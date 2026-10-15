@@ -1,0 +1,215 @@
+[
+  {
+    "order": 2140,
+    "id": "resampling-algorithms-and-sampling-units",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Resampling schemes and the sampling-unit contract",
+    "companion": "resampling-algorithms-and-sampling-units-examples",
+    "requires": [
+      "randomized-treatment-assignment-and-sharp-null-tests"
+    ],
+    "items": [
+      {
+        "id": "def-resampling-sampling-unit-contract",
+        "kind": "definition",
+        "title": "Sampling units and the resampling-unit contract",
+        "deps": [
+          "def-statistical-experiment"
+        ],
+        "dependency_level": 0,
+        "statement": "Define the indivisible random or design unit in the declared experiment and require resampling at a unit level that preserves dependence relevant to the declared target."
+      },
+      {
+        "id": "def-empirical-measure",
+        "kind": "definition",
+        "title": "Empirical measure of observed units",
+        "deps": [
+          "def-measurable-space",
+          "def-dirac-measure"
+        ],
+        "justified_by": [
+          "lem-empirical-measure-is-a-probability-measure"
+        ],
+        "dependency_level": 0,
+        "statement": "For a nonempty observed tuple in a measurable unit space, define its empirical measure as the equally weighted sum of its Dirac measures, counting repeated observations with multiplicity."
+      },
+      {
+        "id": "lem-uniform-law-on-finite-subset-families",
+        "kind": "lemma",
+        "title": "Uniform laws on finite subset families",
+        "deps": [
+          "def-finite-cardinality",
+          "def-finite-probability-space-and-event",
+          "thm-cardinality-of-a-set-of-functions",
+          "thm-subset-of-a-finite-set"
+        ],
+        "dependency_level": 0,
+        "statement": "For 0 <= r <= n, the family of r-element subsets of [n] is finite and nonempty, and equal weights define a probability law on it, including r=0 and r=n."
+      },
+      {
+        "id": "lem-empirical-measure-is-a-probability-measure",
+        "kind": "lemma",
+        "title": "The empirical measure is a probability measure",
+        "deps": [
+          "def-empirical-measure",
+          "def-probability-measure",
+          "prop-dirac-measure-is-a-probability-measure"
+        ],
+        "dependency_level": 1,
+        "statement": "For every nonempty finite observed tuple in a measurable space, its empirical measure is a probability measure."
+      },
+      {
+        "id": "alg-delete-d-jackknife-replicates",
+        "kind": "algorithm",
+        "title": "Delete-d jackknife replicates and their uniform average",
+        "deps": [
+          "def-resampling-sampling-unit-contract",
+          "lem-uniform-law-on-finite-subset-families",
+          "def-statistic-and-estimator"
+        ],
+        "dependency_level": 1,
+        "statement": "For 1 <= d < n, compute a declared measurable statistic on each complement of a d-subset of the observed sampling-unit indices and return the replicates and their uniform average; no variance scaling is implicit."
+      },
+      {
+        "id": "alg-uniform-subsampling-without-replacement",
+        "kind": "algorithm",
+        "title": "Uniform subsampling without replacement",
+        "deps": [
+          "def-resampling-sampling-unit-contract",
+          "lem-uniform-law-on-finite-subset-families",
+          "def-statistic-and-estimator"
+        ],
+        "dependency_level": 1,
+        "statement": "For 1 <= b < n, select a uniformly distributed b-subset of observed sampling-unit indices without replacement and apply the declared measurable size-b statistic."
+      },
+      {
+        "id": "alg-n-out-of-n-bootstrap-from-empirical-law",
+        "kind": "algorithm",
+        "title": "Size-n bootstrap from the empirical law",
+        "deps": [
+          "def-resampling-sampling-unit-contract",
+          "def-empirical-measure",
+          "lem-empirical-measure-is-a-probability-measure",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-statistic-and-estimator",
+          "def-finite-probability-space-and-event",
+          "thm-cardinality-of-a-set-of-functions"
+        ],
+        "justified_by": [
+          "thm-bootstrap-draws-are-conditionally-iid-empirical-law"
+        ],
+        "dependency_level": 2,
+        "statement": "For n >= 1, draw n sampling units conditionally IID from the empirical probability measure of the observed units and apply the declared size-n statistic."
+      },
+      {
+        "id": "thm-bootstrap-draws-are-conditionally-iid-empirical-law",
+        "kind": "theorem",
+        "title": "Empirical-law bootstrap draws are conditionally IID",
+        "deps": [
+          "alg-n-out-of-n-bootstrap-from-empirical-law",
+          "def-empirical-measure",
+          "lem-empirical-measure-is-a-probability-measure",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-law-or-distribution-of-a-random-element",
+          "def-random-element-and-real-random-variable",
+          "def-independent-random-elements",
+          "def-independent-sigma-algebras-and-events",
+          "def-finite-probability-space-and-event",
+          "def-finite-cardinality",
+          "thm-cardinality-of-a-set-of-functions",
+          "thm-subset-of-a-finite-set",
+          "thm-product-rule"
+        ],
+        "dependency_level": 3,
+        "statement": "Conditional on a fixed observed tuple of n >= 1 units, the size-n bootstrap sample has joint law equal to the n-fold product of the empirical law, hence its entries are IID from that empirical law."
+      }
+    ]
+  },
+  {
+    "order": 2141,
+    "id": "resampling-algorithms-and-sampling-units-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Resampling schemes and the sampling-unit contract — Examples",
+    "companion": "resampling-algorithms-and-sampling-units",
+    "requires": [
+      "resampling-algorithms-and-sampling-units"
+    ],
+    "items": [
+      {
+        "id": "ex-two-point-bootstrap-sample-mean",
+        "kind": "example",
+        "title": "The bootstrap law of a two-point sample mean",
+        "deps": [
+          "alg-n-out-of-n-bootstrap-from-empirical-law",
+          "thm-bootstrap-draws-are-conditionally-iid-empirical-law",
+          "def-empirical-measure",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-partial-sums-and-sample-means",
+          "def-statistic-and-estimator"
+        ],
+        "dependency_level": 4,
+        "statement": "For observed IID real units (0,2), compute exactly the conditional size-two bootstrap distribution of the sample mean without asserting its asymptotic validity."
+      },
+      {
+        "id": "ex-delete-d-and-subsampling",
+        "kind": "example",
+        "title": "Delete-d replicates and subsampling on four units",
+        "deps": [
+          "alg-delete-d-jackknife-replicates",
+          "alg-uniform-subsampling-without-replacement",
+          "def-partial-sums-and-sample-means",
+          "def-statistic-and-estimator"
+        ],
+        "dependency_level": 2,
+        "statement": "On four observed real units, calculate all delete-two means and distinguish their uniform average from a variance estimate, then compare the uniform size-two subsampling law and identify its equality with the delete-two replicate law under complementation for the sample mean."
+      },
+      {
+        "id": "ex-cluster-resampling-unit",
+        "kind": "example",
+        "title": "Resampling complete cluster records",
+        "deps": [
+          "def-resampling-sampling-unit-contract",
+          "alg-n-out-of-n-bootstrap-from-empirical-law",
+          "thm-bootstrap-draws-are-conditionally-iid-empirical-law",
+          "def-empirical-measure"
+        ],
+        "dependency_level": 4,
+        "statement": "Treat each observed cluster vector as one unit and resample whole vectors, preserving each vector's within-cluster records in every replicate."
+      },
+      {
+        "id": "cex-pointwise-bootstrap-does-not-preserve-dependent-pair-law",
+        "kind": "counterexample",
+        "title": "Pointwise bootstrap need not preserve pair dependence",
+        "deps": [
+          "alg-n-out-of-n-bootstrap-from-empirical-law",
+          "thm-bootstrap-draws-are-conditionally-iid-empirical-law",
+          "def-empirical-measure",
+          "def-moments-variance-and-covariance"
+        ],
+        "dependency_level": 4,
+        "statement": "Refute the claim that the conditional pointwise bootstrap reproduces the joint sampling law for every dependent pair by comparing their pairwise covariances in a finite binary model."
+      },
+      {
+        "id": "ex-assignment-randomization-versus-bootstrap",
+        "kind": "example",
+        "title": "Assignment randomization and bootstrap are different laws",
+        "deps": [
+          "def-resampling-sampling-unit-contract",
+          "alg-n-out-of-n-bootstrap-from-empirical-law",
+          "thm-bootstrap-draws-are-conditionally-iid-empirical-law",
+          "def-finite-randomized-treatment-assignment-model",
+          "def-finite-population-average-treatment-effect-and-weak-null",
+          "def-fisher-sharp-null-and-predeclared-test-orderings",
+          "def-statistic-and-estimator",
+          "def-p-value",
+          "def-empirical-measure",
+          "thm-fisher-sharp-null-randomization-pvalues-are-valid"
+        ],
+        "dependency_level": 4,
+        "statement": "For a two-unit Fisher-sharp-null design, calculate the known assignment-randomization law and contrast it with the empirical bootstrap law on observed outcomes."
+      }
+    ]
+  }
+]

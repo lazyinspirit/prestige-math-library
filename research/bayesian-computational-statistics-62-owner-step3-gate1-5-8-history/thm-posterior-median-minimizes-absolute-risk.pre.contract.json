@@ -1,0 +1,132 @@
+{
+  "risk": "medium",
+  "kind": "theorem",
+  "citations": [
+    {
+      "fact": "F1",
+      "source": "def-posterior-median",
+      "source_section": "Definition",
+      "quote": "For a probability measure $\\Pi_y$ on $\\mathbb R$, a **posterior median** is any $m\\in\\mathbb R$ satisfying\n$$\\Pi_y((-\\infty,m])\\ge \\tfrac12\\quad\\text{and}\\quad\\Pi_y([m,\\infty))\\ge\\tfrac12.$$\nThe two inequalities, rather than a density-based definition, apply to discrete, continuous, and mixed posteriors and permit more than one median.",
+      "uses": [
+        "1.2",
+        "2.1"
+      ]
+    },
+    {
+      "fact": "F2",
+      "source": "def-posterior-risk-and-bayes-action",
+      "source_section": "Definition",
+      "quote": "Let $(\\Theta,\\mathcal T)$ have a supplied posterior probability kernel $\\Pi_y$, let $(\\mathsf A,\\mathcal G)$ be a measurable action space, and let $L:\\Theta\\times\\mathsf A\\to[0,\\infty]$ be a measurable function on the product measurable space [[def-product-sigma-algebra-and-finite-product-sigma-algebras]], in the sense of [[def-measurable-function-between-measurable-spaces]]. This strengthens the section-measurability convention in [[def-loss-function-and-risk]] so that posterior integrals vary measurably with measurable action rules.\n\nFor a fixed data fiber $y$ and action $a$, define the **posterior risk** only when\n$$\\rho_y(a):=\\int_\\Theta L(\\theta,a)\\,\\Pi_y(d\\theta)<\\infty.$$\nA **pointwise Bayes action** at $y$ is a finite-risk action attaining the minimum among all finite-risk actions. On a declared measurable data domain $D$, a **Bayes action rule** is a measurable map $\\delta:D\\to\\mathsf A$ whose finite posterior risk attains that minimum at every $y\\in D$. This definition makes no assertion that finite-risk actions or measurable minimizing rules always exist. It therefore does not infer a Bayes action merely from the existence of an infimum. The sampling risk in [[def-loss-function-and-risk]] is a different integral, taken over the data law at a fixed parameter.",
+      "uses": [
+        "1.1",
+        "1.2",
+        "2.1"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "lem-lower-posterior-median-is-measurable",
+      "source_section": "Statement",
+      "quote": "Let $\\Pi$ be a posterior probability kernel on $\\mathbb R$. The rule $m(y)=q_{1/2}(y)$ is measurable and is a posterior median on every data fiber.",
+      "uses": [
+        "2.1"
+      ]
+    },
+    {
+      "fact": "F4",
+      "source": "thm-measurability-of-integration-against-a-kernel",
+      "source_section": "Statement",
+      "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+      "uses": [
+        "1.1"
+      ]
+    }
+  ],
+  "derivations": [
+    {
+      "id": "step-1-1",
+      "step": "1.1",
+      "claim": "The function $(y,\\theta)\\mapsto|\\theta|$ is product-measurable, so [F4] makes its posterior integral measurable and hence $D_1$ a measurable data domain. For $y\\in D_1$ and every finite $a$, $|\\theta-a|\\le|\\theta|+|a|$ makes the posterior risk finite.",
+      "inputs": [
+        "given",
+        "F2",
+        "F4",
+        "algebra"
+      ]
+    },
+    {
+      "id": "step-1-2",
+      "step": "1.2",
+      "claim": "Fix $y\\in D_1$ and a median $m$. For any $a>m$, put $d=a-m$ and partition $\\mathbb R$ into $A=(-\\infty,m]$, $B=(m,a)$, and $C=[a,\\infty)$. On these three sets respectively, $|\\theta-a|-|\\theta-m|$ equals $d$, $a+m-2\\theta$, and $-d$. On $B$, $a+m-2\\theta\\ge-d$. Therefore $\\rho_y(a)-\\rho_y(m)\\ge d\\{\\Pi_y(A)-\\Pi_y(B)-\\Pi_y(C)\\}=d\\{2\\Pi_y(A)-1\\}\\ge0$, where the last inequality is the first median condition [F1].",
+      "inputs": [
+        "given",
+        "F1",
+        "F2",
+        "algebra"
+      ]
+    },
+    {
+      "id": "step-2-1",
+      "step": "2.1",
+      "claim": "If $a<m$, put $d=m-a$ and partition into $A=(-\\infty,a]$, $B=(a,m)$, and $C=[m,\\infty)$. On these sets the loss difference is respectively $-d$, $2\\theta-a-m$, and $d$; on $B$, $2\\theta-a-m\\ge-d$. Hence $\\rho_y(a)-\\rho_y(m)\\ge d\\{-\\Pi_y(A)-\\Pi_y(B)+\\Pi_y(C)\\}=d\\{2\\Pi_y(C)-1\\}\\ge0$ by the second median condition [F1]. Equality holds when $a=m$. Thus every median is a pointwise minimizer; [F3] supplies a measurable median rule, whose finite risk on $D_1$ and attained minimum satisfy [F2].",
+      "inputs": [
+        "given",
+        "F1",
+        "F2",
+        "F3",
+        "step 1.2",
+        "algebra"
+      ]
+    }
+  ],
+  "routine_steps": [],
+  "boundaries": [
+    {
+      "case": "empty",
+      "status": "checked",
+      "evidence": "Statement allows the measurable first-moment domain D_1 to be empty; step 1.1 defines it by a measurable integral, and the lower-median rule restricted to it then has no fibers to verify."
+    },
+    {
+      "case": "zero",
+      "status": "checked",
+      "evidence": "Steps 1.1\u20132.1 include zero absolute risk when the posterior is a point mass."
+    },
+    {
+      "case": "one",
+      "status": "checked",
+      "evidence": "Statement with Pi_y=delta_1 gives median 1 and risk |1-a|; the selected median has zero risk and is the unique minimizer on this fiber."
+    },
+    {
+      "case": "degenerate",
+      "status": "checked",
+      "evidence": "Statement and steps 1.1\u20132.1 permit a degenerate posterior and show its point is a median minimizer."
+    },
+    {
+      "case": "endpoints",
+      "status": "checked",
+      "evidence": "Statement includes only finite absolute first moments. Proof step 1.1 uses this finiteness to subtract finite risks; the theorem makes no minimization claim on infinite-first-moment fibers."
+    },
+    {
+      "case": "nonempty-choice",
+      "status": "checked",
+      "evidence": "Steps 1.2 and 2.1 provide a measurable lower-median selector without AC."
+    },
+    {
+      "case": "iff-forward",
+      "status": "not_applicable",
+      "reason": "Statement proves that every median minimizes finite absolute risk; it does not state an iff characterization of all minimizers."
+    },
+    {
+      "case": "iff-reverse",
+      "status": "not_applicable",
+      "reason": "Proof steps 1.2 and 2.1 compare actions on either side of a median; they do not claim a converse that an arbitrary minimizer satisfies median inequalities."
+    }
+  ],
+  "finite_checks": [],
+  "finite_smoke": [],
+  "supplier_interfaces": [],
+  "risk_review": {
+    "status": "open",
+    "notes": "Initial authoring contract. Independent mathematical review remains pending."
+  }
+}

@@ -1,0 +1,9 @@
+# Scope-aware library inventory during independent authoring
+
+Without an explicit run context, readLibraryItems remains strict for every enumerated file. With {run,requiredIds}, it can record an unreadable independent in-flight foreign authoring carrier as an outside observation only after bounded retries and exact native ownership checks. This run's frozen/current manifest items and transitive declared suppliers stay mandatory, as do explicit outside review/maintenance subjects. Alias resolution retains original native aliases and current readable aliases and never silently resolves an ambiguous required alias.
+
+Readable outside items remain available to discoverDownstream. Unavailable independent authoring carriers are recorded under research/R-step5-v2/outside-inflight-observations/HASH.json with observed-excluded-not-passed, manifest/state/active-writer evidence, and explicit false mathematical-review/certification fields. No unavailable foreign source is passed or reconstructed. An incomplete item with no exact active foreign owner, or one needed by this run, still fails closed.
+
+Raw, guard and statement hashes remain based on the same successful source bytes. Run context is passed through workflow hashes/identity/review helpers and consumer-maintenance calls, not inferred from environment or a process-global variable. The old3.1second retry bound is unchanged; the fix is scope policy, not waiting longer. Full native evidence, drift, dependency and frontier gates remain required.
+
+Foreign manifest/state ownership establishes active authoring responsibility, not the unreadable file's draft/published status. Observations therefore make no status claim. Each observation binds the exact raw state hash and captured dispatch stage/role/label/covers/attempt/timestamps, plus the manifest hash; these are individual actual reads, not an atomic cross-file or whole-corpus snapshot.

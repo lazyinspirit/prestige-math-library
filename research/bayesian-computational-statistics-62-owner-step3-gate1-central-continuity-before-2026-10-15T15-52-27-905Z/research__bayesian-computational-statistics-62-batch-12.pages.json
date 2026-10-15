@@ -1,0 +1,393 @@
+[
+  {
+    "order": 2064,
+    "id": "misspecified-posterior-consistency",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Posterior consistency at a KL projection",
+    "companion": "misspecified-posterior-consistency-examples",
+    "requires": [
+      "iid-posterior-contraction",
+      "conformal-prediction-and-exchangeable-ranks"
+    ],
+    "items": [
+      {
+        "id": "def-kl-projection-set-and-relative-kl-neighborhoods",
+        "kind": "definition",
+        "title": "KL projection sets and relative KL neighborhoods",
+        "deps": [
+          "def-probability-measure",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice",
+          "def-metric-space"
+        ],
+        "dependency_level": 0,
+        "statement": "For a jointly measurable dominated IID density model with truth P0 and metric parameter space (Theta,rho), define K(theta)=KL(P0||Ptheta), finite K*=inf K, the nonempty full minimizer set Theta*, distance d(theta,Theta*)=inf rho(theta,theta*), and relative neighborhoods B_epsilon={theta:K(theta)-K*<=epsilon}.",
+        "strategy": "Definition: fix the KL direction, finite minimum, full projection set, metric distance, and relative-neighborhood convention.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-centered-integrable-iid-random-walk-is-unbounded-above",
+        "kind": "lemma",
+        "title": "A nonconstant centered integrable IID random walk is unbounded above",
+        "statement": "Let $(X_n)_{n\\ge1}$ be IID real random variables with $\\mathbb E|X_1|<\\infty$, $\\mathbb EX_1=0$, and $\\mathbb P(X_1=0)<1$. Put $S_0=0$ and $S_n=\\sum_{i=1}^nX_i$. Then\n$$\\mathbb P\\left(\\sup_{n\\ge0}S_n=+\\infty\\right)=1.$$\nIn particular, $\\limsup_{n\\to\\infty}S_n=+\\infty$ almost surely.",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-kolmogorov-zero-one-law",
+          "thm-grouping-independent-sigma-algebras",
+          "thm-dominated-convergence",
+          "lem-basic-properties-of-characteristic-functions",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+        ],
+        "justified_by": [],
+        "strategy": "direct",
+        "axiom_use": "None; the supplied real random variables use no selection.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, fifth edition, §5.4, especially Theorem 5.4.8 (Chung–Fuchs recurrence)",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-likelihood-tilted-measure-at-kl-projection",
+        "kind": "definition",
+        "title": "Likelihood-tilted measures at a KL projection",
+        "deps": [
+          "def-kl-projection-set-and-relative-kl-neighborhoods",
+          "def-probability-measure"
+        ],
+        "dependency_level": 1,
+        "statement": "For selected theta* in Theta* with finite KL contrast and ptheta*>0 P0-a.s., define Qtheta(A)=integral_A (ptheta/ptheta*) dP0, with ratio zero where ptheta*=0, and qtheta=Qtheta(X) in [0,infinity]. A local lemma proves Qtheta sigma-finite; another proves Qtheta^n has product density relative to P0^n.",
+        "strategy": "Definition: set the likelihood-ratio density and null-set convention; downstream local lemmas establish measure and product properties.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-likelihood-tilted-measure-is-sigma-finite",
+        "kind": "lemma",
+        "title": "Likelihood tilts are sigma-finite measures",
+        "deps": [
+          "def-likelihood-tilted-measure-at-kl-projection",
+          "def-measure",
+          "def-probability-measure",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure"
+        ],
+        "dependency_level": 2,
+        "statement": "Under the likelihood-tilt definition, Qtheta(A)=integral_A rtheta dP0 is a sigma-finite measure, since its density sublevel sets have finite Qtheta measure.",
+        "strategy": "Direct: the nonnegative density defines a measure, and its integer sublevel sets give a countable finite-measure cover.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-kl-neighborhood-prior-mass-likelihood-denominator-lower-bound",
+        "kind": "lemma",
+        "title": "KL-neighborhood prior mass lower-bounds the likelihood denominator",
+        "deps": [
+          "def-kl-projection-set-and-relative-kl-neighborhoods",
+          "def-likelihood-tilted-measure-at-kl-projection",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice",
+          "def-probability-measure",
+          "def-identically-distributed-and-iid-random-variables",
+          "lem-measurable-functions-preserve-independence",
+          "thm-kolmogorov-iid-l1-strong-law",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "def-measure-with-density",
+          "cor-finite-nonnegative-integral-implies-finite-almost-everywhere",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-fatou-lemma",
+          "lem-coordinate-maps-and-permutations-are-measurable-on-finite-products",
+          "def-likelihood-density"
+        ],
+        "dependency_level": 2,
+        "statement": "If B_epsilon is measurable with positive prior mass and its relative log likelihood contrasts are P0-integrable Pi-a.e., then for each alpha>epsilon the relative likelihood denominator D_n is eventually at least exp(-n alpha) P0-a.s.; it is finite and positive P0^n-a.s. for each n.",
+        "strategy": "Direct: obtain a common almost-sure strong-law event by Tonelli, verify finite positive evidence under domination, and apply Fatou to rescaled likelihoods.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-product-likelihood-tilt-has-product-density",
+        "kind": "lemma",
+        "title": "Product likelihood tilts have the product density",
+        "deps": [
+          "def-likelihood-tilted-measure-at-kl-projection",
+          "lem-likelihood-tilted-measure-is-sigma-finite",
+          "def-probability-measure",
+          "def-measure-with-density",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-coordinate-maps-and-permutations-are-measurable-on-finite-products",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability"
+        ],
+        "dependency_level": 3,
+        "statement": "For each theta and n>=1, Qtheta^n exists and has density product_i ptheta(x_i)/ptheta*(x_i) relative to P0^n.",
+        "strategy": "Direct: define the product-density measure relative to P0^n, compare its rectangle values with Qtheta^n by Tonelli, and use uniqueness of sigma-finite product measure.",
+        "justified_by": []
+      },
+      {
+        "id": "prop-compact-kl-projection-tests-under-fractional-moment-continuity",
+        "kind": "proposition",
+        "title": "Compact models admit tests at a unique KL projection under fractional-moment continuity",
+        "deps": [
+          "def-kl-projection-set-and-relative-kl-neighborhoods",
+          "def-likelihood-tilted-measure-at-kl-projection",
+          "def-metric-space",
+          "def-metric-compactness",
+          "def-metric-topology",
+          "lem-closed-subset-of-a-compact-space-is-compact",
+          "def-probability-measure",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-axiom-of-choice",
+          "lem-product-likelihood-tilt-has-product-density",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-dominated-convergence",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "lem-coordinate-maps-and-permutations-are-measurable-on-finite-products",
+          "thm-logarithm-derivative-and-integral",
+          "def-real-exponential-function-and-e",
+          "thm-derivative-of-exponential",
+          "thm-algebra-of-derivatives",
+          "thm-exponential-is-strictly-increasing",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_level": 4,
+        "statement": "For a compact metric model with unique finite KL minimizer theta*, finite P0 likelihood-ratio means, strictly negative extended relative log contrasts, and finite fractional moments continuous at each alternative, local likelihood-ratio tests combine by a finite cover to give uniformly exponential P0 and Qtheta^n errors on each metric-separated set.",
+        "strategy": "Direct: prove a fractional moment below one from a strictly negative extended log contrast, use continuity for local exponential tests, then cover the compact separated set finitely.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-exponential-test-posterior-splitting-at-kl-projection",
+        "kind": "lemma",
+        "title": "Exponential tests and KL mass force posterior exclusion",
+        "deps": [
+          "def-kl-projection-set-and-relative-kl-neighborhoods",
+          "def-likelihood-tilted-measure-at-kl-projection",
+          "lem-kl-neighborhood-prior-mass-likelihood-denominator-lower-bound",
+          "lem-product-likelihood-tilt-has-product-density",
+          "def-axiom-of-choice",
+          "def-probability-measure",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-bayes-formula-for-dominated-kernels",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "cor-markov-inequality-for-random-variables",
+          "cor-first-borel-cantelli-lemma-for-events"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $V\\subseteq\\Theta$ be measurable. Suppose a relative KL neighborhood\n$B_\\epsilon$ has positive prior mass and that, for all sufficiently large\n$n$, tests $\\phi_n:\\mathsf X^n\\to[0,1]$ satisfy\n$$\\phi_n(X_1,\\ldots,X_n)\\longrightarrow0\\quad P_0^\\infty\\text{-almost surely},\\qquad \\sup_{\\theta\\in V}Q_\\theta^n(1-\\phi_n)\\le e^{-n\\beta}$$\nfor a constant $\\beta>\\epsilon$. Then\n$$\\Pi(V\\mid X_1,\\ldots,X_n)\\longrightarrow0 \\quad P_0^\\infty\\text{-almost surely}.$$",
+        "strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "AC enters through the imported KL and likelihood-density conventions; supplied joint density representatives mean the proof makes no further selections.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. J. K. Kleijn and A. W. van der Vaart, The Bernstein-Von-Mises Theorem under Misspecification, Lemma 4.1, pp. 376–377",
+              "url": "https://pure.uva.nl/ws/files/1850322/114737_376240.pdf"
+            }
+          ]
+        },
+        "forward_refs": [
+          "cex-weak-tilted-tests-do-not-imply-almost-sure-consistency"
+        ]
+      },
+      {
+        "id": "thm-posterior-consistency-at-kl-projection",
+        "kind": "theorem",
+        "title": "Posterior consistency at a KL projection",
+        "deps": [
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-metric-space",
+          "def-probability-measure",
+          "def-kl-projection-set-and-relative-kl-neighborhoods",
+          "def-likelihood-tilted-measure-at-kl-projection",
+          "lem-product-likelihood-tilt-has-product-density",
+          "lem-kl-neighborhood-prior-mass-likelihood-denominator-lower-bound",
+          "lem-exponential-test-posterior-splitting-at-kl-projection",
+          "thm-bayes-formula-for-dominated-kernels",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a sample space with a fixed sigma-finite\nmeasure and let $(P_\\theta)_{\\theta\\in\\Theta}$ be a dominated experiment\n([[def-dominated-statistical-experiment]]). Let $(\\Theta,\\mathcal T,\\rho)$\nbe a metric parameter space with its Borel sigma-algebra\n([[def-metric-space]]) and supplied\nfinite-valued likelihood densities $p_\\theta$\n([[def-likelihood-density]]) that are jointly measurable and normalized\nrelative to $\\mu$. Let $P_0$ be a probability measure with supplied density\n$p_0$ ([[def-probability-measure]]) and let\n$X_1,X_2,\\ldots$ be IID with law $P_0$\n([[def-identically-distributed-and-iid-random-variables]]). Let $\\Pi$ be a\nprior probability on $(\\Theta,\\mathcal T)$ ([[def-probability-measure]]).\nAssume AC for the imported directional KL and likelihood-density\nconventions. Define\n$K(\\theta)$, $K^*$, and the nonempty set $\\Theta^*$ as in\n[[def-kl-projection-set-and-relative-kl-neighborhoods]]. Assume $K^*<\\infty$\nand, for every $\\epsilon>0$, the measurable set\n$$\\Pi\\{\\theta:K(\\theta)-K^*\\le\\epsilon\\}>0.$$\nFix any selected $\\theta^*\\in\\Theta^*$ and assume that for\n$\\Pi$-almost every $\\theta$ in each such set,\n$\\log(p_\\theta/p_{\\theta^*})$ is $P_0$-integrable, as required by the\ndenominator lemma. Define the likelihood-tilted measures $Q_\\theta$ as in\n[[def-likelihood-tilted-measure-at-kl-projection]]. Define the posterior by\n[[thm-bayes-formula-for-dominated-kernels]] on finite positive evidence\nfibres; the denominator lemma below makes those fibres $P_0^n$-almost sure.\nFor each $n\\ge1$, use the product measure $Q_\\theta^n$ and its $P_0^n$\ndensity from [[lem-product-likelihood-tilt-has-product-density]].\nAssume the test integrals below are well-defined. For every $\\eta>0$,\nsuppose there are\nmeasurable tests $\\phi_n:\\mathsf X^n\\to[0,1]$ and a constant $\\beta_\\eta>0$ such that\n$$\\phi_n(X_1,\\ldots,X_n)\\longrightarrow0\\quad P_0^\\infty\\text{-almost surely},\\qquad \\sup_{\\theta:\\,d(\\theta,\\Theta^*)>\\eta} Q_\\theta^n(1-\\phi_n)\\le e^{-n\\beta_\\eta}$$\nfor all sufficiently large $n$,\nwhere $d(\\theta,\\Theta^*)=\\inf_{\\vartheta\\in\\Theta^*}\\rho(\\theta,\\vartheta)$.\nThen\n$$\\Pi\\{\\theta:d(\\theta,\\Theta^*)>\\eta\\mid X_1,\\ldots,X_n\\} \\longrightarrow0 \\quad P_0^\\infty\\text{-almost surely}$$\nfor every fixed $\\eta>0$. The type-I expectations need not be summable or exponentially small.",
+        "strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "AC enters through the imported KL and likelihood-density conventions. The jointly measurable density family is supplied, so the proof makes no further selections.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. J. K. Kleijn and A. W. van der Vaart, The Bernstein-Von-Mises Theorem under Misspecification, §4.1, Lemma 4.1 and Corollary 4.2, pp. 376–379",
+              "url": "https://pure.uva.nl/ws/files/1850322/114737_376240.pdf"
+            },
+            {
+              "title": "B. J. K. Kleijn, Bayesian Statistics for Frequentists, §5.3.1, pp. 158–160",
+              "url": "https://staff.fnwi.uva.nl/b.j.k.kleijn/bkleijn-book-work-in-progress-Bayesian_Statistics_for_frequentists-Version-1.0-July-2025.pdf"
+            },
+            {
+              "title": "R. V. Ramamoorthi, K. Sriram, and R. Martin, On Posterior Concentration in Misspecified Models, §§1–3",
+              "url": "https://arxiv.org/pdf/1312.4620"
+            }
+          ]
+        },
+        "forward_refs": [
+          "cex-weak-tilted-tests-do-not-imply-almost-sure-consistency"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 2065,
+    "id": "misspecified-posterior-consistency-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Posterior consistency at a KL projection — Examples",
+    "companion": "misspecified-posterior-consistency",
+    "requires": [
+      "misspecified-posterior-consistency"
+    ],
+    "items": [
+      {
+        "id": "ex-distant-alternatives-without-uniform-tests",
+        "kind": "example",
+        "title": "Distant alternatives can prevent uniform testability",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-kl-projection-set-and-relative-kl-neighborhoods",
+          "def-metric-space",
+          "def-total-variation-distance-for-probability-laws"
+        ],
+        "dependency_level": 1,
+        "statement": "For truth (1/2,1/2) and alternatives p_j=(1/2-delta_j,1/2+delta_j) with delta_j=1/(j+4), the unique minimizer is the truth at label 0, but parameter-distant alternatives preclude tests with both vanishing type-I and uniformly vanishing type-II errors.",
+        "strategy": "Verification: construct a finite-coordinate coupling with disagreement at most n delta_j, then derive the testing-error lower bound from total variation.",
+        "justified_by": []
+      },
+      {
+        "id": "ex-nonunique-kl-projection-set",
+        "kind": "example",
+        "title": "A nonunique KL projection set need not select one parameter",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-kl-projection-set-and-relative-kl-neighborhoods",
+          "thm-kolmogorov-iid-l1-strong-law"
+        ],
+        "dependency_level": 1,
+        "statement": "When two labels share density (1/2,1/2), both minimize KL for truth (3/5,2/5); a third density (1/5,4/5) has larger KL loss, its posterior mass vanishes, and the two minimizer labels retain their prior odds.",
+        "strategy": "Verification: compute the third-point KL loss, use equal minimizer likelihoods, and apply the IID strong law to the log odds against the third point.",
+        "justified_by": []
+      },
+      {
+        "id": "ex-unique-kl-projection-finite-model",
+        "kind": "example",
+        "title": "A finite misspecified model with a unique KL projection",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-kl-projection-set-and-relative-kl-neighborhoods",
+          "def-likelihood-tilted-measure-at-kl-projection",
+          "lem-likelihood-tilted-measure-is-sigma-finite",
+          "thm-kolmogorov-iid-l1-strong-law"
+        ],
+        "dependency_level": 3,
+        "statement": "For explicit two-point densities p0=(3/5,2/5), pa=(1/2,1/2), pb=(1/5,4/5), the unique KL minimizer is a, the posterior mass at b tends to zero almost surely, and Qb(X)=22/25.",
+        "strategy": "Verification: compute the exact KL contrast and tilt mass; apply the IID strong law to bounded log posterior odds.",
+        "justified_by": []
+      },
+      {
+        "id": "ex-likelihood-tilt-can-have-mass-below-one",
+        "kind": "example",
+        "title": "A likelihood tilt can be a finite measure of mass below one",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-kl-projection-set-and-relative-kl-neighborhoods",
+          "def-likelihood-tilted-measure-at-kl-projection",
+          "lem-likelihood-tilted-measure-is-sigma-finite"
+        ],
+        "dependency_level": 3,
+        "statement": "For p0=(1/10,9/10), pa=(9/10,1/10), and pb=(1,0), a is the unique KL minimizer and Qb(X)=1/9.",
+        "strategy": "Verification: compare the finite and infinite directional KL losses, then evaluate the likelihood-ratio integral on the two-point space.",
+        "justified_by": []
+      },
+      {
+        "id": "ex-likelihood-tilt-can-have-mass-above-one",
+        "kind": "example",
+        "title": "A likelihood tilt can be a finite measure of mass above one",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-kl-projection-set-and-relative-kl-neighborhoods",
+          "def-likelihood-tilted-measure-at-kl-projection",
+          "lem-likelihood-tilted-measure-is-sigma-finite"
+        ],
+        "dependency_level": 3,
+        "statement": "For p0=(1/1000,999/1000), pa=(10^-6,999999/10^6), and pb=(1,0), a is the unique KL minimizer and Qb(X)=1000.",
+        "strategy": "Verification: compare finite and infinite directional KL losses, then evaluate the likelihood-ratio integral exactly.",
+        "justified_by": []
+      },
+      {
+        "id": "cex-weak-tilted-tests-do-not-imply-almost-sure-consistency",
+        "kind": "counterexample",
+        "title": "Weak tests against likelihood tilts do not ensure almost-sure posterior consistency",
+        "statement": "In a dominated IID model with a finite KL minimum, a nonempty KL-minimizer\nset $\\Theta^*$, and positive prior mass in every relative KL neighborhood,\nsuppose that for every $\\eta>0$ there are measurable tests satisfying\n$$P_0^n\\phi_n\\to0,\\qquad\\sup_{\\theta:d(\\theta,\\Theta^*)>\\eta}Q_\\theta^n(1-\\phi_n)\\to0.$$\nThe false assertion is that these conditions, allowing arbitrary\nsigma-finite likelihood tilts, imply almost-sure posterior concentration\non every neighborhood of $\\Theta^*$. The example below has a unique\nminimizer and finite log likelihood contrasts, but posterior mass outside\neach discrete neighborhood of radius less than one has almost-sure\nlimes superior one.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-kl-projection-set-and-relative-kl-neighborhoods",
+          "def-likelihood-tilted-measure-at-kl-projection",
+          "lem-likelihood-tilted-measure-is-sigma-finite",
+          "lem-product-likelihood-tilt-has-product-density",
+          "lem-centered-integrable-iid-random-walk-is-unbounded-above",
+          "cor-chebyshev-inequality-for-random-variables",
+          "cor-first-borel-cantelli-lemma-for-events",
+          "thm-finite-union-bound"
+        ],
+        "justified_by": [],
+        "strategy": "direct",
+        "axiom_use": "AC is inherited only through the KL and likelihood-density conventions. Every density is supplied explicitly and each deterministic hitting-time quantile is chosen as the least admissible integer.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kleijn and van der Vaart, The Bernstein-Von-Mises theorem under misspecification, Lemma 3.3 and Corollaries 4.1–4.2 (claims examined here)",
+              "url": "https://pure.uva.nl/ws/files/1850322/114737_376240.pdf"
+            },
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition, random walks and zero-one laws",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "forward_refs": [],
+        "dependency_level": 4
+      }
+    ]
+  }
+]

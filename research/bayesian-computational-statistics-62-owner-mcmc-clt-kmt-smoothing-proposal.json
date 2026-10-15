@@ -1,0 +1,348 @@
+{
+  "version": 1,
+  "kind": "owner-kmt-bounded-row-local-proof-proposal",
+  "run": "bayesian-computational-statistics-62",
+  "scope": [
+    "lem-bounded-vector-log-cubed-gaussian-coupling"
+  ],
+  "manifest_rows": [
+    {
+      "id": "lem-bounded-vector-log-cubed-gaussian-coupling",
+      "kind": "lemma",
+      "title": "Bounded independent vector rows admit a logarithmic cubed Gaussian coupling",
+      "status": "draft",
+      "origin": "pipeline",
+      "pipeline_run": "bayesian-computational-statistics-62",
+      "deps": [
+        "def-axiom-of-choice",
+        "lem-gaussian-anchored-sums-have-cumulant-and-fourier-bounds",
+        "lem-gaussian-anchored-conditional-quantile-coupling",
+        "lem-finite-euclidean-space-is-standard-borel",
+        "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+        "lem-conditional-independence-under-kernel-extension-and-conditioning",
+        "cor-markov-inequality-for-random-variables",
+        "thm-finite-union-bound",
+        "lem-characteristic-function-of-a-multivariate-normal-law",
+        "thm-monotone-convergence-for-the-integral",
+        "thm-nondegenerate-multivariate-normal-law-has-density",
+        "thm-cauchy-schwarz-and-the-euclidean-norm"
+      ],
+      "provenance": {
+        "statement": "literature-derived",
+        "proof": "ai-altered"
+      },
+      "axiom_use": "AC is inherited from the Gaussian, analytic and standard-Borel disintegration suppliers; finite kernel extensions preserve an already realized marginal.",
+      "justified_by": [],
+      "statement": "Assume AC. For every $A>0$ there is a finite constant $C_A$, independent of all row laws and lengths, such that the following holds. Let $1\\le d\\le2$, $N\\ge1$, $B\\ge1$, and let $X_1,\\ldots,X_N$ be independent random vectors in $\\mathbb R^d$ with\n$$EX_i=0,\\qquad \\operatorname{cov}(X_i)=I_d,\\qquad |X_i|\\le B\\quad\\hbox{almost surely}.$$\nTheir distributions need not be identical. There is a coupling with independent $G_1,\\ldots,G_N\\sim N_d(0,I_d)$ such that\n$$\\Pr\\!\\left(\\max_{1\\le k\\le N}\\left|\\sum_{i=1}^k(X_i-G_i)\\right|>C_AB\\log^3(eN)\\right)\\le N^{-A}.$$\nThe coupling can be realized on an extension preserving an already realized raw row as its original marginal. Independence between the raw and Gaussian rows is not asserted.",
+      "strategy": "direct",
+      "sources": [
+        {
+          "title": "A. Yu. Zaitsev, Multidimensional version of the results of Komlos, Major and Tusnady for vectors with finite exponential moments (1998), Sections 5\u20138; weaker logarithmic bound by Gaussian anchors",
+          "url": "https://www.numdam.org/item/PS_1998__2__41_0.pdf"
+        }
+      ],
+      "file": "items/lem-bounded-vector-log-cubed-gaussian-coupling.md"
+    }
+  ],
+  "proof_contracts": {
+    "version": 1,
+    "level": "bayesian-computational-statistics-62-owner-mcmc-clt-kmt-smoothing",
+    "scope": [
+      "lem-bounded-vector-log-cubed-gaussian-coupling"
+    ],
+    "contracts": {
+      "lem-bounded-vector-log-cubed-gaussian-coupling": {
+        "risk": "high",
+        "kind": "lemma",
+        "citations": [
+          {
+            "fact": "A1",
+            "source": "def-axiom-of-choice",
+            "source_section": "Definition",
+            "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F1",
+            "source": "lem-gaussian-anchored-sums-have-cumulant-and-fourier-bounds",
+            "source_section": "Statement",
+            "quote": "Assume AC. Fix $0<\\gamma\\le1$. Let $1\\le d\\le4$, $s>0$, $B>0$, and let $X_1,\\ldots,X_m,Z$ be independent centered random vectors in $\\mathbb R^d$, where $m\\ge0$, $|X_j|\\le B$ almost surely, and $Z\\sim N_d(0,G)$. Suppose $S=Z+\\sum_jX_j$ has covariance $sI_d$ and $G\\ge\\gamma sI_d$ in quadratic form order. There is an absolute constant $C_0\\ge1$ such that, with $\\tau=C_0B$, the logarithmic moment generating function\n$$K(z)=\\log\\mathbb E e^{z\\cdot S},\\qquad K(0)=0,$$\nhas a single analytic branch on the complex Euclidean ball $\\tau|z|<1$, and\n$$|\\partial_u\\partial_v^2K(z)|\\le\\tau s|u||v|^2\\qquad(u,v\\in\\mathbb R^d,\\ \\tau|z|<1).$$\nHere $z\\cdot S$ uses the complex bilinear dot product and $|z|^2=\\sum_i|z_i|^2$. Every real exponential tilt $\\mathbb P_h(d\\omega)=e^{h\\cdot S-K(h)}\\mathbb P(d\\omega)$ is defined, and its characteristic function satisfies\n$$|\\varphi_h(t)|:=|\\mathbb E_h e^{it\\cdot S}|\\le e^{-\\gamma s|t|^2/2}\\qquad(t,h\\in\\mathbb R^d),$$\nwhere $K(h)=\\log\\mathbb E e^{h\\cdot S}$ for real $h$, also outside the analytic ball. Put $\\kappa=\\tau/\\sqrt s$. For every fixed $a>0$ and integer $N\\ge1$ there is a finite $C_{a,N,\\gamma}$, uniform in $1\\le d\\le4$, such that, if $0<\\kappa\\le1$,\n$$(2\\pi)^{-d}\\int_{|t|\\ge a/\\tau}|\\varphi_h(t)|\\,dt\\le C_{a,N,\\gamma}\\kappa^Ns^{-d/2},$$\n$$(2\\pi)^{-d}\\int_{|t|\\ge a/\\tau}|t\\cdot v||\\varphi_h(t)|\\,dt\\le C_{a,N,\\gamma}\\kappa^N|v|s^{-(d+1)/2}.$$\nAll assertions hold with the same $C_0$, $B$, $s$, and $\\gamma$ for $AS$, where $A$ is any real $k\\times d$ matrix with $1\\le k\\le d$ and $AA^T=I_k$. This includes every coordinate prefix, every orthogonal change of coordinates, and their compositions. In particular it covers the normalized joint sum and difference of two independent children by applying the assertion in their joint dimension, provided that dimension is at most four and the joint input satisfies the stated covariance assumptions.",
+            "uses": [
+              "2.1"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "lem-gaussian-anchored-conditional-quantile-coupling",
+            "source_section": "Statement",
+            "quote": "Assume AC and the hypotheses of [[lem-gaussian-anchored-sums-have-cumulant-and-fourier-bounds]]: $S=Z+\\sum_{i=1}^mX_i\\in\\mathbb R^d$, $1\\le d\\le4$, the centered summands are independent, $|X_i|\\le B$, $Z$ is Gaussian with covariance $G\\ge\\gamma sI_d$, and $\\operatorname{cov}(S)=sI_d$, where $s,B>0$ and $0<\\gamma\\le1$. Put $\\tau=C_0B$, with $C_0$ from that supplier, and let $\\Phi_s$ be the CDF of $N(0,s)$. There are constants $c_\\gamma>0$ and $C_\\gamma<\\infty$, independent of the summand laws, $m,d,s,B$, with the following properties.\n\nFor $1\\le j\\le d$, let $H_j(x',y)$ be the conditional CDF of $S_j$ given $S_{<j}=x'\\in\\mathbb R^{j-1}$ obtained by dividing the joint prefix density by its marginal density. These densities are strictly positive, so this defines a probability kernel at every $x'$, including prefixes of probability zero. Its quantile transport\n$$T_j(x',z)=H_j(x',\\cdot)^{-1}(\\Phi_s(z))$$\nis jointly Borel measurable and takes a fresh $N(0,s)$ variable to that conditional law. If $s\\ge C_\\gamma\\tau^2$, then, with $y=T_j(x',z)$,\n$$|y-z|\\le C_\\gamma\\tau\\left(1+\\frac{|x'|^2+y^2}{s}\\right)\\quad\\hbox{when }|x'|+|y|\\le c_\\gamma s/\\tau,$$\nand also\n$$|T_j(x',z)-z|\\le C_\\gamma\\tau\\left(1+\\frac{|x'|^2+z^2}{s}\\right)\\quad\\hbox{when }|x'|+|z|\\le c_\\gamma s/\\tau.$$\nFor $j=1$, the prefix is empty and its norm is zero. The resulting successive coordinate transport $R$ sends $N_d(0,sI_d)$ to the law of $S$ and satisfies\n$$|R(g)-g|\\le C_\\gamma\\tau\\left(1+\\frac{|R(g)|^2}{s}\\right)\\quad\\hbox{when }|R(g)|\\le c_\\gamma s/\\tau.$$\n\nIf $d=2a$ with $a\\le2$, write $S=(P,D)$ with $P,D\\in\\mathbb R^a$. The last $a$ successive conditional transports give a jointly measurable $T_p$ taking a fresh $E\\sim N_a(0,sI_a)$ to the conditional law of $D$ given $P=p$, and\n$$|T_p(e)-e|\\le C_\\gamma\\tau\\left(1+\\frac{|p|^2+|T_p(e)|^2}{s}\\right)$$\nwhen $s\\ge C_\\gamma\\tau^2$ and $|p|,|T_p(e)|\\le c_\\gamma s/\\tau$. The Gaussian reference bridge $E$ is independent of its Gaussian parent.\n\nThere is also the following scalar unequal-variance form. Let $L,R$ be independent centered scalar sums of independent variables bounded by $B$ and independent Gaussian terms, with variances $V_L,V_R\\in[s/2,s]$, and with Gaussian component variances at least $\\gamma V_L,\\gamma V_R$, respectively. Put\n$$W=V_L+V_R,\\qquad w=V_L/W,\\qquad v=V_LV_R/W,\\qquad P=L+R,\\qquad D=L-wP.$$\nThen $W\\in[s,2s]$, $w\\in[1/3,2/3]$, $v\\in[s/4,s/2]$. There is a jointly measurable transport taking a fresh $N(0,v)$ variable to $D$ conditional on $P=p$ with\n$$|T_p(e)-e|\\le C_\\gamma\\tau\\left(1+\\frac{p^2+T_p(e)^2}{s}\\right)$$\nwhen $s\\ge C_\\gamma\\tau^2$ and $|p|,|T_p(e)|\\le c_\\gamma s/\\tau$. The corresponding root transport from $N(0,W)$ to $P$ obeys the analogous bound with $|P|^2/s$. The reconstructed children are $L=wP+D$ and $R=(1-w)P-D$.\n\nAll these maps are jointly measurable in an additional measurable parameter whenever, on each fixed finite row length, the bounded input laws are probability kernels, their Gaussian covariance and $s$ are measurable functions, and the displayed hypotheses hold parameterwise. This includes countable arrays with different row lengths. No claim here asserts the conditional estimates for raw bounded laws without a positive Gaussian component.",
+            "uses": [
+              "2.1",
+              "2.2",
+              "2.3",
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "lem-finite-euclidean-space-is-standard-borel",
+            "source_section": "Statement",
+            "quote": "For every natural $n\\ge1$, let $\\mathbb R^n$ be the set of functions\n$x:n\\to\\mathbb R$ with its finite-product topology and Borel sigma-algebra\n([[def-product-topology]], [[def-borel-sigma-algebra]]). Then\n$(\\mathbb R^n,\\mathcal B(\\mathbb R^n))$ is standard Borel.",
+            "uses": [
+              "1.1",
+              "2.3",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+            "source_section": "Statement",
+            "quote": "Assume AC. Let $\\lambda$ be a probability on $(E\\times T,\\mathcal S\\otimes\\mathcal T)$, where E and T are standard-Borel spaces, and let $\\beta(B)=\\lambda(E\\times B)$ be its second marginal. There is a probability kernel $K:(T,\\mathcal T)\\to(E,\\mathcal S)$ such that\n\n$$\\lambda(A\\times B)=\\int_B K(y,A)\\,\\beta(dy)\\quad(A\\in\\mathcal S,\\ B\\in\\mathcal T).$$\n\nIt is unique as a kernel outside a single measurable $\\beta$-null set. For every nonnegative product-measurable $f:E\\times T\\to[0,\\infty]$,\n\n$$\\int f(x,y)\\,\\lambda(d(x,y))=\\int_T\\left(\\int_E f(x,y)K(y,dx)\\right)\\beta(dy).$$\n\nIn particular this applies to the joint law of random elements $(X,Y)$, with $\\beta=P_Y$; the direction is the law of X given Y.",
+            "uses": [
+              "1.1",
+              "2.3",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "lem-conditional-independence-under-kernel-extension-and-conditioning",
+            "source_section": "Statement",
+            "quote": "Assume AC. Let $L,R,C,V$ be random elements in arbitrary measurable spaces. Suppose $L\\perp\\!\\!\\!\\perp R\\mid\\sigma(C)$ and that the joint law of $(L,R,C,V)$ is obtained from the law of $(L,R,C)$ by a probability kernel $K(l,c,dv)$ depending only on $(l,c)$. Then\n$$(L,V)\\perp\\!\\!\\!\\perp R\\mid\\sigma(C),\\qquad L\\perp\\!\\!\\!\\perp R\\mid\\sigma(C,V).$$\nNo regular conditional law on an unspecified measurable space is assumed: $K$ is supplied in the hypotheses.",
+            "uses": [
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F5",
+            "source": "cor-markov-inequality-for-random-variables",
+            "source_section": "Statement",
+            "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+            "uses": [
+              "1.2",
+              "3.1",
+              "3.2",
+              "4.2"
+            ]
+          },
+          {
+            "fact": "F5",
+            "source": "thm-finite-union-bound",
+            "source_section": "Statement",
+            "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$,\n$$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$\nFor $n=0$ both sides are $0$.",
+            "uses": [
+              "1.2",
+              "3.1",
+              "3.2",
+              "4.2"
+            ]
+          },
+          {
+            "fact": "F6",
+            "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+            "source_section": "Statement",
+            "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+            "uses": [
+              "2.3"
+            ]
+          },
+          {
+            "fact": "F7",
+            "source": "thm-monotone-convergence-for-the-integral",
+            "source_section": "Statement",
+            "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F8",
+            "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+            "source_section": "Statement",
+            "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+            "uses": [
+              "1.2"
+            ]
+          },
+          {
+            "fact": "F9",
+            "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+            "source_section": "Statement",
+            "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+            "uses": [
+              "3.2",
+              "4.2"
+            ]
+          }
+        ],
+        "derivations": [
+          {
+            "id": "lem-bounded-vector-log-cubed-gaussian-coupling-step-1-1",
+            "claim": "It suffices to construct a coupling of row laws: by [F3] its joint law can be disintegrated given the raw row, and the measure $P(d\\omega)K(X(\\omega),dg)$ extends any original realization with that coupling law. This is a probability measure: for disjoint product-measurable events, countable additivity follows by monotone convergence inside the kernel integral. The original marginal remains $P$ because the kernel has total mass one. Pad the row to dyadic length $n=2^{\\lceil\\log_2N\\rceil}$, with $n=1$ if $N=1$, by independent extra entries of the law of $X_1$. It suffices to control its first $N$ entries. Set $L=a\\log(en)$, where the constant $a$ will depend only on $A$.",
+            "step": "1.1",
+            "inputs": [
+              "given",
+              "A1",
+              "F3",
+              "F7",
+              "construct",
+              "choose"
+            ]
+          },
+          {
+            "id": "lem-bounded-vector-log-cubed-gaussian-coupling-step-1-2",
+            "claim": "Every independent row of centered entries, each either one of the raw laws or $N_d(0,I_d)$, obeys a common Bernstein estimate. For a raw coordinate $Z$, $E|Z|^r\\le B^{r-2}$ for $r\\ge2$, so for $B|h|<1$ exponential-series expansion gives $\\log Ee^{hZ}\\le h^2/[2(1-B|h|)]$; the same inequality holds for a standard normal because its log mgf is $h^2/2$. For any block of $s$ entries, multiply the mgfs and apply [F5] to their exponential, using $h=u/(s+Bu)$ and both signs, and then the coordinate union bound. Thus for $t\\ge1$,\n$$\\Pr\\left(\\left|\\sum_{i\\in I}Z_i\\right|>C(\\sqrt{st}+Bt)\\right)\\le4e^{-t}.$$\nThe constant is uniform in $d\\le2$ and in the individual row laws.",
+            "step": "1.2",
+            "inputs": [
+              "given",
+              "F5",
+              "F8",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-bounded-vector-log-cubed-gaussian-coupling-step-2-1",
+            "claim": "Consider a compressed dyadic row of length $m$, whose odd entries are Gaussian and whose even entries have their prescribed raw laws. For every aligned dyadic interval of length $s\\ge4$, both halves contain half Gaussian slots. Its sum has covariance $sI_d$ and Gaussian covariance $(s/2)I_d$. Its joint normalized parent and difference $((U_L+U_R)/\\sqrt2,(U_L-U_R)/\\sqrt2)$ has covariance $(s/2)I_{2d}$ and Gaussian covariance $(s/4)I_{2d}$. Each bounded contribution to this joint vector has norm at most $B$. Hence [F1] applies with fixed Gaussian fraction $1/2$, also to all coordinate prefixes, and [F2] supplies root and bridge maps. Rescaling the normalized pair only changes universal constants. No identical-distribution assumption was used: each bounded contribution retains its own original index law.",
+            "step": "2.1",
+            "inputs": [
+              "F1",
+              "F2",
+              "given",
+              "construct",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-bounded-vector-log-cubed-gaussian-coupling-step-2-2",
+            "claim": "Put $\\tau=CB$, with a fixed $C$ covering [F2], and choose a fixed large $H$. Let $m_0$ be the least dyadic integer at least $H\\tau^2L$. If $m\\ge2m_0$, choose an independent Gaussian root $V_{\\rm root}\\sim N_d(0,mI_d)$ and independent Gaussian split primitives $Z_I\\sim N_d(0,|I|I_d)$ for all dyadic $I$ of length greater than $m_0$. The root map constructs $U_{\\rm root}$ from $V_{\\rm root}$. Descending the tree, with $U_I,V_I$ present, let $D_I$ be the conditional bridge map of $Z_I$ given target parent $U_I$, and put\n$$U_{I_L}=(U_I+D_I)/2,\\quad U_{I_R}=(U_I-D_I)/2,\\quad V_{I_L}=(V_I+Z_I)/2,\\quad V_{I_R}=(V_I-Z_I)/2.$$\nThe new primitive is independent of the exposed parents. Its Gaussian conditional law therefore does not depend on $U_I-V_I$. The target split has exactly the prescribed conditional law given $U_I$ by [F2].",
+            "step": "2.2",
+            "inputs": [
+              "F2",
+              "step 2.1",
+              "construct",
+              "choose",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-bounded-vector-log-cubed-gaussian-coupling-step-2-3",
+            "claim": "At terminal blocks sample the entries of the mixed independent row by their regular conditional law given their sum $U_I$, with product kernels over distinct terminal blocks. Recover Gaussian entries given sum $V_I$ by fresh independent standard normals $h_i$ and the formula $g_i=V_I/m_0+h_i-m_0^{-1}\\sum_{j\\in I}h_j$. For the mixed row, independence of the original disjoint blocks implies that their conditional kernels given their sums factor: check the identity on products of block events by the disintegration formula and extend to all events by uniqueness of probability measures. Induction over the binary splits and then these terminal kernels recovers exactly the mixed row product law. For Gaussians, $(V_I+Z_I)/2$ and $(V_I-Z_I)/2$ have zero cross covariance and covariance $(|I|/2)I_d$; [F6] and induction give the Gaussian product law at each level and after terminal reconstruction. Thus the final two marginal rows have independent entries, despite their coupling.",
+            "step": "2.3",
+            "inputs": [
+              "F2",
+              "F3",
+              "F6",
+              "step 2.2",
+              "construct",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-bounded-vector-log-cubed-gaussian-coupling-step-3-1",
+            "claim": "Apply step 1.2 with $t=L$ to every dyadic mixed sum and to every prefix within a terminal block in either completed marginal row. There are at most $4m$ such vectors; their unconditional product marginal laws were proved in step 2.3. The union bound gives a good event of failure at most $Cm e^{-cL}$ on which each mixed sum satisfies $|U_I|\\le C(\\sqrt{|I|L}+\\tau L)$ and each terminal residual is at most $C(\\sqrt{m_0L}+\\tau L)$. At an active split of size $s\\ge2m_0$, $|D_I|\\le|U_{I_L}|+|U_{I_R}|\\le C(\\sqrt{sL}+\\tau L)$. Choose $H$ large enough that both $|U_I|,|D_I|\\le cs/\\tau$, using the bounds $C/\\sqrt H+C/H$ for their ratios to $s/\\tau$. Their normalized squares are at most $CL$. The same holds at the root. Consequently [F2] bounds the root and every split discrepancy by $C\\tau L$.",
+            "step": "3.1",
+            "inputs": [
+              "F2",
+              "F5",
+              "step 1.2",
+              "step 2.2",
+              "step 2.3",
+              "choose",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-bounded-vector-log-cubed-gaussian-coupling-step-3-2",
+            "claim": "At terminal boundaries write $E(k)=\\sum_{i\\le k}(Z_i-g_i)$. Its endpoint values are zero and $U_{\\rm root}-V_{\\rm root}$. At the midpoint $h$ of any active interval $[a,b]$, the split formulas give $E(h)=(E(a)+E(b))/2+(D_I-Z_I)/2$. Convexity of the Euclidean norm shows that adding one level increases the maximal boundary error by at most half the maximal split discrepancy at that level. There are at most $\\log_2m$ levels. Adding the terminal residuals from step 3.1, and using $m_0<2H\\tau^2L$, proves that one round's maximum prefix discrepancy is at most $C\\tau L\\log(en)$ except on probability $Cm e^{-cL}$. If $m<2m_0$, use instead an independent coupling of the full mixed and Gaussian rows; step 1.2 and a union bound over all their initial prefixes bound their discrepancy by $C(\\sqrt{mL}+\\tau L)\\le C\\tau L$, with the same failure bound. This also covers $m=1$ and arbitrarily large $B$.",
+            "step": "3.2",
+            "inputs": [
+              "step 1.2",
+              "step 3.1",
+              "F5",
+              "F9",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-bounded-vector-log-cubed-gaussian-coupling-step-4-1",
+            "claim": "Start with an independent Gaussian row of length $n$. Apply the round just proved to that row, putting its designated raw law in every even slot and retaining Gaussian odd slots. This is possible while preserving the existing row: disintegrate the coupling given its Gaussian marginal using [F3] and extend by that kernel. Freeze the newly raw entries. The output mixed marginal is a product law, so the retained Gaussian subsequence is independent of all frozen variables. Repeat on that subsequence using a kernel depending only on it; [F4] preserves independence from the frozen complement. At each stage every newly raw coordinate has the law originally designated for that particular original index. If the active length is less than $2m_0$, replace all its remaining slots by independent raw entries instead; step 3.2's terminal bound applies to the raw and Gaussian marginal prefix sums. After at most $\\lceil\\log_2n\\rceil+1$ stages the final full row has exactly the prescribed product of the possibly different raw laws.",
+            "step": "4.1",
+            "inputs": [
+              "F3",
+              "F4",
+              "step 2.1",
+              "step 3.2",
+              "construct"
+            ]
+          },
+          {
+            "id": "lem-bounded-vector-log-cubed-gaussian-coupling-step-4-2",
+            "claim": "A prefix of the original row meets each active subsequence in an initial prefix, so triangle inequality bounds its total change by the sum of the stage maximum prefix errors. Each is at most $C\\tau L\\log(en)$ and there are at most $C\\log(en)$ stages. The total error is therefore at most $C_AB\\log^3(en)$. Use the same ambient $L=a\\log(en)$ in every stage; since each active length is at most $n$, the total failure probability is at most $Cn\\log(en)e^{-ca\\log(en)}$. Choose $a$ large enough, depending only on $A$, that this is at most $N^{-A}$, including the finitely small lengths by increasing $a$ once. As $n<2N$ for $N>1$, $\\log(en)\\le C\\log(eN)$. Restricting to the first $N$ coordinates and using step 1.1 proves the claimed estimate and the assertion about preserving an existing raw realization.",
+            "step": "4.2",
+            "inputs": [
+              "F5",
+              "F9",
+              "step 1.1",
+              "step 3.2",
+              "step 4.1",
+              "choose",
+              "algebra"
+            ]
+          }
+        ],
+        "routine_steps": [],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "checked",
+            "evidence": "The row length is positive; no empty maximum is asserted. Empty raw contribution sets in Gaussian-only subblocks are allowed by the Fourier supplier."
+          },
+          {
+            "case": "zero",
+            "status": "checked",
+            "evidence": "Zero coordinate values, zero root and split targets, and empty prefixes cause no division by those quantities; all scale denominators s, tau and B are positive."
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "N=1 and dimension one are covered by the terminal independent-product construction; the stated failure bound N^(-A)=1 is permitted."
+          },
+          {
+            "case": "degenerate",
+            "status": "checked",
+            "evidence": "Raw laws may be atomic and their conditional laws singular. Only coarse blocks have Gaussian anchors; terminal laws are sampled by standard-Borel disintegration without density assumptions."
+          },
+          {
+            "case": "endpoints",
+            "status": "checked",
+            "evidence": "Every active size exceeds the dyadic stopping threshold, leaving the fixed moderate-region margin required by the quantile supplier. Equality in the bounded norm hypothesis is allowed."
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "checked",
+            "evidence": "AC is explicitly assumed and its uses through Gaussian laws and standard-Borel disintegration are declared. The finite iterated kernel extensions preserve all existing marginals."
+          },
+          {
+            "case": "iff-forward",
+            "status": "not_applicable",
+            "reason": "The assertion is a one-way coupling-existence and tail bound, not a biconditional."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "not_applicable",
+            "reason": "The assertion is a one-way coupling-existence and tail bound, not a biconditional."
+          }
+        ]
+      }
+    }
+  },
+  "integration_note": "Source-exact proposed rows/contracts only. No live manifest, dependency level, audit, hash, or verification stamp was changed. Existing frozen source suppliers are preserved.",
+  "layout_check": {
+    "command": "node tools/proof-layout.mjs items/lem-bounded-vector-log-cubed-gaussian-coupling.md",
+    "exit_code": 0,
+    "output": "proof-layout: 1 items, 9 steps, 0 defects"
+  }
+}

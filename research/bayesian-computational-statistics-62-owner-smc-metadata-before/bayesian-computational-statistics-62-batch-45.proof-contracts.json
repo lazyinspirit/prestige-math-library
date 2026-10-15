@@ -1,0 +1,2687 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-45",
+  "scope": [
+    "def-dobrushin-coefficient-for-probability-kernels",
+    "lem-dobrushin-contraction-from-density-ratios",
+    "def-smc-clt-function-classes-and-variance-recursions",
+    "lem-smc-backward-operator-oscillation-bound",
+    "lem-smc-finite-horizon-empirical-law",
+    "lem-smc-multinomial-variance-unrolls",
+    "lem-smc-multinomial-resampling-clt",
+    "lem-smc-mutation-and-weighted-correction-clt",
+    "lem-smc-residual-resampling-clt-away-from-integer-weights",
+    "thm-smc-time-uniform-variance-bound-under-uniform-incremental-weights",
+    "thm-smc-multinomial-fixed-horizon-clt",
+    "thm-smc-residual-fixed-horizon-clt-away-from-integer-weights",
+    "ex-smc-multinomial-ancestry-collapse",
+    "cex-smc-clt-class-does-not-ensure-target-moment",
+    "cex-smc-residual-clt-fails-at-integer-weight-boundary",
+    "cex-smc-zero-residual-fraction-can-have-random-offspring",
+    "ex-smc-dominant-weight-and-ess",
+    "cex-smc-time-bound-fails-with-varying-proposals",
+    "ex-smc-bounded-weights-with-mixing",
+    "ex-smc-fixed-horizon-clt-does-not-give-time-uniform-accuracy"
+  ],
+  "contracts": {
+    "def-dobrushin-coefficient-for-probability-kernels": {
+      "claim": "Let $(S,\\Sigma)$ and $(E,\\mathcal E)$ be measurable spaces with $S\\ne\\varnothing$, and let $K:S\\rightsquigarrow E$ be a probability kernel as in [[def-measure-kernel-and-probability-kernel]]. Its **Dobrushin contraction coefficient** is\n$$\\delta(K):=\\sup_{x,x'\\in S}\\lVert K(x,\\cdot)-K(x',\\cdot)\\rVert_{\\mathrm{TV}},$$\nwhere $\\lVert\\cdot\\rVert_{\\mathrm{TV}}$ is the event-supremum distance between probability laws in [[def-total-variation-distance-for-probability-laws]]. Thus $0\\le\\delta(K)\\le1$. The coefficient measures the largest total-variation separation between two one-step output laws.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This definition has no finite particle list or sample-count input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-valued boundary parameter; its hypotheses and claim do not depend on one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no non-degeneracy assumption or claim requiring a separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This definition has no endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item’s local argument is choice-free and makes no selection from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "finite_check_disposition": "No separate finite numerical check applies; the arbitrary finite-horizon argument is the proof obligation."
+    },
+    "lem-dobrushin-contraction-from-density-ratios": {
+      "claim": "Let $K:S\\rightsquigarrow E$ be a probability kernel on a nonempty measurable source space. Suppose a sigma-finite measure $\\lambda$ on $E$ and probability densities $k_x$ satisfy $K(x,A)=\\int_A k_x\\,d\\lambda$ for every $x\\in S$ and measurable $A\\subseteq E$. If $C\\ge1$ and, for every $x,x'\\in S$, $k_x(z)\\le Ck_{x'}(z)$ for $\\lambda$-almost every $z$, then the Dobrushin coefficient from [[def-dobrushin-coefficient-for-probability-kernels]] obeys\n$$\\delta(K)\\le1-C^{-1}.$$",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-dobrushin-coefficient-for-probability-kernels",
+          "source_section": "Definition",
+          "quote": "Let $(S,\\Sigma)$ and $(E,\\mathcal E)$ be measurable spaces with $S\\ne\\varnothing$, and let $K:S\\rightsquigarrow E$ be a probability kernel as in [[def-measure-kernel-and-probability-kernel]]. Its **Dobrushin contraction coefficient** is\n$$\\delta(K):=\\sup_{x,x'\\in S}\\lVert K(x,\\cdot)-K(x',\\cdot)\\rVert_{\\mathrm{TV}},$$\nwhere $\\lVert\\cdot\\rVert_{\\mathrm{TV}}$ is the event-supremum distance between probability laws in [[def-total-variation-distance-for-probability-laws]]. Thus $0\\le\\delta(K)\\le1$. The coefficient measures the largest total-variation separation between two one-step output laws.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-total-variation-distance-for-probability-laws",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ and $\\nu$ be probability measures on the same measurable space\n$(E,\\mathcal E)$ ([[def-probability-measure]]). Their **total variation\ndistance** is",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Fix $x,x'\\in S$ and write $p=k_x$, $q=k_{x'}$. The assumed ordered-pair bound gives $p\\le Cq$ almost everywhere, so $q\\ge p/C$. Where $p\\le q$, $\\min(p,q)=p\\ge p/C$; where $p>q$, the same inequality $p\\le Cq$ gives $\\min(p,q)=q\\ge p/C$. Hence $\\int\\min(p,q)\\,d\\lambda\\ge C^{-1}\\int p\\,d\\lambda=C^{-1}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "Let $A_+=\\{z:p(z)\\ge q(z)\\}$. For every measurable $A$, $|\\int_A(p-q)\\,d\\lambda|\\le\\int(p-q)^+\\,d\\lambda$. Since $\\int(p-q)=0$, the positive and negative parts have equal integral, and $\\int(p-q)^+\\,d\\lambda=1-\\int\\min(p,q)\\,d\\lambda$; equality is attained at $A_+$. Thus [F2] gives $\\lVert K(x,\\cdot)-K(x',\\cdot)\\rVert_{\\mathrm{TV}}=1-\\int\\min(p,q)\\,d\\lambda\\le1-C^{-1}$ by step 1.1.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "The bound in step 1.2 holds for every pair $x,x'$, so taking their supremum in [F1] proves $\\delta(K)\\le1-C^{-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-valued boundary parameter; its hypotheses and claim do not depend on one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no non-degeneracy assumption or claim requiring a separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or terminal-time boundary is asserted beyond the stated arbitrary finite horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item’s local argument is choice-free and makes no selection from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "finite_check_disposition": "No separate finite numerical check applies; the arbitrary finite-horizon argument is the proof obligation."
+    },
+    "def-smc-clt-function-classes-and-variance-recursions": {
+      "claim": "Fix a finite horizon $T$. At each $0\\le t\\le T$, let $\\pi_t$ be a probability law on a measurable particle space $\\Theta_t$. Let $\\widetilde\\pi_0$ be an initial proposal with $\\pi_0\\ll\\widetilde\\pi_0$, and fix $\\upsilon_0=d\\pi_0/d\\widetilde\\pi_0$. For $1\\le t\\le T$, let $k_t$ be a probability kernel from $\\Theta_{t-1}$ to $\\Theta_t$, and put\n$$\\widetilde\\pi_t(A)=\\int_{\\Theta_{t-1}}k_t(x,A)\\,\\pi_{t-1}(dx).$$\nAssume $\\pi_t\\ll\\widetilde\\pi_t$ and fix a nonnegative Radon–Nikodym version $\\upsilon_t=d\\pi_t/d\\widetilde\\pi_t$, so $\\widetilde\\pi_t(\\upsilon_t)=1$. The BCS-41 sequential importance-resampling algorithm [[alg-sequential-importance-resampling]] is this scheme on path spaces when $k_t$ appends a proposal transition and $\\upsilon_t$ is the normalized Feynman–Kac path weight supplied by [[thm-feynman-kac-path-radon-nikodym-weight]].\n\nFor a measurable vector function $\\phi:\\Theta_t\\to\\mathbb R^d$, write $\\mu(\\phi)=\\int\\phi\\,d\\mu$ and\n$$\\operatorname{Cov}_{\\mu}(\\phi)=\\int(\\phi-\\mu(\\phi))(\\phi-\\mu(\\phi))^\\top\\,d\\mu,$$\nwhen the second moment is finite. Also write $k_t\\phi(x)=\\int\\phi(z)k_t(x,dz)$ and\n$$\\operatorname{Cov}_{k_t}(\\phi)(x)=\\int(\\phi(z)-k_t\\phi(x))(\\phi(z)-k_t\\phi(x))^\\top k_t(x,dz).$$\n\nThe source recursive test classes are\n$$\\Phi_0^{(d)}=\\{\\phi:\\widetilde\\pi_0(\\|\\phi\\|^2)<\\infty\\},$$\nand, for $t\\ge1$,\n$$\\Phi_t^{(d)}=\\left\\{\\phi:\\text{ for some }\\delta>0,\\ \\widetilde\\pi_t(\\|\\upsilon_t\\phi\\|^{2+\\delta})<\\infty\\ \\text{ and }\\ x\\mapsto k_t(\\upsilon_t\\phi)(x)\\in\\Phi_{t-1}^{(d)}\\right\\}.$$\nAssume $1\\in\\Phi_t^{(1)}$ for every $t$. This is the source theorem's explicit normalizing-weight condition. For the recursive post-resampling CLTs proved on this page, use the stronger classes $\\Psi_t^{(d)}$. At $t=0$, let $\\Psi_0^{(d)}$ consist of the $\\phi\\in\\Phi_0^{(d)}$ for which, for some $\\epsilon>0$, $\\widetilde\\pi_0(\\|\\upsilon_0(\\phi-\\pi_0(\\phi))\\|^{2+\\epsilon})<\\infty$ and $\\pi_0(\\|\\phi\\|^{2+\\epsilon})<\\infty$. The initial normalizing denominator needs only its finite first moment $\\widetilde\\pi_0(\\upsilon_0)=1$. For $t\\ge1$, let $\\Psi_t^{(d)}$ consist of the $\\phi\\in\\Phi_t^{(d)}$ for which, for some $\\epsilon>0$, $\\pi_t(\\|\\phi\\|^{2+\\epsilon})<\\infty$ and $x\\mapsto E_t(\\phi-\\pi_t(\\phi))(x)\\in\\Psi_{t-1}^{(d)}$. Here $E_t h=k_t(\\upsilon_t h)$ is the operator defined below. The recursive target moments supply the offspring variance at every earlier selection used in the induction. The source $\\Phi_t$ conditions alone need not imply them. The source condition $1\\in\\Phi_t$ and these recursive target moments are the stated hypotheses for the CLT induction; no higher initial normalizer moment is required.\n\nDefine the mutation covariance operators recursively. At time zero,\n$$\\widetilde V_0(\\phi)=\\operatorname{Cov}_{\\widetilde\\pi_0}(\\phi).$$\nFor $t\\ge1$,\n$$\\widetilde V_t(\\phi)=\\widehat V_{t-1}(k_t\\phi)+\\int\\operatorname{Cov}_{k_t}(\\phi)(x)\\,\\pi_{t-1}(dx).$$\nThe weighted-estimator covariance is\n$$V_t(\\phi)=\\widetilde V_t\\!\\left(\\upsilon_t(\\phi-\\pi_t(\\phi))\\right).$$\nFor a measurable vector function $h$ on $\\Theta_t$, define the forward operator from $\\Theta_{t-1}$ by\n$$E_t h(x)=k_t(\\upsilon_t h)(x)=\\int\\upsilon_t(z)h(z)\\,k_t(x,dz).$$\nFor $k<t$, write $E_{k+1:t}=E_{k+1}\\circ\\cdots\\circ E_t$; set $E_{t+1:t}$ to the identity operator.\nFor multinomial offspring resampling set\n$$\\widehat V_t^{\\mathrm{multi}}(\\phi)=V_t(\\phi)+\\operatorname{Cov}_{\\pi_t}(\\phi).$$\nFor residual offspring resampling, let $r(u)=u-\\lfloor u\\rfloor$. When $c_t=\\widetilde\\pi_t(r(\\upsilon_t))>0$, define the formal source candidate\n$$R_t^{\\mathrm{cand}}(\\phi)=\\widetilde\\pi_t\\!\\left(r(\\upsilon_t)\\phi\\phi^\\top\\right)-\\frac{\\widetilde\\pi_t(r(\\upsilon_t)\\phi)\\,\\widetilde\\pi_t(r(\\upsilon_t)\\phi)^\\top}{c_t}.$$\nSet $R_t=R_t^{\\mathrm{cand}}$ and $\\widehat V_t^{\\mathrm{res}}=V_t+R_t$ only when $\\widetilde\\pi_t(\\upsilon_t\\in\\{1,2,\\ldots\\})=0$; then $c_t>0$ and the finite-sample floor discontinuities are avoided. If $\\upsilon_t=1$ $\\widetilde\\pi_t$-almost everywhere, all normalized weights are exactly equal and residual offspring are deterministic; in that special case put $R_t=0$. No residual covariance is assigned when $c_t=0$ but $\\upsilon_t$ is not almost everywhere one: the finite-sample normalization can move positive integer weights across floor boundaries. The B-page counterexamples show why the general positive-integer-atom branch remains unassigned.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This definition has no finite particle list or sample-count input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-valued boundary parameter; its hypotheses and claim do not depend on one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no non-degeneracy assumption or claim requiring a separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This definition has no endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition explicitly records the inherited AC supplier and makes no additional selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "finite_check_disposition": "No separate finite numerical check applies; the arbitrary finite-horizon argument is the proof obligation."
+    },
+    "lem-smc-backward-operator-oscillation-bound": {
+      "claim": "Let $E_s$ be the forward operators of [[def-smc-clt-function-classes-and-variance-recursions]], and for bounded real $h$ put $\\operatorname{osc}(h)=\\sup h-\\inf h$. Suppose there is one $\\beta\\in[0,1)$ such that\n$$\\operatorname{osc}(E_s h)\\le\\beta\\operatorname{osc}(h)$$\nfor every $s$ and every bounded real $h$. For bounded $\\phi:\\Theta_t\\to\\mathbb R$, put $\\Delta\\phi=\\operatorname{osc}(\\phi)$ and $\\bar\\phi=\\phi-\\pi_t(\\phi)$. Then for every $0\\le k\\le t$,\n$$\\bigl\\lVert E_{k+1:t}\\bar\\phi\\bigr\\rVert_\\infty\\le\\beta^{t-k}\\Delta\\phi,$$\nwith $\\beta^0=1$ and $E_{t+1:t}$ the identity. This condition concerns the actual SMC backward operators; it is not implied merely by mixing ratios of the proposal densities.",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-smc-clt-function-classes-and-variance-recursions",
+          "source_section": "Definition",
+          "quote": "The source recursive test classes are\n$$\\Phi_0^{(d)}=\\{\\phi:\\widetilde\\pi_0(\\|\\phi\\|^2)<\\infty\\},$$\nand, for $t\\ge1$,\n$$\\Phi_t^{(d)}=\\left\\{\\phi:\\text{ for some }\\delta>0,\\ \\widetilde\\pi_t(\\|\\upsilon_t\\phi\\|^{2+\\delta})<\\infty\\ \\text{ and }\\ x\\mapsto k_t(\\upsilon_t\\phi)(x)\\in\\Phi_{t-1}^{(d)}\\right\\}.$$\nAssume $1\\in\\Phi_t^{(1)}$ for every $t$. This is the source theorem's explicit normalizing-weight condition. For the recursive post-resampling CLTs proved on this page, use the stronger classes $\\Psi_t^{(d)}$. At $t=0$, let $\\Psi_0^{(d)}$ consist of the $\\phi\\in\\Phi_0^{(d)}$ for which, for some $\\epsilon>0$, $\\widetilde\\pi_0(\\|\\upsilon_0(\\phi-\\pi_0(\\phi))\\|^{2+\\epsilon})<\\infty$ and $\\pi_0(\\|\\phi\\|^{2+\\epsilon})<\\infty$. The initial normalizing denominator needs only its finite first moment $\\widetilde\\pi_0(\\upsilon_0)=1$. For $t\\ge1$, let $\\Psi_t^{(d)}$ consist of the $\\phi\\in\\Phi_t^{(d)}$ for which, for some $\\epsilon>0$, $\\pi_t(\\|\\phi\\|^{2+\\epsilon})<\\infty$ and $x\\mapsto E_t(\\phi-\\pi_t(\\phi))(x)\\in\\Psi_{t-1}^{(d)}$. Here $E_t h=k_t(\\upsilon_t h)$ is the operator defined below. The recursive target moments supply the offspring variance at every earlier selection used in the induction. The source $\\Phi_t$ conditions alone need not imply them. The source condition $1\\in\\Phi_t$ and these recursive target moments are the stated hypotheses for the CLT induction; no higher initial normalizer moment is required.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "For any bounded measurable $h$ and $s\\ge1$, [F1] gives\n$$\\pi_{s-1}(E_sh)=\\pi_{s-1}(k_s(\\upsilon_sh))=\\widetilde\\pi_s(\\upsilon_sh)=\\pi_s(h).$$\nIterating this identity yields $\\pi_k(E_{k+1:t}\\bar\\phi)=\\pi_t(\\bar\\phi)=0$ for every $k<t$; for $k=t$ the identity operator also gives mean zero.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Repeated application of the assumed oscillation contraction gives $\\operatorname{osc}(E_{k+1:t}\\bar\\phi)\\le\\beta^{t-k}\\operatorname{osc}(\\bar\\phi)=\\beta^{t-k}\\Delta\\phi$. By step 1.1 its $\\pi_k$-mean is zero, so its infimum is at most zero and its supremum at least zero; hence its sup norm is at most its oscillation. For $k=t$ this is $\\|\\bar\\phi\\|_\\infty\\le\\Delta\\phi$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-weight, zero-variance or zero-remainder boundary specified for this item is handled. See step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate variance, deterministic-weight or counterexample branch is stated and calculated. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or terminal-time boundary is asserted beyond the stated arbitrary finite horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The stated AC premise is inherited through the cited path-law or probability-limit supplier. See step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "finite_check_disposition": "No separate finite numerical check applies; the arbitrary finite-horizon argument is the proof obligation."
+    },
+    "lem-smc-finite-horizon-empirical-law": {
+      "claim": "Use the finite-horizon target, proposal and mutation sequence of [[def-smc-clt-function-classes-and-variance-recursions]], and run the SIR procedure of [[alg-sequential-importance-resampling]] with either multinomial or residual resampling at every selection. Let $X_t^{1:N}$ be the proposal particles after mutation and before correction, let $\\eta_t^N=N^{-1}\\sum_{i=1}^N\\delta_{X_t^i}$, and let\n$$\\omega_t^N=\\frac{\\sum_{i=1}^N\\upsilon_t(X_t^i)\\delta_{X_t^i}}{\\sum_{i=1}^N\\upsilon_t(X_t^i)}$$\nwhen the denominator is positive, using the algorithm's uniform fallback otherwise. Let $\\check\\eta_t^N$ be the empirical probability measure of one offspring selection from $\\omega_t^N$; for nonterminal times this is the population carried into the next mutation. For each fixed $t\\le T$,\n$$\\eta_t^N(h)\\xrightarrow{P}\\widetilde\\pi_t(h)\\quad(h\\in L^1(\\widetilde\\pi_t)),\\qquad \\omega_t^N(\\phi)\\xrightarrow{P}\\pi_t(\\phi),\\qquad \\check\\eta_t^N(\\phi)\\xrightarrow{P}\\pi_t(\\phi)\\quad(\\phi\\in L^1(\\pi_t))$$\nas $N\\to\\infty$. The terminal selection in $\\check\\eta_t^N$ is an auxiliary resampling output; it is not an extra finite-particle accuracy claim.",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-smc-clt-function-classes-and-variance-recursions",
+          "source_section": "Definition",
+          "quote": "The source recursive test classes are\n$$\\Phi_0^{(d)}=\\{\\phi:\\widetilde\\pi_0(\\|\\phi\\|^2)<\\infty\\},$$\nand, for $t\\ge1$,\n$$\\Phi_t^{(d)}=\\left\\{\\phi:\\text{ for some }\\delta>0,\\ \\widetilde\\pi_t(\\|\\upsilon_t\\phi\\|^{2+\\delta})<\\infty\\ \\text{ and }\\ x\\mapsto k_t(\\upsilon_t\\phi)(x)\\in\\Phi_{t-1}^{(d)}\\right\\}.$$\nAssume $1\\in\\Phi_t^{(1)}$ for every $t$. This is the source theorem's explicit normalizing-weight condition. For the recursive post-resampling CLTs proved on this page, use the stronger classes $\\Psi_t^{(d)}$. At $t=0$, let $\\Psi_0^{(d)}$ consist of the $\\phi\\in\\Phi_0^{(d)}$ for which, for some $\\epsilon>0$, $\\widetilde\\pi_0(\\|\\upsilon_0(\\phi-\\pi_0(\\phi))\\|^{2+\\epsilon})<\\infty$ and $\\pi_0(\\|\\phi\\|^{2+\\epsilon})<\\infty$. The initial normalizing denominator needs only its finite first moment $\\widetilde\\pi_0(\\upsilon_0)=1$. For $t\\ge1$, let $\\Psi_t^{(d)}$ consist of the $\\phi\\in\\Phi_t^{(d)}$ for which, for some $\\epsilon>0$, $\\pi_t(\\|\\phi\\|^{2+\\epsilon})<\\infty$ and $x\\mapsto E_t(\\phi-\\pi_t(\\phi))(x)\\in\\Psi_{t-1}^{(d)}$. Here $E_t h=k_t(\\upsilon_t h)$ is the operator defined below. The recursive target moments supply the offspring variance at every earlier selection used in the induction. The source $\\Phi_t$ conditions alone need not imply them. The source condition $1\\in\\Phi_t$ and these recursive target moments are the stated hypotheses for the CLT induction; no higher initial normalizer moment is required.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-sequential-importance-resampling",
+          "source_section": "Definition",
+          "quote": "Use the finite-horizon target and proposal setting of [[def-feynman-kac-path-targets-and-normalizers]]. For admissible inputs require $\\mu_0\\ll\\nu_0$ and, for each $k\\ge1$, $M_k(x,\\cdot)\\ll R_k(x,\\cdot)$ for almost every $x$ under the last-coordinate marginal of the proposal path law $Q_{k-1}$. Select the joint measurable versions $\\rho_0=d\\mu_0/d\\nu_0$ and $r_k(x,\\cdot)=dM_k(x,\\cdot)/dR_k(x,\\cdot)$ supplied by [[thm-feynman-kac-path-radon-nikodym-weight]]. Fix $N\\ge1$ and select either multinomial or residual resampling at each time. The algorithm returns a weighted empirical path measure and a normalizer estimate.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts",
+          "source_section": "Statement",
+          "quote": "Fix $N\\ge1$ and nonnegative input weights $a_1,\\ldots,a_N$. Let $p$ be the normalized probability vector, with the uniform fallback when all weights vanish, and let $C_j$ be the offspring count from [[alg-multinomial-and-residual-offspring-resampling]]. Conditional on the input weights, for either scheme and every $1\\le j\\le N$,\n$$\\mathbb E[C_j\\mid a_1,\\ldots,a_N]=Np_j.$$\nThis assertion concerns the counts only; it gives no variance comparison for arbitrary weights.",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-khinchin-weak-law-for-iid-integrable-variables",
+          "source_section": "Statement",
+          "quote": "If $(X_k)_{k\\ge1}$ are IID real random variables and $\\mathbb E|X_1|<\\infty$, then, with $S_n=\\sum_{k=1}^nX_k$ and $\\mu=\\mathbb EX_1$,\n$$\\mathbb E|S_n/n-\\mu|\\longrightarrow0.$$\nConsequently $S_n/n\\to\\mu$ in probability.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-chebyshev-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X$ is a square-integrable real random variable and $a>0$, then\n$$\\mathbb P(|X-\\mathbb E[X]|\\ge a)\\le\\frac{\\operatorname{Var}(X)}{a^2}.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "2.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "source_section": "Statement",
+          "quote": "Assume Choice. Let $(E_n,\\mathcal E_n)_{n\\ge0}$ be measurable spaces, let\n$\\mu_0$ be a probability measure on $E_0$, and, for each $n\\ge0$, let $K_n$ be\na probability kernel from $E_0\\times\\cdots\\times E_n$ to $E_{n+1}$. There is a\nunique probability measure $P$ on\n$$ \\left(\\prod_{n\\ge0}E_n,\\ \\bigotimes_{n\\ge0}\\mathcal E_n\\right) $$ whose finite-prefix laws are the prescribed iterated integrals $$ \\mu_0(dx_0)K_0(x_0,dx_1)K_1(x_0,x_1,dx_2)\\cdots K_{r-1}(x_0,\\ldots,x_{r-1},dx_r). $$\nIn particular, if every $E_n=E$ and\n$K_n(x_0,\\ldots,x_n,A)=K(x_n,A)$, the coordinate process is a homogeneous\n$K$-chain with initial law $\\mu_0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "At time $0$, [F2] and the finite particle law [F7] give IID proposal particles with law $\\widetilde\\pi_0$. For $h\\in L^1(\\widetilde\\pi_0)$, [F4] gives $\\eta_0^N(h)\\to\\widetilde\\pi_0(h)$. If $\\phi\\in L^1(\\pi_0)$, then $\\upsilon_0\\phi$ is integrable under $\\widetilde\\pi_0$ and its integral is $\\pi_0(\\phi)$ by [F1]; also $\\widetilde\\pi_0(\\upsilon_0)=1$. Applying [F4] to numerator and denominator and dividing on the event that the denominator is positive gives $\\omega_0^N(\\phi)\\to\\pi_0(\\phi)$. That event has probability tending to one because the denominator average converges to $1$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Fix $t\\ge1$ and suppose the three convergences hold at $t-1$. First let $h$ be bounded. By [F2] and [F7], conditional on the selected parents, the $X_t^i$ are independent with laws $k_t(\\check X_{t-1}^i,\\cdot)$; measurability of $k_th$ follows from [F8]. Thus $\\eta_t^N(h)-\\check\\eta_{t-1}^N(k_th)$ has conditional mean zero and conditional variance at most $\\|h\\|_\\infty^2/N$. By [F5] this difference tends to zero in probability. Since $k_th$ is bounded and $\\pi_{t-1}(k_th)=\\widetilde\\pi_t(h)$ by [F1], the induction hypothesis proves $\\eta_t^N(h)\\to\\widetilde\\pi_t(h)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "F7",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2-2",
+          "claim": "For general $h\\in L^1(\\widetilde\\pi_t)$, let $h_M=h\\mathbf1_{\\{|h|\\le M\\}}$. The conditional mean of $\\eta_t^N(|h-h_M|)$ is $Y_N=\\check\\eta_{t-1}^N(k_t|h-h_M|)$, measurable by [F8]. The function inside this last empirical average is integrable under $\\pi_{t-1}$ and its integral is $a_M=\\widetilde\\pi_t(|h-h_M|)$. The induction hypothesis gives $Y_N\\to a_M$ in probability. Conditional Markov [F6] bounds $P(\\eta_t^N(|h-h_M|)>\\epsilon)$ by $E[\\min(1,Y_N/\\epsilon)]$. For fixed $M$, bounded continuity of $y\\mapsto\\min(1,y/\\epsilon)$ and convergence in probability to the constant $a_M$ imply that this expectation tends to $\\min(1,a_M/\\epsilon)$: for any $\\eta>0$, split on $|Y_N-a_M|\\le\\eta$ and its complement, use continuity on the first event and convergence in probability on the second. Since $a_M\\to0$ by integrability, the limiting tail probability vanishes. Applying the same truncation to the target integral and combining with step 2.1 proves the proposal empirical convergence for every integrable $h$.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "Apply step 2.2 to $h=\\upsilon_t$ and $h=\\upsilon_t\\phi$, where $\\phi\\in L^1(\\pi_t)$. Their limiting integrals are $1$ and $\\pi_t(\\phi)$ by [F1]. The ratio consequently converges to $\\pi_t(\\phi)$ whenever its denominator is positive; the denominator-zero event has probability tending to zero because its normalized sum converges to $1$. The uniform fallback in [F2] on that event cannot change convergence in probability.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4-1",
+          "claim": "For bounded $\\phi$, the conditional expectation of $\\check\\eta_t^N(\\phi)$ is $\\omega_t^N(\\phi)$ by [F3]. In multinomial resampling the conditional variance is at most $\\|\\phi\\|_\\infty^2/N$. In residual resampling the deterministic floor counts contribute no variance, and the remaining $R\\le N$ categorical draws give conditional variance at most $\\|\\phi\\|_\\infty^2/N$ as well. Chebyshev [F5] and step 3.1 prove $\\check\\eta_t^N(\\phi)\\to\\pi_t(\\phi)$ for bounded $\\phi$.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derivation-4-2",
+          "claim": "For $\\phi\\in L^1(\\pi_t)$, truncate to $\\phi_M=\\phi\\mathbf1_{\\{|\\phi|\\le M\\}}$. By [F3], the conditional expected selected average of $|\\phi-\\phi_M|$ is exactly $\\omega_t^N(|\\phi-\\phi_M|)$. Step 3.1 applied to this integrable tail and conditional Markov [F6] make the limiting probability of a tail deviation at most $\\min(1,\\pi_t(|\\phi-\\phi_M|)/\\epsilon)$, which tends to zero as $M\\to\\infty$. Combining with step 4.1 proves the selected empirical convergence for all integrable $\\phi$.",
+          "step": "4.2",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 3.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "derivation-5-1",
+          "claim": "Steps 2.1–2.2, 3.1, and 4.1–4.2 establish the induction step from $t-1$ to $t$. Step 1.1 gives the base case, so the assertions hold for every fixed finite time. No conclusion is uniform in $t$.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "step 4.1",
+            "step 4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-weight, zero-variance or zero-remainder boundary specified for this item is handled. See step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate variance, deterministic-weight or counterexample branch is stated and calculated. See step 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or terminal-time boundary is asserted beyond the stated arbitrary finite horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The stated AC premise is inherited through the cited path-law or probability-limit supplier. See step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "finite_check_disposition": "No separate finite numerical check applies; the arbitrary finite-horizon argument is the proof obligation."
+    },
+    "lem-smc-multinomial-variance-unrolls": {
+      "claim": "Use the operators and multinomial variance recursion of [[def-smc-clt-function-classes-and-variance-recursions]] at every selection time. For $\\phi\\in\\Psi_t^{(d)}$, put $\\bar\\phi=\\phi-\\pi_t(\\phi)$. Then\n$$V_t(\\phi)=\\sum_{k=0}^{t}\\widetilde\\pi_k\\!\\left[\\upsilon_k^2\\,E_{k+1:t}(\\bar\\phi)E_{k+1:t}(\\bar\\phi)^\\top\\right],$$\nwhere the $k=t$ term uses $E_{t+1:t}\\bar\\phi=\\bar\\phi$. Each summand is a finite positive-semidefinite matrix under the stated class conditions.",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-smc-clt-function-classes-and-variance-recursions",
+          "source_section": "Definition",
+          "quote": "The source recursive test classes are\n$$\\Phi_0^{(d)}=\\{\\phi:\\widetilde\\pi_0(\\|\\phi\\|^2)<\\infty\\},$$\nand, for $t\\ge1$,\n$$\\Phi_t^{(d)}=\\left\\{\\phi:\\text{ for some }\\delta>0,\\ \\widetilde\\pi_t(\\|\\upsilon_t\\phi\\|^{2+\\delta})<\\infty\\ \\text{ and }\\ x\\mapsto k_t(\\upsilon_t\\phi)(x)\\in\\Phi_{t-1}^{(d)}\\right\\}.$$\nAssume $1\\in\\Phi_t^{(1)}$ for every $t$. This is the source theorem's explicit normalizing-weight condition. For the recursive post-resampling CLTs proved on this page, use the stronger classes $\\Psi_t^{(d)}$. At $t=0$, let $\\Psi_0^{(d)}$ consist of the $\\phi\\in\\Phi_0^{(d)}$ for which, for some $\\epsilon>0$, $\\widetilde\\pi_0(\\|\\upsilon_0(\\phi-\\pi_0(\\phi))\\|^{2+\\epsilon})<\\infty$ and $\\pi_0(\\|\\phi\\|^{2+\\epsilon})<\\infty$. The initial normalizing denominator needs only its finite first moment $\\widetilde\\pi_0(\\upsilon_0)=1$. For $t\\ge1$, let $\\Psi_t^{(d)}$ consist of the $\\phi\\in\\Phi_t^{(d)}$ for which, for some $\\epsilon>0$, $\\pi_t(\\|\\phi\\|^{2+\\epsilon})<\\infty$ and $x\\mapsto E_t(\\phi-\\pi_t(\\phi))(x)\\in\\Psi_{t-1}^{(d)}$. Here $E_t h=k_t(\\upsilon_t h)$ is the operator defined below. The recursive target moments supply the offspring variance at every earlier selection used in the induction. The source $\\Phi_t$ conditions alone need not imply them. The source condition $1\\in\\Phi_t$ and these recursive target moments are the stated hypotheses for the CLT induction; no higher initial normalizer moment is required.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "For every integrable $h$ on $\\Theta_s$, the Radon–Nikodym identity [F1] gives $\\pi_{s-1}(E_sh)=\\pi_{s-1}(k_s(\\upsilon_sh))=\\widetilde\\pi_s(\\upsilon_sh)=\\pi_s(h)$. Hence if $\\pi_s(h)=0$, then $E_sh$ has mean zero under $\\pi_{s-1}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "For a square-integrable vector function $u$ on $\\Theta_s$, expand\n$$u-\\widetilde\\pi_s(u)=\\bigl(u-k_su\\bigr)+\\bigl(k_su-\\widetilde\\pi_s(u)\\bigr).$$\nThe cross-covariance terms vanish after integrating the first factor conditionally against $k_s$, because $k_s(u-k_su)=0$. Therefore\n$$\\operatorname{Cov}_{\\widetilde\\pi_s}(u)=\\int\\operatorname{Cov}_{k_s}(u)(x)\\,\\pi_{s-1}(dx)+\\operatorname{Cov}_{\\pi_{s-1}}(k_su).$$\nFor $u=\\upsilon_s h$ with $\\pi_s(h)=0$, its $\\widetilde\\pi_s$ mean is zero by step 1.1. Substituting the multinomial recursion from [F1] thus yields\n$$V_s(h)=V_{s-1}(E_sh)+\\widetilde\\pi_s\\!\\left[\\upsilon_s^2hh^\\top\\right].$$",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Starting with $h=\\bar\\phi$ at time $t$, apply step 1.1 to see that each backward iterate $E_{k+1:t}\\bar\\phi$ has $\\pi_k$-mean zero. The recursive $\\Psi$ condition also gives its finite target second moment at each such time. Repeated substitution of the one-step identity in step 1.2 gives one new term $\\widetilde\\pi_k[\\upsilon_k^2(E_{k+1:t}\\bar\\phi)(E_{k+1:t}\\bar\\phi)^\\top]$ at each $k=t,t-1,\\ldots,1$, and the remaining initial term is $V_0(E_{1:t}\\bar\\phi)=\\operatorname{Cov}_{\\widetilde\\pi_0}(\\upsilon_0E_{1:t}\\bar\\phi)$. Its mean is zero by step 1.1, so it equals the $k=0$ summand. The same base calculation gives the formula when $t=0$. Each summand is finite: for $k\\ge1$, the recursive $\\Phi$ condition gives a $2+\\delta$ proposal moment of $\\upsilon_kE_{k+1:t}\\bar\\phi$; for $k=0$, the initial $\\Psi_0$ moment gives square integrability of $\\upsilon_0E_{1:t}\\bar\\phi$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-weight, zero-variance or zero-remainder boundary specified for this item is handled. See step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate variance, deterministic-weight or counterexample branch is stated and calculated. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or terminal-time boundary is asserted beyond the stated arbitrary finite horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The stated AC premise is inherited through the cited path-law or probability-limit supplier. See step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "finite_check_disposition": "No separate finite numerical check applies; the arbitrary finite-horizon argument is the proof obligation."
+    },
+    "lem-smc-multinomial-resampling-clt": {
+      "claim": "Fix a time $t$ in the finite-horizon SIR system of [[def-smc-clt-function-classes-and-variance-recursions]]. Let $\\omega_t^N$ be its corrected weighted empirical law and let $\\check\\eta_t^N$ be the empirical law after multinomial offspring resampling. Suppose $\\phi\\in\\Psi_t^{(1)}$, the empirical-law conclusions of [[lem-smc-finite-horizon-empirical-law]] hold, and\n$$\\sqrt N\\{\\omega_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow N(0,V)$$\nfor a finite $V\\ge0$. Then\n$$\\sqrt N\\{\\check\\eta_t^N(\\phi)-\\omega_t^N(\\phi)\\}\\Rightarrow N(0,\\operatorname{Var}_{\\pi_t}(\\phi)),$$\nasymptotically independently of the weighted-estimator fluctuation, and\n$$\\sqrt N\\{\\check\\eta_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow N\\!\\left(0,V+\\operatorname{Var}_{\\pi_t}(\\phi)\\right).$$",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-smc-clt-function-classes-and-variance-recursions",
+          "source_section": "Definition",
+          "quote": "The source recursive test classes are\n$$\\Phi_0^{(d)}=\\{\\phi:\\widetilde\\pi_0(\\|\\phi\\|^2)<\\infty\\},$$\nand, for $t\\ge1$,\n$$\\Phi_t^{(d)}=\\left\\{\\phi:\\text{ for some }\\delta>0,\\ \\widetilde\\pi_t(\\|\\upsilon_t\\phi\\|^{2+\\delta})<\\infty\\ \\text{ and }\\ x\\mapsto k_t(\\upsilon_t\\phi)(x)\\in\\Phi_{t-1}^{(d)}\\right\\}.$$\nAssume $1\\in\\Phi_t^{(1)}$ for every $t$. This is the source theorem's explicit normalizing-weight condition. For the recursive post-resampling CLTs proved on this page, use the stronger classes $\\Psi_t^{(d)}$. At $t=0$, let $\\Psi_0^{(d)}$ consist of the $\\phi\\in\\Phi_0^{(d)}$ for which, for some $\\epsilon>0$, $\\widetilde\\pi_0(\\|\\upsilon_0(\\phi-\\pi_0(\\phi))\\|^{2+\\epsilon})<\\infty$ and $\\pi_0(\\|\\phi\\|^{2+\\epsilon})<\\infty$. The initial normalizing denominator needs only its finite first moment $\\widetilde\\pi_0(\\upsilon_0)=1$. For $t\\ge1$, let $\\Psi_t^{(d)}$ consist of the $\\phi\\in\\Phi_t^{(d)}$ for which, for some $\\epsilon>0$, $\\pi_t(\\|\\phi\\|^{2+\\epsilon})<\\infty$ and $x\\mapsto E_t(\\phi-\\pi_t(\\phi))(x)\\in\\Psi_{t-1}^{(d)}$. Here $E_t h=k_t(\\upsilon_t h)$ is the operator defined below. The recursive target moments supply the offspring variance at every earlier selection used in the induction. The source $\\Phi_t$ conditions alone need not imply them. The source condition $1\\in\\Phi_t$ and these recursive target moments are the stated hypotheses for the CLT induction; no higher initial normalizer moment is required.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-multinomial-and-residual-offspring-resampling",
+          "source_section": "Definition",
+          "quote": "For multinomial resampling, return the sampled vector $(J_1,\\ldots,J_N)$ in its sampled order, together with its count vector $(C_1,\\ldots,C_N)$; do not sort the sampled indices. For residual resampling, return the ancestor list containing exactly $C_j$ copies of index $j$, ordered by increasing index, together with its count vector. Each output is a length-$N$ list and a count vector summing to $N$. When all input weights vanish, the uniform fallback defines the procedure; any downstream normalizer already multiplied by this zero average remains zero.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-smc-finite-horizon-empirical-law",
+          "source_section": "Statement",
+          "quote": "Use the finite-horizon target, proposal and mutation sequence of [[def-smc-clt-function-classes-and-variance-recursions]], and run the SIR procedure of [[alg-sequential-importance-resampling]] with either multinomial or residual resampling at every selection. Let $X_t^{1:N}$ be the proposal particles after mutation and before correction, let $\\eta_t^N=N^{-1}\\sum_{i=1}^N\\delta_{X_t^i}$, and let\n$$\\omega_t^N=\\frac{\\sum_{i=1}^N\\upsilon_t(X_t^i)\\delta_{X_t^i}}{\\sum_{i=1}^N\\upsilon_t(X_t^i)}$$\nwhen the denominator is positive, using the algorithm's uniform fallback otherwise. Let $\\check\\eta_t^N$ be the empirical probability measure of one offspring selection from $\\omega_t^N$; for nonterminal times this is the population carried into the next mutation. For each fixed $t\\le T$,\n$$\\eta_t^N(h)\\xrightarrow{P}\\widetilde\\pi_t(h)\\quad(h\\in L^1(\\widetilde\\pi_t)),\\qquad \\omega_t^N(\\phi)\\xrightarrow{P}\\pi_t(\\phi),\\qquad \\check\\eta_t^N(\\phi)\\xrightarrow{P}\\pi_t(\\phi)\\quad(\\phi\\in L^1(\\pi_t))$$\nas $N\\to\\infty$. The terminal selection in $\\check\\eta_t^N$ is an auxiliary resampling output; it is not an extra finite-particle accuracy claim.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lindeberg-feller-central-limit-theorem-sufficiency",
+          "source_section": "Statement",
+          "quote": "Assume AC. If a centered row-wise independent triangular array has finite second moments, $s_n>0$ and the Lindeberg condition, then $$s_n^{-1}\\sum_{k=1}^{k_n}X_{n,k}\\Rightarrow N(0,1).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-chebyshev-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X$ is a square-integrable real random variable and $a>0$, then\n$$\\mathbb P(|X-\\mathbb E[X]|\\ge a)\\le\\frac{\\operatorname{Var}(X)}{a^2}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-slutsky-for-real-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $(X_n)$ and $(Y_n)$ be real random variables on one probability space, and let $X$ be a real random variable (possibly on another space). If $X_n\\Rightarrow X$ and $Y_n\\to c$ in probability for $c\\in\\mathbb R$, then $X_n+Y_n\\Rightarrow X+c$ and $X_nY_n\\Rightarrow cX$. If $c\\ne0$, define $Q_n=X_n/Y_n$ on $\\{Y_n\\ne0\\}$ and give $Q_n$ any fixed value on $\\{Y_n=0\\}$. Then $Q_n\\Rightarrow X/c$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Let $\\mathcal F_N$ contain the corrected particles and their weights. By [F2], conditionally on $\\mathcal F_N$ the selected values $Y_1^N,\\ldots,Y_N^N$ are IID with law $\\omega_t^N$. Their centered conditional variance is $s_N^2=\\omega_t^N(\\phi^2)-\\omega_t^N(\\phi)^2$, which converges in probability to $s^2=\\operatorname{Var}_{\\pi_t}(\\phi)$ by [F1] and [F3].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "Put $\\xi_i^N=\\phi(Y_i^N)-\\omega_t^N(\\phi)$. Since $\\pi_t(|\\phi|^{2+\\epsilon})<\\infty$, [F3] gives $\\omega_t^N(|\\phi|^{2+\\epsilon})=O_P(1)$ and $\\omega_t^N(|\\phi|)=O_P(1)$. Jensen's inequality and $|a-b|^{2+\\epsilon}\\le 2^{1+\\epsilon}(|a|^{2+\\epsilon}+|b|^{2+\\epsilon})$ then give $\\omega_t^N(|\\phi-\\omega_t^N(\\phi)|^{2+\\epsilon})=O_P(1)$. For every $a>0$, the conditional Lindeberg sum is bounded by\n$$\\frac1N\\sum_{i=1}^N\\mathbb E\\!\\left[(\\xi_i^N)^2\\mathbf1_{\\{|\\xi_i^N|>a\\sqrt N\\}}\\middle|\\mathcal F_N\\right]\\le a^{-\\epsilon}N^{-\\epsilon/2}\\omega_t^N(|\\phi-\\omega_t^N(\\phi)|^{2+\\epsilon}),$$\nwhich tends to zero in probability.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Along any subsequence, choose a further subsequence on which $s_N\\to s$ almost surely. If $s>0$, then eventually $s_N>s/2$; the normalized Lindeberg sum for draws divided by $s_N\\sqrt N$ is bounded by step 1.2 at threshold $as/2$, divided by $s_N^2$. It therefore tends to zero in probability, and a further subsequence makes that convergence almost sure. Apply [F4] to obtain a standard-normal limit for the normalized row. Slutsky [F6] with $s_N\\to s$ gives convergence of the conditional characteristic function of $N^{-1/2}\\sum_i\\xi_i^N$ to $e^{-u^2s^2/2}$. If $s=0$, conditional [F5] gives $P(|N^{-1/2}\\sum_i\\xi_i^N|>a\\mid\\mathcal F_N)\\le\\min(1,s_N^2/a^2)\\to0$, giving the degenerate characteristic-function limit. The subsequence criterion therefore gives convergence in probability of these conditional characteristic functions along the full sequence.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derivation-2-2",
+          "claim": "The conditional characteristic functions are bounded by one, so their differences from $e^{-u^2s^2/2}$ converge to zero in $L^1$. Multiplying by the bounded factor $e^{iu\\sqrt N(\\omega_t^N(\\phi)-\\pi_t(\\phi))}$ and taking expectations shows that the joint limiting characteristic function factors into the weighted-estimator Gaussian characteristic function and $e^{-u^2s^2/2}$. Thus the resampling fluctuation is asymptotically independent of the weighted fluctuation, and their sum has variance $V+s^2$.",
+          "step": "2.2",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-weight, zero-variance or zero-remainder boundary specified for this item is handled. See step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate variance, deterministic-weight or counterexample branch is stated and calculated. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or terminal-time boundary is asserted beyond the stated arbitrary finite horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The stated AC premise is inherited through the cited path-law or probability-limit supplier. See step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "finite_check_disposition": "No separate finite numerical check applies; the arbitrary finite-horizon argument is the proof obligation."
+    },
+    "lem-smc-mutation-and-weighted-correction-clt": {
+      "claim": "Fix $t\\ge1$. Suppose the selected empirical array at time $t-1$ has the CLT with covariance $\\widehat V_{t-1}$ for $k_t\\psi$. Let $\\psi:\\Theta_t\\to\\mathbb R$ satisfy $\\widetilde\\pi_t(|\\psi|^{2+\\delta})<\\infty$ for some $\\delta>0$ and $k_t\\psi\\in\\Phi_{t-1}^{(1)}$. Then the proposal empirical mean after mutation satisfies\n$$\\sqrt N\\left(\\eta_t^N(\\psi)-\\widetilde\\pi_t(\\psi)\\right)\\Rightarrow N\\!\\left(0,\\widehat V_{t-1}(k_t\\psi)+\\pi_{t-1}\\!\\left(\\operatorname{Var}_{k_t}(\\psi)\\right)\\right)=N(0,\\widetilde V_t(\\psi)).$$\nIn particular, if $\\phi\\in\\Psi_t^{(1)}$ and $1\\in\\Phi_s^{(1)}$ for $0\\le s\\le t$, the weighted corrected estimate satisfies\n$$\\sqrt N\\left(\\omega_t^N(\\phi)-\\pi_t(\\phi)\\right)\\Rightarrow N(0,V_t(\\phi)).$$\nAt $t=0$, for $\\phi\\in\\Psi_0^{(1)}$ the weighted estimate has the ratio CLT with covariance $V_0(\\phi)=\\widetilde V_0(\\upsilon_0(\\phi-\\pi_0\\phi))$.",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-smc-clt-function-classes-and-variance-recursions",
+          "source_section": "Definition",
+          "quote": "The source recursive test classes are\n$$\\Phi_0^{(d)}=\\{\\phi:\\widetilde\\pi_0(\\|\\phi\\|^2)<\\infty\\},$$\nand, for $t\\ge1$,\n$$\\Phi_t^{(d)}=\\left\\{\\phi:\\text{ for some }\\delta>0,\\ \\widetilde\\pi_t(\\|\\upsilon_t\\phi\\|^{2+\\delta})<\\infty\\ \\text{ and }\\ x\\mapsto k_t(\\upsilon_t\\phi)(x)\\in\\Phi_{t-1}^{(d)}\\right\\}.$$\nAssume $1\\in\\Phi_t^{(1)}$ for every $t$. This is the source theorem's explicit normalizing-weight condition. For the recursive post-resampling CLTs proved on this page, use the stronger classes $\\Psi_t^{(d)}$. At $t=0$, let $\\Psi_0^{(d)}$ consist of the $\\phi\\in\\Phi_0^{(d)}$ for which, for some $\\epsilon>0$, $\\widetilde\\pi_0(\\|\\upsilon_0(\\phi-\\pi_0(\\phi))\\|^{2+\\epsilon})<\\infty$ and $\\pi_0(\\|\\phi\\|^{2+\\epsilon})<\\infty$. The initial normalizing denominator needs only its finite first moment $\\widetilde\\pi_0(\\upsilon_0)=1$. For $t\\ge1$, let $\\Psi_t^{(d)}$ consist of the $\\phi\\in\\Phi_t^{(d)}$ for which, for some $\\epsilon>0$, $\\pi_t(\\|\\phi\\|^{2+\\epsilon})<\\infty$ and $x\\mapsto E_t(\\phi-\\pi_t(\\phi))(x)\\in\\Psi_{t-1}^{(d)}$. Here $E_t h=k_t(\\upsilon_t h)$ is the operator defined below. The recursive target moments supply the offspring variance at every earlier selection used in the induction. The source $\\Phi_t$ conditions alone need not imply them. The source condition $1\\in\\Phi_t$ and these recursive target moments are the stated hypotheses for the CLT induction; no higher initial normalizer moment is required.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-sequential-importance-resampling",
+          "source_section": "Definition",
+          "quote": "1. Draw $X_0^1,\\ldots,X_0^N$ independently from $\\nu_0$. Set $a_0^i=G_0(X_0^i)\\rho_0(X_0^i)$ and $\\widehat Z_0=N^{-1}\\sum_{i=1}^Na_0^i$. If $\\sum_i a_0^i>0$, put $\\bar w_0^i=a_0^i/\\sum_j a_0^j$; otherwise put $\\bar w_0^i=1/N$. Each initial path is $X_{0:0}^i=X_0^i$.\n2. For $k=1,\\ldots,t$, do the following:\n   1. Apply [[alg-multinomial-and-residual-offspring-resampling]] to the previous normalized weights $(\\bar w_{k-1}^1,\\ldots,\\bar w_{k-1}^N)$, obtaining ancestor indices $A_k^1,\\ldots,A_k^N$.\n   2. Given the previous paths and these indices, draw $(X_k^1,\\ldots,X_k^N)$ with joint conditional law $\\bigotimes_{i=1}^N R_k(X_{k-1}^{A_k^i},\\cdot)$ and set $X_{0:k}^i=(X_{0:k-1}^{A_k^i},X_k^i)$.\n   3. Set $a_k^i=G_k(X_k^i)r_k(X_{k-1}^{A_k^i},X_k^i)$ and $\\widehat Z_k=\\widehat Z_{k-1}(N^{-1}\\sum_{i=1}^Na_k^i)$. If $\\sum_i a_k^i>0$, put $\\bar w_k^i=a_k^i/\\sum_j a_k^j$; otherwise put $\\bar w_k^i=1/N$.\n3. Return $\\widehat Z_t$ and the weighted empirical path probability measure $\\widehat\\pi_t^N=\\sum_{i=1}^N\\bar w_t^i\\delta_{X_{0:t}^i}$. Its last-coordinate marginal is the corresponding empirical filtering approximation.",
+          "uses": [
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-smc-finite-horizon-empirical-law",
+          "source_section": "Statement",
+          "quote": "Use the finite-horizon target, proposal and mutation sequence of [[def-smc-clt-function-classes-and-variance-recursions]], and run the SIR procedure of [[alg-sequential-importance-resampling]] with either multinomial or residual resampling at every selection. Let $X_t^{1:N}$ be the proposal particles after mutation and before correction, let $\\eta_t^N=N^{-1}\\sum_{i=1}^N\\delta_{X_t^i}$, and let\n$$\\omega_t^N=\\frac{\\sum_{i=1}^N\\upsilon_t(X_t^i)\\delta_{X_t^i}}{\\sum_{i=1}^N\\upsilon_t(X_t^i)}$$\nwhen the denominator is positive, using the algorithm's uniform fallback otherwise. Let $\\check\\eta_t^N$ be the empirical probability measure of one offspring selection from $\\omega_t^N$; for nonterminal times this is the population carried into the next mutation. For each fixed $t\\le T$,\n$$\\eta_t^N(h)\\xrightarrow{P}\\widetilde\\pi_t(h)\\quad(h\\in L^1(\\widetilde\\pi_t)),\\qquad \\omega_t^N(\\phi)\\xrightarrow{P}\\pi_t(\\phi),\\qquad \\check\\eta_t^N(\\phi)\\xrightarrow{P}\\pi_t(\\phi)\\quad(\\phi\\in L^1(\\pi_t))$$\nas $N\\to\\infty$. The terminal selection in $\\check\\eta_t^N$ is an auxiliary resampling output; it is not an extra finite-particle accuracy claim.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lindeberg-feller-central-limit-theorem-sufficiency",
+          "source_section": "Statement",
+          "quote": "Assume AC. If a centered row-wise independent triangular array has finite second moments, $s_n>0$ and the Lindeberg condition, then $$s_n^{-1}\\sum_{k=1}^{k_n}X_{n,k}\\Rightarrow N(0,1).$$",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-slutsky-for-real-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $(X_n)$ and $(Y_n)$ be real random variables on one probability space, and let $X$ be a real random variable (possibly on another space). If $X_n\\Rightarrow X$ and $Y_n\\to c$ in probability for $c\\in\\mathbb R$, then $X_n+Y_n\\Rightarrow X+c$ and $X_nY_n\\Rightarrow cX$. If $c\\ne0$, define $Q_n=X_n/Y_n$ on $\\{Y_n\\ne0\\}$ and give $Q_n$ any fixed value on $\\{Y_n=0\\}$. Then $Q_n\\Rightarrow X/c$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-chebyshev-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X$ is a square-integrable real random variable and $a>0$, then\n$$\\mathbb P(|X-\\mathbb E[X]|\\ge a)\\le\\frac{\\operatorname{Var}(X)}{a^2}.$$",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "At $t=0$, the centered weighted numerator $Z=\\upsilon_0(\\phi-\\pi_0\\phi)$ has mean zero and a finite $2+\\epsilon$ moment by the definition of $\\Psi_0$. If its variance is positive, [F4] gives the IID CLT; if its variance is zero, [F6] gives convergence of its centered sample mean to zero. The denominator $\\eta_0^N(\\upsilon_0)$ converges to one by [F3], since $\\widetilde\\pi_0(\\upsilon_0)=1$. Slutsky [F5] gives the ratio CLT with variance $V_0(\\phi)$. For $t\\ge1$, $\\Phi_t$ is closed under finite linear combinations: use the smaller moment exponent, the $L^p$ triangle inequality, and linearity of kernel integration. The same arguments together with the target-moment condition show closure of $\\Psi_t$. If $\\phi\\in\\Psi_t$, then $\\psi=\\upsilon_t(\\phi-\\pi_t\\phi)$ has a finite proposal $2+\\delta$ moment because $\\phi,1\\in\\Phi_t$, and $k_t\\psi=E_t(\\phi-\\pi_t\\phi)\\in\\Psi_{t-1}$ by the recursive $\\Psi_t$ condition.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "For the mutation part, condition on the selected parent paths $\\check X_{t-1}^{1:N}$ and set $m_i=k_t\\psi(\\check X_{t-1}^i)$. Under the product kernel in [F2], $D_{i,N}=\\psi(X_t^i)-m_i$ are independent and centered. Their row variance is\n$$s_N^2=\\frac1N\\sum_{i=1}^N\\operatorname{Var}_{k_t(\\check X_{t-1}^i)}(\\psi),$$\nwhich converges in probability to $\\sigma^2=\\pi_{t-1}(\\operatorname{Var}_{k_t}(\\psi))$ by [F3], because $0\\le\\operatorname{Var}_{k_t}(\\psi)\\le k_t(\\psi^2)$ and $\\pi_{t-1}(k_t|\\psi|^{2+\\delta})=\\widetilde\\pi_t(|\\psi|^{2+\\delta})<\\infty$. When $\\sigma^2>0$, normalize the array by $s_N\\sqrt N$, where $s_N^2$ is the displayed variance. For every $a>0$, the resulting conditional Lindeberg sum is at most\n$$C_\\delta a^{-\\delta}N^{-\\delta/2}s_N^{-(2+\\delta)}\\,\\check\\eta_{t-1}^N(k_t|\\psi|^{2+\\delta}),$$\nwhere $C_\\delta$ is a finite constant from $|a-b|^{2+\\delta}\\le2^{1+\\delta}(|a|^{2+\\delta}+|b|^{2+\\delta})$ and Jensen's inequality. Since $s_N\\to\\sigma>0$ and [F3] makes the average factor converge in probability to a finite value, this conditional Lindeberg sum tends to zero.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2-2",
+          "claim": "Along any subsequence, choose a further subsequence on which $s_N\\to\\sigma$ almost surely. If $\\sigma>0$, a further subsequence makes the normalized Lindeberg sums converge almost surely; [F4] gives a standard-normal limit for the normalized row, and Slutsky [F5] with $s_N\\to\\sigma$ gives the conditional characteristic-function limit $e^{-u^2\\sigma^2/2}$. If $\\sigma=0$, conditional [F6] gives\n$$P\\!\\left(\\left|N^{-1/2}\\sum_iD_{i,N}\\right|>a\\,\\middle|\\,\\check X_{t-1}^{1:N}\\right)\\le\\min(1,s_N^2/a^2)\\longrightarrow0$$\nfor every $a>0$, yielding the same characteristic-function limit with variance zero. The subsequence criterion therefore gives convergence in probability of the conditional characteristic functions along the full sequence. They are bounded by one, so their $L^1$ differences from that limit also tend to zero.",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-3",
+          "claim": "The conditional mean part is\n$$P_N=\\sqrt N\\left(\\check\\eta_{t-1}^N(k_t\\psi)-\\pi_{t-1}(k_t\\psi)\\right),$$\nand has the previous selected-population CLT by the hypothesis of the Statement. The total proposal error is $P_N+N^{-1/2}\\sum_iD_{i,N}$. Multiplying the conditional characteristic function from step 2.2 by the bounded factor $e^{iuP_N}$ and integrating shows that its limit is the product of the previous Gaussian characteristic function and $e^{-u^2\\sigma^2/2}$. Hence the two covariance contributions add, giving $\\widetilde V_t(\\psi)$.",
+          "step": "2.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.2",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "For $\\phi\\in\\Psi_t$, apply the mutation result to $\\psi=\\upsilon_t(\\phi-\\pi_t\\phi)$ using step 1.1 and the preceding selected CLT for $k_t\\psi\\in\\Psi_{t-1}$. By [F3], $\\eta_t^N(\\upsilon_t)\\to\\widetilde\\pi_t(\\upsilon_t)=1$ in probability, and the event of a zero denominator has probability tending to zero. On its complement,\n$$\\sqrt N\\left(\\omega_t^N(\\phi)-\\pi_t(\\phi)\\right)=\\frac{\\sqrt N\\,\\eta_t^N(\\upsilon_t(\\phi-\\pi_t\\phi))}{\\eta_t^N(\\upsilon_t)}.$$\nSlutsky [F5] gives the stated limit with covariance $\\widetilde V_t(\\upsilon_t(\\phi-\\pi_t\\phi))=V_t(\\phi)$. The fallback on a zero empirical weight sum changes the ratio only on an event whose probability tends to zero.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.1",
+            "step 2.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-weight, zero-variance or zero-remainder boundary specified for this item is handled. See step 2.2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate variance, deterministic-weight or counterexample branch is stated and calculated. See step 2.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or terminal-time boundary is asserted beyond the stated arbitrary finite horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The stated AC premise is inherited through the cited path-law or probability-limit supplier. See step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "finite_check_disposition": "No separate finite numerical check applies; the arbitrary finite-horizon argument is the proof obligation."
+    },
+    "lem-smc-residual-resampling-clt-away-from-integer-weights": {
+      "claim": "Fix a time $t$ in the finite-horizon SIR system of [[def-smc-clt-function-classes-and-variance-recursions]]. Let $X_t^{1:N}$ have proposal empirical law $\\eta_t^N$, corrected law $\\omega_t^N$, and residual-resampled law $\\check\\eta_t^N$. Assume the proposal empirical law converges in probability for every integrable test as in [[lem-smc-finite-horizon-empirical-law]], the weighted estimate has a finite-variance CLT\n$$\\sqrt N\\{\\omega_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow N(0,V),$$\nand $\\phi\\in\\Psi_t^{(1)}$. Write $u=\\upsilon_t$ and assume either $u=1$ $\\widetilde\\pi_t$-almost everywhere, or\n$$\\widetilde\\pi_t(u\\in\\{1,2,\\ldots\\})=0.$$\nIn the second case $c=\\widetilde\\pi_t(r(u))>0$. Then, with\n$$R_t(\\phi)=\\widetilde\\pi_t(r(u)\\phi^2)-\\frac{\\widetilde\\pi_t(r(u)\\phi)^2}{c},$$\nwhere $R_t(\\phi)=0$ in the constant-weight case,\n$$\\sqrt N\\{\\check\\eta_t^N(\\phi)-\\omega_t^N(\\phi)\\}\\Rightarrow N(0,R_t(\\phi)),$$\nasymptotically independently of the weighted-estimator fluctuation, and\n$$\\sqrt N\\{\\check\\eta_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow N(0,V+R_t(\\phi)).$$",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-smc-clt-function-classes-and-variance-recursions",
+          "source_section": "Definition",
+          "quote": "Define the mutation covariance operators recursively. At time zero,\n$$\\widetilde V_0(\\phi)=\\operatorname{Cov}_{\\widetilde\\pi_0}(\\phi).$$\nFor $t\\ge1$,\n$$\\widetilde V_t(\\phi)=\\widehat V_{t-1}(k_t\\phi)+\\int\\operatorname{Cov}_{k_t}(\\phi)(x)\\,\\pi_{t-1}(dx).$$\nThe weighted-estimator covariance is\n$$V_t(\\phi)=\\widetilde V_t\\!\\left(\\upsilon_t(\\phi-\\pi_t(\\phi))\\right).$$\nFor a measurable vector function $h$ on $\\Theta_t$, define the forward operator from $\\Theta_{t-1}$ by\n$$E_t h(x)=k_t(\\upsilon_t h)(x)=\\int\\upsilon_t(z)h(z)\\,k_t(x,dz).$$\nFor $k<t$, write $E_{k+1:t}=E_{k+1}\\circ\\cdots\\circ E_t$; set $E_{t+1:t}$ to the identity operator.\nFor multinomial offspring resampling set\n$$\\widehat V_t^{\\mathrm{multi}}(\\phi)=V_t(\\phi)+\\operatorname{Cov}_{\\pi_t}(\\phi).$$\nFor residual offspring resampling, let $r(u)=u-\\lfloor u\\rfloor$. When $c_t=\\widetilde\\pi_t(r(\\upsilon_t))>0$, define the formal source candidate\n$$R_t^{\\mathrm{cand}}(\\phi)=\\widetilde\\pi_t\\!\\left(r(\\upsilon_t)\\phi\\phi^\\top\\right)-\\frac{\\widetilde\\pi_t(r(\\upsilon_t)\\phi)\\,\\widetilde\\pi_t(r(\\upsilon_t)\\phi)^\\top}{c_t}.$$\nSet $R_t=R_t^{\\mathrm{cand}}$ and $\\widehat V_t^{\\mathrm{res}}=V_t+R_t$ only when $\\widetilde\\pi_t(\\upsilon_t\\in\\{1,2,\\ldots\\})=0$; then $c_t>0$ and the finite-sample floor discontinuities are avoided. If $\\upsilon_t=1$ $\\widetilde\\pi_t$-almost everywhere, all normalized weights are exactly equal and residual offspring are deterministic; in that special case put $R_t=0$. No residual covariance is assigned when $c_t=0$ but $\\upsilon_t$ is not almost everywhere one: the finite-sample normalization can move positive integer weights across floor boundaries. The B-page counterexamples show why the general positive-integer-atom branch remains unassigned.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-multinomial-and-residual-offspring-resampling",
+          "source_section": "Definition",
+          "quote": "For multinomial resampling, return the sampled vector $(J_1,\\ldots,J_N)$ in its sampled order, together with its count vector $(C_1,\\ldots,C_N)$; do not sort the sampled indices. For residual resampling, return the ancestor list containing exactly $C_j$ copies of index $j$, ordered by increasing index, together with its count vector. Each output is a length-$N$ list and a count vector summing to $N$. When all input weights vanish, the uniform fallback defines the procedure; any downstream normalizer already multiplied by this zero average remains zero.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-smc-finite-horizon-empirical-law",
+          "source_section": "Statement",
+          "quote": "Use the finite-horizon target, proposal and mutation sequence of [[def-smc-clt-function-classes-and-variance-recursions]], and run the SIR procedure of [[alg-sequential-importance-resampling]] with either multinomial or residual resampling at every selection. Let $X_t^{1:N}$ be the proposal particles after mutation and before correction, let $\\eta_t^N=N^{-1}\\sum_{i=1}^N\\delta_{X_t^i}$, and let\n$$\\omega_t^N=\\frac{\\sum_{i=1}^N\\upsilon_t(X_t^i)\\delta_{X_t^i}}{\\sum_{i=1}^N\\upsilon_t(X_t^i)}$$\nwhen the denominator is positive, using the algorithm's uniform fallback otherwise. Let $\\check\\eta_t^N$ be the empirical probability measure of one offspring selection from $\\omega_t^N$; for nonterminal times this is the population carried into the next mutation. For each fixed $t\\le T$,\n$$\\eta_t^N(h)\\xrightarrow{P}\\widetilde\\pi_t(h)\\quad(h\\in L^1(\\widetilde\\pi_t)),\\qquad \\omega_t^N(\\phi)\\xrightarrow{P}\\pi_t(\\phi),\\qquad \\check\\eta_t^N(\\phi)\\xrightarrow{P}\\pi_t(\\phi)\\quad(\\phi\\in L^1(\\pi_t))$$\nas $N\\to\\infty$. The terminal selection in $\\check\\eta_t^N$ is an auxiliary resampling output; it is not an extra finite-particle accuracy claim.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lindeberg-feller-central-limit-theorem-sufficiency",
+          "source_section": "Statement",
+          "quote": "Assume AC. If a centered row-wise independent triangular array has finite second moments, $s_n>0$ and the Lindeberg condition, then $$s_n^{-1}\\sum_{k=1}^{k_n}X_{n,k}\\Rightarrow N(0,1).$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-chebyshev-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X$ is a square-integrable real random variable and $a>0$, then\n$$\\mathbb P(|X-\\mathbb E[X]|\\ge a)\\le\\frac{\\operatorname{Var}(X)}{a^2}.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-slutsky-for-real-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $(X_n)$ and $(Y_n)$ be real random variables on one probability space, and let $X$ be a real random variable (possibly on another space). If $X_n\\Rightarrow X$ and $Y_n\\to c$ in probability for $c\\in\\mathbb R$, then $X_n+Y_n\\Rightarrow X+c$ and $X_nY_n\\Rightarrow cX$. If $c\\ne0$, define $Q_n=X_n/Y_n$ on $\\{Y_n\\ne0\\}$ and give $Q_n$ any fixed value on $\\{Y_n=0\\}$. Then $Q_n\\Rightarrow X/c$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Put $\\bar u_N=\\eta_t^N(u)$ and $b_i^N=r(u(X_t^i)/\\bar u_N)$ on the event $\\bar u_N>0$, whose probability tends to one by [F3]. If $u=1$ almost everywhere, every finite normalized weight is $1/N$ and residual selection is deterministic, so the resampling fluctuation is zero. In the other case, for $j=0,1,2,2+\\epsilon$, where $\\pi_t(|\\phi|^{2+\\epsilon})<\\infty$, one has\n$$\\frac1N\\sum_i b_i^N\\phi(X_t^i)^j\\xrightarrow{P}\\widetilde\\pi_t(r(u)\\phi^j).$$\nTo verify this triangular empirical limit, fix $M$ and first restrict to $u\\le M$ and $|\\phi|\\le M$. The compact $u$ interval meets only finitely many positive-integer discontinuities of $r$. Delete open $\\gamma$-neighborhoods of those integers. On the remaining compact set, $r(u/\\bar u_N)\\to r(u)$ uniformly as $\\bar u_N\\to1$, and $|\\phi|^j\\le M^j$, so [F3] gives convergence of the restricted averages. Each deleted neighborhood has proposal integral of $|\\phi|^j$ tending to zero as $\\gamma\\downarrow0$: it lies where $u\\ge1/2$, and $\\widetilde\\pi_t(u|\\phi|^j)=\\pi_t(|\\phi|^j)<\\infty$; the no-atom condition gives the limit zero. [F3] controls its empirical average for each fixed $\\gamma$. For the tails, when $\\bar u_N\\in[1/2,2]$, $b_i^N\\le2u(X_t^i)$; hence the $|\\phi|>M$ contribution is bounded by $2\\eta_t^N(u|\\phi|^j\\mathbf1_{\\{|\\phi|>M\\}})$, whose limit tends to zero by target integrability. On $u>M$, use $b_i^N\\le1$ and $\\widetilde\\pi_t(|\\phi|^j\\mathbf1_{\\{u>M\\}})\\le M^{-1}\\pi_t(|\\phi|^j)$, with [F3] again controlling the empirical average. The corresponding target tails obey the same bounds because $r(u)\\le u$ and $r(u)\\le1$. Taking first $N\\to\\infty$, then $\\gamma\\downarrow0$ and $M\\to\\infty$, proves the claim.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "Taking $j=0$ in step 1.1 gives $N^{-1}\\sum_i b_i^N\\to c$. Here $c>0$: if $c=0$, then $u$ is integer-valued almost surely; the no-positive-integer-atom assumption would force $u=0$ almost surely, contradicting $\\widetilde\\pi_t(u)=1$. Thus the number $M_N=\\sum_i b_i^N$ of residual draws diverges and $M_N/N\\to c$. Their conditional sampling probabilities are $b_i^N/M_N$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Let $m_N=M_N^{-1}\\sum_i b_i^N\\phi(X_t^i)$. Given the particles, the residual offspring contribution to the centered, $\\sqrt N$-scaled empirical mean is $N^{-1/2}\\sum_{\\ell=1}^{M_N}(\\phi(Y_\\ell^N)-m_N)$, with IID conditional draws $Y_\\ell^N$ from probabilities $b_i^N/M_N$. By step 1.1 its conditional variance converges in probability to\n$$c\\left\\{\\frac{\\widetilde\\pi_t(r(u)\\phi^2)}c-\\left(\\frac{\\widetilde\\pi_t(r(u)\\phi)}c\\right)^2\\right\\}=R_t(\\phi).$$\nThe empirical $(2+\\epsilon)$-moment $N^{-1}\\sum_i b_i^N|\\phi(X_t^i)|^{2+\\epsilon}$ is bounded in probability by step 1.1, and $M_N/N\\to c>0$. The residual draw mean $m_N$ is bounded in probability by the $j=1$ limit. Therefore the conditional $(2+\\epsilon)$ moment of $\\phi(Y_\\ell^N)-m_N$ is bounded in probability. For any $a>0$, the Lindeberg sum is at most $a^{-\\epsilon}N^{-\\epsilon/2}(M_N/N)\\mathbb E[|\\phi(Y_1^N)-m_N|^{2+\\epsilon}\\mid X_t^{1:N}]$, so it tends to zero.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-2",
+          "claim": "Along any subsequence, choose a further subsequence on which the conditional residual variance converges almost surely. If $R_t(\\phi)>0$, the conditional standard deviation is eventually greater than $\\sqrt{R_t(\\phi)}/2$. Apply the bound in step 2.1 at threshold $a\\sqrt{R_t(\\phi)}/2$ and divide by the conditional variance; this gives the Lindeberg condition after normalizing the residual sum by its conditional standard deviation. Conditional [F4] gives a standard-normal limit, and Slutsky [F6] with the conditional standard deviation converging to $\\sqrt{R_t(\\phi)}$ gives the characteristic-function limit $e^{-u_0^2R_t(\\phi)/2}$. If $R_t(\\phi)=0$, conditional [F5] bounds the deviation probability by the conditional variance divided by the squared threshold, giving the same degenerate limit. AC is inherited only through the particle law and conditional CLT supplier [F4]; the finite residual calculation adds no choice. The subsequence criterion gives convergence in probability along the full sequence. These conditional characteristic functions are bounded by one. Multiplication by the characteristic factor of the weighted-estimator fluctuation and integration therefore shows asymptotic independence and adds $R_t(\\phi)$ to $V$. The deterministic-floor part is centered at its conditional expectation, so the conditional mean of the selected empirical law is exactly $\\omega_t^N(\\phi)$.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-weight, zero-variance or zero-remainder boundary specified for this item is handled. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate variance, deterministic-weight or counterexample branch is stated and calculated. See step 2.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or terminal-time boundary is asserted beyond the stated arbitrary finite horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The stated AC premise is inherited through the cited path-law or probability-limit supplier. See step 2.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "finite_check_disposition": "No separate finite numerical check applies; the arbitrary finite-horizon argument is the proof obligation."
+    },
+    "thm-smc-time-uniform-variance-bound-under-uniform-incremental-weights": {
+      "claim": "Use multinomial offspring resampling at every time and the variance $V_t$ in [[def-smc-clt-function-classes-and-variance-recursions]]. Assume there is a constant $B<\\infty$ such that $\\upsilon_s\\le B$ $\\widetilde\\pi_s$-almost everywhere for every $s\\ge0$. Assume also that the forward operators satisfy the uniform oscillation condition of [[lem-smc-backward-operator-oscillation-bound]] with one $\\beta\\in[0,1)$ for all times. Then every bounded real test $\\phi$ with $\\Delta\\phi=\\sup\\phi-\\inf\\phi<\\infty$ satisfies\n$$V_t(\\phi)\\le\\frac{B^2(\\Delta\\phi)^2}{1-\\beta^2}\\qquad(t\\ge0).$$\nThis is a bound on the fixed-horizon CLT variance, uniform in the time index; it is not a finite-particle error bound.",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-smc-clt-function-classes-and-variance-recursions",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T$. At each $0\\le t\\le T$, let $\\pi_t$ be a probability law on a measurable particle space $\\Theta_t$. Let $\\widetilde\\pi_0$ be an initial proposal with $\\pi_0\\ll\\widetilde\\pi_0$, and fix $\\upsilon_0=d\\pi_0/d\\widetilde\\pi_0$. For $1\\le t\\le T$, let $k_t$ be a probability kernel from $\\Theta_{t-1}$ to $\\Theta_t$, and put\n$$\\widetilde\\pi_t(A)=\\int_{\\Theta_{t-1}}k_t(x,A)\\,\\pi_{t-1}(dx).$$\nAssume $\\pi_t\\ll\\widetilde\\pi_t$ and fix a nonnegative Radon–Nikodym version $\\upsilon_t=d\\pi_t/d\\widetilde\\pi_t$, so $\\widetilde\\pi_t(\\upsilon_t)=1$. The BCS-41 sequential importance-resampling algorithm [[alg-sequential-importance-resampling]] is this scheme on path spaces when $k_t$ appends a proposal transition and $\\upsilon_t$ is the normalized Feynman–Kac path weight supplied by [[thm-feynman-kac-path-radon-nikodym-weight]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-smc-multinomial-variance-unrolls",
+          "source_section": "Statement",
+          "quote": "Use the operators and multinomial variance recursion of [[def-smc-clt-function-classes-and-variance-recursions]] at every selection time. For $\\phi\\in\\Psi_t^{(d)}$, put $\\bar\\phi=\\phi-\\pi_t(\\phi)$. Then\n$$V_t(\\phi)=\\sum_{k=0}^{t}\\widetilde\\pi_k\\!\\left[\\upsilon_k^2\\,E_{k+1:t}(\\bar\\phi)E_{k+1:t}(\\bar\\phi)^\\top\\right],$$\nwhere the $k=t$ term uses $E_{t+1:t}\\bar\\phi=\\bar\\phi$. Each summand is a finite positive-semidefinite matrix under the stated class conditions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-smc-backward-operator-oscillation-bound",
+          "source_section": "Statement",
+          "quote": "Let $E_s$ be the forward operators of [[def-smc-clt-function-classes-and-variance-recursions]], and for bounded real $h$ put $\\operatorname{osc}(h)=\\sup h-\\inf h$. Suppose there is one $\\beta\\in[0,1)$ such that\n$$\\operatorname{osc}(E_s h)\\le\\beta\\operatorname{osc}(h)$$\nfor every $s$ and every bounded real $h$. For bounded $\\phi:\\Theta_t\\to\\mathbb R$, put $\\Delta\\phi=\\operatorname{osc}(\\phi)$ and $\\bar\\phi=\\phi-\\pi_t(\\phi)$. Then for every $0\\le k\\le t$,\n$$\\bigl\\lVert E_{k+1:t}\\bar\\phi\\bigr\\rVert_\\infty\\le\\beta^{t-k}\\Delta\\phi,$$\nwith $\\beta^0=1$ and $E_{t+1:t}$ the identity. This condition concerns the actual SMC backward operators; it is not implied merely by mixing ratios of the proposal densities.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Uniformly bounded weights and bounded $\\phi$ imply $\\phi\\in\\Psi_s$ at each finite time: every weighted proposal moment is finite, the initial weighted moment is finite because $\\upsilon_0\\le B$, the target moments are finite, and every forward image of a bounded test is bounded by $B$ times its sup norm. The constant test also belongs to each $\\Psi_s$. Thus the unrolling formula [F2] applies. By [F2],\n$$V_t(\\phi)=\\sum_{k=0}^t\\widetilde\\pi_k\\!\\left[\\upsilon_k^2\\left(E_{k+1:t}(\\phi-\\pi_t\\phi)\\right)^2\\right].$$\nThe summands are nonnegative and finite because $\\upsilon_k\\le B$ almost everywhere and $\\phi$ is bounded.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "For each $k$, [F3] bounds its summand by $B^2\\beta^{2(t-k)}(\\Delta\\phi)^2$. Therefore\n$$V_t(\\phi)\\le B^2(\\Delta\\phi)^2\\sum_{j=0}^t\\beta^{2j}\\le\\frac{B^2(\\Delta\\phi)^2}{1-\\beta^2},$$\nwhich is independent of $t$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-weight, zero-variance or zero-remainder boundary specified for this item is handled. See step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate variance, deterministic-weight or counterexample branch is stated and calculated. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite-horizon endpoint or terminal-time case is included in the calculation. See step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The stated AC premise is inherited through the cited path-law or probability-limit supplier. See step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "finite_check_disposition": "No separate finite numerical check applies; the arbitrary finite-horizon argument is the proof obligation."
+    },
+    "thm-smc-multinomial-fixed-horizon-clt": {
+      "claim": "Fix a finite horizon $t$ and use the target/proposal flow and classes $\\Phi_s^{(d)},\\Psi_s^{(d)}$ of [[def-smc-clt-function-classes-and-variance-recursions]], with $1\\in\\Phi_s^{(1)}$ for every $0\\le s\\le t$. Run the SIR procedure with multinomial resampling at each time. For $\\phi\\in\\Psi_t^{(d)}$, let $\\omega_t^N$ be the corrected weighted empirical law and $\\check\\eta_t^N$ the post-resampling empirical law. Then\n$$\\sqrt N\\{\\omega_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow\\mathcal N_d(0,V_t(\\phi)),\\qquad\n\\sqrt N\\{\\check\\eta_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow\\mathcal N_d(0,\\widehat V_t^{\\rm multi}(\\phi)),$$\nwhere $\\widehat V_t^{\\rm multi}(\\phi)=V_t(\\phi)+\\operatorname{Cov}_{\\pi_t}(\\phi)$. The horizon is fixed as $N\\to\\infty$; the theorem asserts no time-uniform finite-particle accuracy.",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-smc-clt-function-classes-and-variance-recursions",
+          "source_section": "Definition",
+          "quote": "Define the mutation covariance operators recursively. At time zero,\n$$\\widetilde V_0(\\phi)=\\operatorname{Cov}_{\\widetilde\\pi_0}(\\phi).$$\nFor $t\\ge1$,\n$$\\widetilde V_t(\\phi)=\\widehat V_{t-1}(k_t\\phi)+\\int\\operatorname{Cov}_{k_t}(\\phi)(x)\\,\\pi_{t-1}(dx).$$\nThe weighted-estimator covariance is\n$$V_t(\\phi)=\\widetilde V_t\\!\\left(\\upsilon_t(\\phi-\\pi_t(\\phi))\\right).$$\nFor a measurable vector function $h$ on $\\Theta_t$, define the forward operator from $\\Theta_{t-1}$ by\n$$E_t h(x)=k_t(\\upsilon_t h)(x)=\\int\\upsilon_t(z)h(z)\\,k_t(x,dz).$$\nFor $k<t$, write $E_{k+1:t}=E_{k+1}\\circ\\cdots\\circ E_t$; set $E_{t+1:t}$ to the identity operator.\nFor multinomial offspring resampling set\n$$\\widehat V_t^{\\mathrm{multi}}(\\phi)=V_t(\\phi)+\\operatorname{Cov}_{\\pi_t}(\\phi).$$\nFor residual offspring resampling, let $r(u)=u-\\lfloor u\\rfloor$. When $c_t=\\widetilde\\pi_t(r(\\upsilon_t))>0$, define the formal source candidate\n$$R_t^{\\mathrm{cand}}(\\phi)=\\widetilde\\pi_t\\!\\left(r(\\upsilon_t)\\phi\\phi^\\top\\right)-\\frac{\\widetilde\\pi_t(r(\\upsilon_t)\\phi)\\,\\widetilde\\pi_t(r(\\upsilon_t)\\phi)^\\top}{c_t}.$$\nSet $R_t=R_t^{\\mathrm{cand}}$ and $\\widehat V_t^{\\mathrm{res}}=V_t+R_t$ only when $\\widetilde\\pi_t(\\upsilon_t\\in\\{1,2,\\ldots\\})=0$; then $c_t>0$ and the finite-sample floor discontinuities are avoided. If $\\upsilon_t=1$ $\\widetilde\\pi_t$-almost everywhere, all normalized weights are exactly equal and residual offspring are deterministic; in that special case put $R_t=0$. No residual covariance is assigned when $c_t=0$ but $\\upsilon_t$ is not almost everywhere one: the finite-sample normalization can move positive integer weights across floor boundaries. The B-page counterexamples show why the general positive-integer-atom branch remains unassigned.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-smc-mutation-and-weighted-correction-clt",
+          "source_section": "Statement",
+          "quote": "Fix $t\\ge1$. Suppose the selected empirical array at time $t-1$ has the CLT with covariance $\\widehat V_{t-1}$ for $k_t\\psi$. Let $\\psi:\\Theta_t\\to\\mathbb R$ satisfy $\\widetilde\\pi_t(|\\psi|^{2+\\delta})<\\infty$ for some $\\delta>0$ and $k_t\\psi\\in\\Phi_{t-1}^{(1)}$. Then the proposal empirical mean after mutation satisfies\n$$\\sqrt N\\left(\\eta_t^N(\\psi)-\\widetilde\\pi_t(\\psi)\\right)\\Rightarrow N\\!\\left(0,\\widehat V_{t-1}(k_t\\psi)+\\pi_{t-1}\\!\\left(\\operatorname{Var}_{k_t}(\\psi)\\right)\\right)=N(0,\\widetilde V_t(\\psi)).$$\nIn particular, if $\\phi\\in\\Psi_t^{(1)}$ and $1\\in\\Phi_s^{(1)}$ for $0\\le s\\le t$, the weighted corrected estimate satisfies\n$$\\sqrt N\\left(\\omega_t^N(\\phi)-\\pi_t(\\phi)\\right)\\Rightarrow N(0,V_t(\\phi)).$$\nAt $t=0$, for $\\phi\\in\\Psi_0^{(1)}$ the weighted estimate has the ratio CLT with covariance $V_0(\\phi)=\\widetilde V_0(\\upsilon_0(\\phi-\\pi_0\\phi))$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-smc-multinomial-resampling-clt",
+          "source_section": "Statement",
+          "quote": "Fix a time $t$ in the finite-horizon SIR system of [[def-smc-clt-function-classes-and-variance-recursions]]. Let $\\omega_t^N$ be its corrected weighted empirical law and let $\\check\\eta_t^N$ be the empirical law after multinomial offspring resampling. Suppose $\\phi\\in\\Psi_t^{(1)}$, the empirical-law conclusions of [[lem-smc-finite-horizon-empirical-law]] hold, and\n$$\\sqrt N\\{\\omega_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow N(0,V)$$\nfor a finite $V\\ge0$. Then\n$$\\sqrt N\\{\\check\\eta_t^N(\\phi)-\\omega_t^N(\\phi)\\}\\Rightarrow N(0,\\operatorname{Var}_{\\pi_t}(\\phi)),$$\nasymptotically independently of the weighted-estimator fluctuation, and\n$$\\sqrt N\\{\\check\\eta_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow N\\!\\left(0,V+\\operatorname{Var}_{\\pi_t}(\\phi)\\right).$$",
+          "uses": [
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cramer-wold-device",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be a finite integer and $p_\\theta(x)=\\theta\\cdot x$ for $\\theta\\in\\mathbb R^d$. Borel probability laws on $\\mathbb R^d$ are determined by all the laws $(p_\\theta)_*\\mu$. Moreover, if $(p_\\theta)_*\\mu_n\\Rightarrow(p_\\theta)_*\\mu$ for every $\\theta$ and a specified Borel probability law $\\mu$, then $\\mu_n\\Rightarrow\\mu$. If dimension zero is admitted, interpret $\\mathbb R^0$ as the singleton empty tuple; both conclusions then hold as well.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Fix $a\\in\\mathbb R^d$ and put $h=a^\\top\\phi$. The bound $|a^\\top x|\\le\\|a\\|\\,\\|x\\|$ and linearity of each $E_s$ show from [F1] that $h\\in\\Psi_t^{(1)}$. We prove by induction on $s\\le t$ the scalar assertion for every test in $\\Psi_s^{(1)}$; at $s=t$ this includes $h$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "At time zero, let $h\\in\\Psi_0$. By [F2], the initial weighted ratio has CLT variance $V_0(h)$. The target moment in $\\Psi_0$ and the weighted CLT meet [F3], which gives the post-resampling CLT with variance $V_0(h)+\\operatorname{Var}_{\\pi_0}(h)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-2-2",
+          "claim": "Let $1\\le s\\le t$, assume the assertion holds for every test in $\\Psi_{s-1}$, and take arbitrary $h\\in\\Psi_s$. By [F1], $E_s(h-\\pi_s h)\\in\\Psi_{s-1}$, so the induction hypothesis gives the selected CLT needed by [F2] for the centered weighted test. The source condition $1\\in\\Phi_s$ makes the correction ratio well defined in the same class. Thus [F2] yields the weighted CLT at time $s$ with covariance $V_s(h)$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "induction"
+          ]
+        },
+        {
+          "id": "derivation-2-3",
+          "claim": "The target moment $h\\in\\Psi_s$ and the weighted CLT just obtained satisfy [F3]. Multinomial resampling therefore gives the selected CLT with covariance $V_s(h)+\\operatorname{Var}_{\\pi_s}(h)=\\widehat V_s^{\\rm multi}(h)$. This proves the induction assertion for every $h\\in\\Psi_s$.",
+          "step": "2.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "The base step 2.1 and induction steps 2.2–2.3 prove both scalar limits at time $t$ for every $h\\in\\Psi_t$. For each $a\\in\\mathbb R^d$, $a^\\top\\phi\\in\\Psi_t$ by step 1.1 and has covariance projections $a^\\top V_t(\\phi)a$ and $a^\\top\\widehat V_t^{\\rm multi}(\\phi)a$. Since $a$ was arbitrary, [F4] gives the two vector limits. No bound uniform over the horizon follows from this fixed-$t$ argument.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 2.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-weight, zero-variance or zero-remainder boundary specified for this item is handled. See step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate variance, deterministic-weight or counterexample branch is stated and calculated. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite-horizon endpoint or terminal-time case is included in the calculation. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The stated AC premise is inherited through the cited path-law or probability-limit supplier. See step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "finite_check_disposition": "No separate finite numerical check applies; the arbitrary finite-horizon argument is the proof obligation."
+    },
+    "thm-smc-residual-fixed-horizon-clt-away-from-integer-weights": {
+      "claim": "Fix a finite horizon $t$ and use the target/proposal flow and classes $\\Phi_s^{(d)},\\Psi_s^{(d)}$ of [[def-smc-clt-function-classes-and-variance-recursions]], with $1\\in\\Phi_s^{(1)}$ for every $0\\le s\\le t$. Run SIR with residual resampling at each time. At every $0\\le s\\le t$, assume either $\\upsilon_s=1$ $\\widetilde\\pi_s$-almost everywhere, or $\\widetilde\\pi_s(\\upsilon_s\\in\\{1,2,\\ldots\\})=0$. For $\\phi\\in\\Psi_t^{(d)}$, let $\\omega_t^N$ be the corrected weighted empirical law and $\\check\\eta_t^N$ the post-resampling empirical law. Then\n$$\\sqrt N\\{\\omega_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow\\mathcal N_d(0,V_t(\\phi)),\\qquad\n\\sqrt N\\{\\check\\eta_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow\\mathcal N_d(0,\\widehat V_t^{\\rm res}(\\phi)),$$\nwhere $\\widehat V_s^{\\rm res}=V_s+R_s$ is defined by [[def-smc-clt-function-classes-and-variance-recursions]] in the stated branches. No conclusion is asserted for a nonconstant weight law with positive mass at a positive integer. The horizon is fixed as $N\\to\\infty$.",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-smc-clt-function-classes-and-variance-recursions",
+          "source_section": "Definition",
+          "quote": "Define the mutation covariance operators recursively. At time zero,\n$$\\widetilde V_0(\\phi)=\\operatorname{Cov}_{\\widetilde\\pi_0}(\\phi).$$\nFor $t\\ge1$,\n$$\\widetilde V_t(\\phi)=\\widehat V_{t-1}(k_t\\phi)+\\int\\operatorname{Cov}_{k_t}(\\phi)(x)\\,\\pi_{t-1}(dx).$$\nThe weighted-estimator covariance is\n$$V_t(\\phi)=\\widetilde V_t\\!\\left(\\upsilon_t(\\phi-\\pi_t(\\phi))\\right).$$\nFor a measurable vector function $h$ on $\\Theta_t$, define the forward operator from $\\Theta_{t-1}$ by\n$$E_t h(x)=k_t(\\upsilon_t h)(x)=\\int\\upsilon_t(z)h(z)\\,k_t(x,dz).$$\nFor $k<t$, write $E_{k+1:t}=E_{k+1}\\circ\\cdots\\circ E_t$; set $E_{t+1:t}$ to the identity operator.\nFor multinomial offspring resampling set\n$$\\widehat V_t^{\\mathrm{multi}}(\\phi)=V_t(\\phi)+\\operatorname{Cov}_{\\pi_t}(\\phi).$$\nFor residual offspring resampling, let $r(u)=u-\\lfloor u\\rfloor$. When $c_t=\\widetilde\\pi_t(r(\\upsilon_t))>0$, define the formal source candidate\n$$R_t^{\\mathrm{cand}}(\\phi)=\\widetilde\\pi_t\\!\\left(r(\\upsilon_t)\\phi\\phi^\\top\\right)-\\frac{\\widetilde\\pi_t(r(\\upsilon_t)\\phi)\\,\\widetilde\\pi_t(r(\\upsilon_t)\\phi)^\\top}{c_t}.$$\nSet $R_t=R_t^{\\mathrm{cand}}$ and $\\widehat V_t^{\\mathrm{res}}=V_t+R_t$ only when $\\widetilde\\pi_t(\\upsilon_t\\in\\{1,2,\\ldots\\})=0$; then $c_t>0$ and the finite-sample floor discontinuities are avoided. If $\\upsilon_t=1$ $\\widetilde\\pi_t$-almost everywhere, all normalized weights are exactly equal and residual offspring are deterministic; in that special case put $R_t=0$. No residual covariance is assigned when $c_t=0$ but $\\upsilon_t$ is not almost everywhere one: the finite-sample normalization can move positive integer weights across floor boundaries. The B-page counterexamples show why the general positive-integer-atom branch remains unassigned.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-smc-mutation-and-weighted-correction-clt",
+          "source_section": "Statement",
+          "quote": "Fix $t\\ge1$. Suppose the selected empirical array at time $t-1$ has the CLT with covariance $\\widehat V_{t-1}$ for $k_t\\psi$. Let $\\psi:\\Theta_t\\to\\mathbb R$ satisfy $\\widetilde\\pi_t(|\\psi|^{2+\\delta})<\\infty$ for some $\\delta>0$ and $k_t\\psi\\in\\Phi_{t-1}^{(1)}$. Then the proposal empirical mean after mutation satisfies\n$$\\sqrt N\\left(\\eta_t^N(\\psi)-\\widetilde\\pi_t(\\psi)\\right)\\Rightarrow N\\!\\left(0,\\widehat V_{t-1}(k_t\\psi)+\\pi_{t-1}\\!\\left(\\operatorname{Var}_{k_t}(\\psi)\\right)\\right)=N(0,\\widetilde V_t(\\psi)).$$\nIn particular, if $\\phi\\in\\Psi_t^{(1)}$ and $1\\in\\Phi_s^{(1)}$ for $0\\le s\\le t$, the weighted corrected estimate satisfies\n$$\\sqrt N\\left(\\omega_t^N(\\phi)-\\pi_t(\\phi)\\right)\\Rightarrow N(0,V_t(\\phi)).$$\nAt $t=0$, for $\\phi\\in\\Psi_0^{(1)}$ the weighted estimate has the ratio CLT with covariance $V_0(\\phi)=\\widetilde V_0(\\upsilon_0(\\phi-\\pi_0\\phi))$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-smc-residual-resampling-clt-away-from-integer-weights",
+          "source_section": "Statement",
+          "quote": "Fix a time $t$ in the finite-horizon SIR system of [[def-smc-clt-function-classes-and-variance-recursions]]. Let $X_t^{1:N}$ have proposal empirical law $\\eta_t^N$, corrected law $\\omega_t^N$, and residual-resampled law $\\check\\eta_t^N$. Assume the proposal empirical law converges in probability for every integrable test as in [[lem-smc-finite-horizon-empirical-law]], the weighted estimate has a finite-variance CLT\n$$\\sqrt N\\{\\omega_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow N(0,V),$$\nand $\\phi\\in\\Psi_t^{(1)}$. Write $u=\\upsilon_t$ and assume either $u=1$ $\\widetilde\\pi_t$-almost everywhere, or\n$$\\widetilde\\pi_t(u\\in\\{1,2,\\ldots\\})=0.$$\nIn the second case $c=\\widetilde\\pi_t(r(u))>0$. Then, with\n$$R_t(\\phi)=\\widetilde\\pi_t(r(u)\\phi^2)-\\frac{\\widetilde\\pi_t(r(u)\\phi)^2}{c},$$\nwhere $R_t(\\phi)=0$ in the constant-weight case,\n$$\\sqrt N\\{\\check\\eta_t^N(\\phi)-\\omega_t^N(\\phi)\\}\\Rightarrow N(0,R_t(\\phi)),$$\nasymptotically independently of the weighted-estimator fluctuation, and\n$$\\sqrt N\\{\\check\\eta_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow N(0,V+R_t(\\phi)).$$",
+          "uses": [
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cramer-wold-device",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be a finite integer and $p_\\theta(x)=\\theta\\cdot x$ for $\\theta\\in\\mathbb R^d$. Borel probability laws on $\\mathbb R^d$ are determined by all the laws $(p_\\theta)_*\\mu$. Moreover, if $(p_\\theta)_*\\mu_n\\Rightarrow(p_\\theta)_*\\mu$ for every $\\theta$ and a specified Borel probability law $\\mu$, then $\\mu_n\\Rightarrow\\mu$. If dimension zero is admitted, interpret $\\mathbb R^0$ as the singleton empty tuple; both conclusions then hold as well.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Fix $a\\in\\mathbb R^d$ and put $h=a^\\top\\phi$. The bound $|a^\\top x|\\le\\|a\\|\\,\\|x\\|$ and linearity of each $E_s$ show from [F1] that $h\\in\\Psi_t^{(1)}$. We prove by induction on $s\\le t$ the scalar assertion for every test in $\\Psi_s^{(1)}$; at $s=t$ this includes $h$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "At time zero, let $h\\in\\Psi_0$. By [F2], the initial weighted ratio has CLT variance $V_0(h)$. The assumed residual-weight branch either has constant weight one, in which case selection is deterministic and $R_0(h)=0$, or has no positive-integer atom; in the latter case the target moment and weighted CLT meet [F3], which gives the selected CLT with its stated $R_0(h)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-2-2",
+          "claim": "Let $1\\le s\\le t$, assume the assertion holds for every test in $\\Psi_{s-1}$, and take arbitrary $h\\in\\Psi_s$. By [F1], $E_s(h-\\pi_s h)\\in\\Psi_{s-1}$, so the induction hypothesis gives the selected CLT needed by [F2] for the centered weighted test. The source condition $1\\in\\Phi_s$ makes the correction ratio well defined in the stated class. Thus [F2] yields the weighted CLT at time $s$ with covariance $V_s(h)$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "induction"
+          ]
+        },
+        {
+          "id": "derivation-2-3",
+          "claim": "The target moment $h\\in\\Psi_s$, the weighted CLT just obtained, and the residual-weight condition satisfy [F3]. Residual selection gives the selected CLT with covariance $V_s(h)+R_s(h)=\\widehat V_s^{\\rm res}(h)$. This proves the induction assertion for every $h\\in\\Psi_s$ while retaining the stated weight condition at each time.",
+          "step": "2.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "The base step 2.1 and induction steps 2.2–2.3 prove both scalar limits at time $t$ for every $h\\in\\Psi_t$. For each $a\\in\\mathbb R^d$, $a^\\top\\phi\\in\\Psi_t$ by step 1.1 and has covariance projections $a^\\top V_t(\\phi)a$ and $a^\\top\\widehat V_t^{\\rm res}(\\phi)a$. Since $a$ was arbitrary, [F4] yields the two vector limits. The integer-boundary branch is excluded by hypothesis and receives no conclusion here.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 2.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-weight, zero-variance or zero-remainder boundary specified for this item is handled. See step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate variance, deterministic-weight or counterexample branch is stated and calculated. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite-horizon endpoint or terminal-time case is included in the calculation. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The stated AC premise is inherited through the cited path-law or probability-limit supplier. See step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "finite_check_disposition": "No separate finite numerical check applies; the arbitrary finite-horizon argument is the proof obligation."
+    },
+    "ex-smc-multinomial-ancestry-collapse": {
+      "claim": "Track $N=2$ particles with equal weights through $m\\ge1$ repeated multinomial resampling steps and identity mutation. Each child records the original ancestor from which its state descends. The target weights remain $(1/2,1/2)$ at each step.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-multinomial-and-residual-offspring-resampling",
+          "source_section": "Definition",
+          "quote": "For multinomial resampling, return the sampled vector $(J_1,\\ldots,J_N)$ in its sampled order, together with its count vector $(C_1,\\ldots,C_N)$; do not sort the sampled indices. For residual resampling, return the ancestor list containing exactly $C_j$ copies of index $j$, ordered by increasing index, together with its count vector. Each output is a length-$N$ list and a count vector summing to $N$. When all input weights vanish, the uniform fallback defines the procedure; any downstream normalizer already multiplied by this zero average remains zero.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts",
+          "source_section": "Statement",
+          "quote": "Fix $N\\ge1$ and nonnegative input weights $a_1,\\ldots,a_N$. Let $p$ be the normalized probability vector, with the uniform fallback when all weights vanish, and let $C_j$ be the offspring count from [[alg-multinomial-and-residual-offspring-resampling]]. Conditional on the input weights, for either scheme and every $1\\le j\\le N$,\n$$\\mathbb E[C_j\\mid a_1,\\ldots,a_N]=Np_j.$$\nThis assertion concerns the counts only; it gives no variance comparison for arbitrary weights.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The two child indices are independent fair draws by [F1]. They choose the same parent with probability $(1/2)^2+(1/2)^2=1/2$. The expected number of distinct parents represented is $2\\{1-(1-1/2)^2\\}=3/2$, since each parent is selected at least once with probability $3/4$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "If both children select one parent, identity mutation leaves two copies of that same original ancestor; all future weights remain equal because the target is unchanged. The next resampling therefore cannot restore the lost ancestor. If they select different parents, the population still contains both lineages and another independent fair resampling preserves both with probability $1/2$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Starting from two lineages, the probability that no collapse occurs in $m$ successive resampling steps is $(1/2)^m$ by induction on $m$ using step 1.2. Hence the probability of a single represented ancestor is $1-2^{-m}\\to1$, even though the expected offspring counts at each step remain $(1,1)$ by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-valued boundary parameter; its hypotheses and claim do not depend on one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no non-degeneracy assumption or claim requiring a separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or terminal-time boundary is asserted beyond the stated arbitrary finite horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item’s local argument is choice-free and makes no selection from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "finite-1",
+          "claim": "The two child indices are independent fair draws by [F1]. They choose the same parent with probability $(1/2)^2+(1/2)^2=1/2$. The expected number of distinct parents represented is $2\\{1-(1-1/2)^2\\}=3/2$, since each parent is selected at least once with probability $3/4$.",
+          "result": "Computed and justified in proof step 1.1."
+        },
+        {
+          "id": "finite-2",
+          "claim": "Starting from two lineages, the probability that no collapse occurs in $m$ successive resampling steps is $(1/2)^m$ by induction on $m$ using step 1.2. Hence the probability of a single represented ancestor is $1-2^{-m}\\to1$, even though the expected offspring counts at each step remain $(1,1)$ by [F2].",
+          "result": "Computed and justified in proof step 2.1."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "Worked finite checks are justified at their cited proof steps; no external finite-smoke program is registered."
+    },
+    "cex-smc-clt-class-does-not-ensure-target-moment": {
+      "claim": "The source class $\\Phi_t$ in [[def-smc-clt-function-classes-and-variance-recursions]], together with $1\\in\\Phi_t$, guarantees that every displayed finite-horizon weighted and post-resampling CLT covariance is finite, including $V_0$ for a separately weighted initial proposal.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smc-clt-function-classes-and-variance-recursions",
+          "source_section": "Definition",
+          "quote": "The source recursive test classes are\n$$\\Phi_0^{(d)}=\\{\\phi:\\widetilde\\pi_0(\\|\\phi\\|^2)<\\infty\\},$$\nand, for $t\\ge1$,\n$$\\Phi_t^{(d)}=\\left\\{\\phi:\\text{ for some }\\delta>0,\\ \\widetilde\\pi_t(\\|\\upsilon_t\\phi\\|^{2+\\delta})<\\infty\\ \\text{ and }\\ x\\mapsto k_t(\\upsilon_t\\phi)(x)\\in\\Phi_{t-1}^{(d)}\\right\\}.$$\nAssume $1\\in\\Phi_t^{(1)}$ for every $t$. This is the source theorem's explicit normalizing-weight condition. For the recursive post-resampling CLTs proved on this page, use the stronger classes $\\Psi_t^{(d)}$. At $t=0$, let $\\Psi_0^{(d)}$ consist of the $\\phi\\in\\Phi_0^{(d)}$ for which, for some $\\epsilon>0$, $\\widetilde\\pi_0(\\|\\upsilon_0(\\phi-\\pi_0(\\phi))\\|^{2+\\epsilon})<\\infty$ and $\\pi_0(\\|\\phi\\|^{2+\\epsilon})<\\infty$. The initial normalizing denominator needs only its finite first moment $\\widetilde\\pi_0(\\upsilon_0)=1$. For $t\\ge1$, let $\\Psi_t^{(d)}$ consist of the $\\phi\\in\\Phi_t^{(d)}$ for which, for some $\\epsilon>0$, $\\pi_t(\\|\\phi\\|^{2+\\epsilon})<\\infty$ and $x\\mapsto E_t(\\phi-\\pi_t(\\phi))(x)\\in\\Psi_{t-1}^{(d)}$. Here $E_t h=k_t(\\upsilon_t h)$ is the operator defined below. The recursive target moments supply the offspring variance at every earlier selection used in the induction. The source $\\Phi_t$ conditions alone need not imply them. The source condition $1\\in\\Phi_t$ and these recursive target moments are the stated hypotheses for the CLT induction; no higher initial normalizer moment is required.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-smc-clt-function-classes-and-variance-recursions",
+          "source_section": "Definition",
+          "quote": "For a measurable vector function $\\phi:\\Theta_t\\to\\mathbb R^d$, write $\\mu(\\phi)=\\int\\phi\\,d\\mu$ and\n$$\\operatorname{Cov}_{\\mu}(\\phi)=\\int(\\phi-\\mu(\\phi))(\\phi-\\mu(\\phi))^\\top\\,d\\mu,$$\nwhen the second moment is finite. Also write $k_t\\phi(x)=\\int\\phi(z)k_t(x,dz)$ and\n$$\\operatorname{Cov}_{k_t}(\\phi)(x)=\\int(\\phi(z)-k_t\\phi(x))(\\phi(z)-k_t\\phi(x))^\\top k_t(x,dz).$$",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The geometric proposal masses sum to one. Since $0<s<1/2$, $w_0$ is finite and positive, and $\\sum_{n\\ge0}p_nw_n=1$ by construction; hence $\\pi_1$ is a probability law with density $w$ relative to $p$. The identity kernel gives $\\widetilde\\pi_1=p$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "Choose $\\delta=1$. For $n\\ge1$, $w_n\\phi(n)=w_n^{1/4}$, so $\\sum p_n|w_n\\phi(n)|^3=\\sum_{n\\ge1}p_nw_n^{3/4}<\\infty$ and $\\sum p_n|w_n\\phi(n)|^2=\\sum_{n\\ge1}p_nw_n^{1/2}<\\infty$. Thus $k_1(w\\phi)=w\\phi\\in\\Phi_0$ and $\\phi\\in\\Phi_1$. Also $\\sum p_nw_n^3<\\infty$ and $k_1w=w\\in\\Phi_0$, so $1\\in\\Phi_1$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "The target mean is $\\pi_1(\\phi)=\\sum_{n\\ge1}p_nw_n^{1/4}<\\infty$, but\n$$\\pi_1(\\phi^2)=\\sum_{n\\ge1}p_nw_n^{-1/2}=\\sum_{n\\ge1}2^{-(n+1)}2^{n^2/2}=\\infty,$$\nsince the summands do not tend to zero. Therefore $\\operatorname{Var}_{\\pi_1}(\\phi)=\\infty$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "The weighted covariance $V_1(\\phi)$ is finite: the identity mutation has zero conditional variance, $w(\\phi-\\pi_1\\phi)\\in L^2(p)$ by step 1.2 and the finite mean in step 2.1, and the initial multinomial covariance at time zero is finite because $\\upsilon_0=1$ and $p\\in L^2(p)$. Yet the post-multinomial formula in [F1] adds the infinite target variance from step 2.1. Thus the source class and $1\\in\\Phi_1$ do not suffice for the claimed finite post-resampling covariance.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4-1",
+          "claim": "For a separate initial-proposal witness, let $\\Theta_0=\\mathbb N_{\\ge1}$, $\\widetilde\\pi_0\\{n\\}=2^{-n}$, $c=(\\sum_{n\\ge1}2^{-n/2})^{-1}$, and $\\upsilon_0(n)=c2^{n/2}$. Put $\\pi_0\\{n\\}=2^{-n}\\upsilon_0(n)$ and $\\phi(n)=\\mathbf1_{\\{n\\text{ even}\\}}$. Then $\\sum_n\\widetilde\\pi_0\\{n\\}\\upsilon_0(n)=1$, so $\\pi_0$ is a probability law and $\\upsilon_0=d\\pi_0/d\\widetilde\\pi_0$. Both $\\phi$ and $1$ are bounded, hence belong to $\\Phi_0$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4-2",
+          "claim": "Let $q=\\pi_0(\\phi)$. Positive proposal and target mass occur on both parities, so $0<q<1$. For every even $n$, $\\widetilde\\pi_0\\{n\\}\\upsilon_0(n)^2(\\phi(n)-q)^2=c^2(1-q)^2>0$, so the sum over even $n$ diverges. Thus $\\widetilde\\pi_0(\\upsilon_0^2(\\phi-q)^2)=\\infty$ and [F2] gives $V_0(\\phi)=\\infty$, despite $\\phi,1\\in\\Phi_0$. This independently refutes the claimed initial weighted-estimator covariance finiteness.",
+          "step": "4.2",
+          "inputs": [
+            "F2",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-weight, zero-variance or zero-remainder boundary specified for this item is handled. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate variance, deterministic-weight or counterexample branch is stated and calculated. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or terminal-time boundary is asserted beyond the stated arbitrary finite horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item’s local argument is choice-free and makes no selection from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "finite-1",
+          "claim": "The geometric proposal masses sum to one. Since $0<s<1/2$, $w_0$ is finite and positive, and $\\sum_{n\\ge0}p_nw_n=1$ by construction; hence $\\pi_1$ is a probability law with density $w$ relative to $p$. The identity kernel gives $\\widetilde\\pi_1=p$.",
+          "result": "Computed and justified in proof step 1.1."
+        },
+        {
+          "id": "finite-2",
+          "claim": "Choose $\\delta=1$. For $n\\ge1$, $w_n\\phi(n)=w_n^{1/4}$, so $\\sum p_n|w_n\\phi(n)|^3=\\sum_{n\\ge1}p_nw_n^{3/4}<\\infty$ and $\\sum p_n|w_n\\phi(n)|^2=\\sum_{n\\ge1}p_nw_n^{1/2}<\\infty$. Thus $k_1(w\\phi)=w\\phi\\in\\Phi_0$ and $\\phi\\in\\Phi_1$. Also $\\sum p_nw_n^3<\\infty$ and $k_1w=w\\in\\Phi_0$, so $1\\in\\Phi_1$.",
+          "result": "Computed and justified in proof step 1.2."
+        },
+        {
+          "id": "finite-3",
+          "claim": "The target mean is $\\pi_1(\\phi)=\\sum_{n\\ge1}p_nw_n^{1/4}<\\infty$, but\n$$\\pi_1(\\phi^2)=\\sum_{n\\ge1}p_nw_n^{-1/2}=\\sum_{n\\ge1}2^{-(n+1)}2^{n^2/2}=\\infty,$$\nsince the summands do not tend to zero. Therefore $\\operatorname{Var}_{\\pi_1}(\\phi)=\\infty$.",
+          "result": "Computed and justified in proof step 2.1."
+        },
+        {
+          "id": "finite-4",
+          "claim": "The weighted covariance $V_1(\\phi)$ is finite: the identity mutation has zero conditional variance, $w(\\phi-\\pi_1\\phi)\\in L^2(p)$ by step 1.2 and the finite mean in step 2.1, and the initial multinomial covariance at time zero is finite because $\\upsilon_0=1$ and $p\\in L^2(p)$. Yet the post-multinomial formula in [F1] adds the infinite target variance from step 2.1. Thus the source class and $1\\in\\Phi_1$ do not suffice for the claimed finite post-resampling covariance.",
+          "result": "Computed and justified in proof step 3.1."
+        },
+        {
+          "id": "finite-5",
+          "claim": "For a separate initial-proposal witness, let $\\Theta_0=\\mathbb N_{\\ge1}$, $\\widetilde\\pi_0\\{n\\}=2^{-n}$, $c=(\\sum_{n\\ge1}2^{-n/2})^{-1}$, and $\\upsilon_0(n)=c2^{n/2}$. Put $\\pi_0\\{n\\}=2^{-n}\\upsilon_0(n)$ and $\\phi(n)=\\mathbf1_{\\{n\\text{ even}\\}}$. Then $\\sum_n\\widetilde\\pi_0\\{n\\}\\upsilon_0(n)=1$, so $\\pi_0$ is a probability law and $\\upsilon_0=d\\pi_0/d\\widetilde\\pi_0$. Both $\\phi$ and $1$ are bounded, hence belong to $\\Phi_0$.",
+          "result": "Computed and justified in proof step 4.1."
+        },
+        {
+          "id": "finite-6",
+          "claim": "Let $q=\\pi_0(\\phi)$. Positive proposal and target mass occur on both parities, so $0<q<1$. For every even $n$, $\\widetilde\\pi_0\\{n\\}\\upsilon_0(n)^2(\\phi(n)-q)^2=c^2(1-q)^2>0$, so the sum over even $n$ diverges. Thus $\\widetilde\\pi_0(\\upsilon_0^2(\\phi-q)^2)=\\infty$ and [F2] gives $V_0(\\phi)=\\infty$, despite $\\phi,1\\in\\Phi_0$. This independently refutes the claimed initial weighted-estimator covariance finiteness.",
+          "result": "Computed and justified in proof step 4.2."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "Worked finite checks are justified at their cited proof steps; no external finite-smoke program is registered."
+    },
+    "cex-smc-residual-clt-fails-at-integer-weight-boundary": {
+      "claim": "Under the recursive weighted-moment class and normalization hypotheses in [[def-smc-clt-function-classes-and-variance-recursions]], the residual offspring covariance is always the displayed $R_t(\\phi)$ computed from the limiting fractional parts $r(\\upsilon_t)$, including when the importance-weight law has an atom at a positive integer.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smc-clt-function-classes-and-variance-recursions",
+          "source_section": "Definition",
+          "quote": "Define the mutation covariance operators recursively. At time zero,\n$$\\widetilde V_0(\\phi)=\\operatorname{Cov}_{\\widetilde\\pi_0}(\\phi).$$\nFor $t\\ge1$,\n$$\\widetilde V_t(\\phi)=\\widehat V_{t-1}(k_t\\phi)+\\int\\operatorname{Cov}_{k_t}(\\phi)(x)\\,\\pi_{t-1}(dx).$$\nThe weighted-estimator covariance is\n$$V_t(\\phi)=\\widetilde V_t\\!\\left(\\upsilon_t(\\phi-\\pi_t(\\phi))\\right).$$\nFor a measurable vector function $h$ on $\\Theta_t$, define the forward operator from $\\Theta_{t-1}$ by\n$$E_t h(x)=k_t(\\upsilon_t h)(x)=\\int\\upsilon_t(z)h(z)\\,k_t(x,dz).$$\nFor $k<t$, write $E_{k+1:t}=E_{k+1}\\circ\\cdots\\circ E_t$; set $E_{t+1:t}$ to the identity operator.\nFor multinomial offspring resampling set\n$$\\widehat V_t^{\\mathrm{multi}}(\\phi)=V_t(\\phi)+\\operatorname{Cov}_{\\pi_t}(\\phi).$$\nFor residual offspring resampling, let $r(u)=u-\\lfloor u\\rfloor$. When $c_t=\\widetilde\\pi_t(r(\\upsilon_t))>0$, define the formal source candidate\n$$R_t^{\\mathrm{cand}}(\\phi)=\\widetilde\\pi_t\\!\\left(r(\\upsilon_t)\\phi\\phi^\\top\\right)-\\frac{\\widetilde\\pi_t(r(\\upsilon_t)\\phi)\\,\\widetilde\\pi_t(r(\\upsilon_t)\\phi)^\\top}{c_t}.$$\nSet $R_t=R_t^{\\mathrm{cand}}$ and $\\widehat V_t^{\\mathrm{res}}=V_t+R_t$ only when $\\widetilde\\pi_t(\\upsilon_t\\in\\{1,2,\\ldots\\})=0$; then $c_t>0$ and the finite-sample floor discontinuities are avoided. If $\\upsilon_t=1$ $\\widetilde\\pi_t$-almost everywhere, all normalized weights are exactly equal and residual offspring are deterministic; in that special case put $R_t=0$. No residual covariance is assigned when $c_t=0$ but $\\upsilon_t$ is not almost everywhere one: the finite-sample normalization can move positive integer weights across floor boundaries. The B-page counterexamples show why the general positive-integer-atom branch remains unassigned.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-multinomial-and-residual-offspring-resampling",
+          "source_section": "Definition",
+          "quote": "For multinomial resampling, return the sampled vector $(J_1,\\ldots,J_N)$ in its sampled order, together with its count vector $(C_1,\\ldots,C_N)$; do not sort the sampled indices. For residual resampling, return the ancestor list containing exactly $C_j$ copies of index $j$, ordered by increasing index, together with its count vector. Each output is a length-$N$ list and a count vector summing to $N$. When all input weights vanish, the uniform fallback defines the procedure; any downstream normalizer already multiplied by this zero average remains zero.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lindeberg-levy-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X_k)_{k\\ge1}$ be iid real random variables with mean $m$ and variance $0<\\sigma^2<\\infty$. Then $$\\frac{\\sum_{k=1}^nX_k-nm}{\\sigma\\sqrt n}\\ \\Rightarrow\\ N(0,1).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-slutsky-for-real-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $(X_n)$ and $(Y_n)$ be real random variables on one probability space, and let $X$ be a real random variable (possibly on another space). If $X_n\\Rightarrow X$ and $Y_n\\to c$ in probability for $c\\in\\mathbb R$, then $X_n+Y_n\\Rightarrow X+c$ and $X_nY_n\\Rightarrow cX$. If $c\\ne0$, define $Q_n=X_n/Y_n$ on $\\{Y_n\\ne0\\}$ and give $Q_n$ any fixed value on $\\{Y_n=0\\}$. Then $Q_n\\Rightarrow X/c$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuous-mapping-theorem",
+          "source_section": "Statement",
+          "quote": "Let S,T be metric spaces, $g:S\\to T$ measurable, and $\\mu_n\\Rightarrow\\mu$. If the discontinuity set $D_g$ is $\\mu$-null, then $g_*\\mu_n\\Rightarrow g_*\\mu$. Consequently $X_n\\Rightarrow X$ implies $g(X_n)\\Rightarrow g(X)$ whenever $P_X(D_g)=0$.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "For $N$ IID proposal particles, let $M_N$ be the number at $A$ and $p_N=M_N/N$. The weighted empirical estimate is\n$$S_N=\\frac{2M_N}{2M_N+(2/3)(N-M_N)}=\\frac{3p_N}{1+2p_N}.$$\nSince $M_N$ is binomial with parameters $(N,1/4)$, [F3] gives $\\sqrt N(p_N-1/4)\\Rightarrow N(0,3/16)$. The identity $\\sqrt N(S_N-1/2)=2\\sqrt N(p_N-1/4)/(1+2p_N)$ and [F4] yield $Z_N:=\\sqrt N(S_N-1/2)\\Rightarrow Z\\sim N(0,1/3)$. Moreover, $Z_N>0$ exactly when $p_N>1/4$.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "The limiting-weight candidate in [F1] gives $r(2)=0$ and $r(2/3)=2/3$. Because $\\phi(B)=0$, both $\\widetilde\\pi_0(r(\\upsilon_0)\\phi^2)$ and $\\widetilde\\pi_0(r(\\upsilon_0)\\phi)$ are zero, so $R_0^{\\mathrm{cand}}(\\phi)=0$. If used as a universal residual CLT variance, it predicts a post-resampling Gaussian limit with variance $V_0(\\phi)=\\widetilde\\pi_0[\\upsilon_0^2(\\phi-1/2)^2]=1/3$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Put $\\bar w_N=2/3+(4/3)p_N$ and $u_A=2/\\bar w_N$, $u_B=(2/3)/\\bar w_N$. On $1/4<p_N<1/3$, the normalized residual sizes are $u_A\\in(1,2)$ and $u_B\\in(0,1)$; hence each $A$ particle receives one deterministic child, each $B$ particle receives none, and $R=N-M_N$ children are sampled from the remainders. If $X_N$ is the number of residual children at $A$, then conditionally on the proposal sample, $X_N\\sim\\mathrm{Bin}(R,a_N)$ with $a_N=M_N(u_A-1)/R$. As $p_N\\downarrow1/4$, $R/N\\to3/4$ and $a_N\\to1/3$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-2",
+          "claim": "On that event, the post-resampling mean is $(M_N+X_N)/N$ and its conditional mean is $S_N$. A Taylor expansion of the binomial characteristic function, uniform for $0\\le a_N\\le1$ and $R\\le N$, gives\n$$\\mathbb E\\!\\left[\\exp\\!\\left(iu\\frac{X_N-Ra_N}{\\sqrt N}\\right)\\middle|M_N\\right]=\\exp\\!\\left(-\\frac{u^2}{2}\\frac RN a_N(1-a_N)+O(N^{-1/2})\\right).$$\nThus, on the positive branch $p_N>1/4$, the extra resampling fluctuation has limiting variance $(3/4)(1/3)(2/3)=1/6$.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "On the negative branch with $p_N<1/4$ and $p_N\\to1/4$, one has $u_A\\in(2,3)$ and $u_B\\in(0,1)$. The floor for each $A$ particle is two, and its total fractional remainder is $M_N(u_A-2)=O_P(\\sqrt N)$, because $u_A-2=2(1/\\bar w_N-1)=O_P(|p_N-1/4|)$. Conditional variance of the residual $A$ count is at most this total remainder. Consequently the variance of $\\sqrt N$ times the post-resampling proportion about its weighted conditional mean is $O_P(N^{-1/2})$, so the extra resampling fluctuation tends to zero in probability on the negative branch. The events $p_N\\notin(1/5,1/3)$ have probability tending to zero by [F3].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-2",
+          "claim": "Put $U_N=\\sqrt N(\\check\\eta_0^N(\\phi)-S_N)$, the post-resampling fluctuation centered at the weighted mean, and condition on the proposal count $M_N$. For any real $v,s$, steps 2.2–3.1 and the negligible exceptional event show that $\\mathbb E[e^{isU_N}\\mid M_N]$ converges in probability to $e^{-s^2/12}$ when $Z_N>0$ and to $1$ when $Z_N<0$. Since $Z_N\\Rightarrow Z$ and $P(Z=0)=0$, [F5] gives\n$$\\mathbb E[e^{ivZ_N+isU_N}]\\longrightarrow\\mathbb E\\!\\left[e^{ivZ}\\left(\\mathbf1_{\\{Z>0\\}}e^{-s^2/12}+\\mathbf1_{\\{Z<0\\}}\\right)\\right].$$\nThis is the joint characteristic function of $(Z,\\mathbf1_{\\{Z>0\\}}W)$ for an independent $W\\sim N(0,1/6)$, so the post-resampling limit is $Z+\\mathbf1_{\\{Z>0\\}}W$. Its mean is zero and its third moment is $3\\mathbb E[Z\\mathbf1_{\\{Z>0\\}}]\\mathbb E[W^2]>0$, so it is not Gaussian. This contradicts the variance-$1/3$ Gaussian predicted in step 1.2.",
+          "step": "3.2",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.2",
+            "step 3.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-weight, zero-variance or zero-remainder boundary specified for this item is handled. See step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate variance, deterministic-weight or counterexample branch is stated and calculated. See step 3.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or terminal-time boundary is asserted beyond the stated arbitrary finite horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item’s local argument is choice-free and makes no selection from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "finite-1",
+          "claim": "For $N$ IID proposal particles, let $M_N$ be the number at $A$ and $p_N=M_N/N$. The weighted empirical estimate is\n$$S_N=\\frac{2M_N}{2M_N+(2/3)(N-M_N)}=\\frac{3p_N}{1+2p_N}.$$\nSince $M_N$ is binomial with parameters $(N,1/4)$, [F3] gives $\\sqrt N(p_N-1/4)\\Rightarrow N(0,3/16)$. The identity $\\sqrt N(S_N-1/2)=2\\sqrt N(p_N-1/4)/(1+2p_N)$ and [F4] yield $Z_N:=\\sqrt N(S_N-1/2)\\Rightarrow Z\\sim N(0,1/3)$. Moreover, $Z_N>0$ exactly when $p_N>1/4$.",
+          "result": "Computed and justified in proof step 1.1."
+        },
+        {
+          "id": "finite-2",
+          "claim": "The limiting-weight candidate in [F1] gives $r(2)=0$ and $r(2/3)=2/3$. Because $\\phi(B)=0$, both $\\widetilde\\pi_0(r(\\upsilon_0)\\phi^2)$ and $\\widetilde\\pi_0(r(\\upsilon_0)\\phi)$ are zero, so $R_0^{\\mathrm{cand}}(\\phi)=0$. If used as a universal residual CLT variance, it predicts a post-resampling Gaussian limit with variance $V_0(\\phi)=\\widetilde\\pi_0[\\upsilon_0^2(\\phi-1/2)^2]=1/3$.",
+          "result": "Computed and justified in proof step 1.2."
+        },
+        {
+          "id": "finite-3",
+          "claim": "Put $\\bar w_N=2/3+(4/3)p_N$ and $u_A=2/\\bar w_N$, $u_B=(2/3)/\\bar w_N$. On $1/4<p_N<1/3$, the normalized residual sizes are $u_A\\in(1,2)$ and $u_B\\in(0,1)$; hence each $A$ particle receives one deterministic child, each $B$ particle receives none, and $R=N-M_N$ children are sampled from the remainders. If $X_N$ is the number of residual children at $A$, then conditionally on the proposal sample, $X_N\\sim\\mathrm{Bin}(R,a_N)$ with $a_N=M_N(u_A-1)/R$. As $p_N\\downarrow1/4$, $R/N\\to3/4$ and $a_N\\to1/3$.",
+          "result": "Computed and justified in proof step 2.1."
+        },
+        {
+          "id": "finite-4",
+          "claim": "On that event, the post-resampling mean is $(M_N+X_N)/N$ and its conditional mean is $S_N$. A Taylor expansion of the binomial characteristic function, uniform for $0\\le a_N\\le1$ and $R\\le N$, gives\n$$\\mathbb E\\!\\left[\\exp\\!\\left(iu\\frac{X_N-Ra_N}{\\sqrt N}\\right)\\middle|M_N\\right]=\\exp\\!\\left(-\\frac{u^2}{2}\\frac RN a_N(1-a_N)+O(N^{-1/2})\\right).$$\nThus, on the positive branch $p_N>1/4$, the extra resampling fluctuation has limiting variance $(3/4)(1/3)(2/3)=1/6$.",
+          "result": "Computed and justified in proof step 2.2."
+        },
+        {
+          "id": "finite-5",
+          "claim": "On the negative branch with $p_N<1/4$ and $p_N\\to1/4$, one has $u_A\\in(2,3)$ and $u_B\\in(0,1)$. The floor for each $A$ particle is two, and its total fractional remainder is $M_N(u_A-2)=O_P(\\sqrt N)$, because $u_A-2=2(1/\\bar w_N-1)=O_P(|p_N-1/4|)$. Conditional variance of the residual $A$ count is at most this total remainder. Consequently the variance of $\\sqrt N$ times the post-resampling proportion about its weighted conditional mean is $O_P(N^{-1/2})$, so the extra resampling fluctuation tends to zero in probability on the negative branch. The events $p_N\\notin(1/5,1/3)$ have probability tending to zero by [F3].",
+          "result": "Computed and justified in proof step 3.1."
+        },
+        {
+          "id": "finite-6",
+          "claim": "Put $U_N=\\sqrt N(\\check\\eta_0^N(\\phi)-S_N)$, the post-resampling fluctuation centered at the weighted mean, and condition on the proposal count $M_N$. For any real $v,s$, steps 2.2–3.1 and the negligible exceptional event show that $\\mathbb E[e^{isU_N}\\mid M_N]$ converges in probability to $e^{-s^2/12}$ when $Z_N>0$ and to $1$ when $Z_N<0$. Since $Z_N\\Rightarrow Z$ and $P(Z=0)=0$, [F5] gives\n$$\\mathbb E[e^{ivZ_N+isU_N}]\\longrightarrow\\mathbb E\\!\\left[e^{ivZ}\\left(\\mathbf1_{\\{Z>0\\}}e^{-s^2/12}+\\mathbf1_{\\{Z<0\\}}\\right)\\right].$$\nThis is the joint characteristic function of $(Z,\\mathbf1_{\\{Z>0\\}}W)$ for an independent $W\\sim N(0,1/6)$, so the post-resampling limit is $Z+\\mathbf1_{\\{Z>0\\}}W$. Its mean is zero and its third moment is $3\\mathbb E[Z\\mathbf1_{\\{Z>0\\}}]\\mathbb E[W^2]>0$, so it is not Gaussian. This contradicts the variance-$1/3$ Gaussian predicted in step 1.2.",
+          "result": "Computed and justified in proof step 3.2."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "Worked finite checks are justified at their cited proof steps; no external finite-smoke program is registered."
+    },
+    "cex-smc-zero-residual-fraction-can-have-random-offspring": {
+      "claim": "If $\\widetilde\\pi(r(\\upsilon))=0$, then standard residual resampling has deterministic offspring counts for every finite particle sample, so its residual covariance may always be set to zero.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smc-clt-function-classes-and-variance-recursions",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T$. At each $0\\le t\\le T$, let $\\pi_t$ be a probability law on a measurable particle space $\\Theta_t$. Let $\\widetilde\\pi_0$ be an initial proposal with $\\pi_0\\ll\\widetilde\\pi_0$, and fix $\\upsilon_0=d\\pi_0/d\\widetilde\\pi_0$. For $1\\le t\\le T$, let $k_t$ be a probability kernel from $\\Theta_{t-1}$ to $\\Theta_t$, and put\n$$\\widetilde\\pi_t(A)=\\int_{\\Theta_{t-1}}k_t(x,A)\\,\\pi_{t-1}(dx).$$\nAssume $\\pi_t\\ll\\widetilde\\pi_t$ and fix a nonnegative Radon–Nikodym version $\\upsilon_t=d\\pi_t/d\\widetilde\\pi_t$, so $\\widetilde\\pi_t(\\upsilon_t)=1$. The BCS-41 sequential importance-resampling algorithm [[alg-sequential-importance-resampling]] is this scheme on path spaces when $k_t$ appends a proposal transition and $\\upsilon_t$ is the normalized Feynman–Kac path weight supplied by [[thm-feynman-kac-path-radon-nikodym-weight]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-multinomial-and-residual-offspring-resampling",
+          "source_section": "Definition",
+          "quote": "For multinomial resampling, return the sampled vector $(J_1,\\ldots,J_N)$ in its sampled order, together with its count vector $(C_1,\\ldots,C_N)$; do not sort the sampled indices. For residual resampling, return the ancestor list containing exactly $C_j$ copies of index $j$, ordered by increasing index, together with its count vector. Each output is a length-$N$ list and a count vector summing to $N$. When all input weights vanish, the uniform fallback defines the procedure; any downstream normalizer already multiplied by this zero average remains zero.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "For $N=3$, the event that the proposal sample contains one $A$, one $C$, and one $B$ has probability $3!(1/4)(1/4)(1/2)=3/16>0$. On this event the total weight is four and the normalized weights are $(1/2,1/2,0)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "The scaled normalized weights are $(Np_A,Np_C,Np_B)=(3/2,3/2,0)$, so their floor counts are $(1,1,0)$ and their fractional remainders are $(1/2,1/2,0)$. By [F2] one residual child is drawn, with equal probability from $A$ and $C$; hence the offspring-count vector is random although the limiting proposal remainder integral is zero. This contradicts the Statement.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-weight, zero-variance or zero-remainder boundary specified for this item is handled. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate variance, deterministic-weight or counterexample branch is stated and calculated. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or terminal-time boundary is asserted beyond the stated arbitrary finite horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item’s local argument is choice-free and makes no selection from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "finite-1",
+          "claim": "For $N=3$, the event that the proposal sample contains one $A$, one $C$, and one $B$ has probability $3!(1/4)(1/4)(1/2)=3/16>0$. On this event the total weight is four and the normalized weights are $(1/2,1/2,0)$.",
+          "result": "Computed and justified in proof step 1.1."
+        },
+        {
+          "id": "finite-2",
+          "claim": "The scaled normalized weights are $(Np_A,Np_C,Np_B)=(3/2,3/2,0)$, so their floor counts are $(1,1,0)$ and their fractional remainders are $(1/2,1/2,0)$. By [F2] one residual child is drawn, with equal probability from $A$ and $C$; hence the offspring-count vector is random although the limiting proposal remainder integral is zero. This contradicts the Statement.",
+          "result": "Computed and justified in proof step 2.1."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "Worked finite checks are justified at their cited proof steps; no external finite-smoke program is registered."
+    },
+    "ex-smc-dominant-weight-and-ess": {
+      "claim": "Use proposal probabilities $q(A)=1/4$, $q(B)=3/4$ and target probabilities $\\pi(A)=99/100$, $\\pi(B)=1/100$. Compute the weight-based effective sample size for four proposal draws containing one $A$ and three $B$ values.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smc-clt-function-classes-and-variance-recursions",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T$. At each $0\\le t\\le T$, let $\\pi_t$ be a probability law on a measurable particle space $\\Theta_t$. Let $\\widetilde\\pi_0$ be an initial proposal with $\\pi_0\\ll\\widetilde\\pi_0$, and fix $\\upsilon_0=d\\pi_0/d\\widetilde\\pi_0$. For $1\\le t\\le T$, let $k_t$ be a probability kernel from $\\Theta_{t-1}$ to $\\Theta_t$, and put\n$$\\widetilde\\pi_t(A)=\\int_{\\Theta_{t-1}}k_t(x,A)\\,\\pi_{t-1}(dx).$$\nAssume $\\pi_t\\ll\\widetilde\\pi_t$ and fix a nonnegative Radon–Nikodym version $\\upsilon_t=d\\pi_t/d\\widetilde\\pi_t$, so $\\widetilde\\pi_t(\\upsilon_t)=1$. The BCS-41 sequential importance-resampling algorithm [[alg-sequential-importance-resampling]] is this scheme on path spaces when $k_t$ appends a proposal transition and $\\upsilon_t$ is the normalized Feynman–Kac path weight supplied by [[thm-feynman-kac-path-radon-nikodym-weight]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-importance-weight-effective-sample-size",
+          "source_section": "Definition",
+          "quote": "For the nonnegative importance weights $w_1,\\ldots,w_n$ in [[alg-self-normalized-importance-sampling]], with $n\\ge1$ and at least one positive weight, define the **weight-based effective sample size** by\n$$\\operatorname{ESS}_w:=\\frac{(\\sum_{i=1}^nw_i)^2}{\\sum_{i=1}^nw_i^2}.$$\nIt is a diagnostic of observed weight imbalance. It depends only on the weights, not on the integrand, proposal regions that were never sampled, or target mass outside the observed sample. It does not certify support coverage, finite variance, accuracy, or convergence.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The proposal-to-target ratios are $w(A)=\\pi(A)/q(A)=99/25$ and $w(B)=\\pi(B)/q(B)=1/75$, and $q(A)w(A)+q(B)w(B)=1$. The event of exactly one $A$ in four IID proposal draws has probability $\\binom41(1/4)(3/4)^3=27/64>0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "The four unnormalized weights sum to $99/25+3/75=4$, so their normalized values are $99/100,1/300,1/300,1/300$. By [F2],\n$$\\operatorname{ESS}_w=\\left((99/100)^2+3(1/300)^2\\right)^{-1}=\\frac{7500}{7351}\\approx1.0203.$$\nThe first particle carries $99\\%$ of the observed weight, which explains the low ESS; the calculation concerns weight concentration only.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-valued boundary parameter; its hypotheses and claim do not depend on one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no non-degeneracy assumption or claim requiring a separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or terminal-time boundary is asserted beyond the stated arbitrary finite horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item’s local argument is choice-free and makes no selection from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "finite-1",
+          "claim": "The proposal-to-target ratios are $w(A)=\\pi(A)/q(A)=99/25$ and $w(B)=\\pi(B)/q(B)=1/75$, and $q(A)w(A)+q(B)w(B)=1$. The event of exactly one $A$ in four IID proposal draws has probability $\\binom41(1/4)(3/4)^3=27/64>0$.",
+          "result": "Computed and justified in proof step 1.1."
+        },
+        {
+          "id": "finite-2",
+          "claim": "The four unnormalized weights sum to $99/25+3/75=4$, so their normalized values are $99/100,1/300,1/300,1/300$. By [F2],\n$$\\operatorname{ESS}_w=\\left((99/100)^2+3(1/300)^2\\right)^{-1}=\\frac{7500}{7351}\\approx1.0203.$$\nThe first particle carries $99\\%$ of the observed weight, which explains the low ESS; the calculation concerns weight concentration only.",
+          "result": "Computed and justified in proof step 1.2."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "Worked finite checks are justified at their cited proof steps; no external finite-smoke program is registered."
+    },
+    "cex-smc-time-bound-fails-with-varying-proposals": {
+      "claim": "Uniform bounds on the true transition density ratios $g(x\\mid x')/g(x\\mid x'')$ and proposal density ratios $q_t(x\\mid x')/q_t(x\\mid x'')$, together with a likelihood bounded above and away from zero and a bounded test oscillation, suffice by themselves to keep the SIR asymptotic variance $V_t(\\phi)$ bounded uniformly in time.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smc-clt-function-classes-and-variance-recursions",
+          "source_section": "Definition",
+          "quote": "Define the mutation covariance operators recursively. At time zero,\n$$\\widetilde V_0(\\phi)=\\operatorname{Cov}_{\\widetilde\\pi_0}(\\phi).$$\nFor $t\\ge1$,\n$$\\widetilde V_t(\\phi)=\\widehat V_{t-1}(k_t\\phi)+\\int\\operatorname{Cov}_{k_t}(\\phi)(x)\\,\\pi_{t-1}(dx).$$\nThe weighted-estimator covariance is\n$$V_t(\\phi)=\\widetilde V_t\\!\\left(\\upsilon_t(\\phi-\\pi_t(\\phi))\\right).$$\nFor a measurable vector function $h$ on $\\Theta_t$, define the forward operator from $\\Theta_{t-1}$ by\n$$E_t h(x)=k_t(\\upsilon_t h)(x)=\\int\\upsilon_t(z)h(z)\\,k_t(x,dz).$$\nFor $k<t$, write $E_{k+1:t}=E_{k+1}\\circ\\cdots\\circ E_t$; set $E_{t+1:t}$ to the identity operator.\nFor multinomial offspring resampling set\n$$\\widehat V_t^{\\mathrm{multi}}(\\phi)=V_t(\\phi)+\\operatorname{Cov}_{\\pi_t}(\\phi).$$\nFor residual offspring resampling, let $r(u)=u-\\lfloor u\\rfloor$. When $c_t=\\widetilde\\pi_t(r(\\upsilon_t))>0$, define the formal source candidate\n$$R_t^{\\mathrm{cand}}(\\phi)=\\widetilde\\pi_t\\!\\left(r(\\upsilon_t)\\phi\\phi^\\top\\right)-\\frac{\\widetilde\\pi_t(r(\\upsilon_t)\\phi)\\,\\widetilde\\pi_t(r(\\upsilon_t)\\phi)^\\top}{c_t}.$$\nSet $R_t=R_t^{\\mathrm{cand}}$ and $\\widehat V_t^{\\mathrm{res}}=V_t+R_t$ only when $\\widetilde\\pi_t(\\upsilon_t\\in\\{1,2,\\ldots\\})=0$; then $c_t>0$ and the finite-sample floor discontinuities are avoided. If $\\upsilon_t=1$ $\\widetilde\\pi_t$-almost everywhere, all normalized weights are exactly equal and residual offspring are deterministic; in that special case put $R_t=0$. No residual covariance is assigned when $c_t=0$ but $\\upsilon_t$ is not almost everywhere one: the finite-sample normalization can move positive integer weights across floor boundaries. The B-page counterexamples show why the general positive-integer-atom branch remains unassigned.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-smc-multinomial-variance-unrolls",
+          "source_section": "Statement",
+          "quote": "Use the operators and multinomial variance recursion of [[def-smc-clt-function-classes-and-variance-recursions]] at every selection time. For $\\phi\\in\\Psi_t^{(d)}$, put $\\bar\\phi=\\phi-\\pi_t(\\phi)$. Then\n$$V_t(\\phi)=\\sum_{k=0}^{t}\\widetilde\\pi_k\\!\\left[\\upsilon_k^2\\,E_{k+1:t}(\\bar\\phi)E_{k+1:t}(\\bar\\phi)^\\top\\right],$$\nwhere the $k=t$ term uses $E_{t+1:t}\\bar\\phi=\\bar\\phi$. Each summand is a finite positive-semidefinite matrix under the stated class conditions.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "For every pair of preceding states, both $g(x\\mid x')/g(x\\mid x'')$ and $q_t(x\\mid x')/q_t(x\\mid x'')$ equal $1$. The likelihood satisfies $0<1\\le f(\\ast\\mid x)\\le1$, and $\\Delta\\phi=1$. The filtering target at every $t\\ge1$ has last-state law $\\pi_t(X_t=1)=1/2$, while the proposal last-state law is $q_t$. Its normalized incremental Radon–Nikodym weight is $\\upsilon_t(1)=1/(2\\epsilon_t)$ and $\\upsilon_t(0)=1/(2(1-\\epsilon_t))$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "For every preceding path, the forward image of the centered test is\n$$E_t(\\phi-1/2)=\\sum_{x=0}^1q_t(x\\mid x_{t-1})\\upsilon_t(x)(\\mathbf1_{\\{x=1\\}}-1/2)=\\sum_{x=0}^1g(x\\mid x_{t-1})(\\mathbf1_{\\{x=1\\}}-1/2)=0.$$\nConsequently $E_{k+1:t}(\\phi-\\pi_t\\phi)=0$ for every $k<t$, so all earlier-time terms in [F2] vanish.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "The remaining $k=t$ term in [F2] is\n$$V_t(\\phi)=\\epsilon_t\\left(\\frac1{2\\epsilon_t}\\right)^2\\frac14+(1-\\epsilon_t)\\left(\\frac1{2(1-\\epsilon_t)}\\right)^2\\frac14=\\frac1{16\\epsilon_t}+\\frac1{16(1-\\epsilon_t)}.$$\nSince $\\epsilon_t=2^{-t-2}\\downarrow0$, $V_t(\\phi)\\to\\infty$ despite all the stated ratio, likelihood, and oscillation bounds. Thus those conditions alone do not imply the claimed time-uniform variance bound.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-weight, zero-variance or zero-remainder boundary specified for this item is handled. See step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate variance, deterministic-weight or counterexample branch is stated and calculated. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or terminal-time boundary is asserted beyond the stated arbitrary finite horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item’s local argument is choice-free and makes no selection from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "finite-1",
+          "claim": "For every pair of preceding states, both $g(x\\mid x')/g(x\\mid x'')$ and $q_t(x\\mid x')/q_t(x\\mid x'')$ equal $1$. The likelihood satisfies $0<1\\le f(\\ast\\mid x)\\le1$, and $\\Delta\\phi=1$. The filtering target at every $t\\ge1$ has last-state law $\\pi_t(X_t=1)=1/2$, while the proposal last-state law is $q_t$. Its normalized incremental Radon–Nikodym weight is $\\upsilon_t(1)=1/(2\\epsilon_t)$ and $\\upsilon_t(0)=1/(2(1-\\epsilon_t))$.",
+          "result": "Computed and justified in proof step 1.1."
+        },
+        {
+          "id": "finite-2",
+          "claim": "For every preceding path, the forward image of the centered test is\n$$E_t(\\phi-1/2)=\\sum_{x=0}^1q_t(x\\mid x_{t-1})\\upsilon_t(x)(\\mathbf1_{\\{x=1\\}}-1/2)=\\sum_{x=0}^1g(x\\mid x_{t-1})(\\mathbf1_{\\{x=1\\}}-1/2)=0.$$\nConsequently $E_{k+1:t}(\\phi-\\pi_t\\phi)=0$ for every $k<t$, so all earlier-time terms in [F2] vanish.",
+          "result": "Computed and justified in proof step 1.2."
+        },
+        {
+          "id": "finite-3",
+          "claim": "The remaining $k=t$ term in [F2] is\n$$V_t(\\phi)=\\epsilon_t\\left(\\frac1{2\\epsilon_t}\\right)^2\\frac14+(1-\\epsilon_t)\\left(\\frac1{2(1-\\epsilon_t)}\\right)^2\\frac14=\\frac1{16\\epsilon_t}+\\frac1{16(1-\\epsilon_t)}.$$\nSince $\\epsilon_t=2^{-t-2}\\downarrow0$, $V_t(\\phi)\\to\\infty$ despite all the stated ratio, likelihood, and oscillation bounds. Thus those conditions alone do not imply the claimed time-uniform variance bound.",
+          "result": "Computed and justified in proof step 2.1."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "Worked finite checks are justified at their cited proof steps; no external finite-smoke program is registered."
+    },
+    "ex-smc-bounded-weights-with-mixing": {
+      "claim": "Let $\\mathsf X=\\{0,1\\}$, set the initial target and proposal to the uniform law, and use at every step the true transition and proposal kernel $K(x,\\cdot)=(1/2,1/2)$, with constant likelihood one. Thus all incremental weights equal one. For $\\phi(x_{0:t})=\\mathbf1_{\\{x_t=1\\}}$, compute the asymptotic variance and verify the time-uniform bound.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smc-clt-function-classes-and-variance-recursions",
+          "source_section": "Definition",
+          "quote": "The source recursive test classes are\n$$\\Phi_0^{(d)}=\\{\\phi:\\widetilde\\pi_0(\\|\\phi\\|^2)<\\infty\\},$$\nand, for $t\\ge1$,\n$$\\Phi_t^{(d)}=\\left\\{\\phi:\\text{ for some }\\delta>0,\\ \\widetilde\\pi_t(\\|\\upsilon_t\\phi\\|^{2+\\delta})<\\infty\\ \\text{ and }\\ x\\mapsto k_t(\\upsilon_t\\phi)(x)\\in\\Phi_{t-1}^{(d)}\\right\\}.$$\nAssume $1\\in\\Phi_t^{(1)}$ for every $t$. This is the source theorem's explicit normalizing-weight condition. For the recursive post-resampling CLTs proved on this page, use the stronger classes $\\Psi_t^{(d)}$. At $t=0$, let $\\Psi_0^{(d)}$ consist of the $\\phi\\in\\Phi_0^{(d)}$ for which, for some $\\epsilon>0$, $\\widetilde\\pi_0(\\|\\upsilon_0(\\phi-\\pi_0(\\phi))\\|^{2+\\epsilon})<\\infty$ and $\\pi_0(\\|\\phi\\|^{2+\\epsilon})<\\infty$. The initial normalizing denominator needs only its finite first moment $\\widetilde\\pi_0(\\upsilon_0)=1$. For $t\\ge1$, let $\\Psi_t^{(d)}$ consist of the $\\phi\\in\\Phi_t^{(d)}$ for which, for some $\\epsilon>0$, $\\pi_t(\\|\\phi\\|^{2+\\epsilon})<\\infty$ and $x\\mapsto E_t(\\phi-\\pi_t(\\phi))(x)\\in\\Psi_{t-1}^{(d)}$. Here $E_t h=k_t(\\upsilon_t h)$ is the operator defined below. The recursive target moments supply the offspring variance at every earlier selection used in the induction. The source $\\Phi_t$ conditions alone need not imply them. The source condition $1\\in\\Phi_t$ and these recursive target moments are the stated hypotheses for the CLT induction; no higher initial normalizer moment is required.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-dobrushin-coefficient-for-probability-kernels",
+          "source_section": "Definition",
+          "quote": "Let $(S,\\Sigma)$ and $(E,\\mathcal E)$ be measurable spaces with $S\\ne\\varnothing$, and let $K:S\\rightsquigarrow E$ be a probability kernel as in [[def-measure-kernel-and-probability-kernel]]. Its **Dobrushin contraction coefficient** is\n$$\\delta(K):=\\sup_{x,x'\\in S}\\lVert K(x,\\cdot)-K(x',\\cdot)\\rVert_{\\mathrm{TV}},$$\nwhere $\\lVert\\cdot\\rVert_{\\mathrm{TV}}$ is the event-supremum distance between probability laws in [[def-total-variation-distance-for-probability-laws]]. Thus $0\\le\\delta(K)\\le1$. The coefficient measures the largest total-variation separation between two one-step output laws.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-dobrushin-contraction-from-density-ratios",
+          "source_section": "Statement",
+          "quote": "Let $K:S\\rightsquigarrow E$ be a probability kernel on a nonempty measurable source space. Suppose a sigma-finite measure $\\lambda$ on $E$ and probability densities $k_x$ satisfy $K(x,A)=\\int_A k_x\\,d\\lambda$ for every $x\\in S$ and measurable $A\\subseteq E$. If $C\\ge1$ and, for every $x,x'\\in S$, $k_x(z)\\le Ck_{x'}(z)$ for $\\lambda$-almost every $z$, then the Dobrushin coefficient from [[def-dobrushin-coefficient-for-probability-kernels]] obeys\n$$\\delta(K)\\le1-C^{-1}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-smc-backward-operator-oscillation-bound",
+          "source_section": "Statement",
+          "quote": "Let $E_s$ be the forward operators of [[def-smc-clt-function-classes-and-variance-recursions]], and for bounded real $h$ put $\\operatorname{osc}(h)=\\sup h-\\inf h$. Suppose there is one $\\beta\\in[0,1)$ such that\n$$\\operatorname{osc}(E_s h)\\le\\beta\\operatorname{osc}(h)$$\nfor every $s$ and every bounded real $h$. For bounded $\\phi:\\Theta_t\\to\\mathbb R$, put $\\Delta\\phi=\\operatorname{osc}(\\phi)$ and $\\bar\\phi=\\phi-\\pi_t(\\phi)$. Then for every $0\\le k\\le t$,\n$$\\bigl\\lVert E_{k+1:t}\\bar\\phi\\bigr\\rVert_\\infty\\le\\beta^{t-k}\\Delta\\phi,$$\nwith $\\beta^0=1$ and $E_{t+1:t}$ the identity. This condition concerns the actual SMC backward operators; it is not implied merely by mixing ratios of the proposal densities.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-smc-time-uniform-variance-bound-under-uniform-incremental-weights",
+          "source_section": "Statement",
+          "quote": "Use multinomial offspring resampling at every time and the variance $V_t$ in [[def-smc-clt-function-classes-and-variance-recursions]]. Assume there is a constant $B<\\infty$ such that $\\upsilon_s\\le B$ $\\widetilde\\pi_s$-almost everywhere for every $s\\ge0$. Assume also that the forward operators satisfy the uniform oscillation condition of [[lem-smc-backward-operator-oscillation-bound]] with one $\\beta\\in[0,1)$ for all times. Then every bounded real test $\\phi$ with $\\Delta\\phi=\\sup\\phi-\\inf\\phi<\\infty$ satisfies\n$$V_t(\\phi)\\le\\frac{B^2(\\Delta\\phi)^2}{1-\\beta^2}\\qquad(t\\ge0).$$\nThis is a bound on the fixed-horizon CLT variance, uniform in the time index; it is not a finite-particle error bound.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Every transition row is $(1/2,1/2)$, so the target and proposal transitions coincide and the likelihood contributes no correction. By [F1], $\\upsilon_s=1$, hence $B=1$, and $\\pi_s$ is uniform for every $s\\ge0$. Since the row does not depend on its predecessor, [F2] gives $\\delta(K)=0$; its density rows are identical, so [F3] also applies with $C=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "The forward operator is $E_sh=Kh$, which maps every function to its uniform average. Thus $\\operatorname{osc}(E_sh)=0$, so the contraction hypothesis holds with $\\beta=0$. The test has $\\Delta\\phi=1$ and is centered by $1/2$. Every earlier backward image is zero; the final $k=t$ term in the variance expansion is $\\operatorname{Var}_{\\pi_t}(\\phi)=1/4$. Hence $V_t(\\phi)=1/4$ for every $t$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Applying [F5] with $B=1$, $\\beta=0$ and $\\Delta\\phi=1$ gives $V_t(\\phi)\\le1$, uniformly in $t$; the exact variance $1/4$ from step 1.2 satisfies the bound. This verifies a time-uniform asymptotic-variance result under explicit mixing and weight conditions.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-weight, zero-variance or zero-remainder boundary specified for this item is handled. See step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate variance, deterministic-weight or counterexample branch is stated and calculated. See step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite-horizon endpoint or terminal-time case is included in the calculation. See step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item’s local argument is choice-free and makes no selection from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "finite-1",
+          "claim": "Every transition row is $(1/2,1/2)$, so the target and proposal transitions coincide and the likelihood contributes no correction. By [F1], $\\upsilon_s=1$, hence $B=1$, and $\\pi_s$ is uniform for every $s\\ge0$. Since the row does not depend on its predecessor, [F2] gives $\\delta(K)=0$; its density rows are identical, so [F3] also applies with $C=1$.",
+          "result": "Computed and justified in proof step 1.1."
+        },
+        {
+          "id": "finite-2",
+          "claim": "The forward operator is $E_sh=Kh$, which maps every function to its uniform average. Thus $\\operatorname{osc}(E_sh)=0$, so the contraction hypothesis holds with $\\beta=0$. The test has $\\Delta\\phi=1$ and is centered by $1/2$. Every earlier backward image is zero; the final $k=t$ term in the variance expansion is $\\operatorname{Var}_{\\pi_t}(\\phi)=1/4$. Hence $V_t(\\phi)=1/4$ for every $t$.",
+          "result": "Computed and justified in proof step 1.2."
+        },
+        {
+          "id": "finite-3",
+          "claim": "Applying [F5] with $B=1$, $\\beta=0$ and $\\Delta\\phi=1$ gives $V_t(\\phi)\\le1$, uniformly in $t$; the exact variance $1/4$ from step 1.2 satisfies the bound. This verifies a time-uniform asymptotic-variance result under explicit mixing and weight conditions.",
+          "result": "Computed and justified in proof step 2.1."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "Worked finite checks are justified at their cited proof steps; no external finite-smoke program is registered."
+    },
+    "ex-smc-fixed-horizon-clt-does-not-give-time-uniform-accuracy": {
+      "claim": "Let $\\mathsf X=\\{0,1\\}$ have the uniform target and proposal at time zero. Use identity mutation, unit incremental weights, and multinomial resampling at every time. For each fixed horizon $t$, take $\\phi(x_{0:t})=\\mathbf1_{\\{x_t=1\\}}$. Compute the fixed-horizon asymptotic variance and compare its dependence on $t$ with a time-uniform bound.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smc-clt-function-classes-and-variance-recursions",
+          "source_section": "Definition",
+          "quote": "Define the mutation covariance operators recursively. At time zero,\n$$\\widetilde V_0(\\phi)=\\operatorname{Cov}_{\\widetilde\\pi_0}(\\phi).$$\nFor $t\\ge1$,\n$$\\widetilde V_t(\\phi)=\\widehat V_{t-1}(k_t\\phi)+\\int\\operatorname{Cov}_{k_t}(\\phi)(x)\\,\\pi_{t-1}(dx).$$\nThe weighted-estimator covariance is\n$$V_t(\\phi)=\\widetilde V_t\\!\\left(\\upsilon_t(\\phi-\\pi_t(\\phi))\\right).$$\nFor a measurable vector function $h$ on $\\Theta_t$, define the forward operator from $\\Theta_{t-1}$ by\n$$E_t h(x)=k_t(\\upsilon_t h)(x)=\\int\\upsilon_t(z)h(z)\\,k_t(x,dz).$$\nFor $k<t$, write $E_{k+1:t}=E_{k+1}\\circ\\cdots\\circ E_t$; set $E_{t+1:t}$ to the identity operator.\nFor multinomial offspring resampling set\n$$\\widehat V_t^{\\mathrm{multi}}(\\phi)=V_t(\\phi)+\\operatorname{Cov}_{\\pi_t}(\\phi).$$\nFor residual offspring resampling, let $r(u)=u-\\lfloor u\\rfloor$. When $c_t=\\widetilde\\pi_t(r(\\upsilon_t))>0$, define the formal source candidate\n$$R_t^{\\mathrm{cand}}(\\phi)=\\widetilde\\pi_t\\!\\left(r(\\upsilon_t)\\phi\\phi^\\top\\right)-\\frac{\\widetilde\\pi_t(r(\\upsilon_t)\\phi)\\,\\widetilde\\pi_t(r(\\upsilon_t)\\phi)^\\top}{c_t}.$$\nSet $R_t=R_t^{\\mathrm{cand}}$ and $\\widehat V_t^{\\mathrm{res}}=V_t+R_t$ only when $\\widetilde\\pi_t(\\upsilon_t\\in\\{1,2,\\ldots\\})=0$; then $c_t>0$ and the finite-sample floor discontinuities are avoided. If $\\upsilon_t=1$ $\\widetilde\\pi_t$-almost everywhere, all normalized weights are exactly equal and residual offspring are deterministic; in that special case put $R_t=0$. No residual covariance is assigned when $c_t=0$ but $\\upsilon_t$ is not almost everywhere one: the finite-sample normalization can move positive integer weights across floor boundaries. The B-page counterexamples show why the general positive-integer-atom branch remains unassigned.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-smc-multinomial-variance-unrolls",
+          "source_section": "Statement",
+          "quote": "Use the operators and multinomial variance recursion of [[def-smc-clt-function-classes-and-variance-recursions]] at every selection time. For $\\phi\\in\\Psi_t^{(d)}$, put $\\bar\\phi=\\phi-\\pi_t(\\phi)$. Then\n$$V_t(\\phi)=\\sum_{k=0}^{t}\\widetilde\\pi_k\\!\\left[\\upsilon_k^2\\,E_{k+1:t}(\\bar\\phi)E_{k+1:t}(\\bar\\phi)^\\top\\right],$$\nwhere the $k=t$ term uses $E_{t+1:t}\\bar\\phi=\\bar\\phi$. Each summand is a finite positive-semidefinite matrix under the stated class conditions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-smc-multinomial-fixed-horizon-clt",
+          "source_section": "Statement",
+          "quote": "Fix a finite horizon $t$ and use the target/proposal flow and classes $\\Phi_s^{(d)},\\Psi_s^{(d)}$ of [[def-smc-clt-function-classes-and-variance-recursions]], with $1\\in\\Phi_s^{(1)}$ for every $0\\le s\\le t$. Run the SIR procedure with multinomial resampling at each time. For $\\phi\\in\\Psi_t^{(d)}$, let $\\omega_t^N$ be the corrected weighted empirical law and $\\check\\eta_t^N$ the post-resampling empirical law. Then\n$$\\sqrt N\\{\\omega_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow\\mathcal N_d(0,V_t(\\phi)),\\qquad\n\\sqrt N\\{\\check\\eta_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow\\mathcal N_d(0,\\widehat V_t^{\\rm multi}(\\phi)),$$\nwhere $\\widehat V_t^{\\rm multi}(\\phi)=V_t(\\phi)+\\operatorname{Cov}_{\\pi_t}(\\phi)$. The horizon is fixed as $N\\to\\infty$; the theorem asserts no time-uniform finite-particle accuracy.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The identity kernel leaves the uniform law invariant and has incremental weight one. Thus [F1] gives $E_{k+1:t}(\\phi-\\pi_t\\phi)=\\phi-1/2$ for every $k\\le t$. Since $(\\phi-1/2)^2=1/4$ everywhere, each of the $t+1$ summands in [F2] equals $1/4$. Therefore $V_t(\\phi)=(t+1)/4$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "By [F3], at every fixed $t$ the weighted estimate has a valid CLT with variance $(t+1)/4$, and the post-resampling estimate has variance $(t+2)/4$. Both variance sequences are unbounded as $t$ ranges over the integers. The fixed-horizon theorem therefore supplies no uniform-in-time variance bound or finite-particle accuracy guarantee.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The SIR/resampling setup requires N≥1; no empty particle population is in the item statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-weight, zero-variance or zero-remainder boundary specified for this item is handled. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No N=1 or one-object boundary is part of this item’s stated finite-horizon claim; its proof covers the declared N≥1 or arbitrary-kernel setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate variance, deterministic-weight or counterexample branch is stated and calculated. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite-horizon endpoint or terminal-time case is included in the calculation. See step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item’s local argument is choice-free and makes no selection from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no forward iff branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence and has no reverse iff branch."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "finite-1",
+          "claim": "The identity kernel leaves the uniform law invariant and has incremental weight one. Thus [F1] gives $E_{k+1:t}(\\phi-\\pi_t\\phi)=\\phi-1/2$ for every $k\\le t$. Since $(\\phi-1/2)^2=1/4$ everywhere, each of the $t+1$ summands in [F2] equals $1/4$. Therefore $V_t(\\phi)=(t+1)/4$.",
+          "result": "Computed and justified in proof step 1.1."
+        },
+        {
+          "id": "finite-2",
+          "claim": "By [F3], at every fixed $t$ the weighted estimate has a valid CLT with variance $(t+1)/4$, and the post-resampling estimate has variance $(t+2)/4$. Both variance sequences are unbounded as $t$ ranges over the integers. The fixed-horizon theorem therefore supplies no uniform-in-time variance bound or finite-particle accuracy guarantee.",
+          "result": "Computed and justified in proof step 1.2."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "Worked finite checks are justified at their cited proof steps; no external finite-smoke program is registered."
+    }
+  }
+}

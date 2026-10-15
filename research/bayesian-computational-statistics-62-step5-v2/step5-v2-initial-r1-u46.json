@@ -1,0 +1,294 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "46",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "def-conditionally-linear-gaussian-state-space-model",
+      "model": "gpt-6-luna",
+      "context_sha256": "7343b31608b976d2408fb37c12755be4cb270147a6c806fc894f34bde5fe6fec",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The cited deterministic linear-Gaussian definition requires d_t and p_t to be positive integers. The assigned Definition did not exclude zero dimensions, so its assertion that every frozen path meets those hypotheses was unsupported. Added exactly those dimension requirements; singular state and process covariances remain allowed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+      "model": "gpt-6-luna",
+      "context_sha256": "d6430ca5899f0ac1388053ac740700db8b1598a59b01a00adc8257d65eee815a",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The unqualified target t allowed t=T+1, while s=min(t+L,T)=T then yields a path with no time-t coordinate. Made the algorithm domain explicit: integer lag L>=0 and t in {0,...,T}. The proof now checks t<=s<=T before taking the coordinate projection.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-fixed-lag-smoothing-bias-from-delayed-information",
+      "model": "gpt-6-luna",
+      "context_sha256": "a5bfe9fa9d1b450fe1609223eddc3f9bc3bcaa30c862a313c594c2e0ab8787f0",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "F1 defines a smoothing law on the whole state path, so the claimed full smoothing law delta_b had the wrong state space and could not be compared directly to Bernoulli(1/2) on X_0. The full path law is delta_(b,b,b); its time-0 marginal is delta_b. Corrected the Example and verification to compare time-0 marginals throughout.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-conditionally-linear-gaussian-state-space-model",
+      "disposition": "repaired",
+      "post_sha256": "0340a083b36618d9cf717f304688fbca06076777f66d7187ba44c216fc2e76b8",
+      "review_context_sha256": "218b9218dc5eaee0b1f697fe041fa69a410b64c822f7929071db9f9ac99e906f",
+      "reason": "Checked the complete Definition against def-linear-gaussian-state-space-model-with-independent-noises: fixed-path coefficient dimensions, independent Gaussian noises and semidefinite state covariances agree, with positive observation covariance ensuring innovation invertibility. Explicit positive integer dimensions now meet the supplier domain. AC and conditional-version qualifications are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+      "disposition": "repaired",
+      "post_sha256": "19e616d5756b74a7cfa4daf128e376e43b17ef0504fc738c9f1b81a5d82ade5c",
+      "review_context_sha256": "54fcd540816b7214b670e62025099ed0e12c10a01d4d293c6cf73182620179e7",
+      "reason": "Checked the exact fixed-lag algorithm and complete backward-factorization proof. At each admissible prefix horizon s the supplied exact kernels generate the conditional path law; because 0<=t<=s, its time-t projection has the claimed conditional marginal. The full-measure, conditional-version, T=0 and L=0 qualifications remain valid. No new convergence claim or AC use is introduced. Also corrected the contract boundary note to use the actual full-measure factorization assumption.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-fixed-lag-smoothing-bias-from-delayed-information",
+      "disposition": "repaired",
+      "post_sha256": "7ae3dd96780c5903e154353cbae430118cfc0c040aec25d1b437a34de6d235a0",
+      "review_context_sha256": "b6fb8f239f9330524dfee50c75fddd16ed3db46bd6602fbebd31d3e44a3d9200",
+      "reason": "Checked the entire finite model: both Y_2 outcomes have probability 1/2, Y_1 is constant, the full path equals (b,b,b) conditional on Y_2=b, and projection gives the time-0 law delta_b. Enumerating subsets of {0,1} gives total variation 1/2 from the lagged Bernoulli law. The repaired theorem applies with t=0,L=1,T=2; deterministic kernels satisfy the factorization assumptions. Updated its exact F4 supplier quotation and synchronized its derivation rows.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+    "alg-rao-blackwellized-particle-filter",
+    "ex-switching-linear-gaussian-rbpf",
+    "ex-fixed-lag-smoothing-bias-from-delayed-information"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "operation": "append",
+      "row": {
+        "defect_id": "bayesian-computational-statistics-62-step5-initial-r1-u46-1",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T17:03:26.762Z",
+        "class": "accuracy",
+        "subclass": "citation-inflated",
+        "severity": "fatal",
+        "location": "definition",
+        "subject": "def-conditionally-linear-gaussian-state-space-model",
+        "caught_at_stage": "5a-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "repair_cost": "repair+rejudge",
+        "subclass_note": "The cited deterministic linear-Gaussian definition requires d_t and p_t to be positive integers. The assigned Definition did not exclude zero dimensions, so its assertion that every frozen path meets those hypotheses was unsupported. Added exactly those dimension requirements; singular state and process covariances remain allowed.",
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u46.json",
+            "anchor": "def-conditionally-linear-gaussian-state-space-model"
+          }
+        ],
+        "item_sha256": "0340a083b36618d9cf717f304688fbca06076777f66d7187ba44c216fc2e76b8"
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "operation": "append",
+      "row": {
+        "defect_id": "bayesian-computational-statistics-62-step5-initial-r1-u46-2",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T17:03:26.763Z",
+        "class": "accuracy",
+        "subclass": "missing-hypothesis",
+        "severity": "fatal",
+        "location": "statement",
+        "subject": "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+        "caught_at_stage": "5a-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "repair_cost": "repair+rejudge",
+        "subclass_note": "The unqualified target t allowed t=T+1, while s=min(t+L,T)=T then yields a path with no time-t coordinate. Made the algorithm domain explicit: integer lag L>=0 and t in {0,...,T}. The proof now checks t<=s<=T before taking the coordinate projection.",
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u46.json",
+            "anchor": "thm-fixed-lag-smoother-targets-truncated-conditional-law"
+          }
+        ],
+        "item_sha256": "19e616d5756b74a7cfa4daf128e376e43b17ef0504fc738c9f1b81a5d82ade5c"
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "operation": "append",
+      "row": {
+        "defect_id": "bayesian-computational-statistics-62-step5-initial-r1-u46-3",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T17:03:26.763Z",
+        "class": "accuracy",
+        "subclass": "ill-typed-claim",
+        "severity": "fatal",
+        "location": "proof-step",
+        "subject": "ex-fixed-lag-smoothing-bias-from-delayed-information",
+        "caught_at_stage": "5a-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "repair_cost": "repair+rejudge",
+        "subclass_note": "F1 defines a smoothing law on the whole state path, so the claimed full smoothing law delta_b had the wrong state space and could not be compared directly to Bernoulli(1/2) on X_0. The full path law is delta_(b,b,b); its time-0 marginal is delta_b. Corrected the Example and verification to compare time-0 marginals throughout.",
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u46.json",
+            "anchor": "ex-fixed-lag-smoothing-bias-from-delayed-information"
+          }
+        ],
+        "item_sha256": "7ae3dd96780c5903e154353cbae430118cfc0c040aec25d1b437a34de6d235a0"
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "operation": "append",
+      "row": {
+        "defect_id": "bayesian-computational-statistics-62-step5-initial-r1-u46-contract-boundary",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T17:03:26.763Z",
+        "class": "accuracy",
+        "subclass": "false-boundary-disposition",
+        "severity": "nonfatal",
+        "location": "contract-row",
+        "subject": "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+        "caught_at_stage": "5a-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "repair_cost": "inline-fix",
+        "subclass_note": "The zero boundary entry claims the Statement excludes zero-evidence histories via a finite-positive conditional-law domain. The Statement actually selects histories where the supplied factorization holds at every prefix; the exact-kernel theorem does not itself require an evidence density. Replace the entry with this actual full-measure-set convention.",
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u46.json",
+            "anchor": "contract-boundary"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "operation": "no_change",
+      "reason": "No potentially defective published consumers were found. The published deterministic linear-Gaussian definition was consulted for its explicit positive dimension requirements; this bounded interface comparison makes no whole-item publication audit or repair claim."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "All assigned rejected tuples are adjudicated and all confirmed defects repaired. No new prerequisite, dependency change, manifest change, judgment, stamp, certificate, or round-state write was needed. These are repair reviews, not independent reviews of the repairs.",
+    "Changed only the three assigned item carriers and their owning batch contract. Under tools/step5-shared-write-lock.mjs acquire/reread/edit/check/release, refreshed exact quotations of the changed Definition and Statement, synchronized the changed proof derivations, and corrected the theorem contract boundary note. Necessary supplier-quotation refreshes in already examined direct consumers changed no consumer item.",
+    "Review-context hashes were captured immediately after each completed item review, before the next item edit. Subsequent edits were contract metadata only; no review hash was refreshed after a supplier change.",
+    "Direct searches across current items/ and library/ found exactly the four item consumers in downstream. Frozen before_aliases has no aliases for the assigned items. The Example/Verification correction changes no Statement/Definition section and therefore creates no additional propagation event under the task rule.",
+    "No outside-frontier or potentially defective published consumers were found. The published linear-Gaussian definition supplies the positive-dimension convention used for the first repair; this bounded interface check is not a whole-item audit. All mathematical reasoning used here is familiar; no external source reading is claimed.",
+    "Precheck, rendering, the final focused proof-contract check, and the required single batched proof-layout run all pass. The earlier contract-quotation failure is retained in checks as operational history. No unresolved mathematical or repair obligation remains in this assignment."
+  ],
+  "downstream_evidence": [
+    {
+      "supplier": "def-conditionally-linear-gaussian-state-space-model",
+      "id": "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+      "path": "items/lem-kalman-filter-is-exact-conditional-on-nonlinear-path.md",
+      "affected_use": "Statement assumes the conditional model; F1 and Proof 2.1 identify each fixed nonlinear path as a deterministic linear-Gaussian model and invoke exact Kalman filtering.",
+      "invalidated_claim": "None after supplier repair: positive dimensions are now inherited and supply the domain required by the Kalman and Gaussian-density dependencies.",
+      "minimality": "No item edit: all formulas and claims already use the supplied dimension convention. Refresh the exact F1 supplier quotation in the owning contract.",
+      "disposition": "sound_unchanged",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-conditionally-linear-gaussian-state-space-model",
+      "id": "alg-rao-blackwellized-particle-filter",
+      "path": "items/alg-rao-blackwellized-particle-filter.md",
+      "affected_use": "Definition starts with the conditional linear-Gaussian model and computes p_t-dimensional Gaussian likelihoods and d_t-dimensional Kalman moments in instructions 2 through 4.",
+      "invalidated_claim": "None: the newly explicit positive dimensions make the existing Gaussian formulas meet their suppliers, with finite-positive evidence restrictions preserved.",
+      "minimality": "No procedure or other item change is required; the input model reference inherits the repaired dimension restrictions.",
+      "disposition": "sound_unchanged",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-conditionally-linear-gaussian-state-space-model",
+      "id": "ex-switching-linear-gaussian-rbpf",
+      "path": "items/ex-switching-linear-gaussian-rbpf.md",
+      "affected_use": "F1 and Verification 1.1 identify the scalar two-mode construction as a conditionally linear-Gaussian model before applying the Kalman lemma.",
+      "invalidated_claim": "None: U_0,U_1,Y_1 are scalar, so d_0=d_1=p_1=1 already satisfy the repaired input class.",
+      "minimality": "No item change is needed. Any whole-section F1 contract quote should match the repaired supplier.",
+      "disposition": "sound_unchanged",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+      "id": "ex-fixed-lag-smoothing-bias-from-delayed-information",
+      "path": "items/ex-fixed-lag-smoothing-bias-from-delayed-information.md",
+      "affected_use": "F4 and Verification 1.1 use the theorem for t=0,L=1,T=2 to identify the lagged time-0 conditional law as Bernoulli(1/2).",
+      "invalidated_claim": "None from this supplier change: t=0 is an allowed target and the integer lag is nonnegative. The separately assigned path-versus-marginal defect is repaired in this same report.",
+      "minimality": "Only its own assigned path-versus-marginal terminology and the theorem quotation in its contract need adjustment; its Example and numerical bias claim remain intact.",
+      "disposition": "sound_after_assigned_repair",
+      "route": "assigned-review"
+    }
+  ],
+  "page_checks": [
+    {
+      "path": "library/bayesian-computational-statistics/particle-smoothing-backward-simulation-and-rbpf.md",
+      "reason": "The page lists both changed interfaces and says the RBPF has exact conditional Gaussian components and fixed lag targets truncated observations. Positive dimensions and admissible target times preserve each claim; no page change is needed."
+    },
+    {
+      "path": "library/bayesian-computational-statistics/particle-smoothing-backward-simulation-and-rbpf-examples.md",
+      "reason": "The page describes a finite-state later-information example with total variation 1/2. Both the truncated/full path laws and their time-0 marginals have that distance in this model, so its summary remains sound."
+    }
+  ],
+  "interface_changes": [
+    {
+      "id": "def-conditionally-linear-gaussian-state-space-model",
+      "section": "Definition",
+      "change": "Added d_t and p_t positive integer requirements; all other model equations and conditional-law conventions retained."
+    },
+    {
+      "id": "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+      "section": "Statement",
+      "change": "Made the algorithm domain explicit: integer lag L>=0 and t in {0,...,T}."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts --json items/def-conditionally-linear-gaussian-state-space-model.md items/thm-fixed-lag-smoother-targets-truncated-conditional-law.md items/ex-fixed-lag-smoothing-bias-from-delayed-information.md",
+      "exit_code": 0,
+      "result": "3 files, 2 proofs checked, 0 failures; definition not applicable."
+    },
+    {
+      "command": "node tools/rendercheck.mjs --json items/def-conditionally-linear-gaussian-state-space-model.md items/thm-fixed-lag-smoother-targets-truncated-conditional-law.md items/ex-fixed-lag-smoothing-bias-from-delayed-information.md",
+      "exit_code": 0,
+      "result": "3 checked, no errors or warnings."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/def-conditionally-linear-gaussian-state-space-model.md items/thm-fixed-lag-smoother-targets-truncated-conditional-law.md items/ex-fixed-lag-smoothing-bias-from-delayed-information.md",
+      "exit_code": 0,
+      "result": "3 items, 5 steps, 0 defects. Run after all item edits; no formatter used."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-46.proof-contracts.json --strict --items def-conditionally-linear-gaussian-state-space-model,thm-fixed-lag-smoother-targets-truncated-conditional-law,ex-fixed-lag-smoothing-bias-from-delayed-information --json",
+      "exit_code": 1,
+      "result": "Initial check found only the stale F4 theorem quotation in the example contract. Repaired under the shared lock; final expanded check below passed."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-46.proof-contracts.json --strict --items def-conditionally-linear-gaussian-state-space-model,lem-kalman-filter-is-exact-conditional-on-nonlinear-path,alg-rao-blackwellized-particle-filter,ex-switching-linear-gaussian-rbpf,thm-fixed-lag-smoother-targets-truncated-conditional-law,ex-fixed-lag-smoothing-bias-from-delayed-information --json",
+      "exit_code": 0,
+      "result": "6 scoped contracts checked, no errors or warnings."
+    }
+  ],
+  "supporting_evidence": {
+    "research/bayesian-computational-statistics-62-batch-46.proof-contracts.json": "1c66c3ee09afde52753a3b6effe4b5368aaecc6ede483eaf48ab31dd33d162a7"
+  }
+}

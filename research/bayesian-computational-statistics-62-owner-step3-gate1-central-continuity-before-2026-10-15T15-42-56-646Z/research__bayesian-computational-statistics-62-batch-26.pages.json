@@ -1,0 +1,438 @@
+[
+  {
+    "order": 2092,
+    "id": "laplace-approximation-and-marginal-integration",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Laplace approximation and deterministic quadrature",
+    "companion": "laplace-approximation-and-marginal-integration-examples",
+    "requires": [
+      "numerical-optimization-for-statistical-computation"
+    ],
+    "items": [
+      {
+        "id": "def-composite-trapezoidal-rule",
+        "kind": "definition",
+        "title": "Composite trapezoidal rule",
+        "deps": [
+          "def-finite-sum"
+        ],
+        "justified_by": [],
+        "statement": "For a<b, an integer N>=1, mesh width h=(b-a)/N, and a real-valued f on [a,b], define T_N(f)=h[ f(a)/2 + sum_{j=1}^{N-1} f(a+jh) + f(b)/2 ].",
+        "strategy": "Define the deterministic equal-mesh quadrature value and state its input domain without asserting an error estimate.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6.1–§5.6.4",
+              "url": "https://tobydriscoll.net/fnc-julia/localapprox/integration.html",
+              "locator": "Equations (5.6.1)–(5.6.4), composite trapezoid weights and formula; complete online chapter inspected."
+            },
+            {
+              "title": "Endre Süli, Numerical Computation, course notes",
+              "url": "https://people.maths.ox.ac.uk/suli/nc.pdf",
+              "locator": "§2.2, composite trapezium rule, equation (20), PDF pp. 15–16."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-positive-definite-gaussian-integral",
+        "kind": "lemma",
+        "title": "Gaussian integral for a positive-definite quadratic form",
+        "deps": [
+          "def-cholesky-factorisation-with-positive-diagonal",
+          "def-countable-choice",
+          "def-determinant-of-a-square-matrix",
+          "def-euclidean-inner-product",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-borel-sigma-algebra",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-measurable-function-between-measurable-spaces",
+          "def-matrix-product-and-identity-matrix",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-matrix-space",
+          "def-nonnegative-lebesgue-integral",
+          "def-self-adjoint-and-normal-endomorphism",
+          "lem-metrics-on-rn",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-algebra-of-continuous-functions",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-composition-of-continuous-functions",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-determinant-of-transpose",
+          "thm-exponential-is-strictly-increasing",
+          "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures",
+          "thm-gaussian-integral",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-nonnegative-measurable-functions-admit-increasing-simple-approximations",
+          "thm-of-square-roots",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "thm-substitution-for-improper-integrals",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral"
+        ],
+        "justified_by": [],
+        "statement": "Assuming Countable Choice, for every d>=1 and every real symmetric positive-definite H in M_d(R), the Lebesgue integral over R^d of exp(-u^T H u/2) equals (2 pi)^(d/2)/sqrt(det H).",
+        "strategy": "Use the real spectral theorem to identify the positive eigenvalue branch, Cholesky factorization for an invertible linear change of variables, Tonelli for the product Gaussian, and the one-dimensional Gaussian integral.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Laplace method for integrals, PHYS 2400, University of Connecticut",
+              "url": "https://www.phys.uconn.edu/~rozman/Courses/P2400_23S/downloads/laplace-method-integrals.pdf",
+              "locator": "Complete 7-page PDF inspected, especially the Gaussian reductions on pp. 2–6; the exact multivariate integral is proved locally."
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3(iii), Laplace's Method",
+              "url": "https://dlmf.nist.gov/2.3",
+              "locator": "Equations (2.3.13)–(2.3.18) and conditions (a)–(c); one-dimensional endpoint formulation, used as asymptotic context only."
+            },
+            {
+              "title": "Francis Bach, Approximating Integrals with Laplace's Method",
+              "url": "https://francisbach.com/laplace-method/",
+              "locator": "The multidimensional Hessian and Jacobian derivation in the opening Laplace approximation argument; the local proof supplies domination and tails."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Countable Choice is used by the Lebesgue and box-measure, Borel-to-Lebesgue, Riemann–Lebesgue equality, product-completion, and C^1 change-of-variables suppliers. No full Axiom of Choice is used."
+      },
+      {
+        "id": "lem-linear-interpolation-error-bound",
+        "kind": "lemma",
+        "title": "Pointwise linear interpolation error from a second-derivative bound",
+        "deps": [
+          "def-higher-derivatives-and-smoothness",
+          "thm-continuous-implies-integrable",
+          "thm-rolle"
+        ],
+        "justified_by": [],
+        "statement": "If f is C^2 on [a,b] and L is the affine interpolant through (a,f(a)) and (b,f(b)), then |f(x)-L(x)| <= M(x-a)(b-x)/2 for every x in [a,b], where M=max_[a,b]|f''|.",
+        "strategy": "Apply Rolle's theorem twice to a correction that vanishes at both endpoints and at the chosen interior point, obtaining the exact second-order interpolation remainder.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, Numerical Computation, course notes",
+              "url": "https://people.maths.ox.ac.uk/suli/nc.pdf",
+              "locator": "§1.1, Theorem 1 (Cauchy interpolation remainder), equations (5)–(6), specialized to degree-one interpolation."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-laplace-approximation-under-unique-interior-maximum",
+        "kind": "theorem",
+        "title": "Laplace asymptotic under a unique nondegenerate interior maximum",
+        "deps": [
+          "cor-second-order-taylor-expansion-with-the-hessian",
+          "def-cholesky-factorisation-with-positive-diagonal",
+          "def-countable-choice",
+          "def-convex-subset-of-euclidean-space",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-euclidean-inner-product",
+          "def-hessian-and-euclidean-critical-point",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-nonnegative-lebesgue-integral",
+          "def-measurable-function-between-measurable-spaces",
+          "lem-closed-subset-of-a-compact-space-is-compact",
+          "lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets",
+          "lem-positive-definite-gaussian-integral",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-borel-sigma-algebra-of-a-subspace-is-the-trace",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-compact-subset-is-closed-and-bounded",
+          "thm-composition-of-continuous-functions",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-dominated-convergence",
+          "thm-exponential-is-strictly-increasing",
+          "thm-extreme-value-metric",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder"
+        ],
+        "justified_by": [],
+        "statement": "For I_n=int_K a(theta) exp(n h(theta)) dtheta on a compact measurable K subset R^d of positive Lebesgue measure, assume a>=0 is measurable and integrable, is continuous at the unique interior maximizer theta-hat, and a(theta-hat)>0; h is continuous on K and C^3 near theta-hat; H=-D^2 h(theta-hat) is symmetric positive definite; h has a local quadratic upper bound at theta-hat and a strict global gap away from a neighborhood. Then I_n is asymptotic to a(theta-hat) exp(n h(theta-hat)) (2 pi/n)^(d/2)/sqrt(det H).",
+        "strategy": "Prove the interior gradient vanishes, use second-order Taylor expansion and a bounded third-order remainder after u=sqrt(n)(theta-theta-hat), apply dominated convergence under the local quadratic bound, and show the integrable off-mode contribution is exponentially small using the compact gap.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Laplace method for integrals, PHYS 2400, University of Connecticut",
+              "url": "https://www.phys.uconn.edu/~rozman/Courses/P2400_23S/downloads/laplace-method-integrals.pdf",
+              "locator": "Complete 7-page PDF inspected, pp. 1–7; heuristic derivations and endpoint/nonquadratic examples are treated as context, not proof."
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3(iii), Laplace's Method",
+              "url": "https://dlmf.nist.gov/2.3",
+              "locator": "Equations (2.3.13)–(2.3.18) and conditions (a)–(c); the local theorem has its own hypotheses and complete proof."
+            },
+            {
+              "title": "Francis Bach, Approximating Integrals with Laplace's Method",
+              "url": "https://francisbach.com/laplace-method/",
+              "locator": "Opening compact-domain multidimensional formula and its Hessian/Jacobian derivation; the local proof supplies the missing domination and off-mode bound."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Countable Choice is inherited from lem-positive-definite-gaussian-integral through the cited C^1 Lebesgue change-of-variables theorem; no full Axiom of Choice is used."
+      },
+      {
+        "id": "thm-composite-trapezoidal-rule-error-bound",
+        "kind": "theorem",
+        "title": "Second-derivative error bound for the composite trapezoidal rule",
+        "deps": [
+          "def-composite-trapezoidal-rule",
+          "def-higher-derivatives-and-smoothness",
+          "lem-linear-interpolation-error-bound",
+          "thm-additivity-over-subintervals",
+          "thm-continuous-implies-integrable",
+          "thm-linearity-of-the-integral",
+          "thm-monotonicity-of-the-integral",
+          "thm-newton-leibniz-with-interior-derivative",
+          "def-darboux-integral"
+        ],
+        "justified_by": [],
+        "statement": "For f in C^2[a,b], N>=1, h=(b-a)/N, and T_N as defined, |int_a^b f-T_N| <= (b-a) h^2 ||f''||_infinity/12.",
+        "strategy": "On each mesh cell compare f with its endpoint linear interpolant, integrate the exact pointwise interpolation bound, sum by additivity, and evaluate the elementary quadratic integral.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6.1–§5.6.4",
+              "url": "https://tobydriscoll.net/fnc-julia/localapprox/integration.html",
+              "locator": "Equations (5.6.1)–(5.6.4), composite formula, and the second-order accuracy discussion; complete online chapter inspected."
+            },
+            {
+              "title": "Endre Süli, Numerical Computation, course notes",
+              "url": "https://people.maths.ox.ac.uk/suli/nc.pdf",
+              "locator": "§2.1, Theorem 3 and equation (14) for one panel; §2.2, equations (20)–(21) for the composite trapezium error, PDF pp. 12–16."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2093,
+    "id": "laplace-approximation-and-marginal-integration-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Laplace approximation and deterministic quadrature — Examples",
+    "companion": "laplace-approximation-and-marginal-integration",
+    "requires": [
+      "laplace-approximation-and-marginal-integration"
+    ],
+    "items": [
+      {
+        "id": "ex-exact-gaussian-laplace-integral",
+        "kind": "example",
+        "title": "An exact Gaussian Laplace integral on the noncompact line",
+        "deps": [
+          "thm-gaussian-integral",
+          "thm-substitution-for-improper-integrals"
+        ],
+        "justified_by": [],
+        "statement": "For h(theta)=c-(theta-mu)^2/2 on R and amplitude one, the integral of exp(n h(theta)) is exactly exp(nc) sqrt(2 pi/n), agreeing with its quadratic-mode approximation; the compact theorem is not invoked.",
+        "strategy": "Evaluate by a positive affine change of variable in the one-dimensional Gaussian integral and compute the unique maximizer and Hessian directly.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Laplace method for integrals, PHYS 2400, University of Connecticut",
+              "url": "https://www.phys.uconn.edu/~rozman/Courses/P2400_23S/downloads/laplace-method-integrals.pdf",
+              "locator": "Complete 7-page PDF inspected, especially the Gaussian reductions on pp. 2 and 5–6; the exact evaluation is supplied locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-boundary-mode-changes-laplace-rate",
+        "kind": "counterexample",
+        "title": "A boundary mode has a different concentration rate",
+        "deps": [
+          "cor-exponential-reciprocal-and-positivity",
+          "def-higher-derivatives-and-smoothness",
+          "thm-continuous-implies-integrable",
+          "thm-exponential-is-strictly-increasing",
+          "thm-monotonicity-of-the-integral",
+          "thm-derivative-of-exponential",
+          "thm-newton-leibniz-with-interior-derivative"
+        ],
+        "justified_by": [],
+        "statement": "The interior Gaussian formula remains valid at a unique boundary maximizer whenever the second derivative there is negative.",
+        "strategy": "Use h(x)=-x-x^2 on [0,1]: the endpoint is the unique maximum, the second derivative is -2, but a direct upper bound makes the integral negligible relative to n^(-1/2).",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3(iii), Laplace's Method",
+              "url": "https://dlmf.nist.gov/2.3",
+              "locator": "Equation (2.3.15) and conditions (a)–(c), which explicitly treat an endpoint minimum in the one-dimensional formulation."
+            },
+            {
+              "title": "Laplace method for integrals, PHYS 2400, University of Connecticut",
+              "url": "https://www.phys.uconn.edu/~rozman/Courses/P2400_23S/downloads/laplace-method-integrals.pdf",
+              "locator": "Complete 7-page PDF inspected, pp. 2–3, for a boundary-dominated example with a nonquadratic endpoint phase; the counterexample is proved locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-singular-interior-mode-changes-laplace-rate",
+        "kind": "counterexample",
+        "title": "A singular interior mode need not have Gaussian scaling",
+        "deps": [
+          "cor-exponential-reciprocal-and-positivity",
+          "def-higher-derivatives-and-smoothness",
+          "thm-continuous-implies-integrable",
+          "thm-exponential-is-strictly-increasing",
+          "thm-monotonicity-of-the-integral"
+        ],
+        "justified_by": [],
+        "statement": "A unique interior maximum of a smooth phase always gives an integral of order exp(n h-hat)/sqrt(n), even when the Hessian is singular.",
+        "strategy": "For h(x)=-x^4 on [-1,1], integrate only over a shrinking interval of width 2/m when n=m^4; there the integrand is at least e^(-1), so the integral is much larger than n^(-1/2).",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Laplace method for integrals, PHYS 2400, University of Connecticut",
+              "url": "https://www.phys.uconn.edu/~rozman/Courses/P2400_23S/downloads/laplace-method-integrals.pdf",
+              "locator": "Complete 7-page PDF inspected, pp. 2–5, including a nonquadratic phase example; the interior singular-mode witness is proved locally."
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3(iii), Laplace's Method",
+              "url": "https://dlmf.nist.gov/2.3",
+              "locator": "Equations (2.3.14)–(2.3.18): the local power and amplitude orders determine the scale; the witness is proved locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-equal-multiple-modes-double-laplace-constant",
+        "kind": "counterexample",
+        "title": "Two equal modes contribute two Gaussian terms",
+        "deps": [
+          "def-countable-choice",
+          "def-higher-derivatives-and-smoothness",
+          "def-hessian-and-euclidean-critical-point",
+          "thm-additivity-over-subintervals",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-continuous-implies-integrable",
+          "thm-laplace-approximation-under-unique-interior-maximum"
+        ],
+        "justified_by": [],
+        "statement": "When two distinct nondegenerate interior maxima have equal height, the leading asymptotic term is the contribution from only one of the two modes.",
+        "strategy": "For h(x)=-(x^2-1)^2 on [-2,2], apply the proved theorem separately on [-2,0] and [0,2], verify its hypotheses on each half, and add the two equal contributions.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3(iii), Laplace's Method",
+              "url": "https://dlmf.nist.gov/2.3",
+              "locator": "Section §2.3(iii), equations (2.3.13)–(2.3.18), for localization at dominant modes; this two-mode calculation is proved locally."
+            },
+            {
+              "title": "Francis Bach, Approximating Integrals with Laplace's Method",
+              "url": "https://francisbach.com/laplace-method/",
+              "locator": "Opening discussion of a strict global minimizer and localization near the mode; the equal-mode sum is proved locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Countable Choice is inherited from the Laplace theorem and used in the Lebesgue/Riemann integral comparison; no full Axiom of Choice is used."
+      },
+      {
+        "id": "ex-one-panel-composite-trapezoid-on-square",
+        "kind": "example",
+        "title": "The one-panel trapezoidal bound is attained by x squared",
+        "deps": [
+          "def-composite-trapezoidal-rule",
+          "def-higher-derivatives-and-smoothness",
+          "thm-composite-trapezoidal-rule-error-bound",
+          "thm-continuous-implies-integrable",
+          "thm-newton-leibniz-with-interior-derivative"
+        ],
+        "justified_by": [],
+        "statement": "For f(x)=x^2 on [0,1] with N=1, the one-panel trapezoidal error equals the stated second-derivative bound, h^2||f''||_infinity/12=1/6.",
+        "strategy": "Compute the endpoint trapezoid, exact integral, and second-derivative supremum directly.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6.1–§5.6.4",
+              "url": "https://tobydriscoll.net/fnc-julia/localapprox/integration.html",
+              "locator": "Equations (5.6.1)–(5.6.4) and the second-order accuracy discussion; complete online chapter inspected."
+            },
+            {
+              "title": "Endre Süli, Numerical Computation, course notes",
+              "url": "https://people.maths.ox.ac.uk/suli/nc.pdf",
+              "locator": "§2.1, one-panel trapezium error (14), and §2.2, composite formula (20), PDF pp. 12–16."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

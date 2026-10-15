@@ -1,0 +1,692 @@
+[
+  {
+    "order": 2142,
+    "id": "iid-bootstrap-and-jackknife-validity",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "IID bootstrap and jackknife for smooth statistics",
+    "companion": "iid-bootstrap-and-jackknife-validity-examples",
+    "requires": [
+      "resampling-algorithms-and-sampling-units",
+      "delta-method-and-asymptotic-normality",
+      "confidence-sets-pivots-and-test-inversion"
+    ],
+    "items": [
+      {
+        "id": "alg-lower-empirical-bootstrap-quantile",
+        "kind": "algorithm",
+        "title": "Lower empirical quantile of bootstrap values",
+        "deps": [],
+        "justified_by": [],
+        "statement": "Input a nonempty finite list $y_1,\\ldots,y_B\\in\\mathbb R$ and $p\\in[0,1]$. Sort the values with multiplicity as $y_{(1)}\\le\\cdots\\le y_{(B)}$. If $p=0$, set $k=1$; if $p>0$, let $k$ be the least integer in $\\{1,\\ldots,B\\}$ with $k\\ge Bp$. Return\n$$Q_B(p)=y_{(k)}.$$\nThis is the lower inverse empirical-CDF quantile, with the explicit endpoint convention $Q_B(0)=y_{(1)}$ and $Q_B(1)=y_{(B)}$. Repeated values remain repeated; no interpolation is performed. An empty list or a value of $p$ outside $[0,1]$ is inadmissible.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Bradley Efron and Robert Tibshirani, The Bootstrap Method for Assessing Statistical Accuracy, Behaviormetrika 12 (1985), §7",
+            "url": "https://link.springer.com/content/pdf/10.2333/bhmk.12.17_1.pdf",
+            "locator": "Complete 35-page article inspected. §§1–2 on IID empirical resampling; §4 bootstrap-t example; §7 percentile, BC, and BCa interval construction. The article omits most proofs; no coverage theorem is imported."
+          },
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §6",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page STAT 581 lecture-notes chapter inspected. §2 empirical/bootstrap laws; §3 delete-one jackknife definitions; §4 Theorem 4.1 and full conditional mean CLT proof, PDF pp. 14–15; §5 Theorem 5.1 and full bootstrap-delta proof, PDF pp. 25–26."
+          }
+        ],
+        "axiom_use": "No choice principle is used by this definition, algorithm, or proof. Finite sums and real-coordinate arguments are choice-free.",
+        "dependency_level": 0,
+        "level": 0
+      },
+      {
+        "id": "def-iid-empirical-bootstrap-sample",
+        "kind": "definition",
+        "title": "IID empirical bootstrap sample and smooth mean statistic",
+        "deps": [
+          "def-statistic-and-estimator",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-moments-variance-and-covariance",
+          "def-partial-sums-and-sample-means",
+          "def-measurable-function-between-measurable-spaces",
+          "def-borel-sigma-algebra",
+          "def-probability-measure",
+          "def-dirac-measure",
+          "def-finite-probability-space-and-event",
+          "thm-cardinality-of-a-set-of-functions",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability"
+        ],
+        "justified_by": [
+          "lem-empirical-bootstrap-law-is-a-probability-measure",
+          "lem-finite-index-bootstrap-sample-is-conditionally-iid"
+        ],
+        "statement": "Fix integers $d,n\\ge1$ and observed vectors $x_1,\\ldots,x_n\\in\\mathbb R^d$, with the Borel sigma-algebra $\\mathcal B(\\mathbb R^d)$ ([[def-borel-sigma-algebra]]). Their empirical law is the set function\n$$P_n(A)=\\frac1n\\sum_{i=1}^n 1\\{x_i\\in A\\},\\qquad A\\in\\mathcal B(\\mathbb R^d).$$\n\nLet $\\mathsf I_n=\\{1,\\ldots,n\\}^n$ carry the uniform probability ([[def-probability-measure]]) giving each index tuple mass $n^{-n}$. For $j=1,\\ldots,n$, let $I_j$ be its $j$th coordinate and put $X_j^*=x_{I_j}$. The **ideal size-$n$ empirical bootstrap law conditional on the data** is the pushforward of this finite uniform law under\n$$ (i_1,\\ldots,i_n)\\longmapsto (x_{i_1},\\ldots,x_{i_n}). $$\nThus conditional probabilities are finite averages over the $n^n$ index tuples. The empirical law is a probability measure, and the bootstrap coordinates are conditionally IID with that law, by the well-definedness results listed in justified_by.\n\nFor random observations $X_1,\\ldots,X_n$, write $\\bar X_n=n^{-1}\\sum_iX_i$ coordinatewise, so each coordinate is the scalar sample mean in [[def-partial-sums-and-sample-means]]. Write $P_n=n^{-1}\\sum_i\\delta_{X_i}$, using the Dirac measure [[def-dirac-measure]], and let $\\bar X_n^*$ be the bootstrap mean. If $g:\\mathbb R^d\\to\\mathbb R$ is Borel ([[def-measurable-function-between-measurable-spaces]]), then\n$$\\hat\\theta_n=g(\\bar X_n),\\qquad \\hat\\theta_n^*=g(\\bar X_n^*).$$\nWhen $X_i$ are IID ([[def-identically-distributed-and-iid-random-variables]]) with finite second moment, write $\\mu_j=\\mathbb E X_{1j}$ and $\\Sigma_{jk}=\\mathbb E[(X_{1j}-\\mu_j)(X_{1k}-\\mu_k)]$ ([[def-moments-variance-and-covariance]]), and set $\\theta=g(\\mu)$. The functions of the data above are Borel statistics and estimators in the sense of [[def-statistic-and-estimator]]; coordinatewise arithmetic preserves measurability ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]). No bootstrap validity or interval coverage is part of this definition. For $n\\ge2$, the delete-one mean and plug-in statistic are\n$$\\bar X_{n,(-i)}=\\frac1{n-1}\\sum_{j\\ne i}X_j,\\qquad \\hat\\theta_{n,(-i)}=g(\\bar X_{n,(-i)}).$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Bradley Efron and Robert Tibshirani, The Bootstrap Method for Assessing Statistical Accuracy, Behaviormetrika 12 (1985), §§1–2",
+            "url": "https://link.springer.com/content/pdf/10.2333/bhmk.12.17_1.pdf",
+            "locator": "Complete 35-page article inspected. §§1–2 on IID empirical resampling; §4 bootstrap-t example; §7 percentile, BC, and BCa interval construction. The article omits most proofs; no coverage theorem is imported."
+          },
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §2",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page STAT 581 lecture-notes chapter inspected. §2 empirical/bootstrap laws; §3 delete-one jackknife definitions; §4 Theorem 4.1 and full conditional mean CLT proof, PDF pp. 14–15; §5 Theorem 5.1 and full bootstrap-delta proof, PDF pp. 25–26."
+          }
+        ],
+        "axiom_use": "No choice principle is used by this definition, algorithm, or proof. Finite sums and real-coordinate arguments are choice-free.",
+        "dependency_level": 0,
+        "level": 0
+      },
+      {
+        "id": "lem-iid-sample-covariance-converges",
+        "kind": "lemma",
+        "title": "Finite-second-moment IID sample covariance converges",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "def-partial-sums-and-sample-means",
+          "def-moments-variance-and-covariance",
+          "lem-measurable-functions-preserve-independence",
+          "thm-khinchin-weak-law-for-iid-integrable-variables"
+        ],
+        "justified_by": [],
+        "statement": "Let $d\\ge1$ be finite and let $X_1,X_2,\\ldots$ be IID $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$. Put $\\mu_j=\\mathbb E X_{1j}$ and $\\Sigma_{jk}=\\mathbb E[(X_{1j}-\\mu_j)(X_{1k}-\\mu_k)]$, the coordinate covariance entries from [[def-moments-variance-and-covariance]]. Define\n$$\\bar X_n=\\frac1n\\sum_{i=1}^nX_i,\\qquad \\widehat\\Sigma_n=\\frac1n\\sum_{i=1}^n(X_i-\\bar X_n)(X_i-\\bar X_n)^T.$$\nThen $\\bar X_n\\to\\mu$ in probability and every entry of $\\widehat\\Sigma_n$ converges in probability to the corresponding entry of $\\Sigma$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §4",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page STAT 581 lecture-notes chapter inspected. §2 empirical/bootstrap laws; §3 delete-one jackknife definitions; §4 Theorem 4.1 and full conditional mean CLT proof, PDF pp. 14–15; §5 Theorem 5.1 and full bootstrap-delta proof, PDF pp. 25–26."
+          },
+          {
+            "title": "Bradley Efron and Robert Tibshirani, The Bootstrap Method for Assessing Statistical Accuracy, Behaviormetrika 12 (1985), §1",
+            "url": "https://link.springer.com/content/pdf/10.2333/bhmk.12.17_1.pdf",
+            "locator": "Complete 35-page article inspected. §§1–2 on IID empirical resampling; §4 bootstrap-t example; §7 percentile, BC, and BCa interval construction. The article omits most proofs; no coverage theorem is imported."
+          }
+        ],
+        "axiom_use": "No choice principle is used by this definition, algorithm, or proof. Finite sums and real-coordinate arguments are choice-free.",
+        "dependency_level": 0,
+        "level": 0
+      },
+      {
+        "id": "alg-basic-bootstrap-interval",
+        "kind": "algorithm",
+        "title": "Basic bootstrap interval",
+        "deps": [
+          "def-iid-empirical-bootstrap-sample",
+          "alg-lower-empirical-bootstrap-quantile"
+        ],
+        "justified_by": [],
+        "statement": "Input the observed estimate $\\hat\\theta$, a nonempty list of $B$ bootstrap estimates $\\hat\\theta_1^*,\\ldots,\\hat\\theta_B^*$ generated under [[def-iid-empirical-bootstrap-sample]], and $0<\\alpha<1$. Let $Q_B$ be [[alg-lower-empirical-bootstrap-quantile]] and set $p=\\alpha/2$. Return\n$$[2\\hat\\theta-Q_B(1-p),\\,2\\hat\\theta-Q_B(p)].$$\nThis is the reflected bootstrap-quantile interval under the declared finite-sample quantile convention. It makes no coverage claim.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Bradley Efron and Robert Tibshirani, The Bootstrap Method for Assessing Statistical Accuracy, Behaviormetrika 12 (1985), §§4 and 7",
+            "url": "https://link.springer.com/content/pdf/10.2333/bhmk.12.17_1.pdf",
+            "locator": "Complete 35-page article inspected. §§1–2 on IID empirical resampling; §4 bootstrap-t example; §7 percentile, BC, and BCa interval construction. The article omits most proofs; no coverage theorem is imported."
+          },
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §6",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page STAT 581 lecture-notes chapter inspected. §2 empirical/bootstrap laws; §3 delete-one jackknife definitions; §4 Theorem 4.1 and full conditional mean CLT proof, PDF pp. 14–15; §5 Theorem 5.1 and full bootstrap-delta proof, PDF pp. 25–26."
+          }
+        ],
+        "axiom_use": "No choice principle is used by this definition, algorithm, or proof. Finite sums and real-coordinate arguments are choice-free.",
+        "dependency_level": 1,
+        "level": 1
+      },
+      {
+        "id": "alg-bias-corrected-bootstrap-interval",
+        "kind": "algorithm",
+        "title": "Bias-corrected bootstrap interval",
+        "deps": [
+          "def-iid-empirical-bootstrap-sample",
+          "alg-lower-empirical-bootstrap-quantile",
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "lem-standard-normal-cdf-is-continuous-and-strictly-increasing"
+        ],
+        "justified_by": [],
+        "statement": "Assume AC, as required by the standard normal law. Input observed estimate $\\hat\\theta$, a nonempty list of $B$ bootstrap estimates $\\hat\\theta_1^*,\\ldots,\\hat\\theta_B^*$ generated under [[def-iid-empirical-bootstrap-sample]], and $0<\\alpha<1$. Use the explicit midrank tie convention\n$$\\hat p_0=\\frac{\\#\\{b:\\hat\\theta_b^*<\\hat\\theta\\}+\\tfrac12\\#\\{b:\\hat\\theta_b^*=\\hat\\theta\\}}{B}.$$\nLet $z_0=\\Phi^{-1}(\\hat p_0)$, where $\\Phi$ is the standard normal CDF. Use the extended endpoint convention $\\Phi^{-1}(0)=-\\infty$ and $\\Phi^{-1}(1)=+\\infty$. With $Q_B$ from [[alg-lower-empirical-bootstrap-quantile]] and $p=\\alpha/2$, return\n$$\\left[Q_B\\!\\left(\\Phi(2z_0+\\Phi^{-1}(p))\\right),\\,\nQ_B\\!\\left(\\Phi(2z_0+\\Phi^{-1}(1-p))\\right)\\right].$$\nThis is a finite-$B$ algorithm with an explicit tie rule; no coverage or higher-order accuracy claim is included.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Bradley Efron and Robert Tibshirani, The Bootstrap Method for Assessing Statistical Accuracy, Behaviormetrika 12 (1985), §7",
+            "url": "https://link.springer.com/content/pdf/10.2333/bhmk.12.17_1.pdf",
+            "locator": "Complete 35-page article inspected. §§1–2 on IID empirical resampling; §4 bootstrap-t example; §7 percentile, BC, and BCa interval construction. The article omits most proofs; no coverage theorem is imported."
+          },
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §6",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page STAT 581 lecture-notes chapter inspected. §2 empirical/bootstrap laws; §3 delete-one jackknife definitions; §4 Theorem 4.1 and full conditional mean CLT proof, PDF pp. 14–15; §5 Theorem 5.1 and full bootstrap-delta proof, PDF pp. 25–26."
+          }
+        ],
+        "axiom_use": "Assumes AC to use the standard-normal law and its quantile; finite sorting and midrank counting are choice-free.",
+        "dependency_level": 1,
+        "level": 1
+      },
+      {
+        "id": "alg-bootstrap-t-interval",
+        "kind": "algorithm",
+        "title": "Bootstrap-t interval",
+        "deps": [
+          "def-iid-empirical-bootstrap-sample",
+          "alg-lower-empirical-bootstrap-quantile"
+        ],
+        "justified_by": [],
+        "statement": "Input an observed estimate $\\hat\\theta$, an observed standard error $\\hat s>0$, and $B\\ge1$ pairs $(\\hat\\theta_b^*,\\hat s_b^*)$ with finite real $\\hat\\theta_b^*$ and strictly positive finite $\\hat s_b^*$, produced from bootstrap samples under [[def-iid-empirical-bootstrap-sample]]. If the observed or any bootstrap standard error is nonpositive or nonfinite, return **undefined**. Otherwise form\n$$t_b^*=\\frac{\\hat\\theta_b^*-\\hat\\theta}{\\hat s_b^*},\\qquad b=1,\\ldots,B.$$\nWith $Q_B$ from [[alg-lower-empirical-bootstrap-quantile]] and $p=\\alpha/2$ for a supplied $0<\\alpha<1$, return\n$$[\\hat\\theta-\\hat s\\,Q_B(1-p),\\ \\hat\\theta-\\hat s\\,Q_B(p)].$$\nThe standard-error procedure is an explicit input; this algorithm alone establishes no studentized limit or coverage.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Bradley Efron and Robert Tibshirani, The Bootstrap Method for Assessing Statistical Accuracy, Behaviormetrika 12 (1985), §§4 and 7",
+            "url": "https://link.springer.com/content/pdf/10.2333/bhmk.12.17_1.pdf",
+            "locator": "Complete 35-page article inspected. §§1–2 on IID empirical resampling; §4 bootstrap-t example; §7 percentile, BC, and BCa interval construction. The article omits most proofs; no coverage theorem is imported."
+          },
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §6",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page STAT 581 lecture-notes chapter inspected. §2 empirical/bootstrap laws; §3 delete-one jackknife definitions; §4 Theorem 4.1 and full conditional mean CLT proof, PDF pp. 14–15; §5 Theorem 5.1 and full bootstrap-delta proof, PDF pp. 25–26."
+          }
+        ],
+        "axiom_use": "No choice principle is used by this definition, algorithm, or proof. Finite sums and real-coordinate arguments are choice-free.",
+        "dependency_level": 1,
+        "level": 1
+      },
+      {
+        "id": "alg-percentile-bootstrap-interval",
+        "kind": "algorithm",
+        "title": "Percentile bootstrap interval",
+        "deps": [
+          "def-iid-empirical-bootstrap-sample",
+          "alg-lower-empirical-bootstrap-quantile"
+        ],
+        "justified_by": [],
+        "statement": "Input a nonempty list of $B$ bootstrap estimates $\\hat\\theta_1^*,\\ldots,\\hat\\theta_B^*$ generated under the empirical bootstrap law in [[def-iid-empirical-bootstrap-sample]], and $0<\\alpha<1$. Let $Q_B$ be [[alg-lower-empirical-bootstrap-quantile]] and set $p=\\alpha/2$. Return\n$$[Q_B(p),\\,Q_B(1-p)].$$\nThis finite-$B$ procedure uses the declared lower empirical-quantile convention. It defines endpoints only; it asserts no coverage guarantee.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Bradley Efron and Robert Tibshirani, The Bootstrap Method for Assessing Statistical Accuracy, Behaviormetrika 12 (1985), §7",
+            "url": "https://link.springer.com/content/pdf/10.2333/bhmk.12.17_1.pdf",
+            "locator": "Complete 35-page article inspected. §§1–2 on IID empirical resampling; §4 bootstrap-t example; §7 percentile, BC, and BCa interval construction. The article omits most proofs; no coverage theorem is imported."
+          },
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §6",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page STAT 581 lecture-notes chapter inspected. §2 empirical/bootstrap laws; §3 delete-one jackknife definitions; §4 Theorem 4.1 and full conditional mean CLT proof, PDF pp. 14–15; §5 Theorem 5.1 and full bootstrap-delta proof, PDF pp. 25–26."
+          }
+        ],
+        "axiom_use": "No choice principle is used by this definition, algorithm, or proof. Finite sums and real-coordinate arguments are choice-free.",
+        "dependency_level": 1,
+        "level": 1
+      },
+      {
+        "id": "lem-empirical-bootstrap-law-is-a-probability-measure",
+        "kind": "lemma",
+        "title": "A finite empirical law is a probability measure",
+        "deps": [
+          "def-iid-empirical-bootstrap-sample",
+          "def-measure",
+          "def-probability-measure",
+          "def-nonnegative-extended-series"
+        ],
+        "justified_by": [],
+        "statement": "For any $n\\ge1$ and $x_1,\\ldots,x_n\\in\\mathbb R^d$, the set function\n$$P_n(A)=\\frac1n\\sum_{i=1}^n1\\{x_i\\in A\\},\\qquad A\\in\\mathcal B(\\mathbb R^d),$$\nis a probability measure.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §2",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page STAT 581 lecture-notes chapter inspected. §2 empirical/bootstrap laws; §3 delete-one jackknife definitions; §4 Theorem 4.1 and full conditional mean CLT proof, PDF pp. 14–15; §5 Theorem 5.1 and full bootstrap-delta proof, PDF pp. 25–26."
+          },
+          {
+            "title": "Bradley Efron and Robert Tibshirani, The Bootstrap Method for Assessing Statistical Accuracy, Behaviormetrika 12 (1985), §1",
+            "url": "https://link.springer.com/content/pdf/10.2333/bhmk.12.17_1.pdf",
+            "locator": "Complete 35-page article inspected. §§1–2 on IID empirical resampling; §4 bootstrap-t example; §7 percentile, BC, and BCa interval construction. The article omits most proofs; no coverage theorem is imported."
+          }
+        ],
+        "axiom_use": "No choice principle is used by this definition, algorithm, or proof. Finite sums and real-coordinate arguments are choice-free.",
+        "dependency_level": 1,
+        "level": 1
+      },
+      {
+        "id": "thm-delete-one-jackknife-linearization-for-smooth-statistics",
+        "kind": "theorem",
+        "title": "Delete-one jackknife linearization for smooth functions of a mean",
+        "deps": [
+          "def-iid-empirical-bootstrap-sample",
+          "def-moments-variance-and-covariance",
+          "lem-iid-sample-covariance-converges",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "def-frechet-derivative-between-banach-spaces",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "cor-mean-value-theorem"
+        ],
+        "justified_by": [],
+        "statement": "Let $X_i$ be IID $\\mathbb R^d$-valued vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean $\\mu$, and covariance $\\Sigma$. Let $g:\\mathbb R^d\\to\\mathbb R$ be Borel and continuously differentiable on an open neighborhood of $\\mu$, and suppose $a=\\nabla g(\\mu)$ satisfies $0<a^T\\Sigma a<\\infty$. For $n\\ge2$, set $\\hat\\theta_n=g(\\bar X_n)$, $\\hat\\theta_{n,(-i)}=g(\\bar X_{n,(-i)})$, $\\bar\\theta_{n,(-)}=n^{-1}\\sum_i\\hat\\theta_{n,(-i)}$, and\n$$V_{J,n}=\\frac{n-1}{n}\\sum_{i=1}^n(\\hat\\theta_{n,(-i)}-\\bar\\theta_{n,(-)})^2,\\qquad p_{n,i}=n\\hat\\theta_n-(n-1)\\hat\\theta_{n,(-i)}.$$\nThen\n$$\\frac1n\\sum_{i=1}^n\\left|p_{n,i}-\\{\\hat\\theta_n+a^T(X_i-\\bar X_n)\\}\\right|^2\\longrightarrow0\\quad\\text{in probability},\\qquad nV_{J,n}\\longrightarrow a^T\\Sigma a\\quad\\text{in probability}.$$\nThe neighborhood $C^1$ condition is used for the deletion secants; differentiability at $\\mu$ alone is not asserted to give this jackknife conclusion.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §3",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page STAT 581 lecture-notes chapter inspected. §2 empirical/bootstrap laws; §3 delete-one jackknife definitions; §4 Theorem 4.1 and full conditional mean CLT proof, PDF pp. 14–15; §5 Theorem 5.1 and full bootstrap-delta proof, PDF pp. 25–26."
+          },
+          {
+            "title": "Bradley Efron and Robert Tibshirani, The Bootstrap Method for Assessing Statistical Accuracy, Behaviormetrika 12 (1985), §§1–2",
+            "url": "https://link.springer.com/content/pdf/10.2333/bhmk.12.17_1.pdf",
+            "locator": "Complete 35-page article inspected. §§1–2 on IID empirical resampling; §4 bootstrap-t example; §7 percentile, BC, and BCa interval construction. The article omits most proofs; no coverage theorem is imported."
+          }
+        ],
+        "axiom_use": "No choice principle is used by this definition, algorithm, or proof. Finite sums and real-coordinate arguments are choice-free.",
+        "dependency_level": 1,
+        "level": 1
+      },
+      {
+        "id": "lem-finite-bootstrap-cdf-supremum-is-measurable",
+        "kind": "lemma",
+        "title": "Measurability of the finite-bootstrap CDF supremum",
+        "deps": [
+          "def-iid-empirical-bootstrap-sample",
+          "thm-cardinality-of-a-set-of-functions",
+          "def-measurable-function-between-measurable-spaces",
+          "def-borel-sigma-algebra",
+          "prop-indicator-function-is-measurable-iff-its-set-is-measurable",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "def-cumulative-distribution-function-of-a-random-variable"
+        ],
+        "justified_by": [],
+        "statement": "Let $n,d\\ge1$, let $(X_1,\\ldots,X_n)$ be a measurable $(\\mathbb R^d)^n$-valued random vector, and fix $a\\in\\mathbb R^d$. For each finite index tuple $\\omega=(i_1,\\ldots,i_n)\\in\\mathsf I_n=\\{1,\\ldots,n\\}^n$, define the projected centered bootstrap-mean value",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §2",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page chapter inspected. §2, PDF pp. 4–7, supplies the empirical bootstrap setup only; the measurable-supremum formula and proof are local."
+          },
+          {
+            "title": "Bradley Efron and Robert Tibshirani, The Bootstrap Method for Assessing Statistical Accuracy, Behaviormetrika 12 (1985), §§1–2",
+            "url": "https://link.springer.com/content/pdf/10.2333/bhmk.12.17_1.pdf",
+            "locator": "Complete 35-page article inspected. §§1–2 give empirical-law and IID resampling context only; the measurable-supremum result is proved locally."
+          }
+        ],
+        "axiom_use": "No choice principle is used by this item.",
+        "dependency_level": 1,
+        "level": 1
+      },
+      {
+        "id": "alg-delete-one-jackknife-acceleration",
+        "kind": "algorithm",
+        "title": "Delete-one jackknife acceleration",
+        "deps": [
+          "thm-delete-one-jackknife-linearization-for-smooth-statistics"
+        ],
+        "justified_by": [],
+        "statement": "Input $n\\ge2$ real delete-one estimates $\\hat\\theta_{(-1)},\\ldots,\\hat\\theta_{(-n)}$. Compute\n$$\\bar\\theta_{(-)}=\\frac1n\\sum_{i=1}^n\\hat\\theta_{(-i)},\\qquad d_i=\\bar\\theta_{(-)}-\\hat\\theta_{(-i)},\\qquad S_2=\\sum_i d_i^2.$$\nIf $S_2=0$, return **undefined**. Otherwise return the jackknife acceleration\n$$\\hat a_J=\\frac{\\sum_i d_i^3}{6S_2^{3/2}}.$$\nThe output is the finite-sample acceleration input used by the BCa procedure. For a $C^1$ function of an IID mean, [[thm-delete-one-jackknife-linearization-for-smooth-statistics]] proves the first-order jackknife variance relation; this algorithm and that first-order theorem make no BCa coverage claim.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Bradley Efron and Robert Tibshirani, The Bootstrap Method for Assessing Statistical Accuracy, Behaviormetrika 12 (1985), §7",
+            "url": "https://link.springer.com/content/pdf/10.2333/bhmk.12.17_1.pdf",
+            "locator": "Complete 35-page article inspected. §§1–2 on IID empirical resampling; §4 bootstrap-t example; §7 percentile, BC, and BCa interval construction. The article omits most proofs; no coverage theorem is imported."
+          },
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §3",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page STAT 581 lecture-notes chapter inspected. §2 empirical/bootstrap laws; §3 delete-one jackknife definitions; §4 Theorem 4.1 and full conditional mean CLT proof, PDF pp. 14–15; §5 Theorem 5.1 and full bootstrap-delta proof, PDF pp. 25–26."
+          }
+        ],
+        "axiom_use": "No choice principle is used by this definition, algorithm, or proof. Finite sums and real-coordinate arguments are choice-free.",
+        "dependency_level": 2,
+        "level": 2
+      },
+      {
+        "id": "lem-finite-index-bootstrap-sample-is-conditionally-iid",
+        "kind": "lemma",
+        "title": "Finite-index bootstrap draws are conditionally IID from the empirical law",
+        "deps": [
+          "def-iid-empirical-bootstrap-sample",
+          "lem-empirical-bootstrap-law-is-a-probability-measure",
+          "lem-measurable-functions-preserve-independence"
+        ],
+        "justified_by": [],
+        "statement": "For fixed data $x_1,\\ldots,x_n\\in\\mathbb R^d$, the coordinates of the finite-index bootstrap sample in [[def-iid-empirical-bootstrap-sample]] are independent and each has law $P_n$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §2",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page STAT 581 lecture-notes chapter inspected. §2 empirical/bootstrap laws; §3 delete-one jackknife definitions; §4 Theorem 4.1 and full conditional mean CLT proof, PDF pp. 14–15; §5 Theorem 5.1 and full bootstrap-delta proof, PDF pp. 25–26."
+          },
+          {
+            "title": "Bradley Efron and Robert Tibshirani, The Bootstrap Method for Assessing Statistical Accuracy, Behaviormetrika 12 (1985), §2",
+            "url": "https://link.springer.com/content/pdf/10.2333/bhmk.12.17_1.pdf",
+            "locator": "Complete 35-page article inspected. §§1–2 on IID empirical resampling; §4 bootstrap-t example; §7 percentile, BC, and BCa interval construction. The article omits most proofs; no coverage theorem is imported."
+          }
+        ],
+        "axiom_use": "No choice principle is used by this definition, algorithm, or proof. Finite sums and real-coordinate arguments are choice-free.",
+        "dependency_level": 2,
+        "level": 2
+      },
+      {
+        "id": "alg-bca-bootstrap-interval",
+        "kind": "algorithm",
+        "title": "Bias-corrected and accelerated bootstrap interval",
+        "deps": [
+          "def-iid-empirical-bootstrap-sample",
+          "alg-lower-empirical-bootstrap-quantile",
+          "alg-delete-one-jackknife-acceleration",
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "lem-standard-normal-cdf-is-continuous-and-strictly-increasing"
+        ],
+        "justified_by": [],
+        "statement": "Assume AC. Input observed estimate $\\hat\\theta$, a nonempty list of $B$ bootstrap estimates, $n\\ge2$ delete-one estimates, and $0<\\alpha<1$. The bootstrap estimates are generated under [[def-iid-empirical-bootstrap-sample]]. Compute\n$$\\hat p_0=\\frac{\\#\\{b:\\hat\\theta_b^*<\\hat\\theta\\}+\\tfrac12\\#\\{b:\\hat\\theta_b^*=\\hat\\theta\\}}{B},\\qquad \\hat z_0=\\Phi^{-1}(\\hat p_0),$$\nusing the midrank tie rule and extended endpoint convention $\\Phi^{-1}(0)=-\\infty$, $\\Phi^{-1}(1)=+\\infty$, and compute $\\hat a_J$ by [[alg-delete-one-jackknife-acceleration]].\n\nIf $\\hat p_0\\in\\{0,1\\}$, if $\\hat a_J$ is undefined, if either denominator below is zero, or if the resulting lower adjusted probability is not strictly below the upper adjusted probability, return **undefined**. Otherwise, for $\\gamma\\in\\{\\alpha/2,1-\\alpha/2\\}$ set\n$$z_\\gamma=\\Phi^{-1}(\\gamma),\\qquad\np_\\gamma=\\Phi\\!\\left(z_0+\\frac{z_0+z_\\gamma}{1-\\hat a_J(z_0+z_\\gamma)}\\right),$$\nwhere $z_0=\\Phi^{-1}(\\hat p_0)$. Return $[Q_B(p_{\\alpha/2}),Q_B(p_{1-\\alpha/2})]$, using [[alg-lower-empirical-bootstrap-quantile]]. These instructions define a finite-sample procedure only; no BCa coverage theorem is asserted.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Bradley Efron and Robert Tibshirani, The Bootstrap Method for Assessing Statistical Accuracy, Behaviormetrika 12 (1985), §7",
+            "url": "https://link.springer.com/content/pdf/10.2333/bhmk.12.17_1.pdf",
+            "locator": "Complete 35-page article inspected. §§1–2 on IID empirical resampling; §4 bootstrap-t example; §7 percentile, BC, and BCa interval construction. The article omits most proofs; no coverage theorem is imported."
+          },
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §§3 and 6",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page STAT 581 lecture-notes chapter inspected. §2 empirical/bootstrap laws; §3 delete-one jackknife definitions; §4 Theorem 4.1 and full conditional mean CLT proof, PDF pp. 14–15; §5 Theorem 5.1 and full bootstrap-delta proof, PDF pp. 25–26."
+          }
+        ],
+        "axiom_use": "Assumes AC to use the standard-normal law and its quantile; finite sorting, delete-one calculations, and branch checks are choice-free.",
+        "dependency_level": 3,
+        "level": 3
+      },
+      {
+        "id": "thm-conditional-iid-bootstrap-clt-for-empirical-law",
+        "kind": "theorem",
+        "title": "Conditional IID bootstrap CLT for an empirical law",
+        "deps": [
+          "def-iid-empirical-bootstrap-sample",
+          "lem-empirical-bootstrap-law-is-a-probability-measure",
+          "lem-finite-index-bootstrap-sample-is-conditionally-iid",
+          "lem-iid-sample-covariance-converges",
+          "def-row-wise-independent-centered-triangular-array",
+          "def-total-row-variance-and-lindeberg-condition",
+          "def-axiom-of-choice",
+          "def-convergence-in-distribution-for-real-random-variables",
+          "def-standard-normal-and-normal-laws",
+          "lem-standard-normal-cdf-is-continuous-and-strictly-increasing",
+          "thm-dominated-convergence",
+          "cor-markov-inequality-for-random-variables",
+          "thm-lindeberg-feller-central-limit-theorem-sufficiency",
+          "thm-slutsky-for-real-random-variables",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-heine-cantor-metric",
+          "thm-well-ordering-principle",
+          "cor-archimedean-reciprocal",
+          "lem-finite-bootstrap-cdf-supremum-is-measurable",
+          "thm-almost-sure-convergence-implies-convergence-in-probability"
+        ],
+        "justified_by": [],
+        "statement": "Assume the Axiom of Choice. Let $X_1,X_2,\\ldots$ be IID $\\mathbb R^d$-valued vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean $\\mu$, and covariance $\\Sigma$. Fix $a\\in\\mathbb R^d$ such that $\\sigma^2=a^T\\Sigma a>0$. For the finite-index empirical bootstrap in [[def-iid-empirical-bootstrap-sample]], let $\\bar X_n^*$ be the bootstrap mean and define the conditional CDF",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §4, Theorem 4.1 and full proof",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf"
+          },
+          {
+            "title": "P. J. Bickel, F. Götze, and W. R. van Zwet, Resampling Fewer Than n Observations: Gains, Losses, and Remedies for Losses, Statistica Sinica 7 (1997), §2.2",
+            "url": "https://www3.stat.sinica.edu.tw/statistica/oldpdf/a7n11.pdf"
+          }
+        ],
+        "axiom_use": "Assumes AC exactly through the Lindeberg–Feller CLT and normal-law/CDF suppliers. Finite empirical measures, index tuples, tail bounds, and the subsequence selection are choice-free.",
+        "dependency_level": 3,
+        "level": 3
+      },
+      {
+        "id": "thm-iid-bootstrap-validity-for-smooth-statistics",
+        "kind": "theorem",
+        "title": "First-order IID bootstrap validity for smooth functions of a mean",
+        "deps": [
+          "def-iid-empirical-bootstrap-sample",
+          "lem-iid-sample-covariance-converges",
+          "thm-conditional-iid-bootstrap-clt-for-empirical-law",
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "lem-standard-normal-cdf-is-continuous-and-strictly-increasing",
+          "def-convergence-in-distribution-for-real-random-variables",
+          "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "thm-vector-stochastic-order-calculus",
+          "thm-multivariate-iid-central-limit-theorem",
+          "thm-first-and-second-order-delta-method-for-random-vectors",
+          "cor-markov-inequality-for-random-variables"
+        ],
+        "justified_by": [],
+        "statement": "Assume AC. Let $X_i$ be IID $\\mathbb R^d$-valued vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean $\\mu$, and covariance $\\Sigma$. Let $g:\\mathbb R^d\\to\\mathbb R$ be Borel and Fréchet differentiable at $\\mu$, with derivative $a^T$, and assume\n$$0<\\sigma^2:=a^T\\Sigma a<\\infty.$$\nSet $\\theta=g(\\mu)$, $\\hat\\theta_n=g(\\bar X_n)$, and $\\hat\\theta_n^*=g(\\bar X_n^*)$ for the finite-index empirical bootstrap in [[def-iid-empirical-bootstrap-sample]]. Then\n$$\\sqrt n(\\hat\\theta_n-\\theta)\\Rightarrow N(0,\\sigma^2),$$\nand, for every fixed $x\\in\\mathbb R$,\n$$\\mathbb P^*\\!\\left(\\sqrt n(\\hat\\theta_n^*-\\hat\\theta_n)\\le x\\mid X_1,\\ldots,X_n\\right)\\longrightarrow\\Phi_\\sigma(x)\\quad\\text{in probability},$$\nwhere $\\Phi_\\sigma$ is the CDF of $N(0,\\sigma^2)$. Thus the ideal conditional bootstrap law and the sampling law have the same first-order limit with the stated centering and $\\sqrt n$ scaling. This theorem does not imply coverage of any interval algorithm.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §5, Theorem 5.1 and full proof",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page STAT 581 lecture-notes chapter inspected. §2 empirical/bootstrap laws; §3 delete-one jackknife definitions; §4 Theorem 4.1 and full conditional mean CLT proof, PDF pp. 14–15; §5 Theorem 5.1 and full bootstrap-delta proof, PDF pp. 25–26."
+          },
+          {
+            "title": "Bradley Efron and Robert Tibshirani, The Bootstrap Method for Assessing Statistical Accuracy, Behaviormetrika 12 (1985), §§1–2 and §7",
+            "url": "https://link.springer.com/content/pdf/10.2333/bhmk.12.17_1.pdf",
+            "locator": "Complete 35-page article inspected. §§1–2 on IID empirical resampling; §4 bootstrap-t example; §7 percentile, BC, and BCa interval construction. The article omits most proofs; no coverage theorem is imported."
+          },
+          {
+            "title": "P. J. Bickel, F. Götze, and W. R. van Zwet, Resampling Fewer Than n Observations: Gains, Losses, and Remedies for Losses, Statistica Sinica 7 (1997), §2.3",
+            "url": "https://www3.stat.sinica.edu.tw/statistica/oldpdf/a7n11.pdf",
+            "locator": "Complete 31-page article inspected. §2.3, Example 6, PDF p. 7, on bootstrap failure for the absolute mean at a nondifferentiable point. Used as scope context; the local counterexample proof is supplied here."
+          }
+        ],
+        "axiom_use": "Inherits AC through the multivariate IID CLT, conditional bootstrap CLT, and multivariate normal law. The delta expansion and conditional remainder bounds add no choice.",
+        "dependency_level": 4,
+        "level": 4
+      }
+    ]
+  },
+  {
+    "order": 2143,
+    "id": "iid-bootstrap-and-jackknife-validity-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "IID bootstrap and jackknife for smooth statistics — Examples",
+    "companion": "iid-bootstrap-and-jackknife-validity",
+    "requires": [
+      "iid-bootstrap-and-jackknife-validity"
+    ],
+    "items": [
+      {
+        "id": "ex-delete-one-jackknife-for-sample-mean",
+        "kind": "example",
+        "title": "The delete-one jackknife variance for a sample mean",
+        "deps": [
+          "def-iid-empirical-bootstrap-sample",
+          "thm-delete-one-jackknife-linearization-for-smooth-statistics"
+        ],
+        "justified_by": [],
+        "statement": "For real data $X_1,\\ldots,X_n$ with $n\\ge2$, take $g(x)=x$. The delete-one pseudovalues are exactly the observations, and the jackknife variance estimate is the usual sample variance divided by $n$.",
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §3",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page STAT 581 lecture-notes chapter inspected. §2 empirical/bootstrap laws; §3 delete-one jackknife definitions; §4 Theorem 4.1 and full conditional mean CLT proof, PDF pp. 14–15; §5 Theorem 5.1 and full bootstrap-delta proof, PDF pp. 25–26."
+          },
+          {
+            "title": "Bradley Efron and Robert Tibshirani, The Bootstrap Method for Assessing Statistical Accuracy, Behaviormetrika 12 (1985), §1",
+            "url": "https://link.springer.com/content/pdf/10.2333/bhmk.12.17_1.pdf",
+            "locator": "Complete 35-page article inspected. §§1–2 on IID empirical resampling; §4 bootstrap-t example; §7 percentile, BC, and BCa interval construction. The article omits most proofs; no coverage theorem is imported."
+          }
+        ],
+        "axiom_use": "No choice principle is used by this definition, algorithm, or proof. Finite sums and real-coordinate arguments are choice-free.",
+        "dependency_level": 2,
+        "level": 2
+      },
+      {
+        "id": "ex-discrete-median-bootstrap-ties",
+        "kind": "example",
+        "title": "Discrete median bootstrap with ties",
+        "deps": [
+          "def-iid-empirical-bootstrap-sample",
+          "lem-finite-index-bootstrap-sample-is-conditionally-iid",
+          "alg-lower-empirical-bootstrap-quantile",
+          "alg-percentile-bootstrap-interval",
+          "alg-basic-bootstrap-interval"
+        ],
+        "justified_by": [],
+        "statement": "Use the lower empirical median, defined as the second order statistic for a sample of size three, and consider observed data $(0,0,1)$. Enumerating all $3^3=27$ bootstrap index tuples gives the exact conditional bootstrap law and demonstrates how the declared lower-quantile convention handles ties. The percentile and basic procedures below are endpoint algorithms, not coverage assertions.",
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §§2 and 6",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page STAT 581 lecture-notes chapter inspected. §2 empirical/bootstrap laws; §3 delete-one jackknife definitions; §4 Theorem 4.1 and full conditional mean CLT proof, PDF pp. 14–15; §5 Theorem 5.1 and full bootstrap-delta proof, PDF pp. 25–26."
+          },
+          {
+            "title": "Bradley Efron and Robert Tibshirani, The Bootstrap Method for Assessing Statistical Accuracy, Behaviormetrika 12 (1985), §7",
+            "url": "https://link.springer.com/content/pdf/10.2333/bhmk.12.17_1.pdf",
+            "locator": "Complete 35-page article inspected. §§1–2 on IID empirical resampling; §4 bootstrap-t example; §7 percentile, BC, and BCa interval construction. The article omits most proofs; no coverage theorem is imported."
+          }
+        ],
+        "axiom_use": "No choice principle is used by this definition, algorithm, or proof. Finite sums and real-coordinate arguments are choice-free.",
+        "dependency_level": 3,
+        "level": 3
+      },
+      {
+        "id": "cex-iid-bootstrap-inconsistency-at-absolute-mean-kink",
+        "kind": "counterexample",
+        "title": "The IID bootstrap can fail at the kink of the absolute mean",
+        "deps": [
+          "def-iid-empirical-bootstrap-sample",
+          "thm-conditional-iid-bootstrap-clt-for-empirical-law",
+          "thm-lindeberg-levy-iid-central-limit-theorem",
+          "thm-continuous-mapping-theorem",
+          "thm-slutsky-for-real-random-variables",
+          "def-standard-normal-and-normal-laws",
+          "lem-standard-normal-cdf-is-continuous-and-strictly-increasing",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "statement": "For every finite-variance IID law and every Borel plug-in map $g$ whose sampling root $\\sqrt n\\{g(\\bar X_n)-g(\\mathbb E X_1)\\}$ has a continuous weak limit $L$, the conditional empirical-bootstrap root $\\sqrt n\\{g(\\bar X_n^*)-g(\\bar X_n)\\}$ has CDF converging in probability to the CDF of $L$ at every continuity point, even when $g$ is not differentiable at $\\mathbb E X_1$.",
+        "strategy": "direct",
+        "generation": {
+          "role": "counterexample"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "P. J. Bickel, F. Götze, and W. R. van Zwet, Resampling Fewer Than n Observations: Gains, Losses, and Remedies for Losses, Statistica Sinica 7 (1997), §2.3, Example 6",
+            "url": "https://www3.stat.sinica.edu.tw/statistica/oldpdf/a7n11.pdf",
+            "locator": "Complete 31-page article inspected. §2.3, Example 6, PDF p. 7, on bootstrap failure for the absolute mean at a nondifferentiable point. Used as scope context; the local counterexample proof is supplied here."
+          },
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §§4–5",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page STAT 581 lecture-notes chapter inspected. §2 empirical/bootstrap laws; §3 delete-one jackknife definitions; §4 Theorem 4.1 and full conditional mean CLT proof, PDF pp. 14–15; §5 Theorem 5.1 and full bootstrap-delta proof, PDF pp. 25–26."
+          }
+        ],
+        "axiom_use": "Inherits AC through the scalar IID CLT, conditional bootstrap CLT, and standard-normal law. The finite Rademacher event calculation is choice-free.",
+        "dependency_level": 4,
+        "level": 4
+      },
+      {
+        "id": "ex-iid-bootstrap-smooth-mean",
+        "kind": "example",
+        "title": "The IID bootstrap for a smooth mean functional",
+        "deps": [
+          "def-iid-empirical-bootstrap-sample",
+          "thm-iid-bootstrap-validity-for-smooth-statistics",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "statement": "Let $X_1,X_2,\\ldots$ be IID real random variables with mean $\\mu$ and variance $0<\\sigma^2<\\infty$, and estimate $\\theta=\\mu$ by the sample mean. This is the smooth statistic $g(x)=x$ in the theorem.",
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "University of Washington STAT 581, Chapter 8: Bootstrap and Jackknife Estimation of Sampling Distributions, §4",
+            "url": "https://sites.stat.washington.edu/jaw/COURSES/580s/581/LECTNOTES/ch8b.pdf",
+            "locator": "Complete 28-page STAT 581 lecture-notes chapter inspected. §2 empirical/bootstrap laws; §3 delete-one jackknife definitions; §4 Theorem 4.1 and full conditional mean CLT proof, PDF pp. 14–15; §5 Theorem 5.1 and full bootstrap-delta proof, PDF pp. 25–26."
+          }
+        ],
+        "axiom_use": "Inherits AC through the cited multivariate and conditional IID CLT results.",
+        "dependency_level": 5,
+        "level": 5
+      }
+    ]
+  }
+]

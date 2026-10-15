@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "33",
+  "round": 1,
+  "reviewed_items": [
+    "lem-common-submeasure-density-is-pointwise-minimum",
+    "lem-common-submeasure-and-bounded-radon-nikodym-density",
+    "alg-metropolis-hastings-kernel",
+    "lem-metropolis-hastings-density-ratio",
+    "thm-metropolis-hastings-kernel-is-reversible-and-invariant",
+    "ex-random-walk-metropolis-hastings",
+    "ex-independence-metropolis-hastings",
+    "ex-metropolis-hastings-proposal-support-failure",
+    "ex-metropolis-hastings-rejected-self-transition"
+  ],
+  "reviewed_pages": [
+    "metropolis-hastings-algorithm-and-invariance",
+    "metropolis-hastings-algorithm-and-invariance-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The earlier theorem defect is resolved: the current proof establishes that P is a probability kernel before constructing its joint flow and proves the diagonal map measurable. The full batch still has an unmet prerequisite in the bounded common-submeasure lemma. This is the second review after the single local repair, so escalation is required.",
+  "findings": [
+    {
+      "id": "lem-common-submeasure-and-bounded-radon-nikodym-density",
+      "type": "prerequisite",
+      "reason": "Proof steps 1.1 and 1.2 use additivity of the nonnegative integral, but the lemma's Facts and deps do not supply cor-additivity-of-the-nonnegative-lebesgue-integral; monotonicity and monotone convergence alone do not establish these equalities and bounds. This is the smallest missing prerequisite. It affects alg-metropolis-hastings-kernel step 2, lem-metropolis-hastings-density-ratio through the algorithm's selected version, and thm-metropolis-hastings-kernel-is-reversible-and-invariant [F4, step 2.2]. The four assigned examples and the batch-37 consumer thm-metropolized-hamiltonian-chain-preserves-target inherit the downstream dependency."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-metropolis-hastings-kernel",
+      "decision": "escalate",
+      "reason": "Definition step 2 relies on the bounded common-submeasure lemma for the accepted-flow density version."
+    },
+    {
+      "id": "lem-metropolis-hastings-density-ratio",
+      "decision": "escalate",
+      "reason": "Its comparison with the algorithm-selected version relies on that algorithm's use of the unresolved lemma."
+    },
+    {
+      "id": "thm-metropolis-hastings-kernel-is-reversible-and-invariant",
+      "decision": "escalate",
+      "reason": "Fact F4 and step 2.2 use the accepted-flow identity supplied through the unresolved lemma."
+    },
+    {
+      "id": "ex-random-walk-metropolis-hastings",
+      "decision": "escalate",
+      "reason": "Its invariance conclusion imports the unresolved Metropolis–Hastings theorem."
+    },
+    {
+      "id": "ex-independence-metropolis-hastings",
+      "decision": "escalate",
+      "reason": "Its invariance conclusion imports the unresolved Metropolis–Hastings theorem."
+    },
+    {
+      "id": "ex-metropolis-hastings-proposal-support-failure",
+      "decision": "escalate",
+      "reason": "Its invariance conclusion imports the unresolved Metropolis–Hastings theorem."
+    },
+    {
+      "id": "ex-metropolis-hastings-rejected-self-transition",
+      "decision": "escalate",
+      "reason": "Its invariance conclusion imports the unresolved Metropolis–Hastings theorem."
+    },
+    {
+      "id": "thm-metropolized-hamiltonian-chain-preserves-target",
+      "decision": "escalate",
+      "reason": "The batch-37 consumer imports the current Metropolis–Hastings invariance theorem, whose proof depends on the unresolved lemma."
+    }
+  ]
+}

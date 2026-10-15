@@ -1,0 +1,59 @@
+--- a/tools/step5-guard.mjs
++++ b/tools/step5-guard.mjs
+@@ -138,17 +138,42 @@
+   const changed = Object.keys(now).filter(id => baseline.hashes?.[id] && baseline.hashes[id] !== now[id]);
+   const created = Object.keys(now).filter(id => !Object.hasOwn(baseline.hashes ?? {}, id));
+   const deleted = Object.keys(baseline.hashes ?? {}).filter(id => !Object.hasOwn(now, id));
+-  const excluded = { changed: [], created: [], reason: 'Outside frozen frontier: observed, excluded from Step-5 certification, not passed' };
+-  let scopedChanged = [], scopedCreated = [];
++  const excluded = { changed: [], created: [], deleted: [], reason: 'Outside frozen frontier: observed, excluded from Step-5 certification, not passed' };
++  let scopedChanged = [], scopedCreated = [], scopedDeleted = [];
+   let licensed = 0;
+-  // Deletion is a global integrity violation, regardless of frontier membership.
+-  for (const id of deleted) error('step5-deletion', `${id}: deleting results is not licensed at Step 5`, id);
+   try {
+     const frontier = validateFrontier(JSON.parse(readFileSync(join(workflowDirectory, 'frontier.json'), 'utf8')));
+     if (frontier.run !== workflowScope.run
+       || JSON.stringify([...frontier.ids].sort()) !== JSON.stringify(Object.keys(workflowScope.by_item ?? {}).sort()))
+       throw Error('frozen original frontier does not match Step-5 scope');
+     const ids = new Set(frontier.ids);
++    // Deletions share the frozen frontier boundary with changed/created items.
++    // Retain current logical suppliers as integrity context, including aliases
++    // captured by the original native pack before a supplier could disappear.
++    const originalPackPath = join(workflowDirectory, 'initial-1.json');
++    const originalAliases = existsSync(originalPackPath)
++      ? JSON.parse(readFileSync(originalPackPath, 'utf8')).before_aliases : null;
++    const aliasContextAvailable = originalAliases && typeof originalAliases === 'object'
++      && !Array.isArray(originalAliases);
++    const protectedIds = new Set(ids);
++    if (aliasContextAvailable) for (const id of protectedIds) {
++      if (!Object.hasOwn(now, id)) continue; // still rejected below if deleted
++      const text = readFileSync(join(ITEMS, `${id}.md`), 'utf8');
++      for (const raw of [...frontmatterList(text, 'deps'), ...frontmatterList(text, 'justified_by')]) {
++        // Canonical IDs win over aliases, matching ordinary dependency readers.
++        const supplier = Object.hasOwn(now, raw) || Object.hasOwn(baseline.hashes ?? {}, raw)
++          ? raw : originalAliases[raw] ?? raw;
++        protectedIds.add(supplier);
++      }
++    }
++    // Without the original alias context retain historical strictness; never
++    // reinterpret a genuinely required deleted alias as an outside observation.
++    scopedDeleted = deleted.filter(id => !aliasContextAvailable || protectedIds.has(id));
++    excluded.deleted = deleted.filter(id => !scopedDeleted.includes(id));
++    for (const id of scopedDeleted) error('step5-deletion',
++      `${id}: deleting a frozen-frontier item or its logical supplier is not licensed at Step 5`, id);
++    for (const id of protectedIds) if (!Object.hasOwn(now, id) && !deleted.includes(id))
++      error('step5-prerequisite-missing', `${id}: current frozen-frontier dependency context is missing`, id);
+     scopedChanged = changed.filter(id => ids.has(id) && !isPublishedItem(workflowRoot, id));
+     scopedCreated = created.filter(id => ids.has(id));
+     excluded.changed = changed.filter(id => !ids.has(id) || isPublishedItem(workflowRoot, id));
+@@ -177,7 +202,8 @@
+     compared_against: againstLabel ?? 'working tree', items_at_baseline: Object.keys(baseline.hashes ?? {}).length,
+     changed: changed.length, licensed_by_centralized_certification: licensed,
+     frontier_changed: scopedChanged.length, frontier_created: scopedCreated.length,
+-    excluded_outside: excluded.changed.length + excluded.created.length,
++    protected_deleted: scopedDeleted.length,
++    excluded_outside: excluded.changed.length + excluded.created.length + excluded.deleted.length,
+     created: created.length, deleted: deleted.length, errors: errors.length, warnings: warnings.length };
+   if (asJson) console.log(JSON.stringify({ summary, changed, created, deleted, excluded, errors, warnings }, null, 2));
+   else {

@@ -1,0 +1,869 @@
+[
+  {
+    "order": 2052,
+    "id": "conjugate-families-and-posterior-prediction",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Conjugate families and Gaussian conditioning",
+    "companion": "conjugate-families-and-posterior-prediction-examples",
+    "requires": [
+      "posterior-propriety-and-dominated-bayes-formula",
+      "complete-sufficiency-exponential-families-and-basu",
+      "central-limit-theorems",
+      "mixed-effects-and-longitudinal-models",
+      "poisson-and-cox-point-process-models"
+    ],
+    "items": [
+      {
+        "id": "lem-beta-density-normalization",
+        "kind": "lemma",
+        "title": "The Beta density has finite positive Lebesgue integral",
+        "deps": [
+          "def-countable-choice",
+          "def-real-beta-integral",
+          "thm-real-beta-integral-convergence",
+          "thm-real-beta-gamma-identity",
+          "thm-real-gamma-euler-integral-convergence",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-real-power-continuity-and-derivatives",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. For every $\\alpha,\\beta>0$, the nonnegative function\n$p\\mapsto p^{\\alpha-1}(1-p)^{\\beta-1}$ is Lebesgue measurable on $(0,1)$ and\n$$\\int_{(0,1)}p^{\\alpha-1}(1-p)^{\\beta-1}\\,d\\lambda_1(p)\n=B(\\alpha,\\beta)=\\frac{\\Gamma(\\alpha)\\Gamma(\\beta)}{\\Gamma(\\alpha+\\beta)}\n\\in(0,\\infty).$$",
+        "strategy": "Use compact interior truncations, the bounded Riemann-to-Lebesgue result, monotone convergence, and the Beta-Gamma identity.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §2.1",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Johnson, Ott & Dogucu, Bayes Rules!, Chapter 3, §3.1",
+              "url": "https://www.bayesrulesbook.com/chapter-3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-binomial-count-law",
+        "kind": "lemma",
+        "title": "The Binomial count has its usual probability mass function",
+        "deps": [
+          "def-bernoulli-and-binomial-random-variables",
+          "def-binomial-coefficient",
+          "thm-independent-random-elements-have-product-joint-law"
+        ],
+        "justified_by": [],
+        "statement": "If $X_1,\\ldots,X_n$ are independent Bernoulli$(p)$ variables with $0<p<1$ and\n$n\\in\\mathbb N_0$, then their sum $S_n$ has\n$$\\mathbb P(S_n=y)=\\binom ny p^y(1-p)^{n-y},\\qquad y=0,\\ldots,n.$$\nFor $n=0$, the empty sum is zero and the sole mass is one.",
+        "strategy": "Partition by the success-index subset and sum the independent Bernoulli probabilities, including n=0.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §2.1",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Johnson, Ott & Dogucu, Bayes Rules!, Chapter 3, §3.1",
+              "url": "https://www.bayesrulesbook.com/chapter-3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-gamma-density-normalization",
+        "kind": "lemma",
+        "title": "The shape-rate Gamma density is normalized",
+        "deps": [
+          "def-countable-choice",
+          "def-real-gamma-function-by-the-euler-integral",
+          "thm-real-gamma-euler-integral-convergence",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-continuous-implies-integrable",
+          "thm-monotone-convergence-for-the-integral",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-derivative-of-exponential"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. For $a,b>0$,\n$$\\int_{(0,\\infty)}\\frac{b^a}{\\Gamma(a)}x^{a-1}e^{-bx}\\,d\\lambda_1(x)=1.$$",
+        "strategy": "Scale the Euler Gamma integral by t=bx under Countable Choice and normalize the shape-rate kernel.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Johnson, Ott & Dogucu, Bayes Rules!, Chapter 5, §§5.2.1–5.2.2",
+              "url": "https://www.bayesrulesbook.com/chapter-5"
+            },
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §§2.1, 2.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-poisson-law",
+        "kind": "definition",
+        "title": "Exposure-parameterized Poisson law",
+        "deps": [
+          "def-scalar-poisson-count-law",
+          "lem-poisson-count-law-normalization-and-moments"
+        ],
+        "justified_by": [],
+        "statement": "For exposure $e\\ge0$ and rate $\\lambda>0$, define\n$Y\\sim\\operatorname{Pois}(e\\lambda)$ to have the scalar Poisson count law with\nparameter $e\\lambda$. Thus for $e>0$,\n$$\\mathbb P(Y=y\\mid\\lambda,e)=e^{-e\\lambda}\\frac{(e\\lambda)^y}{y!},\n\\qquad y\\in\\mathbb N_0,$$\nwith $0^0=1$; when $e=0$ this is the point mass at $y=0$. The law is normalized\nby [[lem-poisson-count-law-normalization-and-moments]]. A zero-exposure\npositive count has likelihood zero.",
+        "strategy": "Reparameterize the scalar Poisson law by exposure times rate; preserve the zero-exposure point mass.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §2.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process, 2017, Chapter 1",
+              "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_strategy": "definition"
+      },
+      {
+        "id": "def-exponential-conjugate-prior-family",
+        "kind": "definition",
+        "title": "Conjugate-form prior for an exponential family",
+        "deps": [
+          "def-exponential-family",
+          "def-finite-sigma-finite-and-semifinite-measures"
+        ],
+        "justified_by": [],
+        "statement": "Let $\\eta:\\Theta\\to\\Omega\\subseteq\\mathbb R^k$ be measurable, let\n$\\rho$ be a sigma-finite measure on the parameter space, and let $A$ be the\nlog-partition function in [[def-exponential-family]]. For\n$\\chi\\in\\mathbb R^k$ and $\\kappa\\in\\mathbb R$, define\n$$Z(\\chi,\\kappa)=\\int_\\Theta\n\\exp\\{\\eta(\\theta)^T\\chi-\\kappa A(\\eta(\\theta))\\}\\,\\rho(d\\theta).$$\nWhen $0<Z(\\chi,\\kappa)<\\infty$, the **conjugate-form prior**\n$\\Pi_{\\chi,\\kappa}$ is the probability measure with density\n$$\\frac{\\exp\\{\\eta(\\theta)^T\\chi-\\kappa A(\\eta(\\theta))\\}}\n{Z(\\chi,\\kappa)}$$\nrelative to $\\rho$. If this finite-positive condition fails, this notation\ndoes not designate a probability prior.",
+        "strategy": "Define the conjugate-form prior only when its parameter-measure normalizer is finite and positive.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §2.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Charles J. Geyer, Stat 5421 Lecture Notes: Exponential Families, 2020",
+              "url": "https://www.stat.umn.edu/geyer/5421/notes/expfam.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_strategy": "definition"
+      },
+      {
+        "id": "lem-finite-euclidean-space-is-standard-borel",
+        "kind": "lemma",
+        "title": "Finite-dimensional Euclidean space with its Borel sigma-algebra is standard Borel",
+        "deps": [
+          "def-polish-space",
+          "def-separable-space",
+          "def-standard-borel-space",
+          "def-borel-sigma-algebra",
+          "def-product-topology",
+          "def-metric-topology",
+          "def-cauchy-in-metric",
+          "def-metric-convergence",
+          "lem-metrics-on-rn",
+          "lem-finite-sum-laws",
+          "thm-of-square-roots",
+          "lem-of-square-monotone",
+          "lem-of-abs-value",
+          "lem-of-naturals-positive",
+          "thm-euclidean-space-complete",
+          "thm-rational-points-and-boxes-in-rn",
+          "lem-rat-embeds-dense",
+          "lem-finite-set-has-max",
+          "def-max-min"
+        ],
+        "justified_by": [],
+        "statement": "For every natural $n\\ge1$, let $\\mathbb R^n$ be the set of functions $x:n\\to\\mathbb R$ with its finite-product topology and Borel sigma-algebra ([[def-product-topology]], [[def-borel-sigma-algebra]]). Then $(\\mathbb R^n,\\mathcal B(\\mathbb R^n))$ is standard Borel.",
+        "strategy": "Compare the maximum metric topology with the product topology, then use completeness and rational density.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "O. Biskup, MATH 275D notes, Chapter 2: Kolmogorov Extension Theorem",
+              "url": "https://math.ucla.edu/~biskup/275d.1.25f/PDFs/ch2.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-dirichlet-density-kernel",
+        "kind": "definition",
+        "title": "Dirichlet simplex density kernel",
+        "deps": [
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-real-gamma-function-by-the-euler-integral",
+          "thm-real-gamma-euler-integral-convergence"
+        ],
+        "justified_by": [],
+        "statement": "For $k\\ge2$ and positive coordinates $\\alpha_1,\\ldots,\\alpha_k$, write\n$\\Delta_{k-1}=\\{(p_1,\\ldots,p_{k-1})\\in(0,\\infty)^{k-1}:\n\\sum_{j<k}p_j<1\\}$ and set $p_k=1-\\sum_{j<k}p_j$. The **Dirichlet density\nkernel** is the nonnegative function\n$$q_\\alpha(p_1,\\ldots,p_{k-1})\n=\\frac{\\Gamma(\\alpha_+)}{\\prod_{j=1}^k\\Gamma(\\alpha_j)}\n\\prod_{j=1}^kp_j^{\\alpha_j-1},\\qquad\n\\alpha_+=\\sum_{j=1}^k\\alpha_j,$$\nrelative to coordinate Lebesgue measure $dp_1\\cdots dp_{k-1}$. This item\ndefines the density function; [[thm-dirichlet-density-normalization]] proves\nthat it integrates to one.",
+        "strategy": "Define the nonnegative coordinate-simplex density kernel with Gamma factors and declare its reference measure.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §3.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Gero Walter, A Technical Note on the Dirichlet-Multinomial Model, 2013",
+              "url": "https://epub.ub.uni-muenchen.de/14068/1/tech-rep-131_gero-walter.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_strategy": "definition"
+      },
+      {
+        "id": "lem-multinomial-law-normalization",
+        "kind": "lemma",
+        "title": "The Multinomial mass function is normalized",
+        "deps": [
+          "thm-multinomial-theorem",
+          "def-multinomial-coefficient"
+        ],
+        "justified_by": [],
+        "statement": "For $k\\ge1$, $n\\in\\mathbb N_0$, and $p_j\\ge0$ with $\\sum_jp_j=1$, the masses\n$$\\frac{n!}{\\prod_{j=1}^ky_j!}\\prod_{j=1}^kp_j^{y_j},\n\\qquad y_j\\in\\mathbb N_0,\\quad\\sum_jy_j=n,$$\nsum to one, using $0^0=1$.",
+        "strategy": "Apply the finite multinomial theorem to the probability vector, checking n=0 and zero coordinates.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §3.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Gero Walter, A Technical Note on the Dirichlet-Multinomial Model, 2013",
+              "url": "https://epub.ub.uni-muenchen.de/14068/1/tech-rep-131_gero-walter.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-multivariate-normal-conditional-law",
+        "kind": "theorem",
+        "title": "Conditional law of a jointly Gaussian block with positive-definite observed covariance",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "lem-joint-gaussian-blocks-with-zero-cross-covariance-are-independent",
+          "def-measure-kernel-and-probability-kernel",
+          "def-law-or-distribution-of-a-random-element",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "justified_by": [],
+        "statement": "Assume AC. Let $X\\in\\mathbb R^d$ and $Y\\in\\mathbb R^m$, with $d,m\\ge1$, be\njointly multivariate normal with mean $(a,b)$ and positive-semidefinite block\ncovariance\n$$\\Sigma=\\begin{pmatrix}A&C\\\\C^T&B\\end{pmatrix},$$\nwhere $B$ is positive definite. Then\n$$S=A-CB^{-1}C^T$$\nis positive semidefinite, and for every $y\\in\\mathbb R^m$ the probability law\n$$K(y,\\cdot)=N_d\\!\\left(a+CB^{-1}(y-b),S\\right)$$\nis defined. The map $K$ is a probability kernel and is a conditional law of\n$X$ given $Y$: for all Borel $E\\subseteq\\mathbb R^d$ and\n$F\\subseteq\\mathbb R^m$,\n$$\\mathbb P(X\\in E,Y\\in F)=\\int_F K(y,E)\\,\\mathbb P_Y(dy).$$\nThe covariance $A$ and the conditional covariance $S$ may be singular.\nPositive definiteness of $B$ is required; no pseudoinverse formula for\nsingular $B$ is asserted.",
+        "strategy": "Prove the Schur complement is PSD, subtract the regression residual, use Gaussian block independence, and verify the conditional-kernel identity.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §3.5",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Simo Särkkä, Bayesian Filtering and Smoothing, Appendix A.1",
+              "url": "https://users.aalto.fi/~ssarkka/pub/cup_book_online_20131111.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-iid-exponential-family-statistic-is-sufficient",
+        "kind": "theorem",
+        "title": "The sum of exponential-family statistics is sufficient for an IID sample",
+        "deps": [
+          "def-exponential-family",
+          "def-sufficient-statistic",
+          "def-axiom-of-choice",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "thm-common-reference-factorization-criterion",
+          "lem-finite-euclidean-space-is-standard-borel"
+        ],
+        "justified_by": [],
+        "statement": "Assume AC. Let $(\\mathsf Y,\\mathcal Y)$ be standard Borel, let $\\mu$ be a\nsigma-finite measure, and let $(P_\\eta)_{\\eta\\in\\Omega}$ be a nonempty\nexponential family of [[def-exponential-family]] with density\n$p_\\eta(y)=h(y)\\exp\\{\\eta^TT(y)-A(\\eta)\\}$. For each finite $n\\ge1$, the IID\nsample law $P_\\eta^{\\otimes n}$ has density\n$$\\prod_{i=1}^nh(y_i)\\exp\\!\\left\\{\\eta^T\\sum_{i=1}^nT(y_i)-nA(\\eta)\\right\\}$$\nrelative to $\\mu^{\\otimes n}$, and\n$T_n(y_1,\\ldots,y_n)=\\sum_{i=1}^nT(y_i)$ is sufficient for the sample.\nNo full-rank, completeness, or converse characterization is asserted.",
+        "strategy": "Construct the IID product density, factor its likelihood ratio through the sum statistic, and apply the standard-Borel common-reference criterion under AC.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §2.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Peter Kempthorne, MIT 18.655 Lecture Note 6: Sufficiency",
+              "url": "https://ocw.mit.edu/courses/18-655-mathematical-statistics-spring-2016/bbbca14a2009e47add8c7ea2a49daa41_MIT18_655S16_LecNote6.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-beta-distribution",
+        "kind": "definition",
+        "title": "Beta distribution",
+        "deps": [
+          "lem-beta-density-normalization",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. For $\\alpha,\\beta>0$, the **Beta distribution** $\\operatorname{Beta}(\\alpha,\\beta)$ is the probability measure on $(0,1)$ with density\n$$f_{\\alpha,\\beta}(p)=\\frac{p^{\\alpha-1}(1-p)^{\\beta-1}}{B(\\alpha,\\beta)}$$\nrelative to Lebesgue measure. The finite positive normalization follows from\n[[lem-beta-density-normalization]]. The open interval is the parameter domain;\nno endpoint atoms are included.",
+        "strategy": "Define the Beta law using the proved finite-positive Beta kernel normalizer; state the open-interval convention.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §2.1",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Johnson, Ott & Dogucu, Bayes Rules!, Chapter 3, §3.1",
+              "url": "https://www.bayesrulesbook.com/chapter-3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_strategy": "definition"
+      },
+      {
+        "id": "def-gamma-distribution-shape-rate",
+        "kind": "definition",
+        "title": "Shape-rate Gamma distribution",
+        "deps": [
+          "lem-gamma-density-normalization",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. For shape $a>0$ and rate $b>0$, the **shape-rate Gamma distribution**\n$\\operatorname{Gamma}(a,b)$ is the probability measure on $(0,\\infty)$ with\ndensity\n$$f_{a,b}(\\lambda)=\\frac{b^a}{\\Gamma(a)}\\lambda^{a-1}e^{-b\\lambda}$$\nrelative to Lebesgue measure. Its normalization is proved in\n[[lem-gamma-density-normalization]]. The second argument is a rate, not a scale.",
+        "strategy": "Define Gamma in shape-rate convention using the proved positive finite Gamma density integral.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Johnson, Ott & Dogucu, Bayes Rules!, Chapter 5, §§5.2.1–5.2.2",
+              "url": "https://www.bayesrulesbook.com/chapter-5"
+            },
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §2.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_strategy": "definition"
+      },
+      {
+        "id": "thm-dirichlet-density-normalization",
+        "kind": "theorem",
+        "title": "Dirichlet density normalization by iterated Beta integrals",
+        "deps": [
+          "def-dirichlet-density-kernel",
+          "def-countable-choice",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-beta-density-normalization",
+          "thm-real-beta-gamma-identity",
+          "thm-real-gamma-euler-integral-convergence"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. For $k\\ge2$ and $\\alpha_j>0$,\n$$\\int_{\\Delta_{k-1}}\\prod_{j=1}^kp_j^{\\alpha_j-1}\\,dp_1\\cdots dp_{k-1}\n=\\frac{\\prod_{j=1}^k\\Gamma(\\alpha_j)}{\\Gamma(\\alpha_+)}\\in(0,\\infty).$$\nConsequently the density kernel in [[def-dirichlet-density-kernel]] has\nintegral one.",
+        "strategy": "Use the stick-breaking diffeomorphism, compute its Jacobian, factor into Beta integrals, and cancel Gamma factors.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §3.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Gero Walter, A Technical Note on the Dirichlet-Multinomial Model, 2013",
+              "url": "https://epub.ub.uni-muenchen.de/14068/1/tech-rep-131_gero-walter.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-multinomial-distribution",
+        "kind": "definition",
+        "title": "Multinomial distribution",
+        "deps": [
+          "lem-multinomial-law-normalization",
+          "def-natural-numbers",
+          "def-factorial-and-falling-factorial"
+        ],
+        "justified_by": [],
+        "statement": "For $k\\ge1$, $n\\in\\mathbb N_0$, and $p=(p_1,\\ldots,p_k)$ with $p_j\\ge0$ and\n$\\sum_jp_j=1$, the **Multinomial distribution**\n$\\operatorname{Multinomial}(n,p)$ is the law on count vectors\n$y\\in\\mathbb N_0^k$ with $\\sum_jy_j=n$ and masses\n$$\\mathbb P(Y=y)=\\frac{n!}{\\prod_jy_j!}\\prod_jp_j^{y_j},$$\nusing $0^0=1$. The masses sum to one by\n[[lem-multinomial-law-normalization]]. For $k=1$ or $n=0$, this law is\ndegenerate at its unique admissible count vector.",
+        "strategy": "Define the count-vector mass on the finite admissible support and cite its normalization lemma.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §3.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Gero Walter, A Technical Note on the Dirichlet-Multinomial Model, 2013",
+              "url": "https://epub.ub.uni-muenchen.de/14068/1/tech-rep-131_gero-walter.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_strategy": "definition"
+      },
+      {
+        "id": "def-dirichlet-distribution",
+        "kind": "definition",
+        "title": "Dirichlet distribution, including the one-category case",
+        "deps": [
+          "def-dirichlet-density-kernel",
+          "thm-dirichlet-density-normalization",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. For $k\\ge2$ and $\\alpha_j>0$, the **Dirichlet distribution**\n$\\operatorname{Dirichlet}(\\alpha_1,\\ldots,\\alpha_k)$ is the probability law\non the open probability simplex with density\n$$\\frac{\\Gamma(\\alpha_+)}{\\prod_j\\Gamma(\\alpha_j)}\n\\prod_jp_j^{\\alpha_j-1}$$\nrelative to $dp_1\\cdots dp_{k-1}$, with $p_k=1-\\sum_{j<k}p_j$. Its\nnormalization is [[thm-dirichlet-density-normalization]]. For $k=1$, define\nthe law to be the point mass at $p_1=1$. All coordinates of the parameter\nvector must be strictly positive.",
+        "strategy": "Define the proper Dirichlet law using the proved simplex normalization; include the deterministic k=1 case.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §3.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Gero Walter, A Technical Note on the Dirichlet-Multinomial Model, 2013",
+              "url": "https://epub.ub.uni-muenchen.de/14068/1/tech-rep-131_gero-walter.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_strategy": "definition"
+      },
+      {
+        "id": "thm-beta-binomial-conjugate-update",
+        "kind": "theorem",
+        "title": "Beta-Binomial conjugate update",
+        "deps": [
+          "def-beta-distribution",
+          "lem-beta-density-normalization",
+          "lem-binomial-count-law",
+          "def-countable-choice",
+          "def-bayesian-model-as-prior-and-sampling-kernel",
+          "def-posterior-evidence-normalizer-and-fiberwise-update",
+          "prop-fiberwise-posterior-propriety-iff-finite-positive-evidence",
+          "thm-bayes-formula-for-dominated-kernels"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. Let $P\\sim\\operatorname{Beta}(\\alpha,\\beta)$ with $\\alpha,\\beta>0$, and,\nconditional on $P=p$, let $Y$ have the Binomial$(n,p)$ law for\n$n\\in\\mathbb N_0$. The data space $\\{0,\\ldots,n\\}$ is equipped with finite\ncounting measure. For every observed $y\\in\\{0,\\ldots,n\\}$, the evidence is\n$$m(y)=\\binom ny\\frac{B(\\alpha+y,\\beta+n-y)}{B(\\alpha,\\beta)}\n\\in(0,\\infty),$$\nand the posterior is $\\operatorname{Beta}(\\alpha+y,\\beta+n-y)$. The endpoints\n$y=0$ and $y=n$ are included; all posterior shape parameters remain positive.",
+        "strategy": "Multiply the normalized Beta prior and Binomial likelihood; integrate the updated kernel and normalize only at finite-positive evidence, including endpoints.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §2.1",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Johnson, Ott & Dogucu, Bayes Rules!, Chapter 3, §3.1",
+              "url": "https://www.bayesrulesbook.com/chapter-3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-gamma-poisson-exposure-adjusted-update",
+        "kind": "theorem",
+        "title": "Exposure-adjusted Gamma-Poisson conjugate update",
+        "deps": [
+          "def-gamma-distribution-shape-rate",
+          "lem-gamma-density-normalization",
+          "def-poisson-law",
+          "def-countable-choice",
+          "def-bayesian-model-as-prior-and-sampling-kernel",
+          "def-posterior-evidence-normalizer-and-fiberwise-update",
+          "prop-fiberwise-posterior-propriety-iff-finite-positive-evidence",
+          "thm-bayes-formula-for-dominated-kernels"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. Let $n\\in\\mathbb N_0$, $a,b>0$, and\n$\\lambda\\sim\\operatorname{Gamma}(a,b)$ in shape-rate convention. Conditional\non $\\lambda$, let $Y_1,\\ldots,Y_n$ be independent with\n$Y_i\\sim\\operatorname{Pois}(e_i\\lambda)$ for $i=1,\\ldots,n$, where each fixed\nexposure $e_i\\ge0$.\nThe data space $\\mathbb N_0^n$ has counting measure. If some $e_i=0$ but\n$y_i>0$, the likelihood and evidence are zero and no posterior quotient is\ndefined. Otherwise put $E=\\sum_i e_i$, $S=\\sum_i y_i$, and\n$$c(\\mathbf e,\\mathbf y)=\\prod_{i:e_i>0}\\frac{e_i^{y_i}}{y_i!},$$\nwith the empty product one. Then\n$$m(\\mathbf y)=c(\\mathbf e,\\mathbf y)\\,\n\\frac{b^a\\Gamma(a+S)}{\\Gamma(a)(b+E)^{a+S}}\\in(0,\\infty),$$\nand the posterior is $\\operatorname{Gamma}(a+S,b+E)$. This includes all-zero\nexposures with zero counts, for which the posterior equals the prior.",
+        "strategy": "Separate impossible zero-exposure data, multiply likelihood and prior kernels, and use the Gamma integral with total count and exposure.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §§2.1, 2.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Johnson, Ott & Dogucu, Bayes Rules!, Chapter 5, §5.2.2",
+              "url": "https://www.bayesrulesbook.com/chapter-5"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-exponential-family-conjugate-update",
+        "kind": "theorem",
+        "title": "Conjugate update for an exponential-family likelihood",
+        "deps": [
+          "def-exponential-family",
+          "def-exponential-conjugate-prior-family",
+          "def-bayesian-model-as-prior-and-sampling-kernel",
+          "def-posterior-evidence-normalizer-and-fiberwise-update",
+          "prop-fiberwise-posterior-propriety-iff-finite-positive-evidence",
+          "thm-bayes-formula-for-dominated-kernels"
+        ],
+        "justified_by": [],
+        "statement": "Let $\\eta:\\Theta\\to\\Omega$ be measurable, let $n\\ge1$, and let $\\mu$ be a\nsigma-finite data measure. Suppose, given $\\theta$, the observations\n$Y_1,\\ldots,Y_n$ are IID with density\n$h(y)\\exp\\{\\eta(\\theta)^TT(y)-A(\\eta(\\theta))\\}$ relative to $\\mu$. On the\nproduct data space with measure $\\mu^{\\otimes n}$, assume the resulting joint\ndensity is specified and jointly measurable and that the sampling family is a\nparameter-measurable probability kernel. Let the prior be $\\Pi_{\\chi,\\kappa}$ from\n[[def-exponential-conjugate-prior-family]] with\n$0<Z(\\chi,\\kappa)<\\infty$. For an observed $y_{1:n}$, put\n$s=\\sum_iT(y_i)$. If $h(y_i)>0$ for each $i$ and\n$0<Z(\\chi+s,\\kappa+n)<\\infty$, then the evidence is\n$$m(y_{1:n})=\\left(\\prod_{i=1}^nh(y_i)\\right)\n\\frac{Z(\\chi+s,\\kappa+n)}{Z(\\chi,\\kappa)}\\in(0,\\infty),$$\nand the posterior density relative to the parameter measure is\n$$\\frac{\\exp\\{\\eta(\\theta)^T(\\chi+s)-(\\kappa+n)A(\\eta(\\theta))\\}}\n{Z(\\chi+s,\\kappa+n)}.$$\nThus the update adds $\\sum_iT(y_i)$ to $\\chi$ and $n$ to $\\kappa$ only on\nfinite-positive evidence fibers.",
+        "strategy": "Multiply the IID exponential-family likelihood and conjugate-form prior; calculate evidence and posterior only on finite-positive evidence fibers.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §2.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Charles J. Geyer, Stat 5421 Lecture Notes: Exponential Families, 2020",
+              "url": "https://www.stat.umn.edu/geyer/5421/notes/expfam.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-dirichlet-multinomial-conjugate-update",
+        "kind": "theorem",
+        "title": "Dirichlet-Multinomial conjugate update",
+        "deps": [
+          "def-dirichlet-distribution",
+          "def-dirichlet-density-kernel",
+          "thm-dirichlet-density-normalization",
+          "def-multinomial-distribution",
+          "lem-multinomial-law-normalization",
+          "def-countable-choice",
+          "def-bayesian-model-as-prior-and-sampling-kernel",
+          "def-posterior-evidence-normalizer-and-fiberwise-update",
+          "prop-fiberwise-posterior-propriety-iff-finite-positive-evidence",
+          "thm-bayes-formula-for-dominated-kernels"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. Let $p\\sim\\operatorname{Dirichlet}(\\alpha_1,\\ldots,\n\\alpha_k)$, with each $\\alpha_j>0$. Conditional on $p$, observe a\nMultinomial$(n,p)$ count vector $y\\in\\mathbb N_0^k$ with $\\sum_jy_j=n$.\nFor $k\\ge2$, the data space is equipped with counting measure on its finite\nset of admissible counts. The evidence is\n$$m(y)=\\frac{n!}{\\prod_jy_j!}\n\\frac{\\Gamma(\\alpha_+)}{\\prod_j\\Gamma(\\alpha_j)}\n\\frac{\\prod_j\\Gamma(\\alpha_j+y_j)}{\\Gamma(\\alpha_++n)}\n\\in(0,\\infty),$$\nwhere $\\alpha_+=\\sum_j\\alpha_j$, and the posterior is\n$\\operatorname{Dirichlet}(\\alpha_1+y_1,\\ldots,\\alpha_k+y_k)$.\nFor $k=1$, the parameter and count are both deterministic and the posterior\nequals the prior point mass.",
+        "strategy": "Separate k=1, multiply the Dirichlet and Multinomial kernels, apply simplex normalization, then normalize the posterior.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §3.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Gero Walter, A Technical Note on the Dirichlet-Multinomial Model, 2013",
+              "url": "https://epub.ub.uni-muenchen.de/14068/1/tech-rep-131_gero-walter.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-normal-normal-conjugate-update",
+        "kind": "theorem",
+        "title": "Known-variance Normal-Normal conjugate update",
+        "deps": [
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "def-axiom-of-choice",
+          "def-bayesian-model-as-prior-and-sampling-kernel",
+          "def-posterior-evidence-normalizer-and-fiberwise-update",
+          "prop-fiberwise-posterior-propriety-iff-finite-positive-evidence",
+          "thm-bayes-formula-for-dominated-kernels"
+        ],
+        "justified_by": [],
+        "statement": "Assume AC. Let $\\mu\\sim N(\\mu_0,\\tau_0^2)$ with $\\tau_0^2>0$, and, conditional\non $\\mu$, let $Y_1,\\ldots,Y_n$ be IID $N(\\mu,\\sigma^2)$ with known\n$\\sigma^2>0$ and $n\\ge1$. The sampling data use $n$-dimensional Lebesgue\nmeasure. For every $y_{1:n}\\in\\mathbb R^n$, define\n$$V_n=(\\tau_0^{-2}+n\\sigma^{-2})^{-1},\\qquad\n\\mu_n=V_n\\left(\\frac{\\mu_0}{\\tau_0^2}\n+\\frac{n\\bar y}{\\sigma^2}\\right),\\qquad\n\\bar y=\\frac1n\\sum_{i=1}^ny_i.$$\nThe evidence is finite and positive, and the posterior is $N(\\mu_n,V_n)$.",
+        "strategy": "Multiply the Gaussian prior and IID likelihood, complete the square, evaluate evidence, and identify posterior parameters.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §2.5",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Johnson, Ott & Dogucu, Bayes Rules!, Chapter 5, §§5.3.1–5.3.4",
+              "url": "https://www.bayesrulesbook.com/chapter-5"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2053,
+    "id": "conjugate-families-and-posterior-prediction-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Conjugate families and Gaussian conditioning — Examples",
+    "companion": "conjugate-families-and-posterior-prediction",
+    "requires": [
+      "conjugate-families-and-posterior-prediction"
+    ],
+    "items": [
+      {
+        "id": "ex-multivariate-normal-conditioning-singular-state",
+        "kind": "example",
+        "title": "Gaussian conditioning with singular state covariance",
+        "deps": [
+          "thm-multivariate-normal-conditional-law",
+          "def-multivariate-normal-law",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume AC. Let $Z=(Z_1,Z_2)\\sim N_2(0,I_2)$, where $I_2$ is the $2\\times2$\nidentity matrix, and set $X=(Z_1,Z_1)$ and $Y=Z_1+Z_2$. The state covariance\nis singular, $\\operatorname{Var}(Y)=2>0$, and the conditional law at every\n$y\\in\\mathbb R$ is\n$$X\\mid Y=y\\sim N_2\\left((y/2,y/2),\\begin{pmatrix}1/2&1/2\\\\1/2&1/2\\end{pmatrix}\\right).$$",
+        "strategy": "Construct a jointly Gaussian state/observation pair with singular state covariance and SPD observed covariance, then apply the conditioner.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §3.5 and Appendix A",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Simo Särkkä, Bayesian Filtering and Smoothing, Appendix A.1, Lemma A.2",
+              "url": "https://users.aalto.fi/~ssarkka/pub/cup_book_online_20131111.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-beta-binomial-update",
+        "kind": "example",
+        "title": "A Beta(2,3) prior updated by five Bernoulli trials",
+        "deps": [
+          "thm-beta-binomial-conjugate-update",
+          "cor-real-gamma-positive-integer-values",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. With prior $P\\sim\\operatorname{Beta}(2,3)$ and $n=5$ Binomial trials, an\nobserved success count $y=3$ has evidence $4/21$ and posterior\n$\\operatorname{Beta}(5,5)$. The boundary counts $y=0$ and $y=5$ give proper\nposteriors $\\operatorname{Beta}(2,8)$ and $\\operatorname{Beta}(7,3)$.",
+        "strategy": "Substitute a concrete prior and count into the update formulas; calculate endpoint posteriors.",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Johnson, Ott & Dogucu, Bayes Rules!, Chapter 3, §3.1",
+              "url": "https://www.bayesrulesbook.com/chapter-3"
+            },
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §2.1",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-exposure-gamma-poisson-update",
+        "kind": "example",
+        "title": "Gamma-Poisson updating with a zero exposure",
+        "deps": [
+          "thm-gamma-poisson-exposure-adjusted-update",
+          "cor-real-gamma-positive-integer-values",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. Take $\\lambda\\sim\\operatorname{Gamma}(2,1)$ and two independent counts with\nexposures $(e_1,e_2)=(2,0)$. For observed counts $(y_1,y_2)=(3,0)$, the\nevidence is $32/243$ and the posterior is $\\operatorname{Gamma}(5,3)$. If the\nzero-exposure count were instead $y_2=1$, its evidence would be zero and no\nposterior quotient would be defined.",
+        "strategy": "Substitute one positive and one zero exposure into the update and verify an impossible zero-exposure count.",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §2.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Johnson, Ott & Dogucu, Bayes Rules!, Chapter 5, §5.2.2",
+              "url": "https://www.bayesrulesbook.com/chapter-5"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-normal-normal-conjugate-update",
+        "kind": "example",
+        "title": "Normal precision pooling with two observations",
+        "deps": [
+          "thm-normal-normal-conjugate-update",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume AC. Let the prior be $\\mu\\sim N(0,4)$, and, conditionally on $\\mu$,\nobserve independent $Y_1,Y_2\\sim N(\\mu,1)$. For data $(y_1,y_2)=(1,3)$, the\nevidence is finite and positive and the posterior is $N(16/9,4/9)$.",
+        "strategy": "Compute pooled precision and posterior mean for two observations under a proper Gaussian prior.",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §2.5",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Johnson, Ott & Dogucu, Bayes Rules!, Chapter 5, §5.3",
+              "url": "https://www.bayesrulesbook.com/chapter-5"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-dirichlet-multinomial-update",
+        "kind": "example",
+        "title": "A three-category Dirichlet-Multinomial update",
+        "deps": [
+          "thm-dirichlet-multinomial-conjugate-update",
+          "cor-real-gamma-positive-integer-values",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. With prior $p\\sim\\operatorname{Dirichlet}(1,2,1)$,\nsample size $n=3$, and observed counts $y=(2,1,0)$, the evidence is $1/10$ and\nthe posterior is $\\operatorname{Dirichlet}(3,3,1)$.",
+        "strategy": "Evaluate one three-category evidence ratio and record its updated Dirichlet vector.",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Gelman et al., Bayesian Data Analysis, 3rd ed., §3.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Gero Walter, A Technical Note on the Dirichlet-Multinomial Model, 2013",
+              "url": "https://epub.ub.uni-muenchen.de/14068/1/tech-rep-131_gero-walter.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

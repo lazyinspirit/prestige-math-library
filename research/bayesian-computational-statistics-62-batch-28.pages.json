@@ -1,0 +1,300 @@
+[
+  {
+    "order": 2096,
+    "id": "iid-monte-carlo-integration-and-error",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "IID Monte Carlo integration and error",
+    "companion": "iid-monte-carlo-integration-and-error-examples",
+    "requires": [
+      "central-limit-theorems"
+    ],
+    "items": [
+      {
+        "id": "def-iid-monte-carlo-estimators",
+        "kind": "definition",
+        "title": "IID Monte Carlo sample mean, variance, and standard error",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "def-partial-sums-and-sample-means",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance"
+        ],
+        "justified_by": [],
+        "statement": "For real IID outputs with finite first absolute moment, define the target and sample mean; for any finite real sample define the Bessel-corrected sample variance, and under a finite second moment define the population variance, standard error, and plug-in estimate.",
+        "strategy": "State the sample mean convention from the library's partial-sum definition and give the sample-variance and standard-error formulas with their exact moment and sample-size domains.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 2",
+              "url": "https://artowen.su.domains/mc/Ch-intro.pdf",
+              "locator": "§§2.1–2.3, PDF pp. 15–22: sample mean, population and sample variance, and standard-error notation."
+            },
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, 5th ed.",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "§§2.2.1 and 2.2.14, printed pp. 57–58 and 64–65: IID moment conventions and sample means."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-iid-monte-carlo-mean-moments",
+        "kind": "theorem",
+        "title": "Unbiasedness and exact variance of the IID Monte Carlo mean",
+        "deps": [
+          "def-iid-monte-carlo-estimators",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-change-of-variables-for-expectation",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-moments-variance-and-covariance",
+          "cor-variance-adds-for-pairwise-independent-random-variables"
+        ],
+        "justified_by": [],
+        "statement": "For a real IID sequence, the sample mean has expectation equal to the common mean when the first absolute moment is finite; with a finite second moment its variance is exactly the population variance divided by n.",
+        "strategy": "Use equality in law to identify each summand's moments, linearity for the mean, and variance additivity for the finite independent sample.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 2",
+              "url": "https://artowen.su.domains/mc/Ch-intro.pdf",
+              "locator": "§2.1, PDF pp. 16–17, equations (2.4)–(2.5): unbiased sample mean and exact variance scaling."
+            },
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, 5th ed.",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "§2.2.1, printed pp. 56–57: variance additivity for uncorrelated summands; §2.2.3, printed p. 57."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-iid-monte-carlo-mean-consistency",
+        "kind": "theorem",
+        "title": "Strong and weak consistency of the IID Monte Carlo mean",
+        "deps": [
+          "def-iid-monte-carlo-estimators",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-khinchin-weak-law-for-iid-integrable-variables",
+          "thm-kolmogorov-iid-l1-strong-law"
+        ],
+        "justified_by": [],
+        "statement": "If the common real IID output has finite first absolute moment, then the sample mean converges in probability and almost surely to its expectation; in fact its mean absolute error tends to zero.",
+        "strategy": "Apply the fully proved integrable IID weak law and Kolmogorov strong law to the sequence of integrand outputs.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 2",
+              "url": "https://artowen.su.domains/mc/Ch-intro.pdf",
+              "locator": "§2.1, PDF p. 16, equations (2.2)–(2.3): weak and strong consistency of simple Monte Carlo."
+            },
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, 5th ed.",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "Theorem 2.2.14, printed p. 65, and Theorem 2.4.1, printed pp. 76–78: integrable IID weak and strong laws, including proofs."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-iid-monte-carlo-sample-variance-consistency",
+        "kind": "theorem",
+        "title": "Consistency of the IID Monte Carlo sample variance",
+        "deps": [
+          "def-iid-monte-carlo-estimators",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-moments-variance-and-covariance",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "lem-measurable-functions-preserve-independence",
+          "thm-change-of-variables-for-expectation",
+          "thm-kolmogorov-iid-l1-strong-law"
+        ],
+        "justified_by": [],
+        "statement": "For real IID outputs with finite second moment, the Bessel-corrected sample variance converges almost surely to the population variance; when that variance is positive, the estimated standard error is relatively consistent for sigma divided by the square root of n.",
+        "strategy": "Apply the IID strong law to the outputs and their squares, then use the centered-squares identity and continuity of the square root.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 2",
+              "url": "https://artowen.su.domains/mc/Ch-intro.pdf",
+              "locator": "§2.2, PDF p. 19: consistency of s by applying the weak law to the sample averages of Y and Y squared."
+            },
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, 5th ed.",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "Theorem 2.4.1, printed pp. 76–78: strong law used for both Y and the transformed sequence Y squared."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-iid-monte-carlo-central-limit",
+        "kind": "theorem",
+        "title": "Lindeberg–Lévy limit for the IID Monte Carlo mean",
+        "deps": [
+          "def-iid-monte-carlo-estimators",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "thm-lindeberg-levy-iid-central-limit-theorem",
+          "thm-continuous-mapping-theorem"
+        ],
+        "justified_by": [],
+        "statement": "Assuming AC, for real IID outputs with positive finite variance, the centered sample mean multiplied by the square root of n converges in distribution to the centered normal law with the population variance.",
+        "strategy": "Apply the fully proved local Lindeberg–Lévy theorem to the sample sums, rewrite the statistic as the centered sample mean, and scale the weak limit continuously.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 2",
+              "url": "https://artowen.su.domains/mc/Ch-intro.pdf",
+              "locator": "Theorem 2.1 in §2.2, PDF p. 19: IID CLT statement; Owen cites Chung for its proof, which is not imported."
+            },
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, 5th ed.",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "Theorem 3.4.1, printed pp. 144–145: complete characteristic-function proof of the IID Lindeberg–Lévy theorem."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is explicitly assumed and is inherited from thm-lindeberg-levy-iid-central-limit-theorem and the library normal-law definition; no additional choice is used in the Monte Carlo rewrite."
+      }
+    ]
+  },
+  {
+    "order": 2097,
+    "id": "iid-monte-carlo-integration-and-error-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "IID Monte Carlo integration and error — Examples",
+    "companion": "iid-monte-carlo-integration-and-error",
+    "requires": [
+      "iid-monte-carlo-integration-and-error",
+      "detection-and-quantification-limits"
+    ],
+    "items": [
+      {
+        "id": "ex-gaussian-monte-carlo-integrand",
+        "kind": "example",
+        "title": "Gaussian integrand: exact Monte Carlo moments and asymptotic error",
+        "deps": [
+          "def-iid-monte-carlo-estimators",
+          "def-axiom-of-choice",
+          "lem-normal-location-scale-mean-and-variance",
+          "thm-iid-monte-carlo-mean-moments",
+          "thm-iid-monte-carlo-sample-variance-consistency",
+          "thm-iid-monte-carlo-central-limit"
+        ],
+        "justified_by": [],
+        "statement": "For IID normal integrand outputs with mean mu and positive variance sigma squared, the Monte Carlo mean is unbiased with variance sigma squared divided by n, its plug-in standard error is relatively consistent, and its square-root-n limit is normal under AC.",
+        "strategy": "Use the proved normal moment supplier to check the finite-moment hypotheses, then apply the local Monte Carlo moment, sample-variance, and CLT results.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 2",
+              "url": "https://artowen.su.domains/mc/Ch-intro.pdf",
+              "locator": "§§2.1–2.2, PDF pp. 16–19: mean, variance, sample variance, and the IID CLT."
+            },
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, 5th ed.",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "Theorem 3.4.1, printed pp. 144–145: finite-positive-variance IID CLT."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is required by the normal-law interface and the local Monte Carlo CLT, and is stated in the example."
+      },
+      {
+        "id": "ex-finite-mean-infinite-variance-monte-carlo-integrand",
+        "kind": "example",
+        "title": "Finite mean does not give a finite-variance Monte Carlo error",
+        "deps": [
+          "def-iid-monte-carlo-estimators",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-countable-choice",
+          "def-random-element-and-real-random-variable",
+          "thm-probability-law-and-distribution-function-correspondence",
+          "thm-change-of-variables-for-expectation",
+          "thm-real-power-continuity-and-derivatives",
+          "lem-rational-power-monotone",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-layer-cake-formulas-for-random-variables",
+          "thm-layer-cake-formula-for-l-p-powers",
+          "thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line",
+          "lem-truncated-integrals-of-rational-powers",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-continuous-implies-integrable",
+          "cor-continuous-functions-are-borel-measurable",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-iid-monte-carlo-mean-consistency"
+        ],
+        "justified_by": [],
+        "statement": "Under countable choice, the Pareto law with tail t to the power minus three halves has finite mean and infinite second moment. Any IID sample with this law has a consistent sample mean, but no finite population standard error sigma divided by the square root of n is available.",
+        "strategy": "Construct the Pareto law from its CDF, compute the first and second moments by the layer-cake formulas, and apply the integrable IID consistency theorem while keeping finite-variance error conclusions outside their hypotheses.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 2",
+              "url": "https://artowen.su.domains/mc/Ch-intro.pdf",
+              "locator": "§2.1, PDF p. 16: finite-mean weak and strong consistency; §2.3, PDF pp. 21–22: finite-variance standard-error computation caveat."
+            },
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, 5th ed.",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "Theorem 2.2.14, printed p. 65: weak law under a finite first absolute moment; Theorem 2.4.1, printed pp. 76–78: strong law under the same moment condition."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Countable Choice is used for the CDF-to-law correspondence and the continuous-to-Borel and Riemann/Lebesgue bridges in the moment calculation; no full AC or dependent choice is used, and the conditional IID consistency result is choice-free."
+      }
+    ]
+  }
+]

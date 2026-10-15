@@ -1,0 +1,208 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "31",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "alg-importance-sampling",
+      "model": "gpt-6-luna",
+      "context_sha256": "5d4ea13c3fa7864188f56398422de21243d6d30e32f026cd708a196e16358df3",
+      "outcome": "false_positive",
+      "reason": "False positive: items/thm-ordinary-importance-sampling-is-unbiased.md separately proves the claimed identity in steps 1.1 and 2.1. Density integration gives E_Q|Y|=Z_p^{-1} integral |f| p_tilde dmu under the algorithm support condition, so its integrability assumption supplies that theorem's target-integrability hypothesis. The signed density identity gives E_Q Y=integral f dpi; finite linearity proves unbiasedness. The algorithm has precise finite inputs, measurable zero-proposal branch and explicit average output. Its contract and owning page agree; no correctness theorem is missing.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+      "model": "gpt-6-luna",
+      "context_sha256": "4518aa6a4244aa7e16d6c8a1403365dda1a551982bc04cf6db7d9fcbb85e8bbc",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed unsupported extension: the imported unbiasedness statement supplies only a finite IID sample, while the original F5 and F8 both require an infinite IID sequence. The repair preserves the choice-free variance identity for the original finite sample: F2 at sample size one identifies E_Q Y_1=theta, the finite variance-addition corollary gives Var(sum Y_i)=n sigma^2, and bilinearity gives the factor n^{-2}. Density integration and the variance-identity lemma give the displayed integral formula. Only the CLT clause now explicitly supplies an infinite IID Q sequence and uses its prefixes. Its positive-variance case applies F8 under AC; the zero-variance case has Dirac law at every n. The finite-sample and asymptotic conclusions, support conditions and moment requirements are retained.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse",
+      "model": "gpt-6-luna",
+      "context_sha256": "206ebce48305f5046d87d88622afd947edf0f43c7523848eb67d41412e514ca6",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed undefined CLT carrier: the algorithm returns a nonnumeric status when S_n=0, and the cited consistency theorem restricts its numerical-zero interpretation to its own convergence assertion. This can occur with positive probability: on {a,b}, take Q(a)=Q(b)=1/2, p_tilde(a)=1, p_tilde(b)=0 and f=1; P(S_n=0)=2^{-n}, with all stated moments finite. The repaired Statement explicitly defines the ratio for S_n>0 and value zero otherwise for every n and every convergence claim. Step 2.2 now identifies that random variable with the globally Borel ratio map, whose derivative at (Z_p,Z_p theta) is (-theta,1)/Z_p with a quadratic remainder. The multivariate CLT and normal projection give tau^2 including zero variance. Choice-free strong laws for U=W^2(f-theta)^2, C=W^2(f-theta), B=W^2, with Holder for C, justify the residual expansion and MCSE limit; eventual positive denominator follows from E W=Z_p>0. No extra moment or support restrictions were added.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-importance-sampling",
+      "disposition": "unaffected",
+      "post_sha256": "1da75baa0f5197f445e41a79f478c7fa1f99397b68f42cd0429839b14f09be9c",
+      "review_context_sha256": "e97af59bdc8a73afcf32582e10e96e4438dbec3bc796ab89e2a54b9cf6870994",
+      "reason": "The finite procedure and its zero-proposal branch are measurable and defined under the stated conditions. The separate unbiasedness theorem, steps 1.1 and 2.1, supplies the claimed correctness: support and E_Q|Y|<infinity imply target absolute integrability by density integration, and finite linearity yields E_Q mu_hat=integral f dpi. Checked the assigned contract and owning page; no edit is warranted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+      "disposition": "repaired",
+      "post_sha256": "d46c1489967bf2d68a206af360fb932bbf3a435586bce344c4b14ba743c6e8bb",
+      "review_context_sha256": "75cc7c0b21cc27b8021e9db43d5ce6542918534d14f995dbb1b800e98e14074a",
+      "reason": "Repaired the missing sequence interface only in the CLT clause. Retained the choice-free finite-sample variance statement and replaced the infinite-sequence moment supplier with finite variance addition and covariance bilinearity; steps 2.1 and 3.1 give the exact variance formula. For the explicitly supplied infinite sequence, the measurable transform is IID and the positive-variance CLT applies under AC; zero variance gives Dirac laws. Synced the assigned manifest dependency list and proof-contract entry under the shared write lock. The counterexample consumer and owning page remain mathematically sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse",
+      "disposition": "repaired",
+      "post_sha256": "09d59f14454e7f89006e9f0ec06bbef1453b7211bb35df2dc5801df380b4dabb",
+      "review_context_sha256": "a17729dcaed596ccc5e96e4942c321198e67c102e27fa0982243e8443be3a002",
+      "reason": "The Statement now defines the numerical ratio extension for every n, with zero at S_n=0. Step 2.2 identifies exactly this variable with the Borel map g and checks its derivative and quadratic remainder at the positive mean denominator. The multivariate CLT and linear Gaussian projection yield the stated tau^2. U and B are integrable by the second moments, C by Holder; their IID strong laws, ratio consistency and the residual expansion prove both MCSE limits without AC, including tau=0. Synced only the assigned proof-contract entry under the shared write lock; the owning page remains sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "cex-ordinary-importance-sampling-infinite-variance-under-light-tailed-proposal"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "operation": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u31-ordinary-sequence",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T17:00:37Z",
+        "class": "accuracy",
+        "subclass": "missing-hypothesis",
+        "severity": "fatal",
+        "location": "statement",
+        "subject": "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+        "caught_at_stage": "4-judge",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "summary": "Original finite IID sampling hypotheses did not license the infinite sequence required by the CLT supplier. Repaired the CLT sequence hypothesis and kept the finite variance assertion choice-free with finite variance suppliers.",
+        "source": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u31.json",
+        "adjudication_ref": [
+          {
+            "id": "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+            "model": "gpt-6-luna",
+            "context_sha256": "4518aa6a4244aa7e16d6c8a1403365dda1a551982bc04cf6db7d9fcbb85e8bbc",
+            "outcome": "confirmed_fatal",
+            "report": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u31.json"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "operation": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u31-ratio-numeric-extension",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T17:00:37Z",
+        "class": "accuracy",
+        "subclass": "ill-typed-claim",
+        "severity": "fatal",
+        "location": "statement",
+        "subject": "thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse",
+        "caught_at_stage": "4-judge",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "summary": "Original CLT expression used an algorithm output that can be a nonnumeric status on a positive-probability zero-weight event. Defined the numerical zero extension for all convergence assertions and aligned the delta-method identification.",
+        "source": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u31.json",
+        "adjudication_ref": [
+          {
+            "id": "thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse",
+            "model": "gpt-6-luna",
+            "context_sha256": "206ebce48305f5046d87d88622afd947edf0f43c7523848eb67d41412e514ca6",
+            "outcome": "confirmed_fatal",
+            "report": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u31.json"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "operation": "none",
+      "reason": "No assigned interface change reaches a published consumer, and no potentially defective published supplier or consumer was found. No published maintenance finding is proposed."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Reviewed in assigned order: alg-importance-sampling unchanged, ordinary finite-variance/CLT repaired, self-normalized ratio-CLT/MCSE repaired. Captured each review-context pair immediately after the completed mathematical review, before editing the next item; ordinary review was repeated after preserving its finite-sample claim with finite variance suppliers. Metadata-only synchronization thereafter changed no item or supplier interface.",
+    "Changed only the two assigned theorem item files, their rows in research/bayesian-computational-statistics-62-batch-31.pages.json and research/bayesian-computational-statistics-62-batch-31.proof-contracts.json, and this report. Shared metadata followed acquire/reread/edit/check/release. No item, proof or metadata of the false-positive algorithm was edited.",
+    "Compared the original and repaired Statement sections directly. Ordinary: added the infinite IID sequence only to the CLT clause and preserved the finite-sample variance interface; proof also now uses the finite variance-addition corollary and covariance-identity lemma. Ratio: explicitly defined numerical zero on S_n=0 for all convergence statements; existing moments, support and conclusions remain. Algorithm Definition unchanged.",
+    "Exact local sources read include the separate ordinary unbiasedness proof, ordinary Monte Carlo moments and CLT proofs, both importance-sampling algorithms, self-normalized consistency proof, and the relevant Statement/Definition sections of the density-integration, expectation, measurable-transform, finite-variance, multivariate-CLT, Borel delta-method, IID L1 strong-law, normal-law, Holder and null-integral suppliers. These are familiar arguments; no external-source reading is claimed.",
+    "Direct item/library reference search found only the light-tail counterexample consuming the changed ordinary theorem, and no item consuming the changed ratio theorem. Both owning-page uses remain sound. The sole consumer contract quote refresh is explicitly routed to its frontier owner; it is not a new mathematical defect. No outside-frontier maintenance subjects or published defects were found.",
+    "All focused checks are recorded in checks. No new items, algorithm changes, choice-scope expansion, unresolved mathematical uncertainty, judge invocation, verification stamp, certificate or round-state update. These are adjudicator repairs, not independent reviews of the revised proofs. The two confirmed-fatal original carriers still count toward the engine's next-round obligation."
+  ],
+  "downstream_reviews": [
+    {
+      "supplier": "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+      "id": "cex-ordinary-importance-sampling-infinite-variance-under-light-tailed-proposal",
+      "path": "items/cex-ordinary-importance-sampling-infinite-variance-under-light-tailed-proposal.md",
+      "affected_use": "F3 states the finite-variance formula requires E_Q[Y_1^2]<infinity; Counterexample step 2.1 observes that this weighted moment is infinite for p=(1/2)exp(-|x|), q=exp(-2|x|), f=1.",
+      "disposition": "unaffected",
+      "reason": "This is only a warning about a hypothesis that fails, not an application of the CLT or an inference from its converse. Adding explicit sequence indexing leaves the second-moment requirement and the direct infinite-variance proof unchanged. Its contract F3 quotes the old supplier statement and needs citation-only currency reconciliation through its frontier owner.",
+      "route": "frontier_owner",
+      "uncertain": false,
+      "source_excerpt": "[F3] [[thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment]]: Its finite-variance formula assumes $\\mathbb E_Q[Y_1^2]<\\infty$ and makes no finite-variance claim when that moment is infinite.",
+      "proof_excerpt": "The proposal has full target support, but the finite-second-moment hypothesis in [F3] fails.",
+      "invalidated_claim": "No mathematical claim is invalidated. The contract F3 quote of the supplier's full old Statement no longer matches its literal current Statement.",
+      "minimality": "Owner should replace only that F3 citation quote in research/bayesian-computational-statistics-62-batch-31.proof-contracts.json with the supplier's current Statement. The consumer item, other citations, derivations and Statement refuted need no change."
+    }
+  ],
+  "page_uses": [
+    {
+      "supplier": "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+      "path": "library/bayesian-computational-statistics/importance-sampling-and-weight-diagnostics.md",
+      "affected_use": "The page says finite variance and a normal limit need the corresponding weighted second moment and that the CLT assumes AC.",
+      "disposition": "unaffected",
+      "reason": "Explicit IID sequence indexing preserves the page claims and all moment and AC boundaries."
+    },
+    {
+      "supplier": "thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse",
+      "path": "library/bayesian-computational-statistics/importance-sampling-and-weight-diagnostics.md",
+      "affected_use": "The page says finite second moments of W and Wf give the ratio CLT under AC and plug-in MCSE consistency without AC.",
+      "disposition": "unaffected",
+      "reason": "The explicit numerical zero convention agrees with the proof already used and leaves the page moment, support and AC claims sound."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-importance-sampling.md items/thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment.md items/thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse.md --json",
+      "exit_code": 0,
+      "result": "3 files; 2 checked proofs pass; algorithm not-applicable; 0 failures."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-importance-sampling.md items/thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment.md items/thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse.md library/bayesian-computational-statistics/importance-sampling-and-weight-diagnostics.md library/bayesian-computational-statistics/importance-sampling-and-weight-diagnostics-examples.md --json",
+      "exit_code": 0,
+      "result": "5 files; 0 errors; 0 warnings; real KaTeX and YAML checks enabled."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-31.proof-contracts.json --strict --items alg-importance-sampling,thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment,thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse --json",
+      "exit_code": 0,
+      "result": "All 3 assigned contract entries checked; ok:true; 0 errors; 0 warnings."
+    },
+    {
+      "command": "node tools/depcheck.mjs --items-file /tmp/step5-v2-initial-r1-u31-items.json --json",
+      "exit_code": 0,
+      "result": "Selector contains exactly the 3 assigned item IDs from the current batch manifest; 0 errors; 0 warnings; prerequisite closure retained (1619 items, 161 pages)."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment.md items/thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse.md",
+      "exit_code": 0,
+      "result": "2 items; 9 steps; 0 defects. Ran once in a batch after the final item edits."
+    }
+  ]
+}

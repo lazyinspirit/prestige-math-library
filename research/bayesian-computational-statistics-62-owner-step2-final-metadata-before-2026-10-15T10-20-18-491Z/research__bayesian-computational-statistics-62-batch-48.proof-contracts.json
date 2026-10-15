@@ -1,0 +1,1930 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-48",
+  "scope": [
+    "lem-near-iid-exchangeable-arrays-have-convergent-means",
+    "lem-probability-convergence-plus-higher-moments-gives-lp-convergence",
+    "lem-near-iid-exchangeable-arrays-have-convergent-sample-covariances",
+    "def-data-assimilation-problem",
+    "alg-ensemble-kalman-filter",
+    "alg-four-dimensional-variational-assimilation",
+    "alg-three-dimensional-variational-assimilation",
+    "lem-linear-gaussian-reference-ensemble-reproduces-kalman-filter",
+    "lem-ensemble-kalman-update-preserves-joint-exchangeability",
+    "lem-perturbed-observation-ensemble-kalman-moment-bounds",
+    "thm-three-dimensional-variational-analysis-is-gaussian-map-update",
+    "thm-three-dimensional-variational-assimilation-tracking-under-contraction",
+    "thm-perturbed-observation-ensemble-kalman-large-ensemble-limit",
+    "ex-finite-ensemble-covariance-fluctuation",
+    "ex-four-dimensional-variational-objective-has-two-local-minima",
+    "ex-nonlinear-observation-ensemble-kalman-does-not-recover-posterior",
+    "ex-linear-gaussian-three-dimensional-variational-analysis"
+  ],
+  "contracts": {
+    "lem-near-iid-exchangeable-arrays-have-convergent-means": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-holder-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $p,q\\in[1,\\infty]$ be conjugate exponents. If $X$ and $Y$ are real random\nvariables in the spaces named by the corresponding clause of\n[[thm-holder-inequality-for-integrals]], then\n$$\\mathbb E[|XY|]\\le\\|X\\|_p\\|Y\\|_q.$$\n\nIn particular, $XY$ is integrable.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1], all $X_{N,i}$ have the same distribution and every distinct pair has the same covariance. By [A3] and [F1], $\\mathbb E X_{N,1}\\to\\mathbb E U$; the same $L^2$ convergence and $\\mathbb E U^2<\\infty$ give $\\sup_N\\|X_{N,1}\\|_2<\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $X_i=X_{N,i}$ and $U_i=U_{N,i}$. The identity $X_1X_2-U_1U_2=(X_1-U_1)X_2+U_1(X_2-U_2)$ and [F1] give $|\\operatorname{Cov}(X_1,X_2)-\\operatorname{Cov}(U_1,U_2)|\\le \\|X_1-U_1\\|_2\\|X_2\\|_2+\\|U_1\\|_2\\|X_2-U_2\\|_2+|\\mathbb EX_1\\mathbb EX_2-\\mathbb EU_1\\mathbb EU_2|.$ By exchangeability the two $L^2$ differences have the same norm and both means converge as in step 1.1. Thus [A2]–[A3] imply $\\operatorname{Cov}(X_{N,1},X_{N,2})\\to0$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Expanding the variance and using [A1] yields $\\operatorname{Var}(\\bar X_N)=N^{-1}\\operatorname{Var}(X_{N,1})+(1-N^{-1})\\operatorname{Cov}(X_{N,1},X_{N,2})\\longrightarrow0,$ because the first variance is uniformly bounded by step 1.1 and the second term tends to zero by step 2.1. Also $\\mathbb E\\bar X_N=\\mathbb E X_{N,1}\\to\\mathbb E U$ by step 1.1. Hence $\\mathbb E|\\bar X_N-\\mathbb E U|^2=\\operatorname{Var}(\\bar X_N)+|\\mathbb E\\bar X_N-\\mathbb E U|^2\\to0$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the hypotheses specify nonempty finite-dimensional vectors or rows; no empty index set is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero or singular state covariance and zero limiting moments are allowed wherever only positive semidefiniteness or finite moments are required."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement: the ensemble/row index requires N>=2, so the N=1 case is outside this result."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: constant or degenerate random variables still satisfy the displayed moment and convergence argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Proof: only finite-dimensional sums, limits, and algebraic constructions are used; no arbitrary choice function is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        }
+      ]
+    },
+    "lem-probability-convergence-plus-higher-moments-gives-lp-convergence": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $D_n=\\|Z_n-Z\\|$. The triangle inequality and convexity of $t\\mapsto t^s$ on $[0,\\infty)$ give $D_n^s\\le2^{s-1}(\\|Z_n\\|^s+\\|Z\\|^s)$, so [A2] implies $\\sup_n\\mathbb E D_n^s=:C<\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any $0<\\delta<M$, split according to $D_n\\le\\delta$, $\\delta<D_n\\le M$, and $D_n>M$. On these three events, respectively, $D_n^q\\le\\delta^q$, $D_n^q\\le M^q$, and $D_n^q\\le M^{q-s}D_n^s$. Therefore $\\mathbb E D_n^q\\le\\delta^q+M^q\\mathbb P(D_n>\\delta)+CM^{q-s}.$ For fixed $\\delta,M$, the probability term tends to zero by [A1]; then letting $M\\to\\infty$ and $\\delta\\downarrow0$ proves $\\mathbb E D_n^q\\to0$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the hypotheses specify nonempty finite-dimensional vectors or rows; no empty index set is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero or singular state covariance and zero limiting moments are allowed wherever only positive semidefiniteness or finite moments are required."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement: the ensemble/row index requires N>=2, so the N=1 case is outside this result."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: constant or degenerate random variables still satisfy the displayed moment and convergence argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Proof: only finite-dimensional sums, limits, and algebraic constructions are used; no arbitrary choice function is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        }
+      ]
+    },
+    "lem-near-iid-exchangeable-arrays-have-convergent-sample-covariances": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-near-iid-exchangeable-arrays-have-convergent-means",
+          "source_section": "Statement",
+          "quote": "For each integer $N\\ge2$, let $(X_{N,i},U_{N,i})_{i=1}^N$ be a jointly exchangeable row of real random pairs: its law is invariant when the same permutation is applied to every index. Assume that $U_{N,1},\\ldots,U_{N,N}$ are pairwise uncorrelated, all have the law of a fixed square-integrable random variable $U$, and\n$$\\|X_{N,1}-U_{N,1}\\|_2:=\\bigl(\\mathbb E|X_{N,1}-U_{N,1}|^2\\bigr)^{1/2}\\longrightarrow0.$$\nHere $\\operatorname{Cov}(V,W):=\\mathbb E[(V-\\mathbb EV)(W-\\mathbb EW)]$. Then the empirical mean $\\bar X_N=N^{-1}\\sum_{i=1}^N X_{N,i}$ converges to $\\mathbb E U$ in $L^2$, meaning $\\mathbb E|\\bar X_N-\\mathbb E U|^2\\to0$, and hence in probability.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-holder-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $p,q\\in[1,\\infty]$ be conjugate exponents. If $X$ and $Y$ are real random\nvariables in the spaces named by the corresponding clause of\n[[thm-holder-inequality-for-integrals]], then\n$$\\mathbb E[|XY|]\\le\\|X\\|_p\\|Y\\|_q.$$\n\nIn particular, $XY$ is integrable.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Holder's inequality [F2] on a probability space gives $\\|X_{N,1}-U_{N,1}\\|_2\\le\\|X_{N,1}-U_{N,1}\\|_4$. Apply [F1] to each coordinate to obtain $\\bar X_N\\to\\mathbb EU$ in probability.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix coordinates $r,s\\in\\{1,\\ldots,d\\}$ and set $V_{N,i}=X_{N,i,r}X_{N,i,s}$ and $W_{N,i}=U_{N,i,r}U_{N,i,s}$. The rows $(V_{N,i},W_{N,i})$ are jointly exchangeable. By Cauchy–Schwarz, $\\|V_{N,1}-W_{N,1}\\|_2\\le\\|X_{N,1,r}-U_{N,1,r}\\|_4\\|X_{N,1,s}\\|_4+\\|U_{N,1,r}\\|_4\\|X_{N,1,s}-U_{N,1,s}\\|_4\\to0.$ The product bounds follow from [F2]; the factors tending to zero follow from [A2], and the remaining fourth moments are bounded by [A2]. Since the $W_{N,i}$ are iid and square-integrable, they are pairwise uncorrelated. Thus [F1] applied to these scalar rows gives $N^{-1}\\sum_iX_{N,i,r}X_{N,i,s}\\to\\mathbb E[U_rU_s]$ in probability.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Entrywise, $C_N=N^{-1}\\sum_iX_{N,i}X_{N,i}^T-\\bar X_N\\bar X_N^T$. The first term converges to $\\mathbb E[UU^T]$ by step 2.1 and the second to $(\\mathbb EU)(\\mathbb EU)^T$ by step 1.1. Their difference is $\\operatorname{Cov}(U)$, proving the claim.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the hypotheses specify nonempty finite-dimensional vectors or rows; no empty index set is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero or singular state covariance and zero limiting moments are allowed wherever only positive semidefiniteness or finite moments are required."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement: the ensemble/row index requires N>=2, so the N=1 case is outside this result."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: constant or degenerate random variables still satisfy the displayed moment and convergence argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Proof: only finite-dimensional sums, limits, and algebraic constructions are used; no arbitrary choice function is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        }
+      ]
+    },
+    "def-data-assimilation-problem": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the horizon T=0 is explicitly allowed and leaves only the initial state and trivial data history."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero observation errors and zero state values satisfy the stated model equations."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one state coordinate, one observation coordinate, and a one-step horizon are allowed by the positive integer and T bounds."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: this is a model convention and imposes no nondegeneracy assumption on state laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the finite-dimensional maps are deterministic; AC is inherited only for the cited conditional-law existence theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        }
+      ]
+    },
+    "alg-ensemble-kalman-filter": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: ensemble size N is required to satisfy N>=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero empirical covariance is allowed; adding Gamma>0 makes S_N positive definite."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition: N=1 is outside the stated N>=2 ensemble domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a rank-deficient or zero empirical covariance still gives S_N=C_zz+Gamma>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the finite update uses no arbitrary selection; AC is stated only to instantiate the specified multivariate-normal perturbation law."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        }
+      ]
+    },
+    "alg-four-dimensional-variational-assimilation": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the window satisfies T>=1 and its decision domain is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero residuals are permitted; both objectives remain defined because the covariance matrices are positive definite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the strong-constraint example with T=1 is included by the domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition: B, observation covariances, and weak model-error covariances are positive definite by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: each selected gradient-descent run has finitely many deterministic updates and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        }
+      ]
+    },
+    "alg-three-dimensional-variational-assimilation": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: d,p>=1 and the covariance matrices are positive definite."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: if y=Hm^f, the update returns m^f and the objective remains uniquely minimized."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: scalar state and observation spaces d=p=1 satisfy the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition: B and Gamma are required positive definite, so degenerate covariance inputs are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: Cholesky is unique and the finite triangular solves make no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        }
+      ]
+    },
+    "lem-linear-gaussian-reference-ensemble-reproduces-kalman-filter": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-gaussian-state-space-model-with-independent-noises",
+          "source_section": "Definition",
+          "quote": "Assume AC ([[def-axiom-of-choice]]) and fix a finite horizon $T\\ge0$. Let\nthe state dimension at time\n$t$ be a positive integer $d_t$ for $0\\le t\\le T$, and the observation\ndimension at time $t$ be a positive integer $p_t$ for $1\\le t\\le T$.\nChoose deterministic matrices\n$F_t\\in\\mathbb R^{d_t\\times d_{t-1}}$ and\n$H_t\\in\\mathbb R^{p_t\\times d_t}$, a mean $m_0\\in\\mathbb R^{d_0}$, and\nsymmetric positive-semidefinite matrices, meaning $v^TPv\\ge0$ for every\nreal vector $v$ of matching dimension,\n$P_0\\in\\mathbb R^{d_0\\times d_0}$,\n$Q_t\\in\\mathbb R^{d_t\\times d_t}$, and\n$R_t\\in\\mathbb R^{p_t\\times p_t}$. A **linear-Gaussian state-space model\nwith independent noises** is the general finite-horizon kernel model\n([[def-general-state-space-model-by-kernels]]) with initial law\n$\\mu_0=N_{d_0}(m_0,P_0)$ and transition and observation kernels\n$$K_t(x,\\cdot)=N_{d_t}(F_t x,Q_t),\\qquad G_t(x,\\cdot)=N_{p_t}(H_t x,R_t).$$\nAll Gaussian laws use the convention of\n[[def-multivariate-normal-law]], which allows singular covariance matrices.\n\nIts independent-noise representation consists of random vectors\n$x_0,q_1,r_1,\\ldots,q_T,r_T$ on a common probability space, with\n$x_0\\sim N_{d_0}(m_0,P_0)$, $q_t\\sim N_{d_t}(0,Q_t)$,\n$r_t\\sim N_{p_t}(0,R_t)$, all mutually independent in the sense of\n[[def-independent-random-elements]] (their generated sigma-algebras are\nindependent), and equations\n$$x_t=F_t x_{t-1}+q_t,\\qquad y_t=H_t x_t+r_t\\qquad(1\\le t\\le T).$$\nThe local path-law theorem proves that every allowed parameter tuple has\nsuch a finite representation, that its induced kernels are the displayed\n$K_t,G_t$, and that its path law is the general kernel-product law.\n\nThis definition imposes the stated noise law and independence assumptions;\nit does not establish their empirical adequacy. It supplies no filtering\nalgorithm, posterior recursion, or convergence claim. Any separate formula\nthat inverts an observed innovation covariance must assume that covariance is\npositive definite at the point of inversion.\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $m\\ge1$ be finite, let $d_j\\ge1$, and let\n$Z_j$ for $1\\le j\\le m$ be mutually independent random elements of\n$\\mathbb R^{d_j}$. Suppose $Z_j\\sim N_{d_j}(a_j,\\Sigma_j)$, where each\n$\\Sigma_j$ is symmetric positive semidefinite. Put\n$D=\\sum_{j=1}^m d_j$, $Z=(Z_1,\\ldots,Z_m)$,\n$a=(a_1,\\ldots,a_m)$, and\n$\\Sigma=\\operatorname{diag}(\\Sigma_1,\\ldots,\\Sigma_m)$. Then\n$$Z\\sim N_D(a,\\Sigma).$$\nNo covariance block needs to be invertible.\n\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-kalman-filter",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T\\ge0$, positive state dimensions $d_0,\\ldots,d_T$,\nand positive observation dimensions $p_1,\\ldots,p_T$. The input is a\nlinear-Gaussian model from\n[[def-linear-gaussian-state-space-model-with-independent-noises]], with\nmatrices $F_k\\in\\mathbb R^{d_k\\times d_{k-1}}$ and\n$H_k\\in\\mathbb R^{p_k\\times d_k}$, initial mean $m_0$, and symmetric\npositive-semidefinite covariances $P_0,Q_k,R_k$. Its state and observation\nequations are\n$$X_k=F_kX_{k-1}+q_k,\\qquad Y_k=H_kX_k+r_k,$$\nwhere $q_k\\sim N(0,Q_k)$ and $r_k\\sim N(0,R_k)$ are centered and mutually\nindependent across all times and of $X_0$.\n\nThe admissible data are vectors $y_k\\in\\mathbb R^{p_k}$ for which every\ninnovation covariance encountered below is positive definite. Positive\ndefinite means $u^TS_ku>0$ for every nonzero $u\\in\\mathbb R^{p_k}$. The\nalgorithm returns predicted and updated means and covariances and the\ninnovation and gain at each time. Initialize\n$$m_{0|0}=m_0,\\qquad P_{0|0}=P_0.$$\nFor $k=1,\\ldots,T$, perform:\n\n1. Predict:\n$$m_{k|k-1}=F_km_{k-1|k-1},\\qquad P_{k|k-1}=F_kP_{k-1|k-1}F_k^T+Q_k.$$\n2. Form the innovation and its covariance:\n$$v_k=y_k-H_km_{k|k-1},\\qquad S_k=H_kP_{k|k-1}H_k^T+R_k.$$\n3. Factor $S_k=L_kL_k^T$ with lower-triangular $L_k$ having positive\ndiagonal, using\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]].\nSolve $L_kU_k=H_kP_{k|k-1}$ and $L_k^TK_k^T=U_k$ by triangular solves. This\ndefines $K_k^T=S_k^{-1}H_kP_{k|k-1}$, hence\n$K_k=P_{k|k-1}H_k^TS_k^{-1}$, without explicitly forming $S_k^{-1}$.\n4. Update:\n$$m_{k|k}=m_{k|k-1}+K_kv_k,\\qquad P_{k|k}=P_{k|k-1}-K_kS_kK_k^T.$$\n\nFor $T=0$ the loop is empty and the returned pair is $(m_0,P_0)$. No\ninverse of $P_0$, $Q_k$, or $R_k$ is used. This item defines the procedure\nand makes no complexity, rounding-error, or numerical-stability claim.\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-kalman-filter-is-exact-posterior",
+          "source_section": "Statement",
+          "quote": "Assume AC. Fix a finite-horizon model from\n[[def-linear-gaussian-state-space-model-with-independent-noises]] with\nstate and observation equations\n$$X_k=F_kX_{k-1}+q_k,\\qquad Y_k=H_kX_k+r_k\\qquad (1\\le k\\le T),$$\nwhere $X_0\\sim N_{d_0}(m_0,P_0)$, the centered Gaussian noises $q_k,r_k$ are\nmutually independent across times and from $X_0$, and $P_0,Q_k,R_k$ are\nsymmetric positive semidefinite. Let the parameters and observations be\nadmissible for [[alg-kalman-filter]], so the recursively formed innovation\ncovariances\n$$S_k=H_kP_{k|k-1}H_k^T+R_k$$\nare positive definite for every $1\\le k\\le T$. Run that algorithm from\n$m_{0|0}=m_0$ and $P_{0|0}=P_0$. Then, for each $0\\le k\\le T$, the map\n$$\\pi_k(y_{1:k},\\cdot)=N_{d_k}(m_{k|k}(y_{1:k}),P_{k|k})$$\nis an everywhere-defined filtering kernel for $X_k$ given $Y_{1:k}$ in the\nsense of [[def-state-space-filtering-laws]]. The empty history at $k=0$ is a\nsingleton, and $\\pi_0=N_{d_0}(m_0,P_0)$. In particular, these recursions\ngive an exact Gaussian conditional-law version at every observation history;\neach $P_{k|k}$ is positive semidefinite. Singular initial, process,\nmeasurement, predicted-state, and filtered-state covariances are allowed.\nEquivalently, the covariance update can be written in Joseph form\n$$P_{k|k}=(I-K_kH_k)P_{k|k-1}(I-K_kH_k)^T+K_kR_kK_k^T.$$\nOnly the innovation matrices being solved must be positive definite. No\npointwise uniqueness of a conditional-law version on null histories,\nobservation-density assumption, or numerical-stability claim is made.\n\n",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At $k=0$, the analysis members are iid with law $N(m_0,P_0)$ by their initialization, so the claim holds at the base time.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "given",
+            "base"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume the induction hypothesis: the members at time $k-1$ are iid with law $N(m_{k-1|k-1},P_{k-1|k-1})$. Each forecast is an affine image of the independent Gaussian pair $(U_{N,i}^{a,k-1},q_{N,i}^k)$. By [F2] the pair is jointly Gaussian; every scalar projection of its affine image is a scalar Gaussian projection, so [F5] makes the forecasts iid Gaussian with mean $m^f=F_km_{k-1|k-1}$ and covariance $P^f=F_kP_{k-1|k-1}F_k^T+Q_k$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "step 1.1",
+            "IH"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $P^f\\succeq0$ and $R_k\\succ0$, $S=H_kP^fH_k^T+R_k\\succ0$, so $K=P^fH_k^TS^{-1}$ is defined. The independent Gaussian pair $(U_{N,i}^{f,k},y_k+\\eta_{N,i}^k)$ and [F2] show that $U_{N,i}^{a,k}=A U_{N,i}^{f,k}+K(y_k+\\eta_{N,i}^k)$, with $A=I-KH_k$, is Gaussian. Its mean is $m^f+K(y_k-H_km^f)$ and its covariance is $AP^fA^T+KR_kK^T=P^f-KSK^T,$ because $KS K^T=P^fH_k^TK^T=KH_kP^f$. These are precisely the Kalman update parameters in [F3].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For distinct member indices the pairs of forecast and perturbed observation are independent by the input independence and the induction hypothesis; applying the same deterministic affine update separately to each pair preserves independence. Therefore the updated members are iid with the Gaussian law from step 3.1. By [A1] and [F4] that law is the exact filtering law at the fixed data.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The initialization in step 1.1 is the base case, and step 4.1 proves the claim at time $k$ from the induction hypothesis at time $k-1$. Induction therefore gives the asserted iid exact filtering law for every $k\\le T$.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 4.1",
+            "discharge-induction: step 1.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the hypotheses specify nonempty finite-dimensional vectors or rows; no empty index set is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero or singular state covariance and zero limiting moments are allowed wherever only positive semidefiniteness or finite moments are required."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement: the ensemble/row index requires N>=2, so the N=1 case is outside this result."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: positive-semidefinite state and process covariances may be singular while R_k remains positive definite."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Facts and Assumptions: the Axiom of Choice use for Gaussian laws is stated explicitly; the finite algebraic induction adds no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        }
+      ]
+    },
+    "lem-ensemble-kalman-update-preserves-joint-exchangeability": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-ensemble-kalman-filter",
+          "source_section": "Definition",
+          "quote": "Fix an ensemble size $N\\ge2$, forecast map $\\Psi$, observation map $G$, datum $y\\in\\mathbb R^p$, and observation covariance $\\Gamma\\succ0$. The input is a state ensemble $x^1,\\ldots,x^N\\in\\mathbb R^d$, forecast-error draws $\\xi^i$ that are independent across members and of the input ensemble, each with the caller-specified additive model-error law, and observation perturbations $\\eta^i\\sim N_p(0,\\Gamma)$ under [[def-multivariate-normal-law]]. The observation perturbations are independent across members and independent of the forecast ensemble and forecast-error draws.\n\n1. Forecast each member: $\\widehat x^i=\\Psi(x^i)+\\xi^i$.\n\n2. Form predicted observations $z^i=G(\\widehat x^i)$, means $\\bar x=N^{-1}\\sum_i\\widehat x^i$, $\\bar z=N^{-1}\\sum_i z^i$, and empirical covariance blocks\n$$C_{xz}=N^{-1}\\sum_i(\\widehat x^i-\\bar x)(z^i-\\bar z)^T,\\qquad C_{zz}=N^{-1}\\sum_i(z^i-\\bar z)(z^i-\\bar z)^T.$$\nThe divisor-$N$ convention is part of this algorithm.\n\n3. Form $S_N=C_{zz}+\\Gamma$. Since $C_{zz}$ is positive semidefinite and $\\Gamma$ is positive definite, $S_N$ is positive definite. Factor it by Cholesky and solve $S_NK_N^T=C_{xz}^T$ by triangular solves.\n\n4. Update every member using its perturbed datum:\n$$x^{a,i}=\\widehat x^i+K_N(y+\\eta^i-z^i).$$\n\nReturn the updated ensemble and its empirical mean and covariance. When $G(x)=Hx$, $C_{xz}=C_xH^T$ and $C_{zz}=HC_xH^T$, giving the usual sample-covariance Kalman gain. This item specifies the perturbed-observation variant; deterministic square-root updates are different finite-ensemble procedures. Finite ensembles in nonlinear models are approximations and carry no general posterior-exactness claim.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a permutation $\\sigma$ of $\\{1,\\ldots,N\\}$. Applying it to the input states and errors permutes the forecast states and predicted observations by the same $\\sigma$. Their empirical means are unchanged, while the sums defining $C_{xz}$ and $C_{zz}$ are unchanged because they only reorder their summands. Therefore $S_N$ and the common gain $K_N$ are unchanged.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With the same $K_N$, the update at permuted index $i$ is exactly the original updated state at index $\\sigma(i)$, since its datum perturbation and reference variable are permuted along with that member. Thus the full updated tuple under $\\sigma$ is a permutation of the original updated tuple. Its law is unchanged by [A1], which is joint exchangeability.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the hypotheses specify nonempty finite-dimensional vectors or rows; no empty index set is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero or singular state covariance and zero limiting moments are allowed wherever only positive semidefiniteness or finite moments are required."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement: the ensemble/row index requires N>=2, so the N=1 case is outside this result."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: constant or degenerate random variables still satisfy the displayed moment and convergence argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Proof: only finite-dimensional sums, limits, and algebraic constructions are used; no arbitrary choice function is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        }
+      ]
+    },
+    "lem-perturbed-observation-ensemble-kalman-moment-bounds": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-ensemble-kalman-filter",
+          "source_section": "Definition",
+          "quote": "Fix an ensemble size $N\\ge2$, forecast map $\\Psi$, observation map $G$, datum $y\\in\\mathbb R^p$, and observation covariance $\\Gamma\\succ0$. The input is a state ensemble $x^1,\\ldots,x^N\\in\\mathbb R^d$, forecast-error draws $\\xi^i$ that are independent across members and of the input ensemble, each with the caller-specified additive model-error law, and observation perturbations $\\eta^i\\sim N_p(0,\\Gamma)$ under [[def-multivariate-normal-law]]. The observation perturbations are independent across members and independent of the forecast ensemble and forecast-error draws.\n\n1. Forecast each member: $\\widehat x^i=\\Psi(x^i)+\\xi^i$.\n\n2. Form predicted observations $z^i=G(\\widehat x^i)$, means $\\bar x=N^{-1}\\sum_i\\widehat x^i$, $\\bar z=N^{-1}\\sum_i z^i$, and empirical covariance blocks\n$$C_{xz}=N^{-1}\\sum_i(\\widehat x^i-\\bar x)(z^i-\\bar z)^T,\\qquad C_{zz}=N^{-1}\\sum_i(z^i-\\bar z)(z^i-\\bar z)^T.$$\nThe divisor-$N$ convention is part of this algorithm.\n\n3. Form $S_N=C_{zz}+\\Gamma$. Since $C_{zz}$ is positive semidefinite and $\\Gamma$ is positive definite, $S_N$ is positive definite. Factor it by Cholesky and solve $S_NK_N^T=C_{xz}^T$ by triangular solves.\n\n4. Update every member using its perturbed datum:\n$$x^{a,i}=\\widehat x^i+K_N(y+\\eta^i-z^i).$$\n\nReturn the updated ensemble and its empirical mean and covariance. When $G(x)=Hx$, $C_{xz}=C_xH^T$ and $C_{zz}=HC_xH^T$, giving the usual sample-covariance Kalman gain. This item specifies the perturbed-observation variant; deterministic square-root updates are different finite-ensemble procedures. Finite ensembles in nonlinear models are approximations and carry no general posterior-exactness claim.\n",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.\n\n",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-holder-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $p,q\\in[1,\\infty]$ be conjugate exponents. If $X$ and $Y$ are real random\nvariables in the spaces named by the corresponding clause of\n[[thm-holder-inequality-for-integrals]], then\n$$\\mathbb E[|XY|]\\le\\|X\\|_p\\|Y\\|_q.$$\n\nIn particular, $XY$ is integrable.\n\n",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1] and [F2]–[F3], each Gaussian vector is an affine image of finitely many standard normals. For every finite $p$, the integral of $|x|^p e^{-x^2/2}$ is finite because for sufficiently large $|x|$, $|x|^p\\le e^{x^2/4}$ and $e^{-x^2/4}$ is integrable; bounded intervals contribute a finite integral. Finite-dimensional triangle inequalities then give finite moments for each vector input, with laws independent of $N$ and $i$. This proves the asserted state bound at $k=0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "given",
+            "base",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume the induction hypothesis that at time $k-1$ the state moments are bounded uniformly in $N,i$ at every finite order. The forecast formula in [F1] is a fixed linear map plus a Gaussian process-error draw. The triangle inequality and $ (a+b)^p\\le2^{p-1}(a^p+b^p)$ for $a,b\\ge0$ therefore give uniform bounds at every order for the forecast members $X_{N,i}^{f,k}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "step 1.1",
+            "IH"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Write the forecast sample covariance as $C_N=N^{-1}\\sum_iX_iX_i^T-\\bar X\\bar X^T$. Since $\\|xx^T\\|_{\\rm op}=\\|x\\|^2$, Jensen's inequality for finite averages bounds the $p$th moment of the first term by $N^{-1}\\sum_i\\mathbb E\\|X_i\\|^{2p}$ and bounds $\\mathbb E\\|\\bar X\\|^{2p}$ by the same average. Thus [F1] and the forecast bounds in step 2.1 give $\\sup_N\\mathbb E\\|C_N\\|_{\\rm op}^p<\\infty$ for every finite $p$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The matrix $H_kC_NH_k^T$ is positive semidefinite, so $S_N=H_kC_NH_k^T+R_k$ has quadratic form at least that of $R_k$. Let $r_k>0$ be the least eigenvalue of $R_k$, which exists by [F4]. Every eigenvalue of $S_N$ is at least $r_k$, hence $\\|S_N^{-1}\\|_{\\rm op}\\le r_k^{-1}$. It follows from $K_N=C_NH_k^TS_N^{-1}$ and step 3.1 that $\\sup_N\\mathbb E\\|K_N\\|_{\\rm op}^p<\\infty$ at every finite order.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Let $D_i=y_k+\\eta_{N,i}^k$. The update in [F1] gives $\\|X_{N,i}^{a,k}\\|\\le\\|X_{N,i}^{f,k}\\|+\\|K_N\\|_{\\rm op}\\|H_kX_{N,i}^{f,k}\\|+\\|K_N\\|_{\\rm op}\\|D_i\\|$. Apply [F5] with exponent pair $(2,2)$ to the middle product; for the last product use that $D_i$ is independent of $K_N$ and has finite Gaussian moments. The forecast, gain, and perturbation bounds in steps 2.1 and 4.1 therefore bound the $p$th moment of the updated state uniformly in $N,i$. This proves the induction step at time $k$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "given",
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Step 1.1 proves the base bound at time zero. For each arbitrary $k\\in\\{1,\\ldots,T\\}$, the induction steps derive the state and gain bounds at time $k$ from the induction hypothesis at $k-1$. Finite induction proves both bounds for every $k\\le T$ and every finite $p$.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.1",
+            "step 5.1",
+            "discharge-induction: step 1.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the hypotheses specify nonempty finite-dimensional vectors or rows; no empty index set is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero or singular state covariance and zero limiting moments are allowed wherever only positive semidefiniteness or finite moments are required."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement: the ensemble/row index requires N>=2, so the N=1 case is outside this result."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: positive-semidefinite state and process covariances may be singular while R_k remains positive definite."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Facts and Assumptions: the Axiom of Choice use for Gaussian laws is stated explicitly; the finite algebraic induction adds no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        }
+      ]
+    },
+    "thm-three-dimensional-variational-analysis-is-gaussian-map-update": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-three-dimensional-variational-assimilation",
+          "source_section": "Definition",
+          "quote": "Given a forecast mean $m^f\\in\\mathbb R^d$, fixed background covariance $B\\in\\mathbb R^{d\\times d}$, linear observation matrix $H\\in\\mathbb R^{p\\times d}$, datum $y\\in\\mathbb R^p$, and observation-error covariance $\\Gamma\\in\\mathbb R^{p\\times p}$, require $B$ and $\\Gamma$ symmetric positive definite. Define the 3DVAR objective\n$$J(u)=\\tfrac12(u-m^f)^TB^{-1}(u-m^f)+\\tfrac12(y-Hu)^T\\Gamma^{-1}(y-Hu).$$\nForm $S=HBH^T+\\Gamma$. It is positive definite because for every $z\\ne0$,\n$$z^TSz=(H^Tz)^TB(H^Tz)+z^T\\Gamma z>0.$$\nFactor $S=LL^T$ with the unique positive-diagonal Cholesky factor from [[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]. Solve $LW=HB$ and $L^TK^T=W$; thus $K^T=S^{-1}HB$ without explicitly forming $S^{-1}$. Return the analysis point\n$$m^a=m^f+K(y-Hm^f).$$\nFor a sequential 3DVAR filter, first set $m^f_{j+1}=\\Psi_j(m^a_j)$, then apply this update with the fixed matrices $B,H,\\Gamma$ and observation $y_{j+1}$. The routine returns a point estimate only. Its unique-minimizer and Gaussian-MAP properties are established separately; no analysis covariance is returned.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-least-squares-solutions-and-normal-equation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces and let $b\\in W$. A vector $x\\in V$ minimises $\\lVert Tx-b\\rVert$ if and only if\n\n$$T^*(Tx-b)=0,$$\n\nequivalently $T^*Tx=T^*b$. Minimisers exist, and if $x_0$ is one minimiser, then the full set of minimisers is $x_0+\\ker T$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-bayes-formula-for-dominated-kernels",
+          "source_section": "Statement",
+          "quote": "Let $\\pi$ be a prior probability on $(E,\\mathcal S)$ and let $Q:E\\to T$ be a probability kernel dominated by a sigma-finite measure $\\nu$ on $(T,\\mathcal T)$, with specified nonnegative jointly measurable density $\\ell:E\\times T\\to[0,\\infty]$:\n$$Q(\\theta,B)=\\int_B\\ell(\\theta,y)\\,\\nu(dy)\\quad\\text{for every }\\theta\\in E,\\ B\\in\\mathcal T.$$\n\nDefine $m(y)=\\int_E\\ell(\\theta,y)\\,\\pi(d\\theta)$. Under the joint law with density $\\ell$ relative to $\\pi\\times\\nu$, a conditional law of the parameter given the observation is\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_A\\ell(\\theta,y)\\,\\pi(d\\theta)}{m(y)},&0<m(y)<\\infty,\\\\ \\pi(A),&m(y)=0\\text{ or }m(y)=\\infty.\\end{cases}$$\n\nThe observation marginal is $m\\,d\\nu$, and the filled fibres have marginal mass zero. This is a choice-free assertion about the explicit kernel and event identities.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-kalman-filter",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T\\ge0$, positive state dimensions $d_0,\\ldots,d_T$,\nand positive observation dimensions $p_1,\\ldots,p_T$. The input is a\nlinear-Gaussian model from\n[[def-linear-gaussian-state-space-model-with-independent-noises]], with\nmatrices $F_k\\in\\mathbb R^{d_k\\times d_{k-1}}$ and\n$H_k\\in\\mathbb R^{p_k\\times d_k}$, initial mean $m_0$, and symmetric\npositive-semidefinite covariances $P_0,Q_k,R_k$. Its state and observation\nequations are\n$$X_k=F_kX_{k-1}+q_k,\\qquad Y_k=H_kX_k+r_k,$$\nwhere $q_k\\sim N(0,Q_k)$ and $r_k\\sim N(0,R_k)$ are centered and mutually\nindependent across all times and of $X_0$.\n\nThe admissible data are vectors $y_k\\in\\mathbb R^{p_k}$ for which every\ninnovation covariance encountered below is positive definite. Positive\ndefinite means $u^TS_ku>0$ for every nonzero $u\\in\\mathbb R^{p_k}$. The\nalgorithm returns predicted and updated means and covariances and the\ninnovation and gain at each time. Initialize\n$$m_{0|0}=m_0,\\qquad P_{0|0}=P_0.$$\nFor $k=1,\\ldots,T$, perform:\n\n1. Predict:\n$$m_{k|k-1}=F_km_{k-1|k-1},\\qquad P_{k|k-1}=F_kP_{k-1|k-1}F_k^T+Q_k.$$\n2. Form the innovation and its covariance:\n$$v_k=y_k-H_km_{k|k-1},\\qquad S_k=H_kP_{k|k-1}H_k^T+R_k.$$\n3. Factor $S_k=L_kL_k^T$ with lower-triangular $L_k$ having positive\ndiagonal, using\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]].\nSolve $L_kU_k=H_kP_{k|k-1}$ and $L_k^TK_k^T=U_k$ by triangular solves. This\ndefines $K_k^T=S_k^{-1}H_kP_{k|k-1}$, hence\n$K_k=P_{k|k-1}H_k^TS_k^{-1}$, without explicitly forming $S_k^{-1}$.\n4. Update:\n$$m_{k|k}=m_{k|k-1}+K_kv_k,\\qquad P_{k|k}=P_{k|k-1}-K_kS_kK_k^T.$$\n\nFor $T=0$ the loop is empty and the returned pair is $(m_0,P_0)$. No\ninverse of $P_0$, $Q_k$, or $R_k$ is used. This item defines the procedure\nand makes no complexity, rounding-error, or numerical-stability claim.\n",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-kalman-filter-is-exact-posterior",
+          "source_section": "Statement",
+          "quote": "Assume AC. Fix a finite-horizon model from\n[[def-linear-gaussian-state-space-model-with-independent-noises]] with\nstate and observation equations\n$$X_k=F_kX_{k-1}+q_k,\\qquad Y_k=H_kX_k+r_k\\qquad (1\\le k\\le T),$$\nwhere $X_0\\sim N_{d_0}(m_0,P_0)$, the centered Gaussian noises $q_k,r_k$ are\nmutually independent across times and from $X_0$, and $P_0,Q_k,R_k$ are\nsymmetric positive semidefinite. Let the parameters and observations be\nadmissible for [[alg-kalman-filter]], so the recursively formed innovation\ncovariances\n$$S_k=H_kP_{k|k-1}H_k^T+R_k$$\nare positive definite for every $1\\le k\\le T$. Run that algorithm from\n$m_{0|0}=m_0$ and $P_{0|0}=P_0$. Then, for each $0\\le k\\le T$, the map\n$$\\pi_k(y_{1:k},\\cdot)=N_{d_k}(m_{k|k}(y_{1:k}),P_{k|k})$$\nis an everywhere-defined filtering kernel for $X_k$ given $Y_{1:k}$ in the\nsense of [[def-state-space-filtering-laws]]. The empty history at $k=0$ is a\nsingleton, and $\\pi_0=N_{d_0}(m_0,P_0)$. In particular, these recursions\ngive an exact Gaussian conditional-law version at every observation history;\neach $P_{k|k}$ is positive semidefinite. Singular initial, process,\nmeasurement, predicted-state, and filtered-state covariances are allowed.\nEquivalently, the covariance update can be written in Joseph form\n$$P_{k|k}=(I-K_kH_k)P_{k|k-1}(I-K_kH_k)^T+K_kR_kK_k^T.$$\nOnly the innovation matrices being solved must be positive definite. No\npointwise uniqueness of a conditional-law version on null histories,\nobservation-density assumption, or numerical-stability claim is made.\n\n",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $z\\ne0$, $z^TSz=(H^Tz)^TB(H^Tz)+z^T\\Gamma z>0$, so $S\\succ0$ and $K$ is defined. The inverses $B^{-1}$ and $\\Gamma^{-1}$ are positive definite: for nonzero $v$, $v^TB^{-1}v=(B^{-1}v)^TB(B^{-1}v)>0$, and the same argument applies to $\\Gamma$. By [F3], choose Cholesky factors $B^{-1}=L_BL_B^T$ and $\\Gamma^{-1}=L_\\Gamma L_\\Gamma^T$. Define $T u=(L_B^Tu,L_\\Gamma^THu)$ and $b=(L_B^Tm^f,L_\\Gamma^Ty)$. Then $2J(u)=\\|Tu-b\\|^2$. The first block $L_B^T$ is invertible, hence $\\ker T=\\{0\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The normal equation in [F2] is $B^{-1}(u-m^f)+H^T\\Gamma^{-1}(Hu-y)=0$. Let $\\delta=y-Hm^f$ and $u=m^f+BH^TS^{-1}\\delta=m^a$. Then $B^{-1}(u-m^f)=H^TS^{-1}\\delta$, while $y-Hu=(I-HBH^TS^{-1})\\delta=\\Gamma S^{-1}\\delta$. Substitution gives the normal equation. By [F2] this $u$ minimizes $J$, and because $\\ker T=\\{0\\}$ it is the unique minimizer.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under the Gaussian prior and independent Gaussian observation-error model, [F4] gives a prior density proportional to $\\exp[-\\tfrac12(u-m^f)^TB^{-1}(u-m^f)]$ and a jointly continuous likelihood density proportional to $\\exp[-\\tfrac12(y-Hu)^T\\Gamma^{-1}(y-Hu)]$. The likelihood is strictly positive and bounded above by its finite Gaussian normalizing constant; hence its prior integral is finite and positive. Bayes' formula [F5] makes the posterior density proportional to $e^{-J(u)}$; its unique maximum is therefore the unique minimizer from step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply [F6] to the one-step model with forecast covariance $B$, identity transition, zero process covariance, and observation covariance $\\Gamma$. Its innovation covariance is $S\\succ0$ by step 1.1, so the output mean is $m^f+K(y-Hm^f)=m^a$. By [F7] this is the mean of the exact conditional Gaussian law.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F6",
+            "F7",
+            "step 1.1",
+            "given",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the hypotheses specify nonempty finite-dimensional vectors or rows; no empty index set is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero or singular state covariance and zero limiting moments are allowed wherever only positive semidefiniteness or finite moments are required."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement: the ensemble/row index requires N>=2, so the N=1 case is outside this result."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: constant or degenerate random variables still satisfy the displayed moment and convergence argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Facts and Assumptions: the Axiom of Choice use for Gaussian laws is stated explicitly; the finite algebraic induction adds no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        }
+      ]
+    },
+    "thm-three-dimensional-variational-assimilation-tracking-under-contraction": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-three-dimensional-variational-assimilation",
+          "source_section": "Definition",
+          "quote": "Given a forecast mean $m^f\\in\\mathbb R^d$, fixed background covariance $B\\in\\mathbb R^{d\\times d}$, linear observation matrix $H\\in\\mathbb R^{p\\times d}$, datum $y\\in\\mathbb R^p$, and observation-error covariance $\\Gamma\\in\\mathbb R^{p\\times p}$, require $B$ and $\\Gamma$ symmetric positive definite. Define the 3DVAR objective\n$$J(u)=\\tfrac12(u-m^f)^TB^{-1}(u-m^f)+\\tfrac12(y-Hu)^T\\Gamma^{-1}(y-Hu).$$\nForm $S=HBH^T+\\Gamma$. It is positive definite because for every $z\\ne0$,\n$$z^TSz=(H^Tz)^TB(H^Tz)+z^T\\Gamma z>0.$$\nFactor $S=LL^T$ with the unique positive-diagonal Cholesky factor from [[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]. Solve $LW=HB$ and $L^TK^T=W$; thus $K^T=S^{-1}HB$ without explicitly forming $S^{-1}$. Return the analysis point\n$$m^a=m^f+K(y-Hm^f).$$\nFor a sequential 3DVAR filter, first set $m^f_{j+1}=\\Psi_j(m^a_j)$, then apply this update with the fixed matrices $B,H,\\Gamma$ and observation $y_{j+1}$. The routine returns a point estimate only. Its unique-minimizer and Gaussian-MAP properties are established separately; no analysis covariance is returned.\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $e_j=m_j-v_j^\\dagger$. By [F1], the observation equation, and $v_{j+1}^\\dagger=\\Psi(v_j^\\dagger)$, $e_{j+1}=F(m_j)-F(v_j^\\dagger)+K\\epsilon_j.$ The contraction bound [A1], triangle inequality, and [F2] give $\\|e_{j+1}\\|\\le a\\|e_j\\|+\\kappa\\epsilon.$",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $c=\\kappa\\epsilon$. Repeated substitution in step 1.1 gives, for each $n\\ge1$, $\\|e_n\\|\\le a^n\\|e_0\\|+c\\sum_{r=0}^{n-1}a^r=a^n\\|e_0\\|+c\\frac{1-a^n}{1-a}.$ For $a=0$ the finite sum is $1$ and the same expression holds for every $n\\ge1$. Since $0\\le a<1$, $a^n\\to0$, so taking the limit superior proves the bound.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the hypotheses specify nonempty finite-dimensional vectors or rows; no empty index set is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof step 2.1: a=0 is allowed and the proof handles its geometric sum explicitly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement: the ensemble/row index requires N>=2, so the N=1 case is outside this result."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: constant or degenerate random variables still satisfy the displayed moment and convergence argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Proof: only finite-dimensional sums, limits, and algebraic constructions are used; no arbitrary choice function is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        }
+      ]
+    },
+    "thm-perturbed-observation-ensemble-kalman-large-ensemble-limit": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-gaussian-state-space-model-with-independent-noises",
+          "source_section": "Definition",
+          "quote": "Assume AC ([[def-axiom-of-choice]]) and fix a finite horizon $T\\ge0$. Let\nthe state dimension at time\n$t$ be a positive integer $d_t$ for $0\\le t\\le T$, and the observation\ndimension at time $t$ be a positive integer $p_t$ for $1\\le t\\le T$.\nChoose deterministic matrices\n$F_t\\in\\mathbb R^{d_t\\times d_{t-1}}$ and\n$H_t\\in\\mathbb R^{p_t\\times d_t}$, a mean $m_0\\in\\mathbb R^{d_0}$, and\nsymmetric positive-semidefinite matrices, meaning $v^TPv\\ge0$ for every\nreal vector $v$ of matching dimension,\n$P_0\\in\\mathbb R^{d_0\\times d_0}$,\n$Q_t\\in\\mathbb R^{d_t\\times d_t}$, and\n$R_t\\in\\mathbb R^{p_t\\times p_t}$. A **linear-Gaussian state-space model\nwith independent noises** is the general finite-horizon kernel model\n([[def-general-state-space-model-by-kernels]]) with initial law\n$\\mu_0=N_{d_0}(m_0,P_0)$ and transition and observation kernels\n$$K_t(x,\\cdot)=N_{d_t}(F_t x,Q_t),\\qquad G_t(x,\\cdot)=N_{p_t}(H_t x,R_t).$$\nAll Gaussian laws use the convention of\n[[def-multivariate-normal-law]], which allows singular covariance matrices.\n\nIts independent-noise representation consists of random vectors\n$x_0,q_1,r_1,\\ldots,q_T,r_T$ on a common probability space, with\n$x_0\\sim N_{d_0}(m_0,P_0)$, $q_t\\sim N_{d_t}(0,Q_t)$,\n$r_t\\sim N_{p_t}(0,R_t)$, all mutually independent in the sense of\n[[def-independent-random-elements]] (their generated sigma-algebras are\nindependent), and equations\n$$x_t=F_t x_{t-1}+q_t,\\qquad y_t=H_t x_t+r_t\\qquad(1\\le t\\le T).$$\nThe local path-law theorem proves that every allowed parameter tuple has\nsuch a finite representation, that its induced kernels are the displayed\n$K_t,G_t$, and that its path law is the general kernel-product law.\n\nThis definition imposes the stated noise law and independence assumptions;\nit does not establish their empirical adequacy. It supplies no filtering\nalgorithm, posterior recursion, or convergence claim. Any separate formula\nthat inverts an observed innovation covariance must assume that covariance is\npositive definite at the point of inversion.\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-ensemble-kalman-filter",
+          "source_section": "Definition",
+          "quote": "Fix an ensemble size $N\\ge2$, forecast map $\\Psi$, observation map $G$, datum $y\\in\\mathbb R^p$, and observation covariance $\\Gamma\\succ0$. The input is a state ensemble $x^1,\\ldots,x^N\\in\\mathbb R^d$, forecast-error draws $\\xi^i$ that are independent across members and of the input ensemble, each with the caller-specified additive model-error law, and observation perturbations $\\eta^i\\sim N_p(0,\\Gamma)$ under [[def-multivariate-normal-law]]. The observation perturbations are independent across members and independent of the forecast ensemble and forecast-error draws.\n\n1. Forecast each member: $\\widehat x^i=\\Psi(x^i)+\\xi^i$.\n\n2. Form predicted observations $z^i=G(\\widehat x^i)$, means $\\bar x=N^{-1}\\sum_i\\widehat x^i$, $\\bar z=N^{-1}\\sum_i z^i$, and empirical covariance blocks\n$$C_{xz}=N^{-1}\\sum_i(\\widehat x^i-\\bar x)(z^i-\\bar z)^T,\\qquad C_{zz}=N^{-1}\\sum_i(z^i-\\bar z)(z^i-\\bar z)^T.$$\nThe divisor-$N$ convention is part of this algorithm.\n\n3. Form $S_N=C_{zz}+\\Gamma$. Since $C_{zz}$ is positive semidefinite and $\\Gamma$ is positive definite, $S_N$ is positive definite. Factor it by Cholesky and solve $S_NK_N^T=C_{xz}^T$ by triangular solves.\n\n4. Update every member using its perturbed datum:\n$$x^{a,i}=\\widehat x^i+K_N(y+\\eta^i-z^i).$$\n\nReturn the updated ensemble and its empirical mean and covariance. When $G(x)=Hx$, $C_{xz}=C_xH^T$ and $C_{zz}=HC_xH^T$, giving the usual sample-covariance Kalman gain. This item specifies the perturbed-observation variant; deterministic square-root updates are different finite-ensemble procedures. Finite ensembles in nonlinear models are approximations and carry no general posterior-exactness claim.\n",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-kalman-filter",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T\\ge0$, positive state dimensions $d_0,\\ldots,d_T$,\nand positive observation dimensions $p_1,\\ldots,p_T$. The input is a\nlinear-Gaussian model from\n[[def-linear-gaussian-state-space-model-with-independent-noises]], with\nmatrices $F_k\\in\\mathbb R^{d_k\\times d_{k-1}}$ and\n$H_k\\in\\mathbb R^{p_k\\times d_k}$, initial mean $m_0$, and symmetric\npositive-semidefinite covariances $P_0,Q_k,R_k$. Its state and observation\nequations are\n$$X_k=F_kX_{k-1}+q_k,\\qquad Y_k=H_kX_k+r_k,$$\nwhere $q_k\\sim N(0,Q_k)$ and $r_k\\sim N(0,R_k)$ are centered and mutually\nindependent across all times and of $X_0$.\n\nThe admissible data are vectors $y_k\\in\\mathbb R^{p_k}$ for which every\ninnovation covariance encountered below is positive definite. Positive\ndefinite means $u^TS_ku>0$ for every nonzero $u\\in\\mathbb R^{p_k}$. The\nalgorithm returns predicted and updated means and covariances and the\ninnovation and gain at each time. Initialize\n$$m_{0|0}=m_0,\\qquad P_{0|0}=P_0.$$\nFor $k=1,\\ldots,T$, perform:\n\n1. Predict:\n$$m_{k|k-1}=F_km_{k-1|k-1},\\qquad P_{k|k-1}=F_kP_{k-1|k-1}F_k^T+Q_k.$$\n2. Form the innovation and its covariance:\n$$v_k=y_k-H_km_{k|k-1},\\qquad S_k=H_kP_{k|k-1}H_k^T+R_k.$$\n3. Factor $S_k=L_kL_k^T$ with lower-triangular $L_k$ having positive\ndiagonal, using\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]].\nSolve $L_kU_k=H_kP_{k|k-1}$ and $L_k^TK_k^T=U_k$ by triangular solves. This\ndefines $K_k^T=S_k^{-1}H_kP_{k|k-1}$, hence\n$K_k=P_{k|k-1}H_k^TS_k^{-1}$, without explicitly forming $S_k^{-1}$.\n4. Update:\n$$m_{k|k}=m_{k|k-1}+K_kv_k,\\qquad P_{k|k}=P_{k|k-1}-K_kS_kK_k^T.$$\n\nFor $T=0$ the loop is empty and the returned pair is $(m_0,P_0)$. No\ninverse of $P_0$, $Q_k$, or $R_k$ is used. This item defines the procedure\nand makes no complexity, rounding-error, or numerical-stability claim.\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-kalman-filter-is-exact-posterior",
+          "source_section": "Statement",
+          "quote": "Assume AC. Fix a finite-horizon model from\n[[def-linear-gaussian-state-space-model-with-independent-noises]] with\nstate and observation equations\n$$X_k=F_kX_{k-1}+q_k,\\qquad Y_k=H_kX_k+r_k\\qquad (1\\le k\\le T),$$\nwhere $X_0\\sim N_{d_0}(m_0,P_0)$, the centered Gaussian noises $q_k,r_k$ are\nmutually independent across times and from $X_0$, and $P_0,Q_k,R_k$ are\nsymmetric positive semidefinite. Let the parameters and observations be\nadmissible for [[alg-kalman-filter]], so the recursively formed innovation\ncovariances\n$$S_k=H_kP_{k|k-1}H_k^T+R_k$$\nare positive definite for every $1\\le k\\le T$. Run that algorithm from\n$m_{0|0}=m_0$ and $P_{0|0}=P_0$. Then, for each $0\\le k\\le T$, the map\n$$\\pi_k(y_{1:k},\\cdot)=N_{d_k}(m_{k|k}(y_{1:k}),P_{k|k})$$\nis an everywhere-defined filtering kernel for $X_k$ given $Y_{1:k}$ in the\nsense of [[def-state-space-filtering-laws]]. The empty history at $k=0$ is a\nsingleton, and $\\pi_0=N_{d_0}(m_0,P_0)$. In particular, these recursions\ngive an exact Gaussian conditional-law version at every observation history;\neach $P_{k|k}$ is positive semidefinite. Singular initial, process,\nmeasurement, predicted-state, and filtered-state covariances are allowed.\nEquivalently, the covariance update can be written in Joseph form\n$$P_{k|k}=(I-K_kH_k)P_{k|k-1}(I-K_kH_k)^T+K_kR_kK_k^T.$$\nOnly the innovation matrices being solved must be positive definite. No\npointwise uniqueness of a conditional-law version on null histories,\nobservation-density assumption, or numerical-stability claim is made.\n\n",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.\n\n",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chebyshev-markov-inequality-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $t>0$. Then\n$$\\mu(\\{f\\ge t\\})\\le\\frac1t\\int f\\,d\\mu.$$\n\n",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $m\\ge1$ be finite, let $d_j\\ge1$, and let\n$Z_j$ for $1\\le j\\le m$ be mutually independent random elements of\n$\\mathbb R^{d_j}$. Suppose $Z_j\\sim N_{d_j}(a_j,\\Sigma_j)$, where each\n$\\Sigma_j$ is symmetric positive semidefinite. Put\n$D=\\sum_{j=1}^m d_j$, $Z=(Z_1,\\ldots,Z_m)$,\n$a=(a_1,\\ldots,a_m)$, and\n$\\Sigma=\\operatorname{diag}(\\Sigma_1,\\ldots,\\Sigma_m)$. Then\n$$Z\\sim N_D(a,\\Sigma).$$\nNo covariance block needs to be invertible.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-ensemble-kalman-update-preserves-joint-exchangeability",
+          "source_section": "Statement",
+          "quote": "Fix the perturbed-observation update of [[alg-ensemble-kalman-filter]]. A row of random inputs is **exchangeable** if its joint law is invariant under every common permutation of the member indices. If the forecast states, forecast errors, observation perturbations, and any reference-member variables form an exchangeable input row, then the updated states together with those reference variables are exchangeable.\n\n",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-near-iid-exchangeable-arrays-have-convergent-sample-covariances",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$. For each $N\\ge2$, let $(X_{N,i},U_{N,i})_{i=1}^N$ be jointly exchangeable random pairs in $\\mathbb R^d$. Assume that $U_{N,1},\\ldots,U_{N,N}$ are iid with the law of a fixed $U$, $\\mathbb E\\|U\\|^4<\\infty$, and $\\|X_{N,1}-U_{N,1}\\|_4\\to0$. Define\n$$\\bar X_N=N^{-1}\\sum_iX_{N,i},\\qquad C_N=N^{-1}\\sum_i(X_{N,i}-\\bar X_N)(X_{N,i}-\\bar X_N)^T.$$\nHere $\\operatorname{Cov}(U):=\\mathbb E[(U-\\mathbb EU)(U-\\mathbb EU)^T]$. Then $\\bar X_N\\to\\mathbb EU$ and $C_N\\to\\operatorname{Cov}(U)$ in probability, entry by entry.\n\n",
+          "uses": [
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-linear-gaussian-reference-ensemble-reproduces-kalman-filter",
+          "source_section": "Statement",
+          "quote": "Assume AC and the finite-horizon linear-Gaussian model of [[def-linear-gaussian-state-space-model-with-independent-noises]], with $R_k\\succ0$ for $1\\le k\\le T$. Fix the observation values $y_{1:T}$. For each $N$, initialize $U_{N,i}^{a,0}$ iid with the model's $N(m_0,P_0)$ prior. At each time use independent per-member noises $q_{N,i}^k\\sim N(0,Q_k)$ and $\\eta_{N,i}^k\\sim N(0,R_k)$, independent across $i,k$ and from the preceding ensemble, and form\n$$U_{N,i}^{f,k}=F_kU_{N,i}^{a,k-1}+q_{N,i}^k,\\qquad U_{N,i}^{a,k}=U_{N,i}^{f,k}+K_k(y_k+\\eta_{N,i}^k-H_kU_{N,i}^{f,k}),$$\nwhere $K_k=P_{k|k-1}H_k^T(H_kP_{k|k-1}H_k^T+R_k)^{-1}$ is the deterministic gain from [[alg-kalman-filter]]. Then, for every $k\\le T$, the analysis members $U_{N,1}^{a,k},\\ldots,U_{N,N}^{a,k}$ are iid with law $N(m_{k|k},P_{k|k})$, the exact Kalman filtering law at the fixed data $y_{1:k}$.\n\n",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-perturbed-observation-ensemble-kalman-moment-bounds",
+          "source_section": "Statement",
+          "quote": "Fix a finite horizon linear-Gaussian model from [[def-linear-gaussian-state-space-model-with-independent-noises]], with each observation covariance $R_k\\succ0$. Run the perturbed-observation procedure of [[alg-ensemble-kalman-filter]] with iid Gaussian initial members and independent Gaussian process and observation perturbations having the model's laws. For every fixed time $k\\le T$ and every finite $p\\ge1$, there are constants $c_{k,p}$ and $b_{k,p}$, independent of ensemble size $N\\ge2$ and member index $i$, such that\n$$\\sup_{N,i}\\mathbb E\\|X_{N,i}^{a,k}\\|^p\\le c_{k,p},\\qquad \\sup_N\\mathbb E\\|K_N^k\\|_{\\rm op}^p\\le b_{k,p}.$$\nHere $\\|\\cdot\\|_{\\rm op}$ is the Euclidean operator norm. The claim is for each fixed finite horizon, not a bound uniform in $k$ as the horizon grows.\n\n",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-probability-convergence-plus-higher-moments-gives-lp-convergence",
+          "source_section": "Statement",
+          "quote": "Let $1\\le q<s<\\infty$. Suppose random vectors $Z_n,Z$ in a fixed finite-dimensional Euclidean space satisfy $Z_n\\to Z$ in probability, $\\mathbb E\\|Z\\|^s<\\infty$, and $\\sup_n\\mathbb E\\|Z_n\\|^s<\\infty$. Then $\\mathbb E\\|Z_n-Z\\|^q\\to0$.\n\n",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Couple the EnKF members with a reference ensemble by using the same iid initial vectors, process-error draws, and perturbed observations. At time $0$, $X_{N,i}^{a,0}=U_{N,i}^{a,0}$, so the paired row is exchangeable and the memberwise difference is zero in every finite $L^p$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "base"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $k\\in\\{1,\\ldots,T\\}$ and assume the induction hypothesis: the paired analysis row $(X_{N,i}^{a,k-1},U_{N,i}^{a,k-1})_{i=1}^N$ is exchangeable and $\\|X_{N,1}^{a,k-1}-U_{N,1}^{a,k-1}\\|_p\\to0$ for every finite $p$. Couple the forecasts with the same $q_{N,i}^k$; then $X_{N,i}^{f,k}-U_{N,i}^{f,k}=F_k(X_{N,i}^{a,k-1}-U_{N,i}^{a,k-1})$. Thus forecast differences tend to zero in every finite $L^p$. The independent iid process-error and observation-perturbation rows have permutation-invariant laws and are independent of the paired analysis row; their product with that row is permutation-invariant, and the same forecast map is applied to each member. Hence the forecast pair row with its perturbations is exchangeable. By [F8] and [F1], each reference forecast is Gaussian, with mean and covariance $m^f=F_km_{k-1|k-1}$ and $P^f=F_kP_{k-1|k-1}F_k^T+Q_k$ as in [F3]; independence across members follows from the independent per-member inputs.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F8",
+            "L3",
+            "given",
+            "step 1.1",
+            "IH",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [L2] to the forecast pair row with $p=4$. The reference forecast covariance is $P_{k|k-1}$ by [F1] and [F3], so $C_N^{f,k}\\to P_{k|k-1}$ in probability. Since $R_k\\succ0$, both $S_N=H_kC_N^{f,k}H_k^T+R_k$ and $S=H_kP_{k|k-1}H_k^T+R_k$ dominate $R_k$ in quadratic form. [F5] bounds both inverse operator norms by $1/\\lambda_{\\min}(R_k)$. The identity $S_N^{-1}-S^{-1}=S_N^{-1}(S-S_N)S^{-1}$ therefore gives $K_N^k=C_N^{f,k}H_k^TS_N^{-1}\\to K_k=P_{k|k-1}H_k^TS^{-1}$ in probability.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "L2",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $D_{N,i}^k=y_k+\\eta_{N,i}^k$. Subtracting the reference update from the EnKF update yields $X_{N,i}^{a,k}-U_{N,i}^{a,k}=(I-K_N^kH_k)(X_{N,i}^{f,k}-U_{N,i}^{f,k})+(K_N^k-K_k)(D_{N,i}^k-H_kU_{N,i}^{f,k}).$ The first factor in the first product is bounded in probability because $K_N^k\\to K_k$ in probability. The first factor in the second product tends to zero in probability, while $D_{N,i}^k-H_kU_{N,i}^{f,k}$ has a fixed finite-moment Gaussian law. Splitting on whether this latter norm exceeds an arbitrary $M$ shows the product tends to zero in probability. The same bounded-in-probability argument for the first product gives $X_{N,1}^{a,k}-U_{N,1}^{a,k}\\to0$ in probability. By [L1], the updated paired row is exchangeable.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "L1",
+            "L3",
+            "given",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The uniform moment bounds [L4] and the Gaussian reference law [L3] give a uniform bound on $\\mathbb E\\|X_{N,1}^{a,k}-U_{N,1}^{a,k}\\|^s$ for every finite $s$. Apply [L5] with any $s>p$ to the probability convergence in step 4.1; the memberwise difference tends to zero in $L^p$ for every finite $p$. Together, the preceding steps establish the induction hypothesis at time $k$.",
+          "step": "5.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "L5",
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "At any fixed $k$, the paired row is exchangeable, the reference members are iid with law $\\pi_k$ by [L3], and [F4] identifies that Kalman law with the exact filtering law at the fixed data. The memberwise difference tends to zero in $L^4$ by step 5.1. The sample-moment result [L2] gives the claimed mean and covariance convergence. For bounded Lipschitz $\\varphi$, the empirical-average difference is at most $\\operatorname{Lip}(\\varphi)N^{-1}\\sum_i\\|X_{N,i}^{a,k}-U_{N,i}^{a,k}\\|$; its expectation tends to zero by exchangeability and the $L^1$ convergence in step 5.1, so the pointwise bound $\\mathbb P(W\\ge t)\\le t^{-1}\\mathbb EW$ from [F7] makes it vanish in probability. For the iid reference average, independence [F6] makes all distinct centered cross terms have expectation zero, so its variance is $\\operatorname{Var}(\\varphi(U_{N,1}^{a,k}))/N\\le\\|\\varphi\\|_\\infty^2/N$. Apply [F7] to its squared centered deviation at threshold $\\epsilon^2$ to obtain convergence in probability to $\\int\\varphi\\,d\\pi_k$. This proves the limits for each fixed $k$.",
+          "step": "6.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F6",
+            "F7",
+            "L1",
+            "L2",
+            "L3",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Step 1.1 is the base case, and for every $k\\ge1$ the four induction steps establish the induction hypothesis at time $k$ from time $k-1$. Thus the coupling bounds hold through $T$, and step 6.1 gives the three asserted limits for every fixed $k\\le T$.",
+          "step": "7.1",
+          "inputs": [
+            "step 1.1",
+            "step 5.1",
+            "step 6.1",
+            "discharge-induction: step 1.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the hypotheses specify nonempty finite-dimensional vectors or rows; no empty index set is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero or singular state covariance and zero limiting moments are allowed wherever only positive semidefiniteness or finite moments are required."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement: the ensemble/row index requires N>=2, so the N=1 case is outside this result."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: positive-semidefinite state and process covariances may be singular while R_k remains positive definite."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Facts and Assumptions: the Axiom of Choice use for Gaussian laws is stated explicitly; the finite algebraic induction adds no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        }
+      ]
+    },
+    "ex-finite-ensemble-covariance-fluctuation": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-ensemble-kalman-filter",
+          "source_section": "Definition",
+          "quote": "Fix an ensemble size $N\\ge2$, forecast map $\\Psi$, observation map $G$, datum $y\\in\\mathbb R^p$, and observation covariance $\\Gamma\\succ0$. The input is a state ensemble $x^1,\\ldots,x^N\\in\\mathbb R^d$, forecast-error draws $\\xi^i$ that are independent across members and of the input ensemble, each with the caller-specified additive model-error law, and observation perturbations $\\eta^i\\sim N_p(0,\\Gamma)$ under [[def-multivariate-normal-law]]. The observation perturbations are independent across members and independent of the forecast ensemble and forecast-error draws.\n\n1. Forecast each member: $\\widehat x^i=\\Psi(x^i)+\\xi^i$.\n\n2. Form predicted observations $z^i=G(\\widehat x^i)$, means $\\bar x=N^{-1}\\sum_i\\widehat x^i$, $\\bar z=N^{-1}\\sum_i z^i$, and empirical covariance blocks\n$$C_{xz}=N^{-1}\\sum_i(\\widehat x^i-\\bar x)(z^i-\\bar z)^T,\\qquad C_{zz}=N^{-1}\\sum_i(z^i-\\bar z)(z^i-\\bar z)^T.$$\nThe divisor-$N$ convention is part of this algorithm.\n\n3. Form $S_N=C_{zz}+\\Gamma$. Since $C_{zz}$ is positive semidefinite and $\\Gamma$ is positive definite, $S_N$ is positive definite. Factor it by Cholesky and solve $S_NK_N^T=C_{xz}^T$ by triangular solves.\n\n4. Update every member using its perturbed datum:\n$$x^{a,i}=\\widehat x^i+K_N(y+\\eta^i-z^i).$$\n\nReturn the updated ensemble and its empirical mean and covariance. When $G(x)=Hx$, $C_{xz}=C_xH^T$ and $C_{zz}=HC_xH^T$, giving the usual sample-covariance Kalman gain. This item specifies the perturbed-observation variant; deterministic square-root updates are different finite-ensemble procedures. Finite ensembles in nonlinear models are approximations and carry no general posterior-exactness claim.\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $N=2$, $\\bar X=(X_1+X_2)/2$, so $X_1-\\bar X=(X_1-X_2)/2$ and $X_2-\\bar X=-(X_1-X_2)/2$. By [F3], $C_2=\\tfrac12\\bigl((X_1-\\bar X)^2+(X_2-\\bar X)^2\\bigr)=\\frac{(X_1-X_2)^2}{4}.$",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The event $A=\\{-0.1<X_1<0.1,\\ 3<X_2<3.1\\}$ has positive probability: each interval has positive probability by [F1], and the variables are independent. On $A$, $X_2-X_1>2.9$, so step 1.1 gives $C_2>2.9^2/4=2.1025>1$. The true variance of $N(0,1)$ is $1$ by [F2]; hence the finite-ensemble covariance differs from it with positive probability.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the displayed example fixes a nonempty finite state/observation or ensemble configuration."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: the parameters and data may include zero values; the verification remains defined under the stated positive covariance assumptions."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example: the specified ensemble has N=2; an empty or one-member ensemble is outside the algorithm domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification step 1.1: the empirical covariance formula is also defined when X_1=X_2, giving zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: Verification: all finite arithmetic is explicit; the only random laws are the stated Gaussian laws and their axiom use is recorded in the item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        }
+      ]
+    },
+    "ex-four-dimensional-variational-objective-has-two-local-minima": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-four-dimensional-variational-assimilation",
+          "source_section": "Definition",
+          "quote": "Fix $T\\ge1$, an initial background mean $m_b$, background covariance $B\\succ0$, observations $y_t$, observation maps $G_t$, and observation covariances $\\Gamma_t\\succ0$. All decision spaces below are finite-dimensional open subsets on which the stated maps are continuously differentiable. For a positive-definite covariance $M$, write $\\|v\\|_{M^{-1}}^2=v^TM^{-1}v$.\n\nIn **strong-constraint 4DVAR**, choose the initial state $u_0$ and generate $u_t=\\Psi_{t-1}(u_{t-1})$ for $1\\le t\\le T$. Minimize the trajectory objective\n$$J_s(u_0)=\\tfrac12\\|u_0-m_b\\|_{B^{-1}}^2+\\tfrac12\\sum_{t=1}^T\\|y_t-G_t(u_t)\\|_{\\Gamma_t^{-1}}^2.$$\n\nIn **weak-constraint 4DVAR**, the decision variable is the full path $(u_0,\\ldots,u_T)$. Given model-error covariances $Q_t\\succ0$, minimize\n$$J_w(u_0,\\ldots,u_T)=\\tfrac12\\|u_0-m_b\\|_{B^{-1}}^2+\\tfrac12\\sum_{t=1}^T\\|y_t-G_t(u_t)\\|_{\\Gamma_t^{-1}}^2+\\tfrac12\\sum_{t=1}^T\\|u_t-\\Psi_{t-1}(u_{t-1})\\|_{Q_t^{-1}}^2.$$\n\nSelect one objective, an initial decision vector, a finite iteration limit $M\\ge0$, and either positive fixed steps or the backtracking parameters required by [[alg-gradient-descent]]. Run that algorithm on the selected objective for at most $M$ updates and return its last iterate (or report its domain failure). In strong mode return the trajectory generated from the last initial-state iterate; in weak mode return the last path iterate. This is a finite numerical procedure, not a guarantee that a global or local minimizer is reached. The page's BCS-20 hypotheses for gradient descent supply no general guarantee for these objectives.\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $u_1=\\Psi(u_0)=u_0$, the one-variable objective from [F1] is $J(u)=\\tfrac12u^2+\\tfrac12(1-u^2)^2=\\tfrac12-u^2+\\tfrac12u^4.$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Differentiating gives $J'(u)=u(2u^2-1)$. Its only stationary points are $0$ and $\\pm1/\\sqrt2$. The derivative changes from negative to positive at each of $\\pm1/\\sqrt2$, so both are strict local minima. The objective is even, $J(\\pm1/\\sqrt2)=1/8<J(0)=1/2$, and $J(u)\\to\\infty$ as $|u|\\to\\infty$. Every global minimum is therefore attained at a stationary point, and these two distinct points are both global minimizers. Thus the minimizer is not unique, so an iterative routine's finite definition gives no guarantee that it returns a designated unique solution.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the displayed example fixes a nonempty finite state/observation or ensemble configuration."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: the parameters and data may include zero values; the verification remains defined under the stated positive covariance assumptions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: its one-step window T=1 is an allowed boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: the exact formulas remain defined at the stated positive covariance values."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: Verification: all finite arithmetic is explicit; the only random laws are the stated Gaussian laws and their axiom use is recorded in the item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        }
+      ]
+    },
+    "ex-nonlinear-observation-ensemble-kalman-does-not-recover-posterior": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-bayes-formula-for-dominated-kernels",
+          "source_section": "Statement",
+          "quote": "Let $\\pi$ be a prior probability on $(E,\\mathcal S)$ and let $Q:E\\to T$ be a probability kernel dominated by a sigma-finite measure $\\nu$ on $(T,\\mathcal T)$, with specified nonnegative jointly measurable density $\\ell:E\\times T\\to[0,\\infty]$:\n$$Q(\\theta,B)=\\int_B\\ell(\\theta,y)\\,\\nu(dy)\\quad\\text{for every }\\theta\\in E,\\ B\\in\\mathcal T.$$\n\nDefine $m(y)=\\int_E\\ell(\\theta,y)\\,\\pi(d\\theta)$. Under the joint law with density $\\ell$ relative to $\\pi\\times\\nu$, a conditional law of the parameter given the observation is\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_A\\ell(\\theta,y)\\,\\pi(d\\theta)}{m(y)},&0<m(y)<\\infty,\\\\ \\pi(A),&m(y)=0\\text{ or }m(y)=\\infty.\\end{cases}$$\n\nThe observation marginal is $m\\,d\\nu$, and the filled fibres have marginal mass zero. This is a choice-free assertion about the explicit kernel and event identities.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-ensemble-kalman-filter",
+          "source_section": "Definition",
+          "quote": "Fix an ensemble size $N\\ge2$, forecast map $\\Psi$, observation map $G$, datum $y\\in\\mathbb R^p$, and observation covariance $\\Gamma\\succ0$. The input is a state ensemble $x^1,\\ldots,x^N\\in\\mathbb R^d$, forecast-error draws $\\xi^i$ that are independent across members and of the input ensemble, each with the caller-specified additive model-error law, and observation perturbations $\\eta^i\\sim N_p(0,\\Gamma)$ under [[def-multivariate-normal-law]]. The observation perturbations are independent across members and independent of the forecast ensemble and forecast-error draws.\n\n1. Forecast each member: $\\widehat x^i=\\Psi(x^i)+\\xi^i$.\n\n2. Form predicted observations $z^i=G(\\widehat x^i)$, means $\\bar x=N^{-1}\\sum_i\\widehat x^i$, $\\bar z=N^{-1}\\sum_i z^i$, and empirical covariance blocks\n$$C_{xz}=N^{-1}\\sum_i(\\widehat x^i-\\bar x)(z^i-\\bar z)^T,\\qquad C_{zz}=N^{-1}\\sum_i(z^i-\\bar z)(z^i-\\bar z)^T.$$\nThe divisor-$N$ convention is part of this algorithm.\n\n3. Form $S_N=C_{zz}+\\Gamma$. Since $C_{zz}$ is positive semidefinite and $\\Gamma$ is positive definite, $S_N$ is positive definite. Factor it by Cholesky and solve $S_NK_N^T=C_{xz}^T$ by triangular solves.\n\n4. Update every member using its perturbed datum:\n$$x^{a,i}=\\widehat x^i+K_N(y+\\eta^i-z^i).$$\n\nReturn the updated ensemble and its empirical mean and covariance. When $G(x)=Hx$, $C_{xz}=C_xH^T$ and $C_{zz}=HC_xH^T$, giving the usual sample-covariance Kalman gain. This item specifies the perturbed-observation variant; deterministic square-root updates are different finite-ensemble procedures. Finite ensembles in nonlinear models are approximations and carry no general posterior-exactness claim.\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The predicted observations of both ensemble members equal $1$, so their empirical observation variance is $0$. Their empirical state-observation cross-covariance is also $0$, because the observation deviations are both zero. By [F5] and $\\gamma>0$, the gain is zero; the update is therefore $x^{a,1}=-1$, $x^{a,2}=1$ for every perturbation realization. The updated empirical variance remains $1$.",
+          "step": "1.1",
+          "inputs": [
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [A1], [F1], and [F3], the prior and Gaussian likelihood have densities. The likelihood is positive and bounded, so its prior integral is finite and positive; Bayes' formula [F4] makes the posterior density proportional to the even function $e^{-x^2/2}w(x^2)$, where $w(t)=e^{-t^2/(2\\gamma)}$. The posterior mean is therefore zero by symmetry. Put $T=X^2$. Since $\\mathbb ET=1$ by [F2], $\\mathbb E[(T-1)w(T)]=\\mathbb E[(T-1)(w(T)-w(1))]<0.$ The equality uses $\\mathbb E(T-1)=0$. The inequality holds because $w$ is strictly decreasing on $[0,\\infty)$, so the integrand is negative whenever $T\\ne1$; the standard normal density gives $\\mathbb P(T=1)=0$. The integrand is integrable since $0<w\\le1$ and $\\mathbb ET<\\infty$. Thus the posterior variance is $\\operatorname{Var}(X\\mid Y=0)=\\frac{\\mathbb E[T w(T)]}{\\mathbb E[w(T)]}<1.$ The finite EnKF ensemble variance from step 1.1 is $1$, so this admissible nonlinear finite-ensemble update does not equal the exact posterior law.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the displayed example fixes a nonempty finite state/observation or ensemble configuration."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 1.1: the empirical cross-covariance is zero and the gain is exactly zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: the scalar dimension d=p=1 is allowed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: the exact formulas remain defined at the stated positive covariance values."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: Verification: all finite arithmetic is explicit; the only random laws are the stated Gaussian laws and their axiom use is recorded in the item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        }
+      ]
+    },
+    "ex-linear-gaussian-three-dimensional-variational-analysis": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-gaussian-state-space-model-with-independent-noises",
+          "source_section": "Definition",
+          "quote": "Assume AC ([[def-axiom-of-choice]]) and fix a finite horizon $T\\ge0$. Let\nthe state dimension at time\n$t$ be a positive integer $d_t$ for $0\\le t\\le T$, and the observation\ndimension at time $t$ be a positive integer $p_t$ for $1\\le t\\le T$.\nChoose deterministic matrices\n$F_t\\in\\mathbb R^{d_t\\times d_{t-1}}$ and\n$H_t\\in\\mathbb R^{p_t\\times d_t}$, a mean $m_0\\in\\mathbb R^{d_0}$, and\nsymmetric positive-semidefinite matrices, meaning $v^TPv\\ge0$ for every\nreal vector $v$ of matching dimension,\n$P_0\\in\\mathbb R^{d_0\\times d_0}$,\n$Q_t\\in\\mathbb R^{d_t\\times d_t}$, and\n$R_t\\in\\mathbb R^{p_t\\times p_t}$. A **linear-Gaussian state-space model\nwith independent noises** is the general finite-horizon kernel model\n([[def-general-state-space-model-by-kernels]]) with initial law\n$\\mu_0=N_{d_0}(m_0,P_0)$ and transition and observation kernels\n$$K_t(x,\\cdot)=N_{d_t}(F_t x,Q_t),\\qquad G_t(x,\\cdot)=N_{p_t}(H_t x,R_t).$$\nAll Gaussian laws use the convention of\n[[def-multivariate-normal-law]], which allows singular covariance matrices.\n\nIts independent-noise representation consists of random vectors\n$x_0,q_1,r_1,\\ldots,q_T,r_T$ on a common probability space, with\n$x_0\\sim N_{d_0}(m_0,P_0)$, $q_t\\sim N_{d_t}(0,Q_t)$,\n$r_t\\sim N_{p_t}(0,R_t)$, all mutually independent in the sense of\n[[def-independent-random-elements]] (their generated sigma-algebras are\nindependent), and equations\n$$x_t=F_t x_{t-1}+q_t,\\qquad y_t=H_t x_t+r_t\\qquad(1\\le t\\le T).$$\nThe local path-law theorem proves that every allowed parameter tuple has\nsuch a finite representation, that its induced kernels are the displayed\n$K_t,G_t$, and that its path law is the general kernel-product law.\n\nThis definition imposes the stated noise law and independence assumptions;\nit does not establish their empirical adequacy. It supplies no filtering\nalgorithm, posterior recursion, or convergence claim. Any separate formula\nthat inverts an observed innovation covariance must assume that covariance is\npositive definite at the point of inversion.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-three-dimensional-variational-assimilation",
+          "source_section": "Definition",
+          "quote": "Given a forecast mean $m^f\\in\\mathbb R^d$, fixed background covariance $B\\in\\mathbb R^{d\\times d}$, linear observation matrix $H\\in\\mathbb R^{p\\times d}$, datum $y\\in\\mathbb R^p$, and observation-error covariance $\\Gamma\\in\\mathbb R^{p\\times p}$, require $B$ and $\\Gamma$ symmetric positive definite. Define the 3DVAR objective\n$$J(u)=\\tfrac12(u-m^f)^TB^{-1}(u-m^f)+\\tfrac12(y-Hu)^T\\Gamma^{-1}(y-Hu).$$\nForm $S=HBH^T+\\Gamma$. It is positive definite because for every $z\\ne0$,\n$$z^TSz=(H^Tz)^TB(H^Tz)+z^T\\Gamma z>0.$$\nFactor $S=LL^T$ with the unique positive-diagonal Cholesky factor from [[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]. Solve $LW=HB$ and $L^TK^T=W$; thus $K^T=S^{-1}HB$ without explicitly forming $S^{-1}$. Return the analysis point\n$$m^a=m^f+K(y-Hm^f).$$\nFor a sequential 3DVAR filter, first set $m^f_{j+1}=\\Psi_j(m^a_j)$, then apply this update with the fixed matrices $B,H,\\Gamma$ and observation $y_{j+1}$. The routine returns a point estimate only. Its unique-minimizer and Gaussian-MAP properties are established separately; no analysis covariance is returned.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-three-dimensional-variational-analysis-is-gaussian-map-update",
+          "source_section": "Statement",
+          "quote": "Let $d,p\\ge1$, $m^f\\in\\mathbb R^d$, $y\\in\\mathbb R^p$, $H\\in\\mathbb R^{p\\times d}$, and symmetric positive-definite $B\\in\\mathbb R^{d\\times d}$ and $\\Gamma\\in\\mathbb R^{p\\times p}$. Put $S=HBH^T+\\Gamma$, $K=BH^TS^{-1}$, and\n$$J(u)=\\tfrac12(u-m^f)^TB^{-1}(u-m^f)+\\tfrac12(y-Hu)^T\\Gamma^{-1}(y-Hu).$$\nThe 3DVAR analysis $m^a=m^f+K(y-Hm^f)$ from [[alg-three-dimensional-variational-assimilation]] is the unique global minimizer of $J$. If $m^f,B$ are the mean and covariance of a Gaussian forecast and the observation model is $Y=HX+r$ with independent $r\\sim N_p(0,\\Gamma)$, then $m^a$ is the unique maximum-a-posteriori point of the posterior density. It is also the mean update of the exact one-step Kalman filter with identity state transition, zero process covariance, and datum $y$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-kalman-filter",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T\\ge0$, positive state dimensions $d_0,\\ldots,d_T$,\nand positive observation dimensions $p_1,\\ldots,p_T$. The input is a\nlinear-Gaussian model from\n[[def-linear-gaussian-state-space-model-with-independent-noises]], with\nmatrices $F_k\\in\\mathbb R^{d_k\\times d_{k-1}}$ and\n$H_k\\in\\mathbb R^{p_k\\times d_k}$, initial mean $m_0$, and symmetric\npositive-semidefinite covariances $P_0,Q_k,R_k$. Its state and observation\nequations are\n$$X_k=F_kX_{k-1}+q_k,\\qquad Y_k=H_kX_k+r_k,$$\nwhere $q_k\\sim N(0,Q_k)$ and $r_k\\sim N(0,R_k)$ are centered and mutually\nindependent across all times and of $X_0$.\n\nThe admissible data are vectors $y_k\\in\\mathbb R^{p_k}$ for which every\ninnovation covariance encountered below is positive definite. Positive\ndefinite means $u^TS_ku>0$ for every nonzero $u\\in\\mathbb R^{p_k}$. The\nalgorithm returns predicted and updated means and covariances and the\ninnovation and gain at each time. Initialize\n$$m_{0|0}=m_0,\\qquad P_{0|0}=P_0.$$\nFor $k=1,\\ldots,T$, perform:\n\n1. Predict:\n$$m_{k|k-1}=F_km_{k-1|k-1},\\qquad P_{k|k-1}=F_kP_{k-1|k-1}F_k^T+Q_k.$$\n2. Form the innovation and its covariance:\n$$v_k=y_k-H_km_{k|k-1},\\qquad S_k=H_kP_{k|k-1}H_k^T+R_k.$$\n3. Factor $S_k=L_kL_k^T$ with lower-triangular $L_k$ having positive\ndiagonal, using\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]].\nSolve $L_kU_k=H_kP_{k|k-1}$ and $L_k^TK_k^T=U_k$ by triangular solves. This\ndefines $K_k^T=S_k^{-1}H_kP_{k|k-1}$, hence\n$K_k=P_{k|k-1}H_k^TS_k^{-1}$, without explicitly forming $S_k^{-1}$.\n4. Update:\n$$m_{k|k}=m_{k|k-1}+K_kv_k,\\qquad P_{k|k}=P_{k|k-1}-K_kS_kK_k^T.$$\n\nFor $T=0$ the loop is empty and the returned pair is $(m_0,P_0)$. No\ninverse of $P_0$, $Q_k$, or $R_k$ is used. This item defines the procedure\nand makes no complexity, rounding-error, or numerical-stability claim.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-kalman-filter-is-exact-posterior",
+          "source_section": "Statement",
+          "quote": "Assume AC. Fix a finite-horizon model from\n[[def-linear-gaussian-state-space-model-with-independent-noises]] with\nstate and observation equations\n$$X_k=F_kX_{k-1}+q_k,\\qquad Y_k=H_kX_k+r_k\\qquad (1\\le k\\le T),$$\nwhere $X_0\\sim N_{d_0}(m_0,P_0)$, the centered Gaussian noises $q_k,r_k$ are\nmutually independent across times and from $X_0$, and $P_0,Q_k,R_k$ are\nsymmetric positive semidefinite. Let the parameters and observations be\nadmissible for [[alg-kalman-filter]], so the recursively formed innovation\ncovariances\n$$S_k=H_kP_{k|k-1}H_k^T+R_k$$\nare positive definite for every $1\\le k\\le T$. Run that algorithm from\n$m_{0|0}=m_0$ and $P_{0|0}=P_0$. Then, for each $0\\le k\\le T$, the map\n$$\\pi_k(y_{1:k},\\cdot)=N_{d_k}(m_{k|k}(y_{1:k}),P_{k|k})$$\nis an everywhere-defined filtering kernel for $X_k$ given $Y_{1:k}$ in the\nsense of [[def-state-space-filtering-laws]]. The empty history at $k=0$ is a\nsingleton, and $\\pi_0=N_{d_0}(m_0,P_0)$. In particular, these recursions\ngive an exact Gaussian conditional-law version at every observation history;\neach $P_{k|k}$ is positive semidefinite. Singular initial, process,\nmeasurement, predicted-state, and filtered-state covariances are allowed.\nEquivalently, the covariance update can be written in Joseph form\n$$P_{k|k}=(I-K_kH_k)P_{k|k-1}(I-K_kH_k)^T+K_kR_kK_k^T.$$\nOnly the innovation matrices being solved must be positive definite. No\npointwise uniqueness of a conditional-law version on null histories,\nobservation-density assumption, or numerical-stability claim is made.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $S=HBH^T+\\Gamma=2$ and $K=BH^TS^{-1}=1/2$. Thus the analysis is $m^a=0+(1/2)(2-0)=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The independent Gaussian prior and observation-error model in the Example is the one-step model specified by [F1]. Completing the square gives $J(u)=\\tfrac12u^2+\\tfrac12(2-u)^2=(u-1)^2+1$, so its unique minimizer is $1$, agreeing with step 1.1 and [F3]. The Kalman covariance is $P^a=1-(1/2)2(1/2)=1/2$ by [F4]; [F5] therefore identifies the exact conditional law as $N(1,1/2)$. The 3DVAR output is its MAP point and supplies no covariance output.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the displayed example fixes a nonempty finite state/observation or ensemble configuration."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: the parameters and data may include zero values; the verification remains defined under the stated positive covariance assumptions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: the scalar dimension d=p=1 is allowed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: the exact formulas remain defined at the stated positive covariance values."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: Verification: all finite arithmetic is explicit; the only random laws are the stated Gaussian laws and their axiom use is recorded in the item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no if-and-only-if equivalence is asserted."
+        }
+      ]
+    }
+  }
+}

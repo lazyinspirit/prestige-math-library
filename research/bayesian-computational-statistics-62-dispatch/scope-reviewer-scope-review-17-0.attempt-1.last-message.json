@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "17",
+  "round": 0,
+  "reviewed_items": [
+    "lem-countable-discrete-space-is-standard-borel",
+    "def-poisson-random-measure",
+    "def-dirichlet-process",
+    "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+    "lem-dirichlet-aggregation-under-coarsening",
+    "thm-dirichlet-process-posterior-update",
+    "thm-dirichlet-process-polya-urn-predictive-law",
+    "rem-dirichlet-process-support-does-not-imply-density-contraction",
+    "ex-dirichlet-process-finite-partition-posterior-and-polya-urn",
+    "ex-dirichlet-process-alpha-null-observation-fiber"
+  ],
+  "reviewed_pages": [
+    "dirichlet-process-priors-and-finite-partition-updates",
+    "dirichlet-process-priors-and-finite-partition-updates-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The whole batch and its suppliers were reviewed. A published change-of-variables supplier proof has an unresolved gap outside this batch; its uses affect the existence and aggregation arguments and their downstream consumers. Local repairs are also needed for finite-space hypotheses.",
+  "findings": [
+    {
+      "id": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+      "type": "prerequisite",
+      "reason": "At Step 3.1, the family {V∩R} is called a π-system without including ∅. For V=R^n, two disjoint rational open rectangles intersect in ∅, which is not represented by a nonempty open rectangle. Add ∅ or explicitly include empty rectangles. Assigned uses: thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure Steps 5.1 and 6.1; lem-dirichlet-aggregation-under-coarsening Step 2.1. The gap also reaches def-dirichlet-process through the external Dirichlet-density normalization proof."
+    },
+    {
+      "id": "lem-dirichlet-aggregation-under-coarsening",
+      "type": "local",
+      "reason": "Step 1.1 applies the normalized-gamma theorem to {1,…,k} without verifying the finite-space hypotheses. State that the space is standard Borel, for example by lem-countable-discrete-space-is-standard-borel, and define the finite nonzero base measure by α(B)=Σ_{j∈B}a_j."
+    },
+    {
+      "id": "ex-dirichlet-process-finite-partition-posterior-and-polya-urn",
+      "type": "local",
+      "reason": "The example invokes DP on a finite discrete space without explicitly establishing the required standard-Borel condition or identifying the given masses as a finite nonzero measure. State these facts, using the assigned countable-discrete-space lemma as needed."
+    },
+    {
+      "id": "ex-dirichlet-process-alpha-null-observation-fiber",
+      "type": "local",
+      "reason": "For the finite model, explicitly establish that the discrete two-point space is standard Borel and that δ_a is a finite nonzero base measure, using the assigned discrete-space lemma and the Dirac-measure result."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-dirichlet-process",
+      "decision": "escalate",
+      "reason": "Its positive-parameter Dirichlet law depends through def-dirichlet-distribution on the external density-normalization proof."
+    },
+    {
+      "id": "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+      "decision": "escalate",
+      "reason": "Uses the external change-of-variables result at Steps 5.1 and 6.1."
+    },
+    {
+      "id": "lem-dirichlet-aggregation-under-coarsening",
+      "decision": "repair",
+      "reason": "Repair the finite-space and base-measure hypotheses in Step 1.1; its Step 2.1 also uses the escalated supplier."
+    },
+    {
+      "id": "thm-dirichlet-process-posterior-update",
+      "decision": "escalate",
+      "reason": "Depends on the existence and aggregation results; no separate consumer-side gap was found."
+    },
+    {
+      "id": "thm-dirichlet-process-polya-urn-predictive-law",
+      "decision": "escalate",
+      "reason": "Depends on the posterior and existence results."
+    },
+    {
+      "id": "rem-dirichlet-process-support-does-not-imply-density-contraction",
+      "decision": "escalate",
+      "reason": "Its scope statement relies on the existence and posterior results."
+    },
+    {
+      "id": "ex-dirichlet-process-finite-partition-posterior-and-polya-urn",
+      "decision": "repair",
+      "reason": "Make the finite-space and base-measure hypotheses explicit; the example also relies on the unresolved upstream results."
+    },
+    {
+      "id": "ex-dirichlet-process-alpha-null-observation-fiber",
+      "decision": "repair",
+      "reason": "Make the finite-space and δ_a base-measure hypotheses explicit; the example also relies on the unresolved upstream results."
+    },
+    {
+      "id": "dirichlet-process-priors-and-finite-partition-updates",
+      "decision": "escalate",
+      "reason": "Its summary claims the normalized-gamma construction and posterior results whose supplier chain is unresolved."
+    },
+    {
+      "id": "dirichlet-process-priors-and-finite-partition-updates-examples",
+      "decision": "escalate",
+      "reason": "Its summary depends on the posterior and predictive results in the unresolved chain."
+    }
+  ]
+}

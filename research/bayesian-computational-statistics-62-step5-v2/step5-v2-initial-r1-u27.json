@@ -1,0 +1,117 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "27",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "cex-identifiable-model-with-insufficient-abc-summary",
+      "model": "gpt-6-luna",
+      "context_sha256": "4d5aa143a09d21b83fdc000d4127ee64e07a7d6129bf9e7c7561d94454f0e180",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F6 omits the IID prior-simulator sequence premise of the cited rejection theorem, so its general rejection-output restatement is incomplete. This is nonfatal: here S is constantly zero and every tolerance event has probability one, so the target is directly the equal prior, while the full-data posterior at zero is delta_0 and the event {0} gives TV discrepancy 1/2. Qualified F6 and step 3.1 explicitly by the IID premise; the counterexample claim is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "cex-identifiable-model-with-insufficient-abc-summary",
+      "disposition": "repaired",
+      "post_sha256": "45e5f0d0aa7932307c890dfc2ad70a3bc9363137ed9e9d405917622823f93b26",
+      "review_context_sha256": "ee49b62b1cd2256455bdadd236148784b0d74c908dc96b62cbe367f79fdbc9c9",
+      "reason": "Checked the finite standard-Borel presentations, measurable constant summary, distinct deterministic sampling laws, posterior event identities, probability-one ABC event for all epsilon>=0, and failure of the common conditional-data kernel: Q(0,{0}) would have to be both 1 and 0. The rejection-output clause now applies only with the theorem's IID prior-simulator pairs; no sequence existence or choice axiom is asserted. Also corrected the counterexample heading to Statement refuted and synchronized contract derivation 3.1, retaining the original risk_review. These are local repair checks, not independent review of my repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "id": "cex-identifiable-model-with-insufficient-abc-summary",
+      "outcome": "confirmed_nonfatal",
+      "locus": "facts-block",
+      "finding": "F6 restated the positive-acceptance rejection theorem without its IID prior-simulator sequence hypothesis; step 3.1 cited that unqualified fact.",
+      "resolution": "F6 and step 3.1 now explicitly condition the output-law assertion on IID pairs. The probability-one target calculation and the posterior discrepancy never required repeated proposals.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "id": "cex-identifiable-model-with-insufficient-abc-summary",
+      "outcome": "confirmed_nonfatal",
+      "locus": "statement",
+      "finding": "The counterexample used the heading Statement instead of the prescribed Statement refuted, as reported by the Step-4 digest.",
+      "resolution": "Renamed the heading while preserving the complete mathematical statement verbatim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update",
+      "reason": "No published item was edited or found defective in this assigned review. The direct item dependency/reference consumer inventory is empty.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "claim_and_conventions": "Binary parameter and data spaces with all subsets measurable; prior (1/2,1/2), deterministic Y=theta, constant real summary S=0, observation y0=0, and closed tolerance epsilon>=0. The full-data posterior is delta_0 and every ABC target is the prior. Rejection output uses an assumed IID prior-simulator sequence. No AC is used.",
+    "local_evidence": [
+      "items/cex-identifiable-model-with-insufficient-abc-summary.md: F6 and Counterexample steps 1.1-4.1.",
+      "items/thm-abc-rejection-target-is-tolerance-conditioned-posterior.md: complete Statement and Proof; IID pairs and p>0 yield the first accepted output law.",
+      "items/def-approximate-bayesian-computation.md: Definition of M, positive-event normalization, and epsilon>=0 convention.",
+      "items/def-sufficient-statistic.md: common-kernel Definition; items/def-bayesian-posterior-as-regular-conditional-law.md: posterior event identities; items/def-total-variation-distance-for-probability-laws.md: event-supremum convention.",
+      "research/bayesian-computational-statistics-62-batch-27.proof-contracts.json: assigned entry, exact prerequisite excerpts and derivations; only derivation 3.1 changed under the shared-write lock."
+    ],
+    "sources_consulted": "Local item arguments and contract excerpts only. Familiar finite probability reasoning; no external source reading is claimed.",
+    "interface_comparison": "The original Statement prose is preserved verbatim under Statement refuted. Removing the literal Statement heading changes the engine statement hash, so consumers were examined. No dependency or mathematical claim changed and no prerequisite was added.",
+    "consumer_examination": [
+      {
+        "path": "library/bayesian-computational-statistics/approximate-bayesian-computation-and-simulation-based-inference-examples.md",
+        "affected_use": "A binary identifiable experiment with a constant summary leaves the ABC target at the prior, demonstrating that full-model identifiability does not establish summary sufficiency.",
+        "disposition": "unchanged_sound",
+        "reason": "The page describes the unchanged target calculation, not an unconditional repeated-sampling law. The item remains listed in examples. Exact-ID search of items and library found no other consumer."
+      }
+    ],
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-27.proof-contracts.json --strict --items cex-identifiable-model-with-insufficient-abc-summary --json",
+        "exit_code": 0,
+        "result": "ok:true; one assigned item checked; zero errors and warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-identifiable-model-with-insufficient-abc-summary.md --json",
+        "exit_code": 0,
+        "result": "One file, one proof checked, zero failures; direct strategy passes."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/cex-identifiable-model-with-insufficient-abc-summary.md --json",
+        "exit_code": 0,
+        "result": "One item checked; zero errors and warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/cex-identifiable-model-with-insufficient-abc-summary.md",
+        "exit_code": 0,
+        "result": "1 items, 4 steps, 0 defects; run once after final item edit."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run bayesian-computational-statistics-62 --items cex-identifiable-model-with-insufficient-abc-summary",
+        "exit_code": 0,
+        "result": "Review hashes recorded immediately after mathematical review and confirmed after contract synchronization; hashes were identical."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller merges proposed ledger evidence and applies the ordinary current-carrier review/certification policy. No judges, stamps, certificates, or round transitions were launched or written."
+  }
+}

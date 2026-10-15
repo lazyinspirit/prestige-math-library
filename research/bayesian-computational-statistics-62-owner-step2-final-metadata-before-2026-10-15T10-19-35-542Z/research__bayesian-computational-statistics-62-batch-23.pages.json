@@ -1,0 +1,397 @@
+[
+  {
+    "order": 2086,
+    "id": "numerical-optimization-for-statistical-computation",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Computational foundations: factorization, KL, and optimization",
+    "companion": "numerical-optimization-for-statistical-computation-examples",
+    "requires": [
+      "posterior-propriety-and-dominated-bayes-formula",
+      "minimax-lower-bounds-and-information-theoretic-methods",
+      "matrix-differentiation-and-first-order-spectral-perturbation"
+    ],
+    "items": [
+      {
+        "id": "def-latent-variable-joint-and-observed-data-factorization",
+        "kind": "definition",
+        "title": "Latent-variable joint and observed-data factorization",
+        "deps": [
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-likelihood-density",
+          "def-measurable-space",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-probability-measure",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique"
+        ],
+        "justified_by": [
+          "thm-observed-density-is-latent-marginal-under-tonelli"
+        ],
+        "statement": "On measurable parameter, observation, and latent spaces with sigma-finite observation and latent reference measures, take one specified jointly measurable nonnegative complete-data density normalized on every parameter fibre. Its observed marginal is the latent integral, and a normalized latent-fibre density is defined only when that marginal is positive and finite. This supplied joint function is not inferred from separate likelihood versions and requires no choice axiom.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mario A. T. Figueiredo, Lecture Notes on the EM Algorithm (2004)",
+              "url": "https://www2.stat.duke.edu/courses/Spring06/sta376/Support/EM/EM.Mixtures.Figueiredo.2004.pdf",
+              "locator": "§1, equation (1), PDF pp. 1–2"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-kullback-leibler-is-nonnegative",
+        "kind": "theorem",
+        "title": "Kullback–Leibler divergence is nonnegative",
+        "deps": [
+          "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "cor-second-derivative-characterises-convexity",
+          "def-axiom-of-choice",
+          "def-borel-sigma-algebra-on-the-extended-real-line",
+          "def-integral-logarithm",
+          "def-kullback-leibler-divergence",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-measure-space",
+          "def-measure-with-density",
+          "def-positive-and-negative-parts-of-a-function",
+          "def-probability-measure",
+          "lem-integral-elementary-bounds",
+          "lem-of-abs-value",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-additivity-over-subintervals",
+          "thm-algebra-of-derivatives",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-continuous-implies-integrable",
+          "thm-integration-against-a-density",
+          "thm-integral-logarithm-derivative-and-normalisation",
+          "thm-jensens-integral-inequality",
+          "thm-monotonicity-of-the-integral",
+          "thm-natural-logarithm-laws",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability"
+        ],
+        "statement": "Under AC and the published directional KL convention, D(P||Q) is nonnegative and equals zero exactly when P=Q. For finite-valued nonnegative measurable gamma and probability density q on a measure space, if 0<Z=integral gamma<infinity, q is supported by gamma, and integral q(|log gamma|+|log q|) is finite, then log Z=integral q(log gamma-log q)+D(q mu||(gamma/Z)mu). The density ratio and absolute-continuity hypotheses are proved locally.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mario A. T. Figueiredo, Lecture Notes on the EM Algorithm (2004)",
+              "url": "https://www2.stat.duke.edu/courses/Spring06/sta376/Support/EM/EM.Mixtures.Figueiredo.2004.pdf",
+              "locator": "§2, equations (7)–(9), PDF pp. 3–5; the source's parameter-equality clause is excluded"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-gradient-descent",
+        "kind": "algorithm",
+        "title": "Gradient descent",
+        "deps": [
+          "def-jacobian-matrix-and-gradient",
+          "def-real-frechet-derivative-on-real-and-complex-matrix-spaces"
+        ],
+        "justified_by": [
+          "lem-armijo-backtracking-terminates-for-strict-descent-directions"
+        ],
+        "statement": "For a continuously differentiable real objective on an open Euclidean domain, update in the negative gradient direction using either a supplied fixed positive step or Armijo backtracking; stop at a zero gradient or the caller's stopping rule.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stephen Boyd and Lieven Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 9 §§9.2–9.3, especially Algorithm 9.3, PDF pp. 477–483"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-damped-newton",
+        "kind": "algorithm",
+        "title": "Damped Newton method",
+        "deps": [
+          "cor-hessian-is-symmetric",
+          "def-hessian-and-euclidean-critical-point",
+          "def-jacobian-matrix-and-gradient",
+          "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique"
+        ],
+        "justified_by": [
+          "lem-armijo-backtracking-terminates-for-strict-descent-directions"
+        ],
+        "statement": "For a twice continuously differentiable real objective, solve the Newton system with a symmetric positive-definite Hessian by Cholesky factorization and use Armijo backtracking with a Newton-decrement stopping rule. Halt if the gradient is zero or a required positive-definite solve is unavailable.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stephen Boyd and Lieven Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 9 §9.5, especially Algorithm 9.5, PDF pp. 498–505"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-observed-density-is-latent-marginal-under-tonelli",
+        "kind": "theorem",
+        "title": "The observed density is the latent marginal under Tonelli",
+        "deps": [
+          "def-borel-sigma-algebra-on-the-extended-real-line",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-latent-variable-joint-and-observed-data-factorization",
+          "def-measurable-space",
+          "def-measure-kernel-and-probability-kernel",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-of-archimedean",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "statement": "For a jointly measurable normalized complete-data density on sigma-finite reference spaces, the latent marginal is measurable and normalized. It is finite almost everywhere; positive finite fibres define measurable normalized latent densities. A product-measurable complex-valued h may be exchanged by Fubini when its absolute hp integral is finite.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mario A. T. Figueiredo, Lecture Notes on the EM Algorithm (2004)",
+              "url": "https://www2.stat.duke.edu/courses/Spring06/sta376/Support/EM/EM.Mixtures.Figueiredo.2004.pdf",
+              "locator": "§1, equation (1), PDF pp. 1–2; the Tonelli and Fubini arguments are supplied locally"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-armijo-backtracking-terminates-for-strict-descent-directions",
+        "kind": "lemma",
+        "title": "Armijo backtracking terminates for strict descent directions",
+        "deps": [
+          "alg-damped-newton",
+          "alg-gradient-descent",
+          "def-jacobian-matrix-and-gradient",
+          "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "lem-bernoulli-inequality",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-of-archimedean"
+        ],
+        "statement": "For either authored backtracking procedure, if the objective is differentiable on an open domain and the current direction has strictly negative directional derivative, geometric Armijo backtracking accepts a positive step after finitely many reductions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stephen Boyd and Lieven Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 9 §9.2 backtracking line search and §9.5 Algorithm 9.5, PDF pp. 477–483 and 498–505"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-gradient-descent-rate-under-strong-convexity-and-smoothness",
+        "kind": "theorem",
+        "title": "Gradient descent rate under strong convexity and smoothness",
+        "deps": [
+          "alg-gradient-descent",
+          "def-jacobian-matrix-and-gradient",
+          "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-continuous-implies-integrable",
+          "thm-newton-leibniz-with-interior-derivative"
+        ],
+        "statement": "If f has an attained minimum, its gradient is L-Lipschitz, it is mu-strongly convex with 0<mu<=L, and gradient descent uses step 1/L, then f(x_k)-f* <= (1-mu/L)^k (f(x_0)-f*).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stephen Boyd and Lieven Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 9 §9.3.1, PDF pp. 477–483; the stated fixed-step form is proved locally"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-newton-local-quadratic-convergence-under-lipschitz-hessian",
+        "kind": "theorem",
+        "title": "Newton's method has local quadratic convergence under a Lipschitz Hessian",
+        "deps": [
+          "alg-damped-newton",
+          "cor-hessian-is-symmetric",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-hessian-and-euclidean-critical-point",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-continuous-implies-integrable",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "thm-monotonicity-of-the-integral",
+          "thm-newton-leibniz-with-interior-derivative"
+        ],
+        "statement": "Let f be C2 near an interior critical point x* with positive-definite Hessian and locally Lipschitz Hessian. From a sufficiently close start, damped Newton with Armijo backtracking accepts unit steps and satisfies ||x_(k+1)-x*|| <= C ||x_k-x*||^2 for a finite constant C. This is local and makes no global optimality claim.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stephen Boyd and Lieven Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 9 §9.5.3, PDF pp. 498–505; the local theorem is proved under the BCS-20 hypotheses"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      }
+    ]
+  },
+  {
+    "order": 2087,
+    "id": "numerical-optimization-for-statistical-computation-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Computational foundations: factorization, KL, and optimization — Examples",
+    "companion": "numerical-optimization-for-statistical-computation",
+    "requires": [
+      "numerical-optimization-for-statistical-computation"
+    ],
+    "items": [
+      {
+        "id": "ex-gaussian-location-kl",
+        "kind": "example",
+        "title": "Equal-variance Gaussian location KL",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-kullback-leibler-divergence",
+          "lem-gaussian-location-kl-formula",
+          "thm-kullback-leibler-is-nonnegative"
+        ],
+        "statement": "For P=N(a,tau^2) and Q=N(b,tau^2), with tau>0, the KL divergence is (a-b)^2/(2 tau^2), hence nonnegative.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-multimodal-nonconvex-objective",
+        "kind": "example",
+        "title": "A multimodal nonconvex objective",
+        "deps": [
+          "alg-damped-newton",
+          "alg-gradient-descent"
+        ],
+        "statement": "The smooth objective f(x)=(x^2-1)^2 has two distinct global minima and a local maximum between them; no global convergence guarantee is inferred for either local algorithm.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-finite-mixture-latent-factorization",
+        "kind": "example",
+        "title": "A finite mixture latent factorization",
+        "deps": [
+          "def-latent-variable-joint-and-observed-data-factorization",
+          "thm-observed-density-is-latent-marginal-under-tonelli"
+        ],
+        "statement": "For finitely many normalized component densities and positive weights summing to one, the complete-data density p(x,j)=w_j f_j(x) has observed marginal sum_j w_j f_j(x), and its normalized positive finite fibers give the component-label conditional density.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-zero-normalizer-latent-fiber",
+        "kind": "example",
+        "title": "A zero-normalizer latent fiber",
+        "deps": [
+          "def-latent-variable-joint-and-observed-data-factorization",
+          "thm-observed-density-is-latent-marginal-under-tonelli"
+        ],
+        "statement": "A normalized complete-data density may have an observed fiber with marginal zero; on that fiber the ratio p(x,z)/m(x) is undefined and supplies no pointwise conditional density.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-strongly-convex-quadratic-gradient-descent",
+        "kind": "example",
+        "title": "Gradient descent on a strongly convex quadratic",
+        "deps": [
+          "thm-gradient-and-hessian-of-the-frobenius-least-squares-functional",
+          "thm-gradient-descent-rate-under-strong-convexity-and-smoothness",
+          "thm-hessian-characterises-convexity"
+        ],
+        "statement": "For f(x)=1/2||x-b||^2, the gradient and Hessian are x-b and I. With mu=1 and a valid smoothness constant L=2, step 1/L gives objective gap 4^-k times the initial gap, so the claimed (1/2)^k bound holds.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      }
+    ]
+  }
+]

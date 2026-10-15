@@ -1,0 +1,210 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "48",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "lem-near-iid-exchangeable-arrays-have-convergent-means",
+      "model": "gpt-6-luna",
+      "context_sha256": "949bce2799549d2c2a995e5aa384012e3a09794f9ffa06fdd1f287b9399015fc",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The title unnecessarily describes the reference row as iid, whereas the stated result correctly permits a common square-integrable law with pairwise zero covariances. Joint exchangeability transfers the L2 coupling bound to every coordinate. Holder bounds the difference of pairwise covariances by quantities tending to zero, and the exchangeable-mean variance is Var(X_1)/N+(1-1/N)Cov(X_1,X_2). Together with convergence of the means this proves the stated L2 conclusion without independence. Corrected only the title to describe uncorrelated reference rows; the Statement and proof remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-three-dimensional-variational-assimilation",
+      "model": "gpt-6-luna",
+      "context_sha256": "94910f0b6f7a939bad830edafe131ffb739b767bd06d913156b0da4591a7ac63",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The Definition omitted the positive-dimension admissibility condition even though its empty-boundary contract says d,p>=1, def-data-assimilation-problem uses positive state/observation dimensions, and its well-definedness theorem assumes d,p>=1. Taken literally at p=0 its Cholesky call is outside the supplier Statement n>=1. Added only the explicit integers d,p>=1 convention already required by those interfaces; no formula, output or intended positive-dimensional claim was weakened. For p>=1, S is symmetric positive definite and both triangular systems are uniquely solvable, yielding S K^T=HB and the stated gain.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-linear-gaussian-three-dimensional-variational-analysis",
+      "model": "gpt-6-luna",
+      "context_sha256": "0dc38b9b99a2a7f1fc193c5c6076c10bbdcd2d7d92e2f697eacda5dfc9fd3d37",
+      "outcome": "false_positive",
+      "reason": "The rejection overlooks the existing Facts & Assumptions: its Given fixes the one-dimensional Gaussian prior/error model, F1 explicitly states independent Gaussian initial and observation errors and links the independent-noise model, and verification step 2.1 expressly selects that independent model. Under this setup take T=1, X_0~N(0,1), F_1=1, Q_1=0, H_1=R_1=1 and independent r_1. Then S=2, K=1/2, m^a=1, P^a=1/2; completing the square gives J=(u-1)^2+1. The cited exact-filter theorem supplies the Gaussian conditional-law version N(1,1/2). The proposed correlation-1/2 witness has Var(Y)=3 and posterior variance 1/4, but violates the explicitly independent-noise setup of F1 and step 2.1. No mathematical repair to this item is warranted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-near-iid-exchangeable-arrays-have-convergent-means",
+      "disposition": "repaired",
+      "post_sha256": "ccfdd5326164a06dd9d5308d9051b202ae816c23bc8d2a8081d1c4a8fdfe7a38",
+      "review_context_sha256": "d56658edae6aa3c4f6ddb9f5f68cef14406bac56284b305ea7ce4f753dab9e6e",
+      "reason": "Checked the complete Statement, proof, Holder supplier, owning contract and home page. The uniform second-moment bound, vanishing cross covariance and variance/bias decomposition prove the asserted L2 convergence, including a constant reference law. Only the misleading iid title was repaired; no Statement/Definition changed and no consumer propagation is triggered. This is local repair verification, not independent acceptance of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-three-dimensional-variational-assimilation",
+      "disposition": "repaired",
+      "post_sha256": "af57e48685a83a27873057f38811871a64aa92b4604a48c8de422658a34938d6",
+      "review_context_sha256": "025cf9c2de2563f370b9bd8f7dc6e868907670fe0d342b9da55a57baedd2dc0b",
+      "reason": "Read the entire procedure, Cholesky Statement/proof, data-assimilation Definition, well-definedness/MAP theorem, contract and page. Explicit positive dimensions now match the owning empty-boundary contract and the existing mathematical supplier convention. The factor is p by p; W and K^T are p by d; the two solves give K=BH^T S^-1. Rank-deficient H and zero innovation remain admissible. Sequential mode forecasts before updating, with point output only. This is verification of the local repair, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-linear-gaussian-three-dimensional-variational-analysis",
+      "disposition": "unaffected",
+      "post_sha256": "dd3cc3788997bedd745f00a296c05e35050298de6dbda82e32727171c5ce5386",
+      "review_context_sha256": "1131e4d2c1c5d50b9dc8041f1d43563dae0bdd9e70502568377cfba62f82f889",
+      "metadata_repair_only": true,
+      "reason": "Reviewed both verification steps, its complete assumptions and contract, and the actual independent-noise, 3DVAR, Gaussian-MAP and exact-Kalman supplier interfaces. F1 and step 2.1 specify independence; AC is explicit; the scalar parameters meet d=p=1 and innovation positivity. The exact-filter supplier promises a conditional-law version, which suffices at y=2 without asserting pointwise uniqueness of all versions. The example item guard is unchanged. Only its owning F2 contract quotation must follow the supplier Definition dimension clarification; no example statement or proof repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-three-dimensional-variational-analysis-is-gaussian-map-update",
+    "thm-three-dimensional-variational-assimilation-tracking-under-contraction",
+    "ex-linear-gaussian-three-dimensional-variational-analysis"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose",
+      "subject": "lem-near-iid-exchangeable-arrays-have-convergent-means",
+      "severity": "nonfatal",
+      "location": "frontmatter",
+      "disposition": "fixed",
+      "reason": "The title unnecessarily describes the reference row as iid, whereas the stated result correctly permits a common square-integrable law with pairwise zero covariances. Joint exchangeability transfers the L2 coupling bound to every coordinate. Holder bounds the difference of pairwise covariances by quantities tending to zero, and the exchangeable-mean variance is Var(X_1)/N+(1-1/N)Cov(X_1,X_2). Together with convergence of the means this proves the stated L2 conclusion without independence. Corrected only the title to describe uncorrelated reference rows; the Statement and proof remain unchanged.",
+      "evidence": [
+        {
+          "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u48.json",
+          "anchor": "decisions[0]"
+        }
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose",
+      "subject": "alg-three-dimensional-variational-assimilation",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "location": "statement",
+      "disposition": "fixed",
+      "reason": "The Definition omitted the positive-dimension admissibility condition even though its empty-boundary contract says d,p>=1, def-data-assimilation-problem uses positive state/observation dimensions, and its well-definedness theorem assumes d,p>=1. Taken literally at p=0 its Cholesky call is outside the supplier Statement n>=1. Added only the explicit integers d,p>=1 convention already required by those interfaces; no formula, output or intended positive-dimensional claim was weakened. For p>=1, S is symmetric positive definite and both triangular systems are uniquely solvable, yielding S K^T=HB and the stated gain.",
+      "evidence": [
+        {
+          "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u48.json",
+          "anchor": "decisions[1]"
+        }
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "route-to-frontier-owner",
+      "subject": "lem-near-iid-exchangeable-arrays-have-convergent-sample-covariances",
+      "severity": "nonfatal",
+      "location": "facts-block",
+      "disposition": "repair-pending",
+      "reason": "Confirmed the batch-48 Step-4 digest concern: F1 says exchangeable rows are pairwise uncorrelated and close in L2 to a common row. The supplier actually requires joint exchangeability of paired rows, a common fixed square-integrable reference law, pairwise uncorrelated reference variables and L2 convergence of the paired difference. This is an inaccurate supplier restatement, not a failure of proof steps 1.1-2.1: those use iid coordinate/reference-product rows with finite second moments and the stated L4 coupling, which meet the actual lemma. This unassigned frontier item was read without editing; the owner should replace only F1 with the accurate paired-row hypothesis, leaving Statement and proof unchanged.",
+      "affected_use": "items/lem-near-iid-exchangeable-arrays-have-convergent-sample-covariances.md F1 and proof steps 1.1-2.1.",
+      "invalidated_claim": "Only the F1 restatement is defective; the covariance convergence claim remains supported by the actual mean supplier.",
+      "minimality": "Replace F1 by the exact joint-exchangeability/common-reference-law/L2-coupling hypotheses; no change to the covariance Statement or proof is needed.",
+      "evidence": [
+        {
+          "path": "research/bayesian-computational-statistics-62-batch-48-step5-context.json",
+          "anchor": "concerns[0]"
+        },
+        {
+          "path": "items/lem-near-iid-exchangeable-arrays-have-convergent-sample-covariances.md",
+          "anchor": "Facts & Assumptions, F1"
+        }
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Completed all three assigned mathematical reviews in the supplied increasing dependency order, capturing each review with the required review-contexts command immediately after completing it and before editing another item. No unresolved mathematical uncertainty, new prerequisite, new item or outside/published consumer obligation was found. No external source consultation or independent review of these repairs is claimed.",
+    "Mean lemma: N>=2; jointly exchangeable paired rows; reference variables have one fixed square-integrable law and zero pairwise covariance. Holder supplies the product/mean bounds in steps 1.1-2.1; step 3.1 is the exact variance/bias identity. Title-only repair and owning manifest-title synchronization; original Statement and complete proof unchanged. Source evidence: items/lem-near-iid-exchangeable-arrays-have-convergent-means.md, items/cor-holder-inequality-for-random-variables.md Statement, and its owning contract.",
+    "3DVAR: the sole Definition delta is the leading integers d,p>=1 clause, already promised by its empty-boundary contract, def-data-assimilation-problem and justified_by theorem. This supplies the exact n>=1 Cholesky hypothesis. B,Gamma SPD give S SPD, and the two p-by-d triangular solves give K^T=S^-1 HB. All three direct item consumers and the owning page were examined. Their formulas and original Statements remain sound and unchanged. Updated only their exact contract quotations of the supplier; no consumer item was edited.",
+    "Example: independence is stated in F1 and expressly selected in step 2.1, with AC inherited explicitly. The one-step identity-transition, zero-process-noise scalar Kalman model gives S=2, K=1/2, mean 1, variance 1/2. The exact-filter theorem supplies a conditional-law version at y=2; no claim of unique versions on null histories is required. Original example carrier unchanged; only its F2 contract quotation followed the supplier Definition edit.",
+    "The batch-48 digest covariance-lemma F1 wording defect was verified against the complete current argument and routed to its frontier owner through ledger_updates. Its actual coordinate and product-row applications satisfy the mean lemma, so its mathematical conclusion needs no change. This unassigned item was not edited. This separate finding is not propagation from the mean title edit.",
+    "Shared metadata was acquired, reread, edited, checked and released through tools/step5-shared-write-lock.mjs under step5-v2-initial-r1-u48. The manifest title and three supplier quotations are synchronized. Focused precheck, rendering, strict contracts and the one required batched proof-layout command pass. Direct Statement/Definition comparison confirms only the algorithm interface changed. Input digest and current item guards match the report. The optional whole-library currency scan encountered an unrelated malformed carrier; a scoped check of the exact native direct-supplier hash formula confirmed all recorded review contexts without refreshing them.",
+    "No new published defect was found, so no published-consumer-supplier-ledger amendment is proposed. The existing published ledger already records separate nonfatal Cholesky proof-detail maintenance; this unit makes no new audit or repair claim for that supplier. No gate diagnostics were assigned; no judges, stamps, certificates, round transitions or workers were launched. The controller retains rejudgment and convergence duties."
+  ],
+  "downstream_reviews": [
+    {
+      "supplier": "alg-three-dimensional-variational-assimilation",
+      "id": "thm-three-dimensional-variational-analysis-is-gaussian-map-update",
+      "path": "items/thm-three-dimensional-variational-analysis-is-gaussian-map-update.md",
+      "affected_use": "Statement identifies the returned m^a as the minimizer; F1 and proof steps 1.1-2.1 use its J, S, K and return formula.",
+      "disposition": "unaffected",
+      "reason": "The consumer explicitly assumes d,p>=1. The gain, objective and output formulas are unchanged, so its least-squares and Gaussian-MAP argument uses exactly the retained algorithm branch."
+    },
+    {
+      "supplier": "alg-three-dimensional-variational-assimilation",
+      "id": "thm-three-dimensional-variational-assimilation-tracking-under-contraction",
+      "path": "items/thm-three-dimensional-variational-assimilation-tracking-under-contraction.md",
+      "affected_use": "F1 and proof step 1.1 use m_(j+1)=(I-KH)Psi(m_j)+K y_(j+1), under the positive state/observation dimension convention of def-data-assimilation-problem.",
+      "disposition": "unaffected",
+      "reason": "The invoked assimilation problem uses positive state and observation dimensions. Its fixed-gain update is unchanged, as are e_(j+1)=F(m_j)-F(v_j)+K epsilon_j and the geometric-series error bound."
+    },
+    {
+      "supplier": "alg-three-dimensional-variational-assimilation",
+      "id": "ex-linear-gaussian-three-dimensional-variational-analysis",
+      "path": "items/ex-linear-gaussian-three-dimensional-variational-analysis.md",
+      "affected_use": "F2 and verification step 1.1 use S=2, K=1/2 and m^a=1 for the scalar update d=p=1.",
+      "disposition": "unaffected",
+      "reason": "The example has d=p=1 and B=Gamma=1, so the explicit positive-dimension condition holds and its analysis arithmetic is unchanged; its separate independence rejection is still to be adjudicated."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts --json items/lem-near-iid-exchangeable-arrays-have-convergent-means.md items/alg-three-dimensional-variational-assimilation.md items/ex-linear-gaussian-three-dimensional-variational-analysis.md",
+      "exit_code": 0,
+      "result": "3 files, 2 proofs checked, 0 failures; algorithm not-applicable"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-near-iid-exchangeable-arrays-have-convergent-means.md items/alg-three-dimensional-variational-assimilation.md items/ex-linear-gaussian-three-dimensional-variational-analysis.md",
+      "exit_code": 0,
+      "result": "3 files, all mathematics and YAML parsed successfully"
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/lem-near-iid-exchangeable-arrays-have-convergent-means.md items/alg-three-dimensional-variational-assimilation.md",
+      "exit_code": 0,
+      "result": "2 items, 3 steps, 0 defects; one batched invocation after all item edits"
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-48.proof-contracts.json --strict --items lem-near-iid-exchangeable-arrays-have-convergent-means,alg-three-dimensional-variational-assimilation,ex-linear-gaussian-three-dimensional-variational-analysis,thm-three-dimensional-variational-analysis-is-gaussian-map-update,thm-three-dimensional-variational-assimilation-tracking-under-contraction --json",
+      "exit_code": 0,
+      "result": "5 entries checked, no errors or warnings after synchronizing the three exact supplier quotations. The preceding invocation failed only those three expected stale quotations."
+    },
+    {
+      "command": "Scoped verification of itemHashGuard and the native version-3 direct-supplier statement-hash formula",
+      "exit_code": 0,
+      "result": "All three original recorded post and context hashes matched; 1, 3 and 8 direct suppliers respectively. No review hash was refreshed. The optional whole-library helper retry failed on missing frontmatter in unrelated items/lem-qc-linear-isometry-preserves-inner-products.md; no foreign file was edited."
+    }
+  ],
+  "supporting_evidence": {
+    "research/bayesian-computational-statistics-62-batch-48.pages.json": "5763cc208ac507281aee31cb5de99b7767ac25a6106b7fbce586551f0e04709f",
+    "research/bayesian-computational-statistics-62-batch-48.proof-contracts.json": "c52b56299b05cc41a4010338b7c9a2ac3ee93bd768f8ed28fcf578574e562fe5"
+  }
+}

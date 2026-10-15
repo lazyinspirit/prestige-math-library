@@ -1,0 +1,232 @@
+[
+  {
+    "order": 2120,
+    "id": "mcmc-diagnostics-and-finite-run-limitations",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "MCMC diagnostics and finite-run limitations",
+    "companion": "mcmc-diagnostics-and-finite-run-limitations-examples",
+    "requires": [
+      "mcmc-clt-and-monte-carlo-standard-error",
+      "adaptive-mcmc-convergence-and-limitations"
+    ],
+    "items": [
+      {
+        "id": "def-blom-rank-normalization-for-pooled-draws",
+        "kind": "definition",
+        "title": "Blom rank-normal scores for pooled draws",
+        "statement": "Pool scalar draws, assign average ranks to ties, and map each rank r to Phi^{-1}((r-3/8)/(S+1/4)).",
+        "strategy": "Define the finite rank-score transform and state the normal-CDF inverse interface.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "lem-standard-normal-cdf-is-continuous-and-strictly-increasing"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-empirical-left-quantile-for-finite-draws",
+        "kind": "definition",
+        "title": "Left empirical quantile of finite draws",
+        "statement": "For sorted finite draws x_(1)<=...<=x_(S), set Q_S(u)=x_(ceil(Su)) for 0<u<=1, retaining ties.",
+        "strategy": "Specify the inverse-ECDF convention and tie handling.",
+        "deps": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-standard-cauchy-law",
+        "kind": "definition",
+        "title": "Standard Cauchy probability law",
+        "statement": "Define the standard Cauchy law as the probability measure with density 1/(pi*(1+x^2)) relative to Lebesgue measure; prove the normalization and well-definedness.",
+        "strategy": "Construct the density measure, evaluate its mass on symmetric compact intervals, and use monotone convergence.",
+        "deps": [
+          "def-countable-choice",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "cor-continuous-functions-are-borel-measurable",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-algebra-of-continuous-functions",
+          "def-measure-with-density",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-principal-inverse-tangent-calculus",
+          "def-principal-inverse-tangent",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "thm-monotone-convergence-for-the-integral",
+          "def-probability-measure",
+          "thm-additivity-over-subintervals",
+          "def-pi-via-first-positive-cosine-zero",
+          "thm-of-archimedean",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-functional-specific-effective-sample-size",
+        "kind": "definition",
+        "title": "Functional-specific effective sample size",
+        "statement": "For a stationary scalar functional with absolutely summable autocorrelations and positive tau=1+2 sum_{k>=1} rho(k), define ESS_h(n)=n/tau, conditionally on the corresponding asymptotic-variance regime.",
+        "strategy": "Define the variance-equivalent sample size for a chosen functional without asserting a CLT.",
+        "deps": [
+          "def-stationary-process-and-canonical-shift",
+          "def-moments-variance-and-covariance"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-split-rhat-from-multiple-chains",
+        "kind": "algorithm",
+        "title": "Split R-hat from multiple chains",
+        "statement": "Split equal-length finite chains into first and last halves, compute W, B and V+, and return sqrt(V+/W) when W>0.",
+        "strategy": "Give the finite split, within/between variance and nonestimable W=0 branch.",
+        "deps": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-multichain-effective-sample-size",
+        "kind": "algorithm",
+        "title": "Split multi-chain autocorrelation effective sample size",
+        "statement": "Split equal-length finite chains (discarding a middle draw when odd), combine split-chain within/between autocorrelations with Geyer positive/monotone paired truncation and antithetic odd/even averaging, and return the retained split sample size divided by tau subject to the documented finite software cap.",
+        "strategy": "Define the split, between/within adjustment, biased autocovariances, paired truncation, antithetic averaging, cap and nonestimable branches.",
+        "deps": [
+          "def-functional-specific-effective-sample-size"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-rank-normalized-folded-split-rhat",
+        "kind": "algorithm",
+        "title": "Rank-normalized folded split R-hat",
+        "statement": "Return the maximum of split R-hat on pooled Blom normal scores and on Blom scores of absolute deviations from the pooled median.",
+        "strategy": "Compose pooled rank normalization, splitting, folding, and the two split statistics.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-blom-rank-normalization-for-pooled-draws",
+          "alg-split-rhat-from-multiple-chains"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-bulk-effective-sample-size",
+        "kind": "algorithm",
+        "title": "Bulk effective sample size",
+        "statement": "Apply the multi-chain ESS estimator to pooled Blom normal scores of the scalar draws.",
+        "strategy": "Define bulk ESS as the ESS procedure applied to rank-normalized draws.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-blom-rank-normalization-for-pooled-draws",
+          "alg-multichain-effective-sample-size"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-tail-effective-sample-size",
+        "kind": "algorithm",
+        "title": "Tail effective sample size",
+        "statement": "Take the minimum ESS of rank-normalized indicators below the pooled 5% and 95% empirical quantiles.",
+        "strategy": "Localize ESS to the two tail quantile indicators and report the minimum.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-blom-rank-normalization-for-pooled-draws",
+          "def-empirical-left-quantile-for-finite-draws",
+          "alg-multichain-effective-sample-size"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-quantile-monte-carlo-standard-error",
+        "kind": "algorithm",
+        "title": "Quantile Monte Carlo standard error",
+        "statement": "Estimate indicator ESS at the empirical alpha-quantile, use Beta(ESS*alpha+1, ESS*(1-alpha)+1) quantiles, map them through the empirical quantile function, and take half the 16%-84% interval width.",
+        "strategy": "Define the Beta-quantile approximation and its finite, nonestimable boundaries.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-blom-rank-normalization-for-pooled-draws",
+          "def-empirical-left-quantile-for-finite-draws",
+          "def-beta-distribution",
+          "alg-multichain-effective-sample-size"
+        ],
+        "dependency_level": 2
+      }
+    ]
+  },
+  {
+    "order": 2121,
+    "id": "mcmc-diagnostics-and-finite-run-limitations-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "MCMC diagnostics and finite-run limitations \u2014 Examples",
+    "companion": "mcmc-diagnostics-and-finite-run-limitations",
+    "requires": [
+      "mcmc-diagnostics-and-finite-run-limitations"
+    ],
+    "items": [
+      {
+        "id": "ex-thinning-can-mask-sticky-mcmc-output",
+        "kind": "example",
+        "title": "Thinning lowers observed lag correlation but discards information",
+        "statement": "For a stationary two-state chain with lag correlation 0.8^k, thinning by ten lowers retained lag-one correlation but lowers total ESS under a fixed transition budget.",
+        "strategy": "Verify the transition law, correlation powers, geometric long-run variance and retained-sample ESS.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-probability-measure",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-stationary-process-and-canonical-shift",
+          "def-moments-variance-and-covariance",
+          "def-functional-specific-effective-sample-size"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-shared-funnel-region-missed-by-all-chains",
+        "kind": "example",
+        "title": "A shared missed region in a finite funnel-shaped target",
+        "statement": "Four chains can all miss a target region of mass one half while their rank-normalized folded split R-hat for each monitored coordinate is sqrt(15/16).",
+        "strategy": "Verify the finite invariant target, positive-probability missed-region event, and identical split-chain variance ratios.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-probability-measure",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "alg-rank-normalized-folded-split-rhat"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-cauchy-heavy-tail-and-location-shift-rhat",
+        "kind": "example",
+        "title": "Heavy tails and a location shift in split R-hat",
+        "statement": "The standard Cauchy has no finite second moment, while an explicit finite location-shift array has raw and rank-normalized split R-hat sqrt(7/4) and folded R-hat sqrt(3/4).",
+        "strategy": "Prove the Cauchy second-moment divergence and compute the raw, rank-normalized and folded finite variance ratios.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-standard-cauchy-law",
+          "def-countable-choice",
+          "def-moments-variance-and-covariance",
+          "def-standard-normal-and-normal-laws",
+          "lem-standard-normal-cdf-is-continuous-and-strictly-increasing",
+          "alg-split-rhat-from-multiple-chains",
+          "alg-rank-normalized-folded-split-rhat"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-centered-eight-schools-low-tail-ess-and-thinning",
+        "kind": "example",
+        "title": "Centered eight-schools runs show small R-hat with low tail ESS",
+        "statement": "Report Vehtari et al.'s centered eight-schools simulation outputs, including a near-one R-hat with low tail ESS and a thinned run whose diagnostics failed to reveal the observed problem; classify these as empirical results.",
+        "strategy": "Transcribe the source-reported simulation results and state their empirical, non-theorem status.",
+        "deps": [
+          "def-axiom-of-choice",
+          "alg-rank-normalized-folded-split-rhat",
+          "alg-bulk-effective-sample-size",
+          "alg-tail-effective-sample-size"
+        ],
+        "dependency_level": 3
+      }
+    ]
+  }
+]

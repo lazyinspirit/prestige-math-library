@@ -1,0 +1,228 @@
+[
+  {
+    "order": 2134,
+    "id": "particle-mcmc-pmmh-and-particle-gibbs",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Particle MCMC: PMMH and particle Gibbs",
+    "companion": "particle-mcmc-pmmh-and-particle-gibbs-examples",
+    "requires": [
+      "metropolis-hastings-algorithm-and-invariance",
+      "feynman-kac-particle-filters"
+    ],
+    "items": [
+      {
+        "id": "alg-pmmh",
+        "kind": "algorithm",
+        "title": "Particle marginal Metropolis–Hastings",
+        "dependency_level": 5,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-measure",
+          "def-probability-measure",
+          "def-standard-borel-space",
+          "def-measure-kernel-and-probability-kernel",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "alg-metropolis-hastings-kernel",
+          "def-feynman-kac-path-targets-and-normalizers",
+          "thm-feynman-kac-path-radon-nikodym-weight",
+          "alg-sequential-importance-resampling",
+          "thm-sequential-particle-estimator-is-unbiased"
+        ],
+        "statement": "Fix observations $y_{1:T}$, a standard-Borel parameter space $(\\Theta,\\mathcal T)$,\na prior probability $\\pi_0$, and the finite-horizon Feynman–Kac path model in\n[[def-feynman-kac-path-targets-and-normalizers]]. Write\n$$L_\\theta(y_{1:T})=\\gamma_{\\theta,T}(1),\\qquad C=\\int_\\Theta L_\\theta(y_{1:T})\\,\\pi_0(d\\theta).$$\nRequire every prefix normalizer $0<Z_{\\theta,t}<\\infty$ for $t=0,\\ldots,T$\nand $\\pi_0$-almost every $\\theta$, together with $0<C<\\infty$; then the\nparameter posterior is\n$$\\pi_y(d\\theta)=C^{-1}L_\\theta(y_{1:T})\\,\\pi_0(d\\theta).$$\n\nFor fixed particle count $N\\ge1$, let $U$ contain the full output of\n[[alg-sequential-importance-resampling]] at $\\theta$ and a terminal index\n$K\\in\\{1,\\ldots,N\\}$ drawn conditionally with its final normalized weight.\nLet $m_\\theta(du)$ be this measurable auxiliary-variable probability kernel and\nlet $\\widehat L_\\theta(U)=\\widehat Z_T$ be jointly measurable and nonnegative\nin $(\\theta,U)$. The required interface is\n$$\\int\\widehat L_\\theta(u)\\,m_\\theta(du)=L_\\theta(y_{1:T});$$\n[[thm-sequential-particle-estimator-is-unbiased]] supplies this identity under\nits finite-horizon support and integrability hypotheses. Define the extended\ntarget probability by\n$$\\widetilde\\pi(d\\theta,du)=C^{-1}\\pi_0(d\\theta)m_\\theta(du)\\widehat L_\\theta(u).$$\n\nGiven current $(\\theta,U)$, propose $\\theta'\\sim R(\\theta,\\cdot)$ and then\n$U'\\sim m_{\\theta'}$. Apply the general Metropolis–Hastings construction\n[[alg-metropolis-hastings-kernel]] to this proposal kernel and target\n$\\widetilde\\pi$. On rejection retain the entire current pair $(\\theta,U)$,\nincluding its stored likelihood estimate and selected path index. When $\\pi_0$\nand $R$ have densities $p_0$ and $r$, and the current extended target density\nis positive, the acceptance probability is\n$$1\\wedge\\frac{p_0(\\theta')\\widehat L_{\\theta'}(U')r(\\theta\\mid\\theta')}{p_0(\\theta)\\widehat L_\\theta(U)r(\\theta'\\mid\\theta)}.$$\nFor the displayed density-ratio formula, initialize at a current state where\n$p_0(\\theta)\\widehat L_\\theta(U)>0$. The density-free version uses the\naccepted-flow Radon–Nikodym construction in the cited general-state algorithm;\nit does not evaluate a pointwise prior mass or require this density condition.\nProposed zero estimates are rejected.\nThe input is the current extended state $(\\theta,U)$; output the proposed\nextended state $(\\theta',U')$ on acceptance and retain $(\\theta,U)$ on\nrejection.\n\nThe selected path stored in $U$ is part of the auxiliary state. Refreshing its\nestimate after rejection defines the different Monte Carlo within Metropolis\nprocedure, not this algorithm."
+      },
+      {
+        "id": "thm-pmmh-exact-invariance",
+        "kind": "theorem",
+        "title": "PMMH preserves the exact parameter posterior",
+        "dependency_level": 6,
+        "deps": [
+          "def-axiom-of-choice",
+          "alg-pmmh",
+          "alg-metropolis-hastings-kernel",
+          "thm-metropolis-hastings-kernel-is-reversible-and-invariant",
+          "thm-sequential-particle-estimator-is-unbiased",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel"
+        ],
+        "statement": "Under the hypotheses of [[alg-pmmh]], assume the unbiasedness identity there\nholds and the evidence $C$ is finite and positive. Then $\\widetilde\\pi$ is a\nprobability measure whose parameter marginal is $\\pi_y$. With the terminal\nindex included in $U$, the joint marginal of $(\\theta,X_{0:T}^{K})$ is the\nposterior $C^{-1}\\pi_0(d\\theta)\\gamma_{\\theta,T}(dx_{0:T})$. The PMMH\ntransition kernel is reversible, hence invariant, for $\\widetilde\\pi$; its\nparameter and selected-path marginals are therefore exact for every fixed\n$N\\ge1$. This is an invariance result only; it asserts no irreducibility,\nuniqueness, convergence rate, or mixing speed."
+      },
+      {
+        "id": "alg-monte-carlo-within-metropolis",
+        "kind": "algorithm",
+        "title": "Monte Carlo within Metropolis",
+        "dependency_level": 6,
+        "deps": [
+          "alg-pmmh"
+        ],
+        "statement": "Use the parameter and likelihood-estimator inputs of [[alg-pmmh]], restricted\nto the common-density case where the prior has density $p_0$ and the proposal\nkernel has transition density $r(\\theta'\\mid\\theta)$ with respect to a common\nparameter reference measure. Initialize at a parameter with $p_0(\\theta)>0$,\nand assume $\\widehat L_\\vartheta(U)>0$ for $m_\\vartheta$-almost every $U$ at\nevery parameter $\\vartheta$ that the procedure can propose or visit. These\nconditions make the displayed ratio defined almost surely. The input is the\ncurrent parameter $\\theta$; the output is the next parameter.\n\nAt each iteration draw a fresh $U\\sim m_\\theta$, propose\n$\\theta'\\sim R(\\theta,\\cdot)$, and independently draw $U'\\sim m_{\\theta'}$.\nAccept $\\theta'$ with probability\n$$1\\wedge\\frac{p_0(\\theta')\\widehat L_{\\theta'}(U')r(\\theta\\mid\\theta')}{p_0(\\theta)\\widehat L_\\theta(U)r(\\theta'\\mid\\theta)}.$$\nOutput $\\theta'$ on acceptance and $\\theta$ on rejection. Discard both\nauxiliary values before the next iteration and draw a new current estimate.\n\nThis is Monte Carlo within Metropolis (MCWM). It does not retain a single\nextended state on rejection, so the pseudo-marginal invariance proof does not\napply. This definition makes no exactness or stationarity claim."
+      },
+      {
+        "id": "def-particle-gibbs-extended-target",
+        "kind": "definition",
+        "title": "Particle Gibbs extended target",
+        "dependency_level": 4,
+        "deps": [
+          "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+          "def-axiom-of-choice",
+          "def-measure",
+          "def-probability-measure",
+          "def-standard-borel-space",
+          "def-measure-kernel-and-probability-kernel",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "def-feynman-kac-path-targets-and-normalizers",
+          "thm-feynman-kac-path-radon-nikodym-weight",
+          "alg-sequential-importance-resampling"
+        ],
+        "statement": "Let $(\\Theta,\\mathcal T)$ be a standard-Borel parameter space with a prior\n$\\pi_0$. Use common standard-Borel state spaces and a jointly measurable\nparameterized target/proposal family: the initial and transition target and\nproposal laws are probability kernels in $\\theta$ and their state arguments,\nthe potentials are jointly measurable, and the chosen Radon–Nikodym weight\nversions are jointly measurable. Thus $\\theta\\mapsto\\gamma_{\\theta,T}$ and\n$\\theta\\mapsto\\psi_\\theta$ are measure and probability kernels, and the SIR\nweights and normalizer are jointly measurable in $(\\theta,U)$. The prior-kernel\nlaw $\\pi_0(d\\theta)\\psi_\\theta(du)$ is a probability measure by\n[[lem-prior-and-model-kernel-define-joint-law]].\n\nUse the finite-horizon state path model and proposal support conditions in\n[[def-feynman-kac-path-targets-and-normalizers]],\n[[thm-feynman-kac-path-radon-nikodym-weight]], and\n[[alg-sequential-importance-resampling]]. Select the multinomial resampling\nbranch, returning ancestor indices in sampled order. Residual resampling is not\nthe labeled particle law used by this genealogical construction. Write\n$\\gamma_{\\theta,T}$ for the Feynman–Kac path measure at parameter $\\theta$ and\nset $L_\\theta=\\gamma_{\\theta,T}(1)$. Assume $0<L_\\theta<\\infty$ for\n$\\pi_0$-almost every $\\theta$, and\n$$C=\\int L_\\theta\\,\\pi_0(d\\theta),\\qquad 0<C<\\infty.$$\nFor a fixed particle count $N\\ge2$, write\n$$U=(X_0^{1:N},A_1^{1:N},X_1^{1:N},\\ldots,A_T^{1:N},X_T^{1:N})$$\nfor the full particle system and ancestor indices generated by\n[[alg-sequential-importance-resampling]]. Its forward probability law at\nparameter $\\theta$ is $\\psi_\\theta(du)$. The algorithm defines the product\nnormalizer estimate $\\widehat Z_T(U)$ and final normalized weights\n$W_T^1(U),\\ldots,W_T^N(U)$; $K$ is a terminal particle index. The path\n$X_{0:T}^{K}$ means the states on the ancestral lineage of particle $K$,\ntraced through the arrays $A_1^{1:N},\\ldots,A_T^{1:N}$.\n\nMore explicitly, relative to counting measure on ancestor arrays and the\nordered SIR proposal-kernel integrals for the states,\n$$\\psi_\\theta(du)=\\prod_{i=1}^N\\nu_{\\theta,0}(dx_0^i)\\prod_{t=1}^T\\prod_{i=1}^N\\left[W_{t-1}^{A_t^i}(U)R_{\\theta,t}(X_{t-1}^{A_t^i},dx_t^i)\\right].$$\nEach factor $W_{t-1}^{A_t^i}(U)$ is the categorical mass of that ancestor\nchoice; no state transition density is assumed for the genealogical variant.\n\nThe genealogical particle Gibbs extended target is the measure\n$$\\varphi_N(d\\theta,du,k)=C^{-1}\\pi_0(d\\theta)\\,\\psi_\\theta(du)\\,\\widehat Z_T(u)W_T^k(u),\\qquad k\\in\\{1,\\ldots,N\\}.$$\nThe selected state is $(\\theta,X_{0:T}^{K})$. The zero-weight fallback in the\nparticle algorithm defines $W_T$ everywhere; when $\\widehat Z_T=0$ the extended\ntarget assigns the configuration zero mass.\n\nThe measure is a probability and has the exact joint smoothing posterior as\nits selected $(\\theta,X_{0:T}^{K})$ marginal by\n[[thm-particle-gibbs-selected-path-marginal]]."
+      },
+      {
+        "id": "alg-conditional-particle-gibbs",
+        "kind": "algorithm",
+        "title": "Conditional particle filter for particle Gibbs",
+        "dependency_level": 5,
+        "deps": [
+          "def-particle-gibbs-extended-target",
+          "alg-sequential-importance-resampling",
+          "def-feynman-kac-path-targets-and-normalizers",
+          "thm-feynman-kac-path-radon-nikodym-weight"
+        ],
+        "statement": "Fix $N\\ge2$, a finite horizon $T$, a parameter $\\theta$, and a reference\ntrajectory $x^*_{0:T}$ with a reference lineage of particle indices\n$b_0,\\ldots,b_T\\in\\{1,\\ldots,N\\}$. Use the proposal kernels, incremental\nweights, and normalized resampling weights of\n[[alg-sequential-importance-resampling]]. Use multinomial resampling with indices in sampled order. Require target-path domination as in [[thm-feynman-kac-path-radon-nikodym-weight]] and a retained $(\\theta,x^*,b)$ in the measurable full-measure good set $D$ of [[def-particle-gibbs-extended-target]]. The formulas are conditional-law versions for posterior-almost every reference path; membership in topological support alone is insufficient. Outside $D$, return status “unavailable” and leave the retained parameter-path-lineage state unchanged in the sweep. If an arithmetic operation in a sampled particle system is undefined or a required normalizing sum is zero/nonfinite, also return “unavailable” and retain the old state; on $D$ these events have conditional probability zero by the factorization theorem.\n\nAt fixed $\\theta$, use the parameter-specific proposal kernels and weights in\n[[alg-sequential-importance-resampling]], writing its normalized resampling\nweights $\\bar w_t^i$ as $W_t^i$. The input is $(\\theta,x^*_{0:T},b_{0:T})$;\nthe output is the conditional particle system, its normalized weights, its\nancestry arrays, and either a successful status or “unavailable”.\n\n1. At time $0$, draw each $X_0^i$ for $i\\ne b_0$ independently from $\\nu_0$\n   and set $X_0^{b_0}=x_0^*$. Compute the SIR initial weights\n   $a_0^i=G_0(X_0^i)\\rho_0(X_0^i)$ and set\n   $\\widehat Z_0=N^{-1}\\sum_i a_0^i$. If $\\sum_i a_0^i>0$, put\n   $W_0^i=a_0^i/\\sum_j a_0^j$; otherwise use the SIR zero-weight convention\n   $W_0^i=1/N$. A zero or nonfinite normalizing sum makes the sweep unavailable\n   and returns the unchanged retained state.\n2. For $t=1,\\ldots,T$, for every $i\\ne b_t$ draw an ancestor $A_t^i$ from the\n   categorical distribution with probabilities $W_{t-1}^{1:N}$ and then draw\n   $X_t^i$ from the proposal kernel conditional on $X_{t-1}^{A_t^i}$. Set\n   $A_t^{b_t}=b_{t-1}$ and $X_t^{b_t}=x_t^*$. Compute the SIR incremental\n   weights $a_t^i=G_t(X_t^i)r_t(X_{t-1}^{A_t^i},X_t^i)$ and update\n   $\\widehat Z_t=\\widehat Z_{t-1}(N^{-1}\\sum_i a_t^i)$. If the weight sum is\n   positive, put $W_t^i=a_t^i/\\sum_j a_t^j$; otherwise use the SIR zero-weight\n   convention $W_t^i=1/N$. A zero or nonfinite normalizing sum makes the sweep\n   unavailable and returns the unchanged retained state.\n3. Return the conditional particle system, its normalized weights, and its\n   ancestry arrays.\n\nFor a joint parameter-path sweep, retain the current selected path $x^*$ and\nits lineage $b$, draw $\\theta'$ from its exact posterior full conditional\ngiven $x^*$, and apply Steps 1–3 at $\\theta'$. This parameter draw followed by\nconditional-particle-filter regeneration is one joint conditional-block\nupdate. Then draw $K'\\sim\\mathrm{Categorical}(W_T^{1:N})$ and trace its\nancestry to obtain the next selected path. Output the new extended state\n$(\\theta',U',K')$ together with that path. The correctness of this sweep is a\nseparate result."
+      },
+      {
+        "id": "thm-particle-gibbs-selected-path-marginal",
+        "kind": "theorem",
+        "title": "The particle Gibbs extended target has the exact smoothing marginal",
+        "dependency_level": 5,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-particle-gibbs-extended-target",
+          "alg-sequential-importance-resampling",
+          "def-feynman-kac-path-targets-and-normalizers",
+          "thm-feynman-kac-path-radon-nikodym-weight"
+        ],
+        "statement": "Assume the hypotheses of [[def-particle-gibbs-extended-target]] and\n[[alg-sequential-importance-resampling]], with multinomial resampling in sampled order, including the finite-horizon support\nconditions and $0<L_\\theta<\\infty$ for prior-almost every $\\theta$, with\n$0<C=\\int L_\\theta\\,\\pi_0(d\\theta)<\\infty$. Then $\\varphi_N$ in\n[[def-particle-gibbs-extended-target]] is a probability measure and its\nselected $(\\theta,X_{0:T}^{K})$ marginal is\n$$C^{-1}\\pi_0(d\\theta)\\gamma_{\\theta,T}(dx_{0:T}),$$\nthe exact joint parameter and smoothing posterior, for every $N\\ge2$."
+      },
+      {
+        "id": "thm-particle-gibbs-conditional-sweep-is-gibbs",
+        "kind": "theorem",
+        "title": "The conditional particle Gibbs sweep is a Gibbs update",
+        "dependency_level": 6,
+        "deps": [
+          "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+          "def-axiom-of-choice",
+          "def-particle-gibbs-extended-target",
+          "alg-conditional-particle-gibbs",
+          "thm-particle-gibbs-selected-path-marginal",
+          "alg-sequential-importance-resampling",
+          "thm-feynman-kac-path-radon-nikodym-weight"
+        ],
+        "statement": "Under [[def-particle-gibbs-extended-target]] and\n[[alg-conditional-particle-gibbs]], for $\\varphi_N$-almost every extended\nstate the conditional law of the terminal index $K$ given $(\\theta,U)$ is\n$\\mathrm{Categorical}(W_T^{1:N})$. For posterior-almost every retained parameter-trajectory-lineage value, the remaining particles and\nancestor indices have exactly the conditional-particle-filter law in\n[[alg-conditional-particle-gibbs]]. In a joint sweep, the parameter draw from\nits posterior full conditional given the selected path, followed by\nregeneration of the remaining particles and ancestors from the\nconditional-particle-filter law, is the joint conditional-block update of\nthose variables given the retained selected path and lineage. The terminal\nindex is then drawn from its categorical conditional given the particle\nsystem. These two updates preserve the extended target; the measurable\nexceptional-state identity fallback specified by the algorithm is included.\nThe selected marginal is the exact joint parameter-path posterior. This\ninvariance does not assert fast mixing."
+      },
+      {
+        "id": "def-particle-gibbs-backward-simulation-extended-target",
+        "kind": "definition",
+        "title": "Backward-simulation particle Gibbs extended target",
+        "dependency_level": 5,
+        "deps": [
+          "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+          "def-particle-gibbs-extended-target",
+          "def-feynman-kac-path-targets-and-normalizers",
+          "thm-feynman-kac-path-radon-nikodym-weight",
+          "alg-sequential-importance-resampling"
+        ],
+        "statement": "Assume the finite-horizon Feynman–Kac model and proposal support conditions in\n[[def-feynman-kac-path-targets-and-normalizers]] and\n[[thm-feynman-kac-path-radon-nikodym-weight]]. Use the multinomial SIR law with ancestor indices in sampled order. Residual resampling is not included in this labeled-density construction. For this variant, additionally\nassume that the initial target law has a measurable density $\\mu_{\\theta,0}$,\neach target transition $M_{\\theta,t}$ has a jointly measurable density\n$f_{\\theta,t}(x_t\\mid x_{t-1})$, and each proposal transition $R_{\\theta,t}$ has\na density $q_{\\theta,t}(x_t\\mid x_{t-1})$, all with respect to declared\nsigma-finite coordinate reference measures. Let $q_{\\theta,0}$ be the proposal\ninitial density with respect to the initial coordinate reference measure.\nRetain the proper-prior and positive-finite-evidence assumptions of\n[[def-particle-gibbs-extended-target]]. Then\nthe path measure has density\n$$\\gamma_{\\theta,T}(x_{0:T})=\\mu_{\\theta,0}(x_0)G_0(x_0)\\prod_{t=1}^Tf_{\\theta,t}(x_t\\mid x_{t-1})G_t(x_t).$$\nRequire positive finite denominators in the backward probabilities below on\nthe extended-target support.\n\nWrite $U$ for all SIR particles and ancestor indices, $\\psi_\\theta(u)$ for\ntheir forward joint density, and $j=(j_0,\\ldots,j_T)$ for a sequence of\nparticle indices. Let $x^j_{0:T}$ be the path formed from states\n$X_t^{j_t}$, without requiring $A_t^{j_t}=j_{t-1}$. For\n$t=0,\\ldots,T-1$, define\n$$B_t^i(z;U)=\\frac{W_t^i f_{\\theta,t+1}(z\\mid X_t^i)}{\\sum_{\\ell=1}^NW_t^\\ell f_{\\theta,t+1}(z\\mid X_t^\\ell)}.$$\nThe backward-simulation extended target is\n$$\\varphi_N^{\\rm BS}(d\\theta,du,j)=\\frac{\\pi_0(d\\theta)\\,\\gamma_{\\theta,T}(x^j_{0:T})}{C\\,N^{T+1}}\\frac{\\psi_\\theta(u)}{q_{\\theta,0}(X_0^{j_0})\\prod_{t=1}^TW_{t-1}^{A_t^{j_t}}q_{\\theta,t}(X_t^{j_t}\\mid X_{t-1}^{A_t^{j_t}})}\\prod_{t=1}^TB_{t-1}^{A_t^{j_t}}(X_t^{j_t};U).$$\nwhere the displayed expression is a density with respect to the common\nparticle reference measures, counting measure on ancestor and selected indices,\nand the prior measure on $\\theta$. The complete SIR forward density\n$\\psi_\\theta$ includes the normalized ancestor probabilities and proposal\ndensities for every particle. This is the backward-simulation extension of the\nparticle Gibbs target; its exact selected-path marginal and Gibbs conditionals\nare proved in\n[[thm-particle-gibbs-backward-simulation-sweep-is-gibbs]]."
+      },
+      {
+        "id": "alg-particle-gibbs-backward-simulation",
+        "kind": "algorithm",
+        "title": "Particle Gibbs with backward simulation",
+        "dependency_level": 6,
+        "deps": [
+          "def-particle-gibbs-backward-simulation-extended-target",
+          "alg-conditional-particle-gibbs",
+          "alg-sequential-importance-resampling"
+        ],
+        "statement": "Use the density, support, and positive-denominator hypotheses of\n[[def-particle-gibbs-backward-simulation-extended-target]]. Select multinomial resampling with ancestor indices in sampled order. Fix $N\\ge2$. Before updating, require the retained state to be in $D_{\\rm BS}$ of [[def-particle-gibbs-backward-simulation-extended-target]]; otherwise return the unchanged retained state. If a required ratio or normalizing sum is undefined, zero or nonfinite during a sweep, return the old retained state. The factorization theorem proves that such failures have conditional probability zero on the designated full-measure set.\n\nA backward-simulation sweep takes the current extended state $(\\theta,U,j)$\nin $D_{\\rm BS}$, where $j=(j_0,\\ldots,j_T)$ selects the reference path\n$x^*_{0:T}=x^j_{0:T}$ from $U$. It returns the updated extended state $(\\theta',U',J)$\nand selected path $x^J_{0:T}$. First draw $\\theta'$ from its exact posterior\nfull conditional given $x^*_{0:T}$ and the observations. If\n$(\\theta',x^*,j)$ is outside $D_{\\rm BS}$, return the old extended state.\n\nThe initial proposal, non-reference resampling and propagation, and SIR\nweight updates use [[alg-conditional-particle-gibbs]] in its density setting.\nBecause $j$ is a backward index sequence rather than an ancestral lineage, the\nreference particle's ancestor is sampled from $B$ below instead of being fixed\nto the preceding reference index.\n\n1. Initialize the conditional auxiliary particle filter at time $0$: set\n   $X_0^{j_0}=x_0^*$ and independently draw $X_0^i\\sim q_{\\theta',0}$ for\n   $i\\ne j_0$. For each $i$, compute the SIR initial weight\n   $a_0^i=\\mu_{\\theta',0}(X_0^i)G_0(X_0^i)/q_{\\theta',0}(X_0^i)$. If\n   $\\sum_i a_0^i>0$, set $W_0^i=a_0^i/\\sum_\\ell a_0^\\ell$; otherwise use the\n   SIR zero-weight convention $W_0^i=1/N$.\n2. For $t=1,\\ldots,T$, do the following in order:\n   1. For each $i\\ne j_t$, draw $A_t^i$ categorically with probabilities\n      $W_{t-1}^{1:N}$ and then draw $X_t^i\\sim\n      q_{\\theta',t}(\\cdot\\mid X_{t-1}^{A_t^i})$.\n   2. Set $X_t^{j_t}=x_t^*$ and draw its ancestor $A_t^{j_t}$ categorically\n      with probabilities $B_{t-1}^{1:N}(x_t^*;U')$.\n   3. For every $i$, compute\n      $a_t^i=G_t(X_t^i)f_{\\theta',t}(X_t^i\\mid\n      X_{t-1}^{A_t^i})/q_{\\theta',t}(X_t^i\\mid\n      X_{t-1}^{A_t^i})$. If $\\sum_i a_t^i>0$, set\n      $W_t^i=a_t^i/\\sum_\\ell a_t^\\ell$; otherwise use the SIR zero-weight\n      convention $W_t^i=1/N$.\n3. Draw $J_T$ categorically with probabilities $W_T^{1:N}$. For\n   $t=T-1,T-2,\\ldots,0$, draw $J_t$ with probabilities\n   $B_t^{1:N}(X_{t+1}^{J_{t+1}};U')$. Return the updated extended state and\n   selected path.\n\nThe zero-weight conventions above define normalized weights as in\n[[alg-sequential-importance-resampling]]. If any required density ratio or\nbackward-probability denominator is undefined, zero or nonfinite, or a weight\nsum is zero or nonfinite, return the old extended state as specified above.\nOn the designated good set these exceptional events have conditional\nprobability zero. For $T=0$, Step 2 is empty and Step 3 draws $J_0$ from $W_0$.\n\nThe conditional auxiliary particle filter and the backward simulator are the\ntwo particle-coordinate conditionals of\n[[def-particle-gibbs-backward-simulation-extended-target]]. Their Gibbs\ninterpretation and exact posterior marginal are separate proved properties.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-particle-gibbs-backward-simulation-sweep-is-gibbs",
+        "kind": "theorem",
+        "title": "The backward-simulation sweep is a Gibbs update",
+        "dependency_level": 7,
+        "deps": [
+          "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+          "def-axiom-of-choice",
+          "def-particle-gibbs-backward-simulation-extended-target",
+          "alg-particle-gibbs-backward-simulation",
+          "thm-feynman-kac-path-radon-nikodym-weight",
+          "def-feynman-kac-path-targets-and-normalizers"
+        ],
+        "statement": "Under [[def-particle-gibbs-backward-simulation-extended-target]] and\n[[alg-particle-gibbs-backward-simulation]], for posterior-almost every retained state in the stated good set, the conditional law of the\nremaining particle system given $(\\theta,x^*,j)$ is the stated conditional\nauxiliary particle filter, and the conditional law of the index sequence given\n$(\\theta,U)$ is the backward simulator with terminal weights $W_T$ and\nbackward probabilities $B_t$. In a joint sweep, the posterior draw of\n$\\theta'$ given the selected path, followed by conditional auxiliary-particle\nfilter regeneration, is the joint conditional-block update of the parameter\nand remaining particle variables given the retained path and index sequence.\nThe backward-index draw is then its conditional update given $(\\theta',U')$.\nThe extended target is a probability measure whose selected $(\\theta,x^*)$\nmarginal is the exact joint smoothing posterior. With the measurable identity\nfallback on exceptional retained states, these updates preserve the extended\ntarget for every fixed $N\\ge2$. No fast-mixing or ergodicity claim follows."
+      }
+    ]
+  },
+  {
+    "order": 2135,
+    "id": "particle-mcmc-pmmh-and-particle-gibbs-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Particle MCMC: PMMH and particle Gibbs — Examples",
+    "companion": "particle-mcmc-pmmh-and-particle-gibbs",
+    "requires": [
+      "particle-mcmc-pmmh-and-particle-gibbs"
+    ],
+    "items": [
+      {
+        "id": "ex-pseudo-marginal-rejection",
+        "kind": "example",
+        "title": "Pseudo-marginal rejection retains the current likelihood estimate",
+        "dependency_level": 7,
+        "deps": [
+          "alg-pmmh",
+          "thm-pmmh-exact-invariance"
+        ],
+        "statement": "Let $\\Theta=\\{0,1\\}$ with uniform prior, exact likelihoods $L_0=L_1=1$, and\na symmetric proposal that flips the parameter. At $\\theta=0$ let the unbiased\nlikelihood estimator be $\\widehat L_0=1$ surely. At $\\theta=1$ let\n$\\widehat L_1=1/2$ or $3/2$, each with probability $1/2$. The pseudo-marginal\ntarget on parameter and estimate has masses\n$$\\widetilde\\pi(0,1)=1/2,\\qquad \\widetilde\\pi(1,1/2)=1/8,\\qquad \\widetilde\\pi(1,3/2)=3/8.$$\nThe parameter marginal is uniform, although the estimate conditional on\n$\\theta=1$ is size-biased. A rejection at $(1,3/2)$ retains $3/2$ for the next\nratio calculation."
+      },
+      {
+        "id": "cex-monte-carlo-within-metropolis-not-exact",
+        "kind": "counterexample",
+        "title": "Refreshing the current estimate can destroy exactness",
+        "dependency_level": 7,
+        "deps": [
+          "alg-monte-carlo-within-metropolis",
+          "thm-pmmh-exact-invariance"
+        ],
+        "statement": "Replacing an exact likelihood by an unbiased estimate freshly drawn at both the\ncurrent and proposed parameter in every Metropolis step necessarily leaves the\nexact parameter posterior invariant."
+      },
+      {
+        "id": "ex-particle-gibbs-invariant-but-sticky",
+        "kind": "example",
+        "title": "An invariant particle Gibbs chain can be sticky",
+        "dependency_level": 7,
+        "deps": [
+          "alg-conditional-particle-gibbs",
+          "thm-particle-gibbs-selected-path-marginal",
+          "thm-particle-gibbs-conditional-sweep-is-gibbs"
+        ],
+        "statement": "Take the one-time model $T=0$ with state space $\\{0,1\\}$, target\n$\\pi(0)=99/100$, $\\pi(1)=1/100$, and proposal\n$q(0)=1/100$, $q(1)=99/100$. Both target states are in proposal support. Use\n$N=2$ particles: one is the retained reference state, the other is sampled\nfrom $q$, and the next state is drawn from the two importance weights\n$w(x)=\\pi(x)/q(x)$. This is the one-time conditional particle Gibbs update."
+      },
+      {
+        "id": "cex-particle-gibbs-missing-path-support",
+        "kind": "counterexample",
+        "title": "A particle Gibbs proposal that misses posterior path support",
+        "dependency_level": 6,
+        "deps": [
+          "alg-conditional-particle-gibbs",
+          "thm-particle-gibbs-selected-path-marginal",
+          "thm-feynman-kac-path-radon-nikodym-weight"
+        ],
+        "statement": "A particle Gibbs exactness construction remains well-defined with its usual\nfinite importance weights even if its proposal assigns zero probability to a\npositive-mass posterior path."
+      }
+    ]
+  }
+]

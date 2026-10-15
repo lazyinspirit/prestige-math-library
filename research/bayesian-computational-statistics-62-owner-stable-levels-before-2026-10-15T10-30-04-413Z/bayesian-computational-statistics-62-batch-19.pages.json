@@ -1,0 +1,369 @@
+[
+  {
+    "order": 2078,
+    "id": "weak-nonparametric-bernstein-von-mises",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Weak nonparametric Bernstein–von Mises limits",
+    "companion": "weak-nonparametric-bernstein-von-mises-examples",
+    "requires": [
+      "orthonormal-bases-parseval-and-fourier-series",
+      "weak-convergence-tightness-and-representation"
+    ],
+    "items": [
+      {
+        "id": "def-negative-sobolev-space-for-white-noise",
+        "kind": "definition",
+        "title": "Logarithmic negative Sobolev spaces for white noise",
+        "deps": [
+          "def-hilbert-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $(\\psi_{lk})$ be a countable complete orthonormal basis of the real Hilbert space $L^2([0,1])$ ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]], [[def-hilbert-space]], [[def-l-p-space-as-a-quotient-by-null-functions]]). For a wavelet basis, index levels by $l\\ge0$, let $K_l$ have $2^l$ indices, and put $a_l=2^l$ for $l\\ge1$ and $a_0=2$ for the finite coarsest level. This finite-level convention only prevents a zero logarithmic weight and does not change any convergence criterion below. For a trigonometric basis, use its integer frequency index $l$, bounded multiplicities, and $a_l=\\max(2,|l|)$.\n\nHere an **$S$-regular wavelet basis** means a wavelet orthonormal basis whose members are $S$ times differentiable, with each derivative through order $S$ in $L^2([0,1])$, following the source convention. The weak BvM theorem below only uses the basis's completeness, orthonormality, and level counts.\n\nFor $\\delta>0$, define $H(\\delta)=H^{-1/2,\\delta}_2$ to be the space of coefficient sequences $c=(c_{lk})$ with norm\n\n$$\\|c\\|_{H(\\delta)}^2:=\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}|c_{lk}|^2<\\infty.$$\n\nIts inner product is the corresponding weighted coefficient inner product. Multiplying each coordinate by $a_l^{-1/2}(\\log a_l)^{-\\delta}$ identifies it isometrically with $\\ell^2(I)$, where $I=\\{(l,k):k\\in K_l\\}$ (or the corresponding trigonometric index set). This sequence space is complete: if $x^{(m)}$ is Cauchy, each coordinate converges to a scalar $x_i$; for every finite $F\\subset I$, the Cauchy bound passes to the limit in $\\sum_{i\\in F}|x_i^{(m)}-x_i^{(n)}|^2$, so the supremum over finite $F$ shows $x^{(m)}\\to x$ in $\\ell^2(I)$. It is separable because finite-support sequences with rational coordinates form a countable dense set. Thus $H(\\delta)$ is a separable Hilbert space without an additional choice assumption.\n\nA function $f\\in L^2([0,1])$ is identified with its coefficient sequence $c_{lk}=\\langle f,\\psi_{lk}\\rangle$. For each finite set $F$ of indices, orthonormality makes $\\sum_{(l,k)\\in F}c_{lk}\\psi_{lk}$ orthogonal to its residual in $L^2$, so the Pythagorean identity gives $\\sum_F|c_{lk}|^2\\le\\|f\\|_2^2$. Taking the supremum over finite $F$ and using the boundedness of the weights proves continuity of the coefficient map. If all coefficients of $f$ vanish, then $f$ is orthogonal to the linear span of the basis. Completeness makes this span dense, and continuity of $g\\mapsto\\langle f,g\\rangle$ gives $\\langle f,f\\rangle=0$, hence $f=0$ in $L^2$. Applying this to the difference of two functions proves injectivity. Thus the coefficient map is a continuous linear embedding $L^2([0,1])\\hookrightarrow H(\\delta)$.\n\nThe weight trace $\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}$ is finite exactly when $\\delta>1/2$: for wavelets its tail is a constant multiple of $\\sum_{l\\ge1}l^{-2\\delta}$, while for a trigonometric basis it is comparable to $\\sum_{l\\ge2}[l(\\log l)^{2\\delta}]^{-1}$. The product-prior theorem below uses the wavelet case.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, Nonparametric Bernstein–von Mises theorems in Gaussian white noise, Definition 2 and equations (7)–(8), printed pp. 2004–2006",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/AOS1133.pdf"
+            },
+            {
+              "title": "Giné and Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §7.3.4, printed pp. 594–595",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "strategy": null
+      },
+      {
+        "id": "lem-wavelet-product-prior-is-l2-valued",
+        "kind": "lemma",
+        "title": "The wavelet product prior is L2-valued",
+        "deps": [
+          "def-countable-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-hilbert-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-bounded-lipschitz-metric-characterizes-weak-convergence-on-polish-spaces",
+        "kind": "lemma",
+        "title": "The bounded-Lipschitz metric characterizes weak convergence on Polish spaces",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-polish-space",
+          "def-weak-convergence-of-borel-probability-measures",
+          "lem-finite-measure-uniqueness-on-a-pi-system",
+          "thm-dominated-convergence",
+          "thm-portmanteau-theorem",
+          "thm-prokhorov-tightness-theorem-on-polish-spaces"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume the Axiom of Choice. Let $(S,d)$ be a Polish space, and let $\\mu_n,\\mu$ be Borel probability measures on $S$. Define\n\n$$\\beta_{BL}(\\nu,\\rho):=\\sup\\left\\{\\left|\\int g\\,d\\nu-\\int g\\,d\\rho\\right|:g:S\\to\\mathbb R,\\ \\|g\\|_\\infty\\le1,\\ \\operatorname{Lip}_d(g)\\le1\\right\\},$$\n\nwhere $\\operatorname{Lip}_d(g):=\\sup_{x\\ne y}|g(x)-g(y)|/d(x,y)$, with value $0$ when $S$ has at most one point. Then\n\n$$\\mu_n\\Rightarrow\\mu\\quad\\Longleftrightarrow\\quad\\beta_{BL}(\\mu_n,\\mu)\\longrightarrow0,$$\n\nwhere $\\Rightarrow$ is weak convergence of Borel probabilities ([[def-weak-convergence-of-borel-probability-measures]]). The implication from bounded-Lipschitz convergence to weak convergence is choice-free; the reverse implication below uses AC through Prokhorov's theorem.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Giné and Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §3.7 and §7.3.4, printed pp. 246–247 and 594–595",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            },
+            {
+              "title": "Castillo and Nickl, Nonparametric Bernstein–von Mises theorems in Gaussian white noise, Definition 1, printed pp. 2003–2004",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/AOS1133.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-product-prior-coordinate-posterior-law",
+        "kind": "lemma",
+        "title": "The product-prior posterior factors by coordinates",
+        "deps": [
+          "lem-wavelet-product-prior-is-l2-valued",
+          "def-countable-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-dynkin-pi-lambda",
+          "thm-rectangle-criterion-for-independent-random-elements"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-product-prior-posterior-second-moment-in-negative-sobolev-space",
+        "kind": "lemma",
+        "title": "A negative-Sobolev posterior second-moment bound",
+        "deps": [
+          "def-negative-sobolev-space-for-white-noise",
+          "lem-wavelet-product-prior-is-l2-valued",
+          "lem-product-prior-coordinate-posterior-law",
+          "def-countable-choice",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-finite-coordinate-posterior-total-variation-limit",
+        "kind": "lemma",
+        "title": "Finite-coordinate posterior total-variation limit",
+        "deps": [
+          "lem-wavelet-product-prior-is-l2-valued",
+          "lem-product-prior-coordinate-posterior-law",
+          "def-countable-choice",
+          "thm-dominated-convergence",
+          "thm-finite-and-countable-subadditivity-of-measures"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-density-normal-laws-and-square-summable-gaussian-series",
+        "kind": "lemma",
+        "title": "Density normal laws and square-summable Gaussian series under countable choice",
+        "deps": [
+          "def-countable-choice",
+          "def-real-exponential-function-and-e",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-chain-rule",
+          "thm-derivative-of-exponential",
+          "thm-dominated-convergence",
+          "thm-dynkin-pi-lambda",
+          "thm-ftc-second-part",
+          "thm-gaussian-integral",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-integration-against-a-density",
+          "thm-integration-by-parts",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-substitution",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "statement": "Assume countable choice. Put $g(x)=(2\\pi)^{-1/2}e^{-x^2/2}$. Then $\\gamma(E)=\\int_Eg(x)\\,dx$ is a Borel probability on $\\mathbb R$. In this item and its applications, write $N(m,v)$ for its pushforward under $x\\mapsto m+\\sqrt v\\,x$, where $v\\ge0$; thus $N(m,0)=\\delta_m$. This density convention requires no full axiom of choice. For $v>0$ the law has density\n$$g_{m,v}(x)=(2\\pi v)^{-1/2}\\exp\\{- (x-m)^2/(2v)\\},$$\nand its CDF is continuous and strictly increasing. Its mean and variance are $m$ and $v$.\n\nIf $Z_j$ are mutually independent with density $g$ and $\\sum_{j\\ge1}c_j^2=v<\\infty$, and the finite sums $S_m=\\sum_{j\\le m}c_jZ_j$ converge in probability to a supplied real random variable $S$, then $S$ has law $N(0,v)$. In particular, this applies whenever the sums converge almost surely or in $L^2$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition, Gaussian density and independent sums",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space",
+        "kind": "lemma",
+        "title": "White noise is a Borel Gaussian law on the negative Sobolev space",
+        "deps": [
+          "def-countable-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-negative-sobolev-space-for-white-noise",
+          "lem-density-normal-laws-and-square-summable-gaussian-series",
+          "thm-continuity-from-above-for-measures",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume countable choice. Let $(\\psi_{lk})$ be the wavelet or trigonometric basis from [[def-negative-sobolev-space-for-white-noise]]. Let $Z_{lk}$ be mutually independent real random variables with density $g(x)=(2\\pi)^{-1/2}e^{-x^2/2}$. Define the formal white-noise coefficient sequence $W=(Z_{lk})$. For every $\\delta>1/2$, this sequence is almost surely an element of $H(\\delta)$ and is a Borel Gaussian random element there. Its law $N$ is a Borel probability on $H(\\delta)$. For an infinite-dimensional basis, white noise is not an $L^2([0,1])$-valued random element. Here Gaussian means that each continuous real linear functional has a centered law $N(0,v)$ in the density convention of [[lem-density-normal-laws-and-square-summable-gaussian-series]]; in particular, for $L(c)=\\sum_jd_jc_j$ its variance is $\\sum_jd_j^2$ whenever this pairing is continuous on $H(\\delta)$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, Nonparametric Bernstein–von Mises theorems in Gaussian white noise, §1.2, equations (7)–(8), printed pp. 2005–2006",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/AOS1133.pdf"
+            },
+            {
+              "title": "Giné and Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §7.3.4, printed pp. 594–595",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            },
+            {
+              "title": "Ray, Adaptive Bernstein–von Mises theorems in Gaussian white noise, §2.1, printed pp. 5–6",
+              "url": "https://arxiv.org/pdf/1407.3397"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "cor-canonical-white-noise-law-is-tight-under-choice",
+        "kind": "corollary",
+        "title": "The canonical white-noise law is tight under the Axiom of Choice",
+        "deps": [
+          "def-negative-sobolev-space-for-white-noise",
+          "def-polish-space",
+          "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space",
+          "def-axiom-of-choice",
+          "thm-prokhorov-tightness-theorem-on-polish-spaces"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-weak-nonparametric-bernstein-von-mises-for-product-priors",
+        "kind": "theorem",
+        "title": "Weak nonparametric Bernstein–von Mises theorem for product priors",
+        "deps": [
+          "cor-cauchy-schwarz-for-random-variables",
+          "cor-markov-inequality-for-random-variables",
+          "def-countable-choice",
+          "def-negative-sobolev-space-for-white-noise",
+          "lem-finite-coordinate-posterior-total-variation-limit",
+          "lem-product-prior-coordinate-posterior-law",
+          "lem-product-prior-posterior-second-moment-in-negative-sobolev-space",
+          "lem-wavelet-product-prior-is-l2-valued",
+          "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $(\\psi_{lk})$ be the S-regular wavelet basis in [[def-negative-sobolev-space-for-white-noise]], with $2^l$ coefficients at each level $l\\ge0$. For $\\alpha>0$, put $\\sigma_l=2^{-l(\\alpha+1/2)}$ and let the prior on $f=\\sum_{l,k}\\sigma_l\\xi_{lk}\\psi_{lk}$ have IID coefficients $\\xi_{lk}$ with density $\\varphi$. Assume countable choice for the $L^2$ prior construction supplied by [[lem-wavelet-product-prior-is-l2-valued]], and take the full posterior kernel as the supplied model input of [[lem-product-prior-coordinate-posterior-law]]. Let $f_0\\in L^2([0,1])$, write $\\theta_{0,lk}=\\langle f_0,\\psi_{lk}\\rangle$ and $r_{lk}=\\theta_{0,lk}/\\sigma_l$, and suppose\n\n$$\\sup_{l,k}|r_{lk}|\\le M<\\tau,$$\n\nwhere $\\varphi$ is a probability density satisfying $\\varphi(u)\\le C_\\varphi$ for every $u$, $\\varphi(u)\\ge c_\\varphi>0$ for $|u|<\\tau$, $\\int u^2\\varphi(u)\\,du<\\infty$, and $\\varphi$ is continuous at each $r_{lk}$. The observation model is\n\n$$dX^{(n)}(t)=f_0(t)\\,dt+n^{-1/2}dW(t),\\qquad 0\\le t\\le1,$$\n\nwith standard white noise $W$; in the stated basis this is the sequence experiment $X_{lk}=\\theta_{0,lk}+n^{-1/2}Z_{lk}$ with independent standard normal coordinates. Let $\\Pi_n(\\cdot\\mid X)$ be the product-coordinate posterior of [[lem-product-prior-coordinate-posterior-law]]. Let $N$ be the law of the canonical white noise in $H(\\delta)$ and define\n\n$$\\widetilde\\Pi_n:=\\Pi_n(\\cdot\\mid X)\\circ[f\\mapsto\\sqrt n(f-X)]^{-1},\\qquad \\beta_{BL,H(\\delta)}(\\mu,\\nu):=\\sup_{\\substack{\\|g\\|_\\infty\\le1\\\\ \\operatorname{Lip}_{H(\\delta)}(g)\\le1}}\\left|\\int g\\,d\\mu-\\int g\\,d\\nu\\right|.$$\n\nFor every $\\delta>1/2$,\n\n$$\\beta_{BL,H(\\delta)}(\\widetilde\\Pi_n,N)\\longrightarrow0$$\n\nin probability under the true white-noise law $P_{f_0}^{(n)}$. This is a bounded-Lipschitz weak BvM conclusion; it asserts neither total-variation convergence on all Borel subsets nor an $L^2$-valued Gaussian limit.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, Nonparametric Bernstein–von Mises theorems in Gaussian white noise, Theorems 5, 7–9 and proofs, printed pp. 2013–2021",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/AOS1133.pdf"
+            },
+            {
+              "title": "Giné and Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, Theorems 7.3.12, 7.3.18–7.3.19 and proofs, printed pp. 584–596",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            },
+            {
+              "title": "Ray, Adaptive Bernstein–von Mises theorems in Gaussian white noise, §§2.1–2.2 and §7.1, printed pp. 5–8 and 23–24",
+              "url": "https://arxiv.org/pdf/1407.3397"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "cor-weak-posterior-convergence-in-negative-sobolev-space",
+        "kind": "corollary",
+        "title": "The scaled posterior converges weakly on the negative Sobolev space",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-weak-convergence-of-borel-probability-measures",
+          "lem-bounded-lipschitz-metric-characterizes-weak-convergence-on-polish-spaces",
+          "thm-weak-nonparametric-bernstein-von-mises-for-product-priors"
+        ],
+        "dependency_level": 4,
+        "statement": "Assume AC and the hypotheses of [[thm-weak-nonparametric-bernstein-von-mises-for-product-priors]]. Then the random Borel probability measures $\\widetilde\\Pi_n$ converge weakly in probability to $N$ on $H(\\delta)$, where weak convergence is the bounded-continuous-test definition in [[def-weak-convergence-of-borel-probability-measures]].",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, Nonparametric Bernstein–von Mises theorems in Gaussian white noise, Definition 1 and Theorem 9, printed pp. 2003–2004 and 2019–2020",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/AOS1133.pdf"
+            },
+            {
+              "title": "Giné and Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, Theorem 7.3.19, printed pp. 595–596",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "cor-continuous-functionals-of-the-scaled-posterior-converge",
+        "kind": "corollary",
+        "title": "Continuous images of the scaled posterior converge weakly",
+        "deps": [
+          "cor-weak-posterior-convergence-in-negative-sobolev-space",
+          "thm-weak-nonparametric-bernstein-von-mises-for-product-priors",
+          "lem-bounded-lipschitz-metric-characterizes-weak-convergence-on-polish-spaces",
+          "thm-continuous-mapping-theorem",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-product-prior-predictive-and-fixed-truth-data-laws-equivalent",
+        "kind": "lemma",
+        "title": "Prior-predictive and fixed-truth data laws are equivalent",
+        "deps": [
+          "def-countable-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-negative-sobolev-space-for-white-noise",
+          "lem-wavelet-product-prior-is-l2-valued",
+          "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space",
+          "thm-bessel-inequality-for-an-arbitrary-orthonormal-family",
+          "thm-dynkin-pi-lambda"
+        ],
+        "statement": "Assume countable choice. Use the wavelet product prior and white-noise model from [[lem-wavelet-product-prior-is-l2-valued]] and [[lem-white-noise-is-borel-gaussian-on-negative-sobolev-space]], with $\\alpha>0$, $\\sigma_l=2^{-l(\\alpha+1/2)}$, and a common coefficient density $\\varphi$ having finite second moment $m_2$. Let $f_0\\in L^2([0,1])$. For each $n\\ge1$ and $\\delta>1/2$, let $Q_n$ be the prior-predictive law on $H(\\delta)$ of $X=f+n^{-1/2}W$, with prior draw $f$ independent of canonical white noise $W$, and let $P_{f_0}^{(n)}$ be the law of $f_0+n^{-1/2}W$. Then $Q_n$ and $P_{f_0}^{(n)}$ are mutually absolutely continuous as Borel probabilities on $H(\\delta)$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, Nonparametric Bernstein–von Mises theorems in Gaussian white noise, Condition 1 and Theorem 5, printed pp. 2013–2016",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/AOS1133.pdf"
+            },
+            {
+              "title": "Giné and Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, Condition 7.3.11 and Theorem 7.3.12, printed pp. 583–586",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2079,
+    "id": "weak-nonparametric-bernstein-von-mises-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Weak nonparametric Bernstein–von Mises limits — Examples",
+    "companion": "weak-nonparametric-bernstein-von-mises",
+    "requires": [
+      "weak-nonparametric-bernstein-von-mises"
+    ],
+    "items": [
+      {
+        "id": "ex-white-noise-is-not-l2-valued",
+        "kind": "example",
+        "title": "White noise has a negative-Sobolev law but no L2-valued law",
+        "deps": [
+          "def-negative-sobolev-space-for-white-noise",
+          "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space",
+          "cor-canonical-white-noise-law-is-tight-under-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-gaussian-product-prior-satisfies-weak-bvm",
+        "kind": "example",
+        "title": "A Gaussian wavelet product prior covered by the weak BvM theorem",
+        "deps": [
+          "lem-wavelet-product-prior-is-l2-valued",
+          "def-countable-choice",
+          "thm-weak-nonparametric-bernstein-von-mises-for-product-priors"
+        ],
+        "dependency_level": 4
+      }
+    ]
+  }
+]

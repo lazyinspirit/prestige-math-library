@@ -1,0 +1,114 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "22",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "ex-unit-temperature-likelihood-update",
+      "model": "gpt-6-luna",
+      "context_sha256": "0108b859746ad8fe0a99ce52005e7ea4c384dac4f6286b7062d28f67f364db88",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The supplied definition requires a real loss on the full parameter-observation product, but the example originally specified only its y=1 section. This is a nonfatal missing specification: the fixed-observation calculation uses only that already valid section, and every displayed sampling probability is strictly positive. Defining ell(theta,y)=-log P_theta(Y=y) for both observations completes the setup without changing the posterior or argument at y=1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-unit-temperature-likelihood-update",
+      "disposition": "repaired",
+      "post_sha256": "292bf853c46ccf2d6379dedc1955e5603493dbff030aea3577340b1b963c0021",
+      "review_context_sha256": "2bb76f7f411a452eef6dda262f1020db5df95ab4ad603f7d1bd7075b068694de",
+      "reason": "Completed the negative-log-likelihood loss on Theta x X and verified all four likelihoods are strictly positive, hence every loss value is finite and each parameter section is measurable on the power-set space. The prior and sampling rows sum to one; at y=1 the weights are 1/12 and 1/2 with Z=7/12, giving (1/7,6/7), exactly the joint-law conditional probabilities. The cited definition, normalizer lemma, logarithm inverse and positive-event conditional-probability hypotheses all apply. Updated only the corresponding contract derivation and repair explanation. No Statement or Definition section changed, no new prerequisites or consumer repairs are needed, and no independent review of this repair is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "subject": "ex-unit-temperature-likelihood-update",
+      "class": "accuracy",
+      "subclass": "missing-map",
+      "severity": "nonfatal",
+      "location": "statement",
+      "caught_at_stage": "5-adjudicate",
+      "caught_by_role": "final-adjudicator",
+      "disposition": "fixed",
+      "source_rejection": {
+        "id": "ex-unit-temperature-likelihood-update",
+        "model": "gpt-6-luna",
+        "context_sha256": "0108b859746ad8fe0a99ce52005e7ea4c384dac4f6286b7062d28f67f364db88"
+      },
+      "reason": "The supplied definition requires a real loss on the full parameter-observation product, but the example originally specified only its y=1 section. This is a nonfatal missing specification: the fixed-observation calculation uses only that already valid section, and every displayed sampling probability is strictly positive. Defining ell(theta,y)=-log P_theta(Y=y) for both observations completes the setup without changing the posterior or argument at y=1.",
+      "repair": "Example now defines the negative-log-likelihood loss for both observations, and Verification step 2.1 checks every section against the supplier definition; contract derivation synchronized.",
+      "report": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u22.json"
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "repair and focused checks complete",
+    "item": "ex-unit-temperature-likelihood-update",
+    "claim": "Finite model with prior (1/3,2/3), full negative-log-likelihood loss, temperature 1 and observation 1 gives posterior (1/7,6/7). All four likelihoods are positive, every loss section is measurable on the finite power-set parameter space, Z=7/12, and the conditional joint-law calculation agrees.",
+    "conventions": "Finite spaces have power-set sigma-algebras; real losses, positive temperature, finite positive normalizer; no choice principle is used.",
+    "sources_read": [
+      "items/def-generalized-bayes-loss-update-and-temperature.md#Definition",
+      "items/lem-generalized-bayes-loss-update-normalizes-to-a-probability-measure.md#Statement",
+      "items/def-natural-logarithm.md#Definition",
+      "items/def-conditional-probability.md#Definition",
+      "items/def-probability-measure.md#Definition",
+      "items/def-statistical-experiment.md#Definition",
+      "items/lem-countable-discrete-space-is-standard-borel.md#Statement and Proof",
+      "library/bayesian-computational-statistics/generalized-bayes-loss-updates-and-temperature-examples.md"
+    ],
+    "changed_sections": [
+      "Example",
+      "Verification step 2.1"
+    ],
+    "dependency_changes": [],
+    "statement_definition_changes": false,
+    "unresolved_mathematics": [],
+    "next_action": "Controller collection and any required independent rejudgment; no workers, judges, gates or certification launched by this adjudicator.",
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-unit-temperature-likelihood-update.md --json",
+        "exit_code": 0,
+        "result": "1 proof checked; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-unit-temperature-likelihood-update.md --json",
+        "exit_code": 0,
+        "result": "1 item checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-unit-temperature-likelihood-update.md",
+        "exit_code": 0,
+        "result": "1 item, 4 steps, 0 defects; run after final item edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-22.proof-contracts.json --items ex-unit-temperature-likelihood-update --strict --json",
+        "exit_code": 0,
+        "result": "Assigned item contract checked; ok, no errors or warnings."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run bayesian-computational-statistics-62 --items ex-unit-temperature-likelihood-update",
+        "exit_code": 0,
+        "result": "Current post and review-context hashes copied directly into the review."
+      }
+    ],
+    "shared_metadata": "Owning contract reread, synchronized and checked under tools/step5-shared-write-lock.mjs with owner step5-v2-initial-r1-u22; lock released before review-context capture.",
+    "external_sources_consulted": [],
+    "published_consumer_findings": [],
+    "published_ledger_update": "No update proposed to research/published-consumer-supplier-ledger.md: no published item was changed or found defective."
+  },
+  "supporting_evidence": {
+    "research/bayesian-computational-statistics-62-batch-22.proof-contracts.json": "1584673e697875e55db00dc74e7ba55c1fb9a0433736346bcfe2236613463a42"
+  }
+}

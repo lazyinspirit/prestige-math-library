@@ -1,0 +1,186 @@
+[
+  {
+    "order": 2138,
+    "id": "abc-mcmc-and-sequential-abc",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "ABC-MCMC and ABC-sequential Monte Carlo",
+    "companion": "abc-mcmc-and-sequential-abc-examples",
+    "requires": [
+      "approximate-bayesian-computation-and-simulation-based-inference",
+      "metropolis-hastings-algorithm-and-invariance",
+      "feynman-kac-particle-filters"
+    ],
+    "items": [
+      {
+        "id": "def-abc-augmented-tolerance-target",
+        "kind": "definition",
+        "title": "Augmented ABC tolerance target",
+        "deps": [
+          "def-approximate-bayesian-computation",
+          "def-bayesian-model-as-prior-and-sampling-kernel",
+          "def-measure-kernel-and-probability-kernel",
+          "def-probability-measure",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-standard-borel-space",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "lem-prior-and-model-kernel-define-joint-law"
+        ],
+        "dependency_level": 2,
+        "statement": "For a prior and simulator on standard Borel spaces, define the joint prior-simulator measure restricted to the summary-tolerance event and normalize it only when the event has positive probability."
+      },
+      {
+        "id": "lem-abc-augmented-target-has-tolerance-posterior-marginal",
+        "kind": "lemma",
+        "title": "The augmented ABC target has the tolerance posterior as its parameter marginal",
+        "deps": [
+          "def-abc-augmented-tolerance-target",
+          "def-approximate-bayesian-computation",
+          "lem-prior-and-model-kernel-define-joint-law"
+        ],
+        "dependency_level": 3,
+        "statement": "When the tolerance-event probability is positive, the parameter marginal of the augmented ABC target equals the tolerance-conditioned parameter law defined by the simulator-based ABC interface."
+      },
+      {
+        "id": "alg-abc-metropolis-hastings",
+        "kind": "algorithm",
+        "title": "ABC Metropolis–Hastings on simulator-augmented states",
+        "deps": [
+          "alg-metropolis-hastings-kernel",
+          "def-abc-augmented-tolerance-target",
+          "def-axiom-of-choice",
+          "def-measure-kernel-and-probability-kernel",
+          "def-standard-borel-space",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "thm-measurability-of-integration-against-a-kernel"
+        ],
+        "justified_by": [
+          "thm-abc-metropolis-hastings-invariance"
+        ],
+        "dependency_level": 3,
+        "statement": "At a fixed tolerance with positive prior-predictive acceptance probability, run the general Metropolis–Hastings procedure on the augmented parameter-simulator state using a proposal that perturbs the parameter and simulates new data."
+      },
+      {
+        "id": "alg-abc-sequential-smc",
+        "kind": "algorithm",
+        "title": "Sequential ABC importance-resampling with tolerance populations",
+        "deps": [
+          "alg-multinomial-and-residual-offspring-resampling",
+          "def-abc-augmented-tolerance-target",
+          "def-axiom-of-choice",
+          "def-measure-kernel-and-probability-kernel",
+          "def-standard-borel-space",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "thm-measurability-of-integration-against-a-kernel"
+        ],
+        "justified_by": [
+          "thm-abc-sequential-smc-rn-weight-update"
+        ],
+        "dependency_level": 3,
+        "statement": "For a decreasing finite sequence of positive tolerances, resample ancestors from the current weighted population, perturb and simulate once per child, then weight tolerance matches by a finite nonnegative version of the prior-to-proposal-mixture Radon–Nikodym derivative when the mixture dominates the prior; nonmatches receive zero weight."
+      },
+      {
+        "id": "thm-abc-metropolis-hastings-invariance",
+        "kind": "theorem",
+        "title": "ABC Metropolis–Hastings preserves its augmented tolerance target",
+        "deps": [
+          "alg-abc-metropolis-hastings",
+          "alg-metropolis-hastings-kernel",
+          "def-axiom-of-choice",
+          "def-abc-augmented-tolerance-target",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "thm-metropolis-hastings-kernel-is-reversible-and-invariant"
+        ],
+        "dependency_level": 4,
+        "statement": "For a fixed positive tolerance, positive normalizer, standard Borel augmented state space, and probability proposal kernel, the ABC-MH kernel is reversible with respect to and leaves invariant the augmented ABC target."
+      },
+      {
+        "id": "thm-abc-sequential-smc-rn-weight-update",
+        "kind": "theorem",
+        "title": "Sequential ABC Radon–Nikodym weights target each tolerance law",
+        "deps": [
+          "alg-abc-sequential-smc",
+          "alg-multinomial-and-residual-offspring-resampling",
+          "def-abc-augmented-tolerance-target",
+          "def-axiom-of-choice",
+          "def-measure-kernel-and-probability-kernel",
+          "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "thm-integration-against-a-radon-nikodym-derivative",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts"
+        ],
+        "dependency_level": 4,
+        "statement": "Conditionally on any previous weighted population whose proposal mixture dominates the prior, the accepted ABC proposal reweighted by the prior-to-mixture Radon–Nikodym derivative has the normalized tolerance target as its population-level weighted law; resampling preserves the weighted empirical mean conditionally."
+      }
+    ]
+  },
+  {
+    "order": 2139,
+    "id": "abc-mcmc-and-sequential-abc-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "ABC-MCMC and ABC-sequential Monte Carlo — Examples",
+    "companion": "abc-mcmc-and-sequential-abc",
+    "requires": [
+      "abc-mcmc-and-sequential-abc"
+    ],
+    "items": [
+      {
+        "id": "ex-abc-vanishing-acceptance",
+        "kind": "example",
+        "title": "ABC acceptance probability vanishes with the tolerance",
+        "deps": [
+          "alg-abc-metropolis-hastings",
+          "alg-metropolis-hastings-kernel",
+          "def-abc-augmented-tolerance-target"
+        ],
+        "dependency_level": 4,
+        "statement": "A continuous uniform simulator has positive ABC acceptance probability for every positive tolerance but acceptance probability tending to zero as the tolerance shrinks to zero, where the indicator target is undefined."
+      },
+      {
+        "id": "ex-abc-positive-tolerance-stationary-law",
+        "kind": "example",
+        "title": "A positive-tolerance ABC-MH stationary law can differ from the exact-data posterior",
+        "deps": [
+          "alg-abc-metropolis-hastings",
+          "alg-metropolis-hastings-kernel",
+          "def-abc-augmented-tolerance-target",
+          "lem-abc-augmented-target-has-tolerance-posterior-marginal",
+          "thm-abc-metropolis-hastings-invariance"
+        ],
+        "dependency_level": 5,
+        "statement": "A finite simulator with a non-sufficient summary has an explicit positive-tolerance augmented ABC target and independence-proposal ABC-MH kernel that leaves it invariant, while its parameter marginal differs from the exact-data posterior."
+      },
+      {
+        "id": "ex-abc-sequential-tolerance-schedule-and-rn-weights",
+        "kind": "example",
+        "title": "A finite ABC-SMC tolerance schedule and its mixture weights",
+        "deps": [
+          "alg-abc-sequential-smc",
+          "def-abc-augmented-tolerance-target",
+          "thm-abc-sequential-smc-rn-weight-update"
+        ],
+        "dependency_level": 5,
+        "statement": "For a two-parameter finite simulator, calculate two positive decreasing tolerance targets, the proposal-mixture acceptance probability, Radon–Nikodym weights, and the normalized target parameter marginal from the expected unnormalized weights, while distinguishing it from the realized finite-particle self-normalized estimate."
+      },
+      {
+        "id": "ex-abc-smc-finite-particle-collapse",
+        "kind": "example",
+        "title": "Finite ABC-SMC particles can miss target support despite a valid mixture weight",
+        "deps": [
+          "alg-abc-sequential-smc",
+          "def-abc-augmented-tolerance-target",
+          "thm-abc-sequential-smc-rn-weight-update"
+        ],
+        "dependency_level": 5,
+        "statement": "Even when the ABC proposal mixture dominates the prior and all Radon–Nikodym weights are valid, a finite population can miss a positive-mass target component and collapse to an unrepresentative repeated particle."
+      }
+    ]
+  }
+]

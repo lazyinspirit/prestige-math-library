@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "30",
+  "round": 0,
+  "reviewed_items": [
+    "alg-rejection-sampling",
+    "thm-counting-measure-integral-is-nonnegative-series",
+    "thm-rejection-sampling-has-target-acceptance-law",
+    "thm-rejection-sampling-expected-proposal-count-under-finite-envelope",
+    "ex-rejection-sampling-tail-mismatch-no-finite-envelope",
+    "ex-rejection-sampling-bounded-likelihood-ratio",
+    "ex-rejection-sampling-unnormalized-finite-measures"
+  ],
+  "reviewed_pages": [
+    "rejection-sampling",
+    "rejection-sampling-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Owner reconciliation is needed for two published supplier proofs; the target-law item also has a local prerequisite gap. Approved scope is otherwise sufficient. The IID page edge is ordering-only, and the algorithm uses the published IID-family definition.",
+  "findings": [
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "type": "prerequisite",
+      "reason": "Published supplier proof 2.1 infers ∫s ≤ L by “letting a fixed sequence c_m ↑ 1” without constructing or citing that approximation and limit step. This supports the counting-series and expected-count proofs directly, and the target-law proof through its Tonelli, change-of-variables, and density-integration suppliers. Owner reconciliation is needed."
+    },
+    {
+      "id": "cor-finite-nonnegative-integral-implies-finite-almost-everywhere",
+      "type": "prerequisite",
+      "reason": "Published supplier proof 2.1 uses that n·μ(F) eventually exceeds finite ∫f when 0 < μ(F) < ∞. This requires unboundedness of natural multiples in ℝ, which its stated prerequisites do not supply. The direct assigned use is thm-rejection-sampling-has-target-acceptance-law, proof 1.1 [F3]. Owner reconciliation is needed."
+    },
+    {
+      "id": "thm-rejection-sampling-has-target-acceptance-law",
+      "type": "local",
+      "reason": "Proof 5.1 uses q^m → 0, but thm-geometric-series states convergence and the series sum, not nullity of the terms. Add and cite lem-geometric-sequence-null (or an equivalent term-test argument) as an explicit prerequisite, without changing the Statement."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-rejection-sampling",
+      "decision": "escalate",
+      "reason": "Its justified_by result establishes termination and output law; that result has unresolved local and supplier proof obligations."
+    },
+    {
+      "id": "thm-counting-measure-integral-is-nonnegative-series",
+      "decision": "escalate",
+      "reason": "Proof 1.1 uses the unresolved monotone-convergence supplier."
+    },
+    {
+      "id": "thm-rejection-sampling-has-target-acceptance-law",
+      "decision": "escalate",
+      "reason": "Proof 5.1 needs an explicit q^m → 0 supplier; proof 1.1 also uses the unresolved finite-integral supplier."
+    },
+    {
+      "id": "thm-rejection-sampling-expected-proposal-count-under-finite-envelope",
+      "decision": "escalate",
+      "reason": "Proof 3.1 uses the unresolved monotone-convergence supplier, and the result uses the pending target-law theorem."
+    },
+    {
+      "id": "ex-rejection-sampling-tail-mismatch-no-finite-envelope",
+      "decision": "escalate",
+      "reason": "Its normalization uses the counting-series theorem, whose proof uses the unresolved monotone-convergence supplier."
+    },
+    {
+      "id": "ex-rejection-sampling-bounded-likelihood-ratio",
+      "decision": "escalate",
+      "reason": "The finite enumeration verifies the accepted masses; its expected-count claim relies on the expected-count theorem and its unresolved supplier."
+    },
+    {
+      "id": "ex-rejection-sampling-unnormalized-finite-measures",
+      "decision": "escalate",
+      "reason": "The finite enumeration verifies the accepted masses; its expected-count claim relies on the expected-count theorem and its unresolved supplier."
+    }
+  ]
+}

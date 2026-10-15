@@ -1,0 +1,208 @@
+{
+  "group": "c",
+  "batches": ["11"],
+  "pages_read": [
+    "iid-posterior-contraction",
+    "iid-posterior-contraction-examples"
+  ],
+  "items_read": [
+    "def-hellinger-distance-between-density-laws",
+    "lem-iid-bounded-variance-bernstein-tail",
+    "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+    "lem-hellinger-distance-controls-l1-and-total-variation",
+    "lem-iid-sieve-entropy-produces-exponential-tests",
+    "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+    "ex-bernoulli-density-logarithmic-contraction-rate",
+    "ex-high-entropy-sieve-can-fail-without-precluding-contraction",
+    "ex-holder-density-rate-from-entropy-balance"
+  ],
+  "conventions": [
+    {
+      "convention": "Hellinger distance uses root-L2 normalization: h²(P,Q)=∫(√p−√q)² dμ, with a fixed dominating measure and supplied density versions.",
+      "fixed_by": "def-hellinger-distance-between-density-laws",
+      "matters_for": [
+        "lem-hellinger-distance-controls-l1-and-total-variation",
+        "lem-iid-sieve-entropy-produces-exponential-tests",
+        "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+        "ex-holder-density-rate-from-entropy-balance"
+      ]
+    },
+    {
+      "convention": "Density L1 is the full integral ∫|p−q| dμ; event-supremum total variation equals half that integral.",
+      "fixed_by": "lem-hellinger-distance-controls-l1-and-total-variation",
+      "matters_for": [
+        "lem-iid-sieve-entropy-produces-exponential-tests",
+        "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+        "ex-bernoulli-density-logarithmic-contraction-rate",
+        "ex-high-entropy-sieve-can-fail-without-precluding-contraction"
+      ]
+    },
+    {
+      "convention": "Local prior mass controls directional KL(P0‖Pθ) and P0[log(pθ/p0)]² simultaneously. Weighted log terms are zero where p0=0; where p0>0 and pθ=0, the log ratio is −∞ and its square is +∞. AC is assumed for the imported KL convention.",
+      "fixed_by": "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+      "matters_for": [
+        "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+        "ex-bernoulli-density-logarithmic-contraction-rate",
+        "ex-high-entropy-sieve-can-fail-without-precluding-contraction",
+        "ex-holder-density-rate-from-entropy-balance"
+      ]
+    },
+    {
+      "convention": "Packing uses finite subsets with pairwise distances strictly greater than the radius. The entropy, separation, and conclusion use the same selected metric. Density L2 requires one finite almost-everywhere bound for every model density and the truth.",
+      "fixed_by": "lem-iid-sieve-entropy-produces-exponential-tests",
+      "matters_for": [
+        "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+        "ex-bernoulli-density-logarithmic-contraction-rate",
+        "ex-high-entropy-sieve-can-fail-without-precluding-contraction",
+        "ex-holder-density-rate-from-entropy-balance"
+      ]
+    },
+    {
+      "convention": "The density family is supplied jointly measurably; parameter sieves are measurable and nonempty. Posterior normalization uses finite positive evidence. Contraction is in sampling probability for sufficiently large fixed M, without an almost-sure or minimax conclusion.",
+      "fixed_by": "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+      "matters_for": [
+        "ex-bernoulli-density-logarithmic-contraction-rate",
+        "ex-high-entropy-sieve-can-fail-without-precluding-contraction",
+        "ex-holder-density-rate-from-entropy-balance"
+      ]
+    },
+    {
+      "convention": "The Hölder example assumes its Hellinger entropy bound and its local KL/log-square prior-mass bound; it does not prove either premise from Hölder regularity alone.",
+      "fixed_by": "ex-holder-density-rate-from-entropy-balance",
+      "matters_for": ["ex-holder-density-rate-from-entropy-balance"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+      "statement": "For the stated jointly measurable dominated IID model, choose d to be root-L2 Hellinger, full density L1, or density L2 with a common finite density bound. Suppose εn→0, nεn²→∞, log D(εn,Fn,d)≤nεn², Π(Θnᶜ)≤exp(−(C+4)nεn²), and prior mass at least exp(−Cnεn²) where both KL(P0‖Pθ) and P0[log(pθ/p0)]² are at most εn². Then for all sufficiently large fixed M, Π{θ:d(pθ,p0)>Mεn | X1,…,Xn}→0 in P0ⁿ-probability.",
+      "used_by": [
+        "ex-bernoulli-density-logarithmic-contraction-rate",
+        "ex-high-entropy-sieve-can-fail-without-precluding-contraction",
+        "ex-holder-density-rate-from-entropy-balance"
+      ]
+    },
+    {
+      "id": "lem-iid-sieve-entropy-produces-exponential-tests",
+      "statement": "Under the stated same-metric packing condition log D(εn,Fn,d)≤nεn², εn→0 and nεn²→∞, for every fixed M≥128 and all sufficiently large n there is a measurable binary test with null error at most 2exp(−(cdM²−1)nεn²) and error at most exp(−cdM²nεn²) under every p∈Fn satisfying d(p,p0)>Mεn. The constant cd>0 depends only on the selected metric and, for density L2, its common density bound.",
+      "used_by": [
+        "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+        "thm-gaussian-process-posterior-contraction"
+      ]
+    },
+    {
+      "id": "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+      "statement": "For the stated jointly measurable dominated IID model, if Π(Kn)≥exp(−Cnεn²), where Kn controls directional KL and the log-square moment by εn², then the likelihood-ratio denominator Dn is finite and positive P0ⁿ-almost surely and P0ⁿ{Dn≥exp(−(C+2)nεn²)}≥1−1/(nεn²).",
+      "used_by": [
+        "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+        "thm-gaussian-process-posterior-contraction",
+        "lem-iid-posterior-contraction-under-countable-sieves",
+        "lem-dirichlet-normal-mixture-posterior-sieve-tail",
+        "thm-dirichlet-normal-mixture-posterior-contraction",
+        "cor-dirichlet-normal-mixture-interval-mass-refinement"
+      ]
+    },
+    {
+      "id": "lem-hellinger-distance-controls-l1-and-total-variation",
+      "statement": "For probability densities relative to one fixed measure, h is a metric on the induced probability laws and h(P,Q)²≤d1(P,Q)=2‖P−Q‖TV, while d1(P,Q)≤2h(P,Q).",
+      "used_by": [
+        "lem-iid-sieve-entropy-produces-exponential-tests",
+        "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+        "lem-iid-posterior-contraction-under-countable-sieves",
+        "lem-dirichlet-normal-mixture-sieve-entropy",
+        "lem-dirichlet-normal-mixture-countable-band-entropy-sum",
+        "lem-dirichlet-normal-mixture-local-prior-mass"
+      ]
+    },
+    {
+      "id": "lem-iid-bounded-variance-bernstein-tail",
+      "statement": "For independent centered real variables Zi with |Zi|≤b almost surely, b>0, and V=ΣE[Zi²]>0, each one-sided tail of ΣZi at t>0 is bounded by exp(−t²/[2(V+bt/3)]). If V=0, the sum is zero almost surely.",
+      "used_by": [
+        "lem-iid-sieve-entropy-produces-exponential-tests",
+        "thm-type-s-density-weak-bvm-on-m0w"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {"id":"def-probability-measure","used_for":"Probability laws and normalized priors.","opened":true},
+    {"id":"def-measure-with-density","used_for":"Density-induced laws and likelihood change of measure.","opened":true},
+    {"id":"thm-arithmetic-and-lattice-operations-preserve-measurability","used_for":"Measurability of distance, likelihood, and test integrands.","opened":true},
+    {"id":"thm-composition-with-borel-functions-preserves-measurability","used_for":"Measurable logarithms, roots, signs, and threshold functions.","opened":true},
+    {"id":"cor-additivity-of-the-nonnegative-lebesgue-integral","used_for":"Density integral bounds and decompositions.","opened":true},
+    {"id":"prop-order-and-scalar-rules-for-the-nonnegative-integral","used_for":"Integral inequalities and scalar bounds.","opened":true},
+    {"id":"cor-integral-over-a-null-set-vanishes","used_for":"Hellinger invariance under density-version changes.","opened":true},
+    {"id":"def-expectation-of-a-nonnegative-or-integrable-random-variable","used_for":"Expectations in the Bernstein proof.","opened":true},
+    {"id":"def-independent-random-elements","used_for":"Independence convention in the Bernstein proof.","opened":true},
+    {"id":"def-real-exponential-function-and-e","used_for":"Exponential series bounds and moment generating functions.","opened":true},
+    {"id":"cor-markov-inequality-for-random-variables","used_for":"Exponential tails and posterior numerator bounds.","opened":true},
+    {"id":"thm-exponential-addition-formula","used_for":"Factorization of the exponential of a finite sum.","opened":true},
+    {"id":"thm-factorization-of-expectations-for-independent-variables","used_for":"Moment generating functions, zero covariances, and likelihood-ratio expectations.","opened":true},
+    {"id":"thm-linearity-of-the-lebesgue-integral-on-l-one","used_for":"Finite expectation sums and signed density differences.","opened":true},
+    {"id":"thm-nonnegative-integral-zero-iff-zero-almost-everywhere","used_for":"Zero variance, equality of densities, and positivity arguments.","opened":true},
+    {"id":"thm-exponential-is-strictly-increasing","used_for":"Exponential threshold comparisons and elementary bounds.","opened":true},
+    {"id":"def-dominated-statistical-experiment","used_for":"Specified sigma-finite domination without implied parameter measurability.","opened":true},
+    {"id":"def-likelihood-density","used_for":"Density-version and choice conventions; joint measurability must be supplied separately.","opened":true},
+    {"id":"def-kullback-leibler-divergence","used_for":"Directional KL, absolute continuity, and log-integral conventions.","opened":true},
+    {"id":"def-axiom-of-choice","used_for":"Explicit imported KL and likelihood convention assumptions.","opened":true},
+    {"id":"def-identically-distributed-and-iid-random-variables","used_for":"Mutual independence and a common sampling law.","opened":true},
+    {"id":"thm-independent-random-elements-have-product-joint-law","used_for":"Finite IID product laws and product-density identities.","opened":true},
+    {"id":"def-moments-variance-and-covariance","used_for":"Second moments and variance in the denominator bound.","opened":true},
+    {"id":"cor-finite-nonnegative-integral-implies-finite-almost-everywhere","used_for":"Almost-sure finiteness of the denominator.","opened":true},
+    {"id":"lem-measurable-functions-preserve-independence","used_for":"Independence of transformed observations.","opened":true},
+    {"id":"thm-tonelli-theorem-for-sigma-finite-product-spaces","used_for":"Measurable section integrals, exchanged integrations, and product affinities.","opened":true},
+    {"id":"def-natural-logarithm","used_for":"Logarithm domain and inverse convention.","opened":true},
+    {"id":"thm-natural-logarithm-laws","used_for":"Logarithm measurability and algebra.","opened":true},
+    {"id":"thm-variance-of-a-finite-sum","used_for":"Variance of averaged integrated log likelihoods.","opened":true},
+    {"id":"thm-jensens-integral-inequality","used_for":"Integrated log-square control and likelihood denominator lower bounds, with integrability checked.","opened":true},
+    {"id":"thm-holder-inequality-for-integrals","used_for":"Cauchy–Schwarz in metric comparisons, testing, and denominator integrability.","opened":true},
+    {"id":"cor-chebyshev-inequality-for-random-variables","used_for":"Probability bound for the averaged integrated log likelihood.","opened":true},
+    {"id":"thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality","used_for":"Identification of the directional KL density ratio.","opened":true},
+    {"id":"def-total-variation-distance-for-probability-laws","used_for":"Event-supremum normalization and test-probability comparisons.","opened":true},
+    {"id":"thm-minkowski-inequality-for-integrals","used_for":"Hellinger, density L1, and density L2 triangle inequalities.","opened":true},
+    {"id":"def-product-sigma-algebra-and-finite-product-sigma-algebras","used_for":"Measurable finite-sample spaces and product rectangles.","opened":true},
+    {"id":"thm-measure-uniqueness-on-a-sigma-finite-pi-system","used_for":"Identification of finite product-law densities.","opened":true},
+    {"id":"thm-grouping-independent-sigma-algebras","used_for":"Independence of disjoint testing blocks.","opened":true},
+    {"id":"thm-derivative-of-exponential","used_for":"The inequality 1−u≤exp(−u) in affinity testing.","opened":true},
+    {"id":"lem-probability-measure-basic-identities","used_for":"Finite union bounds for local tests.","opened":true},
+    {"id":"cor-mean-value-theorem","used_for":"Bernoulli KL quadratic and log-square bounds.","opened":true},
+    {"id":"thm-logarithm-derivative-and-integral","used_for":"Bernoulli derivatives and elementary logarithmic rate bounds.","opened":true},
+    {"id":"thm-chain-rule","used_for":"Differentiating Bernoulli KL and log likelihoods.","opened":true},
+    {"id":"thm-algebra-of-derivatives","used_for":"Bernoulli KL first and second derivatives.","opened":true},
+    {"id":"thm-real-power-continuity-and-derivatives","used_for":"Reciprocal-power derivatives in the Bernoulli calculation.","opened":true},
+    {"id":"cor-differentiable-implies-continuous","used_for":"Checking the mean-value theorem hypotheses in the Bernoulli example.","opened":true}
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "iid-posterior-contraction",
+      "to": "posterior-consistency-and-tests",
+      "faithful": true,
+      "note": "The prerequisite page uses the same root-L2 Hellinger and event-supremum TV conventions. Batch 11 proves its denominator, tests, and probability contraction locally; it does not import the earlier almost-sure consistency conclusion."
+    },
+    {
+      "from": "misspecified-posterior-consistency",
+      "to": "iid-posterior-contraction",
+      "faithful": true,
+      "note": "This is a contextual page prerequisite. Its listed items do not cite batch-11 items; the page develops separate likelihood-tilt denominator and testing arguments rather than applying the well-specified contraction theorem to unnormalized tilts."
+    },
+    {
+      "from": "gaussian-process-posterior-contraction",
+      "to": "iid-posterior-contraction",
+      "faithful": true,
+      "note": "The main theorem faithfully states and applies the IID denominator and same-metric testing lemmas, enlarging radii to absorb entropy constants. Binary-regression densities are bounded by one for density-L2 testing. Fixed-design regression uses separate non-IID suppliers; expectation convergence is derived from bounded posterior tails converging in probability."
+    },
+    {
+      "from": "dirichlet-normal-mixture-contraction",
+      "to": "iid-posterior-contraction",
+      "faithful": true,
+      "note": "The countable-sieve lemma and mixture results preserve root-L2 normalization and the denominator exponent C+2; prior mass exp(−nδ²) yields exp(−3nδ²). Weighted countable-sieve testing is established separately rather than attributed to the global-entropy theorem."
+    },
+    {
+      "from": "functional-bayesian-limits-and-credible-set-calibration",
+      "to": "iid-posterior-contraction",
+      "faithful": true,
+      "note": "The type-S weak-BvM theorem cites the bounded-variance Bernstein lemma for empirical wavelet coefficients. Its IID centered bounded summands and finite variance bounds support the stated two-sided Bernstein estimate."
+    }
+  ]
+}

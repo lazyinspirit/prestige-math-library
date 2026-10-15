@@ -1,0 +1,929 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "basis": "owner-authorized-second-focused-cycle; original a.s. weak-test theorem explicitly refuted",
+  "source_paths": [
+    "items/lem-exponential-test-posterior-splitting-at-kl-projection.md",
+    "items/thm-posterior-consistency-at-kl-projection.md",
+    "items/lem-centered-integrable-iid-random-walk-is-unbounded-above.md",
+    "items/cex-weak-tilted-tests-do-not-imply-almost-sure-consistency.md"
+  ],
+  "metadata_integration": "Proposal only: root owns manifests, levels, contracts integration, hashes, readiness and recertification.",
+  "manifest_entries": {
+    "lem-exponential-test-posterior-splitting-at-kl-projection": {
+      "id": "lem-exponential-test-posterior-splitting-at-kl-projection",
+      "kind": "lemma",
+      "title": "Exponential tests and KL mass force posterior exclusion",
+      "statement": "Let $V\\subseteq\\Theta$ be measurable. Suppose a relative KL neighborhood\n$B_\\epsilon$ has positive prior mass and that, for all sufficiently large\n$n$, tests $\\phi_n:\\mathsf X^n\\to[0,1]$ satisfy\n$$\\phi_n(X_1,\\ldots,X_n)\\longrightarrow0\\quad P_0^\\infty\\text{-almost surely},\\qquad \\sup_{\\theta\\in V}Q_\\theta^n(1-\\phi_n)\\le e^{-n\\beta}$$\nfor a constant $\\beta>\\epsilon$. Then\n$$\\Pi(V\\mid X_1,\\ldots,X_n)\\longrightarrow0 \\quad P_0^\\infty\\text{-almost surely}.$$",
+      "deps": [
+        "def-kl-projection-set-and-relative-kl-neighborhoods",
+        "def-likelihood-tilted-measure-at-kl-projection",
+        "lem-kl-neighborhood-prior-mass-likelihood-denominator-lower-bound",
+        "lem-product-likelihood-tilt-has-product-density",
+        "def-axiom-of-choice",
+        "def-probability-measure",
+        "def-identically-distributed-and-iid-random-variables",
+        "thm-independent-random-elements-have-product-joint-law",
+        "thm-bayes-formula-for-dominated-kernels",
+        "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+        "cor-markov-inequality-for-random-variables",
+        "cor-first-borel-cantelli-lemma-for-events"
+      ],
+      "justified_by": [],
+      "strategy": "direct",
+      "axiom_use": "AC enters through the imported KL and likelihood-density conventions; supplied joint density representatives mean the proof makes no further selections.",
+      "provenance": {
+        "statement": "literature-derived",
+        "proof": "ai-altered"
+      },
+      "sources": {
+        "references": [
+          {
+            "title": "B. J. K. Kleijn and A. W. van der Vaart, The Bernstein-Von-Mises Theorem under Misspecification, Lemma 4.1, pp. 376\u2013377",
+            "url": "https://pure.uva.nl/ws/files/1850322/114737_376240.pdf"
+          }
+        ]
+      }
+    },
+    "thm-posterior-consistency-at-kl-projection": {
+      "id": "thm-posterior-consistency-at-kl-projection",
+      "kind": "theorem",
+      "title": "Posterior consistency at a KL projection",
+      "statement": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a sample space with a fixed sigma-finite\nmeasure and let $(P_\\theta)_{\\theta\\in\\Theta}$ be a dominated experiment\n([[def-dominated-statistical-experiment]]). Let $(\\Theta,\\mathcal T,\\rho)$\nbe a metric parameter space with its Borel sigma-algebra\n([[def-metric-space]]) and supplied\nfinite-valued likelihood densities $p_\\theta$\n([[def-likelihood-density]]) that are jointly measurable and normalized\nrelative to $\\mu$. Let $P_0$ be a probability measure with supplied density\n$p_0$ ([[def-probability-measure]]) and let\n$X_1,X_2,\\ldots$ be IID with law $P_0$\n([[def-identically-distributed-and-iid-random-variables]]). Let $\\Pi$ be a\nprior probability on $(\\Theta,\\mathcal T)$ ([[def-probability-measure]]).\nAssume AC for the imported directional KL and likelihood-density\nconventions. Define\n$K(\\theta)$, $K^*$, and the nonempty set $\\Theta^*$ as in\n[[def-kl-projection-set-and-relative-kl-neighborhoods]]. Assume $K^*<\\infty$\nand, for every $\\epsilon>0$, the measurable set\n$$\\Pi\\{\\theta:K(\\theta)-K^*\\le\\epsilon\\}>0.$$\nFix any selected $\\theta^*\\in\\Theta^*$ and assume that for\n$\\Pi$-almost every $\\theta$ in each such set,\n$\\log(p_\\theta/p_{\\theta^*})$ is $P_0$-integrable, as required by the\ndenominator lemma. Define the likelihood-tilted measures $Q_\\theta$ as in\n[[def-likelihood-tilted-measure-at-kl-projection]]. Define the posterior by\n[[thm-bayes-formula-for-dominated-kernels]] on finite positive evidence\nfibres; the denominator lemma below makes those fibres $P_0^n$-almost sure.\nFor each $n\\ge1$, use the product measure $Q_\\theta^n$ and its $P_0^n$\ndensity from [[lem-product-likelihood-tilt-has-product-density]].\nAssume the test integrals below are well-defined. For every $\\eta>0$,\nsuppose there are\nmeasurable tests $\\phi_n:\\mathsf X^n\\to[0,1]$ and a constant $\\beta_\\eta>0$ such that\n$$\\phi_n(X_1,\\ldots,X_n)\\longrightarrow0\\quad P_0^\\infty\\text{-almost surely},\\qquad \\sup_{\\theta:\\,d(\\theta,\\Theta^*)>\\eta} Q_\\theta^n(1-\\phi_n)\\le e^{-n\\beta_\\eta}$$\nfor all sufficiently large $n$,\nwhere $d(\\theta,\\Theta^*)=\\inf_{\\vartheta\\in\\Theta^*}\\rho(\\theta,\\vartheta)$.\nThen\n$$\\Pi\\{\\theta:d(\\theta,\\Theta^*)>\\eta\\mid X_1,\\ldots,X_n\\} \\longrightarrow0 \\quad P_0^\\infty\\text{-almost surely}$$\nfor every fixed $\\eta>0$. The type-I expectations need not be summable or exponentially small.",
+      "deps": [
+        "def-dominated-statistical-experiment",
+        "def-likelihood-density",
+        "def-identically-distributed-and-iid-random-variables",
+        "def-metric-space",
+        "def-probability-measure",
+        "def-kl-projection-set-and-relative-kl-neighborhoods",
+        "def-likelihood-tilted-measure-at-kl-projection",
+        "lem-product-likelihood-tilt-has-product-density",
+        "lem-kl-neighborhood-prior-mass-likelihood-denominator-lower-bound",
+        "lem-exponential-test-posterior-splitting-at-kl-projection",
+        "thm-bayes-formula-for-dominated-kernels",
+        "def-axiom-of-choice"
+      ],
+      "justified_by": [],
+      "strategy": "direct",
+      "axiom_use": "AC enters through the imported KL and likelihood-density conventions. The jointly measurable density family is supplied, so the proof makes no further selections.",
+      "provenance": {
+        "statement": "literature-derived",
+        "proof": "ai-altered"
+      },
+      "sources": {
+        "references": [
+          {
+            "title": "B. J. K. Kleijn and A. W. van der Vaart, The Bernstein-Von-Mises Theorem under Misspecification, \u00a74.1, Lemma 4.1 and Corollary 4.2, pp. 376\u2013379",
+            "url": "https://pure.uva.nl/ws/files/1850322/114737_376240.pdf"
+          },
+          {
+            "title": "B. J. K. Kleijn, Bayesian Statistics for Frequentists, \u00a75.3.1, pp. 158\u2013160",
+            "url": "https://staff.fnwi.uva.nl/b.j.k.kleijn/bkleijn-book-work-in-progress-Bayesian_Statistics_for_frequentists-Version-1.0-July-2025.pdf"
+          },
+          {
+            "title": "R. V. Ramamoorthi, K. Sriram, and R. Martin, On Posterior Concentration in Misspecified Models, \u00a7\u00a71\u20133",
+            "url": "https://arxiv.org/pdf/1312.4620"
+          }
+        ]
+      }
+    },
+    "lem-centered-integrable-iid-random-walk-is-unbounded-above": {
+      "id": "lem-centered-integrable-iid-random-walk-is-unbounded-above",
+      "kind": "lemma",
+      "title": "A nonconstant centered integrable IID random walk is unbounded above",
+      "statement": "Let $(X_n)_{n\\ge1}$ be IID real random variables with $\\mathbb E|X_1|<\\infty$, $\\mathbb EX_1=0$, and $\\mathbb P(X_1=0)<1$. Put $S_0=0$ and $S_n=\\sum_{i=1}^nX_i$. Then\n$$\\mathbb P\\left(\\sup_{n\\ge0}S_n=+\\infty\\right)=1.$$\nIn particular, $\\limsup_{n\\to\\infty}S_n=+\\infty$ almost surely.",
+      "deps": [
+        "def-identically-distributed-and-iid-random-variables",
+        "thm-kolmogorov-zero-one-law",
+        "thm-grouping-independent-sigma-algebras",
+        "thm-dominated-convergence",
+        "lem-basic-properties-of-characteristic-functions",
+        "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+        "thm-linearity-of-the-lebesgue-integral-on-l-one",
+        "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+      ],
+      "justified_by": [],
+      "strategy": "direct",
+      "axiom_use": "None; the supplied real random variables use no selection.",
+      "provenance": {
+        "statement": "literature-derived",
+        "proof": "ai-altered"
+      },
+      "sources": {
+        "references": [
+          {
+            "title": "Rick Durrett, Probability: Theory and Examples, fifth edition, \u00a75.4, especially Theorem 5.4.8 (Chung\u2013Fuchs recurrence)",
+            "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+          }
+        ]
+      }
+    },
+    "cex-weak-tilted-tests-do-not-imply-almost-sure-consistency": {
+      "id": "cex-weak-tilted-tests-do-not-imply-almost-sure-consistency",
+      "kind": "counterexample",
+      "title": "Weak tests against likelihood tilts do not ensure almost-sure posterior consistency",
+      "statement": "In a dominated IID model with a finite KL minimum, a nonempty KL-minimizer\nset $\\Theta^*$, and positive prior mass in every relative KL neighborhood,\nsuppose that for every $\\eta>0$ there are measurable tests satisfying\n$$P_0^n\\phi_n\\to0,\\qquad\\sup_{\\theta:d(\\theta,\\Theta^*)>\\eta}Q_\\theta^n(1-\\phi_n)\\to0.$$\nThe false assertion is that these conditions, allowing arbitrary\nsigma-finite likelihood tilts, imply almost-sure posterior concentration\non every neighborhood of $\\Theta^*$. The example below has a unique\nminimizer and finite log likelihood contrasts, but posterior mass outside\neach discrete neighborhood of radius less than one has almost-sure\nlimes superior one.",
+      "deps": [
+        "def-axiom-of-choice",
+        "def-kl-projection-set-and-relative-kl-neighborhoods",
+        "def-likelihood-tilted-measure-at-kl-projection",
+        "lem-likelihood-tilted-measure-is-sigma-finite",
+        "lem-product-likelihood-tilt-has-product-density",
+        "lem-centered-integrable-iid-random-walk-is-unbounded-above",
+        "cor-chebyshev-inequality-for-random-variables",
+        "cor-first-borel-cantelli-lemma-for-events",
+        "thm-finite-union-bound"
+      ],
+      "justified_by": [],
+      "strategy": "direct",
+      "axiom_use": "AC is inherited only through the KL and likelihood-density conventions. Every density is supplied explicitly and each deterministic hitting-time quantile is chosen as the least admissible integer.",
+      "provenance": {
+        "statement": "ai-generated",
+        "proof": "ai-generated"
+      },
+      "sources": {
+        "references": [
+          {
+            "title": "Kleijn and van der Vaart, The Bernstein-Von-Mises theorem under misspecification, Lemma 3.3 and Corollaries 4.1\u20134.2 (claims examined here)",
+            "url": "https://pure.uva.nl/ws/files/1850322/114737_376240.pdf"
+          },
+          {
+            "title": "Durrett, Probability: Theory and Examples, fifth edition, random walks and zero-one laws",
+            "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+          }
+        ]
+      },
+      "generation": {
+        "role": "counterexample"
+      }
+    }
+  },
+  "contracts": {
+    "lem-exponential-test-posterior-splitting-at-kl-projection": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-kl-neighborhood-prior-mass-likelihood-denominator-lower-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\Pi$ be a prior probability on $\\Theta$, let $B_\\epsilon$ be the\nmeasurable relative KL neighborhood from\n[[def-kl-projection-set-and-relative-kl-neighborhoods]], and suppose\n$\\Pi(B_\\epsilon)>0$. Assume the log likelihood ratios\n$\\log(p_\\theta/p_{\\theta^*})$ are $P_0$-integrable for $\\Pi$-almost every\n$\\theta\\in B_\\epsilon$. For\n$$D_n:=\\int_\\Theta\\prod_{i=1}^n \\frac{p_\\theta(X_i)}{p_{\\theta^*}(X_i)}\\,\\Pi(d\\theta),$$\nevery $\\alpha>\\epsilon$ satisfies\n$$D_n\\ge e^{-n\\alpha}$$\nfor all sufficiently large $n$, $P_0$-almost surely. Under the stated\njointly measurable dominated model, $D_n$ is also finite and positive\n$P_0^n$-almost surely for each $n$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-product-likelihood-tilt-has-product-density",
+          "source_section": "Statement",
+          "quote": "Under the setup of [[def-likelihood-tilted-measure-at-kl-projection]] and\n[[lem-likelihood-tilted-measure-is-sigma-finite]], for each $\\theta$ and\ninteger $n\\ge1$, the sigma-finite product measure $Q_\\theta^n$ exists and\nhas density\n$$\\prod_{i=1}^n r_\\theta(x_i),\\qquad r_\\theta(x):=\\frac{p_\\theta(x)}{p_{\\theta^*}(x)},$$\nrelative to $P_0^n$. Ratios are zero where $p_{\\theta^*}=0$, as in the\nlikelihood-tilt definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bayes-formula-for-dominated-kernels",
+          "source_section": "Statement",
+          "quote": "Let $\\pi$ be a prior probability on $(E,\\mathcal S)$ and let $Q:E\\to T$ be a probability kernel dominated by a sigma-finite measure $\\nu$ on $(T,\\mathcal T)$, with specified nonnegative jointly measurable density $\\ell:E\\times T\\to[0,\\infty]$:\n$$Q(\\theta,B)=\\int_B\\ell(\\theta,y)\\,\\nu(dy)\\quad\\text{for every }\\theta\\in E,\\ B\\in\\mathcal T.$$\n\nDefine $m(y)=\\int_E\\ell(\\theta,y)\\,\\pi(d\\theta)$. Under the joint law with density $\\ell$ relative to $\\pi\\times\\nu$, a conditional law of the parameter given the observation is\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_A\\ell(\\theta,y)\\,\\pi(d\\theta)}{m(y)},&0<m(y)<\\infty,\\\\ \\pi(A),&m(y)=0\\text{ or }m(y)=\\infty.\\end{cases}$$\n\nThe observation marginal is $m\\,d\\nu$, and the filled fibres have marginal mass zero. This is a choice-free assertion about the explicit kernel and event identities.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-first-borel-cantelli-lemma-for-events",
+          "source_section": "Statement",
+          "quote": "Let $(A_n)_{n\\in\\mathbb N}$ be events in a probability space. If\n$$\\sum_{n=0}^\\infty \\mathbb P(A_n)<+\\infty,$$\nthen\n$$\\mathbb P(A_n\\ \\mathrm{i.o.})=0.$$\n\nNo independence hypothesis is needed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Choose $\\alpha$ with $\\epsilon<\\alpha<\\beta$. By [A1] and [F1], the denominator $D_n$ is at least $e^{-n\\alpha}$ eventually almost surely. By the type-I premise, $\\phi_n(X_1,\\ldots,X_n)\\to0$ almost surely under the same infinite IID law. Intersect these two full-probability events.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F7",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "Define $N_n:=\\int_V\\prod_{i=1}^n \\frac{p_\\theta(X_i)}{p_{\\theta^*}(X_i)} (1-\\phi_n)\\,\\Pi(d\\theta),\\qquad Y_n:=e^{n\\alpha}N_n.$ By [F2], [F4], [F8], and the type-II bound, $\\mathbb E_{P_0^n}Y_n \\le e^{n\\alpha}\\Pi(V)e^{-n\\beta} \\le e^{-n(\\beta-\\alpha)}.$",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Set $a_n=e^{-n(\\beta-\\alpha)/2}$. For every sufficiently large $n$, Markov's inequality [F5] gives $P_0^n\\{Y_n>a_n\\}\\le e^{-n(\\beta-\\alpha)/2}$. The right-hand side is summable, and the finite initial terms do not matter. Thus [F6] and [F7] imply $Y_n\\to0$ almost surely.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "On the full-probability event from the denominator lemma, the ordinary evidence is $Z_n:=\\int_\\Theta\\prod_i p_\\theta(X_i)\\,\\Pi(d\\theta) =\\left(\\prod_i p_{\\theta^*}(X_i)\\right)D_n,$ which is finite and positive. Bayes' formula [F3] therefore gives the posterior as the normalized likelihood integral, and division by this positive common factor expresses it using $D_n$. Decompose the tested likelihood integral over $V$ into its $\\phi_n$ and $1-\\phi_n$ parts. Since $0\\le\\phi_n\\le1$, $\\int_V R_n(\\theta)\\,\\Pi(d\\theta) =\\int_V\\phi_nR_n(\\theta)\\,\\Pi(d\\theta)+N_n \\le\\phi_n\\int_\\Theta R_n(\\theta)\\,\\Pi(d\\theta)+N_n =\\phi_nD_n+N_n,$ where $R_n(\\theta)=\\prod_i p_\\theta(X_i)/p_{\\theta^*}(X_i)$. Therefore $\\Pi(V\\mid X_1,\\ldots,X_n) \\le \\phi_n+\\frac{N_n}{D_n} \\le \\phi_n+e^{n\\alpha}N_n=\\phi_n+Y_n.$ Steps 1.1 and 2.1 make the right-hand side tend to zero.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/proof boundary: empty is covered under the stated conventions and hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/proof boundary: zero is covered under the stated conventions and hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This item has no separate one boundary claim; its explicit hypotheses delimit the case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This item has no separate degenerate boundary claim; its explicit hypotheses delimit the case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/proof boundary: endpoints is covered under the stated conventions and hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/proof boundary: nonempty-choice is covered under the stated conventions and hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if claim is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if claim is asserted."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "AC enters through the imported KL and likelihood-density conventions; supplied joint density representatives mean the proof makes no further selections."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-posterior-consistency-at-kl-projection": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-kl-neighborhood-prior-mass-likelihood-denominator-lower-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\Pi$ be a prior probability on $\\Theta$, let $B_\\epsilon$ be the\nmeasurable relative KL neighborhood from\n[[def-kl-projection-set-and-relative-kl-neighborhoods]], and suppose\n$\\Pi(B_\\epsilon)>0$. Assume the log likelihood ratios\n$\\log(p_\\theta/p_{\\theta^*})$ are $P_0$-integrable for $\\Pi$-almost every\n$\\theta\\in B_\\epsilon$. For\n$$D_n:=\\int_\\Theta\\prod_{i=1}^n \\frac{p_\\theta(X_i)}{p_{\\theta^*}(X_i)}\\,\\Pi(d\\theta),$$\nevery $\\alpha>\\epsilon$ satisfies\n$$D_n\\ge e^{-n\\alpha}$$\nfor all sufficiently large $n$, $P_0$-almost surely. Under the stated\njointly measurable dominated model, $D_n$ is also finite and positive\n$P_0^n$-almost surely for each $n$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-exponential-test-posterior-splitting-at-kl-projection",
+          "source_section": "Statement",
+          "quote": "Let $V\\subseteq\\Theta$ be measurable. Suppose a relative KL neighborhood\n$B_\\epsilon$ has positive prior mass and that, for all sufficiently large\n$n$, tests $\\phi_n:\\mathsf X^n\\to[0,1]$ satisfy\n$$\\phi_n(X_1,\\ldots,X_n)\\longrightarrow0\\quad P_0^\\infty\\text{-almost surely},\\qquad \\sup_{\\theta\\in V}Q_\\theta^n(1-\\phi_n)\\le e^{-n\\beta}$$\nfor a constant $\\beta>\\epsilon$. Then\n$$\\Pi(V\\mid X_1,\\ldots,X_n)\\longrightarrow0 \\quad P_0^\\infty\\text{-almost surely}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-product-likelihood-tilt-has-product-density",
+          "source_section": "Statement",
+          "quote": "Under the setup of [[def-likelihood-tilted-measure-at-kl-projection]] and\n[[lem-likelihood-tilted-measure-is-sigma-finite]], for each $\\theta$ and\ninteger $n\\ge1$, the sigma-finite product measure $Q_\\theta^n$ exists and\nhas density\n$$\\prod_{i=1}^n r_\\theta(x_i),\\qquad r_\\theta(x):=\\frac{p_\\theta(x)}{p_{\\theta^*}(x)},$$\nrelative to $P_0^n$. Ratios are zero where $p_{\\theta^*}=0$, as in the\nlikelihood-tilt definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bayes-formula-for-dominated-kernels",
+          "source_section": "Statement",
+          "quote": "Let $\\pi$ be a prior probability on $(E,\\mathcal S)$ and let $Q:E\\to T$ be a probability kernel dominated by a sigma-finite measure $\\nu$ on $(T,\\mathcal T)$, with specified nonnegative jointly measurable density $\\ell:E\\times T\\to[0,\\infty]$:\n$$Q(\\theta,B)=\\int_B\\ell(\\theta,y)\\,\\nu(dy)\\quad\\text{for every }\\theta\\in E,\\ B\\in\\mathcal T.$$\n\nDefine $m(y)=\\int_E\\ell(\\theta,y)\\,\\pi(d\\theta)$. Under the joint law with density $\\ell$ relative to $\\pi\\times\\nu$, a conditional law of the parameter given the observation is\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_A\\ell(\\theta,y)\\,\\pi(d\\theta)}{m(y)},&0<m(y)<\\infty,\\\\ \\pi(A),&m(y)=0\\text{ or }m(y)=\\infty.\\end{cases}$$\n\nThe observation marginal is $m\\,d\\nu$, and the filled fibres have marginal mass zero. This is a choice-free assertion about the explicit kernel and event identities.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Fix $\\eta>0$ and put $V=\\{\\theta:d(\\theta,\\Theta^*)>\\eta\\}$. Distance to a nonempty subset of a metric space is a finite 1-Lipschitz function, since the triangle inequality gives $d(\\theta,\\Theta^*)\\le\\rho(\\theta,\\theta')+d(\\theta',\\Theta^*)$ and the reversed inequality follows on exchanging the parameters. Thus $V$ is Borel measurable. Choose $0<\\epsilon<\\beta_\\eta$. The relative KL support and log-integrability hypotheses supply $\\Pi(B_\\epsilon)>0$ and all premises of [F1].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "By [F1] and [F3], the posterior and product-test integrals are those required by [F2]. The tests in the Statement have a.s.-vanishing type-I statistics and uniform type-II exponent $\\beta_\\eta>\\epsilon$. Apply [F2] to $V$ to obtain $\\Pi(V\\mid X_1,\\ldots,X_n)\\to0$ almost surely. Since $\\eta$ was any fixed positive radius, this is the asserted conclusion.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This claim has no additional empty assertion beyond its explicit hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This claim has no additional zero assertion beyond its explicit hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This claim has no additional one assertion beyond its explicit hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This claim has no additional degenerate assertion beyond its explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This claim has no additional endpoints assertion beyond its explicit hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This claim has no additional nonempty-choice assertion beyond its explicit hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This claim has no additional iff-forward assertion beyond its explicit hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This claim has no additional iff-reverse assertion beyond its explicit hypotheses."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "AC enters through the imported KL and likelihood-density conventions. The jointly measurable density family is supplied, so the proof makes no further selections."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-centered-integrable-iid-random-walk-is-unbounded-above": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-kolmogorov-zero-one-law",
+          "source_section": "Statement",
+          "quote": "Let $(X_n)_{n\\in\\mathbb N}$ be an independent sequence of random elements, and\nlet $\\mathcal T(X_n:n\\in\\mathbb N)$ be its tail sigma-algebra. Then every event\n$A\\in\\mathcal T(X_n:n\\in\\mathbb N)$ satisfies\n$$\\mathbb P(A)\\in\\{0,1\\}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-grouping-independent-sigma-algebras",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal F_i)_{i\\in I}$ be an independent family of sigma-algebras on a\nprobability space, and let $J_0,\\dots,J_{m-1}\\subseteq I$ be pairwise disjoint\nindex sets. For each $r<m$, define\n\n$$\\mathcal G_r:=\\sigma\\left(\\bigcup_{i\\in J_r}\\mathcal F_i\\right).$$\n\nThen the sigma-algebras $\\mathcal G_0,\\dots,\\mathcal G_{m-1}$ are independent.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-basic-properties-of-characteristic-functions",
+          "source_section": "Statement",
+          "quote": "Every characteristic function $\\varphi$ on $\\mathbb R$ satisfies $\\varphi(0)=1$, $|\\varphi(t)|\\le1$, $\\varphi(-t)=\\overline{\\varphi(t)}$, and is uniformly continuous on $\\mathbb R$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space and let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $M=\\sup_{n\\ge0}S_n$, a measurable $[0,+\\infty]$-valued random variable. For each $m\\ge1$, removing the first $m$ increments changes later partial sums only by the finite number $S_m$, and the removed partial sums form a finite set. Consequently $\\{M=+\\infty\\}=\\{\\sup_{k\\ge0}\\sum_{i=m+1}^{m+k}X_i=+\\infty\\}$ belongs to $\\sigma(X_{m+1},X_{m+2},\\ldots)$. It is a tail event, so its probability is zero or one.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose its probability were zero. Then $M$ is finite almost surely. Define $M'=\\sup_{k\\ge0}\\sum_{i=2}^{k+1}X_i$, which is also finite almost surely and has the same law as $M$: for every real $b$, the event that the supremum is at most $b$ is the decreasing intersection of the corresponding finite-prefix events, whose probabilities agree by the IID hypothesis. The variable $M'$ is independent of $X_1$ by independence of their coordinate sigma-algebras. Decomposing the supremum according to whether the empty partial sum is used gives $M=\\max(0,X_1+M')$ almost surely. On null exceptional sets replace $M$ and $M'$ by zero if needed, without changing their laws or these almost-sure assertions.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $A=\\max(0,M'+X_1)$ and $B=M'$, so $A$ and $B$ are finite nonnegative variables with the same law. The map $u\\mapsto\\max(0,u)$ is one-Lipschitz and $B\\ge0$, hence $|A-B|\\le|X_1|$. For each positive integer $K$, equality in law gives $\\mathbb E[\\min(A,K)-\\min(B,K)]=0$. The difference converges almost surely to $A-B$ and has absolute value at most $|A-B|\\le|X_1|$. Dominated convergence therefore yields $\\mathbb E(A-B)=0$, without requiring either $A$ or $B$ to have finite expectation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F4",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The identity $A-B=X_1+R$, where $R=(-B-X_1)^+$ and $u^+=\\max(u,0)$, gives $0\\le R\\le|X_1|$. Centering and step 2.1 imply $\\mathbb ER=0$, so $R=0$ almost surely. Thus $B+X_1=A$ almost surely and $B+X_1$ has the same law as $B$. Independence now gives $\\varphi_B(t)\\varphi_{X_1}(t)=\\varphi_B(t)$ for every real $t$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "F6",
+            "F7",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Continuity and $\\varphi_B(0)=1$ supply $\\delta>0$ such that $\\varphi_B(t)\\ne0$ for $|t|<\\delta$. Step 2.2 then gives $\\varphi_{X_1}(t)=1$ on this interval. Choose a positive integer $q$ with $1/q<\\delta$. For every integer $k\\ge q$, taking real parts gives $\\mathbb E[1-\\cos(X_1/k)]=0$, so $\\cos(X_1/k)=1$ almost surely. Intersecting these countably many probability-one events, fix a resulting value $x$ of $X_1$. If $x\\ne0$, some $k\\ge q$ has $0<|x|/k<2\\pi$, contradicting $\\cos(x/k)=1$. Therefore $X_1=0$ almost surely, contrary to the hypothesis.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "F5",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The zero-probability alternative in step 1.1 is impossible, so $M=+\\infty$ almost surely. Each finite prefix has finite maximum, and hence removing it preserves an infinite supremum. Thus the limsup of the partial sums is also $+\\infty$ almost surely.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: S_0=0 includes the empty sum; the increment sequence is indexed by every positive integer."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the identically zero increment law is excluded explicitly and is exactly the contradiction reached."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement: the assertion concerns an infinite IID sequence, not a single-step bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: centering makes every constant increment law identically zero; it is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.2: the extended value +infinity is precisely the asserted supremum and limsup."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1: only positive integers and a countable intersection of fixed events are used; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted."
+        }
+      ]
+    },
+    "cex-weak-tilted-tests-do-not-imply-almost-sure-consistency": {
+      "risk": "high",
+      "kind": "counterexample",
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This claim has no additional empty assertion beyond its explicit hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This claim has no additional zero assertion beyond its explicit hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This claim has no additional one assertion beyond its explicit hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This claim has no additional degenerate assertion beyond its explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This claim has no additional endpoints assertion beyond its explicit hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This claim has no additional nonempty-choice assertion beyond its explicit hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This claim has no additional iff-forward assertion beyond its explicit hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This claim has no additional iff-reverse assertion beyond its explicit hypotheses."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "2.2"
+          ],
+          "reason": "AC is inherited only through the KL and likelihood-density conventions. Every density is supplied explicitly and each deterministic hitting-time quantile is chosen as the least admissible integer."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Let $c>0$ normalize the density $f(y)=c/[y^2(\\log y)^2]$ on $[e,\\infty)$. Its normalizing integral is finite and positive, and $\\mu:=E_0Y=c\\int_e^\\infty[y(\\log y)^2]^{-1}dy=c<\\infty$. For IID $Y_i$ with this density put $X_i=Y_i-\\mu$ and $S_n=\\sum_{i=1}^nX_i$. These increments are integrable, nonconstant and centered.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "For $b\\ge e$, direct integration gives $E_0[Y1_{\\{Y>b\\}}]=c/\\log b$ and $P_0(Y>b)\\le c/[b(\\log b)^2]$. Moreover $E_0[Y^21_{\\{Y\\le b\\}}]=c\\int_e^b(\\log y)^{-2}dy=O(b/(\\log b)^2)$: split the integral at $\\sqrt b$, bound the first part by $\\sqrt b$, and the second by $4b/(\\log b)^2$. Put $b_n=n/(\\log n)^{3/2}$ for all sufficiently large $n$. By [F6], the probability that any of the first $n$ observations exceeds $b_n$ is $O((\\log n)^{-1/2})\\to0$. The variance of $\\sum_{i=1}^nY_i1_{\\{Y_i\\le b_n\\}}$ is at most $O(nb_n/(\\log b_n)^2)$ by independence. Dividing this bound by $(n/\\log n)^2$ gives $O(b_n/n)\\to0$. Chebyshev [F4] therefore shows $S_n/(n/\\log n)=-c\\log n/\\log b_n+o_{P_0}(1)\\to-c$. Define $a_n=cn/(2\\log n)$ and $\\phi_n=1_{\\{S_n>-a_n\\}}$ for $n\\ge3$, with arbitrary tests for $n<3$. It follows that $P_0^n\\phi_n\\to0$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F6",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "By [F3], the hitting times $T_j=\\inf\\{n\\ge1:S_n\\ge j\\}$ are finite almost surely for every positive integer $j$. Define recursively $N_0=0$ and let $N_j$ be the least integer at least $\\max(j,N_{j-1}+1)$ with $P_0(T_j>N_j)\\le2^{-j}$. Such an integer exists since $T_j<\\infty$ almost surely. Put $\\epsilon_j=N_j^{-1}$. Thus $\\epsilon_j>0$ and $\\epsilon_j\\to0$; these constants depend only on the true law, not the realized observations. By [F5], $T_j\\le N_j$ eventually almost surely. Also $T_j\\to\\infty$ almost surely, since finitely many finite partial sums cannot exceed arbitrarily large levels.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "claim": "Take sample space $\\mathsf X=[e,\\infty)\\sqcup\\{z\\}$ with its disjoint-union Borel sigma-algebra and dominating measure equal to Lebesgue measure plus $\\delta_z$. Set $p_0(y)=f(y)$ and $p_0(z)=0$. On the continuous part supply $p_*(y)=f(y)e^{-2y}$ and $p_j(y)=f(y)e^{-y-\\mu-\\epsilon_j}$; give each density its remaining mass at $z$. Both continuous masses are strictly between zero and one, so these atom masses are positive, and every density is finite and normalized. Take $\\Theta=\\{*\\}\\sqcup\\mathbb N$ with the discrete metric and its Borel sigma-algebra; the supplied density family is jointly measurable. By [F1], $K(*)=2\\mu<\\infty$ and $K(j)=E_0(Y+\\mu+\\epsilon_j)=2\\mu+\\epsilon_j$, so $\\Theta^*=\\{*\\}$. All relevant log ratios are integrable because $E_0Y<\\infty$.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.3",
+          "claim": "On the $P_0$-support, the tilt at $j$ has density $r_j(y)=e^{y-\\mu-\\epsilon_j}=e^{X-\\epsilon_j}$. Its total mass is infinite, since $\\int_e^\\infty e^y f(y)dy=\\infty$, but the finite pointwise density makes it sigma-finite by [F2]. Its product density is $e^{S_n-n\\epsilon_j}$. On $\\{\\phi_n=0\\}$ this is at most $e^{-a_n}$, uniformly in $j$, and hence $\\sup_jQ_j^n(1-\\phi_n)\\le e^{-a_n}\\to0$. For $0<\\eta<1$, the set at distance greater than $\\eta$ from $\\Theta^*$ is precisely $\\mathbb N$, so these same tests satisfy both required weak errors. For $\\eta\\ge1$ that set is empty and the type-II requirement is vacuous.",
+          "step": "2.3",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Put $r=e^{-1/4}$ and give the model prior $\\pi_*=1/2$, $\\pi_j=(1-r)r^{j-1}/2$. These masses sum to one. Every relative KL neighborhood has mass at least $1/2$ because it contains $*$. On any observed continuous sample, divide the prior-weighted likelihood by $\\prod_i p_*(Y_i)$ to obtain the alternative numerator $A_n=e^{S_n}\\sum_{j\\ge1}\\pi_je^{-n\\epsilon_j}$. It is finite, being at most $e^{S_n}/2$, and the total relative evidence is $1/2+A_n>0$. Thus the posterior mass of the alternatives is $A_n/(1/2+A_n)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "step 2.3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "claim": "Almost surely, for every sufficiently large $j$, step 2.1 gives $T_j\\epsilon_j\\le1$ and $S_{T_j}\\ge j$. Consequently $A_{T_j}\\ge e^{j-1}\\pi_j=(1-r)e^{j-1}r^{j-1}/2\\to\\infty$. Since $T_j\\to\\infty$, the posterior mass outside every discrete neighborhood of radius less than one has limes superior one almost surely. This contradicts the claimed a.s. consistency although both test errors in the refuted statement tend to zero.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-kl-projection-set-and-relative-kl-neighborhoods",
+          "source_section": "Definition",
+          "quote": "Assume AC as required by the imported directional KL convention\n[[def-kullback-leibler-divergence]]. Let $(\\Theta,\\mathcal T,\\rho)$ be a\nmetric space, where $\\mathcal T$ is its Borel sigma-algebra. Let\n$(\\mathsf X,\\mathcal A,\\mu)$ be a sample space with a fixed sigma-finite\ndominating measure. Suppose the supplied finite-valued densities\n$(\\theta,x)\\mapsto p_\\theta(x)$ and $x\\mapsto p_0(x)$ are jointly measurable\nand normalized relative to $\\mu$, and observations are IID from $P_0$. Use\nthe directional convention for [[def-kullback-leibler-divergence]]:\n$$K(\\theta):=\\mathrm{KL}(P_0\\Vert P_\\theta).$$\nAssume $K^*:=\\inf_{\\theta\\in\\Theta}K(\\theta)<\\infty$ and\n$$\\Theta^*:=\\{\\theta\\in\\Theta:K(\\theta)=K^*\\}\\ne\\varnothing.$$\nThe set $\\Theta^*$ is the **KL projection set** of the truth onto the model.\nThe **distance to the KL projection set** is\n$$d(\\theta,\\Theta^*):=\\inf_{\\vartheta\\in\\Theta^*}\\rho(\\theta,\\vartheta).$$\nA **relative KL neighborhood** of $\\Theta^*$ of radius $\\epsilon>0$ is\n$$B_\\epsilon:=\\{\\theta\\in\\Theta:K(\\theta)-K^*\\le\\epsilon\\}.$$\n\nFor any selected $\\theta^*\\in\\Theta^*$ with finite contrast, the relative\ncontrast on $B_\\epsilon$ satisfies\n$$K(\\theta)-K^*=-\\mathbb E_{P_0}\\log\\frac{p_\\theta(X)}{p_{\\theta^*}(X)}$$\nwhenever the displayed log ratio is integrable. This definition allows\n$\\Theta^*$ to contain multiple parameters and does not assert that the\nposterior selects one of them.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-likelihood-tilted-measure-at-kl-projection",
+          "source_section": "Definition",
+          "quote": "Fix a selected $\\theta^*\\in\\Theta^*$ as in\n[[def-kl-projection-set-and-relative-kl-neighborhoods]]. Since its KL value is\nfinite, $p_{\\theta^*}>0$ $P_0$-almost surely. For each $\\theta\\in\\Theta$,\ndefine the nonnegative set function\n$$Q_\\theta(A):=\\int_A\\frac{p_\\theta(x)}{p_{\\theta^*}(x)}\\,P_0(dx), \\qquad A\\in\\mathcal A,$$\nwhere the ratio is assigned value $0$ on the $P_0$-null set\n$\\{p_{\\theta^*}=0\\}$. Write\n$$q_\\theta:=Q_\\theta(\\mathsf X) =\\mathbb E_{P_0}\\left[\\frac{p_\\theta(X)}{p_{\\theta^*}(X)}\\right]\\in[0,+\\infty].$$\nWhen $q_\\theta\\ne1$, $Q_\\theta$ is not a probability law. The local\nsigma-finiteness lemma proves that it is a measure. The local product-measure\nlemma then constructs $Q_\\theta^n$ and proves its density relative to $P_0^n$\nis $\\prod_{i=1}^n p_\\theta(X_i)/p_{\\theta^*}(X_i)$.\n\nFor a measurable test $\\phi_n:\\mathsf X^n\\to[0,1]$,\nOnce that product measure has been constructed,\n$Q_\\theta^n(1-\\phi_n)$ means the nonnegative integral of $1-\\phi_n$ under it.\nIt may be infinite; a hypothesis that this quantity tends to zero in\nparticular requires it to be finite for all sufficiently large $n$.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-likelihood-tilted-measure-is-sigma-finite",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses and conventions of\n[[def-likelihood-tilted-measure-at-kl-projection]], each $Q_\\theta$ is a\nsigma-finite measure. The definition does not require its total mass to be\none; the companion examples exhibit masses below and above one, while\n$Q_{\\theta^*}(\\mathsf X)=1$ for the selected minimizer.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-product-likelihood-tilt-has-product-density",
+          "source_section": "Statement",
+          "quote": "Under the setup of [[def-likelihood-tilted-measure-at-kl-projection]] and\n[[lem-likelihood-tilted-measure-is-sigma-finite]], for each $\\theta$ and\ninteger $n\\ge1$, the sigma-finite product measure $Q_\\theta^n$ exists and\nhas density\n$$\\prod_{i=1}^n r_\\theta(x_i),\\qquad r_\\theta(x):=\\frac{p_\\theta(x)}{p_{\\theta^*}(x)},$$\nrelative to $P_0^n$. Ratios are zero where $p_{\\theta^*}=0$, as in the\nlikelihood-tilt definition.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-centered-integrable-iid-random-walk-is-unbounded-above",
+          "source_section": "Statement",
+          "quote": "Let $(X_n)_{n\\ge1}$ be IID real random variables with $\\mathbb E|X_1|<\\infty$, $\\mathbb EX_1=0$, and $\\mathbb P(X_1=0)<1$. Put $S_0=0$ and $S_n=\\sum_{i=1}^nX_i$. Then\n$$\\mathbb P\\left(\\sup_{n\\ge0}S_n=+\\infty\\right)=1.$$\nIn particular, $\\limsup_{n\\to\\infty}S_n=+\\infty$ almost surely.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-chebyshev-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X$ is a square-integrable real random variable and $a>0$, then\n$$\\mathbb P(|X-\\mathbb E[X]|\\ge a)\\le\\frac{\\operatorname{Var}(X)}{a^2}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-first-borel-cantelli-lemma-for-events",
+          "source_section": "Statement",
+          "quote": "Let $(A_n)_{n\\in\\mathbb N}$ be events in a probability space. If\n$$\\sum_{n=0}^\\infty \\mathbb P(A_n)<+\\infty,$$\nthen\n$$\\mathbb P(A_n\\ \\mathrm{i.o.})=0.$$\n\nNo independence hypothesis is needed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finite-union-bound",
+          "source_section": "Statement",
+          "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$,\n$$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$\nFor $n=0$ both sides are $0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ]
+    }
+  },
+  "page_inventory_additions": {
+    "misspecified-posterior-consistency": [
+      "lem-centered-integrable-iid-random-walk-is-unbounded-above"
+    ],
+    "misspecified-posterior-consistency-examples": [
+      "cex-weak-tilted-tests-do-not-imply-almost-sure-consistency"
+    ]
+  },
+  "source_exact_claim_section_names": {
+    "lem-exponential-test-posterior-splitting-at-kl-projection": "Statement",
+    "thm-posterior-consistency-at-kl-projection": "Statement",
+    "lem-centered-integrable-iid-random-walk-is-unbounded-above": "Statement",
+    "cex-weak-tilted-tests-do-not-imply-almost-sure-consistency": "Statement refuted"
+  },
+  "validation": {
+    "command": "node tools/proof-layout.mjs items/lem-exponential-test-posterior-splitting-at-kl-projection.md items/thm-posterior-consistency-at-kl-projection.md items/cex-weak-tilted-tests-do-not-imply-almost-sure-consistency.md items/lem-centered-integrable-iid-random-walk-is-unbounded-above.md",
+    "exit_code": 0,
+    "output": "proof-layout: 4 items, 19 steps, 0 defects"
+  }
+}

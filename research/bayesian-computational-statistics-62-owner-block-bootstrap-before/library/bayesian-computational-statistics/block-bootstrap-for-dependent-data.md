@@ -1,0 +1,25 @@
+---
+page: block-bootstrap-for-dependent-data
+title: Moving and tapered block bootstrap for dependent data
+status: draft
+items:
+  - def-conditional-weak-convergence-in-probability
+  - def-hadamard-differentiability-tangentially
+  - alg-overlapping-block-resampling
+  - alg-moving-block-bootstrap
+  - alg-tapered-block-bootstrap
+  - lem-moving-block-bootstrap-conditional-covariance
+  - lem-tapered-block-bootstrap-conditional-covariance
+  - lem-taper-window-l2-normalization
+  - alg-k-sample-null-constrained-block-bootstrap
+  - lem-k-sample-null-centering
+  - thm-conditional-bootstrap-hadamard-delta-method
+  - thm-moving-block-bootstrap-clt-for-dependent-data
+  - thm-tapered-block-bootstrap-clt-for-dependent-data
+  - thm-k-sample-block-bootstrap-validity
+examples: []
+---
+
+## Summary
+
+This page defines overlapping moving blocks and tapered blocks for Hilbert-valued time series, proves their finite-sample conditional covariance identities, and verifies the taper normalization. It also proves that position-centered block resampling gives every bootstrap series the same pooled conditional mean, and gives a conditional K-sample limit theorem for continuous statistics and Hadamard-differentiable maps. The intended MBB and TBB sample-mean CLTs are stated with the source's stronger physical-dependence rate, block-length regime, AC assumption inherited from the sampling CLT, covariance target and topology. Their local empirical covariance, conditional Lindeberg and tightness proofs remain escalated; this page makes no path-process FCLT claim.

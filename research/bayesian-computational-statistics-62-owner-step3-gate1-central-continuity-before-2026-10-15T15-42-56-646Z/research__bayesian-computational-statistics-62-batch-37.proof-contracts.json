@@ -1,0 +1,2397 @@
+{
+  "version": 1,
+  "scope": [
+    "def-leapfrog-step-map",
+    "thm-exact-hamiltonian-flow-preserves-energy-and-volume",
+    "lem-real-line-exponential-tail-integrable",
+    "thm-leapfrog-is-reversible-and-volume-preserving",
+    "def-hamiltonian-monte-carlo",
+    "alg-leapfrog-hamiltonian-monte-carlo",
+    "thm-metropolized-hamiltonian-chain-preserves-target",
+    "ex-hmc-globally-lipschitz-force",
+    "ex-hmc-exact-flow-limit",
+    "ex-hmc-leapfrog-harmonic-resonance",
+    "ex-hmc-finite-step-energy-error"
+  ],
+  "contracts": {
+    "def-leapfrog-step-map": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires d>=1 and L>=1; there is no empty coordinate block or zero-step power in its input contract."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition allows a=0 and b=0 in the auxiliary maps, giving K_0=D_0=identity by substitution. Its leapfrog step epsilon must be positive, so epsilon=0 is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition admits d=1 and L=1: M is then a positive scalar, and Phi_epsilon to the first power is exactly the displayed kick-drift-kick composition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition requires M symmetric positive definite so its inverse exists; a singular mass is excluded. A zero gradient is permitted and makes each force kick identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition permits all real a,b but requires epsilon>0 and finite integer L>=1. There is no upper step-size bound or accuracy conclusion at a stability endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition supplies explicit kick, drift and flip formulas on every (q,p); finite L-fold composition uses no witness selection or choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a definition or procedure; it has no proof boundary case for this worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Forward equivalence-axis review: The Definition assigns kick, drift, finite composition, flip and flipped proposal maps from C1 potential data; its inverse formulas are identities and do not state a biconditional.",
+            "item_sha256": "11124ac8b7e35a840f59929b5398341949a31a5a623f5fc4b79992645a195e45",
+            "row_sha256": "ef3f876d18b2a62bad706e4361a256f31383e340987238cd315efad71b04919d"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a definition or procedure; it has no proof boundary case for this worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Reverse equivalence-axis review: The Definition assigns kick, drift, finite composition, flip and flipped proposal maps from C1 potential data; its inverse formulas are identities and do not state a biconditional.",
+            "item_sha256": "11124ac8b7e35a840f59929b5398341949a31a5a623f5fc4b79992645a195e45",
+            "row_sha256": "1004402ad1f8372c74ce536d26e0a0620e6d61902a1941417b9bda606643ddb7"
+          }
+        }
+      ]
+    },
+    "thm-exact-hamiltonian-flow-preserves-energy-and-volume": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+          "source_section": "Statement",
+          "quote": "Let U⊂R^n be open and Y:U→R^n be C¹. There is a unique maximal flow Φ on an open domain\nD⊂R×U containing {0}×U, and Φ is jointly C¹. Its time slices are local C¹\ndiffeomorphisms with inverse Φ_{−t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V′=DY(\\Phi)V$, V(0)=I. Each regular point has a C¹ flow box. If Y\nis C², Φ and those flow boxes are C²; the second state variation W satisfies\n$W′=DY(\\Phi)W+D²Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C¹ field are\nC² in time. A trajectory remaining in a compact K⊂⊂U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-determinant-differential-and-jacobis-formula",
+          "source_section": "Statement",
+          "quote": "Let $A$ be an $n\\times n$ matrix and let $H$ be a direction matrix. Then\n\n$$D\\det(A)[H]=\\operatorname{tr}(\\operatorname{adj}(A)H).$$\n\nIf $A$ is invertible, then\n\n$$D\\det(A)[H]=\\det(A)\\operatorname{tr}(A^{-1}H).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-globally-lipschitz-odes-have-global-solutions",
+          "source_section": "Statement",
+          "quote": "Let $F:\\mathbb R\\times\\mathbb R^n\\to\\mathbb R^n$ be continuous and suppose one $L\\ge0$ satisfies $\\|F(t,x)-F(t,y)\\|_2\\le L\\|x-y\\|_2$ for all $t,x,y$. Then every IVP for $x'=F(t,x)$ has a unique global solution.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-lipschitz-ode-uniqueness-and-stability-estimate",
+          "source_section": "Statement",
+          "quote": "Let $F:D\\to\\mathbb R^n$ be continuous on an open ODE domain, let $I\\subseteq\\mathbb R$ be an order-convex interval with at least two elements, and let $x,y:I\\to\\mathbb R^n$ solve $z'=F(t,z)$ with both graphs in $D$. Fix $t_0\\in I$, and suppose that for every $t\\in I$,\n\n$$\\|F(t,x(t))-F(t,y(t))\\|_2\\le L\\|x(t)-y(t)\\|_2.$$\n\nThen\n\n$$\\|x(t)-y(t)\\|_2\\le e^{L|t-t_0|}\\|x(t_0)-y(t_0)\\|_2.$$\n\nCoincident initial values give uniqueness on every common interval.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-cholesky-factorisation-with-positive-diagonal",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$ and $A\\in M_n(\\mathbb C)$; over $\\mathbb R$ the same definition uses transpose\ninstead of conjugate transpose.\n\nThe matrix $A$ is **Hermitian positive definite** if $A=A^*$ and\n\n$$x^*Ax>0$$for every nonzero vector $x\\in \\mathbb C^n$. A **Cholesky factorisation with positive diagonal** of $A$ is a factorisation$$A=LL^*,$$\n\nwhere $L$ is lower triangular and every diagonal entry of $L$ is a positive real\nnumber.\n\nThe Hermitian terminology matches\n[[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]], and the\ntriangular terminology matches\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-determinant-of-a-triangular-matrix",
+          "source_section": "Statement",
+          "quote": "If $A=(a_{ij})\\in M_n(R)$ is upper or lower triangular over a commutative ring, with $n\\ge1$, then\n$$\\det(A)=\\prod_{i<n}a_{ii}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge1$ and every real matrix $A\\in M_n(\\mathbb R)$,\n$$A\\text{ is invertible}\\quad\\Longleftrightarrow\\quad\\det(A)\\ne0.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F7], $M=LL^T$ where $L$ is lower triangular with strictly positive diagonal. Thus $\\det L$ is the positive product of its diagonal entries, and $\\det M=\\det L\\det(L^T)=(\\det L)^2>0$; [F7] implies that $M$ is invertible, so $M^{-1}$ is well-defined and symmetric. Since $U\\in C^2$, [F9] makes $F$ a $C^1$ vector field. By [F1] it has a unique maximal $C^1$ flow, and completeness as defined in the Statement makes every time slice $\\Phi_t$ global with inverse $\\Phi_{-t}$. Differentiating $\\Phi_{-t}\\circ\\Phi_t=I$ by [F2] shows $D\\Phi_t(z)$ is invertible. The derivative $A(t):=D\\Phi_t(z)$ satisfies $A'(t)=DF(\\Phi_t(z))A(t)$ by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F7",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Along a solution $z(t)=(q(t),p(t))$, [F2] and the displayed Hamilton equations give $$\\frac d{dt}H(q(t),p(t))=\\nabla U(q(t))^TM^{-1}p(t)+(M^{-1}p(t))^T(-\\nabla U(q(t)))=0,$$ where symmetry of $M^{-1}$ identifies the derivative of the kinetic energy. Hence $H(\\Phi_t(z))=H(z)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Suppose $\\nabla U$ is globally $L$-Lipschitz. For $z=(q,p)$ and $w=(q',p')$, [F6] gives $$\\|F(z)-F(w)\\|_2^2\\le\\|M^{-1}\\|_F^2\\|p-p'\\|_2^2+L^2\\|q-q'\\|_2^2\\le C^2\\|z-w\\|_2^2.$$ Thus the time-independent field on $\\mathbb R\\times\\mathbb R^{2d}$ has global state-Lipschitz constant $C$.",
+          "step": "1.3",
+          "inputs": [
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F9], the variational matrix is $$DF(q,p)=\\begin{pmatrix}0&M^{-1}\\\\-\\nabla^2U(q)&0\\end{pmatrix},$$ whose trace is zero. Since $A(t)$ is invertible by step 1.1, [F3] and the finite-sum trace identity $\\operatorname{tr}(XY)=\\sum_{i,j}X_{ij}Y_{ji}=\\operatorname{tr}(YX)$ give $$\\frac d{dt}\\det A(t)=\\det A(t)\\operatorname{tr}(A(t)^{-1}DF(\\Phi_t(z))A(t))=\\det A(t)\\operatorname{tr}(DF(\\Phi_t(z)))=0.$$ Since $A(0)=I_{2d}$, $\\det A(0)=1$, so $\\det D\\Phi_t(z)=1$ for all $t$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F9",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Apply [F4] to obtain completeness and uniqueness in this globally Lipschitz case, and apply [F5] with the same $C$ to obtain the stated Gronwall stability estimate. This supplies a sufficient condition; no completeness is inferred from merely local Lipschitz continuity of $\\nabla U$.",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each $t\\in\\mathbb R$, step 1.1 makes $\\Phi_t:\\mathbb R^{2d}\\to\\mathbb R^{2d}$ a global $C^1$ diffeomorphism. For any Lebesgue-measurable $E\\subseteq\\mathbb R^{2d}$, apply [F8] to $\\mathbf1_E$ and use step 2.1 to get $\\lambda_{2d}(\\Phi_t^{-1}(E))=\\int_{\\mathbb R^{2d}}\\mathbf1_E(\\Phi_t(z))|\\det D\\Phi_t(z)|\\,dz=\\lambda_{2d}(E)$. Hence the exact flow preserves phase-space Lebesgue volume.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F8",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 applies to every Lebesgue-measurable E, including the empty set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At t=0, the flow is the identity and step 2.1 gives determinant one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the same block trace calculation when d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The SPD hypothesis excludes singular mass matrices; step 1.1 proves invertibility."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The time statement includes t=0 and every real t; steps 1.1, 2.1, and 3.1 cover t=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit and is used in step 3.1 for the change-of-variables supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Completeness of the C2 Hamiltonian field implies energy conservation and determinant one; Proof 1.1 and 2.1 do not characterize complete fields by these invariances. No forward direction of a biconditional is part of that claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Read the actual current Statement/Definition and relevant argument for this gate failure. Completeness of the C2 Hamiltonian field implies energy conservation and determinant one; Proof 1.1 and 2.1 do not characterize complete fields by these invariances. No forward direction of a biconditional is part of that claim.",
+            "item_sha256": "acc0018902f79a1e2fdc24f4c580ab1ddeb16e686146751d54f1bb23f0eaab41",
+            "row_sha256": "d6657d43ddcc46ac9576ea6b12055a583500d46672c2b2ae6913cef562b54c21"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Completeness of the C2 Hamiltonian field implies energy conservation and determinant one; Proof 1.1 and 2.1 do not characterize complete fields by these invariances. No reverse direction of a biconditional is part of that claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Read the actual current Statement/Definition and relevant argument for this gate failure. Completeness of the C2 Hamiltonian field implies energy conservation and determinant one; Proof 1.1 and 2.1 do not characterize complete fields by these invariances. No reverse direction of a biconditional is part of that claim.",
+            "item_sha256": "acc0018902f79a1e2fdc24f4c580ab1ddeb16e686146751d54f1bb23f0eaab41",
+            "row_sha256": "10585ad7093bf6589dcb44ac03a3fe6d2909336c2f8bd3d50e756cc80fdf59cb"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-37",
+        "notes": "Checked all six steps, maximal-flow supplier argument and direct citation statements. C2 U yields C1 vector field; completeness supplies all positive and negative times and inverse slices. SPD mass is invertible and its inverse symmetric. The energy derivatives cancel, variational trace vanishes by finite trace cyclicity, and initial determinant is one. Countable Choice matches C1 change of variables on full Lebesgue sets. The Frobenius/Lipschitz squared estimate gives max(norm_F(M^-1),L) in both time directions; local regularity alone is never used for completeness. d>=1, t=0, negative t and constant force create no exceptions."
+      }
+    },
+    "lem-real-line-exponential-tail-integrable": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. If $f,g:X\\to[0,+\\infty]$ are measurable, then\n$$\\int(f+g)\\,d\\mu=\\int f\\,d\\mu+\\int g\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ be a measurable space and let\n$f,g:X\\to\\overline{\\mathbb R}$ be measurable for the Borel sigma-algebra on\nthe extended real line. Products of functions use\n$\\odot_X$ from [[def-measurable-pointwise-extended-real-product]], and $cf$\nabbreviates $\\underline c\\odot_X f$ for the constant function $\\underline c$.\nThe magnitude function is $|f|=\\max(f,-f)$ as in\n[[def-positive-and-negative-parts-of-a-function]]. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if the partial pointwise sum $f+g$ is defined at every point, then it is measurable;\n4. the pointwise product $fg:=f\\odot_X g$ is measurable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "Let $a \\in \\mathbb{R}$, where $\\mathbb{R}$ is the ambient ordered field\n([[def-ordered-field]], [[def-field]]).\n\n**Natural exponents.** By the recursion theorem ([[thm-recursion]]) applied to\nthe set $\\mathbb{R}$, the starting element $1$ and the function\n$f(x) = x \\cdot a$, there is a unique function $\\mathbb{N} \\to \\mathbb{R}$,\nwritten $n \\mapsto a^n$, with\n\n$$a^0 = 1, \\qquad a^{n+1} = a^n \\cdot a \\quad (n \\in \\mathbb{N}).$$\n\nThus $a^1 = a$, $a^2 = a \\cdot a$, and so on. Note that this is defined for\n**every** $a$, including $a = 0$.\n\n**Negative exponents.** If $a \\ne 0$ and $n \\in \\mathbb{N}$ with $n \\ge 1$, set\n\n$$a^{-n} := (a^n)^{-1}.$$\n\n**Why that is legitimate.** The right-hand side presupposes that $a^n$ is\ninvertible, that is, that $a^n \\ne 0$. This is a proof obligation and not an\nobservation, and it is discharged by claim 2 of [[lem-power-laws]]: for $a \\ne 0$\nin a field, $a^n \\ne 0$ for every $n \\in \\mathbb{N}$, proved there by induction on\n$n$ from the fact that a field has no zero divisors ([[lem-of-no-zero-divisors]]).\nThat lemma is a statement *about* the operation introduced here, so it depends on\nthis definition and is recorded in this item's `justified_by` rather than in its\n`deps` (SCHEMA §3). Given $a^n \\ne 0$, the value $(a^n)^{-1}$ is a single\nwell-determined element, because multiplicative inverses in a field are unique\n([[lem-of-inverse-unique]]).\n\n**Integer exponents.** Every integer $m$ ([[def-integers]]) is either\n$n$ or $-n$ for a unique natural $n$, where $n$ in these integer expressions denotes its image under the\nembedding $\\iota : \\mathbb{N} \\to \\mathbb{Z}$ ([[lem-nat-embeds-int]],\n[[def-int-operations]]). This too is a citation and not a slogan: the order on\n$\\mathbb{Z}$ is total ([[thm-int-ordered-ring]]), so $m \\ge 0$ or $m < 0$; the\nimage of $\\iota$ is exactly the set of nonnegative integers, and each of them is\n$n$ for a unique natural $n$ ([[lem-nat-embeds-int]]); and if $m < 0$ then\n$-m > 0$, by compatibility of the order with addition ([[thm-int-ordered-ring]]),\nso $-m = n$ and $m = -n$, with $n$ unique because $\\iota$ is\ninjective. The two clauses above therefore define $a^m$ for every\n$m \\in \\mathbb{Z}$ whenever $a \\ne 0$, and for every $m \\in \\mathbb{N}$ for\narbitrary $a$. The two exponent domains are disjoint: the natural clause\nhandles $m \\ge 0$, including $m = 0$, while the negative clause requires\n$n \\ge 1$ and therefore handles only $m < 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n([[def-extended-real-valued-measurable-function]]). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\n[[def-integral-of-a-nonnegative-simple-function]].\n\nThe set of admissible simple minorants is nonempty because it contains the zero\nfunction, which is simple ([[def-nonnegative-simple-measurable-function]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]) with additive identity $0_F$ and\nmultiplicative identity $1_F$. Define\n$\\iota : \\mathbb{N} \\to F$ by recursion on $\\mathbb{N}$\n([[def-natural-numbers]], [[thm-recursion]]):\n\n$$\\iota(0) \\;:=\\; 0_F, \\qquad \\iota(n+1) \\;:=\\; \\iota(n) + 1_F .$$\n\n$\\iota(n)$ is the **canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added to itself $n$ times.\n\n**Why the notation is needed at all.** A natural number in this library is a von\nNeumann natural, that is a set ([[def-natural-numbers]]), and a set is not an\nelement of $F$. So $1/n$, $n^{\\alpha}$ and $x/n$ are not expressions of $F$ when\n$n$ is a natural: what they mean is $1/\\iota(n)$, $\\iota(n)^{\\alpha}$ and\n$x/\\iota(n)$. The map $\\iota$ is what carries a counting number into the field,\nand writing it is the whole reason a reader meets $1/\\iota(k+1)$ where an\ninformal text would write $1/(k+1)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let\n$f:X\\to[0,+\\infty]$ be measurable, and let $E\\in\\mathcal A$. Since\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]]\nimplies that $f\\chi_E$ is measurable, define the **integral of $f$ over $E$**\nby\n$$\\int_E f\\,d\\mu:=\\int f\\chi_E\\,d\\mu,$$\nwhere the integral on the right is the nonnegative Lebesgue integral of\n[[def-nonnegative-lebesgue-integral]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since absolute value and the exponential are continuous, $f$ is continuous and hence Borel measurable by [F1]; its values are positive by [F1]. Put $r=\\exp(-1)$. Positivity gives $r>0$, while strict increase and $-1<0$ give $r<\\exp(0)=1$. Thus [F4] gives $\\sum_{k=0}^{\\infty}r^k=1/(1-r)<\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $k,n\\in\\mathbb N$ with $n\\ge1$, read as real endpoints via [F9], set $I_k=[k,k+1)$ and $J_k=[-k-1,-k)$. These intervals are pairwise disjoint and partition $\\mathbb R$; each has measure one by [F2]. On either interval $|x|\\ge k$, so monotonicity of the exponential and [F6] give $f(x)\\le\\exp(-k)=r^k$. For each such $n$, the union of $I_k,J_k$ over $k<n$ is $[-n,n)$, and the integral notation is that of [F10]; [F3] yields $$\\int_{[-n,n)}f\\,d\\lambda_1\\le 2\\sum_{k<n}r^k\\le\\frac{2}{1-r}.$$",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The measurable functions $f_n=f\\mathbf1_{[-n,n)}$ increase pointwise to $f$; their measurability follows from [F1], [F2], and [F5]. By [F7] and [F10], their nonnegative integrals are defined, and monotone convergence [F3] gives $$\\int_{\\mathbb R}f\\,d\\lambda_1=\\lim_{n\\to\\infty}\\int_{[-n,n)}f\\,d\\lambda_1\\le\\frac{2}{1-r}<\\infty.$$ This proves the claimed integrability.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F7",
+            "F10",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes f on the nonempty real line. Proof 2.1 partitions R by intervals I_k and J_k; the n=0 truncation is the empty interval [0,0), whose integral is 0, before the increasing positive truncations in 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves f(x)>0 everywhere, so there is no zero-function exception."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof 2.1 with n=1 integrates over [-1,1), consisting of the two length-one intervals J_0 and I_0, and gives integral at most 2r^0=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement fixes exp(-|x|), which is strictly positive by Proof 1.1. The comparison ratio r=exp(-1) lies strictly between 0 and 1, so the geometric envelope never has the singular r=1 denominator."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 assigns every integer endpoint to exactly one half-open interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement explicitly assumes Countable Choice, used by the box-measure and continuous-to-Borel suppliers in steps 1.1 and 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The fixed function exp(-|x|) is integrable by the geometric envelope in Proof 2.1 and monotone convergence in 3.1; no characterization of all integrable functions is claimed. No forward direction of a biconditional is part of that claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Read the actual current Statement/Definition and relevant argument for this gate failure. The fixed function exp(-|x|) is integrable by the geometric envelope in Proof 2.1 and monotone convergence in 3.1; no characterization of all integrable functions is claimed. No forward direction of a biconditional is part of that claim.",
+            "item_sha256": "50b6b9df43b04df0dd9c520c5988caf82d4eda344cfa97332778537fadd51127",
+            "row_sha256": "9d18f4f991130474e98ef9378b3917811a8c8cce50642c11c8812c81986f05ff"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The fixed function exp(-|x|) is integrable by the geometric envelope in Proof 2.1 and monotone convergence in 3.1; no characterization of all integrable functions is claimed. No reverse direction of a biconditional is part of that claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Read the actual current Statement/Definition and relevant argument for this gate failure. The fixed function exp(-|x|) is integrable by the geometric envelope in Proof 2.1 and monotone convergence in 3.1; no characterization of all integrable functions is claimed. No reverse direction of a biconditional is part of that claim.",
+            "item_sha256": "50b6b9df43b04df0dd9c520c5988caf82d4eda344cfa97332778537fadd51127",
+            "row_sha256": "7aea03838eda1196def88c85e67f7bc76d0f0ea6e27fe693722447d5e9f7c1b3"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-37",
+        "notes": "Checked all three steps and direct supplier statements: r=exp(-1) lies strictly between zero and one; I_k and J_k are disjoint and cover R including zero via I_0; the finite [-n,n) envelope is bounded by 2/(1-r). Measurable truncations increase to f, so nonnegative monotone convergence applies. Countable Choice matches continuous-Borel and box hypotheses. No improper-integral interchange or stronger choice is used."
+      }
+    },
+    "thm-leapfrog-is-reversible-and-volume-preserving": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-leapfrog-step-map",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $U:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable, and let $M$ be a real symmetric positive-definite $d\\times d$ matrix. Write $\\nabla U$ for its Euclidean gradient, and let $\\epsilon>0$.\n\nFor $a,b\\in\\mathbb R$, define the **force kick** and **drift shear**\n$$K_a(q,p)=(q,p-a\\nabla U(q)),\\qquad D_b(q,p)=(q+bM^{-1}p,p).$$\nThe one-step leapfrog map is\n$$\\Phi_\\epsilon=K_{\\epsilon/2}\\circ D_\\epsilon\\circ K_{\\epsilon/2},$$\nwhere composition is read right to left. For a finite integer $L\\ge1$, its $L$-step map is $\\Phi_\\epsilon^L$. Define the momentum flip $R(q,p)=(q,-p)$ and the flipped proposal map $T_{\\epsilon,L}=R\\circ\\Phi_\\epsilon^L$.\n\nEach kick and drift is a continuous bijection with inverse $K_{-a}$ or $D_{-b}$, respectively. These finite maps use only $\\nabla U$ and do not require a solution of Hamilton's ODE. The classical derivative of a force kick is not part of this definition: for merely $U\\in C^1$, $\\nabla U$ need not be differentiable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, let $h \\in \\mathbb{R}^n$, and let $E + h$ be the translate of\n$E \\subseteq \\mathbb{R}^n$ ([[def-translation-of-a-set-in-rn]]). Then:\n\n1. $\\lambda_n^*(E+h) = \\lambda_n^*(E)$ for **every** subset $E$;\n2. $E$ is Lebesgue measurable if and only if $E+h$ is;\n3. $\\lambda_n(E+h) = \\lambda_n(E)$ for every Lebesgue measurable $E$.\n\n**No choice principle is used.** Lebesgue outer measure is defined as an infimum\nand the Carathéodory condition is a family of equations between its values, so\nall three clauses are statements about objects that exist in ZF; countable\nchoice is needed to know that $\\lambda_n$ is a measure, not to know that it is\ntranslation invariant.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sections-of-product-measurable-functions-are-measurable",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces, and let\n$$f : X \\times Y \\to \\overline{\\mathbb R}$$\nbe $(\\mathcal A \\otimes \\mathcal B,\\mathcal B(\\overline{\\mathbb R}))$-measurable.\nThen $f_x : Y \\to \\overline{\\mathbb R}$ is $\\mathcal B$-measurable for every\n$x \\in X$, and $f^y : X \\to \\overline{\\mathbb R}$ is $\\mathcal A$-measurable\nfor every $y \\in Y$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue\nmeasurable ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lebesgue-measure-under-dilations-and-reflections",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), let $c$ be a nonzero real and write\n$cE := \\{\\, cx : x \\in E \\,\\}$ for $E \\subseteq \\mathbb{R}^n$, where\n$(cx)_i := cx_i$. Then:\n\n1. $\\lambda_n^*(cE) = |c|^{\\,n}\\,\\lambda_n^*(E)$ for every subset $E$, the\n   product being defined in $\\overline{\\mathbb{R}}$ because $|c|^{\\,n} > 0$;\n2. $E$ is Lebesgue measurable if and only if $cE$ is;\n3. $\\lambda_n(cE) = |c|^{\\,n}\\lambda_n(E)$ for every Lebesgue measurable $E$.\n\nAt $c = -1$ the map is reflection in the origin and $|c|^{\\,n} = 1$, so it\npreserves outer measure, measurability and measure. The value $c = 0$ is\nexcluded because $0E$ is $\\{0\\}$ or $\\varnothing$ and carries no information\nabout $E$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-determinant-of-a-triangular-matrix",
+          "source_section": "Statement",
+          "quote": "If $A=(a_{ij})\\in M_n(R)$ is upper or lower triangular over a commutative ring, with $n\\ge1$, then\n$$\\det(A)=\\prod_{i<n}a_{ii}.$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "source_section": "Statement",
+          "quote": "Let $m,n \\ge 1$. Under the identification\n$$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$\none has\n$$\\mathcal B(\\mathbb R^m)\\otimes\\mathcal B(\\mathbb R^n) = \\mathcal B(\\mathbb R^{m+n}).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$m,n \\ge 1$. Under the identification\n$$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$\nthe product measure $\\lambda_m \\times \\lambda_n$ and the Euclidean Lebesgue\nmeasure $\\lambda_{m+n}$ agree on every Borel subset of $\\mathbb R^{m+n}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Write $\\beta_n$ for the restriction of $\\lambda_n$ to\nthe Borel sigma-algebra $\\mathcal{B}(\\mathbb{R}^n)$\n([[def-borel-sigma-algebra]]). Then $\\mathcal{L}(\\mathbb{R}^n)$ is exactly the\ncompletion domain of $(\\mathbb{R}^n, \\mathcal{B}(\\mathbb{R}^n), \\beta_n)$\n([[def-completion-of-a-measure-space]]), and $\\lambda_n$ is the completed measure\nthere. Explicitly,\n\n$$E \\in \\mathcal{L}(\\mathbb{R}^n) \\iff E = A\\cup N \\text{ for some } A, Z \\in \\mathcal{B}(\\mathbb{R}^n) \\text{ with } N \\subseteq Z \\text{ and } \\beta_n(Z) = 0,$$\n\nand then $\\lambda_n(E) = \\beta_n(A)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "construct"
+          ],
+          "claim": "Fix $a\\in\\mathbb R$ and a Borel set $E\\subseteq\\mathbb R^d\\times\\mathbb R^d$. Continuity of $K_a$ makes $K_a^{-1}(E)$ Borel, and [F3, F8] make these sets product-measurable with measurable sections $E_q$. For fixed $q$, the momentum section of $K_a^{-1}(E)$ is $E_q+a\\nabla U(q)$, a translate of $E_q$, so [F2] gives equal $\\lambda_d$-measures. Tonelli [F5] on the product measure from [F4] gives equal product measures, and [F8] identifies them with full Euclidean measures: $\\lambda_{2d}(K_a^{-1}(E))=\\lambda_{2d}(E)$."
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F8",
+            "algebra"
+          ],
+          "claim": "For each fixed $p$, continuity of $D_b$ from [F1] and [F3, F8] make the position section of $D_b^{-1}(E)$ measurable; it is $E^p-bM^{-1}p$, also a translate. The same [F2] and Tonelli calculation, with [F8], gives $\\lambda_{2d}(D_b^{-1}(E))=\\lambda_{2d}(E)$. The map $R$ preserves full phase volume because it reflects each momentum section, so [A1, F5, F6] apply. Thus every kick, drift, and flip preserves phase volume on Borel sets."
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F9",
+            "step 1.1",
+            "step 1.2"
+          ],
+          "claim": "Let $E\\subseteq\\mathbb R^{2d}$ be Lebesgue measurable. By [F9], choose Borel sets $A,Z$ and $N\\subseteq Z$ with $E=A\\cup N$ and $\\lambda_{2d}(Z)=0$. For any kick, drift, or flip $S$, [F1] and [F3] make $S^{-1}(A)$ and $S^{-1}(Z)$ Borel; steps 1.1 and 1.2 give $\\lambda_{2d}(S^{-1}(A))=\\lambda_{2d}(A)$ and $\\lambda_{2d}(S^{-1}(Z))=0$. Thus $S^{-1}(E)$ differs from $S^{-1}(A)$ by a subset of the null Borel set $S^{-1}(Z)$, so [F9] gives its measurability and $\\lambda_{2d}(S^{-1}(E))=\\lambda_{2d}(E)$. This proves preservation for every Lebesgue-measurable set."
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ],
+          "claim": "Since $\\Phi_\\epsilon=K_{\\epsilon/2}\\circ D_\\epsilon\\circ K_{\\epsilon/2}$, its finite powers and their composition with $R$ preserve volume by step 2.1."
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ],
+          "claim": "Direct substitution gives $RK_aR=K_{-a}$ and $RD_bR=D_{-b}$. Hence $$R\\Phi_\\epsilon R=K_{-\\epsilon/2}\\circ D_{-\\epsilon}\\circ K_{-\\epsilon/2}=\\Phi_\\epsilon^{-1}.$$ For $T_{\\epsilon,L}=R\\Phi_\\epsilon^L$, this yields $$T_{\\epsilon,L}^2=R\\Phi_\\epsilon^LR\\Phi_\\epsilon^L=\\Phi_\\epsilon^{-L}\\Phi_\\epsilon^L=I.$$ This proves reversibility by momentum flip and the involution claim."
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "step 2.1",
+            "step 4.1",
+            "algebra",
+            "step 1.1"
+          ],
+          "claim": "If $U\\in C^2$, differentiation gives $$DK_a=\\begin{pmatrix}I&0\\\\-a\\nabla^2U(q)&I\\end{pmatrix},\\qquad DD_b=\\begin{pmatrix}I&bM^{-1}\\\\0&I\\end{pmatrix};$$ by [F7] both determinants are one, and $|\\det DR|=1$. Under merely $C^1$ regularity these derivative matrices need not exist, but steps 1.1–4.1 already prove measure preservation without them."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to E=∅; both measures are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero shear coefficients give identity maps, covered by the section calculation in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows d=1, and step 5.1 gives the scalar triangular Jacobian case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 apply to every Borel set, including null or degenerate sets."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses half-open finite boxes whose faces are covered by the box-measure supplier."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicitly assumed for the reflection supplier used in step 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement derives full Euclidean Lebesgue preservation and the flipped-proposal identity T squared=I from the leapfrog input data. Current Proof 2.1 supplies completion beyond Borel sets and 4.1 derives the involution algebra; neither assertion characterizes all measure-preserving involutions as leapfrog maps. No forward direction of a biconditional is part of that claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Read the actual current Statement/Definition and relevant argument for this gate failure. The Statement derives full Euclidean Lebesgue preservation and the flipped-proposal identity T squared=I from the leapfrog input data. Current Proof 2.1 supplies completion beyond Borel sets and 4.1 derives the involution algebra; neither assertion characterizes all measure-preserving involutions as leapfrog maps. No forward direction of a biconditional is part of that claim.",
+            "item_sha256": "d6ec8495e6a7d9d87ea966e22492edc88dab183d0c9e15ce7d1570803bde1277",
+            "row_sha256": "3531f9dfea74dc33f9019b13c7f74682bcb6c32d19a358df761125109bab8ab0"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement derives full Euclidean Lebesgue preservation and the flipped-proposal identity T squared=I from the leapfrog input data. Current Proof 2.1 supplies completion beyond Borel sets and 4.1 derives the involution algebra; neither assertion characterizes all measure-preserving involutions as leapfrog maps. No reverse direction of a biconditional is part of that claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Read the actual current Statement/Definition and relevant argument for this gate failure. The Statement derives full Euclidean Lebesgue preservation and the flipped-proposal identity T squared=I from the leapfrog input data. Current Proof 2.1 supplies completion beyond Borel sets and 4.1 derives the involution algebra; neither assertion characterizes all measure-preserving involutions as leapfrog maps. No reverse direction of a biconditional is part of that claim.",
+            "item_sha256": "d6ec8495e6a7d9d87ea966e22492edc88dab183d0c9e15ce7d1570803bde1277",
+            "row_sha256": "9dc632cacdf541e7f286f501b4f9dd98751f684dee522b21e27fad7cc0307ed7"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-37",
+        "notes": "Read all six steps and all direct supplier statements, including the completion corollary proof. Continuous C1-force shears are homeomorphisms; translated sections preserve measures, Tonelli applies on sigma-finite factors, and Euclidean/product measures agree on Borel sets. Completion extends each preimage calculation to all Lebesgue sets by pulling back a Borel null envelope. Refuter citation defect confirmed and corrected to the exact canonical supplier ID; Countable Choice is sufficient. Flip conjugates both shears to inverses, hence R Phi^L is an involution for every finite L>=1 and epsilon>0. a=b=0 give identity; no Hessian is assumed at C1, while C2 yields the displayed block triangular determinant-one matrices. Claim and hypotheses unchanged."
+      }
+    },
+    "def-hamiltonian-monte-carlo": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition assumes d>=1 and a target normalizer in (0,infinity), excluding both empty Euclidean coordinates and a zero-mass target."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition excludes Z_U=0, epsilon=0 and L=0, while q=0 or p=0 is an ordinary input to the Hamiltonian and finite leapfrog formulas."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows scalar d=1, unit mass M=1, and a single leapfrog step L=1. The momentum covariance remains positive and the target is normalized by its actual Z_U."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition rules out singular M and infinite Z_U. At H(z*)=H(z), its acceptance formula equals min(1,exp(0))=1 without any division by the energy difference."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition uses the open normalizer range (0,infinity) and positive epsilon with finite L>=1. Its min formula includes acceptance 1 at zero or negative energy increment."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition expressly assumes AC and independently refreshes a multivariate Gaussian momentum; the finite deterministic leapfrog part adds no separate selection requirement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a definition or procedure; it has no proof boundary case for this worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Forward equivalence-axis review: The Definition specifies a normalized position density, Gaussian momentum, Hamiltonian and finite leapfrog accept/reject rule; these prescriptions are not a theorem characterizing target-preserving kernels.",
+            "item_sha256": "f5a50f36fa534fceb88c922f99277337180ce16c97119093384df5fa297bc9fe",
+            "row_sha256": "ef3f876d18b2a62bad706e4361a256f31383e340987238cd315efad71b04919d"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a definition or procedure; it has no proof boundary case for this worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Reverse equivalence-axis review: The Definition specifies a normalized position density, Gaussian momentum, Hamiltonian and finite leapfrog accept/reject rule; these prescriptions are not a theorem characterizing target-preserving kernels.",
+            "item_sha256": "f5a50f36fa534fceb88c922f99277337180ce16c97119093384df5fa297bc9fe",
+            "row_sha256": "1004402ad1f8372c74ce536d26e0a0620e6d61902a1941417b9bda606643ddb7"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-37",
+        "notes": "Reviewed Definition and all direct suppliers: d>=1, C1 real potential and strictly positive finite normalizer yield a Borel position target; SPD M yields an inverse and a nondegenerate normal refresh under AC. Kick-drift-kick plus final flip and min(1,exp(-Delta H)) specify the finite proposal and acceptance convention. General MH reference is used for accepted flow/rejected self transition only. Exact ODE completeness is confined to the C2 exact-flow remark, where AC supplies Countable Choice. No convergence, scaling or finite-step energy conservation is asserted; no issue at zero gradient or L=1, and singular M/zero normalizer are excluded."
+      }
+    },
+    "alg-leapfrog-hamiltonian-monte-carlo": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition inherits d>=1 and normalized target data, and explicitly fixes L>=1, so instruction 2 never asks for an empty trajectory."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition excludes epsilon=0 and L=0. Instruction 3 accepts an energy-neutral proposal with probability 1 and retains the original phase point on rejection."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits L=1, so instruction 2 calls one kick-drift-kick map, then the flip. For d=1 the returned position is the scalar first coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition instruction 3 retains z on rejection; a proposal with unchanged position is still an admissible deterministic kernel. Positive definite M remains inherited from the HMC input contract."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition instruction 3 has acceptance in (0,1] for finite real energies, including 1 when H(z*)<=H(z). The positive epsilon input is not bounded by a numerical stability condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition inherits AC from def-hamiltonian-monte-carlo and the general Metropolis construction; instruction 1 is independent Gaussian sampling and instruction 2 is a specified finite recursion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a definition or procedure; it has no proof boundary case for this worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Forward equivalence-axis review: The Definition prescribes four finite HMC instructions ending with position projection; the equivalently phrased acceptance rule is an alternate procedural expression, not an iff theorem.",
+            "item_sha256": "3a208605a17d646f263e7ff407d7029dc05612bdb2eb85ba5a1eb8b5d8cf0496",
+            "row_sha256": "ef3f876d18b2a62bad706e4361a256f31383e340987238cd315efad71b04919d"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a definition or procedure; it has no proof boundary case for this worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Reverse equivalence-axis review: The Definition prescribes four finite HMC instructions ending with position projection; the equivalently phrased acceptance rule is an alternate procedural expression, not an iff theorem.",
+            "item_sha256": "3a208605a17d646f263e7ff407d7029dc05612bdb2eb85ba5a1eb8b5d8cf0496",
+            "row_sha256": "1004402ad1f8372c74ce536d26e0a0620e6d61902a1941417b9bda606643ddb7"
+          }
+        }
+      ]
+    },
+    "thm-metropolized-hamiltonian-chain-preserves-target": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-hamiltonian-monte-carlo",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $d\\ge1$, let $U:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable, and suppose\n$$Z_U:=\\int_{\\mathbb R^d}e^{-U(q)}\\,dq\\in(0,\\infty).$$\nThe **position target** is the Borel probability with density\n$$\\pi(q)=Z_U^{-1}e^{-U(q)}.$$\nLet $M$ be a real symmetric positive-definite $d\\times d$ mass matrix. Define the kinetic energy and Hamiltonian by\n$$K(p)=\\tfrac12p^TM^{-1}p,\\qquad H(q,p)=U(q)+K(p).$$\nAt each iteration, refresh the momentum independently from $p\\sim N_d(0,M)$, the multivariate normal law of mean zero and covariance $M$ ([[def-multivariate-normal-law]]). The corresponding Hamilton equations are\n$$\\dot q=M^{-1}p,\\qquad \\dot p=-\\nabla U(q),$$\nwhere $\\nabla U$ is the Euclidean gradient of the objective under the convention of [[def-jacobian-matrix-and-gradient]] and the BCS-20 gradient-descent input contract [[alg-gradient-descent]].\n\nFor finite leapfrog integration, choose $\\epsilon>0$ and an integer $L\\ge1$, use the map from [[def-leapfrog-step-map]] for $L$ steps, and flip the final momentum. If $z=(q,p)$, write $(\\widetilde q,\\widetilde p)=\\Phi_\\epsilon^L(z)$ and define the flipped proposal $z^*=(\\widetilde q,-\\widetilde p)$. The Metropolis acceptance probability is\n$$\\alpha(z,z^*)=\\min\\{1,\\exp(-H(z^*)+H(z))\\}.$$\nThe general accepted-flow and rejected-self-transition convention is the Metropolis-Hastings procedure [[alg-metropolis-hastings-kernel]].",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-leapfrog-hamiltonian-monte-carlo",
+          "source_section": "Definition",
+          "quote": "Assume the inputs of [[def-hamiltonian-monte-carlo]] and fix a current position $q$, a step size $\\epsilon>0$, and a finite integer $L\\ge1$.\n\n1. Independently refresh $p\\sim N_d(0,M)$ and set $z=(q,p)$.\n2. Compute $z_L=\\Phi_\\epsilon^L(z)$ by the finite recursion in [[def-leapfrog-step-map]], then set $z^*=R(z_L)$, where $R(q,p)=(q,-p)$.\n3. Form the deterministic proposal kernel $Q_T(z,A)=\\mathbf 1_A(z^*)$ on phase space and apply [[alg-metropolis-hastings-kernel]] with target $\\nu(dq,dp)=\\pi(dq)N_d(0,M)(dp)$. Equivalently, accept $z^*$ with probability $\\min\\{1,\\exp(-H(z^*)+H(z))\\}$ and otherwise retain $z$.\n4. Return the position coordinate of the accepted or retained phase point.\n\nThe finite recursion is defined for every $(q,p)\\in\\mathbb R^{2d}$. No exact ODE solution, energy conservation by the discrete map, or convergence guarantee is part of this procedure.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-euclidean-space-is-standard-borel",
+          "source_section": "Statement",
+          "quote": "For every natural $n\\ge1$, let $\\mathbb R^n$ be the set of functions\n$x:n\\to\\mathbb R$ with its finite-product topology and Borel sigma-algebra\n([[def-product-topology]], [[def-borel-sigma-algebra]]). Then\n$(\\mathbb R^n,\\mathcal B(\\mathbb R^n))$ is standard Borel.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-leapfrog-step-map",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $U:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable, and let $M$ be a real symmetric positive-definite $d\\times d$ matrix. Write $\\nabla U$ for its Euclidean gradient, and let $\\epsilon>0$.\n\nFor $a,b\\in\\mathbb R$, define the **force kick** and **drift shear**\n$$K_a(q,p)=(q,p-a\\nabla U(q)),\\qquad D_b(q,p)=(q+bM^{-1}p,p).$$\nThe one-step leapfrog map is\n$$\\Phi_\\epsilon=K_{\\epsilon/2}\\circ D_\\epsilon\\circ K_{\\epsilon/2},$$\nwhere composition is read right to left. For a finite integer $L\\ge1$, its $L$-step map is $\\Phi_\\epsilon^L$. Define the momentum flip $R(q,p)=(q,-p)$ and the flipped proposal map $T_{\\epsilon,L}=R\\circ\\Phi_\\epsilon^L$.\n\nEach kick and drift is a continuous bijection with inverse $K_{-a}$ or $D_{-b}$, respectively. These finite maps use only $\\nabla U$ and do not require a solution of Hamilton's ODE. The classical derivative of a force kick is not part of this definition: for merely $U\\in C^1$, $\\nabla U$ need not be differentiable.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-leapfrog-is-reversible-and-volume-preserving",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Use the notation of [[def-leapfrog-step-map]] on $\\mathbb R^d\\times\\mathbb R^d$, equipped with full Euclidean Lebesgue measure $\\lambda_{2d}$. Every kick $K_a$ and drift $D_b$ preserves that measure. Consequently $\\Phi_\\epsilon^L$ and $T_{\\epsilon,L}=R\\circ\\Phi_\\epsilon^L$ preserve phase volume, and\n$$T_{\\epsilon,L}^2=I.$$\nFor $U\\in C^2$, the classical Jacobian matrices of the kick and drift are block triangular with determinant one; under only $U\\in C^1$, the volume conclusion means measure preservation and does not presume a classical Jacobian exists.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-coordinate-maps-and-permutations-are-measurable-on-finite-products",
+          "source_section": "Statement",
+          "quote": "Let $(S_i,\\Sigma_i)$, $1\\le i\\le n$, be finitely many measurable spaces, with\n$n\\ge1$, and equip $\\prod_{i=1}^nS_i$ with its finite product sigma-algebra.\nIf $f_i:(\\Omega,\\mathcal F)\\to(S_i,\\Sigma_i)$ are measurable, then the tuple\n$f=(f_1,\\ldots,f_n)$ is measurable. If all factors equal one measurable space\n$(S,\\Sigma)$, every coordinate permutation $\\tau_\\pi:S^n\\to S^n$ is\nmeasurable, where $(\\tau_\\pi z)_i=z_{\\pi(i)}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "alg-metropolis-hastings-kernel",
+          "source_section": "Definition",
+          "quote": "Assume AC. The **Metropolis–Hastings procedure** takes as input a standard-Borel\nspace $(\\mathsf X,\\mathcal X)$ ([[def-standard-borel-space]]), a target\nprobability measure $\\pi$ ([[def-probability-measure]]), and a probability\nkernel $Q$ from $(\\mathsf X,\\mathcal X)$ to itself\n([[def-measure-kernel-and-probability-kernel]]).\n\n1. On the product sigma-algebra ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]),\nform the proposal-flow measure $\\mu$ ([[def-measure]]) on\n$\\mathsf X\\times\\mathsf X$ by\n$$\\mu(C)=\\int_{\\mathsf X}Q(x,C_x)\\,\\pi(dx),\\qquad C_x=\\{y:(x,y)\\in C\\}.$$\nThis is a probability measure by [[lem-prior-and-model-kernel-define-joint-law]].\nLet $\\tau(x,y)=(y,x)$ and set $\\mu^{\\mathsf T}(C)=\\mu(\\tau^{-1}C)$.\n\n2. Set $\\eta=\\mu\\wedge\\mu^{\\mathsf T}$, the greatest measure dominated by both\nflows. Put $\\lambda_0=\\mu+\\mu^{\\mathsf T}$, which is a finite measure by\n[[thm-nonnegative-weighted-sums-of-measures]], and choose nonnegative measurable\nrepresentatives $f=d\\mu/d\\lambda_0$ and $g=d\\mu^{\\mathsf T}/d\\lambda_0$\nwith $f+g=1$ everywhere after modification on a $\\lambda_0$-null set. Define\n$$\\alpha(x,y)=\\begin{cases}\\min\\{1,g(x,y)/f(x,y)\\},&f(x,y)>0,\\\\1,&f(x,y)=0.\\end{cases}$$\nThis is a jointly measurable version of $d\\eta/d\\mu$ taking values in $[0,1]$.\n\n3. For $x\\in\\mathsf X$, compute the integrated acceptance probability\n$$a(x)=\\int_{\\mathsf X}\\alpha(x,y)\\,Q(x,dy)$$\nand rejection probability $r(x)=1-a(x)$.\n\n4. Return the transition rule\n$$P(x,A)=\\int_{\\mathsf X}\\mathbf1_A(y)\\alpha(x,y)\\,Q(x,dy)+\\mathbf1_A(x)r(x),\\qquad A\\in\\mathcal X.$$\nThe second term retains every rejected proposal as a self-transition.\n\nThe item [[lem-common-submeasure-and-bounded-radon-nikodym-density]] proves the\ncommon-submeasure construction and density-version claims in step 2.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-common-submeasure-density-is-pointwise-minimum",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice (AC). Let $\\lambda$ be a sigma-finite positive\nmeasure on $(E,\\mathcal F)$, and let $\\rho$ and $\\sigma$ be finite positive\nmeasures absolutely continuous with respect to $\\lambda$. Suppose finite-valued\nnonnegative measurable functions $f,g:E\\to[0,\\infty)$ satisfy\n$$\\rho(A)=\\int_A f\\,d\\lambda,\\qquad \\sigma(A)=\\int_A g\\,d\\lambda\\qquad(A\\in\\mathcal F).$$\nThen\n$$\\eta(A):=\\int_A\\min\\{f,g\\}\\,d\\lambda$$\nis the greatest measure dominated by both $\\rho$ and $\\sigma$, where\ndomination means inequality on every measurable set.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-metropolis-hastings-kernel-is-reversible-and-invariant",
+          "source_section": "Statement",
+          "quote": "Assume AC and the hypotheses of [[alg-metropolis-hastings-kernel]]. Its output\n$P$ is a probability kernel, the joint measure\n$J_P(dx,dy)=\\pi(dx)P(x,dy)$ is symmetric under $(x,y)\\mapsto(y,x)$, and $\\pi$\nis invariant for $P$. Symmetry of this joint measure is reversibility. No\nirreducibility, uniqueness, convergence-rate, or central limit theorem\nconclusion is asserted.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Fix $n \\ge 1$ and let $\\lambda_n^*$ be the Lebesgue outer set function on $\\mathbb{R}^n$\n([[def-lebesgue-outer-measure]]). A set $E \\subseteq \\mathbb{R}^n$ is\n**Lebesgue measurable** when\n\n$$\\lambda_n^*(A) \\;=\\; \\lambda_n^*(A \\cap E) \\;+\\; \\lambda_n^*(A \\setminus E) \\qquad \\text{for every } A \\subseteq \\mathbb{R}^n .$$\n\nThis formula makes sense before any outer-measure theorem is invoked. Under\ncountable choice, [[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]]\nmakes $\\lambda_n^*$ an outer measure, and the displayed condition is then exactly\nCarathéodory measurability in the sense of [[def-caratheodory-measurable-set]].\n\nThe family of Lebesgue measurable sets is written $\\mathcal{L}(\\mathbb{R}^n)$,\nand **Lebesgue measure** is the restriction\n\n$$\\lambda_n \\;:=\\; \\lambda_n^*\\!\\restriction_{\\mathcal{L}(\\mathbb{R}^n)} .$$\n\nOn the real line the subscript is dropped and $\\lambda := \\lambda_1$.\n\nThe quantifier over every test set $A$ is part of the condition, and no\nhypothesis on $E$ is imposed before it is tested. That\n$\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra and that $\\lambda_n$ is a complete\nmeasure on it are not part of this definition: they are proved, under the Axiom\nof Countable Choice, in [[thm-lebesgue-measure-is-a-complete-measure]], which is\nrecorded in this item's `justified_by` because it is a statement about the\nobjects introduced here. Until that theorem the symbols $\\mathcal{L}(\\mathbb{R}^n)$\nand $\\lambda_n$ name a family of sets and a restricted set function, nothing more.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$m,n \\ge 1$. Under the identification\n$$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$\nthe product measure $\\lambda_m \\times \\lambda_n$ and the Euclidean Lebesgue\nmeasure $\\lambda_{m+n}$ agree on every Borel subset of $\\mathbb R^{m+n}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-nonnegative-weighted-sums-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $(\\mu_k)$ be measures on one measurable space and let $c_k\\in[0,+\\infty]$. Each scalar multiple $c_k\\mu_k$, defined by the zero, finite-positive, and positive-infinity branches of [[def-nonnegative-weighted-sum-of-measures]], is a measure. Every finite or countable weighted sum $\\sum_kc_k\\mu_k$ is also a measure.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ be a measurable space and let\n$f,g:X\\to\\overline{\\mathbb R}$ be measurable for the Borel sigma-algebra on\nthe extended real line. Products of functions use\n$\\odot_X$ from [[def-measurable-pointwise-extended-real-product]], and $cf$\nabbreviates $\\underline c\\odot_X f$ for the constant function $\\underline c$.\nThe magnitude function is $|f|=\\max(f,-f)$ as in\n[[def-positive-and-negative-parts-of-a-function]]. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if the partial pointwise sum $f+g$ is defined at every point, then it is measurable;\n4. the pointwise product $fg:=f\\odot_X g$ is measurable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-prior-and-model-kernel-define-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathcal X,\\mathcal A)$ be measurable spaces,\nlet $\\pi$ be a probability measure on $(\\Theta,\\mathcal T)$, and let\n$K:\\Theta\\times\\mathcal A\\to[0,1]$ be a probability kernel. For\n$C\\in\\mathcal T\\otimes\\mathcal A$, write\n$C_\\theta=\\{x\\in\\mathcal X:(\\theta,x)\\in C\\}$ and set\n$$J(C)=\\int_\\Theta K(\\theta,C_\\theta)\\,\\pi(d\\theta).$$\nThen $J$ is a probability measure on the product sigma-algebra, and for every\nnonnegative product-measurable $h$,\n$$\\int_{\\Theta\\times\\mathcal X}h(\\theta,x)\\,J(d\\theta,dx)=\\int_\\Theta\\left(\\int_\\mathcal Xh(\\theta,x)\\,K(\\theta,dx)\\right)\\pi(d\\theta).$$\nIn particular, $J(A\\times B)=\\int_AK(\\theta,B)\\,\\pi(d\\theta)$ for\n$A\\in\\mathcal T$ and $B\\in\\mathcal A$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-measure-preserving-transformation-and-system",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. A measurable self-map $T:X\\to X$ is **measure preserving** if $\\mu(T^{-1}E)=\\mu(E)$ for every $E\\in\\mathcal A$. The quadruple $(X,\\mathcal A,\\mu,T)$ is a **measure-preserving system**; it is a probability system if $\\mu(X)=1$. Here $T^{-1}E=\\{x:T(x)\\in E\\}$ denotes an inverse image, whether or not $T$ is invertible. Neither completeness nor finiteness is implicit. The measure-space and measurable-map conventions are [[def-measure-space]] and [[def-measurable-function-between-measurable-spaces]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "source_section": "Statement",
+          "quote": "If $T$ preserves $\\mu$ and $f:X\\to[0,\\infty]$ is measurable, then $\\int f\\circ T\\,d\\mu=\\int f\\,d\\mu$, allowing infinity. If $f$ is integrable real or complex valued, $f\\circ T$ is integrable and the same equality holds. Conversely, for a measurable self-map, equality for every measurable indicator implies measure preservation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-composition-of-probability-kernels",
+          "source_section": "Definition",
+          "quote": "For probability kernels $K:(S,\\Sigma)\\to(T,\\Tau)$ and $L:(T,\\Tau)\\to(U,\\Upsilon)$, their **composition**, in the order K then L, is\n$$(KL)(s,A)=\\int_T L(t,A)\\,K(s,dt),\\qquad s\\in S,\\quad A\\in\\Upsilon.$$\n\nThe kernel convention is [[def-measure-kernel-and-probability-kernel]]. The integrand is measurable in t and lies in $[0,1]$, so the displayed number exists in $[0,1]$. As a function of s it is measurable by [[thm-measurability-of-integration-against-a-kernel]], applied to the product-measurable function $(s,t)\\mapsto L(t,A)$: its threshold preimages are rectangles $S\\times\\{t:L(t,A)>a\\}$. The probability-kernel assertion and associativity are justified by [[lem-kernel-composition-is-well-defined-and-associative]].\n\nComposition refers to specified pointwise kernels. Almost-everywhere classes alone do not define this formula until representatives and the relevant measures are specified. For an empty source the candidate is the empty map. No choice of versions or assumption of AC enters this definition.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "lem-kernel-composition-is-well-defined-and-associative",
+          "source_section": "Statement",
+          "quote": "The composition KL of probability kernels $K:S\\to T$ and $L:T\\to U$ is a probability kernel $S\\to U$. If $M:U\\to V$ is another probability kernel, then $(KL)M=K(LM)$ at every source point and every measurable subset of V. Equality concerns the specified kernels, not unspecified almost-everywhere classes.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-sections-of-product-measurable-functions-are-measurable",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces, and let\n$$f : X \\times Y \\to \\overline{\\mathbb R}$$\nbe $(\\mathcal A \\otimes \\mathcal B,\\mathcal B(\\overline{\\mathbb R}))$-measurable.\nThen $f_x : Y \\to \\overline{\\mathbb R}$ is $\\mathcal B$-measurable for every\n$x \\in X$, and $f^y : X \\to \\overline{\\mathbb R}$ is $\\mathcal A$-measurable\nfor every $y \\in Y$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "def-hamiltonian-monte-carlo",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $d\\ge1$, let $U:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable, and suppose\n$$Z_U:=\\int_{\\mathbb R^d}e^{-U(q)}\\,dq\\in(0,\\infty).$$\nThe **position target** is the Borel probability with density\n$$\\pi(q)=Z_U^{-1}e^{-U(q)}.$$\nLet $M$ be a real symmetric positive-definite $d\\times d$ mass matrix. Define the kinetic energy and Hamiltonian by\n$$K(p)=\\tfrac12p^TM^{-1}p,\\qquad H(q,p)=U(q)+K(p).$$\nAt each iteration, refresh the momentum independently from $p\\sim N_d(0,M)$, the multivariate normal law of mean zero and covariance $M$ ([[def-multivariate-normal-law]]). The corresponding Hamilton equations are\n$$\\dot q=M^{-1}p,\\qquad \\dot p=-\\nabla U(q),$$\nwhere $\\nabla U$ is the Euclidean gradient of the objective under the convention of [[def-jacobian-matrix-and-gradient]] and the BCS-20 gradient-descent input contract [[alg-gradient-descent]].\n\nFor finite leapfrog integration, choose $\\epsilon>0$ and an integer $L\\ge1$, use the map from [[def-leapfrog-step-map]] for $L$ steps, and flip the final momentum. If $z=(q,p)$, write $(\\widetilde q,\\widetilde p)=\\Phi_\\epsilon^L(z)$ and define the flipped proposal $z^*=(\\widetilde q,-\\widetilde p)$. The Metropolis acceptance probability is\n$$\\alpha(z,z^*)=\\min\\{1,\\exp(-H(z^*)+H(z))\\}.$$\nThe general accepted-flow and rejected-self-transition convention is the Metropolis-Hastings procedure [[alg-metropolis-hastings-kernel]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ be a measurable space and let\n$f,g:X\\to\\overline{\\mathbb R}$ be measurable for the Borel sigma-algebra on\nthe extended real line. Products of functions use\n$\\odot_X$ from [[def-measurable-pointwise-extended-real-product]], and $cf$\nabbreviates $\\underline c\\odot_X f$ for the constant function $\\underline c$.\nThe magnitude function is $|f|=\\max(f,-f)$ as in\n[[def-positive-and-negative-parts-of-a-function]]. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if the partial pointwise sum $f+g$ is defined at every point, then it is measurable;\n4. the pointwise product $fg:=f\\odot_X g$ is measurable.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a probability kernel on a measurable space $(E,\\mathcal E)$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure on $(E,\\mathcal E)$ ([[def-probability-measure]]). The\nprobability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a\n**stationary distribution** of $K$, when\n\n$$(\\pi K)(A):=\\int_E K(x,A)\\,\\pi(dx)=\\pi(A)\\qquad\\text{for every }A\\in\\mathcal E .$$\n\nThe set function $\\pi K$ is again a probability measure: for fixed $A$ the map\n$x\\mapsto K(x,A)$ is measurable and lies in $[0,1]$, so the integral exists in\n$[0,1]$; for pairwise disjoint $A_n\\in\\mathcal E$ the identity\n$K(x,\\bigcup_nA_n)=\\sum_nK(x,A_n)$ of the measure $K(x,\\cdot)$ and the\nmonotone convergence theorem for nonnegative functions\n([[thm-monotone-convergence-for-the-integral]]) give\n$\\sigma$-additivity of $\\pi K$; and $K(x,E)=1$ for every $x$ gives\n$(\\pi K)(E)=1$. Thus $(\\pi K)(A)=\\pi(A)$ is an identity between two probability\nmeasures evaluated at $A$.\n\nA $K$-chain whose initial law is $\\pi$ is called **stationary** when\n$\\pi K=\\pi$. Stationarity of the process is a statement about all of its\nfinite-dimensional laws and is proved, not assumed, from $\\pi K=\\pi$; see\n[[thm-invariant-initial-law-makes-the-chain-stationary]].\n\nOn a countable state space $E$ with sigma-algebra $2^E$ and transition matrix\n$p(x,y)=K(x,\\{y\\})$ ([[def-transition-matrix-and-n-step-transition-probabilities]]),\na measure on $E$ is its weighted sum of Dirac masses at singletons\n([[thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums]]), so\ninvariance is equivalent to the matrix identity\n\n$$\\pi(y)=\\sum_{x\\in E}\\pi(x)\\,p(x,y)\\qquad\\text{for every }y\\in E .$$\n\nThe definition fixes no irreducibility, aperiodicity or uniqueness hypothesis,\nand it selects no conditional-expectation versions; the display defines a\nsingle measure $\\pi K$ and asserts an identity for it. A transient, periodic or\nreducible chain may have several invariant probability measures or none.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "lem-dirac-integral-evaluation",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a set $X$, let $x_0\\in X$, and let\n$\\delta_{x_0}$ be the Dirac probability measure on $(X,\\mathcal A)$. For every\nnonnegative $\\mathcal A$-measurable $f:X\\to[0,+\\infty]$,\n$$\\int_X f\\,d\\delta_{x_0}=f(x_0).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "lem-coordinate-maps-and-permutations-are-measurable-on-finite-products",
+          "source_section": "Statement",
+          "quote": "Let $(S_i,\\Sigma_i)$, $1\\le i\\le n$, be finitely many measurable spaces, with\n$n\\ge1$, and equip $\\prod_{i=1}^nS_i$ with its finite product sigma-algebra.\nIf $f_i:(\\Omega,\\mathcal F)\\to(S_i,\\Sigma_i)$ are measurable, then the tuple\n$f=(f_1,\\ldots,f_n)$ is measurable. If all factors equal one measurable space\n$(S,\\Sigma)$, every coordinate permutation $\\tau_\\pi:S^n\\to S^n$ is\nmeasurable, where $(\\tau_\\pi z)_i=z_{\\pi(i)}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ be a measurable space and let\n$f,g:X\\to\\overline{\\mathbb R}$ be measurable for the Borel sigma-algebra on\nthe extended real line. Products of functions use\n$\\odot_X$ from [[def-measurable-pointwise-extended-real-product]], and $cf$\nabbreviates $\\underline c\\odot_X f$ for the constant function $\\underline c$.\nThe magnitude function is $|f|=\\max(f,-f)$ as in\n[[def-positive-and-negative-parts-of-a-function]]. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if the partial pointwise sum $f+g$ is defined at every point, then it is measurable;\n4. the pointwise product $fg:=f\\odot_X g$ is measurable.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\lambda=\\lambda_d\\otimes\\lambda_d$ on the product Borel phase space, where $\\lambda_d$ denotes the Borel restriction of Lebesgue measure. Put $\\phi(q)=Z_U^{-1}e^{-U(q)}$ and $\\psi(p)=(2\\pi)^{-d/2}\\det(M)^{-1/2}e^{-K(p)}$. By [F1] and [F3], these are probability densities for $\\pi$ and $N_d(0,M)$. For every product-measurable $C\\subseteq E$, Tonelli in [F11] and these density identities give $$\\int_E\\mathbf1_C(q,p)\\phi(q)\\psi(p)\\,d\\lambda=\\int_{\\mathbb R^d}\\phi(q)\\left(\\int_{\\mathbb R^d}\\mathbf1_C(q,p)\\psi(p)\\,d\\lambda_d(p)\\right)d\\lambda_d(q)=\\int_{\\mathbb R^d}N_d(0,M)(C_q)\\,\\pi(dq)=\\nu(C),$$ where the final equality is the product-law formula (equivalently [F13] for the constant momentum-refresh kernel). Taking $C=E$ also gives $\\int\\phi(q)\\psi(p)\\,d\\lambda=1$. Thus $\\rho(q,p)=\\phi(q)\\psi(p)$ is a density of $\\nu$ with respect to $\\lambda$. The Borel product agrees with Euclidean phase-space Lebesgue measure by [F11], and [F18] gives strict positivity of $\\rho$. The Countable Choice hypothesis of [F11] follows from [A2].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F3",
+            "F11",
+            "F13",
+            "F18",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write $T=R\\circ\\Phi_\\epsilon^L$. By [F5], $T$ is continuous, involutive, and volume-preserving. For each $z$, $Q_T(z,\\cdot)=\\delta_{Tz}$ is a probability measure by [F6]; for each Borel $A$, $z\\mapsto Q_T(z,A)=\\mathbf1_A(Tz)$ is measurable by [F6]. Thus $Q_T$ is a probability kernel on the standard-Borel phase space [F4]. Countable Choice needed for [F5] follows from [A2].",
+          "step": "1.2",
+          "inputs": [
+            "A2",
+            "F4",
+            "F5",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $\\mu(dz,dw)=\\nu(dz)Q_T(z,dw)$ and $\\tau(z,w)=(w,z)$. By [F13], $\\mu$ is a probability measure; [F7] makes $\\tau$ measurable, so [F20] makes its pushforward $\\mu^{\\mathsf T}(C):=\\mu(\\tau^{-1}C)$ a measure. For product-measurable $C$, [F6] and [F21] give $$\\mu(C)=\\int\\mathbf1_C(z,Tz)\\rho(z)\\,d\\lambda(z),\\qquad\\mu^{\\mathsf T}(C)=\\int\\mathbf1_C(Tz,z)\\rho(z)\\,d\\lambda(z).$$ The second formula is the definition of transpose. Put $h(x)=\\mathbf1_C(x,Tx)\\rho(Tx)$, which is nonnegative Borel by [F22]. Since $T^2=I$, $h(Tz)=\\mathbf1_C(Tz,z)\\rho(z)$, so [F14] gives $\\mu^{\\mathsf T}(C)=\\int\\mathbf1_C(z,Tz)\\rho(Tz)\\,d\\lambda(z)$. Therefore [F11] makes $\\lambda_0:=\\mu+\\mu^{\\mathsf T}$ a finite measure $$\\lambda_0(C)=\\int\\mathbf1_C(z,Tz)\\big(\\rho(z)+\\rho(Tz)\\big)\\,d\\lambda(z).$$",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "F5",
+            "F6",
+            "F7",
+            "F11",
+            "F13",
+            "F14",
+            "F18",
+            "F20",
+            "F21",
+            "F22",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For all $(x,y)$ set $$f(x,y)=\\frac{\\rho(x)}{\\rho(x)+\\rho(Tx)},\\qquad g(x,y)=\\frac{\\rho(Tx)}{\\rho(x)+\\rho(Tx)}.$$ They are Borel by [F22], using the product closure in [F12]. By the graph integral formula in step 2.1, $\\int_C f\\,d\\lambda_0=\\int\\mathbf1_C(z,Tz)\\rho(z)\\,d\\lambda(z)=\\mu(C)$; similarly $\\int_C g\\,d\\lambda_0=\\mu^{\\mathsf T}(C)$. Thus they are densities. By [F9], the common accepted flow has density $\\min\\{f,g\\}$. Since $\\rho(z)>0$ by [F18], its derivative relative to the forward flow on that graph is $$\\frac{\\min\\{f,g\\}}{f}=\\min\\{1,\\rho(Tz)/\\rho(z)\\}=\\min\\{1,e^{-H(Tz)+H(z)}\\},$$ where the Gaussian and target normalizing constants cancel.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F9",
+            "F11",
+            "F12",
+            "F18",
+            "F22",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Thus the acceptance formula in [F2] is a version of the accepted-flow derivative in [F8]. Applying [F10] to target $\\nu$ and proposal kernel $Q_T$ shows that the Metropolized phase-space kernel preserves $\\nu$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F8",
+            "F10",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Let $S$ be the refresh kernel of [F16] and $J$ the position kernel of [F17]. With $P$ the phase-space Metropolis kernel from step 4.1, [F15] makes $K:=SPJ$ a probability kernel on positions. By [F13], refreshing a $\\pi$-distributed position defines a probability law $m$ on phase space. On Borel rectangles $A\\times B$, this law is $m(A\\times B)=\\int_A N_d(0,M)(B)\\,\\pi(dq)=\\pi(A)N_d(0,M)(B)$; [A2, F11] and uniqueness on rectangles give $m=\\nu$. Thus $mP=\\nu P=\\nu$ by step 4.1, and $(\\nu J)(A)=\\nu(A\\times\\mathbb R^d)=\\pi(A)$ since $N_d(0,M)$ is a probability. By the kernel-composition definition [F15] and the measure action [F19], the output law under $K=SPJ$ is $\\pi K=mPJ=\\nu PJ=\\nu J=\\pi$. This proves invariance of the HMC position kernel.",
+          "step": "5.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F11",
+            "F13",
+            "F15",
+            "F16",
+            "F17",
+            "F19",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero forward and reverse flow for C=∅."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives acceptance one when H(Tz)=H(z)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 allows d=1, and step 3.1 applies to L=1; neither proof requires a larger dimension or trajectory length."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The SPD hypothesis and strictly positive density in step 1.1 exclude degenerate momentum laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 handles ratio one and both branches of the minimum acceptance rule."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit; A2 supplies Countable Choice for the shear-volume input in steps 1.2 and 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The volume-preserving involution gives an accepted-flow Metropolis correction, then momentum refresh and projection preserve pi in Proof 4.1 and 5.1; preservation is not asserted to characterize that construction. No forward direction of a biconditional is part of that claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Read the actual current Statement/Definition and relevant argument for this gate failure. The volume-preserving involution gives an accepted-flow Metropolis correction, then momentum refresh and projection preserve pi in Proof 4.1 and 5.1; preservation is not asserted to characterize that construction. No forward direction of a biconditional is part of that claim.",
+            "item_sha256": "588ad4a3e8e0651eff0b5827687eaaaf83eb4ab5c8cb3d1d0b7d25dac19a6834",
+            "row_sha256": "9cf67c89d99e4ce8be791893c6a6696b667546ab7b3d18c55b8f2c8474ecec6e"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The volume-preserving involution gives an accepted-flow Metropolis correction, then momentum refresh and projection preserve pi in Proof 4.1 and 5.1; preservation is not asserted to characterize that construction. No reverse direction of a biconditional is part of that claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Read the actual current Statement/Definition and relevant argument for this gate failure. The volume-preserving involution gives an accepted-flow Metropolis correction, then momentum refresh and projection preserve pi in Proof 4.1 and 5.1; preservation is not asserted to characterize that construction. No reverse direction of a biconditional is part of that claim.",
+            "item_sha256": "588ad4a3e8e0651eff0b5827687eaaaf83eb4ab5c8cb3d1d0b7d25dac19a6834",
+            "row_sha256": "e75e46556dda3c265a47870b95c44f4e3a21a3e8eb96047c5169acbe4f37499c"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-37",
+        "notes": "Reviewed all six proof steps and every direct supplier statement; independently read MH invariance, common-submeasure lemmas and Euclidean standard-Borel proof. Product target has finite strictly positive Borel density rho. T is a continuous volume-preserving involution under AC-implied Countable Choice. Its deterministic kernel is pointwise measurable. Transpose flow is computed by h composed with T; graph integrands are measurable, and lambda0=mu+muT is finite. Positive finite f=rho/(rho+rhoT) and g=rhoT/(rho+rhoT) are everywhere Borel RN versions; minimum-density lemma applies to finite measures with finite sigma-finite lambda0. The graph ratio equals min(1,exp(-Delta H)), including fixed points where acceptance is one. General MH theorem gives probability-kernel status and invariance. Refresh S and projection J have the correct position-to-phase and phase-to-position types; SPJ preserves pi by pi S=nu and nu P=nu. No mixing conclusion, smooth Hessian, exact flow, or bounded energy error is required."
+      }
+    },
+    "ex-hmc-globally-lipschitz-force": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hamiltonian-monte-carlo",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $d\\ge1$, let $U:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable, and suppose\n$$Z_U:=\\int_{\\mathbb R^d}e^{-U(q)}\\,dq\\in(0,\\infty).$$\nThe **position target** is the Borel probability with density\n$$\\pi(q)=Z_U^{-1}e^{-U(q)}.$$\nLet $M$ be a real symmetric positive-definite $d\\times d$ mass matrix. Define the kinetic energy and Hamiltonian by\n$$K(p)=\\tfrac12p^TM^{-1}p,\\qquad H(q,p)=U(q)+K(p).$$\nAt each iteration, refresh the momentum independently from $p\\sim N_d(0,M)$, the multivariate normal law of mean zero and covariance $M$ ([[def-multivariate-normal-law]]). The corresponding Hamilton equations are\n$$\\dot q=M^{-1}p,\\qquad \\dot p=-\\nabla U(q),$$\nwhere $\\nabla U$ is the Euclidean gradient of the objective under the convention of [[def-jacobian-matrix-and-gradient]] and the BCS-20 gradient-descent input contract [[alg-gradient-descent]].\n\nFor finite leapfrog integration, choose $\\epsilon>0$ and an integer $L\\ge1$, use the map from [[def-leapfrog-step-map]] for $L$ steps, and flip the final momentum. If $z=(q,p)$, write $(\\widetilde q,\\widetilde p)=\\Phi_\\epsilon^L(z)$ and define the flipped proposal $z^*=(\\widetilde q,-\\widetilde p)$. The Metropolis acceptance probability is\n$$\\alpha(z,z^*)=\\min\\{1,\\exp(-H(z^*)+H(z))\\}.$$\nThe general accepted-flow and rejected-self-transition convention is the Metropolis-Hastings procedure [[alg-metropolis-hastings-kernel]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-globally-lipschitz-odes-have-global-solutions",
+          "source_section": "Statement",
+          "quote": "Let $F:\\mathbb R\\times\\mathbb R^n\\to\\mathbb R^n$ be continuous and suppose one $L\\ge0$ satisfies $\\|F(t,x)-F(t,y)\\|_2\\le L\\|x-y\\|_2$ for all $t,x,y$. Then every IVP for $x'=F(t,x)$ has a unique global solution.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-lipschitz-ode-uniqueness-and-stability-estimate",
+          "source_section": "Statement",
+          "quote": "Let $F:D\\to\\mathbb R^n$ be continuous on an open ODE domain, let $I\\subseteq\\mathbb R$ be an order-convex interval with at least two elements, and let $x,y:I\\to\\mathbb R^n$ solve $z'=F(t,z)$ with both graphs in $D$. Fix $t_0\\in I$, and suppose that for every $t\\in I$,\n\n$$\\|F(t,x(t))-F(t,y(t))\\|_2\\le L\\|x(t)-y(t)\\|_2.$$\n\nThen\n\n$$\\|x(t)-y(t)\\|_2\\le e^{L|t-t_0|}\\|x(t_0)-y(t_0)\\|_2.$$\n\nCoincident initial values give uniqueness on every common interval.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exact-hamiltonian-flow-preserves-energy-and-volume",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $U\\in C^2(\\mathbb R^d,\\mathbb R)$, and let $M$ be real symmetric positive definite. Set\n$$H(q,p)=U(q)+\\tfrac12p^TM^{-1}p,\\qquad F(q,p)=(M^{-1}p,-\\nabla U(q)).$$\nAssume Countable Choice. Call this vector field **complete** when the solution through every $(q,p)$ exists for all $t\\in\\mathbb R$. If $F$ is complete, it has a unique global $C^1$ flow $\\Phi_t$, which conserves $H$ and satisfies\n$$\\det D\\Phi_t(q,p)=1\\qquad(t\\in\\mathbb R).$$\nThus it preserves phase-space Lebesgue volume. Completeness is an explicit hypothesis. In particular, if $\\nabla U$ is globally $L$-Lipschitz, then $F$ is globally Lipschitz with constant $C=\\max\\{\\|M^{-1}\\|_F,L\\}$, so the global-existence and stability corollaries apply and\n$$\\|\\Phi_t(z)-\\Phi_t(w)\\|_2\\le e^{C|t|}\\|z-w\\|_2.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-real-line-exponential-tail-integrable",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and let $f(x)=\\exp(-|x|)$ on $\\mathbb R$. Then $f$ is nonnegative and Lebesgue measurable, and\n$$\\int_{\\mathbb R} f(x)\\,d\\lambda_1(x)<\\infty.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let\n$f:X\\to[0,+\\infty]$ be measurable, and let $E\\in\\mathcal A$. Since\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]]\nimplies that $f\\chi_E$ is measurable, define the **integral of $f$ over $E$**\nby\n$$\\int_E f\\,d\\mu:=\\int f\\chi_E\\,d\\mu,$$\nwhere the integral on the right is the nonnegative Lebesgue integral of\n[[def-nonnegative-lebesgue-integral]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "given",
+            "algebra"
+          ],
+          "claim": "For $|q|\\le1$, $U(q)\\le\\sqrt2$, so monotonicity of the exponential gives $e^{-U(q)}\\ge e^{-\\sqrt2}$; [F8]–[F10] imply $$Z_U\\ge\\int_{[-1,1]}e^{-U(q)}\\,d\\lambda_1(q)\\ge e^{-\\sqrt2}\\lambda_1([-1,1])=2e^{-\\sqrt2}>0.$$ For all $q$, $U(q)\\ge|q|$, hence $e^{-U(q)}\\le e^{-|q|}$; by [F6] AC supplies the Countable Choice required by [F7], and [F9] gives $Z_U<\\infty$. Differentiating gives $$U'(q)=\\frac{q}{\\sqrt{1+q^2}},\\qquad U''(q)=\\frac{1}{(1+q^2)^{3/2}}\\in(0,1].$$ Applying [F5] to $U'$, which is continuous on each closed interval and differentiable on its interior, the bound $0<U''\\le1$ makes $U'$ globally $1$-Lipschitz."
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $z=(q,p)$ and $w=(\\widetilde q,\\widetilde p)$, $$\\|F(z)-F(w)\\|_2^2=|p-\\widetilde p|^2+|U'(q)-U'(\\widetilde q)|^2\\le |p-\\widetilde p|^2+|q-\\widetilde q|^2=\\|z-w\\|_2^2.$$ Thus the Hamiltonian vector field is globally $1$-Lipschitz.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F2] to obtain the unique global flow. Since $U\\in C^2$, [F4] and its Countable Choice hypothesis supplied by [F6] give energy and volume preservation; its sufficient-condition bound has $C=\\max\\{1,1\\}=1$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Applying [F3] with the same constant gives $\\|\\Phi_t(z)-\\Phi_t(w)\\|_2\\le e^{|t|}\\|z-w\\|_2$ for every pair of initial states and every real $t$. This is a flow-stability bound, not a discretization-error estimate.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example fixes the nonempty phase space R squared with d=M=1. Proof 1.1 obtains positive normalizing mass on [-1,1], so neither an empty target nor an empty state space occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the normalizing constant is positive at q=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example fixes d=1 and M=1; steps 1.1–4.1 verify that case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof 1.1 computes U double-prime=(1+q squared)^(-3/2)>0 and bounds the normalizer strictly above zero and below infinity. Unit mass is invertible; the example has no singular mass or improper target."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The target lower bound in step 1.1 includes both endpoints q=−1 and q=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is inherited from HMC and supplies Countable Choice in steps 1.1 and 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the explicit potential sqrt(1+q squared), current Proof 1.1 checks both closed-interval continuity and interior differentiability before the mean value theorem. It obtains positive finite target mass and globally 1-Lipschitz force, then a complete flow; the Example does not characterize all potentials with complete flows. No forward direction of a biconditional is part of that claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Read the actual current Statement/Definition and relevant argument for this gate failure. For the explicit potential sqrt(1+q squared), current Proof 1.1 checks both closed-interval continuity and interior differentiability before the mean value theorem. It obtains positive finite target mass and globally 1-Lipschitz force, then a complete flow; the Example does not characterize all potentials with complete flows. No forward direction of a biconditional is part of that claim.",
+            "item_sha256": "b9980bb76dfba57cb8d29a376c591afc79b882377d29ca82089fe7626cd643c1",
+            "row_sha256": "d03b59d6cafdb7a40ad034c2444d571d840ae2074f3f37e486be4968e725f495"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the explicit potential sqrt(1+q squared), current Proof 1.1 checks both closed-interval continuity and interior differentiability before the mean value theorem. It obtains positive finite target mass and globally 1-Lipschitz force, then a complete flow; the Example does not characterize all potentials with complete flows. No reverse direction of a biconditional is part of that claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Read the actual current Statement/Definition and relevant argument for this gate failure. For the explicit potential sqrt(1+q squared), current Proof 1.1 checks both closed-interval continuity and interior differentiability before the mean value theorem. It obtains positive finite target mass and globally 1-Lipschitz force, then a complete flow; the Example does not characterize all potentials with complete flows. No reverse direction of a biconditional is part of that claim.",
+            "item_sha256": "b9980bb76dfba57cb8d29a376c591afc79b882377d29ca82089fe7626cd643c1",
+            "row_sha256": "aacd9e15f1dd50b2fcb04702f9c2da32105c62fb10d52b1c395369258de3ba51"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-37",
+        "notes": "Accepted reader repair: F5 includes closed-interval continuity and step 1.1 writes the positive integral lower bound with exact simple-integral and set-integral suppliers. Checked all four steps and cited statements: sqrt(1+q^2)>=|q| gives domination by the proved integrable tail; the [-1,1] lower bound is 2 exp(-sqrt(2))>0. The smooth potential has U prime q/sqrt(1+q^2), U double-prime (1+q^2)^(-3/2) in (0,1], so the mean value theorem gives global 1-Lipschitz force (equal endpoints trivial). Squared phase norm gives Lipschitz constant one, completeness and exp(|t|) stability for all real t. AC supplies Countable Choice. No discretization-error inference is made."
+      }
+    },
+    "ex-hmc-exact-flow-limit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hamiltonian-monte-carlo",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $d\\ge1$, let $U:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable, and suppose\n$$Z_U:=\\int_{\\mathbb R^d}e^{-U(q)}\\,dq\\in(0,\\infty).$$\nThe **position target** is the Borel probability with density\n$$\\pi(q)=Z_U^{-1}e^{-U(q)}.$$\nLet $M$ be a real symmetric positive-definite $d\\times d$ mass matrix. Define the kinetic energy and Hamiltonian by\n$$K(p)=\\tfrac12p^TM^{-1}p,\\qquad H(q,p)=U(q)+K(p).$$\nAt each iteration, refresh the momentum independently from $p\\sim N_d(0,M)$, the multivariate normal law of mean zero and covariance $M$ ([[def-multivariate-normal-law]]). The corresponding Hamilton equations are\n$$\\dot q=M^{-1}p,\\qquad \\dot p=-\\nabla U(q),$$\nwhere $\\nabla U$ is the Euclidean gradient of the objective under the convention of [[def-jacobian-matrix-and-gradient]] and the BCS-20 gradient-descent input contract [[alg-gradient-descent]].\n\nFor finite leapfrog integration, choose $\\epsilon>0$ and an integer $L\\ge1$, use the map from [[def-leapfrog-step-map]] for $L$ steps, and flip the final momentum. If $z=(q,p)$, write $(\\widetilde q,\\widetilde p)=\\Phi_\\epsilon^L(z)$ and define the flipped proposal $z^*=(\\widetilde q,-\\widetilde p)$. The Metropolis acceptance probability is\n$$\\alpha(z,z^*)=\\min\\{1,\\exp(-H(z^*)+H(z))\\}.$$\nThe general accepted-flow and rejected-self-transition convention is the Metropolis-Hastings procedure [[alg-metropolis-hastings-kernel]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exact-hamiltonian-flow-preserves-energy-and-volume",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $U\\in C^2(\\mathbb R^d,\\mathbb R)$, and let $M$ be real symmetric positive definite. Set\n$$H(q,p)=U(q)+\\tfrac12p^TM^{-1}p,\\qquad F(q,p)=(M^{-1}p,-\\nabla U(q)).$$\nAssume Countable Choice. Call this vector field **complete** when the solution through every $(q,p)$ exists for all $t\\in\\mathbb R$. If $F$ is complete, it has a unique global $C^1$ flow $\\Phi_t$, which conserves $H$ and satisfies\n$$\\det D\\Phi_t(q,p)=1\\qquad(t\\in\\mathbb R).$$\nThus it preserves phase-space Lebesgue volume. Completeness is an explicit hypothesis. In particular, if $\\nabla U$ is globally $L$-Lipschitz, then $F$ is globally Lipschitz with constant $C=\\max\\{\\|M^{-1}\\|_F,L\\}$, so the global-existence and stability corollaries apply and\n$$\\|\\Phi_t(z)-\\Phi_t(w)\\|_2\\le e^{C|t|}\\|z-w\\|_2.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-globally-lipschitz-odes-have-global-solutions",
+          "source_section": "Statement",
+          "quote": "Let $F:\\mathbb R\\times\\mathbb R^n\\to\\mathbb R^n$ be continuous and suppose one $L\\ge0$ satisfies $\\|F(t,x)-F(t,y)\\|_2\\le L\\|x-y\\|_2$ for all $t,x,y$. Then every IVP for $x'=F(t,x)$ has a unique global solution.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here Hamilton's equations are $\\dot q=p$ and $\\dot p=-q$. For $z=(q,p)$ and $w=(\\widetilde q,\\widetilde p)$, $\\|F(z)-F(w)\\|_2^2=|p-\\widetilde p|^2+|q-\\widetilde q|^2=\\|z-w\\|_2^2$, so the field is globally $1$-Lipschitz. The curves $$q(t)=q\\cos t+p\\sin t,\\qquad p(t)=p\\cos t-q\\sin t$$ satisfy these equations and the initial condition $(q(0),p(0))=(q,p)$. By [F4], this global solution is the unique exact flow through $(q,p)$; [F3] applies with the Countable Choice hypothesis supplied by [F5].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $t=\\pi/2$, the exact endpoint is $(p,-q)$; flipping momentum gives $z^*=(p,q)$. Since $H(q,p)=(q^2+p^2)/2$, $H(z^*)=H(q,p)$ and the Metropolis acceptance probability is $1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The returned position is the refreshed $p$, which is independent of the old $q$ and has law $N(0,1)$ by [F2]. Thus every update returns an independent draw from the target. This exact-flow argument does not apply to a finite leapfrog discretization.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example concerns scalar q and refreshed p on R squared; Proof 3.1 returns the N(0,1) momentum law, a probability on a nonempty space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The solution formula in step 1.1 also holds at q=p=0 and step 2.1 accepts it."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is the d=1, M=1 instance computed in steps 1.1–3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof 1.1 solves the nonsingular harmonic oscillator with M=1, while 2.1 gives acceptance 1. Acceptance equal to one is a valid deterministic accept branch, not a zero-variance momentum law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example fixes the positive time pi/2. Proof 1.1 gives the flow at every real time and checks the initial time 0; 2.1 substitutes pi/2 exactly to get (p,-q) before the flip."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is inherited from HMC and supplies the Countable Choice hypothesis used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The quarter-period quadratic exact flow returns refreshed momentum as position in Proof 2.1 and 3.1; an equivalence between independent proposals and quarter-period dynamics is not claimed. No forward direction of a biconditional is part of that claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Read the actual current Statement/Definition and relevant argument for this gate failure. The quarter-period quadratic exact flow returns refreshed momentum as position in Proof 2.1 and 3.1; an equivalence between independent proposals and quarter-period dynamics is not claimed. No forward direction of a biconditional is part of that claim.",
+            "item_sha256": "c045f4b2f579d661d54a52eb86fd225fbac41c16666d6c0d584647d2d9b14df0",
+            "row_sha256": "a12f16c0803f433de348a90ff25cb99257d8b807ff4846293b335e6ac516c502"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The quarter-period quadratic exact flow returns refreshed momentum as position in Proof 2.1 and 3.1; an equivalence between independent proposals and quarter-period dynamics is not claimed. No reverse direction of a biconditional is part of that claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Read the actual current Statement/Definition and relevant argument for this gate failure. The quarter-period quadratic exact flow returns refreshed momentum as position in Proof 2.1 and 3.1; an equivalence between independent proposals and quarter-period dynamics is not claimed. No reverse direction of a biconditional is part of that claim.",
+            "item_sha256": "c045f4b2f579d661d54a52eb86fd225fbac41c16666d6c0d584647d2d9b14df0",
+            "row_sha256": "d800c74ab8744b9d71496a5c881436f0ce41fd5b21c0c3e47ddf5d81f4d79407"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-37",
+        "notes": "Accepted reader repair: F3 now states Countable Choice, supplied by AC through F5. Checked all three steps and all direct suppliers. Harmonic vector field is globally 1-Lipschitz; differentiating the displayed rotation verifies the unique solution for all real t. At pi/2, endpoint (p,-q) and final flip (p,q) preserve (q^2+p^2)/2 exactly, giving acceptance one. Independent normal momentum becomes the returned independent target position. This explicitly uses exact integration and asserts no numerical discretization convergence theorem. AC and scalar normal hypotheses hold, including arbitrary initial q and zero momentum."
+      }
+    },
+    "ex-hmc-leapfrog-harmonic-resonance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-leapfrog-step-map",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $U:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable, and let $M$ be a real symmetric positive-definite $d\\times d$ matrix. Write $\\nabla U$ for its Euclidean gradient, and let $\\epsilon>0$.\n\nFor $a,b\\in\\mathbb R$, define the **force kick** and **drift shear**\n$$K_a(q,p)=(q,p-a\\nabla U(q)),\\qquad D_b(q,p)=(q+bM^{-1}p,p).$$\nThe one-step leapfrog map is\n$$\\Phi_\\epsilon=K_{\\epsilon/2}\\circ D_\\epsilon\\circ K_{\\epsilon/2},$$\nwhere composition is read right to left. For a finite integer $L\\ge1$, its $L$-step map is $\\Phi_\\epsilon^L$. Define the momentum flip $R(q,p)=(q,-p)$ and the flipped proposal map $T_{\\epsilon,L}=R\\circ\\Phi_\\epsilon^L$.\n\nEach kick and drift is a continuous bijection with inverse $K_{-a}$ or $D_{-b}$, respectively. These finite maps use only $\\nabla U$ and do not require a solution of Hamilton's ODE. The classical derivative of a force kick is not part of this definition: for merely $U\\in C^1$, $\\nabla U$ need not be differentiable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-leapfrog-hamiltonian-monte-carlo",
+          "source_section": "Definition",
+          "quote": "Assume the inputs of [[def-hamiltonian-monte-carlo]] and fix a current position $q$, a step size $\\epsilon>0$, and a finite integer $L\\ge1$.\n\n1. Independently refresh $p\\sim N_d(0,M)$ and set $z=(q,p)$.\n2. Compute $z_L=\\Phi_\\epsilon^L(z)$ by the finite recursion in [[def-leapfrog-step-map]], then set $z^*=R(z_L)$, where $R(q,p)=(q,-p)$.\n3. Form the deterministic proposal kernel $Q_T(z,A)=\\mathbf 1_A(z^*)$ on phase space and apply [[alg-metropolis-hastings-kernel]] with target $\\nu(dq,dp)=\\pi(dq)N_d(0,M)(dp)$. Equivalently, accept $z^*$ with probability $\\min\\{1,\\exp(-H(z^*)+H(z))\\}$ and otherwise retain $z$.\n4. Return the position coordinate of the accepted or retained phase point.\n\nThe finite recursion is defined for every $(q,p)\\in\\mathbb R^{2d}$. No exact ODE solution, energy conservation by the discrete map, or convergence guarantee is part of this procedure.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-leapfrog-hamiltonian-monte-carlo",
+          "source_section": "Definition",
+          "quote": "Assume the inputs of [[def-hamiltonian-monte-carlo]] and fix a current position $q$, a step size $\\epsilon>0$, and a finite integer $L\\ge1$.\n\n1. Independently refresh $p\\sim N_d(0,M)$ and set $z=(q,p)$.\n2. Compute $z_L=\\Phi_\\epsilon^L(z)$ by the finite recursion in [[def-leapfrog-step-map]], then set $z^*=R(z_L)$, where $R(q,p)=(q,-p)$.\n3. Form the deterministic proposal kernel $Q_T(z,A)=\\mathbf 1_A(z^*)$ on phase space and apply [[alg-metropolis-hastings-kernel]] with target $\\nu(dq,dp)=\\pi(dq)N_d(0,M)(dp)$. Equivalently, accept $z^*$ with probability $\\min\\{1,\\exp(-H(z^*)+H(z))\\}$ and otherwise retain $z$.\n4. Return the position coordinate of the accepted or retained phase point.\n\nThe finite recursion is defined for every $(q,p)\\in\\mathbb R^{2d}$. No exact ODE solution, energy conservation by the discrete map, or convergence guarantee is part of this procedure.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let\n$f:X\\to[0,+\\infty]$ be measurable, and let $E\\in\\mathcal A$. Since\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]]\nimplies that $f\\chi_E$ is measurable, define the **integral of $f$ over $E$**\nby\n$$\\int_E f\\,d\\mu:=\\int f\\chi_E\\,d\\mu,$$\nwhere the integral on the right is the nonnegative Lebesgue integral of\n[[def-nonnegative-lebesgue-integral]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $U'(q)=q$ and $M=1$, the half kick and drift matrices are $$K_{\\epsilon/2}=\\begin{pmatrix}1&0\\\\-\\epsilon/2&1\\end{pmatrix},\\qquad D_\\epsilon=\\begin{pmatrix}1&\\epsilon\\\\0&1\\end{pmatrix}.$$ Multiplication in the order from [F1] gives $$A=K_{\\epsilon/2}D_\\epsilon K_{\\epsilon/2}=\\begin{pmatrix}1-\\epsilon^2/2&\\epsilon\\\\-\\epsilon(1-\\epsilon^2/4)&1-\\epsilon^2/2\\end{pmatrix}.$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting $\\epsilon=\\sqrt2$ gives $A=\\begin{pmatrix}0&\\sqrt2\\\\-\\sqrt2/2&0\\end{pmatrix}$ and direct multiplication yields $A^2=-I_2$, hence $A^4=I_2$. Thus after four steps $(q_4,p_4)=(q,p)$. By [F4] the flipped proposal is $(q,-p)$, whose Hamiltonian equals the initial Hamiltonian because $K$ is even.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ],
+          "claim": "By [F2], acceptance is one and every returned position equals the input $q$. Starting at $q=0$ therefore gives law $\\delta_0$ at every iteration. On $[1,2]$, the density [F3] is at least $(2\\pi)^{-1/2}e^{-2}>0$, so [F6] and [F7] give target mass at least $(2\\pi)^{-1/2}e^{-2}\\lambda_1([1,2])=(2\\pi)^{-1/2}e^{-2}>0$. Thus the chain remains trapped at a point while the target is not a point mass."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example uses the scalar normal target on R and four leapfrog steps, not an empty trajectory; Proof 2.1 computes A to the fourth power as I_2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The selected starting position q=0 is shown trapped at every iteration in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example computes the one-dimensional d=1, M=1 case in steps 1.1–3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof 2.1 gives a genuinely degenerate position transition: the final flip sends (q,p) to (q,-p). Proof 3.1 explicitly treats the trapped initial value q=0 as delta_0 at every iteration."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example fixes epsilon=sqrt(2) and L=4, rather than taking a limiting step size. Proof 3.1 uses the closed interval [1,2], bounding its density below by exp(-2)/sqrt(2pi), including both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is inherited from the HMC algorithm; Countable Choice supplies the interval measure in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The specified harmonic leapfrog matrix at epsilon=sqrt(2) has A squared=-I and A to the fourth=I. Current Proof 3.1 concludes accepted positions stay fixed while [1,2] has positive normal mass; the Example does not assert a converse characterizing all trapped HMC configurations. No forward direction of a biconditional is part of that claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Read the actual current Statement/Definition and relevant argument for this gate failure. The specified harmonic leapfrog matrix at epsilon=sqrt(2) has A squared=-I and A to the fourth=I. Current Proof 3.1 concludes accepted positions stay fixed while [1,2] has positive normal mass; the Example does not assert a converse characterizing all trapped HMC configurations. No forward direction of a biconditional is part of that claim.",
+            "item_sha256": "a43edc26237e388b3fc90862275e81f7058dce59c95d717385ef990ae47869dd",
+            "row_sha256": "26099e2df73d7367ee6513f001e7244184fa37f574875ba57d7f3e8841e3d8e0"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The specified harmonic leapfrog matrix at epsilon=sqrt(2) has A squared=-I and A to the fourth=I. Current Proof 3.1 concludes accepted positions stay fixed while [1,2] has positive normal mass; the Example does not assert a converse characterizing all trapped HMC configurations. No reverse direction of a biconditional is part of that claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Read the actual current Statement/Definition and relevant argument for this gate failure. The specified harmonic leapfrog matrix at epsilon=sqrt(2) has A squared=-I and A to the fourth=I. Current Proof 3.1 concludes accepted positions stay fixed while [1,2] has positive normal mass; the Example does not assert a converse characterizing all trapped HMC configurations. No reverse direction of a biconditional is part of that claim.",
+            "item_sha256": "a43edc26237e388b3fc90862275e81f7058dce59c95d717385ef990ae47869dd",
+            "row_sha256": "625419830cfd6098e00da70208e24b2f4b52c09e304691825b1c8c0a2736e4f5"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-37",
+        "notes": "Accepted reader repair: AC explicit; density lower bound supported by exact measurable-set, monotonicity and simple-integral suppliers. Checked all three steps and direct dependencies. Kick-drift-kick multiplication gives the displayed matrix; epsilon=sqrt(2) makes A^2=-I and A^4=I. Thus for every q,p final flip is (q,-p), energy is unchanged and acceptance is one. Independent refresh never changes the returned q, including p=0, so starting zero stays delta_0 at every iteration. The normal density on [1,2] is at least (2pi)^(-1/2)exp(-2)>0 and the interval has length one under AC-implied Countable Choice. Trapping and absence of convergence from zero coexist with target invariance."
+      }
+    },
+    "ex-hmc-finite-step-energy-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hamiltonian-monte-carlo",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $d\\ge1$, let $U:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable, and suppose\n$$Z_U:=\\int_{\\mathbb R^d}e^{-U(q)}\\,dq\\in(0,\\infty).$$\nThe **position target** is the Borel probability with density\n$$\\pi(q)=Z_U^{-1}e^{-U(q)}.$$\nLet $M$ be a real symmetric positive-definite $d\\times d$ mass matrix. Define the kinetic energy and Hamiltonian by\n$$K(p)=\\tfrac12p^TM^{-1}p,\\qquad H(q,p)=U(q)+K(p).$$\nAt each iteration, refresh the momentum independently from $p\\sim N_d(0,M)$, the multivariate normal law of mean zero and covariance $M$ ([[def-multivariate-normal-law]]). The corresponding Hamilton equations are\n$$\\dot q=M^{-1}p,\\qquad \\dot p=-\\nabla U(q),$$\nwhere $\\nabla U$ is the Euclidean gradient of the objective under the convention of [[def-jacobian-matrix-and-gradient]] and the BCS-20 gradient-descent input contract [[alg-gradient-descent]].\n\nFor finite leapfrog integration, choose $\\epsilon>0$ and an integer $L\\ge1$, use the map from [[def-leapfrog-step-map]] for $L$ steps, and flip the final momentum. If $z=(q,p)$, write $(\\widetilde q,\\widetilde p)=\\Phi_\\epsilon^L(z)$ and define the flipped proposal $z^*=(\\widetilde q,-\\widetilde p)$. The Metropolis acceptance probability is\n$$\\alpha(z,z^*)=\\min\\{1,\\exp(-H(z^*)+H(z))\\}.$$\nThe general accepted-flow and rejected-self-transition convention is the Metropolis-Hastings procedure [[alg-metropolis-hastings-kernel]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-leapfrog-hamiltonian-monte-carlo",
+          "source_section": "Definition",
+          "quote": "Assume the inputs of [[def-hamiltonian-monte-carlo]] and fix a current position $q$, a step size $\\epsilon>0$, and a finite integer $L\\ge1$.\n\n1. Independently refresh $p\\sim N_d(0,M)$ and set $z=(q,p)$.\n2. Compute $z_L=\\Phi_\\epsilon^L(z)$ by the finite recursion in [[def-leapfrog-step-map]], then set $z^*=R(z_L)$, where $R(q,p)=(q,-p)$.\n3. Form the deterministic proposal kernel $Q_T(z,A)=\\mathbf 1_A(z^*)$ on phase space and apply [[alg-metropolis-hastings-kernel]] with target $\\nu(dq,dp)=\\pi(dq)N_d(0,M)(dp)$. Equivalently, accept $z^*$ with probability $\\min\\{1,\\exp(-H(z^*)+H(z))\\}$ and otherwise retain $z$.\n4. Return the position coordinate of the accepted or retained phase point.\n\nThe finite recursion is defined for every $(q,p)\\in\\mathbb R^{2d}$. No exact ODE solution, energy conservation by the discrete map, or convergence guarantee is part of this procedure.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The first half kick gives $p_{1/2}=1-\\tfrac12U'(0)=1$. The drift gives $q_1=0+1\\cdot p_{1/2}=1$. The final half kick gives $p_1=1-\\tfrac12U'(1)=1/2$, so the flipped proposal is $(q^*,p^*)=(1,-1/2)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The initial energy is $H(0,1)=1/2$, while the proposed energy is $H(1,-1/2)=1/2+1/8=5/8$. The discrete step therefore does not conserve $H$ at this point.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ],
+          "claim": "The acceptance probability is $\\min\\{1,e^{-5/8+1/2}\\}=e^{-1/8}<1$, since $-1/8<0$ and [F3] gives $e^{-1/8}<e^0=1$; rejection retains $q=0$ by [F2]. This finite calculation distinguishes energy error from the exact target-invariance statement proved for the full Metropolized kernel."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example specifies one leapfrog step from (0,1); Proof 1.1 performs all three subupdates, so no empty recursion is substituted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The initial position q0=0 is included in the one-step calculation in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example uses exactly one leapfrog step L=1, calculated in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof 1.1 treats the initial zero position q=0 directly: the first kick leaves p=1, the drift gives q=1, and the second kick gives p=1/2. Thus zero position does not collapse the phase calculation."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example fixes epsilon=L=1. Proof 3.1 gives acceptance exp(-1/8) strictly between zero and one and explicitly retains q=0 on rejection; no missing accept/reject endpoint case changes this calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is inherited from the HMC momentum and Metropolis-Hastings suppliers; see the statement and step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The current Example fixes q=0,p=1,epsilon=L=1; Proof 1.1 computes the flipped endpoint (1,-1/2), 2.1 computes energy increase 1/8 and 3.1 gives acceptance exp(-1/8). This evaluated witness of finite-step energy error is not a necessary-and-sufficient description of Hamiltonian invariance. No forward direction of a biconditional is part of that claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Read the actual current Statement/Definition and relevant argument for this gate failure. The current Example fixes q=0,p=1,epsilon=L=1; Proof 1.1 computes the flipped endpoint (1,-1/2), 2.1 computes energy increase 1/8 and 3.1 gives acceptance exp(-1/8). This evaluated witness of finite-step energy error is not a necessary-and-sufficient description of Hamiltonian invariance. No forward direction of a biconditional is part of that claim.",
+            "item_sha256": "851a750914449f6929f820a6c49d30cbd0a46041e0a6d21c08631cf23c47d5bb",
+            "row_sha256": "7ff494228ad8fcec5fd717ccd45927dd88e114e5ad2bfaff2b210827758766a3"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The current Example fixes q=0,p=1,epsilon=L=1; Proof 1.1 computes the flipped endpoint (1,-1/2), 2.1 computes energy increase 1/8 and 3.1 gives acceptance exp(-1/8). This evaluated witness of finite-step energy error is not a necessary-and-sufficient description of Hamiltonian invariance. No reverse direction of a biconditional is part of that claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_37_40",
+            "reason": "Read the actual current Statement/Definition and relevant argument for this gate failure. The current Example fixes q=0,p=1,epsilon=L=1; Proof 1.1 computes the flipped endpoint (1,-1/2), 2.1 computes energy increase 1/8 and 3.1 gives acceptance exp(-1/8). This evaluated witness of finite-step energy error is not a necessary-and-sufficient description of Hamiltonian invariance. No reverse direction of a biconditional is part of that claim.",
+            "item_sha256": "851a750914449f6929f820a6c49d30cbd0a46041e0a6d21c08631cf23c47d5bb",
+            "row_sha256": "f5353b145993302bcb70afabe1910bb9fe67ae212dfd7bdf5ad6fbe84428c854"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-37",
+        "notes": "Accepted reader repair: AC is explicit and F3 supplies exponential positivity/strict increase for the strict rejection inequality. All three steps checked by substitution: kicks and drift take (0,1) to (1,1/2), flip gives (1,-1/2); H changes from 1/2 to 5/8, so Delta H=1/8 and acceptance exp(-1/8) lies strictly between zero and one. Rejection retains original position zero. Unit mass, epsilon=L=1 satisfy the algorithm interface. This is one deterministic phase-point witness, with no assertion that the refreshed momentum equals one with positive probability."
+      }
+    }
+  }
+}

@@ -1,0 +1,1598 @@
+{
+  "version": 1,
+  "level": "batch-57",
+  "run": "bayesian-computational-statistics-62",
+  "scope": [
+    "def-statistical-and-computational-error-ledger",
+    "thm-pathwise-error-ledger-decomposition",
+    "thm-error-ledger-mse-covariance-identity",
+    "thm-independent-replicate-variance-estimator",
+    "cor-independent-replicate-mean-clt",
+    "ex-bootstrap-finite-b-versus-sampling-error",
+    "ex-permutation-pvalue-resolution",
+    "ex-euler-discretization-bias-and-path-variance",
+    "ex-rqmc-replicate-error-estimate",
+    "ex-dot-product-roundoff-and-conditioning",
+    "ex-correlated-error-components"
+  ],
+  "contracts": {
+    "def-statistical-and-computational-error-ledger": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition permits m=0; the only remaining component is the final numerical difference."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition permits zero references and defines each adjacent difference without division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition gives a single adjacent difference when m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition permits all references to agree, making all stage differences zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition has no interval endpoint or limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition selects no witnesses from a family and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no equivalence."
+        }
+      ]
+    },
+    "thm-pathwise-error-ledger-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-statistical-and-computational-error-ledger",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space as in [[def-probability-measure]], let $\\theta\\in\\mathbb R$ be a fixed target, and let $m\\in\\mathbb N\\cup\\{0\\}$. Take $r_1,\\ldots,r_m$ and $\\widetilde r$ to be real random variables on this space, meaning measurable maps $(\\Omega,\\mathcal F)\\to(\\mathbb R,\\mathcal B(\\mathbb R))$ as in [[def-random-element-and-real-random-variable]]. Set $r_0(\\omega):=\\theta$ for every $\\omega\\in\\Omega$. Deterministic values are included by using a one-point probability space. The reference chain $r_0,r_1,\\ldots,r_m$ must put every quantity on the same scale and state which ideal analysis stage each transition represents. Define the signed stage errors pointwise by\n$$e_j:=r_j-r_{j-1}\\qquad(1\\le j\\le m)$$\nand the final numerical error\n$$e_{\\mathrm{fp}}:=\\widetilde r-r_m.$$\n\nEach error is measurable because finite sums and differences of measurable real-valued functions are measurable ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\nWhen the stages are present, $e_1$ may record data-sampling error, a later transition may record a bootstrap or permutation approximation, a discretized target may record numerical-model bias, and a finite simulation may record computation-randomization error. The labels describe the declared adjacent references; they do not by themselves assert that errors are independent, centered, unbiased, or even random. If a stage is absent, omit it or set its two adjacent references equal. If no floating-point computation is involved, set $\\widetilde r=r_m$.\n\nFor a probability statement about these errors, the required joint probability law and any conditioning convention must also be specified. For example, fixing the observed data and varying independent randomizations concerns computation error conditional on those data; it does not include variation across new data samples. A deterministic quadrature rule has no replicate-based error estimate unless an actual randomization is added. Any numerical roundoff bound must state its arithmetic and normal-range hypotheses.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the finite sum telescopes: $\\sum_{j=1}^{m}(r_j-r_{j-1})=r_m-r_0$; for $m=0$ both sides are $0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Adding $\\widetilde r-r_m$ to the equality in step 1.1 and using $r_0=\\theta$ gives $\\widetilde r-\\theta=\\sum_{j=1}^{m}(r_j-r_{j-1})+(\\widetilde r-r_m)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the triangle inequality to the finite sum in step 2.1 to obtain the absolute-error bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles m=0 and the empty finite sum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid when one or more adjacent differences are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement includes m=1, for which one telescoping difference and the final numerical difference remain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 are pointwise algebra and impose no independence or nondegeneracy assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limit occurs in this finite-chain identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is selected and no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts no equivalence."
+        }
+      ]
+    },
+    "thm-error-ledger-mse-covariance-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $|E_j|\\le 1+E_j^2$ and $\\mathbb E E_j^2<\\infty$, each $E_j$ is integrable. For $S=\\sum_{j=1}^{m}E_j$, [F2] gives $\\mathbb E S=\\sum_{j=1}^{m}b_j$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $C_j=E_j-b_j$. By step 1.1, $S-\\mathbb E S=\\sum_{j=1}^{m}C_j$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Expanding the finite square gives $(S-\\mathbb E S)^2=\\sum_j C_j^2+2\\sum_{j<k}C_jC_k$. Each cross product is integrable because $2|C_jC_k|\\le C_j^2+C_k^2$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Taking expectations in step 3.1, using [F2] and [F1], yields $\\operatorname{Var}(S)=\\sum_j\\operatorname{Var}(E_j)+2\\sum_{j<k}\\operatorname{Cov}(E_j,E_k)$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Since $\\mathbb E(S-\\mathbb E S)=0$, expansion of $S^2=((S-\\mathbb E S)+\\mathbb E S)^2$ gives $\\mathbb E S^2=\\operatorname{Var}(S)+(\\mathbb E S)^2$; substitute step 4.1 and step 1.1 to obtain the stated formula. Subtracting $\\sum_j\\operatorname{Var}(E_j)$ shows that equality with the variance sum holds exactly when $(\\sum_j b_j)^2+2\\sum_{j<k}\\operatorname{Cov}(E_j,E_k)=0$.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 4.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "In the pairwise-independent case, apply [F3] to the coordinate functions $x\\mapsto x-b_j$ and $y\\mapsto y-b_k$; their means are zero, so every covariance in step 5.1 is zero. If all components are also centered, the squared-total-bias term is zero as well.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement explicitly requires m>=1, excluding an empty component family. Its sum over pairs j<k is empty when m=1 and contributes zero, consistently with step 5.1 and the one-variable second-moment identity.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Statement explicitly requires m>=1, excluding an empty component family. Its sum over pairs j<k is empty when m=1 and contributes zero, consistently with step 5.1 and the one-variable second-moment identity."
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Statement explicitly requires m>=1, excluding an empty component family. Its sum over pairs j<k is empty when m=1 and contributes zero, consistently with step 5.1 and the one-variable second-moment identity."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 includes squared total bias; if all component variables are zero, both sides are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1 both covariance sums are empty and step 5.1 reduces to E[E_1^2]=b_1^2+Var(E_1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement retains the covariance term for perfectly correlated components."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite sums are formed; no witness selection or choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "reason": "The theorem asserts no equivalence.",
+          "evidence": "Step 5.1 obtains the exact formula and subtracts the variance sum, proving both directions of the combined-correction criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "reason": "The theorem asserts no equivalence.",
+          "evidence": "Step 5.1 obtains the exact formula and subtracts the variance sum, proving both directions of the combined-correction criterion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "one-component",
+          "claim": "For m=1, both covariance sums are empty and the formula is E[E1^2]=b1^2+Var(E1).",
+          "result": "Step 5.1 reduces the identity to the variance definition."
+        }
+      ]
+    },
+    "thm-independent-replicate-variance-estimator": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3] and the given moment assumptions, every $Z_r$ has $\\mathbb E Z_r=\\mu$ and $\\mathbb E Z_r^2=\\mu^2+\\tau^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $r\\ne s$, independence and [F2] give $\\mathbb E[Z_rZ_s]=\\mathbb E Z_r\\,\\mathbb E Z_s=\\mu^2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Expanding the finite square gives $\\sum_r(Z_r-\\overline Z_R)^2=\\sum_r Z_r^2-R\\overline Z_R^2$, since $\\sum_r Z_r=R\\overline Z_R$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Expanding $\\overline Z_R^2$ and using steps 1.1–1.2 gives $\\mathbb E[\\overline Z_R^2]=R^{-2}\\{R(\\mu^2+\\tau^2)+R(R-1)\\mu^2\\}=\\mu^2+\\tau^2/R$; hence $\\operatorname{Var}(\\overline Z_R)=\\tau^2/R$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Taking expectations in step 1.3 and using steps 1.1 and 2.1 gives $\\mathbb E\\sum_r(Z_r-\\overline Z_R)^2=R(\\mu^2+\\tau^2)-R(\\mu^2+\\tau^2/R)=(R-1)\\tau^2$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Divide step 3.1 by $R(R-1)$ to obtain $\\mathbb E\\widehat V_R=\\tau^2/R=\\operatorname{Var}(\\overline Z_R)$, as required.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires R>=2. Thus R=0 has no defined mean or variance estimator and R=1 has zero denominator R(R-1); an empty off-diagonal pair sum inside the algebra would not create an empty-replicate claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Statement requires R>=2. Thus R=0 has no defined mean or variance estimator and R=1 has zero denominator R(R-1); an empty off-diagonal pair sum inside the algebra would not create an empty-replicate claim."
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Statement requires R>=2. Thus R=0 has no defined mean or variance estimator and R=1 has zero denominator R(R-1); an empty off-diagonal pair sum inside the algebra would not create an empty-replicate claim."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The allowed case tau squared=0 gives zero replicate deviations and zero target variance in steps 2.1, 3.1, 4.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "R=1 is excluded because R(R-1)=0 and there is no sample-variance estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 gives zero target variance when all replicates are identical."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement covers every finite R>=2; step 4.1 divides only by the positive quantity R(R-1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite replicate list is given; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts no equivalence."
+        }
+      ]
+    },
+    "cor-independent-replicate-mean-clt": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lindeberg-levy-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X_k)_{k\\ge1}$ be iid real random variables with mean $m$ and variance $0<\\sigma^2<\\infty$. Then $$\\frac{\\sum_{k=1}^nX_k-nm}{\\sigma\\sqrt n}\\ \\Rightarrow\\ N(0,1).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The normalized replicate average is $\\sqrt R(\\overline Z_R-\\mu)/\\tau=(\\sum_{r=1}^{R}Z_r-R\\mu)/(\\tau\\sqrt R)$, the normalized sum in the Lindeberg–Levy theorem.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Under [A1], apply [F3] to the IID sequence in step 1.1 to obtain the asserted convergence in distribution.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes an infinite IID sequence indexed by r>=1. Each replicate mean uses a positive integer R, and R=0 is inadmissible because the displayed average divides by R.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Statement assumes an infinite IID sequence indexed by r>=1. Each replicate mean uses a positive integer R, and R=0 is inadmissible because the displayed average divides by R."
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Statement assumes an infinite IID sequence indexed by r>=1. Each replicate mean uses a positive integer R, and R=0 is inadmissible because the displayed average divides by R."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Zero variance is expressly excluded because the denominator tau is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A single replicate is not an asymptotic sequence; the limit concerns R tending to infinity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and step 2.1 require positive variance, so the zero-variance normalization is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No finite endpoint or one-sided limit is asserted beyond R tending to infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicitly assumed in A1 and used to invoke the published CLT in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary asserts no equivalence."
+        }
+      ]
+    },
+    "ex-bootstrap-finite-b-versus-sampling-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-statistical-and-computational-error-ledger",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space as in [[def-probability-measure]], let $\\theta\\in\\mathbb R$ be a fixed target, and let $m\\in\\mathbb N\\cup\\{0\\}$. Take $r_1,\\ldots,r_m$ and $\\widetilde r$ to be real random variables on this space, meaning measurable maps $(\\Omega,\\mathcal F)\\to(\\mathbb R,\\mathcal B(\\mathbb R))$ as in [[def-random-element-and-real-random-variable]]. Set $r_0(\\omega):=\\theta$ for every $\\omega\\in\\Omega$. Deterministic values are included by using a one-point probability space. The reference chain $r_0,r_1,\\ldots,r_m$ must put every quantity on the same scale and state which ideal analysis stage each transition represents. Define the signed stage errors pointwise by\n$$e_j:=r_j-r_{j-1}\\qquad(1\\le j\\le m)$$\nand the final numerical error\n$$e_{\\mathrm{fp}}:=\\widetilde r-r_m.$$\n\nEach error is measurable because finite sums and differences of measurable real-valued functions are measurable ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\nWhen the stages are present, $e_1$ may record data-sampling error, a later transition may record a bootstrap or permutation approximation, a discretized target may record numerical-model bias, and a finite simulation may record computation-randomization error. The labels describe the declared adjacent references; they do not by themselves assert that errors are independent, centered, unbiased, or even random. If a stage is absent, omit it or set its two adjacent references equal. If no floating-point computation is involved, set $\\widetilde r=r_m$.\n\nFor a probability statement about these errors, the required joint probability law and any conditioning convention must also be specified. For example, fixing the observed data and varying independent randomizations concerns computation error conditional on those data; it does not include variation across new data samples. A deterministic quadrature rule has no replicate-based error estimate unless an actual randomization is added. Any numerical roundoff bound must state its arithmetic and normal-range hypotheses.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pathwise-error-ledger-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $\\theta=r_0,r_1,\\ldots,r_m,\\widetilde r$ be the finite scalar reference chain and returned value of [[def-statistical-and-computational-error-ledger]], with $m\\ge0$. Then, pointwise,\n$$\\widetilde r-\\theta=\\sum_{j=1}^{m}(r_j-r_{j-1})+(\\widetilde r-r_m),$$\nand consequently\n$$|\\widetilde r-\\theta|\\le\\sum_{j=1}^{m}|r_j-r_{j-1}|+|\\widetilde r-r_m|.$$\nThe sum is empty when $m=0$. No independence, unbiasedness, or distributional assumption is needed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-n-out-of-n-bootstrap-from-empirical-law",
+          "source_section": "Definition",
+          "quote": "**Input.** Let $n\\ge1$, let $(\\mathcal Z,\\mathcal F)$ be the declared measurable space of sampling units, and fix the observed ordered tuple $z=(z_1,\\ldots,z_n)$. Let $P_n$ be its empirical probability measure from [[def-empirical-measure]] and [[lem-empirical-measure-is-a-probability-measure]]. Declare a sample sigma-algebra $\\mathcal F_n$ on the ordered tuple space $\\mathcal Z^n$ and provide a statistic $T_n:(\\mathcal Z^n,\\mathcal F_n)\\to(\\mathbb R^q,\\mathcal B_q)$, where $q\\ge1$ is finite and $\\mathcal B_q$ is the declared target sigma-algebra; \"statistic\" has the measurable-map meaning in [[def-statistic-and-estimator]].\n\nWrite $[n]:=\\{1,\\ldots,n\\}$ for the indexing set.\n\n**Procedure.** Draw indices $I_1,\\ldots,I_n$ independently and uniformly from $[n]$, so repeated indices are allowed. Set $Z_j^*:=z_{I_j}$ for $j=1,\\ldots,n$. Return the bootstrap tuple $(Z_1^*,\\ldots,Z_n^*)$ and the replicate $T_n(Z_1^*,\\ldots,Z_n^*)$. Generate further replicates by repeating the index draws with fresh randomness. These are resampling units only when the tuple entries satisfy the unit contract in [[def-resampling-sampling-unit-contract]].\n\nThe conditional IID law of the draws is proved in [[thm-bootstrap-draws-are-conditionally-iid-empirical-law]]. This algorithm does not claim that its conditional law consistently approximates any sampling law; such validity requires separate hypotheses and a separate theorem.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-bootstrap-draws-are-conditionally-iid-empirical-law",
+          "source_section": "Statement",
+          "quote": "Fix $n\\ge1$, write $[n]:=\\{1,\\ldots,n\\}$, let $(\\mathcal Z,\\mathcal F)$ be a measurable unit space, and fix an observed tuple $z=(z_1,\\ldots,z_n)$. Let $P_n=\\frac1n\\sum_{i=1}^n\\delta_{z_i}$ be its empirical probability measure. For the bootstrap algorithm [[alg-n-out-of-n-bootstrap-from-empirical-law]], equip the conditional index vector $(I_1,\\ldots,I_n)$ with the finite uniform law on $\\Omega_n:=\\{f:[n]\\to[n]\\}$ and set $Z_j^*=z_{I_j}$. For every $A_1,\\ldots,A_n\\in\\mathcal F$,\n$$\\mathbb P^*(Z_1^*\\in A_1,\\ldots,Z_n^*\\in A_n)=\\prod_{j=1}^nP_n(A_j).$$\nThus, conditional on the fixed observed tuple, $Z_1^*,\\ldots,Z_n^*$ are independent random elements with common law $P_n$ ([[def-identically-distributed-and-iid-random-variables]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-independent-replicate-variance-estimator",
+          "source_section": "Statement",
+          "quote": "Let $Z_1,\\ldots,Z_R$ be IID real random variables with mean $\\mu$ and finite variance $\\tau^2$, where $R\\ge2$, and let $\\overline Z_R=R^{-1}\\sum_{r=1}^{R}Z_r$. Then\n$$\n\\widehat V_R:=\\frac{1}{R(R-1)}\\sum_{r=1}^{R}(Z_r-\\overline Z_R)^2\n$$\nis unbiased for $\\operatorname{Var}(\\overline Z_R)=\\tau^2/R$. The probability law may be the computation-randomization law conditional on fixed observed data; in that use, this estimate concerns computation variability only.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1], the observed event $(X_1,X_2)=(0,1)$ has probability $(1/4)(3/4)=3/16>0$. By [A2], its statistic is $T_2(0,1)=1/2$, so the realized data-sampling error is $1/2-3/4=-1/4$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F4] and [F5], the four equally likely ordered pairs of bootstrap indices have sample means $0,1/2,1/2,1$, respectively. Therefore the conditional bootstrap mean is $1/2$ and its conditional variance is $(1/4)(1/2)^2+(1/2)0^2+(1/4)(1/2)^2=1/8$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A2",
+            "F4",
+            "F5",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The four stated means average to $(0+1/2+1+1)/4=5/8$, so the finite-$B$ simulation error relative to the exact conditional bootstrap mean is $5/8-1/2=1/8$. Each ordered index pair has conditional probability $1/4$; independence across the four repetitions makes this listed realization have probability $(1/4)^4=1/256>0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Under the conditional resampling law, the four replicate means are IID with variance $1/8$ by step 1.2 and [A3]; [F6] gives variance $1/(4\\cdot8)=1/32$ for their average. This is computation-randomization variance conditional on the data, distinct from the data-sampling error in step 1.1.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 1.2",
+            "A3",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The chain $3/4,1/2,1/2,5/8,5/8$ has successive errors $-1/4,0,1/8,0$. Their sum is $-1/8=5/8-3/4$, so the realized total error is exactly the separate sampling and finite-$B$ errors in steps 1.1 and 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a sample of size two, so an empty sample is outside its setup."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The observed data include zero, and step 1.2 shows it is an admissible bootstrap outcome."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example uses B=4; no B=1 variance estimate is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 computes positive conditional variance 1/8 for the fixed nonconstant sample (0,1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 includes both possible endpoint resample means 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 enumerates all four index pairs; step 2.1 verifies that the listed four-replicate outcome has probability 1/256."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The verification proves no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The fixed bootstrap realization separates sampling error -1/4 from simulation error 1/8 and verifies the conditional law; it makes no bootstrap-validity equivalence. The forward-equivalence axis is therefore inapplicable."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The verification proves no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The fixed bootstrap realization separates sampling error -1/4 from simulation error 1/8 and verifies the conditional law; it makes no bootstrap-validity equivalence. No reverse-equivalence conclusion is part of this claim."
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "observed-sample-mass",
+          "claim": "P((X1,X2)=(0,1))=(1/4)(3/4)=3/16.",
+          "result": "Step 1.1 computes the positive event probability."
+        },
+        {
+          "id": "conditional-resample-law",
+          "claim": "The four ordered index pairs have sample means 0,1/2,1/2,1; the conditional mean is 1/2 and variance 1/8.",
+          "result": "Step 1.2 enumerates all four cases and weights each by 1/4."
+        },
+        {
+          "id": "four-replicate-outcome",
+          "claim": "The listed means average to 5/8 and the specified four index pairs occur with conditional probability 1/256.",
+          "result": "Step 2.1 computes both the finite-B error 1/8 and 4^-4."
+        },
+        {
+          "id": "conditional-mean-variance",
+          "claim": "Four independent replicate means of variance 1/8 have average variance 1/32.",
+          "result": "Step 2.2 applies the independent-replicate theorem."
+        }
+      ]
+    },
+    "ex-permutation-pvalue-resolution": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-group-randomization-test",
+          "source_section": "Definition",
+          "quote": "A **finite-group randomization setup** consists of a finite probability space $(\\Omega,w)$ as in [[def-finite-probability-space-and-event]], a finite group $G$ acting on $\\Omega$ as in [[def-group-action]], a statistic $T:\\Omega\\to\\mathbb R$, and a family $\\mathcal P_0$ of null probability laws on $\\Omega$ that is invariant under the action. Invariance means that for every $P\\in\\mathcal P_0$, $g\\in G$, and $A\\subseteq\\Omega$, $P(\\{x:g\\cdot x\\in A\\})=P(A)$. The **orbit** of $x$ is $O(x):=\\{g\\cdot x:g\\in G\\}$, a finite subset of $\\Omega$. The setup itself does not assert that the action is free or that distinct group elements give distinct orbit points.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-orbit-rank-p-value",
+          "source_section": "Definition",
+          "quote": "For a finite-group randomization setup with statistic $T$, the **inclusive orbit upper-tail rank** at $x\\in\\Omega$ is\n$$p_0(x):=\\frac{\\#\\{g\\in G:T(g\\cdot x)\\ge T(x)\\}}{|G|}.$$\nIf $U$ is independent of the observed data and uniform on $[0,1]$, the **tie-randomized orbit rank** is\n$$p_U(x,U):=\\frac{\\#\\{g\\in G:T(g\\cdot x)>T(x)\\}+U\\,\\#\\{g\\in G:T(g\\cdot x)=T(x)\\}}{|G|}.$$\nBoth counts are over group elements, with multiplicity. Thus a nonfree action counts a distinct orbit point as many times as it has preimages under $g\\mapsto g\\cdot x$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-group-randomization-validity",
+          "source_section": "Statement",
+          "quote": "In a finite-group randomization setup, fix a null law invariant under the group action. Conditional on every orbit $O$ with positive probability, the data are uniform on the distinct points of $O$. For the orbit ranks of [[def-orbit-rank-p-value]], the inclusive p-value $p_0$ is superuniform under the null, and the independent-uniform tie-randomized value $p_U$ is Uniform$(0,1)$ conditionally on each positive-probability orbit. Consequently, $p_U$ is also Uniform$(0,1)$ unconditionally.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pathwise-error-ledger-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $\\theta=r_0,r_1,\\ldots,r_m,\\widetilde r$ be the finite scalar reference chain and returned value of [[def-statistical-and-computational-error-ledger]], with $m\\ge0$. Then, pointwise,\n$$\\widetilde r-\\theta=\\sum_{j=1}^{m}(r_j-r_{j-1})+(\\widetilde r-r_m),$$\nand consequently\n$$|\\widetilde r-\\theta|\\le\\sum_{j=1}^{m}|r_j-r_{j-1}|+|\\widetilde r-r_m|.$$\nThe sum is empty when $m=0$. No independence, unbiasedness, or distributional assumption is needed.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each map $x\\mapsto gx$ permutes $G$, so the uniform law is invariant and the data form the finite-group setup of [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The sampled statistic values are $1,2,3,1$, so the inclusive count among the four sampled transforms is one and $p_+=(1+1)/5=2/5$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Exactly one of $e,a,a^2$ has statistic at least $T(e)=3$, so [F2] gives the exact-orbit rank $p_0(e)=1/3$; [F3] supplies its superuniformity under this invariant null.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The finite-$B$ output lies on the grid $\\{1/5,2/5,3/5,4/5,1\\}$ because its count is an integer from zero through four. Set $m=1$, $r_0=p_0(e)$, and $r_1=\\widetilde r=p_+$; then the one-stage error is $2/5-1/3=1/15$ by [F4].",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F4",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 uses a group of order three; an empty group is outside the example."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 specifies positive statistic values; the rank calculation does not use a zero-score convention."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes |G|=3 and B=4; the single-transform case is not asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The three orbit scores are distinct, so the example makes no tie-specific claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite-B grid in step 3.1 includes its endpoint values 1/5 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 lists the three group elements and checks invariance by bijection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The verification proves no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The three-element orbit has p-value 1/3 whereas the realized four-transform formula gives 2/5; the item makes no characterization of finite-B validity. The forward-equivalence axis is therefore inapplicable."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The verification proves no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The three-element orbit has p-value 1/3 whereas the realized four-transform formula gives 2/5; the item makes no characterization of finite-B validity. No reverse-equivalence conclusion is part of this claim."
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "group-and-full-orbit",
+          "claim": "Exactly one of e,a,a^2 has score at least T(e)=3, so p0(e)=1/3.",
+          "result": "Steps 1.1 and 2.1 verify invariance and the inclusive count."
+        },
+        {
+          "id": "plus-one-realization",
+          "claim": "The listed four transforms have one score at least 3; the plus-one value is 2/5.",
+          "result": "Steps 1.2 and 3.1 count the realized list and distinguished identity."
+        },
+        {
+          "id": "finite-b-grid",
+          "claim": "For B=4 the formula takes values on {1/5,2/5,3/5,4/5,1}; the realized difference is 2/5-1/3=1/15.",
+          "result": "Step 3.1 computes the grid and exact difference."
+        }
+      ]
+    },
+    "ex-euler-discretization-bias-and-path-variance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-statistical-and-computational-error-ledger",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space as in [[def-probability-measure]], let $\\theta\\in\\mathbb R$ be a fixed target, and let $m\\in\\mathbb N\\cup\\{0\\}$. Take $r_1,\\ldots,r_m$ and $\\widetilde r$ to be real random variables on this space, meaning measurable maps $(\\Omega,\\mathcal F)\\to(\\mathbb R,\\mathcal B(\\mathbb R))$ as in [[def-random-element-and-real-random-variable]]. Set $r_0(\\omega):=\\theta$ for every $\\omega\\in\\Omega$. Deterministic values are included by using a one-point probability space. The reference chain $r_0,r_1,\\ldots,r_m$ must put every quantity on the same scale and state which ideal analysis stage each transition represents. Define the signed stage errors pointwise by\n$$e_j:=r_j-r_{j-1}\\qquad(1\\le j\\le m)$$\nand the final numerical error\n$$e_{\\mathrm{fp}}:=\\widetilde r-r_m.$$\n\nEach error is measurable because finite sums and differences of measurable real-valued functions are measurable ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\nWhen the stages are present, $e_1$ may record data-sampling error, a later transition may record a bootstrap or permutation approximation, a discretized target may record numerical-model bias, and a finite simulation may record computation-randomization error. The labels describe the declared adjacent references; they do not by themselves assert that errors are independent, centered, unbiased, or even random. If a stage is absent, omit it or set its two adjacent references equal. If no floating-point computation is involved, set $\\widetilde r=r_m$.\n\nFor a probability statement about these errors, the required joint probability law and any conditioning convention must also be specified. For example, fixing the observed data and varying independent randomizations concerns computation error conditional on those data; it does not include variation across new data samples. A deterministic quadrature rule has no replicate-based error estimate unless an actual randomization is added. Any numerical roundoff bound must state its arithmetic and normal-range hypotheses.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pathwise-error-ledger-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $\\theta=r_0,r_1,\\ldots,r_m,\\widetilde r$ be the finite scalar reference chain and returned value of [[def-statistical-and-computational-error-ledger]], with $m\\ge0$. Then, pointwise,\n$$\\widetilde r-\\theta=\\sum_{j=1}^{m}(r_j-r_{j-1})+(\\widetilde r-r_m),$$\nand consequently\n$$|\\widetilde r-\\theta|\\le\\sum_{j=1}^{m}|r_j-r_{j-1}|+|\\widetilde r-r_m|.$$\nThe sum is empty when $m=0$. No independence, unbiasedness, or distributional assumption is needed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-independent-replicate-variance-estimator",
+          "source_section": "Statement",
+          "quote": "Let $Z_1,\\ldots,Z_R$ be IID real random variables with mean $\\mu$ and finite variance $\\tau^2$, where $R\\ge2$, and let $\\overline Z_R=R^{-1}\\sum_{r=1}^{R}Z_r$. Then\n$$\n\\widehat V_R:=\\frac{1}{R(R-1)}\\sum_{r=1}^{R}(Z_r-\\overline Z_R)^2\n$$\nis unbiased for $\\operatorname{Var}(\\overline Z_R)=\\tau^2/R$. The probability law may be the computation-randomization law conditional on fixed observed data; in that use, this estimate concerns computation variability only.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-differentiable-implies-continuous",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\nlimit point of $A$ ([[def-limit-point-r]]). If $f$ is differentiable at $c$\n([[def-derivative]]) then $f$ is continuous at $c$ ([[def-continuity-real]]).\n\nConsequently, if $f$ is differentiable on a set $S \\subseteq A$ then $f$ is\ncontinuous at every point of $S$.\n\n**No converse is asserted, and none holds.** Continuity at $c$ does not give\ndifferentiability at $c$, and the standard witness is worked out on the\ncompanion page.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F5] and [F6], $x_*(t)=X_0\\exp(t)$ solves the stated initial-value problem. For any solution $x$, put $f(t)=\\exp(-t)$ and $u(t)=f(t)x(t)$. By [F6] and [F7], $f'(t)=-f(t)$. For $h\\ne0$ with $t+h\\in[0,1]$, $\\frac{u(t+h)-u(t)}h=f(t+h)\\frac{x(t+h)-x(t)}h+x(t)\\frac{f(t+h)-f(t)}h$. As $h\\to0$, continuity of $f$ and differentiability of $x,f$ make the right side tend to $f(t)x'(t)+x(t)f'(t)=0$ because $x'=x$. Thus $u'=0$ on $(0,1)$. The solution $x$ is continuous at $0,1$ by [F9], so $u$ is continuous on $[0,1]$; [F4] gives $u(1)-u(0)=0$, hence $x(1)=eX_0$. By [F5] and $\\mathbb E[X_0^2]=(1+4)/2=5/2$, the exact target is $\\theta=e^2\\mathbb E[X_0^2]=(5/2)e^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The Euler update gives $X_1^h=2X_0$, so the exact-arithmetic discretized target is $\\theta_h=\\mathbb E[4X_0^2]=10$. Since $e=\\sum_{k=0}^{\\infty}1/k!>2$, its bias is $10-(5/2)e^2<0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "By [F8] and [A2], a single simulated squared Euler endpoint is $4X_0^2$, equal to $4$ or $16$ with equal probability. Its mean is $10$ and its variance is $((4-10)^2+(16-10)^2)/2=36$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F11], $z\\mapsto4z^2$ is measurable; by [F8] and [A2] the initial values are IID, so [F10] makes the outputs independent. Their common two-point law is computed in step 1.3, hence they are IID. Then [F3] gives variance $36/M$ for their average, while the discretization bias in step 1.2 remains $10-(5/2)e^2$ for every $M$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F8",
+            "F10",
+            "F11",
+            "step 1.2",
+            "step 1.3",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For a realized path average $\\overline Y_M$, the ledger chain $\\theta,\\theta_h,\\overline Y_M$ gives $\\overline Y_M-\\theta=(\\theta_h-\\theta)+(\\overline Y_M-\\theta_h)$ by [F1] and [F2], separating discretization bias from path-simulation error.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example requires M>=2 simulated paths and has no empty-path case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The initial value is restricted to 1 or 2; the zero-initial-state case is outside the example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example uses one explicit Euler step of size h=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The two-point initial law has positive variance; no deterministic initial-state boundary is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the exact endpoint at t=1 and step 1.2 the Euler endpoint at t=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two-point initial law is explicit and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The verification proves no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The one-step Euler example computes persistent bias 10-(5/2)e squared and path variance 36/M; it does not characterize consistency of arbitrary discretizations. The forward-equivalence axis is therefore inapplicable."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The verification proves no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The one-step Euler example computes persistent bias 10-(5/2)e squared and path variance 36/M; it does not characterize consistency of arbitrary discretizations. No reverse-equivalence conclusion is part of this claim."
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "exact-target",
+          "claim": "E[X0^2]=5/2 and theta=(5/2)e^2.",
+          "result": "Step 1.1 verifies the ODE endpoint and target."
+        },
+        {
+          "id": "euler-target",
+          "claim": "One h=1 Euler step gives theta_h=10 and bias 10-(5/2)e^2<0.",
+          "result": "Step 1.2 computes the target and uses e>2."
+        },
+        {
+          "id": "single-path-law",
+          "claim": "The squared Euler output is 4 or 16 with equal probability, with mean 10 and variance 36.",
+          "result": "Step 1.3 enumerates the two outcomes."
+        },
+        {
+          "id": "M-path-average",
+          "claim": "The average of M independent path outputs has variance 36/M while discretization bias stays fixed.",
+          "result": "Step 2.1 applies the replicate variance theorem."
+        }
+      ]
+    },
+    "ex-rqmc-replicate-error-estimate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-independent-replicate-variance-estimator",
+          "source_section": "Statement",
+          "quote": "Let $Z_1,\\ldots,Z_R$ be IID real random variables with mean $\\mu$ and finite variance $\\tau^2$, where $R\\ge2$, and let $\\overline Z_R=R^{-1}\\sum_{r=1}^{R}Z_r$. Then\n$$\n\\widehat V_R:=\\frac{1}{R(R-1)}\\sum_{r=1}^{R}(Z_r-\\overline Z_R)^2\n$$\nis unbiased for $\\operatorname{Var}(\\overline Z_R)=\\tau^2/R$. The probability law may be the computation-randomization law conditional on fixed observed data; in that use, this estimate concerns computation variability only.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-statistical-and-computational-error-ledger",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space as in [[def-probability-measure]], let $\\theta\\in\\mathbb R$ be a fixed target, and let $m\\in\\mathbb N\\cup\\{0\\}$. Take $r_1,\\ldots,r_m$ and $\\widetilde r$ to be real random variables on this space, meaning measurable maps $(\\Omega,\\mathcal F)\\to(\\mathbb R,\\mathcal B(\\mathbb R))$ as in [[def-random-element-and-real-random-variable]]. Set $r_0(\\omega):=\\theta$ for every $\\omega\\in\\Omega$. Deterministic values are included by using a one-point probability space. The reference chain $r_0,r_1,\\ldots,r_m$ must put every quantity on the same scale and state which ideal analysis stage each transition represents. Define the signed stage errors pointwise by\n$$e_j:=r_j-r_{j-1}\\qquad(1\\le j\\le m)$$\nand the final numerical error\n$$e_{\\mathrm{fp}}:=\\widetilde r-r_m.$$\n\nEach error is measurable because finite sums and differences of measurable real-valued functions are measurable ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\nWhen the stages are present, $e_1$ may record data-sampling error, a later transition may record a bootstrap or permutation approximation, a discretized target may record numerical-model bias, and a finite simulation may record computation-randomization error. The labels describe the declared adjacent references; they do not by themselves assert that errors are independent, centered, unbiased, or even random. If a stage is absent, omit it or set its two adjacent references equal. If no floating-point computation is involved, set $\\widetilde r=r_m$.\n\nFor a probability statement about these errors, the required joint probability law and any conditioning convention must also be specified. For example, fixing the observed data and varying independent randomizations concerns computation error conditional on those data; it does not include variation across new data samples. A deterministic quadrature rule has no replicate-based error estimate unless an actual randomization is added. Any numerical roundoff bound must state its arithmetic and normal-range hypotheses.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The replicate mean is $\\overline Z_3=(2/5+1/2+7/10)/3=8/15$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The squared deviations from $8/15$ sum to $(2/5-8/15)^2+(1/2-8/15)^2+(7/10-8/15)^2=7/150$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The replicate variance estimate for the mean is $(3\\cdot2)^{-1}(7/150)=7/900$ by [F1]. With the data fixed, this estimate concerns only the independent rule-randomization law, not data-sampling variation. The realized computation error in the ledger is $\\overline Z_3-I=8/15-I$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes R=3 and has no empty-replicate case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero replicate output is allowed by the definition; this example makes no positivity assumption."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "R=1 is excluded because the variance-estimate denominator is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 notes that equal replicate outputs would give zero estimated variance without implying zero true variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 keeps the fixed integral target I distinct from the realized replicate mean."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The three realized outputs are explicitly supplied; no witness selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The verification proves no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Three independent-rule outputs give mean 8/15 and estimated mean variance 7/900; the verification is arithmetic with fixed data, not an equivalence about confidence coverage. The forward-equivalence axis is therefore inapplicable."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The verification proves no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Three independent-rule outputs give mean 8/15 and estimated mean variance 7/900; the verification is arithmetic with fixed data, not an equivalence about confidence coverage. No reverse-equivalence conclusion is part of this claim."
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "replicate-mean",
+          "claim": "The three values 2/5,1/2,7/10 average to 8/15.",
+          "result": "Step 1.1 adds and divides exactly."
+        },
+        {
+          "id": "squared-deviations",
+          "claim": "The squared deviations from 8/15 sum to 7/150.",
+          "result": "Step 2.1 calculates the three rational terms."
+        },
+        {
+          "id": "variance-estimate",
+          "claim": "The replicate variance estimate is (1/(3*2))(7/150)=7/900.",
+          "result": "Step 3.1 applies the independent-replicate theorem."
+        }
+      ]
+    },
+    "ex-dot-product-roundoff-and-conditioning": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $x=(x_j),y=(y_j)\\in\\mathbb{R}^{n}$, with the dot product\n$x\\cdot y=\\sum_{j<n}x_jy_j$ computed from left to right in an arithmetic model\nwith unit roundoff $u$ satisfying $nu<1$\n([[def-standard-relative-floating-point-model-and-unit-roundoff]]), where every\nproduct $x_jy_j$, every rounded product\n$p_j:=\\operatorname{fl}(x_jy_j)$, and every intermediate sum lies in the normal\nrange. Let $s_1:=p_0$ and, for $1\\le k<n$, let\n$s_{k+1}:=\\operatorname{fl}(s_k+p_k)$. Then:\n\n1. **Componentwise form.** There are reals $\\delta_0,\\dots,\\delta_{n-1}$ with\n   $|\\delta_j|\\le\\gamma_n:=nu/(1-nu)$ such that\n   $$s_n=\\sum_{j<n}x_jy_j(1+\\delta_j).$$\n2. **Normwise form.**\n   $$|s_n-x\\cdot y|\\;\\le\\;\\gamma_n\\sum_{j<n}|x_jy_j|\\;\\le\\;\\gamma_n\\,\\lVert x\\rVert_1\\lVert y\\rVert_1,$$\n   where $\\lVert\\cdot\\rVert_1$ is the published $1$-norm\n   ([[def-p-norms-on-rn]], [[lem-p-norms-are-norms-and-induce-the-published-metrics]])\n   and $|\\cdot|$ the absolute value ([[def-abs-value]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-relative-floating-point-model-and-unit-roundoff",
+          "source_section": "Definition",
+          "quote": "**A floating-point system.** A floating-point system consists of a nonempty\nfinite set $\\mathbb F\\subseteq\\mathbb R$ of representable numbers with\n$0\\in\\mathbb F$ and $-\\mathbb F=\\mathbb F$, a positive real\n$N_{\\max}\\in\\mathbb F$ (the largest normal magnitude), a positive real\n$N_{\\min}\\in\\mathbb F$ (the smallest normal magnitude), with\n$N_{\\min}\\le N_{\\max}$, and a rounding map\n$\\operatorname{fl}$ defined on $0$ and on the real numbers $t$ with\n$N_{\\min}\\le|t|\\le N_{\\max}$, taking values in $\\mathbb F$ and satisfying\n$\\operatorname{fl}(0)=0$.\n\n**Unit roundoff.** A real $u>0$ is a **unit roundoff** for the system when\nevery real $t$ with $N_{\\min}\\le|t|\\le N_{\\max}$ satisfies\n\n$$\\operatorname{fl}(t)=t(1+\\delta)\\qquad\\text{for some }\\delta\\text{ with }|\\delta|\\le u,$$\n\nwith $|\\cdot|$ the absolute value ([[def-abs-value]]). The model quantifies all\nsubsequent error analysis through the single constant $u$ and says nothing\nabout the internal bit representation beyond the bound $|\\delta|\\le u$.\n\n**The standard relative model.** For each operation\n$\\circ\\in\\{+,-,\\times,\\div\\}$ and all $x,y\\in\\mathbb F$ such that $x\\circ y$ is\nzero or is a real number in the normal range\n($N_{\\min}\\le|x\\circ y|\\le N_{\\max}$; for $\\div$ this includes $y\\ne 0$), the\ncomputed result is\n\n$$\\operatorname{fl}(x\\circ y)=(x\\circ y)(1+\\delta)\\qquad\\text{for some }\\delta\\text{ with }|\\delta|\\le u.$$\n\nWhen $x\\circ y=0$, this identity is the exact-zero rule\n$\\operatorname{fl}(0)=0$ and one may take $\\delta=0$.\n\n**The exclusions are part of the model, and are stated explicitly.**\n\n- **Overflow** is excluded: when $|x\\circ y|>N_{\\max}$ the result is not a real\n  number of the form $(x\\circ y)(1+\\delta)$ with $|\\delta|\\le u$.\n- **Underflow** is excluded: when $0<|x\\circ y|<N_{\\min}$ the result falls into\n  the subnormal or lost range and need not satisfy the relative bound.\n- **Invalid operations** are excluded: when $x\\circ y$ is not a real number\n  (for example $0/0$), there is no real $\\delta$ for the displayed identity.\n\nEvery item on this page that uses the model therefore carries the hypotheses\nthat the relevant operations lie in the normal range, and statements about\noverflow, underflow or invalid operations are made only where the exclusion is\nmentioned.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-statistical-and-computational-error-ledger",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space as in [[def-probability-measure]], let $\\theta\\in\\mathbb R$ be a fixed target, and let $m\\in\\mathbb N\\cup\\{0\\}$. Take $r_1,\\ldots,r_m$ and $\\widetilde r$ to be real random variables on this space, meaning measurable maps $(\\Omega,\\mathcal F)\\to(\\mathbb R,\\mathcal B(\\mathbb R))$ as in [[def-random-element-and-real-random-variable]]. Set $r_0(\\omega):=\\theta$ for every $\\omega\\in\\Omega$. Deterministic values are included by using a one-point probability space. The reference chain $r_0,r_1,\\ldots,r_m$ must put every quantity on the same scale and state which ideal analysis stage each transition represents. Define the signed stage errors pointwise by\n$$e_j:=r_j-r_{j-1}\\qquad(1\\le j\\le m)$$\nand the final numerical error\n$$e_{\\mathrm{fp}}:=\\widetilde r-r_m.$$\n\nEach error is measurable because finite sums and differences of measurable real-valued functions are measurable ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\nWhen the stages are present, $e_1$ may record data-sampling error, a later transition may record a bootstrap or permutation approximation, a discretized target may record numerical-model bias, and a finite simulation may record computation-randomization error. The labels describe the declared adjacent references; they do not by themselves assert that errors are independent, centered, unbiased, or even random. If a stage is absent, omit it or set its two adjacent references equal. If no floating-point computation is involved, set $\\widetilde r=r_m$.\n\nFor a probability statement about these errors, the required joint probability law and any conditioning convention must also be specified. For example, fixing the observed data and varying independent randomizations concerns computation error conditional on those data; it does not include variation across new data samples. A deterministic quadrature rule has no replicate-based error estimate unless an actual randomization is added. Any numerical roundoff bound must state its arithmetic and normal-range hypotheses.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pathwise-error-ledger-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $\\theta=r_0,r_1,\\ldots,r_m,\\widetilde r$ be the finite scalar reference chain and returned value of [[def-statistical-and-computational-error-ledger]], with $m\\ge0$. Then, pointwise,\n$$\\widetilde r-\\theta=\\sum_{j=1}^{m}(r_j-r_{j-1})+(\\widetilde r-r_m),$$\nand consequently\n$$|\\widetilde r-\\theta|\\le\\sum_{j=1}^{m}|r_j-r_{j-1}|+|\\widetilde r-r_m|.$$\nThe sum is empty when $m=0$. No independence, unbiasedness, or distributional assumption is needed.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The exact dot product is $10^{16}+1-(10^{16}-2)=3$, and each product by a component of $y$ is exact.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [A1], the first rounded partial sum is $\\operatorname{fl}(10^{16}+1)=10^{16}$; the next exact sum is $10^{16}-(10^{16}-2)=2$, which is represented exactly. The exact intermediate sums are $10^{16}+1$ and $2$, and the rounded partial sums are $10^{16}$ and $2$. Together with the exact products of magnitudes $10^{16},1,10^{16}-2$, all lie between the binary64 smallest and largest normal magnitudes stated in [F2].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Here $3u<1$, $\\gamma_3=3/(2^{53}-3)$, and $\\sum_j|x_jy_j|=19999999999999999$. The bound is $3(19999999999999999)/(2^{53}-3)>1$, since its numerator exceeds its denominator; this is consistent with the computed error $|2-3|=1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The condition ratio is $19999999999999999/3$, while the relative forward error is $1/3$. In the ledger take $m=0$, $\\theta=3$, and $\\widetilde r=2$; [F3] gives the sole error $e_{\\mathrm{fp}}=-1$, and [F4] identifies it with the total error. No sampling or simulation stage occurs.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The vector length is n=3, satisfying n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives nonzero exact dot product 3, so the condition ratio is defined."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes n=3; n=1 is not part of this finite calculation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The exact dot product is nonzero but strongly cancellation-sensitive; the condition ratio is explicitly defined in the Example."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Every exact product and intermediate sum stays in the normal range; step 1.2 checks the computed path."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witnesses are selected; the vectors are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The binary64 example computes exact dot product 3 and rounded result 2, with absolute error one within the gamma bound; no condition-number equivalence is claimed. The forward-equivalence axis is therefore inapplicable."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The binary64 example computes exact dot product 3 and rounded result 2, with absolute error one within the gamma bound; no condition-number equivalence is claimed. No reverse-equivalence conclusion is part of this claim."
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "exact-and-rounded-dot",
+          "claim": "The exact dot product is 3 and the left-to-right binary64 result is 2.",
+          "result": "Steps 1.1-1.2 calculate the exact sum and tie-to-even rounding."
+        },
+        {
+          "id": "normal-range",
+          "claim": "Products and exact/rounded intermediate sums have magnitudes 10^16, 1, 10^16-2, 10^16+1, and 2, all normal in binary64.",
+          "result": "Step 1.2 checks each operation against the stated normal range."
+        },
+        {
+          "id": "gamma-bound",
+          "claim": "The absolute bound is 3(19999999999999999)/(2^53-3)>1, exceeding the actual absolute error 1.",
+          "result": "Step 2.1 evaluates gamma_3 and compares exact integers."
+        },
+        {
+          "id": "conditioning-ratio",
+          "claim": "kappa=19999999999999999/3 and relative forward error is 1/3.",
+          "result": "Step 3.1 divides the exact component sum by the exact result."
+        }
+      ]
+    },
+    "ex-correlated-error-components": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-error-ledger-mse-covariance-identity",
+          "source_section": "Statement",
+          "quote": "Let $E_1,\\ldots,E_m$ be square-integrable real random variables on one probability space, where $m\\ge1$. Write $b_j=\\mathbb E E_j$. Then\n$$\\mathbb E\\left[\\left(\\sum_{j=1}^{m}E_j\\right)^2\\right]=\\left(\\sum_{j=1}^{m}b_j\\right)^2+\\sum_{j=1}^{m}\\operatorname{Var}(E_j)+2\\sum_{1\\le j<k\\le m}\\operatorname{Cov}(E_j,E_k).$$\nThe correction to the sum of component variances is exactly $(\\sum_j b_j)^2+2\\sum_{j<k}\\operatorname{Cov}(E_j,E_k)$. Thus the mean square equals the sum of component variances exactly when this combined correction is zero. In particular, if the total bias is zero, pairwise independence suffices.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-statistical-and-computational-error-ledger",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space as in [[def-probability-measure]], let $\\theta\\in\\mathbb R$ be a fixed target, and let $m\\in\\mathbb N\\cup\\{0\\}$. Take $r_1,\\ldots,r_m$ and $\\widetilde r$ to be real random variables on this space, meaning measurable maps $(\\Omega,\\mathcal F)\\to(\\mathbb R,\\mathcal B(\\mathbb R))$ as in [[def-random-element-and-real-random-variable]]. Set $r_0(\\omega):=\\theta$ for every $\\omega\\in\\Omega$. Deterministic values are included by using a one-point probability space. The reference chain $r_0,r_1,\\ldots,r_m$ must put every quantity on the same scale and state which ideal analysis stage each transition represents. Define the signed stage errors pointwise by\n$$e_j:=r_j-r_{j-1}\\qquad(1\\le j\\le m)$$\nand the final numerical error\n$$e_{\\mathrm{fp}}:=\\widetilde r-r_m.$$\n\nEach error is measurable because finite sums and differences of measurable real-valued functions are measurable ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\nWhen the stages are present, $e_1$ may record data-sampling error, a later transition may record a bootstrap or permutation approximation, a discretized target may record numerical-model bias, and a finite simulation may record computation-randomization error. The labels describe the declared adjacent references; they do not by themselves assert that errors are independent, centered, unbiased, or even random. If a stage is absent, omit it or set its two adjacent references equal. If no floating-point computation is involved, set $\\widetilde r=r_m$.\n\nFor a probability statement about these errors, the required joint probability law and any conditioning convention must also be specified. For example, fixing the observed data and varying independent randomizations concerns computation error conditional on those data; it does not include variation across new data samples. A deterministic quadrature rule has no replicate-based error estimate unless an actual randomization is added. Any numerical roundoff bound must state its arithmetic and normal-range hypotheses.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set the first reference to $0$, the next to $U$, and the returned value to $U+V$; by [F2] the two signed stage errors are exactly $U$ and $V$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since $U$ equals $-1$ or $1$ with equal probability and $V=U$, $\\mathbb E U=\\mathbb E V=0$ and $\\operatorname{Var}(U)=\\operatorname{Var}(V)=1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $V=U$, $\\operatorname{Cov}(U,V)=\\mathbb E[UV]=1$ and $\\mathbb E[(U+V)^2]=4$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "[F1] gives the same value, $1+1+2(1)=4$, whereas adding only the two component variances gives $2$; the omitted covariance term changes the result.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has two error components and does not use an empty list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement permits zero component variables, but this Example uses Rademacher components of variance one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example requires two components to exhibit a covariance term."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "V=U is the perfect-correlation boundary; step 2.1 computes its nonzero covariance exactly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two-point law is explicitly listed and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The verification proves no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The Rademacher errors U and V=U have squared sum expectation four but variance-only sum two; their covariance supplies the missing term without a general equivalence assertion. The forward-equivalence axis is therefore inapplicable."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The verification proves no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The Rademacher errors U and V=U have squared sum expectation four but variance-only sum two; their covariance supplies the missing term without a general equivalence assertion. No reverse-equivalence conclusion is part of this claim."
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-point-errors",
+          "claim": "For V=U with U equally likely +/-1, each component is centered with variance 1, covariance is 1, and E[(U+V)^2]=4.",
+          "result": "Steps 1.2 and 2.1 enumerate both outcomes."
+        },
+        {
+          "id": "variance-only-sum",
+          "claim": "The component variance sum is 2, while the covariance identity gives 4.",
+          "result": "Step 3.1 substitutes the finite values into the theorem."
+        }
+      ]
+    }
+  }
+}

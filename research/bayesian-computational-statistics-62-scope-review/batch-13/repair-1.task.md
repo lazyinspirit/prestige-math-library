@@ -1,0 +1,15 @@
+# Batch 13: repair 1
+
+Run: bayesian-computational-statistics-62
+Batch: 13
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: parametric-bernstein-von-mises-and-misspecification, parametric-bernstein-von-mises-and-misspecification-examples
+Items: lem-local-lipschitz-class-empirical-process-bound, thm-lan-implies-total-variation-bvm, cor-qmd-ac-component-lan-to-bvm, thm-misspecified-iid-lan-under-kv-smoothness, cor-misspecified-iid-bvm-under-kv-regularity, thm-misspecified-mle-sandwich-expansion, ex-regular-normal-model-bvm, ex-normal-working-model-misspecified-coverage, ex-boundary-normal-mean-truncated-posterior
+Consolidated findings: [{"id":"thm-misspecified-mle-sandwich-expansion","type":"local","reason":"The optional clause names only the posterior-rate contraction premise, but proof step 6.1 applies the LAN-to-BvM theorem, which also requires a proper prior with a continuous, strictly positive density near θ*, and finite positive posterior evidence. Add those conditions to the optional clause. The cited Theorem 2.1 has the same prior and contraction requirements: [Kleijn–van der Vaart](https://pure.uva.nl/ws/files/1850322/114737_376240.pdf)."}]
+Authorized source files: ["items/lem-local-lipschitz-class-empirical-process-bound.md","items/thm-lan-implies-total-variation-bvm.md","items/cor-qmd-ac-component-lan-to-bvm.md","items/thm-misspecified-iid-lan-under-kv-smoothness.md","items/cor-misspecified-iid-bvm-under-kv-regularity.md","items/thm-misspecified-mle-sandwich-expansion.md","items/ex-regular-normal-model-bvm.md","items/ex-normal-working-model-misspecified-coverage.md","items/ex-boundary-normal-mean-truncated-posterior.md","library/bayesian-computational-statistics/parametric-bernstein-von-mises-and-misspecification.md","library/bayesian-computational-statistics/parametric-bernstein-von-mises-and-misspecification-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

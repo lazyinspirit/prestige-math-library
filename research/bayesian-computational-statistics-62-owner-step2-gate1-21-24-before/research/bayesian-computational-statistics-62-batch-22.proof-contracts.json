@@ -1,0 +1,1822 @@
+{
+  "version": 1,
+  "scope": [
+    "def-generalized-bayes-loss-update-and-temperature",
+    "lem-generalized-bayes-loss-update-normalizes-to-a-probability-measure",
+    "thm-generalized-bayes-loss-update-is-the-unique-kl-minimizer",
+    "thm-sequential-generalized-bayes-updates-are-coherent",
+    "rem-generalized-bayes-temperature-calibration",
+    "ex-loss-update-can-have-infinite-normalizer",
+    "cex-temperature-generalized-bayes-credible-set-zero-coverage",
+    "ex-rescaling-loss-changes-effective-temperature",
+    "ex-unit-temperature-likelihood-update"
+  ],
+  "contracts": {
+    "def-generalized-bayes-loss-update-and-temperature": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: a probability prior on the parameter space cannot exist when the parameter space is empty, since its total mass would be zero rather than one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the normalizer condition is strictly 0<Z<infinity; the final sentence says no update is supplied when Z is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for a singleton parameter space, the same integral formula applies and normalizes the prior point mass whenever the stated normalizer is finite positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: if the loss section is constant, its exponential density is constant relative to the prior, so the normalized formula returns the prior; no nonconstant-loss hypothesis is imposed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: w>0 and 0<Z<infinity are strict conditions, so zero temperature and zero or infinite normalizers are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the update is defined directly by a fixed integral and normalization; it selects no element from a family and invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: no biconditional claim or two-direction proof is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: no biconditional claim or two-direction proof is asserted."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-generalized-bayes-loss-update-normalizes-to-a-probability-measure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-generalized-bayes-loss-update-and-temperature",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a standard Borel parameter space\n([[def-standard-borel-space]]). Let $\\mathsf X$ be a set of possible observations,\nand let $\\ell:\\Theta\\times\\mathsf X\\to\\mathbb R$ be a **loss** whose section\n$\\ell_x(\\theta):=\\ell(\\theta,x)$ is $\\mathcal T$-measurable for every\n$x\\in\\mathsf X$. A **prior** is a probability measure $\\pi$ on\n$(\\Theta,\\mathcal T)$ ([[def-probability-measure]]). A **temperature** is a\nfixed scalar $w>0$ that multiplies the observed loss.\n\nFor $x\\in\\mathsf X$, define the normalizer\n$$Z_w(\\pi,x):=\\int_\\Theta \\exp\\{-w\\ell_x(\\theta)\\}\\,\\pi(d\\theta).$$\nThe integrand is measurable by continuity of the exponential and composition\nof measurable maps ([[thm-exponential-is-strictly-increasing]],\n[[thm-composition-with-borel-functions-preserves-measurability]]). When\n$0<Z_w(\\pi,x)<\\infty$, the **generalized Bayes loss update** (or **Gibbs loss\nupdate**) is the set function\n$$G_{w,\\pi,x}(A):=\\frac{1}{Z_w(\\pi,x)}\\int_A\\exp\\{-w\\ell_x(\\theta)\\}\\,\\pi(d\\theta),\\qquad A\\in\\mathcal T.$$\nIt is a positive scalar multiple of the measure with density\n$\\exp\\{-w\\ell_x\\}$ relative to $\\pi$\n([[def-measure-with-density]]).\nIf the normalizer is zero or infinite, this definition supplies no update.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nonnegative-weighted-sums-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $(\\mu_k)$ be measures on one measurable space and let $c_k\\in[0,+\\infty]$. Each scalar multiple $c_k\\mu_k$, defined by the zero, finite-positive, and positive-infinity branches of [[def-nonnegative-weighted-sum-of-measures]], is a measure. Every finite or countable weighted sum $\\sum_kc_k\\mu_k$ is also a measure.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $f(\\theta)=e^{-w\\ell_x(\\theta)}$ and $\\mu(A)=\\int_A f\\,d\\pi$. By [F1]–[F2], $\\mu$ is the measure with density $f$ relative to $\\pi$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $Z_w(\\pi,x)>0$, [F1] gives $G_{w,\\pi,x}=Z_w(\\pi,x)^{-1}\\mu$, which is a measure by [F3]. Also [F4] gives $$\\mu(\\Theta)=\\int_\\Theta 1\\,d(f\\,d\\pi)=\\int_\\Theta f\\,d\\pi=Z_w(\\pi,x),$$ so $G_{w,\\pi,x}(\\Theta)=1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F5], the measure in step 2.1 with total mass one is a probability measure.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: a probability prior on an empty parameter space cannot have total mass one, so the hypotheses exclude that case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the hypothesis requires Z>0; the definition supplies no update when Z=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 computes G(Theta)=1 directly, which also covers a one-point measurable space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 use only a nonnegative density and its finite positive integral; a constant density is admitted without a nondegeneracy condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: both endpoints are excluded by 0<Z<infinity; the proof uses division only by this finite positive normalizer."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1–3.1 construct the measure by density scaling and check its mass directly; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional claim or two-direction proof is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional claim or two-direction proof is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-point density normalization",
+          "method": "exact finite calculation",
+          "input": {
+            "prior": [
+              "1/3",
+              "2/3"
+            ],
+            "weights": [
+              "1",
+              "3"
+            ]
+          },
+          "calculation": "Z=(1/3)*1+(2/3)*3=7/3. The updated masses are (1/3)/(7/3)=1/7 and 2/(7/3)=6/7; they sum to 1.",
+          "expected": {
+            "normalizer": "7/3",
+            "updated_masses": [
+              "1/7",
+              "6/7"
+            ],
+            "total_mass": "1"
+          }
+        }
+      ]
+    },
+    "thm-generalized-bayes-loss-update-is-the-unique-kl-minimizer": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-generalized-bayes-loss-update-and-temperature",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a standard Borel parameter space\n([[def-standard-borel-space]]). Let $\\mathsf X$ be a set of possible observations,\nand let $\\ell:\\Theta\\times\\mathsf X\\to\\mathbb R$ be a **loss** whose section\n$\\ell_x(\\theta):=\\ell(\\theta,x)$ is $\\mathcal T$-measurable for every\n$x\\in\\mathsf X$. A **prior** is a probability measure $\\pi$ on\n$(\\Theta,\\mathcal T)$ ([[def-probability-measure]]). A **temperature** is a\nfixed scalar $w>0$ that multiplies the observed loss.\n\nFor $x\\in\\mathsf X$, define the normalizer\n$$Z_w(\\pi,x):=\\int_\\Theta \\exp\\{-w\\ell_x(\\theta)\\}\\,\\pi(d\\theta).$$\nThe integrand is measurable by continuity of the exponential and composition\nof measurable maps ([[thm-exponential-is-strictly-increasing]],\n[[thm-composition-with-borel-functions-preserves-measurability]]). When\n$0<Z_w(\\pi,x)<\\infty$, the **generalized Bayes loss update** (or **Gibbs loss\nupdate**) is the set function\n$$G_{w,\\pi,x}(A):=\\frac{1}{Z_w(\\pi,x)}\\int_A\\exp\\{-w\\ell_x(\\theta)\\}\\,\\pi(d\\theta),\\qquad A\\in\\mathcal T.$$\nIt is a positive scalar multiple of the measure with density\n$\\exp\\{-w\\ell_x\\}$ relative to $\\pi$\n([[def-measure-with-density]]).\nIf the normalizer is zero or infinite, this definition supplies no update.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-generalized-bayes-loss-update-normalizes-to-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "Let $G_{w,\\pi,x}$ be the update of\n[[def-generalized-bayes-loss-update-and-temperature]], with prior probability\n$\\pi$ and normalizer $0<Z_w(\\pi,x)<\\infty$. Then $G_{w,\\pi,x}$ is a\nprobability measure on $(\\Theta,\\mathcal T)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-radon-nikodym-derivative",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a sigma-finite positive measure.\n\n1. If $\\nu$ is a signed measure satisfying the hypothesis of [[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]] and $\\nu\\ll\\mu$, the **Radon-Nikodym derivative** $d\\nu/d\\mu$ is the $\\mu$-almost-everywhere equivalence class of measurable real-valued functions $f$ satisfying the measurable-set integral formula in that theorem.\n2. Assuming the Axiom of Choice ([[def-axiom-of-choice]]), if $\\nu$ is a finite complex measure and $\\nu\\ll\\mu$, the **Radon-Nikodym derivative** $d\\nu/d\\mu$ is the $\\mu$-almost-everywhere equivalence class of complex $L^1(\\mu)$ functions $h$ satisfying\n   $$\\nu(E)=\\int_E h\\,d\\mu\\qquad(E\\in\\mathcal A),$$\n   as given by [[cor-finite-complex-measures-admit-integrable-radon-nikodym-densities]].\n\nIn both cases the derivative is not a distinguished pointwise function: it is determined only up to $\\mu$-almost-everywhere equality in the sense of [[def-measure-null-set-and-almost-everywhere]].",
+          "uses": [
+            "3.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-absolutely-continuous-with-respect-to-a-positive-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure or a complex measure on the same measurable space $(X,\\mathcal A)$. We say that $\\nu$ is **absolutely continuous with respect to $\\mu$**, and write\n$$\\nu\\ll\\mu,$$\nif every measurable $\\mu$-null set is also $\\nu$-null:\n$$\\mu(E)=0\\qquad\\Longrightarrow\\qquad \\nu(E)=0\\qquad(E\\in\\mathcal A).$$\nBecause every measurable subset of a $\\mu$-null set is again $\\mu$-null, this is equivalent to requiring $\\nu(F)=0$ for every measurable $F\\subseteq E$ whenever $\\mu(E)=0$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-radon-nikodym-derivatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\lambda$ and $\\mu$ be sigma-finite positive measures and let $\\nu$ be a\nsigned measure or a finite complex measure on the same measurable space.\nAssume there is an increasing measurable exhaustion $(X_n)_{n\\in\\mathbb N}$\nwith $\\bigcup_nX_n=X$, $\\lambda(X_n)<+\\infty$, $\\mu(X_n)<+\\infty$, and\n$|\\nu|(X_n)<+\\infty$ for every $n$, and assume $\\nu\\ll\\mu\\ll\\lambda$. Then\n$$\\frac{d\\nu}{d\\lambda}=\\frac{d\\nu}{d\\mu}\\frac{d\\mu}{d\\lambda}\\qquad\\lambda\\text{-almost everywhere.}$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space and let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $g(\\theta)=e^{-w\\ell_x(\\theta)}/Z$. By [F1]–[F2], $q$ is the probability measure with density $g$ relative to $\\pi$. Since $\\ell_x$ is real-valued, [F7] gives $g>0$ everywhere.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $t>0$, put $u(t)=\\log t-1+t^{-1}$. By [F10], $u'(t)=(t-1)/t^2$. If $0<t<1$, the mean value theorem on $[t,1]$ gives $u(t)>u(1)=0$; if $t>1$, it on $[1,t]$ gives $u(t)>u(1)=0$. Thus $\\log t\\ge1-t^{-1}$. Multiplying by $t>0$ gives $t\\log t\\ge t-1$, with equality only at $t=1$. At $t=0$ the inequality also holds under $0\\log0:=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F10",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The update is admissible: $q\\ll\\pi$ by [F1], and [F4], [F9] give $$D(q\\|\\pi)=\\int\\log g\\,dq=-w\\int\\ell_x\\,dq-\\log Z,$$ which is finite by the loss-integrability hypothesis and $0<Z<\\infty$. Thus $q\\in\\mathcal V$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F9",
+            "A1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Fix $\\nu\\in\\mathcal V$. If $q(A)=0$, then for every integer $m\\ge1$, [F8] and [F1] give $$0\\le m^{-1}\\pi(A\\cap\\{g\\ge m^{-1}\\})\\le\\int_Ag\\,d\\pi=q(A)=0.$$ Let $A_1=A\\cap\\{g\\ge1\\}$ and, for $m\\ge2$, let $A_m=(A\\cap\\{g\\ge m^{-1}\\})\\setminus(A\\cap\\{g\\ge(m-1)^{-1}\\})$. These sets are disjoint, each is $\\pi$-null by the displayed bound, and their union is $A$ because $g>0$ everywhere. Countable additivity [F15] therefore gives $\\pi(A)=0$. Hence $\\pi\\ll q$, and $\\nu\\ll q$ follows from $\\nu\\ll\\pi$ and [F5].",
+          "step": "2.2",
+          "inputs": [
+            "F8",
+            "F1",
+            "F15",
+            "F5",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The measures $\\nu,q,\\pi$ are finite probabilities. The constant exhaustion $X_m=\\Theta$ is therefore a common finite exhaustion, so [A1] and [F6] apply to $\\nu\\ll q\\ll\\pi$. With $r=d\\nu/d\\pi$ and $h=d\\nu/dq$, the chain rule gives $r=hg$ $\\pi$-almost everywhere.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F6",
+            "F1",
+            "F2",
+            "F3",
+            "step 2.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The Radon–Nikodym formula [F3] gives $\\nu(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,d\\pi=0$ and likewise $\\nu(\\{h=0\\})=0$, so $r,h>0$ $\\nu$-almost everywhere. Since $D(\\nu\\|\\pi)<\\infty$ and the negative part of the log-density integral is finite by [F4], $\\log r$ is $\\nu$-integrable; $\\log g$ is $\\nu$-integrable by $\\int|\\ell_x|\\,d\\nu<\\infty$. Using $r=hg$ from step 3.1, [F9], and $\\log g=-w\\ell_x-\\log Z$, we obtain $$D(\\nu\\|q)=\\int\\log h\\,d\\nu =D(\\nu\\|\\pi)+w\\int\\ell_x\\,d\\nu+\\log Z.$$ The right-hand side is finite, so $D(\\nu\\|q)<\\infty$.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 3.1",
+            "F9",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For $h=d\\nu/dq$, the density form of [F4] gives $$D(\\nu\\|q)=\\int\\log h\\,d\\nu=\\int h\\log h\\,dq,$$ with $0\\log0:=0$. The integral is finite by step 4.1.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "step 4.1",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Apply step 1.2 to $h$ and integrate under $q$. Since $\\int h\\,dq=\\nu(\\Theta)=1$ and $q(\\Theta)=1$, step 5.1 yields $$D(\\nu\\|q)=\\int h\\log h\\,dq\\ge\\int(h-1)\\,dq=0.$$ If equality holds, the nonnegative function $h\\log h-h+1$ has integral zero, so [F13] makes it zero $q$-almost everywhere. Step 1.2 then gives $h=1$ $q$-almost everywhere, and the Radon–Nikodym formula [F3] implies $\\nu=q$. Conversely, if $\\nu=q$, its Radon–Nikodym density relative to itself is $h=1$ $q$-almost everywhere, so [F4] and [F9] give $D(q\\|q)=\\int 1\\log 1\\,dq=0$. Thus equality holds exactly when $\\nu=q$.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.2",
+            "step 5.1",
+            "F13",
+            "F3",
+            "F4",
+            "F9",
+            "A1",
+            "F14",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "By step 4.1 and [F12], $$J_w(\\nu)=D(\\nu\\|q)-\\log Z\\ge-\\log Z.$$ Step 2.1 gives $J_w(q)=-\\log Z$, and step 6.1 shows equality is possible only for $\\nu=q$. Therefore $q$ is the unique minimizer and $J_w(\\nu)-J_w(q)=D(\\nu\\|q)$.",
+          "step": "7.1",
+          "inputs": [
+            "step 4.1",
+            "F12",
+            "step 2.1",
+            "step 6.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the prior is a probability measure, which is impossible on an empty parameter space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 6.1 proves the KL gap is nonnegative and is zero exactly at the update."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: if Theta is a singleton, its only probability is the update; steps 1.1–7.1 remain valid and the minimizer is unique."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: constant real loss sections satisfy the hypotheses; the density in step 1.1 is constant relative to pi and the same KL equality argument gives the unique minimizer."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Z is required to be finite and strictly positive and q must have finite absolute loss expectation; no zero/infinite-normalizer endpoint is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Fact A1 and step 3.1 identify the exact AC use in the supplied RN/KL interfaces; the remaining calculations use no additional selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 6.1 proves that D(nu||q)=0 implies h=1 q-a.e. and hence nu=q."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 6.1 also proves that nu=q gives h=1 q-a.e. and D(q||q)=0 by the KL definition."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-sequential-generalized-bayes-updates-are-coherent": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-generalized-bayes-loss-update-and-temperature",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a standard Borel parameter space\n([[def-standard-borel-space]]). Let $\\mathsf X$ be a set of possible observations,\nand let $\\ell:\\Theta\\times\\mathsf X\\to\\mathbb R$ be a **loss** whose section\n$\\ell_x(\\theta):=\\ell(\\theta,x)$ is $\\mathcal T$-measurable for every\n$x\\in\\mathsf X$. A **prior** is a probability measure $\\pi$ on\n$(\\Theta,\\mathcal T)$ ([[def-probability-measure]]). A **temperature** is a\nfixed scalar $w>0$ that multiplies the observed loss.\n\nFor $x\\in\\mathsf X$, define the normalizer\n$$Z_w(\\pi,x):=\\int_\\Theta \\exp\\{-w\\ell_x(\\theta)\\}\\,\\pi(d\\theta).$$\nThe integrand is measurable by continuity of the exponential and composition\nof measurable maps ([[thm-exponential-is-strictly-increasing]],\n[[thm-composition-with-borel-functions-preserves-measurability]]). When\n$0<Z_w(\\pi,x)<\\infty$, the **generalized Bayes loss update** (or **Gibbs loss\nupdate**) is the set function\n$$G_{w,\\pi,x}(A):=\\frac{1}{Z_w(\\pi,x)}\\int_A\\exp\\{-w\\ell_x(\\theta)\\}\\,\\pi(d\\theta),\\qquad A\\in\\mathcal T.$$\nIt is a positive scalar multiple of the measure with density\n$\\exp\\{-w\\ell_x\\}$ relative to $\\pi$\n([[def-measure-with-density]]).\nIf the normalizer is zero or infinite, this definition supplies no update.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-generalized-bayes-loss-update-normalizes-to-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "Let $G_{w,\\pi,x}$ be the update of\n[[def-generalized-bayes-loss-update-and-temperature]], with prior probability\n$\\pi$ and normalizer $0<Z_w(\\pi,x)<\\infty$. Then $G_{w,\\pi,x}$ is a\nprobability measure on $(\\Theta,\\mathcal T)$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $n=0$, the cumulative loss is the empty sum zero. In the power series definition [F9] at zero, the zeroth term is $1$ and every positive-degree term vanishes, so its exponential weight is $1$. By [F4], $\\int 1\\,d\\pi_0=\\pi_0(\\Theta)=1$. Thus the empty normalizer is the empty product one and the displayed formula is $\\pi_0(A)=\\pi_0(A)$.",
+          "step": "1.1",
+          "inputs": [
+            "F9",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $n=1$, the claim is exactly the update definition [F1], with $z_1=\\int e^{-w\\ell_1}\\,d\\pi_0$. This normalizer is finite positive by hypothesis, so the update is a probability by [F2].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For $n\\ge2$, suppose the formula holds at $n-1$, with cumulative normalizer $c_{n-1}=\\prod_{i=1}^{n-1}z_i$ and density $f_{n-1}(\\theta)=e^{-w\\sum_{i=1}^{n-1}\\ell_i(\\theta)}$ relative to $\\pi_0$. The finite cumulative loss is measurable by repeated use of [F7], so [F1] gives measurability of $f_{n-1}$ and of $e^{-w\\ell_n}$. Algebra and [F8] factor the cumulative exponential into $f_{n-1}e^{-w\\ell_n}$. Then [F3] gives $$z_n=\\int e^{-w\\ell_n}\\,d\\pi_{n-1} =c_{n-1}^{-1}\\int e^{-w\\sum_{i=1}^{n}\\ell_i}\\,d\\pi_0.$$ Thus the cumulative normalizer is $c_n=c_{n-1}z_n=\\prod_{i=1}^n z_i$, which is finite and positive.",
+          "step": "1.3",
+          "inputs": [
+            "F7",
+            "F1",
+            "F8",
+            "F3",
+            "F5",
+            "given",
+            "ih"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], [F3], and the same factorization [F8], for every measurable $A$, $$\\pi_n(A)=z_n^{-1}\\int_Ae^{-w\\ell_n}\\,d\\pi_{n-1} =c_n^{-1}\\int_Ae^{-w\\sum_{i=1}^{n}\\ell_i}\\,d\\pi_0.$$ This proves the induction step.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F8",
+            "F7",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Define $Q(m)$ to be the claimed formula at $n=m+1$. Step 1.2 proves $Q(0)$. For any $m\\in\\mathbb N$, set $n=m+2\\ge2$; steps 1.3–2.1 prove that the formula at $n-1=m+1$ implies it at $n=m+2$, hence $Q(m)$ implies $Q(m+1)$. Therefore [F6] gives the formula for every $n\\ge1$; step 1.1 covers $n=0$. The initial $\\pi_0$ is a probability by [F4], and every later $\\pi_i$ is a probability by [F2]. The proof uses only fixed-temperature updates and the stated normalizers.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "F6",
+            "step 1.1",
+            "F4",
+            "F2",
+            "discharge-induction: step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: pi_0 is a probability measure, so an empty parameter space cannot satisfy the hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: w and each sequential normalizer z_i are strictly positive; zero-temperature and zero-normalizer cases are excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2 give the n=0 and n=1 boundary cases explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.3–2.1 use only finite sums and exponential factorization; constant or zero losses are included in those identities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2 handle the finite-sequence endpoint n=0 and the base case n=1; steps 1.3–3.1 extend to all later finite n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1–3.1 use finite induction, integrals and algebra, with no choice of a point from a general family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: sequential equality is asserted, but no biconditional or reverse direction is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: sequential equality is asserted, but no biconditional or reverse direction is stated."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-step density factorization",
+          "method": "symbolic finite-step check",
+          "input": {
+            "losses": [
+              "ell_1",
+              "ell_2"
+            ],
+            "temperature": "w",
+            "sequential_normalizers": [
+              "z_1",
+              "z_2"
+            ]
+          },
+          "calculation": "After step 1 the density is exp(-w ell_1)/z_1. Updating by exp(-w ell_2)/z_2 gives exp(-w(ell_1+ell_2))/(z_1 z_2), matching the cumulative formula and normalizer product.",
+          "expected": {
+            "cumulative_weight": "exp(-w*(ell_1+ell_2))",
+            "normalizer": "z_1*z_2"
+          }
+        }
+      ]
+    },
+    "rem-generalized-bayes-temperature-calibration": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Remark: it records calibration proposals and makes no theorem about a parameter-space boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the underlying update is restricted to w>0; the remark makes no zero-temperature claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Remark: no observation-count or one-dimensional tuning parameter is quantified."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Remark: it explicitly limits its statements to proposals and cautions, without a theorem for degenerate data or losses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Remark: it does not define a confidence interval or assert a limiting calibration result at a nominal endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Remark: it summarizes elicitation proposals and contains no proof or selection argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Remark: no biconditional claim is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Remark: no biconditional claim is made."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-loss-update-can-have-infinite-normalizer": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-generalized-bayes-loss-update-and-temperature",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a standard Borel parameter space\n([[def-standard-borel-space]]). Let $\\mathsf X$ be a set of possible observations,\nand let $\\ell:\\Theta\\times\\mathsf X\\to\\mathbb R$ be a **loss** whose section\n$\\ell_x(\\theta):=\\ell(\\theta,x)$ is $\\mathcal T$-measurable for every\n$x\\in\\mathsf X$. A **prior** is a probability measure $\\pi$ on\n$(\\Theta,\\mathcal T)$ ([[def-probability-measure]]). A **temperature** is a\nfixed scalar $w>0$ that multiplies the observed loss.\n\nFor $x\\in\\mathsf X$, define the normalizer\n$$Z_w(\\pi,x):=\\int_\\Theta \\exp\\{-w\\ell_x(\\theta)\\}\\,\\pi(d\\theta).$$\nThe integrand is measurable by continuity of the exponential and composition\nof measurable maps ([[thm-exponential-is-strictly-increasing]],\n[[thm-composition-with-borel-functions-preserves-measurability]]). When\n$0<Z_w(\\pi,x)<\\infty$, the **generalized Bayes loss update** (or **Gibbs loss\nupdate**) is the set function\n$$G_{w,\\pi,x}(A):=\\frac{1}{Z_w(\\pi,x)}\\int_A\\exp\\{-w\\ell_x(\\theta)\\}\\,\\pi(d\\theta),\\qquad A\\in\\mathcal T.$$\nIt is a positive scalar multiple of the measure with density\n$\\exp\\{-w\\ell_x\\}$ relative to $\\pi$\n([[def-measure-with-density]]).\nIf the normalizer is zero or infinite, this definition supplies no update.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-countable-discrete-space-is-standard-borel",
+          "source_section": "Statement",
+          "quote": "If $S$ is a nonempty at-most-countable set, then $(S,\\mathcal P(S))$ is a\nstandard Borel space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable",
+          "source_section": "Definition",
+          "quote": "Recall that a natural number is a von Neumann natural\n([[def-natural-numbers]]): $0 = \\varnothing$ and $\\sigma(n) = n \\cup \\{n\\}$, so\nthat\n\n$$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\} = \\{0, 1, \\dots, n-1\\}$$\n\nis itself the set of its predecessors. Here $<$ is the order of\n[[def-nat-order]], which is defined additively, so the displayed identity is a\ntheorem and not a convention: it is [[lem-nat-order-is-membership]], proved\nimmediately above. Let $A$ be a set, and let $\\approx$ be equinumerosity\n([[def-equinumerous]]).\n\n- $A$ is **finite** if $A \\approx n$ for some $n \\in \\mathbb{N}$.\n- $A$ is **countably infinite** if $A \\approx \\mathbb{N}$.\n- $A$ is **at most countable** if it is finite or countably infinite.\n- $A$ is **uncountable** if it is not at most countable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nonnegative-weighted-sums-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $(\\mu_k)$ be measures on one measurable space and let $c_k\\in[0,+\\infty]$. Each scalar multiple $c_k\\mu_k$, defined by the zero, finite-positive, and positive-infinity branches of [[def-nonnegative-weighted-sum-of-measures]], is a measure. Every finite or countable weighted sum $\\sum_kc_k\\mu_k$ is also a measure.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "Let $a \\in \\mathbb{R}$, where $\\mathbb{R}$ is the ambient ordered field\n([[def-ordered-field]], [[def-field]]).\n\n**Natural exponents.** By the recursion theorem ([[thm-recursion]]) applied to\nthe set $\\mathbb{R}$, the starting element $1$ and the function\n$f(x) = x \\cdot a$, there is a unique function $\\mathbb{N} \\to \\mathbb{R}$,\nwritten $n \\mapsto a^n$, with\n\n$$a^0 = 1, \\qquad a^{n+1} = a^n \\cdot a \\quad (n \\in \\mathbb{N}).$$\n\nThus $a^1 = a$, $a^2 = a \\cdot a$, and so on. Note that this is defined for\n**every** $a$, including $a = 0$.\n\n**Negative exponents.** If $a \\ne 0$ and $n \\in \\mathbb{N}$ with $n \\ge 1$, set\n\n$$a^{-n} := (a^n)^{-1}.$$\n\n**Why that is legitimate.** The right-hand side presupposes that $a^n$ is\ninvertible, that is, that $a^n \\ne 0$. This is a proof obligation and not an\nobservation, and it is discharged by claim 2 of [[lem-power-laws]]: for $a \\ne 0$\nin a field, $a^n \\ne 0$ for every $n \\in \\mathbb{N}$, proved there by induction on\n$n$ from the fact that a field has no zero divisors ([[lem-of-no-zero-divisors]]).\nThat lemma is a statement *about* the operation introduced here, so it depends on\nthis definition and is recorded in this item's `justified_by` rather than in its\n`deps` (SCHEMA §3). Given $a^n \\ne 0$, the value $(a^n)^{-1}$ is a single\nwell-determined element, because multiplicative inverses in a field are unique\n([[lem-of-inverse-unique]]).\n\n**Integer exponents.** Every integer $m$ ([[def-integers]]) is either\n$n$ or $-n$ for a unique natural $n$, where $n$ in these integer expressions denotes its image under the\nembedding $\\iota : \\mathbb{N} \\to \\mathbb{Z}$ ([[lem-nat-embeds-int]],\n[[def-int-operations]]). This too is a citation and not a slogan: the order on\n$\\mathbb{Z}$ is total ([[thm-int-ordered-ring]]), so $m \\ge 0$ or $m < 0$; the\nimage of $\\iota$ is exactly the set of nonnegative integers, and each of them is\n$n$ for a unique natural $n$ ([[lem-nat-embeds-int]]); and if $m < 0$ then\n$-m > 0$, by compatibility of the order with addition ([[thm-int-ordered-ring]]),\nso $-m = n$ and $m = -n$, with $n$ unique because $\\iota$ is\ninjective. The two clauses above therefore define $a^m$ for every\n$m \\in \\mathbb{Z}$ whenever $a \\ne 0$, and for every $m \\in \\mathbb{N}$ for\narbitrary $a$. The two exponent domains are disjoint: the natural clause\nhandles $m \\ge 0$, including $m = 0$, while the negative clause requires\n$n \\ge 1$ and therefore handles only $m < 0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-nonnegative-simple-measurable-function",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. A measurable function\n$s:X\\to[0,+\\infty)\\subseteq\\overline{\\mathbb R}$\n([[def-extended-real-valued-measurable-function]]) is a\n**nonnegative simple measurable function** when it has finite range.\n\nEquivalently, there are pairwise disjoint measurable sets\n$E_1,\\dots,E_m\\in\\mathcal A$ and coefficients $c_1,\\dots,c_m\\in[0,+\\infty)$\nsuch that\n$$s=\\sum_{j=1}^m c_j\\chi_{E_j}.$$\nAny such display is a **simple representation** of $s$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n([[def-extended-real-valued-measurable-function]]). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\n[[def-integral-of-a-nonnegative-simple-function]].\n\nThe set of admissible simple minorants is nonempty because it contains the zero\nfunction, which is simple ([[def-nonnegative-simple-measurable-function]]).",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "cor-cauchy-reals-lub-complete",
+          "source_section": "Statement",
+          "quote": "The Cauchy-sequence reals $\\mathbb{R}_C$ have the **least-upper-bound property**:\nevery nonempty $S \\subseteq \\mathbb{R}_C$ that is bounded above has a least upper\nbound $\\sup S \\in \\mathbb{R}_C$. Hence, together with [[thm-reals-ordered-field]],\n$\\mathbb{R}_C$ is a **complete ordered field** ([[def-complete-ordered-field]]).",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "def-ordered-field",
+          "source_section": "Definition",
+          "quote": "An **ordered field** is a field $F$ ([[def-field]]) together with a subset\n$P \\subseteq F$, the set of **positive** elements (the *positive cone*),\nsatisfying:\n\n- **(O1) Trichotomy.** For each $x \\in F$, exactly one of the following holds:\n  $x \\in P$, or $x = 0$, or $-x \\in P$.\n- **(O2) Closure.** If $x, y \\in P$ then $x + y \\in P$ and $x \\cdot y \\in P$.\n\nWe write $x > 0$ for $x \\in P$ (read \"$x$ is positive\"), and define the order by\n\n$$a < b \\;:\\Longleftrightarrow\\; b - a \\in P, \\qquad a \\le b \\;:\\Longleftrightarrow\\; a < b \\text{ or } a = b.$$\n\nThus $a > b$ means $b < a$, and $a \\ge b$ means $b \\le a$. An element $x$ with\n$-x \\in P$ (equivalently $x < 0$) is called **negative**.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F23",
+          "source": "cor-of-one-positive",
+          "source_section": "Statement",
+          "quote": "In any ordered field $F$ with positive cone $P$, the multiplicative identity\nsatisfies $0 < 1$; that is, $1 \\in P$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F24",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F25",
+          "source": "def-series",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field ([[def-real-numbers]]) and\na **sequence of reals** is a function $a : \\mathbb{N} \\to \\mathbb{R}$\n([[def-sequence]]), written $(a_k)$; recall that $\\mathbb{N}$ contains $0$.\n\n**Partial sums.** Let $(a_k)$ be a sequence of reals. Its **sequence of partial\nsums** is\n\n$$s_n \\;:=\\; \\sum_{k < n} a_k \\qquad (n \\in \\mathbb{N}),$$\n\nthe finite sum of [[def-finite-sum]]. In particular $s_0 = 0$, the empty sum, and\n$s_{n+1} = s_n + a_n$ for every $n$, those being exactly the two recursion clauses\nthat define the finite sum. Note that $s_n$ is the sum of the $n$ terms\n$a_0, \\dots, a_{n-1}$, so the index $n$ counts terms rather than naming the last\none.\n\n**Convergence, the sum, divergence.** The **series** of $(a_k)$, written\n$\\sum a_k$, **converges** when the sequence $(s_n)$ of partial sums converges\n([[def-real-limit]]), and then the **sum of the series** is\n\n$$\\sum_{k=0}^{\\infty} a_k \\;:=\\; \\lim_{n} s_n .$$\n\nThe series **diverges** when $(s_n)$ does not converge. A convergent sequence of\nreals has exactly one limit ([[lem-limit-unique]]), so the displayed symbol names\na single real number and nothing further has to be checked for it to be\nwell defined.\n\n**Series with a general starting index.** Let $m \\in \\mathbb{N}$ and let $a$ be a\nfunction on $\\{\\, k \\in \\mathbb{N} : k \\ge m \\,\\}$, which we call a **family from\n$m$** and write $(a_k)_{k \\ge m}$. The series\n\n$$\\sum_{k \\ge m} a_k$$\n\nis by definition the series of the sequence $b_j := a_{j + m}$,\n$j \\in \\mathbb{N}$, which is a genuine sequence of reals; it converges exactly\nwhen that series converges, and its sum is then written\n$\\sum_{k = m}^{\\infty} a_k$. Its partial sums are\n\n$$\\sum_{k=m}^{n-1} a_k \\;=\\; \\sum_{j < n-m} a_{m+j} \\qquad (n \\ge m),$$\n\nin the notation of [[def-finite-sum]], the value at $n = m$ being the empty sum\n$0$. A sequence on $\\mathbb{N}$ is the case $m = 0$, and the two readings of\n$\\sum a_k$ agree there, since $b_j = a_j$.\n\n**This clause is not a convenience.** Sequences in this library are functions on\n$\\mathbb{N}$ and $\\mathbb{N}$ contains $0$ ([[def-sequence]]), while many of the\nclassical series are built from expressions that are undefined at the index $0$:\n$1/k$, $1/k^{p}$ and $|a_k|^{1/k}$ all require $k \\ge 1$. Writing such a series as\n$\\sum_{k \\ge 1} a_k$ names an honest object, whereas writing it as a sequence on\n$\\mathbb{N}$ would require a value at an index where the defining expression has\nnone. Every statement on this page says which starting index it uses.\n\n**Tail series.** For $N \\in \\mathbb{N}$, the **$N$-th tail series** of\n$\\sum a_k$ is $\\sum_{k \\ge N} a_k$, that is the series of the $N$-th tail\n$a^{(N)}$ of [[def-sequence]], whose terms are $a^{(N)}_j = a_{j+N}$. The\n$0$-th tail series is the series itself.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F26",
+          "source": "thm-algebra-of-limits",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ and $(y_k)$ be sequences of reals ([[def-sequence]]) converging to\n$x$ and $y$ respectively ([[def-real-limit]]), and let $c \\in \\mathbb{R}$. Then\n\n$$x_k + y_k \\to x + y, \\qquad c\\,x_k \\to c\\,x, \\qquad x_k - y_k \\to x - y, \\qquad x_k y_k \\to x y,$$\n\nand if in addition $y \\ne 0$ and $y_k \\ne 0$ for every $k \\in \\mathbb{N}$, then\n\n$$\\frac{1}{y_k} \\to \\frac{1}{y} \\qquad \\text{and} \\qquad \\frac{x_k}{y_k} \\to \\frac{x}{y}.$$\n\nThe quotient case rests on an eventual lower bound for $|y_k|$, proved below\nrather than assumed: $|y_k| > |y|/2$ for all sufficiently large $k$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F27",
+          "source": "thm-nonnegative-series-bounded-partial-sums",
+          "source_section": "Statement",
+          "quote": "Let $(a_k)$ be a sequence of reals with $a_k \\ge 0$ for every $k \\in \\mathbb{N}$,\nlet $s_n = \\sum_{k<n} a_k$ be its partial sums and let\n$S = \\{\\, s_n : n \\in \\mathbb{N} \\,\\}$ be the range of $(s_n)$ ([[def-series]]).\nThen:\n\n1. $(s_n)$ is nondecreasing ([[def-monotone-sequence]]) and $s_n \\ge 0$ for every\n   $n$;\n2. $\\sum a_k$ converges **if and only if** $S$ is bounded above\n   ([[def-bounded-set]]), and in that case\n   $$\\sum_{k=0}^{\\infty} a_k \\;=\\; \\sup S ,$$\n   so in particular $s_n \\le \\sum_{k=0}^{\\infty} a_k$ for every $n$;\n3. if $S$ is not bounded above then $s_n \\to +\\infty$\n   ([[def-divergence-to-infinity]]) and $\\sum a_k$ diverges.\n\nThis is the theorem that makes the nonnegative theory work: for terms of one\nsign, convergence is a boundedness question and no candidate limit is ever\nneeded. Every comparison test on this page is an application of it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F28",
+          "source": "def-nonnegative-extended-series",
+          "source_section": "Definition",
+          "quote": "Let $a=(a_k)_{k\\in\\mathbb N}$ take values in $[0,+\\infty]\\subseteq\\overline{\\mathbb R}$ ([[def-extended-reals]]). Its **partial sums** are the unique sequence $(s_n)$ in $[0,+\\infty]$ satisfying\n\n$$s_0=0,\\qquad s_{n+1}=s_n+a_n.$$\n\nTo apply [[thm-recursion]] with a fixed successor function, use the state space $\\mathbb N\\times[0,+\\infty]$ and the self-map $T(n,s)=(n+1,s+a_n)$, starting from $(0,0)$. Recursion gives a unique state sequence; induction makes its first coordinate $n$, and its second coordinates are exactly the unique $(s_n)$ satisfying the displayed recurrence. Addition of two nonnegative extended reals is always defined, including when either is $+\\infty$. The sequence $(s_n)$ is nondecreasing, and its **nonnegative extended sum** is\n\n$$\\sum_{k=0}^{\\infty}a_k:=\\sup_{n\\in\\mathbb N}s_n\\in[0,+\\infty],$$\n\nwhose existence follows from completeness of the extended real line ([[lem-extended-reals-complete]]). More generally, for $m\\in\\mathbb N$,\n\n$$\\sum_{k\\ge m}a_k:=\\sum_{j=0}^{\\infty}a_{m+j}.$$\n\nFinite sums use the same recursion: $\\sum_{k<n}a_k=s_n$, so the empty sum at $n=0$ is $0$. A double sum such as $\\sum_i\\sum_j a_{ij}$ means that the inner nonnegative extended sum is formed first and the resulting nonnegative extended sequence is then summed.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F29",
+          "source": "def-nonnegative-weighted-sum-of-measures",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a measure and let $c\\in[0,+\\infty]$. Define the scalar set function $c\\mu$ by three disjoint branches:\n\n$$ (c\\mu)(E):=\\begin{cases}0,&c=0,\\\\c\\,\\mu(E),&0<c<+\\infty,\\\\0,&c=+\\infty\\text{ and }\\mu(E)=0,\\\\+\\infty,&c=+\\infty\\text{ and }\\mu(E)>0.\\end{cases}$$\n\nThus neither the zero branch nor the infinite branch forms the undefined extended-real product $0\\cdot(+\\infty)$.\n\nFor measures $(\\mu_k)_{k\\in\\mathbb N}$ on the same measurable space and weights $c_k\\in[0,+\\infty]$, their **countable weighted sum** is the pointwise set function\n\n$$\\left(\\sum_{k=0}^{\\infty}c_k\\mu_k\\right)(E):=\\sum_{k=0}^{\\infty}(c_k\\mu_k)(E),$$\n\nusing [[def-nonnegative-extended-series]]. Finite weighted sums are defined by the corresponding finite partial sum, with the empty weighted sum the zero set function. The fact that all these set functions are measures is [[thm-nonnegative-weighted-sums-of-measures]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The identity map shows $\\mathbb N$ is equinumerous with itself, hence at-most-countable by [F3]; [F4] makes it nonempty. Therefore [F2] shows $(\\Theta,\\mathcal P(\\Theta))$ is standard Borel.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $b=1/2$. Ordered-field arithmetic gives $0<b<1$, so [F21] gives $|b|=b<1$. The powers are positive: $b^0=1>0$ by [F10] and [F23], and if $b^k>0$, then $b^{k+1}=b^kb>0$ by [F10] and [F22]. Induction [F9] gives $a_k=b^{k+1}>0$ for every $k$.",
+          "step": "1.2",
+          "inputs": [
+            "F21",
+            "F10",
+            "F23",
+            "F22",
+            "F9",
+            "F19",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F11], $\\sum_{k=0}^{\\infty}b^k=1/(1-b)$. For every $N$, recursion [F10] and finite-sum scaling [F24] give $$\\sum_{k<N+1}a_k=\\sum_{k<N+1}b^{k+1} =b\\sum_{k<N+1}b^k.$$ The partial sums of $\\sum b^k$ converge to $1/(1-b)$ by [F11] and [F25]; therefore [F26] gives $\\sum_{k=0}^{\\infty}a_k=b/(1-b)=1$. By [F27] and [F28], this usual series sum is also the nonnegative extended sum of the coefficients used in the weighted measure.",
+          "step": "2.1",
+          "inputs": [
+            "F11",
+            "F10",
+            "F24",
+            "F25",
+            "F26",
+            "F27",
+            "F28",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Since $a_k>0$, $\\ell(k)=\\log a_k$ is finite. Every inverse image of a Borel subset of $\\mathbb R$ is a subset of $\\mathbb N$, hence is in $\\mathcal P(\\mathbb N)$; therefore $\\ell$ is measurable. By [F12]–[F13], $e^{-\\ell(k)}=1/a_k$, so the normalizer is $Z=\\int e^{-\\ell}\\,d\\pi$.",
+          "step": "2.2",
+          "inputs": [
+            "F12",
+            "F13",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F5] and [F7], $\\pi=\\sum_{k\\ge0}a_k\\delta_k$ is a measure. Its total mass is $$\\pi(\\Theta)=\\sum_{k\\ge0}a_k\\delta_k(\\Theta)=\\sum_{k\\ge0}a_k=1$$ by [F6], [F28], [F29], and step 2.1, so [F8] makes $\\pi$ a probability. For each $k$, [F6] gives $\\pi(\\{k\\})=a_k$.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F7",
+            "F6",
+            "F28",
+            "F29",
+            "step 2.1",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For each $N\\in\\mathbb N$, set $$s_N:=\\sum_{k=0}^{N}a_k^{-1}\\mathbf1_{\\{k\\}}.$$ It is a nonnegative simple function by [F14], and $0\\le s_N\\le e^{-\\ell}$: there is equality at $k\\le N$, and for $k>N$ the left side is zero while $e^{-\\ell(k)}>0$ by [F13]. By [F16]–[F17] and step 3.1, $$\\int s_N\\,d\\pi=\\sum_{k=0}^{N}a_k^{-1}\\pi(\\{k\\})=N+1.$$ Thus [F18] yields $Z\\ge N+1$ for every $N$.",
+          "step": "4.1",
+          "inputs": [
+            "F14",
+            "F13",
+            "F16",
+            "F17",
+            "step 3.1",
+            "F18",
+            "F15",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $Z$ were finite, [F19]–[F20] would give $N\\in\\mathbb N$, $N\\ge1$, with $Z<N$. Step 4.1 gives $Z\\ge N+1$, a contradiction. Since [F15] places $Z$ in $[0,+\\infty]$, it follows that $Z=+\\infty$. The finite-positive condition in [F1] therefore fails, so no generalized Bayes update is defined.",
+          "step": "5.1",
+          "inputs": [
+            "F19",
+            "F20",
+            "step 4.1",
+            "F15",
+            "F1",
+            "contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: Theta is N and includes zero, so the construction is explicitly nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 4.1 proves Z>=N+1 for every N, so the normalizer cannot be zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 4.1 includes N=0, giving the first atom a positive unit contribution."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Example: the assigned weights vary with k, so the displayed loss is nonconstant; no constant-loss case is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 2.1 and 5.1 track the unbounded partial sums and conclude Z=+infinity, the relevant extended endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1–5.1 use the explicit natural-number enumeration and finite partial sums; no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: no biconditional claim is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: no biconditional claim is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "first three partial contributions",
+          "method": "exact finite calculation",
+          "input": {
+            "indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "calculation": "For a_k=2^(-k-1), the first three atom contributions to the loss normalizer are a_k*exp(-log(a_k))=1 each, so the partial integral is 3, agreeing with step 4.1 at N=2.",
+          "expected": {
+            "partial_normalizer": "3"
+          }
+        }
+      ]
+    },
+    "cex-temperature-generalized-bayes-credible-set-zero-coverage": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-countable-discrete-space-is-standard-borel",
+          "source_section": "Statement",
+          "quote": "If $S$ is a nonempty at-most-countable set, then $(S,\\mathcal P(S))$ is a\nstandard Borel space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-generalized-bayes-loss-update-and-temperature",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a standard Borel parameter space\n([[def-standard-borel-space]]). Let $\\mathsf X$ be a set of possible observations,\nand let $\\ell:\\Theta\\times\\mathsf X\\to\\mathbb R$ be a **loss** whose section\n$\\ell_x(\\theta):=\\ell(\\theta,x)$ is $\\mathcal T$-measurable for every\n$x\\in\\mathsf X$. A **prior** is a probability measure $\\pi$ on\n$(\\Theta,\\mathcal T)$ ([[def-probability-measure]]). A **temperature** is a\nfixed scalar $w>0$ that multiplies the observed loss.\n\nFor $x\\in\\mathsf X$, define the normalizer\n$$Z_w(\\pi,x):=\\int_\\Theta \\exp\\{-w\\ell_x(\\theta)\\}\\,\\pi(d\\theta).$$\nThe integrand is measurable by continuity of the exponential and composition\nof measurable maps ([[thm-exponential-is-strictly-increasing]],\n[[thm-composition-with-borel-functions-preserves-measurability]]). When\n$0<Z_w(\\pi,x)<\\infty$, the **generalized Bayes loss update** (or **Gibbs loss\nupdate**) is the set function\n$$G_{w,\\pi,x}(A):=\\frac{1}{Z_w(\\pi,x)}\\int_A\\exp\\{-w\\ell_x(\\theta)\\}\\,\\pi(d\\theta),\\qquad A\\in\\mathcal T.$$\nIt is a positive scalar multiple of the measure with density\n$\\exp\\{-w\\ell_x\\}$ relative to $\\pi$\n([[def-measure-with-density]]).\nIf the normalizer is zero or infinite, this definition supplies no update.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-generalized-bayes-loss-update-normalizes-to-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "Let $G_{w,\\pi,x}$ be the update of\n[[def-generalized-bayes-loss-update-and-temperature]], with prior probability\n$\\pi$ and normalizer $0<Z_w(\\pi,x)<\\infty$. Then $G_{w,\\pi,x}$ is a\nprobability measure on $(\\Theta,\\mathcal T)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-confidence-set-and-coverage",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment as in [[def-statistical-experiment]], and assume\n$\\Theta\\ne\\varnothing$. A **confidence-set procedure** is a map\n$C:\\mathcal X\\to\\mathcal P(\\Theta)$, where\n$\\mathcal P(\\Theta):=\\{A:A\\subseteq\\Theta\\}$, such that, for every\n$\\eta\\in\\Theta$, its\nmembership section\n$$C_\\eta:=\\{x\\in\\mathcal X:\\eta\\in C(x)\\}$$\nbelongs to $\\mathcal A$. Its **coverage at $\\theta$** is\n$c_C(\\theta):=P_\\theta(C_\\theta)$, and its **confidence level** is\n$\\inf_{\\theta\\in\\Theta}c_C(\\theta)$, the greatest lower bound of those\ncoverage values. For $0\\le\\alpha\\le1$, it has coverage\nat least $1-\\alpha$ if $P_\\theta(C_\\theta)\\ge1-\\alpha$ for every\n$\\theta\\in\\Theta$.\n\nOnly membership sections need to be measurable; no sigma-algebra on the\nparameter set is assumed. The parameter is fixed in the repeated-sampling\ncoverage probability.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The parameter and data spaces are nonempty finite sets, so [F1] makes them standard Borel. The prior masses sum to one, hence [F2] makes $\\pi$ a probability. [F3]–[F5] show the sampling laws define a statistical experiment. [F6]–[F8] give the normalizer $$Z=\\frac1{100}e^{-1}+\\frac{99}{100}e^0,$$ which is finite and positive. By [F7], the resulting update $q$ is a probability measure.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F8",
+            "F7",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $-1<0$, [F9] gives $e^{-1}<e^0$. Both are positive by [F8], and $$Z=\\frac1{100}e^{-1}+\\frac{99}{100}e^0<e^0.$$ Therefore $$q(\\{1\\})=\\frac{(99/100)e^0}{Z}>\\frac{99}{100}>0.95.$$ Thus $C(x_0)=\\{1\\}$ is a posterior credible set of mass greater than $0.95$.",
+          "step": "2.1",
+          "inputs": [
+            "F9",
+            "F8",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Regard $C$ as the data-to-set procedure with sole value $C(x_0)=\\{1\\}$. Its membership section for parameter $0$ is empty, and for parameter $1$ is $\\{x_0\\}$; both are measurable. The coverage definition [F10] therefore applies, and at true parameter $0$ it gives $$P_0\\{x:C(x)\\ni0\\}=P_0(\\varnothing)=0.$$ This is below $0.95$, refuting the proposed universal guarantee.",
+          "step": "3.1",
+          "inputs": [
+            "F10",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Counterexample: both parameter and observation spaces are explicitly nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 computes the coverage at theta=0 exactly as P_0(empty)=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 verifies the one-point observation space and step 3.1 uses its sole observation for the data-to-set rule."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 has P_0=P_1=delta_x0, so the identical sampling laws form the degenerate experiment used by the counterexample."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 2.1 and 3.1 compare posterior mass strictly above 0.95 with coverage exactly zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1–3.1 use fixed finite sets, explicit laws and a fixed set-valued rule; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Counterexample: it refutes an implication and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Counterexample: it refutes an implication and asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "posterior mass and sampling coverage",
+          "method": "exact finite calculation",
+          "input": {
+            "prior": [
+              "1/100",
+              "99/100"
+            ],
+            "losses": [
+              "1",
+              "0"
+            ],
+            "temperature": "1",
+            "sampling": "P_0=P_1=delta_x0"
+          },
+          "calculation": "Z=(1/100)e^(-1)+(99/100)e^0<e^0, so q({1})>(99/100)>0.95. The set {1} excludes true parameter 0, and P_0 observes x0 surely, hence coverage is 0.",
+          "expected": {
+            "posterior_mass_lower_bound": "99/100",
+            "coverage": "0"
+          }
+        }
+      ]
+    },
+    "ex-rescaling-loss-changes-effective-temperature": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-countable-discrete-space-is-standard-borel",
+          "source_section": "Statement",
+          "quote": "If $S$ is a nonempty at-most-countable set, then $(S,\\mathcal P(S))$ is a\nstandard Borel space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-generalized-bayes-loss-update-and-temperature",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a standard Borel parameter space\n([[def-standard-borel-space]]). Let $\\mathsf X$ be a set of possible observations,\nand let $\\ell:\\Theta\\times\\mathsf X\\to\\mathbb R$ be a **loss** whose section\n$\\ell_x(\\theta):=\\ell(\\theta,x)$ is $\\mathcal T$-measurable for every\n$x\\in\\mathsf X$. A **prior** is a probability measure $\\pi$ on\n$(\\Theta,\\mathcal T)$ ([[def-probability-measure]]). A **temperature** is a\nfixed scalar $w>0$ that multiplies the observed loss.\n\nFor $x\\in\\mathsf X$, define the normalizer\n$$Z_w(\\pi,x):=\\int_\\Theta \\exp\\{-w\\ell_x(\\theta)\\}\\,\\pi(d\\theta).$$\nThe integrand is measurable by continuity of the exponential and composition\nof measurable maps ([[thm-exponential-is-strictly-increasing]],\n[[thm-composition-with-borel-functions-preserves-measurability]]). When\n$0<Z_w(\\pi,x)<\\infty$, the **generalized Bayes loss update** (or **Gibbs loss\nupdate**) is the set function\n$$G_{w,\\pi,x}(A):=\\frac{1}{Z_w(\\pi,x)}\\int_A\\exp\\{-w\\ell_x(\\theta)\\}\\,\\pi(d\\theta),\\qquad A\\in\\mathcal T.$$\nIt is a positive scalar multiple of the measure with density\n$\\exp\\{-w\\ell_x\\}$ relative to $\\pi$\n([[def-measure-with-density]]).\nIf the normalizer is zero or infinite, this definition supplies no update.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-generalized-bayes-loss-update-normalizes-to-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "Let $G_{w,\\pi,x}$ be the update of\n[[def-generalized-bayes-loss-update-and-temperature]], with prior probability\n$\\pi$ and normalizer $0<Z_w(\\pi,x)<\\infty$. Then $G_{w,\\pi,x}$ is a\nprobability measure on $(\\Theta,\\mathcal T)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The set $\\Theta$ is nonempty and finite, so [F1] makes its power-set measurable space standard Borel. Since $0<p<1$, the masses $p$ and $1-p$ are positive and sum to one, so [F2] makes $\\pi$ a probability. For every $t>0$, the two real loss values give positive finite weights $e^{-ta}$ and $e^{-tb}$ by [F6]; their prior-weighted sum is therefore finite and positive.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3]–[F4], the update $q_t=G_{t,\\pi,x_0}$ has masses $$q_t(0)=\\frac{p e^{-ta}}{p e^{-ta}+(1-p)e^{-tb}},\\qquad q_t(1)=\\frac{(1-p)e^{-tb}}{p e^{-ta}+(1-p)e^{-tb}}.$$ Consequently its odds satisfy $$\\frac{q_t(1)}{q_t(0)}=\\frac{1-p}{p}e^{-t(b-a)}.$$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For $\\theta\\in\\Theta$, the unnormalized weight after replacing $\\ell_{x_0}$ by $c\\ell_{x_0}$ at temperature $w$ is $\\pi(\\theta)e^{-w c\\ell_{x_0}(\\theta)}= \\pi(\\theta)e^{-(cw)\\ell_{x_0}(\\theta)}$. These are exactly the unnormalized masses for $q_{cw}$. The two updates have the same finite positive normalizer by step 1.1, so their values on both singletons, and hence on every subset of $\\Theta$, agree.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because $b-a\\ne0$ and $t_1\\ne t_2$, the real numbers $-t_1(b-a)$ and $-t_2(b-a)$ differ. Injectivity in [F5] makes their exponentials different. Multiplication by the fixed positive factor $(1-p)/p$ preserves that difference, so step 2.1 gives distinct odds. On a two-point probability space the odds determine both singleton masses; therefore $q_{t_1}\\ne q_{t_2}$.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: Theta={0,1} is explicitly nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: w,c,t_1,t_2 are positive; step 1.1 also allows zero loss values because its exponential weights remain positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example: 0<p<1 gives positive prior mass to both points, so a one-point prior support is excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement: a!=b is an explicit nonconstant-loss hypothesis; constant losses are outside the claimed distinct-temperature conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: temperatures and scale factors are strictly positive and t_1!=t_2; step 3.1 proves distinct updates under exactly those conditions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1–3.1 use explicit two-point masses and algebra; no selection from a family or choice axiom is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: it asserts scale-temperature equality and distinctness, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: it asserts scale-temperature equality and distinctness, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "loss-scale and temperature identity",
+          "method": "symbolic finite calculation",
+          "input": {
+            "prior": [
+              "p",
+              "1-p"
+            ],
+            "losses": [
+              "a",
+              "b"
+            ],
+            "temperature": "w",
+            "scale": "c"
+          },
+          "calculation": "At each theta, exp(-w*(c*ell(theta)))=exp(-(c*w)*ell(theta)); the unnormalized two-point masses and normalizers coincide, so the normalized updates agree.",
+          "expected": {
+            "effective_temperature": "c*w"
+          }
+        },
+        {
+          "name": "distinct positive temperatures",
+          "method": "symbolic finite calculation",
+          "input": {
+            "temperatures": [
+              "t_1",
+              "t_2"
+            ],
+            "loss_difference": "b-a != 0"
+          },
+          "calculation": "The odds ratio is ((1-p)/p)exp(-t*(b-a)); distinct t values give distinct exponents and injectivity of exp gives distinct odds.",
+          "expected": {
+            "updates_distinct": true
+          }
+        }
+      ]
+    },
+    "ex-unit-temperature-likelihood-update": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-countable-discrete-space-is-standard-borel",
+          "source_section": "Statement",
+          "quote": "If $S$ is a nonempty at-most-countable set, then $(S,\\mathcal P(S))$ is a\nstandard Borel space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-generalized-bayes-loss-update-and-temperature",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a standard Borel parameter space\n([[def-standard-borel-space]]). Let $\\mathsf X$ be a set of possible observations,\nand let $\\ell:\\Theta\\times\\mathsf X\\to\\mathbb R$ be a **loss** whose section\n$\\ell_x(\\theta):=\\ell(\\theta,x)$ is $\\mathcal T$-measurable for every\n$x\\in\\mathsf X$. A **prior** is a probability measure $\\pi$ on\n$(\\Theta,\\mathcal T)$ ([[def-probability-measure]]). A **temperature** is a\nfixed scalar $w>0$ that multiplies the observed loss.\n\nFor $x\\in\\mathsf X$, define the normalizer\n$$Z_w(\\pi,x):=\\int_\\Theta \\exp\\{-w\\ell_x(\\theta)\\}\\,\\pi(d\\theta).$$\nThe integrand is measurable by continuity of the exponential and composition\nof measurable maps ([[thm-exponential-is-strictly-increasing]],\n[[thm-composition-with-borel-functions-preserves-measurability]]). When\n$0<Z_w(\\pi,x)<\\infty$, the **generalized Bayes loss update** (or **Gibbs loss\nupdate**) is the set function\n$$G_{w,\\pi,x}(A):=\\frac{1}{Z_w(\\pi,x)}\\int_A\\exp\\{-w\\ell_x(\\theta)\\}\\,\\pi(d\\theta),\\qquad A\\in\\mathcal T.$$\nIt is a positive scalar multiple of the measure with density\n$\\exp\\{-w\\ell_x\\}$ relative to $\\pi$\n([[def-measure-with-density]]).\nIf the normalizer is zero or infinite, this definition supplies no update.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-generalized-bayes-loss-update-normalizes-to-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "Let $G_{w,\\pi,x}$ be the update of\n[[def-generalized-bayes-loss-update-and-temperature]], with prior probability\n$\\pi$ and normalizer $0<Z_w(\\pi,x)<\\infty$. Then $G_{w,\\pi,x}$ is a\nprobability measure on $(\\Theta,\\mathcal T)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-conditional-probability",
+          "source_section": "Definition",
+          "quote": "Let $A$ and $B$ be events in a finite probability space with $\\mathbb P(B)>0$. The **conditional probability of $A$ given $B$** is\n$$\\mathbb P(A\\mid B):=\\frac{\\mathbb P(A\\cap B)}{\\mathbb P(B)}.$$\nNo value is assigned to $\\mathbb P(A\\mid B)$ when $\\mathbb P(B)=0$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both parameter and sample spaces are nonempty finite sets, so [F1] makes them standard Borel. The prior masses are nonnegative and sum to one; each pair of sampling probabilities is nonnegative and sums to one. By [F2] these are probability measures, and [F3] therefore gives the stated finite statistical experiment.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $y=1$, both likelihoods are positive, so the loss is finite and measurable on the finite parameter space. The inverse relation in [F6] gives $e^{-\\ell(\\theta,1)}=e^{\\log P_\\theta(Y=1)}=P_\\theta(Y=1)$. Hence the unnormalized weights are $$\\pi(0)P_0(Y=1)=\\frac1{12},\\qquad \\pi(1)P_1(Y=1)=\\frac12,$$ and their normalizer is $Z=1/12+1/2=7/12$, finite and positive.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4]–[F5], the update is a probability measure with $$q(0)=\\frac{1/12}{7/12}=\\frac17,\\qquad q(1)=\\frac{1/2}{7/12}=\\frac67.$$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Define the joint masses by $\\Pr(\\theta,y)=\\pi(\\theta)P_\\theta(Y=y)$. The four masses are $1/4,1/12,1/6,1/2$ at $(0,0),(0,1),(1,0),(1,1)$, respectively; they sum to one, and $\\Pr(Y=1)=7/12>0$. Applying [F7] to each parameter singleton gives $$\\Pr(\\theta=0\\mid Y=1)=\\frac{1/12}{7/12}=\\frac17,\\qquad \\Pr(\\theta=1\\mid Y=1)=\\frac{1/2}{7/12}=\\frac67.$$ Thus the loss update equals the ordinary finite-model posterior at $y=1$.",
+          "step": "4.1",
+          "inputs": [
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: both finite spaces are explicitly the nonempty set {0,1}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 lists positive likelihoods 1/4 and 3/4 for the observed event, so the normalizer is strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example: the parameter and sample spaces each have two points and no one-point variant is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Example: the two sampling laws differ; the item illustrates a nondegenerate finite experiment and makes no degeneracy claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 2.1–4.1 verify the conditioning event has probability 7/12>0, so the conditional-probability denominator is admissible."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1–4.1 compute finite tables and conditional ratios explicitly; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: it proves equality of two specified updates and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: it proves equality of two specified updates and asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "finite Bayes update",
+          "method": "exact finite calculation",
+          "input": {
+            "prior": [
+              "1/3",
+              "2/3"
+            ],
+            "likelihood_y1": [
+              "1/4",
+              "3/4"
+            ]
+          },
+          "calculation": "Unnormalized masses are 1/12 and 1/2; Z=7/12; normalization gives (1/7,6/7). The joint conditional law given Y=1 has the same two masses.",
+          "expected": {
+            "normalizer": "7/12",
+            "posterior": [
+              "1/7",
+              "6/7"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

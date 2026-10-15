@@ -1,0 +1,689 @@
+{
+  "version": 1,
+  "kind": "owner-zero-markov-sum-rate-proof-proposal",
+  "run": "bayesian-computational-statistics-62",
+  "scope": [
+    "lem-geometric-strong-mixing-gives-lp-poisson-solution",
+    "lem-zero-variance-geometric-markov-sums-have-strong-rate"
+  ],
+  "item_paths": [
+    "items/lem-geometric-strong-mixing-gives-lp-poisson-solution.md",
+    "items/lem-zero-variance-geometric-markov-sums-have-strong-rate.md"
+  ],
+  "home_page": "mcmc-clt-and-monte-carlo-standard-error",
+  "manifest_rows": [
+    {
+      "id": "lem-geometric-strong-mixing-gives-lp-poisson-solution",
+      "kind": "lemma",
+      "title": "Geometric strong mixing gives an Lp Poisson solution",
+      "deps": [
+        "def-axiom-of-choice",
+        "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+        "def-l-p-space-as-a-quotient-by-null-functions",
+        "def-mixing-coefficients-for-stationary-markov-chain",
+        "def-moments-variance-and-covariance",
+        "lem-strong-mixing-quantile-covariance-bound",
+        "lem-square-integrable-markov-transition-conditional-expectation",
+        "cor-conditional-lp-contraction",
+        "thm-chapman-kolmogorov-equations",
+        "thm-finite-measure-l-r-includes-into-l-p-for-p-less-r",
+        "thm-generalized-holder-inequality-for-products",
+        "thm-holder-inequality-for-integrals",
+        "thm-minkowski-inequality-for-integrals",
+        "thm-riesz-fischer-completeness-of-l-p",
+        "thm-monotone-convergence-for-the-integral",
+        "thm-covariance-bilinearity-and-symmetry"
+      ]
+    },
+    {
+      "id": "lem-zero-variance-geometric-markov-sums-have-strong-rate",
+      "kind": "lemma",
+      "title": "Zero-variance geometric Markov sums have a uniform strong rate",
+      "deps": [
+        "def-axiom-of-choice",
+        "def-geometric-and-uniform-ergodicity-for-mcmc-clt",
+        "def-total-variation-distance-for-probability-laws",
+        "lem-geometric-strong-mixing-gives-lp-poisson-solution",
+        "lem-square-integrable-markov-transition-conditional-expectation",
+        "cor-cauchy-schwarz-for-random-variables",
+        "thm-taking-out-what-is-known",
+        "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+        "thm-finite-measure-l-r-includes-into-l-p-for-p-less-r",
+        "thm-monotone-convergence-for-the-integral",
+        "cor-first-borel-cantelli-lemma-for-events",
+        "cor-canonical-markov-chain-on-path-space",
+        "thm-markov-property-for-bounded-future-path-functionals",
+        "thm-invariant-initial-law-makes-the-chain-stationary",
+        "lem-harris-geometric-ergodicity-has-integrable-rate-envelope",
+        "lem-geometric-total-variation-rate-controls-strong-mixing"
+      ]
+    }
+  ],
+  "proof_contracts": {
+    "version": 1,
+    "scope": [
+      "lem-geometric-strong-mixing-gives-lp-poisson-solution",
+      "lem-zero-variance-geometric-markov-sums-have-strong-rate"
+    ],
+    "contracts": {
+      "lem-geometric-strong-mixing-gives-lp-poisson-solution": {
+        "citations": [
+          {
+            "fact": "A1",
+            "source": "def-axiom-of-choice",
+            "source_section": "Definition",
+            "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+            "uses": [
+              "1.1",
+              "2.2",
+              "3.2"
+            ]
+          },
+          {
+            "fact": "F1",
+            "source": "lem-strong-mixing-quantile-covariance-bound",
+            "source_section": "Statement",
+            "quote": "Let $\\mathcal A,\\mathcal B$ be sub-sigma-algebras of a probability space and put\n$$a=\\sup_{A\\in\\mathcal A,\\,B\\in\\mathcal B}|\\mathbb P(A\\cap B)-\\mathbb P(A)\\mathbb P(B)|.$$\nFor any real random variable $U$, define its absolute tail quantile by\n$$Q_U(u)=\\inf\\{t\\ge0:\\mathbb P(|U|>t)\\le u\\},\\qquad 0<u<1.$$\nThis is a nonnegative nonincreasing Borel function and, for every nonnegative Borel function $\\psi$,\n$$\\int_0^1\\psi(Q_U(u))\\,du=\\mathbb E\\psi(|U|).$$\nIf $U,V$ are square-integrable real random variables measurable respectively with respect to $\\mathcal A,\\mathcal B$, then\n$$|\\operatorname{Cov}(U,V)|\\le4\\int_0^a Q_U(u)Q_V(u)\\,du.$$\nIn particular, if $|U|\\le A$ and $|V|\\le B$ almost surely, the right-hand side is at most $4ABa$. For complex $U,V$ with these bounds and the same measurability,\n$$|\\mathbb E(UV)-\\mathbb EU\\mathbb EV|\\le16ABa.$$\nFor two collections of observations separated by $n$ time steps in a process $Y$, the coefficient $a$ of their sigma-algebras is at most $\\alpha_Y(n)$ as defined in [[def-mixing-coefficients-for-stationary-markov-chain]]. An integral whose upper endpoint is zero is zero.",
+            "uses": [
+              "1.2",
+              "2.1",
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F1",
+            "source": "def-mixing-coefficients-for-stationary-markov-chain",
+            "source_section": "Definition",
+            "quote": "Let $Y=(Y_k)_{k\\ge0}$ be a process on a probability space whose finite-dimensional laws are invariant under common nonnegative time shifts; call this strict stationarity. For $j\\ge0$, set $\\mathcal F_j^-:=\\sigma(Y_0,\\ldots,Y_j)$ and $\\mathcal F_j^+:=\\sigma(Y_j,Y_{j+1},\\ldots)$. For $n\\ge1$, define the **strong-mixing coefficient** by\n$$\\alpha_Y(n):=\\sup_{j\\ge0}\\ \\sup_{\\substack{A\\in\\mathcal F_j^-\\\\B\\in\\mathcal F_{j+n}^+}}|\\mathbb P(A\\cap B)-\\mathbb P(A)\\mathbb P(B)|.$$\n\nDefine the **uniform-mixing coefficient** by\n$$\\phi_Y(n):=\\sup_{j\\ge0}\\ \\sup_{\\substack{A\\in\\mathcal F_j^-\\\\\\mathbb P(A)>0}}\\ \\sup_{B\\in\\mathcal F_{j+n}^+}|\\mathbb P(B\\mid A)-\\mathbb P(B)|.$$\n\nDefine the **maximal-correlation coefficient** by\n$$\\rho_Y(n):=\\sup_{j\\ge0}\\ \\sup_{U,V}|\\operatorname{Corr}(U,V)|,$$\nwhere the last supremum is over real $U,V$ with finite second moments (square-integrable in the sense of [[def-l-p-space-as-a-quotient-by-null-functions]]), measurable with respect to $\\mathcal F_j^-$ and $\\mathcal F_{j+n}^+$, respectively, and each with positive variance. The process is called strongly mixing, uniformly mixing, or rho-mixing, respectively, when the corresponding coefficient tends to zero. These coefficients are distinct conditions; no implication between them is included in this definition.",
+            "uses": [
+              "1.2",
+              "2.1",
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "thm-chapman-kolmogorov-equations",
+            "source_section": "Statement",
+            "quote": "For $m,n\\ge0$,\n$$K^{m+n}=K^mK^n.$$ Assume Choice and let $X$ be a Markov chain with kernel $K$ relative to $(\\mathcal F_n)$. For every bounded measurable real $f$, $$ \\mathbb E[f(X_{m+n})\\mid\\mathcal F_m]=K^nf(X_m)\\quad\\text{a.s.} $$ Equivalently, for $A\\in\\mathcal E$, $$ \\mathbb P(X_{m+n}\\in A\\mid\\mathcal F_m)=K^n(X_m,A)\\quad\\text{a.s.} $$\nBoth assertions include $m=0$ and $n=0$.",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "lem-square-integrable-markov-transition-conditional-expectation",
+            "source_section": "Statement",
+            "quote": "Assume AC. Let $(X_k)_{k\\ge0}$ be a stationary time-homogeneous Markov chain\nwith probability kernel $P$, invariant law $\\pi$, and natural filtration\n$\\mathcal F_k=\\sigma(X_0,\\ldots,X_k)$. Let $g\\in L^2(\\pi)$ ([[def-l-p-space-as-a-quotient-by-null-functions]]). Define\n$Pg(x)=\\int g(y)P(x,dy)$ and $P(g^2)(x)=\\int g(y)^2P(x,dy)$ on the\n$\\pi$-full measurable set where the respective integrals are finite, and set\nthese functions to zero on the exceptional set. Then, for each $k\\ge0$,\n$$\\mathbb E[g(X_{k+1})\\mid\\mathcal F_k]=Pg(X_k).$$\n$$\\mathbb E[g(X_{k+1})^2\\mid\\mathcal F_k]=P(g^2)(X_k)\\quad\\text{a.s.}$$\nConsequently, if $D_{k+1}=g(X_{k+1})-Pg(X_k)$, then $(D_{k+1})$ is a square-integrable martingale-difference sequence and\n$$\\mathbb E[D_{k+1}^2\\mid\\mathcal F_k]=P(g^2)(X_k)-(Pg(X_k))^2\\quad\\text{a.s.}$$",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "cor-conditional-lp-contraction",
+            "source_section": "Statement",
+            "quote": "Assume AC. For $1\\le p\\le\\infty$, conditional expectation is a linear map from real $L^p(P)$ to real $L^p(P|_{\\mathcal G})$ satisfying $\\|E[X\\mid\\mathcal G]\\|_p\\le\\|X\\|_p$.",
+            "uses": [
+              "1.1",
+              "1.2",
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "thm-finite-measure-l-r-includes-into-l-p-for-p-less-r",
+            "source_section": "Statement",
+            "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space with $\\mu(X)<\\infty$.\n\n1. If $1\\le p<r<\\infty$ and $f\\in\\mathcal L^r(\\mu)$, then\n   $f\\in\\mathcal L^p(\\mu)$ and\n   $$\\|f\\|_p\\le\\mu(X)^{1/p-1/r}\\|f\\|_r.$$\n2. If $1\\le p<\\infty$ and $f\\in L^\\infty(\\mu)$, then\n   $f\\in\\mathcal L^p(\\mu)$ and\n   $$\\|f\\|_p\\le\\mu(X)^{1/p}\\|f\\|_\\infty.$$",
+            "uses": [
+              "1.1",
+              "1.2",
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "thm-holder-inequality-for-integrals",
+            "source_section": "Statement",
+            "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+            "uses": [
+              "2.1",
+              "2.2",
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "thm-generalized-holder-inequality-for-products",
+            "source_section": "Statement",
+            "quote": "Let $1\\le p,q,r\\le\\infty$ satisfy\n\n$$\\frac1r=\\frac1p+\\frac1q,$$\n\nwith the convention $1/\\infty=0$. If $f$ and $g$ lie in the corresponding\nmeasurable-function spaces ($\\mathcal L^p(\\mu)$ or $L^\\infty(\\mu)$ according to\nwhether the exponent is finite or infinite), then $fg$ lies in the\ncorresponding space for $r$ and\n\n$$\\|fg\\|_r\\le\\|f\\|_p\\|g\\|_q.$$",
+            "uses": [
+              "2.1",
+              "2.2",
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "thm-minkowski-inequality-for-integrals",
+            "source_section": "Statement",
+            "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $1\\le p<\\infty$ and $f,g\\in\\mathcal L^p(\\mu)$, then\n   $$\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p.$$\n2. If $f,g\\in L^\\infty(\\mu)$, then\n   $$\\|f+g\\|_\\infty\\le\\|f\\|_\\infty+\\|g\\|_\\infty.$$",
+            "uses": [
+              "2.1",
+              "2.2",
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F5",
+            "source": "thm-riesz-fischer-completeness-of-l-p",
+            "source_section": "Statement",
+            "quote": "Assume countable choice (in particular, the Axiom of Choice suffices). Let $(X,\\mathcal A,\\mu)$ be a measure space and let $1\\le p\\le\\infty$. Then\n$L^p(\\mu)$, with the norm of\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]], is\ncomplete. Equivalently, the metric induced by that norm is a complete metric in\nthe sense of [[def-complete-metric-space]].\n\nMoreover, if a sequence in $L^p(\\mu)$ converges in norm, then some subsequence\nadmits measurable representatives converging almost everywhere in the sense of\n[[def-convergence-almost-everywhere-relative-to-a-measure]].",
+            "uses": [
+              "2.2",
+              "3.2"
+            ]
+          },
+          {
+            "fact": "F5",
+            "source": "def-l-p-space-as-a-quotient-by-null-functions",
+            "source_section": "Definition",
+            "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n- For $0<p<\\infty$, define an equivalence relation on $\\mathcal L^p(\\mu)$ by\n  $$f\\sim g\\quad\\Longleftrightarrow\\quad f-g\\in\\mathcal N(\\mu),$$\n  and write $L^p(\\mu)$ for the set of classes $[f]$.\n- For $p=\\infty$, define the same relation on $L^\\infty(\\mu)$ and again write\n  $L^\\infty(\\mu)$ for the set of classes.\n\nThus an element of $L^p(\\mu)$ is an almost-everywhere equivalence class of\nmeasurable representatives.\n\nWhen $1\\le p\\le\\infty$, the displayed set quotient agrees with the usual\nquotient-vector-space construction of\n[[def-quotient-vector-space-and-canonical-projection]].\n\nFor $0<p<1$, the same class notation is used; under its stated choice hypothesis, the later item\n[[thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric]]\nsupplies the metric structure rather than a normed-space structure.",
+            "uses": [
+              "2.2",
+              "3.2"
+            ]
+          },
+          {
+            "fact": "F6",
+            "source": "thm-monotone-convergence-for-the-integral",
+            "source_section": "Statement",
+            "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+            "uses": [
+              "1.1",
+              "2.1"
+            ]
+          },
+          {
+            "fact": "F7",
+            "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+            "source_section": "Definition",
+            "quote": "Let $K$ be a probability kernel on a measurable space $(E,\\mathcal E)$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure on $(E,\\mathcal E)$ ([[def-probability-measure]]). The\nprobability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a\n**stationary distribution** of $K$, when\n\n$$(\\pi K)(A):=\\int_E K(x,A)\\,\\pi(dx)=\\pi(A)\\qquad\\text{for every }A\\in\\mathcal E .$$\n\nThe set function $\\pi K$ is again a probability measure: for fixed $A$ the map\n$x\\mapsto K(x,A)$ is measurable and lies in $[0,1]$, so the integral exists in\n$[0,1]$; for pairwise disjoint $A_n\\in\\mathcal E$ the identity\n$K(x,\\bigcup_nA_n)=\\sum_nK(x,A_n)$ of the measure $K(x,\\cdot)$ and the\nmonotone convergence theorem for nonnegative functions\n([[thm-monotone-convergence-for-the-integral]]) give\n$\\sigma$-additivity of $\\pi K$; and $K(x,E)=1$ for every $x$ gives\n$(\\pi K)(E)=1$. Thus $(\\pi K)(A)=\\pi(A)$ is an identity between two probability\nmeasures evaluated at $A$.\n\nA $K$-chain whose initial law is $\\pi$ is called **stationary** when\n$\\pi K=\\pi$. Stationarity of the process is a statement about all of its\nfinite-dimensional laws and is proved, not assumed, from $\\pi K=\\pi$; see\n[[thm-invariant-initial-law-makes-the-chain-stationary]].\n\nOn a countable state space $E$ with sigma-algebra $2^E$ and transition matrix\n$p(x,y)=K(x,\\{y\\})$ ([[def-transition-matrix-and-n-step-transition-probabilities]]),\na measure on $E$ is its weighted sum of Dirac masses at singletons\n([[thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums]]), so\ninvariance is equivalent to the matrix identity\n\n$$\\pi(y)=\\sum_{x\\in E}\\pi(x)\\,p(x,y)\\qquad\\text{for every }y\\in E .$$\n\nThe definition fixes no irreducibility, aperiodicity or uniqueness hypothesis,\nand it selects no conditional-expectation versions; the display defines a\nsingle measure $\\pi K$ and asserts an identity for it. A transient, periodic or\nreducible chain may have several invariant probability measures or none.",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F8",
+            "source": "def-moments-variance-and-covariance",
+            "source_section": "Definition",
+            "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+            "uses": [
+              "3.2"
+            ]
+          },
+          {
+            "fact": "F8",
+            "source": "thm-covariance-bilinearity-and-symmetry",
+            "source_section": "Statement",
+            "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+            "uses": [
+              "3.2"
+            ]
+          }
+        ],
+        "derivations": [
+          {
+            "id": "lem-geometric-strong-mixing-gives-lp-poisson-solution-step-1-1",
+            "claim": "Invariance [F7], extended with [F6], gives $\\pi P|h|=\\pi|h|$ for integrable $h$, so the absolute kernel integral is finite off a measurable $\\pi$-null set. A change of representative on a $\\pi$-null set $A$ does not change its image class, since $\\pi P1_A=\\pi(A)=0$ implies $P1_A=0$ almost everywhere. For $h\\in L^p$, [F3] gives $h\\in L^2$, and [F2] identifies $Ph(X_0)$ with $\\mathbb E[h(X_1)\\mid X_0]$. Conditional contraction [F3] and stationarity give $\\|Ph\\|_p\\le\\|h\\|_p$. The bounded iteration identity in [F2] extends to these $L^p$ classes by replacing $h$ with its bounded clipped truncations: their $L^p$ error tends to zero because the integrable tail $|h|^p1_{\\{|h|>K\\}}$ tends to zero, as follows from [F6] applied to its complementary truncations; conditional and kernel contractions pass this error to zero. Thus $P$ is a well-defined linear contraction on $L^p$, its iterates agree with the kernel iterates, and $P^nh(X_0)=\\mathbb E[h(X_n)\\mid X_0]$. This also proves $P^nf\\in L^p$ before any covariance estimate is used.",
+            "step": "1.1",
+            "inputs": [
+              "A1",
+              "F2",
+              "F3",
+              "F6",
+              "F7",
+              "given"
+            ]
+          },
+          {
+            "id": "lem-geometric-strong-mixing-gives-lp-poisson-solution-step-1-2",
+            "claim": "Fix $n\\ge1$, put $Z=P^nf$, and let $p'=p/(p-1)$ and $W_K(x)=\\operatorname{sgn}(Z(x))|Z(x)|^{p-1}1_{\\{|Z(x)|\\le K\\}}$ for integers $K\\ge1$. This function is bounded, belongs to $L^2$, and satisfies $\\|W_K\\|_{p'}\\le\\|Z\\|_p^{p-1}$. The centered $f(X_n)$ is in $L^2$ by [F3]. Step 1.1 and bounded conditional multiplication give $\\mathbb E[W_K(X_0)f(X_n)]=\\pi(W_KP^nf)=\\pi(|Z|^p1_{\\{|Z|\\le K\\}})$; since $\\pi f=0$, this expectation is the covariance of $W_K(X_0)$ and $f(X_n)$. Bounded conditional multiplication here follows directly from the defining conditional expectation event identity, first for simple $W_K$ and then by uniform bounded approximation. Thus [F1] is applied only to square-integrable variables, even though $p'<2$.",
+            "step": "1.2",
+            "inputs": [
+              "F1",
+              "F3",
+              "step 1.1",
+              "given",
+              "construct",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-geometric-strong-mixing-gives-lp-poisson-solution-step-2-1",
+            "claim": "Put $a=\\alpha_X(n)$. The quantile identity in [F1] gives $\\|Q_{W_K(X_0)}\\|_{p'}=\\|W_K\\|_{p'}$ and $\\|Q_{f(X_n)}\\|_q=\\|f\\|_q$. Since $1/p'+1/q=1-\\theta$, apply the product inequality [F4] to these two quantile functions in $L^{1/(1-\\theta)}(0,1)$, and then Hölder with $1_{(0,a)}$, whose $L^{1/\\theta}$ norm is $a^\\theta$. Therefore [F1] and step 1.2 give $\\pi(|Z|^p1_{\\{|Z|\\le K\\}})\\le4a^\\theta\\|Z\\|_p^{p-1}\\|f\\|_q$. If $a=0$ the quantile integral and the right-hand side are zero. Let $K\\to\\infty$ using [F6]. If $\\|Z\\|_p=0$ the required bound is immediate; otherwise divide by $\\|Z\\|_p^{p-1}$ to obtain $\\|P^nf\\|_p\\le4\\alpha_X(n)^\\theta\\|f\\|_q$. The restriction $p<q$ ensures $\\theta>0$ and makes all Hölder exponents just used valid.",
+            "step": "2.1",
+            "inputs": [
+              "F1",
+              "F4",
+              "F6",
+              "step 1.2",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-geometric-strong-mixing-gives-lp-poisson-solution-step-2-2",
+            "claim": "The geometric bound makes $\\sum_{n\\ge1}\\alpha_X(n)^\\theta\\le C^\\theta\\sum_{n\\ge1}r^{n\\theta}<\\infty$, including $C=0$. By step 2.1, [F4] makes $g_m=\\sum_{n=0}^mP^nf$ a Cauchy sequence in $L^p$. Completeness [F5] gives $g_m\\to g\\in L^p$. The contraction in step 1.1 gives $Pg_m\\to Pg$, while $g_m-Pg_m=f-P^{m+1}f\\to f$ in $L^p$ by step 2.1. Thus $g-Pg=f$ as almost-everywhere classes. Choose the finite measurable representative supplied by [F5], setting it to zero on its measurable null exceptional set if necessary, and use the version convention from step 1.1 for $Pg$. These choices make the asserted almost-everywhere identity precise on the original sigma-algebra without completing the measure.",
+            "step": "2.2",
+            "inputs": [
+              "A1",
+              "F4",
+              "F5",
+              "step 1.1",
+              "step 2.1",
+              "construct",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-geometric-strong-mixing-gives-lp-poisson-solution-step-3-1",
+            "claim": "Apply [F1] directly to $f(X_0),f(X_n)$, both square-integrable. Their quantiles have common $L^q(0,1)$ norm $\\|f\\|_q$. Two applications of [F4], with reciprocal exponents $1/q,1/q,1-2/q$, yield $|c_n|\\le4\\alpha_X(n)^{1-2/q}\\|f\\|_q^2$. The exponent is positive because $q>2$; the geometric bound therefore gives $\\sum_{n\\ge1}|c_n|<\\infty$. At a zero mixing coefficient the quantile integral is zero, so no division by that coefficient is needed.",
+            "step": "3.1",
+            "inputs": [
+              "F1",
+              "F3",
+              "F4",
+              "step 2.1",
+              "given",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-geometric-strong-mixing-gives-lp-poisson-solution-step-3-2",
+            "claim": "Centering, stationarity and [F8] give $n^{-1}\\mathbb E_\\pi(\\sum_{k=0}^{n-1}f(X_k))^2=\\pi(f^2)+2\\sum_{h=1}^{n-1}(1-h/n)c_h$. To pass to its limit, choose any finite $H$; the terms $h\\le H$ converge individually to $c_h$, while the absolute value of either remaining weighted or limiting tail is at most $\\sum_{h>H}|c_h|$, which tends to zero as $H\\to\\infty$ by step 3.1. The limit is the claimed finite covariance sum $v$. Each left-hand side is nonnegative, hence $v\\ge0$. When $f=0$ almost everywhere all bounds and the choice $g=0$ hold directly; no claim of uniqueness of $g$ is made. The strict exponent range and all zero-mixing cases were handled in steps 2.1–3.1. AC is used through the Markov/conditional and completeness suppliers, not as an imported covariance or Poisson theorem.",
+            "step": "3.2",
+            "inputs": [
+              "A1",
+              "F5",
+              "F8",
+              "step 2.2",
+              "step 3.1",
+              "given",
+              "algebra"
+            ]
+          }
+        ],
+        "routine_steps": [],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "checked",
+            "evidence": "The probability space has total mass one; an empty state space cannot carry π. Covariance tails after a finite cutoff and finite sums with no terms contribute zero."
+          },
+          {
+            "case": "zero",
+            "status": "checked",
+            "evidence": "Steps 2.1 and 3.1 cover α_X(n)=0 without dividing by it; step 2.2 covers C=0, and step 3.2 explicitly covers f=0."
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "Kernel powers start at n=1 in the decay estimate; P^0f=f is included separately in the Poisson series. The n=1 variance expansion has an empty covariance tail."
+          },
+          {
+            "case": "degenerate",
+            "status": "checked",
+            "evidence": "The bounded dual test W_K is square-integrable even when p′<2. Zero ||P^nf||p is treated before division. g need not be unique."
+          },
+          {
+            "case": "endpoints",
+            "status": "checked",
+            "evidence": "q is finite and q>p>2. These strict inequalities make θ=1/p−1/q and 1−2/q positive and validate every Hölder exponent and geometric series."
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "checked",
+            "evidence": "AC is explicit for conditional expectations and Lp completeness; finite measurable representatives are chosen on measurable null exceptional sets, without completing the underlying measure."
+          },
+          {
+            "case": "iff-forward",
+            "status": "not_applicable",
+            "reason": "The statement is a one-way Poisson-solution and covariance estimate, not a biconditional."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "not_applicable",
+            "reason": "No converse mixing or necessity assertion is made."
+          }
+        ],
+        "finite_checks": [],
+        "finite_smoke": [],
+        "risk_review": {
+          "status": "pass",
+          "notes": "The bounded dual W_K avoids the square-integrability gap at p′<2; quantile norm identities and explicit Hölder exponents prove the decay. Kernel class contraction, Lp series and covariance variance limit are proved locally."
+        }
+      },
+      "lem-zero-variance-geometric-markov-sums-have-strong-rate": {
+        "citations": [
+          {
+            "fact": "A1",
+            "source": "def-axiom-of-choice",
+            "source_section": "Definition",
+            "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+            "uses": [
+              "1.1",
+              "3.2",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F1",
+            "source": "lem-geometric-strong-mixing-gives-lp-poisson-solution",
+            "source_section": "Statement",
+            "quote": "Assume AC. Let $P$ be a probability kernel on an arbitrary measurable space $(\\mathsf X,\\mathcal X)$ with invariant probability $\\pi$. Let $(X_k)_{k\\ge0}$ be its stationary Markov chain, and suppose its strong-mixing coefficients satisfy $\\alpha_X(n)\\le Cr^n$ for $n\\ge1$, with $0\\le C<\\infty$ and $0<r<1$. Let $f:\\mathsf X\\to\\mathbb R$ be measurable with $\\pi f=0$ and $\\pi|f|^q<\\infty$ for some finite $q>2$.\n\nFor every $2<p<q$, put $\\theta=1/p-1/q$. The kernel operators are understood on $\\pi$-almost-everywhere classes, with finite measurable versions obtained by setting divergent integrals to zero on their $\\pi$-null exceptional sets. Then\n$$\\|P^nf\\|_{L^p(\\pi)}\\le4\\alpha_X(n)^\\theta\\|f\\|_{L^q(\\pi)}\\qquad(n\\ge1),$$\nand the series $g=\\sum_{n=0}^\\infty P^nf$ converges in $L^p(\\pi)$, with\n$$f=g-Pg\\qquad\\pi\\text{-almost everywhere}.$$\nMoreover, writing $c_n=\\operatorname{Cov}_\\pi(f(X_0),f(X_n))$, one has\n$$|c_n|\\le4\\alpha_X(n)^{1-2/q}\\|f\\|_{L^q(\\pi)}^2\\quad(n\\ge1),\\qquad\\sum_{n\\ge1}|c_n|<\\infty.$$\nThe covariance sum $v=\\pi(f^2)+2\\sum_{n\\ge1}c_n$ is finite and nonnegative, and\n$$\\frac1n\\mathbb E_\\pi\\left(\\sum_{k=0}^{n-1}f(X_k)\\right)^2\\longrightarrow v.$$",
+            "uses": [
+              "1.1",
+              "1.2",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "lem-square-integrable-markov-transition-conditional-expectation",
+            "source_section": "Statement",
+            "quote": "Assume AC. Let $(X_k)_{k\\ge0}$ be a stationary time-homogeneous Markov chain\nwith probability kernel $P$, invariant law $\\pi$, and natural filtration\n$\\mathcal F_k=\\sigma(X_0,\\ldots,X_k)$. Let $g\\in L^2(\\pi)$ ([[def-l-p-space-as-a-quotient-by-null-functions]]). Define\n$Pg(x)=\\int g(y)P(x,dy)$ and $P(g^2)(x)=\\int g(y)^2P(x,dy)$ on the\n$\\pi$-full measurable set where the respective integrals are finite, and set\nthese functions to zero on the exceptional set. Then, for each $k\\ge0$,\n$$\\mathbb E[g(X_{k+1})\\mid\\mathcal F_k]=Pg(X_k).$$\n$$\\mathbb E[g(X_{k+1})^2\\mid\\mathcal F_k]=P(g^2)(X_k)\\quad\\text{a.s.}$$\nConsequently, if $D_{k+1}=g(X_{k+1})-Pg(X_k)$, then $(D_{k+1})$ is a square-integrable martingale-difference sequence and\n$$\\mathbb E[D_{k+1}^2\\mid\\mathcal F_k]=P(g^2)(X_k)-(Pg(X_k))^2\\quad\\text{a.s.}$$",
+            "uses": [
+              "1.1",
+              "1.2",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "thm-finite-measure-l-r-includes-into-l-p-for-p-less-r",
+            "source_section": "Statement",
+            "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space with $\\mu(X)<\\infty$.\n\n1. If $1\\le p<r<\\infty$ and $f\\in\\mathcal L^r(\\mu)$, then\n   $f\\in\\mathcal L^p(\\mu)$ and\n   $$\\|f\\|_p\\le\\mu(X)^{1/p-1/r}\\|f\\|_r.$$\n2. If $1\\le p<\\infty$ and $f\\in L^\\infty(\\mu)$, then\n   $f\\in\\mathcal L^p(\\mu)$ and\n   $$\\|f\\|_p\\le\\mu(X)^{1/p}\\|f\\|_\\infty.$$",
+            "uses": [
+              "1.1",
+              "1.2",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "cor-cauchy-schwarz-for-random-variables",
+            "source_section": "Statement",
+            "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+            "uses": [
+              "1.1",
+              "1.2",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+            "source_section": "Statement",
+            "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+            "uses": [
+              "1.1",
+              "1.2",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "thm-taking-out-what-is-known",
+            "source_section": "Statement",
+            "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+            "uses": [
+              "1.1",
+              "1.2",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "thm-monotone-convergence-for-the-integral",
+            "source_section": "Statement",
+            "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+            "uses": [
+              "2.1"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "cor-first-borel-cantelli-lemma-for-events",
+            "source_section": "Statement",
+            "quote": "Let $(A_n)_{n\\in\\mathbb N}$ be events in a probability space. If\n$$\\sum_{n=0}^\\infty \\mathbb P(A_n)<+\\infty,$$\nthen\n$$\\mathbb P(A_n\\ \\mathrm{i.o.})=0.$$\n\nNo independence hypothesis is needed.",
+            "uses": [
+              "2.1"
+            ]
+          },
+          {
+            "fact": "F5",
+            "source": "cor-canonical-markov-chain-on-path-space",
+            "source_section": "Statement",
+            "quote": "Assume Choice. For every probability measure $\\mu$ and probability kernel $K$\non an arbitrary measurable space $(E,\\mathcal E)$, the canonical path space\n$$ (E^{\\mathbb N_0},\\mathcal E^{\\otimes\\mathbb N_0}) $$\ncarries a unique probability $\\mathbb P_\\mu$ under which the coordinate maps\nform a Markov chain with initial law $\\mu$ and transition kernel $K$.",
+            "uses": [
+              "3.2",
+              "3.3",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F5",
+            "source": "thm-markov-property-for-bounded-future-path-functionals",
+            "source_section": "Statement",
+            "quote": "Assume Choice. Let $X$ be a $K$-chain and let\n$H:E^{\\mathbb N_0}\\to\\mathbb R$ be bounded and product-measurable. Then\n$$h(x):=\\mathbb E_x[H(X_0,X_1,\\ldots)]$$ is $\\mathcal E$-measurable and, for every $n\\ge0$, $$ \\mathbb E[H(X_n,X_{n+1},\\ldots)\\mid\\mathcal F_n]=h(X_n)\\quad\\text{a.s.} $$",
+            "uses": [
+              "3.2",
+              "3.3",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F5",
+            "source": "thm-invariant-initial-law-makes-the-chain-stationary",
+            "source_section": "Statement",
+            "quote": "Assume AC ([[def-axiom-of-choice]]). Let $K$ be a probability kernel on a\nmeasurable space $(E,\\mathcal E)$, let $\\pi$ be an invariant probability for $K$\n([[def-invariant-and-stationary-distribution-for-a-markov-kernel]]), and let\n$X$ be a $K$-chain with initial law $\\pi$\n([[def-initial-distribution-of-a-markov-chain]]). Then every finite-dimensional\nlaw of $X$ is invariant under every nonnegative integer time shift: for every\n$r\\ge1$, every $0\\le n_1<\\cdots<n_r$ and every $m\\ge0$,\n\n$$\\mathcal L(X_{m+n_1},\\ldots,X_{m+n_r})=\\mathcal L(X_{n_1},\\ldots,X_{n_r}).$$\n\nEquivalently, the canonical path law\n$\\mathbb P_X:=\\mathcal L\\bigl((X_n)_{n\\ge0}\\bigr)$ on\n$(E^{\\mathbb N_0},\\mathcal E^{\\otimes\\mathbb N_0})$ is invariant under the left\nshift $\\theta(z)_n=z_{n+1}$.",
+            "uses": [
+              "3.2",
+              "3.3",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F6",
+            "source": "def-total-variation-distance-for-probability-laws",
+            "source_section": "Definition",
+            "quote": "Let $\\mu$ and $\\nu$ be probability measures on the same measurable space\n$(E,\\mathcal E)$ ([[def-probability-measure]]). Their **total variation\ndistance** is\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}:=\\sup_{A\\in\\mathcal E}\\bigl|\\mu(A)-\\nu(A)\\bigr| .$$\n\nFor every event $A$ the difference $\\mu(A)-\\nu(A)$ is a real number in\n$[-1,1]$, because both measures have total mass one; hence the set being\nmaximized is a nonempty subset of $[0,1]$ and the supremum lies in $[0,1]$.\nThe empty event and the whole space give the values $0$ and\n$|\\mu(E)-\\nu(E)|=0$, so the distance is zero when $\\mu=\\nu$, and it is symmetric\nin $\\mu$ and $\\nu$. This convention carries no factor $1/2$ in the supremum;\nit is therefore not the total variation norm of the signed measure $\\mu-\\nu$,\nwhich is twice the quantity above when that signed measure is considered on a\nmeasurable space where the decomposition is attained. On a countable state\nspace with its power-set sigma-algebra the supremum equals the half-$\\ell^1$\nsum $\\tfrac12\\sum_{x\\in E}|\\mu(\\{x\\})-\\nu(\\{x\\})|$; that identity is proved in\n[[lem-total-variation-half-l1-formula-on-a-countable-space]], not assumed here.",
+            "uses": [
+              "3.3"
+            ]
+          },
+          {
+            "fact": "F7",
+            "source": "lem-harris-geometric-ergodicity-has-integrable-rate-envelope",
+            "source_section": "Statement",
+            "quote": "Assume the Axiom of Choice. Let $P$ be a probability kernel on an arbitrary measurable space $(\\mathsf X,\\mathcal X)$ with invariant probability $\\pi$. Suppose $P$ is geometrically ergodic in the sense of [[def-geometric-and-uniform-ergodicity-for-mcmc-clt]]: some everywhere finite measurable $M_0$ and common $r_0\\in(0,1)$ satisfy\n$$\\|P^n(x,\\cdot)-\\pi\\|_{\\mathrm{TV}}\\le M_0(x)r_0^n\\quad(x\\in\\mathsf X,\\ n\\ge1).$$\nThen there exist a finite measurable $M:\\mathsf X\\to[0,\\infty)$ with $\\pi(M)<\\infty$ and $r\\in(0,1)$ such that\n$$\\|P^n(x,\\cdot)-\\pi\\|_{\\mathrm{TV}}\\le M(x)r^n\\quad(x\\in\\mathsf X,\\ n\\ge1).$$\nIn particular, the conclusion holds for the originally stated case in which $P$ is also $\\phi$-irreducible ([[def-phi-irreducible-chain]]), aperiodic ([[def-general-state-aperiodic-markov-chain]]), and Harris recurrent relative to its nonzero $\\sigma$-finite irreducibility measure $\\phi$ ([[def-harris-recurrent-markov-chain]]).",
+            "uses": [
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F7",
+            "source": "lem-geometric-total-variation-rate-controls-strong-mixing",
+            "source_section": "Statement",
+            "quote": "Assume AC. Let $(X_k)_{k\\ge0}$ be a stationary time-homogeneous Markov chain\nwith invariant probability $\\pi$. Suppose there are a measurable\n$M:\\mathsf X\\to[0,\\infty)$ with $\\pi(M)<\\infty$ and $r\\in(0,1)$ such that\n$$\\|P^n(x,\\cdot)-\\pi\\|_{\\mathrm{TV}}\\le M(x)r^n\\quad\\text{for every }x\\in\\mathsf X,\\ n\\ge1.$$\nThen the strong-mixing coefficient of the stationary process satisfies\n$$\\alpha_X(n)\\le\\pi(M)r^n\\quad(n\\ge1).$$",
+            "uses": [
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F7",
+            "source": "def-geometric-and-uniform-ergodicity-for-mcmc-clt",
+            "source_section": "Definition",
+            "quote": "Let $P$ be a probability kernel with invariant probability $\\pi$ on a measurable space $(\\mathsf X,\\mathcal X)$. Write $P^n(x,\\cdot)$ for its $n$-step transition probability and use $\\|\\mu-\\nu\\|_{\\mathrm{TV}}=\\sup_{A\\in\\mathcal X}|\\mu(A)-\\nu(A)|$ for probability measures.\n\nThe chain is **geometrically ergodic** if there are a measurable finite function $M:\\mathsf X\\to[0,\\infty)$ and $r\\in(0,1)$ such that\n$$\\|P^n(x,\\cdot)-\\pi\\|_{\\mathrm{TV}}\\le M(x)r^n\\quad(x\\in\\mathsf X,\\ n\\ge1).$$\n\nIt is **uniformly ergodic** if this bound holds with $M$ bounded on $\\mathsf X$. These are convergence-rate properties, not conclusions about a particular function's CLT or long-run variance. If a proof needs $\\int M\\,d\\pi<\\infty$, that integrability is an additional stated hypothesis unless a cited theorem establishes it.",
+            "uses": [
+              "4.1"
+            ]
+          }
+        ],
+        "derivations": [
+          {
+            "id": "lem-zero-variance-geometric-markov-sums-have-strong-rate-step-1-1",
+            "claim": "Apply [F1] to obtain $g\\in L^p(\\pi)$ with $f=g-Pg$ almost everywhere; choose its finite measurable version as in that supplier. By [F3], $g\\in L^2$. Stationarity makes the Poisson identity hold at every $X_k$ simultaneously off a countable union of null events. By [F2], on this common event $f(X_k)=g(X_k)-g(X_{k+1})+D_{k+1}$. Summing gives $S_n:=\\sum_{k=0}^{n-1}f(X_k)=R_n+M_n$, with $R_n=g(X_0)-g(X_n)$ and $M_n=\\sum_{k=0}^{n-1}D_{k+1}$. No ergodic theorem or central limit theorem has been used.",
+            "step": "1.1",
+            "inputs": [
+              "A1",
+              "F1",
+              "F2",
+              "F3",
+              "given",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-zero-variance-geometric-markov-sums-have-strong-rate-step-1-2",
+            "claim": "Put $\\tau^2=\\mathbb E_\\pi D_1^2$. Stationarity of transition pairs gives $\\mathbb E D_j^2=\\tau^2$ for every $j\\ge1$. If $i<j$, then $D_i$ is $\\mathcal F_{j-1}$-measurable, its product with $D_j$ is integrable by [F3], and [F2]–[F3] give $\\mathbb E[D_iD_j]=\\mathbb E[D_i\\mathbb E(D_j\\mid\\mathcal F_{j-1})]=0$. Thus $\\mathbb E M_n^2=n\\tau^2$. The inequality $(a-b)^2\\le2a^2+2b^2$ and stationarity give $\\mathbb E R_n^2\\le4\\|g\\|_2^2$. Cauchy–Schwarz [F3] and step 1.1 imply $|n^{-1}\\mathbb E S_n^2-\\tau^2|\\le4\\|g\\|_2^2/n+4\\|g\\|_2\\tau/\\sqrt n\\to0$. By [F1], the same normalized second moments tend to $v=0$, so $\\tau^2=0$. A nonnegative variable of zero expectation is zero almost surely; applying this to each $D_j^2$ and taking the countable intersection shows that all $D_j$ vanish simultaneously. Hence $S_n=g(X_0)-g(X_n)$ for every $n$ on one probability-one event.",
+            "step": "1.2",
+            "inputs": [
+              "F1",
+              "F2",
+              "F3",
+              "step 1.1",
+              "given",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-zero-variance-geometric-markov-sums-have-strong-rate-step-2-1",
+            "claim": "Fix $\\varepsilon>0$. Pointwise, the number of positive integers $k$ with $|g(x)|^p>\\varepsilon^p k$ is at most $\\varepsilon^{-p}|g(x)|^p$. Stationarity and [F4], applied first to finite sums and then to their increasing limit, therefore give $\\sum_{k\\ge1}\\mathbb P_\\pi(|g(X_k)|>\\varepsilon k^{1/p})=\\sum_{k\\ge1}\\pi(|g|^p>\\varepsilon^p k)\\le\\varepsilon^{-p}\\pi|g|^p<\\infty$. Borel–Cantelli [F4], intersected over positive rational $\\varepsilon$, yields $g(X_k)=o(k^{1/p})$ almost surely. On that event, for every $\\varepsilon>0$ the sufficiently late terms obey $|g(X_k)|\\le\\varepsilon k^{1/p}\\le\\varepsilon n^{1/p}$ for $k\\le n$, while the maximum of the finitely many earlier terms divided by $n^{1/p}$ tends to zero. Thus $\\max_{k\\le n}|g(X_k)|=o(n^{1/p})$. Step 1.2 gives $\\max_{0\\le j\\le n}|S_j|\\le|g(X_0)|+\\max_{j\\le n}|g(X_j)|=o(n^{1/p})$, proving the stationary conclusion.",
+            "step": "2.1",
+            "inputs": [
+              "F4",
+              "step 1.1",
+              "step 1.2",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-zero-variance-geometric-markov-sums-have-strong-rate-step-3-1",
+            "claim": "For the all-start part, define the original path event $E=\\{(x_k)_{k\\ge0}:n^{-1/p}\\sum_{k=0}^{n-1}f(x_k)\\to0\\}$. It is product-measurable, since the condition is a countable combination of inequalities for finite measurable sums. It is invariant under deleting the first coordinate: if $s_n=\\sum_{k=0}^{n-1}f(x_k)$, the shifted sum is $s_{n+1}-f(x_0)$, and the reverse identity is $s_n=f(x_0)+(s_n-f(x_0))$ with the second term the shifted sum of length $n-1$. Since $f(x_0)$ is finite and $((n+1)/n)^{1/p}$ and $((n-1)/n)^{1/p}$ tend to one, either normalized convergence implies the other. Iterating gives invariance under deleting any fixed finite prefix. Also, on every real path, $s_n=o(n^{1/p})$ is equivalent to $\\max_{j\\le n}|s_j|=o(n^{1/p})$: the reverse direction is immediate, and the forward direction follows by discarding a finite initial segment and bounding all later $|s_j|$ by $\\varepsilon j^{1/p}$. Thus it suffices to transfer the event $E$, rather than any Poisson identity outside a stationary full-measure set.",
+            "step": "3.1",
+            "inputs": [
+              "given",
+              "construct",
+              "algebra",
+              "step 2.1"
+            ]
+          },
+          {
+            "id": "lem-zero-variance-geometric-markov-sums-have-strong-rate-step-3-2",
+            "claim": "Let $h(x)=\\mathbb P_x(E)$. By [F5], $h$ is measurable and $0\\le h\\le1$. The canonical stationary chain has the same path law as the stationary chain already considered, so step 2.1 gives $\\pi(h)=\\mathbb P_\\pi(E)=1$; this equality also follows by applying [F5] at time zero and taking expectations. For every state $x$ and integer $n\\ge1$, prefix-deletion invariance and [F5] give $h(x)=\\mathbb E_x1_E=\\mathbb E_x[h(X_n)]=P^nh(x)$. These are identities for each canonical starting state, not simultaneous versions of a conditional expectation over an uncountable family of starts.",
+            "step": "3.2",
+            "inputs": [
+              "A1",
+              "F5",
+              "step 2.1",
+              "step 3.1"
+            ]
+          },
+          {
+            "id": "lem-zero-variance-geometric-markov-sums-have-strong-rate-step-3-3",
+            "claim": "For any probability measures $\\mu,\\nu$ and measurable $0\\le h\\le1$, let $h_m=2^{-m}\\sum_{j=1}^{2^m}1_{\\{h\\ge j2^{-m}\\}}$. Then $|h_m-h|\\le2^{-m}$ and [F6] gives $|\\mu(h_m)-\\nu(h_m)|\\le\\|\\mu-\\nu\\|_{\\mathrm{TV}}$. Letting $m\\to\\infty$ proves the same bound for $h$. Under the additional pointwise total-variation assumption, apply it to $\\mu=P^n(x,\\cdot)$ and $\\nu=\\pi$. Step 3.2 gives $h(x)=P^nh(x)\\to\\pi(h)=1$ for every $x$, hence $h(x)=1$ everywhere. For any initial law $\\mu$, [F5] at time zero gives $\\mathbb P_\\mu(E)=\\int h\\,d\\mu=1$. The deterministic equivalence in step 3.1 transfers the uniform maximal rate as well. No moment or support condition on $\\mu$ is needed.",
+            "step": "3.3",
+            "inputs": [
+              "F5",
+              "F6",
+              "step 3.1",
+              "step 3.2",
+              "given",
+              "construct"
+            ]
+          },
+          {
+            "id": "lem-zero-variance-geometric-markov-sums-have-strong-rate-step-4-1",
+            "claim": "Finally suppose the everywhere common geometric bound in the Statement holds. Since its envelope is finite at every state, it implies $P^n(x,\\cdot)\\to\\pi$ in total variation for every $x$. By [F5] the canonical invariant-initial-law chain is stationary. The stronger arbitrary-measurable-space clause of [F7] supplies a finite integrable geometric envelope, and its mixing implication supplies the stationary geometric strong-mixing bound needed by [F1]. Therefore the proof in steps 1.1–3.3 applies to the stated $f$ and zero covariance sum under every initial law. The zero function, a one-state chain, empty partial sums and zero martingale variance are all included; an empty state space admits no invariant probability and does not satisfy the hypotheses. Strict $2<p<q$ is used by [F1] and the $L^2$ comparison. AC is inherited precisely through [F1], [F2], [F3], [F5] and [F7]. This completes both the stationary result and the asserted all-start sufficient conditions.",
+            "step": "4.1",
+            "inputs": [
+              "A1",
+              "F1",
+              "F2",
+              "F3",
+              "F5",
+              "F7",
+              "step 1.1",
+              "step 1.2",
+              "step 2.1",
+              "step 3.3",
+              "given"
+            ]
+          }
+        ],
+        "routine_steps": [],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "checked",
+            "evidence": "The empty partial sum at j=0 is defined as zero. An empty state space has no invariant probability and cannot meet the hypotheses."
+          },
+          {
+            "case": "zero",
+            "status": "checked",
+            "evidence": "Step 1.2 proves τ²=0 from v=0 using an exact second-moment comparison, then kills every martingale difference on one common event; the zero function is included."
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "The proof includes n=1, one-state chains, and finite prefix shifts; the n=0 partial sum contributes zero to the maximum."
+          },
+          {
+            "case": "degenerate",
+            "status": "checked",
+            "evidence": "No ergodic theorem or martingale CLT is used. The endpoint coboundary and Borel–Cantelli proof handle zero variance directly. Arbitrary initial laws require no moments."
+          },
+          {
+            "case": "endpoints",
+            "status": "checked",
+            "evidence": "p is strictly between 2 and q; Lp embeds in L², while g(Xn)=o(n1/p) uses its actual pth moment. The all-start transfer requires TV convergence at every state, not only π-almost every state."
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "checked",
+            "evidence": "AC is explicit and inherited through the proved Poisson, conditional-expectation, path-law and geometric-envelope suppliers. No uncountable simultaneous conditional-expectation versions are chosen."
+          },
+          {
+            "case": "iff-forward",
+            "status": "checked",
+            "evidence": "The deterministic equivalence between individual and maximal normalized-sum rates is proved in step 3.1. The theorem itself is not a biconditional."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "checked",
+            "evidence": "The reverse direction of that deterministic rate equivalence follows by bounding |S_n| by its partial-sum maximum, explicitly in step 3.1; no converse theorem about zero variance is asserted."
+          }
+        ],
+        "finite_checks": [],
+        "finite_smoke": [],
+        "risk_review": {
+          "status": "pass",
+          "notes": "Variance comparison kills the martingale without ergodicity or CLT. Integrated-tail Borel–Cantelli yields the uniform stationary rate; the measurable prefix-invariant original-path event transfers under everywhere TV convergence. Broad geometric applicability uses the actual strengthened current envelope supplier, with no extra Harris or one-step assumptions."
+        }
+      }
+    }
+  },
+  "source_reading": [
+    {
+      "url": "https://www.numdam.org/item/AIHPB_1994__30_1_63_0.pdf",
+      "inspected": "Actual full PDF retrieved. Printed p.66/PDF p.5 was rendered and opened: quantile definition, Lemma1 finite-variance requirement/covariance bound and Proposition1 covariance variance conclusion inspected. Introduction and surrounding text read. Neither article nor external covariance result is used in place of the explicit proved local suppliers."
+    },
+    {
+      "url": "https://arxiv.org/pdf/math/0409112",
+      "inspected": "Actual full PDF retrieved. Theorem2 mixing-rate implication, §4 opening discussion, Theorem5 and its covariance variance setting on PDF pp.8–10 inspected. The zero-rate and arbitrary-start event proof are derived locally."
+    }
+  ],
+  "limitations": "The two new draft lemmas establish Poisson solutions and zero-variance rates. They do not supply a positive-variance Brownian approximation or claim full SIP closure. Existing source/frontmatter/metadata/proposal files were not edited.",
+  "verification_policy": "No dependency levels or verification stamps added. Exact quotes and mathematical derivations are proposed for owner integration, not represented as an independent acceptance receipt."
+}

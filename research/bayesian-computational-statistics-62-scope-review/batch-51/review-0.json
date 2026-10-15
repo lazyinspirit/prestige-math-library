@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "51",
+  "round": 0,
+  "reviewed_items": [
+    "alg-lower-empirical-bootstrap-quantile",
+    "def-iid-empirical-bootstrap-sample",
+    "lem-iid-sample-covariance-converges",
+    "alg-basic-bootstrap-interval",
+    "alg-bias-corrected-bootstrap-interval",
+    "alg-bootstrap-t-interval",
+    "alg-percentile-bootstrap-interval",
+    "lem-empirical-bootstrap-law-is-a-probability-measure",
+    "thm-delete-one-jackknife-linearization-for-smooth-statistics",
+    "lem-finite-bootstrap-cdf-supremum-is-measurable",
+    "alg-delete-one-jackknife-acceleration",
+    "lem-finite-index-bootstrap-sample-is-conditionally-iid",
+    "alg-bca-bootstrap-interval",
+    "thm-conditional-iid-bootstrap-clt-for-empirical-law",
+    "thm-iid-bootstrap-validity-for-smooth-statistics",
+    "ex-delete-one-jackknife-for-sample-mean",
+    "ex-discrete-median-bootstrap-ties",
+    "cex-iid-bootstrap-inconsistency-at-absolute-mean-kink",
+    "ex-iid-bootstrap-smooth-mean"
+  ],
+  "reviewed_pages": [
+    "iid-bootstrap-and-jackknife-validity",
+    "iid-bootstrap-and-jackknife-validity-examples"
+  ],
+  "decision": "repair",
+  "reason": "Reviewed the complete batch, approved scope, and actual supplier claims and proofs. The substantive theorems and examples are otherwise within scope; the listed defects can be repaired locally, with no unresolved outside prerequisite gap.",
+  "findings": [
+    {
+      "id": "iid-bootstrap-and-jackknife-validity",
+      "type": "scope",
+      "reason": "The page summary says differentiability yields bootstrap validity and C1 yields jackknife validity without stating the approved results’ key conditions: IID Euclidean data, finite second moment, AC where used, and positive finite projected variance. The formal theorem statements include these conditions; align the summary with them."
+    },
+    {
+      "id": "alg-bias-corrected-bootstrap-interval",
+      "type": "local",
+      "reason": "For finite bootstrap lists, the midrank probability can be 0 or 1. The algorithm defines the inverse CDF at those endpoints but then evaluates Φ at ±∞, while the supplied CDF is defined on the real line. Specify Φ(−∞)=0 and Φ(+∞)=1, or define an explicit endpoint branch."
+    },
+    {
+      "id": "thm-delete-one-jackknife-linearization-for-smooth-statistics",
+      "type": "local",
+      "reason": "Proof step 1.1 defines ω_n using gradients along all deletion segments, although g is only differentiable on U and some paths may leave U on the exceptional event. The uncountable supremum’s measurability is also unstated. Localize the definition to the high-probability event and justify measurability, or use a deterministic continuity bound."
+    },
+    {
+      "id": "alg-delete-one-jackknife-acceleration",
+      "type": "local",
+      "reason": "The contextual claim invoking the jackknife theorem says only “a C1 function of an IID mean.” The theorem also requires finite second moment, a Borel function C1 near μ, and 0<a^TΣa<∞. State that the result holds under the theorem’s hypotheses."
+    },
+    {
+      "id": "ex-delete-one-jackknife-for-sample-mean",
+      "type": "local",
+      "reason": "Fact [F1] takes the pseudovalue and variance formulas from a theorem whose hypotheses include IID data, finite second moment, local C1 regularity, and positive projected variance; the example assumes only real data with n≥2. State those formulas locally and verify the algebra directly, or state sufficient theorem hypotheses."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-bca-bootstrap-interval",
+      "decision": "accept",
+      "reason": "It consumes the computed acceleration formula and handles undefined outputs through its stated branches; clarifying the acceleration theorem’s hypotheses does not change this use."
+    }
+  ]
+}

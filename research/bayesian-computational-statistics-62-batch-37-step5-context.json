@@ -1,0 +1,507 @@
+{
+  "group": "k",
+  "batches": [
+    "37"
+  ],
+  "pages_read": [
+    "hamiltonian-monte-carlo-and-leapfrog",
+    "hamiltonian-monte-carlo-and-leapfrog-examples"
+  ],
+  "items_read": [
+    "def-leapfrog-step-map",
+    "thm-exact-hamiltonian-flow-preserves-energy-and-volume",
+    "lem-real-line-exponential-tail-integrable",
+    "thm-leapfrog-is-reversible-and-volume-preserving",
+    "def-hamiltonian-monte-carlo",
+    "alg-leapfrog-hamiltonian-monte-carlo",
+    "thm-metropolized-hamiltonian-chain-preserves-target",
+    "ex-hmc-globally-lipschitz-force",
+    "ex-hmc-exact-flow-limit",
+    "ex-hmc-leapfrog-harmonic-resonance",
+    "ex-hmc-finite-step-energy-error"
+  ],
+  "conventions": [
+    {
+      "convention": "Composition is read right to left; leapfrog is a half kick, full drift, half kick. The proposal is T = R composed with the L-step map, with R(q,p) = (q,-p), ε > 0 and finite integer L ≥ 1.",
+      "fixed_by": "def-leapfrog-step-map",
+      "matters_for": [
+        "thm-leapfrog-is-reversible-and-volume-preserving",
+        "alg-leapfrog-hamiltonian-monte-carlo",
+        "thm-metropolized-hamiltonian-chain-preserves-target",
+        "ex-hmc-leapfrog-harmonic-resonance",
+        "ex-hmc-finite-step-energy-error"
+      ]
+    },
+    {
+      "convention": "The mass matrix M is real symmetric positive definite; refreshed momentum has covariance M, and kinetic energy is pᵀM⁻¹p/2.",
+      "fixed_by": "def-hamiltonian-monte-carlo",
+      "matters_for": [
+        "alg-leapfrog-hamiltonian-monte-carlo",
+        "thm-metropolized-hamiltonian-chain-preserves-target"
+      ]
+    },
+    {
+      "convention": "Finite leapfrog needs only U ∈ C¹. Classical kick Jacobians are asserted only for U ∈ C²; volume preservation at C¹ means preservation of full Euclidean Lebesgue measure.",
+      "fixed_by": "thm-leapfrog-is-reversible-and-volume-preserving",
+      "matters_for": [
+        "thm-metropolized-hamiltonian-chain-preserves-target"
+      ]
+    },
+    {
+      "convention": "Exact-flow conclusions assume U ∈ C² and completeness in both time directions. Countable Choice is assumed for Lebesgue change of variables; a globally Lipschitz gradient is a sufficient completeness condition.",
+      "fixed_by": "thm-exact-hamiltonian-flow-preserves-energy-and-volume",
+      "matters_for": [
+        "ex-hmc-globally-lipschitz-force",
+        "ex-hmc-exact-flow-limit",
+        "def-hamiltonian-monte-carlo"
+      ]
+    },
+    {
+      "convention": "HMC assumes AC and 0 < Z_U < ∞. Its position target and phase-space Markov kernels use Borel sigma-algebras; momentum is refreshed independently before each update.",
+      "fixed_by": "def-hamiltonian-monte-carlo",
+      "matters_for": [
+        "alg-leapfrog-hamiltonian-monte-carlo",
+        "thm-metropolized-hamiltonian-chain-preserves-target",
+        "ex-hmc-exact-flow-limit"
+      ]
+    },
+    {
+      "convention": "Acceptance uses min{1, exp(H(z)−H(Tz))}; rejection retains the original phase point before position projection.",
+      "fixed_by": "alg-leapfrog-hamiltonian-monte-carlo",
+      "matters_for": [
+        "thm-metropolized-hamiltonian-chain-preserves-target",
+        "ex-hmc-leapfrog-harmonic-resonance",
+        "ex-hmc-finite-step-energy-error"
+      ]
+    },
+    {
+      "convention": "Natural indices start at zero; real interval endpoints use their canonical real embeddings, and the geometric sum starts at k = 0.",
+      "fixed_by": "lem-real-line-exponential-tail-integrable",
+      "matters_for": [
+        "ex-hmc-globally-lipschitz-force"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-leapfrog-is-reversible-and-volume-preserving",
+      "statement": "Assume Countable Choice. Every kick K_a and drift D_b preserves full Euclidean Lebesgue measure. Consequently the finite leapfrog map and T = R composed with that map preserve phase volume, and T² = I. Classical kick and drift Jacobians have determinant one when U ∈ C²; the C¹ conclusion does not presume those Jacobians exist.",
+      "used_by": [
+        "thm-metropolized-hamiltonian-chain-preserves-target"
+      ]
+    },
+    {
+      "id": "def-leapfrog-step-map",
+      "statement": "For d ≥ 1, U continuously differentiable, M real symmetric positive definite and ε > 0, define K_a(q,p) = (q,p−a∇U(q)), D_b(q,p) = (q+bM⁻¹p,p), Φ_ε = K_(ε/2) composed with D_ε composed with K_(ε/2), and T_(ε,L) = R composed with Φ_ε^L for finite integer L ≥ 1.",
+      "used_by": [
+        "thm-leapfrog-is-reversible-and-volume-preserving",
+        "def-hamiltonian-monte-carlo",
+        "alg-leapfrog-hamiltonian-monte-carlo",
+        "thm-metropolized-hamiltonian-chain-preserves-target",
+        "ex-hmc-leapfrog-harmonic-resonance",
+        "ex-hmc-finite-step-energy-error"
+      ]
+    },
+    {
+      "id": "def-hamiltonian-monte-carlo",
+      "statement": "Assume AC, d ≥ 1, U ∈ C¹ with 0 < Z_U < ∞, and SPD M. The position density is Z_U⁻¹exp(−U), momentum is refreshed independently from N_d(0,M), and the flipped finite leapfrog proposal is accepted with probability min{1, exp(H(z)−H(z*))}.",
+      "used_by": [
+        "alg-leapfrog-hamiltonian-monte-carlo",
+        "thm-metropolized-hamiltonian-chain-preserves-target",
+        "ex-hmc-globally-lipschitz-force",
+        "ex-hmc-exact-flow-limit",
+        "ex-hmc-leapfrog-harmonic-resonance",
+        "ex-hmc-finite-step-energy-error"
+      ]
+    },
+    {
+      "id": "thm-exact-hamiltonian-flow-preserves-energy-and-volume",
+      "statement": "For d ≥ 1, U ∈ C², SPD M and Countable Choice, a complete Hamiltonian vector field has a unique global C¹ flow conserving H with det DΦ_t = 1, hence preserving phase volume. If ∇U is globally L-Lipschitz, completeness holds and the stability bound is exp(C|t|), with C = max{‖M⁻¹‖_F,L}.",
+      "used_by": [
+        "def-hamiltonian-monte-carlo",
+        "ex-hmc-globally-lipschitz-force",
+        "ex-hmc-exact-flow-limit"
+      ]
+    },
+    {
+      "id": "thm-metropolized-hamiltonian-chain-preserves-target",
+      "statement": "Under AC, U ∈ C¹ with 0 < Z_U < ∞, SPD M, ε > 0 and finite integer L ≥ 1, the phase-space Metropolis correction with the stated energy-ratio acceptance and the refresh-correct-project position transition are probability kernels, and the position transition leaves π invariant. No mixing or convergence conclusion is asserted.",
+      "used_by": [
+        "hamiltonian-monte-carlo-and-leapfrog",
+        "hamiltonian-monte-carlo-and-leapfrog-examples"
+      ]
+    },
+    {
+      "id": "lem-real-line-exponential-tail-integrable",
+      "statement": "Assume Countable Choice and let f(x) = exp(−|x|) on R. Then f is nonnegative and Lebesgue measurable, and its Lebesgue integral over R is finite.",
+      "used_by": [
+        "ex-hmc-globally-lipschitz-force"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+      "used_for": "Finite addition in the exponential-tail integral comparison.",
+      "opened": true
+    },
+    {
+      "id": "cor-continuous-functions-are-borel-measurable",
+      "used_for": "Measurability of the continuous exponential tail under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Positive densities and exponential acceptance calculations.",
+      "opened": true
+    },
+    {
+      "id": "cor-globally-lipschitz-odes-have-global-solutions",
+      "used_for": "Completeness of globally Lipschitz Hamiltonian fields.",
+      "opened": true
+    },
+    {
+      "id": "cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure",
+      "used_for": "Extension of shear preservation from Borel sets to all Lebesgue-measurable sets.",
+      "opened": true
+    },
+    {
+      "id": "cor-lipschitz-ode-uniqueness-and-stability-estimate",
+      "used_for": "Two-sided-time Hamiltonian stability estimates.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "The global Lipschitz bound for the derivative of sqrt(1+q²).",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicit HMC choice assumption.",
+      "opened": true
+    },
+    {
+      "id": "def-canonical-natural",
+      "used_for": "Natural indices interpreted as real interval endpoints.",
+      "opened": true
+    },
+    {
+      "id": "def-cholesky-factorisation-with-positive-diagonal",
+      "used_for": "Positive-diagonal factorization of the mass matrix.",
+      "opened": true
+    },
+    {
+      "id": "def-composition-of-probability-kernels",
+      "used_for": "The refresh-correct-project composition SPJ.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Lebesgue construction, completion and change-of-variables hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "def-dirac-measure",
+      "used_for": "Deterministic phase proposal and position projection kernels.",
+      "opened": true
+    },
+    {
+      "id": "def-integer-power",
+      "used_for": "The exponential-tail geometric envelope.",
+      "opened": true
+    },
+    {
+      "id": "def-integral-of-a-nonnegative-simple-function",
+      "used_for": "Positive lower bounds on target masses.",
+      "opened": true
+    },
+    {
+      "id": "def-integral-over-a-measurable-set",
+      "used_for": "Restricted tail integrals and interval probability bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+      "used_for": "The meaning of target invariance and measure action by a kernel.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Euclidean gradient and Hamiltonian derivative conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+      "used_for": "Full Lebesgue volume and its Borel restriction.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Measurable pushforwards and deterministic kernels.",
+      "opened": true
+    },
+    {
+      "id": "def-measure",
+      "used_for": "Countable additivity of the transposed proposal flow.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Pointwise probability-kernel requirements.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-preserving-transformation-and-system",
+      "used_for": "Inverse-image formulation of phase-volume preservation.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "The momentum law N_d(0,M), with covariance M and AC.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-numbers",
+      "used_for": "Zero-based natural indices in the tail partition.",
+      "opened": true
+    },
+    {
+      "id": "def-nonnegative-lebesgue-integral",
+      "used_for": "Definition of the tail integral.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Unit-mass target and momentum laws.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Phase-space products, graph maps and refresh sections.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-borel-space",
+      "used_for": "The state-space input required by general MH.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Gaussian target normalization in the exact-flow and resonance examples.",
+      "opened": true
+    },
+    {
+      "id": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+      "used_for": "Deriving Countable Choice from the HMC AC assumption.",
+      "opened": true
+    },
+    {
+      "id": "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+      "used_for": "Joint C¹ flow, inverse time slices and the variational equation.",
+      "opened": true
+    },
+    {
+      "id": "lem-coordinate-maps-and-permutations-are-measurable-on-finite-products",
+      "used_for": "Measurability of graph maps and coordinate swaps.",
+      "opened": true
+    },
+    {
+      "id": "lem-dirac-integral-evaluation",
+      "used_for": "Evaluation of deterministic proposal integrals.",
+      "opened": true
+    },
+    {
+      "id": "lem-kernel-composition-is-well-defined-and-associative",
+      "used_for": "Probability-kernel status and associativity of SPJ.",
+      "opened": true
+    },
+    {
+      "id": "lem-prior-and-model-kernel-define-joint-law",
+      "used_for": "Proposal-flow construction and the refreshed product law.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Tail domination and positive interval-mass bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Continuity of the reciprocal on positive reals in the RN-version construction.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurability of densities, products and common-density minima.",
+      "opened": true
+    },
+    {
+      "id": "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+      "used_for": "Identifying Borel phase space with the product Borel space.",
+      "opened": true
+    },
+    {
+      "id": "thm-borel-sets-are-lebesgue-measurable",
+      "used_for": "Applying Lebesgue integration to Borel shear preimages.",
+      "opened": true
+    },
+    {
+      "id": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+      "used_for": "Converting determinant one into exact-flow volume preservation.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "The Frobenius-norm bound on the momentum component of the field.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Energy differentiation and invertibility of flow derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "Invertibility and positive determinant of SPD mass matrices.",
+      "opened": true
+    },
+    {
+      "id": "thm-composition-of-continuous-functions",
+      "used_for": "Continuity context for composed scalar functions; the invariance proof supplies explicit inverse-image arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-preimages-of-borel-sets-are-borel",
+      "used_for": "Borel measurability of proposal maps, projections and composed densities.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-differential-and-jacobis-formula",
+      "used_for": "Differentiating the determinant of the variational matrix.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-multiplicative",
+      "used_for": "The Cholesky determinant calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-of-a-triangular-matrix",
+      "used_for": "Cholesky positivity and determinant-one shear Jacobians.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Identifying exp(−k) with exp(−1)^k.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Tail comparisons, density measurability and acceptance inequalities.",
+      "opened": true
+    },
+    {
+      "id": "thm-geometric-series",
+      "used_for": "Summability of the zero-based exponential-tail envelope.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "The natural-power exponential identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-integrals-are-invariant-under-measure-preserving-maps",
+      "used_for": "Rewriting the transposed deterministic proposal flow using T² = I.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "used_for": "Sigma-finite exhaustions and lengths of half-open or closed intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-under-dilations-and-reflections",
+      "used_for": "Momentum-flip volume preservation.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+      "used_for": "Sectionwise kick and drift volume preservation.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+      "used_for": "Identifying product integration with Euclidean phase volume on Borel sets.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Measurability of refresh and Metropolis kernel evaluations.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Passing from bounded intervals to the full exponential-tail integral.",
+      "opened": true
+    },
+    {
+      "id": "thm-nondegenerate-multivariate-normal-law-has-density",
+      "used_for": "The Gaussian momentum density and phase density proportional to exp(−H).",
+      "opened": true
+    },
+    {
+      "id": "thm-nonnegative-weighted-sums-of-measures",
+      "used_for": "The finite dominating measure μ + μᵀ.",
+      "opened": true
+    },
+    {
+      "id": "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+      "used_for": "Well-defined inverse mass matrix.",
+      "opened": true
+    },
+    {
+      "id": "thm-sections-of-product-measurable-functions-are-measurable",
+      "used_for": "Shear sections and momentum-refresh sections.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Product phase measure and identification of the refreshed law on rectangles.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Sectionwise volume preservation and product-density normalization.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-leapfrog-hamiltonian-monte-carlo",
+      "concern": "Definition step 3 says to 'apply [[alg-metropolis-hastings-kernel]]' and then 'Equivalently, accept' with the pointwise energy-ratio formula. The supplier permits arbitrary measurable RN representatives and explicitly warns that they can change the kernel at target-null starting states. Thus equivalence needs the particular representatives constructed in thm-metropolized-hamiltonian-chain-preserves-target step 3.1. For a concrete distinction, take d=1, U(q)=q²/2, M=1, ε=L=1. The set of phase-pair inputs whose first phase point has position q=0 is null for μ+μᵀ. Setting the supplier's f=g=1/2 there is allowed and gives acceptance one at z=(0,1), whereas the specified energy formula gives exp(−1/8). The local theorem already supplies the required representatives, so this is a readily closed version-selection gap; it does not undermine that theorem's proof for its explicitly specified acceptance.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "hamiltonian-monte-carlo-and-leapfrog",
+      "to": "numerical-optimization-for-statistical-computation",
+      "faithful": true,
+      "note": "The HMC definition imports only the C¹ real objective and Euclidean gradient convention from alg-gradient-descent. It imports no optimization convergence claim."
+    },
+    {
+      "from": "hamiltonian-monte-carlo-and-leapfrog",
+      "to": "metropolis-hastings-algorithm-and-invariance",
+      "faithful": false,
+      "note": "The invariance theorem faithfully supplies AC, a standard-Borel phase space, a probability target and deterministic proposal, and explicitly constructs valid RN representatives. Algorithm step 3's unqualified pointwise 'Equivalently' is stronger than the supplier's arbitrary-version interface; see the concern. The supplier itself correctly states its null-state caveat."
+    },
+    {
+      "from": "hamiltonian-monte-carlo-and-leapfrog",
+      "to": "conjugate-families-and-posterior-prediction",
+      "faithful": true,
+      "note": "The actual item use is lem-finite-euclidean-space-is-standard-borel for phase space R^(2d). Its statement and proof cover every finite positive dimension with the product topology and Borel sigma-algebra. No conjugacy or Gaussian-conditioning conclusion is imported."
+    }
+  ]
+}

@@ -1,0 +1,420 @@
+{
+  "version": 1,
+  "purpose": "Exact current source projections; root owns manifest/frontmatter numeric levels, hashes and readiness.",
+  "items": [
+    {
+      "id": "alg-k-sample-null-constrained-block-bootstrap",
+      "frontmatter": {
+        "id": "alg-k-sample-null-constrained-block-bootstrap",
+        "kind": "algorithm",
+        "title": "Null-constrained block bootstrap for independent series",
+        "status": "draft",
+        "origin": "pipeline",
+        "pipeline_run": "bayesian-computational-statistics-62",
+        "dependency_level": 2,
+        "deps": [
+          "alg-moving-block-bootstrap",
+          "alg-tapered-block-bootstrap",
+          "alg-overlapping-block-resampling"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "verification": {
+          "precheck": "n/a"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Pilavakis, E. Paparoditis, and T. Sapatinas, Moving block and tapered block bootstrap for functional time series with an application to the K-sample mean problem, Bernoulli 25 (2019), Section 3.2",
+              "url": "https://arxiv.org/pdf/1711.01070"
+            }
+          ]
+        }
+      },
+      "manifest_row_without_root_owned_dependency_level": {
+        "id": "alg-k-sample-null-constrained-block-bootstrap",
+        "kind": "algorithm",
+        "title": "Null-constrained block bootstrap for independent series",
+        "deps": [
+          "alg-moving-block-bootstrap",
+          "alg-tapered-block-bootstrap",
+          "alg-overlapping-block-resampling"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "statement": "**Input:** a fixed number $K\\ge2$ of observed series $Y_{i,1},\\ldots,Y_{i,n_i}$ in a real Hilbert space $H$, positive integer sample sizes $n_i$, total size $M=\\sum_{i=1}^K n_i$, integer block lengths $1\\le b_i\\le n_i$, and a mode, moving or tapered. For tapered mode also supply an admissible window with positive block norm at each $b_i$. Put\n\n$$\\bar Y_i=\\frac1{n_i}\\sum_{t=1}^{n_i}Y_{i,t},\\qquad \\bar Y_P=\\frac1M\\sum_{i=1}^K n_i\\bar Y_i,\\qquad R_{i,t}=Y_{i,t}-\\bar Y_i.$$\n\nFor each series $i=1,\\ldots,K$, let $N_i=n_i-b_i+1$ and $k_i=\\lceil n_i/b_i\\rceil$. For every candidate start $j=1,\\ldots,N_i$ and position $r=1,\\ldots,b_i$, define the following arrays. In moving mode set $A_{i,j,r}=R_{i,j+r-1}$. In tapered mode set $A_{i,j,r}=a_{b_i}w_{b_i}(r)R_{i,j+r-1}$, with $a_{b_i}$ and $w_{b_i}$ as in [[alg-tapered-block-bootstrap]]. For each $i=1,\\ldots,K$ and $s=1,\\ldots,k_i$, draw independent uniform starts $J_{i,s}\\in\\{1,\\ldots,N_i\\}$, using the index law of [[alg-overlapping-block-resampling]]. For each within-block position define\n\n$$c_{i,r}=\\frac1{N_i}\\sum_{j=1}^{N_i}A_{i,j,r}.$$\n\n**Output:** for each $i$, a pseudo-series $Y^*_{i,1},\\ldots,Y^*_{i,n_i}$. In the order $s=1,\\ldots,k_i$, retain the positions $r=1,\\ldots,q_{i,s}$, where $q_{i,s}=\\min\\{b_i,n_i-(s-1)b_i\\}$, and set\n\n$$Y^*_{i,(s-1)b_i+r}=\\bar Y_P+A_{i,J_{i,s},r}-c_{i,r}.$$\n\nThus a divisible sample uses $k_i$ complete blocks; otherwise only the first $n_i-b_i\\lfloor n_i/b_i\\rfloor$ positions of the final block are retained. This centers each resampled residual position by its own conditional average, then gives every pseudo-series the same pooled location $\\bar Y_P$. All block starts are conditionally independent across blocks and across series.",
+        "strategy": "Operational definition; no phase proof is applicable.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Pilavakis, E. Paparoditis, and T. Sapatinas, Moving block and tapered block bootstrap for functional time series with an application to the K-sample mean problem, Bernoulli 25 (2019), Section 3.2",
+              "url": "https://arxiv.org/pdf/1711.01070"
+            }
+          ]
+        }
+      },
+      "new_item": false,
+      "page": "block-bootstrap-for-dependent-data"
+    },
+    {
+      "id": "lem-k-sample-null-centering",
+      "frontmatter": {
+        "id": "lem-k-sample-null-centering",
+        "kind": "lemma",
+        "title": "Exact null centering of the K-sample block bootstrap",
+        "status": "draft",
+        "origin": "pipeline",
+        "pipeline_run": "bayesian-computational-statistics-62",
+        "dependency_level": 3,
+        "deps": [
+          "alg-k-sample-null-constrained-block-bootstrap"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Pilavakis, E. Paparoditis, and T. Sapatinas, Moving block and tapered block bootstrap for functional time series with an application to the K-sample mean problem, Bernoulli 25 (2019), Section 3.2",
+              "url": "https://arxiv.org/pdf/1711.01070"
+            }
+          ]
+        }
+      },
+      "manifest_row_without_root_owned_dependency_level": {
+        "id": "lem-k-sample-null-centering",
+        "kind": "lemma",
+        "title": "Exact null centering of the K-sample block bootstrap",
+        "deps": [
+          "alg-k-sample-null-constrained-block-bootstrap"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "For fixed data and either mode of [[alg-k-sample-null-constrained-block-bootstrap]], every pseudo-observation in every series has conditional expectation $\\bar Y_P$. Consequently, for each $i$,\n\n$$E^*\\bar Y_i^*=\\bar Y_P,$$\n\nso the conditional mean functions of the $K$ pseudo-series are equal.",
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Pilavakis, E. Paparoditis, and T. Sapatinas, Moving block and tapered block bootstrap for functional time series with an application to the K-sample mean problem, Bernoulli 25 (2019), Section 3.2",
+              "url": "https://arxiv.org/pdf/1711.01070"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      "new_item": false,
+      "page": "block-bootstrap-for-dependent-data"
+    },
+    {
+      "id": "thm-moving-block-bootstrap-clt-for-dependent-data",
+      "frontmatter": {
+        "id": "thm-moving-block-bootstrap-clt-for-dependent-data",
+        "kind": "theorem",
+        "title": "Moving block bootstrap CLT for dependent Hilbert-valued data",
+        "status": "draft",
+        "origin": "pipeline",
+        "pipeline_run": "bayesian-computational-statistics-62",
+        "dependency_level": 5,
+        "deps": [
+          "lem-weighted-overlapping-block-moment-and-covariance-limits",
+          "lem-conditional-independent-block-bootstrap-clt",
+          "alg-moving-block-bootstrap",
+          "def-axiom-of-choice",
+          "def-conditional-weak-convergence-in-probability",
+          "def-l2-m-approximable-causal-bernoulli-shift",
+          "lem-moving-block-bootstrap-conditional-covariance",
+          "thm-hilbert-valued-clt-for-l2-m-approximable-bernoulli-shifts"
+        ],
+        "proof_strategy": "block decomposition, conditional iid limit, covariance consistency and Hilbert-space tightness",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Pilavakis, E. Paparoditis, and T. Sapatinas, Moving block and tapered block bootstrap for functional time series with an application to the K-sample mean problem, Bernoulli 25 (2019), Theorem 2.1 and Appendix",
+              "url": "https://arxiv.org/pdf/1711.01070"
+            },
+            {
+              "title": "A. DasGupta, Asymptotic Theory of Statistics and Probability, Section 29.18, Block Bootstrap Methods, pp. 478-479",
+              "url": "https://www.stat.purdue.edu/~dasgupta/bootstrap.pdf"
+            }
+          ]
+        }
+      },
+      "manifest_row_without_root_owned_dependency_level": {
+        "id": "thm-moving-block-bootstrap-clt-for-dependent-data",
+        "kind": "theorem",
+        "title": "Moving block bootstrap CLT for dependent Hilbert-valued data",
+        "deps": [
+          "lem-weighted-overlapping-block-moment-and-covariance-limits",
+          "lem-conditional-independent-block-bootstrap-clt",
+          "alg-moving-block-bootstrap",
+          "def-axiom-of-choice",
+          "def-conditional-weak-convergence-in-probability",
+          "def-l2-m-approximable-causal-bernoulli-shift",
+          "lem-moving-block-bootstrap-conditional-covariance",
+          "thm-hilbert-valued-clt-for-l2-m-approximable-bernoulli-shifts"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "statement": "Assume the Axiom of Choice. Let $H=L^2([0,1])$, and let $(X_t)_{t\\in\\mathbb Z}$ be a centered causal Bernoulli shift that is $L^2$-$m$-approximable under [[def-l2-m-approximable-causal-bernoulli-shift]]. Write\n\n$$\\delta_m=\\bigl(E\\|X_0-X_{0,m}\\|_H^2\\bigr)^{1/2}.$$\n\nAssume the stronger approximation condition $m\\delta_m\\to0$. For each $n$, let $b_n$ be an integer with $b_n\\to\\infty$ and $b_n/\\sqrt n\\to0$. For all sufficiently large $n$, these conditions give $1\\le b_n\\le n$; apply [[alg-moving-block-bootstrap]] to $X_1,\\ldots,X_n$ on this admissible tail. All limits below concern that tail. Let $\\Gamma$ be the long-run covariance operator from [[thm-hilbert-valued-clt-for-l2-m-approximable-bernoulli-shifts]], and let $\\bar X_n^*=n^{-1}\\sum_{t=1}^nX_t^*$. Then\n\n$$\\mathcal L^*\\!\\left(\\sqrt n(\\bar X_n^*-E^*\\bar X_n^*)\\right)\\Rightarrow\\mathcal L(G)\\quad\\hbox{in probability},$$\n\nand\n\n$$\\left\\|n\\,\\operatorname{Cov}^*(\\bar X_n^*)-\\Gamma\\right\\|_{\\mathrm{HS}}\\longrightarrow0\\quad\\hbox{in probability},$$\n\nwhere $G$ is the centered $H$-valued Gaussian with covariance $\\Gamma$.",
+        "strategy": "block decomposition, conditional iid limit, covariance consistency and Hilbert-space tightness",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Pilavakis, E. Paparoditis, and T. Sapatinas, Moving block and tapered block bootstrap for functional time series with an application to the K-sample mean problem, Bernoulli 25 (2019), Theorem 2.1 and Appendix",
+              "url": "https://arxiv.org/pdf/1711.01070"
+            },
+            {
+              "title": "A. DasGupta, Asymptotic Theory of Statistics and Probability, Section 29.18, Block Bootstrap Methods, pp. 478-479",
+              "url": "https://www.stat.purdue.edu/~dasgupta/bootstrap.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "block decomposition, conditional iid limit, covariance consistency and Hilbert-space tightness"
+      },
+      "new_item": false,
+      "page": "block-bootstrap-for-dependent-data"
+    },
+    {
+      "id": "thm-tapered-block-bootstrap-clt-for-dependent-data",
+      "frontmatter": {
+        "id": "thm-tapered-block-bootstrap-clt-for-dependent-data",
+        "kind": "theorem",
+        "title": "Tapered block bootstrap CLT for dependent Hilbert-valued data",
+        "status": "draft",
+        "origin": "pipeline",
+        "pipeline_run": "bayesian-computational-statistics-62",
+        "dependency_level": 5,
+        "deps": [
+          "lem-weighted-overlapping-block-moment-and-covariance-limits",
+          "lem-conditional-independent-block-bootstrap-clt",
+          "alg-tapered-block-bootstrap",
+          "def-axiom-of-choice",
+          "def-conditional-weak-convergence-in-probability",
+          "def-l2-m-approximable-causal-bernoulli-shift",
+          "lem-taper-window-l2-normalization",
+          "lem-tapered-block-bootstrap-conditional-covariance",
+          "thm-hilbert-valued-clt-for-l2-m-approximable-bernoulli-shifts"
+        ],
+        "proof_strategy": "tapered block decomposition, conditional iid limit, tapered covariance consistency and Hilbert-space tightness",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Pilavakis, E. Paparoditis, and T. Sapatinas, Moving block and tapered block bootstrap for functional time series with an application to the K-sample mean problem, Bernoulli 25 (2019), Theorem 2.2",
+              "url": "https://arxiv.org/pdf/1711.01070"
+            },
+            {
+              "title": "A. DasGupta, Asymptotic Theory of Statistics and Probability, Section 29.18, Block Bootstrap Methods, pp. 478-479",
+              "url": "https://www.stat.purdue.edu/~dasgupta/bootstrap.pdf"
+            }
+          ]
+        }
+      },
+      "manifest_row_without_root_owned_dependency_level": {
+        "id": "thm-tapered-block-bootstrap-clt-for-dependent-data",
+        "kind": "theorem",
+        "title": "Tapered block bootstrap CLT for dependent Hilbert-valued data",
+        "deps": [
+          "lem-weighted-overlapping-block-moment-and-covariance-limits",
+          "lem-conditional-independent-block-bootstrap-clt",
+          "alg-tapered-block-bootstrap",
+          "def-axiom-of-choice",
+          "def-conditional-weak-convergence-in-probability",
+          "def-l2-m-approximable-causal-bernoulli-shift",
+          "lem-taper-window-l2-normalization",
+          "lem-tapered-block-bootstrap-conditional-covariance",
+          "thm-hilbert-valued-clt-for-l2-m-approximable-bernoulli-shifts"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "statement": "Assume the Axiom of Choice. Let $H=L^2([0,1])$, and let $(Y_t)_{t\\in\\mathbb Z}$ be a centered causal Bernoulli shift that is $L^2$-$m$-approximable under [[def-l2-m-approximable-causal-bernoulli-shift]]. Write\n\n$$\\delta_m=\\bigl(E\\|Y_0-Y_{0,m}\\|_H^2\\bigr)^{1/2}.$$\n\nAssume $m\\delta_m\\to0$, and let the integers $b_n\\to\\infty$ with $b_n/\\sqrt n\\to0$. Let the taper satisfy the support, positivity-near-$1/2$, symmetry and monotonicity conditions in [[alg-tapered-block-bootstrap]]. For all sufficiently large $n$, $1\\le b_n\\le n$ and $W_{b_n}>0$, the latter by [[lem-taper-window-l2-normalization]]. Apply that algorithm to $Y_1,\\ldots,Y_n$ only on this admissible tail; all limits below concern that tail. Write $\\bar Y_n^*=n^{-1}\\sum_{t=1}^nY_t^*$ for the resulting bootstrap mean. Let $\\Gamma$ be the long-run covariance operator from [[thm-hilbert-valued-clt-for-l2-m-approximable-bernoulli-shifts]]. Then\n\n$$\\mathcal L^*\\!\\left(\\sqrt n(\\bar Y_n^*-E^*\\bar Y_n^*)\\right)\\Rightarrow\\mathcal L(G)\\quad\\hbox{in probability},$$\n\nand\n\n$$\\left\\|n\\,\\operatorname{Cov}^*(\\bar Y_n^*)-\\Gamma\\right\\|_{\\mathrm{HS}}\\longrightarrow0\\quad\\hbox{in probability},$$\n\nwhere $G$ is centered Gaussian with covariance $\\Gamma$.",
+        "strategy": "tapered block decomposition, conditional iid limit, tapered covariance consistency and Hilbert-space tightness",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Pilavakis, E. Paparoditis, and T. Sapatinas, Moving block and tapered block bootstrap for functional time series with an application to the K-sample mean problem, Bernoulli 25 (2019), Theorem 2.2",
+              "url": "https://arxiv.org/pdf/1711.01070"
+            },
+            {
+              "title": "A. DasGupta, Asymptotic Theory of Statistics and Probability, Section 29.18, Block Bootstrap Methods, pp. 478-479",
+              "url": "https://www.stat.purdue.edu/~dasgupta/bootstrap.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "tapered block decomposition, conditional iid limit, tapered covariance consistency and Hilbert-space tightness"
+      },
+      "new_item": false,
+      "page": "block-bootstrap-for-dependent-data"
+    },
+    {
+      "id": "ex-block-length-n-one-third",
+      "frontmatter": {
+        "id": "ex-block-length-n-one-third",
+        "kind": "example",
+        "title": "A block-length sequence in the bootstrap CLT regime",
+        "status": "draft",
+        "origin": "pipeline",
+        "pipeline_run": "bayesian-computational-statistics-62",
+        "dependency_level": 1,
+        "deps": [
+          "alg-overlapping-block-resampling"
+        ],
+        "proof_strategy": "direct exponent comparison",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Pilavakis, E. Paparoditis, and T. Sapatinas, Moving block and tapered block bootstrap for functional time series with an application to the K-sample mean problem, Bernoulli 25 (2019), Theorems 2.1 and 2.2",
+              "url": "https://arxiv.org/pdf/1711.01070"
+            }
+          ]
+        }
+      },
+      "manifest_row_without_root_owned_dependency_level": {
+        "id": "ex-block-length-n-one-third",
+        "kind": "example",
+        "title": "A block-length sequence in the bootstrap CLT regime",
+        "deps": [
+          "alg-overlapping-block-resampling"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "statement": "For $b_n=\\lceil n^{1/3}\\rceil$, the two block-length conditions in the moving and tapered block bootstrap theorems are satisfied.",
+        "strategy": "direct exponent comparison",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Pilavakis, E. Paparoditis, and T. Sapatinas, Moving block and tapered block bootstrap for functional time series with an application to the K-sample mean problem, Bernoulli 25 (2019), Theorems 2.1 and 2.2",
+              "url": "https://arxiv.org/pdf/1711.01070"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct exponent comparison"
+      },
+      "new_item": false,
+      "page": "block-bootstrap-for-dependent-data-examples"
+    },
+    {
+      "id": "ex-two-series-block-bootstrap-null-centering",
+      "frontmatter": {
+        "id": "ex-two-series-block-bootstrap-null-centering",
+        "kind": "example",
+        "title": "Two-series null centering with a final block prefix",
+        "status": "draft",
+        "origin": "pipeline",
+        "pipeline_run": "bayesian-computational-statistics-62",
+        "deps": [
+          "alg-k-sample-null-constrained-block-bootstrap",
+          "lem-k-sample-null-centering"
+        ],
+        "proof_strategy": "direct finite calculation",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      "manifest_row_without_root_owned_dependency_level": {
+        "id": "ex-two-series-block-bootstrap-null-centering",
+        "kind": "example",
+        "title": "Two-series null centering with a final block prefix",
+        "deps": [
+          "alg-k-sample-null-constrained-block-bootstrap",
+          "lem-k-sample-null-centering"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "statement": "Apply moving-mode [[alg-k-sample-null-constrained-block-bootstrap]] in $H=\\mathbb R$ to the series $(0,2,4)$ and $(10,12,14,16)$, with $b_1=b_2=2$. Their observed means are $2$ and $13$, but both bootstrap series have conditional mean $\\bar Y_P=58/7$.",
+        "strategy": "direct finite calculation",
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct finite calculation"
+      },
+      "new_item": true,
+      "page": "block-bootstrap-for-dependent-data-examples"
+    },
+    {
+      "id": "ex-iid-functional-data-block-bootstrap",
+      "frontmatter": {
+        "id": "ex-iid-functional-data-block-bootstrap",
+        "kind": "example",
+        "title": "IID functional data in the block bootstrap regime",
+        "status": "draft",
+        "origin": "pipeline",
+        "pipeline_run": "bayesian-computational-statistics-62",
+        "deps": [
+          "def-l2-m-approximable-causal-bernoulli-shift",
+          "def-axiom-of-choice",
+          "thm-moving-block-bootstrap-clt-for-dependent-data",
+          "thm-tapered-block-bootstrap-clt-for-dependent-data"
+        ],
+        "proof_strategy": "innovation-only replacement calculation",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      "manifest_row_without_root_owned_dependency_level": {
+        "id": "ex-iid-functional-data-block-bootstrap",
+        "kind": "example",
+        "title": "IID functional data in the block bootstrap regime",
+        "deps": [
+          "def-l2-m-approximable-causal-bernoulli-shift",
+          "def-axiom-of-choice",
+          "thm-moving-block-bootstrap-clt-for-dependent-data",
+          "thm-tapered-block-bootstrap-clt-for-dependent-data"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume the Axiom of Choice. In $H=L^2([0,1])$, let $e$ be the constant function $1$ and let $X_t=\\varepsilon_t e$, where the innovations $\\varepsilon_t$ are independent with $P(\\varepsilon_t=1)=P(\\varepsilon_t=-1)=1/2$. This IID functional series satisfies the moving and tapered block bootstrap theorems with $b_n=\\lceil n^{1/3}\\rceil$ and, in tapered mode, the window $w(u)=\\mathbf1_{[0,1]}(u)$.",
+        "strategy": "innovation-only replacement calculation",
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "innovation-only replacement calculation"
+      },
+      "new_item": true,
+      "page": "block-bootstrap-for-dependent-data-examples"
+    }
+  ]
+}

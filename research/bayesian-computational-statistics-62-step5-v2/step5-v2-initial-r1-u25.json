@@ -1,0 +1,116 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "25",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "alg-coordinate-ascent-variational-inference",
+      "model": "gpt-6-luna",
+      "context_sha256": "4827c157d87288e453487b69eaefff38aaa23cf3af39bc01b8cee6fdae05279c",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The alleged missing correctness theorem is a false alarm: library/bayesian-computational-statistics/variational-inference-and-evidence-lower-bound.md lists thm-exact-coordinate-ascent-does-not-decrease-elbo, whose Proof steps 1.1–4.1 establish the finite-integral ELBO difference as the nonnegative reverse KL under explicit AC; step 5.1 proves the conditional Nm call bound. Algorithms need not duplicate that proof. A separate nonfatal source-locator defect in this assigned carrier is confirmed by the Step-4 digest and the consulted Blei PDF: equations (17)–(18) occur on PDF page 6, while Algorithm 1 is on page 7, omitted by the old range 5–6. Corrected only that locator to printed 863–864/PDF 6–7. This outcome records the presentation defect, not a missing proof or invalid procedure.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.cs.columbia.edu/~blei/papers/BleiKucukelbirMcAuliffe2017.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-coordinate-update-normalizer-diverges-outside-admissibility",
+      "model": "gpt-6-luna",
+      "context_sha256": "bca51430e7b843f83afe5367c796dc19552ab80ab6a158d5b0f64a5a963b803b",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The library defines natural numbers with 0 included (items/def-natural-numbers.md; def-measure also explicitly starts countable-additivity sums at 0). The Verification instead locally assigned the symbol N to {1,2,...}. This is a genuine notation inconsistency, repaired by naming that explicit positive-integer set I throughout the Given paragraph. The claimed mathematical mass failure is a false alarm: the construction explicitly excluded 0, and sum over n>=1 of 2^(-n) equals 1. No r_0 term was ever included. The finite-evidence, expected-log cancellation, finite absolute log-target moment, divergent entropy, and divergent coordinate normalizer calculations all remain valid.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-coordinate-ascent-variational-inference",
+      "disposition": "repaired",
+      "post_sha256": "51bc09e35ee062b4f85785e86afc8052708f63efcf84733f88c18741e4724f2f",
+      "review_context_sha256": "96a60ff3c48c1b4699c4ad576ff7852c1ae950c641225e5fc5cebef615e3ad90",
+      "reason": "Checked the complete Definition, its def-variational-family-and-elbo interface, its owning page, its contract, and the separate monotonicity theorem and proof. The finite m,N loops, m=1 singleton complement, measurable unambiguous expected logs, positive finite normalizer, and admissible accepted replacement are specified; failed checks return the current density. N=0 performs no update. No convergence guarantee is used. The theorem proves coordinate optimality via finite factor entropies, Fubini and nonnegative KL under AC, separately from the choice-free procedure. Only the source locator changed; Definition and dependencies are byte-for-byte unchanged, so no downstream event is created.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.cs.columbia.edu/~blei/papers/BleiKucukelbirMcAuliffe2017.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-coordinate-update-normalizer-diverges-outside-admissibility",
+      "disposition": "repaired",
+      "post_sha256": "26175084162be11a7362450de0c792d3707d95b08192a15ac294dbf75344ebba",
+      "review_context_sha256": "78171b86c12fffc88a1044e1efcb351189d2ec909f51a35cde9d9d4ea9ba98a2",
+      "reason": "Reviewed all five Verification steps, the eight current prerequisite interfaces, the owning examples page, and the exact contract. With I={1,2,...}, all weights are positive finite; singleton covers are sigma-finite and every function is measurable on the discrete spaces. The telescoping bound on (n+1)^(-2) makes Z finite and positive. Each factor has mass sum_{n>=1}2^(-n)=1; gamma and q are everywhere positive. For each n, r_n*a_n+(1-r_n)*b_n=0 and the absolute log-target moment is at most 4*sum 2^(-n)*log(n+1)<infinity, using log(n+1)<=n and a geometric tail bound. On the n=1 row, log q(1,m)>=a_m and r_m*a_m>=log 2, so absolute entropy diverges. Thus h(n)=0 has infinite counting normalizer outside admissibility, consistently with the algorithm and the page caveat. Changed only the Given paragraph to use I for positive integers; Example, all proof steps, dependencies, and contract claims are unchanged. No Statement/Definition change or new interface occurs.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "defect",
+      "id": "alg-coordinate-ascent-variational-inference",
+      "classification": "confirmed_nonfatal",
+      "locus": "frontmatter:sources.references[0].locator",
+      "status": "fixed",
+      "reason": "The theorem is present as a separate same-page result. Independently confirmed the Step-4 presentation finding: the Blei Algorithm 1 locator must include PDF page 7; changed 5–6 to 6–7 with printed 863–864. No mathematical interface change. The same locator was synchronized in the owning batch-25.pages.json entry under the shared-write lock."
+    },
+    {
+      "ledger": "defect",
+      "id": "ex-coordinate-update-normalizer-diverges-outside-admissibility",
+      "classification": "confirmed_nonfatal",
+      "locus": "Verification:Given",
+      "status": "fixed",
+      "reason": "The local N={1,2,...} notation conflicts with the library zero-inclusive convention. Renamed the explicit set I. The judge mass-2 assertion does not apply to the explicitly positive-index construction; all probability and divergence calculations are unchanged."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "checkpoint": "Complete: both assigned items reviewed and repaired, actual post/context hashes captured immediately after each review, manifest locator synced under the shared lock, scoped checks and final batched proof-layout passed. No unresolved obligations, mathematics, or consumer events.",
+    "source_evidence": "Consulted Blei et al. §2.4, PDF pp. 6–7 (web text lines 500–569): equation (18), Algorithm 1, and its coordinate KL derivation. This does not supply a general convergence guarantee; the local procedure makes no such claim.",
+    "pending": [],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-coordinate-ascent-variational-inference.md items/ex-coordinate-update-normalizer-diverges-outside-admissibility.md --json",
+        "exit_code": 0,
+        "result": "2 files; algorithm not-applicable; example pass; 1 proof checked, 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-coordinate-ascent-variational-inference.md items/ex-coordinate-update-normalizer-diverges-outside-admissibility.md --json",
+        "exit_code": 0,
+        "result": "2 checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-25.proof-contracts.json --strict --items alg-coordinate-ascent-variational-inference,ex-coordinate-update-normalizer-diverges-outside-admissibility --json",
+        "exit_code": 0,
+        "result": "Both scoped contracts checked; ok true; no errors or warnings. No contract changes necessary: only source locator and Given set symbol changed."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-coordinate-ascent-variational-inference.md items/ex-coordinate-update-normalizer-diverges-outside-admissibility.md",
+        "exit_code": 0,
+        "result": "2 items, 5 steps, 0 defects. Run once after final item edits."
+      },
+      {
+        "command": "Locked single-field update and parsed-JSON comparison of research/bayesian-computational-statistics-62-batch-25.pages.json",
+        "exit_code": 0,
+        "result": "Algorithm first-reference locator synced; no other JSON fields changed; lock released."
+      }
+    ],
+    "interface_check": {
+      "input_sha256_verified": true,
+      "assigned_frontier_membership_verified": true,
+      "statement_definition_hashes_unchanged": true,
+      "downstream_reason": "Both frozen interface hashes match initial-1.json. The algorithm edit is confined to sources.references[0].locator; the example edit is confined to Verification/Given, preserving the explicitly positive index set. Neither creates a new prerequisite or consumer interface."
+    },
+    "published_consumer_findings": [],
+    "shared_metadata": "Acquired tools/step5-shared-write-lock.mjs with owner step5-v2-initial-r1-u25, reread current research/bayesian-computational-statistics-62-batch-25.pages.json, changed only the algorithm first-reference locator to match its item, checked parsed JSON equality with the one-field expected update, and released the lock. No contract update was required. Manifest source metadata is not part of either captured item review context; no item or supplier interface changed in this synchronization."
+  }
+}

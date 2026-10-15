@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "reviewer": "bcs_gate1_45_48",
+  "role": "outside focused current-content reviewer; not native coverage",
+  "cycle": 1,
+  "page_path": "library/bayesian-computational-statistics/particle-mcmc-pmmh-and-particle-gibbs.md",
+  "observed_page_exact": "---\npage: particle-mcmc-pmmh-and-particle-gibbs\ntitle: \"Particle MCMC: PMMH and particle Gibbs\"\nstatus: draft\nitems:\n  - alg-pmmh\n  - thm-pmmh-exact-invariance\n  - alg-monte-carlo-within-metropolis\n  - def-particle-gibbs-extended-target\n  - alg-conditional-particle-gibbs\n  - thm-particle-gibbs-selected-path-marginal\n  - thm-particle-gibbs-conditional-sweep-is-gibbs\n  - def-particle-gibbs-backward-simulation-extended-target\n  - alg-particle-gibbs-backward-simulation\n  - thm-particle-gibbs-backward-simulation-sweep-is-gibbs\nexamples: []\n---\n\nParticle marginal Metropolis\u2013Hastings (PMMH) is an exact pseudo-marginal\nMetropolis update when the likelihood estimator is nonnegative, measurable,\nand unbiased for a finite-horizon state-space likelihood. Its extended state\nincludes all particle randomness, the selected path index, and the likelihood\nestimate; rejection retains that complete state. Monte Carlo within Metropolis\n(MCWM) redraws the current estimate and can lose the exact posterior, as the\nfinite counterexample shows.\n\nParticle Gibbs here uses multinomial resampling with ancestor labels in sampled order and a conditional particle filter on a fixed-horizon path target. PMMH may use either declared unbiased offspring scheme. The particle cloud, ancestor indices, and selected trajectory index\nform an explicit extended target whose selected parameter-path marginal is\nthe exact smoothing posterior for every fixed $N\\ge2$. In a conditional\nparticle Gibbs sweep, the posterior parameter draw followed by conditional\nfilter regeneration is one joint conditional block given the retained path and\nlineage; the terminal index is then drawn from its categorical conditional.\nA density-based backward-simulation variant uses the displayed backward\nprobabilities and a conditional auxiliary particle filter. Its posterior\nparameter draw and filter regeneration form a joint conditional block,\nfollowed by the backward-index conditional. The target and proposal kernels\nvary measurably with the standard-Borel parameter. Full target-path support,\nfinite positive evidence, and measurable proposal weights are also required.\nThe explicit conditional formulas hold on measurable full-posterior-measure\nreference sets; exceptional reference values use a measurable unchanged-state\nfallback. Finite-$N$ invariance does not imply fast mixing, as the sticky finite\nexample illustrates.\n",
+  "reported_pre_reader_sha256": "4ce016a2172d8f3664ae9ed07e80eadbc74f039111162060f34928669597a499",
+  "reported_reader_post_sha256": "5c158502c6f3b4a152697b0b588fe5c26007f20d7fd82afcc0cd6a6f52951133",
+  "root_current_binding_required": true,
+  "archive_search": {
+    "bound": "One filesystem-name scan of research/ and .autopilot/ for the precise page stem, excluding examples; one bounded git log (-4) and tracked-path lookup. No reconstructed/reversed candidate bytes or exhaustive content search.",
+    "found": [
+      {
+        "path": "research/bayesian-computational-statistics-62-owner-pmcmc-before/library/bayesian-computational-statistics/particle-mcmc-pmmh-and-particle-gibbs.md",
+        "raw_sha256_observed": "bbb39af10a12c95c9f7273aee108a0c3ba7c7a179c8cf4fc9a86ff291ecb1b91",
+        "bytes": 1806,
+        "target_match": false
+      }
+    ],
+    "git_result": "No page commits or tracked path returned.",
+    "conclusion": "Exact requested pre-reader full-page carrier not found within this bounded search. Historical delta remains unknown."
+  },
+  "authorization": "Explicit root task authorizes supported current-content resolution if the exact preimage is not found.",
+  "current_content_review": [
+    {
+      "topic": "PMMH exactness and retention",
+      "page_locus": "First paragraph",
+      "suppliers": [
+        "alg-pmmh: Definition",
+        "thm-pmmh-exact-invariance: Statement"
+      ],
+      "disposition": "Supported. The page names nonnegative measurable unbiased likelihood estimation, includes particle randomness and selected index, and retains the complete extended state after rejection. The following paragraph supplies the model support, measurability and finite-positive-evidence qualifications; the algorithm has the more precise prefix conditions and density/density-free initialization branches. The page does not assert unqualified convergence or uniqueness."
+    },
+    {
+      "topic": "MCWM distinction",
+      "page_locus": "End of first paragraph",
+      "suppliers": [
+        "alg-monte-carlo-within-metropolis: Definition",
+        "cex-monte-carlo-within-metropolis-not-exact: Counterexample"
+      ],
+      "disposition": "Supported. MCWM redraws the current estimate and can lose exactness. The finite positive unbiased witness has transition probabilities 3/4 and 5/6 and sends uniform state-1 mass to 11/24, so the wording can lose is correct rather than a universal failure claim."
+    },
+    {
+      "topic": "Resampling scope",
+      "page_locus": "Opening of second paragraph",
+      "suppliers": [
+        "def-particle-gibbs-extended-target: Definition",
+        "alg-conditional-particle-gibbs: Definition",
+        "def-particle-gibbs-backward-simulation-extended-target: Definition",
+        "thm-sequential-particle-estimator-is-unbiased: Statement"
+      ],
+      "disposition": "Supported. Genealogical and density-based PG both use multinomial labeled sampled-order ancestors; residual offspring are excluded from these constructions. PMMH may use either declared unbiased offspring scheme because the SIR unnormalized estimator theorem explicitly permits multinomial or residual selection at every time, under its actual support/integrability/prefix-normalizer hypotheses."
+    },
+    {
+      "topic": "Genealogical target and CPF joint block",
+      "page_locus": "Second paragraph, extended target and conditional sweep sentences",
+      "suppliers": [
+        "thm-particle-gibbs-selected-path-marginal: Statement",
+        "alg-conditional-particle-gibbs: Definition",
+        "thm-particle-gibbs-conditional-sweep-is-gibbs: Statement"
+      ],
+      "disposition": "Supported. For N\u22652 the selected parameter-path marginal is the exact joint posterior. The parameter draw conditional on the retained path and regeneration conditional on that new parameter form one joint block given path/lineage. The page does not misidentify theta conditional on the old full cloud. The final categorical index draw is the separate conditional update."
+    },
+    {
+      "topic": "CAPF and backward indices",
+      "page_locus": "Second paragraph, density-based variant sentences",
+      "suppliers": [
+        "def-particle-gibbs-backward-simulation-extended-target: Definition and Conditional-version convention",
+        "alg-particle-gibbs-backward-simulation: Definition",
+        "thm-particle-gibbs-backward-simulation-sweep-is-gibbs: Statement"
+      ],
+      "disposition": "Supported. This branch requires densities and positive finite backward denominators from the linked definition. The reference ancestors are drawn with backward probabilities rather than fixed as a genealogy. Parameter draw plus CAPF regeneration form the joint retained-path/index block, followed by the backward-index conditional. The page makes no corresponding assertion for arbitrary density-free particle-point evaluation."
+    },
+    {
+      "topic": "Measurability and evidence",
+      "page_locus": "Second paragraph, parameter and qualification sentences",
+      "suppliers": [
+        "alg-pmmh: Definition",
+        "def-particle-gibbs-extended-target: Definition",
+        "def-particle-gibbs-backward-simulation-extended-target: Definition"
+      ],
+      "disposition": "Supported. The current genealogical definition explicitly requires common standard-Borel states, jointly measurable parameterized target/proposal kernels, potentials and RN versions, and defines the prior-kernel law. The page accurately summarizes these requirements rather than supplying arbitrary nonmeasurable theta-indexed families. Finite positive evidence and full target-path support are stated, with branch-specific details left in the linked algorithms/definitions."
+    },
+    {
+      "topic": "Conditional versions and fallback",
+      "page_locus": "Second paragraph, penultimate qualifications",
+      "suppliers": [
+        "def-particle-gibbs-extended-target: Conditional-version convention",
+        "alg-conditional-particle-gibbs: Definition",
+        "def-particle-gibbs-backward-simulation-extended-target: Conditional-version convention",
+        "alg-particle-gibbs-backward-simulation: Definition"
+      ],
+      "disposition": "Supported. Explicit particle conditionals are asserted on measurable full-posterior-measure reference sets; outside those sets the algorithm retains the old state. Required undefined/zero/nonfinite sampled ratios likewise trigger the fallback and have conditional probability zero on the good set. The page does not replace these almost-everywhere statements with validity at arbitrary support points."
+    },
+    {
+      "topic": "Finite-N and time endpoints",
+      "page_locus": "Second paragraph, N\u22652 and final sentence",
+      "suppliers": [
+        "thm-pmmh-exact-invariance: Statement",
+        "thm-particle-gibbs-conditional-sweep-is-gibbs: Statement",
+        "thm-particle-gibbs-backward-simulation-sweep-is-gibbs: Statement",
+        "ex-particle-gibbs-invariant-but-sticky: Example and Verification"
+      ],
+      "disposition": "Supported. The N\u22652 bound belongs to the PG target, while PMMH separately allows N\u22651. Both PG algorithms explicitly admit T=0 through their initialization/terminal-selection branch. The sticky T=0,N=2 example has exit probability 99/980200<1/9000, so finite-N invariance does not justify a mixing-speed assertion."
+    }
+  ],
+  "defects_found": [],
+  "recommendation": "reviewed_no_defect with change_kind=current_content_review and historical_delta_unknown=true",
+  "source_edits": [],
+  "live_metadata_decision_ledger_hash_state_edits": [],
+  "gates_tests_or_dispatches": [],
+  "scope_limit": "Reviewed page prose against actual current local supplier Statements/Definitions and relevant finite examples; did not reopen their genuinely native-reviewed proofs or claim new authoritative full-text reading."
+}

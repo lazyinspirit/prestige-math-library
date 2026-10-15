@@ -1,0 +1,498 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "items": {
+    "lem-gaussian-convolution-kl-and-log-square-second-order-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-normal-location-scale-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$\nof [[def-standard-normal-and-normal-laws]] has Lebesgue density\n$$g_{m,\\sigma}(y)=\\frac1\\sigma\\frac{e^{-((y-m)/\\sigma)^2/2}}{\\sqrt{2\\pi}}=\\frac1{\\sqrt{2\\pi\\sigma^2}}e^{-(y-m)^2/(2\\sigma^2)}.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At every zero of the nonnegative differentiable function $p$, $p'=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $P_t f=f*\\phi_{\\sqrt t}$ for $t>0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $t>0$ and put $q=P_t p$, which is positive everywhere.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Apply [F2] to the time integral in step 1.2 with weights $w(s)=(t/s)^{1/4}$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $u>0$, $\\log u\\le u-1$ gives $u\\log u-u+1\\le(u-1)^2$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The object is a probability density and hence is not empty; no empty finite-family assertion occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof set logarithmic integrands to zero where the truth density vanishes; all smoothing and mixture densities have positive scale."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no unit-probability endpoint assertion; credibility lies strictly between zero and one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a probability density, positive scale, finite nonzero base measure and fixed positive-mass compact scale event where used; the identically zero density is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement assumes positive Gaussian scale and compact truth support; proof handles support endpoints, kernel limits at zero and the compact-scale prior branch where relevant."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement inherits AC from the normal, KL and Dirichlet-process suppliers; all extra choices are finite partitions or finite approximations and a fixed positive-mass scale interval."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-dirichlet-normal-mixture-interval-mass-local-prior-mass": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-gaussian-convolution-kl-and-log-square-second-order-bound",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $p\\in C^2(\\mathbb R)$ be a nonnegative compactly supported probability density and suppose\n$$ J:=\\int_{\\{p>0\\}}\\frac{(p''(x))^2}{p(x)}\\,dx<\\infty. $$\nFor $\\sigma>0$, set $q_\\sigma=p*\\phi_\\sigma$, where $\\phi_\\sigma$ is the centered normal density with standard deviation $\\sigma$. Then\n$$ \\int\\frac{(p-q_\\sigma)^2}{q_\\sigma}\\,dx\\le\\frac49\\sigma^4J,\\qquad \\mathrm{KL}(p\\Vert q_\\sigma)\\le\\frac49\\sigma^4J,\\qquad \\int p\\left[\\log\\frac p{q_\\sigma}\\right]^2dx\\le\\frac49\\sigma^4J. $$\nThe logarithmic integrands are zero where $p=0$. No unimodality or uniform bound on $p/q_\\sigma$ is assumed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-dirichlet-normal-mixture-finite-support-approximation",
+          "source_section": "Statement",
+          "quote": "There is a universal constant $C$ such that, for $A,\\sigma>0$,\n$0<\\eta<1/2$, and every probability measure $F$ supported on $[-A,A]$,\nthere is a discrete probability measure $F'$ on $[-A,A]$ with at most\n$$C(A/\\sigma\\vee1)\\log(e/\\eta)$$\nsupport points and\n$$\\|p_{F,\\sigma}-p_{F',\\sigma}\\|_1\\le\\eta,\\qquad\n\\|p_{F,\\sigma}-p_{F',\\sigma}\\|_\\infty\\le\\eta/\\sigma.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-dirichlet-process-simplex-small-ball",
+          "source_section": "Statement",
+          "quote": "Assume AC, let $\\alpha$ be a finite nonzero measure of total mass $m$, and\nlet $F\\sim DP(\\alpha)$. Consider a finite partition\n$(U_0,U_1,\\ldots,U_N)$ with $\\alpha(U_0)=0$ or\n$0<\\alpha(U_0)\\le m$. Write $\\alpha_j=\\alpha(U_j)$ for $j\\ge1$, and assume\n$$a\\eta^b\\le\\alpha_j\\le1\\quad(1\\le j\\le N),\\qquad 0<\\eta<1/4,qquad N\\eta\\le1/4,$$\nfor fixed $a,b>0$. For every $w=(w_1,\\ldots,w_N)$ in the probability\nsimplex, there are constants $c,C>0$ depending only on $a,b,m,\\alpha(U_0)$\nsuch that\n$$\\Pr\\!\\left\\{\\sum_{j=1}^N|F(U_j)-w_j|+F(U_0)\\le3\\eta,\\quad\n\\min_{1\\le j\\le N}F(U_j)\\ge\\eta^2/2\\right\\}\\ge C\\exp\\{-cN\\log(e/\\eta)\\}.$$\nWhen $\\alpha(U_0)=0$, the zero-base cell has $F(U_0)=0$ almost surely and is\nomitted from the Dirichlet vector.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-dirichlet-normal-mixture-density-well-defined",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P(\\mathbb R)$ be the probability measures on the Borel sets of\n$\\mathbb R$, equipped with the evaluation sigma-algebra, and let $\\sigma>0$.\nFor $F\\in\\mathcal P(\\mathbb R)$ define\n$$p_{F,\\sigma}(x):=\\int_{\\mathbb R}\\frac{1}{\\sigma\\sqrt{2\\pi}}\\exp\\!\\left(-\\frac{(x-z)^2}{2\\sigma^2}\\right)F(dz).$$\nThen $(F,\\sigma,x)\\mapsto p_{F,\\sigma}(x)$ is jointly measurable,\n$0<p_{F,\\sigma}(x)\\le(\\sigma\\sqrt{2\\pi})^{-1}$ for every $(F,\\sigma,x)$,\nand $\\int_{\\mathbb R}p_{F,\\sigma}(x)\\,dx=1$. In particular it is the\nLebesgue density of the convolution of $F$ with $N(0,\\sigma^2)$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-normal-location-scale-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$\nof [[def-standard-normal-and-normal-laws]] has Lebesgue density\n$$g_{m,\\sigma}(y)=\\frac1\\sigma\\frac{e^{-((y-m)/\\sigma)^2/2}}{\\sqrt{2\\pi}}=\\frac1{\\sqrt{2\\pi\\sigma^2}}e^{-(y-m)^2/(2\\sigma^2)}.$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose $0<s_-<s_+<\\infty$ with $g:=G([s_-,s_+])>0$, possible because these compact intervals exhaust $(0,\\infty)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $\\delta=\\eta\\tau$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Apply [F3] with tolerance $\\eta$ to get an event $E_n$ on which $\\sum_j|F(U_j)-w_j|+F(U_0)\\le3\\eta$ and $\\Pi_{DP}(E_n)\\ge\\exp\\{-C b_n^{-1}(\\log n)^2\\}$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $\\tau\\le\\sigma\\le s_+b_n$, the original discrete approximation still satisfies $\\|p_{F_n,\\sigma}-p_{P_0,\\sigma}\\|_\\infty\\le C\\eta/b_n$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For any $x\\in K$ choose a coarse cell whose closure contains $x$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F5",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $q=p_{P_0,\\sigma}$ and $r=p_{F,\\sigma}$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The scale event $S\\in[s_-,s_+]$ has fixed probability $g>0$ and is independent of $F$.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "step 1.3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The object is a probability density and hence is not empty; no empty finite-family assertion occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof set logarithmic integrands to zero where the truth density vanishes; all smoothing and mixture densities have positive scale."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no unit-probability endpoint assertion; credibility lies strictly between zero and one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a probability density, positive scale, finite nonzero base measure and fixed positive-mass compact scale event where used; the identically zero density is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement assumes positive Gaussian scale and compact truth support; proof handles support endpoints, kernel limits at zero and the compact-scale prior branch where relevant."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement inherits AC from the normal, KL and Dirichlet-process suppliers; all extra choices are finite partitions or finite approximations and a fixed positive-mass scale interval."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-dirichlet-normal-mixture-interval-mass-refinement": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-dirichlet-normal-mixture-posterior-contraction",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $p_0$ be a finite-valued probability density on $\\mathbb R$\nwith compact support. Assume $p_0\\in C^2(\\mathbb R)$ and, with the\nintegrands set to zero on $\\{p_0=0\\}$,\n$$\\int_{\\{p_0>0\\}}\\left[\\left(\\frac{p_0''}{p_0}\\right)^2+\n\\left(\\frac{p_0'}{p_0}\\right)^4\\right]p_0\\,dx<\\infty,$$\nand assume there is $C<\\infty$ such that\n$$h(p_0,p_0*\\phi_\\sigma)\\le C\\sigma^2$$\nfor all sufficiently small $\\sigma>0$. Here $h$ is the root-L2 Hellinger\ndistance of [[def-hellinger-distance-between-density-laws]], and\n$\\phi_\\sigma$ is the centered normal density with standard deviation\n$\\sigma$. Let $F\\sim DP(\\alpha)$, where $\\alpha$ is a finite nonzero\nmeasure with a continuous, strictly positive Lebesgue density on an open\ninterval containing $\\operatorname{supp}(p_0)$, and independently let\n$S\\sim G$ on $(0,\\infty)$. For $\\sigma=\\sigma_nS$, define\n$$p_{F,\\sigma}(x)=\\int\\phi_\\sigma(x-z)F(dz),$$\nand observe $X_1,\\ldots,X_n$ IID from $p_0$. Suppose\n$$n^{-a_1}\\lesssim\\sigma_n\\lesssim n^{-a_2},\\qquad\n0<a_2<a_1<1,\\qquad a_2\\ge(4+\\gamma)^{-1},$$\nand, for some $\\beta>0$ and $\\gamma>1$,\n$$G((0,s])\\lesssim e^{-\\beta s^{-\\gamma}}\\ (s\\downarrow0),\\qquad\nG((s,\\infty))\\lesssim e^{-\\beta s^\\gamma}\\ (s\\to\\infty).$$\nHere $u_n\\lesssim v_n$ means $u_n\\le Cv_n$ eventually for a fixed\nconstant $C$. For every fixed\n$\\eta>\\gamma/[2(\\gamma-1)]$, put\n$$\\epsilon_n=\\max\\left\\{(n\\sigma_n)^{-1/2}\\log n,\nn^{-1/2}\\sigma_n^{-\\eta},\\ \\sigma_n^2\\log n\\right\\}.$$\nThen for every sufficiently large fixed $M$,\n$$\\Pi_n\\!\\left(h(p_{F,\\sigma},p_0)>M\\epsilon_n\\mid X_{1:n}\\right)\n\\longrightarrow0$$\nin $P_0^n$-probability. If $G$ is compactly supported in $(0,\\infty)$,\nthe middle term $n^{-1/2}\\sigma_n^{-\\eta}$ may be omitted. The conclusion\nis only in probability; it supplies no almost-sure contraction or generic\nminimax-optimality assertion.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-dirichlet-normal-mixture-interval-mass-local-prior-mass",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $p_0\\in C^2(\\mathbb R)$ be a probability density with compact support $K$, a finite union of intervals. Suppose $J=\\int_{\\{p_0>0\\}}(p_0'')^2/p_0<\\infty$ and there are $a,c>0$ such that $P_0(I)\\ge c\\lambda(I)^a$ for every interval $I\\subseteq K$. Let $F\\sim DP(\\alpha)$, where $\\alpha$ is a finite nonzero measure with continuous strictly positive density on a neighborhood of $K$, and independently let $S\\sim G$ for any probability measure $G$ on $(0,\\infty)$. Suppose $n^{-a_1}\\lesssim\\sigma_n\\lesssim n^{-a_2}$ for $0<a_2<a_1<1$, and put $\\sigma=\\sigma_nS$. Then for constants $C_1,C_2>0$ and all sufficiently large $n$,\n$$ \\Pi_n\\left\\{\\mathrm{KL}(P_0\\Vert P_{F,\\sigma})\\le C_1\\sigma_n^4,\\quad P_0\\left[\\log\\frac{p_0}{p_{F,\\sigma}}\\right]^2\\le C_1\\sigma_n^4\\right\\}\\ge\\exp\\{-C_2\\sigma_n^{-1}(\\log n)^2\\}. $$\nConsequently, for $d_n=\\max\\{(n\\sigma_n)^{-1/2}\\log n,\\sigma_n^2\\}$, the same two local quantities are at most $C_1d_n^2$ on a set of prior mass at least $e^{-C_3nd_n^2}$. Logarithmic integrands vanish where $p_0=0$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a measurable parameter space, $\\Pi$ a prior probability measure on it, and $p_\\theta$ a jointly measurable family of finite-valued probability densities relative to one fixed sigma-finite measure $\\mu$. Let $P_0$ have finite-valued density $p_0$ relative to $\\mu$, and let $X_1,\\ldots,X_n$ be IID with law $P_0$. Assume the Axiom of Choice for the imported directional KL convention ([[def-axiom-of-choice]]). The jointly measurable density family is explicit input, so no arbitrary-index selection of versions is used here. In the expression below, the weighted log terms are set to zero on $\\{p_0=0\\}$; on $\\{p_0>0,p_\\theta=0\\}$ the log ratio is $-\\infty$ and its square is $+\\infty$. For $\\epsilon_n>0$, define\n$$K_n:=\\left\\{\\theta:\\mathrm{KL}(P_0\\Vert P_\\theta)\\le\\epsilon_n^2,\\quad \\int\\left[\\log\\frac{p_\\theta}{p_0}\\right]^2p_0\\,d\\mu\\le\\epsilon_n^2\\right\\}.$$\nJoint measurability and Tonelli make $K_n$ measurable, as verified below. If $\\Pi(K_n)\\ge e^{-Cn\\epsilon_n^2}$ for $C>0$ and $\\mathrm{KL}(P_0\\Vert P_\\theta)$ uses the direction in [[def-kullback-leibler-divergence]], then, defining the ratio to be zero on the $P_0$-null set where $p_0=0$, the likelihood denominator\n$$D_n:=\\int_\\Theta\\prod_{i=1}^n\\frac{p_\\theta(X_i)}{p_0(X_i)}\\,\\Pi(d\\theta)$$\nis finite and positive $P_0^n$-almost surely and\n$$P_0^n\\!\\left\\{D_n\\ge e^{-(C+2)n\\epsilon_n^2}\\right\\}\\ge1-\\frac1{n\\epsilon_n^2}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-dirichlet-normal-mixture-posterior-sieve-tail",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $p_0$ be supported on a compact interval $I=[L,U]$ with\n$L<U$, let $F\\sim DP(\\alpha)$ for a finite nonzero base measure whose\ndensity is bounded below on a neighborhood of $I$, and let $S\\sim G$ be\nindependent with $\\sigma=\\sigma_nS$. Put $R=(U-L)/2$ and, for $d>0$,\n$I_d=[L-d,U+d]$.\nObserve IID data from $p_0$ under the location-mixture density\n$p_{F,\\sigma}$. Let $\\epsilon_n,\\delta_n>0$ with\n$n\\epsilon_n^2\\to\\infty$ and $n\\delta_n^2\\to\\infty$. Suppose the local KL\nand log-square prior-mass condition gives a denominator event\n$$P_0^n\\{D_n\\ge e^{-C_0n\\delta_n^2}\\}\\longrightarrow1,$$\nwhere $D_n=\\int\\prod_i p_{F,\\sigma}(X_i)/p_0(X_i)\\,\\Pi_n(dF,d\\sigma)$.\nChoose $s_n\\to0$ and put $q_n=2\\Phi(-R/s_n)$, where $\\Phi$ is the\nstandard normal distribution function. If\n$$nq_n-(C_0+2)n\\delta_n^2\\to\\infty,\\qquad\nn\\epsilon_n^{-2}s_n^{-1}e^{-d^2/(2s_n^2)}\\to0,$$\nthen the posterior complement of\n$$\\mathcal S_n:=\\{(F,\\sigma):\\sigma\\le s_n,\\ F(I_d^c)\\le\\epsilon_n^2\\}$$\nconverges to zero in $P_0^n$-probability.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-dirichlet-normal-mixture-countable-band-entropy-sum",
+          "source_section": "Statement",
+          "quote": "Let $0<a_2<a_1<1$, $n^{-a_1}\\lesssim\\sigma_n\\lesssim n^{-a_2}$, and\n$\\gamma>1$. Suppose $G$ is a probability measure on $(0,\\infty)$ satisfying\n$G((0,s])\\le C e^{-\\beta s^{-\\gamma}}$ for all sufficiently small $s>0$.\nLet $s_n\\to0$ with $s_n/\\sigma_n\\to\\infty$. For integers $j$ with\n$2^j\\sigma_n\\le s_n$, put $\\widetilde r_n:=\\min\\{r_n,1/4\\}$ and\n$$\\mathcal P_{n,j}:=\\{p_{F,\\sigma}:F([-A,A]^c)\\le\\widetilde r_n^2/8,\n\\quad 2^j\\sigma_n\\le\\sigma<2^{j+1}\\sigma_n,\\quad \\sigma\\le s_n\\},$$\nand let $\\pi_{n,j}$ be the prior mass of the corresponding parameter band,\nso $\\pi_{n,j}\\le G([2^j,2^{j+1}))$. Suppose $r_n>0$ and, for some fixed\nsufficiently large $M_0$ and fixed $\\eta>\\gamma/[2(\\gamma-1)]$,\n$$r_n\\ge M_0\\max\\{(n\\sigma_n)^{-1/2}\\log n,\nn^{-1/2}\\sigma_n^{-\\eta}\\}.$$\nWith $N_{n,j}=N(r_n,\\mathcal P_{n,j},h)$, one has\n$$e^{-nr_n^2}\\sum_{j:2^j\\sigma_n\\le s_n}\\sqrt{N_{n,j}\\pi_{n,j}}\\longrightarrow0.$$\nIf instead $G$ is supported on a compact subset of $(0,\\infty)$, the same\nconclusion holds under the first rate term alone.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-iid-posterior-contraction-under-countable-sieves",
+          "source_section": "Statement",
+          "quote": "Assume AC. For each $n$, let $\\Pi_n$ be a prior on a measurable parameter\nspace $\\Theta_n^*$, and let $p_\\theta$ be a jointly measurable family of finite-valued densities\nagainst one sigma-finite measure, and let $p_0$ be the true density for IID\ndata $X_1,\\ldots,X_n$. Let $\\epsilon_n,\\delta_n>0$ satisfy\n$\\delta_n\\le\\epsilon_n$, $n\\delta_n^2\\to\\infty$, and\n$n\\epsilon_n^2\\to\\infty$. Suppose for a constant $C_0>0$ that\n$$\\Pi_n\\!\\left\\{\\theta:\\mathrm{KL}(P_0\\Vert P_\\theta)\\le\\delta_n^2,\\quad\nP_0\\left[\\log\\frac{p_0}{p_\\theta}\\right]^2\\le\\delta_n^2\\right\\}\\ge e^{-C_0n\\delta_n^2}.$$\nLet $S_n\\subseteq\\Theta_n^*$ be a measurable sieve with\n$\\Pi_n(S_n^c\\mid X_{1:n})\\to0$ in $P_0^n$-probability. Partition it into\ncountably many measurable sets $S_{n,j}$, put $\\pi_{n,j}=\\Pi_n(S_{n,j})$,\nand let $N_{n,j}=N(\\epsilon_n,\\{p_\\theta:\\theta\\in S_{n,j}\\},h)$ be the\nfinite covering number as defined in [[def-covering-packing-bracketing-number-and-metric-entropy]], with centers in that density class, whenever $\\pi_{n,j}>0$. If\n$$e^{-n\\epsilon_n^2}\\sum_{j:\\pi_{n,j}>0}\\sqrt{N_{n,j}\\pi_{n,j}}\\longrightarrow0,$$\nthen for every sufficiently large fixed $M$, the posterior mass of\n$$\\{\\theta:h(p_\\theta,p_0)>M\\epsilon_n\\}$$\nconverges to zero in $P_0^n$-probability.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-dirichlet-normal-mixture-density-well-defined",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P(\\mathbb R)$ be the probability measures on the Borel sets of\n$\\mathbb R$, equipped with the evaluation sigma-algebra, and let $\\sigma>0$.\nFor $F\\in\\mathcal P(\\mathbb R)$ define\n$$p_{F,\\sigma}(x):=\\int_{\\mathbb R}\\frac{1}{\\sigma\\sqrt{2\\pi}}\\exp\\!\\left(-\\frac{(x-z)^2}{2\\sigma^2}\\right)F(dz).$$\nThen $(F,\\sigma,x)\\mapsto p_{F,\\sigma}(x)$ is jointly measurable,\n$0<p_{F,\\sigma}(x)\\le(\\sigma\\sqrt{2\\pi})^{-1}$ for every $(F,\\sigma,x)$,\nand $\\int_{\\mathbb R}p_{F,\\sigma}(x)\\,dx=1$. In particular it is the\nLebesgue density of the convolution of $F$ with $N(0,\\sigma^2)$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The $C^2$ compact truth in [F1] satisfies the $J$ hypothesis of [F2] by the stated derivative integrability condition.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $\\epsilon_n$ denote the displayed improved rate, omitting its middle term if $G$ is compactly supported.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Choose $d>0$ with $d^2/(2c_0^2)>4$ and a fixed $A$ such that $I_d=[L-d,U+d]\\subseteq[-A,A]$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Partition $S_n$ into the measurable dyadic scale bands $S_{n,j}=S_n\\cap\\{2^j\\sigma_n\\le\\sigma<2^{j+1}\\sigma_n\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F7] the model has the jointly measurable density likelihood required in [F6].",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F7",
+            "F6",
+            "F2",
+            "step 1.3",
+            "step 2.1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The object is a probability density and hence is not empty; no empty finite-family assertion occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof set logarithmic integrands to zero where the truth density vanishes; all smoothing and mixture densities have positive scale."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no unit-probability endpoint assertion; credibility lies strictly between zero and one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a probability density, positive scale, finite nonzero base measure and fixed positive-mass compact scale event where used; the identically zero density is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement assumes positive Gaussian scale and compact truth support; proof handles support endpoints, kernel limits at zero and the compact-scale prior branch where relevant."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement inherits AC from the normal, KL and Dirichlet-process suppliers; all extra choices are finite partitions or finite approximations and a fixed positive-mass scale interval."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

@@ -1,0 +1,1093 @@
+{
+  "version": 1,
+  "scope": [
+    "def-variational-family-and-elbo",
+    "thm-elbo-kl-decomposition",
+    "alg-coordinate-ascent-variational-inference",
+    "thm-exact-coordinate-ascent-does-not-decrease-elbo",
+    "cex-mean-field-variational-inference-underestimates-correlated-gaussian-variance",
+    "rem-high-elbo-alone-does-not-certify-posterior-calibration",
+    "ex-discrete-elbo-equality-at-exact-posterior",
+    "ex-coordinate-update-normalizer-can-diverge-despite-admissibility",
+    "ex-variational-candidate-outside-posterior-support"
+  ],
+  "contracts": {
+    "def-variational-family-and-elbo": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: A variational family is defined to be nonempty; the reference space and density are supplied."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition requires 0<Z<∞ and sets q log terms to zero only where q=0; invalid normalizers are excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The finite-product definition permits m=1 and specifies the empty complementary product."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: q may equal π; the admissibility and normalization conditions remain defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The support convention q=0 on {π=0} is stated, and no posterior quotient is formed at Z=0 or Z=∞."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The density normalization and finite products use no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-elbo-kl-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "For a measurable probability density $q\\ge0$, write $q\\ll_\\mu\\pi$ to mean $q=0$ $\\mu$-almost everywhere on $\\{\\pi=0\\}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Call $q$ **admissible** when $q\\ll_\\mu\\pi$ and $$\\int_\\Omega q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Define the finite real number $$\\operatorname{ELBO}(q):=\\int_\\Omega q(\\log\\gamma-\\log q)\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Then $$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Define $$D(P\\|Q):=\\int \\ell\\,dP,$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-kullback-leibler-is-nonnegative",
+          "source_section": "Statement",
+          "quote": "For probability measures $P,Q$ on one measurable space, $D(P\\|Q)\\ge0",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "source_section": "Statement",
+          "quote": "Then $\\nu_f$ is a measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-elbo-kl-decomposition-d1",
+          "claim": "Construct Q and Π as probability measures, use the support condition to prove Q≪Π, and verify directly that q/π is the Radon–Nikodym density.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F7",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-elbo-kl-decomposition-d2",
+          "claim": "Expand log(q/π)=log q−log γ+log Z on the q-support and integrate the absolutely integrable terms to obtain the density-ratio identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-elbo-kl-decomposition-d3",
+          "claim": "Under AC, identify the explicit density-ratio integral with the library directional KL divergence and rearrange.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-elbo-kl-decomposition-d4",
+          "claim": "Apply KL nonnegativity to obtain the lower-bound inequality.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The theorem assumes an admissible probability density q and a defined reference measure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Z is strictly positive and finite; q=0 terms are set to zero and no quotient is taken on target-zero support."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The proof applies on a one-point space and also when q equals π."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: When q=π, the explicit derivative is 1 and the KL gap is zero; no strict inequality is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Z=0 and Z=∞ are excluded, and all log terms are integrable under q."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is explicitly assumed only for the library KL identification and nonnegativity clause; the density-ratio identity is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-coordinate-ascent-variational-inference": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: The input requires m≥1 and a finite sweep count N≥0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: A coordinate normalizer c=0 makes the update unavailable and stops the algorithm without division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: For m=1, the empty complementary product is the unit density on the singleton space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: An undefined conditional expectation, infinite normalizer, or inadmissible update stops without changing the current factor."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The target normalizer is assumed positive finite; support failures are caught by the admissibility check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The coordinate order and finite number of sweeps are fixed; no arbitrary selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-exact-coordinate-ascent-does-not-decrease-elbo": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Call $q$ **admissible** when $q\\ll_\\mu\\pi$ and $$\\int_\\Omega q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Define the finite real number $$\\operatorname{ELBO}(q):=\\int_\\Omega q(\\log\\gamma-\\log q)\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-coordinate-ascent-variational-inference",
+          "source_section": "Definition",
+          "quote": "$$h_j(z_j):=\\int_{\\prod_{k\\ne j}\\Omega_k}\\log\\gamma(z_j,z_{-j})q_{-j}(z_{-j})\\,d\\mu_{-j}(z_{-j}).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "for measurable rectangles, $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Then $x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Then $$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "and let $f : X \\times Y \\to \\mathbb C$ belong to $L^1(\\mu \\times \\nu)$. Then:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Define $$D(P\\|Q):=\\int \\ell\\,dP,$$",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-kullback-leibler-is-nonnegative",
+          "source_section": "Statement",
+          "quote": "For probability measures $P,Q$ on one measurable space, $D(P\\|Q)\\ge0",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-exact-coordinate-ascent-does-not-decrease-elbo-d1",
+          "claim": "For any admissible product replacement, the global log-density is the sum of the factor logs and is integrable. Restricting to a positive-probability bounded set of the other-factor log sum proves the selected factor log is integrable.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "choose",
+            "construct",
+            "algebra",
+            "F6"
+          ]
+        },
+        {
+          "id": "thm-exact-coordinate-ascent-does-not-decrease-elbo-d2",
+          "claim": "Fubini separates the expected log target, and factor-log integrability separates the entropy term; only the selected factor terms vary.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-exact-coordinate-ascent-does-not-decrease-elbo-d3",
+          "claim": "Finite expected |h_j| forces every admissible replacement to vanish where q_j* is zero, and the explicit ratio r_j/q_j* is its Radon–Nikodym density.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-exact-coordinate-ascent-does-not-decrease-elbo-d4",
+          "claim": "Expand D(r_j μ_j||q_j* μ_j) from the update formula; it equals the ELBO difference and is nonnegative under AC.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-exact-coordinate-ascent-does-not-decrease-elbo-d5",
+          "claim": "Choose the current factor as an admissible replacement to conclude the update does not decrease ELBO.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The product dimension m is finite and at least one; the m=1 empty complementary product is defined."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: If c_j=0 the algorithm does not update; the theorem assumes c_j>0 and finite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The coordinate theorem includes a single coordinate and its singleton complementary product."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If q_j*=q_j the ELBO difference is zero; strict increase is not asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The theorem assumes 0<c_j<∞ and admissible old/new products; support-zero regions force replacement densities to vanish there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is stated and used only through the library KL definition and nonnegativity theorem; product integrations are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-mean-field-variational-inference-underestimates-correlated-gaussian-variance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Call $q$ **admissible** when $q\\ll_\\mu\\pi$ and $$\\int_\\Omega q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Define the finite real number $$\\operatorname{ELBO}(q):=\\int_\\Omega q(\\log\\gamma-\\log q)\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gaussian-integral",
+          "source_section": "Statement",
+          "quote": "$$\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt\\pi.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Then $x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "and let $f : X \\times Y \\to \\mathbb C$ belong to $L^1(\\mu \\times \\nu)$. Then:",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Then $$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "cex-mean-field-variational-inference-underestimates-correlated-gaussian-variance-d1",
+          "claim": "Normalize the displayed target by Gaussian integration, integrate its two conditional factorizations to obtain both standard-normal marginals, and compute covariance ρ.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cex-mean-field-variational-inference-underestimates-correlated-gaussian-variance-d2",
+          "claim": "Normalize the independent Gaussian factors, compute their means and variances, and verify finite ELBO integrability.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cex-mean-field-variational-inference-underestimates-correlated-gaussian-variance-d3",
+          "claim": "Substitute the Gaussian second moments and entropies into the ELBO; the positive-definite mean quadratic is uniquely minimized at zero.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cex-mean-field-variational-inference-underestimates-correlated-gaussian-variance-d4",
+          "claim": "Differentiate the separated variance objective and show its derivative changes sign only at β=1−ρ²<1.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Counterexample: The factor dimension is two, and both Gaussian variances are required positive."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Counterexample: The correlation restriction gives β=1−ρ²>0, so the target and factor densities have positive finite normalizers."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Counterexample: The one-dimensional marginal variances are computed explicitly as one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Counterexample: ρ=0 and |ρ|=1 are excluded: at ρ=0 the variance loss disappears, while |ρ|=1 is singular."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Counterexample: The strict range 0<|ρ|<1 is stated; no inverse or density formula is used at singular endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Gaussian densities are explicit and the proof uses only finite integrals and algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "rem-high-elbo-alone-does-not-certify-posterior-calibration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "For a measurable probability density $q\\ge0$, write $q\\ll_\\mu\\pi$ to mean $q=0$ $\\mu$-almost everywhere on $\\{\\pi=0\\}$. This is a support condition on the two densities. It ensures that the induced probability measures $Q:=q\\,\\mu$ and $\\Pi:=\\pi\\,\\mu$ have $Q\\ll\\Pi$.\n\nCall $q$ **admissible** when $q\\ll_\\mu\\pi$ and $$\\int_\\Omega q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Define the finite real number $$\\operatorname{ELBO}(q):=\\int_\\Omega q(\\log\\gamma-\\log q)\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-elbo-kl-decomposition",
+          "source_section": "Statement",
+          "quote": "The choice-free density-ratio identity $$\\log Z=\\operatorname{ELBO}(q)+\\int q\\log(q/\\pi)\\,d\\mu$$ holds, with the ratio integrand set to zero where $q=0$. Under AC, the final integral is the library reverse divergence $D(Q\\|\\Pi)$ and is nonnegative.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$, $$\\log(xy)=\\log x+\\log y,",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "rem-high-elbo-alone-does-not-certify-posterior-calibration-d1",
+          "claim": "Choose a positive scaling factor with any prescribed logarithm; positive homogeneity keeps the normalized posterior and variational measure fixed while preserving admissibility.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "rem-high-elbo-alone-does-not-certify-posterior-calibration-d2",
+          "claim": "The logarithm product law shifts the ELBO by the arbitrary prescribed real amount while leaving posterior discrepancy fixed.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "rem-high-elbo-alone-does-not-certify-posterior-calibration-d3",
+          "claim": "The ELBO decomposition identifies only the evidence-minus-ELBO divergence gap, which does not by itself give a posterior calibration guarantee.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The scaling argument fixes an existing admissible q and finite positive Z."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The multiplier e^c is positive and finite for every real c, so scaled normalizers remain positive finite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The argument also applies when Q=Π, in which case posterior discrepancy stays zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: For any fixed Q≠Π with positive discrepancy, scaling leaves that discrepancy unchanged."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Only finite real scale shifts are used; invalid normalizers remain outside the definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The scale calculation is choice-free; the cited KL identity has its AC branch recorded in the theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-discrete-elbo-equality-at-exact-posterior": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Define the finite real number $$\\operatorname{ELBO}(q):=\\int_\\Omega q(\\log\\gamma-\\log q)\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$, $$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$ Also $\\log 1=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-discrete-elbo-equality-at-exact-posterior-d1",
+          "claim": "Compute the normalizer and posterior and substitute q=π into the finite ELBO sum to obtain log 3.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-discrete-elbo-equality-at-exact-posterior-d2",
+          "claim": "Substitute q=(1/2,1/2), obtain 3/2 log 2, and compare by squaring positive quantities.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: The state space has two points and both target weights are positive."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: No target coordinate is zero, so both candidate densities meet the support condition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is a finite two-point normalization, and the exact density is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The exact q=π branch attains equality; the distinct uniform q gives a strict gap."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: All probabilities are strictly between zero and one, so all logarithms are finite."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All states and densities are explicitly finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-coordinate-update-normalizer-can-diverge-despite-admissibility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Call $q$ **admissible** when $q\\ll_\\mu\\pi$ and $$\\int_\\Omega q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-coordinate-ascent-variational-inference",
+          "source_section": "Definition",
+          "quote": "$$c_j:=\\int_{\\Omega_j}e^{h_j(z_j)}\\,\\mu_j(dz_j).$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Then $x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-integral-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define the **integral logarithm** $$L(x):=\\int_1^x\\frac{dt}{t},$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "source_section": "Statement",
+          "quote": "For every $x>0$, $$L(x)=\\log x.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with $m, M$ real, then",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-coordinate-update-normalizer-can-diverge-despite-admissibility-d1",
+          "claim": "Construct γ and σ-finite atomic reference measures, then bound the normalizer above by convergent reciprocal-square sums and below by a positive diagonal term.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "algebra",
+            "F4"
+          ]
+        },
+        {
+          "id": "ex-coordinate-update-normalizer-can-diverge-despite-admissibility-d2",
+          "claim": "Define q as a product of probability densities and verify its support condition.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "ex-coordinate-update-normalizer-can-diverge-despite-admissibility-d3",
+          "claim": "Compute the conditional expected log as zero and bound its absolute expectation by a summable logarithmic series.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "ex-coordinate-update-normalizer-can-diverge-despite-admissibility-d4",
+          "claim": "Bound the q log q integral by geometric-log series to verify the second admissibility condition.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-coordinate-update-normalizer-can-diverge-despite-admissibility-d5",
+          "claim": "The coordinate exponential is identically one on a countably infinite counting space, so its normalizer diverges.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: Both factor spaces are countably infinite and nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: Every γ(n,m) is positive; the global evidence is finite positive although the coordinate normalizer is infinite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: Each factor qX and qY is explicitly normalized to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The expected-log coordinate function is exactly zero; the update fails only at its infinite normalizer."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: The construction uses finite a_n,b_n at every coordinate; all q log integrals are absolutely finite."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All sequences and densities are explicitly defined by natural-number formulas."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-variational-candidate-outside-posterior-support": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Call $q$ **admissible** when $q\\ll_\\mu\\pi$ and $$\\int_\\Omega q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-variational-candidate-outside-posterior-support-d1",
+          "claim": "Normalize γ and compare q with π at the zero-target point to show the support condition fails.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-variational-candidate-outside-posterior-support-d2",
+          "claim": "At the point where q=1 and γ=0, q|log γ| is infinite, so the ELBO integrability condition also fails.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: The finite state space has two points and the target has evidence one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The target is exactly zero at the point where q places mass; this is the stated support-failure case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: Both π and q are probability densities on the two-point space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example deliberately uses disjoint supports; no finite ELBO is assigned."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The zero-density logarithm is handled by the definition q=0 convention only when q=0; here q>0 at γ=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two-point calculation is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

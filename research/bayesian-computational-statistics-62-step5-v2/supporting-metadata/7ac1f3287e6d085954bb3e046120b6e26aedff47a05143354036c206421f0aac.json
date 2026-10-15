@@ -1,0 +1,648 @@
+[
+  {
+    "order": 2080,
+    "id": "functional-bayesian-limits-and-credible-set-calibration",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Functional BvM limits and credible-set calibration",
+    "companion": "functional-bayesian-limits-and-credible-set-calibration-examples",
+    "requires": [
+      "weak-nonparametric-bernstein-von-mises",
+      "iid-posterior-contraction",
+      "posterior-prediction-and-bayesian-decision"
+    ],
+    "items": [
+      {
+        "id": "def-multiscale-coefficient-space-m0w",
+        "kind": "definition",
+        "title": "Little-o multiscale coefficient space M0(w)",
+        "deps": [
+          "def-negative-sobolev-space-for-white-noise"
+        ],
+        "justified_by": [
+          "lem-m0w-separable-and-projection-tails"
+        ],
+        "dependency_level": 1,
+        "statement": "Use the wavelet coefficient levels $(l,k)$ and multiplicities $|K_l|=2^l$ from [[def-negative-sobolev-space-for-white-noise]]. The same coefficient-space definition applies to the Haar system used for type-H histograms: detail levels $l\\ge0$ have $2^l$ coefficients, and the single scaling coefficient is an additional finite coarsest coordinate, included in the norm with weight $1$. Finite projections always retain that scaling coordinate; this finite convention does not alter any tail assertion. Let $w=(w_l)$ be nondecreasing with $w_l\\ge1$. Define\n$$M(w)=\\left\\{x=(x_{lk}):\\|x\\|_{M(w)}:=\\sup_l\\frac{\\max_{k\\in K_l}|x_{lk}|}{w_l}<\\infty\\right\\}$$\nand its closed little-o subspace\n$$M_0(w)=\\left\\{x\\in M(w):\\frac{\\max_{k\\in K_l}|x_{lk}|}{w_l}\\longrightarrow0\\text{ as }l\\to\\infty\\right\\},$$\nwith the same norm. Call $w$ admissible when $w_l/\\sqrt l\\to\\infty$. The finite coarsest level is included in the norm and does not affect this limit. Elements are coefficient sequences; in particular, they need not be $L^2$ functions. [[lem-m0w-separable-and-projection-tails]] proves that $M_0(w)$ is a separable Banach space, that $L^2$ coefficient sequences embed in it, and that finite-level projections converge in its norm.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, On the Bernstein–von Mises phenomenon for nonparametric Bayes procedures, §2.1, equations (11)–(12)",
+              "url": "https://arxiv.org/pdf/1310.2484"
+            },
+            {
+              "title": "Giné and Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §5.2.2 and §7.3.4",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "strategy": null
+      },
+      {
+        "id": "def-sobolev-linear-functional-for-white-noise",
+        "kind": "definition",
+        "title": "Smooth linear functionals on the white-noise topology",
+        "deps": [
+          "def-negative-sobolev-space-for-white-noise"
+        ],
+        "justified_by": [
+          "lem-smooth-functional-extends-to-negative-sobolev-space"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-type-s-and-h-multiscale-density-priors",
+        "kind": "definition",
+        "title": "Type-S log-density and type-H histogram prior families",
+        "deps": [
+          "def-negative-sobolev-space-for-white-noise"
+        ],
+        "justified_by": [
+          "lem-type-s-h-prior-draws-are-l2-densities"
+        ],
+        "dependency_level": 1,
+        "statement": "For type S use a fixed sufficiently regular compactly supported orthonormal multiresolution wavelet basis $(\\psi_{lk})$ on $[0,1]$ as in [[def-negative-sobolev-space-for-white-noise]], with boundary correction, regularity greater than the truth smoothness $\\alpha$, and $|K_l|=2^l$. The spaces $V_L$ spanned by the retained levels $l\\le L$ contain constants and have orthonormal scaling bases with uniformly bounded overlap, support diameters at most $C2^{-L}$, and suprema at most $C2^{L/2}$; a fixed shift of the scaling-resolution index is absorbed in $C$. The wavelets likewise have uniformly bounded overlap, support diameters at most $C2^{-l}$, and suprema at most $C2^{l/2}$. For an integer $m>\\alpha$, the detail wavelets have vanishing moments through degree $m-1$, and derivatives through order $m$ satisfy $\\|\\psi_{lk}^{(q)}\\|_\\infty\\le C_q2^{l(q+1/2)}$, with uniformly bounded overlap of their supports; the fixed low scaling functions are $C^m$. These are the sufficiently regular compact multiresolution basis conditions in the source density theorem. For the density-model source results, every truth $f_0$ is a probability density satisfying $0<\\rho_0\\le f_0\\le D_0<\\infty$ for constants $\\rho_0,D_0$. For $n\\ge3$ and smoothness index $\\alpha>0$, let $j_n$ and $\\ell_n$ be the largest integers satisfying\n$$2^{j_n}\\le n^{1/(2\\alpha+1)},\\qquad 2^{\\ell_n}\\le(n/\\log n)^{1/(2\\alpha+1)}.$$\nChoose one cutoff sequence $L_n\\in\\{j_n,\\ell_n\\}$ for all $n\\ge3$; set any finite $L_n$ for $n=1,2$, which does not change asymptotic claims.\n\nFor a finite wavelet series $T_n=\\sum_{l\\le L_n}\\sum_{k\\in K_l}\\sigma_l\\xi_{lk}\\psi_{lk}$, define $c(T_n)=\\log\\int_0^1e^{T_n(x)}dx$ and the normalized log-density $f_n(x)=e^{T_n(x)-c(T_n)}$.\n\nThe **type-S1 family** takes IID coefficients $\\xi_{lk}$ with a continuous density $\\varphi_H$ for which $\\log\\varphi_H$ is Lipschitz, and uses $\\sigma_l=2^{-l(\\alpha+1/2)}$. Its source theorem assumes $\\log f_0$ has coefficient Hölder regularity $\\alpha>1$ and $f_0$ is bounded above and bounded away from zero.\n\nThe **type-S2 family** takes IID standard-normal coefficients and uses $\\sigma_l=2^{-l(r+1/2)}$, where $0<r<\\alpha-1/4$; its source theorem uses $\\log f_0\\in C^\\alpha$, $\\alpha>1/2$, and positive finite density bounds.\n\nFor the **type-H family**, use the Haar basis instead of the regular type-S wavelets: its scaling function is $1$ and $\\psi_{lk}=2^{l/2}(1_{I_{l+1,2k}}-1_{I_{l+1,2k+1}})$ for $l\\ge0$ and $0\\le k<2^l$. The histogram space at resolution $L$ consists of the scaling coordinate and detail levels $l<L$; all detail coefficients at $l\\ge L$ vanish. Partition $[0,1]$ into dyadic cells $I_{L_n,k}$ of length $2^{-L_n}$, draw $\\omega=(\\omega_k)_{k<2^{L_n}}\\sim\\operatorname{Dirichlet}(a_{0,L_n},\\ldots,a_{2^{L_n}-1,L_n})$, and set $f_n=2^{L_n}\\omega_k$ on cell $I_{L_n,k}$. The source assumptions are $c_1 2^{-L_na}\\le a_{k,L_n}\\le c_2$ for fixed positive $a,c_1,c_2$, and $f_0\\in C^\\alpha$ for $1/2<\\alpha\\le1$, together with the common positive finite density bounds above. The posterior asymptotic conclusions for these families are separate results.\n\nHere $C^\\alpha_\\psi$ denotes the coefficient class with norm $\\|g\\|_{C^\\alpha_\\psi}:=\\sup_{l,k}2^{l(\\alpha+1/2)}|\\langle g,\\psi_{lk}\\rangle|$. For sufficiently regular standard wavelets this is the usual Hölder scale (with the usual Zygmund interpretation at integer smoothness).",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, On the Bernstein–von Mises phenomenon for nonparametric Bayes procedures, §§2–3.2, equations (19)–(25)",
+              "url": "https://arxiv.org/pdf/1310.2484"
+            },
+            {
+              "title": "Giné and Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §7.4 Notes",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "strategy": null
+      },
+      {
+        "id": "lem-m0w-separable-and-projection-tails",
+        "kind": "lemma",
+        "title": "The multiscale coefficient space is separable and has vanishing projection tails",
+        "deps": [
+          "def-multiscale-coefficient-space-m0w"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-multiscale-primitive-map-to-continuous-cdfs",
+        "kind": "lemma",
+        "title": "The multiscale primitive map is continuous into C[0,1]",
+        "deps": [
+          "def-multiscale-coefficient-space-m0w",
+          "def-negative-sobolev-space-for-white-noise"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $(\\psi_{lk})$ be a compactly supported wavelet basis of [[def-negative-sobolev-space-for-white-noise]]. The Haar basis with its finite scaling coordinate, as specified in [[def-multiscale-coefficient-space-m0w]], is also allowed. Assume each level-$l$ wavelet for $l\\ge l_0$ has zero integral, uniformly bounded overlap, support length at most $C_0 2^{-l}$, and $\\|\\psi_{lk}\\|_1\\le C_0 2^{-l/2}$. Let $M_0(w)$ be as in [[def-multiscale-coefficient-space-m0w]], and suppose\n$$S_w:=\\sum_{l\\ge l_0}w_l2^{-l/2}<\\infty.$$\nFor $x\\in M_0(w)$ define\n$$Jx(t):=\\sum_{l,k}x_{lk}\\langle 1_{[0,t]},\\psi_{lk}\\rangle_{L^2},\\qquad 0\\le t\\le1.$$\nThen this series converges absolutely and uniformly in $t$, $Jx\\in C([0,1])$, and $\\|Jx-Jy\\|_\\infty\\le C S_w\\|x-y\\|_{M(w)}$ after adding the finite coarsest-level constant to $C S_w$. If $x$ is the coefficient sequence of $f\\in L^2$, then $Jx(t)=\\int_0^t f(u)\\,du$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, On the Bernstein–von Mises phenomenon for nonparametric Bayes procedures, §4.1",
+              "url": "https://arxiv.org/pdf/1310.2484"
+            },
+            {
+              "title": "Giné and Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, proof of Theorem 7.3.20",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-random-posterior-quantiles-stabilize-under-bvm",
+        "kind": "lemma",
+        "title": "Posterior quantiles stabilize under scalar weak convergence",
+        "deps": [
+          "lem-measurable-posterior-quantile-and-cdf-bracketing",
+          "thm-continuity-from-above-for-measures"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-smooth-functional-extends-to-negative-sobolev-space",
+        "kind": "lemma",
+        "title": "Smooth functionals extend continuously to the white-noise topology",
+        "deps": [
+          "def-sobolev-linear-functional-for-white-noise",
+          "def-negative-sobolev-space-for-white-noise"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-type-s-h-prior-draws-are-l2-densities",
+        "kind": "lemma",
+        "title": "Finite type-S and type-H prior draws are L2 probability densities",
+        "deps": [
+          "def-type-s-and-h-multiscale-density-priors"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-m0w-finite-projection-and-tail-bvm-criterion",
+        "kind": "lemma",
+        "title": "Finite-projection convergence and posterior tail control imply weak BvM",
+        "deps": [
+          "def-multiscale-coefficient-space-m0w",
+          "lem-m0w-separable-and-projection-tails",
+          "thm-continuity-from-above-for-measures"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-linear-functional-bvm-and-credible-coverage",
+        "kind": "theorem",
+        "title": "Linear-functional BvM limit and credible-interval calibration",
+        "deps": [
+          "def-countable-choice",
+          "def-sobolev-linear-functional-for-white-noise",
+          "lem-density-normal-laws-and-square-summable-gaussian-series",
+          "lem-random-posterior-quantiles-stabilize-under-bvm",
+          "lem-smooth-functional-extends-to-negative-sobolev-space",
+          "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space",
+          "thm-central-posterior-quantile-interval-is-credible",
+          "thm-weak-nonparametric-bernstein-von-mises-for-product-priors"
+        ],
+        "dependency_level": 4,
+        "statement": "Use the product-prior white-noise model and supplied posterior kernel of [[thm-weak-nonparametric-bernstein-von-mises-for-product-priors]], including its wavelet-basis, coefficient-density, truth, and countable-choice hypotheses. Let $g\\in H^s_2$ for some $s>1/2$, with $g\\ne0$, and put $\\sigma_g=\\|g\\|_2$. Let $Q_n$ be the posterior law of $L_g(f)$ and let\n$$C_{n,\\alpha}=\\left[q_{\\alpha/2}(Q_n),q_{1-\\alpha/2}(Q_n)\\right],\\qquad 0<\\alpha<1.$$\nThen\n$$\\beta_{BL,\\mathbb R}\\!\\left(Q_n\\circ[u\\mapsto\\sqrt n(u-L_g(X^{(n)}))]^{-1},N(0,\\sigma_g^2)\\right)\\longrightarrow0$$\nin $P_{f_0}^{(n)}$-probability. The interval $C_{n,\\alpha}$ is posterior credible at level $1-\\alpha$, and its frequentist coverage satisfies\n$$P_{f_0}^{(n)}\\{L_g(f_0)\\in C_{n,\\alpha}\\}\\longrightarrow1-\\alpha.$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, Nonparametric Bernstein–von Mises theorems in Gaussian white noise, Theorem 3 and §2.3.1",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/AOS1133.pdf"
+            },
+            {
+              "title": "Giné and Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §§7.3.4–7.3.5",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-nonlinear-functional-bvm-and-credible-coverage",
+        "kind": "theorem",
+        "title": "Nonlinear-functional BvM limit under fast L2 contraction",
+        "deps": [
+          "def-countable-choice",
+          "def-sobolev-linear-functional-for-white-noise",
+          "lem-density-normal-laws-and-square-summable-gaussian-series",
+          "lem-random-posterior-quantiles-stabilize-under-bvm",
+          "lem-smooth-functional-extends-to-negative-sobolev-space",
+          "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space",
+          "thm-central-posterior-quantile-interval-is-credible",
+          "thm-weak-nonparametric-bernstein-von-mises-for-product-priors"
+        ],
+        "dependency_level": 4,
+        "statement": "Use the white-noise experiment, product prior, and supplied posterior kernel of [[thm-weak-nonparametric-bernstein-von-mises-for-product-priors]], with all its stated basis, coefficient-density, truth, and countable-choice hypotheses. Let $\\Psi:L^2([0,1])\\to\\mathbb R$ be Borel measurable. Suppose $f_0\\in L^2$, and for some $g\\in H^s_2$, $s>1/2$, $g\\ne0$, $C<\\infty$, and $\\rho>0$,\n$$|\\Psi(f_0+h)-\\Psi(f_0)-\\langle h,g\\rangle_{L^2}|\\le C\\|h\\|_2^2\\quad\\text{whenever }\\|h\\|_2\\le\\rho.$$\nAssume the posterior contracts in $L^2$ at a deterministic radius $r_n=o(n^{-1/2})$, meaning $\\Pi_n(\\|f-f_0\\|_2>r_n\\mid X^{(n)})=o_{P_{f_0}^{(n)}}(1)$. Define the efficient center\n$$\\theta_n^*:=\\Psi(f_0)+L_g(X^{(n)}-f_0),$$\nwhere the last pairing is the continuous $H(\\delta)$ extension from [[lem-smooth-functional-extends-to-negative-sobolev-space]]. Then the posterior law of $\\sqrt n\\{\\Psi(f)-\\theta_n^*\\}$ converges in bounded-Lipschitz distance to $N(0,\\|g\\|_2^2)$ in $P_{f_0}^{(n)}$-probability. The equal-tailed posterior interval for $\\Psi(f)$ at level $1-\\alpha$ is credible and has frequentist coverage tending to $1-\\alpha$.\n\nThe stipulated radius implies the source's squared-radius condition: with $s_n=r_n^2$, one has $s_n=o(n^{-1/2})$ and posterior mass inside $\\|f-f_0\\|_2^2\\le s_n$ tends to one. However, for $g\\ne0$ this radius is incompatible with the imported weak BvM limit. Thus the implication under the retained radius is vacuous; the source's squared-radius condition does not have this incompatibility.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, Nonparametric Bernstein–von Mises theorems in Gaussian white noise, Theorem 4 and §2.3.2",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/AOS1133.pdf"
+            },
+            {
+              "title": "Giné and Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §§7.3.4–7.3.5",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-projected-empirical-process-clt-in-m0w",
+        "kind": "theorem",
+        "title": "Projected empirical bridge CLT in the little-o multiscale space",
+        "deps": [
+          "def-multiscale-coefficient-space-m0w",
+          "lem-m0w-separable-and-projection-tails",
+          "lem-m0w-finite-projection-and-tail-bvm-criterion",
+          "thm-multivariate-iid-central-limit-theorem",
+          "def-identically-distributed-and-iid-random-variables",
+          "lem-bounded-lipschitz-metric-characterizes-weak-convergence-on-polish-spaces",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "cor-markov-inequality-for-random-variables",
+          "thm-continuity-from-above-for-measures",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-density-gaussian-bridge-is-borel-on-m0w",
+        "kind": "lemma",
+        "title": "A bounded-density Gaussian bridge has a Borel multiscale law",
+        "deps": [
+          "cor-markov-inequality-for-random-variables",
+          "def-axiom-of-choice",
+          "def-multiscale-coefficient-space-m0w",
+          "lem-characteristic-function-of-a-normal-law",
+          "lem-m0w-separable-and-projection-tails",
+          "thm-dominated-convergence",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function"
+        ],
+        "statement": "Assume AC. Let $P_0$ have density $0\\le f_0\\le D<\\infty$ on $[0,1]$, and let $(\\psi_{lk})$ be an orthonormal wavelet system with at most $C2^l$ coordinates per level, including finitely many coarsest scaling coordinates. The Haar system is allowed. For every admissible $w$, there exists a Borel centered Gaussian random element $G_{P_0}$ of $M_0(w)$ with coefficient covariance\n$$K((l,k),(l',k'))=P_0[(\\psi_{lk}-P_0\\psi_{lk})(\\psi_{l'k'}-P_0\\psi_{l'k'})].$$\nIts Borel law is uniquely determined by these finite-coordinate Gaussian laws.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, On the Bernstein–von Mises phenomenon for nonparametric Bayes procedures, §2.1 and Theorem 1",
+              "url": "https://arxiv.org/pdf/1310.2484"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-density-bridge-norm-cdfs-are-continuous-and-strict",
+        "kind": "lemma",
+        "title": "Continuous and strictly increasing norm distributions for density bridges",
+        "deps": [
+          "cor-cauchy-schwarz-for-random-variables",
+          "def-axiom-of-choice",
+          "def-multiscale-coefficient-space-m0w",
+          "def-negative-sobolev-space-for-white-noise",
+          "lem-density-gaussian-bridge-is-borel-on-m0w",
+          "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "lem-finite-measure-uniqueness-on-a-pi-system",
+          "lem-m0w-separable-and-projection-tails",
+          "lem-mean-and-covariance-determine-gaussian-finite-dimensional-laws",
+          "lem-multiscale-primitive-map-to-continuous-cdfs",
+          "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+          "thm-brownian-reflection-principle",
+          "thm-continuity-from-above-for-measures",
+          "thm-existence-of-continuous-brownian-motion",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "def-brownian-motion",
+          "def-gaussian-process",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "thm-covariance-bilinearity-and-symmetry"
+        ],
+        "statement": "Assume AC. Let $P_0$ have density $0<\\rho\\le f_0\\le D<\\infty$ on $[0,1]$, and put $F_0(t)=\\int_0^t f_0$. Use a complete real orthonormal wavelet basis, allowing the Haar basis with its finite scaling coordinate, and admissible weights $w$ as in [[def-multiscale-coefficient-space-m0w]]. Assume the wavelet geometry and summability conditions of [[lem-multiscale-primitive-map-to-continuous-cdfs]], and write $J:M_0(w)\\to C([0,1])$ for its primitive map. Let $G$ be the Borel centered Gaussian bridge random element of [[lem-density-gaussian-bridge-is-borel-on-m0w]], with coefficient covariance\n$$\\operatorname{Cov}(G_{lk},G_{l'k'})=P_0[(\\psi_{lk}-P_0\\psi_{lk})(\\psi_{l'k'}-P_0\\psi_{l'k'})].$$\nThen the distribution functions of $\\|G\\|_{M(w)}$ and $\\|JG\\|_\\infty$ are continuous on $\\mathbb R$ and strictly increasing on $(0,\\infty)$. Both assign probability zero to $0$, and take values strictly between $0$ and $1$ at every positive argument. Consequently, for every $u\\in(0,1)$, each has a unique positive finite lower $u$-quantile $q$, with CDF value $u$, and is strictly increasing on an open neighborhood of $q$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, On the Bernstein–von Mises phenomenon for nonparametric Bayes procedures, Theorems 4–5 and Section 4",
+              "url": "https://arxiv.org/pdf/1310.2484"
+            },
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, fifth edition, Sections 7.4 and 8.4",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-finite-dirichlet-gamma-representation-and-bernstein-bound",
+        "kind": "lemma",
+        "title": "Finite Dirichlet gamma representation and weighted Bernstein bound",
+        "deps": [
+          "cor-markov-inequality-for-random-variables",
+          "def-axiom-of-choice",
+          "def-dirichlet-distribution",
+          "def-gamma-distribution-shape-rate",
+          "lem-gamma-density-normalization",
+          "lem-uniqueness-of-a-multivariate-exponential-transform",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique"
+        ],
+        "statement": "Assume AC. Let $\\beta_1,\\ldots,\\beta_m>0$, $B=\\sum_j\\beta_j$, and let $Z_j$ be independent $\\operatorname{Gamma}(\\beta_j,1)$ variables. Put $S=\\sum_j Z_j$. Then $\\omega=(Z_j/S)_j$ is $\\operatorname{Dirichlet}(\\beta_1,\\ldots,\\beta_m)$, and $S$ is $\\operatorname{Gamma}(B,1)$, with mean $B$ and variance $B$. Each $Z_j$ has mean $\\beta_j$, variance $\\beta_j$, and moment-generating function $\\mathbb E e^{uZ_j}=(1-u)^{-\\beta_j}$ for every real $u<1$. For real $q_j$ satisfying $|q_j|\\le b$, put $T(q)=\\sum_jq_j(Z_j-\\beta_j)$ and $V=\\sum_j\\beta_jq_j^2$. If $V>0$, then for $x>0$,\n$$\\Pr\\{|T(q)|>x\\}\\le2\\exp\\left\\{-\\frac{x^2}{2(V+bx)}\\right\\}.$$\nIf $V=0$, $T(q)=0$ almost surely. Sums of disjoint groups of the $Z_j$ are independent Gamma variables with their respective summed shapes.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo, On Bayesian supremum norm contraction rates, §4.4",
+              "url": "https://arxiv.org/pdf/1304.1761"
+            },
+            {
+              "title": "Ferguson, A Bayesian Analysis of Some Nonparametric Problems, Section 2",
+              "url": "https://users.wpi.edu/~balnan/Ferguson1973.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-type-h-histogram-posterior-weak-bvm-in-m0w",
+        "kind": "theorem",
+        "title": "Type-H histogram posterior weak Bernstein–von Mises theorem",
+        "deps": [
+          "cor-markov-inequality-for-random-variables",
+          "def-axiom-of-choice",
+          "def-multiscale-coefficient-space-m0w",
+          "def-type-s-and-h-multiscale-density-priors",
+          "lem-bounded-lipschitz-metric-characterizes-weak-convergence-on-polish-spaces",
+          "lem-density-gaussian-bridge-is-borel-on-m0w",
+          "lem-finite-dirichlet-gamma-representation-and-bernstein-bound",
+          "lem-m0w-finite-projection-and-tail-bvm-criterion",
+          "lem-type-s-h-prior-draws-are-l2-densities",
+          "lem-uniqueness-of-a-multivariate-exponential-transform",
+          "thm-bayes-formula-for-dominated-kernels",
+          "thm-dirichlet-multinomial-conjugate-update",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-prokhorov-tightness-theorem-on-polish-spaces",
+          "thm-vector-slutsky"
+        ],
+        "statement": "Assume AC. Use the type-H prior of [[def-type-s-and-h-multiscale-density-priors]], retaining its original conditions: $1/2<\\alpha\\le1$, $f_0\\in C^\\alpha([0,1])$, $0<\\rho_0\\le f_0\\le D_0<\\infty$, either original cutoff $L_n=j_n$ or $L_n=\\ell_n$, and $c_1 2^{-L_na}\\le a_{k,L_n}\\le c_2$ for fixed positive $a,c_1,c_2$. Write $m_n=2^{L_n}$. In the Haar convention, the scaling function is $1$, the detail functions are\n$$\\psi_{lk}=2^{l/2}(\\mathbf1_{I_{l+1,2k}}-\\mathbf1_{I_{l+1,2k+1}}),\\qquad l\\ge0,\\quad 0\\le k<2^l,$$\nand a histogram at resolution $L_n$ has only the scaling coordinate and levels $l<L_n$. Let $X_1,\\ldots,X_n$ be IID from $f_0$, let $N_{nk}=\\sum_i\\mathbf1_{I_{L_n,k}}(X_i)$, and define the empirical histogram\n$$h_n(x)=m_n N_{nk}/n\\quad\\text{on }I_{L_n,k}.$$\nLet $\\Pi_n(\\cdot\\mid X^n)$ be the density posterior for the stated histogram prior. For every nondecreasing $w_l\\ge1$ with $w_l/\\sqrt{l+1}\\to\\infty$, its conditional law $Q_n$ of $\\sqrt n(f-h_n)$ satisfies\n$$\\beta_{BL,M_0(w)}(Q_n,\\mathcal L(G_{P_0}))\\longrightarrow0$$\nin $P_0^n$-probability, where the Borel centered Gaussian bridge $G_{P_0}$ is supplied by [[lem-density-gaussian-bridge-is-borel-on-m0w]] and has covariance $P_0[(\\psi-P_0\\psi)(\\psi'-P_0\\psi')]$. Its scaling coordinate is zero. This proves the type-H source-specific posterior BvM with the empirical projection center; no additional contraction, bias, or Dirichlet-parameter condition is imposed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, On the Bernstein–von Mises phenomenon for nonparametric Bayes procedures, Theorem 3 and §5.4, printed pp.24–28",
+              "url": "https://arxiv.org/pdf/1310.2484"
+            },
+            {
+              "title": "Castillo, On Bayesian supremum norm contraction rates, §4.4, printed pp.25–28",
+              "url": "https://arxiv.org/pdf/1304.1761"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-compact-wavelet-projection-kernel-and-commutator",
+        "kind": "lemma",
+        "title": "Compact wavelet projections approximate smooth functions and commute asymptotically with multiplication",
+        "deps": [
+          "def-negative-sobolev-space-for-white-noise"
+        ],
+        "statement": "Let $V_L$ be the span of wavelets through level $L$ in a compactly supported orthonormal multiresolution basis on $[0,1]$, either boundary corrected or periodized. Assume constants belong to $V_L$, its dimension $d_L\\asymp2^L$, and its orthonormal scaling functions $\\phi_{Lk}$ have supremum norm at most $C2^{L/2}$, support diameter at most $C2^{-L}$, and uniformly bounded overlap. Periodized supports and distances are interpreted on the circle. Assume also $\\sum_k|\\psi_{lk}(x)|\\le C2^{l/2}$ and $\\|\\psi_{lk}\\|_1\\le C2^{-l/2}$. Let $P_L$ denote the orthogonal projection onto $V_L$.\n\nThen $P_L$ has a kernel $K_L$ satisfying $\\sup_x\\int|K_L(x,y)|dy\\le C'$ and $K_L(x,y)=0$ when $\\operatorname{dist}(x,y)>C'2^{-L}$. If $a$ is $\\beta$-Hölder for $0<\\beta\\le1$, then\n$$\\|P_L(ah)-ah\\|_\\infty\\le C'\\|a\\|_{C^\\beta}2^{-\\beta L}\\|h\\|_\\infty,\\qquad h\\in V_L.$$\nFor the composition assertion, assume additionally an integer $m>\\alpha$ such that $\\|\\psi_{lk}^{(q)}\\|_\\infty\\le C_q2^{l(q+1/2)}$ for $0\\le q\\le m$, bounded overlap also for their derivatives, and vanishing moments through degree $m-1$ for the detail wavelets, including boundary wavelets; the finite low scaling functions are $C^m$. These are the usual sufficiently regular compact wavelet hypotheses. If a bounded function $g$ has coefficients bounded by $C_g2^{-l(\\alpha+1/2)}$, with $\\alpha>0$, and its wavelet expansion represents $g$ in $L^2$, then $\\|g-P_Lg\\|_\\infty\\le C''C_g2^{-\\alpha L}$, up to equality of the continuous representatives. Under these additional derivative and cancellation hypotheses, $e^g$ also has coefficients bounded by $C_g^\\prime2^{-l(\\alpha+1/2)}$, including integer $\\alpha$, and $g,e^g$ are $\\beta$-Hölder for every $0<\\beta<\\min(\\alpha,1)$. Moreover $\\|h\\|_\\infty\\le C''\\sqrt{d_L}\\|h\\|_2$ for $h\\in V_L$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, On the Bernstein–von Mises phenomenon for nonparametric Bayes procedures, §2 and §5.4",
+              "url": "https://arxiv.org/pdf/1310.2484"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-type-s-posterior-preliminary-contraction",
+        "kind": "lemma",
+        "title": "Type-S posterior contracts in quotient log-density coordinates without a tail restriction on a log-Lipschitz prior",
+        "deps": [
+          "cor-markov-inequality-for-random-variables",
+          "def-axiom-of-choice",
+          "def-type-s-and-h-multiscale-density-priors",
+          "lem-compact-wavelet-projection-kernel-and-commutator",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "statement": "Assume AC for the imported measure and Gaussian interfaces. Use Type-S priors and either cutoff of [[def-type-s-and-h-multiscale-density-priors]] with the compact multiresolution basis of [[lem-compact-wavelet-projection-kernel-and-commutator]], regular enough for the truth's Hölder approximation. Suppose $0<\\rho_0\\le f_0\\le D_0$, $g_0=\\log f_0\\in C^\\alpha$, and $\\alpha>1/2$. In S1 take $\\sigma_l=2^{-l(\\alpha+1/2)}$ and any probability density whose logarithm is Lipschitz on all of $\\mathbb R$. In S2 take Gaussian coefficients with $\\sigma_l=2^{-l(r+1/2)}$ and $0<r<\\alpha-1/4$.\n\nWrite $d=\\dim V_{L_n}\\asymp2^{L_n}$, $E_{L_n}=V_{L_n}\\cap\\{h:\\int h=0\\}$, $\\theta=T-\\int T$, $\\theta_*=P_{L_n}g_0-\\int g_0$, and $e_n=\\sqrt{d/n}+d^{-\\alpha}$. Under IID data of density $f_0$, the posterior distributions of $\\|\\theta-\\theta_*\\|_2/e_n$ are tight in probability. Equivalently, for every deterministic $b_n\\to\\infty$,\n$$\\Pi(\\|\\theta-\\theta_*\\|_2>b_ne_n\\mid X^n)\\to0$$\nin $P_0^n$-probability. The normalizer defining the posterior is positive and finite $P_0^n$-almost surely. The quotient prior has a positive continuous Lebesgue density $q_L$ on $E_L$. In S1 it obeys\n$$|\\log q_L(\\theta+u)-\\log q_L(\\theta)|\\le B_L\\|u\\|_2,\\qquad B_L^2\\le C\\sum_{l\\le L}2^l\\sigma_l^{-2},$$\nand a shift in a single high wavelet coordinate obeys the sharper bound $C|u_{lk}|/\\sigma_l$. The low scaling block has a fixed finite collection of analogous weighted bounds. In S2 the quotient prior is centered Gaussian, with precision $Q_L$ diagonal on high wavelets with entries $\\sigma_l^{-2}$ and a fixed positive definite low scaling block. Its log-density increment is $-\\langle Q_L\\theta,u\\rangle-\\langle Q_Lu,u\\rangle/2$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo, On Bayesian supremum norm contraction rates, §3.2.1 and §4.3; preliminary contraction here obtained by a finite-dimensional likelihood argument",
+              "url": "https://arxiv.org/pdf/1304.1761"
+            },
+            {
+              "title": "Castillo and Nickl, On the Bernstein–von Mises phenomenon for nonparametric Bayes procedures, §3.2",
+              "url": "https://arxiv.org/pdf/1310.2484"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-type-s-density-weak-bvm-on-m0w",
+        "kind": "theorem",
+        "title": "Type-S density posteriors satisfy the weak multiscale Bernstein–von Mises theorem",
+        "deps": [
+          "cor-markov-inequality-for-random-variables",
+          "def-axiom-of-choice",
+          "def-multiscale-coefficient-space-m0w",
+          "def-type-s-and-h-multiscale-density-priors",
+          "lem-bounded-lipschitz-metric-characterizes-weak-convergence-on-polish-spaces",
+          "lem-compact-wavelet-projection-kernel-and-commutator",
+          "lem-density-gaussian-bridge-is-borel-on-m0w",
+          "lem-iid-bounded-variance-bernstein-tail",
+          "lem-m0w-finite-projection-and-tail-bvm-criterion",
+          "lem-type-s-posterior-preliminary-contraction",
+          "thm-cramer-wold-device",
+          "thm-dominated-convergence",
+          "thm-prokhorov-tightness-theorem-on-polish-spaces",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function"
+        ],
+        "statement": "Assume AC. Let $X_1,\\ldots,X_n$ be IID on $[0,1]$ with density $0<\\rho_0\\le f_0\\le D_0<\\infty$, and suppose $g_0=\\log f_0\\in C^\\alpha$. Use a sufficiently regular compactly supported boundary corrected orthonormal multiresolution wavelet basis satisfying [[lem-compact-wavelet-projection-kernel-and-commutator]], with regularity greater than $\\alpha$, and let $V_L$ contain exactly its wavelet levels through $L$, including the fixed low scaling space and constants. Its regularity and vanishing moments satisfy the composition hypotheses in that lemma for some integer $m>\\alpha$. Let $L_n$ be either of the two cutoff sequences in [[def-type-s-and-h-multiscale-density-priors]], fixed consistently for all $n$.\n\nIn Type-S1 take $\\alpha>1$, $\\sigma_l=2^{-l(\\alpha+1/2)}$, and any coefficient probability density with globally Lipschitz logarithm. In Type-S2 take $\\alpha>1/2$, Gaussian coefficients, and $\\sigma_l=2^{-l(r+1/2)}$ with $0<r<\\alpha-1/4$. Normalize $f=\\exp(T)/\\int\\exp(T)$ as in that definition. For every admissible weight sequence $w$, the posterior satisfies\n$$\\beta_{BL,M_0(w)}\\bigl(\\mathcal L(\\sqrt n(f-P_n(L_n))\\mid X^n),\\mathcal L(G_{P_0})\\bigr)\\longrightarrow0$$\nin $P_0^n$-probability, where $P_n(L_n)$ has empirical wavelet coefficients through $L_n$ and zero coefficients above $L_n$, and $G_{P_0}$ is the Borel Gaussian bridge with covariance $P_0[(\\psi_i-P_0\\psi_i)(\\psi_j-P_0\\psi_j)]$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, On the Bernstein–von Mises phenomenon for nonparametric Bayes procedures, Theorem 3 and §5.4; direct contraction and commutator proof here retains the approved richer prior scope",
+              "url": "https://arxiv.org/pdf/1310.2484"
+            },
+            {
+              "title": "Castillo, On Bayesian supremum norm contraction rates, §4.3",
+              "url": "https://arxiv.org/pdf/1304.1761"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-cdf-and-multiscale-credible-band-calibration-from-bvm",
+        "kind": "theorem",
+        "title": "CDF and multiscale credible-band calibration from weak BvM limits",
+        "deps": [
+          "cor-cauchy-schwarz-for-random-variables",
+          "def-multiscale-coefficient-space-m0w",
+          "def-negative-sobolev-space-for-white-noise",
+          "def-posterior-credible-set",
+          "lem-m0w-separable-and-projection-tails",
+          "lem-measurable-posterior-quantile-and-cdf-bracketing",
+          "lem-multiscale-primitive-map-to-continuous-cdfs",
+          "lem-random-posterior-quantiles-stabilize-under-bvm",
+          "thm-continuous-mapping-theorem",
+          "thm-portmanteau-theorem",
+          "thm-projected-empirical-process-clt-in-m0w",
+          "thm-type-h-histogram-posterior-weak-bvm-in-m0w",
+          "thm-type-s-density-weak-bvm-on-m0w"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $P_0$ have a density $f_0$ on $[0,1]$ bounded above and bounded away from zero, and put $F_0(t)=\\int_0^t f_0(x)dx$. Use the wavelet basis and $M_0(w)$ of [[def-multiscale-coefficient-space-m0w]], and assume the wavelet conditions and summability condition $\\sum_lw_l2^{-l/2}<\\infty$ of [[lem-multiscale-primitive-map-to-continuous-cdfs]]. Let $T_n$ be a measurable $L^2$-valued center, let $\\Pi_n$ be a posterior kernel supported on $L^2$ densities, and define $Q_n$ to be the conditional law on $M_0(w)$ of $\\sqrt n(f-T_n)$ under $f\\sim\\Pi_n(\\cdot\\mid X^n)$.\n\nAssume under $P_0^n$ that (i) $Q_n$ converges in bounded-Lipschitz distance in probability to the centered Gaussian bridge coefficient law $G_{P_0}$ in $M_0(w)$, whose finite coefficient covariances are $P_0[(h-P_0h)(g-P_0g)]$, and (ii) $\\sqrt n(T_n-f_0)\\Rightarrow G_{P_0}$ in $M_0(w)$. For $u=1-\\alpha$, let $q_M$ and $q_C$ be the lower $u$-quantiles of $\\|G_{P_0}\\|_{M(w)}$ and $\\|JG_{P_0}\\|_\\infty$. Assume both CDFs are continuous on $\\mathbb R$ and strictly increasing on open neighborhoods of their respective quantiles, and that $q_M,q_C>0$. These local quantile conditions allow the CDFs to be constant on the negative half-line. In the projected empirical-center case $T_n=P_n(L_n)$, [[thm-projected-empirical-process-clt-in-m0w]] supplies premise (ii) under its stated smoothness and cutoff conditions. For the source-specific type-S and type-H priors, the posterior BvM premise (i) is established in [[thm-type-s-density-weak-bvm-on-m0w]] and [[thm-type-h-histogram-posterior-weak-bvm-in-m0w]], respectively.\n\nFor a posterior draw $f$, write $F_f=Jf$ and $F_{T_n}=JT_n$, where $J$ is the primitive map of [[lem-multiscale-primitive-map-to-continuous-cdfs]]. Then the posterior law of $\\sqrt n(F_f-F_{T_n})$ converges in bounded-Lipschitz distance on $C([0,1])$ to the $P_0$-Brownian bridge $B_{P_0}(t)$, with covariance $F_0(s\\wedge t)-F_0(s)F_0(t)$.\n\nFor $0<\\alpha<1$, let $R_n^M$ and $R_n^C$ be the posterior lower $1-\\alpha$ quantiles of $\\|\\sqrt n(f-T_n)\\|_{M(w)}$ and $\\|\\sqrt n(F_f-F_{T_n})\\|_\\infty$, respectively. The corresponding posterior balls\n$$C_n^M=\\{f:\\|f-T_n\\|_{M(w)}\\le R_n^M/\\sqrt n\\},\\qquad C_n^C=\\{F:\\|F-F_{T_n}\\|_\\infty\\le R_n^C/\\sqrt n\\}$$\nare measurable credible sets of posterior mass at least $1-\\alpha$. Their frequentist coverage tends to $1-\\alpha$, and the scaled radii converge to the respective $1-\\alpha$ quantiles of $\\|G_{P_0}\\|_{M(w)}$ and $\\|B_{P_0}\\|_\\infty$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, On the Bernstein–von Mises phenomenon for nonparametric Bayes procedures, Theorems 4–5, Corollary 2, and §5.4",
+              "url": "https://arxiv.org/pdf/1310.2484"
+            },
+            {
+              "title": "Giné and Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, Theorem 7.3.23 and proof",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-multiscale-credible-band-holder-diameter",
+        "kind": "theorem",
+        "title": "Diameter of undersmoothed multiscale credible bands",
+        "deps": [
+          "def-multiscale-coefficient-space-m0w",
+          "thm-cdf-and-multiscale-credible-band-calibration-from-bvm"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "cor-type-s-h-density-credible-band-calibration",
+        "kind": "corollary",
+        "title": "Type-S and Type-H density credible bands have asymptotically exact coverage",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-type-s-and-h-multiscale-density-priors",
+          "lem-compact-wavelet-projection-kernel-and-commutator",
+          "lem-density-bridge-norm-cdfs-are-continuous-and-strict",
+          "thm-cdf-and-multiscale-credible-band-calibration-from-bvm",
+          "thm-multiscale-credible-band-holder-diameter",
+          "thm-projected-empirical-process-clt-in-m0w",
+          "thm-type-h-histogram-posterior-weak-bvm-in-m0w",
+          "thm-type-s-density-weak-bvm-on-m0w"
+        ],
+        "statement": "Assume AC. Use either Type-S1, Type-S2 or Type-H with all the truth, basis, prior-scale, Dirichlet-parameter and cutoff conditions of [[def-type-s-and-h-multiscale-density-priors]]. Let $w_l\\ge1$ be nondecreasing, $w_l/\\sqrt{l+1}\\to\\infty$, and $\\sum_lw_l2^{-l/2}<\\infty$. In Type S take $T_n=P_n(L_n)$, the empirical wavelet projection through level $L_n$. In Type H take the empirical histogram $T_n=h_n$ at mesh $2^{-L_n}$, equivalently the Haar projection with scaling coordinate and details $l<L_n$.\n\nFor each $0<\\eta<1$, the posterior multiscale and CDF balls of [[thm-cdf-and-multiscale-credible-band-calibration-from-bvm]], at posterior level $1-\\eta$ and centered at these $T_n$, have posterior mass at least $1-\\eta$ and frequentist coverage tending to $1-\\eta$. Their scaled radii converge in probability to the positive finite $1-\\eta$ quantiles of the corresponding Gaussian bridge norms. In particular the CDF posterior converges in bounded-Lipschitz distance to the $P_0$-Brownian bridge law.\n\nIf additionally the coefficient smoothness and undersmoothing hypotheses of [[thm-multiscale-credible-band-holder-diameter]] hold, its intersection with the stated coefficient smoothness ball has the same limiting coverage and the diameter bound asserted there. No unverified entropy, prior-mass, posterior contraction or quantile-regularity premise is required in this corollary.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, On the Bernstein–von Mises phenomenon for nonparametric Bayes procedures, Theorems 3–5",
+              "url": "https://arxiv.org/pdf/1310.2484"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "dependency_level": 7
+      }
+    ]
+  },
+  {
+    "order": 2081,
+    "id": "functional-bayesian-limits-and-credible-set-calibration-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Functional BvM limits and credible-set calibration — Examples",
+    "companion": "functional-bayesian-limits-and-credible-set-calibration",
+    "requires": [
+      "functional-bayesian-limits-and-credible-set-calibration"
+    ],
+    "items": [
+      {
+        "id": "cex-credible-posterior-set-with-zero-frequency-coverage",
+        "kind": "counterexample",
+        "title": "A boundary truth can give an equal-tailed credible interval zero coverage",
+        "deps": [
+          "def-posterior-credible-set",
+          "thm-bayes-formula-for-dominated-kernels"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-type-s-and-h-density-prior-contracts",
+        "kind": "example",
+        "title": "Uniform truth under type-S and type-H density priors",
+        "deps": [
+          "cor-type-s-h-density-credible-band-calibration",
+          "def-multiscale-coefficient-space-m0w",
+          "def-type-s-and-h-multiscale-density-priors",
+          "lem-type-s-h-prior-draws-are-l2-densities"
+        ],
+        "dependency_level": 8,
+        "statement": "The uniform truth $f_0=1$ meets the truth-side smoothness and positive-bound conditions for both a type-S log-density prior and a type-H dyadic histogram prior. The weight sequence $w_l=\\max(1,\\sqrt l\\log(l+1))$ is admissible and also satisfies the extra summability needed for the CDF map. Thus the source-specific posterior BvM and credible-band conclusions of [[cor-type-s-h-density-credible-band-calibration]] apply to these choices.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Castillo and Nickl, On the Bernstein–von Mises phenomenon for nonparametric Bayes procedures, §3.2",
+              "url": "https://arxiv.org/pdf/1310.2484"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-nonlinear-functional-remainder-at-parametric-scale",
+        "kind": "example",
+        "title": "A quadratic remainder at the parametric L2 scale",
+        "deps": [
+          "thm-nonlinear-functional-bvm-and-credible-coverage"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-smooth-linear-functional-in-white-noise",
+        "kind": "example",
+        "title": "The integral functional under a product-prior white-noise BvM",
+        "deps": [
+          "def-sobolev-linear-functional-for-white-noise",
+          "thm-linear-functional-bvm-and-credible-coverage",
+          "thm-weak-nonparametric-bernstein-von-mises-for-product-priors",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5
+      }
+    ]
+  }
+]

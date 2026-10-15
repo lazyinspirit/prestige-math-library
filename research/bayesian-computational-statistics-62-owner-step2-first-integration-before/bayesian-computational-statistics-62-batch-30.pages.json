@@ -1,0 +1,290 @@
+[
+  {
+    "order": 2100,
+    "id": "rejection-sampling",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Rejection sampling",
+    "companion": "rejection-sampling-examples",
+    "requires": [
+      "iid-monte-carlo-integration-and-error"
+    ],
+    "items": [
+      {
+        "id": "alg-rejection-sampling",
+        "kind": "algorithm",
+        "title": "Rejection sampling",
+        "statement": "Let $(S,\\mathcal S,\\mu)$ be a measure space. The nonnegative measurable\nfunctions $\\tilde f,\\tilde g:S\\to[0,\\infty)$ are the target and proposal\nshapes, with\n$$Z_f:=\\int_S\\tilde f\\,d\\mu\\in(0,\\infty),\\qquad Z_g:=\\int_S\\tilde g\\,d\\mu\\in(0,\\infty).$$\nThe normalized densities $\\bar f:=\\tilde f/Z_f$ and $\\bar g:=\\tilde g/Z_g$\nare measurable by closure under scalar multiplication\n([[thm-arithmetic-and-lattice-operations-preserve-measurability]]). Their\nintegrals are one by homogeneity of the nonnegative integral\n([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]). Thus their\ndensity measures are probability laws by\n[[def-measure-with-density]] and [[def-probability-measure]]:\n$$F(A):=Z_f^{-1}\\int_A\\tilde f\\,d\\mu,\\qquad G(A):=Z_g^{-1}\\int_A\\tilde g\\,d\\mu\\quad(A\\in\\mathcal S).$$\nAssume a finite $c>0$ satisfies $\\tilde f\\le c\\tilde g$ outside a common\n$\\mu$-null set. Use finite-valued representatives; values on that null set\ndo not affect $F$ or $G$.\n\nThe stochastic input is an ideal sequence of independent proposal draws\n$Y_i$ with common law $G$ and independent auxiliary draws $U_i$ with common\nlaw $\\Lambda$, where $\\Lambda$ is the uniform probability law on $(0,1)$:\n$\\Lambda(U\\le t)=t$ for $0\\le t\\le1$. The two sequences are independent, so\nthe pairs $(Y_i,U_i)$ are IID in the sense of\n[[def-identically-distributed-and-iid-random-variables]]. This contract\nassumes exact draws; it makes no claim about a finite-precision pseudorandom\ngenerator.\n\nDefine the measurable acceptance function\n$$a(y):=\\begin{cases} 0,&\\tilde g(y)=0,\\\\ \\min\\!\\left\\{1,\\dfrac{\\tilde f(y)}{c\\tilde g(y)}\\right\\},&\\tilde g(y)>0. \\end{cases}$$\nIt is measurable. The reciprocal extension $h:[0,\\infty)\\to[0,\\infty)$,\n$h(t)=1/t$ for $t>0$ and $h(0)=0$, is Borel: for every real $r$, its strict\nupper level set is $[0,\\infty)$ if $r<0$, $(0,\\infty)$ if $r=0$, and\n$(0,1/r)$ if $r>0$. These are Borel sets in the subspace $[0,\\infty)$ by\n[[def-borel-sigma-algebra]], so the threshold characterization\n[[thm-threshold-characterisations-of-real-and-extended-real-measurability]]\napplies. Equivalently,\n$a(y)=\\min\\{1,\\tilde f(y)h(\\tilde g(y))/c\\}$. Arithmetic operations and Borel\ncomposition preserve measurability by\n[[thm-arithmetic-and-lattice-operations-preserve-measurability]] and\n[[thm-composition-with-borel-functions-preserves-measurability]]. On the\nenvelope set this is exactly $\\tilde f(y)/(c\\tilde g(y))$. If the quotient\nexceeds $1$ at an exceptional point, replacing it by $1$ does not change the\ntest $U_i\\le\\tilde f(y)/(c\\tilde g(y))$, since $U_i\\in(0,1)$.\n\n**Procedure.** For $i=1,2,\\ldots$, draw $(Y_i,U_i)$. If $U_i\\le a(Y_i)$,\nreturn $Y_i$ and stop; otherwise continue to the next pair. When\n$\\tilde f=f$ and $\\tilde g=g$ are normalized densities, integrating\n$f\\le cg$ gives $c\\ge1$, and the rule is the usual threshold $f(Y_i)/(cg(Y_i))$.",
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-law-or-distribution-of-a-random-element",
+          "def-measure-with-density",
+          "def-probability-measure",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 4 §4.7",
+              "url": "https://artowen.su.domains/mc/Ch-nonunifrng.pdf"
+            },
+            {
+              "title": "Computational Statistics with R, Chapter 6 §6.1",
+              "url": "https://cswr.nrhstat.org/reject-samp.html"
+            }
+          ]
+        },
+        "justified_by": [
+          "thm-rejection-sampling-has-target-acceptance-law"
+        ]
+      },
+      {
+        "id": "thm-counting-measure-integral-is-nonnegative-series",
+        "kind": "theorem",
+        "title": "Counting-measure integration is a nonnegative series",
+        "statement": "Let $\\mathbb N=\\{0,1,2,\\ldots\\}$ and let $\\#$ be counting measure on\n$(\\mathbb N,\\mathcal P(\\mathbb N))$ ([[def-counting-measure]],\n[[prop-counting-measure-is-a-measure]]). For every measurable\n$f:\\mathbb N\\to[0,+\\infty]$,\n$$\\int_{\\mathbb N} f\\,d\\#=\\sum_{n=0}^{\\infty}f(n),$$\nwhere the right side is the nonnegative extended series of\n[[def-nonnegative-extended-series]].",
+        "deps": [
+          "cor-cauchy-reals-lub-complete",
+          "def-counting-measure",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-nonnegative-extended-series",
+          "def-nonnegative-lebesgue-integral",
+          "def-nonnegative-simple-measurable-function",
+          "lem-of-naturals-positive",
+          "prop-counting-measure-is-a-measure",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-of-archimedean",
+          "thm-reals-ordered-field"
+        ],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Measure Theory, Princeton University MAT425 Spring 2025 Lecture Notes, Example 2.42 and Claim 2.50",
+              "url": "https://web.math.princeton.edu/~js129/PDFs/teaching/MAT425_spring_2025/MAT425_Lecture_Notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-rejection-sampling-has-target-acceptance-law",
+        "kind": "theorem",
+        "title": "Rejection sampling has the target acceptance law",
+        "statement": "Let $(S,\\mathcal S,\\mu)$ be a measure space and let\n$\\tilde f,\\tilde g:S\\to[0,\\infty]$ be measurable with\n$0<Z_f:=\\int\\tilde f\\,d\\mu<\\infty$ and\n$0<Z_g:=\\int\\tilde g\\,d\\mu<\\infty$. Suppose $c>0$ is finite and\n$\\tilde f\\le c\\tilde g$ $\\mu$-almost everywhere. Apply\n[[alg-rejection-sampling]] with proposal law\n$G(A)=Z_g^{-1}\\int_A\\tilde g\\,d\\mu$. If $N$ is the first accepted proposal,\nthen $N<\\infty$ almost surely, the per-proposal acceptance probability is\n$$p=\\frac{Z_f}{cZ_g},$$\nand for every $A\\in\\mathcal S$,\n$$\\mathbb P(Y_N\\in A)=\\frac1{Z_f}\\int_A\\tilde f\\,d\\mu.$$\nThus the accepted law has density $\\tilde f/Z_f$. In the normalized case\n$Z_f=Z_g=1$, this gives acceptance probability $1/c$ and accepted density\n$f$; necessarily $c\\ge1$.",
+        "deps": [
+          "alg-rejection-sampling",
+          "cor-finite-nonnegative-integral-implies-finite-almost-everywhere",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-law-or-distribution-of-a-random-element",
+          "def-measure",
+          "def-measure-with-density",
+          "def-probability-measure",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-change-of-variables-for-expectation",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-geometric-series",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-integration-against-a-density",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 4 §4.7",
+              "url": "https://artowen.su.domains/mc/Ch-nonunifrng.pdf"
+            },
+            {
+              "title": "Computational Statistics with R, Chapter 6 §6.1",
+              "url": "https://cswr.nrhstat.org/reject-samp.html"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-rejection-sampling-expected-proposal-count-under-finite-envelope",
+        "kind": "theorem",
+        "title": "Expected proposal count under a finite rejection envelope",
+        "statement": "In the setup of [[thm-rejection-sampling-has-target-acceptance-law]], let $N$\nbe the number of proposals through and including the first accepted proposal.\nWith $p=Z_f/(cZ_g)$ and $q=1-p$, for every integer $k\\ge1$,\n$$\\mathbb P(N=k)=q^{k-1}p,\\qquad \\mathbb E[N]=\\frac1p=\\frac{cZ_g}{Z_f}.$$\nThus $N$ is geometric on $\\{1,2,\\ldots\\}$. For normalized target and proposal\ndensities, $\\mathbb E[N]=c$.",
+        "deps": [
+          "alg-rejection-sampling",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-geometric-series",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-rejection-sampling-has-target-acceptance-law"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 4 §4.7",
+              "url": "https://artowen.su.domains/mc/Ch-nonunifrng.pdf"
+            },
+            {
+              "title": "Computational Statistics with R, Chapter 6 §6.1",
+              "url": "https://cswr.nrhstat.org/reject-samp.html"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2101,
+    "id": "rejection-sampling-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Rejection sampling — Examples",
+    "companion": "rejection-sampling",
+    "requires": [
+      "rejection-sampling"
+    ],
+    "items": [
+      {
+        "id": "ex-rejection-sampling-tail-mismatch-no-finite-envelope",
+        "kind": "example",
+        "title": "A lighter-tailed proposal has no finite rejection envelope",
+        "statement": "On $\\mathbb N=\\{0,1,2,\\ldots\\}$ with counting measure, put $f(0)=g(0)=0$ and\nfor $n\\ge1$ define\n$$f(n)=\\frac1{n(n+1)},\\qquad g(n)=\\frac4{n(n+1)(n+2)}.$$\nBoth are probability masses, but their ratio\n$f(n)/g(n)=(n+2)/4$ for $n\\ge1$ is unbounded. Thus this lighter-tailed\nproposal has no finite rejection envelope for the target.",
+        "deps": [
+          "alg-rejection-sampling",
+          "cor-archimedean-reciprocal",
+          "cor-cauchy-reals-lub-complete",
+          "def-counting-measure",
+          "def-real-limit",
+          "lem-of-inverse-positive",
+          "lem-of-naturals-positive",
+          "prop-counting-measure-is-a-measure",
+          "thm-counting-measure-integral-is-nonnegative-series",
+          "thm-of-archimedean",
+          "thm-reals-ordered-field"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 4 §4.7",
+              "url": "https://artowen.su.domains/mc/Ch-nonunifrng.pdf"
+            },
+            {
+              "title": "Computational Statistics with R, Chapter 6 §6.1",
+              "url": "https://cswr.nrhstat.org/reject-samp.html"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-rejection-sampling-bounded-likelihood-ratio",
+        "kind": "example",
+        "title": "A bounded target-to-proposal density ratio",
+        "statement": "On $S=\\{a,b\\}$ with counting measure, let the target masses be\n$f(a)=1/4,\\ f(b)=3/4$ and the proposal masses be $g(a)=g(b)=1/2$.\nThe density ratio is bounded by $c=3/2$. Rejection sampling has acceptance\nprobability $2/3$, returns the target law, and has expected proposal count\n$3/2$.",
+        "deps": [
+          "alg-rejection-sampling",
+          "def-counting-measure",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-counting-measure-is-a-measure",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-rejection-sampling-expected-proposal-count-under-finite-envelope",
+          "thm-rejection-sampling-has-target-acceptance-law"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 4 §4.7",
+              "url": "https://artowen.su.domains/mc/Ch-nonunifrng.pdf"
+            },
+            {
+              "title": "Computational Statistics with R, Chapter 6 §6.1",
+              "url": "https://cswr.nrhstat.org/reject-samp.html"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-rejection-sampling-unnormalized-finite-measures",
+        "kind": "example",
+        "title": "Rejection sampling with unnormalized finite masses",
+        "statement": "On $S=\\{a,b\\}$ with counting measure, take unnormalized target masses\n$\\tilde f(a)=2,\\ \\tilde f(b)=1$ and proposal shape\n$\\tilde g(a)=\\tilde g(b)=1$. With $c=2$, the envelope holds and\n$Z_f=3,\\ Z_g=2$. Rejection sampling accepts with probability $3/4$, returns\nnormalized target masses $(2/3,1/3)$, and uses $4/3$ proposals on average.",
+        "deps": [
+          "alg-rejection-sampling",
+          "def-counting-measure",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-counting-measure-is-a-measure",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-rejection-sampling-expected-proposal-count-under-finite-envelope",
+          "thm-rejection-sampling-has-target-acceptance-law"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 4 §4.7",
+              "url": "https://artowen.su.domains/mc/Ch-nonunifrng.pdf"
+            },
+            {
+              "title": "Computational Statistics with R, Chapter 6 §6.1",
+              "url": "https://cswr.nrhstat.org/reject-samp.html"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

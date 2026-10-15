@@ -1,0 +1,74 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "16",
+  "input_sha256": "8a8734c8cd9afdc96618dbafe685e00ab296c41b484981fc79203392668dde20",
+  "decisions": [
+    {
+      "id": "lem-gaussian-linear-and-quadratic-statistic-tail",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "8f14c2acee6d8c4a9a70646466f8083eabaef498ebd2a82eeb535d287f84a710",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original Statement never assumes n>=1; independence permits an empty family, but at n=0 both empirical norms and both statistics contain the undefined reciprocal of zero. This is a domain defect in the claim, not a missing citation. Added only the explicit positive-integer hypothesis. For n>=1 the original completed-square MGFs, two-sided exponential Markov bounds, zero-coefficient branch, and endpoint t=b^2+2 are valid.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-gaussian-linear-and-quadratic-statistic-tail",
+      "disposition": "repaired",
+      "post_sha256": "0fa63bad6185815359432ce2ccf9b132a916d45a7002f442f85ca0f20373aa75",
+      "review_context_sha256": "52d2f6c7779a71fa85fc978cee701644ef1ec766bda51fe6e0c9618eecd744d5",
+      "reason": "The positive-integer hypothesis makes every empirical average well-defined. Checked the actual normal-law, independent-product factorization, Lebesgue scaling/translation, monotone-convergence, Markov and logarithm interfaces. AC supplies the declared normal-law and countable-choice requirements. Completing the square gives the stated MGFs; for |lambda|<=1/(4b^2), the centered-sum log MGF is at most n(2b^4+4b^2)lambda^2. The choice lambda=t/(2V_b) is admissible through t=b^2+2 and gives both tails. The c=0 branch is treated separately without division by zero. No proof rewrite or independent review of this repair is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-fixed-design-gaussian-regression-exponential-tests",
+    "cex-degenerate-gaussian-scale-prior-can-break-arbitrary-concentration-rate",
+    "thm-gaussian-process-posterior-contraction"
+  ],
+  "downstream_uses": {
+    "lem-fixed-design-gaussian-regression-exponential-tests": "items/lem-fixed-design-gaussian-regression-exponential-tests.md, F1 and proof 1.1, 2.1, 3.1: linear-score and residual-energy tail applications are only needed for sufficiently large n. Such n are positive integers. Unchanged; the added supplier hypothesis invalidates no claim.",
+    "cex-degenerate-gaussian-scale-prior-can-break-arbitrary-concentration-rate": "items/cex-degenerate-gaussian-scale-prior-can-break-arbitrary-concentration-rate.md, F4 and Counterexample 2.1: apply the quadratic tail with delta=0, sigma=b=1, t=k/sqrt(n_k), n_k=ceil(k^4 exp(2k!))>=1. Here t tends to zero, so the admissible upper threshold holds eventually. Unchanged; no claim is invalidated.",
+    "thm-gaussian-process-posterior-contraction": "items/thm-gaussian-process-posterior-contraction.md, F15 and proof 1.2: control P(|S_n-n sigma_0^2|>R sqrt(n)) for fixed R as n tends to infinity, using zero mean shift and t=R/sqrt(n). Positive sample size and the supplier threshold hold for all sufficiently large n. Unchanged; no claim is invalidated."
+  },
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "item": "lem-gaussian-linear-and-quadratic-statistic-tail",
+      "run": "bayesian-computational-statistics-62",
+      "class": "accuracy",
+      "subclass": "missing-hypothesis",
+      "severity": "fatal",
+      "location": "statement",
+      "caught_at_stage": "5-rejudge",
+      "caught_by_role": "judge-sol",
+      "disposition": "fixed",
+      "reason": "The rejected Statement allowed n=0 although empirical norms and statistics divide by n. Added an explicit positive-integer hypothesis and synchronized its owning manifest and empty-boundary contract evidence. The existing positive-n proof is unchanged. No consumer claim is invalidated.",
+      "evidence": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-repeat-r1-u16.json"
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "none",
+      "reason": "All three direct dependency/reference consumers are draft members of the frozen frontier. No published or outside-frontier consumer use was found, and no published item was edited; no published-ledger amendment is proposed."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Changed only the assigned item Statement by inserting: Let $n\\ge1$ be an integer. The original proof, formulas, dependencies, provenance, sources and choice scope are preserved.",
+    "Under the shared-write lock, reread current owning metadata, amended only the assigned manifest statement summary and assigned contract empty-boundary evidence, passed the focused strict contract check, then released the lock.",
+    "Immediately after completing the mathematical item review, ran review-contexts and copied both returned hashes. Subsequent edits affect only manifest/contract mirrors, not the item or mathematical suppliers.",
+    "Direct-consumer search covered items/ and library/: the three item consumers are listed in downstream. The home page library/bayesian-computational-statistics/gaussian-process-posterior-contraction.md lists the item but states no separate finite-sample tail claim; its asymptotic page interface remains sound.",
+    "Focused checks, all exit 0: node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-16.proof-contracts.json --strict --items lem-gaussian-linear-and-quadratic-statistic-tail --json (ok:true, no errors or warnings); node tools/tsx-run.mjs tools/precheck.mts items/lem-gaussian-linear-and-quadratic-statistic-tail.md --json (1 checked, 0 failed); node tools/rendercheck.mjs items/lem-gaussian-linear-and-quadratic-statistic-tail.md --json (1 checked, no errors or warnings); node tools/proof-layout.mjs items/lem-gaussian-linear-and-quadratic-statistic-tail.md (1 item, 3 steps, 0 defects). Proof-layout ran once after the final item edit.",
+    "No new prerequisite, outside-scope edit, source consultation, unresolved mathematical obligation, judge launch, judgment/stamp update or certification. No gate diagnostics were assigned. The confirmed-fatal decision remains part of this round even though repaired; the controller owns further review and convergence."
+  ]
+}

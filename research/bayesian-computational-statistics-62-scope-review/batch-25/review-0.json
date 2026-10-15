@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "25",
+  "round": 0,
+  "reviewed_items": [
+    "def-variational-family-and-elbo",
+    "thm-elbo-kl-decomposition",
+    "alg-coordinate-ascent-variational-inference",
+    "cex-mean-field-variational-inference-underestimates-correlated-gaussian-variance",
+    "lem-admissible-product-coordinate-normalizer-is-finite",
+    "thm-exact-coordinate-ascent-does-not-decrease-elbo",
+    "rem-high-elbo-alone-does-not-certify-posterior-calibration",
+    "ex-discrete-elbo-equality-at-exact-posterior",
+    "ex-variational-candidate-outside-posterior-support",
+    "ex-coordinate-update-normalizer-diverges-outside-admissibility"
+  ],
+  "reviewed_pages": [
+    "variational-inference-and-evidence-lower-bound",
+    "variational-inference-and-evidence-lower-bound-examples"
+  ],
+  "decision": "repair",
+  "reason": "The assigned claims and inspected supplier arguments support their stated uses. Request one local repair for the missing definition justifications, the approved local-optima coverage, and separate termination/complexity results for the algorithm.",
+  "findings": [
+    {
+      "id": "def-variational-family-and-elbo",
+      "type": "prerequisite",
+      "reason": "The definition asserts that π integrates to one and that qμ is absolutely continuous with respect to πμ, but does not justify these claims. State the needed nonnegative-integral homogeneity and zero-integral criteria (available in prop-order-and-scalar-rules-for-the-nonnegative-integral and thm-nonnegative-integral-zero-iff-zero-almost-everywhere); no interface change is needed."
+    },
+    {
+      "id": "variational-inference-and-evidence-lower-bound",
+      "type": "scope",
+      "reason": "The approved design requires discussion of local optima. The page and items disclaim convergence and global optimality but do not state or support the local-optima caveat. Add precise coverage on the A page."
+    },
+    {
+      "id": "alg-coordinate-ascent-variational-inference",
+      "type": "local",
+      "reason": "The separate theorem proves exact single-coordinate maximization and monotonicity, but no result proves termination or gives a complexity bound. Add a proved result for the finite sweep procedure, such as at most Nm coordinate visits, and specify the cost model or limit the claim to update-call count."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-elbo-kl-decomposition",
+      "decision": "accept",
+      "reason": "Its support-to-absolute-continuity argument is explicit and sound; its use of π as a probability depends on the requested definition justification, with no consumer interface change needed."
+    },
+    {
+      "id": "thm-exact-coordinate-ascent-does-not-decrease-elbo",
+      "decision": "accept",
+      "reason": "The exact update conditions and coordinate maximization proof are sound; they do not rely on the missing algorithm termination or complexity result."
+    },
+    {
+      "id": "ex-coordinate-update-normalizer-diverges-outside-admissibility",
+      "decision": "accept",
+      "reason": "The example establishes finite evidence and expected-log values, then correctly proves entropy integrability fails and the coordinate normalizer diverges."
+    },
+    {
+      "id": "rem-high-elbo-alone-does-not-certify-posterior-calibration",
+      "decision": "accept",
+      "reason": "The rescaling argument preserves the posterior and changes the ELBO by an arbitrary constant; the decomposition is used with the correct reverse-KL direction."
+    },
+    {
+      "id": "cex-mean-field-variational-posterior-misses-correlation",
+      "decision": "accept",
+      "reason": "The outside-batch consumer explicitly verifies support and log integrability for its Gaussian family; its use of the variational definition is sound."
+    }
+  ]
+}

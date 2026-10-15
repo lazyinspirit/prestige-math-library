@@ -1,0 +1,443 @@
+[
+  {
+    "order": 2094,
+    "id": "approximate-bayesian-computation-and-simulation-based-inference",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Approximate Bayesian computation and summary-based inference",
+    "companion": "approximate-bayesian-computation-and-simulation-based-inference-examples",
+    "requires": [
+      "numerical-optimization-for-statistical-computation",
+      "complete-sufficiency-exponential-families-and-basu"
+    ],
+    "items": [
+      {
+        "id": "def-approximate-bayesian-computation",
+        "kind": "definition",
+        "title": "Approximate Bayesian computation and the tolerance-conditioned target",
+        "deps": [
+          "def-bayesian-model-as-prior-and-sampling-kernel",
+          "def-probability-measure",
+          "def-standard-borel-space",
+          "def-statistic-and-estimator",
+          "def-measure-kernel-and-probability-kernel",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "thm-change-of-variables-for-expectation"
+        ],
+        "justified_by": [],
+        "statement": "For a proper prior and measurable simulator kernel, define the prior-predictive law of the parameter and summary and, when its event probability is positive, the indicator ABC target as the posterior conditioned on the summary falling in a specified Euclidean tolerance ball.",
+        "strategy": "Push the prior-simulator joint law through the measurable summary map; normalize its restriction to the tolerance event only when the event has positive probability.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Jarno Lintusaari, Michael U. Gutmann, Ritabrata Dutta, Samuel Kaski, and Jukka Corander, Fundamentals and Recent Developments in Approximate Bayesian Computation",
+              "url": "https://www.pure.ed.ac.uk/ws/files/27977065/Lintusaari2016b.pdf",
+              "locator": "PDF pp. 10–16, 19–20, and 46–47; source defines exact and tolerance rejection targets, while local items supply the event-law proofs and explicit regularity."
+            },
+            {
+              "title": "Ryan Martin, Peter Kumar, and Yunus Saaty, Bayesian Modeling and Computation in Python",
+              "url": "https://bayesiancomputationbook.com/markdown/chp_08.html",
+              "locator": "Chapter 8 §§8.1–8.2 and 8.4; full chapter retrieved and inspected."
+            },
+            {
+              "title": "Aki Honkela, Computational Statistics I",
+              "url": "https://www.cs.helsinki.fi/u/ahonkela/teaching/compstats1/book/further-monte-carlo-techniques-and-approximate-bayesian-computation-abc.html",
+              "locator": "Chapter 9 §§9.2–9.6; entire chapter 9.1–9.9 retrieved and inspected."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-abc-rejection",
+        "kind": "algorithm",
+        "title": "ABC rejection sampling",
+        "deps": [
+          "def-approximate-bayesian-computation"
+        ],
+        "justified_by": [],
+        "statement": "Repeat independent prior draws and simulator draws; return the first parameter whose simulated summary lies in the observed-summary tolerance ball. The procedure is admissible only when the acceptance probability is positive.",
+        "strategy": "Specify the proposal law, simulator call, measurable acceptance event, repeat rule, output, and positive-probability admissibility condition.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Jarno Lintusaari, Michael U. Gutmann, Ritabrata Dutta, Samuel Kaski, and Jukka Corander, Fundamentals and Recent Developments in Approximate Bayesian Computation",
+              "url": "https://www.pure.ed.ac.uk/ws/files/27977065/Lintusaari2016b.pdf",
+              "locator": "PDF pp. 11, 14–16, and 46; rejection instructions and tolerance event."
+            },
+            {
+              "title": "Aki Honkela, Computational Statistics I",
+              "url": "https://www.cs.helsinki.fi/u/ahonkela/teaching/compstats1/book/further-monte-carlo-techniques-and-approximate-bayesian-computation-abc.html",
+              "locator": "Chapter 9 §§9.3–9.5 and 9.7; exact rejection and coin-flip algorithm."
+            },
+            {
+              "title": "Mark A. Beaumont, Wenyang Zhang, and David J. Balding, Approximate Bayesian Computation in Population Genetics",
+              "url": "https://people.eecs.berkeley.edu/~jordan/sail/readings/beaumont-zhang-balding.pdf",
+              "locator": "PDF pp. 1–2 (printed pp. 2025–2026), simulated-summary rejection algorithm; local item does not import the source's regression adjustment."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-abc-rejection-target-is-tolerance-conditioned-posterior",
+        "kind": "theorem",
+        "title": "ABC rejection returns the tolerance-conditioned posterior",
+        "deps": [
+          "alg-abc-rejection",
+          "def-approximate-bayesian-computation",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-geometric-series"
+        ],
+        "justified_by": [],
+        "statement": "If the tolerance event has probability p in (0,1], ABC rejection terminates almost surely and the accepted parameter has exactly the prior-predictive law conditioned on that event.",
+        "strategy": "Partition the accepted output by its first successful proposal index; independence gives a geometric survival factor and a geometric-series normalization.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Jarno Lintusaari, Michael U. Gutmann, Ritabrata Dutta, Samuel Kaski, and Jukka Corander, Fundamentals and Recent Developments in Approximate Bayesian Computation",
+              "url": "https://www.pure.ed.ac.uk/ws/files/27977065/Lintusaari2016b.pdf",
+              "locator": "PDF pp. 11, 14–16; the source describes exact and tolerance rejection targets, while the full accepted-law argument is supplied locally."
+            },
+            {
+              "title": "Aki Honkela, Computational Statistics I",
+              "url": "https://www.cs.helsinki.fi/u/ahonkela/teaching/compstats1/book/further-monte-carlo-techniques-and-approximate-bayesian-computation-abc.html",
+              "locator": "Chapter 9 §§9.3–9.7; the binomial rejection example supports the sampling interpretation, while the proof is local."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None. The proof assumes the IID proposal-simulator sequence supplied by the algorithm and uses only its finite-dimensional independence."
+      },
+      {
+        "id": "thm-abc-zero-tolerance-target-is-summary-posterior-under-density-regularity",
+        "kind": "theorem",
+        "title": "ABC targets the density-defined summary posterior at zero tolerance",
+        "deps": [
+          "def-approximate-bayesian-computation",
+          "def-bayesian-posterior-as-regular-conditional-law",
+          "def-countable-choice",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-measure-kernel-and-probability-kernel",
+          "def-posterior-evidence-normalizer-and-fiberwise-update",
+          "def-probability-measure",
+          "def-total-variation-distance-for-probability-laws",
+          "prop-fiberwise-posterior-propriety-iff-finite-positive-evidence",
+          "thm-dominated-convergence",
+          "thm-sequential-criterion-for-function-limits",
+          "lem-metrics-on-rn",
+          "prop-measure-monotonicity",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-metric-open-set-algebra",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "justified_by": [],
+        "statement": "If the summary-predictive law has a specified jointly measurable density version continuous at the observed summary almost everywhere, positive finite prior-averaged density there, and an integrable envelope on a neighborhood, then the positive-tolerance ABC targets converge in total variation to the posterior selected by that density version.",
+        "strategy": "Average the summary density over shrinking Euclidean balls, prove convergence in L1 by continuity and dominated convergence, normalize the averages, and bound the event-supremum total variation by their L1 difference.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Jarno Lintusaari, Michael U. Gutmann, Ritabrata Dutta, Samuel Kaski, and Jukka Corander, Fundamentals and Recent Developments in Approximate Bayesian Computation",
+              "url": "https://www.pure.ed.ac.uk/ws/files/27977065/Lintusaari2016b.pdf",
+              "locator": "PDF pp. 15–20 and 46–47; source discusses the summary posterior and threshold trade-off, but does not prove the stated envelope theorem."
+            },
+            {
+              "title": "Paul Fearnhead and Dennis Prangle, Constructing Summary Statistics for Approximate Bayesian Computation: Semi-automatic ABC",
+              "url": "https://arxiv.org/pdf/1004.1112",
+              "locator": "PDF pp. 2–7 and 35–38; source distinguishes summary-posterior and finite simulation effects; no generic zero-tolerance theorem is imported."
+            },
+            {
+              "title": "Martin, Kumar, and Lao, Bayesian Modeling and Computation in Python",
+              "url": "https://bayesiancomputationbook.com/markdown/chp_08.html",
+              "locator": "Chapter 8 §§8.1–8.4; source discusses tolerance and summary information loss; all limit hypotheses and proof steps are local."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Countable Choice is used only through thm-lebesgue-measure-of-a-box-of-every-kind in step 1.1 to establish positive finite Euclidean-ball volumes. The density-limit and normalization arguments use no further choice."
+      },
+      {
+        "id": "thm-sufficient-summary-recovers-full-posterior",
+        "kind": "theorem",
+        "title": "A sufficient summary preserves the Bayesian posterior",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bayesian-model-as-prior-and-sampling-kernel",
+          "def-bayesian-posterior-as-regular-conditional-law",
+          "def-conditional-law-given-a-random-element",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-measure-kernel-and-probability-kernel",
+          "def-posterior-evidence-normalizer-and-fiberwise-update",
+          "def-polish-space",
+          "def-separable-space",
+          "def-standard-borel-space",
+          "def-statistic-and-estimator",
+          "def-sufficient-statistic",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-bayes-formula-for-dominated-kernels",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-standard-borel-bayesian-posterior-kernel-exists"
+        ],
+        "justified_by": [],
+        "statement": "For standard-Borel data and summary spaces, a statistic sufficient through one parameter-independent conditional kernel makes the full-data posterior equal almost surely to a version depending only on the summary. In the stated dominated factorization form p_theta(y)=g(y)h_theta(S(y)), the explicit full-data and summary posterior densities agree wherever g and both finite-positive evidence normalizers permit the updates.",
+        "strategy": "Mix the common conditional-data kernel over the prior to show the summary posterior composed with S satisfies the full-data conditional-law identities; then cancel the common factor g in the dominated Bayes formulas on good fibres.",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf",
+              "locator": "§§5.1–5.3, PDF pp. 100–107; full lecture-note derivations of sufficient statistics and conditional laws."
+            },
+            {
+              "title": "Jarno Lintusaari, Michael U. Gutmann, Ritabrata Dutta, Samuel Kaski, and Jukka Corander, Fundamentals and Recent Developments in Approximate Bayesian Computation",
+              "url": "https://www.pure.ed.ac.uk/ws/files/27977065/Lintusaari2016b.pdf",
+              "locator": "PDF pp. 15–19; summary sufficiency and persistent information loss for nonsufficient summaries."
+            },
+            {
+              "title": "Paul Fearnhead and Dennis Prangle, Constructing Summary Statistics for Approximate Bayesian Computation: Semi-automatic ABC",
+              "url": "https://arxiv.org/pdf/1004.1112",
+              "locator": "PDF pp. 2–7 and 11–12; the paper separates the posterior given summaries from the full-data posterior and gives a loss-specific summary result not imported here."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is used only for the standard-Borel posterior-kernel existence branch (step 1.1). The common-kernel conditioning calculation and the pointwise density cancellation branch use no additional choice."
+      }
+    ]
+  },
+  {
+    "order": 2095,
+    "id": "approximate-bayesian-computation-and-simulation-based-inference-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Approximate Bayesian computation and simulation-based inference — Examples",
+    "companion": "approximate-bayesian-computation-and-simulation-based-inference",
+    "requires": [
+      "approximate-bayesian-computation-and-simulation-based-inference"
+    ],
+    "items": [
+      {
+        "id": "cex-abc-zero-tolerance-limit-fails-without-integrable-envelope",
+        "kind": "counterexample",
+        "title": "Pointwise continuity alone does not guarantee the zero-tolerance limit",
+        "deps": [
+          "def-approximate-bayesian-computation",
+          "def-countable",
+          "def-countable-choice",
+          "def-dirac-measure",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-measure-with-density",
+          "def-nonnegative-weighted-sum-of-measures",
+          "def-probability-measure",
+          "def-standard-borel-space",
+          "def-polish-space",
+          "def-separable-space",
+          "def-borel-sigma-algebra",
+          "prop-dirac-measure-is-a-probability-measure",
+          "cor-archimedean-reciprocal",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "thm-abc-zero-tolerance-target-is-summary-posterior-under-density-regularity",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure"
+        ],
+        "justified_by": [],
+        "statement": "Pointwise continuity of every summary density at the observed value and a positive finite prior-averaged density there do not suffice for total-variation convergence when no integrable local envelope controls the density spikes.",
+        "strategy": "Use countably many continuous-at-zero densities with spikes at 1/n, a telescoping prior of order 1/n squared, and a sequence of shrinking balls whose posterior mass on one fixed parameter event has a limit different from its density-defined zero-tolerance mass.",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Jarno Lintusaari et al., Fundamentals and Recent Developments in Approximate Bayesian Computation",
+              "url": "https://www.pure.ed.ac.uk/ws/files/27977065/Lintusaari2016b.pdf",
+              "locator": "PDF pp. 15–20; the design's local-envelope theorem is stronger than source-level convergence discussion; the spike construction is local."
+            },
+            {
+              "title": "Martin, Kumar, and Lao, Bayesian Modeling and Computation in Python",
+              "url": "https://bayesiancomputationbook.com/markdown/chp_08.html",
+              "locator": "Chapter 8 §§8.1 and 8.4; source distinguishes summary error and tolerance error but does not prove this boundary example."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "counterexample"
+        },
+        "axiom_use": "Countable Choice is used only for the Lebesgue ball-volume fact in step 1.1; the countable prior, densities, and posterior asymptotics are otherwise explicit."
+      },
+      {
+        "id": "cex-identifiable-model-with-insufficient-abc-summary",
+        "kind": "counterexample",
+        "title": "An identifiable model can have persistent ABC summary distortion",
+        "deps": [
+          "def-approximate-bayesian-computation",
+          "def-bayesian-model-as-prior-and-sampling-kernel",
+          "def-identifiability-of-an-estimand",
+          "def-parametric-statistical-model",
+          "def-observational-equivalence",
+          "def-estimand-on-a-statistical-model",
+          "def-bayesian-posterior-as-regular-conditional-law",
+          "def-measure-kernel-and-probability-kernel",
+          "def-probability-measure",
+          "def-statistic-and-estimator",
+          "def-sufficient-statistic",
+          "def-standard-borel-space",
+          "def-total-variation-distance-for-probability-laws",
+          "def-borel-sigma-algebra",
+          "def-metric-ball",
+          "def-metric-topology",
+          "def-polish-space",
+          "def-separable-space",
+          "lem-metrics-on-rn",
+          "lem-rat-embeds-dense",
+          "thm-rationals-countable",
+          "thm-reals-cauchy-complete",
+          "thm-abc-rejection-target-is-tolerance-conditioned-posterior"
+        ],
+        "justified_by": [],
+        "statement": "The claim that full-model identifiability alone makes every ABC summary target recover the full-data posterior is false.",
+        "strategy": "Use two distinct point-mass sampling laws and a constant summary; the full-data posterior is a point mass while every tolerance event leaves the prior unchanged.",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Christian P. Robert, Jean-Marie Cornuet, Jean-Michel Marin, and Natesh S. Pillai, Lack of Confidence in Approximate Bayesian Computation Model Choice",
+              "url": "https://arxiv.org/pdf/1102.4432",
+              "locator": "PDF pp. 1–4; source establishes the broader warning about information loss in model choice, while the local binary parameter counterexample is proved independently."
+            },
+            {
+              "title": "Jarno Lintusaari et al., Fundamentals and Recent Developments in Approximate Bayesian Computation",
+              "url": "https://www.pure.ed.ac.uk/ws/files/27977065/Lintusaari2016b.pdf",
+              "locator": "PDF pp. 15–19; examples distinguish summary information loss from tolerance and finite simulation effects."
+            },
+            {
+              "title": "Martin, Kumar, and Lao, Bayesian Modeling and Computation in Python",
+              "url": "https://bayesiancomputationbook.com/markdown/chp_08.html",
+              "locator": "Chapter 8 §§8.1 and 8.4; source warns that insufficient summaries add error."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "counterexample"
+        },
+        "axiom_use": "None. The two-parameter experiment and prior are finite."
+      },
+      {
+        "id": "ex-abc-vanishing-acceptance-rate",
+        "kind": "example",
+        "title": "Vanishing acceptance probability with a stable zero-tolerance target",
+        "deps": [
+          "alg-abc-rejection",
+          "def-approximate-bayesian-computation",
+          "def-countable-choice",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-measure-with-density",
+          "def-measure-kernel-and-probability-kernel",
+          "def-probability-measure",
+          "def-statistic-and-estimator",
+          "def-standard-borel-space",
+          "def-borel-sigma-algebra",
+          "def-metric-ball",
+          "def-metric-topology",
+          "def-polish-space",
+          "def-separable-space",
+          "lem-metrics-on-rn",
+          "lem-rat-embeds-dense",
+          "thm-rationals-countable",
+          "thm-reals-cauchy-complete",
+          "thm-abc-rejection-target-is-tolerance-conditioned-posterior",
+          "thm-abc-zero-tolerance-target-is-summary-posterior-under-density-regularity",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-lebesgue-measure-of-a-box-of-every-kind"
+        ],
+        "justified_by": [],
+        "statement": "With two equally likely parameter values and uniform simulator laws on adjacent unit intervals, the ABC acceptance probability for a half-width epsilon ball about 1/2 is epsilon for 0<epsilon<1/2, while the accepted parameter and density-defined zero-tolerance posterior are both the point mass at 0.",
+        "strategy": "Compute the two interval intersection probabilities, average over the prior, and check the density regularity, normalizer, and limiting posterior directly.",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Jarno Lintusaari et al., Fundamentals and Recent Developments in Approximate Bayesian Computation",
+              "url": "https://www.pure.ed.ac.uk/ws/files/27977065/Lintusaari2016b.pdf",
+              "locator": "PDF pp. 14–16 and 19–20; source separates acceptance rate, Monte Carlo error, and tolerance bias."
+            },
+            {
+              "title": "Martin, Kumar, and Lao, Bayesian Modeling and Computation in Python",
+              "url": "https://bayesiancomputationbook.com/markdown/chp_08.html",
+              "locator": "Chapter 8 §§8.1, 8.2, and 8.4; small tolerance improves target approximation but can make simulation inefficient."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Countable Choice is used only through the ball-volume supplier inherited from the zero-tolerance theorem; the interval acceptance calculation itself is elementary."
+      },
+      {
+        "id": "ex-abc-finite-sample-sufficient-summary",
+        "kind": "example",
+        "title": "A Bernoulli count is a sufficient summary for a finite-sample posterior",
+        "deps": [
+          "alg-abc-rejection",
+          "def-approximate-bayesian-computation",
+          "def-bayesian-model-as-prior-and-sampling-kernel",
+          "def-measure-kernel-and-probability-kernel",
+          "def-probability-measure",
+          "def-dirac-measure",
+          "def-statistic-and-estimator",
+          "def-sufficient-statistic",
+          "prop-dirac-measure-is-a-probability-measure",
+          "def-standard-borel-space",
+          "def-borel-sigma-algebra",
+          "def-polish-space",
+          "def-separable-space",
+          "def-metric-ball",
+          "def-metric-topology",
+          "lem-metrics-on-rn",
+          "lem-rat-embeds-dense",
+          "thm-rationals-countable",
+          "thm-reals-cauchy-complete",
+          "thm-abc-rejection-target-is-tolerance-conditioned-posterior"
+        ],
+        "justified_by": [],
+        "statement": "For three Bernoulli observations, a two-point proper prior, and observed count two, the sample count is sufficient and ABC with any tolerance below one has the exact full-data posterior, with posterior masses 1/3 and 2/3.",
+        "strategy": "Construct the common conditional kernel uniformly on each count fiber and compare the exact-sequence and count likelihoods; the common factor of three cancels.",
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Aki Honkela, Computational Statistics I",
+              "url": "https://www.cs.helsinki.fi/u/ahonkela/teaching/compstats1/book/further-monte-carlo-techniques-and-approximate-bayesian-computation-abc.html",
+              "locator": "Chapter 9 §9.7, full binomial coin-flip rejection example."
+            },
+            {
+              "title": "Martin, Kumar, and Lao, Bayesian Modeling and Computation in Python",
+              "url": "https://bayesiancomputationbook.com/markdown/chp_08.html",
+              "locator": "Chapter 8 §§8.1–8.2; simulation, summaries, and rejection."
+            },
+            {
+              "title": "Jarno Lintusaari et al., Fundamentals and Recent Developments in Approximate Bayesian Computation",
+              "url": "https://www.pure.ed.ac.uk/ws/files/27977065/Lintusaari2016b.pdf",
+              "locator": "PDF pp. 14–16; exact and summary-based rejection targets."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "None. The finite prior, finite conditional kernel, and likelihood normalizers are written and checked explicitly."
+      }
+    ]
+  }
+]

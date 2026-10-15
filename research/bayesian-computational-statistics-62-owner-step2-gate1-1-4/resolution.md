@@ -1,0 +1,5 @@
+# Actual Step2 gate1 repair: batches1–4
+
+Read all21flagged carriers and the three missing-contract definitions/algorithm, focusing the named boundary axes and actual proof anchors. Replaced all105candidate rows with item-specific outcomes, corrected the finite-Ito degenerate anchor, and supplied three full eight-case contracts. The posterior definition’s explicit equivalently clause is now acknowledged, instead of falsely saying it has no equivalence. Euler worksheets distinguish single-step grids from scalar dimensions and use actual current step2.1/3.2, not nonexistent2.2. The OU denominator1-x is positive on0<=x<=h<=1/2.
+
+Complete contracts for batches1–4 and exact before/current source guards are supplied. One source-only terminal citation repair adds F1 to the H-M-S proof1.1 recursion/interpolation use; no live metadata was edited; no interface changed, so no consumer repair is needed. Root owns canonical REPAIR formatting, final citation synchronization, hashes and full batteries. Final explicit changed-item proof-layout passed:1item,5steps,0defects. No optional tests/gates were run.

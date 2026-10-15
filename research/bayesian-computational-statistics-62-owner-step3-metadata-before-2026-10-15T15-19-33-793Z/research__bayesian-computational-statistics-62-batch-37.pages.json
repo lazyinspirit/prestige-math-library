@@ -1,0 +1,464 @@
+[
+  {
+    "order": 2114,
+    "id": "hamiltonian-monte-carlo-and-leapfrog",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Hamiltonian Monte Carlo and leapfrog correction",
+    "companion": "hamiltonian-monte-carlo-and-leapfrog-examples",
+    "requires": [
+      "numerical-optimization-for-statistical-computation",
+      "metropolis-hastings-algorithm-and-invariance",
+      "picard-lindelof-and-first-order-odes",
+      "codimension-one-foliations-and-secondary-classes",
+      "finite-sample-point-estimation-and-unbiased-optimality",
+      "conjugate-families-and-posterior-prediction"
+    ],
+    "items": [
+      {
+        "id": "def-leapfrog-step-map",
+        "kind": "definition",
+        "title": "One-step leapfrog map as force and drift shears",
+        "deps": [
+          "def-jacobian-matrix-and-gradient",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique"
+        ],
+        "statement": "For U in C^1(R^d), an SPD mass matrix M, and epsilon > 0, define the kick K_a(q,p)=(q,p-a grad U(q)), drift D_b(q,p)=(q+b M^{-1}p,p), and one-step leapfrog map Phi_epsilon=K_(epsilon/2) composed with D_epsilon composed with K_(epsilon/2). Its L-step map is Phi_epsilon^L; the momentum-flipped proposal map is R composed with Phi_epsilon^L, where R(q,p)=(q,-p).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Radford M. Neal, MCMC Using Hamiltonian Dynamics, Handbook of Markov Chain Monte Carlo, Chapter 5",
+              "url": "https://sites.stat.columbia.edu/gelman/bayescomputation/Neal2011.pdf"
+            },
+            {
+              "title": "Michael Betancourt, A Conceptual Introduction to Hamiltonian Monte Carlo",
+              "url": "https://arxiv.org/pdf/1701.02434"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-exact-hamiltonian-flow-preserves-energy-and-volume",
+        "kind": "theorem",
+        "title": "A complete C2 Hamiltonian flow preserves energy and phase volume",
+        "deps": [
+          "cor-globally-lipschitz-odes-have-global-solutions",
+          "cor-lipschitz-ode-uniqueness-and-stability-estimate",
+          "def-countable-choice",
+          "def-cholesky-factorisation-with-positive-diagonal",
+          "def-jacobian-matrix-and-gradient",
+          "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-determinant-differential-and-jacobis-formula",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique"
+        ],
+        "statement": "Assume Countable Choice. For U in C^2 and SPD M, a complete Hamiltonian vector field has a unique global C^1 flow that conserves H and has determinant-one derivative, hence preserves phase volume by change of variables. A globally Lipschitz gradient is a sufficient condition for completeness and the stated Gronwall stability bound.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Radford M. Neal, MCMC Using Hamiltonian Dynamics, Handbook of Markov Chain Monte Carlo, Chapter 5",
+              "url": "https://sites.stat.columbia.edu/gelman/bayescomputation/Neal2011.pdf"
+            },
+            {
+              "title": "Michael Betancourt, A Conceptual Introduction to Hamiltonian Monte Carlo",
+              "url": "https://arxiv.org/pdf/1701.02434"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-real-line-exponential-tail-integrable",
+        "kind": "lemma",
+        "title": "The real-line exponential tail is Lebesgue integrable",
+        "deps": [
+          "def-countable-choice",
+          "def-canonical-natural",
+          "def-integral-over-a-measurable-set",
+          "def-natural-numbers",
+          "def-nonnegative-lebesgue-integral",
+          "cor-continuous-functions-are-borel-measurable",
+          "cor-exponential-reciprocal-and-positivity",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "thm-geometric-series",
+          "thm-induction-principle",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-monotone-convergence-for-the-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-integer-power"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Assuming Countable Choice, f(x)=exp(-|x|) is nonnegative Lebesgue measurable and integrable on R.",
+        "sources": {
+          "references": [
+            {
+              "title": "OpenStax, Calculus Volume 2, \u00a73.7 Improper Integrals, Example 3.55",
+              "url": "https://openstax.org/books/calculus-volume-2/pages/3-7-improper-integrals"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-leapfrog-is-reversible-and-volume-preserving",
+        "kind": "theorem",
+        "title": "Leapfrog is reversible and volume-preserving",
+        "deps": [
+          "def-countable-choice",
+          "def-leapfrog-step-map",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-lebesgue-measure-under-dilations-and-reflections",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-sections-of-product-measurable-functions-are-measurable",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-determinant-of-a-triangular-matrix"
+        ],
+        "statement": "For U in C^1(R^d), SPD M, epsilon > 0, and finite L >= 1, every force kick and drift shear in the leapfrog map preserves product Lebesgue measure, so Phi_epsilon^L does too. With R(q,p)=(q,-p), R Phi_epsilon^L is an involution and is volume-preserving. The shear argument does not assume a Hessian; when U is C^2, the classical Jacobian of each shear is block triangular with determinant one.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Radford M. Neal, MCMC Using Hamiltonian Dynamics, Handbook of Markov Chain Monte Carlo, Chapter 5",
+              "url": "https://sites.stat.columbia.edu/gelman/bayescomputation/Neal2011.pdf"
+            },
+            {
+              "title": "Michael Betancourt, A Conceptual Introduction to Hamiltonian Monte Carlo",
+              "url": "https://arxiv.org/pdf/1701.02434"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-hamiltonian-monte-carlo",
+        "kind": "definition",
+        "title": "Hamiltonian Monte Carlo",
+        "deps": [
+          "alg-gradient-descent",
+          "alg-metropolis-hastings-kernel",
+          "def-axiom-of-choice",
+          "def-cholesky-factorisation-with-positive-diagonal",
+          "def-jacobian-matrix-and-gradient",
+          "def-leapfrog-step-map",
+          "def-multivariate-normal-law",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-exact-hamiltonian-flow-preserves-energy-and-volume"
+        ],
+        "statement": "For a finite-dimensional continuously differentiable potential U with 0 < Z_U=integral exp(-U(q))dq < infinity, define pi(q)=exp(-U(q))/Z_U, an SPD mass M, K(p)=p^T M^{-1}p/2, H=U+K, and refreshed p distributed as N_d(0,M), independently of q. Hamilton's equations are qdot=M^{-1}p and pdot=-grad U(q). A finite leapfrog trajectory with momentum flip is Metropolized using min(1,exp(-H(q*,p*)+H(q,p))). Exact-flow properties are asserted only for U in C^2 with a complete Hamiltonian vector field.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Radford M. Neal, MCMC Using Hamiltonian Dynamics, Handbook of Markov Chain Monte Carlo, Chapter 5",
+              "url": "https://sites.stat.columbia.edu/gelman/bayescomputation/Neal2011.pdf"
+            },
+            {
+              "title": "Michael Betancourt, A Conceptual Introduction to Hamiltonian Monte Carlo",
+              "url": "https://arxiv.org/pdf/1701.02434"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-leapfrog-hamiltonian-monte-carlo",
+        "kind": "algorithm",
+        "title": "Leapfrog Hamiltonian Monte Carlo",
+        "deps": [
+          "alg-metropolis-hastings-kernel",
+          "def-hamiltonian-monte-carlo",
+          "def-leapfrog-step-map"
+        ],
+        "statement": "Given a current q, U, SPD M, epsilon > 0, and finite integer L >= 1, independently refresh p from N_d(0,M), apply the one-step leapfrog map L times, flip the final momentum, accept the phase-space proposal with probability min(1,exp(-H(q*,p*)+H(q,p))), retain q on rejection, and return the accepted or retained position.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Radford M. Neal, MCMC Using Hamiltonian Dynamics, Handbook of Markov Chain Monte Carlo, Chapter 5",
+              "url": "https://sites.stat.columbia.edu/gelman/bayescomputation/Neal2011.pdf"
+            },
+            {
+              "title": "Michael Betancourt, A Conceptual Introduction to Hamiltonian Monte Carlo",
+              "url": "https://arxiv.org/pdf/1701.02434"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-metropolized-hamiltonian-chain-preserves-target",
+        "kind": "theorem",
+        "title": "The Metropolized Hamiltonian chain preserves its target",
+        "deps": [
+          "alg-leapfrog-hamiltonian-monte-carlo",
+          "alg-metropolis-hastings-kernel",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dirac-measure",
+          "def-hamiltonian-monte-carlo",
+          "def-leapfrog-step-map",
+          "def-measure-kernel-and-probability-kernel",
+          "def-measure",
+          "def-measurable-function-between-measurable-spaces",
+          "def-probability-measure",
+          "def-standard-borel-space",
+          "def-composition-of-probability-kernels",
+          "def-measure-preserving-transformation-and-system",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "lem-common-submeasure-density-is-pointwise-minimum",
+          "lem-dirac-integral-evaluation",
+          "lem-finite-euclidean-space-is-standard-borel",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "lem-coordinate-maps-and-permutations-are-measurable-on-finite-products",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "lem-kernel-composition-is-well-defined-and-associative",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-sections-of-product-measurable-functions-are-measurable",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-algebra-of-continuous-functions",
+          "thm-composition-of-continuous-functions",
+          "thm-exponential-is-strictly-increasing",
+          "thm-leapfrog-is-reversible-and-volume-preserving",
+          "thm-metropolis-hastings-kernel-is-reversible-and-invariant",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "cor-exponential-reciprocal-and-positivity"
+        ],
+        "statement": "Assume AC and U in C^1 with 0<Z_U<infinity. The phase-space Metropolis kernel for the momentum-flipped finite leapfrog proposal preserves nu=pi x N_d(0,M). Independent momentum refresh, this phase update, and position projection define an HMC position kernel preserving pi. No mixing or convergence claim is made.",
+        "proof_strategy": "direct",
+        "axiom_use": "AC is used through the multivariate-normal density and the general Radon-Nikodym Metropolis-Hastings construction and common-submeasure supplier. The leapfrog map and its shear calculation use no arbitrary-choice principle.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Radford M. Neal, MCMC Using Hamiltonian Dynamics, Handbook of Markov Chain Monte Carlo, Chapter 5",
+              "url": "https://sites.stat.columbia.edu/gelman/bayescomputation/Neal2011.pdf"
+            },
+            {
+              "title": "Michael Betancourt, A Conceptual Introduction to Hamiltonian Monte Carlo",
+              "url": "https://arxiv.org/pdf/1701.02434"
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 2115,
+    "id": "hamiltonian-monte-carlo-and-leapfrog-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Hamiltonian Monte Carlo and leapfrog correction \u2014 Examples",
+    "companion": "hamiltonian-monte-carlo-and-leapfrog",
+    "requires": [
+      "hamiltonian-monte-carlo-and-leapfrog"
+    ],
+    "items": [
+      {
+        "id": "ex-hmc-globally-lipschitz-force",
+        "kind": "example",
+        "title": "A globally Lipschitz Hamiltonian force",
+        "deps": [
+          "cor-globally-lipschitz-odes-have-global-solutions",
+          "cor-lipschitz-ode-uniqueness-and-stability-estimate",
+          "cor-mean-value-theorem",
+          "def-axiom-of-choice",
+          "def-hamiltonian-monte-carlo",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-integral-over-a-measurable-set",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "lem-real-line-exponential-tail-integrable",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-is-strictly-increasing",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-exact-hamiltonian-flow-preserves-energy-and-volume"
+        ],
+        "statement": "For U(q)=sqrt(1+q^2) on R and M=1, the target is proper, grad U(q)=q/sqrt(1+q^2) is globally 1-Lipschitz, and the Hamiltonian vector field F(q,p)=(p,-grad U(q)) is globally Lipschitz. The exact flow is complete and obeys the stated Gronwall stability bound.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Radford M. Neal, MCMC Using Hamiltonian Dynamics, Handbook of Markov Chain Monte Carlo, Chapter 5",
+              "url": "https://sites.stat.columbia.edu/gelman/bayescomputation/Neal2011.pdf"
+            },
+            {
+              "title": "Michael Betancourt, A Conceptual Introduction to Hamiltonian Monte Carlo",
+              "url": "https://arxiv.org/pdf/1701.02434"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-hmc-exact-flow-limit",
+        "kind": "example",
+        "title": "The exact-flow Hamiltonian Monte Carlo limit",
+        "deps": [
+          "cor-globally-lipschitz-odes-have-global-solutions",
+          "def-axiom-of-choice",
+          "def-hamiltonian-monte-carlo",
+          "def-standard-normal-and-normal-laws",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "thm-exact-hamiltonian-flow-preserves-energy-and-volume"
+        ],
+        "statement": "For U(q)=q^2/2 and M=1, the exact flow at time pi/2 is (q,p) -> (p,-q). After the required momentum flip the proposal is (q,p) -> (p,q), has zero energy error, and accepts with probability one. Since the refreshed momentum is an independent N(0,1) draw, the returned position is an independent N(0,1) draw.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Radford M. Neal, MCMC Using Hamiltonian Dynamics, Handbook of Markov Chain Monte Carlo, Chapter 5",
+              "url": "https://sites.stat.columbia.edu/gelman/bayescomputation/Neal2011.pdf"
+            },
+            {
+              "title": "Michael Betancourt, A Conceptual Introduction to Hamiltonian Monte Carlo",
+              "url": "https://arxiv.org/pdf/1701.02434"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-hmc-leapfrog-harmonic-resonance",
+        "kind": "example",
+        "title": "A Gaussian harmonic leapfrog resonance",
+        "deps": [
+          "alg-leapfrog-hamiltonian-monte-carlo",
+          "def-axiom-of-choice",
+          "def-hamiltonian-monte-carlo",
+          "def-leapfrog-step-map",
+          "def-standard-normal-and-normal-laws",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-integral-over-a-measurable-set",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-is-strictly-increasing"
+        ],
+        "statement": "For U(q)=q^2/2, M=1, epsilon=sqrt(2), and L=4, one leapfrog step has matrix A=[[0,sqrt(2)],[-sqrt(2)/2,0]], so A^2=-I and A^4=I. The momentum-flipped proposal leaves q unchanged and has acceptance probability one; starting q=0 therefore remains at zero although the target is N(0,1).",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Radford M. Neal, MCMC Using Hamiltonian Dynamics, Handbook of Markov Chain Monte Carlo, Chapter 5",
+              "url": "https://sites.stat.columbia.edu/gelman/bayescomputation/Neal2011.pdf"
+            },
+            {
+              "title": "Michael Betancourt, A Conceptual Introduction to Hamiltonian Monte Carlo",
+              "url": "https://arxiv.org/pdf/1701.02434"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-hmc-finite-step-energy-error",
+        "kind": "example",
+        "title": "Finite-step leapfrog energy error",
+        "deps": [
+          "alg-leapfrog-hamiltonian-monte-carlo",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-axiom-of-choice",
+          "def-hamiltonian-monte-carlo",
+          "def-leapfrog-step-map",
+          "thm-exponential-is-strictly-increasing"
+        ],
+        "statement": "For U(q)=q^2/2, M=1, epsilon=1, L=1, and initial phase point (0,1), leapfrog gives the flipped proposal (1,-1/2). The Hamiltonian rises from 1/2 to 5/8, so the Metropolis acceptance probability is exp(-1/8), strictly less than one.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Radford M. Neal, MCMC Using Hamiltonian Dynamics, Handbook of Markov Chain Monte Carlo, Chapter 5",
+              "url": "https://sites.stat.columbia.edu/gelman/bayescomputation/Neal2011.pdf"
+            },
+            {
+              "title": "Michael Betancourt, A Conceptual Introduction to Hamiltonian Monte Carlo",
+              "url": "https://arxiv.org/pdf/1701.02434"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

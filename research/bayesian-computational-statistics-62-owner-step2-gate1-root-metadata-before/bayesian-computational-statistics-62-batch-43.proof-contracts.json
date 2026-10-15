@@ -1,0 +1,853 @@
+{
+  "version": 1,
+  "scope": [
+    "def-fixed-interval-gaussian-smoothing-law",
+    "lem-backward-gaussian-kernel-is-valid-under-full-smoothing-data",
+    "alg-rauch-tung-striebel-smoother",
+    "thm-rauch-tung-striebel-fixed-interval-recursion",
+    "ex-two-time-scalar-rauch-tung-striebel-smoother",
+    "ex-singular-forecast-covariance-outside-rts-domain"
+  ],
+  "contracts": {
+    "def-fixed-interval-gaussian-smoothing-law": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model has positive finite-dimensional Euclidean state spaces, so an empty state target is outside the definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the smoothing kernel is an everywhere probability kernel; no evidence normalization is performed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: each section is a probability measure and the RCD identity is stated for every data event."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: no covariance nonsingularity or density assumption is imposed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: k ranges from 0 through T, and the empty data product is a singleton at T=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: AC is inherited from the model convention; defining the term makes no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms_used": [
+        "AC"
+      ]
+    },
+    "lem-backward-gaussian-kernel-is-valid-under-full-smoothing-data": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-gaussian-state-space-model-with-independent-noises",
+          "source_section": "Definition",
+          "quote": "Assume AC ([[def-axiom-of-choice]]) and fix a finite horizon $T\\ge0$. Let\nthe state dimension at time\n$t$ be a positive integer $d_t$ for $0\\le t\\le T$, and the observation\ndimension at time $t$ be a positive integer $p_t$ for $1\\le t\\le T$.\nChoose deterministic matrices\n$F_t\\in\\mathbb R^{d_t\\times d_{t-1}}$ and\n$H_t\\in\\mathbb R^{p_t\\times d_t}$, a mean $m_0\\in\\mathbb R^{d_0}$, and\nsymmetric positive-semidefinite matrices, meaning $v^TPv\\ge0$ for every\nreal vector $v$ of matching dimension,\n$P_0\\in\\mathbb R^{d_0\\times d_0}$,\n$Q_t\\in\\mathbb R^{d_t\\times d_t}$, and\n$R_t\\in\\mathbb R^{p_t\\times p_t}$. A **linear-Gaussian state-space model\nwith independent noises** is the general finite-horizon kernel model\n([[def-general-state-space-model-by-kernels]]) with initial law\n$\\mu_0=N_{d_0}(m_0,P_0)$ and transition and observation kernels\n$$K_t(x,\\cdot)=N_{d_t}(F_t x,Q_t),\\qquad G_t(x,\\cdot)=N_{p_t}(H_t x,R_t).$$\nAll Gaussian laws use the convention of\n[[def-multivariate-normal-law]], which allows singular covariance matrices.\n\nIts independent-noise representation consists of random vectors\n$x_0,q_1,r_1,\\ldots,q_T,r_T$ on a common probability space, with\n$x_0\\sim N_{d_0}(m_0,P_0)$, $q_t\\sim N_{d_t}(0,Q_t)$,\n$r_t\\sim N_{p_t}(0,R_t)$, all mutually independent in the sense of\n[[def-independent-random-elements]] (their generated sigma-algebras are\nindependent), and equations\n$$x_t=F_t x_{t-1}+q_t,\\qquad y_t=H_t x_t+r_t\\qquad(1\\le t\\le T).$$\nThe local path-law theorem proves that every allowed parameter tuple has\nsuch a finite representation, that its induced kernels are the displayed\n$K_t,G_t$, and that its path law is the general kernel-product law.\n\nThis definition imposes the stated noise law and independence assumptions;\nit does not establish their empirical adequacy. It supplies no filtering\nalgorithm, posterior recursion, or convergence claim. Any separate formula\nthat inverts an observed innovation covariance must assume that covariance is\npositive definite at the point of inversion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-kalman-filter",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T\\ge0$, positive state dimensions $d_0,\\ldots,d_T$,\nand positive observation dimensions $p_1,\\ldots,p_T$. The input is a\nlinear-Gaussian model from\n[[def-linear-gaussian-state-space-model-with-independent-noises]], with\nmatrices $F_k\\in\\mathbb R^{d_k\\times d_{k-1}}$ and\n$H_k\\in\\mathbb R^{p_k\\times d_k}$, initial mean $m_0$, and symmetric\npositive-semidefinite covariances $P_0,Q_k,R_k$. Its state and observation\nequations are\n$$X_k=F_kX_{k-1}+q_k,\\qquad Y_k=H_kX_k+r_k,$$\nwhere $q_k\\sim N(0,Q_k)$ and $r_k\\sim N(0,R_k)$ are centered and mutually\nindependent across all times and of $X_0$.\n\nThe admissible data are vectors $y_k\\in\\mathbb R^{p_k}$ for which every\ninnovation covariance encountered below is positive definite. Positive\ndefinite means $u^TS_ku>0$ for every nonzero $u\\in\\mathbb R^{p_k}$. The\nalgorithm returns predicted and updated means and covariances and the\ninnovation and gain at each time. Initialize\n$$m_{0|0}=m_0,\\qquad P_{0|0}=P_0.$$\nFor $k=1,\\ldots,T$, perform:\n\n1. Predict:\n$$m_{k|k-1}=F_km_{k-1|k-1},\\qquad P_{k|k-1}=F_kP_{k-1|k-1}F_k^T+Q_k.$$\n2. Form the innovation and its covariance:\n$$v_k=y_k-H_km_{k|k-1},\\qquad S_k=H_kP_{k|k-1}H_k^T+R_k.$$\n3. Factor $S_k=L_kL_k^T$ with lower-triangular $L_k$ having positive\ndiagonal, using\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]].\nSolve $L_kU_k=H_kP_{k|k-1}$ and $L_k^TK_k^T=U_k$ by triangular solves. This\ndefines $K_k^T=S_k^{-1}H_kP_{k|k-1}$, hence\n$K_k=P_{k|k-1}H_k^TS_k^{-1}$, without explicitly forming $S_k^{-1}$.\n4. Update:\n$$m_{k|k}=m_{k|k-1}+K_kv_k,\\qquad P_{k|k}=P_{k|k-1}-K_kS_kK_k^T.$$\n\nFor $T=0$ the loop is empty and the returned pair is $(m_0,P_0)$. No\ninverse of $P_0$, $Q_k$, or $R_k$ is used. This item defines the procedure\nand makes no complexity, rounding-error, or numerical-stability claim.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kalman-filter-is-exact-posterior",
+          "source_section": "Statement",
+          "quote": "Assume AC. Fix a finite-horizon model from\n[[def-linear-gaussian-state-space-model-with-independent-noises]] with\nstate and observation equations\n$$X_k=F_kX_{k-1}+q_k,\\qquad Y_k=H_kX_k+r_k\\qquad (1\\le k\\le T),$$\nwhere $X_0\\sim N_{d_0}(m_0,P_0)$, the centered Gaussian noises $q_k,r_k$ are\nmutually independent across times and from $X_0$, and $P_0,Q_k,R_k$ are\nsymmetric positive semidefinite. Let the parameters and observations be\nadmissible for [[alg-kalman-filter]], so the recursively formed innovation\ncovariances\n$$S_k=H_kP_{k|k-1}H_k^T+R_k$$\nare positive definite for every $1\\le k\\le T$. Run that algorithm from\n$m_{0|0}=m_0$ and $P_{0|0}=P_0$. Then, for each $0\\le k\\le T$, the map\n$$\\pi_k(y_{1:k},\\cdot)=N_{d_k}(m_{k|k}(y_{1:k}),P_{k|k})$$\nis an everywhere-defined filtering kernel for $X_k$ given $Y_{1:k}$ in the\nsense of [[def-state-space-filtering-laws]]. The empty history at $k=0$ is a\nsingleton, and $\\pi_0=N_{d_0}(m_0,P_0)$. In particular, these recursions\ngive an exact Gaussian conditional-law version at every observation history;\neach $P_{k|k}$ is positive semidefinite. Singular initial, process,\nmeasurement, predicted-state, and filtered-state covariances are allowed.\nEquivalently, the covariance update can be written in Joseph form\n$$P_{k|k}=(I-K_kH_k)P_{k|k-1}(I-K_kH_k)^T+K_kR_kK_k^T.$$\nOnly the innovation matrices being solved must be positive definite. No\npointwise uniqueness of a conditional-law version on null histories,\nobservation-density assumption, or numerical-stability claim is made.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-independent-noise-extends-a-conditional-law",
+          "source_section": "Statement",
+          "quote": "Let $X,Y,Z$ be random elements with values in measurable spaces\n$(E,\\mathcal E)$, $(H,\\mathcal H)$, and $(W,\\mathcal W)$. Suppose $Z$ is\nindependent of the random element $(X,Y)$, and let\n$\\kappa:H\\to E$ be a supplied conditional law of $X$ given $Y$. For each\n$h\\in H$, form the product probability\n$\\Lambda(h,\\cdot)=\\kappa(h,\\cdot)\\otimes\\mathcal L(Z)$ on\n$\\mathcal E\\otimes\\mathcal W$. Then $\\Lambda$ is a conditional law of\n$(X,Z)$ given $Y$. If $\\Phi:E\\times W\\to V$ is measurable into a measurable\nspace $(V,\\mathcal V)$, then\n$$\\Lambda^\\Phi(h,C):=\\Lambda(h,\\Phi^{-1}(C))$$\nis a conditional law of $\\Phi(X,Z)$ given $Y$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $m\\ge1$ be finite, let $d_j\\ge1$, and let\n$Z_j$ for $1\\le j\\le m$ be mutually independent random elements of\n$\\mathbb R^{d_j}$. Suppose $Z_j\\sim N_{d_j}(a_j,\\Sigma_j)$, where each\n$\\Sigma_j$ is symmetric positive semidefinite. Put\n$D=\\sum_{j=1}^m d_j$, $Z=(Z_1,\\ldots,Z_m)$,\n$a=(a_1,\\ldots,a_m)$, and\n$\\Sigma=\\operatorname{diag}(\\Sigma_1,\\ldots,\\Sigma_m)$. Then\n$$Z\\sim N_D(a,\\Sigma).$$\nNo covariance block needs to be invertible.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-multivariate-normal-conditional-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X\\in\\mathbb R^d$ and $Y\\in\\mathbb R^m$, with $d,m\\ge1$, be\njointly multivariate normal with mean $(a,b)$ and positive-semidefinite block\ncovariance\n$$\\Sigma=\\begin{pmatrix}A&C\\\\C^T&B\\end{pmatrix},$$\nwhere $B$ is positive definite. Then\n$$S=A-CB^{-1}C^T$$\nis positive semidefinite, and for every $y\\in\\mathbb R^m$ the probability law\n$$K(y,\\cdot)=N_d\\!\\left(a+CB^{-1}(y-b),S\\right)$$\nis defined. The map $K$ is a probability kernel and is a conditional law of\n$X$ given $Y$: for all Borel $E\\subseteq\\mathbb R^d$ and\n$F\\subseteq\\mathbb R^m$,\n$$\\mathbb P(X\\in E,Y\\in F)=\\int_F K(y,E)\\,\\mathbb P_Y(dy).$$\nThe covariance $A$ and the conditional covariance $S$ may be singular.\nPositive definiteness of $B$ is required; no pseudoinverse formula for\nsingular $B$ is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linear-gaussian-state-space-path-law-is-jointly-gaussian",
+          "source_section": "Statement",
+          "quote": "Assume AC and fix a finite-horizon model of\n[[def-linear-gaussian-state-space-model-with-independent-noises]]. There is a\nprobability space carrying mutually independent Gaussian vectors\n$x_0,q_1,r_1,\\ldots,q_T,r_T$ with the stated laws. The recursions\n$x_t=F_t x_{t-1}+q_t$ and $y_t=H_t x_t+r_t$ induce the general kernel-product\nlaw of [[def-general-state-space-model-by-kernels]]. In the interleaved order\n$Z_T=(x_0,x_1,y_1,\\ldots,x_T,y_T)$, there is a deterministic matrix $M_T$\nsuch that\n$$Z_T=M_T W_T,\\qquad W_T=(x_0,q_1,r_1,\\ldots,q_T,r_T),$$\nand\n$$Z_T\\sim N\\!\\left(M_T a_T,\\ M_T\\Sigma_T M_T^T\\right),\\qquad a_T=(m_0,0,\\ldots,0),\\quad \\Sigma_T=\\operatorname{diag}(P_0,Q_1,R_1,\\ldots,Q_T,R_T).$$\nThe covariance may be singular.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-state-space-filtering-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC and fix a finite horizon $T\\ge0$ with a state-space model by\nprobability kernels as in\n[[def-general-state-space-model-by-kernels]]. If $T=0$, put $\\Omega_T=E_0$;\notherwise put $\\Omega_T=E_0\\times E_1\\times F_1\\times\\cdots\\times E_T\\times\nF_T$. Let $\\mathcal Z_T$ be the corresponding finite-product sigma-algebra\nand write $(\\Omega_T,\\mathcal Z_T,P_T)$ for its finite-horizon probability\nspace. The law $P_T$ is the unique law supplied by\n[[thm-finite-horizon-state-space-kernel-law-exists-uniquely]]. Let $X_t$ and\n$Y_t$ be the coordinate random elements taking values in $E_t$ and $F_t$. For\n$t\\ge1$, write $Y_{1:t}:=(Y_1,\\ldots,Y_t)$ and\n$\\mathsf F_{1:t}:=F_1\\times\\cdots\\times F_t$ with its finite-product\nsigma-algebra; let $\\mathsf F_{1:0}$ be a singleton and $Y_{1:0}$ its constant\nmap. The factors are standard Borel, meaning measurably isomorphic to Polish\nspaces ([[def-standard-borel-space]]), and their finite products are standard\nBorel ([[lem-finite-products-of-standard-borel-spaces-are-standard-borel]]).\n\nThe **initial filtering kernel** $\\pi_0:\\mathsf F_{1:0}\\to E_0$ assigns\n$\\mu_0$ to the unique empty history; it is the conditional law of $X_0$ given\nthe trivial history. For $1\\le t\\le T$, a **filtering kernel at time $t$** is\na probability kernel $\\pi_t:\\mathsf F_{1:t}\\to E_t$ such that\n$\\omega\\mapsto\\pi_t(Y_{1:t}(\\omega),\\cdot)$ is a regular conditional\ndistribution of $X_t$ given $\\sigma(Y_{1:t})$. For $1\\le t\\le T$, a\n**predictive kernel at time $t$** is a probability kernel\n$\\pi_{t|t-1}:\\mathsf F_{1:t-1}\\to E_t$ whose composition with $Y_{1:t-1}$\nis a regular conditional distribution of $X_t$ given\n$\\sigma(Y_{1:t-1})$. A **finite-horizon smoothing kernel** is a probability\nkernel $\\psi_T:\\mathsf F_{1:T}\\to E_0\\times\\cdots\\times E_T$ whose\ncomposition with $Y_{1:T}$ is a regular conditional distribution of the full\nstate path $(X_0,\\ldots,X_T)$ given $\\sigma(Y_{1:T})$. Here a regular\nconditional distribution is an everywhere probability kernel satisfying the\nconditional event identities in\n[[def-regular-conditional-distribution]], and a conditional law given a\nrandom element is its data-indexed kernel form in\n[[def-conditional-law-given-a-random-element]].\n\nThese kernels are versions: their values can be changed on a measurable set\nof observation histories of probability zero without changing the conditional\nidentities. No density is assumed in these definitions. The state-space model\nhere is one fixed law. A parametric statistical model is instead a map\n$\\theta\\mapsto P_\\theta$ from a parameter set to probability laws; its\nmeasurability is not asserted without a parameter sigma-algebra\n([[def-parametric-statistical-model]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a history $h=y_{1:k}$. By [F3], the conditional law of $X_k$ is $N(m_{k|k}(h),P_{k|k})$. The next process noise is independent of the past by [F1], so [F4] extends this filtering kernel by $q_{k+1}$ and pushes it forward through $(x,q)\\mapsto(x,F_{k+1}x+q)$. By [F5], $(X_k,q_{k+1})$ is jointly Gaussian, and the projection characterization in [F10] makes its linear image $(X_k,X_{k+1})$ jointly Gaussian. Its mean is $(m_{k|k},F_{k+1}m_{k|k})$, its state covariance is $P_{k|k}$, its cross-covariance is $P_{k|k}F_{k+1}^T$, and its next-state covariance is $P_{k+1|k}$. The latter block is positive definite by hypothesis. Apply [F6] with that observed block: the conditional mean and covariance are exactly the displayed $Q_k$ parameters, so $V_k\\succeq0$. The history mean is affine by [F2], and representing each Gaussian section as a translate of fixed $N(0,V_k)$ plus [F8] gives joint measurability in $(h,x_{k+1})$. Thus $Q_k$ is an everywhere probability kernel.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F8",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $H=Y_{1:k}$, $V=X_{k+1}$, and $Z=Y_{k+1:T}$. By [F7], the full path law factors by taking the law of $(H,X_k)$, applying the transition kernel at $k+1$, and then a future observation kernel $R(V,dz)$ formed by the remaining transition and observation kernels. The first two factors disintegrate as $\\pi_k(h,dx_k)K_{k+1}(x_k,dv)=\\rho_k(h,dv)Q_k(h,v,dx_k)$ by step 1.1, where $\\rho_k$ is the one-step predictive law. Substitution gives the joint factorization as the law of $H$ followed by $\\rho_k$, $Q_k$, and $R$. The future kernel depends on the past only through $V$, and its iterated integrals are measurable by [F8].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any Borel set $A$ of $X_k$ and any Borel set $D$ in the product space of $(H,V,Z)$, integrate $1_A(x_k)1_D(h,v,z)$ in the factorization from step 2.1. This gives $\\mathbb P(X_k\\in A,(H,V,Z)\\in D)=\\int_D Q_k(h,v,A)\\,\\mathbb P_{(H,V,Z)}(dh,dv,dz)$. This is the RCD event identity for $Q_k$ given $(H,V,Z)$; its kernel properties were established in step 1.1. Since $(H,Z)=Y_{1:T}$, it is also a version of the conditional law given $(Y_{1:T},X_{k+1})$. The factorization uses model kernels rather than observation densities, and the only inverse is of $P_{k+1|k}\\succ0$.",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma assumes k<T and positive finite-dimensional state and observation dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only P_{k+1|k}≻0; no zero or singular forecast is inverted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs an everywhere conditional kernel for every next-state value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 permits singular P_{k|k}, Q_{k+1}, and V_k when the forecast remains SPD."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 include k=0 and k=T−1; the past or future history may be empty."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement A1 records AC through the Gaussian suppliers; step 1.1 introduces no stronger choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms_used": [
+        "AC"
+      ]
+    },
+    "alg-rauch-tung-striebel-smoother": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes a finite-horizon model with positive state dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: every forecast covariance solved is required to be positive definite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: Cholesky factorization is specified only for positive-definite forecasts."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: filtered state and noise covariances may be singular, but no forecast inverse is taken outside the stated SPD domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: at T=0 the loop is empty and returns the initial filtered pair."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the procedure is deterministic and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms_used": []
+    },
+    "thm-rauch-tung-striebel-fixed-interval-recursion": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-gaussian-state-space-model-with-independent-noises",
+          "source_section": "Definition",
+          "quote": "Assume AC ([[def-axiom-of-choice]]) and fix a finite horizon $T\\ge0$. Let\nthe state dimension at time\n$t$ be a positive integer $d_t$ for $0\\le t\\le T$, and the observation\ndimension at time $t$ be a positive integer $p_t$ for $1\\le t\\le T$.\nChoose deterministic matrices\n$F_t\\in\\mathbb R^{d_t\\times d_{t-1}}$ and\n$H_t\\in\\mathbb R^{p_t\\times d_t}$, a mean $m_0\\in\\mathbb R^{d_0}$, and\nsymmetric positive-semidefinite matrices, meaning $v^TPv\\ge0$ for every\nreal vector $v$ of matching dimension,\n$P_0\\in\\mathbb R^{d_0\\times d_0}$,\n$Q_t\\in\\mathbb R^{d_t\\times d_t}$, and\n$R_t\\in\\mathbb R^{p_t\\times p_t}$. A **linear-Gaussian state-space model\nwith independent noises** is the general finite-horizon kernel model\n([[def-general-state-space-model-by-kernels]]) with initial law\n$\\mu_0=N_{d_0}(m_0,P_0)$ and transition and observation kernels\n$$K_t(x,\\cdot)=N_{d_t}(F_t x,Q_t),\\qquad G_t(x,\\cdot)=N_{p_t}(H_t x,R_t).$$\nAll Gaussian laws use the convention of\n[[def-multivariate-normal-law]], which allows singular covariance matrices.\n\nIts independent-noise representation consists of random vectors\n$x_0,q_1,r_1,\\ldots,q_T,r_T$ on a common probability space, with\n$x_0\\sim N_{d_0}(m_0,P_0)$, $q_t\\sim N_{d_t}(0,Q_t)$,\n$r_t\\sim N_{p_t}(0,R_t)$, all mutually independent in the sense of\n[[def-independent-random-elements]] (their generated sigma-algebras are\nindependent), and equations\n$$x_t=F_t x_{t-1}+q_t,\\qquad y_t=H_t x_t+r_t\\qquad(1\\le t\\le T).$$\nThe local path-law theorem proves that every allowed parameter tuple has\nsuch a finite representation, that its induced kernels are the displayed\n$K_t,G_t$, and that its path law is the general kernel-product law.\n\nThis definition imposes the stated noise law and independence assumptions;\nit does not establish their empirical adequacy. It supplies no filtering\nalgorithm, posterior recursion, or convergence claim. Any separate formula\nthat inverts an observed innovation covariance must assume that covariance is\npositive definite at the point of inversion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-kalman-filter",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T\\ge0$, positive state dimensions $d_0,\\ldots,d_T$,\nand positive observation dimensions $p_1,\\ldots,p_T$. The input is a\nlinear-Gaussian model from\n[[def-linear-gaussian-state-space-model-with-independent-noises]], with\nmatrices $F_k\\in\\mathbb R^{d_k\\times d_{k-1}}$ and\n$H_k\\in\\mathbb R^{p_k\\times d_k}$, initial mean $m_0$, and symmetric\npositive-semidefinite covariances $P_0,Q_k,R_k$. Its state and observation\nequations are\n$$X_k=F_kX_{k-1}+q_k,\\qquad Y_k=H_kX_k+r_k,$$\nwhere $q_k\\sim N(0,Q_k)$ and $r_k\\sim N(0,R_k)$ are centered and mutually\nindependent across all times and of $X_0$.\n\nThe admissible data are vectors $y_k\\in\\mathbb R^{p_k}$ for which every\ninnovation covariance encountered below is positive definite. Positive\ndefinite means $u^TS_ku>0$ for every nonzero $u\\in\\mathbb R^{p_k}$. The\nalgorithm returns predicted and updated means and covariances and the\ninnovation and gain at each time. Initialize\n$$m_{0|0}=m_0,\\qquad P_{0|0}=P_0.$$\nFor $k=1,\\ldots,T$, perform:\n\n1. Predict:\n$$m_{k|k-1}=F_km_{k-1|k-1},\\qquad P_{k|k-1}=F_kP_{k-1|k-1}F_k^T+Q_k.$$\n2. Form the innovation and its covariance:\n$$v_k=y_k-H_km_{k|k-1},\\qquad S_k=H_kP_{k|k-1}H_k^T+R_k.$$\n3. Factor $S_k=L_kL_k^T$ with lower-triangular $L_k$ having positive\ndiagonal, using\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]].\nSolve $L_kU_k=H_kP_{k|k-1}$ and $L_k^TK_k^T=U_k$ by triangular solves. This\ndefines $K_k^T=S_k^{-1}H_kP_{k|k-1}$, hence\n$K_k=P_{k|k-1}H_k^TS_k^{-1}$, without explicitly forming $S_k^{-1}$.\n4. Update:\n$$m_{k|k}=m_{k|k-1}+K_kv_k,\\qquad P_{k|k}=P_{k|k-1}-K_kS_kK_k^T.$$\n\nFor $T=0$ the loop is empty and the returned pair is $(m_0,P_0)$. No\ninverse of $P_0$, $Q_k$, or $R_k$ is used. This item defines the procedure\nand makes no complexity, rounding-error, or numerical-stability claim.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kalman-filter-is-exact-posterior",
+          "source_section": "Statement",
+          "quote": "Assume AC. Fix a finite-horizon model from\n[[def-linear-gaussian-state-space-model-with-independent-noises]] with\nstate and observation equations\n$$X_k=F_kX_{k-1}+q_k,\\qquad Y_k=H_kX_k+r_k\\qquad (1\\le k\\le T),$$\nwhere $X_0\\sim N_{d_0}(m_0,P_0)$, the centered Gaussian noises $q_k,r_k$ are\nmutually independent across times and from $X_0$, and $P_0,Q_k,R_k$ are\nsymmetric positive semidefinite. Let the parameters and observations be\nadmissible for [[alg-kalman-filter]], so the recursively formed innovation\ncovariances\n$$S_k=H_kP_{k|k-1}H_k^T+R_k$$\nare positive definite for every $1\\le k\\le T$. Run that algorithm from\n$m_{0|0}=m_0$ and $P_{0|0}=P_0$. Then, for each $0\\le k\\le T$, the map\n$$\\pi_k(y_{1:k},\\cdot)=N_{d_k}(m_{k|k}(y_{1:k}),P_{k|k})$$\nis an everywhere-defined filtering kernel for $X_k$ given $Y_{1:k}$ in the\nsense of [[def-state-space-filtering-laws]]. The empty history at $k=0$ is a\nsingleton, and $\\pi_0=N_{d_0}(m_0,P_0)$. In particular, these recursions\ngive an exact Gaussian conditional-law version at every observation history;\neach $P_{k|k}$ is positive semidefinite. Singular initial, process,\nmeasurement, predicted-state, and filtered-state covariances are allowed.\nEquivalently, the covariance update can be written in Joseph form\n$$P_{k|k}=(I-K_kH_k)P_{k|k-1}(I-K_kH_k)^T+K_kR_kK_k^T.$$\nOnly the innovation matrices being solved must be positive definite. No\npointwise uniqueness of a conditional-law version on null histories,\nobservation-density assumption, or numerical-stability claim is made.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fixed-interval-gaussian-smoothing-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and fix a finite-horizon linear-Gaussian state-space model\n([[def-linear-gaussian-state-space-model-with-independent-noises]]) with\nstates $X_0,\\ldots,X_T$, observations $Y_1,\\ldots,Y_T$, and Borel observation\nspace $\\mathsf Y_{1:T}=\\mathbb R^{p_1}\\times\\cdots\\times\\mathbb R^{p_T}$,\nwith the empty product a singleton when $T=0$.\nFor $0\\le k\\le T$, a **fixed-interval smoothing kernel for $X_k$** is an\neverywhere-defined probability kernel\n$$\\psi_{k|T}:\\mathsf Y_{1:T}\\longrightarrow\\mathbb R^{d_k}$$\nwhose composition with the full observation vector $Y_{1:T}$ is a regular\nconditional distribution of $X_k$ given $\\sigma(Y_{1:T})$. Thus it is the\nsingle-time marginal smoothing law after all observations through time $T$\nare supplied. The full-path smoothing kernel and its version convention are\ndefined in [[def-state-space-filtering-laws]].\n\nThis definition does not assert that such a kernel exists or is unique at\nobservation values in a null set. The theorem on this page constructs a\nGaussian version under its explicit forecast and innovation assumptions.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-backward-gaussian-kernel-is-valid-under-full-smoothing-data",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X_0,\\ldots,X_T,Y_1,\\ldots,Y_T)$ follow a finite-horizon\nlinear-Gaussian model as in\n[[def-linear-gaussian-state-space-model-with-independent-noises]]. Suppose\nthe Kalman filter of [[alg-kalman-filter]] is admissible: every innovation\ncovariance $S_j$ it solves is positive definite. Fix $0\\le k<T$, and let\n$m_{k|k},P_{k|k}$ and $m_{k+1|k},P_{k+1|k}$ be the corresponding filtered\nand one-step predicted quantities. Assume in addition that\n$P_{k+1|k}\\succ0$. Put\n$$C_k=P_{k|k}F_{k+1}^TP_{k+1|k}^{-1},\\qquad V_k=P_{k|k}-C_kP_{k+1|k}C_k^T.$$\nThen $V_k\\succeq0$, and the formula\n$$Q_k(y_{1:k},x_{k+1},\\cdot)=N\\!\\left(m_{k|k}(y_{1:k})+C_k(x_{k+1}-m_{k+1|k}(y_{1:k})),V_k\\right)$$\ndefines an everywhere probability kernel. It is a conditional law of $X_k$\ngiven $(Y_{1:k},X_{k+1})$ and also a version of the conditional law of\n$X_k$ given $(Y_{1:T},X_{k+1})$ under the full finite-horizon model. Thus\nfuture observations do not change this backward kernel once $X_{k+1}$ is\nalso given. The inverse is the ordinary inverse of the positive-definite\nforecast covariance; no singular-forecast extension is asserted.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $m\\ge1$ be finite, let $d_j\\ge1$, and let\n$Z_j$ for $1\\le j\\le m$ be mutually independent random elements of\n$\\mathbb R^{d_j}$. Suppose $Z_j\\sim N_{d_j}(a_j,\\Sigma_j)$, where each\n$\\Sigma_j$ is symmetric positive semidefinite. Put\n$D=\\sum_{j=1}^m d_j$, $Z=(Z_1,\\ldots,Z_m)$,\n$a=(a_1,\\ldots,a_m)$, and\n$\\Sigma=\\operatorname{diag}(\\Sigma_1,\\ldots,\\Sigma_m)$. Then\n$$Z\\sim N_D(a,\\Sigma).$$\nNo covariance block needs to be invertible.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At time $T$, the conditioning data for the forward filter are exactly $y_{1:T}$. By [F3], the terminal filter kernel $N(m_{T|T},P_{T|T})$ is an everywhere conditional-law version of $X_T$ given these data, with $P_{T|T}\\succeq0$. It is therefore the base case for the fixed-interval smoothing kernels in [F4].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "base"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose the Gaussian kernel $\\psi_{k+1|T}(y,\\cdot)$ is an RCD of $X_{k+1}$ given $Y_{1:T}=y$. Define $\\psi_{k|T}(y,A)=\\int Q_k(y_{1:k},x,A)\\,\\psi_{k+1|T}(y,dx)$ for each Borel state set $A$. This is a probability kernel by [F5]–[F6]. To verify its RCD identity, define $\\nu(D)=\\int\\!\\int 1_D(y,x)\\,\\psi_{k+1|T}(y,dx)\\,\\mathbb P_Y(dy)$ for Borel $D$ in the product of data and state spaces. Measurability follows from [F6]; for pairwise disjoint $D_n$, monotone convergence gives countable additivity, and $\\nu$ has total mass one. Its rectangle values equal those of the actual joint law of $(Y_{1:T},X_{k+1})$ by the RCD identity for $\\psi_{k+1|T}$. By [F8], the measures agree on every Borel set. Thus for any Borel data set $B$ and state set $A$, $\\int_B\\psi_{k|T}(y,A)\\,\\mathbb P_Y(dy)=\\int_{B\\times\\mathbb R^{d_{k+1}}}Q_k(y_{1:k},x,A)\\,\\mathbb P_{(Y_{1:T},X_{k+1})}(dy,dx)=\\mathbb P(X_k\\in A,Y_{1:T}\\in B)$, where the last equality is [F5] applied to the conditioning event $B\\times\\mathbb R^{d_{k+1}}$. Hence $\\psi_{k|T}$ is the required RCD.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "ih",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Write $V_k=P_{k|k}-C_kP_{k+1|k}C_k^T$ as in [F5]. On the product probability space carrying independent $U\\sim N(0,V_k)$ and $W\\sim N(m_{k+1|T},P_{k+1|T})$, the integral in step 2.1 is the law of $m_{k|k}+C_k(W-m_{k+1|k})+U$ by [F9]. The covariance matrices of $U$ and $W$ are positive semidefinite by [F5] and the induction hypothesis, so both Gaussian laws exist by [A1, F11]. The product coordinates are independent by [F12]; [F10] makes their stack jointly Gaussian, and its affine image is Gaussian by the projection characterization in [F11]. Independence makes the cross-covariance terms vanish, so its mean is $m_{k|k}+C_k(m_{k+1|T}-m_{k+1|k})$ and its covariance is $V_k+C_kP_{k+1|T}C_k^T=P_{k|k}+C_k(P_{k+1|T}-P_{k+1|k})C_k^T$. This is exactly the smoother update in the statement and algorithm. The first covariance expression is positive semidefinite, so the updated covariance is positive semidefinite as well.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Starting from step 1.1, apply steps 2.1–3.1 for $k=T-1,T-2,\\ldots,0$. The induction constructs an everywhere smoothing kernel at each time and identifies its mean and covariance with the algorithm output. When $T=0$ only the base case is needed. Positive definiteness is used only for the forecast inverses in [F5] and the forward innovation solves in [F2]; no singular forecast is inverted.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model has positive finite-dimensional state spaces and a finite horizon."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 require an SPD forecast covariance and the filter requires SPD innovations; no zero matrix is inverted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 and the conditional-kernel construction give normalized probability sections."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 allow singular state, process, measurement, filtered, and smoothed covariances while retaining SPD solve conditions."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the terminal case; step 4.1 handles T=0 and the initial state endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement A1 names AC through the Gaussian suppliers; the finite backward induction adds no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms_used": [
+        "AC"
+      ]
+    },
+    "ex-two-time-scalar-rauch-tung-striebel-smoother": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-gaussian-state-space-model-with-independent-noises",
+          "source_section": "Definition",
+          "quote": "Assume AC ([[def-axiom-of-choice]]) and fix a finite horizon $T\\ge0$. Let\nthe state dimension at time\n$t$ be a positive integer $d_t$ for $0\\le t\\le T$, and the observation\ndimension at time $t$ be a positive integer $p_t$ for $1\\le t\\le T$.\nChoose deterministic matrices\n$F_t\\in\\mathbb R^{d_t\\times d_{t-1}}$ and\n$H_t\\in\\mathbb R^{p_t\\times d_t}$, a mean $m_0\\in\\mathbb R^{d_0}$, and\nsymmetric positive-semidefinite matrices, meaning $v^TPv\\ge0$ for every\nreal vector $v$ of matching dimension,\n$P_0\\in\\mathbb R^{d_0\\times d_0}$,\n$Q_t\\in\\mathbb R^{d_t\\times d_t}$, and\n$R_t\\in\\mathbb R^{p_t\\times p_t}$. A **linear-Gaussian state-space model\nwith independent noises** is the general finite-horizon kernel model\n([[def-general-state-space-model-by-kernels]]) with initial law\n$\\mu_0=N_{d_0}(m_0,P_0)$ and transition and observation kernels\n$$K_t(x,\\cdot)=N_{d_t}(F_t x,Q_t),\\qquad G_t(x,\\cdot)=N_{p_t}(H_t x,R_t).$$\nAll Gaussian laws use the convention of\n[[def-multivariate-normal-law]], which allows singular covariance matrices.\n\nIts independent-noise representation consists of random vectors\n$x_0,q_1,r_1,\\ldots,q_T,r_T$ on a common probability space, with\n$x_0\\sim N_{d_0}(m_0,P_0)$, $q_t\\sim N_{d_t}(0,Q_t)$,\n$r_t\\sim N_{p_t}(0,R_t)$, all mutually independent in the sense of\n[[def-independent-random-elements]] (their generated sigma-algebras are\nindependent), and equations\n$$x_t=F_t x_{t-1}+q_t,\\qquad y_t=H_t x_t+r_t\\qquad(1\\le t\\le T).$$\nThe local path-law theorem proves that every allowed parameter tuple has\nsuch a finite representation, that its induced kernels are the displayed\n$K_t,G_t$, and that its path law is the general kernel-product law.\n\nThis definition imposes the stated noise law and independence assumptions;\nit does not establish their empirical adequacy. It supplies no filtering\nalgorithm, posterior recursion, or convergence claim. Any separate formula\nthat inverts an observed innovation covariance must assume that covariance is\npositive definite at the point of inversion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-kalman-filter",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T\\ge0$, positive state dimensions $d_0,\\ldots,d_T$,\nand positive observation dimensions $p_1,\\ldots,p_T$. The input is a\nlinear-Gaussian model from\n[[def-linear-gaussian-state-space-model-with-independent-noises]], with\nmatrices $F_k\\in\\mathbb R^{d_k\\times d_{k-1}}$ and\n$H_k\\in\\mathbb R^{p_k\\times d_k}$, initial mean $m_0$, and symmetric\npositive-semidefinite covariances $P_0,Q_k,R_k$. Its state and observation\nequations are\n$$X_k=F_kX_{k-1}+q_k,\\qquad Y_k=H_kX_k+r_k,$$\nwhere $q_k\\sim N(0,Q_k)$ and $r_k\\sim N(0,R_k)$ are centered and mutually\nindependent across all times and of $X_0$.\n\nThe admissible data are vectors $y_k\\in\\mathbb R^{p_k}$ for which every\ninnovation covariance encountered below is positive definite. Positive\ndefinite means $u^TS_ku>0$ for every nonzero $u\\in\\mathbb R^{p_k}$. The\nalgorithm returns predicted and updated means and covariances and the\ninnovation and gain at each time. Initialize\n$$m_{0|0}=m_0,\\qquad P_{0|0}=P_0.$$\nFor $k=1,\\ldots,T$, perform:\n\n1. Predict:\n$$m_{k|k-1}=F_km_{k-1|k-1},\\qquad P_{k|k-1}=F_kP_{k-1|k-1}F_k^T+Q_k.$$\n2. Form the innovation and its covariance:\n$$v_k=y_k-H_km_{k|k-1},\\qquad S_k=H_kP_{k|k-1}H_k^T+R_k.$$\n3. Factor $S_k=L_kL_k^T$ with lower-triangular $L_k$ having positive\ndiagonal, using\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]].\nSolve $L_kU_k=H_kP_{k|k-1}$ and $L_k^TK_k^T=U_k$ by triangular solves. This\ndefines $K_k^T=S_k^{-1}H_kP_{k|k-1}$, hence\n$K_k=P_{k|k-1}H_k^TS_k^{-1}$, without explicitly forming $S_k^{-1}$.\n4. Update:\n$$m_{k|k}=m_{k|k-1}+K_kv_k,\\qquad P_{k|k}=P_{k|k-1}-K_kS_kK_k^T.$$\n\nFor $T=0$ the loop is empty and the returned pair is $(m_0,P_0)$. No\ninverse of $P_0$, $Q_k$, or $R_k$ is used. This item defines the procedure\nand makes no complexity, rounding-error, or numerical-stability claim.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-rauch-tung-striebel-smoother",
+          "source_section": "Definition",
+          "quote": "Fix a finite-horizon linear-Gaussian model from\n[[def-linear-gaussian-state-space-model-with-independent-noises]] and data\n$y_{1:T}$ for which [[alg-kalman-filter]] is admissible. Its forward output\ncontains filtered means and covariances $m_{k|k},P_{k|k}$ and predicted means\nand covariances $m_{k+1|k},P_{k+1|k}$. Assume each forecast covariance used\nbelow is positive definite, meaning $u^TP_{k+1|k}u>0$ for every nonzero\n$u\\in\\mathbb R^{d_{k+1}}$. Positive semidefinite means the same quadratic\nform is nonnegative for every $u$.\n\nThe algorithm takes that forward output as input, initializes\n$$m_{T|T}:=m_{T|T}^{\\mathrm{filter}},\\qquad P_{T|T}:=P_{T|T}^{\\mathrm{filter}}$$\nand for $k=T-1,T-2,\\ldots,0$ performs the following steps:\n\n1. Form the backward gain\n$$C_k=P_{k|k}F_{k+1}^TP_{k+1|k}^{-1}.$$\nFor the computation, factor $P_{k+1|k}=L_kL_k^T$ with the unique\npositive-diagonal Cholesky factor from\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]],\nthen solve $L_kU_k=F_{k+1}P_{k|k}$ and\n$L_k^TC_k^T=U_k$ by triangular solves. Thus no inverse is formed in the\nprocedure.\n2. Update the smoothed mean and covariance:\n$$m_{k|T}=m_{k|k}+C_k(m_{k+1|T}-m_{k+1|k})$$\n$$P_{k|T}=P_{k|k}+C_k(P_{k+1|T}-P_{k+1|k})C_k^T$$\n\nReturn $(m_{k|T},P_{k|T})_{k=0}^T$. For $T=0$ the loop is empty and the\noutput is the initial filtered pair. The algorithm is undefined if a\nforecast covariance to be solved is singular; it makes no pseudoinverse,\ncomplexity, rounding-error, or numerical-stability claim. The theorem on\nthis page proves that the outputs are moments of the fixed-interval\nconditional laws under these hypotheses.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rauch-tung-striebel-fixed-interval-recursion",
+          "source_section": "Statement",
+          "quote": "Assume AC and fix a finite-horizon linear-Gaussian model\n([[def-linear-gaussian-state-space-model-with-independent-noises]]) with\n$P_0,Q_j,R_j\\succeq0$. Run the forward Kalman filter on data $y_{1:T}$,\nwith every innovation covariance $S_j$ positive definite. Also assume that\nevery one-step forecast covariance $P_{k+1|k}$ is positive definite for\n$0\\le k<T$. Let $(m_{k|T},P_{k|T})_{k=0}^T$ be the output of\n[[alg-rauch-tung-striebel-smoother]] applied to that forward output. Then,\nfor every $0\\le k\\le T$,\n$$N_{d_k}(m_{k|T}(y_{1:T}),P_{k|T})$$\nis an everywhere-defined fixed-interval smoothing kernel for $X_k$ in the\nsense of [[def-fixed-interval-gaussian-smoothing-law]]. In particular,\n$P_{k|T}\\succeq0$. Singular initial, process, measurement, filtered, and\nsmoothed covariances are allowed; only the innovation matrices solved by the\nfilter and the forecast matrices inverted by this smoother must be positive\ndefinite. The formulas select a conditional-law version at every data value;\nother versions may differ on a set of observation data of probability zero.\nNo pseudoinverse result for a singular forecast is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At time $1$, the filter predicts $m_{1|0}=0$ and $P_{1|0}=2$. Hence $S_1=3$, $v_1=1$, and $K_1=2/3$, so $m_{1|1}=2/3$ and $P_{1|1}=2-(2/3)3(2/3)=2/3$. In particular $S_1>0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At time $2$, the prediction is $m_{2|1}=2/3$ and $P_{2|1}=5/3$. Thus $S_2=8/3$, $v_2=4/3$, and $K_2=5/8$, giving $m_{2|2}=2/3+(5/8)(4/3)=3/2$ and $P_{2|2}=5/3-(5/8)(8/3)(5/8)=5/8$. Both $S_2$ and $P_{2|1}$ are positive.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The first backward gain is $C_1=(2/3)/(5/3)=2/5$. Therefore $m_{1|2}=2/3+(2/5)(3/2-2/3)=1$ and $P_{1|2}=2/3+(2/5)(5/8-5/3)(2/5)=1/2$. The next gain is $C_0=1/2$, so $m_{0|2}=0+(1/2)(1-0)=1/2$ and $P_{0|2}=1+(1/2)(1/2-2)(1/2)=5/8$. The theorem [F4] identifies the resulting smoothing kernels as $N(1/2,5/8)$ for $X_0$, $N(1,1/2)$ for $X_1$, and $N(3/2,5/8)$ for $X_2$ at the selected data history.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The scalar example uses positive state and observation dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 2.1 compute S_1=3 and S_2=8/3, both positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 applies the exact smoothing theorem to normalized Gaussian laws."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example uses strictly positive prior and noise variances, so degeneracy is not part of this example."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 cover the two forward times and backward steps k=1,0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement A1 supplies the Gaussian-law convention; steps 1.1–3.1 use only finite exact arithmetic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "rts-two-time-scalar",
+          "claim": "For X_0~N(0,1), unit random-walk and observation variances, and data (1,2), the RTS smoother returns means (1/2,1,3/2) and variances (5/8,1/2,5/8).",
+          "result": "Steps 1.1–3.1 compute the forward and backward gains and moments by exact rational arithmetic."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms_used": [
+        "AC"
+      ]
+    },
+    "ex-singular-forecast-covariance-outside-rts-domain": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-gaussian-state-space-model-with-independent-noises",
+          "source_section": "Definition",
+          "quote": "Assume AC ([[def-axiom-of-choice]]) and fix a finite horizon $T\\ge0$. Let\nthe state dimension at time\n$t$ be a positive integer $d_t$ for $0\\le t\\le T$, and the observation\ndimension at time $t$ be a positive integer $p_t$ for $1\\le t\\le T$.\nChoose deterministic matrices\n$F_t\\in\\mathbb R^{d_t\\times d_{t-1}}$ and\n$H_t\\in\\mathbb R^{p_t\\times d_t}$, a mean $m_0\\in\\mathbb R^{d_0}$, and\nsymmetric positive-semidefinite matrices, meaning $v^TPv\\ge0$ for every\nreal vector $v$ of matching dimension,\n$P_0\\in\\mathbb R^{d_0\\times d_0}$,\n$Q_t\\in\\mathbb R^{d_t\\times d_t}$, and\n$R_t\\in\\mathbb R^{p_t\\times p_t}$. A **linear-Gaussian state-space model\nwith independent noises** is the general finite-horizon kernel model\n([[def-general-state-space-model-by-kernels]]) with initial law\n$\\mu_0=N_{d_0}(m_0,P_0)$ and transition and observation kernels\n$$K_t(x,\\cdot)=N_{d_t}(F_t x,Q_t),\\qquad G_t(x,\\cdot)=N_{p_t}(H_t x,R_t).$$\nAll Gaussian laws use the convention of\n[[def-multivariate-normal-law]], which allows singular covariance matrices.\n\nIts independent-noise representation consists of random vectors\n$x_0,q_1,r_1,\\ldots,q_T,r_T$ on a common probability space, with\n$x_0\\sim N_{d_0}(m_0,P_0)$, $q_t\\sim N_{d_t}(0,Q_t)$,\n$r_t\\sim N_{p_t}(0,R_t)$, all mutually independent in the sense of\n[[def-independent-random-elements]] (their generated sigma-algebras are\nindependent), and equations\n$$x_t=F_t x_{t-1}+q_t,\\qquad y_t=H_t x_t+r_t\\qquad(1\\le t\\le T).$$\nThe local path-law theorem proves that every allowed parameter tuple has\nsuch a finite representation, that its induced kernels are the displayed\n$K_t,G_t$, and that its path law is the general kernel-product law.\n\nThis definition imposes the stated noise law and independence assumptions;\nit does not establish their empirical adequacy. It supplies no filtering\nalgorithm, posterior recursion, or convergence claim. Any separate formula\nthat inverts an observed innovation covariance must assume that covariance is\npositive definite at the point of inversion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-kalman-filter",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T\\ge0$, positive state dimensions $d_0,\\ldots,d_T$,\nand positive observation dimensions $p_1,\\ldots,p_T$. The input is a\nlinear-Gaussian model from\n[[def-linear-gaussian-state-space-model-with-independent-noises]], with\nmatrices $F_k\\in\\mathbb R^{d_k\\times d_{k-1}}$ and\n$H_k\\in\\mathbb R^{p_k\\times d_k}$, initial mean $m_0$, and symmetric\npositive-semidefinite covariances $P_0,Q_k,R_k$. Its state and observation\nequations are\n$$X_k=F_kX_{k-1}+q_k,\\qquad Y_k=H_kX_k+r_k,$$\nwhere $q_k\\sim N(0,Q_k)$ and $r_k\\sim N(0,R_k)$ are centered and mutually\nindependent across all times and of $X_0$.\n\nThe admissible data are vectors $y_k\\in\\mathbb R^{p_k}$ for which every\ninnovation covariance encountered below is positive definite. Positive\ndefinite means $u^TS_ku>0$ for every nonzero $u\\in\\mathbb R^{p_k}$. The\nalgorithm returns predicted and updated means and covariances and the\ninnovation and gain at each time. Initialize\n$$m_{0|0}=m_0,\\qquad P_{0|0}=P_0.$$\nFor $k=1,\\ldots,T$, perform:\n\n1. Predict:\n$$m_{k|k-1}=F_km_{k-1|k-1},\\qquad P_{k|k-1}=F_kP_{k-1|k-1}F_k^T+Q_k.$$\n2. Form the innovation and its covariance:\n$$v_k=y_k-H_km_{k|k-1},\\qquad S_k=H_kP_{k|k-1}H_k^T+R_k.$$\n3. Factor $S_k=L_kL_k^T$ with lower-triangular $L_k$ having positive\ndiagonal, using\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]].\nSolve $L_kU_k=H_kP_{k|k-1}$ and $L_k^TK_k^T=U_k$ by triangular solves. This\ndefines $K_k^T=S_k^{-1}H_kP_{k|k-1}$, hence\n$K_k=P_{k|k-1}H_k^TS_k^{-1}$, without explicitly forming $S_k^{-1}$.\n4. Update:\n$$m_{k|k}=m_{k|k-1}+K_kv_k,\\qquad P_{k|k}=P_{k|k-1}-K_kS_kK_k^T.$$\n\nFor $T=0$ the loop is empty and the returned pair is $(m_0,P_0)$. No\ninverse of $P_0$, $Q_k$, or $R_k$ is used. This item defines the procedure\nand makes no complexity, rounding-error, or numerical-stability claim.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-rauch-tung-striebel-smoother",
+          "source_section": "Definition",
+          "quote": "Fix a finite-horizon linear-Gaussian model from\n[[def-linear-gaussian-state-space-model-with-independent-noises]] and data\n$y_{1:T}$ for which [[alg-kalman-filter]] is admissible. Its forward output\ncontains filtered means and covariances $m_{k|k},P_{k|k}$ and predicted means\nand covariances $m_{k+1|k},P_{k+1|k}$. Assume each forecast covariance used\nbelow is positive definite, meaning $u^TP_{k+1|k}u>0$ for every nonzero\n$u\\in\\mathbb R^{d_{k+1}}$. Positive semidefinite means the same quadratic\nform is nonnegative for every $u$.\n\nThe algorithm takes that forward output as input, initializes\n$$m_{T|T}:=m_{T|T}^{\\mathrm{filter}},\\qquad P_{T|T}:=P_{T|T}^{\\mathrm{filter}}$$\nand for $k=T-1,T-2,\\ldots,0$ performs the following steps:\n\n1. Form the backward gain\n$$C_k=P_{k|k}F_{k+1}^TP_{k+1|k}^{-1}.$$\nFor the computation, factor $P_{k+1|k}=L_kL_k^T$ with the unique\npositive-diagonal Cholesky factor from\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]],\nthen solve $L_kU_k=F_{k+1}P_{k|k}$ and\n$L_k^TC_k^T=U_k$ by triangular solves. Thus no inverse is formed in the\nprocedure.\n2. Update the smoothed mean and covariance:\n$$m_{k|T}=m_{k|k}+C_k(m_{k+1|T}-m_{k+1|k})$$\n$$P_{k|T}=P_{k|k}+C_k(P_{k+1|T}-P_{k+1|k})C_k^T$$\n\nReturn $(m_{k|T},P_{k|T})_{k=0}^T$. For $T=0$ the loop is empty and the\noutput is the initial filtered pair. The algorithm is undefined if a\nforecast covariance to be solved is singular; it makes no pseudoinverse,\ncomplexity, rounding-error, or numerical-stability claim. The theorem on\nthis page proves that the outputs are moments of the fixed-interval\nconditional laws under these hypotheses.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-fixed-interval-gaussian-smoothing-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and fix a finite-horizon linear-Gaussian state-space model\n([[def-linear-gaussian-state-space-model-with-independent-noises]]) with\nstates $X_0,\\ldots,X_T$, observations $Y_1,\\ldots,Y_T$, and Borel observation\nspace $\\mathsf Y_{1:T}=\\mathbb R^{p_1}\\times\\cdots\\times\\mathbb R^{p_T}$,\nwith the empty product a singleton when $T=0$.\nFor $0\\le k\\le T$, a **fixed-interval smoothing kernel for $X_k$** is an\neverywhere-defined probability kernel\n$$\\psi_{k|T}:\\mathsf Y_{1:T}\\longrightarrow\\mathbb R^{d_k}$$\nwhose composition with the full observation vector $Y_{1:T}$ is a regular\nconditional distribution of $X_k$ given $\\sigma(Y_{1:T})$. Thus it is the\nsingle-time marginal smoothing law after all observations through time $T$\nare supplied. The full-path smoothing kernel and its version convention are\ndefined in [[def-state-space-filtering-laws]].\n\nThis definition does not assert that such a kernel exists or is unique at\nobservation values in a null set. The theorem on this page constructs a\nGaussian version under its explicit forecast and innovation assumptions.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $X_0=0$ and $q_1=0$ almost surely, so $X_1=0$ almost surely. The observation is $Y_1=r_1$ and the model covariances are positive semidefinite.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The forward recursion gives $P_{1|0}=1\\cdot0\\cdot1+0=0$ and $m_{1|0}=0$. Since $H_1=0$ and $R_1=1$, its innovation covariance is $S_1=1>0$, gain $K_1=0$, and filtered state remains $N(0,0)$. Thus the forward filter is admissible, while the RTS step would require the ordinary inverse of $P_{1|0}=0$, which does not exist by [F4]. No pseudoinverse substitution follows from that algorithm.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Define $\\psi_{0|1}(y,\\cdot)=\\delta_0$ for every $y\\in\\mathbb R$. For any Borel sets $A,B\\subseteq\\mathbb R$, $\\mathbb P(X_0\\in A,Y_1\\in B)=1_{\\{0\\in A\\}}\\mathbb P(Y_1\\in B)=\\int_B\\delta_0(A)\\,\\mathbb P_{Y_1}(dy)$ by step 1.1. Hence this everywhere-defined kernel satisfies the RCD identity in [F5]; it is the fixed-interval smoothing law even though the ordinary RTS recursion is undefined.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is one-dimensional and has nonempty Euclidean state and observation spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives S_1=1>0 while P_{1|0}=0, so the singular inverse boundary is explicit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies a normalized point-mass RCD for all observation events."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses a degenerate Gaussian state and process noise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The horizon is T=1; step 2.1 checks the only forecast and innovation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement A1 is inherited from the degenerate Gaussian-law definition; steps 1.1–3.1 make no further choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "rts-singular-forecast-boundary",
+          "claim": "For P_0=Q_1=0, F_1=1, H_1=0, R_1=1, the forward filter has S_1=1 but P_{1|0}=0.",
+          "result": "Step 2.1 verifies the exact scalar arithmetic; step 3.1 verifies that delta_0 is the RCD for X_0 given Y_1."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms_used": [
+        "AC"
+      ]
+    }
+  }
+}

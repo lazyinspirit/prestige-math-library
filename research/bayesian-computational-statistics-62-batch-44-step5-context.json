@@ -1,0 +1,318 @@
+{
+  "group": "n",
+  "batches": [
+    "44"
+  ],
+  "pages_read": [
+    "feynman-kac-particle-filters",
+    "feynman-kac-particle-filters-examples"
+  ],
+  "items_read": [
+    "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels",
+    "alg-multinomial-and-residual-offspring-resampling",
+    "def-feynman-kac-path-targets-and-normalizers",
+    "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts",
+    "lem-feynman-kac-path-measures-satisfy-forward-recursion",
+    "thm-feynman-kac-path-radon-nikodym-weight",
+    "alg-sequential-importance-resampling",
+    "thm-sequential-particle-estimator-is-unbiased",
+    "ex-multinomial-versus-residual-resampling",
+    "ex-bootstrap-and-informed-proposal-particle-filter",
+    "cex-particle-filter-proposal-misses-target-support"
+  ],
+  "conventions": [
+    {
+      "convention": "The horizon is finite, time starts at zero, state spaces are standard Borel, and every potential is finite-valued, nonnegative and measurable. A normalized path target is defined only when its normalizer is finite and strictly positive.",
+      "fixed_by": "def-feynman-kac-path-targets-and-normalizers",
+      "matters_for": [
+        "lem-feynman-kac-path-measures-satisfy-forward-recursion",
+        "thm-feynman-kac-path-radon-nikodym-weight",
+        "alg-sequential-importance-resampling",
+        "thm-sequential-particle-estimator-is-unbiased"
+      ]
+    },
+    {
+      "convention": "Kernel domination and the joint derivative identity hold outside one preceding-state null set independent of the measurable target set.",
+      "fixed_by": "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels",
+      "matters_for": [
+        "thm-feynman-kac-path-radon-nikodym-weight",
+        "alg-sequential-importance-resampling",
+        "thm-sequential-particle-estimator-is-unbiased"
+      ]
+    },
+    {
+      "convention": "Transition domination is required almost everywhere under the last-coordinate marginal of the proposal path law Q at the previous time.",
+      "fixed_by": "thm-feynman-kac-path-radon-nikodym-weight",
+      "matters_for": [
+        "alg-sequential-importance-resampling",
+        "thm-sequential-particle-estimator-is-unbiased",
+        "cex-particle-filter-proposal-misses-target-support"
+      ]
+    },
+    {
+      "convention": "Multinomial ancestor indices are returned in sampled order and are conditionally IID. Residual indices are returned sorted by parent index; only their expected-count identity is shared with multinomial resampling. All-zero input weights use uniform probabilities.",
+      "fixed_by": "alg-multinomial-and-residual-offspring-resampling",
+      "matters_for": [
+        "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts",
+        "alg-sequential-importance-resampling",
+        "thm-sequential-particle-estimator-is-unbiased",
+        "ex-multinomial-versus-residual-resampling"
+      ]
+    },
+    {
+      "convention": "SIR resamples before propagation at every positive time, uses finite-valued measurable derivative versions, and keeps the product normalizer estimate zero after any zero average weight. Uniform fallback supplies reporting and sampling probabilities.",
+      "fixed_by": "alg-sequential-importance-resampling",
+      "matters_for": [
+        "thm-sequential-particle-estimator-is-unbiased",
+        "ex-bootstrap-and-informed-proposal-particle-filter"
+      ]
+    },
+    {
+      "convention": "Unbiasedness concerns the unnormalized empirical path measure, assumes every prefix normalizer is finite and positive, and applies to nonnegative measurable tests with finite target integral. It does not assert unbiasedness of the normalized empirical measure.",
+      "fixed_by": "thm-sequential-particle-estimator-is-unbiased",
+      "matters_for": [
+        "thm-sequential-particle-estimator-is-unbiased"
+      ]
+    },
+    {
+      "convention": "AC is explicitly assumed for the general path-law, Radon–Nikodym and conditional-expectation arguments; the finite resampling calculations and finite examples require no additional choice.",
+      "fixed_by": "def-feynman-kac-path-targets-and-normalizers",
+      "matters_for": [
+        "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels",
+        "lem-feynman-kac-path-measures-satisfy-forward-recursion",
+        "thm-feynman-kac-path-radon-nikodym-weight",
+        "alg-sequential-importance-resampling",
+        "thm-sequential-particle-estimator-is-unbiased"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-feynman-kac-path-targets-and-normalizers",
+      "statement": "The unnormalized Feynman–Kac path measure is the Markov path law weighted by the product of the finite nonnegative potentials G_0 through G_t. Its normalizer Z_t may be zero or infinite; the normalized path target is defined only when 0 < Z_t < ∞.",
+      "used_by": [
+        "lem-feynman-kac-path-measures-satisfy-forward-recursion",
+        "thm-feynman-kac-path-radon-nikodym-weight",
+        "alg-sequential-importance-resampling",
+        "thm-sequential-particle-estimator-is-unbiased",
+        "ex-bootstrap-and-informed-proposal-particle-filter",
+        "cex-particle-filter-proposal-misses-target-support"
+      ]
+    },
+    {
+      "id": "thm-feynman-kac-path-radon-nikodym-weight",
+      "statement": "Assume AC, initial domination μ_0 ≪ ν_0, and transition domination M_k(x,·) ≪ R_k(x,·) almost everywhere under the preceding proposal last-coordinate marginal. Then γ_s ≪ Q_s for every s ≤ t, with product density W_s = G_0ρ_0 times the product of G_kr_k over 1 ≤ k ≤ s. When 0 < Z_s < ∞, the normalized density is W_s/Z_s.",
+      "used_by": [
+        "alg-sequential-importance-resampling",
+        "thm-sequential-particle-estimator-is-unbiased",
+        "ex-bootstrap-and-informed-proposal-particle-filter"
+      ]
+    },
+    {
+      "id": "alg-sequential-importance-resampling",
+      "statement": "Initially sample N IID proposal states and weight by G_0ρ_0. At every subsequent time, resample ancestors by the selected multinomial or residual scheme, independently propagate children conditional on those ancestors, weight by G_kr_k, and multiply the previous normalizer estimate by the average incremental weight. Return the product estimate and the normalized weighted empirical path measure, using uniform probabilities when the current weight sum is zero.",
+      "used_by": [
+        "thm-sequential-particle-estimator-is-unbiased",
+        "ex-bootstrap-and-informed-proposal-particle-filter",
+        "cex-particle-filter-proposal-misses-target-support"
+      ]
+    },
+    {
+      "id": "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels",
+      "statement": "Assume AC. For standard Borel spaces E and F, a probability λ on E, and probability kernels M,R from E to F with M(x,·) ≪ R(x,·) for λ-almost every x, there is a product-measurable r:E×F→[0,∞] satisfying M(x,B) = ∫_B r(x,y)R(x,dy) for λ-almost every x and every measurable B, with one exceptional null set independent of B.",
+      "used_by": [
+        "thm-feynman-kac-path-radon-nikodym-weight"
+      ]
+    },
+    {
+      "id": "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts",
+      "statement": "Conditional on the input weights, for either scheme and every 1 ≤ j ≤ N, E[C_j | a_1,…,a_N] = Np_j, including the uniform fallback when all weights vanish.",
+      "used_by": [
+        "thm-sequential-particle-estimator-is-unbiased",
+        "ex-multinomial-versus-residual-resampling"
+      ]
+    },
+    {
+      "id": "lem-feynman-kac-path-measures-satisfy-forward-recursion",
+      "statement": "Assume AC and the finite-horizon Feynman–Kac setup. For 1 ≤ k ≤ T and every nonnegative product-measurable φ, γ_k(φ) = ∫ γ_{k-1}(dx_{0:k-1}) ∫ G_k(x_k)φ(x_{0:k})M_k(x_{k-1},dx_k), with equality in [0,∞].",
+      "used_by": [
+        "thm-sequential-particle-estimator-is-unbiased"
+      ]
+    },
+    {
+      "id": "thm-sequential-particle-estimator-is-unbiased",
+      "statement": "Assume AC and the stated finite-horizon target/proposal and SIR setup, N ≥ 1, and 0 < Z_k < ∞ for every 0 ≤ k ≤ t. For every nonnegative measurable φ with γ_t(φ) < ∞, E[∫φ d(Ẑ_t π̂_t^N)] = γ_t(φ). In particular E[Ẑ_t] = Z_t. Either multinomial or residual resampling may be used at each time.",
+      "used_by": [
+        "alg-pmmh",
+        "thm-pmmh-exact-invariance"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicit choice assumption inherited by general path-law, density and conditional-expectation constructions.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-borel-space",
+      "used_for": "The measurable-space hypotheses of the kernel derivative lemma and Feynman–Kac definition.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Pointwise probability-kernel sections and measurable evaluations in joint-law and particle-law constructions.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Finite path spaces, measurable coordinates and particle-system product spaces.",
+      "opened": true
+    },
+    {
+      "id": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+      "used_for": "Ordered finite-prefix target, proposal and particle-system laws under AC.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Measurable nonnegative section integrals against probability kernels.",
+      "opened": true
+    },
+    {
+      "id": "thm-sections-of-product-measurable-functions-are-measurable",
+      "used_for": "Measurability of fixed-parent sections of the joint kernel density.",
+      "opened": true
+    },
+    {
+      "id": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+      "used_for": "Scalar densities for finite joint laws and initial laws, and uniqueness of the countably many section identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-against-a-radon-nikodym-derivative",
+      "used_for": "Setwise density identities and simple-function integration, extended locally by monotone convergence.",
+      "opened": true
+    },
+    {
+      "id": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+      "used_for": "Weighted path measures and fixed-parent density measures.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+      "used_for": "Joint-law domination, nonnegative density versions and avoidance of proposal-null histories.",
+      "opened": true
+    },
+    {
+      "id": "thm-composition-with-borel-functions-preserves-measurability",
+      "used_for": "Coordinate compositions, positive-part versions and measurable particle operations.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurability of products of potentials and finite particle weight operations.",
+      "opened": true
+    },
+    {
+      "id": "cor-standard-borel-spaces-have-countable-generating-and-measure-determining-algebras",
+      "used_for": "One common exceptional parent null set and extension from a countable algebra to all measurable target sets.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-against-a-density",
+      "used_for": "The forward Feynman–Kac recursion, including infinite nonnegative integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+      "used_for": "Extending setwise Radon–Nikodym identities to arbitrary nonnegative measurable tests.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Passing to limits in the nonnegative change-of-measure identities.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-products-of-probability-kernels",
+      "used_for": "The measurable joint laws of initial IID particles and conditionally independent propagation.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-given-a-sigma-algebra",
+      "used_for": "Identifying the conditional-kernel integral as a conditional-expectation version after establishing integrability.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-as-an-ae-class",
+      "used_for": "Almost-sure interpretation of conditional-expectation identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-conditional-expectation-exists-by-radon-nikodym",
+      "used_for": "Existence of integrable conditional-expectation versions under AC.",
+      "opened": true
+    },
+    {
+      "id": "thm-tower-property-of-conditional-expectation",
+      "used_for": "The final expectation identity in the particle unbiasedness induction after integrability is proved.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-expectation",
+      "used_for": "Computing expectations from proposal laws in the initial particle step and finite proposal example.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Finite sums of integrable weighted particle contributions.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Nonnegative extended expectation and finite expectation conventions.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "feynman-kac-particle-filters",
+      "to": "state-space-filtering-and-predictive-laws",
+      "faithful": true,
+      "note": "The filtering-law definition supplies conditional-kernel versions. The Feynman–Kac definition explicitly preserves the observation-null-history caveat and does not infer pointwise conditional identities."
+    },
+    {
+      "from": "feynman-kac-particle-filters",
+      "to": "importance-sampling-and-weight-diagnostics",
+      "faithful": true,
+      "note": "The two-state example uses the ordinary density-ratio estimator with positive proposal masses and finite integrals. Multiplication by the known normalizer correctly converts the normalized expectation identity into normalizer unbiasedness."
+    },
+    {
+      "from": "smc-clts-error-and-degeneracy",
+      "to": "feynman-kac-particle-filters",
+      "faithful": true,
+      "note": "The SMC definition uses normalized incremental weights rather than multiplying the previous full path weight again. The empirical-law and selection arguments accurately distinguish multinomial IID indices from residual floor counts and random remainder draws; their convergence claims are proved separately."
+    },
+    {
+      "from": "particle-smoothing-backward-simulation-and-rbpf",
+      "to": "feynman-kac-particle-filters",
+      "faithful": true,
+      "note": "Backward simulation treats SIR filtering clouds as approximation inputs. The bootstrap consistency result specializes to identical target/proposal kernels with positive bounded potentials. The Rao–Blackwellized procedure uses standard-Borel history states, path-extension kernels and finite-positive prefix evidence."
+    },
+    {
+      "from": "particle-mcmc-pmmh-and-particle-gibbs",
+      "to": "feynman-kac-particle-filters",
+      "faithful": true,
+      "note": "PMMH explicitly requires measurable nonnegative unbiased likelihood estimates and finite-positive prefix normalizers; its selected-path proof uses unnormalized path-integral unbiasedness. Both particle-Gibbs constructions restrict the labeled particle law to multinomial indices in sampled order and retain the derivative-version and exceptional-reference qualifications."
+    },
+    {
+      "from": "abc-mcmc-and-sequential-abc",
+      "to": "feynman-kac-particle-filters",
+      "faithful": true,
+      "note": "The ABC population algorithm applies the joint kernel derivative lemma under the actual conditional previous-population law and almost-sure mixture domination. Multinomial ancestor draws and the optional multinomial/residual offspring expectation identity are used with their stated laws; no normalized-estimator unbiasedness is inferred."
+    }
+  ]
+}

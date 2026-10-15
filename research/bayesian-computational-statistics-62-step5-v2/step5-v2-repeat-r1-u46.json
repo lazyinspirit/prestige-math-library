@@ -1,0 +1,158 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "46",
+  "input_sha256": "8a8734c8cd9afdc96618dbafe685e00ab296c41b484981fc79203392668dde20",
+  "decisions": [
+    {
+      "id": "def-conditionally-linear-gaussian-state-space-model",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "17f9e5028c853936baa4ab94dc98afc00337c97278f8c3bf3ebffb6515be7d4f",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The explicit condition v^T R_t v>0 does not imply symmetry: for R=[[1,1],[-1,1]], v^T R v=v_1^2+v_2^2>0 for nonzero v, but R is nonsymmetric. Covariance entries E[(X_i-m_i)(X_j-m_j)] are symmetric, so this allowed R cannot specify N(0,R). Both def-linear-gaussian-state-space-model-with-independent-noises and def-multivariate-normal-law require symmetric covariances. Added the missing symmetry requirement to R_t without excluding any legitimate positive-definite observation covariance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-conditionally-linear-gaussian-state-space-model",
+      "disposition": "repaired",
+      "post_sha256": "9ac43d222c532bbc38fbf0887eaae2560386f374d360b4f8d7beaeb3835cfea1",
+      "review_context_sha256": "b93a48753fe51d64d3926fe823660535b4330169a18666c2a77d537eb7b2dccc",
+      "reason": "The repaired Definition now supplies symmetric positive-definite R_t, symmetric positive-semidefinite P_0 and Q_t, positive dimensions, and conditional mutual independence of all Gaussian noises and U_0. For each fixed nonlinear path these match the deterministic linear-Gaussian supplier. Borel prefix coefficient maps, the U-independent nonlinear transition, the empty-observation T=0 convention, null-history version qualifications, and inherited AC are preserved. Updated the owning contract boundary and risk evidence. This is a local repair review, not an independent judgment of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+    "alg-rao-blackwellized-particle-filter",
+    "ex-switching-linear-gaussian-rbpf"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "row": {
+        "defect_id": "bcs62-b46-step5-repeat-r1-observation-covariance-symmetry",
+        "run": "bayesian-computational-statistics-62",
+        "class": "accuracy",
+        "subclass": "missing-hypothesis",
+        "severity": "fatal",
+        "location": "definition",
+        "subject": "def-conditionally-linear-gaussian-state-space-model",
+        "batch": "46",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "repair_cost": "inline-fix",
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-repeat-r1-u46.json",
+            "note": "The explicit condition v^T R_t v>0 does not imply symmetry: for R=[[1,1],[-1,1]], v^T R v=v_1^2+v_2^2>0 for nonzero v, but R is nonsymmetric. Covariance entries E[(X_i-m_i)(X_j-m_j)] are symmetric, so this allowed R cannot specify N(0,R). Both def-linear-gaussian-state-space-model-with-independent-noises and def-multivariate-normal-law require symmetric covariances. Added the missing symmetry requirement to R_t without excluding any legitimate positive-definite observation covariance."
+          }
+        ],
+        "source": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-repeat-r1-u46.json",
+        "at": "2026-10-15T18:06:10.548Z"
+      },
+      "reason": "The Definition permitted a nonsymmetric purported covariance; explicit symmetry repairs the ill-defined Gaussian law."
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update_required",
+      "reason": "No published or outside-frontier direct consumer was found. The three direct consumer uses remain sound and their exact affected uses are recorded in repair_notes.consumer_checks."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "Assigned repair, direct-consumer examination, citation mirrors, and all focused checks complete; no unresolved mathematical obligations.",
+    "claim_and_conventions": "Only the Definition changes: R_t is now explicitly symmetric positive definite; P_0 and Q_t may remain singular. Positive dimensions and AC remain unchanged.",
+    "dependencies_consulted": [
+      "items/def-linear-gaussian-state-space-model-with-independent-noises.md: Definition",
+      "items/def-multivariate-normal-law.md: Definition and proof step 1.1",
+      "items/def-general-state-space-model-by-kernels.md: Definition",
+      "items/def-state-space-filtering-laws.md: Definition",
+      "items/def-axiom-of-choice.md: Definition",
+      "items/def-standard-borel-space.md: Definition",
+      "items/def-measure-kernel-and-probability-kernel.md: Definition"
+    ],
+    "source_reading": "The covariance issue is familiar elementary linear algebra and probability. No external source was consulted; listed source URLs in item metadata are not claimed as read.",
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-46.proof-contracts.json --strict --items def-conditionally-linear-gaussian-state-space-model --json",
+        "exit_code": 0,
+        "result": "ok:true; no errors or warnings; one selected contract checked."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-conditionally-linear-gaussian-state-space-model.md --json",
+        "exit_code": 0,
+        "result": "One file checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-conditionally-linear-gaussian-state-space-model.md --json",
+        "exit_code": 0,
+        "result": "One file; not-applicable because definition has no phase proof; zero proofs checked and zero failures."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-conditionally-linear-gaussian-state-space-model.md",
+        "exit_code": 0,
+        "result": "1 item, 0 steps, 0 defects."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-46.proof-contracts.json --strict --items def-conditionally-linear-gaussian-state-space-model,lem-kalman-filter-is-exact-conditional-on-nonlinear-path,alg-rao-blackwellized-particle-filter,ex-switching-linear-gaussian-rbpf --json",
+        "exit_code": 0,
+        "result": "Four selected contracts checked, ok:true, no errors or warnings; both supplier quotation mirrors refreshed."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run bayesian-computational-statistics-62 --items def-conditionally-linear-gaussian-state-space-model",
+        "exit_code": 0,
+        "result": "Final review after examining the citation-mirror changes returned the same post_sha256 and review_context_sha256 recorded in reviews."
+      }
+    ],
+    "interface_change": {
+      "path": "items/def-conditionally-linear-gaussian-state-space-model.md",
+      "section": "Definition",
+      "before": "positive definite, meaning $v^TR_tv>0$ for every nonzero $v$.",
+      "after": "symmetric positive definite, meaning $v^TR_tv>0$ for every nonzero $v$.",
+      "reason": "An actual Definition change triggers the direct-consumer inventory. No consumer Statement or Definition is edited, so propagation stops at this hop."
+    },
+    "consumer_checks": [
+      {
+        "id": "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+        "path": "items/lem-kalman-filter-is-exact-conditional-on-nonlinear-path.md",
+        "affected_use": "Statement assumes the model; F1 and proof steps 1.1–3.1 use its Gaussian covariances to form S_t=C_t P_{t|t-1} C_t^T+R_t, invert S_t, and evaluate the nondegenerate Gaussian density.",
+        "disposition": "sound_unchanged",
+        "reason": "Symmetric P and R give symmetric S; v^T S v>0 follows from R>0. The strengthened supplier now explicitly meets the already-used covariance and Kalman hypotheses. Only the contract F1 quotation needed refreshing."
+      },
+      {
+        "id": "alg-rao-blackwellized-particle-filter",
+        "path": "items/alg-rao-blackwellized-particle-filter.md",
+        "affected_use": "Definition imports the model; instructions 2–4 form per-particle innovation S_t^i, its determinant and inverse, Gaussian likelihoods, and the Kalman covariance update.",
+        "disposition": "sound_unchanged",
+        "reason": "Every R_t along every particle path now explicitly is symmetric positive definite; all the existing update and likelihood instructions retain their domain. No item or contract change needed for this consumer."
+      },
+      {
+        "id": "ex-switching-linear-gaussian-rbpf",
+        "path": "items/ex-switching-linear-gaussian-rbpf.md",
+        "affected_use": "F1 and Verification step 1.1 assert that scalar initial covariance 1, process covariance 1 and observation covariance 1 meet the conditionally linear-Gaussian model.",
+        "disposition": "sound_unchanged",
+        "reason": "The scalar matrix [1] is symmetric positive definite, so the example still belongs to the model class and all posterior calculations are unchanged. Only the contract F1 quotation needed refreshing."
+      }
+    ],
+    "page_check": {
+      "path": "library/bayesian-computational-statistics/particle-smoothing-backward-simulation-and-rbpf.md",
+      "affected_use": "The page lists the definition before the conditional Kalman lemma and describes sampling nonlinear paths with exact conditional Gaussian updates.",
+      "disposition": "sound_unchanged",
+      "reason": "The covariance symmetry repair supports the existing page interface and does not change its algorithm or approximation caveats."
+    },
+    "inventory": "The supplier declares no aliases. Current items/library searches find exactly the three direct item dependency/reference consumers listed in downstream; the additional text match in thm-particle-smoothing-consistency-under-stated-conditions is only a bibliography title. All three consumers are draft frozen-frontier items; no outside or published consumer repair is proposed.",
+    "unresolved_mathematics": [],
+    "shared_metadata": "The owning contract boundary/risk update used the shared lock. A later citation-mirror edit mistakenly ran after a busy-lock response. Recovered by acquiring the lock, rereading the current contract, verifying both quotations equal the exact final Definition, rewriting the same verified bytes, running the four-item strict contract check successfully, and releasing the lock. No other report or ledger was edited."
+  }
+}

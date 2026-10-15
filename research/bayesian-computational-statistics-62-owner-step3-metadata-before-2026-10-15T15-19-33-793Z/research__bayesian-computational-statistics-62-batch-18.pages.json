@@ -1,0 +1,275 @@
+[
+  {
+    "order": 2076,
+    "id": "dirichlet-normal-mixture-contraction",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Dirichlet normal-mixture posterior contraction",
+    "companion": "dirichlet-normal-mixture-contraction-examples",
+    "requires": [
+      "iid-posterior-contraction",
+      "dirichlet-process-priors-and-finite-partition-updates",
+      "plancherel-measure-and-asymptotic-young-diagrams",
+      "hierarchical-bayesian-models-and-partial-pooling"
+    ],
+    "items": [
+      {
+        "id": "lem-dirichlet-normal-mixture-density-well-defined",
+        "kind": "lemma",
+        "title": "The Dirichlet normal-mixture density is jointly measurable and normalized",
+        "deps": [
+          "def-probability-measure",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-normal-location-scale-density",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-hellinger-ratio-controls-kl-moments",
+        "kind": "lemma",
+        "title": "A bounded likelihood ratio controls KL and log-square moments by Hellinger distance",
+        "deps": [
+          "def-hellinger-distance-between-density-laws",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-gaussian-convolution-kl-and-log-square-second-order-bound",
+        "kind": "lemma",
+        "title": "Gaussian convolution has second-order KL and log-square error",
+        "deps": [
+          "lem-normal-location-scale-density",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-integration-by-parts",
+          "thm-ftc-second-part",
+          "thm-logarithm-derivative-and-integral",
+          "thm-dominated-convergence"
+        ],
+        "statement": "Assume AC. Let $p\\in C^2(\\mathbb R)$ be a nonnegative compactly supported probability density and suppose\n$$J:=\\int_{\\{p>0\\}}\\frac{(p''(x))^2}{p(x)}\\,dx<\\infty.$$\nFor $\\sigma>0$, set $q_\\sigma=p*\\phi_\\sigma$, where $\\phi_\\sigma$ is the centered normal density with standard deviation $\\sigma$. Then\n$$\\int\\frac{(p-q_\\sigma)^2}{q_\\sigma}\\,dx\\le\\frac49\\sigma^4J,\\qquad \\mathrm{KL}(p\\Vert q_\\sigma)\\le\\frac49\\sigma^4J,\\qquad \\int p\\left[\\log\\frac p{q_\\sigma}\\right]^2dx\\le\\frac49\\sigma^4J.$$\nThe logarithmic integrands are zero where $p=0$. No unimodality or uniform bound on $p/q_\\sigma$ is assumed.\n",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-dirichlet-normal-mixture-finite-support-approximation",
+        "kind": "lemma",
+        "title": "Compactly supported Gaussian mixtures admit logarithmic-size finite approximations",
+        "deps": [
+          "lem-dirichlet-normal-mixture-density-well-defined",
+          "lem-normal-location-scale-density",
+          "def-monic-probabilists-hermite-polynomials",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-axiom-of-choice",
+          "lem-normal-location-scale-mean-and-variance",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-integration-by-parts",
+          "thm-ftc-second-part"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-iid-posterior-contraction-under-countable-sieves",
+        "kind": "lemma",
+        "title": "Countably partitioned sieves yield posterior contraction by weighted entropy",
+        "deps": [
+          "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+          "def-hellinger-distance-between-density-laws",
+          "lem-hellinger-distance-controls-l1-and-total-variation",
+          "def-kullback-leibler-divergence",
+          "def-probability-measure",
+          "def-measure-with-density",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "cor-markov-inequality-for-random-variables",
+          "def-axiom-of-choice",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-covering-packing-bracketing-number-and-metric-entropy"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-dirichlet-normal-mixture-sieve-entropy",
+        "kind": "lemma",
+        "title": "Hellinger entropy for compact-location normal mixtures in a scale band",
+        "deps": [
+          "lem-dirichlet-normal-mixture-density-well-defined",
+          "lem-dirichlet-normal-mixture-finite-support-approximation",
+          "def-hellinger-distance-between-density-laws",
+          "lem-hellinger-distance-controls-l1-and-total-variation",
+          "lem-normal-location-scale-density",
+          "def-axiom-of-choice",
+          "lem-normal-location-scale-mean-and-variance",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-ftc-second-part"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-dirichlet-normal-mixture-countable-band-entropy-sum",
+        "kind": "lemma",
+        "title": "The dyadic scale bands satisfy the weighted entropy condition",
+        "deps": [
+          "lem-dirichlet-normal-mixture-sieve-entropy",
+          "lem-hellinger-distance-controls-l1-and-total-variation",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-dirichlet-process-simplex-small-ball",
+        "kind": "lemma",
+        "title": "A Dirichlet process assigns exponential mass to a finite-partition simplex neighborhood",
+        "deps": [
+          "def-dirichlet-process",
+          "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "def-dirichlet-distribution",
+          "def-axiom-of-choice",
+          "def-real-gamma-function-by-the-euler-integral",
+          "thm-real-gamma-euler-integral-convergence",
+          "thm-real-gamma-functional-equation",
+          "thm-real-gamma-is-smooth"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume AC, let $\\alpha$ be a finite nonzero measure of total mass $m$, and\nlet $F\\sim DP(\\alpha)$. Consider a finite partition\n$(U_0,U_1,\\ldots,U_N)$ with $\\alpha(U_0)=0$ or\n$0<\\alpha(U_0)\\le m$. Write $\\alpha_j=\\alpha(U_j)$ for $j\\ge1$, and assume\n$$a\\eta^b\\le\\alpha_j\\le1\\quad(1\\le j\\le N),\\qquad 0<\\eta<1/4,\\qquad N\\eta\\le1/4,$$\nfor fixed $a,b>0$. For every $w=(w_1,\\ldots,w_N)$ in the probability\nsimplex, there are constants $c,C>0$ depending only on $a,b,m,\\alpha(U_0)$\nsuch that\n$$\\Pr\\!\\left\\{\\sum_{j=1}^N|F(U_j)-w_j|+F(U_0)\\le3\\eta,\\quad \\min_{1\\le j\\le N}F(U_j)\\ge\\eta^2/2\\right\\}\\ge C\\exp\\{-cN\\log(e/\\eta)\\}.$$\nFor any compact $J\\subset(0,m]$, the constants may instead depend only on\n$a,b,m,J$ and are uniform over $\\alpha(U_0)\\in J$.\nWhen $\\alpha(U_0)=0$, the zero-base cell has $F(U_0)=0$ almost surely and is\nomitted from the Dirichlet vector.\n"
+      },
+      {
+        "id": "lem-dirichlet-normal-mixture-local-prior-mass",
+        "kind": "lemma",
+        "title": "The mixture prior places local KL and log-square mass near a compact smooth truth",
+        "deps": [
+          "lem-dirichlet-normal-mixture-density-well-defined",
+          "lem-dirichlet-normal-mixture-finite-support-approximation",
+          "lem-hellinger-ratio-controls-kl-moments",
+          "lem-dirichlet-process-simplex-small-ball",
+          "def-dirichlet-process",
+          "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "def-hellinger-distance-between-density-laws",
+          "lem-hellinger-distance-controls-l1-and-total-variation",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice",
+          "lem-normal-location-scale-density",
+          "lem-normal-location-scale-mean-and-variance",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-dirichlet-normal-mixture-interval-mass-local-prior-mass",
+        "kind": "lemma",
+        "title": "Interval masses give a log-free local KL neighborhood for the mixture prior",
+        "deps": [
+          "lem-gaussian-convolution-kl-and-log-square-second-order-bound",
+          "lem-dirichlet-normal-mixture-finite-support-approximation",
+          "lem-dirichlet-process-simplex-small-ball",
+          "lem-dirichlet-normal-mixture-density-well-defined",
+          "lem-normal-location-scale-density",
+          "def-axiom-of-choice",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "statement": "Assume AC. Let $p_0\\in C^2(\\mathbb R)$ be a probability density with compact support $K$, a finite union of intervals. Suppose $J=\\int_{\\{p_0>0\\}}(p_0'')^2/p_0<\\infty$ and there are $a,c>0$ such that $P_0(I)\\ge c\\lambda(I)^a$ for every interval $I\\subseteq K$. Let $F\\sim DP(\\alpha)$, where $\\alpha$ is a finite nonzero measure with continuous strictly positive density on a neighborhood of $K$, and independently let $S\\sim G$ for any probability measure $G$ on $(0,\\infty)$. Suppose $n^{-a_1}\\lesssim\\sigma_n\\lesssim n^{-a_2}$ for $0<a_2<a_1<1$, and put $\\sigma=\\sigma_nS$. Then for constants $C_1,C_2>0$ and all sufficiently large $n$,\n$$\\Pi_n\\left\\{\\mathrm{KL}(P_0\\Vert P_{F,\\sigma})\\le C_1\\sigma_n^4,\\quad P_0\\left[\\log\\frac{p_0}{p_{F,\\sigma}}\\right]^2\\le C_1\\sigma_n^4\\right\\}\\ge\\exp\\{-C_2\\sigma_n^{-1}(\\log n)^2\\}.$$\nConsequently, for $d_n=\\max\\{(n\\sigma_n)^{-1/2}\\log n,\\sigma_n^2\\}$, the same two local quantities are at most $C_1d_n^2$ on a set of prior mass at least $e^{-C_3nd_n^2}$. Logarithmic integrands vanish where $p_0=0$.\n",
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-dirichlet-normal-mixture-posterior-sieve-tail",
+        "kind": "lemma",
+        "title": "The posterior excludes large scales and mixing mass far from compact data",
+        "deps": [
+          "lem-dirichlet-normal-mixture-density-well-defined",
+          "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+          "def-dirichlet-process",
+          "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "thm-dirichlet-process-posterior-update",
+          "thm-dirichlet-process-polya-urn-predictive-law",
+          "lem-normal-location-scale-density",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "cor-markov-inequality-for-random-variables",
+          "def-axiom-of-choice",
+          "def-kullback-leibler-divergence",
+          "thm-ftc-first-part"
+        ],
+        "dependency_level": 8,
+        "statement": "Assume AC. Let $p_0$ be supported on a compact interval $I=[L,U]$ with\n$L<U$, let $F\\sim DP(\\alpha)$ for a finite nonzero base measure whose\ndensity is bounded below by a positive constant on a neighborhood of $I$, and let $S\\sim G$ be\nindependent with $\\sigma=\\sigma_nS$. Put $R=(U-L)/2$ and, for $d>0$,\n$I_d=[L-d,U+d]$.\nObserve IID data from $p_0$ under the location-mixture density\n$p_{F,\\sigma}$. Let $\\epsilon_n,\\delta_n>0$ with\n$n\\epsilon_n^2\\to\\infty$ and $n\\delta_n^2\\to\\infty$. Suppose the local KL\nand log-square prior-mass condition gives a denominator event\n$$P_0^n\\{D_n\\ge e^{-C_0n\\delta_n^2}\\}\\longrightarrow1,$$\nwhere $D_n=\\int\\prod_i p_{F,\\sigma}(X_i)/p_0(X_i)\\,\\Pi_n(dF,d\\sigma)$.\nChoose $s_n\\to0$ and put $q_n=2\\Phi(-R/s_n)$, where $\\Phi$ is the\nstandard normal distribution function. If\n$$nq_n-(C_0+2)n\\delta_n^2\\to\\infty,\\qquad n\\epsilon_n^{-2}s_n^{-1}e^{-d^2/(2s_n^2)}\\to0,$$\nthen the posterior complement of\n$$\\mathcal S_n:=\\{(F,\\sigma):\\sigma\\le s_n,\\ F(I_d^c)\\le\\epsilon_n^2\\}$$\nconverges to zero in $P_0^n$-probability.\n"
+      },
+      {
+        "id": "thm-dirichlet-normal-mixture-posterior-contraction",
+        "kind": "theorem",
+        "title": "Dirichlet normal-mixture posterior contraction",
+        "deps": [
+          "lem-dirichlet-normal-mixture-density-well-defined",
+          "lem-dirichlet-normal-mixture-countable-band-entropy-sum",
+          "lem-dirichlet-normal-mixture-local-prior-mass",
+          "lem-iid-posterior-contraction-under-countable-sieves",
+          "lem-dirichlet-normal-mixture-posterior-sieve-tail",
+          "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+          "def-dirichlet-process",
+          "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-hellinger-distance-between-density-laws",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 9
+      },
+      {
+        "id": "cor-dirichlet-normal-mixture-interval-mass-refinement",
+        "kind": "corollary",
+        "title": "An interval-mass condition removes the Gaussian-bias logarithm",
+        "deps": [
+          "thm-dirichlet-normal-mixture-posterior-contraction",
+          "lem-dirichlet-normal-mixture-interval-mass-local-prior-mass",
+          "lem-dirichlet-normal-mixture-density-well-defined",
+          "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+          "lem-dirichlet-normal-mixture-posterior-sieve-tail",
+          "lem-dirichlet-normal-mixture-countable-band-entropy-sum",
+          "lem-iid-posterior-contraction-under-countable-sieves"
+        ],
+        "dependency_level": 10,
+        "statement": "Under the hypotheses of [[thm-dirichlet-normal-mixture-posterior-contraction]],\nassume additionally that $\\operatorname{supp}(p_0)$ is a finite union of\nintervals and there are $a,c>0$ such that $P_0(I)\\ge c\\lambda(I)^a$ for\nevery interval $I$ contained in the support. Then the source's sharpened\nHellinger contraction rate is\n$$\\max\\{(n\\sigma_n)^{-1/2}\\log n,\\ n^{-1/2}\\sigma_n^{-\\eta},\\ \\sigma_n^2\\},\\qquad \\eta>\\frac{\\gamma}{2(\\gamma-1)}.$$\nIf $G$ is compactly supported in $(0,\\infty)$, the middle term is omitted.\n\n"
+      }
+    ]
+  },
+  {
+    "order": 2077,
+    "id": "dirichlet-normal-mixture-contraction-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Dirichlet normal-mixture posterior contraction \u2014 Examples",
+    "companion": "dirichlet-normal-mixture-contraction",
+    "requires": [
+      "dirichlet-normal-mixture-contraction"
+    ],
+    "items": [
+      {
+        "id": "ex-dirichlet-normal-mixture-compact-scale-hyperprior-and-rate",
+        "kind": "example",
+        "title": "A compact scale hyperprior removes the tail term and permits an explicit bandwidth balance",
+        "deps": [
+          "thm-dirichlet-normal-mixture-posterior-contraction"
+        ],
+        "dependency_level": 10
+      },
+      {
+        "id": "ex-dirichlet-normal-mixture-polynomial-scale-tail-outside-theorem",
+        "kind": "example",
+        "title": "A polynomial scale tail is outside the stated theorem",
+        "deps": [
+          "thm-dirichlet-normal-mixture-posterior-contraction"
+        ],
+        "dependency_level": 10
+      }
+    ]
+  }
+]

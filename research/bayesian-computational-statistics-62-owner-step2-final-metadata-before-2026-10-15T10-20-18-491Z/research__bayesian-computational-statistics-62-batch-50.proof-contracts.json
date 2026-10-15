@@ -1,0 +1,1402 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-50",
+  "run": "bayesian-computational-statistics-62",
+  "batch": 50,
+  "scope": [
+    "def-resampling-sampling-unit-contract",
+    "def-empirical-measure",
+    "lem-uniform-law-on-finite-subset-families",
+    "lem-empirical-measure-is-a-probability-measure",
+    "alg-delete-d-jackknife-replicates",
+    "alg-uniform-subsampling-without-replacement",
+    "alg-n-out-of-n-bootstrap-from-empirical-law",
+    "thm-bootstrap-draws-are-conditionally-iid-empirical-law",
+    "ex-two-point-bootstrap-sample-mean",
+    "ex-delete-d-and-subsampling",
+    "ex-cluster-resampling-unit",
+    "cex-pointwise-bootstrap-does-not-preserve-dependent-pair-law",
+    "ex-assignment-randomization-versus-bootstrap"
+  ],
+  "contracts": {
+    "def-resampling-sampling-unit-contract": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition concerns a declared unit mechanism and does not specify an empty dataset."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Definition has no numerical mass or zero-valued parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a single indexed unit is an indivisible sampling unit."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Definition does not classify distributions or degeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "def-empirical-measure": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated input requires n>=1 or a nonempty sample, so no empty-sample convention is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: any measurable set containing none of the observed unit records has empirical mass zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for n=1 the empirical measure is the single Dirac measure."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: repeated observations are counted with their index multiplicities."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "alg-delete-d-jackknife-replicates": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm requires n>=2 and 1<=d<n, so each complement is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The algorithm has no zero-valued tuning parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: n=2 and d=1 are allowed; the sole complement has one record."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the procedure applies to repeated records and a declared statistic."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both d=1 and d=n-1 satisfy the stated range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the finite subset lemma supplies a nonempty deletion family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "alg-uniform-subsampling-without-replacement": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm requires n>=2 and 1<=b<n."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The algorithm has no zero-valued tuning parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the lower endpoint b=1 is allowed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: repeated observed records are allowed; the selected indices remain distinct."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both b=1 and b=n-1 satisfy the stated range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the finite subset lemma supplies a nonempty selection family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "alg-n-out-of-n-bootstrap-from-empirical-law": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated input requires n>=1 or a nonempty sample, so no empty-sample convention is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: an unobserved unit record has empirical mass zero and is never selected."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: n=1 gives a well-defined one-index replicate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: repeated observed values retain their index multiplicities."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: each replicate uses an explicit finite index vector; no arbitrary choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "lem-uniform-law-on-finite-subset-families": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "A set $A$ is **finite** when $A \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-countable]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cardinality-of-a-set-of-functions",
+          "source_section": "Statement",
+          "quote": "Then $A^{B}$ is finite and $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$,",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-subset-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "1. $B$ is finite;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and $$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "**Definition.** Let $A$ be a finite set. Then there is **exactly one** $n \\in \\mathbb{N}$ with $A \\approx n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "**(b) $\\lvert\\varnothing\\rvert = 0$, and a finite $A$ satisfies $\\lvert A\\rvert = 0$ if and only if $A = \\varnothing$.**",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The shift bijection makes [n] finite; the indicator map injects the r-subset family into a subset of the finite function set B^[n], and composing with a bijection of the finite image into a natural proves the family finite.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "An explicit r-subset shows nonemptiness, so its finite cardinality is positive; equal weights therefore sum to one.",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The finite outcome set and normalized nonnegative weights define the claimed finite probability space.",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include n=0,r=0, where the unique subset is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2: r=0 gives the nonempty singleton family containing the empty subset."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2: n=1 permits r=0 and r=1, both with nonempty families."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: the cases r=0 and r=n are included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.1 cover both endpoints 0<=r<=n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 constructs an explicit member; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "lem-empirical-measure-is-a-probability-measure": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-empirical-measure",
+          "source_section": "Definition",
+          "quote": "$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{z_i},\\qquad P_n(A)=\\frac1n\\sum_{i=1}^n1\\{z_i\\in A\\}\\quad(A\\in\\mathcal F),",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The finite average of Dirac probabilities is nonnegative, vanishes on the empty set, and has total mass one.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Finite summation of the countably additive Dirac measures is countably additive.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The set function is a measure with total mass one, hence a probability measure.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated input requires n>=1 or a nonempty sample, so no empty-sample convention is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: sets disjoint from the observed tuple have zero mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the formula is valid for n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–1.2: repeated observations remain separate summands."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 use only the fixed finite tuple and finite sums."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "thm-bootstrap-draws-are-conditionally-iid-empirical-law": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-n-out-of-n-bootstrap-from-empirical-law",
+          "source_section": "Definition",
+          "quote": "Draw indices $I_1,\\ldots,I_n$ independently and uniformly from $[n]$, so repeated indices are allowed. Set $Z_j^*:=z_{I_j}$ for $j=1,\\ldots,n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-empirical-measure",
+          "source_section": "Definition",
+          "quote": "$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{z_i},\\qquad P_n(A)=\\frac1n\\sum_{i=1}^n1\\{z_i\\in A\\}\\quad(A\\in\\mathcal F),",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cardinality-of-a-set-of-functions",
+          "source_section": "Statement",
+          "quote": "Then $A^{B}$ is finite and $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$,",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-product-rule",
+          "source_section": "Statement",
+          "quote": "Then $\\prod_{i<m} A_i$ is finite and $\\big\\lvert\\prod_{i<m} A_i\\big\\rvert = \\prod_{i<m}\\lvert A_i\\rvert",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "A **random element** of $S$ is a measurable map",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras $(\\sigma(X_i))_{i\\in I}$ are independent",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-independent-sigma-algebras-and-events",
+          "source_section": "Definition",
+          "quote": "Equivalently, for every finite choice of distinct indices $i_0,\\dots,i_{n-1}$, $$\\mathbb P\\left(\\bigcap_{k<n}A_{i_k}\\right)=\\prod_{k<n}\\mathbb P(A_{i_k}).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "A set $A$ is **finite** when $A \\approx n$ for some $n \\in \\mathbb{N}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "**(a) $\\lvert n\\rvert = n$ for every $n \\in \\mathbb{N}$.**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "**(c) Transport along a bijection.** If $A$ is finite and $f : A \\to B$ is a bijection, then $B$ is finite and $\\lvert B\\rvert = \\lvert A\\rvert$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-subset-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "1. $B$ is finite;",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The index vector has a finite uniform probability space with n^n atoms, and both index and resampled-record coordinate maps are measurable.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F10",
+            "F11",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For any measurable coordinate events, the corresponding index-vector event has cardinality equal to the product of the finite coordinate counts, giving the product probability formula and marginals.",
+          "inputs": [
+            "F3",
+            "F5",
+            "F7",
+            "F13",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The common marginal law and factorization of all coordinate-event intersections give mutual independence and identical distribution.",
+          "inputs": [
+            "F8",
+            "F9",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated input requires n>=1 or a nonempty sample, so no empty-sample convention is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: a measurable event containing no observed index has empirical and bootstrap probability zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 allow n=1; the index-vector space has one atom."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 counts indices, so repeated observed records retain their multiplicity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid when any A_j is empty or all of the unit space."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly constructs the finite index-vector space; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "ex-two-point-bootstrap-sample-mean": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-empirical-measure",
+          "source_section": "Definition",
+          "quote": "$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{z_i},\\qquad P_n(A)=\\frac1n\\sum_{i=1}^n1\\{z_i\\in A\\}\\quad(A\\in\\mathcal F),",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-partial-sums-and-sample-means",
+          "source_section": "Definition",
+          "quote": "$S_0=0,\\qquad S_n=\\sum_{k=1}^nX_k,\\qquad \\overline X_n=S_n/n\\quad(n\\ge1).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-n-out-of-n-bootstrap-from-empirical-law",
+          "source_section": "Definition",
+          "quote": "Draw indices $I_1,\\ldots,I_n$ independently and uniformly from $[n]",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-bootstrap-draws-are-conditionally-iid-empirical-law",
+          "source_section": "Statement",
+          "quote": "Thus, conditional on the fixed observed tuple, $Z_1^*,\\ldots,Z_n^*$ are independent random elements with common law $P_n$ ([[def-identically-distributed-and-iid-random-variables]]).",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The stipulated IID law gives positive probability to the observed tuple, and its empirical law assigns equal mass to 0 and 2.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The four ordered bootstrap pairs each have conditional probability one quarter.",
+          "inputs": [
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Applying the sample-mean formula yields the exact conditional distribution with masses one quarter, one half, one quarter at 0, 1, and 2.",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes an observed sample of size two."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: conditional mass outside the displayed three sample means is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes n=2 and makes no n=1 calculation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The observed values 0 and 2 are distinct; no degenerate-sample claim is made."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly enumerates all four ordered index pairs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "ex-delete-d-and-subsampling": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-delete-d-jackknife-replicates",
+          "source_section": "Definition",
+          "quote": "This algorithm defines the replicates and their average only. Any variance or bias scaling is a separate statistic with an explicitly stated target; no scaling is implicit in the term **delete-d jackknife**",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-uniform-subsampling-without-replacement",
+          "source_section": "Definition",
+          "quote": "Draw $I$ uniformly from the finite family $\\mathcal I_{n,b}:=\\{J\\subseteq[n]:|J|=b\\}$, without replacement",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-partial-sums-and-sample-means",
+          "source_section": "Definition",
+          "quote": "$S_0=0,\\qquad S_n=\\sum_{k=1}^nX_k,\\qquad \\overline X_n=S_n/n\\quad(n\\ge1).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The six deleted pairs leave the six stated size-two complement means.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The uniform average of the delete-two replicates is 7/2, with no variance interpretation or multiplier.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The six subsampling means are equally weighted and complementing two-subsets is a bijection, so the finite laws coincide while the average is not a variance estimate.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a four-unit sample and subsets of size two."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All six subsets have positive probability 1/6."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example uses size-two deletion complements and size-two subsamples."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed values 1, 2, 4, 7 are distinct."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For n=4, d=2 and b=2 are interior choices in the stated ranges."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 enumerate all six two-subsets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "ex-cluster-resampling-unit": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-resampling-sampling-unit-contract",
+          "source_section": "Definition",
+          "quote": "A **resampling unit** is the complete unit record or predeclared group of records that one draw of a resampling procedure selects.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-n-out-of-n-bootstrap-from-empirical-law",
+          "source_section": "Definition",
+          "quote": "Draw indices $I_1,\\ldots,I_n$ independently and uniformly from $[n]",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bootstrap-draws-are-conditionally-iid-empirical-law",
+          "source_section": "Statement",
+          "quote": "Thus, conditional on the fixed observed tuple, $Z_1^*,\\ldots,Z_n^*$ are independent random elements with common law $P_n$ ([[def-identically-distributed-and-iid-random-variables]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-empirical-measure",
+          "source_section": "Definition",
+          "quote": "$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{z_i},\\qquad P_n(A)=\\frac1n\\sum_{i=1}^n1\\{z_i\\in A\\}\\quad(A\\in\\mathcal F),",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The declared sampling unit is each complete two-measurement cluster vector.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The specified ordered bootstrap index tuple produces the stated whole-record tuple with probability 1/27.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Every selected cluster vector remains intact, which checks the unit contract for this example without asserting general validity.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes three observed clusters."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All three empirical cluster records have positive mass 1/3."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes three clusters and a three-draw replicate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The three observed cluster vectors are not all equal."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 specifies one of the 27 finite index triples."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "cex-pointwise-bootstrap-does-not-preserve-dependent-pair-law": {
+      "risk": "medium",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-empirical-measure",
+          "source_section": "Definition",
+          "quote": "$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{z_i},\\qquad P_n(A)=\\frac1n\\sum_{i=1}^n1\\{z_i\\in A\\}\\quad(A\\in\\mathcal F),",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-n-out-of-n-bootstrap-from-empirical-law",
+          "source_section": "Definition",
+          "quote": "Draw indices $I_1,\\ldots,I_n$ independently and uniformly from $[n]",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bootstrap-draws-are-conditionally-iid-empirical-law",
+          "source_section": "Statement",
+          "quote": "Thus, conditional on the fixed observed tuple, $Z_1^*,\\ldots,Z_n^*$ are independent random elements with common law $P_n$ ([[def-identically-distributed-and-iid-random-variables]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "their **covariance** is $$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The stationary two-state transition rule gives the displayed joint law, unequal joint and product probabilities, and original covariance 1/8.",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For every fixed pair, conditional empirical bootstrap draws are independent with equal means, so their conditional covariance is zero.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The bounded original and bootstrap pairs have different covariances, so their joint laws differ.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes a pair of observations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 includes repeated observed values, for which unseen values have conditional probability zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample concerns two consecutive observations."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 holds for every fixed pair, including x1=x2, when the conditional bootstrap law is degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 gives an explicit finite joint law and step 1.2 uses finite index draws."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "ex-assignment-randomization-versus-bootstrap": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-randomized-treatment-assignment-model",
+          "source_section": "Definition",
+          "quote": "The schedule and the units are fixed; the assignment $Z$ is the only randomness supplied by the design, and the observed response vector is $Y_\\theta(Z)=(Y_i(Z))_{i\\in\\mathcal I}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fisher-sharp-null-and-predeclared-test-orderings",
+          "source_section": "Definition",
+          "quote": "a schedule satisfies the **Fisher sharp null** when for each unit $i$ there is a value $y_i$ such that $Y_i(z)=y_i$ for every allowed assignment $z$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fisher-sharp-null-randomization-pvalues-are-valid",
+          "source_section": "Statement",
+          "quote": "For every schedule satisfying the Fisher sharp null and every $u\\in[0,1]$, $$P_\\theta\\!\\left(p_{\\rm rand}(Z,Y_\\theta(Z))\\le u\\right)\\le u,$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-n-out-of-n-bootstrap-from-empirical-law",
+          "source_section": "Definition",
+          "quote": "Draw indices $I_1,\\ldots,I_n$ independently and uniformly from $[n]",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-bootstrap-draws-are-conditionally-iid-empirical-law",
+          "source_section": "Statement",
+          "quote": "Thus, conditional on the fixed observed tuple, $Z_1^*,\\ldots,Z_n^*$ are independent random elements with common law $P_n$ ([[def-identically-distributed-and-iid-random-variables]]).",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-finite-population-average-treatment-effect-and-weak-null",
+          "source_section": "Definition",
+          "quote": "The **weak zero-average-effect null** is the hypothesis $\\tau_F=0$; it constrains the average of the unit-level effects, not each effect separately.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-resampling-sampling-unit-contract",
+          "source_section": "Definition",
+          "quote": "When defined, a Bayesian posterior is instead a conditional law on parameter values under a specified prior and joint parameter-data model.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-p-value",
+          "source_section": "Definition",
+          "quote": "For a nonempty null hypothesis $\\Theta_0\\subseteq\\Theta$, the statistic is a **valid p-value for $\\Theta_0$** if it is superuniform under every null law:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-empirical-measure",
+          "source_section": "Definition",
+          "quote": "$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{z_i},\\qquad P_n(A)=\\frac1n\\sum_{i=1}^n1\\{z_i\\in A\\}\\quad(A\\in\\mathcal F),",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The fixed sharp-null schedule and predeclared treated-minus-untreated score give values -2 and 2 under the two assignments.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The design law puts equal mass on -2 and 2, and the inclusive upper-tail ranks are 1 and 1/2, a valid superuniform p-value law.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The fixed observed outcomes have empirical mass 1/2 each, and the four equally likely ordered bootstrap pairs produce the stated law with mass at zero, which differs from the assignment law computed in the preceding step.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F9",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Assignment randomization, conditional empirical bootstrap, and a Bayesian posterior use distinct randomness or state spaces; the sharp-null calculation does not assert weak-null validity.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two experimental units and a nonempty two-assignment set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Both allowed assignments have positive probability 1/2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example uses two units and two allowed assignments."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed sharp-null outcomes are distinct, 0 and 2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, and 3.1 enumerate both assignments and all four bootstrap pairs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1192 @@
+{
+  "version": 1,
+  "level": 3,
+  "scope": [
+    "lem-real-line-is-standard-borel",
+    "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+    "thm-finite-gaussian-process-posterior-and-predictive-laws",
+    "ex-finite-gaussian-process-posterior-with-nonzero-mean-and-correlated-noise",
+    "ex-singular-gaussian-process-prior-and-predictive-covariances",
+    "ex-gaussian-process-extrapolation-retains-independent-index-uncertainty"
+  ],
+  "contracts": {
+    "lem-real-line-is-standard-borel": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-separable-space",
+          "source_section": "Definition",
+          "quote": "A topological space $X$ is **separable** if some at most countable subset $D\\subseteq X$ is dense in $X$ ([[def-dense-top]], [[def-countable]]). Equivalently, every nonempty open subset of $X$ meets $D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-euclidean-space-complete",
+          "source_section": "Statement",
+          "quote": "1. $(\\mathbb{R}, d_{\\mathbb{R}})$ with the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]) is a complete metric space\n   ([[def-complete-metric-space]]).\n2. Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $d_2$ be the Euclidean metric on\n   $\\mathbb{R}^n$ ([[lem-metrics-on-rn]]). Then $(\\mathbb{R}^n, d_2)$ is complete.\n\n**The hypothesis $n \\ge 1$ is inherited and is not decoration.**\n[[lem-metrics-on-rn]] defines $\\mathbb{R}^n$ and its three metrics only for\n$n \\ge 1$, because at $n = 0$ the metric $d_\\infty$ would be a maximum over the\nempty index set. Every statement about $\\mathbb{R}^n$ in this library carries the\nhypothesis, and this one does too.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F4] and [F5], $\\mathbb Q$ is a countable dense subset of $\\mathbb R$, so [F2] makes the usual real line separable. Its usual metric is complete by [F3]. Thus the usual topology is Polish by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The identity map from $(\\mathbb R,\\mathcal B(\\mathbb R))$ to the usual Polish real line is a bijection and preserves exactly the Borel sets. The standard-Borel definition [F6] therefore applies.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The real line is nonempty and this lemma concerns its usual topology."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim has no numeric covariance, measure mass, or zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim has no sample-size or cardinality-one branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim concerns the usual real metric and has no degenerate parameter case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma has no interval or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The rational dense set and identity presentation are explicit; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement/Definition/Example: Polish realization of the usual real Borel space by its identity map (steps 1.1–2.1). This supplies the stated construction, estimate or conclusion; it is not an iff criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_13_16",
+            "reason": "I read the actual claim and proof for Polish realization of the usual real Borel space by its identity map (steps 1.1–2.1). For the iff-forward row, Statement/Definition/Example: Polish realization of the usual real Borel space by its identity map (steps 1.1–2.1). This supplies the stated construction, estimate or conclusion; it is not an iff criterion.",
+            "item_sha256": "ac2b0a814078c31f0c7d39562975489ba997114db696e64d379ce9939757ff14",
+            "row_sha256": "9b9a67235bc7a10b901a41a53b74713d79b2552585289cae661cb99b3e41d10a"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement/Definition/Example: Polish realization of the usual real Borel space by its identity map (steps 1.1–2.1). This supplies no converse hypothesis-recovery result; it is not an iff criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_13_16",
+            "reason": "I read the actual claim and proof for Polish realization of the usual real Borel space by its identity map (steps 1.1–2.1). For the iff-reverse row, Statement/Definition/Example: Polish realization of the usual real Borel space by its identity map (steps 1.1–2.1). This supplies no converse hypothesis-recovery result; it is not an iff criterion.",
+            "item_sha256": "ac2b0a814078c31f0c7d39562975489ba997114db696e64d379ce9939757ff14",
+            "row_sha256": "676123eb646214f4353a85e70e1847fc164c7956c02daec76603847f1482ad38"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step5-v2-gate-r1-u3",
+        "notes": "Read both proof steps, all six direct supplier statements/definitions, and Biskup Chapter 2 Definition 2.3 and its real-line example (PDF p. 2). Countability and rational density give separability of the usual metric; its completeness makes the topology Polish. The identity is a Borel isomorphism, exactly as the standard-Borel definition requires. No selected family or additional choice is used. The biconditional risk signal comes from recalled definitions, not a missing direction of the lemma. Item bytes and original Statement remain unchanged; this records the focused owner review, not an independent judgment of a repair."
+      }
+    },
+    "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-consistent-family-of-finite-dimensional-distributions",
+          "source_section": "Definition",
+          "quote": "Let $(E_i,\\mathcal E_i)_{i\\in I}$ be measurable spaces. A family\n$(\\mu_F)_{F\\Subset I}$, indexed by all finite subsets of $I$, is a **consistent family of finite-dimensional\ndistributions** when each $\\mu_F$ is a probability measure on\n$\\bigotimes_{i\\in F}\\mathcal E_i$, with the finite unordered product\nsigma-algebra of [[def-coordinate-maps-and-cylinder-sigma-algebra]], and for\nevery pair of finite sets $F\\subseteq G\\subseteq I$ the pushforward of\n$\\mu_G$ under the restriction $p_{G,F}(x)=x|_F$ equals $\\mu_F$; equivalently,\n$\\mu_G(p_{G,F}^{-1}(A))=\\mu_F(A)$ for every\n$A\\in\\bigotimes_{i\\in F}\\mathcal E_i$. The restriction is measurable since\ninverse images of coordinate generators are coordinate generators. The empty\nsupport carries the unique probability measure on the singleton empty product.\n\nReordering means choosing a different enumeration of the **same** finite set\n$F$. If $e:[n]\\to F$ is an enumeration, its displayed ordered law is the\npushforward of $\\mu_F$ under $r_e(x)=(x_{e(0)},\\ldots,x_{e(n-1)})$.\nFor another enumeration $e'$, the coordinate permutation $r_{e'}\\circ r_e^{-1}$\npushes this ordered law to the one displayed using $e'$. This is automatic\nfrom these definitions and does not require equal laws on different subsets\nof $I$, or invariance under permutations of a fixed ordered product.\nIn particular, consistency is data about\nevery finite joint law, not merely the one-coordinate marginals.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-real-line-is-standard-borel",
+          "source_section": "Statement",
+          "quote": "The measurable space $(\\mathbb R,\\mathcal B(\\mathbb R))$ with its usual\ntopology is standard Borel.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For any set $I$, standard-Borel coordinate spaces $(E_i,\\mathcal E_i)$, and consistent finite-dimensional laws $(\\mu_F)_{F\\Subset I}$, there is a unique probability measure $\\mu$ on $\\mathcal C_I$ whose $F$-coordinate marginal is $\\mu_F$ for each finite $F$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-coordinate-maps-and-cylinder-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "For measurable spaces $(E_i,\\mathcal E_i)_{i\\in I}$, put\n$E=\\prod_{i\\in I}E_i$. For finite $F\\subseteq I$, let\n$\\pi_F:E\\to\\prod_{i\\in F}E_i$ be restriction to $F$ (the singleton empty\nproduct when $F=\\varnothing$). On $\\prod_{i\\in F}E_i$, write $q_i$ for the\n$i$th coordinate map and define\n\n$$\\bigotimes_{i\\in F}\\mathcal E_i:=\\sigma\\{q_i^{-1}(A):i\\in F,\\ A\\in\\mathcal E_i\\}.$$\n\nFor $F=\\varnothing$ this is the two-set sigma-algebra on the singleton. If\n$e:[n]\\to F$ is any enumeration, coordinate relabelling identifies this\nsigma-algebra with the recursively defined finite product sigma-algebra of\n[[def-product-sigma-algebra-and-finite-product-sigma-algebras]]: both are\ngenerated by the same coordinate inverse images. Thus the notation is\nindependent of the enumeration.\n\nA **finite-coordinate cylinder** is $\\pi_F^{-1}(A)$ for\n$A\\in\\bigotimes_{i\\in F}\\mathcal E_i$. The **cylinder sigma-algebra** is\n\n$$\\mathcal C_I:=\\sigma\\{\\pi_F^{-1}(A):F\\subseteq I\\text{ finite},\\ A\\in\\bigotimes_{i\\in F}\\mathcal E_i\\}.$$\n\nThis is the product sigma-algebra on the arbitrary product; the empty-support cylinder is either $\\varnothing$ or $E$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-stochastic-process-and-finite-dimensional-distributions",
+          "source_section": "Definition",
+          "quote": "For $t\\in I$, let $X_t:(\\Omega,\\mathcal F,\\mathbb P)\\to(E_t,\\mathcal E_t)$ be a random element. The family $X=(X_t)_{t\\in I}$ is a **stochastic process**. For an ordered tuple of distinct times $(t_1,\\ldots,t_n)$, its finite-dimensional distribution is the pushforward law of $(X_{t_1},\\ldots,X_{t_n})$ on $\\prod_{j<n}E_{t_{j+1}}$. These laws, including their coordinate order, form a consistent family under deletion and permutation of times.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-gaussian-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A real stochastic process\n$X=(X_t)_{t\\in I}$ [[def-stochastic-process-and-finite-dimensional-distributions]]\nis a **Gaussian process** if, for every integer $n\\ge 1$, every time list\n$t_1,\\ldots,t_n\\in I$, and every $a_1,\\ldots,a_n\\in\\mathbb R$, the random\nvariable\n$$\n\\sum_{j=1}^n a_jX_{t_j}\n$$\nhas a normal law $N(m,\\sigma^2)$ for some $m\\in\\mathbb R$ and\n$\\sigma\\ge0$. Variance zero is allowed, so constant linear combinations are\nincluded.\n\nEquivalently, for every such time list the evaluation vector\n$(X_{t_1},\\ldots,X_{t_n})$ has a possibly singular multivariate normal law in\nthe sense of [[def-multivariate-normal-law]]. Indeed, that definition says\nexactly that every scalar projection of the vector is normal. This also covers\nrepeated times, zero coefficients, and singular covariance matrices; no\ndistinct-time convention is needed for this definition.\n\nChoice is declared because the library's scalar and multivariate normal-law\ninterfaces construct their probability laws and independent standard-normal\nrealizations under AC. The equivalence itself is only an unpacking of the\nfinite-dimensional projection definition and makes no further selection.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each nonempty finite $F\\subseteq T$, use AC to choose an enumeration $e_F:\\{1,\\ldots,n\\}\\to F$. Set $a_i=m(e_F(i))$ and $\\Sigma_{ij}=k(e_F(i),e_F(j))$. Positive semidefiniteness of $k$ makes $\\Sigma$ positive semidefinite; [F1] supplies its positive square root and [F2] gives the possibly singular law $N_n(a,\\Sigma)$. Push this law to $\\mathbb R^F$ by relabelling coordinate $i$ as $e_F(i)$. A different enumeration changes both the mean and covariance by the same permutation; [F3] shows that the relabelled law is unchanged. For $F=\\varnothing$, take the unique law on the singleton empty product.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $F\\subseteq G$ are finite, the characteristic function of the restriction pushforward of the $G$-law at $u\\in\\mathbb R^F$ is $ \\exp\\!\\left(i\\sum_{t\\in F}u_t m(t)-\\frac12\\sum_{s,t\\in F}u_su_t k(s,t)\\right). $ This is also the characteristic function of the $F$-law. By [F3] the two pushforward laws agree, so the family constructed in step 1.1 is consistent in the sense of [F4]. The empty marginal is the singleton law.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Each coordinate space $(\\mathbb R,\\mathcal B(\\mathbb R))$ is standard Borel by [F5]. The consistent family from step 2.1 therefore satisfies [F6], which gives a unique probability measure $\\mu$ on $\\mathcal C_T$ with exactly these finite-coordinate marginals.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Define $X_t(x)=x(t)$ on $(\\mathbb R^T,\\mathcal C_T,\\mu)$. By [F7] these coordinates are measurable, and step 3.1 gives each finite evaluation vector the stated multivariate normal law. Every finite linear combination is a scalar projection of such a vector, hence is normal by [F2]. Thus [F8] makes $X$ a Gaussian process. Its one- and two-coordinate laws give mean $m$ and covariance $k$, including zero-variance coordinates and singular finite covariance matrices.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The extension in step 3.1 is unique on $\\mathcal C_T$. It supplies no topology or probability law on a path-continuous or Banach-valued function space, so no such regularity or tightness conclusion is included.",
+          "step": "5.1",
+          "inputs": [
+            "F6",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 assign the singleton empty-coordinate law and extend the family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 retain zero-variance coordinates and singular covariance matrices."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 includes one-coordinate Gaussian marginals."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 allow positive-semidefinite covariance matrices with null directions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval parameter or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 explicitly use AC for arbitrary finite-set enumerations and Kolmogorov extension."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement/Definition/Example: Existence and uniqueness of the cylinder measure from PSD finite Gaussian marginals (steps 1.1, 2.1, 3.1, 4.1, 5.1). This supplies the stated construction, estimate or conclusion; it is not an iff criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_13_16",
+            "reason": "I read the actual claim and proof for Existence and uniqueness of the cylinder measure from PSD finite Gaussian marginals (steps 1.1, 2.1, 3.1, 4.1, 5.1). For the iff-forward row, Statement/Definition/Example: Existence and uniqueness of the cylinder measure from PSD finite Gaussian marginals (steps 1.1, 2.1, 3.1, 4.1, 5.1). This supplies the stated construction, estimate or conclusion; it is not an iff criterion.",
+            "item_sha256": "b851c81420e0eb460313323dc0bddfd5f4e001e6e5f162284bd3b6525f2bd0b3",
+            "row_sha256": "f63a89d5d3f7c137c5c50924c81051bb904d70192dd7c8ab0c00287cc313c761"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement/Definition/Example: Existence and uniqueness of the cylinder measure from PSD finite Gaussian marginals (steps 1.1, 2.1, 3.1, 4.1, 5.1). This supplies no converse hypothesis-recovery result; it is not an iff criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_13_16",
+            "reason": "I read the actual claim and proof for Existence and uniqueness of the cylinder measure from PSD finite Gaussian marginals (steps 1.1, 2.1, 3.1, 4.1, 5.1). For the iff-reverse row, Statement/Definition/Example: Existence and uniqueness of the cylinder measure from PSD finite Gaussian marginals (steps 1.1, 2.1, 3.1, 4.1, 5.1). This supplies no converse hypothesis-recovery result; it is not an iff criterion.",
+            "item_sha256": "b851c81420e0eb460313323dc0bddfd5f4e001e6e5f162284bd3b6525f2bd0b3",
+            "row_sha256": "404b8298013645d22b38ca3cd420a2508f920d6e521cf3b33bf19854685c7a10"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-14",
+        "notes": "Read all five proof steps and all ten direct supplier bodies. Finite Gram matrices are PSD; relabelling and restriction preserve the stated characteristic function, so Gaussian uniqueness supplies enumeration invariance and consistency. The empty support (also T empty) has its singleton law. The real-line lemma supplies standard Borel coordinates, and the AC Kolmogorov theorem supplies exactly cylinder existence and uniqueness. Repeated indices reduce by grouping coefficients at distinct sites; zero variances and singular matrices need no inverse. AC covers simultaneous finite enumerations and the declared Gaussian/extension interfaces. No continuity, joint index measurability or Banach-valued tightness is inferred. Checked van der Vaart–van Zanten section 2.1, printed p.202; source agrees with the arbitrary-index finite-law convention. Reader/refuter findings are empty. No defect found."
+      }
+    },
+    "thm-finite-gaussian-process-posterior-and-predictive-laws": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gaussian-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A real stochastic process\n$X=(X_t)_{t\\in I}$ [[def-stochastic-process-and-finite-dimensional-distributions]]\nis a **Gaussian process** if, for every integer $n\\ge 1$, every time list\n$t_1,\\ldots,t_n\\in I$, and every $a_1,\\ldots,a_n\\in\\mathbb R$, the random\nvariable\n$$\n\\sum_{j=1}^n a_jX_{t_j}\n$$\nhas a normal law $N(m,\\sigma^2)$ for some $m\\in\\mathbb R$ and\n$\\sigma\\ge0$. Variance zero is allowed, so constant linear combinations are\nincluded.\n\nEquivalently, for every such time list the evaluation vector\n$(X_{t_1},\\ldots,X_{t_n})$ has a possibly singular multivariate normal law in\nthe sense of [[def-multivariate-normal-law]]. Indeed, that definition says\nexactly that every scalar projection of the vector is normal. This also covers\nrepeated times, zero coefficients, and singular covariance matrices; no\ndistinct-time convention is needed for this definition.\n\nChoice is declared because the library's scalar and multivariate normal-law\ninterfaces construct their probability laws and independent standard-normal\nrealizations under AC. The equivalence itself is only an unpacking of the\nfinite-dimensional projection definition and makes no further selection.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $m\\ge1$ be finite, let $d_j\\ge1$, and let\n$Z_j$ for $1\\le j\\le m$ be mutually independent random elements of\n$\\mathbb R^{d_j}$. Suppose $Z_j\\sim N_{d_j}(a_j,\\Sigma_j)$, where each\n$\\Sigma_j$ is symmetric positive semidefinite. Put\n$D=\\sum_{j=1}^m d_j$, $Z=(Z_1,\\ldots,Z_m)$,\n$a=(a_1,\\ldots,a_m)$, and\n$\\Sigma=\\operatorname{diag}(\\Sigma_1,\\ldots,\\Sigma_m)$. Then\n$$Z\\sim N_D(a,\\Sigma).$$\nNo covariance block needs to be invertible.",
+          "uses": [
+            "2.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "3.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-multivariate-normal-conditional-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X\\in\\mathbb R^d$ and $Y\\in\\mathbb R^m$, with $d,m\\ge1$, be\njointly multivariate normal with mean $(a,b)$ and positive-semidefinite block\ncovariance\n$$\\Sigma=\\begin{pmatrix}A&C\\\\C^T&B\\end{pmatrix},$$\nwhere $B$ is positive definite. Then\n$$S=A-CB^{-1}C^T$$\nis positive semidefinite, and for every $y\\in\\mathbb R^m$ the probability law\n$$K(y,\\cdot)=N_d\\!\\left(a+CB^{-1}(y-b),S\\right)$$\nis defined. The map $K$ is a probability kernel and is a conditional law of\n$X$ given $Y$: for all Borel $E\\subseteq\\mathbb R^d$ and\n$F\\subseteq\\mathbb R^m$,\n$$\\mathbb P(X\\in E,Y\\in F)=\\int_F K(y,E)\\,\\mathbb P_Y(dy).$$\nThe covariance $A$ and the conditional covariance $S$ may be singular.\nPositive definiteness of $B$ is required; no pseudoinverse formula for\nsingular $B$ is asserted.",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-forward-and-back-substitution-for-triangular-systems",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $b\\in F^n$.\n\nIf $L=(\\ell_{ij})\\in M_n(F)$ is lower triangular with every diagonal entry\n$\\ell_{ii}\\ne 0$, the **forward substitution solve** of $Lx=b$ is the recursive\nconstruction\n\n$$x_i:=\\frac{1}{\\ell_{ii}}\\left(b_i-\\sum_{j<i}\\ell_{ij}x_j\\right)\\qquad(0\\le i<n).$$If $U=(u_{ij})\\in M_n(F)$ is upper triangular with every diagonal entry $u_{ii}\\ne 0$, the **backward substitution solve** of $Ux=b$ is the recursive construction$$x_i:=\\frac{1}{u_{ii}}\\left(b_i-\\sum_{j>i}u_{ij}x_j\\right)\\qquad(n-1\\ge i\\ge 0).$$\n\nThe triangular vocabulary is from\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]. The matrix\nproduct convention from [[def-matrix-product-and-identity-matrix]] is the one\nused when later items rewrite these recursions as matrix equations.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $b\\in F^n$.\n\n1. If $L\\in M_n(F)$ is lower triangular with nonzero diagonal, the forward\n   substitution recursion of\n   [[def-forward-and-back-substitution-for-triangular-systems]] produces the\n   unique solution of $Lx=b$.\n2. If $U\\in M_n(F)$ is upper triangular with nonzero diagonal, the backward\n   substitution recursion produces the unique solution of $Ux=b$.\n\nEach solve uses exactly $n$ divisions,\n$\\frac{n(n-1)}{2}$ multiplications, and $\\frac{n(n-1)}{2}$ additions or\nsubtractions, hence $O(n^2)$ scalar operations.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the concatenated finite evaluation vector $U=(f_{X_*},f_X)$ is multivariate normal with mean $(m_*,m_X)$ and covariance $ \\begin{pmatrix}K_{**}&K_{*X}\\\\K_{X*}&K_{XX}\\end{pmatrix}. $ This remains valid when either list has repetitions.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The vector $\\epsilon$ is multivariate normal with mean zero and covariance $R$. Each coordinate of $U$ is a measurable function of the process coordinates, so $\\sigma(U)\\subseteq\\sigma(f)$. By [F2] and the independence hypothesis, $\\sigma(\\epsilon)$ is independent of $\\sigma(f)$ and hence of $\\sigma(U)$. Applying [F3] to $U$ and $\\epsilon$ shows that $Z=(f_{X_*},f_X,\\epsilon)$ is jointly multivariate normal with block-diagonal covariance between $U$ and $\\epsilon$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the linear map $(u,v,e)\\mapsto(u,v+e)$ to $Z$. Every scalar projection of the result is a scalar projection of $Z$, hence is normal by [F4]; its mean is $(m_*,m_X)$. The Gaussian vectors have finite second moments, so independence and $E\\epsilon=0$ give $\\operatorname{Cov}(f_{X_*},\\epsilon)=0$ and $\\operatorname{Cov}(Y)=K_{XX}+R=C$. By step 1.1, $\\operatorname{Cov}(f_{X_*},f_X)=K_{*X}$, so $(f_{X_*},Y)$ is jointly Gaussian with covariance $ \\begin{pmatrix}K_{**}&K_{*X}\\\\K_{X*}&C\\end{pmatrix}. $",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply [F5] with $A=K_{**}$, cross-covariance $K_{*X}$, and observed covariance $B=C\\succ0$. The result is a probability-kernel version for every $y$, with the displayed mean and Schur-complement covariance; [F5] also proves this covariance is positive semidefinite even if singular.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "given",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "If $\\eta_*$ is present, it is jointly independent of the process and $\\epsilon$ by hypothesis. By [F3], the stack $(f_{X_*},f_X,\\epsilon,\\eta_*)$ is jointly Gaussian. The linear map $(u,v,e,h)\\mapsto(u+h,v+e)$ has mean $(m_*,m_X)$, cross-covariance $K_{*X}$, observed covariance $C$, and prediction covariance $K_{**}+R_*$. Applying [F5] to this pair gives the stated noisy-prediction law.",
+          "step": "4.2",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [F6], write $C=LL^T$. For any right-hand side $b$, solve $Lz=b$ by forward substitution and $L^Tu=z$ by backward substitution; [F8] gives both unique solutions. Then $Cu=L(L^Tu)=Lz=b$, so $u=C^{-1}b$. Applying this to $b=y-m_X$ and, column by column, to $K_{X*}$ evaluates both formula terms without forming the inverse.",
+          "step": "5.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes positive finite observation and test list lengths n and p."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1, 5.1, and 4.2 allow singular prior and conditional covariance, including zero variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows n=p=1 and repeated test or observation indices."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 3.1, 4.1, 4.2 allow singular prior covariance while requiring only the observed block C to be positive definite."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no scalar interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement and steps 1.1, 2.1, 4.1, and 4.2 carry AC through the Gaussian and conditional-normal suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement/Definition/Example: Conditional Gaussian kernel from a positive-definite observed block, permitting singular prior and predictive blocks (steps 1.1, 2.1, 3.1, 4.1, 4.2, 5.1). This supplies the stated construction, estimate or conclusion; it is not an iff criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_13_16",
+            "reason": "I read the actual claim and proof for Conditional Gaussian kernel from a positive-definite observed block, permitting singular prior and predictive blocks (steps 1.1, 2.1, 3.1, 4.1, 4.2, 5.1). For the iff-forward row, Statement/Definition/Example: Conditional Gaussian kernel from a positive-definite observed block, permitting singular prior and predictive blocks (steps 1.1, 2.1, 3.1, 4.1, 4.2, 5.1). This supplies the stated construction, estimate or conclusion; it is not an iff criterion.",
+            "item_sha256": "baab8e0073bcc7b1958a5eacfbea47c83098849e6526343375d1f04548718d7e",
+            "row_sha256": "9a74d6dcd3080238bf1ee1c8fd31d9fc0d98f0b2fc05324027f06a3410c9e9e4"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement/Definition/Example: Conditional Gaussian kernel from a positive-definite observed block, permitting singular prior and predictive blocks (steps 1.1, 2.1, 3.1, 4.1, 4.2, 5.1). This supplies no converse hypothesis-recovery result; it is not an iff criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_13_16",
+            "reason": "I read the actual claim and proof for Conditional Gaussian kernel from a positive-definite observed block, permitting singular prior and predictive blocks (steps 1.1, 2.1, 3.1, 4.1, 4.2, 5.1). For the iff-reverse row, Statement/Definition/Example: Conditional Gaussian kernel from a positive-definite observed block, permitting singular prior and predictive blocks (steps 1.1, 2.1, 3.1, 4.1, 4.2, 5.1). This supplies no converse hypothesis-recovery result; it is not an iff criterion.",
+            "item_sha256": "baab8e0073bcc7b1958a5eacfbea47c83098849e6526343375d1f04548718d7e",
+            "row_sha256": "d19d3045e7ab62474cd830283673f1c9aeef4f66aa90e1a2c1356cd348372e6e"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-14",
+        "notes": "Read all six proof steps and the ten direct prerequisites, including the independent-stack proof, full current conditional-normal kernel proof, Cholesky equivalence and triangular-solve proofs. A finite evaluation stack is Gaussian even with repetitions; independence of noise from the process implies independence from that stack. The affine map to (f_test,Y) gives cross-block K_*X and observed covariance C. C positive definite satisfies the conditional-normal supplier exactly; its residual construction proves PSD Schur complement and a measurable all-y conditional kernel without inverting prior or predictive blocks. Jointly independent prediction noise changes only the predictive block by R_*. Cholesky uses its positive diagonal to solve Lz=b and L^T u=z; the product equation gives Cu=b. Positive n,p exclude empty vectors; n=p=1, zero noise when C remains SPD, repeated indices and zero conditional variance are permitted. The theorem is not an iff claim; the risk signal comes from a cited Cholesky title. AC is retained. GPML equations 2.22–2.24 and Algorithm 2.1 (printed pp.16,19) cover the zero-mean iid-noise specialization; the broader nonzero-mean correlated-noise claim follows from the reviewed local Gaussian argument. Empty reader/refuter findings; no defect found."
+      }
+    },
+    "ex-finite-gaussian-process-posterior-with-nonzero-mean-and-correlated-noise": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a set, let $m:T\\to\\mathbb R$, and let\n$k:T\\times T\\to\\mathbb R$ be symmetric and positive semidefinite, meaning that\nfor every finite list $t_1,\\ldots,t_n\\in T$ and every $a\\in\\mathbb R^n$,\n$$\\sum_{i,j=1}^n a_i a_j k(t_i,t_j)\\ge0.$$\nThere is a unique probability measure $\\mu$ on the cylinder sigma-algebra\n$\\mathcal C_T$ of $\\mathbb R^T$ whose marginal on each finite-coordinate space\n$\\mathbb R^F$, for $F\\subseteq T$ finite, is the Gaussian law with mean\n$(m(t))_{t\\in F}$ and covariance matrix $(k(s,t))_{s,t\\in F}$. The coordinate\nprocess $X_t(x)=x(t)$ is Gaussian, has mean function $m$, and has covariance\nkernel $k$. This construction gives only the cylinder-space process; it\nasserts no sample-path continuity, joint measurability in $(t,x)$, or tight\nBanach-valued law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rectangle-criterion-for-independent-random-elements",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. Then the following are\nequivalent:\n\n1. the family $(X_i)_{i\\in I}$ is independent;\n2. for every natural number $n\\ge1$, every choice of distinct indices\n   $i_0,\\dots,i_{n-1}\\in I$, and every choice of measurable sets\n   $B_k\\in\\Sigma_{i_k}$,\n   $$\\mathbb P\\bigl(X_{i_0}\\in B_0,\\dots,X_{i_{n-1}}\\in B_{n-1}\\bigr)=\\prod_{k<n}\\mathbb P(X_{i_k}\\in B_k).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-coordinate-maps-and-cylinder-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "For measurable spaces $(E_i,\\mathcal E_i)_{i\\in I}$, put\n$E=\\prod_{i\\in I}E_i$. For finite $F\\subseteq I$, let\n$\\pi_F:E\\to\\prod_{i\\in F}E_i$ be restriction to $F$ (the singleton empty\nproduct when $F=\\varnothing$). On $\\prod_{i\\in F}E_i$, write $q_i$ for the\n$i$th coordinate map and define\n\n$$\\bigotimes_{i\\in F}\\mathcal E_i:=\\sigma\\{q_i^{-1}(A):i\\in F,\\ A\\in\\mathcal E_i\\}.$$\n\nFor $F=\\varnothing$ this is the two-set sigma-algebra on the singleton. If\n$e:[n]\\to F$ is any enumeration, coordinate relabelling identifies this\nsigma-algebra with the recursively defined finite product sigma-algebra of\n[[def-product-sigma-algebra-and-finite-product-sigma-algebras]]: both are\ngenerated by the same coordinate inverse images. Thus the notation is\nindependent of the enumeration.\n\nA **finite-coordinate cylinder** is $\\pi_F^{-1}(A)$ for\n$A\\in\\bigotimes_{i\\in F}\\mathcal E_i$. The **cylinder sigma-algebra** is\n\n$$\\mathcal C_I:=\\sigma\\{\\pi_F^{-1}(A):F\\subseteq I\\text{ finite},\\ A\\in\\bigotimes_{i\\in F}\\mathcal E_i\\}.$$\n\nThis is the product sigma-algebra on the arbitrary product; the empty-support cylinder is either $\\varnothing$ or $E$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finite-gaussian-process-posterior-and-predictive-laws",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $f=(f_t)_{t\\in T}$ be a real Gaussian process with mean\n$m$ and covariance kernel $k$; when $m$ and $k$ are specified as a prior,\nthe canonical cylinder-space process exists by\n[[thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel]].\nLet $X=(x_1,\\ldots,x_n)\\in T^n$ and $X_*=(x_1^*,\\ldots,x_p^*)\\in T^p$,\nwhere $n,p\\ge1$ and repeated indices are allowed. Write\n$f_X=(f_{x_i})_{i=1}^n$, $f_{X_*}=(f_{x_j^*})_{j=1}^p$,\n$m_X=(m(x_i))_{i=1}^n$, and $m_*=(m(x_j^*))_{j=1}^p$. For finite lists\n$A=(a_i)$ and $B=(b_j)$, define\n$K_{AB}=(k(a_i,b_j))_{i,j}$.\n\nLet $\\epsilon\\sim N_n(0,R)$ be independent of the process, where $R$ is\nsymmetric positive semidefinite, and set $Y=f_X+\\epsilon$. Assume the\nobserved covariance $C=K_{XX}+R$ is positive definite. Then a version of the\nconditional law of $f_{X_*}$ given $Y=y$ is, for every $y\\in\\mathbb R^n$,\n$$N_p\\!\\left(m_*+K_{*X}C^{-1}(y-m_X),\\;K_{**}-K_{*X}C^{-1}K_{X*}\\right).$$\nThe displayed conditional covariance is positive semidefinite and may be\nsingular; $K_{XX}$ and $K_{**}$ may also be singular. If a prediction-noise\nvector $\\eta_*\\sim N_p(0,R_*)$ jointly independent of the process and\n$\\epsilon$ is added to $f_{X_*}$, with $R_*$ symmetric positive semidefinite,\nthe conditional mean is unchanged and\n$R_*$ is added to the conditional covariance. The displayed kernel is a\nversion defined at every $y$; conditional-law versions are determined only\n$P_Y$-almost surely.\n\nFor computation, the occurrences of $C^{-1}v$ mean solving $Cu=v$. Since\n$C$ is positive definite, its Cholesky factorization and forward/back\nsubstitution evaluate these solves without forming $C^{-1}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every finite coefficient list on $T$, the constant kernel has quadratic form $(\\sum_i a_i)^2\\ge0$. The noise matrix is positive definite because $u^2+uv+v^2=(u+v/2)^2+3v^2/4>0$ for $(u,v)\\ne(0,0)$. By [F1] there is a cylinder-space GP law $\\mu$ and [F2] gives the noise law. Their product probability exists by [F3]; its process and noise coordinates are measurable by [F5] and independent by [F4]. Thus this is a model satisfying the theorem's noise assumption.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The observed and test covariance blocks are $K_{XX}=J_2$, $K_{cX}=(1,1)$, and $K_{cc}=1$. Thus $C=J_2+R=\\begin{pmatrix}2&3/2\\\\3/2&2\\end{pmatrix}$, which is positive definite since its quadratic form is $2(u+3v/4)^2+7v^2/8$. Direct multiplication gives $C^{-1}=\\begin{pmatrix}8/7&-6/7\\\\-6/7&8/7\\end{pmatrix}$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $m_X=(1,-1)$, $m_c=2$, and $y-m_X=(-1,2)$, $C^{-1}(y-m_X)=(-20/7,22/7)$ and $K_{cX}C^{-1}(y-m_X)=2/7$. The posterior mean in [F6] is therefore $2+2/7=16/7$.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Also $C^{-1}K_{Xc}=(2/7,2/7)^T$, so $K_{cX}C^{-1}K_{Xc}=4/7$. The posterior variance is $1-4/7=3/7$, proving the displayed conditional-kernel value. This is the value of the all-$y$ kernel version specified in [F6] at $y=(0,1)$; the theorem does not make conditional-law values pointwise unique.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example fixes three process indices, two observations, and one test value."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the noise covariance and step 1.2 verifies that the observed block is positive definite."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes two observations and does not compare one-observation cases."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant prior kernel is rank one on the three-index set; steps 2.1, 3.1 still give a proper scalar posterior."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example fixes finite matrices and y=(0,1); step 1.2 verifies C positive definite, and no covariance-singular observed-block boundary is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs the specified GP/noise product using the declared AC finite-normal interfaces; the positive-definite noise matrix supplies an actual independent noise law."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement/Definition/Example: Exact nonzero-mean correlated-noise finite GP posterior N(16/7,3/7). This supplies the stated construction, estimate or conclusion; it is not an iff criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_13_16",
+            "reason": "I read the actual claim and proof for Exact nonzero-mean correlated-noise finite GP posterior N(16/7,3/7). For the iff-forward row, Statement/Definition/Example: Exact nonzero-mean correlated-noise finite GP posterior N(16/7,3/7). This supplies the stated construction, estimate or conclusion; it is not an iff criterion.",
+            "item_sha256": "2d974a611698e01a7a1ec67d4942a8126a9f23f3455d855781308e78e350a6b1",
+            "row_sha256": "55134d22fef1a7f7ef1a203047ba03c3c46c69d6185245508d35b75daa4936ec"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement/Definition/Example: Exact nonzero-mean correlated-noise finite GP posterior N(16/7,3/7). This supplies no converse hypothesis-recovery result; it is not an iff criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_13_16",
+            "reason": "I read the actual claim and proof for Exact nonzero-mean correlated-noise finite GP posterior N(16/7,3/7). For the iff-reverse row, Statement/Definition/Example: Exact nonzero-mean correlated-noise finite GP posterior N(16/7,3/7). This supplies no converse hypothesis-recovery result; it is not an iff criterion.",
+            "item_sha256": "2d974a611698e01a7a1ec67d4942a8126a9f23f3455d855781308e78e350a6b1",
+            "row_sha256": "a40df43a5c7fbd6341fbdbd00bffd2f1c3f2e7a37468d75b9efa81c9f03da940"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-14",
+        "notes": "Read all four verification steps and every direct dependency; the three additional product-measure/rectangle/product-sigma suppliers have the needed probability-space interfaces. Constant kernel PSD follows from (sum a_i)^2; R is SPD by completing the square. Product of GP and noise laws makes the entire process and noise independent, not merely pairwise independent coordinates. C=[[2,3/2],[3/2,2]] is SPD with determinant 7/4 and inverse [[8/7,-6/7],[-6/7,8/7]]. With residual (-1,2), the solve is (-20/7,22/7), yielding mean 16/7. The covariance reduction is 4/7 and variance 3/7. AC is declared and the observation is a value of the selected all-y kernel, not a claim of pointwise uniqueness on null observations. Positive fixed dimensions exclude empty cases. GPML regression conventions and the independently reviewed broader posterior theorem justify this generated finite example. Reader/refuter findings empty; no defect found."
+      }
+    },
+    "ex-singular-gaussian-process-prior-and-predictive-covariances": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a set, let $m:T\\to\\mathbb R$, and let\n$k:T\\times T\\to\\mathbb R$ be symmetric and positive semidefinite, meaning that\nfor every finite list $t_1,\\ldots,t_n\\in T$ and every $a\\in\\mathbb R^n$,\n$$\\sum_{i,j=1}^n a_i a_j k(t_i,t_j)\\ge0.$$\nThere is a unique probability measure $\\mu$ on the cylinder sigma-algebra\n$\\mathcal C_T$ of $\\mathbb R^T$ whose marginal on each finite-coordinate space\n$\\mathbb R^F$, for $F\\subseteq T$ finite, is the Gaussian law with mean\n$(m(t))_{t\\in F}$ and covariance matrix $(k(s,t))_{s,t\\in F}$. The coordinate\nprocess $X_t(x)=x(t)$ is Gaussian, has mean function $m$, and has covariance\nkernel $k$. This construction gives only the cylinder-space process; it\nasserts no sample-path continuity, joint measurability in $(t,x)$, or tight\nBanach-valued law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rectangle-criterion-for-independent-random-elements",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. Then the following are\nequivalent:\n\n1. the family $(X_i)_{i\\in I}$ is independent;\n2. for every natural number $n\\ge1$, every choice of distinct indices\n   $i_0,\\dots,i_{n-1}\\in I$, and every choice of measurable sets\n   $B_k\\in\\Sigma_{i_k}$,\n   $$\\mathbb P\\bigl(X_{i_0}\\in B_0,\\dots,X_{i_{n-1}}\\in B_{n-1}\\bigr)=\\prod_{k<n}\\mathbb P(X_{i_k}\\in B_k).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-coordinate-maps-and-cylinder-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "For measurable spaces $(E_i,\\mathcal E_i)_{i\\in I}$, put\n$E=\\prod_{i\\in I}E_i$. For finite $F\\subseteq I$, let\n$\\pi_F:E\\to\\prod_{i\\in F}E_i$ be restriction to $F$ (the singleton empty\nproduct when $F=\\varnothing$). On $\\prod_{i\\in F}E_i$, write $q_i$ for the\n$i$th coordinate map and define\n\n$$\\bigotimes_{i\\in F}\\mathcal E_i:=\\sigma\\{q_i^{-1}(A):i\\in F,\\ A\\in\\mathcal E_i\\}.$$\n\nFor $F=\\varnothing$ this is the two-set sigma-algebra on the singleton. If\n$e:[n]\\to F$ is any enumeration, coordinate relabelling identifies this\nsigma-algebra with the recursively defined finite product sigma-algebra of\n[[def-product-sigma-algebra-and-finite-product-sigma-algebras]]: both are\ngenerated by the same coordinate inverse images. Thus the notation is\nindependent of the enumeration.\n\nA **finite-coordinate cylinder** is $\\pi_F^{-1}(A)$ for\n$A\\in\\bigotimes_{i\\in F}\\mathcal E_i$. The **cylinder sigma-algebra** is\n\n$$\\mathcal C_I:=\\sigma\\{\\pi_F^{-1}(A):F\\subseteq I\\text{ finite},\\ A\\in\\bigotimes_{i\\in F}\\mathcal E_i\\}.$$\n\nThis is the product sigma-algebra on the arbitrary product; the empty-support cylinder is either $\\varnothing$ or $E$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finite-gaussian-process-posterior-and-predictive-laws",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $f=(f_t)_{t\\in T}$ be a real Gaussian process with mean\n$m$ and covariance kernel $k$; when $m$ and $k$ are specified as a prior,\nthe canonical cylinder-space process exists by\n[[thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel]].\nLet $X=(x_1,\\ldots,x_n)\\in T^n$ and $X_*=(x_1^*,\\ldots,x_p^*)\\in T^p$,\nwhere $n,p\\ge1$ and repeated indices are allowed. Write\n$f_X=(f_{x_i})_{i=1}^n$, $f_{X_*}=(f_{x_j^*})_{j=1}^p$,\n$m_X=(m(x_i))_{i=1}^n$, and $m_*=(m(x_j^*))_{j=1}^p$. For finite lists\n$A=(a_i)$ and $B=(b_j)$, define\n$K_{AB}=(k(a_i,b_j))_{i,j}$.\n\nLet $\\epsilon\\sim N_n(0,R)$ be independent of the process, where $R$ is\nsymmetric positive semidefinite, and set $Y=f_X+\\epsilon$. Assume the\nobserved covariance $C=K_{XX}+R$ is positive definite. Then a version of the\nconditional law of $f_{X_*}$ given $Y=y$ is, for every $y\\in\\mathbb R^n$,\n$$N_p\\!\\left(m_*+K_{*X}C^{-1}(y-m_X),\\;K_{**}-K_{*X}C^{-1}K_{X*}\\right).$$\nThe displayed conditional covariance is positive semidefinite and may be\nsingular; $K_{XX}$ and $K_{**}$ may also be singular. If a prediction-noise\nvector $\\eta_*\\sim N_p(0,R_*)$ jointly independent of the process and\n$\\epsilon$ is added to $f_{X_*}$, with $R_*$ symmetric positive semidefinite,\nthe conditional mean is unchanged and\n$R_*$ is added to the conditional covariance. The displayed kernel is a\nversion defined at every $y$; conditional-law versions are determined only\n$P_Y$-almost surely.\n\nFor computation, the occurrences of $C^{-1}v$ mean solving $Cu=v$. Since\n$C$ is positive definite, its Cholesky factorization and forward/back\nsubstitution evaluate these solves without forming $C^{-1}$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any finite coefficient list, the constant kernel's quadratic form is $(\\sum_i a_i)^2\\ge0$. Thus [F1] constructs the cylinder GP and [F2] supplies $N_2(0,I_2)$. Their product probability exists by [F3]; its process and noise random elements are measurable by [F5] and independent by [F4].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The observation covariance is $K_{XX}=J_2$, which has rank one, while $C=J_2+I_2=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$ has quadratic form $u^2+v^2+(u+v)^2>0$ for every nonzero $(u,v)$. Hence it is positive definite and $C^{-1}=\\frac13\\begin{pmatrix}2&-1\\\\-1&2\\end{pmatrix}$. For the repeated test list, $K_{*X}=K_{**}=J_2$. Since $C$ is positive definite, the hypotheses of [F6] hold.",
+          "step": "1.2",
+          "inputs": [
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Multiplication gives $K_{*X}C^{-1}y=(1/3,1/3)^T$. Also $C^{-1}J_2=\\frac13J_2$, so $K_{*X}C^{-1}K_{X*}=\\frac23J_2$ and the conditional covariance is $J_2-\\frac23J_2=\\frac13J_2$. Its determinant is zero and its rank is one. By [F6] this is a valid singular Gaussian conditional law.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The prior observation covariance and conditional predictive covariance are both singular, whereas the matrix inverted by the formula is the positive-definite observed covariance $C$. This verifies why singular prior and predictive blocks are permitted under the stated condition.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two process indices, two observations, and a two-coordinate test list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 compute the positive-definite observed block and the singular predictive covariance."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes two observations and a repeated two-coordinate test list."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2, 2.1, 3.1 exhibit a rank-one prior observation block and a rank-one conditional block."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example has C=J_2+I_2 positive definite but predictive covariance J_2/3 singular; step 1.2 inverts only C, never a singular endpoint matrix."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the specified constant-kernel cylinder process and N_2(0,I_2) on their product probability; AC is declared for the finite Gaussian interfaces."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement/Definition/Example: Singular prior and predictive covariance with invertible observed GP block. This supplies the stated construction, estimate or conclusion; it is not an iff criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_13_16",
+            "reason": "I read the actual claim and proof for Singular prior and predictive covariance with invertible observed GP block. For the iff-forward row, Statement/Definition/Example: Singular prior and predictive covariance with invertible observed GP block. This supplies the stated construction, estimate or conclusion; it is not an iff criterion.",
+            "item_sha256": "1495ccb4d135de371359a8e08b3024537567b775f4fc849a0427e00cb4989503",
+            "row_sha256": "d1a9febff8431f2a94b3a8e889588862dc00434591ceb8f6836565b65f0d91c0"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement/Definition/Example: Singular prior and predictive covariance with invertible observed GP block. This supplies no converse hypothesis-recovery result; it is not an iff criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_13_16",
+            "reason": "I read the actual claim and proof for Singular prior and predictive covariance with invertible observed GP block. For the iff-reverse row, Statement/Definition/Example: Singular prior and predictive covariance with invertible observed GP block. This supplies no converse hypothesis-recovery result; it is not an iff criterion.",
+            "item_sha256": "1495ccb4d135de371359a8e08b3024537567b775f4fc849a0427e00cb4989503",
+            "row_sha256": "ae5ec1caad9d082b30b9918046d947195f37635bc50b88c1dcf3d93827f12d5e"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-14",
+        "notes": "Read all four verification steps against the nine direct prerequisites already reviewed. The constant kernel is PSD for arbitrary coefficient lists, and product probability gives the required entire-process/noise independence with AC retained from the Gaussian interfaces. K_XX=J_2 has rank one, whereas C=J_2+I_2 is SPD by u^2+v^2+(u+v)^2 and has the displayed inverse. For repeated test list (b,b), both cross-block and prior test block are J_2. Exact multiplication at y=(1,0) gives mean (1/3,1/3), reduction (2/3)J_2, and conditional covariance J_2/3. Its eigenvalues are 2/3 and zero, hence rank one and PSD; this is a valid singular law supported on equal test coordinates. Only C is inverted. Fixed two-coordinate dimensions exclude empty cases; singularity and repetitions are the intended boundary witnesses. The selected kernel convention matches the posterior theorem and the source regression convention. Reader/refuter findings empty; no defect found."
+      }
+    },
+    "ex-gaussian-process-extrapolation-retains-independent-index-uncertainty": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a set, let $m:T\\to\\mathbb R$, and let\n$k:T\\times T\\to\\mathbb R$ be symmetric and positive semidefinite, meaning that\nfor every finite list $t_1,\\ldots,t_n\\in T$ and every $a\\in\\mathbb R^n$,\n$$\\sum_{i,j=1}^n a_i a_j k(t_i,t_j)\\ge0.$$\nThere is a unique probability measure $\\mu$ on the cylinder sigma-algebra\n$\\mathcal C_T$ of $\\mathbb R^T$ whose marginal on each finite-coordinate space\n$\\mathbb R^F$, for $F\\subseteq T$ finite, is the Gaussian law with mean\n$(m(t))_{t\\in F}$ and covariance matrix $(k(s,t))_{s,t\\in F}$. The coordinate\nprocess $X_t(x)=x(t)$ is Gaussian, has mean function $m$, and has covariance\nkernel $k$. This construction gives only the cylinder-space process; it\nasserts no sample-path continuity, joint measurability in $(t,x)$, or tight\nBanach-valued law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rectangle-criterion-for-independent-random-elements",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. Then the following are\nequivalent:\n\n1. the family $(X_i)_{i\\in I}$ is independent;\n2. for every natural number $n\\ge1$, every choice of distinct indices\n   $i_0,\\dots,i_{n-1}\\in I$, and every choice of measurable sets\n   $B_k\\in\\Sigma_{i_k}$,\n   $$\\mathbb P\\bigl(X_{i_0}\\in B_0,\\dots,X_{i_{n-1}}\\in B_{n-1}\\bigr)=\\prod_{k<n}\\mathbb P(X_{i_k}\\in B_k).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-coordinate-maps-and-cylinder-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "For measurable spaces $(E_i,\\mathcal E_i)_{i\\in I}$, put\n$E=\\prod_{i\\in I}E_i$. For finite $F\\subseteq I$, let\n$\\pi_F:E\\to\\prod_{i\\in F}E_i$ be restriction to $F$ (the singleton empty\nproduct when $F=\\varnothing$). On $\\prod_{i\\in F}E_i$, write $q_i$ for the\n$i$th coordinate map and define\n\n$$\\bigotimes_{i\\in F}\\mathcal E_i:=\\sigma\\{q_i^{-1}(A):i\\in F,\\ A\\in\\mathcal E_i\\}.$$\n\nFor $F=\\varnothing$ this is the two-set sigma-algebra on the singleton. If\n$e:[n]\\to F$ is any enumeration, coordinate relabelling identifies this\nsigma-algebra with the recursively defined finite product sigma-algebra of\n[[def-product-sigma-algebra-and-finite-product-sigma-algebras]]: both are\ngenerated by the same coordinate inverse images. Thus the notation is\nindependent of the enumeration.\n\nA **finite-coordinate cylinder** is $\\pi_F^{-1}(A)$ for\n$A\\in\\bigotimes_{i\\in F}\\mathcal E_i$. The **cylinder sigma-algebra** is\n\n$$\\mathcal C_I:=\\sigma\\{\\pi_F^{-1}(A):F\\subseteq I\\text{ finite},\\ A\\in\\bigotimes_{i\\in F}\\mathcal E_i\\}.$$\n\nThis is the product sigma-algebra on the arbitrary product; the empty-support cylinder is either $\\varnothing$ or $E$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finite-gaussian-process-posterior-and-predictive-laws",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $f=(f_t)_{t\\in T}$ be a real Gaussian process with mean\n$m$ and covariance kernel $k$; when $m$ and $k$ are specified as a prior,\nthe canonical cylinder-space process exists by\n[[thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel]].\nLet $X=(x_1,\\ldots,x_n)\\in T^n$ and $X_*=(x_1^*,\\ldots,x_p^*)\\in T^p$,\nwhere $n,p\\ge1$ and repeated indices are allowed. Write\n$f_X=(f_{x_i})_{i=1}^n$, $f_{X_*}=(f_{x_j^*})_{j=1}^p$,\n$m_X=(m(x_i))_{i=1}^n$, and $m_*=(m(x_j^*))_{j=1}^p$. For finite lists\n$A=(a_i)$ and $B=(b_j)$, define\n$K_{AB}=(k(a_i,b_j))_{i,j}$.\n\nLet $\\epsilon\\sim N_n(0,R)$ be independent of the process, where $R$ is\nsymmetric positive semidefinite, and set $Y=f_X+\\epsilon$. Assume the\nobserved covariance $C=K_{XX}+R$ is positive definite. Then a version of the\nconditional law of $f_{X_*}$ given $Y=y$ is, for every $y\\in\\mathbb R^n$,\n$$N_p\\!\\left(m_*+K_{*X}C^{-1}(y-m_X),\\;K_{**}-K_{*X}C^{-1}K_{X*}\\right).$$\nThe displayed conditional covariance is positive semidefinite and may be\nsingular; $K_{XX}$ and $K_{**}$ may also be singular. If a prediction-noise\nvector $\\eta_*\\sim N_p(0,R_*)$ jointly independent of the process and\n$\\epsilon$ is added to $f_{X_*}$, with $R_*$ symmetric positive semidefinite,\nthe conditional mean is unchanged and\n$R_*$ is added to the conditional covariance. The displayed kernel is a\nversion defined at every $y$; conditional-law versions are determined only\n$P_Y$-almost surely.\n\nFor computation, the occurrences of $C^{-1}v$ mean solving $Cu=v$. Since\n$C$ is positive definite, its Cholesky factorization and forward/back\nsubstitution evaluate these solves without forming $C^{-1}$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any finite list of indices, group coefficients at repeated sites. The equality kernel's quadratic form is the sum, over distinct sites $t$, of $(\\sum_{i:t_i=t}a_i)^2$, hence is nonnegative. By [F1] the canonical GP law exists and [F2] supplies the $N(0,1)$ noise law. Their product probability exists by [F3]; its process and noise random elements are measurable by [F5] and independent by [F4].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Here $K_{XX}=1$, $K_{**}=1$, $K_{*X}=K_{X*}=0$, and the noise covariance is $R=1$. Thus $C=K_{XX}+R=2>0$, so [F6] applies.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The formula in [F6] gives posterior mean $0+0\\cdot 2^{-1}(y-0)=0$ and variance $1-0\\cdot2^{-1}\\cdot0=1$ for every $y\\in\\mathbb R$. Hence the posterior version at the unobserved independent index is its original $N(0,1)$ law.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two process indices and one observation/test pair."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 explicitly use the zero cross-covariance between the observed and test indices."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example has one observation and one test coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks positive semidefiniteness for repeated indices by grouping their coefficients."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 has observed covariance C=2>0 and zero cross-covariance. Step 2.1 establishes the same conditional kernel for every real observation y."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs the equality-kernel GP and specified N(0,1) noise on a product probability with the declared AC interfaces, rather than selecting a data-dependent process."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement/Definition/Example: Independent unobserved GP index retains its N(0,1) posterior. This supplies the stated construction, estimate or conclusion; it is not an iff criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_13_16",
+            "reason": "I read the actual claim and proof for Independent unobserved GP index retains its N(0,1) posterior. For the iff-forward row, Statement/Definition/Example: Independent unobserved GP index retains its N(0,1) posterior. This supplies the stated construction, estimate or conclusion; it is not an iff criterion.",
+            "item_sha256": "b49d1297d47a483e19e48a25231f044cbdfc8befc95220ed8fd9fb9e07ecf73c",
+            "row_sha256": "fbd5beff9be6dd872eda65f07fe4cbb00074d7f1b3ab3f349a604ad1aa174eaa"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement/Definition/Example: Independent unobserved GP index retains its N(0,1) posterior. This supplies no converse hypothesis-recovery result; it is not an iff criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_13_16",
+            "reason": "I read the actual claim and proof for Independent unobserved GP index retains its N(0,1) posterior. For the iff-reverse row, Statement/Definition/Example: Independent unobserved GP index retains its N(0,1) posterior. This supplies no converse hypothesis-recovery result; it is not an iff criterion.",
+            "item_sha256": "b49d1297d47a483e19e48a25231f044cbdfc8befc95220ed8fd9fb9e07ecf73c",
+            "row_sha256": "6bf839001520ef42deecf801c153d0461e1117e41a6ea48f9ee7b4d3439a1f31"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-14",
+        "notes": "Read all three verification steps against the nine already-read direct suppliers. Grouping repeated sites gives a sum of squared grouped coefficients, proving PSD for every finite list, not only the two distinct indices. Product GP/noise laws supply measurable independent random elements under the declared AC Gaussian interfaces. With one training and one test coordinate the blocks are K_XX=K_**=R=1 and K_*X=0, so C=2 is SPD. The reviewed posterior theorem gives exactly mean zero and variance one for every real y in its selected version. Thus the independent unobserved site retains its original normal law; no general geometric extrapolation or sample-path claim is made. Empty data are outside this fixed example; the zero cross-block and repeated-site PSD boundary are handled explicitly. Source conventions checked in GPML Chapter 2; reader/refuter findings empty. No defect found."
+      }
+    }
+  }
+}

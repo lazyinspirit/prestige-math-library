@@ -1,0 +1,31 @@
+# Step-3 full gate1: batches 9–12, focused cycle 1
+
+All four assigned diagnostics reduce to two genuine native accepted repairs whose current item sources exactly equal their immutable reader-post sources. Preserve both `accepted_repair` verdicts and both existing defect-ledger rows. Root should bind source-identical acceptance continuity after its final metadata synchronization; no amended verdict, replacement defect or new execution coverage is warranted.
+
+The frozen `routing-proposals.json` includes original decision objects, original ledger rows and references, successful native reader/alpha result references, reports/assignments, current inputs, immutable reader-post carriers, and the exact contract deltas. `boundary-patches.json` is intentionally empty because the intake assigns no boundary rows.
+
+## Point-null example, batch 9
+
+- The successful native reader and alpha completed their actual assigned tasks. The reader report describes making the parameter spaces, priors, common counting data measure and Bernoulli density sections explicit. Alpha independently accepted that completed nonfatal setup repair. Its decision already references `bayesian-computational-statistics-62-3a-b9-point-null-model-setup`.
+- Current full raw item bytes match reader-post SHA-256 `19f714625e9acb565c7bd518f83b6c3b03a50510d216cf310eb17e193314c552` exactly. The pre-reader snapshot records a distinct item digest; no invented pre-reader text is needed to establish current/post identity.
+- Read the complete current Example, Facts and two verification steps. The explicit common measure and density sections remain present; the evidences remain 1 and 1/2, the posterior model atom remains positive for positive weights, and the continuous singleton has zero Lebesgue mass under the declared assumption. The source interface has no delta from accepted reader-post content.
+- The archived contract immediately before root's Step-3 metadata pass contains the native risk review. Removing only `risk_review` reproduces the immutable reader-post canonical contract hash `fc233a84cc7e908e9f7a0b153eb2cd82635e1574478a9c52587a4e75c9fdf5de`. The recovered object is retained with its derivation source and hash proof in the proposal. This authenticates the actual original contract object; it does not manufacture a historical verdict.
+- Relative to that archived accepted contract, the current contract changes only the claim string for derivation 1.1, replacing its setup-enriched paraphrase with the exact current proof-step text. Its step, inputs, other derivations, citations, boundaries and native risk review agree.
+- The current manifest row still exactly matches the reader-post manifest digest. Its `statement` is the native short paraphrase, so root must perform its authorized exact Example mirror synchronization before central continuity validation.
+- Ledger row 17759 has the correct subject, fixed nonfatal disposition and reference to `touched:9:ex-point-null-needs-a-model-atom` in the original decisions file. The original decision has the identical defect ID. The apparent unowned row is a consequence of rejecting applicability of that decision, not a missing ledger reference.
+
+## Bernstein lemma, batch 11
+
+- The successful native reader explicitly reported inserting the m=0 branch before fixing a summand; the successful native alpha independently accepted that boundary repair. Its decision already references `bayesian-computational-statistics-62-3a-b11-empty-bounded-sum`.
+- Current full raw item bytes match reader-post SHA-256 `dd972f80a0d0045caa3fd6d695ee345d39f3a38cf2ebba5ab038ba01383ac8e5` exactly. The pre-reader snapshot records a different digest. The original ledger honestly says its original full source bytes were not reconstructed; this review does not replace that historical limit.
+- Read the complete current Statement, Facts and five proof steps. Step 1.1 retains the explicit m=0 conclusion S_m=V=0. It then restricts the summand argument to m>=1; the remaining variance-zero and both-tail conclusions are retained. No source delta or consumer-interface change occurred after reader acceptance.
+- Removing only `risk_review` from the same archived pre-root metadata carrier exactly reproduces reader-post contract hash `a4a5371c62a0a4a13a28cd0c38facbb63fe3cdbe3194611ff51f5858fb91f55f`. The recovered original object and its archive reference are provided.
+- The later metadata change is again confined to derivation 1.1's claim string: its old prose paraphrase now mirrors the actual current proof paragraph. The m=0 condition, positive-m branch, uniform-series justification, step label and input list are unchanged in substance. All other contract fields agree with the archived accepted contract.
+- The current manifest row exactly matches the pinned reader-post digest but still uses its native paraphrased `statement`. Root's ordinary exact Statement mirror update is needed before continuity validation.
+- Ledger row 17765 already references the exact original decision obligation `touched:11:lem-iid-bounded-variance-bernstein-tail`; that decision names the same defect. Preserve this fixed nonfatal row and its historical evidence.
+
+## Frozen handoff and limits
+
+`routing-proposals.json` contains two proposals covering all four assigned diagnostics. It preserves both native decision objects and the exact ledger rows, and references exact copies of the current reader-post-identical sources and accepted native decisions under this task's artifact prefix. Reader-post contract recovery used one existing archived carrier and one precisely verified property removal per item. Current manifest rows can also be authenticated directly against their immutable reader-post digests; no historical manifest bytes were invented.
+
+Root owns final manifest/source mirrors, carrier and target bindings, central continuity entries, strict validation, recertification and the next full battery. This agent ran no tests or gates and changed no live source, contract, manifest, hash snapshot, ledger, decision or state. No new mathematical defect was found in the focused failed-source inspection, and no Statement/Definition changed; no downstream consumer repair is needed. This records continuity of existing genuine acceptance only.

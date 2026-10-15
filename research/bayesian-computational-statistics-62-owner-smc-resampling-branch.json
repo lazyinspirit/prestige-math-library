@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "type": "research-only-smc-resampling-branch",
+  "run": "bayesian-computational-statistics-62",
+  "batch": 45,
+  "date": "2026-10-15",
+  "scope": [
+    "def-smc-clt-function-classes-and-variance-recursions",
+    "lem-smc-multinomial-resampling-clt",
+    "lem-smc-residual-resampling-clt-away-from-integer-weights",
+    "cex-smc-clt-class-does-not-ensure-target-moment",
+    "cex-smc-residual-clt-fails-at-integer-weight-boundary",
+    "cex-smc-zero-residual-fraction-can-have-random-offspring"
+  ],
+  "read_only_source_review": true,
+  "external_full_texts_read": [],
+  "external_source_claim": "No external full text was accessed; conclusions are independent calculations from current repository claims and exact controlling plan.",
+  "native_review_or_gate_coverage_claimed": false,
+  "source_or_live_metadata_changed": false,
+  "controlling_plan": {
+    "path": "research/plan-bayesian-computational-statistics-track.md",
+    "heading": "BCS-42 — Finite-horizon SMC error, CLTs, and degeneracy",
+    "exact_text": "**Pages:** smc-clts-error-and-degeneracy / smc-clts-error-and-degeneracy-examples. **Scope:** State Chopin's fixed-horizon $H\\to\\infty$ particle-count CLT with targets $\\pi_t$, proposal laws $\\tilde\\pi_t$, incremental weights $\\upsilon_t=d\\pi_t/d\\tilde\\pi_t$, and mutation kernels $k_t$. For vector-valued $\\phi$, initialize $\\Phi_0^{(d)}=\\{\\phi:E_{\\tilde\\pi_0}\\|\\phi\\|^2<\\infty\\}$ and recursively require $\\phi\\in\\Phi_t^{(d)}$ if for some $\\delta>0$, $E_{\\tilde\\pi_t}\\|\\upsilon_t\\phi\\|^{2+\\delta}<\\infty$ and $\\theta_{t-1}\\mapsto E_{k_t(\\theta_{t-1},\\cdot)}[\\upsilon_t\\phi]$ belongs to $\\Phi_{t-1}^{(d)}$. Require $1\\in\\Phi_t^{(1)}$ at every time. Give the exact variance recursion $\\widetilde V_0(\\phi)=\\operatorname{Var}_{\\tilde\\pi_0}(\\phi)$, $\\widetilde V_t(\\phi)=\\widehat V_{t-1}(E_{k_t}\\phi)+E_{\\pi_{t-1}}[\\operatorname{Var}_{k_t}(\\phi)]$, $V_t(\\phi)=\\widetilde V_t(\\upsilon_t(\\phi-\\pi_t\\phi))$, and, for multinomial resampling, $\\widehat V_t(\\phi)=V_t(\\phi)+\\operatorname{Var}_{\\pi_t}(\\phi)$. For residual resampling replace the last term by $R_t(\\phi)=E_{\\tilde\\pi_t}[r(\\upsilon_t)\\phi\\phi^T]-E_{\\tilde\\pi_t}[r(\\upsilon_t)\\phi]E_{\\tilde\\pi_t}[r(\\upsilon_t)\\phi]^T/E_{\\tilde\\pi_t}[r(\\upsilon_t)]$, where $r(u)=u-\\lfloor u\\rfloor$, so $\\widehat V_t=V_t+R_t$ when $E_{\\tilde\\pi_t}r(\\upsilon_t)>0$; if this expectation is zero, all residual offspring counts are deterministic and define $R_t=0$. State both source CLT outputs (weighted estimate variance $V_t$ and post-resampling unweighted estimate variance $\\widehat V_t$), centered at $\\pi_t\\phi$. For a separate bounded-asymptotic-variance-in-time result, require finite test oscillation $\\Delta\\phi$, uniform transition and proposal density ratios $g(x|x')/g(x|x'')\\le C$, $q_t(x|x')/q_t(x|x'')\\le C$, and likelihoods $0<f\\le f(y|x)\\le\\bar f$; this is Chopin Theorem 5's restrictive asymptotic-variance condition, not a general finite-$N$ time-uniform error bound. ESS is weight concentration, not posterior coverage/variance/convergence; a fixed-horizon CLT is not a uniform-in-time accuracy guarantee. **Proof route:** Conditional triangular-array CLT/Lindeberg at each step, recursive moment closure and variance recursion; long-time asymptotic-variance bound additionally uses the source's Feynman–Kac contraction conditions. **Examples:** dominant weight, ancestry collapse, fixed-time versus long-horizon degradation, bounded-weight case. **Requires:** BCS-41; `thm-lindeberg-feller-central-limit-theorem-sufficiency`, `thm-martingale-central-limit-theorem`, `thm-conditional-expectation-exists-by-radon-nikodym`, `def-conditional-expectation-as-an-ae-class`, `thm-tower-property-of-conditional-expectation`. **Sources:** Chopin (2004), Theorems 1–2, 4–5 and Appendices A.1/A.3–A.4, source PDF pp. 7–14, 27–31; Doucet–Johansen §3 CLT displays refer elsewhere for proof."
+  },
+  "current_contract_excerpts": [
+    {
+      "path": "items/def-smc-clt-function-classes-and-variance-recursions.md",
+      "heading": "## Definition",
+      "exact_text": "Fix a finite horizon $T$. At each $0\\le t\\le T$, let $\\pi_t$ be a probability law on a measurable particle space $\\Theta_t$. Let $\\widetilde\\pi_0$ be an initial proposal with $\\pi_0\\ll\\widetilde\\pi_0$, and fix $\\upsilon_0=d\\pi_0/d\\widetilde\\pi_0$. For $1\\le t\\le T$, let $k_t$ be a probability kernel from $\\Theta_{t-1}$ to $\\Theta_t$, and put\n$$\\widetilde\\pi_t(A)=\\int_{\\Theta_{t-1}}k_t(x,A)\\,\\pi_{t-1}(dx).$$\nAssume $\\pi_t\\ll\\widetilde\\pi_t$ and fix a nonnegative Radon–Nikodym version $\\upsilon_t=d\\pi_t/d\\widetilde\\pi_t$, so $\\widetilde\\pi_t(\\upsilon_t)=1$. The BCS-41 sequential importance-resampling algorithm [[alg-sequential-importance-resampling]] is this scheme on path spaces when $k_t$ appends a proposal transition and $\\upsilon_t$ is the normalized Feynman–Kac path weight supplied by [[thm-feynman-kac-path-radon-nikodym-weight]].\n\nFor a measurable vector function $\\phi:\\Theta_t\\to\\mathbb R^d$, write $\\mu(\\phi)=\\int\\phi\\,d\\mu$ and\n$$\\operatorname{Cov}_{\\mu}(\\phi)=\\int(\\phi-\\mu(\\phi))(\\phi-\\mu(\\phi))^\\top\\,d\\mu,$$\nwhen the second moment is finite. Also write $k_t\\phi(x)=\\int\\phi(z)k_t(x,dz)$ and\n$$\\operatorname{Cov}_{k_t}(\\phi)(x)=\\int(\\phi(z)-k_t\\phi(x))(\\phi(z)-k_t\\phi(x))^\\top k_t(x,dz).$$\n\nThe source recursive test classes are\n$$\\Phi_0^{(d)}=\\{\\phi:\\widetilde\\pi_0(\\|\\phi\\|^2)<\\infty\\},$$\nand, for $t\\ge1$,\n$$\\Phi_t^{(d)}=\\left\\{\\phi:\\text{ for some }\\delta>0,\\ \\widetilde\\pi_t(\\|\\upsilon_t\\phi\\|^{2+\\delta})<\\infty\\ \\text{ and }\\ x\\mapsto k_t(\\upsilon_t\\phi)(x)\\in\\Phi_{t-1}^{(d)}\\right\\}.$$\nAssume $1\\in\\Phi_t^{(1)}$ for every $t$. This is the source theorem's explicit normalizing-weight condition. For the recursive post-resampling CLTs proved on this page, use the stronger classes $\\Psi_t^{(d)}$. At $t=0$, let $\\Psi_0^{(d)}$ consist of the $\\phi\\in\\Phi_0^{(d)}$ for which, for some $\\epsilon>0$, $\\widetilde\\pi_0(\\|\\upsilon_0(\\phi-\\pi_0(\\phi))\\|^{2+\\epsilon})<\\infty$ and $\\pi_0(\\|\\phi\\|^{2+\\epsilon})<\\infty$. The initial normalizing denominator needs only its finite first moment $\\widetilde\\pi_0(\\upsilon_0)=1$. For $t\\ge1$, let $\\Psi_t^{(d)}$ consist of the $\\phi\\in\\Phi_t^{(d)}$ for which, for some $\\epsilon>0$, $\\pi_t(\\|\\phi\\|^{2+\\epsilon})<\\infty$ and $x\\mapsto E_t(\\phi-\\pi_t(\\phi))(x)\\in\\Psi_{t-1}^{(d)}$. Here $E_t h=k_t(\\upsilon_t h)$ is the operator defined below. The recursive target moments supply the offspring variance at every earlier selection used in the induction. The source $\\Phi_t$ conditions alone need not imply them. The source condition $1\\in\\Phi_t$ and these recursive target moments are the stated hypotheses for the CLT induction; no higher initial normalizer moment is required.\n\nDefine the mutation covariance operators recursively. At time zero,\n$$\\widetilde V_0(\\phi)=\\operatorname{Cov}_{\\widetilde\\pi_0}(\\phi).$$\nFor $t\\ge1$,\n$$\\widetilde V_t(\\phi)=\\widehat V_{t-1}(k_t\\phi)+\\int\\operatorname{Cov}_{k_t}(\\phi)(x)\\,\\pi_{t-1}(dx).$$\nThe weighted-estimator covariance is\n$$V_t(\\phi)=\\widetilde V_t\\!\\left(\\upsilon_t(\\phi-\\pi_t(\\phi))\\right).$$\nFor a measurable vector function $h$ on $\\Theta_t$, define the forward operator from $\\Theta_{t-1}$ by\n$$E_t h(x)=k_t(\\upsilon_t h)(x)=\\int\\upsilon_t(z)h(z)\\,k_t(x,dz).$$\nFor $k<t$, write $E_{k+1:t}=E_{k+1}\\circ\\cdots\\circ E_t$; set $E_{t+1:t}$ to the identity operator.\nFor multinomial offspring resampling set\n$$\\widehat V_t^{\\mathrm{multi}}(\\phi)=V_t(\\phi)+\\operatorname{Cov}_{\\pi_t}(\\phi).$$\nFor residual offspring resampling, let $r(u)=u-\\lfloor u\\rfloor$. When $c_t=\\widetilde\\pi_t(r(\\upsilon_t))>0$, define the formal source candidate\n$$R_t^{\\mathrm{cand}}(\\phi)=\\widetilde\\pi_t\\!\\left(r(\\upsilon_t)\\phi\\phi^\\top\\right)-\\frac{\\widetilde\\pi_t(r(\\upsilon_t)\\phi)\\,\\widetilde\\pi_t(r(\\upsilon_t)\\phi)^\\top}{c_t}.$$\nSet $R_t=R_t^{\\mathrm{cand}}$ and $\\widehat V_t^{\\mathrm{res}}=V_t+R_t$ only when $\\widetilde\\pi_t(\\upsilon_t\\in\\{1,2,\\ldots\\})=0$; then $c_t>0$ and the finite-sample floor discontinuities are avoided. If $\\upsilon_t=1$ $\\widetilde\\pi_t$-almost everywhere, all normalized weights are exactly equal and residual offspring are deterministic; in that special case put $R_t=0$. No residual covariance is assigned when $c_t=0$ but $\\upsilon_t$ is not almost everywhere one: the finite-sample normalization can move positive integer weights across floor boundaries. The B-page counterexamples show why the general positive-integer-atom branch remains unassigned."
+    },
+    {
+      "path": "items/lem-smc-multinomial-resampling-clt.md",
+      "heading": "## Statement",
+      "exact_text": "Fix a time $t$ in the finite-horizon SIR system of [[def-smc-clt-function-classes-and-variance-recursions]]. Let $\\omega_t^N$ be its corrected weighted empirical law and let $\\check\\eta_t^N$ be the empirical law after multinomial offspring resampling. Suppose $\\phi\\in\\Psi_t^{(1)}$, the empirical-law conclusions of [[lem-smc-finite-horizon-empirical-law]] hold, and\n$$\\sqrt N\\{\\omega_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow N(0,V)$$\nfor a finite $V\\ge0$. Then\n$$\\sqrt N\\{\\check\\eta_t^N(\\phi)-\\omega_t^N(\\phi)\\}\\Rightarrow N(0,\\operatorname{Var}_{\\pi_t}(\\phi)),$$\nasymptotically independently of the weighted-estimator fluctuation, and\n$$\\sqrt N\\{\\check\\eta_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow N\\!\\left(0,V+\\operatorname{Var}_{\\pi_t}(\\phi)\\right).$$"
+    },
+    {
+      "path": "items/lem-smc-residual-resampling-clt-away-from-integer-weights.md",
+      "heading": "## Statement",
+      "exact_text": "Fix a time $t$ in the finite-horizon SIR system of [[def-smc-clt-function-classes-and-variance-recursions]]. Let $X_t^{1:N}$ have proposal empirical law $\\eta_t^N$, corrected law $\\omega_t^N$, and residual-resampled law $\\check\\eta_t^N$. Assume the proposal empirical law converges in probability for every integrable test as in [[lem-smc-finite-horizon-empirical-law]], the weighted estimate has a finite-variance CLT\n$$\\sqrt N\\{\\omega_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow N(0,V),$$\nand $\\phi\\in\\Psi_t^{(1)}$. Write $u=\\upsilon_t$ and assume either $u=1$ $\\widetilde\\pi_t$-almost everywhere, or\n$$\\widetilde\\pi_t(u\\in\\{1,2,\\ldots\\})=0.$$\nIn the second case $c=\\widetilde\\pi_t(r(u))>0$. Then, with\n$$R_t(\\phi)=\\widetilde\\pi_t(r(u)\\phi^2)-\\frac{\\widetilde\\pi_t(r(u)\\phi)^2}{c},$$\nwhere $R_t(\\phi)=0$ in the constant-weight case,\n$$\\sqrt N\\{\\check\\eta_t^N(\\phi)-\\omega_t^N(\\phi)\\}\\Rightarrow N(0,R_t(\\phi)),$$\nasymptotically independently of the weighted-estimator fluctuation, and\n$$\\sqrt N\\{\\check\\eta_t^N(\\phi)-\\pi_t(\\phi)\\}\\Rightarrow N(0,V+R_t(\\phi)).$$"
+    },
+    {
+      "path": "items/cex-smc-clt-class-does-not-ensure-target-moment.md",
+      "heading": "## Statement refuted",
+      "exact_text": "The source class $\\Phi_t$ in [[def-smc-clt-function-classes-and-variance-recursions]], together with $1\\in\\Phi_t$, guarantees that every displayed finite-horizon weighted and post-resampling CLT covariance is finite, including $V_0$ for a separately weighted initial proposal."
+    },
+    {
+      "path": "items/cex-smc-residual-clt-fails-at-integer-weight-boundary.md",
+      "heading": "## Statement refuted",
+      "exact_text": "Under the recursive weighted-moment class and normalization hypotheses in [[def-smc-clt-function-classes-and-variance-recursions]], the residual offspring covariance is always the displayed $R_t(\\phi)$ computed from the limiting fractional parts $r(\\upsilon_t)$, including when the importance-weight law has an atom at a positive integer."
+    },
+    {
+      "path": "items/cex-smc-zero-residual-fraction-can-have-random-offspring.md",
+      "heading": "## Statement refuted",
+      "exact_text": "If $\\widetilde\\pi(r(\\upsilon))=0$, then standard residual resampling has deterministic offspring counts for every finite particle sample, so its residual covariance may always be set to zero."
+    }
+  ],
+  "findings": [
+    {
+      "id": "R1",
+      "classification": "genuine-controlling-plan-defect-already-corrected-in-items",
+      "severity": "substantive",
+      "locus": "BCS-42 scope: source Phi class and post-resampling variance",
+      "finding": "Phi alone does not imply target second moments. The time-one countable witness has finite proposal weighted third moment and recursive L2 image, finite weighted variance, but infinite target second moment. The separate initial witness has bounded test and Phi0 membership but infinite initial weighted centered second moment. Current Psi classes explicitly repair both issues.",
+      "minimal_action": "Correct BCS-42 scope to retain Phi as source notation while imposing current recursive Psi hypotheses on the locally proved post-selection CLTs. Retain the centered weighted-numerator initial condition and only first-moment normalization. Do not remove either CLT output or variance recursion."
+    },
+    {
+      "id": "R2",
+      "classification": "genuine-controlling-plan-defect-already-corrected-in-items",
+      "severity": "substantive",
+      "locus": "BCS-42 residual formula for positive remainder",
+      "finding": "A positive limiting remainder c does not suffice for the fractional-parts covariance. The relevant finite weights are u/eta_N(u), not u. The two-state witness has c=1/2, formal residual variance zero, but actual joint limit (Z,1_{Z>0}W), with Z normal variance 1/3 and independent W normal variance 1/6; the selected limit is non-Gaussian. Current exclusion of positive integer atoms is sufficient and correctly preserves the constant-weight special case.",
+      "minimal_action": "Add the current no-positive-integer-atom condition to the residual formula and CLT branch, with u=1 almost surely as a separate exact-equal-weight case. Retain all admissible residual CLT content."
+    },
+    {
+      "id": "R3",
+      "classification": "genuine-controlling-plan-defect-already-corrected-in-items",
+      "severity": "substantive",
+      "locus": "BCS-42 assertion that c=0 implies all offspring deterministic",
+      "finding": "The three-state witness has proposal (1/4,1/4,1/2), u=(2,2,0), c=0, but on the probability-3/16 N=3 event containing each state the scaled normalized weights are (3/2,3/2,0), so one offspring is random. Zero limiting remainder alone is not finite-sample determinism. The current definition correctly leaves general nonconstant integer-valued weights unassigned.",
+      "minimal_action": "Replace the general zero-remainder rule with the u=1 almost surely special case. Do not restore the invalid c=0 deterministic claim."
+    },
+    {
+      "id": "R4",
+      "classification": "local-proof-notation-correction",
+      "severity": "minor",
+      "locus": "lem-smc-residual-resampling-clt-away-from-integer-weights proof 1.1",
+      "finding": "The proof writes phi^j for j=2+epsilon, although phi is an arbitrary real test and epsilon need not be an integer. This power is undefined on negative values. The subsequent Lindeberg proof correctly needs the absolute moment.",
+      "minimal_action": "State the triangular empirical limit for the four tests 1, phi, phi^2, and |phi|^(2+epsilon), with absolute-value bounds for signed first moments. No statement restriction is needed."
+    },
+    {
+      "id": "R5",
+      "classification": "local-proof-explication",
+      "severity": "minor",
+      "locus": "lem-smc-multinomial-resampling-clt proof 2.2",
+      "finding": "The displayed argument uses the same Fourier coefficient u for both weighted and resampling fluctuations and then claims joint asymptotic independence. The available conditional characteristic-function convergence proves the full joint assertion immediately, but the written argument should use arbitrary coefficients v and u.",
+      "minimal_action": "Multiply the conditional resampling characteristic function at u by exp(iv times weighted fluctuation), for arbitrary real v,u. Bounded convergence in L1 gives exp(-v^2 V/2-u^2 s^2/2). Keep the rich independence conclusion."
+    },
+    {
+      "id": "R6",
+      "classification": "local-proof-explication",
+      "severity": "minor",
+      "locus": "cex-smc-clt-class-does-not-ensure-target-moment proof 3.1",
+      "finding": "The phrase that the initial multinomial covariance is finite because p is in L2(p) does not name the argument to that covariance. The needed argument is g=w(phi-pi1(phi)), which is in L2(p) by the preceding estimates. With u0=1, hat V0(g)=2 Var_p(g), and the identity kernel gives V1(phi)=hat V0(g)<infinity.",
+      "minimal_action": "Replace the p-in-L2 phrase with the explicit g calculation. Preserve both counterexamples."
+    }
+  ],
+  "mathematical_assessment": {
+    "multinomial": "Sound under the current explicit target moment and empirical-law assumptions; conditional Lindeberg, zero-variance branch and covariance addition have a complete available argument.",
+    "residual": "Sound in the current no-positive-integer-atom branch. The truncation proof controls floor neighborhoods through target integrability on u>=1/2, controls large tests via b<=2u and controls u>M via |phi|^j <=u|phi|^j/M. Zero u is harmless because r(0/a)=0. c>0 follows from mean-one u and exclusion of all positive integers. Conditional CLT applies with M_N/N->c.",
+    "constant_weight": "Correct exact-equal-weight special case on ordinary supported particle realizations; any earlier algorithm fallback/exceptional proposal-null event should be discarded as a probability-o(1) event if necessary, rather than claiming every conceivable exceptional finite sample is covered.",
+    "counterexamples": "All three constructions independently substantiate the stated contract repairs. The integer-boundary witness has nonzero third moment in its limiting selected distribution and is therefore genuinely non-Gaussian."
+  },
+  "consumer_disposition": "No statements or definitions edited. Existing fixed-horizon multinomial and residual theorem statements were inspected as consumer context and already carry Psi and the stated residual branch restriction. Owner must retain these conditions in any plan reconciliation; no separate new missing supplier was identified in this branch.",
+  "required_missing_prerequisite": null,
+  "recommended_owner_resolution": "Reconcile the controlling BCS-42 scope with the three necessary current contract corrections, preserve full admissible weighted/post-resampling CLTs and exact recursions, and apply the three small proof-text fixes only after the active writer drains."
+}

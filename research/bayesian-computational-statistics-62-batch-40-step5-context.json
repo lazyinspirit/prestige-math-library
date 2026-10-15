@@ -1,0 +1,361 @@
+{
+  "group": "l",
+  "batches": [
+    "40"
+  ],
+  "pages_read": [
+    "mcmc-diagnostics-and-finite-run-limitations",
+    "mcmc-diagnostics-and-finite-run-limitations-examples"
+  ],
+  "items_read": [
+    "def-blom-rank-normalization-for-pooled-draws",
+    "def-empirical-left-quantile-for-finite-draws",
+    "def-standard-cauchy-law",
+    "def-functional-specific-effective-sample-size",
+    "alg-split-rhat-from-multiple-chains",
+    "alg-multichain-effective-sample-size",
+    "alg-rank-normalized-folded-split-rhat",
+    "alg-bulk-effective-sample-size",
+    "alg-tail-effective-sample-size",
+    "alg-quantile-monte-carlo-standard-error",
+    "ex-thinning-can-mask-sticky-mcmc-output",
+    "ex-shared-funnel-region-missed-by-all-chains",
+    "ex-cauchy-heavy-tail-and-location-shift-rhat",
+    "ex-centered-eight-schools-low-tail-ess-and-thinning"
+  ],
+  "conventions": [
+    {
+      "convention": "Average ranks are assigned to ties before applying Φ⁻¹((r−3/8)/(S+1/4)); the normal-law interface inherits AC.",
+      "fixed_by": "def-blom-rank-normalization-for-pooled-draws",
+      "matters_for": [
+        "alg-rank-normalized-folded-split-rhat",
+        "alg-bulk-effective-sample-size",
+        "alg-tail-effective-sample-size",
+        "alg-quantile-monte-carlo-standard-error",
+        "ex-cauchy-heavy-tail-and-location-shift-rhat",
+        "ex-shared-funnel-region-missed-by-all-chains"
+      ]
+    },
+    {
+      "convention": "The empirical quantile is Q_S(u)=x_(ceil(Su)) for 0<u≤1, retaining multiplicities and using no interpolation.",
+      "fixed_by": "def-empirical-left-quantile-for-finite-draws",
+      "matters_for": [
+        "alg-tail-effective-sample-size",
+        "alg-quantile-monte-carlo-standard-error"
+      ]
+    },
+    {
+      "convention": "Split chains retain the first and last floor(L/2) observations, discarding the middle observation for odd L. Sample variances use divisor N−1. W=0 returns not estimable; R-hat is not clamped below 1.",
+      "fixed_by": "alg-split-rhat-from-multiple-chains",
+      "matters_for": [
+        "alg-rank-normalized-folded-split-rhat",
+        "ex-shared-funnel-region-missed-by-all-chains",
+        "ex-cauchy-heavy-tail-and-location-shift-rhat"
+      ]
+    },
+    {
+      "convention": "The theoretical ESS requires strict stationarity, positive finite marginal variance, absolute autocorrelation summability, and positive τ. It does not assert a CLT.",
+      "fixed_by": "def-functional-specific-effective-sample-size",
+      "matters_for": [
+        "alg-multichain-effective-sample-size",
+        "ex-thinning-can-mask-sticky-mcmc-output"
+      ]
+    },
+    {
+      "convention": "Multi-chain ESS splits once, uses biased lag autocovariances with divisor N, initial positive and monotone paired sums, odd/even truncation averaging, and the S′log10(S′) cap. A zero split-chain variance or nonpositive estimated τ returns not estimable.",
+      "fixed_by": "alg-multichain-effective-sample-size",
+      "matters_for": [
+        "alg-bulk-effective-sample-size",
+        "alg-tail-effective-sample-size",
+        "alg-quantile-monte-carlo-standard-error"
+      ]
+    },
+    {
+      "convention": "Folding uses absolute deviations from the pooled median, averaging the two central order statistics for an even pooled size; the reported R-hat is the maximum of the rank and folded components.",
+      "fixed_by": "alg-rank-normalized-folded-split-rhat",
+      "matters_for": [
+        "ex-shared-funnel-region-missed-by-all-chains",
+        "ex-cauchy-heavy-tail-and-location-shift-rhat",
+        "ex-centered-eight-schools-low-tail-ess-and-thinning"
+      ]
+    },
+    {
+      "convention": "Tail ESS uses indicators x≤q at the pooled left empirical 5% and 95% quantiles, rank-normalizes those indicators, and returns the smaller ESS.",
+      "fixed_by": "alg-tail-effective-sample-size",
+      "matters_for": [
+        "ex-centered-eight-schools-low-tail-ess-and-thinning"
+      ]
+    },
+    {
+      "convention": "Quantile MCSE uses Beta(Eα+1,E(1−α)+1) lower quantiles at .16 and .84, maps both through Q_S, and returns half their difference. The interval is an approximation without asserted coverage.",
+      "fixed_by": "alg-quantile-monte-carlo-standard-error",
+      "matters_for": []
+    },
+    {
+      "convention": "The standard Cauchy law is the density measure 1/(π(1+x²)) relative to Lebesgue measure; its construction assumes Countable Choice.",
+      "fixed_by": "def-standard-cauchy-law",
+      "matters_for": [
+        "ex-cauchy-heavy-tail-and-location-shift-rhat"
+      ]
+    },
+    {
+      "convention": "The eight-schools numerical results are reported empirical observations, distinct from the locally proved finite-array examples.",
+      "fixed_by": "ex-centered-eight-schools-low-tail-ess-and-thinning",
+      "matters_for": []
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-multichain-effective-sample-size",
+      "statement": "For M≥2 equal-length scalar chains of length L≥4, split into first and last halves, compute between/within-adjusted autocorrelations, apply positive/monotone paired truncation and odd/even averaging, and return min{S′/τ̂,S′log10(S′)} when the stated variance and positivity checks pass; otherwise return not estimable.",
+      "used_by": [
+        "alg-bulk-effective-sample-size",
+        "alg-tail-effective-sample-size",
+        "alg-quantile-monte-carlo-standard-error"
+      ]
+    },
+    {
+      "id": "def-blom-rank-normalization-for-pooled-draws",
+      "statement": "For a nonempty finite pooled collection of real values, assign average ranks r_i to ties and define z_i=Φ⁻¹((r_i−3/8)/(S+1/4)).",
+      "used_by": [
+        "alg-rank-normalized-folded-split-rhat",
+        "alg-bulk-effective-sample-size",
+        "alg-tail-effective-sample-size",
+        "alg-quantile-monte-carlo-standard-error"
+      ]
+    },
+    {
+      "id": "alg-split-rhat-from-multiple-chains",
+      "statement": "For M≥2 equal-length scalar chains with L≥4, split into first and last N=floor(L/2) observations, compute W, B and V̂⁺=(N−1)W/N+B/N, and return sqrt(V̂⁺/W) if W>0; otherwise return not estimable.",
+      "used_by": [
+        "alg-rank-normalized-folded-split-rhat",
+        "ex-cauchy-heavy-tail-and-location-shift-rhat"
+      ]
+    },
+    {
+      "id": "alg-rank-normalized-folded-split-rhat",
+      "statement": "Compute split R-hat after pooled Blom normalization of the original draws and of their absolute deviations from the pooled median; return their maximum if both are estimable, otherwise not estimable.",
+      "used_by": [
+        "ex-shared-funnel-region-missed-by-all-chains",
+        "ex-cauchy-heavy-tail-and-location-shift-rhat",
+        "ex-centered-eight-schools-low-tail-ess-and-thinning"
+      ]
+    },
+    {
+      "id": "def-functional-specific-effective-sample-size",
+      "statement": "For a strictly stationary real process with 0<σ_h²<∞, absolutely summable autocorrelations, and τ_h=1+2Σρ_h(k)>0, define ESS_h(n)=n/τ_h. This does not assert that a central limit theorem holds.",
+      "used_by": [
+        "alg-multichain-effective-sample-size",
+        "ex-thinning-can-mask-sticky-mcmc-output"
+      ]
+    },
+    {
+      "id": "def-empirical-left-quantile-for-finite-draws",
+      "statement": "For S≥1 sorted real draws retaining multiplicities and 0<u≤1, Q_S(u)=x_(ceil(Su)).",
+      "used_by": [
+        "alg-tail-effective-sample-size",
+        "alg-quantile-monte-carlo-standard-error"
+      ]
+    },
+    {
+      "id": "def-standard-cauchy-law",
+      "statement": "The measure μ_C=f dλ with f(x)=1/(π(1+x²)) has total mass one and is the standard Cauchy law.",
+      "used_by": [
+        "ex-cauchy-heavy-tail-and-location-shift-rhat"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The inherited normal-law, rank-score, and general Markov-chain assumptions.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The stated choice assumption for Cauchy construction and Lebesgue-measure interfaces.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "The standard-normal probability law and its density.",
+      "opened": true
+    },
+    {
+      "id": "lem-standard-normal-cdf-is-continuous-and-strictly-increasing",
+      "used_for": "Continuity, strict increase, and endpoint limits of Φ.",
+      "opened": true
+    },
+    {
+      "id": "lem-standard-normal-cdf-quantiles-and-symmetry",
+      "used_for": "Existence, uniqueness, finiteness, and symmetry of normal quantiles.",
+      "opened": true
+    },
+    {
+      "id": "def-stationary-process-and-canonical-shift",
+      "used_for": "Strict finite-dimensional stationarity in theoretical ESS and the thinning example.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Variance and covariance conventions and the square-integrability requirement.",
+      "opened": true
+    },
+    {
+      "id": "def-real-numbers",
+      "used_for": "Identification of the real field used in the Archimedean arguments.",
+      "opened": true
+    },
+    {
+      "id": "cor-cauchy-reals-lub-complete",
+      "used_for": "Completeness of the real ordered field and existence of bounded infima.",
+      "opened": true
+    },
+    {
+      "id": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+      "used_for": "The reference measure for the Cauchy density.",
+      "opened": true
+    },
+    {
+      "id": "cor-continuous-functions-are-borel-measurable",
+      "used_for": "Measurability of continuous density and moment integrands under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-borel-sets-are-lebesgue-measurable",
+      "used_for": "Passage from Borel to Lebesgue measurability under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Continuity of the rational Cauchy density and second-moment integrand.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-with-density",
+      "used_for": "Construction of μ_C from a nonnegative measurable density.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Compact-interval Riemann integrability of the Cauchy density.",
+      "opened": true
+    },
+    {
+      "id": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+      "used_for": "Identification of compact-interval Riemann and Lebesgue integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-principal-inverse-tangent-calculus",
+      "used_for": "Evaluation of the integral of 1/(1+x²).",
+      "opened": true
+    },
+    {
+      "id": "def-principal-inverse-tangent",
+      "used_for": "The strictly increasing inverse tangent and its principal range.",
+      "opened": true
+    },
+    {
+      "id": "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+      "used_for": "Oddness of tangent and hence of its principal inverse.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Passage from increasing compact truncations to the total Cauchy mass.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Total-mass-one checks for the Cauchy law and finite target distributions.",
+      "opened": true
+    },
+    {
+      "id": "thm-additivity-over-subintervals",
+      "used_for": "Oriented integral decomposition in Cauchy normalization.",
+      "opened": true
+    },
+    {
+      "id": "def-pi-via-first-positive-cosine-zero",
+      "used_for": "Positivity of π.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-archimedean",
+      "used_for": "Cofinality of natural numbers in the inverse-tangent limit argument.",
+      "opened": true
+    },
+    {
+      "id": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+      "used_for": "Measurability of density restrictions to compact intervals.",
+      "opened": true
+    },
+    {
+      "id": "prop-measure-monotonicity",
+      "used_for": "Monotonicity of the Beta CDF in the quantile-MCSE procedure.",
+      "opened": true
+    },
+    {
+      "id": "cor-archimedean-reciprocal",
+      "used_for": "The empty intersection of (0,1/n] inside (0,1).",
+      "opened": true
+    },
+    {
+      "id": "thm-continuity-from-above-for-measures",
+      "used_for": "Beta probabilities of (0,1/n] tending to zero, ensuring positive quantile arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+      "used_for": "The invariant-law identity checked for the two finite Markov examples.",
+      "opened": true
+    },
+    {
+      "id": "def-transition-matrix-and-n-step-transition-probabilities",
+      "used_for": "Finite transition matrices and iterated transition probabilities.",
+      "opened": true
+    },
+    {
+      "id": "def-time-homogeneous-markov-chain-with-transition-kernel",
+      "used_for": "The conditional Markov property in the finite examples.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-against-a-density",
+      "used_for": "Writing the Cauchy second moment as a Lebesgue density integral.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Lower bounds proving divergence of the Cauchy second moment.",
+      "opened": true
+    },
+    {
+      "id": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+      "used_for": "Evaluation of the constant-times-indicator integral in the second-moment lower bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "used_for": "The interval measure λ([1,R])=R−1 under Countable Choice.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "mcmc-diagnostics-and-finite-run-limitations",
+      "to": "mcmc-clt-and-monte-carlo-standard-error",
+      "faithful": true,
+      "note": "Checked the prerequisite page and the CLT-regime and long-run-variance statements against the diagnostics page. The supplier requires explicit moment and dependence conditions; the consumer defines finite estimators and expressly asserts neither a CLT nor prescribed quantile coverage. The dependency is contextual and does not strengthen the supplier."
+    },
+    {
+      "from": "mcmc-diagnostics-and-finite-run-limitations",
+      "to": "adaptive-mcmc-convergence-and-limitations",
+      "faithful": true,
+      "note": "Checked the prerequisite page, diminishing-adaptation and containment definitions, and convergence theorem statement. The supplier concludes one-time marginal total-variation convergence under its stated conditions, expressly excluding an automatic SLLN or CLT. The diagnostics page makes no stronger adaptive-output inference."
+    }
+  ]
+}

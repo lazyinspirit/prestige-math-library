@@ -1,0 +1,94 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "impact-repeat",
+  "round": 1,
+  "unit": "2",
+  "input_sha256": "30e5ad57cc61f1341903e588c6268549f6ab6eb66f4cb349c4d92592e3db2e1c",
+  "decisions": [],
+  "reviews": [
+    {
+      "id": "ex-switching-linear-gaussian-rbpf",
+      "disposition": "unaffected",
+      "post_sha256": "4b54926f6b1df2f317bce3488f5ccd2d900c7c716def2b08b1918a8ba040fa82",
+      "review_context_sha256": "7c3ecbd7cda9ff9a8f13f4b998de7a132f6c87f040b7694c1f99f009fa7e17fc",
+      "reason": "The changed conditional-model Definition adds symmetry of R_t. Verification 1.1 uses the scalar observation covariance R=1, which is symmetric positive definite; P0=Q=1 also satisfy the model. The two innovation variances 2 and 3, likelihood weights and posterior variances 1/2 and 2/3 remain valid. The owning contract F1 already quotes the repaired Definition exactly, so neither carrier nor metadata requires an edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-fixed-design-gaussian-regression-exponential-tests",
+      "disposition": "unaffected",
+      "post_sha256": "46d31fff3989f6ce07b3b05d2c3eb11ef6667761841ef9c97179411a60a6365f",
+      "review_context_sha256": "86ff6cb17fc55fbea066698b93a232ef58c6fe77219af38396361cbda3df4f50",
+      "reason": "The new n>=1 supplier hypothesis is satisfied by every sufficiently-large-n use in Proof 1.1, 2.1 and 3.1. Mean-score coefficients are deterministic, scales lie in (0,b], and the residual-energy branch has empirical shift norm at most M epsilon_n/2<=1 and deviation a M epsilon_n/4<=b^2+2 eventually. The argument remains valid. Synchronized only its owning batch-16 contract F1 quotation with the supplier Statement; the item guard is unchanged.",
+      "metadata_repair_only": true,
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-gaussian-process-posterior-contraction",
+      "disposition": "unaffected",
+      "post_sha256": "bf70f058e4ec3d86b404aaf170b6e09c3a24eacfbb6c47d794afdafb58d22c08",
+      "review_context_sha256": "30ffe8f9c059e25c751c7e85e06a19a5d825eb9ebe85df93c671d918eaf9481c",
+      "reason": "The changed tail supplier is used in F15 and Proof 1.2 only for n tending to infinity. With W=w0=0, take delta_i=0, sigma=sigma0 in [a,b] and t=R/sqrt(n); for each fixed R>0 these satisfy n>=1, norm(delta)=0 and 0<t<=b^2+2 eventually, giving P(E_R^c)<=2 exp(-R^2/(4 V_b)). Thus the stated limsup and the sharper degenerate-prior argument remain valid. Synchronized only its owning batch-16 contract F15 quotation; the item guard is unchanged.",
+      "metadata_repair_only": true,
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "repair_notes": {
+    "completed_items": [
+      "ex-switching-linear-gaussian-rbpf",
+      "lem-fixed-design-gaussian-regression-exponential-tests",
+      "thm-gaussian-process-posterior-contraction"
+    ],
+    "sources_actually_read": [
+      "items/def-conditionally-linear-gaussian-state-space-model.md: Definition",
+      "items/ex-switching-linear-gaussian-rbpf.md: Example, Facts and Verification 1.1\u20133.1",
+      "items/lem-kalman-filter-is-exact-conditional-on-nonlinear-path.md: Statement and proof",
+      "items/alg-rao-blackwellized-particle-filter.md: Definition",
+      "research/bayesian-computational-statistics-62-batch-46.proof-contracts.json: assigned example contract",
+      "items/lem-gaussian-linear-and-quadratic-statistic-tail.md: Statement and complete proof",
+      "items/lem-fixed-design-gaussian-regression-exponential-tests.md: Statement, Facts and complete proof",
+      "items/thm-gaussian-process-posterior-contraction.md: Statement, Facts, complete proof and Remarks",
+      "research/bayesian-computational-statistics-62-batch-16.proof-contracts.json: F1/F15 citation quotations and boundary/risk rows for the assigned consumers"
+    ],
+    "next_action": "Handoff to the engine; no unresolved lane obligation, new item, changed item interface or downstream propagation.",
+    "unresolved_obligations": [],
+    "metadata_changes": [
+      {
+        "path": "research/bayesian-computational-statistics-62-batch-16.proof-contracts.json",
+        "ids": [
+          "lem-fixed-design-gaussian-regression-exponential-tests",
+          "thm-gaussian-process-posterior-contraction"
+        ],
+        "change": "In exactly the F1 and F15 citation quotations, insert the supplier hypothesis: Let n>=1 be an integer. No other contract field changed."
+      }
+    ],
+    "focused_checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-16.proof-contracts.json --strict --items lem-fixed-design-gaussian-regression-exponential-tests,thm-gaussian-process-posterior-contraction --json",
+        "exit_code": 0,
+        "result": "Both scoped contracts passed with no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-46.proof-contracts.json --strict --items ex-switching-linear-gaussian-rbpf --json",
+        "exit_code": 0,
+        "result": "Scoped example contract passed with no errors or warnings."
+      },
+      {
+        "check": "Exact supplier quotation equality for both changed citation rows, frozen pack digest, report identity, assigned review inventory and current itemHashGuard comparison.",
+        "result": "Passed; all three item guards equal the frozen before guards. The task input digest matches the native digest of parsed JSON."
+      }
+    ],
+    "propagation": "No assigned Statement or Definition changed; downstream inventory is empty. The incoming supplier impacts are discharged by these item-specific reviews.",
+    "ledger_reconciliation": "No new mathematical defect in an item or published supplier/consumer was found. The incoming proposals concern other owned items; this lane preserves them and records only its two consumer-contract quotation synchronizations here. No canonical published-ledger amendment is warranted.",
+    "layout": "No item file was edited, so the required post-edit proof-layout command has no changed-item subjects."
+  },
+  "gate_resolutions": []
+}

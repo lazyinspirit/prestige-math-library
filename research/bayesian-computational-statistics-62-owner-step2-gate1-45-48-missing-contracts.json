@@ -1,0 +1,221 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": 46,
+  "contracts": {
+    "def-conditionally-linear-gaussian-state-space-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: The Definition supplies an initial probability mu_0 and probability transitions; a genuinely empty nonlinear state space cannot carry these inputs. At T=0 there is no observation list, but U_0 and Z_0 remain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: P_0=0 or Q_t=0 is admitted by positive semidefiniteness. Observation R_t must remain positive definite, so R_t=0 is excluded for positive observation dimension."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: A singleton nonlinear state space makes all coefficient maps deterministic and reduces the conditional construction to the supplied linear-Gaussian model."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Singular P_0 and Q_t give legitimate degenerate Gaussian states/noises; the Definition explicitly requires only semidefiniteness for those covariances and strict positivity for R_t."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: At T=0 only the nonlinear initial law and conditional U_0 Gaussian are present. Observation and state-noise equations begin at t=1, and the time-T equations use the same stated map domains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: AC is explicit in the first sentence and axiom_use for Gaussian laws and conditional-kernel conventions. The Borel coefficient maps and probability kernels are supplied, so no additional set-family selection is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition specifies a hierarchical model whose nonlinear transition is independent of U_{t-1}; it does not assert an equivalence characterizing all Rao\u2013Blackwellizable models."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse claims that every model with Gaussian conditional moments satisfies this independent nonlinear-transition construction; the final paragraph expressly excludes U-dependent nonlinear transitions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-particle-backward-simulator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: The Definition requires N\u22651 and S\u22651; zero particles cannot supply normalized filtering weights or a terminal categorical draw, and an empty requested path list is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The Definition omits zero filtering/smoothing weights before density evaluation. A required q=0 or q=infinity makes the mode inadmissible rather than assigning uniform backward weights."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: For N=1, its normalized weight is one. Each admissible backward vector is (1), so every particle-mode path follows the sole stored state at each time. S=1 returns one such tuple."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: All particles may coincide, or the transition may be deterministic if a valid density interface is supplied. Only active reachable child denominators must be positive finite; exact-kernel mode also admits general transitions without densities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: At T=0 there are no backward denominator requirements or backward iterations. Particle mode draws S terminal indices from w_0; all-marginals mode returns the initialized w_0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The supplied conditional-law/Feynman\u2013Kac interfaces inherit AC as recorded in axiom_use. Finite categorical draws and ordered calls of the supplied exact B_t kernels make no additional choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition gives three procedures: particle path sampling, supplied exact-kernel sampling, and an all-marginals recursion. It asserts no biconditional admissibility or convergence characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The stated reachable-denominator conditions authorize these density-mode instructions; there is no converse saying every smoothing sampler must use these scores or have transition densities."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-rao-blackwellized-particle-filter": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: The Definition initializes N\u22651 nonlinear particles. An empty cloud cannot provide the normalized Gaussian-mixture output; a zero-length observation history at t=0 is allowed with c_0=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: G_0=1 and initial weights are 1/N. Later Gaussian density factors are strictly positive finite because S_t is positive definite, so empirical likelihood sums never vanish under the specified exact-real interface."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: At N=1 each normalized mixture has one Gaussian component, updated analytically along its sampled nonlinear path. The result still approximates the nonlinear mixture and is not asserted exact for finite N."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Positive-semidefinite P_0,Q_t allow singular Gaussian components. Positive-definite R_t makes each innovation S_t invertible, so likelihood evaluation and component updates remain defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: At t=0 the routine draws z_0, assigns uniform weights and stores m_0,P_0 without an observation update. At T the final step returns the weighted paths and their Gaussian mixture with the same moment formulas."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The Definition assumes the model and supplied path-extension, Gaussian and SIR kernel interfaces, with AC inherited as recorded in axiom_use. Finite resample/append/update instructions add no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition prescribes nonlinear path sampling plus exact per-path Gaussian recursion under finite-positive evidence. It does not characterize all methods equivalent to a full nonlinear filter."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The finite mixture is explicitly an approximation for finite N; no converse identifies arbitrary Gaussian mixtures with outputs of this particle procedure."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-fixed-lag-particle-smoother": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: The Definition requires S\u22651 and the backward simulator inputs (N\u22651 in particle mode). T=0 is permitted, but still returns one time-zero empirical measure rather than an empty collection of times."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: At L=0, s_t=t, so the time-t coordinates are drawn using observations only through t. Zero particle counts or required zero backward denominators remain inadmissible under the called simulator."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: S=1 returns one point mass at each target time; this is a Monte Carlo output, not an exact marginal. With N=1 particle mode can run only when its sole reachable scores are positive finite."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: A deterministic model is allowed through supplied exact backward kernels, without demanding densities. Particle mode retains the simulator\u2019s active-denominator checks rather than silently assigning weights to impossible children."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: For t=T, s_t=T regardless of L, hence the terminal output uses all observations. If L\u2265T, every s_t=T. At T=0 the sole call is the simulator\u2019s time-zero branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The Definition uses already supplied filtering/backward kernels and finite repeated calls. axiom_use records inherited AC from conditional-law and particle-kernel interfaces, with no additional selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition fixes s_t=min(t+L,T), draws paths and returns their time-t empirical laws. It makes no equivalence between finite lag and exact full-data smoothing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The two truncated/full conditional laws may agree for model-specific reasons even when s_t<T; the Definition offers no converse characterization or forgetting criterion."
+        }
+      ],
+      "finite_smoke": []
+    }
+  },
+  "source_context": {
+    "def-conditionally-linear-gaussian-state-space-model": {
+      "source_file": "items/def-conditionally-linear-gaussian-state-space-model.md",
+      "definition_exact": "Assume AC. Let $Z_t$ take values in a standard-Borel space\n$(\\mathsf Z_t,\\mathcal Z_t)$ and let $U_t\\in\\mathbb R^{d_t}$ for a finite\nhorizon $0\\le t\\le T$. For $1\\le t\\le T$, let\n$Y_t\\in\\mathbb R^{p_t}$; observations begin at time $1$. The nonlinear\ncomponent has initial probability $\\mu_0$ and transition probability kernels\n$M_t(z_{t-1},dz_t)$; its transition does not depend on $U_{t-1}$. Given the\nentire nonlinear path $z_{0:T}$, write $\\mathsf Z_{0:t}=\\prod_{s=0}^t\\mathsf Z_s$\nwith its finite-product sigma-algebra and specify Borel maps\n$$m_0:\\mathsf Z_0\\to\\mathbb R^{d_0},\\qquad P_0:\\mathsf Z_0\\to\\mathbb R^{d_0\\times d_0},$$\nand, for $1\\le t\\le T$,\n$$A_t:\\mathsf Z_{0:t}\\to\\mathbb R^{d_t\\times d_{t-1}},\\quad Q_t:\\mathsf Z_{0:t}\\to\\mathbb R^{d_t\\times d_t},\\quad C_t:\\mathsf Z_{0:t}\\to\\mathbb R^{p_t\\times d_t},\\quad R_t:\\mathsf Z_{0:t}\\to\\mathbb R^{p_t\\times p_t}.$$\nRequire $P_0(z_0)$ and\n$Q_t(z_{0:t})$ to be symmetric positive semidefinite, meaning\n$v^TPv\\ge0$ for every matching vector $v$, and $R_t(z_{0:t})$ to be\npositive definite, meaning $v^TR_tv>0$ for every nonzero $v$. Conditional\non $Z_{0:T}=z_{0:T}$, the linear component and observations have the finite\nlinear-Gaussian model, with the transition and observation equations for\n$1\\le t\\le T$:\n$$U_0\\sim N(m_0(z_0),P_0(z_0)),\\qquad U_t=A_t(z_{0:t})U_{t-1}+\\xi_t,\\qquad Y_t=C_t(z_{0:t})U_t+\\varepsilon_t,$$\nwhere the centered Gaussian noises $\\xi_t\\sim N(0,Q_t(z_{0:t}))$ and\n$\\varepsilon_t\\sim N(0,R_t(z_{0:t}))$ are mutually independent over time\nand independent of $U_0$, under that conditional law. For every fixed path\n$z_{0:T}$ these are exactly the hypotheses of\n[[def-linear-gaussian-state-space-model-with-independent-noises]] with\ndeterministic matrices.\n\nThis hierarchical conditionally linear-Gaussian model is the input class for\nthe Rao\u2013Blackwellized filter below: it samples the nonlinear path and keeps\nthe conditional Gaussian law of $U_t$ analytically. It does not include a\nnonlinear transition whose law depends on $U_{t-1}$, nor does it assert that\nthe marginal nonlinear process remains Markov after conditioning on all\nobservations. Such models need their own marginal transition and backward\nkernels. A state-space filtering or smoothing law is a data-indexed regular\nconditional-distribution version as in\n[[def-state-space-filtering-laws]]; no pointwise uniqueness on null data\nhistories is imposed.",
+      "proof_status": "No phase-numbered proof; procedure/model contract only. Existing supporting results retain mathematical-property ownership."
+    },
+    "alg-particle-backward-simulator": {
+      "source_file": "items/alg-particle-backward-simulator.md",
+      "definition_exact": "Fix a finite horizon $T\\ge0$ and a requested path count $S\\ge1$, used in\neither mode below. In the **particle mode**, the inputs include a particle\ncount $N\\ge1$ and normalized filtering clouds\n$$\\{(x_t^i,w_t^i):1\\le i\\le N\\},\\qquad w_t^i\\ge0,\\quad\\sum_{i=1}^Nw_t^i=1,$$\nfor $0\\le t\\le T$, produced, for example, by\n[[alg-sequential-importance-resampling]]. Each $x_t^i$ is the time-$t$\ncoordinate of its stored particle path. Write $M_{t+1}$ for the model\ntransition kernel and require a product-measurable density\n$f_{t+1}(x'\\mid x)$ relative to a declared sigma-finite measure\n$\\lambda_{t+1}$, meaning\n$$M_{t+1}(x,A)=\\int_A f_{t+1}(x'\\mid x)\\,\\lambda_{t+1}(dx')$$\nfor each measurable $A$. For each $t<T$, define the predictive score with\nzero-weight terms omitted:\n$$q_{t+1}^N(x')=\\sum_{i:w_t^i>0}w_t^i f_{t+1}(x'\\mid x_t^i).$$\nFor particle-mode path sampling, define the set of reachable indices\nrecursively by $R_T=\\{j:w_T^j>0\\}$. Descending from $t=T-1$ to $0$, require\n$q_{t+1}^N(x_{t+1}^j)\\in(0,\\infty)$ for every $j\\in R_{t+1}$, and put\n$$R_t=\\bigcup_{j\\in R_{t+1}}\\{i:w_t^i>0,\\ f_{t+1}(x_{t+1}^j\\mid x_t^i)>0\\}.$$\nThese are exactly the indices that can be drawn with positive probability at\nthe corresponding backward step. For the all-marginals mode below, require\ninstead that $q_{t+1}^N(x_{t+1}^j)\\in(0,\\infty)$ whenever the current\nsmoothing weight $\\bar w_{t+1|T}^j$ is positive. Thus no denominator is\nrequired for an omitted zero-weight term. At $T=0$ there are no denominator\nconditions.\n\nIn particle mode, repeat independently for $s=1,\\ldots,S$:\n\n1. Draw $I_T^s$ from $\\{1,\\ldots,N\\}$ with probabilities $w_T^i$ and set\n   $\\widetilde X_T^s=x_T^{I_T^s}$.\n2. For $t=T-1,T-2,\\ldots,0$, set $b_t^i=0$ without evaluating the density\n   whenever $w_t^i=0$. For $w_t^i>0$, set\n   $$b_t^i(\\widetilde X_{t+1}^s)=\\frac{w_t^i f_{t+1}(\\widetilde X_{t+1}^s\\mid x_t^i)}{q_{t+1}^N(\\widetilde X_{t+1}^s)}.$$\n   Draw $I_t^s$ from this probability vector, and set\n   $\\widetilde X_t^s=x_t^{I_t^s}$.\n3. Return the tuple\n   $$\\widetilde X_{0:T}^s=(x_0^{I_0^s},\\ldots,x_T^{I_T^s}).$$\n   This is a draw from the particle backward approximation to the smoothing\n   path law. The coordinates are selected by separate backward indices and\n   need not be the stored forward ancestor history of any one particle.\nThe particle path-sampling output is the list\n$\\widetilde X_{0:T}^1,\\ldots,\\widetilde X_{0:T}^S$.\n\nIf an exact filtering kernel $\\eta_T$ and supplied backward conditional\nkernels $B_t$ from\n[[lem-smoothing-backward-kernel-bayes-factorization]] are available for\ngeneral transition kernels, there is a separate exact-kernel mode: draw\n$S$ conditionally independent paths, each by drawing $X_T\\sim\\eta_T$ and then\ndrawing $X_t\\sim B_t(X_{t+1},\\cdot)$ successively backward. This mode uses\nthe actual kernels; it does not evaluate a transition density or a kernel on\nparticle singletons. It returns exact smoothing paths under the supplied\nconditional versions wherever their factorization holds.\n\nAn optional all-marginals mode computes particle smoothing weights instead\nof drawing paths. Initialize $\\bar w_{T|T}^j=w_T^j$. For\n$t=T-1,\\ldots,0$, let $J_{t+1}=\\{j:\\bar w_{t+1|T}^j>0\\}$. For each\n$j\\in J_{t+1}$ and $i$ with $w_t^i>0$, set\n$$b_{t}^{i,j}=\\frac{w_t^i f_{t+1}(x_{t+1}^j\\mid x_t^i)}{q_{t+1}^N(x_{t+1}^j)};$$\nset $b_t^{i,j}=0$ without evaluating the density if $j\\notin J_{t+1}$ or\n$w_t^i=0$. Update\n$$\\bar w_{t|T}^i=\\sum_{j\\in J_{t+1}}\\bar w_{t+1|T}^j b_t^{i,j}.$$\nFor every active $j$, $(b_t^{i,j})_{i=1}^N$ is a probability vector, so the\nraw updated values are nonnegative and already sum to one; explicit\nnormalization leaves them unchanged. Return\n$\\sum_i\\bar w_{t|T}^i\\delta_{x_t^i}$ as the approximate smoothed marginal at\ntime $t$. The algorithm makes no finite-particle accuracy, consistency, or\nlong-time stability claim.",
+      "proof_status": "No phase-numbered proof; procedure/model contract only. Existing supporting results retain mathematical-property ownership."
+    },
+    "alg-rao-blackwellized-particle-filter": {
+      "source_file": "items/alg-rao-blackwellized-particle-filter.md",
+      "definition_exact": "Use the conditionally linear-Gaussian model of\n[[def-conditionally-linear-gaussian-state-space-model]] and a fixed\nobservation path $y_{1:T}$. For each $0\\le t\\le T$, let $\\bar P_t$ be the\nnonlinear path law generated by $\\mu_0$ and the path-extension kernels from\n[[lem-nonlinear-path-extension-is-a-probability-kernel]], and\nput\n$$c_t(y_{1:t})=\\int_{\\mathsf Z_{0:t}}\\prod_{s=1}^t\\ell_s(z_{0:s};y_{1:s})\\,\\bar P_t(dz_{0:t}),\\qquad c_0=1.$$\nHere $\\ell_s$ is the conditional observation density supplied by\n[[lem-kalman-filter-is-exact-conditional-on-nonlinear-path]].\nFor the claim that the procedure targets the nonlinear filtering law at every\nprefix, assume $0<c_t(y_{1:t})<\\infty$ for every $t$; this is the finite-positive\nnormalizer condition for the normalized Feynman\u2013Kac target. The Kalman\nlikelihood factorization identifies $c_t$ with the observation\nevidence density and the normalized path target with the exact conditional\nlaw of $Z_{0:t}$ given $Y_{1:t}=y_{1:t}$. The particle procedure itself uses\nfinite positive per-particle likelihoods, so each of\nits empirical weight normalizers is finite positive. The particle state at\ntime $t$ is the full\nnonlinear history $z_{0:t}$; finite products of the standard-Borel state\nspaces are standard Borel. Its transition appends a draw\n$z_t\\sim M_t(z_{t-1},\\cdot)$; the resulting path-extension probability\nkernel and standard-Borel path space are supplied by\n[[lem-nonlinear-path-extension-is-a-probability-kernel]]. Set the initial Feynman\u2013Kac potential to\n$G_0\\equiv1$ and the time-$t$ potential to the conditional observation\ndensity\n$$G_t(z_{0:t})=\\ell_t(z_{0:t};y_{1:t})$$\nfrom [[lem-kalman-filter-is-exact-conditional-on-nonlinear-path]]. Use the\nsame path-extension kernel as target and proposal, so the initial and\ntransition Radon\u2013Nikodym weights are identically one. Run\n[[alg-sequential-importance-resampling]] with multinomial resampling to\napproximate the filtering law of the nonlinear path. Each particle stores\nalongside its path the conditional Gaussian moments of $U_t$.\n\nInitialize $N\\ge1$ particles by drawing $z_0^i\\sim\\mu_0$ independently,\nsetting $w_0^i=1/N$, $m_{0|0}^i=m_0(z_0^i)$, and\n$P_{0|0}^i=P_0(z_0^i)$. For each $t=1,\\ldots,T$:\n\n1. Draw ancestor indices $J_t^1,\\ldots,J_t^N$ independently with\n   probabilities $(w_{t-1}^1,\\ldots,w_{t-1}^N)$ and append independent\n   transitions $z_t^i\\sim M_t(z_{t-1}^{J_t^i},\\cdot)$.\n2. For each particle, abbreviate its appended path by $z_{0:t}^i$ and compute\n   $$m_{t|t-1}^i=A_t(z_{0:t}^i)m_{t-1|t-1}^{J_t^i},\\qquad P_{t|t-1}^i=A_t(z_{0:t}^i)P_{t-1|t-1}^{J_t^i}A_t(z_{0:t}^i)^T+Q_t(z_{0:t}^i).$$\n   Form $v_t^i=y_t-C_t(z_{0:t}^i)m_{t|t-1}^i$ and\n   $S_t^i=C_t(z_{0:t}^i)P_{t|t-1}^iC_t(z_{0:t}^i)^T+R_t(z_{0:t}^i)$.\n3. Set the incremental weight to the finite positive Gaussian density\n   $$a_t^i=(2\\pi)^{-p_t/2}\\det(S_t^i)^{-1/2}\\exp\\!\\left(-\\tfrac12(v_t^i)^T(S_t^i)^{-1}v_t^i\\right),$$\n   and normalize $w_t^i=a_t^i/\\sum_j a_t^j$.\n4. Update the conditional Gaussian moments by\n   $$K_t^i=P_{t|t-1}^iC_t(z_{0:t}^i)^T(S_t^i)^{-1},\\qquad m_{t|t}^i=m_{t|t-1}^i+K_t^iv_t^i,\\qquad P_{t|t}^i=P_{t|t-1}^i-K_t^iS_t^i(K_t^i)^T.$$\n\nThe procedure returns the weighted nonlinear particle paths and the Gaussian\nmixture\n$$\\widehat\\pi_t^N(du_t,dz_{0:t})=\\sum_{i=1}^Nw_t^iN(du_t;m_{t|t}^i,P_{t|t}^i)\\,\\delta_{z_{0:t}^i}(dz_{0:t}).$$\nIts conditional mean is $\\sum_iw_t^im_{t|t}^i$ and its conditional covariance\nis $\\sum_iw_t^i[P_{t|t}^i+(m_{t|t}^i-\\bar m_t)(m_{t|t}^i-\\bar m_t)^T]$,\nwhere $\\bar m_t=\\sum_iw_t^im_{t|t}^i$. These are moments of the finite\nmixture approximation; for finite $N$ the algorithm remains an approximation\nto the full nonlinear filter. It makes no general variance-reduction,\nconvergence-rate, or long-time accuracy claim.",
+      "proof_status": "No phase-numbered proof; procedure/model contract only. Existing supporting results retain mathematical-property ownership."
+    },
+    "alg-fixed-lag-particle-smoother": {
+      "source_file": "items/alg-fixed-lag-particle-smoother.md",
+      "definition_exact": "For a finite horizon $T\\ge0$, fix an integer lag $L\\ge0$, a path count\n$S\\ge1$, and the normalized\nfiltering particle clouds and transition inputs required by\n[[alg-particle-backward-simulator]]. For each time $t\\in\\{0,\\ldots,T\\}$,\nput $s_t=\\min(t+L,T)$. Independently for each $t$, run the particle backward\nsimulator using only the filtering clouds at times $0,\\ldots,s_t$ and request\n$S$ paths. Retain their time-$t$ coordinates $\\widetilde X_t^{t,1},\\ldots,\n\\widetilde X_t^{t,S}$ and return the empirical measure\n$$\\widehat\\eta_{t|s_t}^{S}=\\frac1S\\sum_{r=1}^S\\delta_{\\widetilde X_t^{t,r}}.$$\nIn particle mode this empirical law approximates\n$$\\mathcal L(X_t\\mid Y_{1:s_t}),$$\nnot the full smoothing law $\\mathcal L(X_t\\mid Y_{1:T})$ unless $s_t=T$ or\nthe two conditional laws happen to agree. The same procedure can use supplied\nexact backward kernels when the model has no transition density; for each\n$s_t$ it uses the supplied filtering kernel at $y_{1:s_t}$ and the backward\nkernels for the corresponding prefix histories. On histories where these\nkernels factor the truncated smoother, it samples that exact conditional law.\n\nThe procedure returns one truncated smoothing marginal per $t$. It does not\nassert a bound on the lag bias, a forgetting rate, or convergence to the\nfull-data smoother for fixed $L$. Those conclusions require separate\nconditions on the model.",
+      "proof_status": "No phase-numbered proof; procedure/model contract only. Existing supporting results retain mathematical-property ownership."
+    }
+  }
+}

@@ -1,0 +1,327 @@
+[
+  {
+    "order": 2066,
+    "id": "parametric-bernstein-von-mises-and-misspecification",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Parametric Bernstein–von Mises limits and misspecification",
+    "companion": "parametric-bernstein-von-mises-and-misspecification-examples",
+    "requires": [
+      "misspecified-posterior-consistency",
+      "local-asymptotic-normality-contiguity-and-efficiency"
+    ],
+    "items": [
+      {
+        "id": "lem-local-lipschitz-class-empirical-process-bound",
+        "kind": "lemma",
+        "title": "A square-integrable Lipschitz envelope controls a local empirical process",
+        "statement": "For an iid sample and a finite-dimensional parameter ball, a pointwise Lipschitz class with square-integrable envelope has expected centered-process supremum at most C_d r times the envelope's L2 norm on a radius-r ball, and expected modulus at parameter separation epsilon at most C_d epsilon sqrt(log(e r/epsilon)) times that norm.",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique"
+        ],
+        "justified_by": [],
+        "strategy": "Direct: symmetrize with an independent ghost sample, condition on the observations, and use dyadic Euclidean nets and pair nets with sub-Gaussian Rademacher increments.",
+        "axiom_use": "None. The proof uses finite-dimensional Euclidean nets, finite products, symmetrization, and a square-integrable envelope.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. J. K. Kleijn and A. W. van der Vaart, The Bernstein-Von-Mises theorem under misspecification, Lemma 2.1 and proof",
+              "url": "https://pure.uva.nl/ws/files/1850322/114737_376240.pdf"
+            },
+            {
+              "title": "Peter Bartlett, Theoretical Statistics, Lecture 23, QMD and local asymptotic normality",
+              "url": "https://www.stat.berkeley.edu/~bartlett/courses/2013spring-stat210b/notes/23notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-lan-implies-total-variation-bvm",
+        "kind": "theorem",
+        "title": "Compact-uniform LAN and rate contraction imply a total-variation BvM limit",
+        "statement": "Let a finite-dimensional dominated model have an interior point theta-star, a proper prior density continuous and positive near theta-star, and a proper posterior. If the log-likelihood ratio has a compact-uniform LAN expansion at rate delta-n with central vector Delta-n=O_P0(1) and positive-definite quadratic matrix V, and if the posterior contracts in Euclidean parameter norm outside delta-n M-n for every deterministic M-n tending to infinity, then the posterior law of delta-n^{-1}(theta-theta-star) is o_P0(1) in the event-supremum total-variation distance from N_d(V^{-1}Delta-n,V^{-1}). The result is conditional on the stated rate-contraction premise.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-multivariate-normal-law",
+          "def-op-and-little-op-stochastic-bounds",
+          "def-total-variation-distance-for-probability-laws",
+          "thm-nondegenerate-multivariate-normal-law-has-density"
+        ],
+        "justified_by": [],
+        "strategy": "Direct: prove tightness of the scaled posterior from the every-diverging-radius contraction premise, compare the posterior and Gaussian laws after conditioning on a fixed compact ball, then remove the tails.",
+        "axiom_use": "AC is used only for the library multivariate-normal-law construction and, when a supplied density family is not already part of the data, the selected likelihood-density convention. The proof itself uses the explicitly supplied jointly measurable density family.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. J. K. Kleijn and A. W. van der Vaart, The Bernstein-Von-Mises theorem under misspecification, Theorem 2.1 and proof",
+              "url": "https://pure.uva.nl/ws/files/1850322/114737_376240.pdf"
+            },
+            {
+              "title": "A. W. van der Vaart, Asymptotic Statistics, Chapter 10, §10.2, Theorem 10.1 and proof",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/asymp/bayes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "cor-qmd-ac-component-lan-to-bvm",
+        "kind": "corollary",
+        "title": "The QMD route uses normalized absolutely continuous likelihoods and a separate uniform LAN premise",
+        "statement": "Assume AC and a common-dominator iid QMD path at an interior theta-star with P0=P_theta-star. For u=h/sqrt(n), let alpha(u)=P_theta-star+u(p_theta-star=0) and normalize the alternative density on {p_theta-star>0} by 1-alpha(u). If the normalized absolutely continuous component has a compact-uniform LAN expansion, the prior is continuous and positive at theta-star, and the posterior has the parameter-rate contraction required by the general BvM theorem, then that theorem applies. QMD controls the singular and zero-overlap masses and makes the full product law total-variation close to the normalized absolutely continuous component; the existing fixed-local-sequence QMD-LAN theorem alone does not assert compact-uniform LAN.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-likelihood-density",
+          "def-qmd-path",
+          "lem-qmd-normalized-product-likelihood-expansion",
+          "lem-qmd-singular-and-zero-overlap-masses",
+          "thm-lan-implies-total-variation-bvm",
+          "thm-qmd-implies-lan-for-iid"
+        ],
+        "justified_by": [],
+        "strategy": "Direct: bound the one-observation singular mass uniformly on compact local directions, compare the actual posterior likelihood ratio with the normalized absolutely continuous component on the base-law support, and then invoke the LAN-to-BvM theorem under the separate compact-uniform premise.",
+        "axiom_use": "AC is assumed exactly as required by the QMD density-version and QMD-LAN suppliers; the normalized proxy and product comparison use their stated AC branch.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Bartlett, Theoretical Statistics, Lecture 23, QMD and local asymptotic normality",
+              "url": "https://www.stat.berkeley.edu/~bartlett/courses/2013spring-stat210b/notes/23notes.pdf"
+            },
+            {
+              "title": "B. J. K. Kleijn and A. W. van der Vaart, The Bernstein-Von-Mises theorem under misspecification, §2.1",
+              "url": "https://pure.uva.nl/ws/files/1850322/114737_376240.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-misspecified-iid-lan-under-kv-smoothness",
+        "kind": "theorem",
+        "title": "A local KL expansion and square-integrable log-Lipschitz envelope give misspecified iid LAN",
+        "statement": "For iid data from P0 in a jointly measurable dominated density model, suppose theta-star is an interior finite KL minimizer, the log density is differentiable in P0-probability at theta-star, nearby log-density ratios have a common square-integrable Lipschitz envelope, and the KL contrast has a positive-definite second-order expansion there. Then the iid log-likelihood ratio has LAN uniformly on every compact set at rate n^{-1/2}, with central vector V^{-1} n^{-1/2} sum_i score(X_i). The score is square-integrable and P0-centered; no equality between score covariance and V is asserted.",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "def-op-and-little-op-stochastic-bounds",
+          "lem-local-lipschitz-class-empirical-process-bound"
+        ],
+        "justified_by": [],
+        "strategy": "Direct: derive score centering and square integrability from differentiability plus the envelope, bound the centered remainder by the local empirical-process lemma, and use the second-order KL expansion for the deterministic term.",
+        "axiom_use": "None. A supplied jointly measurable density family is part of the hypotheses; the score, LAN expansion, and probability bounds are proved without selecting new density versions or applying a choice-dependent central limit theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. J. K. Kleijn and A. W. van der Vaart, The Bernstein-Von-Mises theorem under misspecification, §2.2, Lemma 2.1 and proof",
+              "url": "https://pure.uva.nl/ws/files/1850322/114737_376240.pdf"
+            },
+            {
+              "title": "Peter Bartlett, Theoretical Statistics, Lecture 23, QMD and local asymptotic normality",
+              "url": "https://www.stat.berkeley.edu/~bartlett/courses/2013spring-stat210b/notes/23notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "cor-misspecified-iid-bvm-under-kv-regularity",
+        "kind": "corollary",
+        "title": "Misspecified iid LAN gives a BvM limit when the posterior has the required parameter rate",
+        "statement": "Under the hypotheses of the misspecified iid LAN theorem, add a prior density continuous and positive at theta-star, proper finite evidence, and posterior contraction outside n^{-1/2} M-n in parameter norm for every deterministic M-n tending to infinity. Then the scaled posterior is o_P0(1) in total variation from N_d(V^{-1}Delta-n,V^{-1}). The rate-contraction condition remains an explicit premise and is not inferred from ordinary posterior consistency at a KL projection.",
+        "deps": [
+          "thm-lan-implies-total-variation-bvm",
+          "thm-misspecified-iid-lan-under-kv-smoothness"
+        ],
+        "justified_by": [],
+        "strategy": "Direct: apply the iid LAN result to supply the uniform likelihood expansion and apply the general LAN-to-BvM theorem with the stated prior and posterior-tail hypotheses.",
+        "axiom_use": "Inherits only the AC assumption of the LAN-to-BvM theorem's multivariate-normal target. No additional axiom is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. J. K. Kleijn and A. W. van der Vaart, The Bernstein-Von-Mises theorem under misspecification, Theorems 2.1 and Lemma 2.1",
+              "url": "https://pure.uva.nl/ws/files/1850322/114737_376240.pdf"
+            },
+            {
+              "title": "A. W. van der Vaart, Asymptotic Statistics, Chapter 10, §10.2, Theorem 10.1 and proof",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/asymp/bayes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-misspecified-mle-sandwich-expansion",
+        "kind": "theorem",
+        "title": "A consistent approximate MLE has the misspecified sandwich limit under local LAN conditions",
+        "statement": "Assume the hypotheses of the misspecified iid LAN theorem and AC. If a measurable estimator theta-hat-n is consistent for theta-star and its empirical average log likelihood is within o_P0(n^{-1}) of the global supremum, then sqrt(n)(theta-hat-n-theta-star)=V^{-1} n^{-1/2} sum_i score(X_i)+o_P0(1), with sampling covariance V^{-1} I V^{-1}, where I=P0[score score^T]. Under the posterior rate-contraction premise of the LAN-to-BvM theorem, the posterior can also be centered at sqrt(n)(theta-hat-n-theta-star) in the same total-variation limit. The consistency and approximate-maximization conditions are separate assumptions; no MLE consistency claim is made here.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "def-op-and-little-op-stochastic-bounds",
+          "def-total-variation-distance-for-probability-laws",
+          "lem-local-lipschitz-class-empirical-process-bound",
+          "thm-lan-implies-total-variation-bvm",
+          "thm-misspecified-iid-lan-under-kv-smoothness",
+          "thm-multivariate-iid-central-limit-theorem",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "thm-vector-slutsky",
+          "thm-vector-stochastic-order-calculus"
+        ],
+        "justified_by": [],
+        "strategy": "Direct: use the local empirical-process bound and positive KL curvature to prove root-n tightness by dyadic shells, optimize the uniform LAN quadratic, then apply the multivariate CLT and a Gaussian location-shift bound.",
+        "axiom_use": "AC is used for the multivariate iid CLT and library Gaussian laws. The exact uses are the score-sum limit and the normal comparison law; no AC is used to obtain MLE consistency.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. J. K. Kleijn and A. W. van der Vaart, The Bernstein-Von-Mises theorem under misspecification, Lemma 2.2 and proof conditions",
+              "url": "https://pure.uva.nl/ws/files/1850322/114737_376240.pdf"
+            },
+            {
+              "title": "Peter Bartlett, Theoretical Statistics, Lecture 23, maximum likelihood conditions under QMD",
+              "url": "https://www.stat.berkeley.edu/~bartlett/courses/2013spring-stat210b/notes/23notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      }
+    ]
+  },
+  {
+    "order": 2067,
+    "id": "parametric-bernstein-von-mises-and-misspecification-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Parametric Bernstein–von Mises limits and misspecification — Examples",
+    "companion": "parametric-bernstein-von-mises-and-misspecification",
+    "requires": [
+      "parametric-bernstein-von-mises-and-misspecification"
+    ],
+    "items": [
+      {
+        "id": "ex-regular-normal-model-bvm",
+        "kind": "example",
+        "title": "A correctly specified regular normal mean model",
+        "statement": "For X_i iid N(theta-star,1), a proper N(0,tau^2) prior gives an exact normal posterior whose sqrt(n)-scaled law is within o_P(1) total variation of N(sqrt(n)(bar X-theta-star),1); the posterior and sampling widths both tend to n^{-1/2}.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-standard-normal-and-normal-laws",
+          "def-total-variation-distance-for-probability-laws",
+          "lem-normal-density-has-total-mass-one"
+        ],
+        "dependency_level": 0,
+        "strategy": "Verification: complete the square in the normal likelihood times prior, rescale the exact posterior, and bound the location and scale changes in total variation.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart, Asymptotic Statistics, Chapter 10, §10.2",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/asymp/bayes.pdf"
+            },
+            {
+              "title": "B. J. K. Kleijn and A. W. van der Vaart, The Bernstein-Von-Mises theorem under misspecification, §1 and §2.1",
+              "url": "https://pure.uva.nl/ws/files/1850322/114737_376240.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-normal-working-model-misspecified-coverage",
+        "kind": "example",
+        "title": "A unit-variance normal working model can miscalibrate credible intervals",
+        "statement": "Under a dominated iid truth with mean zero and finite variance sigma^2>0, the N(theta,1) working likelihood has expected-log-likelihood maximizer theta-star=0 (and KL projection when the directional KL is finite), exact posterior width asymptotic to n^{-1/2}, and sampling width sigma n^{-1/2}; central posterior intervals have limiting coverage 2 Phi(z_{1-alpha/2}/sigma)-1.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "thm-multivariate-iid-central-limit-theorem",
+          "thm-portmanteau-theorem"
+        ],
+        "dependency_level": 0,
+        "strategy": "Verification: normalize the Gaussian prior, complete the square in the working likelihood, identify the exact posterior width and MLE, and apply the iid CLT to the truth's sample mean.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. J. K. Kleijn and A. W. van der Vaart, The Bernstein-Von-Mises theorem under misspecification, Example 2.1",
+              "url": "https://pure.uva.nl/ws/files/1850322/114737_376240.pdf"
+            },
+            {
+              "title": "Natalia Bochkina, Bernstein-von Mises theorem and misspecified models: a review, §§1.2 and 1.4",
+              "url": "https://www.maths.ed.ac.uk/~nbochkin/ReviewBvMmisspecifiedBochkinaRevision.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-boundary-normal-mean-truncated-posterior",
+        "kind": "example",
+        "title": "At a boundary, the normal posterior limit is truncated",
+        "statement": "For the normal mean model restricted to theta>=0, truth theta-star=0, and an exponential prior, the sqrt(n)-scaled posterior is a normal law truncated to [0,infinity); its total-variation distance from the untruncated Gaussian LAN approximation stays bounded away from zero with nonvanishing probability.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-standard-normal-and-normal-laws",
+          "def-total-variation-distance-for-probability-laws",
+          "lem-normal-density-has-total-mass-one",
+          "thm-lindeberg-levy-iid-central-limit-theorem",
+          "thm-portmanteau-theorem"
+        ],
+        "dependency_level": 0,
+        "strategy": "Verification: compute the exact truncated posterior after rescaling and use the negative half-line as a total-variation witness for the untruncated Gaussian approximation.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Natalia Bochkina, Bernstein-von Mises theorem and misspecified models: a review, §1.4.1",
+              "url": "https://www.maths.ed.ac.uk/~nbochkin/ReviewBvMmisspecifiedBochkinaRevision.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

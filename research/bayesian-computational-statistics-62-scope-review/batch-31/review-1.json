@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "31",
+  "round": 1,
+  "reviewed_items": [
+    "alg-importance-sampling",
+    "thm-ordinary-importance-sampling-is-unbiased",
+    "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+    "alg-self-normalized-importance-sampling",
+    "thm-self-normalized-importance-sampling-is-consistent-under-finite-moments",
+    "thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse",
+    "def-importance-weight-effective-sample-size",
+    "ex-ordinary-and-self-normalized-importance-sampling-on-two-point-space",
+    "cex-ordinary-importance-sampling-infinite-variance-under-light-tailed-proposal",
+    "cex-importance-weight-ess-misses-target-region"
+  ],
+  "reviewed_pages": [
+    "importance-sampling-and-weight-diagnostics",
+    "importance-sampling-and-weight-diagnostics-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The round-0 repairs resolve all earlier findings. Final review found an unmet prerequisite in the expectation-to-density conversions, so the batch remains unsatisfied.",
+  "findings": [
+    {
+      "id": "thm-ordinary-importance-sampling-is-unbiased",
+      "type": "prerequisite",
+      "reason": "The proofs use the identity ∫g dQ = ∫gq dμ without citing or establishing published supplier thm-integration-against-a-density. It is needed in thm-ordinary-importance-sampling-is-unbiased step 1.1 (absolute and signed integrands; derive the signed case by positive/negative parts), thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment step 3.1, thm-self-normalized-importance-sampling-is-consistent-under-finite-moments step 1.1, thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse step 1.1, and cex-ordinary-importance-sampling-infinite-variance-under-light-tailed-proposal step 2.1. The available signed-density lemma is restricted to bounded functions and does not cover these general integrands. Add the missing prerequisite and make each use explicit."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+      "decision": "escalate",
+      "reason": "Its step 3.1 uses the missing density integration identity."
+    },
+    {
+      "id": "thm-self-normalized-importance-sampling-is-consistent-under-finite-moments",
+      "decision": "escalate",
+      "reason": "Its step 1.1 uses the missing density integration identity."
+    },
+    {
+      "id": "thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse",
+      "decision": "escalate",
+      "reason": "Its step 1.1 uses the missing density integration identity."
+    },
+    {
+      "id": "cex-ordinary-importance-sampling-infinite-variance-under-light-tailed-proposal",
+      "decision": "escalate",
+      "reason": "Its step 2.1 uses the missing density integration identity."
+    },
+    {
+      "id": "importance-sampling-and-weight-diagnostics",
+      "decision": "escalate",
+      "reason": "Its summary depends on conclusions whose proofs have the unresolved prerequisite gap."
+    },
+    {
+      "id": "importance-sampling-and-weight-diagnostics-examples",
+      "decision": "escalate",
+      "reason": "Its ordinary-IS infinite-variance example depends on the unresolved prerequisite gap."
+    },
+    {
+      "id": "ex-ordinary-and-self-normalized-importance-sampling-on-two-point-space",
+      "decision": "accept",
+      "reason": "Its finite-space expectation and ratio-bias claims are established directly by the displayed calculations."
+    },
+    {
+      "id": "ex-bootstrap-and-informed-proposal-particle-filter",
+      "decision": "accept",
+      "reason": "Its finite proposal weights and normalizer expectations are computed directly in steps 2.1–2.2, independently of its redundant invocation of the ordinary-IS theorem."
+    },
+    {
+      "id": "ex-smc-dominant-weight-and-ess",
+      "decision": "accept",
+      "reason": "Its ESS computation depends on the unchanged ESS definition and is verified directly."
+    }
+  ]
+}

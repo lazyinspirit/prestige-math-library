@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batches": [
+    49,
+    50,
+    51,
+    52
+  ],
+  "contract_additions": {
+    "def-m-out-of-n-bootstrap-and-subsampling": {
+      "risk": "medium",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition assumes n>=1 and1<=m<=n for bootstrap,1<=m<n for subsampling. Thus observed/resampled tuples and subset family are nonempty; no empirical1/n law at n0 is defined."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition requires a_k>0 for every declared normalization. The centered difference T_m-hat_theta_n may equal0, producing root0 without any division by that difference; a zero statistic is admissible."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits n=m=1 for the with-replacement branch: the empirical law is a point mass and the centered root is0. No without-replacement branch exists at n1 because1<=m<n cannot hold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition allows coincident observed records and point-mass empirical laws. All bootstrap draws then equal the repeated record; the root is the stated statistic difference, which need not vanish when T_m and T_n use different sample-size formulas."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition includes m=n for ordinary bootstrap but excludes m=n from subsampling. The asymptotic regime m_n/n\u21920 is stated separately and does not redefine the finite admissible endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition forms a uniform law on the finite binomial(n,m) subset family. The member{1,...,m} exists when1<=m<n; the bootstrap uses a supplied empirical law and no arbitrary-index choice is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition constructs two centered roots with their actual size-m scale. It supplies no theorem equating the m_n/n regime with validity and explicitly says validity does not follow merely from that regime."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition does not infer an m_n/n rate or any sampling-unit design from a limiting root law. The root-specific centering condition a_m/a_n\u21920 is separately identified, not asserted necessary and sufficient."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": []
+    }
+  },
+  "frontmatter_proposals": [
+    {
+      "id": "def-abc-augmented-tolerance-target",
+      "field": "justified_by",
+      "value": [
+        "lem-abc-augmented-target-has-tolerance-posterior-marginal"
+      ],
+      "reason": "Definition expressly defers identification of its parameter marginal to this proved lemma, which already depends on the definition. This is a well-definedness discharge, not an ordinary reverse dependency; it satisfies the flagged citation without creating a deps cycle."
+    },
+    {
+      "id": "thm-abc-zero-tolerance-target-is-summary-posterior-under-density-regularity",
+      "field": "forward_refs",
+      "add": [
+        "cex-abc-zero-tolerance-limit-fails-without-integrable-envelope"
+      ],
+      "reason": "The sole use is an illustrative final Remarks link to the later examples page. Neither Statement nor proof assumes the counterexample; no dependency or claim changes."
+    }
+  ],
+  "source_changes": [
+    {
+      "path": "items/thm-abc-zero-tolerance-target-is-summary-posterior-under-density-regularity.md",
+      "before_file": "research/bayesian-computational-statistics-62-owner-step2-gate1-49-52-before/thm-abc-zero-tolerance-target-is-summary-posterior-under-density-regularity.md",
+      "change": "Removed inline dollar delimiters nested within the display text phrase for Pi-almost every theta; the formula, hypotheses and prose meaning are unchanged.",
+      "consumer_disposition": "Pure KaTeX delimiter correction leaves exact mathematical interface unchanged; no downstream premise is altered."
+    }
+  ],
+  "validation": {
+    "command": "node tools/proof-layout.mjs items/thm-abc-zero-tolerance-target-is-summary-posterior-under-density-regularity.md",
+    "exit_code": 0,
+    "output": "proof-layout: 1 items, 5 steps, 0 defects"
+  },
+  "root_owned": "All live contract/declaration/manifest/citation/step mirrors, final multiline canonical formatting, hashes, readiness and the complete gate battery remain root-owned. No live research metadata or state edited.",
+  "definition_supplier_context": [
+    {
+      "fact": "definition-context",
+      "source": "def-identically-distributed-and-iid-random-variables",
+      "source_section": "Definition",
+      "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+      "uses": []
+    },
+    {
+      "fact": "definition-context",
+      "source": "lem-finite-empirical-measure-is-a-probability-law",
+      "source_section": "Statement",
+      "quote": "Let $(X,\\mathcal A)$ be a measurable space, let $n\\ge1$, and let $x_1,\\ldots,x_n\\in X$. Define\n\n$$P_n(A):=\\frac1n\\sum_{i=1}^n\\delta_{x_i}(A),\\qquad A\\in\\mathcal A.$$\n\nThen $P_n$ is a probability measure on $(X,\\mathcal A)$.",
+      "uses": []
+    }
+  ]
+}

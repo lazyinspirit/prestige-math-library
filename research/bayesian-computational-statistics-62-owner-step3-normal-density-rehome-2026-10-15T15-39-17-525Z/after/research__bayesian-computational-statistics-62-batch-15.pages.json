@@ -1,0 +1,850 @@
+[
+  {
+    "order": 2070,
+    "id": "gaussian-process-support-and-concentration",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Banach Gaussian priors, RKHS support, and concentration",
+    "companion": "gaussian-process-support-and-concentration-examples",
+    "requires": [
+      "gaussian-process-priors-and-posterior-laws",
+      "banach-valued-integration-and-the-radon-nikodym-property",
+      "polyhedral-selective-inference"
+    ],
+    "items": [
+      {
+        "id": "def-borel-gaussian-random-element-on-a-separable-banach-space",
+        "kind": "definition",
+        "title": "Centered Borel Gaussian random element on a separable Banach space",
+        "statement": "Let $(\\Omega,\\mathcal F,P)$ be a probability space and let $B$ be a real\nseparable Banach space with its norm Borel sigma-algebra. A map\n$W:\\Omega\\to B$ is a **centered Borel Gaussian random element** if it is\nBorel-measurable and, for every $\\ell\\in B^*$, the real random variable\n$\\ell(W)$ has a centered (possibly zero-variance) normal law. Its law is the\nBorel probability $\\mu=P\\circ W^{-1}$. When the word *tight* is used, it means\nthat for every $\\delta>0$ there is a norm-compact $K\\subseteq B$ with\n$\\mu(K)>1-\\delta$.\n\nThis definition concerns a random element in $B$. A Gaussian process on an\narbitrary index set with only a cylinder-space law does not satisfy it unless\na Borel $B$-valued realization is separately constructed.",
+        "deps": [
+          "def-measurable-function-between-measurable-spaces",
+          "def-borel-probability-law-on-a-polish-space",
+          "def-polish-space",
+          "def-separable-space",
+          "def-dual-space-of-a-normed-space",
+          "def-standard-normal-and-normal-laws",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart and J. H. van Zanten, Rates of contraction of posterior distributions based on Gaussian process priors (2008)",
+              "url": "https://arxiv.org/pdf/0806.3024",
+              "locator": "Section 2.1, printed pp. 1436–1437: definition of a Borel Gaussian random element in a Banach space."
+            },
+            {
+              "title": "M. Hairer, An Introduction to Stochastic PDEs",
+              "url": "https://www.hairer.org/notes/SPDEs_Course.pdf",
+              "locator": "Section 4.2: Gaussian measures on a separable Banach space."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-borel-map-into-separable-banach-is-strongly-measurable",
+        "kind": "lemma",
+        "title": "A Borel map into a separable Banach space is strongly measurable",
+        "statement": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, let $B$ be a separable\nBanach space, and let $f:\\Omega\\to B$ be Borel-measurable. Then $f$ is strongly\nmeasurable: outside a $P$-null set it is the pointwise limit of finite-valued\nmeasurable simple functions.",
+        "strategy": "direct",
+        "deps": [
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "def-measurable-space",
+          "def-measurable-function-between-measurable-spaces",
+          "def-separable-space",
+          "def-strongly-measurable-banach-valued-function",
+          "def-banach-valued-simple-function-and-integral",
+          "thm-continuity-from-above-for-measures"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "A. Lunardi, M. Miranda, and D. Pallara, Infinite Dimensional Analysis",
+              "url": "https://www.mathematik.tu-darmstadt.de/media/analysis/lehrmaterial_anapde/hallerd/Lectures.pdf",
+              "locator": "Section 2.3, measurable and strongly measurable Banach-valued maps."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-separable-banach-has-countable-norming-family",
+        "kind": "lemma",
+        "title": "A separable Banach space has a countable norming family",
+        "statement": "Assume HB and countable choice. Let $B$ be a real separable Banach space. There is a sequence\n$(\\ell_j)_{j\\ge1}\\subseteq B^*$ with $\\|\\ell_j\\|=1$ such that\n$$\\|x\\|=\\sup_{j\\ge1}|\\ell_j(x)|\\qquad(x\\in B).$$\nIf $B=\\{0\\}$, the conclusion is interpreted using the zero functional and the\nsupremum is $0$.",
+        "strategy": "direct",
+        "deps": [
+          "def-separable-space",
+          "def-dual-space-of-a-normed-space",
+          "def-hahn-banach-extension-principle-relative",
+          "def-countable-choice",
+          "cor-relative-hahn-banach-dual-norming"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "A. Lunardi, M. Miranda, and D. Pallara, Infinite Dimensional Analysis",
+              "url": "https://www.mathematik.tu-darmstadt.de/media/analysis/lehrmaterial_anapde/hallerd/Lectures.pdf",
+              "locator": "Section 3.1: separability and countable norming sets for Gaussian measures."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-finite-dimensional-gaussian-isoperimetric-expansion",
+        "kind": "theorem",
+        "title": "Finite-dimensional Gaussian isoperimetric expansion",
+        "statement": "Assume AC. For $d\\ge1$, let $\\gamma_d$ be standard Gaussian measure on $\\mathbb R^d$,\nlet $A\\subseteq\\mathbb R^d$ be Borel, and let\n$A+rB_2^d=\\{a+ru:a\\in A,\\ |u|\\le1\\}$. Then for every $r\\ge0$,\n$$\\gamma_{d,*}(A+rB_2^d)\\ge \\Phi\\!\\left(\\Phi^{-1}(\\gamma_d(A))+r\\right),$$\nwhere $\\gamma_{d,*}(S)=\\sup\\{\\gamma_d(K):K\\subseteq S,\\ K\\text{ compact}\\}$ is Gaussian inner measure, and $\\Phi^{-1}(0)=-\\infty$, $\\Phi^{-1}(1)=+\\infty$.",
+        "deps": [
+          "def-absolutely-continuous-function",
+          "cor-mean-value-theorem",
+          "thm-cauchy-schwarz-finite",
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "def-multivariate-normal-law",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "lem-standard-normal-cdf-is-continuous-and-strictly-increasing",
+          "thm-derivative-of-exponential",
+          "thm-derivative-of-an-inverse",
+          "thm-chain-rule",
+          "thm-intermediate-value",
+          "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-dominated-convergence",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-integration-by-parts-for-absolutely-continuous-functions",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "thm-borel-probability-measures-on-polish-spaces-are-inner-regular",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "S. G. Bobkov, An isoperimetric inequality on the discrete cube, and an elementary proof of the isoperimetric inequality in Gauss space (1997)",
+              "url": "https://www-users.cse.umn.edu/~bobkov/papers/1997_AOP.pdf",
+              "locator": "The Gaussian isoperimetric inequality and proof from the discrete-cube inequality, pp. 1–8."
+            },
+            {
+              "title": "C. Borell, The Brunn–Minkowski inequality in Gauss space (1975)",
+              "url": "https://dornsife.usc.edu/sergey-lototsky/wp-content/uploads/sites/211/2023/06/Borell-Subspace-original.pdf",
+              "locator": "Section 3, Theorem 3.1 proof, especially the finite-dimensional reduction on pp. 209–210."
+            },
+            {
+              "title": "D. Chafaï and J. Lehec, Lectures on the logarithmic Sobolev inequality, Chapter 4, Theorem 4.6, pp. 45–50",
+              "url": "https://djalil.chafai.net/docs/M2/chafai-lehec-m2-lsie-lecture-notes.pdf",
+              "locator": "Full PDF retrieved; complete semigroup proof pp. 49–50 read; the finite-ball neighborhood passage is supplied locally below."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "axiom_use": "AC is assumed as in the Gaussian suppliers; it implies DC and Countable Choice for the stated integration interfaces. The sharp inequality is proved locally by explicit Gaussian-semigroup calculus, smooth cutoffs and finite-ball approximation."
+      },
+      {
+        "id": "thm-standard-gaussian-log-sobolev-inequality",
+        "kind": "theorem",
+        "title": "Gross logarithmic Sobolev inequality for standard Gaussian measure",
+        "statement": "Assume AC, DC, and countable choice, and let $\\gamma_d$ be standard Gaussian\nmeasure on $\\mathbb R^d$. For every\n$g\\in C^2(\\mathbb R^d)$ bounded above and below by positive constants, with\nbounded first and second derivatives,\n$$\\operatorname{Ent}_{\\gamma_d}(g) :=\\int g\\log g\\,d\\gamma_d -\\left(\\int g\\,d\\gamma_d\\right)\\log\\left(\\int g\\,d\\gamma_d\\right) \\le \\frac12\\int\\frac{|\\nabla g|^2}{g}\\,d\\gamma_d.$$",
+        "strategy": "direct",
+        "deps": [
+          "def-standard-normal-and-normal-laws",
+          "def-multivariate-normal-law",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "def-independent-random-elements",
+          "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-dominated-convergence",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-integration-by-parts-for-absolutely-continuous-functions",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "N. Berestycki and R. Nickl, Concentration of Measure",
+              "url": "https://www.stat.cmu.edu/~arinaldo/36788/berestycki_nickl_notes.pdf",
+              "locator": "Chapter 4, Theorem 11 and complete proof: Gaussian logarithmic Sobolev inequality."
+            },
+            {
+              "title": "D. Chafaï and D. Lehec, Lectures on the logarithmic Sobolev inequality",
+              "url": "https://djalil.chafai.net/docs/M2/chafai-lehec-m2-lsie-lecture-notes.pdf",
+              "locator": "Gaussian Ornstein–Uhlenbeck semigroup proof of the logarithmic Sobolev inequality."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-countable-norming-family-determines-borel-laws",
+        "kind": "lemma",
+        "title": "A countable norming family determines Borel laws",
+        "statement": "Let $B$ be a separable Banach space, and let $(\\ell_j)_{j\\ge1}\\subseteq B^*$ satisfy the norming identity $\\|x\\|=\\sup_{j\\ge1}|\\ell_j(x)|$ for every $x\\in B$. If Borel probabilities $\\mu,\\nu$ on $B$ have equal finite-dimensional pushforwards under every finite subfamily of $(\\ell_j)$, then $\\mu=\\nu$.",
+        "strategy": "direct",
+        "deps": [
+          "def-separable-space",
+          "lem-rat-embeds-dense",
+          "thm-rationals-countable",
+          "thm-product-of-countable",
+          "def-borel-probability-law-on-a-polish-space",
+          "def-pi-system",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "M. Hairer, An Introduction to Stochastic PDEs",
+              "url": "https://www.hairer.org/notes/SPDEs_Course.pdf",
+              "locator": "Proposition 4.11: a countable separating family determines the Borel Gaussian law."
+            },
+            {
+              "title": "A. Lunardi, M. Miranda, and D. Pallara, Infinite Dimensional Analysis",
+              "url": "https://www.mathematik.tu-darmstadt.de/media/analysis/lehrmaterial_anapde/hallerd/Lectures.pdf",
+              "locator": "Sections 2.1 and 3.1: Borel sigma-algebras and Gaussian measures on separable Banach spaces."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-standard-gaussian-lipschitz-concentration",
+        "kind": "theorem",
+        "title": "Lipschitz concentration for standard Gaussian measure",
+        "statement": "Assume AC, DC, and countable choice. Let $Z\\sim\\gamma_d$ be standard Gaussian\non $\\mathbb R^d$ and let\n$f:\\mathbb R^d\\to\\mathbb R$ be $L$-Lipschitz. If $L>0$, then for every $r>0$,\n$$P\\{f(Z)\\ge E f(Z)+r\\}\\le e^{-r^2/(2L^2)}.$$\nIf $L=0$, the probability on the left is zero.",
+        "strategy": "direct",
+        "deps": [
+          "thm-standard-gaussian-log-sobolev-inequality",
+          "def-standard-normal-and-normal-laws",
+          "def-multivariate-normal-law",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "thm-dominated-convergence",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "thm-differentiation-under-the-integral-sign",
+          "cor-mean-value-theorem",
+          "cor-markov-inequality-for-random-variables"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "N. Berestycki and R. Nickl, Concentration of Measure",
+              "url": "https://www.stat.cmu.edu/~arinaldo/36788/berestycki_nickl_notes.pdf",
+              "locator": "Chapter 4, Theorem 9 and the Herbst argument, followed by Theorem 10."
+            },
+            {
+              "title": "D. Chafaï and D. Lehec, Lectures on the logarithmic Sobolev inequality",
+              "url": "https://djalil.chafai.net/docs/M2/chafai-lehec-m2-lsie-lecture-notes.pdf",
+              "locator": "Gaussian logarithmic Sobolev inequality and Herbst concentration argument."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-uncorrelated-joint-banach-gaussians-are-independent",
+        "kind": "lemma",
+        "title": "Uncorrelated jointly Gaussian Banach random elements are independent",
+        "statement": "Assume AC and countable choice. Let $X$ and $Y$ be jointly centered Gaussian Borel random elements taking\nvalues in real separable Banach spaces $B_1$ and $B_2$. Here jointly Gaussian\nmeans every finite family of continuous linear coordinates of $(X,Y)$ has a\nmultivariate normal law. If\n$E[\\ell(X)m(Y)]=0$ for every $\\ell\\in B_1^*$ and $m\\in B_2^*$, then $X$ and\n$Y$ are independent.",
+        "strategy": "direct",
+        "deps": [
+          "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "def-independent-random-elements",
+          "lem-separable-banach-has-countable-norming-family",
+          "lem-countable-norming-family-determines-borel-laws",
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "thm-rectangle-criterion-for-independent-random-elements",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "def-axiom-of-choice",
+          "thm-hahn-banach-dominated-extension",
+          "def-hahn-banach-extension-principle-relative",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "A. Lunardi, M. Miranda, and D. Pallara, Infinite Dimensional Analysis",
+              "url": "https://www.mathematik.tu-darmstadt.de/media/analysis/lehrmaterial_anapde/hallerd/Lectures.pdf",
+              "locator": "Section 3.1: Gaussian orthogonality, independence, and countable determining families."
+            },
+            {
+              "title": "M. Hairer, An Introduction to Stochastic PDEs",
+              "url": "https://www.hairer.org/notes/SPDEs_Course.pdf",
+              "locator": "Section 4.2: independence of Gaussian components."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-fernique-integrability-for-separable-banach-gaussian-law",
+        "kind": "theorem",
+        "title": "Fernique integrability for a separable Banach Gaussian law",
+        "statement": "Assume the Axiom of Choice. Let $W$ be a centered Borel Gaussian random\nelement in a real separable Banach space $B$. There is a constant $a>0$ such\nthat\n$$E\\exp(a\\|W\\|^2)<\\infty.$$\nIn particular, $E\\|W\\|^2<\\infty$.",
+        "strategy": "direct",
+        "deps": [
+          "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "def-separable-space",
+          "lem-countable-norming-family-determines-borel-laws",
+          "lem-uncorrelated-joint-banach-gaussians-are-independent",
+          "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "lem-borel-product-of-second-countable-spaces",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "def-independent-random-elements",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "def-axiom-of-choice",
+          "thm-continuity-from-above-for-measures",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-countable-choice",
+          "thm-hahn-banach-dominated-extension",
+          "def-hahn-banach-extension-principle-relative",
+          "lem-separable-banach-has-countable-norming-family"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "A. Lunardi, M. Miranda, and D. Pallara, Infinite Dimensional Analysis",
+              "url": "https://www.mathematik.tu-darmstadt.de/media/analysis/lehrmaterial_anapde/hallerd/Lectures.pdf",
+              "locator": "Theorem 2.3.1 and complete proof, source PDF pp. 25–26."
+            },
+            {
+              "title": "M. Hairer, An Introduction to Stochastic PDEs",
+              "url": "https://www.hairer.org/notes/SPDEs_Course.pdf",
+              "locator": "Theorem 4.13 and complete proof, source PDF pp. 20–21."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-banach-gaussian-covariance-operator-and-rkhs",
+        "kind": "definition",
+        "title": "Covariance operator and reproducing-kernel Hilbert space of a Banach Gaussian",
+        "statement": "Assume AC. Let $W$ be a centered Borel Gaussian random element in a real separable\nBanach space $B$, with law $\\mu$. For $\\ell\\in B^*$ define\n$$C\\ell=E[\\ell(W)W]\\in B,\\qquad Q(\\ell,m)=E[\\ell(W)m(W)]\\quad(\\ell,m\\in B^*).$$\nThe **Cameron–Martin reproducing-kernel Hilbert space** $H$ is the completion\nof $B^*/N$ in the inner product induced by $Q$, where\n$N=\\{\\ell\\in B^*:Q(\\ell,\\ell)=0\\}$. The canonical map sends the class of\n$\\ell$ to $C\\ell$ and extends continuously to an injective map $i:H\\to B$;\nwe identify $H$ with its image in $B$ and use the completed Hilbert norm\n$\\|\\cdot\\|_H$. The preceding construction is well-defined by\n[[thm-banach-gaussian-covariance-rkhs-is-well-defined]].\n\nThe term *RKHS* here denotes this covariance-induced Hilbert space of shifts\ninside $B$; it is not the space of all continuous functions on an arbitrary\nindex set.",
+        "deps": [
+          "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "thm-fernique-integrability-for-separable-banach-gaussian-law",
+          "lem-borel-map-into-separable-banach-is-strongly-measurable",
+          "def-bochner-integrable-function",
+          "thm-bochner-integrability-criterion"
+        ],
+        "justified_by": [
+          "thm-banach-gaussian-covariance-rkhs-is-well-defined"
+        ],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart and J. H. van Zanten, Rates of contraction of posterior distributions based on Gaussian process priors (2008)",
+              "url": "https://arxiv.org/pdf/0806.3024",
+              "locator": "Section 2.1, printed pp. 1436–1437: covariance operator and RKHS construction."
+            },
+            {
+              "title": "A. Lunardi, M. Miranda, and D. Pallara, Infinite Dimensional Analysis",
+              "url": "https://www.mathematik.tu-darmstadt.de/media/analysis/lehrmaterial_anapde/hallerd/Lectures.pdf",
+              "locator": "Section 3.1: covariance operator, Cameron–Martin space, and its canonical embedding."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-borell-concentration-for-separable-banach-gaussian-law",
+        "kind": "theorem",
+        "title": "Borell concentration for the norm of a separable Banach Gaussian",
+        "statement": "Assume AC, DC, and countable choice. Let $W$ be a centered Borel Gaussian\nrandom element in a real separable\nBanach space $B$. Define\n$$\\sigma^2=\\sup_{\\|\\ell\\|_{B^*}\\le1}E[\\ell(W)^2].$$\nFor $r\\ge0$, if $\\sigma>0$ then\n$$P\\{\\|W\\|>E\\|W\\|+r\\}\\le e^{-r^2/(2\\sigma^2)}.$$\nIf $\\sigma=0$, then $W=0$ almost surely and the tail probability is zero.",
+        "strategy": "direct",
+        "deps": [
+          "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "lem-separable-banach-has-countable-norming-family",
+          "thm-fernique-integrability-for-separable-banach-gaussian-law",
+          "thm-standard-gaussian-lipschitz-concentration",
+          "def-multivariate-normal-law",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "thm-dominated-convergence",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "thm-hahn-banach-dominated-extension",
+          "def-hahn-banach-extension-principle-relative",
+          "thm-continuity-from-below-for-measures"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "N. Berestycki and R. Nickl, Concentration of Measure",
+              "url": "https://www.stat.cmu.edu/~arinaldo/36788/berestycki_nickl_notes.pdf",
+              "locator": "Chapter 4, Theorem 10 and complete proof; §4.4 for Banach-valued Gaussian norm concentration."
+            },
+            {
+              "title": "C. Borell, The Brunn–Minkowski inequality in Gauss space (1975)",
+              "url": "https://dornsife.usc.edu/sergey-lototsky/wp-content/uploads/sites/211/2023/06/Borell-Subspace-original.pdf",
+              "locator": "Section 5, Theorems 5.1–5.2: tails of measurable Gaussian seminorms."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-banach-gaussian-covariance-rkhs-is-well-defined",
+        "kind": "theorem",
+        "title": "The Banach Gaussian covariance and RKHS construction is well-defined",
+        "statement": "Assume AC. Under the hypotheses and notation of\n[[def-banach-gaussian-covariance-operator-and-rkhs]], each $C\\ell$ exists as a\nBochner integral; $Q$ is a finite positive-semidefinite bilinear form;\n$N=\\{\\ell:Q(\\ell,\\ell)=0\\}$ is its nullspace; and the induced map from the\ncompletion of $B^*/N$ to $B$ is continuous and injective. Thus the definition\nidentifies a Hilbert space of shifts in $B$.",
+        "strategy": "direct",
+        "deps": [
+          "def-banach-gaussian-covariance-operator-and-rkhs",
+          "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "thm-fernique-integrability-for-separable-banach-gaussian-law",
+          "lem-borel-map-into-separable-banach-is-strongly-measurable",
+          "thm-bochner-integrability-criterion",
+          "lem-bochner-integral-norm-inequality",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "cor-relative-hahn-banach-dual-norming",
+          "def-axiom-of-choice",
+          "thm-hahn-banach-dominated-extension",
+          "def-hahn-banach-extension-principle-relative",
+          "cor-cauchy-schwarz-for-random-variables"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart and J. H. van Zanten, Rates of contraction of posterior distributions based on Gaussian process priors (2008)",
+              "url": "https://arxiv.org/pdf/0806.3024",
+              "locator": "Section 2.1, printed pp. 1436–1437: covariance operator and quotient RKHS construction."
+            },
+            {
+              "title": "A. Lunardi, M. Miranda, and D. Pallara, Infinite Dimensional Analysis",
+              "url": "https://www.mathematik.tu-darmstadt.de/media/analysis/lehrmaterial_anapde/hallerd/Lectures.pdf",
+              "locator": "Section 3.1: covariance bilinear form and canonical embedding of the completed RKHS."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-cameron-martin-translation-for-separable-banach-gaussian-law",
+        "kind": "theorem",
+        "title": "Cameron–Martin translation formula for a separable Banach Gaussian",
+        "statement": "Assume AC and countable choice. Let $W$ be a centered Borel Gaussian random\nelement in a real separable\nBanach space $B$, with law $\\mu$ and covariance RKHS $H\\subseteq B$. For\n$h\\in H$, let $z_h$ be the $L^2(\\mu)$-limit of the coordinate functions\n$\\ell(x)$ representing a sequence of classes $[\\ell]\\to i^{-1}h$ in the\ncompletion $H$. The limit has a Borel-measurable version and does not depend\non the approximating sequence. If $\\mu_h$ denotes the law of $W+h$, then\n$$\\frac{d\\mu_h}{d\\mu}(x) =\\exp\\!\\left(z_h(x)-\\frac12\\|h\\|_H^2\\right).$$\nIn particular, $\\mu_h$ and $\\mu$ are equivalent. If $h=C\\ell$ for\n$\\ell\\in B^*$, then $z_h(x)=\\ell(x)$ $\\mu$-almost surely and\n$\\|h\\|_H^2=E[\\ell(W)^2]$; these formulas are independent of the choice of\nrepresentative $\\ell$.",
+        "strategy": "direct",
+        "deps": [
+          "def-banach-gaussian-covariance-operator-and-rkhs",
+          "thm-banach-gaussian-covariance-rkhs-is-well-defined",
+          "lem-separable-banach-has-countable-norming-family",
+          "lem-countable-norming-family-determines-borel-laws",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "def-axiom-of-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "def-countable-choice",
+          "thm-hahn-banach-dominated-extension",
+          "cor-cauchy-schwarz-for-random-variables",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "A. Lunardi, M. Miranda, and D. Pallara, Infinite Dimensional Analysis",
+              "url": "https://www.mathematik.tu-darmstadt.de/media/analysis/lehrmaterial_anapde/hallerd/Lectures.pdf",
+              "locator": "Theorem 3.1.5 and complete proof, source PDF pp. 34–36."
+            },
+            {
+              "title": "M. Hairer, An Introduction to Stochastic PDEs",
+              "url": "https://www.hairer.org/notes/SPDEs_Course.pdf",
+              "locator": "Theorem 4.44 and proof, Cameron–Martin translation formula."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-banach-gaussian-rkhs-unit-ball-is-compact",
+        "kind": "lemma",
+        "title": "The Cameron–Martin unit ball is compact in the Banach norm",
+        "statement": "Assume AC. Let $\\mu$ be a centered tight Borel Gaussian law on a real separable Banach\nspace $B$, and let $H\\subset B$ be its covariance RKHS. The closed Hilbert\nunit ball\n$$H_1=\\{h\\in H:\\|h\\|_H\\le1\\}$$\nis compact in the Banach norm.",
+        "strategy": "direct",
+        "deps": [
+          "def-banach-gaussian-covariance-operator-and-rkhs",
+          "thm-cameron-martin-translation-for-separable-banach-gaussian-law",
+          "def-standard-normal-and-normal-laws",
+          "def-axiom-of-choice",
+          "thm-prokhorov-tightness-theorem-on-polish-spaces",
+          "thm-every-borel-probability-on-a-polish-space-is-tight",
+          "cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence",
+          "thm-hilbert-spaces-are-reflexive-by-riesz-representation",
+          "thm-ultrafilter-lemma",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "cor-relative-hahn-banach-dual-norming",
+          "thm-hahn-banach-dominated-extension",
+          "def-hahn-banach-extension-principle-relative",
+          "cor-cauchy-schwarz-for-random-variables"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "A. Lunardi, M. Miranda, and D. Pallara, Infinite Dimensional Analysis",
+              "url": "https://www.mathematik.tu-darmstadt.de/media/analysis/lehrmaterial_anapde/hallerd/Lectures.pdf",
+              "locator": "Theorem 3.1.9 and complete proof, source PDF pp. 38–39."
+            },
+            {
+              "title": "M. Hairer, An Introduction to Stochastic PDEs",
+              "url": "https://www.hairer.org/notes/SPDEs_Course.pdf",
+              "locator": "Section 4.2: compactness of the Cameron–Martin unit ball."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-support-of-banach-gaussian-is-closure-of-rkhs",
+        "kind": "theorem",
+        "title": "The support of a Banach Gaussian is the closure of its RKHS",
+        "statement": "Assume AC and countable choice. Let $\\mu$ be a centered tight Borel Gaussian\nlaw on a real separable Banach\nspace $B$, and let $H\\subseteq B$ be its covariance RKHS. Define\n$\\operatorname{supp}\\mu$ to be the set of $x\\in B$ for which every open\nneighborhood has positive $\\mu$-measure. Then\n$$\\operatorname{supp}\\mu=\\overline H^{\\,B}.$$",
+        "strategy": "direct",
+        "deps": [
+          "def-banach-gaussian-covariance-operator-and-rkhs",
+          "def-separable-space",
+          "thm-banach-gaussian-covariance-rkhs-is-well-defined",
+          "thm-cameron-martin-translation-for-separable-banach-gaussian-law",
+          "lem-separable-banach-has-countable-norming-family",
+          "lem-countable-norming-family-determines-borel-laws",
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "lem-borel-product-of-second-countable-spaces",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-every-borel-probability-on-a-polish-space-is-tight",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "def-independent-random-elements",
+          "thm-rectangle-criterion-for-independent-random-elements",
+          "thm-relative-hahn-banach-geometric-separation",
+          "def-axiom-of-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "def-countable-choice",
+          "thm-hahn-banach-dominated-extension"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart and J. H. van Zanten, Rates of contraction of posterior distributions based on Gaussian process priors (2008)",
+              "url": "https://arxiv.org/pdf/0806.3024",
+              "locator": "Section 2.1, printed pp. 1436–1438: support of a Borel Gaussian law."
+            },
+            {
+              "title": "M. Hairer, An Introduction to Stochastic PDEs",
+              "url": "https://www.hairer.org/notes/SPDEs_Course.pdf",
+              "locator": "Exercise 4.46 and surrounding discussion, source PDF pp. 25–26."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-gaussian-prior-concentration-function",
+        "kind": "definition",
+        "title": "Concentration function of a Banach Gaussian prior",
+        "statement": "Assume AC and countable choice. Let $\\mu$ be a centered tight Borel Gaussian law on a real separable Banach\nspace $B$, with covariance RKHS $H$, and let $w_0\\in\\overline H^{\\,B}$. For\n$\\varepsilon>0$, write\n$\\varepsilon B^\\circ=\\{x\\in B:\\|x\\|_B<\\varepsilon\\}$ and define the\n**concentration function**\n$$\\phi_{w_0}(\\varepsilon) =\\inf_{\\substack{h\\in H\\\\\\|h-w_0\\|_B<\\varepsilon}} \\left\\{\\|h\\|_H^2-\\log\\mu(\\varepsilon B^\\circ)\\right\\}.$$\nThe feasible set is nonempty because $w_0$ lies in the Banach-norm closure of\n$H$. Also $\\mu(\\varepsilon B^\\circ)>0$ because $0\\in\\operatorname{supp}\\mu$;\nthus the logarithm is finite. The value is finite and nonnegative. The support assertion used here is\n[[thm-support-of-banach-gaussian-is-closure-of-rkhs]].",
+        "deps": [
+          "def-banach-gaussian-covariance-operator-and-rkhs",
+          "thm-support-of-banach-gaussian-is-closure-of-rkhs",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart and J. H. van Zanten, Rates of contraction of posterior distributions based on Gaussian process priors (2008)",
+              "url": "https://arxiv.org/pdf/0806.3024",
+              "locator": "Section 2.1, printed p. 1437: definition of the concentration function."
+            },
+            {
+              "title": "A. Lunardi, M. Miranda, and D. Pallara, Infinite Dimensional Analysis",
+              "url": "https://www.mathematik.tu-darmstadt.de/media/analysis/lehrmaterial_anapde/hallerd/Lectures.pdf",
+              "locator": "Section 3.1: Cameron–Martin norm and small-ball probabilities."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-borell-sudakov-tsirelson-expansion-for-banach-gaussian-law",
+        "kind": "theorem",
+        "title": "Borell–Sudakov–Tsirelson expansion for a Banach Gaussian law",
+        "statement": "Assume AC and countable choice. Let $\\mu$ be a centered tight Borel Gaussian law on a real separable Banach\nspace $B$, with covariance RKHS $H$ and unit ball $H_1$. For every Borel set\n$A\\subseteq B$ and $r\\ge0$,\n$$\\mu_*(A+rH_1)\\ge \\Phi\\!\\left(\\Phi^{-1}(\\mu(A))+r\\right),$$\nwhere $\\mu_*(S)=\\sup\\{\\mu(K):K\\subseteq S,\\ K\\text{ compact}\\}$ is the inner\nmeasure and $\\Phi^{-1}(0)=-\\infty$, $\\Phi^{-1}(1)=+\\infty$. When\n$A+rH_1$ is Borel, its inner measure equals its ordinary $\\mu$-measure.",
+        "strategy": "direct",
+        "deps": [
+          "thm-finite-dimensional-gaussian-isoperimetric-expansion",
+          "def-banach-gaussian-covariance-operator-and-rkhs",
+          "thm-banach-gaussian-covariance-rkhs-is-well-defined",
+          "lem-banach-gaussian-rkhs-unit-ball-is-compact",
+          "thm-borel-probability-measures-on-polish-spaces-are-inner-regular",
+          "thm-continuity-from-above-for-measures",
+          "def-axiom-of-choice",
+          "def-separable-space",
+          "def-countable-choice",
+          "thm-hahn-banach-dominated-extension",
+          "def-hahn-banach-extension-principle-relative",
+          "cor-relative-hahn-banach-dual-norming"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "C. Borell, The Brunn–Minkowski inequality in Gauss space (1975)",
+              "url": "https://dornsife.usc.edu/sergey-lototsky/wp-content/uploads/sites/211/2023/06/Borell-Subspace-original.pdf",
+              "locator": "Section 3, Theorem 3.1 and complete two-step proof, printed pp. 208–210."
+            },
+            {
+              "title": "M. Hairer, An Introduction to Stochastic PDEs",
+              "url": "https://www.hairer.org/notes/SPDEs_Course.pdf",
+              "locator": "Theorem 4.53 and the surrounding reduction to Gaussian isoperimetry; the source explicitly omits its proof."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "axiom_use": "AC supplies HB for the point-separation step, while countable choice supplies the countable subcover. The finite-dimensional sharp expansion is proved by its local Gaussian-semigroup and finite-ball argument."
+      },
+      {
+        "id": "thm-gaussian-concentration-sieve-bounds",
+        "kind": "theorem",
+        "title": "Gaussian concentration-function sieve bounds",
+        "statement": "Assume AC and countable choice. Let $\\mu$ be a centered tight Borel Gaussian\nlaw on a real separable Banach\nspace $B$, with covariance RKHS $H$, and let $w_0\\in\\overline H^{\\,B}$.\nSuppose $n\\ge1$, $\\varepsilon>0$, $C>1$,\n$e^{-Cn\\varepsilon^2}<1/2$, and\n$\\phi_{w_0}(\\varepsilon)\\le n\\varepsilon^2$, where $\\phi_{w_0}$ is the\nconcentration function. Then there is a measurable set $B_n\\subseteq B$\nsuch that\n$$\\log N(3\\varepsilon,B_n,\\|\\cdot\\|_B)\\le6Cn\\varepsilon^2,\\qquad \\mu(B\\setminus B_n)\\le e^{-Cn\\varepsilon^2},$$\nand\n$$\\mu\\{\\|W-w_0\\|_B<2\\varepsilon\\}\\ge e^{-n\\varepsilon^2}.$$\nThese are prior-mass and sieve bounds only; they assert no posterior\ncontraction without separate statistical-distance and Kullback–Leibler\ncomparisons.",
+        "strategy": "direct",
+        "deps": [
+          "def-gaussian-prior-concentration-function",
+          "def-banach-gaussian-covariance-operator-and-rkhs",
+          "def-separable-space",
+          "thm-cameron-martin-translation-for-separable-banach-gaussian-law",
+          "def-multivariate-normal-law",
+          "lem-rat-embeds-dense",
+          "thm-rationals-countable",
+          "thm-product-of-countable",
+          "lem-countable-norming-family-determines-borel-laws",
+          "lem-borel-product-of-second-countable-spaces",
+          "lem-separable-banach-has-countable-norming-family",
+          "thm-borell-sudakov-tsirelson-expansion-for-banach-gaussian-law",
+          "lem-banach-gaussian-rkhs-unit-ball-is-compact",
+          "def-standard-normal-and-normal-laws",
+          "def-covering-packing-bracketing-number-and-metric-entropy",
+          "thm-borel-probability-measures-on-polish-spaces-are-inner-regular",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-hahn-banach-dominated-extension",
+          "def-hahn-banach-extension-principle-relative"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart and J. H. van Zanten, Rates of contraction of posterior distributions based on Gaussian process priors (2008)",
+              "url": "https://arxiv.org/pdf/0806.3024",
+              "locator": "Theorem 2.1 and complete proof in §5, printed pp. 1437–1440 and 1454–1456."
+            },
+            {
+              "title": "C. Borell, The Brunn–Minkowski inequality in Gauss space (1975)",
+              "url": "https://dornsife.usc.edu/sergey-lototsky/wp-content/uploads/sites/211/2023/06/Borell-Subspace-original.pdf",
+              "locator": "Section 3, Theorem 3.1: Gaussian enlargement inequality used for the sieve tail."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "axiom_use": "The result uses the declared Gaussian, Cameron–Martin, inner-regularity and expansion interfaces. AC supplies HB for the norming coordinates; no statistical-model or posterior-contraction assumption is made."
+      }
+    ]
+  },
+  {
+    "order": 2071,
+    "id": "gaussian-process-support-and-concentration-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Banach Gaussian priors, RKHS support, and concentration — Examples",
+    "companion": "gaussian-process-support-and-concentration",
+    "requires": [
+      "gaussian-process-support-and-concentration"
+    ],
+    "items": [
+      {
+        "id": "ex-cylinder-gaussian-process-is-not-banach-valued",
+        "kind": "example",
+        "title": "An iid Gaussian cylinder process is not an ℓ²-valued prior",
+        "statement": "Assume AC.\n\nLet $T=\\mathbb N$ and $k(i,j)=\\mathbf 1_{\\{i=j\\}}$. The cylinder Gaussian\nprocess with this kernel has independent $N(0,1)$ coordinates, but its\ncoordinate sequence is almost surely not in $\\ell^2$. Thus its cylinder law\nis not a tight Borel prior on $\\ell^2$.",
+        "strategy": "direct",
+        "deps": [
+          "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+          "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "def-standard-normal-and-normal-laws",
+          "def-multivariate-normal-law",
+          "thm-continuity-from-above-for-measures",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "def-axiom-of-choice",
+          "thm-finite-and-countable-subadditivity-of-measures"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart and J. H. van Zanten, Rates of contraction of posterior distributions based on Gaussian process priors (2008)",
+              "url": "https://arxiv.org/pdf/0806.3024",
+              "locator": "Section 2.1: arbitrary-index Gaussian processes versus Borel Gaussian priors."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-finite-dimensional-gaussian-process-as-tight-banach-prior",
+        "kind": "example",
+        "title": "A rank-one finite-dimensional Gaussian process is a tight Banach prior",
+        "statement": "Assume AC.\n\nTake $T=\\{1,2\\}$, $B=\\mathbb R^2$, and $Z\\sim N(0,1)$. Define\n$X_1=Z$ and $X_2=2Z$. This is a singular finite Gaussian process and its\ncoordinate vector is a tight Borel Gaussian random element of $B$.",
+        "strategy": "direct",
+        "deps": [
+          "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+          "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "def-banach-gaussian-covariance-operator-and-rkhs",
+          "def-standard-normal-and-normal-laws",
+          "def-multivariate-normal-law",
+          "def-axiom-of-choice",
+          "thm-continuity-from-below-for-measures",
+          "thm-gaussian-integral"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart and J. H. van Zanten, Rates of contraction of posterior distributions based on Gaussian process priors (2008)",
+              "url": "https://arxiv.org/pdf/0806.3024",
+              "locator": "Section 2.1: finite-dimensional distributions and Borel Gaussian priors."
+            },
+            {
+              "title": "A. Lunardi, M. Miranda, and D. Pallara, Infinite Dimensional Analysis",
+              "url": "https://www.mathematik.tu-darmstadt.de/media/analysis/lehrmaterial_anapde/hallerd/Lectures.pdf",
+              "locator": "Sections 2.2–3.1: finite-dimensional Gaussian laws and their covariance RKHS."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

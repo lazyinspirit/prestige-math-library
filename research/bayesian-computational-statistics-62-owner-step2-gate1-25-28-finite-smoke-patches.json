@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "patches": [
+    {
+      "batch": 13,
+      "id": "ex-regular-normal-model-bvm",
+      "before": [
+        {
+          "check": "normal-normal-finite-n-posterior",
+          "asserts": "For every integer n>=1, v_n=(n+tau^{-2})^{-1}>0, m_n=n*barX/(n+tau^{-2}), and n*v_n=n/(n+tau^{-2}) tends to 1.",
+          "claim": "Direct multiplication of the normal likelihood and prior gives the finite-n posterior formulas used by the asymptotic comparison.",
+          "checked_in": "Statement and steps 1.2-3.1",
+          "max_states": 1
+        }
+      ],
+      "after": [
+        {
+          "check": "normal-normal-finite-n-posterior",
+          "asserts": "Completing the square yields posterior variance $v_n=(n+\\tau^{-2})^{-1}$ and posterior mean $m_n=n\\bar X/(n+\\tau^{-2})$.",
+          "claim": "27 fixed n/tau/barX normal-normal models, original prior-likelihood quadrature; no asymptotic claim.",
+          "checked_in": "Verification step 1.2"
+        }
+      ]
+    },
+    {
+      "batch": 13,
+      "id": "ex-normal-working-model-misspecified-coverage",
+      "before": [
+        {
+          "check": "normal-working-model-calibration-boundary",
+          "asserts": "At sigma=1 the limit 2*Phi(z_{1-alpha/2}/sigma)-1 equals 1-alpha; for sigma>1 it is smaller and for 0<sigma<1 it is larger.",
+          "claim": "The coverage formula recovers nominal calibration exactly in the correctly scaled case and has the asserted direction on each side.",
+          "checked_in": "Steps 2.2-3.1",
+          "max_states": 3
+        }
+      ],
+      "after": [
+        {
+          "check": "normal-working-model-calibration-boundary",
+          "asserts": "Since $z>0$, the coverage in step 2.2 equals $1-\\alpha$ when $\\sigma=1$, is below $1-\\alpha$ when $\\sigma>1$, and is above $1-\\alpha$ when $0<\\sigma<1$.",
+          "claim": "Six fixed z/sigma interval probabilities with alpha defined by the normal quantile; no CLT claim.",
+          "checked_in": "Verification step 3.1"
+        }
+      ]
+    },
+    {
+      "batch": 13,
+      "id": "ex-boundary-normal-mean-truncated-posterior",
+      "before": [
+        {
+          "check": "boundary-posterior-support-and-tv-witness",
+          "asserts": "For every finite n and realized Delta_n, the posterior gives zero mass to (-infinity,0), while N(Delta_n,1) gives mass Phi(-Delta_n); if Delta_n<=0, the total-variation distance is at least 1/2.",
+          "claim": "The finite-n support mismatch supplies the nonvanishing TV lower bound used in the example.",
+          "checked_in": "Steps 1.2-2.1",
+          "max_states": 1
+        }
+      ],
+      "after": [
+        {
+          "check": "boundary-posterior-support-and-tv-witness",
+          "asserts": "By [F5], the total-variation distance from $N(\\Delta_n,1)$ is at least its mass on $(-\\infty,0)$, namely $\\Phi(-\\Delta_n)$. On $\\{\\Delta_n\\le0\\}$ this bound is at least $1/2$.",
+          "claim": "Nine fixed n/Delta models; original prior support and Gaussian negative-halfline integration verify the TV witness; no probabilistic limit claim.",
+          "checked_in": "Verification steps 1.2 and 2.1"
+        }
+      ]
+    },
+    {
+      "batch": 21,
+      "id": "lem-gaussian-sequence-empirical-bayes-posterior-formula",
+      "before": [
+        {
+          "case": "n=1, i=1, alpha=1, kappa_1=1",
+          "status": "checked",
+          "evidence": "Step 1.1 gives posterior N(x/2,1/2) and prior-predictive N(0,2), agreeing with the one-coordinate formulas."
+        }
+      ],
+      "after": [
+        {
+          "check": "gaussian-sequence-one-coordinate-posterior",
+          "asserts": "Completing the square in $t$ gives conditional variance $v_i=(s_i^{-1}+n\\kappa_i^2)^{-1}$ and conditional mean $m_i(x)=v_i n\\kappa_i x$.",
+          "claim": "n=i=alpha=kappa_i=1 at x=-2,0,3: independent scalar posterior/predictive quadrature; no infinite-product or l2 claim.",
+          "checked_in": "Proof step 1.1"
+        }
+      ]
+    }
+  ]
+}

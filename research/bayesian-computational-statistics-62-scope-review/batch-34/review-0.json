@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "34",
+  "round": 0,
+  "reviewed_items": [
+    "def-gibbs-full-conditional-kernel",
+    "def-gibbs-reversibility-for-a-markov-kernel",
+    "def-finite-markov-chain-reducible",
+    "cor-gibbs-density-formula-supplies-full-conditional-kernels",
+    "alg-gibbs-block-update",
+    "cor-bivariate-normal-full-conditional-kernels",
+    "lem-gibbs-block-update-is-a-probability-kernel",
+    "alg-gibbs-scan-schemes",
+    "lem-gibbs-block-refresh-is-conditionally-independent",
+    "lem-gibbs-block-update-is-reversible-and-invariant",
+    "lem-gibbs-scan-schemes-are-probability-kernels",
+    "thm-random-scan-gibbs-is-reversible-and-invariant",
+    "thm-systematic-gibbs-sweep-preserves-target",
+    "ex-single-site-gibbs-reducible-on-disconnected-support",
+    "ex-bivariate-normal-gibbs-full-conditionals",
+    "ex-systematic-gibbs-sweep-is-not-reversible"
+  ],
+  "reviewed_pages": [
+    "gibbs-sampling-and-scan-schemes",
+    "gibbs-sampling-and-scan-schemes-examples"
+  ],
+  "decision": "repair",
+  "reason": "The approved mathematical scope is covered, and the supplier claims inspected support the in-scope results. Two local repairs are needed on the A page: justify the density corollary’s measure-extension step, and make the scan algorithm’s shared state/target assumptions explicit, with well-definedness proved for systematic scan without random-scan weights.",
+  "findings": [
+    {
+      "id": "cor-gibbs-density-formula-supplies-full-conditional-kernels",
+      "type": "local",
+      "reason": "Step 2.1 applies measure uniqueness after asserting both sides are finite measures, but does not establish that E ↦ ∫_D K_B(z,E_z) π_{-B}(dz) is a measure. Show section-integral measurability using the kernel integration theorem and countable additivity using sectionwise additivity plus monotone convergence before applying uniqueness."
+    },
+    {
+      "id": "alg-gibbs-scan-schemes",
+      "type": "local",
+      "reason": "State explicitly that all P_j act on one common finite-product state space for one target π. The mixture and composition require this shared domain and target."
+    },
+    {
+      "id": "lem-gibbs-scan-schemes-are-probability-kernels",
+      "type": "local",
+      "reason": "The statement omits the shared state space/target used by its proof and requires weights for both scans, although the systematic branch needs none. State the common space/target and separate the random-scan weight condition from systematic-scan well-definedness."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "cor-bivariate-normal-full-conditional-kernels",
+      "decision": "repair",
+      "reason": "The conditional calculations are sound, but its proper-kernel conclusion depends on the density corollary’s measure-extension step; recheck after that local proof repair."
+    },
+    {
+      "id": "ex-bivariate-normal-gibbs-full-conditionals",
+      "decision": "repair",
+      "reason": "Its specialization is correct but depends on the bivariate conditional-kernel corollary; recheck after the supplier proof is repaired."
+    },
+    {
+      "id": "ex-systematic-gibbs-sweep-is-not-reversible",
+      "decision": "repair",
+      "reason": "The covariance argument is sound; its Gaussian conditional-law chain depends on the bivariate example, so close after that supplier chain is rechecked."
+    },
+    {
+      "id": "thm-random-scan-gibbs-is-reversible-and-invariant",
+      "decision": "accept",
+      "reason": "The theorem states one common target and fixed weights; its finite-mixture detailed-balance and invariance arguments are valid."
+    },
+    {
+      "id": "thm-systematic-gibbs-sweep-preserves-target",
+      "decision": "accept",
+      "reason": "The theorem states a common target and the chronological composition convention; the invariance induction is valid."
+    },
+    {
+      "id": "ex-gibbs-chain-invariant-but-reducible",
+      "decision": "accept",
+      "reason": "This outside-batch consumer explicitly uses two coordinate updates for one target with weights 1/2; its scan use is valid."
+    },
+    {
+      "id": "gibbs-sampling-and-scan-schemes",
+      "decision": "repair",
+      "reason": "Its density-kernel summary depends on the corollary’s measure-extension proof; recheck after that repair."
+    },
+    {
+      "id": "gibbs-sampling-and-scan-schemes-examples",
+      "decision": "repair",
+      "reason": "Its Gaussian and nonreversibility summary depends on the bivariate conditional-kernel chain; recheck after that supplier chain is repaired."
+    }
+  ]
+}

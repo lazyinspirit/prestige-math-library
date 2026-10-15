@@ -1,0 +1,351 @@
+{
+  "lem-density-bridge-norm-cdfs-are-continuous-and-strict": {
+    "risk": "high",
+    "kind": "lemma",
+    "claim": "Assume AC. Let $P_0$ have density $0<\\rho\\le f_0\\le D<\\infty$ on $[0,1]$, and put $F_0(t)=\\int_0^t f_0$. Use a complete real orthonormal wavelet basis, allowing the Haar basis with its finite scaling coordinate, and admissible weights $w$ as in [[def-multiscale-coefficient-space-m0w]]. Assume the wavelet geometry and summability conditions of [[lem-multiscale-primitive-map-to-continuous-cdfs]], and write $J:M_0(w)\\to C([0,1])$ for its primitive map. Let $G$ be the Borel centered Gaussian bridge random element of [[lem-density-gaussian-bridge-is-borel-on-m0w]], with coefficient covariance\n$$\\operatorname{Cov}(G_{lk},G_{l'k'})=P_0[(\\psi_{lk}-P_0\\psi_{lk})(\\psi_{l'k'}-P_0\\psi_{l'k'})].$$\nThen the distribution functions of $\\|G\\|_{M(w)}$ and $\\|JG\\|_\\infty$ are continuous on $\\mathbb R$ and strictly increasing on $(0,\\infty)$. Both assign probability zero to $0$, and take values strictly between $0$ and $1$ at every positive argument. Consequently, for every $u\\in(0,1)$, each has a unique positive finite lower $u$-quantile $q$, with CDF value $u$, and is strictly increasing on an open neighborhood of $q$.",
+    "proof_strategy": "direct",
+    "citations": [
+      {
+        "fact": "F1",
+        "source": "lem-m0w-separable-and-projection-tails",
+        "source_section": "Statement",
+        "quote": "For every weight sequence in [[def-multiscale-coefficient-space-m0w]], $M_0(w)$ is a separable Banach space. If $P_J$ retains exactly the coefficients at levels $l\\le J$, then $\\|P_Jx\\|_{M(w)}\\le\\|x\\|_{M(w)}$ and $\\|x-P_Jx\\|_{M(w)}\\to0$ for each $x\\in M_0(w)$. Every square-summable coefficient sequence belongs to $M_0(w)$.",
+        "uses": [
+          "1.1",
+          "3.1",
+          "5.1"
+        ]
+      },
+      {
+        "fact": "F1",
+        "source": "lem-multiscale-primitive-map-to-continuous-cdfs",
+        "source_section": "Statement",
+        "quote": "Let $(\\psi_{lk})$ be a compactly supported wavelet basis of [[def-negative-sobolev-space-for-white-noise]]. The Haar basis with its finite scaling coordinate, as specified in [[def-multiscale-coefficient-space-m0w]], is also allowed. Assume each level-$l$ wavelet for $l\\ge l_0$ has zero integral, uniformly bounded overlap, support length at most $C_0 2^{-l}$, and $\\|\\psi_{lk}\\|_1\\le C_0 2^{-l/2}$. Let $M_0(w)$ be as in [[def-multiscale-coefficient-space-m0w]], and suppose\n$$S_w:=\\sum_{l\\ge l_0}w_l2^{-l/2}<\\infty.$$\nFor $x\\in M_0(w)$ define\n$$Jx(t):=\\sum_{l,k}x_{lk}\\langle 1_{[0,t]},\\psi_{lk}\\rangle_{L^2},\\qquad 0\\le t\\le1.$$\nThen this series converges absolutely and uniformly in $t$, $Jx\\in C([0,1])$, and $\\|Jx-Jy\\|_\\infty\\le C S_w\\|x-y\\|_{M(w)}$ after adding the finite coarsest-level constant to $C S_w$. If $x$ is the coefficient sequence of $f\\in L^2$, then $Jx(t)=\\int_0^t f(u)\\,du$.",
+        "uses": [
+          "1.1",
+          "3.1",
+          "5.1"
+        ]
+      },
+      {
+        "fact": "F2",
+        "source": "def-negative-sobolev-space-for-white-noise",
+        "source_section": "Definition",
+        "quote": "Let $(\\psi_{lk})$ be a countable complete orthonormal basis of the real Hilbert space $L^2([0,1])$ ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]], [[def-hilbert-space]], [[def-l-p-space-as-a-quotient-by-null-functions]]). For a wavelet basis, index levels by $l\\ge0$, let $K_l$ have $2^l$ indices, and put $a_l=2^l$ for $l\\ge1$ and $a_0=2$ for the finite coarsest level. This finite-level convention only prevents a zero logarithmic weight and does not change any convergence criterion below. For a trigonometric basis, use its integer frequency index $l$, bounded multiplicities, and $a_l=\\max(2,|l|)$.\n\nHere an **$S$-regular wavelet basis** means a wavelet orthonormal basis whose members are $S$ times differentiable, with each derivative through order $S$ in $L^2([0,1])$, following the source convention. The weak BvM theorem below only uses the basis's completeness, orthonormality, and level counts.\n\nFor $\\delta>0$, define $H(\\delta)=H^{-1/2,\\delta}_2$ to be the space of coefficient sequences $c=(c_{lk})$ with norm\n\n$$\\|c\\|_{H(\\delta)}^2:=\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}|c_{lk}|^2<\\infty.$$\n\nIts inner product is the corresponding weighted coefficient inner product. Multiplying each coordinate by $a_l^{-1/2}(\\log a_l)^{-\\delta}$ identifies it isometrically with $\\ell^2(I)$, where $I=\\{(l,k):k\\in K_l\\}$ (or the corresponding trigonometric index set). This sequence space is complete: if $x^{(m)}$ is Cauchy, each coordinate converges to a scalar $x_i$; for every finite $F\\subset I$, the Cauchy bound passes to the limit in $\\sum_{i\\in F}|x_i^{(m)}-x_i^{(n)}|^2$, so the supremum over finite $F$ shows $x^{(m)}\\to x$ in $\\ell^2(I)$. It is separable because finite-support sequences with rational coordinates form a countable dense set. Thus $H(\\delta)$ is a separable Hilbert space without an additional choice assumption.\n\nA function $f\\in L^2([0,1])$ is identified with its coefficient sequence $c_{lk}=\\langle f,\\psi_{lk}\\rangle$. For each finite set $F$ of indices, orthonormality makes $\\sum_{(l,k)\\in F}c_{lk}\\psi_{lk}$ orthogonal to its residual in $L^2$, so the Pythagorean identity gives $\\sum_F|c_{lk}|^2\\le\\|f\\|_2^2$. Taking the supremum over finite $F$ and using the boundedness of the weights proves continuity of the coefficient map. If all coefficients of $f$ vanish, then $f$ is orthogonal to the linear span of the basis. Completeness makes this span dense, and continuity of $g\\mapsto\\langle f,g\\rangle$ gives $\\langle f,f\\rangle=0$, hence $f=0$ in $L^2$. Applying this to the difference of two functions proves injectivity. Thus the coefficient map is a continuous linear embedding $L^2([0,1])\\hookrightarrow H(\\delta)$.\n\nThe weight trace $\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}$ is finite exactly when $\\delta>1/2$: for wavelets its tail is a constant multiple of $\\sum_{l\\ge1}l^{-2\\delta}$, while for a trigonometric basis it is comparable to $\\sum_{l\\ge2}[l(\\log l)^{2\\delta}]^{-1}$. The product-prior theorem below uses the wavelet case.",
+        "uses": [
+          "3.1"
+        ]
+      },
+      {
+        "fact": "F3",
+        "source": "lem-density-gaussian-bridge-is-borel-on-m0w",
+        "source_section": "Statement",
+        "quote": "Assume AC. Let $P_0$ have density $0\\le f_0\\le D<\\infty$ on $[0,1]$, and let $(\\psi_{lk})$ be an orthonormal wavelet system with at most $C2^l$ coordinates per level, including finitely many coarsest scaling coordinates. The Haar system is allowed. For every admissible $w$, there exists a Borel centered Gaussian random element $G_{P_0}$ of $M_0(w)$ with coefficient covariance\n$$K((l,k),(l',k'))=P_0[(\\psi_{lk}-P_0\\psi_{lk})(\\psi_{l'k'}-P_0\\psi_{l'k'})].$$\nIts Borel law is uniquely determined by these finite-coordinate Gaussian laws.",
+        "uses": [
+          "1.1",
+          "1.3",
+          "2.1",
+          "3.1",
+          "4.2"
+        ]
+      },
+      {
+        "fact": "F3",
+        "source": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+        "source_section": "Statement",
+        "quote": "Assume the Axiom of Choice. Let $m\\ge1$ be finite, let $d_j\\ge1$, and let\n$Z_j$ for $1\\le j\\le m$ be mutually independent random elements of\n$\\mathbb R^{d_j}$. Suppose $Z_j\\sim N_{d_j}(a_j,\\Sigma_j)$, where each\n$\\Sigma_j$ is symmetric positive semidefinite. Put\n$D=\\sum_{j=1}^m d_j$, $Z=(Z_1,\\ldots,Z_m)$,\n$a=(a_1,\\ldots,a_m)$, and\n$\\Sigma=\\operatorname{diag}(\\Sigma_1,\\ldots,\\Sigma_m)$. Then\n$$Z\\sim N_D(a,\\Sigma).$$\nNo covariance block needs to be invertible.",
+        "uses": [
+          "1.1",
+          "1.3",
+          "2.1",
+          "3.1",
+          "4.2"
+        ]
+      },
+      {
+        "fact": "F3",
+        "source": "lem-mean-and-covariance-determine-gaussian-finite-dimensional-laws",
+        "source_section": "Statement",
+        "quote": "Assume the Axiom of Choice. Two real Gaussian processes on the same index set\nthat have the same mean function and covariance function have identical\nfinite-dimensional distributions.",
+        "uses": [
+          "1.1",
+          "1.3",
+          "2.1",
+          "3.1",
+          "4.2"
+        ]
+      },
+      {
+        "fact": "F4",
+        "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+        "source_section": "Statement",
+        "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+        "uses": [
+          "1.1",
+          "1.2",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F4",
+        "source": "lem-finite-measure-uniqueness-on-a-pi-system",
+        "source_section": "Statement",
+        "quote": "Let $\\mathcal P$ be a pi-system on $X$ and let $\\mathcal A=\\sigma_X(\\mathcal P)$. If finite measures $\\mu$ and $\\nu$ on $(X,\\mathcal A)$ agree on $\\mathcal P$ and satisfy $\\mu(X)=\\nu(X)$, then $\\mu=\\nu$ on $\\mathcal A$.\n\nThe total-mass equality is separate because this library's pi-system convention does not require $X\\in\\mathcal P$.",
+        "uses": [
+          "1.1",
+          "1.2",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F5",
+        "source": "thm-finite-and-countable-subadditivity-of-measures",
+        "source_section": "Statement",
+        "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+        "uses": [
+          "1.2",
+          "2.1",
+          "4.1",
+          "4.2",
+          "5.1"
+        ]
+      },
+      {
+        "fact": "F5",
+        "source": "thm-continuity-from-above-for-measures",
+        "source_section": "Statement",
+        "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be a decreasing sequence of measurable sets for a measure $\\mu$. If $\\mu(E_{n_0})<+\\infty$ for some $n_0$, then\n\n$$\\mu\\left(\\bigcap_{n\\in\\mathbb N}E_n\\right)=\\inf_{n\\in\\mathbb N}\\mu(E_n).$$",
+        "uses": [
+          "1.2",
+          "2.1",
+          "4.1",
+          "4.2",
+          "5.1"
+        ]
+      },
+      {
+        "fact": "F6",
+        "source": "cor-cauchy-schwarz-for-random-variables",
+        "source_section": "Statement",
+        "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+        "uses": [
+          "3.1"
+        ]
+      },
+      {
+        "fact": "F7",
+        "source": "thm-existence-of-continuous-brownian-motion",
+        "source_section": "Statement",
+        "quote": "Assume the Axiom of Choice. The canonical centered Gaussian coordinate process\nwith covariance $E[X_sX_t]=\\min(s,t)$ has a continuous modification $B$, and\n$B$ is a standard Brownian motion. In particular, standard Brownian motion\nexists.",
+        "uses": [
+          "3.1",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F7",
+        "source": "ex-brownian-bridge-from-brownian-motion",
+        "source_section": "Example",
+        "quote": "Assume the Axiom of Choice. Let $B$ be a standard Brownian motion and, for\n$0\\le t\\le1$, define\n\n$$\\beta_t=B_t-tB_1.$$\n\nThen $\\beta$ is a centered Gaussian process with one almost-surely continuous\npath event,\n\n$$\\operatorname{Cov}(\\beta_s,\\beta_t)=\\min(s,t)-st\\qquad(0\\le s,t\\le1),$$\n\nand $\\beta_0=0$ almost surely while $\\beta_1=0$ identically. This is the\nstandard Brownian bridge from $0$ to $0$ over $[0,1]$.",
+        "uses": [
+          "3.1",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F7",
+        "source": "thm-brownian-reflection-principle",
+        "source_section": "Statement",
+        "quote": "Assume the Axiom of Choice, let $B$ be a standard Brownian motion\n[[def-brownian-motion]]. All path operations below use a fixed\neverywhere-continuous, zero-start representative: choose a measurable\nprobability-one event on which the paths are continuous and $B_0=0$, and\nreplace $B$ by the zero path off this event, as in\n[[def-wiener-measure-on-continuous-path-space]]. Retain the notation $B$ for\nthis representative and use its own raw natural filtration and usual\naugmentation. This preserves every finite-dimensional law; all maxima and\nhitting times below refer to this representative, without transferring\nstopping times between the raw filtrations of different versions.\nLet $a>0$ and $T>0$, and put\n$$M_T:=\\sup_{0\\le s\\le T}B_s,\\qquad \\tau_a:=\\inf\\{s\\ge0:B_s=a\\} .$$\nThen:\n\n1. The path reflected at $\\tau_a$ has Wiener law: for each $T>0$ the process\n   $(B_u)_{0\\le u\\le T}$ and its reflection $\\widetilde B_u:=B_u$ for\n   $u\\le\\tau_a\\wedge T$, $\\widetilde B_u:=2a-B_u$ for\n   $\\tau_a\\wedge T<u\\le T$, have the same law on the cylinder sigma-algebra\n   $\\sigma(\\pi_u:u\\in[0,T])$ of $\\mathbb R^{[0,T]}$.\n2. For every $b\\le a$,\n   $$P(M_T\\ge a,\\ B_T\\le b)=P(B_T\\ge2a-b),$$\n   and in particular $P(M_T\\ge a)=2P(B_T\\ge a)$.",
+        "uses": [
+          "3.1",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F8",
+        "source": "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+        "source_section": "Statement",
+        "quote": "Assume the Axiom of Choice. Let $(U,V)$ be a jointly multivariate-normal real\nvector with finite-dimensional blocks $U\\in\\mathbb R^p$ and\n$V\\in\\mathbb R^q$, where $p,q\\ge1$. If $\\operatorname{Cov}(U_i,V_j)=0$ for every\n$1\\le i\\le p$ and $1\\le j\\le q$, then $U$ and $V$ are independent. The\ncovariance matrix may be singular.",
+        "uses": [
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F9",
+        "source": "thm-brownian-reflection-principle",
+        "source_section": "Statement",
+        "quote": "Assume the Axiom of Choice, let $B$ be a standard Brownian motion\n[[def-brownian-motion]]. All path operations below use a fixed\neverywhere-continuous, zero-start representative: choose a measurable\nprobability-one event on which the paths are continuous and $B_0=0$, and\nreplace $B$ by the zero path off this event, as in\n[[def-wiener-measure-on-continuous-path-space]]. Retain the notation $B$ for\nthis representative and use its own raw natural filtration and usual\naugmentation. This preserves every finite-dimensional law; all maxima and\nhitting times below refer to this representative, without transferring\nstopping times between the raw filtrations of different versions.\nLet $a>0$ and $T>0$, and put\n$$M_T:=\\sup_{0\\le s\\le T}B_s,\\qquad \\tau_a:=\\inf\\{s\\ge0:B_s=a\\} .$$\nThen:\n\n1. The path reflected at $\\tau_a$ has Wiener law: for each $T>0$ the process\n   $(B_u)_{0\\le u\\le T}$ and its reflection $\\widetilde B_u:=B_u$ for\n   $u\\le\\tau_a\\wedge T$, $\\widetilde B_u:=2a-B_u$ for\n   $\\tau_a\\wedge T<u\\le T$, have the same law on the cylinder sigma-algebra\n   $\\sigma(\\pi_u:u\\in[0,T])$ of $\\mathbb R^{[0,T]}$.\n2. For every $b\\le a$,\n   $$P(M_T\\ge a,\\ B_T\\le b)=P(B_T\\ge2a-b),$$\n   and in particular $P(M_T\\ge a)=2P(B_T\\ge a)$.",
+        "uses": [
+          "4.1"
+        ]
+      },
+      {
+        "fact": "A1",
+        "source": "def-axiom-of-choice",
+        "source_section": "Definition",
+        "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+        "uses": [
+          "1.1",
+          "3.1",
+          "4.1"
+        ]
+      }
+    ],
+    "derivations": [
+      {
+        "id": "step-1-1",
+        "claim": "In either $E=M_0(w)$ or $E=C([0,1])$, the Borel sigma-algebra is generated by countably many continuous linear coordinates: the wavelet coordinates in the first case, and evaluations at rational times in the second. Indeed, the norm distance to a fixed point is their countable supremum, with the weights included in the first case; in the second case continuity makes the rational supremum equal the full supremum. Separability then gives a countable base of coordinate-measurable balls. Separability of $M_0(w)$ is [F1]; rational polygonal functions give a countable dense family in $C([0,1])$ by uniform continuity and finite rational approximation. Thus finite-coordinate laws determine Borel laws by [F4]. If $X$ is any centered Borel Gaussian random element in either space and $X'$ an independent copy, [F3] gives $-X\\overset d=X$ and $X+X'\\overset d=\\sqrt2X$: every finite coordinate vector on either side is centered Gaussian with the same covariance.",
+        "step": "1.1",
+        "inputs": [
+          "A1",
+          "F1",
+          "F3",
+          "F4",
+          "given",
+          "construct"
+        ]
+      },
+      {
+        "id": "step-1-2",
+        "claim": "For the law $\\mu$ of such an $X$, let $S$ be its support, the set of points whose every open neighborhood has positive probability. Its complement is the union of all zero-mass balls in a countable base, hence has measure zero by [F5]; $S$ is closed and nonempty. Symmetry from step 1.1 gives $S=-S$. The support of $X+X'$ is $\\overline{S+S}$: independent positive-mass balls around $s,t\\in S$ give positive mass to every neighborhood of $s+t$, proving one inclusion; the other follows because $X,X'\\in S$ almost surely, so their sum lies almost surely in the closed set $\\overline{S+S}$. Scaling by $\\sqrt2$ is a homeomorphism, so step 1.1 gives $\\sqrt2S=\\overline{S+S}$. Taking any $s\\in S$ and $-s\\in S$ shows $0\\in\\sqrt2S$, hence $0\\in S$. Now $x+0\\in\\overline{S+S}=\\sqrt2S$ gives $S\\subseteq\\sqrt2S$, while $x+x\\in\\sqrt2S$ gives $\\sqrt2x\\in S$ and hence $\\sqrt2S\\subseteq S$. Therefore $\\sqrt2S=S$ and $\\overline{S+S}=S$. The set $S$ is additive and symmetric, and division by $2$ follows by applying division by $\\sqrt2$ twice. It is closed under dyadic rational scalars, and closure gives all real scalars. Thus $S$ is a closed linear subspace.",
+        "step": "1.2",
+        "inputs": [
+          "F4",
+          "F5",
+          "step 1.1",
+          "construct",
+          "algebra"
+        ]
+      },
+      {
+        "id": "step-1-3",
+        "claim": "If $X$ has any nondegenerate scalar coordinate, then $P(X=0)=0$ and $S\\ne\\{0\\}$. For every $r>0$, $0\\in S$ gives $P(\\|X\\|<r)>0$. A nonzero $s\\in S$ can be scaled to have norm greater than $r$, so some neighborhood of that scaled point lies in $\\{\\|X\\|>r\\}$ and has positive probability. Likewise, for $0<a<b$, scale $s$ to have norm $(a+b)/2$; a sufficiently small ball about it is contained in $\\{a<\\|X\\|<b\\}$ and has positive probability. Consequently its norm CDF is strictly between zero and one at every positive argument and strictly increasing there. This applies to $G$: any nonconstant wavelet has positive $P_0$-variance, because $f_0\\ge\\rho$ makes the $P_0$ and Lebesgue null sets identical and a nonconstant wavelet cannot equal a constant almost everywhere.",
+        "step": "1.3",
+        "inputs": [
+          "F3",
+          "step 1.2",
+          "given",
+          "algebra"
+        ]
+      },
+      {
+        "id": "step-2-1",
+        "claim": "For each nonzero $x\\in M_0(w)$, its norm is attained by some coordinate: if $r=\\|x\\|_{M(w)}>0$, the normalized level maxima are below $r/2$ after finitely many levels, and the maximum over the remaining finite set equals $r$. Enumerate all coordinates by $j$, and write $b_j>0$ for their norm weights: $b_j=w_l$ on detail level $l$, and $b_j=1$ for any additional Haar scaling coordinate. Hence, for $r>0$, $\\{\\|G\\|_{M(w)}=r\\}$ is contained in the countable union of events $\\{|G_j|=rb_j\\}$. Each has probability zero: a positive-variance normal has a density, and a zero-variance centered normal is zero whereas $rb_j>0$. By [F5] the union is null. At $r=0$, the nondegenerate coordinate from step 1.3 again gives probability zero; negative values are impossible. Absence of atoms and continuity of probability in [F5] show that this norm CDF is continuous on $\\mathbb R$.",
+        "step": "2.1",
+        "inputs": [
+          "F3",
+          "F5",
+          "step 1.3",
+          "given",
+          "algebra"
+        ]
+      },
+      {
+        "id": "step-3-1",
+        "claim": "Write $Y=JG$. For every continuous real linear functional $L$ on $C([0,1])$, $L\\circ J$ is continuous linear on $M_0(w)$, so $L(Y)$ is centered normal by [F3]; thus $Y$ is centered Gaussian. For $s\\in[0,1]$, let $p_N1_{[0,s]}$ be the orthogonal wavelet projection through level $N$. Its Lebesgue $L^2$ limit is $1_{[0,s]}$ by [F2], and $f_0\\le D$ gives the same convergence in $L^2(P_0)$. Put $U_N(s)=J(P_NG)(s)$. The coefficient covariance in [F3] gives $\\operatorname{Cov}(U_N(s),U_M(t))=P_0[(p_N1_{[0,s]}-P_0p_N1_{[0,s]})(p_M1_{[0,t]}-P_0p_M1_{[0,t]})]$. In particular $U_N(s)$ is Cauchy in $L^2$, and it converges almost surely to $Y(s)$ by [F1]. Its $L^2$ limit therefore equals $Y(s)$ almost surely, since convergence in $L^2$ implies convergence in probability and two probability limits agree. The means are zero; applying [F6] to the product differences passes the covariances to the limit. Thus $Y$ is a centered continuous Gaussian process with covariance $F_0(s\\wedge t)-F_0(s)F_0(t)$. The function $F_0$ is a continuous strictly increasing bijection of $[0,1]$ onto itself. By [F3], $Y$ and $t\\mapsto\\beta_{F_0(t)}$ from [F7] have the same finite Gaussian laws; step 1.1 then gives equality of their Borel laws on $C([0,1])$. In particular $\\|Y\\|_\\infty\\overset d=\\|\\beta\\|_\\infty$, and $Y$ has a nondegenerate evaluation coordinate, for example at any $s$ with $0<F_0(s)<1$. Step 1.3 therefore applies to its norm as well.",
+        "step": "3.1",
+        "inputs": [
+          "A1",
+          "F1",
+          "F2",
+          "F3",
+          "F6",
+          "F7",
+          "step 1.1",
+          "step 1.3",
+          "given",
+          "algebra"
+        ]
+      },
+      {
+        "id": "step-4-1",
+        "claim": "Put $Z=B_1$ and $M=\\max_{0\\le t\\le1}\\beta_t$. Every finite vector of bridge values is jointly Gaussian with $Z$ and has zero cross-covariance, because $\\operatorname{Cov}(B_t-tB_1,B_1)=t-t=0$. By [F8] these finite vectors are independent of $Z$. The coordinate generation in step 1.1 and finite-measure uniqueness [F4], applied to rectangles and then the generated sigma-algebra, show that the entire bridge path, and hence $M$, is independent of $Z$. Write $\\phi$ for the standard-normal density. For $c>\\varepsilon>0$, [F9] implies that the measure $P(\\max_{t\\le1}B_t<c,Z\\in dz)$ on $[-\\varepsilon,\\varepsilon]$ has density $\\phi(z)-\\phi(2c-z)$: subtract the reflected-event measure from the terminal normal measure; the reflected-event CDF in [F9] differentiates to $\\phi(2c-z)$ for $z<c$. Thus\n$$A_\\varepsilon(c):=\\frac{P(\\max_{t\\le1}B_t<c,|Z|\\le\\varepsilon)}{P(|Z|\\le\\varepsilon)}=\\frac{\\int_{-\\varepsilon}^{\\varepsilon}[\\phi(z)-\\phi(2c-z)]\\,dz}{\\int_{-\\varepsilon}^{\\varepsilon}\\phi(z)\\,dz}.$$\nFor fixed $a>0$, take $0<\\varepsilon<a/3$. Since $\\|B-\\beta\\|_\\infty\\le\\varepsilon$ on $\\{|Z|\\le\\varepsilon\\}$, the inclusions with thresholds $a-\\varepsilon$ and $a+\\varepsilon$, together with independence, give $A_\\varepsilon(a-\\varepsilon)\\le P(M<a)\\le A_\\varepsilon(a+\\varepsilon)$. Continuity and positivity of $\\phi$ show that both bounds tend to $1-\\phi(2a)/\\phi(0)=1-e^{-2a^2}$. Hence $P(M<a)=1-e^{-2a^2}$ for every $a>0$. By [F5], $P(M\\le a)=\\lim_{k\\to\\infty}P(M<a+1/k)=1-e^{-2a^2}$ for $a>0$, and $M\\ge0$ together with the same formula as $a\\downarrow0$ gives $P(M=0)=0$. Therefore $M$ is atomless.",
+        "step": "4.1",
+        "inputs": [
+          "A1",
+          "F4",
+          "F5",
+          "F7",
+          "F8",
+          "F9",
+          "step 1.1",
+          "construct",
+          "algebra"
+        ]
+      },
+      {
+        "id": "step-4-2",
+        "claim": "By symmetry of the centered Gaussian bridge, $-\\min_t\\beta_t$ has the same atomless distribution as $M$. For $r\\ge0$, continuity on a compact interval gives $\\{\\|\\beta\\|_\\infty=r\\}\\subseteq\\{M=r\\}\\cup\\{-\\min_t\\beta_t=r\\}$. Both events on the right are null by step 4.1 and symmetry; [F5] gives no atom at $r$. Negative norm values are impossible. By step 3.1, the CDF of $\\|JG\\|_\\infty$ is therefore continuous on $\\mathbb R$.",
+        "step": "4.2",
+        "inputs": [
+          "F3",
+          "F5",
+          "step 3.1",
+          "step 4.1",
+          "algebra"
+        ]
+      },
+      {
+        "id": "step-5-1",
+        "claim": "Both norm CDFs are continuous by steps 2.1 and 4.2, vanish at zero, and are strictly increasing on $(0,\\infty)$ with values strictly between zero and one by steps 1.3 and 3.1. They tend to one at infinity because both random norms are finite almost surely. For each $u\\in(0,1)$, continuity therefore gives a positive finite point $q$ with CDF value $u$, strict increase gives its uniqueness, and monotonicity makes it the lower $u$-quantile. Any sufficiently small open interval around $q$ is contained in $(0,\\infty)$, where strict increase holds. These are all the asserted quantile conditions.",
+        "step": "5.1",
+        "inputs": [
+          "F1",
+          "F5",
+          "step 1.3",
+          "step 2.1",
+          "step 3.1",
+          "step 4.2",
+          "given",
+          "algebra"
+        ]
+      }
+    ],
+    "routine_steps": [],
+    "boundaries": [
+      {
+        "case": "empty",
+        "status": "not_applicable",
+        "reason": "A probability density and the complete wavelet basis give nonempty probability and coordinate domains."
+      },
+      {
+        "case": "zero",
+        "status": "checked",
+        "evidence": "Steps 1.3, 2.1 and 4.1\u20134.2 prove absence of an atom at zero for each norm."
+      },
+      {
+        "case": "one",
+        "status": "checked",
+        "evidence": "Step 3.1 covers F0(0)=0 and F0(1)=1, where bridge evaluations vanish; the interior evaluation is nondegenerate."
+      },
+      {
+        "case": "degenerate",
+        "status": "checked",
+        "evidence": "Step 2.1 permits zero-variance coordinates, including constant Haar scaling; positive lower density guarantees a nondegenerate detail coordinate. Step 4.2 handles r=0."
+      },
+      {
+        "case": "endpoints",
+        "status": "checked",
+        "evidence": "Step 5.1 assumes 0<u<1 and derives q>0 finite; no endpoint quantiles are asserted. Norm CDFs vanish on the negative half-line."
+      },
+      {
+        "case": "nonempty-choice",
+        "status": "checked",
+        "evidence": "Full AC is explicit in Statement and A1 and inherited from Gaussian, product and Brownian interfaces. The support proof gives origin membership and smallball positivity without selecting uncountably many objects."
+      },
+      {
+        "case": "iff-forward",
+        "status": "not_applicable",
+        "reason": "No equivalence is asserted."
+      },
+      {
+        "case": "iff-reverse",
+        "status": "not_applicable",
+        "reason": "No equivalence is asserted."
+      }
+    ],
+    "finite_checks": [],
+    "finite_check_disposition": "No registered finite smoke computation applies to the Gaussian support, measure continuity or Brownian reflection arguments."
+  }
+}

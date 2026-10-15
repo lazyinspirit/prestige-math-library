@@ -1,0 +1,1286 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-47",
+  "scope": [
+    "alg-pmmh",
+    "thm-pmmh-exact-invariance",
+    "alg-monte-carlo-within-metropolis",
+    "def-particle-gibbs-extended-target",
+    "alg-conditional-particle-gibbs",
+    "thm-particle-gibbs-selected-path-marginal",
+    "thm-particle-gibbs-conditional-sweep-is-gibbs",
+    "def-particle-gibbs-backward-simulation-extended-target",
+    "alg-particle-gibbs-backward-simulation",
+    "thm-particle-gibbs-backward-simulation-sweep-is-gibbs",
+    "ex-pseudo-marginal-rejection",
+    "cex-monte-carlo-within-metropolis-not-exact",
+    "ex-particle-gibbs-invariant-but-sticky",
+    "cex-particle-gibbs-missing-path-support"
+  ],
+  "contracts": {
+    "alg-pmmh": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition rejects proposed zero estimates and initializes on positive extended-target support."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition admits N=1; the SIR product and auxiliary target are still defined for one particle."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degenerate-model boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition uses the clipped Metropolis acceptance probability, including zero and one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition inherits AC through the accepted-flow and path RN suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "thm-pmmh-exact-invariance": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-pmmh",
+          "source_section": "Definition",
+          "quote": "Fix observations $y_{1:T}$, a standard-Borel parameter space $(\\Theta,\\mathcal T)$,\na prior probability $\\pi_0$, and the finite-horizon Feynman–Kac path model in\n[[def-feynman-kac-path-targets-and-normalizers]]. Write\n$$L_\\theta(y_{1:T})=\\gamma_{\\theta,T}(1),\\qquad C=\\int_\\Theta L_\\theta(y_{1:T})\\,\\pi_0(d\\theta).$$\nRequire every prefix normalizer $0<Z_{\\theta,t}<\\infty$ for $t=0,\\ldots,T$\nand $\\pi_0$-almost every $\\theta$, together with $0<C<\\infty$; then the\nparameter posterior is\n$$\\pi_y(d\\theta)=C^{-1}L_\\theta(y_{1:T})\\,\\pi_0(d\\theta).$$\n\nFor fixed particle count $N\\ge1$, let $U$ contain the full output of\n[[alg-sequential-importance-resampling]] at $\\theta$ and a terminal index\n$K\\in\\{1,\\ldots,N\\}$ drawn conditionally with its final normalized weight.\nLet $m_\\theta(du)$ be this measurable auxiliary-variable probability kernel and\nlet $\\widehat L_\\theta(U)=\\widehat Z_T$ be jointly measurable and nonnegative\nin $(\\theta,U)$. The required interface is\n$$\\int\\widehat L_\\theta(u)\\,m_\\theta(du)=L_\\theta(y_{1:T});$$\n[[thm-sequential-particle-estimator-is-unbiased]] supplies this identity under\nits finite-horizon support and integrability hypotheses. Define the extended\ntarget probability by\n$$\\widetilde\\pi(d\\theta,du)=C^{-1}\\pi_0(d\\theta)m_\\theta(du)\\widehat L_\\theta(u).$$\n\nGiven current $(\\theta,U)$, propose $\\theta'\\sim R(\\theta,\\cdot)$ and then\n$U'\\sim m_{\\theta'}$. Apply the general Metropolis–Hastings construction\n[[alg-metropolis-hastings-kernel]] to this proposal kernel and target\n$\\widetilde\\pi$. On rejection retain the entire current pair $(\\theta,U)$,\nincluding its stored likelihood estimate and selected path index. When $\\pi_0$\nand $R$ have densities $p_0$ and $r$, and the current extended target density\nis positive, the acceptance probability is\n$$1\\wedge\\frac{p_0(\\theta')\\widehat L_{\\theta'}(U')r(\\theta\\mid\\theta')}{p_0(\\theta)\\widehat L_\\theta(U)r(\\theta'\\mid\\theta)}.$$\nInitialize on the extended-target support, where $\\pi_0(\\theta)>0$ and\n$\\widehat L_\\theta(U)>0$. Proposed zero estimates are rejected. A density-free version uses the\naccepted-flow Radon–Nikodym construction in the cited general-state algorithm.\n\nThe selected path stored in $U$ is part of the auxiliary state. Refreshing its\nestimate after rejection defines the different Monte Carlo within Metropolis\nprocedure, not this algorithm.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sequential-particle-estimator-is-unbiased",
+          "source_section": "Statement",
+          "quote": "Assume AC and the finite-horizon setup of [[def-feynman-kac-path-targets-and-normalizers]] and [[alg-sequential-importance-resampling]]. Fix $N\\ge1$ and $t\\le T$. Suppose every prefix normalizer satisfies $0<Z_k<\\infty$ for $0\\le k\\le t$. For any nonnegative measurable $\\varphi:\\mathsf X_{0:t}\\to[0,\\infty]$ with $\\gamma_t(\\varphi)<\\infty$, define $\\widehat\\gamma_t^N(\\varphi)=\\int\\varphi\\,d(\\widehat Z_t\\widehat\\pi_t^N)$. Then\n$$\\mathbb E[\\widehat\\gamma_t^N(\\varphi)]=\\gamma_t(\\varphi).$$\nIn particular, with $\\varphi=1$, the product-of-average-incremental-weights estimator in the algorithm satisfies $\\mathbb E[\\widehat Z_t]=Z_t$. At each time either multinomial or residual offspring resampling may be used. The theorem asserts no unbiasedness for the normalized empirical measure $\\widehat\\pi_t^N$ by itself.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-metropolis-hastings-kernel",
+          "source_section": "Definition",
+          "quote": "Assume AC. The **Metropolis–Hastings procedure** takes as input a standard-Borel\nspace $(\\mathsf X,\\mathcal X)$ ([[def-standard-borel-space]]), a target\nprobability measure $\\pi$ ([[def-probability-measure]]), and a probability\nkernel $Q$ from $(\\mathsf X,\\mathcal X)$ to itself\n([[def-measure-kernel-and-probability-kernel]]).\n\n1. On the product sigma-algebra ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]),\nform the proposal-flow measure $\\mu$ ([[def-measure]]) on\n$\\mathsf X\\times\\mathsf X$ by\n$$\\mu(C)=\\int_{\\mathsf X}Q(x,C_x)\\,\\pi(dx),\\qquad C_x=\\{y:(x,y)\\in C\\}.$$\nThis is a probability measure by [[lem-prior-and-model-kernel-define-joint-law]].\nLet $\\tau(x,y)=(y,x)$ and set $\\mu^{\\mathsf T}(C)=\\mu(\\tau^{-1}C)$.\n\n2. Set $\\eta=\\mu\\wedge\\mu^{\\mathsf T}$, the greatest measure dominated by both\nflows. Put $\\lambda_0=\\mu+\\mu^{\\mathsf T}$, which is a finite measure by\n[[thm-nonnegative-weighted-sums-of-measures]], and choose nonnegative measurable\nrepresentatives $f=d\\mu/d\\lambda_0$ and $g=d\\mu^{\\mathsf T}/d\\lambda_0$\nwith $f+g=1$ everywhere after modification on a $\\lambda_0$-null set. Define\n$$\\alpha(x,y)=\\begin{cases}\\min\\{1,g(x,y)/f(x,y)\\},&f(x,y)>0,\\\\1,&f(x,y)=0.\\end{cases}$$\nThis is a jointly measurable version of $d\\eta/d\\mu$ taking values in $[0,1]$.\n\n3. For $x\\in\\mathsf X$, compute the integrated acceptance probability\n$$a(x)=\\int_{\\mathsf X}\\alpha(x,y)\\,Q(x,dy)$$\nand rejection probability $r(x)=1-a(x)$.\n\n4. Return the transition rule\n$$P(x,A)=\\int_{\\mathsf X}\\mathbf1_A(y)\\alpha(x,y)\\,Q(x,dy)+\\mathbf1_A(x)r(x),\\qquad A\\in\\mathcal X.$$\nThe second term retains every rejected proposal as a self-transition.\n\nThe item [[lem-common-submeasure-and-bounded-radon-nikodym-density]] proves the\ncommon-submeasure construction and density-version claims in step 2.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-metropolis-hastings-kernel-is-reversible-and-invariant",
+          "source_section": "Statement",
+          "quote": "Assume AC and the hypotheses of [[alg-metropolis-hastings-kernel]]. Its output\n$P$ is a probability kernel, the joint measure\n$J_P(dx,dy)=\\pi(dx)P(x,dy)$ is symmetric under $(x,y)\\mapsto(y,x)$, and $\\pi$\nis invariant for $P$. Symmetry of this joint measure is reversibility. No\nirreducibility, uniqueness, convergence-rate, or central limit theorem\nconclusion is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a probability kernel on a measurable space $(E,\\mathcal E)$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure on $(E,\\mathcal E)$ ([[def-probability-measure]]). The\nprobability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a\n**stationary distribution** of $K$, when\n\n$$(\\pi K)(A):=\\int_E K(x,A)\\,\\pi(dx)=\\pi(A)\\qquad\\text{for every }A\\in\\mathcal E .$$\n\nThe set function $\\pi K$ is again a probability measure: for fixed $A$ the map\n$x\\mapsto K(x,A)$ is measurable and lies in $[0,1]$, so the integral exists in\n$[0,1]$; for pairwise disjoint $A_n\\in\\mathcal E$ the identity\n$K(x,\\bigcup_nA_n)=\\sum_nK(x,A_n)$ of the measure $K(x,\\cdot)$ and the\nmonotone convergence theorem for nonnegative functions\n([[thm-monotone-convergence-for-the-integral]]) give\n$\\sigma$-additivity of $\\pi K$; and $K(x,E)=1$ for every $x$ gives\n$(\\pi K)(E)=1$. Thus $(\\pi K)(A)=\\pi(A)$ is an identity between two probability\nmeasures evaluated at $A$.\n\nA $K$-chain whose initial law is $\\pi$ is called **stationary** when\n$\\pi K=\\pi$. Stationarity of the process is a statement about all of its\nfinite-dimensional laws and is proved, not assumed, from $\\pi K=\\pi$; see\n[[thm-invariant-initial-law-makes-the-chain-stationary]].\n\nOn a countable state space $E$ with sigma-algebra $2^E$ and transition matrix\n$p(x,y)=K(x,\\{y\\})$ ([[def-transition-matrix-and-n-step-transition-probabilities]]),\na measure on $E$ is its weighted sum of Dirac masses at singletons\n([[thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums]]), so\ninvariance is equivalent to the matrix identity\n\n$$\\pi(y)=\\sum_{x\\in E}\\pi(x)\\,p(x,y)\\qquad\\text{for every }y\\in E .$$\n\nThe definition fixes no irreducibility, aperiodicity or uniqueness hypothesis,\nand it selects no conditional-expectation versions; the display defines a\nsingle measure $\\pi K$ and asserts an identity for it. A transient, periodic or\nreducible chain may have several invariant probability measures or none.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Integrating [F1] first in $u$ gives $C^{-1}\\pi_0(d\\theta)\\mathbb E_{m_\\theta}\\widehat L_\\theta=C^{-1}L_\\theta\\pi_0(d\\theta)$ by [F2]. Its total mass is $C^{-1}\\int L_\\theta\\,d\\pi_0=1$, so $\\widetilde\\pi$ is a probability and its parameter marginal is $\\pi_y$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a measurable set $B$ of parameter-path pairs, summing over the terminal index gives $\\widetilde\\pi\\{(\\theta,X^K_{0:T})\\in B\\}=C^{-1}\\int\\pi_0(d\\theta)\\,\\mathbb E\\!\\left[\\widehat Z_T\\sum_{k=1}^NW_T^k1_B(\\theta,X^k_{0:T})\\right]=C^{-1}\\int\\pi_0(d\\theta)\\,\\gamma_{\\theta,T}(B_\\theta)$, because the sum is the weighted empirical path integral in [F2]. Thus the selected path marginal is the joint posterior.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The proposal in [F1] is a probability kernel because it is the composition of the probability kernel $R$ and the auxiliary probability kernels $m_{\\theta'}$. Applying [F3] to this target and proposal gives the PMMH accept/reject kernel; in the common-density case the factors $m_\\theta(u)$ cancel between the target and proposal ratios, leaving exactly the displayed ratio in [[alg-pmmh]]. On rejection, [F3] retains the current extended state.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4], this extended-space kernel is reversible and invariant for $\\widetilde\\pi$. Applying the measurable coordinate projections $(\\theta,u)\\mapsto\\theta$ and $(\\theta,u)\\mapsto(\\theta,X^K_{0:T})$ to the invariant law gives the exact marginals in steps 1.1–1.2, in the sense of [F5].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: a zero estimate has zero extended-target mass and a proposed zero estimate is rejected."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement allows N=1; its finite integral and weighted path identity remain valid with one particle."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement requires finite positive evidence C; zero evidence is outside its posterior hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition in alg-pmmh clips the acceptance ratio to [0,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 uses the general AC-based accepted-flow MH supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "alg-monte-carlo-within-metropolis": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition assumes strictly positive estimates whenever the ratio is evaluated."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-valued boundary parameter is part of this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degenerate-model boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition clips each computed ratio to a probability."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-state calculations and categorical index sums use no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "def-particle-gibbs-extended-target": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition assigns zero mass to an all-zero likelihood-estimate configuration."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition requires N≥2 for the particle Gibbs update."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition requires positive finite evidence and a nonempty posterior support."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or probability endpoint calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition inherits AC only through the stated RN-weight suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "alg-conditional-particle-gibbs": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition uses the SIR zero-weight convention and the target assigns zero mass to zero-estimate clouds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition requires N≥2; N=1 is outside the stated particle Gibbs update."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition requires the reference path to lie in target support."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or probability endpoint calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition inherits AC through the proposal RN versions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "thm-particle-gibbs-selected-path-marginal": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-particle-gibbs-extended-target",
+          "source_section": "Definition",
+          "quote": "Use the finite-horizon state path model and proposal support conditions in\n[[def-feynman-kac-path-targets-and-normalizers]],\n[[thm-feynman-kac-path-radon-nikodym-weight]], and\n[[alg-sequential-importance-resampling]]. Let $\\pi_0$ be a proper parameter\nprior, $\\gamma_{\\theta,T}$ the Feynman–Kac path measure at parameter $\\theta$,\n$L_\\theta=\\gamma_{\\theta,T}(1)$, with $0<L_\\theta<\\infty$ for\n$\\pi_0$-almost every $\\theta$, and\n$$C=\\int L_\\theta\\,\\pi_0(d\\theta),\\qquad 0<C<\\infty.$$\nFor a fixed particle count $N\\ge2$, write\n$$U=(X_0^{1:N},A_1^{1:N},X_1^{1:N},\\ldots,A_T^{1:N},X_T^{1:N})$$\nfor the full particle system and ancestor indices generated by\n[[alg-sequential-importance-resampling]]. Its forward probability law at\nparameter $\\theta$ is $\\psi_\\theta(du)$. The algorithm defines the product\nnormalizer estimate $\\widehat Z_T(U)$ and final normalized weights\n$W_T^1(U),\\ldots,W_T^N(U)$; $K$ is a terminal particle index. The path\n$X_{0:T}^{K}$ means the states on the ancestral lineage of particle $K$,\ntraced through the arrays $A_1^{1:N},\\ldots,A_T^{1:N}$.\n\nMore explicitly, relative to counting measure on ancestor arrays and the\nordered SIR proposal-kernel integrals for the states,\n$$\\psi_\\theta(du)=\\prod_{i=1}^N\\nu_{\\theta,0}(dx_0^i)\\prod_{t=1}^T\\prod_{i=1}^N\\left[W_{t-1}^{A_t^i}(U)R_{\\theta,t}(X_{t-1}^{A_t^i},dx_t^i)\\right].$$\nEach factor $W_{t-1}^{A_t^i}(U)$ is the categorical mass of that ancestor\nchoice; no state transition density is assumed for the genealogical variant.\n\nThe genealogical particle Gibbs extended target is the measure\n$$\\varphi_N(d\\theta,du,k)=C^{-1}\\pi_0(d\\theta)\\,\\psi_\\theta(du)\\,\\widehat Z_T(u)W_T^k(u),\\qquad k\\in\\{1,\\ldots,N\\}.$$\nThe selected state is $(\\theta,X_{0:T}^{K})$. The zero-weight fallback in the\nparticle algorithm defines $W_T$ everywhere; when $\\widehat Z_T=0$ the extended\ntarget assigns the configuration zero mass.\n\nThe measure is a probability and has the exact joint smoothing posterior as\nits selected $(\\theta,X_{0:T}^{K})$ marginal by\n[[thm-particle-gibbs-selected-path-marginal]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-sequential-importance-resampling",
+          "source_section": "Definition",
+          "quote": "Use the finite-horizon target and proposal setting of [[def-feynman-kac-path-targets-and-normalizers]]. For admissible inputs require $\\mu_0\\ll\\nu_0$ and, for each $k\\ge1$, $M_k(x,\\cdot)\\ll R_k(x,\\cdot)$ for almost every $x$ under the last-coordinate marginal of the proposal path law $Q_{k-1}$. Select the joint measurable versions $\\rho_0=d\\mu_0/d\\nu_0$ and $r_k(x,\\cdot)=dM_k(x,\\cdot)/dR_k(x,\\cdot)$ supplied by [[thm-feynman-kac-path-radon-nikodym-weight]]. Fix $N\\ge1$ and select either multinomial or residual resampling at each time. The algorithm returns a weighted empirical path measure and a normalizer estimate.\n\n1. Draw $X_0^1,\\ldots,X_0^N$ independently from $\\nu_0$. Set $a_0^i=G_0(X_0^i)\\rho_0(X_0^i)$ and $\\widehat Z_0=N^{-1}\\sum_{i=1}^Na_0^i$. If $\\sum_i a_0^i>0$, put $\\bar w_0^i=a_0^i/\\sum_j a_0^j$; otherwise put $\\bar w_0^i=1/N$. Each initial path is $X_{0:0}^i=X_0^i$.\n2. For $k=1,\\ldots,t$, do the following:\n   1. Apply [[alg-multinomial-and-residual-offspring-resampling]] to the previous normalized weights $(\\bar w_{k-1}^1,\\ldots,\\bar w_{k-1}^N)$, obtaining ancestor indices $A_k^1,\\ldots,A_k^N$.\n   2. Given the previous paths and these indices, draw $(X_k^1,\\ldots,X_k^N)$ with joint conditional law $\\bigotimes_{i=1}^N R_k(X_{k-1}^{A_k^i},\\cdot)$ and set $X_{0:k}^i=(X_{0:k-1}^{A_k^i},X_k^i)$.\n   3. Set $a_k^i=G_k(X_k^i)r_k(X_{k-1}^{A_k^i},X_k^i)$ and $\\widehat Z_k=\\widehat Z_{k-1}(N^{-1}\\sum_{i=1}^Na_k^i)$. If $\\sum_i a_k^i>0$, put $\\bar w_k^i=a_k^i/\\sum_j a_k^j$; otherwise put $\\bar w_k^i=1/N$.\n3. Return $\\widehat Z_t$ and the weighted empirical path probability measure $\\widehat\\pi_t^N=\\sum_{i=1}^N\\bar w_t^i\\delta_{X_{0:t}^i}$. Its last-coordinate marginal is the corresponding empirical filtering approximation.\n\nThe all-zero fallback only defines a probability measure for reporting and future sampling. Once a zero average weight occurs, $\\widehat Z$ remains zero. The procedure makes no finite-particle accuracy, consistency, or long-time stability claim.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-feynman-kac-path-radon-nikodym-weight",
+          "source_section": "Statement",
+          "quote": "Assume AC and the setup of [[def-feynman-kac-path-targets-and-normalizers]] through a fixed horizon $t\\le T$. Let $\\nu_0$ be a proposal probability on $\\mathsf X_0$, and for $1\\le k\\le t$ let $R_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be proposal probability kernels. Define $Q_s(dx_{0:s})=\\nu_0(dx_0)\\prod_{k=1}^sR_k(x_{k-1},dx_k)$. Suppose $\\mu_0\\ll\\nu_0$, and for each $k$ suppose $M_k(x,\\cdot)\\ll R_k(x,\\cdot)$ for almost every $x$ under the last-coordinate marginal of $Q_{k-1}$. Choose a measurable version $\\rho_0=d\\mu_0/d\\nu_0$ and, using [[lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels]], measurable versions $r_k(x,\\cdot)=dM_k(x,\\cdot)/dR_k(x,\\cdot)$ for these preceding-state marginals.\n\nThen $\\gamma_s\\ll Q_s$ for every $s\\le t$, with product density\n$$W_s(x_{0:s})=G_0(x_0)\\rho_0(x_0)\\prod_{k=1}^sG_k(x_k)r_k(x_{k-1},x_k).$$\nThat is, $\\gamma_s(A)=\\int_AW_s\\,dQ_s$ for every measurable $A\\subseteq\\mathsf X_{0:s}$. If $0<Z_s<\\infty$, the normalized path target has density $W_s/Z_s$ with respect to $Q_s$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-feynman-kac-path-targets-and-normalizers",
+          "source_section": "Definition",
+          "quote": "Assume AC and fix a finite horizon $T\\in\\mathbb N_0$. For each $0\\le k\\le T$, let $(\\mathsf X_k,\\mathcal X_k)$ be a standard Borel space. Let $\\mu_0$ be a probability measure on $\\mathsf X_0$, and for $1\\le k\\le T$ let $M_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be a probability kernel. A **potential** at time $k$ is a finite-valued nonnegative measurable function $G_k:\\mathsf X_k\\to[0,\\infty)$. Write $\\mathsf X_{0:t}=\\prod_{k=0}^t\\mathsf X_k$ with its finite-product sigma-algebra.\n\nFor each $0\\le t\\le T$, let $P_t^M$ be the finite path law with ordered kernel integral $\\mu_0(dx_0)\\prod_{k=1}^tM_k(x_{k-1},dx_k)$, supplied by Ionescu–Tulcea ([[thm-ionescu-tulcea-construction-of-a-markov-chain]]). The **unnormalized Feynman–Kac path measure** is\n$$\\gamma_t(A)=\\int_{\\mathsf X_{0:t}}\\mathbf 1_A(x_{0:t})\\prod_{k=0}^tG_k(x_k)\\,P_t^M(dx_{0:t}),\\qquad A\\in\\bigotimes_{k=0}^t\\mathcal X_k.$$\nIts **normalizer** is $Z_t=\\gamma_t(\\mathsf X_{0:t})=\\gamma_t(1)\\in[0,\\infty]$. Only when $0<Z_t<\\infty$ define the normalized path target $\\pi_t^{\\mathrm{FK}}=\\gamma_t/Z_t$. The sequence $(\\gamma_t)$ with its kernels and potentials is the Feynman–Kac flow.\n\nState-space filtering kernels are conditional-law versions as in [[def-state-space-filtering-laws]]. A Feynman–Kac path target is not by itself an assertion that a pointwise conditional version has been selected at observation-null histories.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a terminal index $k$ and let $b_0,\\ldots,b_T$ be its ancestry, so $A_t^{b_t}=b_{t-1}$. On a positive-weight particle system, [F1] has $\\widehat Z_TW_T^k=(\\prod_{t=0}^{T-1}\\bar w_t)w_T^{b_T}/N$. In the forward SIR law [F2], the selected lineage contributes $\\prod_{t=1}^TW_{t-1}^{b_{t-1}}R_t(x_{t-1}^{b_{t-1}},dx_t^{b_t})$ and its initial proposal $\\nu_0(dx_0^{b_0})$. Substituting $W_{t-1}^{b_{t-1}}=w_{t-1}^{b_{t-1}}/(N\\bar w_{t-1})$ cancels all average-weight denominators, giving $\\varphi_N(d\\theta,du,k)=\\frac{\\pi_0(d\\theta)\\gamma_{\\theta,T}(dx_{0:T}^{b})}{C N^{T+1}}\\prod_{i\\ne b_0}\\nu_0(dx_0^i)\\prod_{t=1}^T\\prod_{i\\ne b_t}W_{t-1}^{A_t^i}R_t(x_{t-1}^{A_t^i},dx_t^i)$. The selected path factors are $\\nu_0w_0=G_0\\mu_0$ and $R_tw_t=G_tM_t$ by [F3]; all off-path factors are probability proposal/resampling kernels by [F2]. If any average weight is zero, the extended-target mass and selected target path measure are both zero at that step.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each fixed lineage $b$, the right side of step 1.1 integrates over the off-path variables to $C^{-1}\\pi_0(d\\theta)\\gamma_{\\theta,T}(dx^b)/N^{T+1}$ because those variables have the normalized SIR conditional law. There are exactly $N^{T+1}$ index sequences $b$, and summing over them gives total mass one and selected $(\\theta,X_{0:T}^K)$ marginal $C^{-1}\\pi_0(d\\theta)\\gamma_{\\theta,T}(dx_{0:T})$, which is the posterior by [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof treat the zero-average branch, where the extended-target and selected-path factors vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement is for N≥2; N=1 is outside this particle Gibbs claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement excludes C=0 and C=infinity, where no normalized posterior is defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or probability endpoint calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the AC-based path RN supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "thm-particle-gibbs-conditional-sweep-is-gibbs": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-particle-gibbs-extended-target",
+          "source_section": "Definition",
+          "quote": "Use the finite-horizon state path model and proposal support conditions in\n[[def-feynman-kac-path-targets-and-normalizers]],\n[[thm-feynman-kac-path-radon-nikodym-weight]], and\n[[alg-sequential-importance-resampling]]. Let $\\pi_0$ be a proper parameter\nprior, $\\gamma_{\\theta,T}$ the Feynman–Kac path measure at parameter $\\theta$,\n$L_\\theta=\\gamma_{\\theta,T}(1)$, with $0<L_\\theta<\\infty$ for\n$\\pi_0$-almost every $\\theta$, and\n$$C=\\int L_\\theta\\,\\pi_0(d\\theta),\\qquad 0<C<\\infty.$$\nFor a fixed particle count $N\\ge2$, write\n$$U=(X_0^{1:N},A_1^{1:N},X_1^{1:N},\\ldots,A_T^{1:N},X_T^{1:N})$$\nfor the full particle system and ancestor indices generated by\n[[alg-sequential-importance-resampling]]. Its forward probability law at\nparameter $\\theta$ is $\\psi_\\theta(du)$. The algorithm defines the product\nnormalizer estimate $\\widehat Z_T(U)$ and final normalized weights\n$W_T^1(U),\\ldots,W_T^N(U)$; $K$ is a terminal particle index. The path\n$X_{0:T}^{K}$ means the states on the ancestral lineage of particle $K$,\ntraced through the arrays $A_1^{1:N},\\ldots,A_T^{1:N}$.\n\nMore explicitly, relative to counting measure on ancestor arrays and the\nordered SIR proposal-kernel integrals for the states,\n$$\\psi_\\theta(du)=\\prod_{i=1}^N\\nu_{\\theta,0}(dx_0^i)\\prod_{t=1}^T\\prod_{i=1}^N\\left[W_{t-1}^{A_t^i}(U)R_{\\theta,t}(X_{t-1}^{A_t^i},dx_t^i)\\right].$$\nEach factor $W_{t-1}^{A_t^i}(U)$ is the categorical mass of that ancestor\nchoice; no state transition density is assumed for the genealogical variant.\n\nThe genealogical particle Gibbs extended target is the measure\n$$\\varphi_N(d\\theta,du,k)=C^{-1}\\pi_0(d\\theta)\\,\\psi_\\theta(du)\\,\\widehat Z_T(u)W_T^k(u),\\qquad k\\in\\{1,\\ldots,N\\}.$$\nThe selected state is $(\\theta,X_{0:T}^{K})$. The zero-weight fallback in the\nparticle algorithm defines $W_T$ everywhere; when $\\widehat Z_T=0$ the extended\ntarget assigns the configuration zero mass.\n\nThe measure is a probability and has the exact joint smoothing posterior as\nits selected $(\\theta,X_{0:T}^{K})$ marginal by\n[[thm-particle-gibbs-selected-path-marginal]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-sequential-importance-resampling",
+          "source_section": "Definition",
+          "quote": "Use the finite-horizon target and proposal setting of [[def-feynman-kac-path-targets-and-normalizers]]. For admissible inputs require $\\mu_0\\ll\\nu_0$ and, for each $k\\ge1$, $M_k(x,\\cdot)\\ll R_k(x,\\cdot)$ for almost every $x$ under the last-coordinate marginal of the proposal path law $Q_{k-1}$. Select the joint measurable versions $\\rho_0=d\\mu_0/d\\nu_0$ and $r_k(x,\\cdot)=dM_k(x,\\cdot)/dR_k(x,\\cdot)$ supplied by [[thm-feynman-kac-path-radon-nikodym-weight]]. Fix $N\\ge1$ and select either multinomial or residual resampling at each time. The algorithm returns a weighted empirical path measure and a normalizer estimate.\n\n1. Draw $X_0^1,\\ldots,X_0^N$ independently from $\\nu_0$. Set $a_0^i=G_0(X_0^i)\\rho_0(X_0^i)$ and $\\widehat Z_0=N^{-1}\\sum_{i=1}^Na_0^i$. If $\\sum_i a_0^i>0$, put $\\bar w_0^i=a_0^i/\\sum_j a_0^j$; otherwise put $\\bar w_0^i=1/N$. Each initial path is $X_{0:0}^i=X_0^i$.\n2. For $k=1,\\ldots,t$, do the following:\n   1. Apply [[alg-multinomial-and-residual-offspring-resampling]] to the previous normalized weights $(\\bar w_{k-1}^1,\\ldots,\\bar w_{k-1}^N)$, obtaining ancestor indices $A_k^1,\\ldots,A_k^N$.\n   2. Given the previous paths and these indices, draw $(X_k^1,\\ldots,X_k^N)$ with joint conditional law $\\bigotimes_{i=1}^N R_k(X_{k-1}^{A_k^i},\\cdot)$ and set $X_{0:k}^i=(X_{0:k-1}^{A_k^i},X_k^i)$.\n   3. Set $a_k^i=G_k(X_k^i)r_k(X_{k-1}^{A_k^i},X_k^i)$ and $\\widehat Z_k=\\widehat Z_{k-1}(N^{-1}\\sum_{i=1}^Na_k^i)$. If $\\sum_i a_k^i>0$, put $\\bar w_k^i=a_k^i/\\sum_j a_k^j$; otherwise put $\\bar w_k^i=1/N$.\n3. Return $\\widehat Z_t$ and the weighted empirical path probability measure $\\widehat\\pi_t^N=\\sum_{i=1}^N\\bar w_t^i\\delta_{X_{0:t}^i}$. Its last-coordinate marginal is the corresponding empirical filtering approximation.\n\nThe all-zero fallback only defines a probability measure for reporting and future sampling. Once a zero average weight occurs, $\\widehat Z$ remains zero. The procedure makes no finite-particle accuracy, consistency, or long-time stability claim.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-conditional-particle-gibbs",
+          "source_section": "Definition",
+          "quote": "Fix $N\\ge2$, a finite horizon $T$, a parameter $\\theta$, and a reference\ntrajectory $x^*_{0:T}$ with a reference lineage of particle indices\n$b_0,\\ldots,b_T\\in\\{1,\\ldots,N\\}$. Use the proposal kernels, incremental\nweights, and normalized resampling weights of\n[[alg-sequential-importance-resampling]]. Require that the reference path lies\nin the target path support and that the proposal path law dominates the target\npath measure as in [[thm-feynman-kac-path-radon-nikodym-weight]].\n\n1. Draw the $N-1$ initial particles other than $X_0^{b_0}$ independently from\n   $\\nu_0$, and set $X_0^{b_0}=x_0^*$.\n2. For $t=1,\\ldots,T$, for every $i\\ne b_t$ draw an ancestor $A_t^i$ from the\n   categorical distribution with probabilities $W_{t-1}^{1:N}$ and then draw\n   $X_t^i$ from the proposal kernel conditional on $X_{t-1}^{A_t^i}$. Set\n   $A_t^{b_t}=b_{t-1}$ and $X_t^{b_t}=x_t^*$. Compute all incremental and\n   normalized weights by the SIR rule.\n3. Return the conditional particle system, its weights, and ancestry arrays.\n\nIn a particle Gibbs sweep, the conditional particle filter is followed by a\ndraw $K\\sim\\mathrm{Categorical}(W_T^{1:N})$ and tracing the ancestry of $K$.\nFor a joint parameter-path target, first update $\\theta$ from its exact full\nconditional given the retained path. This procedure defines the finite\nconditional particle Gibbs update; its correctness is a separate result.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-feynman-kac-path-radon-nikodym-weight",
+          "source_section": "Statement",
+          "quote": "Assume AC and the setup of [[def-feynman-kac-path-targets-and-normalizers]] through a fixed horizon $t\\le T$. Let $\\nu_0$ be a proposal probability on $\\mathsf X_0$, and for $1\\le k\\le t$ let $R_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be proposal probability kernels. Define $Q_s(dx_{0:s})=\\nu_0(dx_0)\\prod_{k=1}^sR_k(x_{k-1},dx_k)$. Suppose $\\mu_0\\ll\\nu_0$, and for each $k$ suppose $M_k(x,\\cdot)\\ll R_k(x,\\cdot)$ for almost every $x$ under the last-coordinate marginal of $Q_{k-1}$. Choose a measurable version $\\rho_0=d\\mu_0/d\\nu_0$ and, using [[lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels]], measurable versions $r_k(x,\\cdot)=dM_k(x,\\cdot)/dR_k(x,\\cdot)$ for these preceding-state marginals.\n\nThen $\\gamma_s\\ll Q_s$ for every $s\\le t$, with product density\n$$W_s(x_{0:s})=G_0(x_0)\\rho_0(x_0)\\prod_{k=1}^sG_k(x_k)r_k(x_{k-1},x_k).$$\nThat is, $\\gamma_s(A)=\\int_AW_s\\,dQ_s$ for every measurable $A\\subseteq\\mathsf X_{0:s}$. If $0<Z_s<\\infty$, the normalized path target has density $W_s/Z_s$ with respect to $Q_s$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-particle-gibbs-selected-path-marginal",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses of [[def-particle-gibbs-extended-target]] and\n[[alg-sequential-importance-resampling]], including the finite-horizon support\nconditions and $0<L_\\theta<\\infty$ for prior-almost every $\\theta$, with\n$0<C=\\int L_\\theta\\,\\pi_0(d\\theta)<\\infty$. Then $\\varphi_N$ in\n[[def-particle-gibbs-extended-target]] is a probability measure and its\nselected $(\\theta,X_{0:T}^{K})$ marginal is\n$$C^{-1}\\pi_0(d\\theta)\\gamma_{\\theta,T}(dx_{0:T}),$$\nthe exact joint parameter and smoothing posterior, for every $N\\ge2$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since the only $K$-dependent factor in [F1] is $W_T^K$, and the final normalized weights sum to one, $\\varphi_N(K=k\\mid\\theta,U)=W_T^k$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a selected index $K$ and trace its lineage $b_0,\\ldots,b_T$. On the positive-mass support of [F1], write $\\bar w_t=N^{-1}\\sum_iw_t^i$, so $\\widehat Z_TW_T^K=(\\prod_{t=0}^{T-1}\\bar w_t)w_T^{b_T}/N$. In the forward density [F2], the selected lineage contributes $\\prod_{t=1}^TW_{t-1}^{b_{t-1}}R_t(x_{t-1}^{b_{t-1}},dx_t^{b_t})$ and its initial proposal $\\nu_0(dx_0^{b_0})$. Substituting $W_{t-1}^{b_{t-1}}=w_{t-1}^{b_{t-1}}/(N\\bar w_{t-1})$ cancels each $\\bar w_{t-1}$, leaving the selected path factor $N^{-(T+1)}\\nu_0(dx_0^{b_0})w_0^{b_0}\\prod_{t=1}^TR_t(x_{t-1}^{b_{t-1}},dx_t^{b_t})w_t^{b_t}$. If any average weight is zero, [F1] assigns the configuration zero extended-target mass, so its conditional law need not be specified there.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By the initial and transition Radon–Nikodym weight identities in [F4], the selected path factor in step 2.1 equals $N^{-(T+1)}\\gamma_{\\theta,T}(dx_{0:T}^{b})$. All remaining factors are exactly the conditional SIR laws for the non-reference particles and ancestors in [F3]. Thus, conditional on the selected path and lineage, the remaining particle variables have the stated conditional-particle-filter law; the same factorization makes the lineage indices uniform given the selected path.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 3.1 and [F5] identify the selected $(\\theta,x^b)$ marginal as the posterior. Therefore its conditional in $\\theta$ given $x^b$ is the posterior full conditional. The first update in the joint particle Gibbs sweep is this Gibbs conditional.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Each update just identified replaces one coordinate by its conditional law under $\\varphi_N$. For any measurable set $E$, integrating first over the old coordinate and then over the replacement coordinate leaves $\\varphi_N(E)$ unchanged by the defining conditional-probability identity. Hence each Gibbs update preserves $\\varphi_N$, and their composition does too. Its selected marginal remains the exact posterior by [F5].",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 restrict conditionals to positive extended-target mass; zero-average configurations have zero mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement requires N≥2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes positive finite evidence and a reference path in posterior support."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or probability endpoint calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the path RN identity obtained through the AC-based supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "def-particle-gibbs-backward-simulation-extended-target": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition requires positive finite backward denominators on the extended-target support."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition is for the N≥2 particle Gibbs regime."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition excludes a zero backward denominator on target-supported paths."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or probability endpoint calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition inherits AC through the path RN supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "alg-particle-gibbs-backward-simulation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition requires positive finite backward denominators on the extended-target support."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition requires N≥2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degenerate-model boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition normalizes each backward probability by the displayed finite positive denominator."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition inherits AC through the path and proposal weights."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "thm-particle-gibbs-backward-simulation-sweep-is-gibbs": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-particle-gibbs-backward-simulation-extended-target",
+          "source_section": "Definition",
+          "quote": "Assume the finite-horizon Feynman–Kac model and proposal support conditions in\n[[def-feynman-kac-path-targets-and-normalizers]] and\n[[thm-feynman-kac-path-radon-nikodym-weight]]. For this variant, additionally\nassume that the initial target law has a measurable density $\\mu_{\\theta,0}$,\neach target transition $M_{\\theta,t}$ has a jointly measurable density\n$f_{\\theta,t}(x_t\\mid x_{t-1})$, and each proposal transition $R_{\\theta,t}$ has\na density $q_{\\theta,t}(x_t\\mid x_{t-1})$, all with respect to declared\nsigma-finite coordinate reference measures. Let $q_{\\theta,0}$ be the proposal\ninitial density with respect to the initial coordinate reference measure.\nRetain the proper-prior and positive-finite-evidence assumptions of\n[[def-particle-gibbs-extended-target]]. Then\nthe path measure has density\n$$\\gamma_{\\theta,T}(x_{0:T})=\\mu_{\\theta,0}(x_0)G_0(x_0)\\prod_{t=1}^Tf_{\\theta,t}(x_t\\mid x_{t-1})G_t(x_t).$$\nRequire positive finite denominators in the backward probabilities below on\nthe extended-target support.\n\nWrite $U$ for all SIR particles and ancestor indices, $\\psi_\\theta(u)$ for\ntheir forward joint density, and $j=(j_0,\\ldots,j_T)$ for a sequence of\nparticle indices. Let $x^j_{0:T}$ be the path formed from states\n$X_t^{j_t}$, without requiring $A_t^{j_t}=j_{t-1}$. For\n$t=0,\\ldots,T-1$, define\n$$B_t^i(z;U)=\\frac{W_t^i f_{\\theta,t+1}(z\\mid X_t^i)}{\\sum_{\\ell=1}^NW_t^\\ell f_{\\theta,t+1}(z\\mid X_t^\\ell)}.$$\nThe backward-simulation extended target is\n$$\\varphi_N^{\\rm BS}(d\\theta,du,j)=\\frac{\\pi_0(d\\theta)\\,\\gamma_{\\theta,T}(x^j_{0:T})}{C\\,N^{T+1}}\\frac{\\psi_\\theta(u)}{q_{\\theta,0}(X_0^{j_0})\\prod_{t=1}^TW_{t-1}^{A_t^{j_t}}q_{\\theta,t}(X_t^{j_t}\\mid X_{t-1}^{A_t^{j_t}})}\\prod_{t=1}^TB_{t-1}^{A_t^{j_t}}(X_t^{j_t};U).$$\nwhere the displayed expression is a density with respect to the common\nparticle reference measures, counting measure on ancestor and selected indices,\nand the prior measure on $\\theta$. The complete SIR forward density\n$\\psi_\\theta$ includes the normalized ancestor probabilities and proposal\ndensities for every particle. This is the backward-simulation extension of the\nparticle Gibbs target; its exact selected-path marginal and Gibbs conditionals\nare proved in\n[[thm-particle-gibbs-backward-simulation-sweep-is-gibbs]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-particle-gibbs-backward-simulation",
+          "source_section": "Definition",
+          "quote": "Use the density, support, and positive-denominator hypotheses of\n[[def-particle-gibbs-backward-simulation-extended-target]]. Fix $N\\ge2$. A\nbackward-simulation sweep on $(\\theta,x^*,j)$ consists of the following\nupdates:\n\n1. Draw $\\theta'$ from the exact posterior full conditional given $x^*$ and\n   the observations.\n2. Run a conditional auxiliary particle filter at $\\theta'$, conditioned on\n   the reference trajectory $x^*$ and index sequence $j$. Initialize all\n   particles except the indexed reference particle from the proposal. At each\n   later time, draw each non-reference ancestor from the current normalized\n   weights and propagate it with the proposal; fix the indexed reference state\n   to its reference value and draw its ancestor $A_t^{j_t}$ with probabilities\n   $B_{t-1}^i(x_t^{j_t};U)$.\n3. Given the resulting particle cloud, draw $J_T$ from the final normalized\n   weights $W_T^{1:N}$. For $t=T-1,T-2,\\ldots,0$, draw\n   $J_t$ with probabilities $B_t^{1:N}(X_{t+1}^{J_{t+1}};U)$. Return\n   $\\theta'$ and the selected path $X_0^{J_0},\\ldots,X_T^{J_T}$ together with\n   the new index sequence.\n\nThe conditional auxiliary particle filter and the backward simulator are the\ntwo particle-coordinate conditionals of\n[[def-particle-gibbs-backward-simulation-extended-target]]. Their Gibbs\ninterpretation and exact posterior marginal are separate proved properties.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-feynman-kac-path-radon-nikodym-weight",
+          "source_section": "Statement",
+          "quote": "Assume AC and the setup of [[def-feynman-kac-path-targets-and-normalizers]] through a fixed horizon $t\\le T$. Let $\\nu_0$ be a proposal probability on $\\mathsf X_0$, and for $1\\le k\\le t$ let $R_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be proposal probability kernels. Define $Q_s(dx_{0:s})=\\nu_0(dx_0)\\prod_{k=1}^sR_k(x_{k-1},dx_k)$. Suppose $\\mu_0\\ll\\nu_0$, and for each $k$ suppose $M_k(x,\\cdot)\\ll R_k(x,\\cdot)$ for almost every $x$ under the last-coordinate marginal of $Q_{k-1}$. Choose a measurable version $\\rho_0=d\\mu_0/d\\nu_0$ and, using [[lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels]], measurable versions $r_k(x,\\cdot)=dM_k(x,\\cdot)/dR_k(x,\\cdot)$ for these preceding-state marginals.\n\nThen $\\gamma_s\\ll Q_s$ for every $s\\le t$, with product density\n$$W_s(x_{0:s})=G_0(x_0)\\rho_0(x_0)\\prod_{k=1}^sG_k(x_k)r_k(x_{k-1},x_k).$$\nThat is, $\\gamma_s(A)=\\int_AW_s\\,dQ_s$ for every measurable $A\\subseteq\\mathsf X_{0:s}$. If $0<Z_s<\\infty$, the normalized path target has density $W_s/Z_s$ with respect to $Q_s$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-feynman-kac-path-targets-and-normalizers",
+          "source_section": "Definition",
+          "quote": "Assume AC and fix a finite horizon $T\\in\\mathbb N_0$. For each $0\\le k\\le T$, let $(\\mathsf X_k,\\mathcal X_k)$ be a standard Borel space. Let $\\mu_0$ be a probability measure on $\\mathsf X_0$, and for $1\\le k\\le T$ let $M_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be a probability kernel. A **potential** at time $k$ is a finite-valued nonnegative measurable function $G_k:\\mathsf X_k\\to[0,\\infty)$. Write $\\mathsf X_{0:t}=\\prod_{k=0}^t\\mathsf X_k$ with its finite-product sigma-algebra.\n\nFor each $0\\le t\\le T$, let $P_t^M$ be the finite path law with ordered kernel integral $\\mu_0(dx_0)\\prod_{k=1}^tM_k(x_{k-1},dx_k)$, supplied by Ionescu–Tulcea ([[thm-ionescu-tulcea-construction-of-a-markov-chain]]). The **unnormalized Feynman–Kac path measure** is\n$$\\gamma_t(A)=\\int_{\\mathsf X_{0:t}}\\mathbf 1_A(x_{0:t})\\prod_{k=0}^tG_k(x_k)\\,P_t^M(dx_{0:t}),\\qquad A\\in\\bigotimes_{k=0}^t\\mathcal X_k.$$\nIts **normalizer** is $Z_t=\\gamma_t(\\mathsf X_{0:t})=\\gamma_t(1)\\in[0,\\infty]$. Only when $0<Z_t<\\infty$ define the normalized path target $\\pi_t^{\\mathrm{FK}}=\\gamma_t/Z_t$. The sequence $(\\gamma_t)$ with its kernels and potentials is the Feynman–Kac flow.\n\nState-space filtering kernels are conditional-law versions as in [[def-state-space-filtering-laws]]. A Feynman–Kac path target is not by itself an assertion that a pointwise conditional version has been selected at observation-null histories.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At each $t$, the one-step importance weight is $w_t=G_t f_t/q_t$ (and initially $w_0=G_0\\,d\\mu_0/d\\nu_0$). For any two previous particles $i,\\ell$ and a candidate state $z$, cancellation of the common potential gives\n$$w_t(z,X_{t-1}^i)=w_t(z,X_{t-1}^\\ell)\\frac{f_t(z\\mid X_{t-1}^i)q_t(z\\mid X_{t-1}^\\ell)}{f_t(z\\mid X_{t-1}^\\ell)q_t(z\\mid X_{t-1}^i)}.$$\nThis identity is valid on the support in [F3].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a backward index sequence $j$ and its reference path. Expanding the forward density $\\psi_\\theta$ in [F1] and canceling the selected initial proposal and each selected joint ancestor-proposal factor gives $\\varphi_N^{\\rm BS}(d\\theta,du,j)=\\frac{\\pi_0(d\\theta)\\gamma_{\\theta,T}(dx^j_{0:T})}{C N^{T+1}}\\prod_{i\\ne j_0}q_{\\theta,0}(x_0^i)\\prod_{t=1}^T\\left[\\prod_{i\\ne j_t}\\left(W_{t-1}^{A_t^i}q_{\\theta,t}(x_t^i\\mid x_{t-1}^{A_t^i})\\right)\\right]\\prod_{t=1}^TB_{t-1}^{A_t^{j_t}}(x_t^{j_t};U)$. The bracketed factors are exactly the non-reference resample-and-propagate law and the categorical backward ancestor law in [F2]. Each integrates to one, so this is the conditional auxiliary particle filter factorization and its conditional measure is normalized.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Now fix the full particle system and condition in [F1] on its index sequence. Since $W_t^i=w_t^i/\\sum_\\ell w_t^\\ell$, each backward factor is also $B_t^i(z;U)=w_t^if_{t+1}(z\\mid X_t^i)/\\sum_\\ell w_t^\\ell f_{t+1}(z\\mid X_t^\\ell)$. Replacing each selected-parent weight by the identity in step 1.1 cancels the selected proposal factors successively from $t=T$ to $t=1$, leaving unnormalized index mass $W_T^{j_T}\\prod_{t=0}^{T-1}B_t^{j_t}(X_{t+1}^{j_{t+1}};U)$. These factors normalize sequentially: $\\sum_{j_T}W_T^{j_T}=1$ and, for each fixed $j_{t+1}$, $\\sum_{j_t}B_t^{j_t}(X_{t+1}^{j_{t+1}};U)=1$. Hence the full conditional is exactly the backward simulator in [F2].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By step 1.2, for each fixed $j$ the other particle variables have a normalized conditional law. The leading factor is $C^{-1}\\pi_0(d\\theta)\\gamma_{\\theta,T}(dx^j)/N^{T+1}$ by [F4]. There are $N^{T+1}$ index sequences, so integrating the remaining variables and summing over them gives total mass one and selected $(\\theta,x^*)$ marginal $C^{-1}\\pi_0(d\\theta)\\gamma_{\\theta,T}(dx^*)$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.2–2.2 and the exact parameter full conditional in [F2] are Gibbs conditionals of the extended target. Integrating a conditional update against the target recovers the same target by the defining conditional-probability identity; the composition of these updates therefore leaves the extended target invariant. The selected marginal in step 2.2 remains exact.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement requires positive finite backward denominators on the extended-target support; a zero denominator is outside the target construction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement requires N≥2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement requires positive finite backward denominators and positive finite evidence."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 normalizes each finite categorical backward distribution."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the AC-based path RN identity."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "ex-pseudo-marginal-rejection": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pmmh",
+          "source_section": "Definition",
+          "quote": "Fix observations $y_{1:T}$, a standard-Borel parameter space $(\\Theta,\\mathcal T)$,\na prior probability $\\pi_0$, and the finite-horizon Feynman–Kac path model in\n[[def-feynman-kac-path-targets-and-normalizers]]. Write\n$$L_\\theta(y_{1:T})=\\gamma_{\\theta,T}(1),\\qquad C=\\int_\\Theta L_\\theta(y_{1:T})\\,\\pi_0(d\\theta).$$\nRequire every prefix normalizer $0<Z_{\\theta,t}<\\infty$ for $t=0,\\ldots,T$\nand $\\pi_0$-almost every $\\theta$, together with $0<C<\\infty$; then the\nparameter posterior is\n$$\\pi_y(d\\theta)=C^{-1}L_\\theta(y_{1:T})\\,\\pi_0(d\\theta).$$\n\nFor fixed particle count $N\\ge1$, let $U$ contain the full output of\n[[alg-sequential-importance-resampling]] at $\\theta$ and a terminal index\n$K\\in\\{1,\\ldots,N\\}$ drawn conditionally with its final normalized weight.\nLet $m_\\theta(du)$ be this measurable auxiliary-variable probability kernel and\nlet $\\widehat L_\\theta(U)=\\widehat Z_T$ be jointly measurable and nonnegative\nin $(\\theta,U)$. The required interface is\n$$\\int\\widehat L_\\theta(u)\\,m_\\theta(du)=L_\\theta(y_{1:T});$$\n[[thm-sequential-particle-estimator-is-unbiased]] supplies this identity under\nits finite-horizon support and integrability hypotheses. Define the extended\ntarget probability by\n$$\\widetilde\\pi(d\\theta,du)=C^{-1}\\pi_0(d\\theta)m_\\theta(du)\\widehat L_\\theta(u).$$\n\nGiven current $(\\theta,U)$, propose $\\theta'\\sim R(\\theta,\\cdot)$ and then\n$U'\\sim m_{\\theta'}$. Apply the general Metropolis–Hastings construction\n[[alg-metropolis-hastings-kernel]] to this proposal kernel and target\n$\\widetilde\\pi$. On rejection retain the entire current pair $(\\theta,U)$,\nincluding its stored likelihood estimate and selected path index. When $\\pi_0$\nand $R$ have densities $p_0$ and $r$, and the current extended target density\nis positive, the acceptance probability is\n$$1\\wedge\\frac{p_0(\\theta')\\widehat L_{\\theta'}(U')r(\\theta\\mid\\theta')}{p_0(\\theta)\\widehat L_\\theta(U)r(\\theta'\\mid\\theta)}.$$\nInitialize on the extended-target support, where $\\pi_0(\\theta)>0$ and\n$\\widehat L_\\theta(U)>0$. Proposed zero estimates are rejected. A density-free version uses the\naccepted-flow Radon–Nikodym construction in the cited general-state algorithm.\n\nThe selected path stored in $U$ is part of the auxiliary state. Refreshing its\nestimate after rejection defines the different Monte Carlo within Metropolis\nprocedure, not this algorithm.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pmmh-exact-invariance",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[alg-pmmh]], assume the unbiasedness identity there\nholds and the evidence $C$ is finite and positive. Then $\\widetilde\\pi$ is a\nprobability measure whose parameter marginal is $\\pi_y$. With the terminal\nindex included in $U$, the joint marginal of $(\\theta,X_{0:T}^{K})$ is the\nposterior $C^{-1}\\pi_0(d\\theta)\\gamma_{\\theta,T}(dx_{0:T})$. The PMMH\ntransition kernel is reversible, hence invariant, for $\\widetilde\\pi$; its\nparameter and selected-path marginals are therefore exact for every fixed\n$N\\ge1$. This is an invariance result only; it asserts no irreducibility,\nuniqueness, convergence rate, or mixing speed.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The prior mass is $1/2$ at each parameter. Multiplying by the estimator law and its value gives masses $1/2$ at $(0,1)$, $(1/2)(1/2)(1/2)=1/8$ at $(1,1/2)$, and $(1/2)(1/2)(3/2)=3/8$ at $(1,3/2)$. These sum to one, and the two masses over $\\theta=1$ sum to $1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "From $(0,1)$ the proposal $(1,3/2)$ occurs with probability $1/2$ and is accepted with probability one, so the stationary flow is $(1/2)(1/2)=1/4$. In reverse, from $(1,3/2)$ the proposal $(0,1)$ is accepted with probability $(1)/(3/2)=2/3$, so its flow is $(3/8)(2/3)=1/4$. The extended ratio uses the retained value $3/2$ until that move is accepted or rejected.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example uses strictly positive estimates; the algorithm separately rejects a proposed zero estimate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example has one parameter coordinate; its mass calculation is in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example evidence equals one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 computes acceptance probabilities 1 and 2/3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-state calculations and categorical index sums use no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "cex-monte-carlo-within-metropolis-not-exact": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-monte-carlo-within-metropolis",
+          "source_section": "Definition",
+          "quote": "Assume the parameter and likelihood-estimator inputs of [[alg-pmmh]], with\nstrictly positive estimates whenever the ratio is evaluated. At each iteration,\nfrom the current parameter $\\theta$, draw a fresh $U\\sim m_\\theta$; propose\n$\\theta'\\sim R(\\theta,\\cdot)$ and independently draw $U'\\sim m_{\\theta'}$;\naccept $\\theta'$ with the same displayed ratio as [[alg-pmmh]], using the fresh\ncurrent estimate $\\widehat L_\\theta(U)$. Whether the proposal is accepted or\nrejected, discard both auxiliary values before the next iteration and draw a\nnew estimate at the current parameter. The output state is $\\theta$ only.\n\nThis is Monte Carlo within Metropolis (MCWM). It does not retain a single\nextended state on rejection, so the pseudo-marginal invariance proof does not\napply. This definition makes no exactness or stationarity claim.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under MCWM, a move $0\\to1$ accepts with conditional probabilities $1/2$ and $1$ for the two proposed estimates. Thus $P(0,1)=(1/2)(1/2)+(1/2)(1)=3/4$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a move $1\\to0$, the fresh current estimate is $1/2$ or $3/2$ with equal probability and the proposed estimate is $1$. The acceptance probabilities are $1$ and $2/3$, so $P(1,0)=(1/2)(1)+(1/2)(2/3)=5/6$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Starting from the claimed uniform posterior, the next mass at state $1$ is $(1/2)(3/4)+(1/2)(1-5/6)=11/24\\ne1/2$. Hence the exact posterior is not invariant. The unequal cross-flows also violate detailed balance.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Counterexample uses strictly positive estimates, so no zero-denominator convention is involved."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Counterexample has exactly two parameter states; transition probabilities are computed in steps 1.1–1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degenerate-model boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 include acceptance probabilities 1 and 2/3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-state calculations and categorical index sums use no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "ex-particle-gibbs-invariant-but-sticky": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-conditional-particle-gibbs",
+          "source_section": "Definition",
+          "quote": "Fix $N\\ge2$, a finite horizon $T$, a parameter $\\theta$, and a reference\ntrajectory $x^*_{0:T}$ with a reference lineage of particle indices\n$b_0,\\ldots,b_T\\in\\{1,\\ldots,N\\}$. Use the proposal kernels, incremental\nweights, and normalized resampling weights of\n[[alg-sequential-importance-resampling]]. Require that the reference path lies\nin the target path support and that the proposal path law dominates the target\npath measure as in [[thm-feynman-kac-path-radon-nikodym-weight]].\n\n1. Draw the $N-1$ initial particles other than $X_0^{b_0}$ independently from\n   $\\nu_0$, and set $X_0^{b_0}=x_0^*$.\n2. For $t=1,\\ldots,T$, for every $i\\ne b_t$ draw an ancestor $A_t^i$ from the\n   categorical distribution with probabilities $W_{t-1}^{1:N}$ and then draw\n   $X_t^i$ from the proposal kernel conditional on $X_{t-1}^{A_t^i}$. Set\n   $A_t^{b_t}=b_{t-1}$ and $X_t^{b_t}=x_t^*$. Compute all incremental and\n   normalized weights by the SIR rule.\n3. Return the conditional particle system, its weights, and ancestry arrays.\n\nIn a particle Gibbs sweep, the conditional particle filter is followed by a\ndraw $K\\sim\\mathrm{Categorical}(W_T^{1:N})$ and tracing the ancestry of $K$.\nFor a joint parameter-path target, first update $\\theta$ from its exact full\nconditional given the retained path. This procedure defines the finite\nconditional particle Gibbs update; its correctness is a separate result.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-particle-gibbs-conditional-sweep-is-gibbs",
+          "source_section": "Statement",
+          "quote": "Under [[def-particle-gibbs-extended-target]] and\n[[alg-conditional-particle-gibbs]], for $\\varphi_N$-almost every extended\nstate the conditional law of the terminal index $K$ given the particle cloud\nis $\\mathrm{Categorical}(W_T^{1:N})$. Given the\nretained trajectory and its reference lineage, the remaining particles and\nancestor indices have exactly the conditional-particle-filter law in\n[[alg-conditional-particle-gibbs]]. The parameter conditional is the ordinary\nposterior full conditional given the selected path. Consequently these are\nGibbs updates of the extended target. Their composition leaves that target\ninvariant and has the exact joint parameter-path posterior as its selected\nmarginal. This invariance does not assert fast mixing.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The importance weights are $w(0)=(99/100)/(1/100)=99$ and $w(1)=(1/100)/(99/100)=1/99$. From reference state $0$, the free particle is $1$ with probability $99/100$ and is selected with probability $(1/99)/(99+1/99)=1/9802$. Therefore $P(0,1)=99/980200$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "From reference state $1$, the free particle is $0$ with probability $1/100$ and is selected with probability $99/(99+1/99)=9801/9802$. Therefore $P(1,0)=9801/980200$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The detailed-balance flows agree: $(99/100)P(0,1)=9801/98020000=(1/100)P(1,0)$, consistent with the exact invariance in [F2]. Yet the probability of leaving state $0$ is only $99/980200<1/9000$, so exact invariance alone gives no useful lower bound on movement.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example has strictly positive proposal and target mass at both states."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example uses N=2, the smallest particle count covered by the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example uses a nondegenerate two-point posterior and full-support proposal."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 compute the off-diagonal transition probabilities."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-state calculations and categorical index sums use no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "cex-particle-gibbs-missing-path-support": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-conditional-particle-gibbs",
+          "source_section": "Definition",
+          "quote": "Fix $N\\ge2$, a finite horizon $T$, a parameter $\\theta$, and a reference\ntrajectory $x^*_{0:T}$ with a reference lineage of particle indices\n$b_0,\\ldots,b_T\\in\\{1,\\ldots,N\\}$. Use the proposal kernels, incremental\nweights, and normalized resampling weights of\n[[alg-sequential-importance-resampling]]. Require that the reference path lies\nin the target path support and that the proposal path law dominates the target\npath measure as in [[thm-feynman-kac-path-radon-nikodym-weight]].\n\n1. Draw the $N-1$ initial particles other than $X_0^{b_0}$ independently from\n   $\\nu_0$, and set $X_0^{b_0}=x_0^*$.\n2. For $t=1,\\ldots,T$, for every $i\\ne b_t$ draw an ancestor $A_t^i$ from the\n   categorical distribution with probabilities $W_{t-1}^{1:N}$ and then draw\n   $X_t^i$ from the proposal kernel conditional on $X_{t-1}^{A_t^i}$. Set\n   $A_t^{b_t}=b_{t-1}$ and $X_t^{b_t}=x_t^*$. Compute all incremental and\n   normalized weights by the SIR rule.\n3. Return the conditional particle system, its weights, and ancestry arrays.\n\nIn a particle Gibbs sweep, the conditional particle filter is followed by a\ndraw $K\\sim\\mathrm{Categorical}(W_T^{1:N})$ and tracing the ancestry of $K$.\nFor a joint parameter-path target, first update $\\theta$ from its exact full\nconditional given the retained path. This procedure defines the finite\nconditional particle Gibbs update; its correctness is a separate result.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-feynman-kac-path-radon-nikodym-weight",
+          "source_section": "Statement",
+          "quote": "Assume AC and the setup of [[def-feynman-kac-path-targets-and-normalizers]] through a fixed horizon $t\\le T$. Let $\\nu_0$ be a proposal probability on $\\mathsf X_0$, and for $1\\le k\\le t$ let $R_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be proposal probability kernels. Define $Q_s(dx_{0:s})=\\nu_0(dx_0)\\prod_{k=1}^sR_k(x_{k-1},dx_k)$. Suppose $\\mu_0\\ll\\nu_0$, and for each $k$ suppose $M_k(x,\\cdot)\\ll R_k(x,\\cdot)$ for almost every $x$ under the last-coordinate marginal of $Q_{k-1}$. Choose a measurable version $\\rho_0=d\\mu_0/d\\nu_0$ and, using [[lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels]], measurable versions $r_k(x,\\cdot)=dM_k(x,\\cdot)/dR_k(x,\\cdot)$ for these preceding-state marginals.\n\nThen $\\gamma_s\\ll Q_s$ for every $s\\le t$, with product density\n$$W_s(x_{0:s})=G_0(x_0)\\rho_0(x_0)\\prod_{k=1}^sG_k(x_k)r_k(x_{k-1},x_k).$$\nThat is, $\\gamma_s(A)=\\int_AW_s\\,dQ_s$ for every measurable $A\\subseteq\\mathsf X_{0:s}$. If $0<Z_s<\\infty$, the normalized path target has density $W_s/Z_s$ with respect to $Q_s$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $q(\\{1\\})=0$ while $\\pi(\\{1\\})=1/2$, $\\pi\\not\\ll q$. Therefore the Radon–Nikodym weight required by [F2] does not exist on the full target support, so the stated conditional particle filter hypotheses fail.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Starting from reference state $0$, every free particle is also $0$ because it is drawn from $q=\\delta_0$. The particle filter therefore cannot represent the positive posterior mass at state $1$ by a weighted proposal path. The exact conditional particle filter in [F1] is not defined with the required target-to-proposal weight on the full posterior support. Thus the support-free exactness claim is false as stated.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks a zero proposal probability at a positive posterior state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The two-point counterexample is computed in steps 1.1 and 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proposal is deliberately degenerate at state 0, as stated in the counterexample."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses proposal probability zero at state 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-state calculations and categorical index sums use no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    }
+  }
+}

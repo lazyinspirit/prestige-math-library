@@ -1,0 +1,2157 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-19",
+  "scope": [
+    "def-negative-sobolev-space-for-white-noise",
+    "lem-wavelet-product-prior-is-l2-valued",
+    "lem-bounded-lipschitz-metric-characterizes-weak-convergence-on-polish-spaces",
+    "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space",
+    "lem-product-prior-coordinate-posterior-law",
+    "lem-product-prior-posterior-second-moment-in-negative-sobolev-space",
+    "lem-finite-coordinate-posterior-total-variation-limit",
+    "cor-canonical-white-noise-law-is-tight-under-choice",
+    "thm-weak-nonparametric-bernstein-von-mises-for-product-priors",
+    "cor-weak-posterior-convergence-in-negative-sobolev-space",
+    "cor-continuous-functionals-of-the-scaled-posterior-converge",
+    "ex-white-noise-is-not-l2-valued",
+    "ex-gaussian-product-prior-satisfies-weak-bvm"
+  ],
+  "contracts": {
+    "def-negative-sobolev-space-for-white-noise": {
+      "claim": "Let $(\\psi_{lk})$ be a countable complete orthonormal basis of the real Hilbert space $L^2([0,1])$ ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]], [[def-hilbert-space]], [[def-l-p-space-as-a-quotient-by-null-functions]]). For a wavelet basis, index levels by $l\\ge0$, let $K_l$ have $2^l$ indices, and put $a_l=2^l$ for $l\\ge1$ and $a_0=2$ for the finite coarsest level. This finite-level convention only prevents a zero logarithmic weight and does not change any convergence criterion below. For a trigonometric basis, use its integer frequency index $l$, bounded multiplicities, and $a_l=\\max(2,|l|)$.\n\nHere an **$S$-regular wavelet basis** means a wavelet orthonormal basis whose members are $S$ times differentiable, with each derivative through order $S$ in $L^2([0,1])$, following the source convention. The weak BvM theorem below only uses the basis's completeness, orthonormality, and level counts.\n\nFor $\\delta>0$, define $H(\\delta)=H^{-1/2,\\delta}_2$ to be the space of coefficient sequences $c=(c_{lk})$ with norm\n\n$$\\|c\\|_{H(\\delta)}^2:=\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}|c_{lk}|^2<\\infty.$$\n\nIts inner product is the corresponding weighted coefficient inner product. Multiplying each coordinate by $a_l^{-1/2}(\\log a_l)^{-\\delta}$ identifies it isometrically with $\\ell^2(I)$, where $I=\\{(l,k):k\\in K_l\\}$ (or the corresponding trigonometric index set). This sequence space is complete: if $x^{(m)}$ is Cauchy, each coordinate converges to a scalar $x_i$; for every finite $F\\subset I$, the Cauchy bound passes to the limit in $\\sum_{i\\in F}|x_i^{(m)}-x_i^{(n)}|^2$, so the supremum over finite $F$ shows $x^{(m)}\\to x$ in $\\ell^2(I)$. It is separable because finite-support sequences with rational coordinates form a countable dense set. Thus $H(\\delta)$ is a separable Hilbert space without an additional choice assumption.\n\nA function $f\\in L^2([0,1])$ is identified with its coefficient sequence $c_{lk}=\\langle f,\\psi_{lk}\\rangle$. For each finite set $F$ of indices, orthonormality makes $\\sum_{(l,k)\\in F}c_{lk}\\psi_{lk}$ orthogonal to its residual in $L^2$, so the Pythagorean identity gives $\\sum_F|c_{lk}|^2\\le\\|f\\|_2^2$. Taking the supremum over finite $F$ and using the boundedness of the weights proves continuity of the coefficient map. If all coefficients of $f$ vanish, then $f$ is orthogonal to the linear span of the basis. Completeness makes this span dense, and continuity of $g\\mapsto\\langle f,g\\rangle$ gives $\\langle f,f\\rangle=0$, hence $f=0$ in $L^2$. Applying this to the difference of two functions proves injectivity. Thus the coefficient map is a continuous linear embedding $L^2([0,1])\\hookrightarrow H(\\delta)$.\n\nThe weight trace $\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}$ is finite exactly when $\\delta>1/2$: for wavelets its tail is a constant multiple of $\\sum_{l\\ge1}l^{-2\\delta}$, while for a trigonometric basis it is comparable to $\\sum_{l\\ge2}[l(\\log l)^{2\\delta}]^{-1}$. The product-prior theorem below uses the wavelet case.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty input or set is a free parameter in this claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-threshold parameter or zero-valued boundary is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter special case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate-space or dimension limit is part of this claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition gives the finite trace threshold δ>1/2; the wavelet trace diverges at δ=1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice axiom is used by this claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No registered finite-smoke check applies; the analytic proofs and explicit Gaussian example are handled by their stated arguments."
+    },
+    "lem-wavelet-product-prior-is-l2-valued": {
+      "claim": "Let $H$ be a real Hilbert space with a countable orthonormal basis $(\\psi_{lk})$, where $K_l$ is the level-$l$ index set and $|K_l|=2^l$ for each $l\\ge0$ ([[def-hilbert-space]], [[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]). Such an $H$ is separable because finite rational linear combinations of the countable basis are dense. Let $\\xi_{lk}$ be IID real random variables with common density $\\varphi$ and finite second moment $m_2=\\int x^2\\varphi(x)\\,dx<\\infty$ ([[def-identically-distributed-and-iid-random-variables]]). For $\\alpha>0$, set $\\sigma_l=2^{-l(\\alpha+1/2)}$ and form the partial wavelet sums",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ ([[def-real-and-complex-inner-product-space]]) whose induced-length metric is complete in the sense of [[def-complete-metric-space]]: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ ([[cor-inner-product-induces-a-norm]]) converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm ([[def-banach-space]]).\n\n**The completion convention is the Cauchy-sequence one.**\n[[def-banach-space]] defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness — the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a real or complex inner-product space ([[def-real-and-complex-inner-product-space]]), with inner\nproduct linear in the first argument and conjugate-linear in the second, and\nwith the induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. The definitions below\ndo not require completeness. When the term *Hilbert basis* is used, $H$ is\nadditionally assumed complete ([[def-hilbert-space]]).\n\n**Orthonormal indexed family.** Let $I$ be any set. An indexed family\n$(e_i)_{i\\in I}$ of vectors of $H$ is **orthonormal** when\n\n$$\\langle e_i,e_j\\rangle=\\delta_{ij}:=\\begin{cases}1,&i=j,\\\\0,&i\\ne j,\\end{cases} \\qquad\\text{for all } i,j\\in I .$$Because $1\\ne 0$ in the scalar field, the family contains no zero vector: $\\|e_i\\|^2=\\langle e_i,e_i\\rangle=1$, so $\\|e_i\\|=1$ for every $i$ ([[def-real-and-complex-inner-product-space]]); and the index map is injective, since $e_i=e_j$ with $i\\ne j$ would give $0=\\langle e_i,e_j\\rangle=1$. Thus an orthonormal family is the same thing as an orthonormal set together with a labelling of it, and in the sequel no choice is hidden in passing between the two descriptions. **Orthonormal set.** A subset $S\\subseteq H$ is **orthonormal** when every $s\\in S$ has $\\|s\\|=1$ and $\\langle s,t\\rangle=0$ for all distinct $s,t\\in S$. For such an $S$ the family $(e_s)_{s\\in S}$ with $e_s:=s$ is orthonormal in the indexed sense, and the image of an orthonormal indexed family is an orthonormal set. Orthogonal means $\\langle s,t\\rangle=0$ ([[def-orthogonality-and-orthogonal-complement]]). **Independence and unique coefficients.** Let $(e_i)_{i\\in I}$ be orthonormal, let $F\\subseteq I$ be finite, and let scalars $c_i$ satisfy $\\sum_{i\\in F}c_ie_i=0$. For each fixed $j\\in F$, linearity in the first argument gives$$0=\\Bigl\\langle \\sum_{i\\in F}c_ie_i,\\;e_j\\Bigr\\rangle=\\sum_{i\\in F}c_i\\langle e_i,e_j\\rangle=c_j ,$$\n\nso every finite subfamily of an orthonormal family is linearly independent. In\nparticular the coefficients in a finite expansion are unique: if\n$\\sum_{i\\in F}c_ie_i=\\sum_{i\\in F}d_ie_i$, then applying the computation to\n$c-d$ gives $c_i=d_i$ for every $i\\in F$.\n\n**Closed linear span and completeness.** The **span** of an indexed family is\nthe set of all finite linear combinations $\\sum_{i\\in F}c_ie_i$ with $F\\subseteq I$\nfinite and scalars $c_i$; it is the smallest linear subspace of $H$ containing\nevery $e_i$ ([[def-linear-subspace]]). Its closure in the induced norm is the\n**closed linear span** of the family, the smallest closed linear subspace of $H$\ncontaining every $e_i$. The family is **complete**, or is a **complete\northonormal system**, when its closed linear span is all of $H$. A\n**Hilbert basis**, or **orthonormal basis**, of $H$ is a complete orthonormal\nfamily in $H$.\n\n**The empty family.** The span of the empty family is $\\{0\\}$, which is already\nclosed, so the empty family is complete exactly when $H=\\{0\\}$. Thus the zero\nHilbert space always has a Hilbert basis, namely the empty one.\n\n**Not a Hamel basis, and no order is assumed.** A Hilbert basis is a basis only\nin the sense of closed linear span: for an infinite-dimensional $H$ the vectors\nof $H$ are in general **not** finite linear combinations of a Hilbert basis, and\nthe expansion of an arbitrary vector is a norm limit of finite partial sums, not\na finite sum. No enumeration, ordering or countability of the index set is part\nof the definition; the partial sums are indexed by the finite subsets of $I$,\nordered by inclusion, and that is the convention used on this page.\n\n**Coefficient notation.** For orthonormal $(e_i)_{i\\in I}$ and $x\\in H$ the\nscalars $\\langle x,e_i\\rangle$ are the **coefficients** of $x$ with respect to\nthe family. They are well defined for every $x$, without any assumption that\nthe family is complete.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-riesz-fischer-completeness-of-l-p",
+          "source_section": "Statement",
+          "quote": "Assume countable choice (in particular, the Axiom of Choice suffices). Let $(X,\\mathcal A,\\mu)$ be a measure space and let $1\\le p\\le\\infty$. Then\n$L^p(\\mu)$, with the norm of\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]], is\ncomplete. Equivalently, the metric induced by that norm is a complete metric in\nthe sense of [[def-complete-metric-space]].\n\nMoreover, if a sequence in $L^p(\\mu)$ converges in norm, then some subsequence\nadmits measurable representatives converging almost everywhere in the sense of\n[[def-convergence-almost-everywhere-relative-to-a-measure]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each finite $N$, orthonormality [F2] gives $\\|f_N\\|_H^2=\\sum_{0\\le l\\le N}\\sum_{k\\in K_l}\\sigma_l^2\\xi_{lk}^2.$ The nonnegative partial sums increase to the full coefficient-square sum, so [F4] gives its expectation as the limit of the finite expectations, $\\sum_{l\\ge0}\\sum_{k\\in K_l}\\sigma_l^2\\mathbb E\\xi_{lk}^2=m_2\\sum_{l\\ge0}2^l2^{-2l(\\alpha+1/2)}=m_2\\sum_{l\\ge0}2^{-2\\alpha l}<\\infty,$ since the final series is geometric with ratio $2^{-2\\alpha}<1$. If the coefficient-square sum were infinite on an event of probability $p>0$, its expectation would be at least $Rp$ for every $R>0$, contradicting finiteness. Thus that sum is finite almost surely.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On the probability-one event where that sum is finite, for $M>N$ orthonormality gives $\\|f_M-f_N\\|_H^2=\\sum_{N<l\\le M}\\sum_{k\\in K_l}\\sigma_l^2\\xi_{lk}^2.$ The right side tends to zero uniformly over $M>N$ as $N\\to\\infty$, since it is a tail of a convergent nonnegative series. Thus $(f_N)$ is Cauchy in $H$ and has a limit $f$ by completeness [F1]. When $H=L^2([0,1])$, completeness is supplied by [F5] under [A1]. The Cauchy event is measurable because it is a countable combination of conditions on the measurable distances $\\|f_M-f_N\\|_H$. On that event the pointwise limit is measurable as a limit into the separable metric space $H$; setting the limit equal to zero on the measurable complement gives a Borel $H$-valued random element.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The same monotone-convergence calculation in [F4] gives $\\mathbb E\\|f\\|_H^2=\\mathbb E\\sum_{l\\ge0}\\sum_{k\\in K_l}\\sigma_l^2\\xi_{lk}^2=m_2\\sum_{l\\ge0}2^{-2\\alpha l}<\\infty.$ This proves both the stated second-moment formula and the claimed well-definedness.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty input or set is a free parameter in this claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-threshold parameter or zero-valued boundary is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter special case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate-space or dimension limit is part of this claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement assumes α>0; step 1.1 gives the geometric ratio 2^{-2α}<1, while α=0 is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement separates the abstract Hilbert-space argument from the ACω-dependent L² completeness branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No registered finite-smoke check applies; the analytic proofs and explicit Gaussian example are handled by their stated arguments."
+    },
+    "lem-bounded-lipschitz-metric-characterizes-weak-convergence-on-polish-spaces": {
+      "claim": "Assume the Axiom of Choice. Let $(S,d)$ be a Polish space, and let $\\mu_n,\\mu$ be Borel probability measures on $S$. Define\n\n$$\\beta_{BL}(\\nu,\\rho):=\\sup\\left\\{\\left|\\int g\\,d\\nu-\\int g\\,d\\rho\\right|:g:S\\to\\mathbb R,\\ \\|g\\|_\\infty\\le1,\\ \\operatorname{Lip}_d(g)\\le1\\right\\},$$\n\nwhere $\\operatorname{Lip}_d(g):=\\sup_{x\\ne y}|g(x)-g(y)|/d(x,y)$, with value $0$ when $S$ has at most one point. Then\n\n$$\\mu_n\\Rightarrow\\mu\\quad\\Longleftrightarrow\\quad\\beta_{BL}(\\mu_n,\\mu)\\longrightarrow0,$$\n\nwhere $\\Rightarrow$ is weak convergence of Borel probabilities ([[def-weak-convergence-of-borel-probability-measures]]). The implication from bounded-Lipschitz convergence to weak convergence is choice-free; the reverse implication below uses AC through Prokhorov's theorem.",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is [[def-metric-continuity]]. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in [[def-integrable-real-and-complex-functions-and-their-integrals]]. No completeness or coupling is required.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-portmanteau-theorem",
+          "source_section": "Statement",
+          "quote": "For Borel probabilities $\\mu_n,\\mu$ on a metric space S, the following are equivalent: (i) $\\mu_n\\Rightarrow\\mu$; (ii) integrals converge for all bounded uniformly continuous real tests; (iii) $\\limsup_n\\mu_n(F)\\le\\mu(F)$ for every closed F; (iv) $\\liminf_n\\mu_n(G)\\ge\\mu(G)$ for every open G; (v) $\\mu_n(A)\\to\\mu(A)$ for every Borel A with $\\mu(\\partial A)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-prokhorov-tightness-theorem-on-polish-spaces",
+          "source_section": "Statement",
+          "quote": "Assume AC. A family $\\mathcal A$ of Borel probabilities on a Polish space S is tight if and only if it is relatively sequentially compact for weak convergence.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "0.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-measure-uniqueness-on-a-pi-system",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$ and let $\\mathcal A=\\sigma_X(\\mathcal P)$. If finite measures $\\mu$ and $\\nu$ on $(X,\\mathcal A)$ agree on $\\mathcal P$ and satisfy $\\mu(X)=\\nu(X)$, then $\\mu=\\nu$ on $\\mathcal A$.\n\nThe total-mass equality is separate because this library's pi-system convention does not require $X\\in\\mathcal P$.",
+          "uses": [
+            "0.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-0.1",
+          "step": "0.1",
+          "claim": "Nonnegativity, symmetry and the triangle inequality for $\\beta_{BL}$ follow by applying these properties to the difference of the two test integrals and then taking the supremum. If $\\beta_{BL}(\\nu,\\rho)=0$, fix a nonempty closed $F$ and put $g_m=(1-md(\\cdot,F))_+$. The function $g_m/m$ is an admissible test, so $\\int g_m\\,d\\nu=\\int g_m\\,d\\rho$. By [F4], these integrals decrease to $\\nu(F)$ and $\\rho(F)$, respectively. The two probabilities therefore agree on every closed set, including the empty set. Closed sets form a pi-system generating the Borel sigma-algebra, and both total masses are one, so [F6] gives $\\nu=\\rho$. Thus $\\beta_{BL}$ is a metric; this argument uses no choice.",
+          "inputs": [
+            "given",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.1",
+          "claim": "Assume $\\beta_{BL}(\\mu_n,\\mu)\\to0$, and fix a nonempty closed set $F\\subseteq S$. For every integer $m\\ge1$, the function $g_m(x)=(1-md(x,F))_+$ satisfies $0\\le g_m\\le1$ and $\\operatorname{Lip}_d(g_m)\\le m$. Hence $g_m/m$ is admissible in the definition of $\\beta_{BL}$, so $\\int g_m\\,d\\mu_n\\to\\int g_m\\,d\\mu$. Since $1_F\\le g_m$, it follows that $\\limsup_n\\mu_n(F)\\le\\int g_m\\,d\\mu$ for every $m$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Now assume $\\mu_n\\Rightarrow\\mu$, and put $\\mathcal A=\\{\\mu\\}\\cup\\{\\mu_n:n\\ge1\\}$. Any sequence chosen from $\\mathcal A$ either has a member repeated infinitely often, yielding a constant convergent subsequence, or has a subsequence of the form $(\\mu_{n_j})$ with $n_j\\to\\infty$, which converges weakly to $\\mu$. Therefore $\\mathcal A$ is relatively sequentially compact for weak convergence.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The functions $g_m$ decrease pointwise to $1_F$ and are bounded by the integrable constant function $1$ under the probability $\\mu$. By [F4], $\\int g_m\\,d\\mu\\to\\mu(F)$, so the closed-set bound holds; it is trivial for $F=\\varnothing$. The Portmanteau theorem [F2] gives weak convergence in the sense of [F1].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "claim": "By [F5], $S$ is Polish; therefore [F3] applies under [A1] and $\\mathcal A$ is tight. Thus for every $\\varepsilon>0$ there is a compact $K\\subseteq S$ such that $\\sup_{\\nu\\in\\mathcal A}\\nu(K^c)<\\varepsilon$.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Fix $\\eta>0$. Compactness gives a finite $\\eta/8$-net $x_1,\\dots,x_q$ of $K$. Quantize each value $g(x_i)\\in[-1,1]$ into finitely many bins of width at most $\\eta/2$. There are finitely many resulting value patterns for the bounded 1-Lipschitz test class; choose one representative $h_r$ from each nonempty pattern. If $g$ and $h_r$ share a pattern, then for $x\\in K$ a net point $x_i$ gives $|g(x)-h_r(x)|\\le2d(x,x_i)+|g(x_i)-h_r(x_i)|<\\eta$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "construct",
+            "choose",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "For any admissible $g$, choose the representative $h_r$ from its pattern. The integral difference is bounded by $\\left|\\int g\\,d\\mu_n-\\int g\\,d\\mu\\right|\\le\\max_r\\left|\\int h_r\\,d\\mu_n-\\int h_r\\,d\\mu\\right|+2\\eta+2\\mu_n(K^c)+2\\mu(K^c).$ The maximum tends to zero by [F1], because there are finitely many bounded continuous representatives, and the last two terms are at most $4\\varepsilon$ by step 2.2. Taking the supremum over $g$, then the limit superior in $n$, gives $\\limsup_n\\beta_{BL}(\\mu_n,\\mu)\\le2\\eta+4\\varepsilon$. Letting $\\eta,\\varepsilon\\downarrow0$ proves the reverse implication.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 treat F=∅ separately in the closed-set bound."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-threshold parameter or zero-valued boundary is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter special case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition sets Lip_d(g)=0 when S has at most one point."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No additional endpoint beyond the stated strict hypotheses is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement separates the AC-dependent reverse metric direction from the choice-free forward direction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement is an equivalence; the proof establishes bounded-Lipschitz convergence implies weak convergence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement is an equivalence; the proof establishes weak convergence implies bounded-Lipschitz convergence under AC."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No registered finite-smoke check applies; the analytic proofs and explicit Gaussian example are handled by their stated arguments."
+    },
+    "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space": {
+      "claim": "Assume countable choice. Let $(\\psi_{lk})$ be the wavelet or trigonometric basis from [[def-negative-sobolev-space-for-white-noise]]. Let $Z_{lk}$ be mutually independent real random variables with density $g(x)=(2\\pi)^{-1/2}e^{-x^2/2}$. Define the formal white-noise coefficient sequence $W=(Z_{lk})$. For every $\\delta>1/2$, this sequence is almost surely an element of $H(\\delta)$ and is a Borel Gaussian random element there. Its law $N$ is a Borel probability on $H(\\delta)$. For an infinite-dimensional basis, white noise is not an $L^2([0,1])$-valued random element. Here Gaussian means that each continuous real linear functional has a centered law $N(0,v)$ in the density convention of [[lem-density-normal-laws-and-square-summable-gaussian-series]]; in particular, for $L(c)=\\sum_jd_jc_j$ its variance is $\\sum_jd_j^2$ whenever this pairing is continuous on $H(\\delta)$.",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-negative-sobolev-space-for-white-noise",
+          "source_section": "Definition",
+          "quote": "Let $(\\psi_{lk})$ be a countable complete orthonormal basis of the real Hilbert space $L^2([0,1])$ ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]], [[def-hilbert-space]], [[def-l-p-space-as-a-quotient-by-null-functions]]). For a wavelet basis, index levels by $l\\ge0$, let $K_l$ have $2^l$ indices, and put $a_l=2^l$ for $l\\ge1$ and $a_0=2$ for the finite coarsest level. This finite-level convention only prevents a zero logarithmic weight and does not change any convergence criterion below. For a trigonometric basis, use its integer frequency index $l$, bounded multiplicities, and $a_l=\\max(2,|l|)$.\n\nHere an **$S$-regular wavelet basis** means a wavelet orthonormal basis whose members are $S$ times differentiable, with each derivative through order $S$ in $L^2([0,1])$, following the source convention. The weak BvM theorem below only uses the basis's completeness, orthonormality, and level counts.\n\nFor $\\delta>0$, define $H(\\delta)=H^{-1/2,\\delta}_2$ to be the space of coefficient sequences $c=(c_{lk})$ with norm\n\n$$\\|c\\|_{H(\\delta)}^2:=\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}|c_{lk}|^2<\\infty.$$\n\nIts inner product is the corresponding weighted coefficient inner product. Multiplying each coordinate by $a_l^{-1/2}(\\log a_l)^{-\\delta}$ identifies it isometrically with $\\ell^2(I)$, where $I=\\{(l,k):k\\in K_l\\}$ (or the corresponding trigonometric index set). This sequence space is complete: if $x^{(m)}$ is Cauchy, each coordinate converges to a scalar $x_i$; for every finite $F\\subset I$, the Cauchy bound passes to the limit in $\\sum_{i\\in F}|x_i^{(m)}-x_i^{(n)}|^2$, so the supremum over finite $F$ shows $x^{(m)}\\to x$ in $\\ell^2(I)$. It is separable because finite-support sequences with rational coordinates form a countable dense set. Thus $H(\\delta)$ is a separable Hilbert space without an additional choice assumption.\n\nA function $f\\in L^2([0,1])$ is identified with its coefficient sequence $c_{lk}=\\langle f,\\psi_{lk}\\rangle$. For each finite set $F$ of indices, orthonormality makes $\\sum_{(l,k)\\in F}c_{lk}\\psi_{lk}$ orthogonal to its residual in $L^2$, so the Pythagorean identity gives $\\sum_F|c_{lk}|^2\\le\\|f\\|_2^2$. Taking the supremum over finite $F$ and using the boundedness of the weights proves continuity of the coefficient map. If all coefficients of $f$ vanish, then $f$ is orthogonal to the linear span of the basis. Completeness makes this span dense, and continuity of $g\\mapsto\\langle f,g\\rangle$ gives $\\langle f,f\\rangle=0$, hence $f=0$ in $L^2$. Applying this to the difference of two functions proves injectivity. Thus the coefficient map is a continuous linear embedding $L^2([0,1])\\hookrightarrow H(\\delta)$.\n\nThe weight trace $\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}$ is finite exactly when $\\delta>1/2$: for wavelets its tail is a constant multiple of $\\sum_{l\\ge1}l^{-2\\delta}$, while for a trigonometric basis it is comparable to $\\sum_{l\\ge2}[l(\\log l)^{2\\delta}]^{-1}$. The product-prior theorem below uses the wavelet case.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuity-from-above-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be a decreasing sequence of measurable sets for a measure $\\mu$. If $\\mu(E_{n_0})<+\\infty$ for some $n_0$, then\n\n$$\\mu\\left(\\bigcap_{n\\in\\mathbb N}E_n\\right)=\\inf_{n\\in\\mathbb N}\\mu(E_n).$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-density-normal-laws-and-square-summable-gaussian-series",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Put $g(x)=(2\\pi)^{-1/2}e^{-x^2/2}$. Then $\\gamma(E)=\\int_Eg(x)\\,dx$ is a Borel probability on $\\mathbb R$. In this item and its applications, write $N(m,v)$ for its pushforward under $x\\mapsto m+\\sqrt v\\,x$, where $v\\ge0$; thus $N(m,0)=\\delta_m$. This density convention requires no full axiom of choice. For $v>0$ the law has density\n$$g_{m,v}(x)=(2\\pi v)^{-1/2}\\exp\\{- (x-m)^2/(2v)\\},$$\nand its CDF is continuous and strictly increasing. Its mean and variance are $m$ and $v$.\n\nIf $Z_j$ are mutually independent with density $g$ and $\\sum_{j\\ge1}c_j^2=v<\\infty$, and the finite sums $S_m=\\sum_{j\\le m}c_jZ_j$ converge in probability to a supplied real random variable $S$, then $S$ has law $N(0,v)$. In particular, this applies whenever the sums converge almost surely or in $L^2$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Write $w_l=a_l^{-1}(\\log a_l)^{-2\\delta}$. In the wavelet case, the trace sum is a finite coarsest term plus $\\sum_{l\\ge1}2^lw_l=(\\log2)^{-2\\delta}\\sum_{l\\ge1}l^{-2\\delta}$. On each block $2^m\\le l<2^{m+1}$, the sum of $l^{-r}$ is between $2^m2^{-r(m+1)}$ and $2^m2^{-rm}$; hence these blocks form a convergent geometric series when $r>1$, while for $r\\le1$ their contributions are bounded below by a fixed positive constant and the series diverges. For trigonometric coefficients with bounded multiplicities, the block $2^m\\le |l|<2^{m+1}$ contributes between constant multiples of $m^{-2\\delta}$ to $\\sum_{l\\ge2}[l(\\log l)^{2\\delta}]^{-1}$. The same comparison therefore gives finiteness exactly when $\\delta>1/2$. Thus the trace $T_\\delta:=\\sum_{l,k}w_l$ is finite in either case.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Let $S_m$ be the sum of $w_lZ_{lk}^2$ over the first $m$ coordinates in the fixed countable enumeration. These nonnegative partial sums increase to $S=\\sum_{l,k}w_lZ_{lk}^2$, and [F3] gives $\\mathbb ES=\\lim_m\\mathbb ES_m=\\sum_{l,k}w_l=T_\\delta$. The mean and second moment of each coordinate are $0$ and $1$ by [F5]. If $S=\\infty$ on a set of probability $p>0$, then $\\mathbb ES\\ge Rp$ for every $R>0$, impossible; hence $S<\\infty$ almost surely.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "On that probability-one event, the finite-coordinate sums of $W$ are Cauchy in $H(\\delta)$ because the squared norm of every tail is the corresponding tail of the convergent series $S$. Completeness gives a limit in $H(\\delta)$. The Cauchy event is measurable, and the partial sums are measurable; their pointwise limit on that event is measurable as an $H(\\delta)$-valued map because the space is separable. Setting it to zero on the measurable complement gives a Borel random element.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "Let $e_j$ be the unit vector of the weighted sequence Hilbert space supported on coordinate $j$ and let $b_j=L(e_j)$ for a continuous real linear functional $L$. For each finite set $F$, boundedness applied to $\\sum_{j\\in F}b_je_j$ gives $\\sum_{j\\in F}b_j^2\\le\\|L\\|^2$, so $\\sum_jb_j^2<\\infty$. Since the weights $w_j$ are bounded, $v:=\\sum_jw_jb_j^2<\\infty$. The finite-coordinate projections of $W$ converge almost surely in $H(\\delta)$ by step 3.1, so continuity gives $L(W)=\\lim_m\\sum_{j\\le m}\\sqrt{w_j}b_jZ_j$ almost surely. By [F5] this limit has exactly the density normal law $N(0,v)$. Thus $W$ is centered Gaussian. For a continuous coefficient pairing $L(c)=\\sum_jd_jc_j$, one has $b_j=d_j/\\sqrt{w_j}$, giving $v=\\sum_jd_j^2$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "claim": "Enumerate the infinite basis as $(\\psi_j)_{j\\ge1}$, write its white-noise coordinates as $Z_j$, and let $A_j=\\{|Z_j|\\ge1\\}$. The displayed normal density is positive on $[1,2]$, so $p:=\\mathbb P(A_j)>0$; independence gives $\\mathbb P(\\bigcap_{j=m}^{m+q}A_j^c)=(1-p)^{q+1}$. By [F4], $\\mathbb P(\\bigcap_{j\\ge m}A_j^c)=0$ for each $m$, so the event that only finitely many $A_j$ occur, a countable union of these intersections, has probability zero: disjointify that union by replacing its $m$th event $E_m$ with $E_m\\setminus\\bigcup_{i<m}E_i$, and use countable additivity and monotonicity to sum zero probabilities. Therefore $\\sum_{j\\le n}Z_j^2$ is unbounded almost surely. If the same $H(\\delta)$ element were represented by an $L^2$ function, the coefficient embedding in [F1] would identify its $L^2$ coefficients with $Z_j$. The finite Pythagorean identity, applied to the projection onto $\\psi_1,\\dots,\\psi_n$, would then give $\\sum_{j\\le n}Z_j^2\\le\\|W\\|_2^2$ for every $n$, a contradiction.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty input or set is a free parameter in this claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 allows L=0 and v=0; F5 identifies the zero-variance Dirac law."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter special case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The scalar law of a zero linear functional is a centered zero-variance normal. The non-L2 conclusion is expressly restricted to an infinite-dimensional basis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 identify the finite trace threshold δ>1/2 and divergence at δ=1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and Given assume countable choice (or the already stated full-AC corollary branch). Countable choice covers L2 prior completeness and the density-normal interface, including the compact Riemann/Lebesgue bridge; the core Gaussian identification uses convolution and a CDF sandwich, without full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No registered finite-smoke check applies; the analytic proofs and explicit Gaussian example are handled by their stated arguments."
+    },
+    "lem-product-prior-coordinate-posterior-law": {
+      "claim": "Assume countable choice for the $L^2$-valued prior construction. Let the wavelet product prior have independent coefficients $\\theta_{lk}=\\sigma_l\\xi_{lk}$, where the $\\xi_{lk}$ are IID with density $\\varphi$. Observe the independent Gaussian sequence",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rectangle-criterion-for-independent-random-elements",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. Then the following are\nequivalent:\n\n1. the family $(X_i)_{i\\in I}$ is independent;\n2. for every natural number $n\\ge1$, every choice of distinct indices\n   $i_0,\\dots,i_{n-1}\\in I$, and every choice of measurable sets\n   $B_k\\in\\Sigma_{i_k}$,\n   $$\\mathbb P\\bigl(X_{i_0}\\in B_0,\\dots,X_{i_{n-1}}\\in B_{n-1}\\bigr)=\\prod_{k<n}\\mathbb P(X_{i_k}\\in B_k).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-wavelet-product-prior-is-l2-valued",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a real Hilbert space with a countable orthonormal basis $(\\psi_{lk})$, where $K_l$ is the level-$l$ index set and $|K_l|=2^l$ for each $l\\ge0$ ([[def-hilbert-space]], [[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]). Such an $H$ is separable because finite rational linear combinations of the countable basis are dense. Let $\\xi_{lk}$ be IID real random variables with common density $\\varphi$ and finite second moment $m_2=\\int x^2\\varphi(x)\\,dx<\\infty$ ([[def-identically-distributed-and-iid-random-variables]]). For $\\alpha>0$, set $\\sigma_l=2^{-l(\\alpha+1/2)}$ and form the partial wavelet sums\n\n$$f_N=\\sum_{0\\le l\\le N}\\sum_{k\\in K_l}\\sigma_l\\xi_{lk}\\psi_{lk}.$$\n\nAssume countable choice, denoted $\\mathrm{AC}_\\omega$, when specializing to $H=L^2([0,1])$. Then $f_N$ converges almost surely in $H$ to a Borel $H$-valued random element $f$, and\n\n$$\\mathbb E\\|f\\|_H^2=m_2\\sum_{l\\ge0}2^l\\sigma_l^2=m_2\\sum_{l\\ge0}2^{-2\\alpha l}<\\infty.$$\n\nThe abstract Hilbert-space assertion is choice-free; for $H=L^2([0,1])$, completeness follows from the Riesz–Fischer theorem under countable choice ([[def-countable-choice]], [[def-l-p-space-as-a-quotient-by-null-functions]], [[thm-riesz-fischer-completeness-of-l-p]]). More generally, finitely many additional coarsest orthogonal coordinates with fixed scales and finite coefficient second moments may be added; they contribute only a finite expectation to the displayed sum.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each coordinate $j$, the pair $(\\theta_j,X_j)$ is a measurable function of the independent pair $(\\xi_j,Z_j)$. Thus the coordinate pairs are independent: finite rectangle probabilities factor by [F1] and [F2]. Fix finite $J$. For any cylinder event $B$ depending on finitely many observations outside $J$, the random vector $(\\theta_J,X_J)$ is independent of $B$ by that same factorization. The events in $\\sigma(X_{J^c})$ for which this independence identity holds form a lambda-system containing the outside-coordinate cylinder pi-system; [F3] extends it to all outside-data events. Hence conditioning on $X_{J^c}$ adds no information about $\\theta_J$ once $X_J$ is known.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For finite $J$, the joint prior density of $\\theta_J$ is the product of $\\sigma_j^{-1}\\varphi(t_j/\\sigma_j)$, and the likelihood of $X_J=x_J$ is proportional to $\\prod_{j\\in J}e^{-n(x_j-t_j)^2/2}$. Each one-dimensional normalizer is at most $1$ and is positive: the Gaussian factor is bounded by $1$, is strictly positive everywhere, and the prior density integrates to $1$. Thus the normalized product density is $\\prod_{j\\in J}p_{j,n}(t_j\\mid x_j)$. Integrating it over rectangles in $\\theta_J$ and $X_J$ verifies the conditional-law identity for these coordinates. The prior is a Borel probability on $L^2$ by [L1] under [A1], and [A2] supplies the full posterior kernel; step 1.1 extends the finite-coordinate identity to the full observation sequence.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The product of the one-coordinate conditional densities in step 2.1 is exactly the stated finite-dimensional posterior marginal, so the posterior factors by coordinates for every finite index set $J$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement explicitly assigns J=∅ the unit law on the zero-dimensional one-point space."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-threshold parameter or zero-valued boundary is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter special case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate-space or dimension limit is part of this claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No additional endpoint beyond the stated strict hypotheses is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/A1 restrict ACω to the L² prior; A2 treats the full posterior kernel as supplied input."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No registered finite-smoke check applies; the analytic proofs and explicit Gaussian example are handled by their stated arguments."
+    },
+    "lem-product-prior-posterior-second-moment-in-negative-sobolev-space": {
+      "claim": "Use the wavelet product-prior white-noise model of [[lem-wavelet-product-prior-is-l2-valued]] and [[lem-product-prior-coordinate-posterior-law]], with $\\sigma_l=2^{-l(\\alpha+1/2)}$, $\\alpha>0$, and $2^l$ coefficients at level $l\\ge0$. Let $\\theta_{0,lk}$ be the coefficients of a fixed $f_0\\in L^2([0,1])$. Assume countable choice for the $L^2$ prior construction, with the full posterior kernel supplied by [[lem-product-prior-coordinate-posterior-law]], and suppose",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-negative-sobolev-space-for-white-noise",
+          "source_section": "Definition",
+          "quote": "Let $(\\psi_{lk})$ be a countable complete orthonormal basis of the real Hilbert space $L^2([0,1])$ ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]], [[def-hilbert-space]], [[def-l-p-space-as-a-quotient-by-null-functions]]). For a wavelet basis, index levels by $l\\ge0$, let $K_l$ have $2^l$ indices, and put $a_l=2^l$ for $l\\ge1$ and $a_0=2$ for the finite coarsest level. This finite-level convention only prevents a zero logarithmic weight and does not change any convergence criterion below. For a trigonometric basis, use its integer frequency index $l$, bounded multiplicities, and $a_l=\\max(2,|l|)$.\n\nHere an **$S$-regular wavelet basis** means a wavelet orthonormal basis whose members are $S$ times differentiable, with each derivative through order $S$ in $L^2([0,1])$, following the source convention. The weak BvM theorem below only uses the basis's completeness, orthonormality, and level counts.\n\nFor $\\delta>0$, define $H(\\delta)=H^{-1/2,\\delta}_2$ to be the space of coefficient sequences $c=(c_{lk})$ with norm\n\n$$\\|c\\|_{H(\\delta)}^2:=\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}|c_{lk}|^2<\\infty.$$\n\nIts inner product is the corresponding weighted coefficient inner product. Multiplying each coordinate by $a_l^{-1/2}(\\log a_l)^{-\\delta}$ identifies it isometrically with $\\ell^2(I)$, where $I=\\{(l,k):k\\in K_l\\}$ (or the corresponding trigonometric index set). This sequence space is complete: if $x^{(m)}$ is Cauchy, each coordinate converges to a scalar $x_i$; for every finite $F\\subset I$, the Cauchy bound passes to the limit in $\\sum_{i\\in F}|x_i^{(m)}-x_i^{(n)}|^2$, so the supremum over finite $F$ shows $x^{(m)}\\to x$ in $\\ell^2(I)$. It is separable because finite-support sequences with rational coordinates form a countable dense set. Thus $H(\\delta)$ is a separable Hilbert space without an additional choice assumption.\n\nA function $f\\in L^2([0,1])$ is identified with its coefficient sequence $c_{lk}=\\langle f,\\psi_{lk}\\rangle$. For each finite set $F$ of indices, orthonormality makes $\\sum_{(l,k)\\in F}c_{lk}\\psi_{lk}$ orthogonal to its residual in $L^2$, so the Pythagorean identity gives $\\sum_F|c_{lk}|^2\\le\\|f\\|_2^2$. Taking the supremum over finite $F$ and using the boundedness of the weights proves continuity of the coefficient map. If all coefficients of $f$ vanish, then $f$ is orthogonal to the linear span of the basis. Completeness makes this span dense, and continuity of $g\\mapsto\\langle f,g\\rangle$ gives $\\langle f,f\\rangle=0$, hence $f=0$ in $L^2$. Applying this to the difference of two functions proves injectivity. Thus the coefficient map is a continuous linear embedding $L^2([0,1])\\hookrightarrow H(\\delta)$.\n\nThe weight trace $\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}$ is finite exactly when $\\delta>1/2$: for wavelets its tail is a constant multiple of $\\sum_{l\\ge1}l^{-2\\delta}$, while for a trigonometric basis it is comparable to $\\sum_{l\\ge2}[l(\\log l)^{2\\delta}]^{-1}$. The product-prior theorem below uses the wavelet case.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-product-prior-coordinate-posterior-law",
+          "source_section": "Statement",
+          "quote": "Assume countable choice for the $L^2$-valued prior construction. Let the wavelet product prior have independent coefficients $\\theta_{lk}=\\sigma_l\\xi_{lk}$, where the $\\xi_{lk}$ are IID with density $\\varphi$. Observe the independent Gaussian sequence\n\n$$X_{lk}=\\theta_{0,lk}+n^{-1/2}Z_{lk},$$\n\nwhere the $Z_{lk}$ have the standard normal density and are independent of the prior. Assume a data-indexed posterior kernel for the $L^2$-valued prior is supplied as part of this model. In the product white-noise model, for every finite set $J$ of coefficient indices its conditional law of $(\\theta_j)_{j\\in J}$ given the full data sequence $(X_j)$ is the product of the one-coordinate densities\n\n$$p_{j,n}(t\\mid X_j)=\\frac{e^{-n(t-X_j)^2/2}\\,\\sigma_j^{-1}\\varphi(t/\\sigma_j)}{\\int_{\\mathbb R}e^{-n(s-X_j)^2/2}\\,\\sigma_j^{-1}\\varphi(s/\\sigma_j)\\,ds},\\qquad j\\in J.$$\n\nHere $j$ abbreviates a pair $(l,k)$ and $\\sigma_j=\\sigma_l$. For $J=\\varnothing$, the formula denotes the unit law on the zero-dimensional one-point space. Each denominator is strictly positive and finite: the Gaussian factor is everywhere positive and at most $1$, while the prior density integrates to $1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $(l,k)$ and abbreviate $\\sigma=\\sigma_l$, $\\theta_0=\\theta_{0,lk}$, $r=\\theta_0/\\sigma$, and $\\lambda=\\sqrt n\\,\\sigma$. Under the true law write $X=\\theta_0+n^{-1/2}Z$, where $Z$ has density $(2\\pi)^{-1/2}e^{-z^2/2}$. If $B_{lk}(X)=\\int(\\theta-\\theta_0)^2\\,\\Pi_n(d\\theta_{lk}\\mid X)$, change variables $v=\\sqrt n(\\theta-\\theta_0)$ in [F2] to obtain $nB_{lk}(X)=\\frac{N_\\lambda(Z)}{D_\\lambda(Z)},\\quad D_\\lambda(z)=\\frac1\\lambda\\int_{\\mathbb R}e^{-v^2/2+zv}\\varphi(r+v/\\lambda)\\,dv,\\quad N_\\lambda(z)=\\frac1\\lambda\\int_{\\mathbb R}v^2e^{-v^2/2+zv}\\varphi(r+v/\\lambda)\\,dv.$ All integrands are nonnegative and the denominator is positive. The posterior kernel is the $L^2$ model supplied by [F2] under [A2].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $h=(\\tau-M)/2>0$. If $\\lambda\\le S_0$ for a fixed $S_0>0$, then $|r+v/\\lambda|<\\tau$ whenever $|v|\\le h\\lambda$. Substituting $v=\\lambda t$ and pairing $t$ with $-t$ gives $D_\\lambda(z)\\ge c_\\varphi\\int_{-h}^h e^{-\\lambda^2t^2/2+z\\lambda t}\\,dt=2c_\\varphi\\int_0^h e^{-\\lambda^2t^2/2}\\cosh(z\\lambda t)\\,dt\\ge 2hc_\\varphi e^{-h^2\\lambda^2/2}\\ge d_0:=2hc_\\varphi e^{-h^2S_0^2/2}>0,$ because $\\cosh(x)\\ge1$ and $e^{-\\lambda^2t^2/2}\\ge e^{-h^2\\lambda^2/2}$ on $[0,h]$. Completing the square in the standard normal density gives $\\mathbb E e^{Zv}=e^{v^2/2}$; hence, by the substitution $u=r+v/\\lambda$, $\\mathbb E N_\\lambda(Z)=\\frac1\\lambda\\int v^2\\varphi(r+v/\\lambda)\\,dv=\\lambda^2\\int(u-r)^2\\varphi(u)\\,du\\le2\\lambda^2(m_2+M^2).$ Here [F4] justifies the exchange of expectation and the nonnegative $v$-integral. Therefore $\\mathbb E B_{lk}(X)\\le C\\lambda^2/n=C\\sigma_l^2\\le CS_0^2/n$ in this range.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "given",
+            "step 1.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $\\lambda\\ge S_0$, let $R=hS_0$. For $|v|\\le R$ one has $|r+v/\\lambda|<\\tau$, so $D_\\lambda(z)\\ge\\frac{c_\\varphi e^{z^2/2}}\\lambda I_R(z),\\qquad N_\\lambda(z)\\le\\frac{C_\\varphi e^{z^2/2}}\\lambda J(z),$ where $I_R(z)=\\int_{-R}^{R}e^{-(v-z)^2/2}\\,dv$ and $J(z)=\\int_{\\mathbb R}v^2e^{-(v-z)^2/2}\\,dv=\\sqrt{2\\pi}(1+z^2)$. Thus $nB_{lk}(X)\\le(C_\\varphi/c_\\varphi)J(Z)/I_R(Z)$. For $|z|\\le R$, integrate $I_R$ over the half-interval nearest $z$; for $|z|>R$, integrate over the half-interval adjacent to the nearer endpoint. These choices give the common lower bound $I_R(z)\\ge\\frac R2\\exp\\left(-\\frac{R^2}{2}-\\frac{(|z|-R/2)_+^2}{2}\\right).$ Consequently $\\mathbb E[J(Z)/I_R(Z)]$ is finite: after multiplying by the standard normal density, its integrand is bounded on $|z|\\le R/2$ and is at most a constant times $(1+z^2)e^{-R|z|/2}$ on $|z|>R/2$. Hence $\\mathbb E B_{lk}(X)\\le C/n$ also when $\\lambda\\ge S_0$, with $C$ independent of $(l,k,n)$.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two ranges in steps 2.1 and 2.2 cover every $\\lambda>0$; since $\\sigma_l^2\\le S_0^2/n$ in the first range, there is a single constant $C$ for which $\\sup_{l,k}\\mathbb E_{f_0}^{(n)}B_{lk}(X)\\le C/n$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F1], the posterior squared loss is the nonnegative series $\\sum_{l,k}w_l^\\delta B_{lk}(X)$. Apply monotone convergence [F3] to its finite partial sums and use step 3.1 to obtain $\\mathbb E_{f_0}^{(n)}\\int\\|f-f_0\\|_{H(\\delta)}^2\\,\\Pi_n(df\\mid X)=\\sum_{l,k}w_l^\\delta\\mathbb E_{f_0}^{(n)}B_{lk}(X)\\le\\frac Cn\\sum_{l,k}w_l^\\delta.$ The trace on the right is finite for $\\delta>1/2$ by [F1], proving the bound.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty input or set is a free parameter in this claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-threshold parameter or zero-valued boundary is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter special case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate-space or dimension limit is part of this claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires δ>1/2 and M<τ; the lower-density bound uses this strict margin."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/A2 assigns ACω only to the L² prior construction; the full posterior kernel is supplied input."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No registered finite-smoke check applies; the analytic proofs and explicit Gaussian example are handled by their stated arguments."
+    },
+    "lem-finite-coordinate-posterior-total-variation-limit": {
+      "claim": "Assume countable choice for the $L^2$ prior construction, with the full posterior kernel supplied as in [[lem-product-prior-coordinate-posterior-law]]. Fix a finite set $J$ of wavelet coordinates in the product white-noise model of [[lem-product-prior-coordinate-posterior-law]]. Suppose $\\varphi$ is bounded and continuous at each normalized truth coefficient $r_j=\\theta_{0,j}/\\sigma_j$, with $\\varphi(r_j)>0$. Let $\\widetilde\\Pi_{n,J}$ be the conditional posterior law of $\\sqrt n(\\theta_J-X_J)$ given the full data. If $J=\\varnothing$, both laws are the unique probability on the zero-dimensional one-point space. For nonempty $J$, the posterior and Gaussian densities $p_{n,J}$ and $\\phi_J$ on $\\mathbb R^{|J|}$ satisfy",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-product-prior-coordinate-posterior-law",
+          "source_section": "Statement",
+          "quote": "Assume countable choice for the $L^2$-valued prior construction. Let the wavelet product prior have independent coefficients $\\theta_{lk}=\\sigma_l\\xi_{lk}$, where the $\\xi_{lk}$ are IID with density $\\varphi$. Observe the independent Gaussian sequence\n\n$$X_{lk}=\\theta_{0,lk}+n^{-1/2}Z_{lk},$$\n\nwhere the $Z_{lk}$ have the standard normal density and are independent of the prior. Assume a data-indexed posterior kernel for the $L^2$-valued prior is supplied as part of this model. In the product white-noise model, for every finite set $J$ of coefficient indices its conditional law of $(\\theta_j)_{j\\in J}$ given the full data sequence $(X_j)$ is the product of the one-coordinate densities\n\n$$p_{j,n}(t\\mid X_j)=\\frac{e^{-n(t-X_j)^2/2}\\,\\sigma_j^{-1}\\varphi(t/\\sigma_j)}{\\int_{\\mathbb R}e^{-n(s-X_j)^2/2}\\,\\sigma_j^{-1}\\varphi(s/\\sigma_j)\\,ds},\\qquad j\\in J.$$\n\nHere $j$ abbreviates a pair $(l,k)$ and $\\sigma_j=\\sigma_l$. For $J=\\varnothing$, the formula denotes the unit law on the zero-dimensional one-point space. Each denominator is strictly positive and finite: the Gaussian factor is everywhere positive and at most $1$, while the prior density integrates to $1$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix one coordinate $j=(l,k)$ and write $r=\\theta_{0,j}/\\sigma_j$. Under the true law, $X_j/\\sigma_j=r+Z_j/(\\sqrt n\\sigma_j)\\to r$ in probability, and $b_n=(\\sqrt n\\sigma_j)^{-1}\\to0$. By [F1], under [A1], the posterior density of $U_n=\\sqrt n(\\theta_j-X_j)$ is $p_n(u\\mid X_j)=\\frac{e^{-u^2/2}\\varphi(X_j/\\sigma_j+b_nu)}{c_n(X_j)},\\qquad c_n(X_j)=\\int_{\\mathbb R}e^{-v^2/2}\\varphi(X_j/\\sigma_j+b_nv)\\,dv.$ For any deterministic sequence $x_n/\\sigma_j\\to r$, boundedness of $\\varphi$ and [F2] give $c_n(x_n)\\to\\varphi(r)\\sqrt{2\\pi}>0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Along such a deterministic sequence, $p_n(u\\mid x_n)\\to(2\\pi)^{-1/2}e^{-u^2/2}$ pointwise and is eventually bounded by a constant multiple of $e^{-u^2/2}$. A second application of [F2] gives convergence in $L^1(du)$, hence convergence in total variation. Since $X_j/\\sigma_j\\to r$ in probability, if the total-variation convergence in probability failed, some subsequence would have error probability bounded below. Select a further subsequence for which $\\mathbb P(|X_j/\\sigma_j-r|>2^{-q})\\le2^{-q}$ at its $q$th term; [F3] bounds each union of tail events by the corresponding geometric tail, which tends to zero, so the further subsequence converges almost surely to $r$, contradicting the deterministic conclusion.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For finite nonempty $J$, [F1] makes the scaled posterior and its Gaussian target product measures. Telescope the difference of their product densities one coordinate at a time. Integrating the absolute value of each term gives the $L^1$ distance of that coordinate pair, since every other coordinate density integrates to $1$. Thus the joint $L^1$ distance is at most the sum of the finitely many coordinate $L^1$ distances, which tends to zero in probability by step 2.1. For each measurable event $A$, the absolute difference of its probabilities is at most this $L^1$ distance, so the total-variation conclusion follows.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement handles J=∅ by the unique law on the zero-dimensional one-point space."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-threshold parameter or zero-valued boundary is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter special case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement identifies the zero-dimensional case with J=∅."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires φ(r_j)>0 so the limiting normalizer is positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/A1 uses ACω only for the L² prior; the posterior kernel is supplied by F1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No registered finite-smoke check applies; the analytic proofs and explicit Gaussian example are handled by their stated arguments."
+    },
+    "cor-canonical-white-noise-law-is-tight-under-choice": {
+      "claim": "Assume AC. For $\\delta>1/2$, the canonical white-noise law $N$ on the Polish space $H(\\delta)$ from [[lem-white-noise-is-borel-gaussian-on-negative-sobolev-space]] is tight.",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $(\\psi_{lk})$ be the wavelet or trigonometric basis from [[def-negative-sobolev-space-for-white-noise]]. Let $Z_{lk}$ be mutually independent real random variables with density $g(x)=(2\\pi)^{-1/2}e^{-x^2/2}$. Define the formal white-noise coefficient sequence $W=(Z_{lk})$. For every $\\delta>1/2$, this sequence is almost surely an element of $H(\\delta)$ and is a Borel Gaussian random element there. Its law $N$ is a Borel probability on $H(\\delta)$. For an infinite-dimensional basis, white noise is not an $L^2([0,1])$-valued random element. Here Gaussian means that each continuous real linear functional has a centered law $N(0,v)$ in the density convention of [[lem-density-normal-laws-and-square-summable-gaussian-series]]; in particular, for $L(c)=\\sum_jd_jc_j$ its variance is $\\sum_jd_j^2$ whenever this pairing is continuous on $H(\\delta)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-prokhorov-tightness-theorem-on-polish-spaces",
+          "source_section": "Statement",
+          "quote": "Assume AC. A family $\\mathcal A$ of Borel probabilities on a Polish space S is tight if and only if it is relatively sequentially compact for weak convergence.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-negative-sobolev-space-for-white-noise",
+          "source_section": "Definition",
+          "quote": "Let $(\\psi_{lk})$ be a countable complete orthonormal basis of the real Hilbert space $L^2([0,1])$ ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]], [[def-hilbert-space]], [[def-l-p-space-as-a-quotient-by-null-functions]]). For a wavelet basis, index levels by $l\\ge0$, let $K_l$ have $2^l$ indices, and put $a_l=2^l$ for $l\\ge1$ and $a_0=2$ for the finite coarsest level. This finite-level convention only prevents a zero logarithmic weight and does not change any convergence criterion below. For a trigonometric basis, use its integer frequency index $l$, bounded multiplicities, and $a_l=\\max(2,|l|)$.\n\nHere an **$S$-regular wavelet basis** means a wavelet orthonormal basis whose members are $S$ times differentiable, with each derivative through order $S$ in $L^2([0,1])$, following the source convention. The weak BvM theorem below only uses the basis's completeness, orthonormality, and level counts.\n\nFor $\\delta>0$, define $H(\\delta)=H^{-1/2,\\delta}_2$ to be the space of coefficient sequences $c=(c_{lk})$ with norm\n\n$$\\|c\\|_{H(\\delta)}^2:=\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}|c_{lk}|^2<\\infty.$$\n\nIts inner product is the corresponding weighted coefficient inner product. Multiplying each coordinate by $a_l^{-1/2}(\\log a_l)^{-\\delta}$ identifies it isometrically with $\\ell^2(I)$, where $I=\\{(l,k):k\\in K_l\\}$ (or the corresponding trigonometric index set). This sequence space is complete: if $x^{(m)}$ is Cauchy, each coordinate converges to a scalar $x_i$; for every finite $F\\subset I$, the Cauchy bound passes to the limit in $\\sum_{i\\in F}|x_i^{(m)}-x_i^{(n)}|^2$, so the supremum over finite $F$ shows $x^{(m)}\\to x$ in $\\ell^2(I)$. It is separable because finite-support sequences with rational coordinates form a countable dense set. Thus $H(\\delta)$ is a separable Hilbert space without an additional choice assumption.\n\nA function $f\\in L^2([0,1])$ is identified with its coefficient sequence $c_{lk}=\\langle f,\\psi_{lk}\\rangle$. For each finite set $F$ of indices, orthonormality makes $\\sum_{(l,k)\\in F}c_{lk}\\psi_{lk}$ orthogonal to its residual in $L^2$, so the Pythagorean identity gives $\\sum_F|c_{lk}|^2\\le\\|f\\|_2^2$. Taking the supremum over finite $F$ and using the boundedness of the weights proves continuity of the coefficient map. If all coefficients of $f$ vanish, then $f$ is orthogonal to the linear span of the basis. Completeness makes this span dense, and continuity of $g\\mapsto\\langle f,g\\rangle$ gives $\\langle f,f\\rangle=0$, hence $f=0$ in $L^2$. Applying this to the difference of two functions proves injectivity. Thus the coefficient map is a continuous linear embedding $L^2([0,1])\\hookrightarrow H(\\delta)$.\n\nThe weight trace $\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}$ is finite exactly when $\\delta>1/2$: for wavelets its tail is a constant multiple of $\\sum_{l\\ge1}l^{-2\\delta}$, while for a trigonometric basis it is comparable to $\\sum_{l\\ge2}[l(\\log l)^{2\\delta}]^{-1}$. The product-prior theorem below uses the wavelet case.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F4], $H(\\delta)$ is separable and complete; the definition of Polish space [F3] therefore makes it Polish.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every sequence in the singleton family $\\{N\\}$ is constant and therefore converges weakly to $N$; thus $\\{N\\}$ is relatively sequentially compact. Applying [F2] under [A1] proves that $\\{N\\}$, and hence the law $N$, is tight.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "given",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty input or set is a free parameter in this claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-threshold parameter or zero-valued boundary is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter special case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate-space or dimension limit is part of this claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No additional endpoint beyond the stated strict hypotheses is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement requires full AC exactly for the Prokhorov step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No registered finite-smoke check applies; the analytic proofs and explicit Gaussian example are handled by their stated arguments."
+    },
+    "thm-weak-nonparametric-bernstein-von-mises-for-product-priors": {
+      "claim": "Let $(\\psi_{lk})$ be the S-regular wavelet basis in [[def-negative-sobolev-space-for-white-noise]], with $2^l$ coefficients at each level $l\\ge0$. For $\\alpha>0$, put $\\sigma_l=2^{-l(\\alpha+1/2)}$ and let the prior on $f=\\sum_{l,k}\\sigma_l\\xi_{lk}\\psi_{lk}$ have IID coefficients $\\xi_{lk}$ with density $\\varphi$. Assume countable choice for the $L^2$ prior construction supplied by [[lem-wavelet-product-prior-is-l2-valued]], and take the full posterior kernel as the supplied model input of [[lem-product-prior-coordinate-posterior-law]]. Let $f_0\\in L^2([0,1])$, write $\\theta_{0,lk}=\\langle f_0,\\psi_{lk}\\rangle$ and $r_{lk}=\\theta_{0,lk}/\\sigma_l$, and suppose\n\n$$\\sup_{l,k}|r_{lk}|\\le M<\\tau,$$\n\nwhere $\\varphi$ is a probability density satisfying $\\varphi(u)\\le C_\\varphi$ for every $u$, $\\varphi(u)\\ge c_\\varphi>0$ for $|u|<\\tau$, $\\int u^2\\varphi(u)\\,du<\\infty$, and $\\varphi$ is continuous at each $r_{lk}$. The observation model is\n\n$$dX^{(n)}(t)=f_0(t)\\,dt+n^{-1/2}dW(t),\\qquad 0\\le t\\le1,$$\n\nwith standard white noise $W$; in the stated basis this is the sequence experiment $X_{lk}=\\theta_{0,lk}+n^{-1/2}Z_{lk}$ with independent standard normal coordinates. Let $\\Pi_n(\\cdot\\mid X)$ be the product-coordinate posterior of [[lem-product-prior-coordinate-posterior-law]]. Let $N$ be the law of the canonical white noise in $H(\\delta)$ and define\n\n$$\\widetilde\\Pi_n:=\\Pi_n(\\cdot\\mid X)\\circ[f\\mapsto\\sqrt n(f-X)]^{-1},\\qquad \\beta_{BL,H(\\delta)}(\\mu,\\nu):=\\sup_{\\substack{\\|g\\|_\\infty\\le1\\\\ \\operatorname{Lip}_{H(\\delta)}(g)\\le1}}\\left|\\int g\\,d\\mu-\\int g\\,d\\nu\\right|.$$\n\nFor every $\\delta>1/2$,\n\n$$\\beta_{BL,H(\\delta)}(\\widetilde\\Pi_n,N)\\longrightarrow0$$\n\nin probability under the true white-noise law $P_{f_0}^{(n)}$. This is a bounded-Lipschitz weak BvM conclusion; it asserts neither total-variation convergence on all Borel subsets nor an $L^2$-valued Gaussian limit.",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-negative-sobolev-space-for-white-noise",
+          "source_section": "Definition",
+          "quote": "Let $(\\psi_{lk})$ be a countable complete orthonormal basis of the real Hilbert space $L^2([0,1])$ ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]], [[def-hilbert-space]], [[def-l-p-space-as-a-quotient-by-null-functions]]). For a wavelet basis, index levels by $l\\ge0$, let $K_l$ have $2^l$ indices, and put $a_l=2^l$ for $l\\ge1$ and $a_0=2$ for the finite coarsest level. This finite-level convention only prevents a zero logarithmic weight and does not change any convergence criterion below. For a trigonometric basis, use its integer frequency index $l$, bounded multiplicities, and $a_l=\\max(2,|l|)$.\n\nHere an **$S$-regular wavelet basis** means a wavelet orthonormal basis whose members are $S$ times differentiable, with each derivative through order $S$ in $L^2([0,1])$, following the source convention. The weak BvM theorem below only uses the basis's completeness, orthonormality, and level counts.\n\nFor $\\delta>0$, define $H(\\delta)=H^{-1/2,\\delta}_2$ to be the space of coefficient sequences $c=(c_{lk})$ with norm\n\n$$\\|c\\|_{H(\\delta)}^2:=\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}|c_{lk}|^2<\\infty.$$\n\nIts inner product is the corresponding weighted coefficient inner product. Multiplying each coordinate by $a_l^{-1/2}(\\log a_l)^{-\\delta}$ identifies it isometrically with $\\ell^2(I)$, where $I=\\{(l,k):k\\in K_l\\}$ (or the corresponding trigonometric index set). This sequence space is complete: if $x^{(m)}$ is Cauchy, each coordinate converges to a scalar $x_i$; for every finite $F\\subset I$, the Cauchy bound passes to the limit in $\\sum_{i\\in F}|x_i^{(m)}-x_i^{(n)}|^2$, so the supremum over finite $F$ shows $x^{(m)}\\to x$ in $\\ell^2(I)$. It is separable because finite-support sequences with rational coordinates form a countable dense set. Thus $H(\\delta)$ is a separable Hilbert space without an additional choice assumption.\n\nA function $f\\in L^2([0,1])$ is identified with its coefficient sequence $c_{lk}=\\langle f,\\psi_{lk}\\rangle$. For each finite set $F$ of indices, orthonormality makes $\\sum_{(l,k)\\in F}c_{lk}\\psi_{lk}$ orthogonal to its residual in $L^2$, so the Pythagorean identity gives $\\sum_F|c_{lk}|^2\\le\\|f\\|_2^2$. Taking the supremum over finite $F$ and using the boundedness of the weights proves continuity of the coefficient map. If all coefficients of $f$ vanish, then $f$ is orthogonal to the linear span of the basis. Completeness makes this span dense, and continuity of $g\\mapsto\\langle f,g\\rangle$ gives $\\langle f,f\\rangle=0$, hence $f=0$ in $L^2$. Applying this to the difference of two functions proves injectivity. Thus the coefficient map is a continuous linear embedding $L^2([0,1])\\hookrightarrow H(\\delta)$.\n\nThe weight trace $\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}$ is finite exactly when $\\delta>1/2$: for wavelets its tail is a constant multiple of $\\sum_{l\\ge1}l^{-2\\delta}$, while for a trigonometric basis it is comparable to $\\sum_{l\\ge2}[l(\\log l)^{2\\delta}]^{-1}$. The product-prior theorem below uses the wavelet case.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-wavelet-product-prior-is-l2-valued",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a real Hilbert space with a countable orthonormal basis $(\\psi_{lk})$, where $K_l$ is the level-$l$ index set and $|K_l|=2^l$ for each $l\\ge0$ ([[def-hilbert-space]], [[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]). Such an $H$ is separable because finite rational linear combinations of the countable basis are dense. Let $\\xi_{lk}$ be IID real random variables with common density $\\varphi$ and finite second moment $m_2=\\int x^2\\varphi(x)\\,dx<\\infty$ ([[def-identically-distributed-and-iid-random-variables]]). For $\\alpha>0$, set $\\sigma_l=2^{-l(\\alpha+1/2)}$ and form the partial wavelet sums\n\n$$f_N=\\sum_{0\\le l\\le N}\\sum_{k\\in K_l}\\sigma_l\\xi_{lk}\\psi_{lk}.$$\n\nAssume countable choice, denoted $\\mathrm{AC}_\\omega$, when specializing to $H=L^2([0,1])$. Then $f_N$ converges almost surely in $H$ to a Borel $H$-valued random element $f$, and\n\n$$\\mathbb E\\|f\\|_H^2=m_2\\sum_{l\\ge0}2^l\\sigma_l^2=m_2\\sum_{l\\ge0}2^{-2\\alpha l}<\\infty.$$\n\nThe abstract Hilbert-space assertion is choice-free; for $H=L^2([0,1])$, completeness follows from the Riesz–Fischer theorem under countable choice ([[def-countable-choice]], [[def-l-p-space-as-a-quotient-by-null-functions]], [[thm-riesz-fischer-completeness-of-l-p]]). More generally, finitely many additional coarsest orthogonal coordinates with fixed scales and finite coefficient second moments may be added; they contribute only a finite expectation to the displayed sum.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $(\\psi_{lk})$ be the wavelet or trigonometric basis from [[def-negative-sobolev-space-for-white-noise]]. Let $Z_{lk}$ be mutually independent real random variables with density $g(x)=(2\\pi)^{-1/2}e^{-x^2/2}$. Define the formal white-noise coefficient sequence $W=(Z_{lk})$. For every $\\delta>1/2$, this sequence is almost surely an element of $H(\\delta)$ and is a Borel Gaussian random element there. Its law $N$ is a Borel probability on $H(\\delta)$. For an infinite-dimensional basis, white noise is not an $L^2([0,1])$-valued random element. Here Gaussian means that each continuous real linear functional has a centered law $N(0,v)$ in the density convention of [[lem-density-normal-laws-and-square-summable-gaussian-series]]; in particular, for $L(c)=\\sum_jd_jc_j$ its variance is $\\sum_jd_j^2$ whenever this pairing is continuous on $H(\\delta)$.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-product-prior-posterior-second-moment-in-negative-sobolev-space",
+          "source_section": "Statement",
+          "quote": "Use the wavelet product-prior white-noise model of [[lem-wavelet-product-prior-is-l2-valued]] and [[lem-product-prior-coordinate-posterior-law]], with $\\sigma_l=2^{-l(\\alpha+1/2)}$, $\\alpha>0$, and $2^l$ coefficients at level $l\\ge0$. Let $\\theta_{0,lk}$ be the coefficients of a fixed $f_0\\in L^2([0,1])$. Assume countable choice for the $L^2$ prior construction, with the full posterior kernel supplied by [[lem-product-prior-coordinate-posterior-law]], and suppose\n\n$$\\sup_{l,k}\\left|\\frac{\\theta_{0,lk}}{\\sigma_l}\\right|\\le M<\\tau,$$\n\nwhere the common prior density $\\varphi$ satisfies $\\varphi(u)\\le C_\\varphi$ for all $u$, $\\varphi(u)\\ge c_\\varphi>0$ for $|u|<\\tau$, and $m_2:=\\int u^2\\varphi(u)\\,du<\\infty$. For every $\\delta>1/2$ there is a constant $C_\\delta<\\infty$, independent of $n$, such that\n\n$$\\mathbb E_{f_0}^{(n)}\\int\\|f-f_0\\|_{H(\\delta)}^2\\,\\Pi_n(df\\mid X^{(n)})\\le\\frac{C_\\delta}{n}.$$\n\nNo continuity assumption on $\\varphi$ is needed for this moment estimate.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-coordinate-posterior-total-variation-limit",
+          "source_section": "Statement",
+          "quote": "Assume countable choice for the $L^2$ prior construction, with the full posterior kernel supplied as in [[lem-product-prior-coordinate-posterior-law]]. Fix a finite set $J$ of wavelet coordinates in the product white-noise model of [[lem-product-prior-coordinate-posterior-law]]. Suppose $\\varphi$ is bounded and continuous at each normalized truth coefficient $r_j=\\theta_{0,j}/\\sigma_j$, with $\\varphi(r_j)>0$. Let $\\widetilde\\Pi_{n,J}$ be the conditional posterior law of $\\sqrt n(\\theta_J-X_J)$ given the full data. If $J=\\varnothing$, both laws are the unique probability on the zero-dimensional one-point space. For nonempty $J$, the posterior and Gaussian densities $p_{n,J}$ and $\\phi_J$ on $\\mathbb R^{|J|}$ satisfy\n\n$$\\int_{\\mathbb R^{|J|}}|p_{n,J}(u\\mid X)-\\phi_J(u)|\\,du\\longrightarrow0$$\n\nin probability under the true white-noise law. Consequently $d_{\\rm TV}(\\widetilde\\Pi_{n,J},N_{|J|}(0,I))\\to0$, where $d_{\\rm TV}(\\mu,\\nu):=\\sup_A|\\mu(A)-\\nu(A)|$ and $N_{|J|}(0,I)$ is the product of $|J|$ standard normal laws.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-product-prior-coordinate-posterior-law",
+          "source_section": "Statement",
+          "quote": "Assume countable choice for the $L^2$-valued prior construction. Let the wavelet product prior have independent coefficients $\\theta_{lk}=\\sigma_l\\xi_{lk}$, where the $\\xi_{lk}$ are IID with density $\\varphi$. Observe the independent Gaussian sequence\n\n$$X_{lk}=\\theta_{0,lk}+n^{-1/2}Z_{lk},$$\n\nwhere the $Z_{lk}$ have the standard normal density and are independent of the prior. Assume a data-indexed posterior kernel for the $L^2$-valued prior is supplied as part of this model. In the product white-noise model, for every finite set $J$ of coefficient indices its conditional law of $(\\theta_j)_{j\\in J}$ given the full data sequence $(X_j)$ is the product of the one-coordinate densities\n\n$$p_{j,n}(t\\mid X_j)=\\frac{e^{-n(t-X_j)^2/2}\\,\\sigma_j^{-1}\\varphi(t/\\sigma_j)}{\\int_{\\mathbb R}e^{-n(s-X_j)^2/2}\\,\\sigma_j^{-1}\\varphi(s/\\sigma_j)\\,ds},\\qquad j\\in J.$$\n\nHere $j$ abbreviates a pair $(l,k)$ and $\\sigma_j=\\sigma_l$. For $J=\\varnothing$, the formula denotes the unit law on the zero-dimensional one-point space. Each denominator is strictly positive and finite: the Gaussian factor is everywhere positive and at most $1$, while the prior density integrates to $1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Fix $\\delta>1/2$ and choose $\\delta'$ with $1/2<\\delta'<\\delta$. Let $P_J$ retain all wavelet coordinates with level $l\\le J$. Since $w_l^\\delta/w_l^{\\delta'}=(\\log a_l)^{-2(\\delta-\\delta')}$ and $a_l\\to\\infty$, for $q_J:=(\\log a_{J+1})^{-(\\delta-\\delta')}$ one has $\\|(I-P_J)u\\|_{H(\\delta)}\\le q_J\\|u\\|_{H(\\delta')}\\quad\\text{and}\\quad q_J\\to0.$ For any probability law $Q$ on $H(\\delta)$, coupling $U$ with $P_JU$ and using the defining Lipschitz bound gives $\\beta_{BL,H(\\delta)}(Q,Q\\circ P_J^{-1})\\le\\int\\|(I-P_J)u\\|_{H(\\delta)}\\,Q(du)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "For a fixed $J$, the middle term in $\\beta_{BL,H(\\delta)}(\\widetilde\\Pi_n,N)\\le\\beta_{BL,H(\\delta)}(\\widetilde\\Pi_n,\\widetilde\\Pi_n\\circ P_J^{-1})+\\beta_{BL,H(\\delta)}(\\widetilde\\Pi_n\\circ P_J^{-1},N\\circ P_J^{-1})+\\beta_{BL,H(\\delta)}(N\\circ P_J^{-1},N)$ tends to zero in probability: [F5] gives $L^1$ convergence of the projected posterior and Gaussian coordinate densities. Every bounded-Lipschitz test function restricted to the projected subspace is bounded by $1$, so its integral difference is at most that $L^1$ distance.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "claim": "The last term is bounded by $\\mathbb E\\|W-P_JW\\|_{H(\\delta)}$, which is at most $\\bigl(\\mathbb E\\|W-P_JW\\|_{H(\\delta)}^2\\bigr)^{1/2}=\\bigl(\\sum_{l>J,k}w_l^\\delta\\bigr)^{1/2}$ by [F3] and [F7]. This tends to zero as $J\\to\\infty$ by [F1].",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F3",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Under the joint true-data/posterior law, using the supplied posterior model [F6] and the $L^2$ prior construction [F2], $U=\\sqrt n(f-X)=\\sqrt n(f-f_0)-W$, where $W=\\sqrt n(X-f_0)$ has law $N$. By [F4], [F3] and $(a-b)^2\\le2a^2+2b^2$, $\\mathbb E_{f_0}^{(n)}\\int\\|U\\|_{H(\\delta')}^2\\,\\Pi_n(df\\mid X)\\le2n\\mathbb E_{f_0}^{(n)}\\int\\|f-f_0\\|_{H(\\delta')}^2\\,\\Pi_n(df\\mid X)+2\\mathbb E\\|W\\|_{H(\\delta')}^2\\le C,$ with $C$ independent of $n$. Applying [F7] under the posterior probability and then under the true-data probability, together with step 1.1, gives $\\mathbb E_{f_0}^{(n)}\\beta_{BL,H(\\delta)}(\\widetilde\\Pi_n,\\widetilde\\Pi_n\\circ P_J^{-1})\\le q_J\\sqrt C.$ Thus the first projection error can be made uniformly small by taking $J$ large.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Fix $0<\\varepsilon<1$ and choose $J$ so the expected first and deterministic third terms are each less than $\\varepsilon^2$. By [F8], the probability that the first term exceeds $\\varepsilon$ is at most $\\varepsilon$; the deterministic third term is less than $\\varepsilon$. For this fixed $J$, step 1.2 makes the probability that the middle term exceeds $\\varepsilon$ tend to zero. The triangle bound then gives a limiting upper bound $\\varepsilon$ for the probability that the full distance exceeds $3\\varepsilon$. Since $\\varepsilon$ is arbitrary, $\\beta_{BL,H(\\delta)}(\\widetilde\\Pi_n,N)\\to0$ in $P_{f_0}^{(n)}$-probability.",
+          "step": "3.1",
+          "inputs": [
+            "F8",
+            "step 2.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty input or set is a free parameter in this claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-threshold parameter or zero-valued boundary is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter special case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate-space or dimension limit is part of this claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement assumes α>0, M<τ, and δ>1/2; its projection proof chooses 1/2<δ'<δ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and Given assume countable choice (or the already stated full-AC corollary branch). Countable choice covers L2 prior completeness and the density-normal interface, including the compact Riemann/Lebesgue bridge; the core Gaussian identification uses convolution and a CDF sandwich, without full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No registered finite-smoke check applies; the analytic proofs and explicit Gaussian example are handled by their stated arguments."
+    },
+    "cor-weak-posterior-convergence-in-negative-sobolev-space": {
+      "claim": "Assume AC and the hypotheses of [[thm-weak-nonparametric-bernstein-von-mises-for-product-priors]]. Then the random Borel probability measures $\\widetilde\\Pi_n$ converge weakly in probability to $N$ on $H(\\delta)$, where weak convergence is the bounded-continuous-test definition in [[def-weak-convergence-of-borel-probability-measures]].",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-weak-nonparametric-bernstein-von-mises-for-product-priors",
+          "source_section": "Statement",
+          "quote": "Let $(\\psi_{lk})$ be the S-regular wavelet basis in [[def-negative-sobolev-space-for-white-noise]], with $2^l$ coefficients at each level $l\\ge0$. For $\\alpha>0$, put $\\sigma_l=2^{-l(\\alpha+1/2)}$ and let the prior on $f=\\sum_{l,k}\\sigma_l\\xi_{lk}\\psi_{lk}$ have IID coefficients $\\xi_{lk}$ with density $\\varphi$. Assume countable choice for the $L^2$ prior construction supplied by [[lem-wavelet-product-prior-is-l2-valued]], and take the full posterior kernel as the supplied model input of [[lem-product-prior-coordinate-posterior-law]]. Let $f_0\\in L^2([0,1])$, write $\\theta_{0,lk}=\\langle f_0,\\psi_{lk}\\rangle$ and $r_{lk}=\\theta_{0,lk}/\\sigma_l$, and suppose\n\n$$\\sup_{l,k}|r_{lk}|\\le M<\\tau,$$\n\nwhere $\\varphi$ is a probability density satisfying $\\varphi(u)\\le C_\\varphi$ for every $u$, $\\varphi(u)\\ge c_\\varphi>0$ for $|u|<\\tau$, $\\int u^2\\varphi(u)\\,du<\\infty$, and $\\varphi$ is continuous at each $r_{lk}$. The observation model is\n\n$$dX^{(n)}(t)=f_0(t)\\,dt+n^{-1/2}dW(t),\\qquad 0\\le t\\le1,$$\n\nwith standard white noise $W$; in the stated basis this is the sequence experiment $X_{lk}=\\theta_{0,lk}+n^{-1/2}Z_{lk}$ with independent standard normal coordinates. Let $\\Pi_n(\\cdot\\mid X)$ be the product-coordinate posterior of [[lem-product-prior-coordinate-posterior-law]]. Let $N$ be the law of the canonical white noise in $H(\\delta)$ and define\n\n$$\\widetilde\\Pi_n:=\\Pi_n(\\cdot\\mid X)\\circ[f\\mapsto\\sqrt n(f-X)]^{-1},\\qquad \\beta_{BL,H(\\delta)}(\\mu,\\nu):=\\sup_{\\substack{\\|g\\|_\\infty\\le1\\\\ \\operatorname{Lip}_{H(\\delta)}(g)\\le1}}\\left|\\int g\\,d\\mu-\\int g\\,d\\nu\\right|.$$\n\nFor every $\\delta>1/2$,\n\n$$\\beta_{BL,H(\\delta)}(\\widetilde\\Pi_n,N)\\longrightarrow0$$\n\nin probability under the true white-noise law $P_{f_0}^{(n)}$. This is a bounded-Lipschitz weak BvM conclusion; it asserts neither total-variation convergence on all Borel subsets nor an $L^2$-valued Gaussian limit.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bounded-lipschitz-metric-characterizes-weak-convergence-on-polish-spaces",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(S,d)$ be a Polish space, and let $\\mu_n,\\mu$ be Borel probability measures on $S$. Define\n\n$$\\beta_{BL}(\\nu,\\rho):=\\sup\\left\\{\\left|\\int g\\,d\\nu-\\int g\\,d\\rho\\right|:g:S\\to\\mathbb R,\\ \\|g\\|_\\infty\\le1,\\ \\operatorname{Lip}_d(g)\\le1\\right\\},$$\n\nwhere $\\operatorname{Lip}_d(g):=\\sup_{x\\ne y}|g(x)-g(y)|/d(x,y)$, with value $0$ when $S$ has at most one point. Then\n\n$$\\mu_n\\Rightarrow\\mu\\quad\\Longleftrightarrow\\quad\\beta_{BL}(\\mu_n,\\mu)\\longrightarrow0,$$\n\nwhere $\\Rightarrow$ is weak convergence of Borel probabilities ([[def-weak-convergence-of-borel-probability-measures]]). The implication from bounded-Lipschitz convergence to weak convergence is choice-free; the reverse implication below uses AC through Prokhorov's theorem.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is [[def-metric-continuity]]. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in [[def-integrable-real-and-complex-functions-and-their-integrals]]. No completeness or coupling is required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "By [F2], the bounded-Lipschitz metric is a metric for the weak topology on the Polish space $H(\\delta)$ under [A1].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The convergence in probability of this metric to zero in [F1] is exactly convergence in probability in the weak topology established in step 1.1; by [F3], its deterministic convergence relation is bounded-continuous-test convergence. This is the asserted weak posterior limit.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty input or set is a free parameter in this claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-threshold parameter or zero-valued boundary is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter special case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate-space or dimension limit is part of this claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No additional endpoint beyond the stated strict hypotheses is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and Given assume countable choice (or the already stated full-AC corollary branch). Countable choice covers L2 prior completeness and the density-normal interface, including the compact Riemann/Lebesgue bridge; the core Gaussian identification uses convolution and a CDF sandwich, without full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No registered finite-smoke check applies; the analytic proofs and explicit Gaussian example are handled by their stated arguments."
+    },
+    "cor-continuous-functionals-of-the-scaled-posterior-converge": {
+      "claim": "Assume AC and the hypotheses of [[thm-weak-nonparametric-bernstein-von-mises-for-product-priors]]. Let $T$ be a metric space and let $G:H(\\delta)\\to T$ be Borel measurable with $N(D_G)=0$, where $D_G:=\\{x\\in H(\\delta):G\\text{ is not continuous at }x\\}$. For every bounded continuous $h:T\\to\\mathbb R$,",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-weak-posterior-convergence-in-negative-sobolev-space",
+          "source_section": "Statement",
+          "quote": "Assume AC and the hypotheses of [[thm-weak-nonparametric-bernstein-von-mises-for-product-priors]]. Then the random Borel probability measures $\\widetilde\\Pi_n$ converge weakly in probability to $N$ on $H(\\delta)$, where weak convergence is the bounded-continuous-test definition in [[def-weak-convergence-of-borel-probability-measures]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuous-mapping-theorem",
+          "source_section": "Statement",
+          "quote": "Let S,T be metric spaces, $g:S\\to T$ measurable, and $\\mu_n\\Rightarrow\\mu$. If the discontinuity set $D_g$ is $\\mu$-null, then $g_*\\mu_n\\Rightarrow g_*\\mu$. Consequently $X_n\\Rightarrow X$ implies $g(X_n)\\Rightarrow g(X)$ whenever $P_X(D_g)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bounded-lipschitz-metric-characterizes-weak-convergence-on-polish-spaces",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(S,d)$ be a Polish space, and let $\\mu_n,\\mu$ be Borel probability measures on $S$. Define\n\n$$\\beta_{BL}(\\nu,\\rho):=\\sup\\left\\{\\left|\\int g\\,d\\nu-\\int g\\,d\\rho\\right|:g:S\\to\\mathbb R,\\ \\|g\\|_\\infty\\le1,\\ \\operatorname{Lip}_d(g)\\le1\\right\\},$$\n\nwhere $\\operatorname{Lip}_d(g):=\\sup_{x\\ne y}|g(x)-g(y)|/d(x,y)$, with value $0$ when $S$ has at most one point. Then\n\n$$\\mu_n\\Rightarrow\\mu\\quad\\Longleftrightarrow\\quad\\beta_{BL}(\\mu_n,\\mu)\\longrightarrow0,$$\n\nwhere $\\Rightarrow$ is weak convergence of Borel probabilities ([[def-weak-convergence-of-borel-probability-measures]]). The implication from bounded-Lipschitz convergence to weak convergence is choice-free; the reverse implication below uses AC through Prokhorov's theorem.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a bounded continuous $h:T\\to\\mathbb R$ and define $\\Phi(\\nu):=\\int h\\,d(\\nu\\circ G^{-1})$. If $\\beta_{BL,H(\\delta)}(\\nu_m,N)\\to0$, [F3] gives $\\nu_m\\Rightarrow N$ under [A1]; [F2] and $N(D_G)=0$ imply $\\nu_m\\circ G^{-1}\\Rightarrow N\\circ G^{-1}$, hence $\\Phi(\\nu_m)\\to\\Phi(N)$. Since $\\beta_{BL}$ is a metric, this sequential criterion proves continuity of $\\Phi$ at $N$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Given $\\varepsilon>0$, continuity from step 1.1 supplies $\\eta>0$ such that $\\beta_{BL,H(\\delta)}(\\nu,N)<\\eta$ implies $|\\Phi(\\nu)-\\Phi(N)|<\\varepsilon$. Therefore $P_{f_0}^{(n)}\\{|\\Phi(\\widetilde\\Pi_n)-\\Phi(N)|\\ge\\varepsilon\\}\\le P_{f_0}^{(n)}\\{\\beta_{BL,H(\\delta)}(\\widetilde\\Pi_n,N)\\ge\\eta\\}\\longrightarrow0$ by [F1] and [F3], which give bounded-Lipschitz convergence in probability on $H(\\delta)$. This is the stated convergence in probability for $h$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty input or set is a free parameter in this claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-threshold parameter or zero-valued boundary is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter special case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate-space or dimension limit is part of this claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires N(D_G)=0, the boundary-null hypothesis in the continuous-mapping theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/A1 use full AC only through weak-topology metrization in F3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No registered finite-smoke check applies; the analytic proofs and explicit Gaussian example are handled by their stated arguments."
+    },
+    "ex-white-noise-is-not-l2-valued": {
+      "claim": "Take a wavelet basis with $2^l$ coefficients at level $l$ and $a_l=2^l$ for $l\\ge1$. The weighted white-noise trace at $\\delta=1/2$ has level-$l$ contribution",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-negative-sobolev-space-for-white-noise",
+          "source_section": "Definition",
+          "quote": "Let $(\\psi_{lk})$ be a countable complete orthonormal basis of the real Hilbert space $L^2([0,1])$ ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]], [[def-hilbert-space]], [[def-l-p-space-as-a-quotient-by-null-functions]]). For a wavelet basis, index levels by $l\\ge0$, let $K_l$ have $2^l$ indices, and put $a_l=2^l$ for $l\\ge1$ and $a_0=2$ for the finite coarsest level. This finite-level convention only prevents a zero logarithmic weight and does not change any convergence criterion below. For a trigonometric basis, use its integer frequency index $l$, bounded multiplicities, and $a_l=\\max(2,|l|)$.\n\nHere an **$S$-regular wavelet basis** means a wavelet orthonormal basis whose members are $S$ times differentiable, with each derivative through order $S$ in $L^2([0,1])$, following the source convention. The weak BvM theorem below only uses the basis's completeness, orthonormality, and level counts.\n\nFor $\\delta>0$, define $H(\\delta)=H^{-1/2,\\delta}_2$ to be the space of coefficient sequences $c=(c_{lk})$ with norm\n\n$$\\|c\\|_{H(\\delta)}^2:=\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}|c_{lk}|^2<\\infty.$$\n\nIts inner product is the corresponding weighted coefficient inner product. Multiplying each coordinate by $a_l^{-1/2}(\\log a_l)^{-\\delta}$ identifies it isometrically with $\\ell^2(I)$, where $I=\\{(l,k):k\\in K_l\\}$ (or the corresponding trigonometric index set). This sequence space is complete: if $x^{(m)}$ is Cauchy, each coordinate converges to a scalar $x_i$; for every finite $F\\subset I$, the Cauchy bound passes to the limit in $\\sum_{i\\in F}|x_i^{(m)}-x_i^{(n)}|^2$, so the supremum over finite $F$ shows $x^{(m)}\\to x$ in $\\ell^2(I)$. It is separable because finite-support sequences with rational coordinates form a countable dense set. Thus $H(\\delta)$ is a separable Hilbert space without an additional choice assumption.\n\nA function $f\\in L^2([0,1])$ is identified with its coefficient sequence $c_{lk}=\\langle f,\\psi_{lk}\\rangle$. For each finite set $F$ of indices, orthonormality makes $\\sum_{(l,k)\\in F}c_{lk}\\psi_{lk}$ orthogonal to its residual in $L^2$, so the Pythagorean identity gives $\\sum_F|c_{lk}|^2\\le\\|f\\|_2^2$. Taking the supremum over finite $F$ and using the boundedness of the weights proves continuity of the coefficient map. If all coefficients of $f$ vanish, then $f$ is orthogonal to the linear span of the basis. Completeness makes this span dense, and continuity of $g\\mapsto\\langle f,g\\rangle$ gives $\\langle f,f\\rangle=0$, hence $f=0$ in $L^2$. Applying this to the difference of two functions proves injectivity. Thus the coefficient map is a continuous linear embedding $L^2([0,1])\\hookrightarrow H(\\delta)$.\n\nThe weight trace $\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}$ is finite exactly when $\\delta>1/2$: for wavelets its tail is a constant multiple of $\\sum_{l\\ge1}l^{-2\\delta}$, while for a trigonometric basis it is comparable to $\\sum_{l\\ge2}[l(\\log l)^{2\\delta}]^{-1}$. The product-prior theorem below uses the wavelet case.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $(\\psi_{lk})$ be the wavelet or trigonometric basis from [[def-negative-sobolev-space-for-white-noise]]. Let $Z_{lk}$ be mutually independent real random variables with density $g(x)=(2\\pi)^{-1/2}e^{-x^2/2}$. Define the formal white-noise coefficient sequence $W=(Z_{lk})$. For every $\\delta>1/2$, this sequence is almost surely an element of $H(\\delta)$ and is a Borel Gaussian random element there. Its law $N$ is a Borel probability on $H(\\delta)$. For an infinite-dimensional basis, white noise is not an $L^2([0,1])$-valued random element. Here Gaussian means that each continuous real linear functional has a centered law $N(0,v)$ in the density convention of [[lem-density-normal-laws-and-square-summable-gaussian-series]]; in particular, for $L(c)=\\sum_jd_jc_j$ its variance is $\\sum_jd_j^2$ whenever this pairing is continuous on $H(\\delta)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-canonical-white-noise-law-is-tight-under-choice",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $\\delta>1/2$, the canonical white-noise law $N$ on the Polish space $H(\\delta)$ from [[lem-white-noise-is-borel-gaussian-on-negative-sobolev-space]] is tight.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At $\\delta=1/2$, the $l$th trace contribution for $l\\ge1$ is $1/(l\\log2)$. On each block $2^m\\le l<2^{m+1}$ its sum is at least $1/(2\\log2)$, so the trace diverges. For $\\delta>1/2$ the contribution is proportional to $l^{-2\\delta}$; on each dyadic block its sum is at most a constant times $2^{m(1-2\\delta)}$, a summable geometric sequence. Finite coarsest terms do not affect either conclusion.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F2] the coefficient sequence defines a Borel Gaussian law on $H(\\delta)$ and is not $L^2$-valued; [F3] gives tightness of that law under [A1].",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore the canonical Gaussian target for the weak BvM result is the negative-Sobolev law described in [F2], tight under the stated AC branch [F3]; the theorem makes no $L^2$-valued or total-variation conclusion.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty input or set is a free parameter in this claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-threshold parameter or zero-valued boundary is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter special case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate-space or dimension limit is part of this claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example and step 1.1 show divergence at δ=1/2 and finite trace for δ>1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example/A1 use AC only for the tightness claim in F3; the trace and L² obstruction are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No registered finite-smoke check applies; the analytic proofs and explicit Gaussian example are handled by their stated arguments."
+    },
+    "ex-gaussian-product-prior-satisfies-weak-bvm": {
+      "claim": "Let $\\varphi(u)=(2\\pi)^{-1/2}e^{-u^2/2}$ be the standard normal density, take any $\\alpha>0$, and use the product prior scales $\\sigma_l=2^{-l(\\alpha+1/2)}$ on a wavelet basis with $2^l$ coefficients at level $l\\ge0$. Let the truth have coefficients $\\theta_{0,lk}=\\sigma_l$, so $r_{lk}=1$ for every $(l,k)$. With $M=1$ and $\\tau=2$, all density and coefficient hypotheses of the weak BvM theorem hold.",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-wavelet-product-prior-is-l2-valued",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a real Hilbert space with a countable orthonormal basis $(\\psi_{lk})$, where $K_l$ is the level-$l$ index set and $|K_l|=2^l$ for each $l\\ge0$ ([[def-hilbert-space]], [[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]). Such an $H$ is separable because finite rational linear combinations of the countable basis are dense. Let $\\xi_{lk}$ be IID real random variables with common density $\\varphi$ and finite second moment $m_2=\\int x^2\\varphi(x)\\,dx<\\infty$ ([[def-identically-distributed-and-iid-random-variables]]). For $\\alpha>0$, set $\\sigma_l=2^{-l(\\alpha+1/2)}$ and form the partial wavelet sums\n\n$$f_N=\\sum_{0\\le l\\le N}\\sum_{k\\in K_l}\\sigma_l\\xi_{lk}\\psi_{lk}.$$\n\nAssume countable choice, denoted $\\mathrm{AC}_\\omega$, when specializing to $H=L^2([0,1])$. Then $f_N$ converges almost surely in $H$ to a Borel $H$-valued random element $f$, and\n\n$$\\mathbb E\\|f\\|_H^2=m_2\\sum_{l\\ge0}2^l\\sigma_l^2=m_2\\sum_{l\\ge0}2^{-2\\alpha l}<\\infty.$$\n\nThe abstract Hilbert-space assertion is choice-free; for $H=L^2([0,1])$, completeness follows from the Riesz–Fischer theorem under countable choice ([[def-countable-choice]], [[def-l-p-space-as-a-quotient-by-null-functions]], [[thm-riesz-fischer-completeness-of-l-p]]). More generally, finitely many additional coarsest orthogonal coordinates with fixed scales and finite coefficient second moments may be added; they contribute only a finite expectation to the displayed sum.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-weak-nonparametric-bernstein-von-mises-for-product-priors",
+          "source_section": "Statement",
+          "quote": "Let $(\\psi_{lk})$ be the S-regular wavelet basis in [[def-negative-sobolev-space-for-white-noise]], with $2^l$ coefficients at each level $l\\ge0$. For $\\alpha>0$, put $\\sigma_l=2^{-l(\\alpha+1/2)}$ and let the prior on $f=\\sum_{l,k}\\sigma_l\\xi_{lk}\\psi_{lk}$ have IID coefficients $\\xi_{lk}$ with density $\\varphi$. Assume countable choice for the $L^2$ prior construction supplied by [[lem-wavelet-product-prior-is-l2-valued]], and take the full posterior kernel as the supplied model input of [[lem-product-prior-coordinate-posterior-law]]. Let $f_0\\in L^2([0,1])$, write $\\theta_{0,lk}=\\langle f_0,\\psi_{lk}\\rangle$ and $r_{lk}=\\theta_{0,lk}/\\sigma_l$, and suppose\n\n$$\\sup_{l,k}|r_{lk}|\\le M<\\tau,$$\n\nwhere $\\varphi$ is a probability density satisfying $\\varphi(u)\\le C_\\varphi$ for every $u$, $\\varphi(u)\\ge c_\\varphi>0$ for $|u|<\\tau$, $\\int u^2\\varphi(u)\\,du<\\infty$, and $\\varphi$ is continuous at each $r_{lk}$. The observation model is\n\n$$dX^{(n)}(t)=f_0(t)\\,dt+n^{-1/2}dW(t),\\qquad 0\\le t\\le1,$$\n\nwith standard white noise $W$; in the stated basis this is the sequence experiment $X_{lk}=\\theta_{0,lk}+n^{-1/2}Z_{lk}$ with independent standard normal coordinates. Let $\\Pi_n(\\cdot\\mid X)$ be the product-coordinate posterior of [[lem-product-prior-coordinate-posterior-law]]. Let $N$ be the law of the canonical white noise in $H(\\delta)$ and define\n\n$$\\widetilde\\Pi_n:=\\Pi_n(\\cdot\\mid X)\\circ[f\\mapsto\\sqrt n(f-X)]^{-1},\\qquad \\beta_{BL,H(\\delta)}(\\mu,\\nu):=\\sup_{\\substack{\\|g\\|_\\infty\\le1\\\\ \\operatorname{Lip}_{H(\\delta)}(g)\\le1}}\\left|\\int g\\,d\\mu-\\int g\\,d\\nu\\right|.$$\n\nFor every $\\delta>1/2$,\n\n$$\\beta_{BL,H(\\delta)}(\\widetilde\\Pi_n,N)\\longrightarrow0$$\n\nin probability under the true white-noise law $P_{f_0}^{(n)}$. This is a bounded-Lipschitz weak BvM conclusion; it asserts neither total-variation convergence on all Borel subsets nor an $L^2$-valued Gaussian limit.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The normal density is bounded and continuous, is bounded below by $(2\\pi)^{-1/2}e^{-2}$ on $(-2,2)$, and has finite second moment $1$. The normalized truth coefficients all equal $r_{lk}=1$, hence $\\sup_{l,k}|r_{lk}|=1\\le M=1<\\tau=2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The deterministic truth series is in $L^2$ because orthogonality gives $\\sum_{l\\ge0}\\sum_{k\\in K_l}\\theta_{0,lk}^2=\\sum_{l\\ge0}2^l\\sigma_l^2=\\sum_{l\\ge0}2^{-2\\alpha l}<\\infty$. The prior is likewise $L^2$-valued by [F1] under [A1].",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "All hypotheses of [F2] now hold, including continuity at each $r_{lk}=1$; therefore for every $\\delta>1/2$ the scaled posterior converges to canonical white noise in the bounded-Lipschitz metric of $H(\\delta)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty input or set is a free parameter in this claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-threshold parameter or zero-valued boundary is asserted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example fixes r_{lk}=1, M=1, and τ=2; step 1.1 verifies the Gaussian density bound at this value."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate-space or dimension limit is part of this claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example/steps 1.1–1.2 verify α>0 and the strict relation M=1<τ=2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example/A1 assumes ACω for the L² prior; no full AC is used for the bounded-Lipschitz theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No registered finite-smoke check applies; the analytic proofs and explicit Gaussian example are handled by their stated arguments."
+    },
+    "lem-density-normal-laws-and-square-summable-gaussian-series": {
+      "risk": "high",
+      "kind": "lemma",
+      "claim": "Assume countable choice. Put $g(x)=(2\\pi)^{-1/2}e^{-x^2/2}$. Then $\\gamma(E)=\\int_Eg(x)\\,dx$ is a Borel probability on $\\mathbb R$. In this item and its applications, write $N(m,v)$ for its pushforward under $x\\mapsto m+\\sqrt v\\,x$, where $v\\ge0$; thus $N(m,0)=\\delta_m$. This density convention requires no full axiom of choice. For $v>0$ the law has density\n$$g_{m,v}(x)=(2\\pi v)^{-1/2}\\exp\\{- (x-m)^2/(2v)\\},$$\nand its CDF is continuous and strictly increasing. Its mean and variance are $m$ and $v$.\n\nIf $Z_j$ are mutually independent with density $g$ and $\\sum_{j\\ge1}c_j^2=v<\\infty$, and the finite sums $S_m=\\sum_{j\\le m}c_jZ_j$ converge in probability to a supplied real random variable $S$, then $S$ has law $N(0,v)$. In particular, this applies whenever the sums converge almost surely or in $L^2$.",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-integral",
+          "source_section": "Statement",
+          "quote": "$$\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt\\pi.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-substitution",
+          "source_section": "Statement",
+          "quote": "Let $c < d$ be reals and let $\\varphi : [c,d] \\to \\mathbb{R}$ be differentiable\nat every point of $[c,d]$ as a function on $[c,d]$ ([[def-derivative]]), with\n$\\varphi'$ integrable on $[c,d]$ ([[def-darboux-integral]]). Let\n$J \\subseteq \\mathbb{R}$ be order-convex with at least two elements\n([[def-interval]]) with $\\varphi[\\,[c,d]\\,] \\subseteq J$, and let $f : J \\to\n\\mathbb{R}$ be continuous on $J$ ([[def-continuity-real]]).\n\nThen $(f\\circ\\varphi)\\,\\varphi'$ is integrable on $[c,d]$ and\n\n$$\\int_{\\varphi(c)}^{\\varphi(d)} f \\;=\\; \\int_c^d (f\\circ\\varphi)\\,\\varphi' ,$$\n\nthe left-hand integral being the oriented one of [[def-oriented-integral]].\n\n**Neither injectivity nor monotonicity of $\\varphi$ is assumed**, and that is\nexactly why the left-hand side is written with oriented limits: $\\varphi(d)$ may\nlie below $\\varphi(c)$, and $\\varphi$ may return to the same value many times.\nThe proof runs through a primitive of $f$ and the chain rule, and no inverse\nfunction is ever formed.\n\n**Continuity of $f$ is a hypothesis and cannot be weakened to integrability.**\nWith $f$ merely integrable the composite $f \\circ \\varphi$ need not be\nintegrable at all, so the right-hand side need not exist; that is\nthe false statement that weakens it on the companion page.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f:X\\to[0,+\\infty]$ be measurable and define\n$$\\nu_f(A):=\\int_A f\\,d\\mu \\qquad (A\\in\\mathcal A).$$\nThen $\\nu_f$ is a measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-integration-by-parts",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $u, v : [a,b] \\to \\mathbb{R}$ be differentiable at\nevery point of $[a,b]$ as functions on $[a,b]$ ([[def-derivative]]). Suppose\n$u'$ and $v'$ are integrable on $[a,b]$ ([[def-darboux-integral]]). Then $uv'$\nand $u'v$ are integrable and\n\n$$\\int_a^b u\\,v' \\;=\\; u(b)v(b) - u(a)v(a) \\;-\\; \\int_a^b u'\\,v .$$\n\n**The integrability of $u'$ and $v'$ is a hypothesis, not a formality.** Without\nit the two integrals in the display need not exist at all, and the identity is\nthen not false but ill-formed; that is\nthe false statement that deletes it on the companion\npage. The hypothesis is automatic when $u$ and $v$ are continuously\ndifferentiable, since a continuous function on $[a,b]$ is integrable\n([[thm-continuous-implies-integrable]]).",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The positive continuous function $g$ is Borel measurable, since inverse images of open sets are open. For an integer $R\\ge1$, substitute $x=\\sqrt2\\,t$ in the continuous compact-interval integral. The bridge in [F1] and then increasing truncation in [F2] give $\\int_{\\mathbb R}e^{-x^2/2}\\,dx=\\sqrt2\\lim_{R\\to\\infty}\\int_{-R/\\sqrt2}^{R/\\sqrt2}e^{-t^2}\\,dt=\\sqrt{2\\pi}$. Thus [F2] makes $\\gamma$ a probability. For $v>0$, compact substitutions in the same way show that its affine pushforward has the asserted half-line integrals of $g_{m,v}$; limits of compact intervals give the half-lines, and [F5] gives equality of the measures. For $v=0$ the affine map is constant, giving the Dirac law directly.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The CDF of $N(m,v)$ for $v>0$ is continuous, since $g_{m,v}$ is bounded and the integral over an interval of length $h$ is at most $|h|/\\sqrt{2\\pi v}$. It is strictly increasing because the positive continuous density has a positive minimum on every nondegenerate compact interval. For $Z$ with density $g$, $g'(x)=-xg(x)$, and integration by parts gives $\\int_{-R}^R|x|g(x)dx=2(g(0)-g(R))$ and $\\int_{-R}^Rx^2g(x)dx=\\int_{-R}^Rg(x)dx-2Rg(R)$. The exponential series shows $g(R)\\to0$ and $Rg(R)\\to0$. Increasing truncation gives $\\mathbb E|Z|<\\infty$ and $\\mathbb EZ^2=1$; symmetry gives $\\mathbb EZ=0$. Expanding $m+\\sqrt v Z$ gives the claimed mean and variance, also for $v=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $U,V$ be independent centered density normal variables with variances $a,b>0$. Their sum has density $h(x)=\\int_{\\mathbb R}g_{0,a}(u)g_{0,b}(x-u)du$. Indeed, [F4] expresses $P(U+V\\le x)$ as the nonnegative double integral of $\\mathbf1_{u+t\\le x}g_{0,a}(u)g_{0,b}(t)$; for each fixed $u$, a translation in the continuous half-line integral followed by Tonelli gives $\\int_{-\\infty}^xh(y)dy$. These half-line probabilities determine the law by [F5]. Completing the square gives $\\frac{u^2}{a}+\\frac{(x-u)^2}{b}=\\frac{a+b}{ab}\\left(u-\\frac{ax}{a+b}\\right)^2+\\frac{x^2}{a+b}.$ The compact substitutions and increasing limits in step 1.1 therefore give $h(x)=g_{0,a+b}(x)$. If either variance is zero the corresponding variable is zero almost surely and the same conclusion is immediate. Scaling a coordinate by a negative coefficient gives the same density as scaling by its absolute value, by the symmetry of $g$. Finite induction, using mutual independence to separate the last coordinate from the preceding tuple, proves $S_m\\sim N(0,v_m)$ with $v_m=\\sum_{j\\le m}c_j^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $v=0$, every coefficient is zero, so convergence in probability implies $S=0$ almost surely. Suppose $v>0$. Then $v_m\\to v$ and eventually $v_m>0$. Write $\\Phi$ for the continuous CDF of $\\gamma$. For any $x\\in\\mathbb R$ and $\\varepsilon>0$, convergence in probability and step 2.1 give $\\Phi((x-\\varepsilon)/\\sqrt{v_m})-P(|S_m-S|>\\varepsilon)\\le P(S\\le x)\\le\\Phi((x+\\varepsilon)/\\sqrt{v_m})+P(|S_m-S|>\\varepsilon).$ First let $m\\to\\infty$, then $\\varepsilon\\downarrow0$. Continuity from step 1.2 gives $P(S\\le x)=\\Phi(x/\\sqrt v)$ for every $x$. By [F5], $S$ has law $N(0,v)$. Almost sure convergence implies convergence in probability by dominated convergence on the indicators of $\\{|S_m-S|>\\varepsilon\\}$, and $L^2$ convergence implies it by $\\varepsilon^2P(|S_m-S|>\\varepsilon)\\le\\mathbb E|S_m-S|^2$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.2",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The series is indexed by the supplied positive integers; there is no free empty family. Zero finite sums and vanishing coefficients are covered by the zero-variance branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 explicitly identify N(m,0) with the Dirac law and treat v=0 separately; every c_j is then zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 starts from one scaled standard-density coordinate, and induction covers every finite sum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles either convolution variance being zero by the almost-sure constant law before using positive-variance densities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The density and strict-CDF statements require v>0; v=0 is handled separately. Series coefficient-square sum is finite and nonnegative."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and Given assume countable choice (or the already stated full-AC corollary branch). Countable choice covers L2 prior completeness and the density-normal interface, including the compact Riemann/Lebesgue bridge; the core Gaussian identification uses convolution and a CDF sandwich, without full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No registered finite-smoke computation establishes the analytic measure, Gaussian-series, posterior-limit, or coverage argument; exact local proof steps supply the required verification."
+    },
+    "lem-product-prior-predictive-and-fixed-truth-data-laws-equivalent": {
+      "risk": "high",
+      "kind": "lemma",
+      "claim": "Assume countable choice. Use the wavelet product prior and white-noise model from [[lem-wavelet-product-prior-is-l2-valued]] and [[lem-white-noise-is-borel-gaussian-on-negative-sobolev-space]], with $\\alpha>0$, $\\sigma_l=2^{-l(\\alpha+1/2)}$, and a common coefficient density $\\varphi$ having finite second moment $m_2$. Let $f_0\\in L^2([0,1])$. For each $n\\ge1$ and $\\delta>1/2$, let $Q_n$ be the prior-predictive law on $H(\\delta)$ of $X=f+n^{-1/2}W$, with prior draw $f$ independent of canonical white noise $W$, and let $P_{f_0}^{(n)}$ be the law of $f_0+n^{-1/2}W$. Then $Q_n$ and $P_{f_0}^{(n)}$ are mutually absolutely continuous as Borel probabilities on $H(\\delta)$.",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-negative-sobolev-space-for-white-noise",
+          "source_section": "Definition",
+          "quote": "Let $(\\psi_{lk})$ be a countable complete orthonormal basis of the real Hilbert space $L^2([0,1])$ ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]], [[def-hilbert-space]], [[def-l-p-space-as-a-quotient-by-null-functions]]). For a wavelet basis, index levels by $l\\ge0$, let $K_l$ have $2^l$ indices, and put $a_l=2^l$ for $l\\ge1$ and $a_0=2$ for the finite coarsest level. This finite-level convention only prevents a zero logarithmic weight and does not change any convergence criterion below. For a trigonometric basis, use its integer frequency index $l$, bounded multiplicities, and $a_l=\\max(2,|l|)$.\n\nHere an **$S$-regular wavelet basis** means a wavelet orthonormal basis whose members are $S$ times differentiable, with each derivative through order $S$ in $L^2([0,1])$, following the source convention. The weak BvM theorem below only uses the basis's completeness, orthonormality, and level counts.\n\nFor $\\delta>0$, define $H(\\delta)=H^{-1/2,\\delta}_2$ to be the space of coefficient sequences $c=(c_{lk})$ with norm\n\n$$\\|c\\|_{H(\\delta)}^2:=\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}|c_{lk}|^2<\\infty.$$\n\nIts inner product is the corresponding weighted coefficient inner product. Multiplying each coordinate by $a_l^{-1/2}(\\log a_l)^{-\\delta}$ identifies it isometrically with $\\ell^2(I)$, where $I=\\{(l,k):k\\in K_l\\}$ (or the corresponding trigonometric index set). This sequence space is complete: if $x^{(m)}$ is Cauchy, each coordinate converges to a scalar $x_i$; for every finite $F\\subset I$, the Cauchy bound passes to the limit in $\\sum_{i\\in F}|x_i^{(m)}-x_i^{(n)}|^2$, so the supremum over finite $F$ shows $x^{(m)}\\to x$ in $\\ell^2(I)$. It is separable because finite-support sequences with rational coordinates form a countable dense set. Thus $H(\\delta)$ is a separable Hilbert space without an additional choice assumption.\n\nA function $f\\in L^2([0,1])$ is identified with its coefficient sequence $c_{lk}=\\langle f,\\psi_{lk}\\rangle$. For each finite set $F$ of indices, orthonormality makes $\\sum_{(l,k)\\in F}c_{lk}\\psi_{lk}$ orthogonal to its residual in $L^2$, so the Pythagorean identity gives $\\sum_F|c_{lk}|^2\\le\\|f\\|_2^2$. Taking the supremum over finite $F$ and using the boundedness of the weights proves continuity of the coefficient map. If all coefficients of $f$ vanish, then $f$ is orthogonal to the linear span of the basis. Completeness makes this span dense, and continuity of $g\\mapsto\\langle f,g\\rangle$ gives $\\langle f,f\\rangle=0$, hence $f=0$ in $L^2$. Applying this to the difference of two functions proves injectivity. Thus the coefficient map is a continuous linear embedding $L^2([0,1])\\hookrightarrow H(\\delta)$.\n\nThe weight trace $\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}$ is finite exactly when $\\delta>1/2$: for wavelets its tail is a constant multiple of $\\sum_{l\\ge1}l^{-2\\delta}$, while for a trigonometric basis it is comparable to $\\sum_{l\\ge2}[l(\\log l)^{2\\delta}]^{-1}$. The product-prior theorem below uses the wavelet case.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-wavelet-product-prior-is-l2-valued",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a real Hilbert space with a countable orthonormal basis $(\\psi_{lk})$, where $K_l$ is the level-$l$ index set and $|K_l|=2^l$ for each $l\\ge0$ ([[def-hilbert-space]], [[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]). Such an $H$ is separable because finite rational linear combinations of the countable basis are dense. Let $\\xi_{lk}$ be IID real random variables with common density $\\varphi$ and finite second moment $m_2=\\int x^2\\varphi(x)\\,dx<\\infty$ ([[def-identically-distributed-and-iid-random-variables]]). For $\\alpha>0$, set $\\sigma_l=2^{-l(\\alpha+1/2)}$ and form the partial wavelet sums\n\n$$f_N=\\sum_{0\\le l\\le N}\\sum_{k\\in K_l}\\sigma_l\\xi_{lk}\\psi_{lk}.$$\n\nAssume countable choice, denoted $\\mathrm{AC}_\\omega$, when specializing to $H=L^2([0,1])$. Then $f_N$ converges almost surely in $H$ to a Borel $H$-valued random element $f$, and\n\n$$\\mathbb E\\|f\\|_H^2=m_2\\sum_{l\\ge0}2^l\\sigma_l^2=m_2\\sum_{l\\ge0}2^{-2\\alpha l}<\\infty.$$\n\nThe abstract Hilbert-space assertion is choice-free; for $H=L^2([0,1])$, completeness follows from the Riesz–Fischer theorem under countable choice ([[def-countable-choice]], [[def-l-p-space-as-a-quotient-by-null-functions]], [[thm-riesz-fischer-completeness-of-l-p]]). More generally, finitely many additional coarsest orthogonal coordinates with fixed scales and finite coefficient second moments may be added; they contribute only a finite expectation to the displayed sum.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $(\\psi_{lk})$ be the wavelet or trigonometric basis from [[def-negative-sobolev-space-for-white-noise]]. Let $Z_{lk}$ be mutually independent real random variables with density $g(x)=(2\\pi)^{-1/2}e^{-x^2/2}$. Define the formal white-noise coefficient sequence $W=(Z_{lk})$. For every $\\delta>1/2$, this sequence is almost surely an element of $H(\\delta)$ and is a Borel Gaussian random element there. Its law $N$ is a Borel probability on $H(\\delta)$. For an infinite-dimensional basis, white noise is not an $L^2([0,1])$-valued random element. Here Gaussian means that each continuous real linear functional has a centered law $N(0,v)$ in the density convention of [[lem-density-normal-laws-and-square-summable-gaussian-series]]; in particular, for $L(c)=\\sum_jd_jc_j$ its variance is $\\sum_jd_j^2$ whenever this pairing is continuous on $H(\\delta)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-bessel-inequality-for-an-arbitrary-orthonormal-family",
+          "source_section": "Statement",
+          "quote": "Let $(e_i)_{i\\in I}$ be an orthonormal family in a real or complex inner-product\nspace $H$ ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]).\nThen for every $x\\in H$ the nonnegative family\n$\\bigl(|\\langle x,e_i\\rangle|^2\\bigr)_{i\\in I}$ has finite sum in the\nfinite-subset-supremum convention\n([[def-square-summable-family-on-an-arbitrary-index-set]]) and\n\n$$\\sum_{i\\in I}|\\langle x,e_i\\rangle|^2\\le\\|x\\|^2 .$$\n\nIn particular the coefficient family $(\\langle x,e_i\\rangle)_{i\\in I}$ belongs\nto $\\ell^2(I,\\mathbb F)$, and the inequality holds with no hypothesis on the\ncardinality of $I$ and with no completeness of $H$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Enumerate the wavelet coefficients as $j=1,2,\\ldots$ and let $P_m$ retain the first $m$ coordinates. The sigma-algebra generated by all coordinate maps is the Borel sigma-algebra of $H(\\delta)$. Indeed, the coordinate maps are continuous, so their sigma-algebra is contained in the Borel sigma-algebra. Conversely, for any closed set $C\\subseteq H(\\delta)$, $x\\mapsto d(P_mx,C)$ is measurable with respect to the coordinate sigma-algebra and converges to $d(x,C)$ by [F1]. Thus $C=\\{x:d(x,C)=0\\}$ belongs to that sigma-algebra.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write $p_j(x)=(n/2\\pi)^{1/2}e^{-n(x-\\theta_{0,j})^2/2}$ for the true coordinate density. The prior-predictive coordinate density is $q_j(x)=\\int_{\\mathbb R}(n/2\\pi)^{1/2}e^{-n(x-t)^2/2}\\,\\sigma_j^{-1}\\varphi(t/\\sigma_j)\\,dt,$ where $\\sigma_j=\\sigma_l$ for $j=(l,k)$. Both densities are positive and integrate to one. Put $h_j^2=\\int(\\sqrt{p_j}-\\sqrt{q_j})^2dx$ and $\\rho_j=\\int\\sqrt{p_jq_j}\\,dx=1-h_j^2/2$. Since square root is concave, the affinity with a mixture is at least the mixture of the affinities. The affinity of two normal densities with variance $1/n$ and means $a,b$ is $e^{-n(a-b)^2/8}$. Therefore $h_j^2\\le\\int 2\\bigl(1-e^{-n(t-\\theta_{0,j})^2/8}\\bigr)\\,\\sigma_j^{-1}\\varphi(t/\\sigma_j)dt\\le\\frac n4\\int(t-\\theta_{0,j})^2\\sigma_j^{-1}\\varphi(t/\\sigma_j)dt\\le\\frac n2(\\theta_{0,j}^2+\\sigma_j^2m_2).$ By [F2] and [F3] the prior-predictive and true coordinates are each independent across $j$. By [F4] and the geometric-series formula, $\\sum_j\\theta_{0,j}^2<\\infty$ and $\\sum_j\\sigma_j^2=\\sum_{l\\ge0}2^{-2\\alpha l}<\\infty$. Hence $\\sum_jh_j^2<\\infty$ and $\\sum_j(1-\\rho_j)<\\infty$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $\\mathcal F_m$ be the sigma-algebra of the first $m$ coordinates on $H(\\delta)$ and set $L_m=\\prod_{j\\le m}p_j(X_j)/q_j(X_j)$. Under $Q_n$, $L_m$ is the density of the first $m$ true coordinates relative to the first $m$ prior-predictive coordinates, and $\\mathbb E_{Q_n}L_m=1$. For $r>m$, independence gives $\\mathbb E_{Q_n}\\!\\left[\\sqrt{L_rL_m}\\right]=\\prod_{m<j\\le r}\\rho_j,$ so $\\|\\sqrt{L_r}-\\sqrt{L_m}\\|_{L^2(Q_n)}^2=2\\bigl(1-\\prod_{m<j\\le r}\\rho_j\\bigr)\\le2\\sum_{m<j\\le r}(1-\\rho_j)\\to0$ uniformly in $r>m$. Thus $\\sqrt{L_m}$ is Cauchy in $L^2(Q_n)$. Also $\\|L_r-L_m\\|_{L^1(Q_n)}\\le\\|\\sqrt{L_r}-\\sqrt{L_m}\\|_2\\,\\|\\sqrt{L_r}+\\sqrt{L_m}\\|_2\\le2\\|\\sqrt{L_r}-\\sqrt{L_m}\\|_2,$ so $L_m\\to L$ in $L^1(Q_n)$ for some nonnegative $L$ with $\\int L\\,dQ_n=1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For every event $A\\in\\mathcal F_m$ and $r\\ge m$, the finite-coordinate density identity and independence of the remaining coordinates give $\\int_A L_r\\,dQ_n=P_{f_0}^{(n)}(A)$. Passing to the $L^1$ limit gives $\\int_A L\\,dQ_n=P_{f_0}^{(n)}(A)$. Such finite-coordinate cylinder events form a generating pi-system by step 1.1; [F5] therefore gives $P_{f_0}^{(n)}(A)=\\int_A L\\,dQ_n$ for every Borel $A\\subseteq H(\\delta)$. Thus $P_{f_0}^{(n)}\\ll Q_n$. Interchanging $p_j$ and $q_j$ gives the same argument and proves $Q_n\\ll P_{f_0}^{(n)}$.",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The supplied prior, probability spaces, and countable wavelet model are nonempty; no freely varying empty family is part of the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The truth may be zero: step 1.2 still bounds its square-summable coefficients and strictly positive Gaussian convolution densities yield the same equivalence argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 all densities and affinity bounds in step 1.2 remain valid; the Statement requires n>=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Observation noise has variance 1/n>0. The Statement does not claim a degenerate observation-noise limit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires alpha>0, delta>1/2, and n>=1. Step 1.2 uses the summable geometric series with alpha>0; no excluded endpoint is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and Given assume countable choice (or the already stated full-AC corollary branch). Countable choice covers L2 prior completeness and the density-normal interface, including the compact Riemann/Lebesgue bridge; the core Gaussian identification uses convolution and a CDF sandwich, without full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Mutual absolute continuity is proved as two implications for null sets, not a biconditional with a separate premise."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted; step 2.2 explicitly repeats the density argument with p_j and q_j interchanged."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No registered finite-smoke computation establishes the analytic measure, Gaussian-series, posterior-limit, or coverage argument; exact local proof steps supply the required verification."
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "11",
+  "round": 0,
+  "reviewed_items": [
+    "def-hellinger-distance-between-density-laws",
+    "lem-iid-bounded-variance-bernstein-tail",
+    "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+    "lem-hellinger-distance-controls-l1-and-total-variation",
+    "lem-iid-sieve-entropy-produces-exponential-tests",
+    "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+    "ex-bernoulli-density-logarithmic-contraction-rate",
+    "ex-high-entropy-sieve-can-fail-without-precluding-contraction",
+    "ex-holder-density-rate-from-entropy-balance"
+  ],
+  "reviewed_pages": [
+    "iid-posterior-contraction",
+    "iid-posterior-contraction-examples"
+  ],
+  "decision": "repair",
+  "reason": "The main inequalities, posterior split, and example rate calculations check out, and the batch preserves the approved claims. One local repair should make several used prerequisites explicit without changing any Statement or Definition.",
+  "findings": [
+    {
+      "id": "def-hellinger-distance-between-density-laws",
+      "type": "scope",
+      "reason": "The approved design promises that h is finite and specifies bounding the integrand by p+q, but the item does not state that well-definedness fact or identify the density-measure construction for P and Q. Add a definition-adjacent remark establishing (√p−√q)^2≤p+q and h²≤2, citing the density construction; the sieve lemma relies on h²≤2 in step 1.1."
+    },
+    {
+      "id": "lem-iid-bounded-variance-bernstein-tail",
+      "type": "local",
+      "reason": "Step 3.1 applies expectation factorization to exp(λZ_i) as measurable functions, but the listed facts do not establish measurability of this composition. Cite the exponential's continuity and measurable-composition result, or prove the needed measurability locally."
+    },
+    {
+      "id": "lem-hellinger-distance-controls-l1-and-total-variation",
+      "type": "local",
+      "reason": "Steps 1.1–1.2 use measurability of p−q and {p≥q}; step 1.3 also uses measurable arithmetic operations. The listed facts do not supply this closure property. State/cite the measurability result before using these integrals and sets."
+    },
+    {
+      "id": "lem-iid-sieve-entropy-produces-exponential-tests",
+      "type": "local",
+      "reason": "Steps 1.2–1.3 and 5.1 rely on measurable density differences, sign/test functions, products, and threshold events. The listed facts do not establish these measurability closures. Add the arithmetic and Borel-composition facts or give local justifications."
+    },
+    {
+      "id": "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+      "type": "local",
+      "reason": "Step 1.2 says the distance integrands are product-measurable and then invokes Tonelli, but measurability of differences, squares, and square roots from the jointly measurable density map is not established in the listed facts. Cite the arithmetic and Borel-composition results or justify these compositions locally."
+    },
+    {
+      "id": "ex-bernoulli-density-logarithmic-contraction-rate",
+      "type": "local",
+      "reason": "Verification step 1.2 differentiates log θ and log(1−θ) to obtain g′ and g″, but the cited log-derivative fact alone does not justify these compositions or the derivative algebra. State/cite the chain rule and derivative sum/scalar rules."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-hellinger-distance-controls-l1-and-total-variation",
+      "decision": "repair",
+      "reason": "Its metric and comparison conclusions check out; add the missing measurability justification identified in its finding."
+    },
+    {
+      "id": "lem-iid-sieve-entropy-produces-exponential-tests",
+      "decision": "repair",
+      "reason": "The Bernstein and Hellinger comparison uses are sound under their stated hypotheses; add the local measurability justifications identified in its finding."
+    },
+    {
+      "id": "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+      "decision": "repair",
+      "reason": "The denominator, tested numerator, and sieve-tail uses are sound; explicitly justify the distance-integrand measurability identified in its finding."
+    },
+    {
+      "id": "ex-bernoulli-density-logarithmic-contraction-rate",
+      "decision": "repair",
+      "reason": "Its application of the contraction theorem is sound; add the calculus prerequisites identified in its finding."
+    },
+    {
+      "id": "ex-high-entropy-sieve-can-fail-without-precluding-contraction",
+      "decision": "accept",
+      "reason": "The entropy lower bound, point-prior update, and exact contraction claim check out once the theorem and test-lemma local repairs are made."
+    },
+    {
+      "id": "ex-holder-density-rate-from-entropy-balance",
+      "decision": "accept",
+      "reason": "The conditional entropy balance and stated rate check out once the theorem and test-lemma local repairs are made."
+    }
+  ]
+}

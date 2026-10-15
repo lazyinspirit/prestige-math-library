@@ -1,0 +1,682 @@
+{
+  "version": 1,
+  "purpose": "Full replacement contracts proposed for root integration; no live contract edited. Root must reconcile any concurrently changed supplier quotes before merge.",
+  "contracts": {
+    "lem-k-sample-null-centering": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-k-sample-null-constrained-block-bootstrap",
+          "source_section": "Definition",
+          "quote": "**Input:** a fixed number $K\\ge2$ of observed series $Y_{i,1},\\ldots,Y_{i,n_i}$ in a real Hilbert space $H$, positive integer sample sizes $n_i$, total size $M=\\sum_{i=1}^K n_i$, integer block lengths $1\\le b_i\\le n_i$, and a mode, moving or tapered. For tapered mode also supply an admissible window with positive block norm at each $b_i$. Put\n\n$$\\bar Y_i=\\frac1{n_i}\\sum_{t=1}^{n_i}Y_{i,t},\\qquad \\bar Y_P=\\frac1M\\sum_{i=1}^K n_i\\bar Y_i,\\qquad R_{i,t}=Y_{i,t}-\\bar Y_i.$$\n\nFor each series $i=1,\\ldots,K$, let $N_i=n_i-b_i+1$ and $k_i=\\lceil n_i/b_i\\rceil$. For every candidate start $j=1,\\ldots,N_i$ and position $r=1,\\ldots,b_i$, define the following arrays. In moving mode set $A_{i,j,r}=R_{i,j+r-1}$. In tapered mode set $A_{i,j,r}=a_{b_i}w_{b_i}(r)R_{i,j+r-1}$, with $a_{b_i}$ and $w_{b_i}$ as in [[alg-tapered-block-bootstrap]]. For each $i=1,\\ldots,K$ and $s=1,\\ldots,k_i$, draw independent uniform starts $J_{i,s}\\in\\{1,\\ldots,N_i\\}$, using the index law of [[alg-overlapping-block-resampling]]. For each within-block position define\n\n$$c_{i,r}=\\frac1{N_i}\\sum_{j=1}^{N_i}A_{i,j,r}.$$\n\n**Output:** for each $i$, a pseudo-series $Y^*_{i,1},\\ldots,Y^*_{i,n_i}$. In the order $s=1,\\ldots,k_i$, retain the positions $r=1,\\ldots,q_{i,s}$, where $q_{i,s}=\\min\\{b_i,n_i-(s-1)b_i\\}$, and set\n\n$$Y^*_{i,(s-1)b_i+r}=\\bar Y_P+A_{i,J_{i,s},r}-c_{i,r}.$$\n\nThus a divisible sample uses $k_i$ complete blocks; otherwise only the first $n_i-b_i\\lfloor n_i/b_i\\rfloor$ positions of the final block are retained. This centers each resampled residual position by its own conditional average, then gives every pseudo-series the same pooled location $\\bar Y_P$. All block starts are conditionally independent across blocks and across series.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-k-sample-null-centering-1.1",
+          "step": "1.1",
+          "claim": "Fix $i,s,r$. Uniformity of $J_{i,s}$ gives $E^*A_{i,J_{i,s},r}-c_{i,r}=\\frac1{N_i}\\sum_{j=1}^{N_i}A_{i,j,r}-c_{i,r}=0$. Therefore $E^*Y^*_{i,(s-1)b_i+r}=\\bar Y_P$, including positions in a truncated final block.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-k-sample-null-centering-2.1",
+          "step": "2.1",
+          "claim": "The bootstrap mean $\\bar Y_i^*$ is the average of exactly $n_i$ such pseudo-observations. Linearity of the finite conditional expectation gives $E^*\\bar Y_i^*=\\bar Y_P$ for every $i$. The common conditional mean proves the stated null imposition.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item hypotheses require positive sample size or a nonempty limiting sequence; an empty sample is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement review: The displayed algebra remains valid when centered block sums or the limiting derivative are zero; see the Statement and final derivation step."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-valued parameter case is part of this item statement; the relevant admissible domains are stated explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement review: If the relevant centered blocks are constant, their empirical covariance is zero and the displayed finite identity or continuous mapping statement still applies; see the Statement and proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement review: The last-block remainder is zero when n is divisible by b and is represented by the partial block term otherwise; see step 1.1 or the example calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement review: Only finite uniform block-index randomization is used; no arbitrary choice function is invoked by the local argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if assertion."
+        }
+      ]
+    },
+    "thm-moving-block-bootstrap-clt-for-dependent-data": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-l2-m-approximable-causal-bernoulli-shift",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal B$ be the Borel sigma-algebra of $[0,1]$, generated by intervals with rational endpoints; let $dt$ be Lebesgue measure restricted to $\\mathcal B$, and set $H=L^2([0,1],\\mathcal B,dt;\\mathbb R)$, with inner product $\\langle x,y\\rangle_H=\\int_0^1x(u)y(u)\\,du$. We use the quotient-by-null-functions convention for $L^2$ ([[def-l-p-space-as-a-quotient-by-null-functions]]). The measure space is finite and countably generated, so under Countable Choice $H$ is separable ([[thm-l-p-of-a-sigma-finite-countably-generated-measure-space-is-separable]], [[def-countable-choice]], [[def-separable-space]]); [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]] verifies that this real pairing makes the quotient a Hilbert space.\n\nLet $(S,\\mathcal S,\\nu)$ be a probability space and $(\\delta_t)_{t\\in\\mathbb Z}$ an independent identically distributed family of $S$-valued random elements with law $\\nu$ ([[def-random-element-and-real-random-variable]], [[def-law-or-distribution-of-a-random-element]], [[def-independent-random-elements]]). A **causal Bernoulli shift** with innovation law $\\nu$ is a process\n$$X_t=f(\\delta_t,\\delta_{t-1},\\delta_{t-2},\\ldots),\\qquad t\\in\\mathbb Z,$$\nwhere $f:S^{\\mathbb N_0}\\to H$ is measurable from the product sigma-algebra $\\mathcal S^{\\otimes\\mathbb N_0}$ to the Borel sigma-algebra of $H$. This product-measurability formulation is meaningful for a merely measurable innovation space $S$.\n\nOn an independent product extension, take replacement innovations $\\delta'_{t,m,k}$, indexed by $t\\in\\mathbb Z$, $m\\in\\mathbb N_0$, and integers $k\\le t-m$, all with law $\\nu$, mutually independent, and independent of the original innovations. Such a countable family and its product with the original probability space exist under Countable Choice and Dependent Choice ([[def-countable-choice]], [[def-dependent-choice]], [[cor-countable-independent-copies-exist]], [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]). For $m\\ge1$ define\n$$X_{t,m}=f(\\delta_t,\\ldots,\\delta_{t-m+1},\\delta'_{t,m,t-m},\\delta'_{t,m,t-m-1},\\ldots),$$\nand define the full replacement $X_{t,0}=f(\\delta'_{t,0,t},\\delta'_{t,0,t-1},\\ldots)$. Each $X_{t,m}$ has the same marginal law as $X_t$; for fixed $m\\ge1$ the sequence $(X_{t,m})_{t\\in\\mathbb Z}$ is strictly stationary and $m$-dependent because its original-innovation windows have length $m$ and its replacement arrays are independent across $t$.\n\nFor every fixed $m\\ge0$, the joint process $(X_t,X_{t,m})_{t\\in\\mathbb Z}$ is strictly stationary: shifting all indices relabels a family of mutually independent innovations with the same law and commutes with the defining measurable maps. Consequently $D_{t,m}:=X_t-X_{t,m}$ is stationary and $\\|D_{t,m}\\|_{L^2(H)}=\\delta_m$ for every $t$.\n\nWrite $\\|X\\|_{L^2(H)}=(\\mathbb E\\|X\\|_H^2)^{1/2}$ and\n$$\\delta_m=\\|X_0-X_{0,m}\\|_{L^2(H)},\\qquad m\\ge0.$$\nThe process is **$L^2$-$m$-approximable** when\n$$\\mathbb E\\|X_0\\|_H^2<\\infty\\qquad\\hbox{and}\\qquad\\sum_{m\\ge1}\\delta_m<\\infty.$$\nThe same marginal law gives $\\delta_0\\le2\\|X_0\\|_{L^2(H)}<\\infty$. For a Bochner-integrable $H$-valued random element $Y$, write $\\mathbb E_B Y=\\int Y\\,d\\mathbb P$; the moment condition makes $X_t$ and every $X_{t,m}$ Bochner integrable ([[def-bochner-integrable-function]], [[thm-bochner-integrability-criterion]]).\n\nHere **strict stationarity** means invariance of every finite-dimensional law under integer shifts. A process is **$m$-dependent** if, for every $a\\in\\mathbb Z$, the sigma-algebras generated by $(X_s)_{s\\le a}$ and $(X_s)_{s\\ge a+m+1}$ are independent ([[def-independent-sigma-algebras-and-events]]). The stated input windows for $X_{t,m}$ are disjoint across these two index ranges, so they satisfy this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hilbert-valued-clt-for-l2-m-approximable-bernoulli-shifts",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H=L^2([0,1],dt;\\mathbb R)$ and let\n$(X_t)_{t\\in\\mathbb Z}$ be a centered, $L^2$-$m$-approximable causal\nBernoulli shift as defined in\n[[def-l2-m-approximable-causal-bernoulli-shift]], with Bochner mean\n$\\mathbb E_BX_0=0$. Let $\\Gamma$ be its long-run covariance operator from\n[[lem-long-run-covariance-is-trace-class]], and let $G$ be a centered\n$H$-valued Gaussian random element with covariance $\\Gamma$, whose existence\nis given by [[lem-positive-trace-class-covariance-defines-hilbert-gaussian]].\nThen, for $S_n=\\sum_{t=1}^nX_t$,\n$$n^{-1/2}S_n\\ \\Rightarrow\\ G$$\nin the weak topology of Borel probability measures on $H$. The covariance\nkernel is the $L^2([0,1]^2)$ equivalence class $c$ in the long-run covariance\nlemma, and its integral operator is $T_c=\\Gamma$. This is a CLT for the\n$H$-valued sample sums; it is not a functional CLT for the time-indexed\npartial-sum process.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-moving-block-bootstrap",
+          "source_section": "Definition",
+          "quote": "**Input:** observations $x_1,\\ldots,x_n$ in a real Hilbert space $H$, and $1\\le b\\le n$.\n\n**Output:** a pseudo-series $X_1^*,\\ldots,X_n^*$, generated by [[alg-overlapping-block-resampling]]: within each selected block retain the original order and concatenate blocks in their draw order, truncating only the last block when $b\\nmid n$. The conditional bootstrap sample mean is $\\bar X_n^*=n^{-1}\\sum_{t=1}^nX_t^*$. Its conditional center is $E^*\\bar X_n^*$, where $E^*$ averages over the independent uniform block starts while the observations remain fixed.\n\nThis algorithm specifies the resampling law only. It does not assert that the conditional law approximates the sampling law for any data-generating process or block-length regime.\n\nFor a dependent time series, each selected length-$b$ run is treated as a predeclared group of consecutive unit records under [[def-resampling-sampling-unit-contract]]; the group is resampled intact and its within-block order is preserved. This is the sampling-unit interface, not a bootstrap-validity result.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-moving-block-bootstrap-conditional-covariance",
+          "source_section": "Statement",
+          "quote": "Fix $x_1,\\ldots,x_n\\in H$ and $1\\le b\\le n$. Put $N=n-b+1$, $k=\\lfloor n/b\\rfloor$, and $r=n-kb$. For $q\\in\\{b\\}$, and also $q=r$ when $r>0$, define\n\n$$S_j^{(q)}=\\sum_{\\ell=1}^q x_{j+\\ell-1},\\qquad \\bar S_q=N^{-1}\\sum_{j=1}^N S_j^{(q)},\\qquad C_q=N^{-1}\\sum_{j=1}^N(S_j^{(q)}-\\bar S_q)\\otimes(S_j^{(q)}-\\bar S_q).$$\n\nSet $C_0=0$. If $\\bar X_n^*$ is the mean produced by [[alg-moving-block-bootstrap]], then its conditional covariance operator is\n\n$$n\\,\\operatorname{Cov}^*(\\bar X_n^*)=\\frac{kC_b+C_r}{n},$$\n\nwhere the $C_r$ term is zero when $r=0$. Here $\\operatorname{Cov}^*(Z)=E^*[(Z-E^*Z)\\otimes(Z-E^*Z)]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-weighted-overlapping-block-moment-and-covariance-limits",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(X_t)_{t\\in\\mathbb Z}$ be a centered $L^2$-$m$-approximable causal Bernoulli shift in $H=L^2([0,1];\\mathbb R)$ under [[def-l2-m-approximable-causal-bernoulli-shift]], and suppose additionally that $m\\delta_m\\to0$. Put $\\sigma=\\|X_0\\|_{L^2(H)}$, let $\\Gamma$ be its long-run covariance operator, and put\n\n$$K=\\sigma^2+2\\sigma\\sum_{h\\ge1}\\delta_h.$$\n\nFor every integer $b\\ge1$, let $c_{b,1},\\ldots,c_{b,b}$ be deterministic real weights, uniformly bounded in absolute value by $A<\\infty$. Define\n\n$$Z_{j,b}=b^{-1/2}\\sum_{\\ell=1}^b c_{b,\\ell}X_{j+\\ell-1}.$$\n\nThen $\\{\\|Z_{j,b}\\|_H^2:j\\in\\mathbb Z,b\\ge1\\}$ is uniformly integrable, and for $0\\le q\\le b$,\n\n$$E\\left\\|\\sum_{\\ell=1}^q c_{b,\\ell}X_{j+\\ell-1}\\right\\|_H^2\\le A^2Kq.$$\n\nIf $P$ is any finite-rank orthogonal projection, $R=I-P$ and $\\alpha_P=\\|RX_0\\|_{L^2(H)}$, then also\n\n$$E\\left\\|\\sum_{\\ell=1}^q c_{b,\\ell}RX_{j+\\ell-1}\\right\\|_H^2\\le A^2q\\left(\\alpha_P^2+2\\alpha_P\\sum_{h\\ge1}\\delta_h\\right).$$\n\nFor $n\\ge b$, set $N=n-b+1$ and $\\bar Z_{n,b}=N^{-1}\\sum_{j=1}^NZ_{j,b}$. Then\n\n$$E\\|\\bar Z_{n,b}\\|_H^2\\le A^2Kb/N.$$\n\nSuppose further that $b=b_n\\to\\infty$, $b_n/n\\to0$, and the weights satisfy\n\n$$b^{-1}\\sum_{\\ell=1}^bc_{b,\\ell}^2=1,\\qquad q_b(h):=b^{-1}\\sum_{\\ell=1}^{b-h}c_{b,\\ell}c_{b,\\ell+h}\\longrightarrow1\\quad\\text{for every fixed }h\\ge0.$$\n\nThe centered overlapping-block covariance then satisfies the stronger $L^1$ trace-norm limit\n\n$$E\\left\\|N^{-1}\\sum_{j=1}^N(Z_{j,b}-\\bar Z_{n,b})\\otimes(Z_{j,b}-\\bar Z_{n,b})-\\Gamma\\right\\|_1\\longrightarrow0.$$\n\nIn particular it converges in probability in trace norm. Both the MBB weights $c_{b,\\ell}=1$ and the actual TBB weights $c_{b,\\ell}=a_bw((\\ell-\\tfrac12)/b)$ satisfy these weight hypotheses for all sufficiently large $b$. For any complete finite or countable orthonormal basis and its initial-coordinate projections $P_d$, the projection-tail coefficient $\\alpha_{P_d}^2+2\\alpha_{P_d}\\sum_{h\\ge1}\\delta_h$ tends to zero as $d\\to\\infty$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-conditional-independent-block-bootstrap-clt",
+          "source_section": "Statement",
+          "quote": "Assume AC and all the process and weight hypotheses of [[lem-weighted-overlapping-block-moment-and-covariance-limits]], including squared normalization and convergence of each fixed-lag weight autocorrelation to one. Let $b=b_n\\to\\infty$ with $b/\\sqrt n\\to0$, $N=n-b+1$, $k=\\lfloor n/b\\rfloor$, $r=n-kb$, and\n\n$$B_{j,q}=\\sum_{\\ell=1}^q c_{b,\\ell}X_{j+\\ell-1},\\qquad \\bar B_q=N^{-1}\\sum_{j=1}^NB_{j,q},\\qquad C_q=N^{-1}\\sum_{j=1}^N(B_{j,q}-\\bar B_q)\\otimes(B_{j,q}-\\bar B_q),$$\n\nwith $B_{j,0}=\\bar B_0=C_0=0$. Conditional on the observations choose independent uniform starts $J_1,\\ldots,J_{k+1}$ in $\\{1,\\ldots,N\\}$ and set\n\n$$Z_n^*=n^{-1/2}\\left\\{\\sum_{s=1}^k(B_{J_s,b}-\\bar B_b)+(B_{J_{k+1},r}-\\bar B_r)\\right\\}.$$\n\nThen, for the centered Hilbert Gaussian $G$ of covariance $\\Gamma$,\n\n$$\\mathcal L^*(Z_n^*)\\Rightarrow\\mathcal L(G)\\quad\\hbox{in probability},\\qquad \\left\\|\\operatorname{Cov}^*(Z_n^*)-\\Gamma\\right\\|_1\\longrightarrow0\\quad\\hbox{in probability}.$$\n\nTrace-norm convergence implies convergence in Hilbert-Schmidt norm as well. The conditional laws are tight in probability: for every $\\varepsilon,\\eta>0$ there is a deterministic compact $K\\subset H$ such that $\\limsup_nP\\{P^*(Z_n^*\\notin K)>\\varepsilon\\}<\\eta$. The complete blocks satisfy conditional Lindeberg, and the final partial block has $E E^*\\|n^{-1/2}(B_{J_{k+1},r}-\\bar B_r)\\|^2=O(b/n)$. Replacing every $X_t$ by $X_t-M_n$ for any common data-dependent $M_n\\in H$ leaves $Z_n^*$ and all its conditional covariances unchanged.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-moving-block-bootstrap-clt-for-dependent-data-1.1",
+          "step": "1.1",
+          "claim": "Take $c_{b,\\ell}=1$ for $1\\le\\ell\\le b$. These weights are bounded by one, have $b^{-1}\\sum_\\ell c_{b,\\ell}^2=1$, and for each fixed $h\\ge0$ have $b^{-1}\\sum_{\\ell=1}^{b-h}c_{b,\\ell}c_{b,\\ell+h}=(1-h/b)_+\\to1$. Thus every process and weight hypothesis of [F4] holds, with exactly the stated stronger approximation rate and block regime.",
+          "inputs": [
+            "F4",
+            "F1",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-moving-block-bootstrap-clt-for-dependent-data-2.1",
+          "step": "2.1",
+          "claim": "Write $n=kb+r$, $0\\le r<b$. Subtracting the conditional mean from the sum of the $k$ complete sampled blocks and the sampled length-$r$ prefix gives exactly the variable $Z_n^*$ in the conditional-block supplier. The candidate starts for both block sizes are the same $N=n-b+1$ starts, as required by [F3]. Hence [F4] gives the asserted conditional law and trace-norm covariance convergence. The Hilbert-Schmidt conclusion follows from $\\|T\\|_{\\mathrm{HS}}\\le\\|T\\|_1$; the covariance in question is exactly $n\\operatorname{Cov}^*(\\bar X_n^*)$ by [F3]. The remainder has expected conditional squared norm $O(b/n)$, so no divisibility condition is used.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-moving-block-bootstrap-clt-for-dependent-data-3.1",
+          "step": "3.1",
+          "claim": "The limiting Gaussian is the same $G$ as in the sampling-law limit [F2], because both have covariance $\\Gamma$. This proves both stated limits with the approved hypotheses.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes positive sample and block lengths and b tending to infinity; an empty process or empty asymptotic sequence is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 apply the conditional supplier without dividing by any variance; a zero-covariance Gaussian is allowed in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement is an asymptotic claim with b tending to infinity; a fixed one-observation asymptotic sample is outside this regime."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 retain the supplier hypotheses without a positive-variance assumption; the conditional Gaussian may be singular or zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses n=kb+r with every 0<=r<b and the same N overlapping starts for the complete blocks and final prefix."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 explicitly retain AC, including the orthonormal-basis use in the conditional supplier; the finite block-index law introduces no further principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ]
+    },
+    "thm-tapered-block-bootstrap-clt-for-dependent-data": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-l2-m-approximable-causal-bernoulli-shift",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal B$ be the Borel sigma-algebra of $[0,1]$, generated by intervals with rational endpoints; let $dt$ be Lebesgue measure restricted to $\\mathcal B$, and set $H=L^2([0,1],\\mathcal B,dt;\\mathbb R)$, with inner product $\\langle x,y\\rangle_H=\\int_0^1x(u)y(u)\\,du$. We use the quotient-by-null-functions convention for $L^2$ ([[def-l-p-space-as-a-quotient-by-null-functions]]). The measure space is finite and countably generated, so under Countable Choice $H$ is separable ([[thm-l-p-of-a-sigma-finite-countably-generated-measure-space-is-separable]], [[def-countable-choice]], [[def-separable-space]]); [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]] verifies that this real pairing makes the quotient a Hilbert space.\n\nLet $(S,\\mathcal S,\\nu)$ be a probability space and $(\\delta_t)_{t\\in\\mathbb Z}$ an independent identically distributed family of $S$-valued random elements with law $\\nu$ ([[def-random-element-and-real-random-variable]], [[def-law-or-distribution-of-a-random-element]], [[def-independent-random-elements]]). A **causal Bernoulli shift** with innovation law $\\nu$ is a process\n$$X_t=f(\\delta_t,\\delta_{t-1},\\delta_{t-2},\\ldots),\\qquad t\\in\\mathbb Z,$$\nwhere $f:S^{\\mathbb N_0}\\to H$ is measurable from the product sigma-algebra $\\mathcal S^{\\otimes\\mathbb N_0}$ to the Borel sigma-algebra of $H$. This product-measurability formulation is meaningful for a merely measurable innovation space $S$.\n\nOn an independent product extension, take replacement innovations $\\delta'_{t,m,k}$, indexed by $t\\in\\mathbb Z$, $m\\in\\mathbb N_0$, and integers $k\\le t-m$, all with law $\\nu$, mutually independent, and independent of the original innovations. Such a countable family and its product with the original probability space exist under Countable Choice and Dependent Choice ([[def-countable-choice]], [[def-dependent-choice]], [[cor-countable-independent-copies-exist]], [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]). For $m\\ge1$ define\n$$X_{t,m}=f(\\delta_t,\\ldots,\\delta_{t-m+1},\\delta'_{t,m,t-m},\\delta'_{t,m,t-m-1},\\ldots),$$\nand define the full replacement $X_{t,0}=f(\\delta'_{t,0,t},\\delta'_{t,0,t-1},\\ldots)$. Each $X_{t,m}$ has the same marginal law as $X_t$; for fixed $m\\ge1$ the sequence $(X_{t,m})_{t\\in\\mathbb Z}$ is strictly stationary and $m$-dependent because its original-innovation windows have length $m$ and its replacement arrays are independent across $t$.\n\nFor every fixed $m\\ge0$, the joint process $(X_t,X_{t,m})_{t\\in\\mathbb Z}$ is strictly stationary: shifting all indices relabels a family of mutually independent innovations with the same law and commutes with the defining measurable maps. Consequently $D_{t,m}:=X_t-X_{t,m}$ is stationary and $\\|D_{t,m}\\|_{L^2(H)}=\\delta_m$ for every $t$.\n\nWrite $\\|X\\|_{L^2(H)}=(\\mathbb E\\|X\\|_H^2)^{1/2}$ and\n$$\\delta_m=\\|X_0-X_{0,m}\\|_{L^2(H)},\\qquad m\\ge0.$$\nThe process is **$L^2$-$m$-approximable** when\n$$\\mathbb E\\|X_0\\|_H^2<\\infty\\qquad\\hbox{and}\\qquad\\sum_{m\\ge1}\\delta_m<\\infty.$$\nThe same marginal law gives $\\delta_0\\le2\\|X_0\\|_{L^2(H)}<\\infty$. For a Bochner-integrable $H$-valued random element $Y$, write $\\mathbb E_B Y=\\int Y\\,d\\mathbb P$; the moment condition makes $X_t$ and every $X_{t,m}$ Bochner integrable ([[def-bochner-integrable-function]], [[thm-bochner-integrability-criterion]]).\n\nHere **strict stationarity** means invariance of every finite-dimensional law under integer shifts. A process is **$m$-dependent** if, for every $a\\in\\mathbb Z$, the sigma-algebras generated by $(X_s)_{s\\le a}$ and $(X_s)_{s\\ge a+m+1}$ are independent ([[def-independent-sigma-algebras-and-events]]). The stated input windows for $X_{t,m}$ are disjoint across these two index ranges, so they satisfy this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hilbert-valued-clt-for-l2-m-approximable-bernoulli-shifts",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H=L^2([0,1],dt;\\mathbb R)$ and let\n$(X_t)_{t\\in\\mathbb Z}$ be a centered, $L^2$-$m$-approximable causal\nBernoulli shift as defined in\n[[def-l2-m-approximable-causal-bernoulli-shift]], with Bochner mean\n$\\mathbb E_BX_0=0$. Let $\\Gamma$ be its long-run covariance operator from\n[[lem-long-run-covariance-is-trace-class]], and let $G$ be a centered\n$H$-valued Gaussian random element with covariance $\\Gamma$, whose existence\nis given by [[lem-positive-trace-class-covariance-defines-hilbert-gaussian]].\nThen, for $S_n=\\sum_{t=1}^nX_t$,\n$$n^{-1/2}S_n\\ \\Rightarrow\\ G$$\nin the weak topology of Borel probability measures on $H$. The covariance\nkernel is the $L^2([0,1]^2)$ equivalence class $c$ in the long-run covariance\nlemma, and its integral operator is $T_c=\\Gamma$. This is a CLT for the\n$H$-valued sample sums; it is not a functional CLT for the time-indexed\npartial-sum process.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-tapered-block-bootstrap",
+          "source_section": "Definition",
+          "quote": "**Input:** observations $Y_1,\\ldots,Y_n$ in a real Hilbert space $H$, an integer $1\\le b\\le n$, and a window $w:\\mathbb R\\to[0,1]$ that vanishes off $[0,1]$, is positive on a neighbourhood of $1/2$, satisfies $w(1-u)=w(u)$, and is nondecreasing on $[0,1/2]$. Put $w_b(r)=w((r-\\tfrac12)/b)$ for $1\\le r\\le b$, $W_b=(\\sum_{r=1}^bw_b(r)^2)^{1/2}$, and $a_b=\\sqrt b/W_b$. The procedure is admissible only when $W_b>0$.\n\n**Center and taper:** set $\\bar Y_n=n^{-1}\\sum_{t=1}^nY_t$ and $R_t=Y_t-\\bar Y_n$. For each start $j\\in\\{1,\\ldots,n-b+1\\}$, form the block\n\n$$\\bigl(a_bw_b(1)R_j,\\ldots,a_bw_b(b)R_{j+b-1}\\bigr).$$\n\n**Resample:** use the independent uniform block starts from [[alg-overlapping-block-resampling]], multiply each selected centered observation by its within-block taper and the factor $a_b$, concatenate in draw order, and retain the first $n$ entries. The conditional bootstrap mean is centered by its own conditional expectation when used to approximate the sampling law of $\\sqrt n\\,\\bar Y_n$.\n\nThe factor $a_b$ compensates for the window's squared-weight sum in the block-sum variance calculation; this definition alone gives no bootstrap validity result.\n\nFor a dependent time series, the selected length-$b$ consecutive run is the resampling unit under [[def-resampling-sampling-unit-contract]]. The taper changes each unit record's within-block weight but the whole block is selected and resampled together; validity remains a separate theorem.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-tapered-block-bootstrap-conditional-covariance",
+          "source_section": "Statement",
+          "quote": "Fix $Y_1,\\ldots,Y_n\\in H$, a block length $1\\le b\\le n$ with $W_b>0$, and the taper and scale $w_b,a_b$ from [[alg-tapered-block-bootstrap]]. Set $R_t=Y_t-\\bar Y_n$, $N=n-b+1$, $k=\\lfloor n/b\\rfloor$, and $r=n-kb$. For $q=b$, and also $q=r$ when $r>0$, define the tapered partial block sum\n\n$$T_j^{(q)}=a_b\\sum_{\\ell=1}^q w_b(\\ell)R_{j+\\ell-1},\\qquad \\bar T_q=N^{-1}\\sum_{j=1}^N T_j^{(q)},\\qquad V_q=N^{-1}\\sum_{j=1}^N(T_j^{(q)}-\\bar T_q)\\otimes(T_j^{(q)}-\\bar T_q).$$\n\nSet $V_0=0$. If $\\bar X_n^*$ is the tapered bootstrap mean, then\n\n$$n\\,\\operatorname{Cov}^*(\\bar X_n^*)=\\frac{kV_b+V_r}{n},$$\n\nwith the $V_r$ term zero when $r=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-taper-window-l2-normalization",
+          "source_section": "Statement",
+          "quote": "Let $w$ satisfy the taper conditions in [[alg-tapered-block-bootstrap]]. As the positive integer $b\\to\\infty$, $w^2$ is Riemann integrable on $[0,1]$, and\n\n$$\\frac{1}{b}\\sum_{j=1}^b w\\!\\left(\\frac{j-\\tfrac12}{b}\\right)^2\\longrightarrow I_w:=\\int_0^1 w(u)^2\\,du>0.$$\n\nConsequently, $W_b>0$ for all sufficiently large $b$ and $a_b=\\sqrt b/W_b\\to I_w^{-1/2}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-weighted-overlapping-block-moment-and-covariance-limits",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(X_t)_{t\\in\\mathbb Z}$ be a centered $L^2$-$m$-approximable causal Bernoulli shift in $H=L^2([0,1];\\mathbb R)$ under [[def-l2-m-approximable-causal-bernoulli-shift]], and suppose additionally that $m\\delta_m\\to0$. Put $\\sigma=\\|X_0\\|_{L^2(H)}$, let $\\Gamma$ be its long-run covariance operator, and put\n\n$$K=\\sigma^2+2\\sigma\\sum_{h\\ge1}\\delta_h.$$\n\nFor every integer $b\\ge1$, let $c_{b,1},\\ldots,c_{b,b}$ be deterministic real weights, uniformly bounded in absolute value by $A<\\infty$. Define\n\n$$Z_{j,b}=b^{-1/2}\\sum_{\\ell=1}^b c_{b,\\ell}X_{j+\\ell-1}.$$\n\nThen $\\{\\|Z_{j,b}\\|_H^2:j\\in\\mathbb Z,b\\ge1\\}$ is uniformly integrable, and for $0\\le q\\le b$,\n\n$$E\\left\\|\\sum_{\\ell=1}^q c_{b,\\ell}X_{j+\\ell-1}\\right\\|_H^2\\le A^2Kq.$$\n\nIf $P$ is any finite-rank orthogonal projection, $R=I-P$ and $\\alpha_P=\\|RX_0\\|_{L^2(H)}$, then also\n\n$$E\\left\\|\\sum_{\\ell=1}^q c_{b,\\ell}RX_{j+\\ell-1}\\right\\|_H^2\\le A^2q\\left(\\alpha_P^2+2\\alpha_P\\sum_{h\\ge1}\\delta_h\\right).$$\n\nFor $n\\ge b$, set $N=n-b+1$ and $\\bar Z_{n,b}=N^{-1}\\sum_{j=1}^NZ_{j,b}$. Then\n\n$$E\\|\\bar Z_{n,b}\\|_H^2\\le A^2Kb/N.$$\n\nSuppose further that $b=b_n\\to\\infty$, $b_n/n\\to0$, and the weights satisfy\n\n$$b^{-1}\\sum_{\\ell=1}^bc_{b,\\ell}^2=1,\\qquad q_b(h):=b^{-1}\\sum_{\\ell=1}^{b-h}c_{b,\\ell}c_{b,\\ell+h}\\longrightarrow1\\quad\\text{for every fixed }h\\ge0.$$\n\nThe centered overlapping-block covariance then satisfies the stronger $L^1$ trace-norm limit\n\n$$E\\left\\|N^{-1}\\sum_{j=1}^N(Z_{j,b}-\\bar Z_{n,b})\\otimes(Z_{j,b}-\\bar Z_{n,b})-\\Gamma\\right\\|_1\\longrightarrow0.$$\n\nIn particular it converges in probability in trace norm. Both the MBB weights $c_{b,\\ell}=1$ and the actual TBB weights $c_{b,\\ell}=a_bw((\\ell-\\tfrac12)/b)$ satisfy these weight hypotheses for all sufficiently large $b$. For any complete finite or countable orthonormal basis and its initial-coordinate projections $P_d$, the projection-tail coefficient $\\alpha_{P_d}^2+2\\alpha_{P_d}\\sum_{h\\ge1}\\delta_h$ tends to zero as $d\\to\\infty$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-conditional-independent-block-bootstrap-clt",
+          "source_section": "Statement",
+          "quote": "Assume AC and all the process and weight hypotheses of [[lem-weighted-overlapping-block-moment-and-covariance-limits]], including squared normalization and convergence of each fixed-lag weight autocorrelation to one. Let $b=b_n\\to\\infty$ with $b/\\sqrt n\\to0$, $N=n-b+1$, $k=\\lfloor n/b\\rfloor$, $r=n-kb$, and\n\n$$B_{j,q}=\\sum_{\\ell=1}^q c_{b,\\ell}X_{j+\\ell-1},\\qquad \\bar B_q=N^{-1}\\sum_{j=1}^NB_{j,q},\\qquad C_q=N^{-1}\\sum_{j=1}^N(B_{j,q}-\\bar B_q)\\otimes(B_{j,q}-\\bar B_q),$$\n\nwith $B_{j,0}=\\bar B_0=C_0=0$. Conditional on the observations choose independent uniform starts $J_1,\\ldots,J_{k+1}$ in $\\{1,\\ldots,N\\}$ and set\n\n$$Z_n^*=n^{-1/2}\\left\\{\\sum_{s=1}^k(B_{J_s,b}-\\bar B_b)+(B_{J_{k+1},r}-\\bar B_r)\\right\\}.$$\n\nThen, for the centered Hilbert Gaussian $G$ of covariance $\\Gamma$,\n\n$$\\mathcal L^*(Z_n^*)\\Rightarrow\\mathcal L(G)\\quad\\hbox{in probability},\\qquad \\left\\|\\operatorname{Cov}^*(Z_n^*)-\\Gamma\\right\\|_1\\longrightarrow0\\quad\\hbox{in probability}.$$\n\nTrace-norm convergence implies convergence in Hilbert-Schmidt norm as well. The conditional laws are tight in probability: for every $\\varepsilon,\\eta>0$ there is a deterministic compact $K\\subset H$ such that $\\limsup_nP\\{P^*(Z_n^*\\notin K)>\\varepsilon\\}<\\eta$. The complete blocks satisfy conditional Lindeberg, and the final partial block has $E E^*\\|n^{-1/2}(B_{J_{k+1},r}-\\bar B_r)\\|^2=O(b/n)$. Replacing every $X_t$ by $X_t-M_n$ for any common data-dependent $M_n\\in H$ leaves $Z_n^*$ and all its conditional covariances unchanged.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-tapered-block-bootstrap-clt-for-dependent-data-1.1",
+          "step": "1.1",
+          "claim": "Set $c_{b,\\ell}=a_bw((\\ell-1/2)/b)$ and extend this finite sequence by zero on all other integer indices. The exact normalization gives $b^{-1}\\sum_\\ell c_{b,\\ell}^2=1$, and [F4] bounds its maximum by a constant $A$ for sufficiently large $b$. Symmetry and monotonicity of $w$ make the sequence nonnegative and unimodal, including the possible equal central pair; hence its discrete total variation, including both exterior zero tails, is at most $2A$. For every fixed integer $h\\ge1$, telescoping $h$ successive shifts gives $\\sum_{\\ell\\in\\mathbb Z}|c_{b,\\ell+h}-c_{b,\\ell}|\\le2Ah$. Therefore\n$$\\left|b^{-1}\\sum_{\\ell=1}^{b-h}c_{b,\\ell}c_{b,\\ell+h}-1\\right|\\le\\frac{A}{b}\\sum_{\\ell\\in\\mathbb Z}|c_{b,\\ell+h}-c_{b,\\ell}|\\le\\frac{2A^2h}{b}\\longrightarrow0.$$\nThis verifies every weight hypothesis of [F5], even for discontinuous monotone tapers. The process hypotheses and stronger rate are exactly [F1] and the Given.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F1",
+            "F3",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-tapered-block-bootstrap-clt-for-dependent-data-2.1",
+          "step": "2.1",
+          "claim": "For each full or partial weighted block, replacing $Y_t$ by $Y_t-\\bar Y_n$ subtracts $(\\sum_{\\ell=1}^qc_{b,\\ell})\\bar Y_n$ from every candidate block with $q$ entries. Its empirical conditional center over the $N=n-b+1$ starts subtracts the same vector, so all conditionally centered block sums agree exactly with those formed from $Y_t$. Thus $\\sqrt n(\\bar Y_n^*-E^*\\bar Y_n^*)$ is precisely $Z_n^*$ in [F5], with the full-taper prefix weights on its last $r=n-b\\lfloor n/b\\rfloor$ entries.",
+          "inputs": [
+            "F5",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-tapered-block-bootstrap-clt-for-dependent-data-3.1",
+          "step": "3.1",
+          "claim": "Apply [F5]. It gives conditional weak convergence to $G$, conditional tightness, and convergence of the exact covariance $n\\operatorname{Cov}^*(\\bar Y_n^*)$ in trace norm, which implies its stated Hilbert-Schmidt convergence. The final prefix has expected conditional squared norm $O(b/n)$ and is negligible without requiring $b\\mid n$. Its limiting covariance $\\Gamma$ is the sampling target in [F2], completing both claims.",
+          "inputs": [
+            "F5",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes positive sample and block lengths and b tending to infinity; an empty process or empty asymptotic sequence is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 apply the conditional supplier without dividing by any variance; a zero-covariance Gaussian is allowed in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement is an asymptotic claim with b tending to infinity; a fixed one-observation asymptotic sample is outside this regime."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 retain the supplier hypotheses without a positive-variance assumption; the conditional Gaussian may be singular or zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 use exactly the midpoint taper, zero exterior extension and full-taper prefix on the final r entries; no divisibility or continuity condition is introduced."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 explicitly retain AC, including the orthonormal-basis use in the conditional supplier; the finite block-index law introduces no further principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ]
+    },
+    "ex-block-length-n-one-third": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-overlapping-block-resampling",
+          "source_section": "Definition",
+          "quote": "**Input:** a finite sequence $x_1,\\ldots,x_n$ in a measurable space, with $n\\ge1$, and an integer block length $b$ satisfying $1\\le b\\le n$. Set $N=n-b+1$ and $k=\\lceil n/b\\rceil$.\n\n**Randomization:** draw $J_1,\\ldots,J_k$ independently and",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-block-length-n-one-third-1.1",
+          "step": "1.1",
+          "claim": "Since $n^{1/3}\\le b_n<n^{1/3}+1$, $b_n\\to\\infty$, and $b_n$ is a positive integer. For every integer $n\\ge1$, $n^{1/3}\\le n$; since $n$ itself is an integer, taking the least integer above $n^{1/3}$ gives $b_n\\le n$. Thus the block length is admissible at every positive sample size.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-block-length-n-one-third-2.1",
+          "step": "2.1",
+          "claim": "Dividing the same bounds by $\\sqrt n$ gives $0\\le b_n/\\sqrt n<n^{-1/6}+n^{-1/2}\\to0$. Thus $b_n^{-1}+b_nn^{-1/2}\\to0$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Sample sizes are positive integers."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "n=0 is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves all-n admissibility, including b_1=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This example concerns only a deterministic block-length sequence."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 proves 1<=b_n<=n for every integer n>=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The displayed ceiling sequence is explicit; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        }
+      ]
+    },
+    "ex-two-series-block-bootstrap-null-centering": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-k-sample-null-constrained-block-bootstrap",
+          "source_section": "Definition",
+          "quote": "**Input:** a fixed number $K\\ge2$ of observed series $Y_{i,1},\\ldots,Y_{i,n_i}$ in a real Hilbert space $H$, positive integer sample sizes $n_i$, total size $M=\\sum_{i=1}^K n_i$, integer block lengths $1\\le b_i\\le n_i$, and a mode, moving or tapered. For tapered mode also supply an admissible window with positive block norm at each $b_i$. Put\n\n$$\\bar Y_i=\\frac1{n_i}\\sum_{t=1}^{n_i}Y_{i,t},\\qquad \\bar Y_P=\\frac1M\\sum_{i=1}^K n_i\\bar Y_i,\\qquad R_{i,t}=Y_{i,t}-\\bar Y_i.$$\n\nFor each series $i=1,\\ldots,K$, let $N_i=n_i-b_i+1$ and $k_i=\\lceil n_i/b_i\\rceil$. For every candidate start $j=1,\\ldots,N_i$ and position $r=1,\\ldots,b_i$, define the following arrays. In moving mode set $A_{i,j,r}=R_{i,j+r-1}$. In tapered mode set $A_{i,j,r}=a_{b_i}w_{b_i}(r)R_{i,j+r-1}$, with $a_{b_i}$ and $w_{b_i}$ as in [[alg-tapered-block-bootstrap]]. For each $i=1,\\ldots,K$ and $s=1,\\ldots,k_i$, draw independent uniform starts $J_{i,s}\\in\\{1,\\ldots,N_i\\}$, using the index law of [[alg-overlapping-block-resampling]]. For each within-block position define\n\n$$c_{i,r}=\\frac1{N_i}\\sum_{j=1}^{N_i}A_{i,j,r}.$$\n\n**Output:** for each $i$, a pseudo-series $Y^*_{i,1},\\ldots,Y^*_{i,n_i}$. In the order $s=1,\\ldots,k_i$, retain the positions $r=1,\\ldots,q_{i,s}$, where $q_{i,s}=\\min\\{b_i,n_i-(s-1)b_i\\}$, and set\n\n$$Y^*_{i,(s-1)b_i+r}=\\bar Y_P+A_{i,J_{i,s},r}-c_{i,r}.$$\n\nThus a divisible sample uses $k_i$ complete blocks; otherwise only the first $n_i-b_i\\lfloor n_i/b_i\\rfloor$ positions of the final block are retained. This centers each resampled residual position by its own conditional average, then gives every pseudo-series the same pooled location $\\bar Y_P$. All block starts are conditionally independent across blocks and across series.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-k-sample-null-centering",
+          "source_section": "Statement",
+          "quote": "For fixed data and either mode of [[alg-k-sample-null-constrained-block-bootstrap]], every pseudo-observation in every series has conditional expectation $\\bar Y_P$. Consequently, for each $i$,\n\n$$E^*\\bar Y_i^*=\\bar Y_P,$$\n\nso the conditional mean functions of the $K$ pseudo-series are equal.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-two-series-block-bootstrap-null-centering-1.1",
+          "step": "1.1",
+          "claim": "Here $M=7$, $\\bar Y_P=(6+52)/7=58/7$, $N_1=2$, $N_2=3$, and $k_1=k_2=2$. The first residual series is $(-2,0,2)$; its candidate blocks are $(-2,0)$ and $(0,2)$, with position averages $(-1,1)$. After subtracting those averages the two candidates are $(-1,-1)$ and $(1,1)$. The second residual series is $(-3,-1,1,3)$; its candidates are $(-3,-1),(-1,1),(1,3)$, also with position averages $(-1,1)$, and become $(-2,-2),(0,0),(2,2)$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-two-series-block-bootstrap-null-centering-2.1",
+          "step": "2.1",
+          "claim": "Let $V_1,V_2$ be independent uniforms on $\\{-1,1\\}$ and $W_1,W_2$ independent uniforms on $\\{-2,0,2\\}$, all four independent. The outputs are $(58/7+V_1,58/7+V_1,58/7+V_2)$ and $(58/7+W_1,58/7+W_1,58/7+W_2,58/7+W_2)$. The first output retains only the first entry of its final block. Since all four offsets have mean zero, $E^*\\bar Y_1^*=E^*\\bar Y_2^*=58/7$, explicitly realizing [F2] despite the unequal observed means and unequal sample sizes.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example specifies nonempty series or an infinite IID process."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The centered innovations/offsets have zero expectation; both verification steps retain these cases."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The IID example includes b_1=1; the two-series example retains a one-entry final prefix in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes nonconstant signs or nonconstant finite observed series."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the retained prefix or all-n block domain and window positivity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Finite randomization is explicit; the IID application assumes AC as required by its theorem suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        }
+      ]
+    },
+    "ex-iid-functional-data-block-bootstrap": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-l2-m-approximable-causal-bernoulli-shift",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal B$ be the Borel sigma-algebra of $[0,1]$, generated by intervals with rational endpoints; let $dt$ be Lebesgue measure restricted to $\\mathcal B$, and set $H=L^2([0,1],\\mathcal B,dt;\\mathbb R)$, with inner product $\\langle x,y\\rangle_H=\\int_0^1x(u)y(u)\\,du$. We use the quotient-by-null-functions convention for $L^2$ ([[def-l-p-space-as-a-quotient-by-null-functions]]). The measure space is finite and countably generated, so under Countable Choice $H$ is separable ([[thm-l-p-of-a-sigma-finite-countably-generated-measure-space-is-separable]], [[def-countable-choice]], [[def-separable-space]]); [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]] verifies that this real pairing makes the quotient a Hilbert space.\n\nLet $(S,\\mathcal S,\\nu)$ be a probability space and $(\\delta_t)_{t\\in\\mathbb Z}$ an independent identically distributed family of $S$-valued random elements with law $\\nu$ ([[def-random-element-and-real-random-variable]], [[def-law-or-distribution-of-a-random-element]], [[def-independent-random-elements]]). A **causal Bernoulli shift** with innovation law $\\nu$ is a process\n$$X_t=f(\\delta_t,\\delta_{t-1},\\delta_{t-2},\\ldots),\\qquad t\\in\\mathbb Z,$$\nwhere $f:S^{\\mathbb N_0}\\to H$ is measurable from the product sigma-algebra $\\mathcal S^{\\otimes\\mathbb N_0}$ to the Borel sigma-algebra of $H$. This product-measurability formulation is meaningful for a merely measurable innovation space $S$.\n\nOn an independent product extension, take replacement innovations $\\delta'_{t,m,k}$, indexed by $t\\in\\mathbb Z$, $m\\in\\mathbb N_0$, and integers $k\\le t-m$, all with law $\\nu$, mutually independent, and independent of the original innovations. Such a countable family and its product with the original probability space exist under Countable Choice and Dependent Choice ([[def-countable-choice]], [[def-dependent-choice]], [[cor-countable-independent-copies-exist]], [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]). For $m\\ge1$ define\n$$X_{t,m}=f(\\delta_t,\\ldots,\\delta_{t-m+1},\\delta'_{t,m,t-m},\\delta'_{t,m,t-m-1},\\ldots),$$\nand define the full replacement $X_{t,0}=f(\\delta'_{t,0,t},\\delta'_{t,0,t-1},\\ldots)$. Each $X_{t,m}$ has the same marginal law as $X_t$; for fixed $m\\ge1$ the sequence $(X_{t,m})_{t\\in\\mathbb Z}$ is strictly stationary and $m$-dependent because its original-innovation windows have length $m$ and its replacement arrays are independent across $t$.\n\nFor every fixed $m\\ge0$, the joint process $(X_t,X_{t,m})_{t\\in\\mathbb Z}$ is strictly stationary: shifting all indices relabels a family of mutually independent innovations with the same law and commutes with the defining measurable maps. Consequently $D_{t,m}:=X_t-X_{t,m}$ is stationary and $\\|D_{t,m}\\|_{L^2(H)}=\\delta_m$ for every $t$.\n\nWrite $\\|X\\|_{L^2(H)}=(\\mathbb E\\|X\\|_H^2)^{1/2}$ and\n$$\\delta_m=\\|X_0-X_{0,m}\\|_{L^2(H)},\\qquad m\\ge0.$$\nThe process is **$L^2$-$m$-approximable** when\n$$\\mathbb E\\|X_0\\|_H^2<\\infty\\qquad\\hbox{and}\\qquad\\sum_{m\\ge1}\\delta_m<\\infty.$$\nThe same marginal law gives $\\delta_0\\le2\\|X_0\\|_{L^2(H)}<\\infty$. For a Bochner-integrable $H$-valued random element $Y$, write $\\mathbb E_B Y=\\int Y\\,d\\mathbb P$; the moment condition makes $X_t$ and every $X_{t,m}$ Bochner integrable ([[def-bochner-integrable-function]], [[thm-bochner-integrability-criterion]]).\n\nHere **strict stationarity** means invariance of every finite-dimensional law under integer shifts. A process is **$m$-dependent** if, for every $a\\in\\mathbb Z$, the sigma-algebras generated by $(X_s)_{s\\le a}$ and $(X_s)_{s\\ge a+m+1}$ are independent ([[def-independent-sigma-algebras-and-events]]). The stated input windows for $X_{t,m}$ are disjoint across these two index ranges, so they satisfy this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-moving-block-bootstrap-clt-for-dependent-data",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H=L^2([0,1])$, and let $(X_t)_{t\\in\\mathbb Z}$ be a centered causal Bernoulli shift that is $L^2$-$m$-approximable under [[def-l2-m-approximable-causal-bernoulli-shift]]. Write\n\n$$\\delta_m=\\bigl(E\\|X_0-X_{0,m}\\|_H^2\\bigr)^{1/2}.$$\n\nAssume the stronger approximation condition $m\\delta_m\\to0$. For each $n$, let $b_n$ be an integer with $b_n\\to\\infty$ and $b_n/\\sqrt n\\to0$. For all sufficiently large $n$, these conditions give $1\\le b_n\\le n$; apply [[alg-moving-block-bootstrap]] to $X_1,\\ldots,X_n$ on this admissible tail. All limits below concern that tail. Let $\\Gamma$ be the long-run covariance operator from [[thm-hilbert-valued-clt-for-l2-m-approximable-bernoulli-shifts]], and let $\\bar X_n^*=n^{-1}\\sum_{t=1}^nX_t^*$. Then\n\n$$\\mathcal L^*\\!\\left(\\sqrt n(\\bar X_n^*-E^*\\bar X_n^*)\\right)\\Rightarrow\\mathcal L(G)\\quad\\hbox{in probability},$$\n\nand\n\n$$\\left\\|n\\,\\operatorname{Cov}^*(\\bar X_n^*)-\\Gamma\\right\\|_{\\mathrm{HS}}\\longrightarrow0\\quad\\hbox{in probability},$$\n\nwhere $G$ is the centered $H$-valued Gaussian with covariance $\\Gamma$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tapered-block-bootstrap-clt-for-dependent-data",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H=L^2([0,1])$, and let $(Y_t)_{t\\in\\mathbb Z}$ be a centered causal Bernoulli shift that is $L^2$-$m$-approximable under [[def-l2-m-approximable-causal-bernoulli-shift]]. Write\n\n$$\\delta_m=\\bigl(E\\|Y_0-Y_{0,m}\\|_H^2\\bigr)^{1/2}.$$\n\nAssume $m\\delta_m\\to0$, and let the integers $b_n\\to\\infty$ with $b_n/\\sqrt n\\to0$. Let the taper satisfy the support, positivity-near-$1/2$, symmetry and monotonicity conditions in [[alg-tapered-block-bootstrap]]. For all sufficiently large $n$, $1\\le b_n\\le n$ and $W_{b_n}>0$, the latter by [[lem-taper-window-l2-normalization]]. Apply that algorithm to $Y_1,\\ldots,Y_n$ only on this admissible tail; all limits below concern that tail. Write $\\bar Y_n^*=n^{-1}\\sum_{t=1}^nY_t^*$ for the resulting bootstrap mean. Let $\\Gamma$ be the long-run covariance operator from [[thm-hilbert-valued-clt-for-l2-m-approximable-bernoulli-shifts]]. Then\n\n$$\\mathcal L^*\\!\\left(\\sqrt n(\\bar Y_n^*-E^*\\bar Y_n^*)\\right)\\Rightarrow\\mathcal L(G)\\quad\\hbox{in probability},$$\n\nand\n\n$$\\left\\|n\\,\\operatorname{Cov}^*(\\bar Y_n^*)-\\Gamma\\right\\|_{\\mathrm{HS}}\\longrightarrow0\\quad\\hbox{in probability},$$\n\nwhere $G$ is centered Gaussian with covariance $\\Gamma$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-iid-functional-data-block-bootstrap-1.1",
+          "step": "1.1",
+          "claim": "The filter $f(s_0,s_1,\\ldots)=s_0e$ is measurable: it is the coordinate projection followed by a map from the finite innovation space to $H$. We have $EX_t=0$ and $E\\|X_t\\|_H^2=1$. For every $m\\ge1$, the retained current innovation gives $X_{t,m}=X_t$ exactly, so $\\delta_m=0$. Thus both $\\sum_{m\\ge1}\\delta_m<\\infty$ and $m\\delta_m\\to0$ hold. Independence and identical laws follow directly because each $X_t$ depends only on its own IID innovation.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-iid-functional-data-block-bootstrap-2.1",
+          "step": "2.1",
+          "claim": "The integer lengths satisfy $1\\le\\lceil n^{1/3}\\rceil\\le n$, $b_n\\to\\infty$ and $b_n/\\sqrt n\\le n^{-1/6}+n^{-1/2}\\to0$. The window vanishes off $[0,1]$, takes values in $[0,1]$, is positive near $1/2$, symmetric, and nondecreasing on $[0,1/2]$. Every midpoint weight equals one, so $W_{b_n}=\\sqrt{b_n}>0$ and $a_{b_n}=1$. All assumptions of both theorems are therefore met, giving their stated conditional law and covariance limits for this IID example.",
+          "inputs": [
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example specifies nonempty series or an infinite IID process."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The centered innovations/offsets have zero expectation; both verification steps retain these cases."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The IID example includes b_1=1; the two-series example retains a one-entry final prefix in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes nonconstant signs or nonconstant finite observed series."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the retained prefix or all-n block domain and window positivity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Finite randomization is explicit; the IID application assumes AC as required by its theorem suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        }
+      ]
+    }
+  }
+}

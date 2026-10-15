@@ -1,0 +1,85 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "43",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "alg-rauch-tung-striebel-smoother",
+      "model": "gpt-6-luna",
+      "context_sha256": "d770906be877462b5959fa80d7a1ce9daa8e94a6df4e5298f2ab3c5df52c4981",
+      "outcome": "false_positive",
+      "reason": "The owning page library/bayesian-computational-statistics/kalman-smoothing-and-rts-recursion.md explicitly lists thm-rauch-tung-striebel-fixed-interval-recursion, whose local Statement and four-step Proof supply the conditional-law result. The algorithm itself gives complete finite backward instructions: the positive-diagonal Cholesky row substitutions solve Pforecast C^T=F P, hence the stated gain, and the mean/covariance updates have compatible dimensions. Innovation SPD and forecast SPD are distinct explicit admissibility conditions; T=0 returns the initial filtered pair. A definition need not duplicate its separate correctness theorem. The rejection incorrectly treats a theorem absent from the restricted judge context as absent from the page/library.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-rauch-tung-striebel-fixed-interval-recursion",
+      "model": "gpt-6-luna",
+      "context_sha256": "b93ddcf80381ae64e212c779eb56a1b9f70df87012716a1627ee54faf43ab3ec",
+      "outcome": "false_positive",
+      "reason": "The rejection reads only the rectangle clause of F9. Its cited supplier thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, Statement (1), explicitly proves that the set function of def-product-measure-on-sigma-finite-spaces is a measure on the entire product sigma-algebra. That Definition gives (rho x eta)(E)=integral eta(E_w) rho(dw) for every product-measurable E, not only rectangles. Fix y, let rho=N(m_{k+1|T},P_{k+1|T}), eta=N(0,V_k), and H(w,u)=m_{k|k}+C_k(w-m_{k+1|k})+u. For every Borel A, H^{-1}(A) is Borel, and the defining section formula gives (rho x eta)(H^{-1}(A))=integral Q_k(y_{1:k},w,A) rho(dw), exactly step 3.1. Both factors are probabilities, hence sigma-finite, even for singular covariances. No new extension argument is required in the consumer because the cited supplier already establishes the needed formula. The contract quotes this full Statement (including its defining link).",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-rauch-tung-striebel-smoother",
+      "disposition": "unaffected",
+      "post_sha256": "9959c99d31ead231a394a5096e1dd9a0d9107ff7b3f15d821222104a5ccad909",
+      "review_context_sha256": "38110b8cb592bb3c370eef1c4c009a65a5986a885b40f4d6f6575c45b3d7815d",
+      "reason": "The owning page library/bayesian-computational-statistics/kalman-smoothing-and-rts-recursion.md explicitly lists thm-rauch-tung-striebel-fixed-interval-recursion, whose local Statement and four-step Proof supply the conditional-law result. The algorithm itself gives complete finite backward instructions: the positive-diagonal Cholesky row substitutions solve Pforecast C^T=F P, hence the stated gain, and the mean/covariance updates have compatible dimensions. Innovation SPD and forecast SPD are distinct explicit admissibility conditions; T=0 returns the initial filtered pair. A definition need not duplicate its separate correctness theorem. The rejection incorrectly treats a theorem absent from the restricted judge context as absent from the page/library.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-rauch-tung-striebel-fixed-interval-recursion",
+      "disposition": "unaffected",
+      "post_sha256": "5162021729e0b80bdf9097c237f6bb642c0ea4a7a344c9a56fe7a50c48f77d3f",
+      "review_context_sha256": "d4a8c1f9b18b0ca40dae8ef02a3ee3e108e507c99cbe311761b928b48be5ef7a",
+      "reason": "Checked the terminal filtering base, the finite-kernel mixture and its RCD identity via rectangle uniqueness in step 2.1, and the arbitrary-Borel affine pushforward identity in step 3.1 using the actual section-integral definition of the cited product measure. Independent Gaussian product coordinates give covariance V_k+C_k P_{k+1|T} C_k^T, which is PSD and expands to the stated RTS update. Cholesky row substitutions yield the same gain as the backward conditional-kernel lemma. The finite backward induction includes k=0 and T=0; only innovation and forecast solves require SPD, and null-history versions remain unrestricted. The existing contract and owning page match these claims. No item, contract, page or dependency repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Both assigned mathematical reviews are complete. The algorithm and theorem guards equal the frozen assignment before guards; no item, owning metadata or interface changed. Context hashes were captured immediately after each completed review. No downstream propagation or new prerequisite is needed.",
+    "Local source evidence: library/bayesian-computational-statistics/kalman-smoothing-and-rts-recursion.md item list; items/thm-rauch-tung-striebel-fixed-interval-recursion.md Statement and Proof 1.1-4.1; items/thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique.md Statement (1), Facts L1 and Proof 1.2; items/def-product-measure-on-sigma-finite-spaces.md Definition; research/bayesian-computational-statistics-62-batch-43.proof-contracts.json, F9 citation. Existing supplier definition already includes arbitrary product-measurable sets. No external URLs were consulted; finite Gaussian conditioning and product measure mathematics are familiar.",
+    "No confirmed defects or potentially defective published uses were found, so no canonical defect-ledger or published-consumer-ledger amendments are proposed. No gate diagnostics were assigned.",
+    {
+      "checks": [
+        {
+          "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-rauch-tung-striebel-smoother.md items/thm-rauch-tung-striebel-fixed-interval-recursion.md --json",
+          "exit_code": 0,
+          "result": "2 files; algorithm not applicable; theorem proof passed; 0 failures."
+        },
+        {
+          "command": "node tools/rendercheck.mjs items/alg-rauch-tung-striebel-smoother.md items/thm-rauch-tung-striebel-fixed-interval-recursion.md --json",
+          "exit_code": 0,
+          "result": "2 checked; 0 errors; 0 warnings."
+        },
+        {
+          "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-43.proof-contracts.json --strict --items alg-rauch-tung-striebel-smoother,thm-rauch-tung-striebel-fixed-interval-recursion --json",
+          "exit_code": 0,
+          "result": "Both assigned contracts checked; ok:true; 0 errors; 0 warnings."
+        },
+        {
+          "command": "node tools/proof-layout.mjs items/alg-rauch-tung-striebel-smoother.md items/thm-rauch-tung-striebel-fixed-interval-recursion.md",
+          "exit_code": 0,
+          "result": "2 items, 4 steps, 0 defects. No item edits or formatter were necessary."
+        }
+      ]
+    },
+    "Final read-only report validation passed: exact pack digest and rejected-tuple coverage, current itemHashGuard values equal to frozen before guards, unchanged Statement/Definition hashes, and required evidence fields. No unresolved obligations remain within this assignment; engine collection and any later independent judging remain controller-owned."
+  ]
+}

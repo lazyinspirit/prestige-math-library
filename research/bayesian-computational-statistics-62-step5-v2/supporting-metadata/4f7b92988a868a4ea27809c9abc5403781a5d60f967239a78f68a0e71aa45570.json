@@ -1,0 +1,1213 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-24",
+  "scope": [
+    "alg-expectation-maximization",
+    "thm-em-observed-log-likelihood-is-nondecreasing",
+    "thm-generalized-em-is-nondecreasing-under-q-ascent",
+    "rem-em-ascent-does-not-imply-global-optimality-or-convergence",
+    "ex-em-finite-mixture-responsibilities",
+    "ex-generalized-em-increases-q-without-maximizing",
+    "ex-em-likelihood-has-two-local-maxima",
+    "ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse",
+    "ex-em-support-losing-candidate-violates-finite-kl-condition"
+  ],
+  "contracts": {
+    "alg-expectation-maximization": {
+      "risk": "medium",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-latent-variable-joint-and-observed-data-factorization",
+          "status": "inspected-draft",
+          "source_section": "Definition",
+          "excerpt": "The observed marginal density is\n$$\nm(\\theta,x):=\\int_{\\mathsf Z}p(\\theta,x,z)\\,\\mu(dz).\n$$\nThe valid-fibre set is\n$V:=\\{(\\theta,x):0<m(\\theta,x)<\\infty\\}$. Only on $V$ define the normalized\nlatent-fibre density\n$$\nq(z\\mid\\theta,x):=\\frac{p(\\theta,x,z)}{m(\\theta,x)}.\n$$",
+          "use": "Defines the supplied joint density and valid-fiber quotient used by the procedure."
+        },
+        {
+          "supplier": "thm-observed-density-is-latent-marginal-under-tonelli",
+          "status": "inspected-draft",
+          "source_section": "Statement",
+          "excerpt": "On every valid\nfibre $0<m(\\theta,x)<\\infty$, $q(z\\mid\\theta,x)=p(\\theta,x,z)/m(\\theta,x)$ is a measurable\n$\\mu$-density of total mass one.",
+          "use": "Ensures q is a probability density whenever the algorithm enters a positive finite fiber."
+        },
+        {
+          "supplier": "def-likelihood-density",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "No sigma-algebra on $\\Theta$ or measurability of $L_x$ is implied. Each density is determined only\n$\\mu$-almost everywhere; there is no canonical pointwise version and, for\narbitrary uncountable $\\Theta$, no common exceptional null set is asserted.",
+          "use": "The procedure uses an explicit joint density and makes no pointwise-version measurability inference."
+        },
+        {
+          "supplier": "def-axiom-of-choice",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).",
+          "use": "Supplies the stated assumption for evaluating the finite-KL branch of admissibility."
+        },
+        {
+          "supplier": "def-kullback-leibler-divergence",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].",
+          "use": "Defines the directional KL admissibility test, including its choice-free non-absolute-continuity branch and AC-dependent absolutely-continuous branch."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition takes fixed observed data and an initial parameter."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition stops rather than forming q when the observed marginal is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits m(theta,x)=1, a positive finite marginal with log likelihood zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits a degenerate latent law when its stated support and finite-integrability conditions hold."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition does not divide by zero or infinite marginal; those fibers trigger its stop condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses a caller-supplied selector and makes no claim that an exact maximizer exists or can be selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The procedure asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The procedure asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Checked all Definition inputs, finite-time supplied selector, exact attained maximum on an admissible set containing current iterate, generalized Q-ascent, invalid-marginal/current-Q/unavailable stops, and infinite output. Zero/infinite marginals are excluded, finite absolute log integrals and directional current-to-candidate KL restrict admissibility; AC is explicit for RN/KL only. No convergence, global maximum or implementable general integral oracle is asserted. Marginal supplier proof reviewed independently: sound normalization and quotient; nonfatal stale closing reference 1.4 routed to batch 23 (reader:24:2, refuter:24:2), not used for the computation."
+      }
+    },
+    "thm-em-observed-log-likelihood-is-nondecreasing": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-latent-variable-joint-and-observed-data-factorization",
+          "source_section": "Definition",
+          "quote": "The\nobserved marginal density is\n$$m(\\theta,x):=\\int_{\\mathsf Z}p(\\theta,x,z)\\,\\mu(dz).$$\nThe valid-fibre set is\n$V:=\\{(\\theta,x):0<m(\\theta,x)<\\infty\\}$. Only on $V$ define the normalized\nlatent-fibre density\n$$q(z\\mid\\theta,x):=\\frac{p(\\theta,x,z)}{m(\\theta,x)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-observed-density-is-latent-marginal-under-tonelli",
+          "source_section": "Statement",
+          "quote": "On every valid\nfibre $0<m(\\theta,x)<\\infty$, $q(z\\mid\\theta,x)=p(\\theta,x,z)/m(\\theta,x)$ is\na measurable $\\mu$-density of total mass one.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "let $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class;",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-kullback-leibler-is-nonnegative",
+          "source_section": "Statement",
+          "quote": "Assume AC and use the directional convention of\n[[def-kullback-leibler-divergence]]. For probability measures $P,Q$ on one\nmeasurable space, $D(P\\|Q)\\ge0",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-expectation-maximization",
+          "source_section": "Definition",
+          "quote": "In **exact mode**, its candidate set must consist of admissible candidates and contain $\\theta_t$; it returns an attained maximizer of $Q$ on that set",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-integral-over-a-null-set-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $E$ be measurable with $\\mu(E)=0$.\nThen\n$$\\int_E f\\,d\\mu=0.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2] and [F3], $P:=q_t\\mu$ and $Q:=q_\\theta^x\\mu$ are probability measures. For $u=q_t$ and $u=q_\\theta^x$, $n\\mathbf1_{\\{u=\\infty\\}}\\le u$ and $\\int u\\,d\\mu=1$, so [F8] gives $n\\mu\\{u=\\infty\\}\\le1$ for every positive integer $n$; [F9] forces both infinite-value sets to be $\\mu$-null. Let $N$ be their union. By [F10], $P(N)=Q(N)=0$. Also $P\\{q_\\theta^x=0\\}=0$, since $Q\\{q_\\theta^x=0\\}=0$ and $P\\ll Q$. Finally $P\\{q_t=0\\}=0$ by the definition of $P$. Thus $q_t$ and $q_\\theta^x$ are finite and strictly positive on a $P$-full set.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F8",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [A1] and [F4], choose a finite-valued Radon–Nikodym derivative $r=dP/dQ$. Define $\\widetilde r=rq_\\theta^x$ off $N$ and $\\widetilde r=0$ on $N$, and define $\\widetilde q_t=q_t$ off $N$ and $\\widetilde q_t=0$ on $N$. These are finite-valued measurable functions. For every measurable $A$, [F5] and [F10] give $$\\int_A\\widetilde r\\,d\\mu=\\int_A rq_\\theta^x\\,d\\mu=\\int_A r\\,dQ=P(A)=\\int_Aq_t\\,d\\mu=\\int_A\\widetilde q_t\\,d\\mu.$$ Since $\\mu$ is sigma-finite and $P$ is finite, a sigma-finite exhaustion for $\\mu$ is also finite for $P$. Uniqueness [F11] therefore gives $\\widetilde r=\\widetilde q_t$ $\\mu$-almost everywhere. On the $P$-full set from step 1.1, $r=q_t/q_\\theta^x$ and $$\\log r=\\log p(\\theta_t,x,z)-\\log m_{\\theta_t}(x)-\\log p(\\theta,x,z)+\\log m_\\theta(x).$$ The stated absolute-integrability conditions make these log terms integrable. Integrating this equality with respect to $P=q_t\\mu$ and using [F4] yields $$D(P\\|Q)=Q(\\theta_t\\mid\\theta_t)-Q(\\theta\\mid\\theta_t)+\\ell_x(\\theta)-\\ell_x(\\theta_t),$$ which rearranges to the claimed identity.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F10",
+            "F11",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F6], the KL term in the identity is nonnegative, so the observed log-likelihood difference is at least the Q difference. A generalized admissible update has nonnegative Q difference by [F7]. An attained exact maximizer over a set containing $\\theta_t$ has the same property. Hence either update does not decrease the observed log likelihood.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes the data fiber and supplies current and candidate parameters."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement requires current and candidate observed marginals to be strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits a positive finite marginal equal to one; its logarithm is zero and the identity still applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If current and candidate latent laws agree, their KL is zero and the identity reduces to the Q/log-likelihood equality."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement excludes zero and infinite observed marginal fibers before forming q or log m."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement assumes an attained exact maximum when invoking exact mode and makes no claim that an exact maximum exists; the KL definition and its nonnegativity result require AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives an identity and an ascent implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives an identity and an ascent implication, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Checked every proof step: P and Q have mass one; n 1_{u=infinity} <= u gives mu-null exceptional density sets, also P/Q-null. P<<Q removes the candidate-zero set. Finite nonnegative RN representative r times the candidate density represents P relative to sigma-finite mu; finite-measure RN uniqueness applies on a common finite exhaustion and identifies the ratio P-almost everywhere. Both log terms are absolutely P-integrable, so integrating/rearranging gives likelihood difference = Q difference + D(current||candidate). KL nonnegativity gives ascent; exact maximizer must be attained on a candidate set containing current iterate. AC and no parameter-equality claim are explicit. Current raw source is reader-post 5b80955cbd89985a985078b06ebb414378629ea69cdfc52c6cd5ff03784c7975. Accept mathematical repair; synchronize stale manifest dependencies without source changes. Producer final stale citation is nonfatal-recorded, not a missing mathematical premise."
+      }
+    },
+    "thm-generalized-em-is-nondecreasing-under-q-ascent": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-expectation-maximization",
+          "source_section": "Definition",
+          "quote": "**Inputs.** Supply a measurable parameter space $(\\Theta,\\mathcal T)$, sigma-finite measure spaces $(\\mathsf X,\\mathcal A,\\nu)$ and $(\\mathsf Z,\\mathcal C,\\mu)$, and a jointly measurable complete-data density $p(\\theta,x,z)$ relative to $\\nu\\otimes\\mu$ that integrates to one on each parameter fiber, as in [[def-latent-variable-joint-and-observed-data-factorization]]. This joint measurability is supplied explicitly and is not inferred from separate likelihood-density versions ([[def-likelihood-density]]). Also supply fixed observed data $x$, an initial value $\\theta_0$, a mode `exact` or `generalized`, and a candidate selector that returns either a candidate or `unavailable` in finite time at each call. Require $0<m_{\\theta_0}(x)<\\infty$ and\n$$\\int q_{\\theta_0}^x(z)\\,|\\log p(\\theta_0,x,z)|\\,\\mu(dz)<\\infty.$$\n\nWrite\n$$m_\\theta(x):=\\int_{\\mathsf Z}p(\\theta,x,z)\\,\\mu(dz),\\qquad q_\\theta^x(z):=\\frac{p(\\theta,x,z)}{m_\\theta(x)}$$\nonly when $0<m_\\theta(x)<\\infty$. By [[thm-observed-density-is-latent-marginal-under-tonelli]], $m_\\theta$ is the observed-data density and $q_\\theta^x$ is a probability density on every such fiber. The observed log likelihood is $\\ell_x(\\theta):=\\log m_\\theta(x)$ on those fibers.\n\nAt each valid iterate $\\theta_t$, set $q_t:=q_{\\theta_t}^x$ and define\n$$Q(\\theta\\mid\\theta_t):=\\int_{\\mathsf Z}\\log p(\\theta,x,z)\\,q_t(z)\\,\\mu(dz)$$\nonly for candidates where this integral is finite. Use $\\log0=-\\infty$ and set $q_t|\\log p|=0$ wherever $q_t=0$. The Q integral itself is choice-free. To test finite KL when $q_t\\mu\\ll q_\\theta^x\\mu$, assume AC as required by [[def-axiom-of-choice]] and [[def-kullback-leibler-divergence]]; when absolute continuity fails, $D=+\\infty$ by that definition without AC. An **admissible candidate** $\\theta$ also satisfies $0<m_\\theta(x)<\\infty$, $q_t\\mu\\ll q_\\theta^x\\mu$, and\n$$D(q_t\\mu\\|q_\\theta^x\\mu)<\\infty,$$\nwhere the direction of $D$ is that of [[def-kullback-leibler-divergence]]. Require $\\int q_t|\\log p(\\theta,x,\\cdot)|\\,d\\mu<\\infty$ for each candidate and $\\int q_t|\\log p(\\theta_t,x,\\cdot)|\\,d\\mu<\\infty$ for the current iterate.\n\n**Output.** Emit the iterate sequence beginning with $\\theta_0$. If a stopping condition occurs after $T$ successful updates, return the finite list $(\\theta_0,\\ldots,\\theta_T)$ and a status recording the first unavailable condition or selector result; do not append a failed candidate. If no stopping condition occurs, the emitted sequence is infinite and there is no finite stopping status.\n\n**Procedure.** For $t=0,1,2,\\ldots$, check that $0<m_{\\theta_t}(x)<\\infty$; if not, return the current list with status `stopped: invalid current marginal`. Form $q_t$ and $Q(\\cdot\\mid\\theta_t)$ on admissible candidates. If $Q(\\theta_t\\mid\\theta_t)$ is not finite, return with status `stopped: current Q is not finite`. Call the supplied selector. In **exact mode**, its candidate set must consist of admissible candidates and contain $\\theta_t$; it returns an attained maximizer of $Q$ on that set, or `unavailable` if no attained maximum is available. In **generalized mode**, it returns any admissible $\\theta_{t+1}$ with $Q(\\theta_{t+1}\\mid\\theta_t)\\ge Q(\\theta_t\\mid\\theta_t)$, or `unavailable` if no such update is supplied. If the selector returns `unavailable`, return with status `stopped: no required update supplied`; otherwise append its candidate and continue. The procedure asserts no convergence or global-optimality property and makes no assertion for a candidate that loses current latent support.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-em-observed-log-likelihood-is-nondecreasing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $p(\\theta,x,z)$ be a jointly measurable normalized complete-data density as in [[def-latent-variable-joint-and-observed-data-factorization]], and fix observed data $x$. Put $m_\\theta(x)=\\int p(\\theta,x,z)\\,\\mu(dz)$. Let $\\theta_t$ and $\\theta$ satisfy $0<m_{\\theta_t}(x),m_\\theta(x)<\\infty$. Define $q_t(z)=p(\\theta_t,x,z)/m_{\\theta_t}(x)$ and $q_\\theta^x(z)=p(\\theta,x,z)/m_\\theta(x)$. Assume\n$$q_t\\mu\\ll q_\\theta^x\\mu,\\qquad \\int q_t(z)\\bigl(|\\log p(\\theta_t,x,z)|+|\\log p(\\theta,x,z)|\\bigr)\\,\\mu(dz)<\\infty,$$\nand $D(q_t\\mu\\|q_\\theta^x\\mu)<\\infty$. Use $\\log0=-\\infty$ and set $q_t|\\log p|=0$ wherever $q_t=0$. Then, with $Q(\\theta\\mid\\theta_t)=\\int q_t(z)\\log p(\\theta,x,z)\\,\\mu(dz)$,\n$$\\ell_x(\\theta)-\\ell_x(\\theta_t) =Q(\\theta\\mid\\theta_t)-Q(\\theta_t\\mid\\theta_t) +D(q_t\\mu\\|q_\\theta^x\\mu).$$\nConsequently, any admissible update with $Q(\\theta\\mid\\theta_t)\\ge Q(\\theta_t\\mid\\theta_t)$ does not decrease $\\ell_x$. An exact M-step has this property when its maximum is attained over an admissible candidate set containing $\\theta_t$. No equality-of-parameter conclusion is asserted when the KL divergence is zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F2] to the current and proposed parameters. Its hypotheses hold by the given assumptions, so $\\ell_x(\\theta_{t+1})-\\ell_x(\\theta_t)=Q(\\theta_{t+1}\\mid\\theta_t)-Q(\\theta_t\\mid\\theta_t)+D(q_t\\mu\\|q_{\\theta_{t+1}}^x\\mu)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The first term is nonnegative by the Q-ascent condition, and the second is nonnegative by the theorem's KL identity. Hence the observed log likelihood does not decrease. No attained maximum was used.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The result assumes a current and proposed parameter on a fixed valid observation fiber."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The inherited theorem requires positive finite current and candidate marginals."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Positive finite marginals equal to one remain within the inherited theorem hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Equal current and candidate latent laws give zero KL and permit equality in the ascent bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Zero and infinite marginal fibers are excluded by the inherited theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The generalized update is a supplied admissible candidate; no exact maximizer is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives a sufficient Q-ascent condition, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives a sufficient Q-ascent condition, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "rem-em-ascent-does-not-imply-global-optimality-or-convergence": {
+      "risk": "medium",
+      "kind": "remark",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "supplier_interfaces": [
+        {
+          "supplier": "thm-em-observed-log-likelihood-is-nondecreasing",
+          "status": "inspected-draft",
+          "source_section": "Statement",
+          "excerpt": "Consequently, any admissible update with $Q(\\theta\\mid\\theta_t)\\ge Q(\\theta_t\\mid\\theta_t)$ does not decrease $\\ell_x$.",
+          "use": "The remark limits the scope of the one-step result."
+        },
+        {
+          "supplier": "thm-generalized-em-is-nondecreasing-under-q-ascent",
+          "status": "inspected-draft",
+          "source_section": "Statement",
+          "excerpt": "then $\\ell_x(\\theta_{t+1})\\ge\\ell_x(\\theta_t)$. The Q maximizer need not be attained for this generalized-EM conclusion.",
+          "use": "The remark limits the scope of the generalized one-step result."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The remark makes no empty-space claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The remark adds no zero-marginal result."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The remark adds no unit-marginal result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The remark adds no degenerate-model theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The remark adds no endpoint theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The remark states that an attained Q maximum is a separate hypothesis, not a consequence of ascent."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The remark states no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-em-finite-mixture-responsibilities": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-latent-variable-joint-and-observed-data-factorization",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$, $(\\mathsf X,\\mathcal A)$, and\n$(\\mathsf Z,\\mathcal C)$ be measurable spaces (sets equipped with\nsigma-algebras; [[def-measurable-space]]). Let $\\nu$ and $\\mu$ be sigma-finite\nreference measures on the observation and latent spaces; each has a countable\nmeasurable cover by sets of finite measure\n([[def-finite-sigma-finite-and-semifinite-measures]]). The finite product\nsigma-algebra is generated by measurable rectangles\n([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). The product\nreference measure $\\nu\\otimes\\mu$ is the one supplied by\n[[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]].\n\nA **jointly measurable latent-variable density** is a specified function\n$$p:\\Theta\\times\\mathsf X\\times\\mathsf Z\\longrightarrow[0,\\infty]$$\nmeasurable for $\\mathcal T\\otimes\\mathcal A\\otimes\\mathcal C$ and normalized\non every parameter fibre:\n$$\\int_{\\mathsf X\\times\\mathsf Z}p(\\theta,x,z)\\, (\\nu\\otimes\\mu)(d(x,z))=1\\qquad(\\theta\\in\\Theta).$$\nHere $x$ is the observed coordinate and $z$ the latent coordinate. The\nobserved marginal density is\n$$m(\\theta,x):=\\int_{\\mathsf Z}p(\\theta,x,z)\\,\\mu(dz).$$\nThe valid-fibre set is\n$V:=\\{(\\theta,x):0<m(\\theta,x)<\\infty\\}$. Only on $V$ define the normalized\nlatent-fibre density\n$$q(z\\mid\\theta,x):=\\frac{p(\\theta,x,z)}{m(\\theta,x)}.$$\nThis definition requires a single jointly measurable density as an input.\n[[def-likelihood-density]] supplies neither a sigma-algebra on $\\Theta$ nor\njoint parameter measurability from separately specified likelihood sections;\nthe joint measurability above is an additional hypothesis. Because $p$ is\nalready supplied as one joint function, this definition uses no choice axiom.\nIt does not assert that AC can turn separately specified pointwise likelihood\nversions into a jointly measurable version. No quotient or pointwise\nconditional density is asserted on a zero or infinite marginal fibre.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-observed-density-is-latent-marginal-under-tonelli",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses of\n[[def-latent-variable-joint-and-observed-data-factorization]]. Then\n$m(\\theta,x)=\\int p(\\theta,x,z)\\,\\mu(dz)$ is jointly measurable in\n$(\\theta,x)$. For each fixed $\\theta$, it is an observed-data probability\ndensity: it is $\\mathcal A$-measurable and\n$$\\int_{\\mathsf X}m(\\theta,x)\\,\\nu(dx)=1.$$\nConsequently $m(\\theta,x)<\\infty$ for $\\nu$-almost every $x$. On every valid\nfibre $0<m(\\theta,x)<\\infty$, $q(z\\mid\\theta,x)=p(\\theta,x,z)/m(\\theta,x)$ is\na measurable $\\mu$-density of total mass one. Finally, if $h:\\Theta\\times\\mathsf X\\times\\mathsf Z\\to\\mathbb C$ is product\nmeasurable and\n$\\int |h(\\theta,x,z)|p(\\theta,x,z)\\,d(\\nu\\otimes\\mu)<\\infty$ for a fixed\n$\\theta$, Fubini permits exchanging the latent and observed integrals of\n$hp$. No exchange is claimed without this absolute integrability.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bayes-formula-for-dominated-kernels",
+          "source_section": "Statement",
+          "quote": "Let $\\pi$ be a prior probability on $(E,\\mathcal S)$ and let $Q:E\\to T$ be a probability kernel dominated by a sigma-finite measure $\\nu$ on $(T,\\mathcal T)$, with specified nonnegative jointly measurable density $\\ell:E\\times T\\to[0,\\infty]$:\n$$Q(\\theta,B)=\\int_B\\ell(\\theta,y)\\,\\nu(dy)\\quad\\text{for every }\\theta\\in E,\\ B\\in\\mathcal T.$$\n\nDefine $m(y)=\\int_E\\ell(\\theta,y)\\,\\pi(d\\theta)$. Under the joint law with density $\\ell$ relative to $\\pi\\times\\nu$, a conditional law of the parameter given the observation is\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_A\\ell(\\theta,y)\\,\\pi(d\\theta)}{m(y)},&0<m(y)<\\infty,\\\\ \\pi(A),&m(y)=0\\text{ or }m(y)=\\infty.\\end{cases}$$\n\nThe observation marginal is $m\\,d\\nu$, and the filled fibres have marginal mass zero. This is a choice-free assertion about the explicit kernel and event identities.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-conditional-density-formula",
+          "source_section": "Statement",
+          "quote": "Let $(E,\\mathcal S,\\mu)$ and $(T,\\mathcal T,\\nu)$ be sigma-finite measure spaces. Let a joint probability $\\lambda$ on $E\\times T$ have nonnegative product-measurable density $p:E\\times T\\to[0,\\infty]$ relative to $\\mu\\times\\nu$. A fixed probability $\\rho$ on $(E,\\mathcal S)$ is supplied. Put\n$$m(y)=\\int_E p(x,y)\\,\\mu(dx),\\qquad D=\\{y:0<m(y)<\\infty\\},$$\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_Ap(x,y)\\,\\mu(dx)}{m(y)},&y\\in D,\\\\ \\rho(A),&y\\notin D.\\end{cases}$$\n\nThen K is an everywhere probability kernel from T to E. If $\\beta$ is the second marginal of $\\lambda$, then $\\beta(D)=1$ and\n$$\\lambda(A\\times B)=\\int_B K(y,A)\\,\\beta(dy).$$\n\nFor any random elements X,Y with joint law $\\lambda$, $K(Y,\\cdot)$ is a regular conditional distribution of X given $\\sigma(Y)$. These event identities require no AC. If interpreted with the library's conditional-expectation class existence convention, assume AC. Neither zero nor infinite marginal-density fibres are normalized by the displayed quotient.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-expectation-maximization",
+          "source_section": "Definition",
+          "quote": "**Inputs.** Supply a measurable parameter space $(\\Theta,\\mathcal T)$, sigma-finite measure spaces $(\\mathsf X,\\mathcal A,\\nu)$ and $(\\mathsf Z,\\mathcal C,\\mu)$, and a jointly measurable complete-data density $p(\\theta,x,z)$ relative to $\\nu\\otimes\\mu$ that integrates to one on each parameter fiber, as in [[def-latent-variable-joint-and-observed-data-factorization]]. This joint measurability is supplied explicitly and is not inferred from separate likelihood-density versions ([[def-likelihood-density]]). Also supply fixed observed data $x$, an initial value $\\theta_0$, a mode `exact` or `generalized`, and a candidate selector that returns either a candidate or `unavailable` in finite time at each call. Require $0<m_{\\theta_0}(x)<\\infty$ and\n$$\\int q_{\\theta_0}^x(z)\\,|\\log p(\\theta_0,x,z)|\\,\\mu(dz)<\\infty.$$\n\nWrite\n$$m_\\theta(x):=\\int_{\\mathsf Z}p(\\theta,x,z)\\,\\mu(dz),\\qquad q_\\theta^x(z):=\\frac{p(\\theta,x,z)}{m_\\theta(x)}$$\nonly when $0<m_\\theta(x)<\\infty$. By [[thm-observed-density-is-latent-marginal-under-tonelli]], $m_\\theta$ is the observed-data density and $q_\\theta^x$ is a probability density on every such fiber. The observed log likelihood is $\\ell_x(\\theta):=\\log m_\\theta(x)$ on those fibers.\n\nAt each valid iterate $\\theta_t$, set $q_t:=q_{\\theta_t}^x$ and define\n$$Q(\\theta\\mid\\theta_t):=\\int_{\\mathsf Z}\\log p(\\theta,x,z)\\,q_t(z)\\,\\mu(dz)$$\nonly for candidates where this integral is finite. Use $\\log0=-\\infty$ and set $q_t|\\log p|=0$ wherever $q_t=0$. The Q integral itself is choice-free. To test finite KL when $q_t\\mu\\ll q_\\theta^x\\mu$, assume AC as required by [[def-axiom-of-choice]] and [[def-kullback-leibler-divergence]]; when absolute continuity fails, $D=+\\infty$ by that definition without AC. An **admissible candidate** $\\theta$ also satisfies $0<m_\\theta(x)<\\infty$, $q_t\\mu\\ll q_\\theta^x\\mu$, and\n$$D(q_t\\mu\\|q_\\theta^x\\mu)<\\infty,$$\nwhere the direction of $D$ is that of [[def-kullback-leibler-divergence]]. Require $\\int q_t|\\log p(\\theta,x,\\cdot)|\\,d\\mu<\\infty$ for each candidate and $\\int q_t|\\log p(\\theta_t,x,\\cdot)|\\,d\\mu<\\infty$ for the current iterate.\n\n**Output.** Emit the iterate sequence beginning with $\\theta_0$. If a stopping condition occurs after $T$ successful updates, return the finite list $(\\theta_0,\\ldots,\\theta_T)$ and a status recording the first unavailable condition or selector result; do not append a failed candidate. If no stopping condition occurs, the emitted sequence is infinite and there is no finite stopping status.\n\n**Procedure.** For $t=0,1,2,\\ldots$, check that $0<m_{\\theta_t}(x)<\\infty$; if not, return the current list with status `stopped: invalid current marginal`. Form $q_t$ and $Q(\\cdot\\mid\\theta_t)$ on admissible candidates. If $Q(\\theta_t\\mid\\theta_t)$ is not finite, return with status `stopped: current Q is not finite`. Call the supplied selector. In **exact mode**, its candidate set must consist of admissible candidates and contain $\\theta_t$; it returns an attained maximizer of $Q$ on that set, or `unavailable` if no attained maximum is available. In **generalized mode**, it returns any admissible $\\theta_{t+1}$ with $Q(\\theta_{t+1}\\mid\\theta_t)\\ge Q(\\theta_t\\mid\\theta_t)$, or `unavailable` if no such update is supplied. If the selector returns `unavailable`, return with status `stopped: no required update supplied`; otherwise append its candidate and continue. The procedure asserts no convergence or global-optimality property and makes no assertion for a candidate that loses current latent support.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each $f_j$ integrates to one, so $p_\\pi$ is a probability density on $\\mathsf X\\times\\mathsf Z$ because $\\sum_j\\pi_j=1$. At $x=1/4$, $f_1(x)=2$ and $f_2(x)=1$, hence the observed density is $m_\\pi(x)=\\sum_j\\pi_jf_j(x)=4/3$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The latent conditional weights are $q_\\pi(j\\mid x)=\\pi_jf_j(x)/m_\\pi(x)$ by [F2] and [F3], giving $q_\\pi(1\\mid x)=(2/3)/(4/3)=1/2$ and $q_\\pi(2\\mid x)=(2/3)/(4/3)=1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Using this conditional law in the definition [F5] yields $Q(\\lambda\\mid\\pi)=\\frac12\\log(2\\lambda_1)+\\frac12\\log(\\lambda_2)$. The two coefficients are exactly the current responsibilities, so this is the complete-data log density averaged over the latent label. By [F4], these weights are also the conditional probabilities for the observation fiber.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two nonempty component and observation spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed observation fiber has marginal 4/3, so no zero normalizer is used."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This example does not evaluate a unit marginal."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The computed conditional label law is nondegenerate, with both masses equal to one half."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Current and candidate mixture weights are strictly positive; zero-weight boundary candidates are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example selects no element from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example computes m_pi(1/4)=4/3 and q_pi=(1/2,1/2) from the supplied two densities in proofs 1.1–2.1; it does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 3.1 uses those responsibilities to compute Q; it does not infer the mixture weights or component densities from Q."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-component-responsibility-arithmetic",
+          "claim": "At x=1/4, m=(1/3)2+(2/3)1=4/3 and q=(1/2,1/2).",
+          "result": "Direct substitution gives both posterior weights one half."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Checked all three verification steps and supplier interfaces. Component interval integrals are 2*(1/2)=1 and 1*1=1; endpoint overlaps are Lebesgue null. At x=1/4 weighted masses are both 2/3, marginal 4/3, responsibilities 1/2 each. Positive candidate weights summing to one give finite Q=(log(2 lambda_1)+log(lambda_2))/2; zero-weight boundary excluded. Finite counting-space Bayes/conditional-density hypotheses hold; no version claim is made outside valid fibres. Choice-free E-step does not invoke finite-KL selection."
+      }
+    },
+    "ex-generalized-em-increases-q-without-maximizing": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-latent-variable-joint-and-observed-data-factorization",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$, $(\\mathsf X,\\mathcal A)$, and\n$(\\mathsf Z,\\mathcal C)$ be measurable spaces (sets equipped with\nsigma-algebras; [[def-measurable-space]]). Let $\\nu$ and $\\mu$ be sigma-finite\nreference measures on the observation and latent spaces; each has a countable\nmeasurable cover by sets of finite measure\n([[def-finite-sigma-finite-and-semifinite-measures]]). The finite product\nsigma-algebra is generated by measurable rectangles\n([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). The product\nreference measure $\\nu\\otimes\\mu$ is the one supplied by\n[[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]].\n\nA **jointly measurable latent-variable density** is a specified function\n$$p:\\Theta\\times\\mathsf X\\times\\mathsf Z\\longrightarrow[0,\\infty]$$\nmeasurable for $\\mathcal T\\otimes\\mathcal A\\otimes\\mathcal C$ and normalized\non every parameter fibre:\n$$\\int_{\\mathsf X\\times\\mathsf Z}p(\\theta,x,z)\\, (\\nu\\otimes\\mu)(d(x,z))=1\\qquad(\\theta\\in\\Theta).$$\nHere $x$ is the observed coordinate and $z$ the latent coordinate. The\nobserved marginal density is\n$$m(\\theta,x):=\\int_{\\mathsf Z}p(\\theta,x,z)\\,\\mu(dz).$$\nThe valid-fibre set is\n$V:=\\{(\\theta,x):0<m(\\theta,x)<\\infty\\}$. Only on $V$ define the normalized\nlatent-fibre density\n$$q(z\\mid\\theta,x):=\\frac{p(\\theta,x,z)}{m(\\theta,x)}.$$\nThis definition requires a single jointly measurable density as an input.\n[[def-likelihood-density]] supplies neither a sigma-algebra on $\\Theta$ nor\njoint parameter measurability from separately specified likelihood sections;\nthe joint measurability above is an additional hypothesis. Because $p$ is\nalready supplied as one joint function, this definition uses no choice axiom.\nIt does not assert that AC can turn separately specified pointwise likelihood\nversions into a jointly measurable version. No quotient or pointwise\nconditional density is asserted on a zero or infinite marginal fibre.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-observed-density-is-latent-marginal-under-tonelli",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses of\n[[def-latent-variable-joint-and-observed-data-factorization]]. Then\n$m(\\theta,x)=\\int p(\\theta,x,z)\\,\\mu(dz)$ is jointly measurable in\n$(\\theta,x)$. For each fixed $\\theta$, it is an observed-data probability\ndensity: it is $\\mathcal A$-measurable and\n$$\\int_{\\mathsf X}m(\\theta,x)\\,\\nu(dx)=1.$$\nConsequently $m(\\theta,x)<\\infty$ for $\\nu$-almost every $x$. On every valid\nfibre $0<m(\\theta,x)<\\infty$, $q(z\\mid\\theta,x)=p(\\theta,x,z)/m(\\theta,x)$ is\na measurable $\\mu$-density of total mass one. Finally, if $h:\\Theta\\times\\mathsf X\\times\\mathsf Z\\to\\mathbb C$ is product\nmeasurable and\n$\\int |h(\\theta,x,z)|p(\\theta,x,z)\\,d(\\nu\\otimes\\mu)<\\infty$ for a fixed\n$\\theta$, Fubini permits exchanging the latent and observed integrals of\n$hp$. No exchange is claimed without this absolute integrability.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-expectation-maximization",
+          "source_section": "Definition",
+          "quote": "**Inputs.** Supply a measurable parameter space $(\\Theta,\\mathcal T)$, sigma-finite measure spaces $(\\mathsf X,\\mathcal A,\\nu)$ and $(\\mathsf Z,\\mathcal C,\\mu)$, and a jointly measurable complete-data density $p(\\theta,x,z)$ relative to $\\nu\\otimes\\mu$ that integrates to one on each parameter fiber, as in [[def-latent-variable-joint-and-observed-data-factorization]]. This joint measurability is supplied explicitly and is not inferred from separate likelihood-density versions ([[def-likelihood-density]]). Also supply fixed observed data $x$, an initial value $\\theta_0$, a mode `exact` or `generalized`, and a candidate selector that returns either a candidate or `unavailable` in finite time at each call. Require $0<m_{\\theta_0}(x)<\\infty$ and\n$$\\int q_{\\theta_0}^x(z)\\,|\\log p(\\theta_0,x,z)|\\,\\mu(dz)<\\infty.$$\n\nWrite\n$$m_\\theta(x):=\\int_{\\mathsf Z}p(\\theta,x,z)\\,\\mu(dz),\\qquad q_\\theta^x(z):=\\frac{p(\\theta,x,z)}{m_\\theta(x)}$$\nonly when $0<m_\\theta(x)<\\infty$. By [[thm-observed-density-is-latent-marginal-under-tonelli]], $m_\\theta$ is the observed-data density and $q_\\theta^x$ is a probability density on every such fiber. The observed log likelihood is $\\ell_x(\\theta):=\\log m_\\theta(x)$ on those fibers.\n\nAt each valid iterate $\\theta_t$, set $q_t:=q_{\\theta_t}^x$ and define\n$$Q(\\theta\\mid\\theta_t):=\\int_{\\mathsf Z}\\log p(\\theta,x,z)\\,q_t(z)\\,\\mu(dz)$$\nonly for candidates where this integral is finite. Use $\\log0=-\\infty$ and set $q_t|\\log p|=0$ wherever $q_t=0$. The Q integral itself is choice-free. To test finite KL when $q_t\\mu\\ll q_\\theta^x\\mu$, assume AC as required by [[def-axiom-of-choice]] and [[def-kullback-leibler-divergence]]; when absolute continuity fails, $D=+\\infty$ by that definition without AC. An **admissible candidate** $\\theta$ also satisfies $0<m_\\theta(x)<\\infty$, $q_t\\mu\\ll q_\\theta^x\\mu$, and\n$$D(q_t\\mu\\|q_\\theta^x\\mu)<\\infty,$$\nwhere the direction of $D$ is that of [[def-kullback-leibler-divergence]]. Require $\\int q_t|\\log p(\\theta,x,\\cdot)|\\,d\\mu<\\infty$ for each candidate and $\\int q_t|\\log p(\\theta_t,x,\\cdot)|\\,d\\mu<\\infty$ for the current iterate.\n\n**Output.** Emit the iterate sequence beginning with $\\theta_0$. If a stopping condition occurs after $T$ successful updates, return the finite list $(\\theta_0,\\ldots,\\theta_T)$ and a status recording the first unavailable condition or selector result; do not append a failed candidate. If no stopping condition occurs, the emitted sequence is infinite and there is no finite stopping status.\n\n**Procedure.** For $t=0,1,2,\\ldots$, check that $0<m_{\\theta_t}(x)<\\infty$; if not, return the current list with status `stopped: invalid current marginal`. Form $q_t$ and $Q(\\cdot\\mid\\theta_t)$ on admissible candidates. If $Q(\\theta_t\\mid\\theta_t)$ is not finite, return with status `stopped: current Q is not finite`. Call the supplied selector. In **exact mode**, its candidate set must consist of admissible candidates and contain $\\theta_t$; it returns an attained maximizer of $Q$ on that set, or `unavailable` if no attained maximum is available. In **generalized mode**, it returns any admissible $\\theta_{t+1}$ with $Q(\\theta_{t+1}\\mid\\theta_t)\\ge Q(\\theta_t\\mid\\theta_t)$, or `unavailable` if no such update is supplied. If the selector returns `unavailable`, return with status `stopped: no required update supplied`; otherwise append its candidate and continue. The procedure asserts no convergence or global-optimality property and makes no assertion for a candidate that loses current latent support.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $\\theta\\in(0,1)$, summing $p_\\theta(x,z)$ over $(x,z)\\in\\{0,1\\}^2$ gives $(\\theta+(1-\\theta))^2=1$. At $x=1$, $m_\\theta(1)=\\theta$ and the conditional law of $Z$ is Bernoulli$(\\theta)$, so the current law is Bernoulli$(1/2)$. Every candidate has positive finite marginal, the same two-point latent support, and $D(q_t\\|q_\\theta)=\\frac12\\log(1/(2\\theta))+\\frac12\\log(1/(2(1-\\theta)))$ is finite by [A1, F3]. Their complete-data log values are finite, so every $\\theta\\in(0,1)$ is admissible by [F4].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Averaging $\\log p_\\theta(1,Z)$ under that current conditional law gives $Q(\\theta\\mid1/2)=\\frac32\\log\\theta+\\frac12\\log(1-\\theta)=\\frac12\\log\\bigl(\\theta^3(1-\\theta)\\bigr)$. At $\\theta=1/2$, this is $\\log(1/4)$; at $\\theta=7/10$, it is $\\frac12\\log(1029/10000)$. Their difference is $\\frac12\\log(1029/625)>0$, so the candidate strictly raises $Q$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $0<\\theta<1$, $\\frac{27}{256}-\\theta^3(1-\\theta)=(\\theta-3/4)^2\\bigl((\\theta+1/4)^2+1/8\\bigr)\\ge0$, with equality only at $\\theta=3/4$. Thus the exact maximizer of $Q$ is $3/4$, so $7/10$ is a genuinely nonmaximizing generalized step. The observed log-likelihood difference is $\\log(7/10)-\\log(1/2)=\\log(7/5)>0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes nonempty two-point observation and latent spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The parameter lies in (0,1), so m_theta(1)=theta is positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The open parameter interval excludes theta=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: At theta_t=1/2 the conditional latent law is nondegenerate Bernoulli one half."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The open parameter domain excludes theta=0 and theta=1, so all Q logarithms are finite."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example supplies one candidate and proves no selector-existence result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example supplies candidate 7/10 with Q increase; proofs 2.1–3.1 independently verify increase and the different exact maximizer 3/4. No biconditional is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 3.1 does identify the unique exact maximizer via an equality factorization, but the Example never asserts that every Q-increasing candidate is 7/10 or is nonmaximizing."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "bernoulli-q-values",
+          "claim": "Q(7/10|1/2)-Q(1/2|1/2)=0.5 log(1029/625)>0; the exact maximum is at 3/4.",
+          "result": "The exact ratio exceeds one, and the square factor in the proof vanishes only at 3/4."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Checked all three steps: independent Bernoulli joint masses normalize; x=1 gives m=theta and latent Bernoulli(theta). Open interval (0,1) keeps both supports/logs finite; AC covers finite RN/KL branch. Q=(3 log(theta)+log(1-theta))/2; candidate 7/10 increases Q by log(1029/625)/2 and observed likelihood by log(7/5). Expanded factorization 27/256-theta^3(1-theta)=(theta-3/4)^2*((theta+1/4)^2+1/8) verifies unique exact maximizer 3/4. Thus supplied 7/10 is nonmaximizing Q-ascent, with no assertion for excluded endpoints."
+      }
+    },
+    "ex-em-likelihood-has-two-local-maxima": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-latent-variable-joint-and-observed-data-factorization",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$, $(\\mathsf X,\\mathcal A)$, and\n$(\\mathsf Z,\\mathcal C)$ be measurable spaces (sets equipped with\nsigma-algebras; [[def-measurable-space]]). Let $\\nu$ and $\\mu$ be sigma-finite\nreference measures on the observation and latent spaces; each has a countable\nmeasurable cover by sets of finite measure\n([[def-finite-sigma-finite-and-semifinite-measures]]). The finite product\nsigma-algebra is generated by measurable rectangles\n([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). The product\nreference measure $\\nu\\otimes\\mu$ is the one supplied by\n[[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]].\n\nA **jointly measurable latent-variable density** is a specified function\n$$p:\\Theta\\times\\mathsf X\\times\\mathsf Z\\longrightarrow[0,\\infty]$$\nmeasurable for $\\mathcal T\\otimes\\mathcal A\\otimes\\mathcal C$ and normalized\non every parameter fibre:\n$$\\int_{\\mathsf X\\times\\mathsf Z}p(\\theta,x,z)\\, (\\nu\\otimes\\mu)(d(x,z))=1\\qquad(\\theta\\in\\Theta).$$\nHere $x$ is the observed coordinate and $z$ the latent coordinate. The\nobserved marginal density is\n$$m(\\theta,x):=\\int_{\\mathsf Z}p(\\theta,x,z)\\,\\mu(dz).$$\nThe valid-fibre set is\n$V:=\\{(\\theta,x):0<m(\\theta,x)<\\infty\\}$. Only on $V$ define the normalized\nlatent-fibre density\n$$q(z\\mid\\theta,x):=\\frac{p(\\theta,x,z)}{m(\\theta,x)}.$$\nThis definition requires a single jointly measurable density as an input.\n[[def-likelihood-density]] supplies neither a sigma-algebra on $\\Theta$ nor\njoint parameter measurability from separately specified likelihood sections;\nthe joint measurability above is an additional hypothesis. Because $p$ is\nalready supplied as one joint function, this definition uses no choice axiom.\nIt does not assert that AC can turn separately specified pointwise likelihood\nversions into a jointly measurable version. No quotient or pointwise\nconditional density is asserted on a zero or infinite marginal fibre.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-observed-density-is-latent-marginal-under-tonelli",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses of\n[[def-latent-variable-joint-and-observed-data-factorization]]. Then\n$m(\\theta,x)=\\int p(\\theta,x,z)\\,\\mu(dz)$ is jointly measurable in\n$(\\theta,x)$. For each fixed $\\theta$, it is an observed-data probability\ndensity: it is $\\mathcal A$-measurable and\n$$\\int_{\\mathsf X}m(\\theta,x)\\,\\nu(dx)=1.$$\nConsequently $m(\\theta,x)<\\infty$ for $\\nu$-almost every $x$. On every valid\nfibre $0<m(\\theta,x)<\\infty$, $q(z\\mid\\theta,x)=p(\\theta,x,z)/m(\\theta,x)$ is\na measurable $\\mu$-density of total mass one. Finally, if $h:\\Theta\\times\\mathsf X\\times\\mathsf Z\\to\\mathbb C$ is product\nmeasurable and\n$\\int |h(\\theta,x,z)|p(\\theta,x,z)\\,d(\\nu\\otimes\\mu)<\\infty$ for a fixed\n$\\theta$, Fubini permits exchanging the latent and observed integrals of\n$hp$. No exchange is claimed without this absolute integrability.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-expectation-maximization",
+          "source_section": "Definition",
+          "quote": "**Inputs.** Supply a measurable parameter space $(\\Theta,\\mathcal T)$, sigma-finite measure spaces $(\\mathsf X,\\mathcal A,\\nu)$ and $(\\mathsf Z,\\mathcal C,\\mu)$, and a jointly measurable complete-data density $p(\\theta,x,z)$ relative to $\\nu\\otimes\\mu$ that integrates to one on each parameter fiber, as in [[def-latent-variable-joint-and-observed-data-factorization]]. This joint measurability is supplied explicitly and is not inferred from separate likelihood-density versions ([[def-likelihood-density]]). Also supply fixed observed data $x$, an initial value $\\theta_0$, a mode `exact` or `generalized`, and a candidate selector that returns either a candidate or `unavailable` in finite time at each call. Require $0<m_{\\theta_0}(x)<\\infty$ and\n$$\\int q_{\\theta_0}^x(z)\\,|\\log p(\\theta_0,x,z)|\\,\\mu(dz)<\\infty.$$\n\nWrite\n$$m_\\theta(x):=\\int_{\\mathsf Z}p(\\theta,x,z)\\,\\mu(dz),\\qquad q_\\theta^x(z):=\\frac{p(\\theta,x,z)}{m_\\theta(x)}$$\nonly when $0<m_\\theta(x)<\\infty$. By [[thm-observed-density-is-latent-marginal-under-tonelli]], $m_\\theta$ is the observed-data density and $q_\\theta^x$ is a probability density on every such fiber. The observed log likelihood is $\\ell_x(\\theta):=\\log m_\\theta(x)$ on those fibers.\n\nAt each valid iterate $\\theta_t$, set $q_t:=q_{\\theta_t}^x$ and define\n$$Q(\\theta\\mid\\theta_t):=\\int_{\\mathsf Z}\\log p(\\theta,x,z)\\,q_t(z)\\,\\mu(dz)$$\nonly for candidates where this integral is finite. Use $\\log0=-\\infty$ and set $q_t|\\log p|=0$ wherever $q_t=0$. The Q integral itself is choice-free. To test finite KL when $q_t\\mu\\ll q_\\theta^x\\mu$, assume AC as required by [[def-axiom-of-choice]] and [[def-kullback-leibler-divergence]]; when absolute continuity fails, $D=+\\infty$ by that definition without AC. An **admissible candidate** $\\theta$ also satisfies $0<m_\\theta(x)<\\infty$, $q_t\\mu\\ll q_\\theta^x\\mu$, and\n$$D(q_t\\mu\\|q_\\theta^x\\mu)<\\infty,$$\nwhere the direction of $D$ is that of [[def-kullback-leibler-divergence]]. Require $\\int q_t|\\log p(\\theta,x,\\cdot)|\\,d\\mu<\\infty$ for each candidate and $\\int q_t|\\log p(\\theta_t,x,\\cdot)|\\,d\\mu<\\infty$ for the current iterate.\n\n**Output.** Emit the iterate sequence beginning with $\\theta_0$. If a stopping condition occurs after $T$ successful updates, return the finite list $(\\theta_0,\\ldots,\\theta_T)$ and a status recording the first unavailable condition or selector result; do not append a failed candidate. If no stopping condition occurs, the emitted sequence is infinite and there is no finite stopping status.\n\n**Procedure.** For $t=0,1,2,\\ldots$, check that $0<m_{\\theta_t}(x)<\\infty$; if not, return the current list with status `stopped: invalid current marginal`. Form $q_t$ and $Q(\\cdot\\mid\\theta_t)$ on admissible candidates. If $Q(\\theta_t\\mid\\theta_t)$ is not finite, return with status `stopped: current Q is not finite`. Call the supplied selector. In **exact mode**, its candidate set must consist of admissible candidates and contain $\\theta_t$; it returns an attained maximizer of $Q$ on that set, or `unavailable` if no attained maximum is available. In **generalized mode**, it returns any admissible $\\theta_{t+1}$ with $Q(\\theta_{t+1}\\mid\\theta_t)\\ge Q(\\theta_t\\mid\\theta_t)$, or `unavailable` if no such update is supplied. If the selector returns `unavailable`, return with status `stopped: no required update supplied`; otherwise append its candidate and continue. The procedure asserts no convergence or global-optimality property and makes no assertion for a candidate that loses current latent support.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-em-observed-log-likelihood-is-nondecreasing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $p(\\theta,x,z)$ be a jointly measurable normalized complete-data density as in [[def-latent-variable-joint-and-observed-data-factorization]], and fix observed data $x$. Put $m_\\theta(x)=\\int p(\\theta,x,z)\\,\\mu(dz)$. Let $\\theta_t$ and $\\theta$ satisfy $0<m_{\\theta_t}(x),m_\\theta(x)<\\infty$. Define $q_t(z)=p(\\theta_t,x,z)/m_{\\theta_t}(x)$ and $q_\\theta^x(z)=p(\\theta,x,z)/m_\\theta(x)$. Assume\n$$q_t\\mu\\ll q_\\theta^x\\mu,\\qquad \\int q_t(z)\\bigl(|\\log p(\\theta_t,x,z)|+|\\log p(\\theta,x,z)|\\bigr)\\,\\mu(dz)<\\infty,$$\nand $D(q_t\\mu\\|q_\\theta^x\\mu)<\\infty$. Use $\\log0=-\\infty$ and set $q_t|\\log p|=0$ wherever $q_t=0$. Then, with $Q(\\theta\\mid\\theta_t)=\\int q_t(z)\\log p(\\theta,x,z)\\,\\mu(dz)$,\n$$\\ell_x(\\theta)-\\ell_x(\\theta_t) =Q(\\theta\\mid\\theta_t)-Q(\\theta_t\\mid\\theta_t) +D(q_t\\mu\\|q_\\theta^x\\mu).$$\nConsequently, any admissible update with $Q(\\theta\\mid\\theta_t)\\ge Q(\\theta_t\\mid\\theta_t)$ does not decrease $\\ell_x$. An exact M-step has this property when its maximum is attained over an admissible candidate set containing $\\theta_t$. No equality-of-parameter conclusion is asserted when the KL divergence is zero.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "rem-em-ascent-does-not-imply-global-optimality-or-convergence",
+          "source_section": "Remark",
+          "quote": "Under the hypotheses of [[thm-em-observed-log-likelihood-is-nondecreasing]] and [[thm-generalized-em-is-nondecreasing-under-q-ascent]], including AC, these are one-step inequalities for a fixed data fiber. They do not prove that the likelihood sequence is bounded, that parameter iterates converge, that a limit point is stationary, or that a stationary point is globally optimal. The exact M-step also requires an attained Q maximum; ascent itself does not supply one. These are limits of the stated ascent result, not additional convergence theorems.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $0\\le(\\theta^2-1)^2\\le9$ on $[-2,2]$, $1/4\\le r(\\theta)\\le1/2$. Thus $p_\\theta$ is nonnegative and sums to one over $(x,z)\\in\\{0,1\\}^2$ for every $\\theta$. The observed density at $x=1$ is $m_\\theta(1)=r(\\theta)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The squared term $(\\theta^2-1)^2$ vanishes exactly at $\\theta=\\pm1$ and is positive elsewhere. Therefore $r(\\theta)$, and hence the observed likelihood and log likelihood, have strict local maxima at those two distinct parameter values; both are global maximizers with equal value, so neither is a strict global maximum.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every current value $\\theta_t=\\pm1$, the latent conditional law is uniform on $Z$. For any candidate $\\theta$, $Q(\\theta\\mid\\theta_t)=\\log r(\\theta)-\\log2$, so its exact maximizer set is again $\\{-1,1\\}$. Starting from $\\theta_0=-1$, choosing $\\theta_{t+1}=-\\theta_t$ at each step is an attained exact M-step; all fibers have positive finite marginals and identical latent support, with finite Q and KL. The algorithm therefore emits the infinite alternating sequence, which has no limit while its log likelihood is constant. This verifies the limitation described in [F5] without contradicting the one-step ascent result [F4].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes nonempty finite X and Z.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The bound r(theta)>=1/4 keeps every observed marginal positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The observed marginal r(theta) is at most one half, so the unit case is absent.",
+          "evidence": ""
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The latent conditional law is uniform on two labels at every parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The parameter endpoints +/-2 are included but the strict maxima occur only at +/-1 by step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example gives an explicit alternating selector between two attained maximizers; AC is used only for the cited theorem context."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example asserts two strict local/global likelihood maxima and constructs one alternating exact-EM selector. Proofs 2.1–3.1 establish those claims, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 characterizes maxima in this particular model by theta=+/-1; no converse from parameter nonconvergence to multiple maxima is asserted by the Example."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-tied-exact-maximizers",
+          "claim": "r(theta)=1/2-(theta^2-1)^2/36 has exactly two maximizers on [-2,2], at +/-1.",
+          "result": "The squared term is nonnegative and vanishes exactly at those two values; Q differs from log r by the constant -log 2."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Checked all three verification paragraphs and actual ascent/remark suppliers. On [-2,2], 0<= (theta^2-1)^2 <=9, so r in [1/4,1/2]; both coordinates normalize and marginals stay valid. Exactly +/-1 attain r=1/2 and are strict local, tied global maxima. Latent conditional law is uniform at every parameter; Q=log r-log2, KL=0, finite logs. At +/-1 the selector theta_next=-theta is an attained exact maximizer on an admissible set containing current iterate. Sequence alternates -1,+1 and has no limit, while likelihood is constant. AC inherited from KL/ascent is explicit. No strict global maximum or general convergence claim."
+      }
+    },
+    "ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-normal-location-scale-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$\nof [[def-standard-normal-and-normal-laws]] has Lebesgue density\n$$g_{m,\\sigma}(y)=\\frac1\\sigma\\frac{e^{-((y-m)/\\sigma)^2/2}}{\\sqrt{2\\pi}}=\\frac1{\\sqrt{2\\pi\\sigma^2}}e^{-(y-m)^2/(2\\sigma^2)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-latent-variable-joint-and-observed-data-factorization",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$, $(\\mathsf X,\\mathcal A)$, and\n$(\\mathsf Z,\\mathcal C)$ be measurable spaces (sets equipped with\nsigma-algebras; [[def-measurable-space]]). Let $\\nu$ and $\\mu$ be sigma-finite\nreference measures on the observation and latent spaces; each has a countable\nmeasurable cover by sets of finite measure\n([[def-finite-sigma-finite-and-semifinite-measures]]). The finite product\nsigma-algebra is generated by measurable rectangles\n([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). The product\nreference measure $\\nu\\otimes\\mu$ is the one supplied by\n[[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]].\n\nA **jointly measurable latent-variable density** is a specified function\n$$p:\\Theta\\times\\mathsf X\\times\\mathsf Z\\longrightarrow[0,\\infty]$$\nmeasurable for $\\mathcal T\\otimes\\mathcal A\\otimes\\mathcal C$ and normalized\non every parameter fibre:\n$$\\int_{\\mathsf X\\times\\mathsf Z}p(\\theta,x,z)\\, (\\nu\\otimes\\mu)(d(x,z))=1\\qquad(\\theta\\in\\Theta).$$\nHere $x$ is the observed coordinate and $z$ the latent coordinate. The\nobserved marginal density is\n$$m(\\theta,x):=\\int_{\\mathsf Z}p(\\theta,x,z)\\,\\mu(dz).$$\nThe valid-fibre set is\n$V:=\\{(\\theta,x):0<m(\\theta,x)<\\infty\\}$. Only on $V$ define the normalized\nlatent-fibre density\n$$q(z\\mid\\theta,x):=\\frac{p(\\theta,x,z)}{m(\\theta,x)}.$$\nThis definition requires a single jointly measurable density as an input.\n[[def-likelihood-density]] supplies neither a sigma-algebra on $\\Theta$ nor\njoint parameter measurability from separately specified likelihood sections;\nthe joint measurability above is an additional hypothesis. Because $p$ is\nalready supplied as one joint function, this definition uses no choice axiom.\nIt does not assert that AC can turn separately specified pointwise likelihood\nversions into a jointly measurable version. No quotient or pointwise\nconditional density is asserted on a zero or infinite marginal fibre.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-em-observed-log-likelihood-is-nondecreasing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $p(\\theta,x,z)$ be a jointly measurable normalized complete-data density as in [[def-latent-variable-joint-and-observed-data-factorization]], and fix observed data $x$. Put $m_\\theta(x)=\\int p(\\theta,x,z)\\,\\mu(dz)$. Let $\\theta_t$ and $\\theta$ satisfy $0<m_{\\theta_t}(x),m_\\theta(x)<\\infty$. Define $q_t(z)=p(\\theta_t,x,z)/m_{\\theta_t}(x)$ and $q_\\theta^x(z)=p(\\theta,x,z)/m_\\theta(x)$. Assume\n$$q_t\\mu\\ll q_\\theta^x\\mu,\\qquad \\int q_t(z)\\bigl(|\\log p(\\theta_t,x,z)|+|\\log p(\\theta,x,z)|\\bigr)\\,\\mu(dz)<\\infty,$$\nand $D(q_t\\mu\\|q_\\theta^x\\mu)<\\infty$. Use $\\log0=-\\infty$ and set $q_t|\\log p|=0$ wherever $q_t=0$. Then, with $Q(\\theta\\mid\\theta_t)=\\int q_t(z)\\log p(\\theta,x,z)\\,\\mu(dz)$,\n$$\\ell_x(\\theta)-\\ell_x(\\theta_t) =Q(\\theta\\mid\\theta_t)-Q(\\theta_t\\mid\\theta_t) +D(q_t\\mu\\|q_\\theta^x\\mu).$$\nConsequently, any admissible update with $Q(\\theta\\mid\\theta_t)\\ge Q(\\theta_t\\mid\\theta_t)$ does not decrease $\\ell_x$. An exact M-step has this property when its maximum is attained over an admissible candidate set containing $\\theta_t$. No equality-of-parameter conclusion is asserted when the KL divergence is zero.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "rem-em-ascent-does-not-imply-global-optimality-or-convergence",
+          "source_section": "Remark",
+          "quote": "Under the hypotheses of [[thm-em-observed-log-likelihood-is-nondecreasing]] and [[thm-generalized-em-is-nondecreasing-under-q-ascent]], including AC, these are one-step inequalities for a fixed data fiber. They do not prove that the likelihood sequence is bounded, that parameter iterates converge, that a limit point is stationary, or that a stationary point is globally optimal. The exact M-step also requires an attained Q maximum; ascent itself does not supply one. These are limits of the stated ascent result, not additional convergence theorems.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each fixed label pair the displayed density is continuous in $(\\epsilon,y_1,y_2)$ on $(0,\\infty)\\times\\mathbb R^2$; the finite label space therefore makes it jointly measurable. For each observation coordinate, $\\sum_{j=1}^2\\int_{\\mathbb R}\\frac12\\varphi_{a_j,s_j}(y)\\,dy=1$ by [F1]. Lebesgue measure and finite counting measure are sigma-finite, so Tonelli [F5] gives integral $1\\cdot1=1$ for the nonnegative two-coordinate product density. This verifies the requirements of [F2] directly. Summing over the two labels in each coordinate gives the observed joint density $g_\\epsilon(y_1)g_\\epsilon(y_2)$, so its value at $(0,1)$ is $L_\\epsilon$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At the two observations, $g_\\epsilon(0)\\ge\\frac{1}{2\\sqrt{2\\pi}\\,\\epsilon}$ and $g_\\epsilon(1)\\ge\\frac{1}{2\\sqrt{2\\pi}}$. Thus $L_\\epsilon\\ge1/(8\\pi\\epsilon)$. For every $M>0$, choosing $0<\\epsilon<1/(8\\pi M)$ gives $L_\\epsilon>M$, so the likelihood is unbounded while each fixed-$\\epsilon$ value is finite. No finite parameter attains a global maximum.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This is compatible with [F3]–[F4]: the ascent theorem only compares consecutive admissible iterates; it neither bounds the likelihood sequence nor supplies a parameter attaining its unbounded supremum.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses two observations and a nonempty two-label latent space.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: For every epsilon>0, both normal components and mixture density at the stated observations are positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A likelihood value of one is not an exceptional model point: normalization concerns the integral of each density, not its value at the observations.",
+          "evidence": ""
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Each variance is strictly positive for every model point; the zero-variance limit is not included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Epsilon=0 is outside the parameter domain, and step 2.1 proves divergence as epsilon decreases to that boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example uses supplied component labels; AC is explicitly assumed for the normal-density supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example asserts unbounded likelihood as epsilon decreases to zero, established by proof 2.1 lower bound 1/(8pi epsilon). This is not a necessary-and-sufficient statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 constructs arbitrarily large likelihood values from small epsilon; Example does not assert that every unbounded mixture likelihood must have this specific covariance-collapse path."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "gaussian-mixture-collapse-bound",
+          "claim": "For every epsilon>0, L_epsilon>=1/(8 pi epsilon).",
+          "result": "The componentwise lower bounds multiply; choosing epsilon<1/(8 pi M) makes L_epsilon>M for each M>0."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Checked all three verification paragraphs and complete normal-location-scale supplier proof. AC implies CC for affine C1 change of variables; positive epsilon gives proper finite Gaussian components. Product of two normalized mixtures is jointly measurable and normalizes by Tonelli; summing labels gives independent-observation likelihood. g_epsilon(0)>=1/(2 sqrt(2pi) epsilon), g_epsilon(1)>=1/(2 sqrt(2pi)), hence L>=1/(8 pi epsilon), which diverges; each epsilon>0 gives finite L and no maximizer exists. This example asserts no EM trajectory approaching collapse. Reader:24:1 and refuter:24:1 alleged normalization dependency cycle is false: the exact reader-observed published lemma carrier has no normal-law dependency; current supplied normalization proof is independent of that definition. No supplier edit or publication audit. Step 5 unit 24 repair: F2 now restates the actual supplied-density definition rather than attributing a finite-mixture construction theorem to it. Step 1.1 proves joint measurability from continuity on each finite label pair and verifies normalization using the explicitly cited sigma-finite Tonelli theorem F5. The likelihood bound and Example remain unchanged. This is the repair author's check, not an independent review."
+      }
+    },
+    "ex-em-support-losing-candidate-violates-finite-kl-condition": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-latent-variable-joint-and-observed-data-factorization",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$, $(\\mathsf X,\\mathcal A)$, and\n$(\\mathsf Z,\\mathcal C)$ be measurable spaces (sets equipped with\nsigma-algebras; [[def-measurable-space]]). Let $\\nu$ and $\\mu$ be sigma-finite\nreference measures on the observation and latent spaces; each has a countable\nmeasurable cover by sets of finite measure\n([[def-finite-sigma-finite-and-semifinite-measures]]). The finite product\nsigma-algebra is generated by measurable rectangles\n([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). The product\nreference measure $\\nu\\otimes\\mu$ is the one supplied by\n[[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]].\n\nA **jointly measurable latent-variable density** is a specified function\n$$p:\\Theta\\times\\mathsf X\\times\\mathsf Z\\longrightarrow[0,\\infty]$$\nmeasurable for $\\mathcal T\\otimes\\mathcal A\\otimes\\mathcal C$ and normalized\non every parameter fibre:\n$$\\int_{\\mathsf X\\times\\mathsf Z}p(\\theta,x,z)\\, (\\nu\\otimes\\mu)(d(x,z))=1\\qquad(\\theta\\in\\Theta).$$\nHere $x$ is the observed coordinate and $z$ the latent coordinate. The\nobserved marginal density is\n$$m(\\theta,x):=\\int_{\\mathsf Z}p(\\theta,x,z)\\,\\mu(dz).$$\nThe valid-fibre set is\n$V:=\\{(\\theta,x):0<m(\\theta,x)<\\infty\\}$. Only on $V$ define the normalized\nlatent-fibre density\n$$q(z\\mid\\theta,x):=\\frac{p(\\theta,x,z)}{m(\\theta,x)}.$$\nThis definition requires a single jointly measurable density as an input.\n[[def-likelihood-density]] supplies neither a sigma-algebra on $\\Theta$ nor\njoint parameter measurability from separately specified likelihood sections;\nthe joint measurability above is an additional hypothesis. Because $p$ is\nalready supplied as one joint function, this definition uses no choice axiom.\nIt does not assert that AC can turn separately specified pointwise likelihood\nversions into a jointly measurable version. No quotient or pointwise\nconditional density is asserted on a zero or infinite marginal fibre.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-expectation-maximization",
+          "source_section": "Definition",
+          "quote": "**Inputs.** Supply a measurable parameter space $(\\Theta,\\mathcal T)$, sigma-finite measure spaces $(\\mathsf X,\\mathcal A,\\nu)$ and $(\\mathsf Z,\\mathcal C,\\mu)$, and a jointly measurable complete-data density $p(\\theta,x,z)$ relative to $\\nu\\otimes\\mu$ that integrates to one on each parameter fiber, as in [[def-latent-variable-joint-and-observed-data-factorization]]. This joint measurability is supplied explicitly and is not inferred from separate likelihood-density versions ([[def-likelihood-density]]). Also supply fixed observed data $x$, an initial value $\\theta_0$, a mode `exact` or `generalized`, and a candidate selector that returns either a candidate or `unavailable` in finite time at each call. Require $0<m_{\\theta_0}(x)<\\infty$ and\n$$\\int q_{\\theta_0}^x(z)\\,|\\log p(\\theta_0,x,z)|\\,\\mu(dz)<\\infty.$$\n\nWrite\n$$m_\\theta(x):=\\int_{\\mathsf Z}p(\\theta,x,z)\\,\\mu(dz),\\qquad q_\\theta^x(z):=\\frac{p(\\theta,x,z)}{m_\\theta(x)}$$\nonly when $0<m_\\theta(x)<\\infty$. By [[thm-observed-density-is-latent-marginal-under-tonelli]], $m_\\theta$ is the observed-data density and $q_\\theta^x$ is a probability density on every such fiber. The observed log likelihood is $\\ell_x(\\theta):=\\log m_\\theta(x)$ on those fibers.\n\nAt each valid iterate $\\theta_t$, set $q_t:=q_{\\theta_t}^x$ and define\n$$Q(\\theta\\mid\\theta_t):=\\int_{\\mathsf Z}\\log p(\\theta,x,z)\\,q_t(z)\\,\\mu(dz)$$\nonly for candidates where this integral is finite. Use $\\log0=-\\infty$ and set $q_t|\\log p|=0$ wherever $q_t=0$. The Q integral itself is choice-free. To test finite KL when $q_t\\mu\\ll q_\\theta^x\\mu$, assume AC as required by [[def-axiom-of-choice]] and [[def-kullback-leibler-divergence]]; when absolute continuity fails, $D=+\\infty$ by that definition without AC. An **admissible candidate** $\\theta$ also satisfies $0<m_\\theta(x)<\\infty$, $q_t\\mu\\ll q_\\theta^x\\mu$, and\n$$D(q_t\\mu\\|q_\\theta^x\\mu)<\\infty,$$\nwhere the direction of $D$ is that of [[def-kullback-leibler-divergence]]. Require $\\int q_t|\\log p(\\theta,x,\\cdot)|\\,d\\mu<\\infty$ for each candidate and $\\int q_t|\\log p(\\theta_t,x,\\cdot)|\\,d\\mu<\\infty$ for the current iterate.\n\n**Output.** Emit the iterate sequence beginning with $\\theta_0$. If a stopping condition occurs after $T$ successful updates, return the finite list $(\\theta_0,\\ldots,\\theta_T)$ and a status recording the first unavailable condition or selector result; do not append a failed candidate. If no stopping condition occurs, the emitted sequence is infinite and there is no finite stopping status.\n\n**Procedure.** For $t=0,1,2,\\ldots$, check that $0<m_{\\theta_t}(x)<\\infty$; if not, return the current list with status `stopped: invalid current marginal`. Form $q_t$ and $Q(\\cdot\\mid\\theta_t)$ on admissible candidates. If $Q(\\theta_t\\mid\\theta_t)$ is not finite, return with status `stopped: current Q is not finite`. Call the supplied selector. In **exact mode**, its candidate set must consist of admissible candidates and contain $\\theta_t$; it returns an attained maximizer of $Q$ on that set, or `unavailable` if no attained maximum is available. In **generalized mode**, it returns any admissible $\\theta_{t+1}$ with $Q(\\theta_{t+1}\\mid\\theta_t)\\ge Q(\\theta_t\\mid\\theta_t)$, or `unavailable` if no such update is supplied. If the selector returns `unavailable`, return with status `stopped: no required update supplied`; otherwise append its candidate and continue. The procedure asserts no convergence or global-optimality property and makes no assertion for a candidate that loses current latent support.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $\\theta\\in[0,1]$, the complete-data masses sum to $\\theta+(1-\\theta)=1$, and the observed marginal is $m_\\theta(x_0)=1$. The current and candidate latent laws are therefore $q_t=(1/2,1/2)$ and $q_0=(1,0)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The singleton set $\\{1\\}$ has $q_0$-mass zero and $q_t$-mass $1/2$, so $q_t\\not\\ll q_0$ and $D(q_t\\|q_0)=+\\infty$ by [F2]. The extended diagnostic integral is $\\frac12\\log(1-0)+\\frac12\\log0=-\\infty$; it is not a finite value of $Q(0\\mid1/2)$ under [F3].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The observed log likelihood is zero at both parameters, but the candidate violates the support-compatible admissibility condition of [F3]. It is not an update allowed by the defined procedure.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a singleton observation and a two-point latent space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The candidate latent probability is zero at z=1, the support-loss boundary, while the observed marginal remains one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The observed marginal equals one at both current and candidate parameters."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The candidate latent law is a point mass, so it is degenerate and not support-compatible with q_t."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The candidate theta=0 is included and is the support-losing endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family is made; current and candidate points are specified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example gives one candidate theta=0 whose support loss yields infinite current-to-candidate KL by proof 2.1. It does not assert an equivalence for all EM inadmissibility."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 3.1 rejects this candidate using the finite-KL requirement; no reverse assertion says that every rejected candidate must lose support or have infinite KL."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "binary-support-loss",
+          "claim": "q_t=(1/2,1/2) is not absolutely continuous with respect to q_0=(1,0), and Q(0|1/2)=-infinity.",
+          "result": "The set {1} has q_0 mass zero and q_t mass one half; the second complete-data log term is log zero."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Checked complete finite model and all steps: theta+(1-theta)=1 at every endpoint, observed marginal one, current latent (1/2,1/2), candidate theta=0 latent (1,0). Event {1} witnesses failure of current absolute continuity relative to candidate, so KL is infinity by definition without AC. Diagnostic expected log is minus infinity and hence algorithm Q is undefined, not assigned that value. Constant observed likelihood does not make this inadmissible support-losing candidate an allowed update."
+      }
+    }
+  }
+}

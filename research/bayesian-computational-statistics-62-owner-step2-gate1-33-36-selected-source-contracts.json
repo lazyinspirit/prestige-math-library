@@ -1,0 +1,279 @@
+{
+  "scope": [
+    "lem-aperiodic-petite-set-with-accessible-small-set-is-small",
+    "lem-invariant-law-integrates-bounded-set-drift",
+    "lem-positive-triple-set-yields-uniform-overlap"
+  ],
+  "contracts": {
+    "lem-aperiodic-petite-set-with-accessible-small-set-is-small": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-petite-set-for-markov-kernel",
+          "source_section": "Definition",
+          "quote": "For a probability kernel $P$ ([[def-measure-kernel-and-probability-kernel]]), a measurable set $D$ is **petite** if there are a probability measure $\\nu$ ([[def-probability-measure]]), nonnegative weights $(a_n)_{n\\ge1}$ with $\\sum_{n\\ge1}a_n=1$, and a constant $\\alpha>0$ such that\n$$\\sum_{n\\ge1}a_nP^n(x,A)\\ge\\alpha\\nu(A)\\quad(x\\in D,\\ A\\in\\mathcal X).$$\nThis is a randomized-time minorization. A small set requires one fixed time; a petite set permits a common distribution over positive integer times.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-small-set-minorization-and-drift",
+          "source_section": "Definition",
+          "quote": "For a probability kernel $P$ on $(\\mathsf X,\\mathcal X)$ ([[def-measure-kernel-and-probability-kernel]]), a measurable set $C$ is **$(m,\\epsilon,\\nu)$-small** if $m\\ge1$ is an integer, $0<\\epsilon\\le1$, $\\nu$ is a probability measure ([[def-probability-measure]]), and\n$$P^m(x,A)\\ge\\epsilon\\nu(A)\\quad(x\\in C,\\ A\\in\\mathcal X).$$\nThe inequality is pointwise in $x$ and holds for every measurable $A$.\n\nA **geometric drift inequality outside $C$** consists of a finite-valued measurable $V:\\mathsf X\\to[1,\\infty)$, constants $0<\\lambda<1$ and $0\\le b<\\infty$, and\n$$PV(x):=\\int V(y)P(x,dy)\\le\\lambda V(x)+b\\,1_C(x)\\quad(x\\in\\mathsf X).$$\nThe terms small set and drift are separate hypotheses; neither definition asserts the existence of the other.\n\nWhen an invariant probability $\\pi$ is specified ([[def-invariant-and-stationary-distribution-for-a-markov-kernel]]), an **extended geometric drift certificate finite $\\pi$-almost everywhere** allows measurable $V:\\mathsf X\\to[1,+\\infty]$ with $\\pi(V<\\infty)=1$ and the same pointwise inequality, interpreted in the nonnegative extended reals. This is a separate convention from the finite-valued drift function above. The geometric theorem treats this certificate on $E=\\{V<\\infty\\}$; the original finite-valued convention gives the corresponding bound on the whole state space.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-aperiodic-minorization-times-are-cofinite",
+          "source_section": "Statement",
+          "quote": "Let $P$ be $\\phi$-irreducible ([[def-phi-irreducible-chain]]) and aperiodic ([[def-general-state-aperiodic-markov-chain]]) with invariant probability $\\pi$. Let $\\nu\\ll\\pi$ be a probability. Suppose every state has some $n(x)\\ge1$ and $\\delta(x)>0$ with $P^{n(x)}(x,\\cdot)\\ge\\delta(x)\\nu(\\cdot)$. Then there is $N$ such that for every $n\\ge N$, $\\nu P^n\\ge\\epsilon_n\\nu$ for some $\\epsilon_n>0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-phi-irreducible-chain",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X)$ be a countably generated measurable space ([[def-measurable-space]]), $P$ a probability kernel ([[def-measure-kernel-and-probability-kernel]]), and $\\phi$ a nonzero $\\sigma$-finite measure ([[def-finite-sigma-finite-and-semifinite-measures]]) on $\\mathcal X$. Write $P^n$ for the $n$-fold kernel iterate. The kernel is **$\\phi$-irreducible** if, for every $A\\in\\mathcal X$ with $\\phi(A)>0$ and every $x\\in\\mathsf X$, there is an integer $n\\ge1$ such that $P^n(x,A)>0$. Equivalently, the sum of these nonnegative probabilities over $n\\ge1$ is positive. No recurrence or invariant law is part of this definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-discrete-strong-markov-property",
+          "source_section": "Statement",
+          "quote": "Assume Choice. Let $X$ be a $K$-chain, let\n$\\tau:\\Omega\\to\\mathbb N_0\\cup\\{\\infty\\}$ be a stopping time, and let $H$ be a\nbounded measurable path functional. Put $h(x)=\\mathbb E_xH$ and define the\neverywhere meaningful random variables\n$$ Z_H:=\\sum_{n\\ge0}1_{\\{\\tau=n\\}}H(X_n,X_{n+1},\\ldots), \\qquad R_h:=\\sum_{n\\ge0}1_{\\{\\tau=n\\}}h(X_n). $$ Both are defined to be zero on $\\{\\tau=\\infty\\}$. Then $$ \\mathbb E[Z_H\\mid\\mathcal F_\\tau]=R_h\\quad\\text{a.s.} $$ This is the precise meaning of the usual eventwise notation $$ \\mathbb E[1_{\\{\\tau<\\infty\\}}H(X_\\tau,X_{\\tau+1},\\ldots)\\mid\\mathcal F_\\tau] =1_{\\{\\tau<\\infty\\}}h(X_\\tau): $$\nno value $X_\\infty$ is used. If $\\tau<\\infty$ almost surely, the indicators can\nbe omitted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a probability kernel on a measurable space $(E,\\mathcal E)$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure on $(E,\\mathcal E)$ ([[def-probability-measure]]). The\nprobability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a\n**stationary distribution** of $K$, when\n\n$$(\\pi K)(A):=\\int_E K(x,A)\\,\\pi(dx)=\\pi(A)\\qquad\\text{for every }A\\in\\mathcal E .$$\n\nThe set function $\\pi K$ is again a probability measure: for fixed $A$ the map\n$x\\mapsto K(x,A)$ is measurable and lies in $[0,1]$, so the integral exists in\n$[0,1]$; for pairwise disjoint $A_n\\in\\mathcal E$ the identity\n$K(x,\\bigcup_nA_n)=\\sum_nK(x,A_n)$ of the measure $K(x,\\cdot)$ and the\nmonotone convergence theorem for nonnegative functions\n([[thm-monotone-convergence-for-the-integral]]) give\n$\\sigma$-additivity of $\\pi K$; and $K(x,E)=1$ for every $x$ gives\n$(\\pi K)(E)=1$. Thus $(\\pi K)(A)=\\pi(A)$ is an identity between two probability\nmeasures evaluated at $A$.\n\nA $K$-chain whose initial law is $\\pi$ is called **stationary** when\n$\\pi K=\\pi$. Stationarity of the process is a statement about all of its\nfinite-dimensional laws and is proved, not assumed, from $\\pi K=\\pi$; see\n[[thm-invariant-initial-law-makes-the-chain-stationary]].\n\nOn a countable state space $E$ with sigma-algebra $2^E$ and transition matrix\n$p(x,y)=K(x,\\{y\\})$ ([[def-transition-matrix-and-n-step-transition-probabilities]]),\na measure on $E$ is its weighted sum of Dirac masses at singletons\n([[thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums]]), so\ninvariance is equivalent to the matrix identity\n\n$$\\pi(y)=\\sum_{x\\in E}\\pi(x)\\,p(x,y)\\qquad\\text{for every }y\\in E .$$\n\nThe definition fixes no irreducibility, aperiodicity or uniqueness hypothesis,\nand it selects no conditional-expectation versions; the display defines a\nsingle measure $\\pi K$ and asserts an identity for it. A transient, periodic or\nreducible chain may have several invariant probability measures or none.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-aperiodic-petite-set-with-accessible-small-set-is-small-step-1-1",
+          "step": "1.1",
+          "claim": "The petite inequality on $C$ gives $\\sum_na_nP^n(x,C)\\ge\\alpha\\nu(C)>0$ for every $x\\in D$. Choose $M$ so $\\sum_{n>M}a_n<\\alpha\\nu(C)/2$. Since $P^n(x,C)\\le\\Pr_x(\\tau_C\\le n)\\le\\Pr_x(\\tau_C\\le M)$ for $n\\le M$, the truncated weighted sum gives $\\Pr_x(\\tau_C\\le M)\\ge q:=\\alpha\\nu(C)/2$ uniformly on $D$.",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "lem-aperiodic-petite-set-with-accessible-small-set-is-small-step-1-2",
+          "step": "1.2",
+          "claim": "Since $\\nu(C)>0$ and $\\nu\\ll\\pi$, $\\pi(C)>0$. To see that every state has positive probability of reaching $C$, let $H=\\{x\\in C^c:P^n(x,C)=0\\text{ for every }n\\ge1\\}$. Kernel iteration makes $H$ measurable. If $x\\in H$ and $P(x,H^c)>0$, the countable union $H^c=C\\cup\\bigcup_{n\\ge1}\\{y:P^n(y,C)>0\\}$ has a member of positive $P(x,\\cdot)$-mass; integrating the corresponding positive function gives $P^{n+1}(x,C)>0$, a contradiction. Thus $P(x,H)=1$ for every $x\\in H$. Irreducibility then forces $\\phi(H^c)=0$, since no point of $H$ can reach $H^c$; hence $\\phi(H)>0$. For every $n\\ge1$, invariance and $P^n(x,H)=1$ on $H$ give $\\int_{H^c}P^n(x,H)\\,\\pi(dx)=0$. Irreducibility says every $x\\in H^c$ has $P^n(x,H)>0$ for some $n$, so the countable union of these $\\pi$-null level sets is $H^c$ and $\\pi(H^c)=0$, contradicting $\\pi(C)>0$. Therefore $H=\\varnothing$. For every state choose $n(x)\\ge1$ with $P^{n(x)}(x,C)>0$; then $P^{n(x)+m}(x,\\cdot)\\ge\\epsilon P^{n(x)}(x,C)\\nu(\\cdot)$. By [F3], $\\nu P^t\\ge c_t\\nu$ for every $t\\ge N_0$. Choose $L>M+m+N_0$. For every $0\\le s\\le M$ and $y\\in C$, $P^{L-s}(y,\\cdot)\\ge\\epsilon\\nu P^{L-s-m}(\\cdot)\\ge\\epsilon c_{L-s-m}\\nu(\\cdot).$ The minimum $c>0$ over these finitely many $s$ is positive.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "lem-aperiodic-petite-set-with-accessible-small-set-is-small-step-2-1",
+          "step": "2.1",
+          "claim": "Decompose at the first hitting time $\\tau_C=s\\le M$. The strong Markov property and step 1.2 give $P^L(x,\\cdot)\\ge c\\nu(\\cdot)\\Pr_x(\\tau_C\\le M)\\ge cq\\nu(\\cdot)$ for every $x\\in D$. This is one fixed-time minorization, so $D$ is small.",
+          "inputs": [
+            "F5",
+            "A1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Author checked stated hypotheses, domains, proof inputs, and standard boundaries. Independent review and owner reconciliation remain open."
+      }
+    },
+    "lem-invariant-law-integrates-bounded-set-drift": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-small-set-minorization-and-drift",
+          "source_section": "Definition",
+          "quote": "For a probability kernel $P$ on $(\\mathsf X,\\mathcal X)$ ([[def-measure-kernel-and-probability-kernel]]), a measurable set $C$ is **$(m,\\epsilon,\\nu)$-small** if $m\\ge1$ is an integer, $0<\\epsilon\\le1$, $\\nu$ is a probability measure ([[def-probability-measure]]), and\n$$P^m(x,A)\\ge\\epsilon\\nu(A)\\quad(x\\in C,\\ A\\in\\mathcal X).$$\nThe inequality is pointwise in $x$ and holds for every measurable $A$.\n\nA **geometric drift inequality outside $C$** consists of a finite-valued measurable $V:\\mathsf X\\to[1,\\infty)$, constants $0<\\lambda<1$ and $0\\le b<\\infty$, and\n$$PV(x):=\\int V(y)P(x,dy)\\le\\lambda V(x)+b\\,1_C(x)\\quad(x\\in\\mathsf X).$$\nThe terms small set and drift are separate hypotheses; neither definition asserts the existence of the other.\n\nWhen an invariant probability $\\pi$ is specified ([[def-invariant-and-stationary-distribution-for-a-markov-kernel]]), an **extended geometric drift certificate finite $\\pi$-almost everywhere** allows measurable $V:\\mathsf X\\to[1,+\\infty]$ with $\\pi(V<\\infty)=1$ and the same pointwise inequality, interpreted in the nonnegative extended reals. This is a separate convention from the finite-valued drift function above. The geometric theorem treats this certificate on $E=\\{V<\\infty\\}$; the original finite-valued convention gives the corresponding bound on the whole state space.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a probability kernel on a measurable space $(E,\\mathcal E)$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure on $(E,\\mathcal E)$ ([[def-probability-measure]]). The\nprobability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a\n**stationary distribution** of $K$, when\n\n$$(\\pi K)(A):=\\int_E K(x,A)\\,\\pi(dx)=\\pi(A)\\qquad\\text{for every }A\\in\\mathcal E .$$\n\nThe set function $\\pi K$ is again a probability measure: for fixed $A$ the map\n$x\\mapsto K(x,A)$ is measurable and lies in $[0,1]$, so the integral exists in\n$[0,1]$; for pairwise disjoint $A_n\\in\\mathcal E$ the identity\n$K(x,\\bigcup_nA_n)=\\sum_nK(x,A_n)$ of the measure $K(x,\\cdot)$ and the\nmonotone convergence theorem for nonnegative functions\n([[thm-monotone-convergence-for-the-integral]]) give\n$\\sigma$-additivity of $\\pi K$; and $K(x,E)=1$ for every $x$ gives\n$(\\pi K)(E)=1$. Thus $(\\pi K)(A)=\\pi(A)$ is an identity between two probability\nmeasures evaluated at $A$.\n\nA $K$-chain whose initial law is $\\pi$ is called **stationary** when\n$\\pi K=\\pi$. Stationarity of the process is a statement about all of its\nfinite-dimensional laws and is proved, not assumed, from $\\pi K=\\pi$; see\n[[thm-invariant-initial-law-makes-the-chain-stationary]].\n\nOn a countable state space $E$ with sigma-algebra $2^E$ and transition matrix\n$p(x,y)=K(x,\\{y\\})$ ([[def-transition-matrix-and-n-step-transition-probabilities]]),\na measure on $E$ is its weighted sum of Dirac masses at singletons\n([[thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums]]), so\ninvariance is equivalent to the matrix identity\n\n$$\\pi(y)=\\sum_{x\\in E}\\pi(x)\\,p(x,y)\\qquad\\text{for every }y\\in E .$$\n\nThe definition fixes no irreducibility, aperiodicity or uniqueness hypothesis,\nand it selects no conditional-expectation versions; the display defines a\nsingle measure $\\pi K$ and asserts an identity for it. A transient, periodic or\nreducible chain may have several invariant probability measures or none.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-invariant-law-integrates-bounded-set-drift-step-1-1",
+          "step": "1.1",
+          "claim": "If $C=\\varnothing$, then $PV\\le\\lambda V$ everywhere. For each integer $N\\ge1$, $V_N=V\\wedge N$ satisfies $PV_N-V_N\\le-(1-\\lambda)V$ on $\\{V\\le N\\}$ and $PV_N-V_N\\le0$ on $\\{V>N\\}$. Invariance for the bounded function $V_N$ gives integral zero, so $\\pi(\\{V\\le N\\})=0$. Since $V$ is finite-valued, these sets increase to the whole space, contradicting that $\\pi$ is a probability. Thus no invariant probability exists in the empty-set case, and the implication is vacuous. Assume $C\\ne\\varnothing$ below.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "lem-invariant-law-integrates-bounded-set-drift-step-1-2",
+          "step": "1.2",
+          "claim": "Set $V_N=V\\wedge N$. Since $V_N\\le V$ and $V_N\\le N$, $PV_N\\le \\min(PV,N)$. On $C$, $PV_N-V_N\\le\\lambda\\sup_CV+b$. On $C^c\\cap\\{V\\le N\\}$ it is at most $-(1-\\lambda)V$, and on $C^c\\cap\\{V>N\\}$ it is at most zero.",
+          "inputs": [
+            "F1",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "lem-invariant-law-integrates-bounded-set-drift-step-2-1",
+          "step": "2.1",
+          "claim": "Invariance for bounded $V_N$ gives $\\int(PV_N-V_N)d\\pi=0$. Using the three pointwise bounds from step 1.2, $(1-\\lambda)\\int_{C^c\\cap\\{V\\le N\\}}V\\,d\\pi\\le(\\lambda\\sup_CV+b)\\pi(C)\\le\\lambda\\sup_CV+b.$",
+          "inputs": [
+            "F2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "lem-invariant-law-integrates-bounded-set-drift-step-2-2",
+          "step": "2.2",
+          "claim": "The domains $C^c\\cap\\{V\\le N\\}$ increase to $C^c$; monotone convergence bounds $\\int_{C^c}Vd\\pi$ by the right side divided by $1-\\lambda$. The integral over $C$ is at most $\\sup_CV$. Hence $\\pi V<\\infty$.",
+          "inputs": [
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Author checked stated hypotheses, domains, proof inputs, and standard boundaries. Independent review and owner reconciliation remain open."
+      }
+    },
+    "lem-positive-triple-set-yields-uniform-overlap": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measurable-space",
+          "source_section": "Definition",
+          "quote": "A **measurable space** is a pair $(X,\\mathcal A)$ consisting of a set $X$ and a\nsigma-algebra $\\mathcal A$ on $X$ ([[def-sigma-algebra]]). The members of\n$\\mathcal A$ are the **measurable subsets** of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-measure-sets-are-approximable-by-a-generating-algebra",
+          "source_section": "Statement",
+          "quote": "If $\\mu(X)<\\infty$ and an algebra $\\mathcal C$ of subsets of X generates $\\mathcal A$, then for every $E\\in\\mathcal A$ and $\\varepsilon>0$ there is $C\\in\\mathcal C$ with $\\mu(E\\mathbin\\triangle C)<\\varepsilon$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-positive-triple-set-yields-uniform-overlap-step-1-1",
+          "step": "1.1",
+          "claim": "Put $\\eta=\\phi^{\\otimes3}(E)>0$. The product measure is finite because $\\phi$ is finite. By [F1], the union of the algebras of increasing finite tensor-product partitions is an algebra generating the product sigma-algebra. Apply [F2] to obtain a member $H$ of that algebra with $\\phi^{\\otimes3}(E\\mathbin\\triangle H)<\\eta/6$. Then $\\phi^{\\otimes3}(H)>5\\eta/6$ and $\\phi^{\\otimes3}(H\\setminus E)<\\eta/6<\\phi^{\\otimes3}(H)/4$, so $E$ occupies more than three quarters of $H$. The set $H$ is a finite union of tensor cells at a common partition level. If every positive-measure cell had occupancy at most three quarters, finite additivity would give the same upper bound on $H$, a contradiction. Thus some cell $U\\times V\\times W$ has positive product measure and $\\phi^{\\otimes3}(E\\cap(U\\times V\\times W))>\\tfrac34\\phi(U)\\phi(V)\\phi(W)>0$. Only one finite-algebra approximant and one cell of its finite partition are selected; no conditional-expectation representative or choice axiom is used.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-positive-triple-set-yields-uniform-overlap-step-1-2",
+          "step": "1.2",
+          "claim": "Since $E\\subseteq A\\times_{\\!y}B$, Tonelli gives $\\int_{U\\times V}1_A(x,y)\\,d\\phi(x)d\\phi(y)>\\tfrac34\\phi(U)\\phi(V),$ and likewise $\\int_{V\\times W}1_B(y,z)\\,d\\phi(y)d\\phi(z)>\\tfrac34\\phi(V)\\phi(W)$. Consequently the sets $C=\\{x\\in U:\\phi(A_1(x)\\cap V)>\\tfrac34\\phi(V)\\}$ and $D=\\{z\\in W:\\phi(B_2(z)\\cap V)>\\tfrac34\\phi(V)\\}$ have positive measure; otherwise the corresponding integral could not exceed three quarters of the rectangle measure.",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "lem-positive-triple-set-yields-uniform-overlap-step-2-1",
+          "step": "2.1",
+          "claim": "For $x\\in C$ and $z\\in D$, both sections occupy more than three quarters of $V$. The complement of their intersection in $V$ is the union of two sets, each of measure less than $\\phi(V)/4$. Thus $\\phi(A_1(x)\\cap B_2(z))\\ge\\phi(V)/2>0$. Set $\\gamma=\\phi(V)/2$.",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Author checked stated hypotheses, domains, proof inputs, and standard boundaries. Independent review and owner reconciliation remain open."
+      }
+    }
+  },
+  "integration": "Citations/derivations for3actual source repairs only; boundaries merge from boundary-patches.json, never restore stale native worksheet. Root final lexical step synchronization remains authoritative."
+}

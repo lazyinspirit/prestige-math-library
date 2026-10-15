@@ -1,0 +1,1329 @@
+{
+  "version": 1,
+  "scope": [
+    "alg-importance-sampling",
+    "thm-ordinary-importance-sampling-is-unbiased",
+    "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+    "alg-self-normalized-importance-sampling",
+    "thm-self-normalized-importance-sampling-is-consistent-under-finite-moments",
+    "thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse",
+    "def-importance-weight-effective-sample-size",
+    "ex-ordinary-and-self-normalized-importance-sampling-on-two-point-space",
+    "cex-ordinary-importance-sampling-infinite-variance-under-light-tailed-proposal",
+    "cex-importance-weight-ess-misses-target-region"
+  ],
+  "contracts": {
+    "alg-importance-sampling": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n\u22651; an empty-sample output or claim is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition assigns Y_i=0 when q(X_i)=0 and states the target-support condition for an unbiased estimate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition has n\u22651; at n=1 the returned average is the single weighted value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition\u2019s procedure is an arithmetic average and remains defined when all weighted values are the same."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs in the Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition or proof uses no arbitrary selection; where AC is needed, it is isolated to the stated CLT branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": []
+    },
+    "thm-ordinary-importance-sampling-is-unbiased": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-importance-sampling",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space. An **unnormalized target density** is a measurable function $\\tilde p:\\mathsf X\\to[0,\\infty)$ with\n$$Z_p:=\\int_{\\mathsf X}\\tilde p\\,d\\mu\\in(0,\\infty).$$\nThe target probability measure is $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$. A **proposal density** is a measurable $q:\\mathsf X\\to[0,\\infty)$ with $\\int q\\,d\\mu=1$; write $Q(dx)=q(x)\\mu(dx)$. The input integrand $f:\\mathsf X\\to\\mathbb R$ is measurable, and the input sample $X_1,\\ldots,X_n$ is IID with law $Q$, in the sense of [[def-identically-distributed-and-iid-random-variables]]. The normalizing constant $Z_p$ is known for this algorithm.\n\n**Admissible conditions for an unbiased estimate:** $n\\ge1$, $q>0$ $\\mu$-almost everywhere on $\\{x:f(x)\\tilde p(x)\\ne0\\}$, and the random variable\n$$Y:=\\begin{cases}f(X_1)\\tilde p(X_1)/(Z_pq(X_1)),&q(X_1)>0,\\\\0,&q(X_1)=0\\end{cases}$$\nis integrable under $Q$. The support condition makes the value on $q=0$ immaterial to the target integral.\n\n**Well-defined weights:** The reciprocal map $r(s)=1/s$ for $s>0$ and $r(s)=0$ for $s\\le0$ is Borel. Its composition with $q$, multiplied by the measurable inputs, makes the piecewise weight and weighted integrand measurable ([[thm-composition-with-borel-functions-preserves-measurability]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\n**Procedure and output:** For each supplied draw $X_i$, set $Y_i=f(X_i)\\tilde p(X_i)/(Z_pq(X_i))$ when $q(X_i)>0$ and set $Y_i=0$ otherwise. Return\n$$\\hat\\mu_{\\mathrm{IS}}:=\\frac1n\\sum_{i=1}^nY_i.$$\nSeparate variance and central limit claims require the corresponding weighted second-moment hypothesis.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use [F5] with density $r=q$ for integration against $Q$ and with $r=\\tilde p/Z_p$ for integration against $\\pi$. For every $i$, apply the nonnegative case of [F2] to $|Y_i|$. Since $X_i$ has law $Q$,\n$$\\mathbb E_Q|Y_i|=\\int_{\\{q>0\\}}\\frac{|f(x)|\\tilde p(x)}{Z_pq(x)}q(x)\\,d\\mu(x)=\\frac1{Z_p}\\int_{\\{q>0\\}}|f|\\tilde p\\,d\\mu\\le\\frac1{Z_p}\\int_{\\mathsf X}|f|\\tilde p\\,d\\mu<\\infty.$$\nThus $Y_i$ is $Q$-integrable. For any real measurable $h$ whose absolute integral is finite against $r\\,d\\mu$, apply [F5] separately to $h^+=\\max(h,0)$ and $h^-=\\max(-h,0)$: both product integrals are finite because $h^\\pm\\le|h|$. Subtracting their finite identities yields $\\int h\\,d(r\\,d\\mu)=\\int hr\\,d\\mu$, since $(hr)^\\pm=h^\\pm r$ for $r\\ge0$ (with the density convention $0\\cdot\\infty=0$). The integrable case of [F2] therefore gives\n$$\\mathbb E_Q[Y_i]=\\int_{\\{q>0\\}}\\frac{f(x)\\tilde p(x)}{Z_pq(x)}q(x)\\,d\\mu(x)=\\frac1{Z_p}\\int_{\\{q>0\\}}f\\tilde p\\,d\\mu.$$\nThe support condition makes $f\\tilde p=0$ $\\mu$-almost everywhere on $\\{q=0\\}$; hence this last integral equals $Z_p^{-1}\\int_{\\mathsf X}f\\tilde p\\,d\\mu=\\int f\\,d\\pi=\\theta$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], $\\hat\\mu_{\\mathrm{IS}}=n^{-1}\\sum_{i=1}^nY_i$. Apply [F3] and step 1.1 to obtain $\\mathbb E_Q[\\hat\\mu_{\\mathrm{IS}}]=n^{-1}\\sum_{i=1}^n\\mathbb E_Q[Y_i]=\\theta$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n\u22651; an empty-sample output or claim is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the zero-proposal branch only on a set where the support hypothesis makes the target integrand zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the expectation identity for every n\u22651, including n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 remain valid when f is identically zero, giving target and estimator expectation zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs in the Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition or proof uses no arbitrary selection; where AC is needed, it is isolated to the stated CLT branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": []
+    },
+    "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-importance-sampling",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space. An **unnormalized target density** is a measurable function $\\tilde p:\\mathsf X\\to[0,\\infty)$ with\n$$Z_p:=\\int_{\\mathsf X}\\tilde p\\,d\\mu\\in(0,\\infty).$$\nThe target probability measure is $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$. A **proposal density** is a measurable $q:\\mathsf X\\to[0,\\infty)$ with $\\int q\\,d\\mu=1$; write $Q(dx)=q(x)\\mu(dx)$. The input integrand $f:\\mathsf X\\to\\mathbb R$ is measurable, and the input sample $X_1,\\ldots,X_n$ is IID with law $Q$, in the sense of [[def-identically-distributed-and-iid-random-variables]]. The normalizing constant $Z_p$ is known for this algorithm.\n\n**Admissible conditions for an unbiased estimate:** $n\\ge1$, $q>0$ $\\mu$-almost everywhere on $\\{x:f(x)\\tilde p(x)\\ne0\\}$, and the random variable\n$$Y:=\\begin{cases}f(X_1)\\tilde p(X_1)/(Z_pq(X_1)),&q(X_1)>0,\\\\0,&q(X_1)=0\\end{cases}$$\nis integrable under $Q$. The support condition makes the value on $q=0$ immaterial to the target integral.\n\n**Well-defined weights:** The reciprocal map $r(s)=1/s$ for $s>0$ and $r(s)=0$ for $s\\le0$ is Borel. Its composition with $q$, multiplied by the measurable inputs, makes the piecewise weight and weighted integrand measurable ([[thm-composition-with-borel-functions-preserves-measurability]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\n**Procedure and output:** For each supplied draw $X_i$, set $Y_i=f(X_i)\\tilde p(X_i)/(Z_pq(X_i))$ when $q(X_i)>0$ and set $Y_i=0$ otherwise. Return\n$$\\hat\\mu_{\\mathrm{IS}}:=\\frac1n\\sum_{i=1}^nY_i.$$\nSeparate variance and central limit claims require the corresponding weighted second-moment hypothesis.\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ordinary-importance-sampling-is-unbiased",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space, let $\\tilde p\\ge0$ and $q\\ge0$ be measurable densities with $Z_p=\\int\\tilde p\\,d\\mu\\in(0,\\infty)$ and $\\int q\\,d\\mu=1$, and set $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$ and $Q(dx)=q(x)\\mu(dx)$. Let $f:\\mathsf X\\to\\mathbb R$ be measurable with $\\int|f|\\tilde p\\,d\\mu<\\infty$. Suppose $q>0$ $\\mu$-almost everywhere on $\\{f\\tilde p\\ne0\\}$ and $X_1,\\ldots,X_n$ are IID with law $Q$. For the ordinary importance sampling estimator in [[alg-importance-sampling]],\n$$\\mathbb E_Q[\\hat\\mu_{\\mathrm{IS}}]=\\int f\\,d\\pi.$$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-iid-monte-carlo-mean-moments",
+          "source_section": "Statement",
+          "quote": "Let $(Y_i)_{i\\ge1}$ be a real IID sequence. If $\\mathbb E|Y_1|<\\infty$ and $\\mu=\\mathbb E[Y_1]$, then $\\mathbb E[\\bar Y_n]=\\mu$ for every $n\\ge1$. If also $\\mathbb E[Y_1^2]<\\infty$ and $\\sigma^2=\\operatorname{Var}(Y_1)$, then $\\operatorname{Var}(\\bar Y_n)=\\sigma^2/n$ for every $n\\ge1$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\n",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-iid-monte-carlo-central-limit",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(Y_i)_{i\\ge1}$ be a real IID sequence with $\\mu=\\mathbb E[Y_1]$ and $0<\\sigma^2:=\\operatorname{Var}(Y_1)<\\infty$. Then\n$$\\sqrt n\\,(\\bar Y_n-\\mu)\\Rightarrow N(0,\\sigma^2).$$\n\n",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space and let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$\n\n",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].\n",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], each $Y_i$ is obtained from $X_i$ by the same measurable weighted-integrand map and $\\hat\\mu_{\\mathrm{IS}}=n^{-1}\\sum_{i=1}^nY_i$. Since the $X_i$ are IID, [F3] preserves independence and their common law under this map; [F4] therefore makes $(Y_i)$ IID.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], $\\mathbb E_Q[\\hat\\mu_{\\mathrm{IS}}]=\\theta$. Since $|y|\\le1+y^2$, the finite second moment makes $Y_1$ integrable. Then [F5] gives $\\mathbb E_Q[\\hat\\mu_{\\mathrm{IS}}]=\\mathbb E_QY_1$ and $\\operatorname{Var}_Q(\\hat\\mu_{\\mathrm{IS}})=\\sigma^2/n$, so $\\mathbb E_QY_1=\\theta$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Use",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "F7",
+            "step 2.1",
+            "given",
+            "algebra",
+            "F11"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Assume AC as in [A1]. If $\\sigma^2>0$, [F8] applies to the IID sequence from step 1.1 with mean $\\theta$ from step 2.1 and yields the stated normal limit. If $\\sigma^2=0$, [F7] gives $\\mathbb E_Q[(Y_1-\\theta)^2]=0$, so [F9] implies $Y_1=\\theta$ $Q$-almost surely. By the common-law conclusion of step 1.1, each event $\\{Y_i\\ne\\theta\\}$ is null; for each fixed $n$, the union of the first $n$ such events is null. Thus $\\bar Y_n=\\theta$ almost surely for each $n$, and the centered sample mean has law $\\delta_0=N(0,0)$ for every $n$ by [F10]. The variance argument in the preceding steps used no choice axiom.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n\u22651; an empty-sample output or claim is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement uses the ordinary zero-weight convention from its estimator and integrates only over {q>0}."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives Var(hat mu_IS)=sigma^2/n for every n>=1, hence the identity at n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 proves the zero-variance CLT directly: all weighted values equal theta almost surely and the limit is N(0,0)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs in the Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition or proof uses no arbitrary selection; where AC is needed, it is isolated to the stated CLT branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "4.1"
+          ]
+        }
+      ]
+    },
+    "alg-self-normalized-importance-sampling": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n\u22651; an empty-sample output or claim is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition returns the named no-estimate status exactly when S_n=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 with W_1>0, the Definition\u2019s ratio equals f(X_1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: with a constant integrand and S_n>0, the weighted ratio equals that constant."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs in the Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition or proof uses no arbitrary selection; where AC is needed, it is isolated to the stated CLT branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": []
+    },
+    "thm-self-normalized-importance-sampling-is-consistent-under-finite-moments": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-self-normalized-importance-sampling",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space. The unnormalized target density is a measurable $\\tilde p\\ge0$ with $0<Z_p=\\int\\tilde p\\,d\\mu<\\infty$ and target $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$. Let $q\\ge0$ be a measurable proposal probability density against $\\mu$, let $Q(dx)=q(x)\\mu(dx)$, and let $f$ be a measurable real-valued integrand. The input $X_1,\\ldots,X_n$ is an IID sample from $Q$ in the sense of [[def-identically-distributed-and-iid-random-variables]], with $n\\ge1$. For target interpretation require $q>0$ $\\pi$-almost everywhere. Write\n$$W_i:=\\begin{cases}\\tilde p(X_i)/q(X_i),&q(X_i)>0,\\\\0,&q(X_i)=0.\\end{cases}$$\nThis is a nonnegative unnormalized importance weight; the value on $q=0$ is immaterial under $Q$ and under the stated target support condition.\n\nThe reciprocal map that is $1/s$ for $s>0$ and $0$ for $s\\le0$ is Borel. Its composition with $q$, multiplied by $\\tilde p$, makes $W_i$ measurable by [[thm-composition-with-borel-functions-preserves-measurability]] and [[thm-arithmetic-and-lattice-operations-preserve-measurability]].\n\n**Procedure and output:** Compute $S_n=\\sum_{i=1}^nW_i$. If $S_n=0$, return the status **no estimate: zero observed target weight**. If $S_n>0$, return\n$$\\hat\\theta_{\\mathrm{SN}}:=\\frac{\\sum_{i=1}^nW_if(X_i)}{S_n}.$$\nFor consistency require $\\mathbb E_QW_1=Z_p\\in(0,\\infty)$ and $\\mathbb E_Q[W_1|f(X_1)|]<\\infty$. A ratio CLT and its Monte Carlo standard error require finite second moments of $W_1$ and $W_1f(X_1)$.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-iid-monte-carlo-mean-consistency",
+          "source_section": "Statement",
+          "quote": "Let $(Y_i)_{i\\ge1}$ be a real IID sequence with $\\mathbb E|Y_1|<\\infty$, and set $\\mu=\\mathbb E[Y_1]$. Then $\\mathbb E|\\bar Y_n-\\mu|\\to0$, so $\\bar Y_n\\to\\mu$ in probability; moreover, $\\bar Y_n\\to\\mu$ almost surely.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use [F8] with density $r=q$ for integration against $Q$ and with $r=\\tilde p/Z_p$ for integration against $\\pi$. By [F6], the functions $w(x)=\\tilde p(x)/q(x)$ on $q>0$ (with value $0$ on $q=0$) and $v(x)=w(x)f(x)$ are measurable. The support condition gives $\\pi(\\{q=0\\})=0$. For each $i$, $X_i$ has law $Q$, so the given finite first moment applies to its weight and integrand. By [F2],\n$$\\mathbb E_Q[W_i|f(X_i)|]=\\int_{\\{q>0\\}}\\frac{\\tilde p(x)|f(x)|}{q(x)}q(x)\\,d\\mu(x)=\\int_{\\{q>0\\}}\\tilde p|f|\\,d\\mu.$$\nThe given finite moment therefore implies $\\int_{\\{q>0\\}}\\tilde p|f|\\,d\\mu<\\infty$. Since $\\pi(\\{q=0\\})=0$, [F7] gives $\\int_{\\{q=0\\}}|f|\\,d\\pi=0$, and thus $\\int_{\\{q=0\\}}\\tilde p|f|\\,d\\mu=Z_p\\int_{\\{q=0\\}}|f|\\,d\\pi=0$. Hence $\\int_{\\mathsf X}\\tilde p|f|\\,d\\mu<\\infty$ and $\\theta=\\int f\\,d\\pi$ is well-defined. For any real measurable $h$ whose absolute integral is finite against $r\\,d\\mu$, apply [F8] separately to $h^+=\\max(h,0)$ and $h^-=\\max(-h,0)$: both product integrals are finite because $h^\\pm\\le|h|$. Subtracting their finite identities yields $\\int h\\,d(r\\,d\\mu)=\\int hr\\,d\\mu$, since $(hr)^\\pm=h^\\pm r$ for $r\\ge0$ (with the density convention $0\\cdot\\infty=0$). The integrable case of [F2] now gives\n$$\\mathbb E_QV_i=\\int_{\\{q>0\\}}\\frac{\\tilde p(x)f(x)}{q(x)}q(x)\\,d\\mu(x)=\\int_{\\{q>0\\}}\\tilde p f\\,d\\mu=\\int_{\\mathsf X}\\tilde p f\\,d\\mu=Z_p\\theta,$$\nwhere the omitted signed integral is zero because its absolute integral over $\\{q=0\\}$ is zero. Likewise, the nonnegative case of",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F6",
+            "algebra",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F3] the sequences $(W_i)$ and $(V_i)$ are independent; because each is obtained from every $X_i$ by the same measurable map, their marginal laws agree across $i$. Thus both sequences are IID as in [F4], and [F5] gives $n^{-1}\\sum_iW_i\\to Z_p$ and $n^{-1}\\sum_iV_i\\to Z_p\\theta$ almost surely.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On the probability-one event from step 1.2, the denominator average is eventually greater than $Z_p/2>0$, so the ratio is eventually defined and $\\hat\\theta_{\\mathrm{SN},n}=\\frac{n^{-1}\\sum_iV_i}{n^{-1}\\sum_iW_i}\\longrightarrow\\frac{Z_p\\theta}{Z_p}=\\theta$. The fallback in [F1] affects only the finite prefix before the denominator becomes positive.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n\u22651; an empty-sample output or claim is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 show S_n/n\u2192Z_p>0, so the no-estimate fallback can occur only on an almost surely finite prefix."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement includes n=1; the fallback is interpreted as zero only when the single weight vanishes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If f is constant and the denominator is positive, its weighted ratio equals that constant; step 2.1\u2019s limit is unchanged."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs in the Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition or proof uses no arbitrary selection; where AC is needed, it is isolated to the stated CLT branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": []
+    },
+    "thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-self-normalized-importance-sampling",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space. The unnormalized target density is a measurable $\\tilde p\\ge0$ with $0<Z_p=\\int\\tilde p\\,d\\mu<\\infty$ and target $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$. Let $q\\ge0$ be a measurable proposal probability density against $\\mu$, let $Q(dx)=q(x)\\mu(dx)$, and let $f$ be a measurable real-valued integrand. The input $X_1,\\ldots,X_n$ is an IID sample from $Q$ in the sense of [[def-identically-distributed-and-iid-random-variables]], with $n\\ge1$. For target interpretation require $q>0$ $\\pi$-almost everywhere. Write\n$$W_i:=\\begin{cases}\\tilde p(X_i)/q(X_i),&q(X_i)>0,\\\\0,&q(X_i)=0.\\end{cases}$$\nThis is a nonnegative unnormalized importance weight; the value on $q=0$ is immaterial under $Q$ and under the stated target support condition.\n\nThe reciprocal map that is $1/s$ for $s>0$ and $0$ for $s\\le0$ is Borel. Its composition with $q$, multiplied by $\\tilde p$, makes $W_i$ measurable by [[thm-composition-with-borel-functions-preserves-measurability]] and [[thm-arithmetic-and-lattice-operations-preserve-measurability]].\n\n**Procedure and output:** Compute $S_n=\\sum_{i=1}^nW_i$. If $S_n=0$, return the status **no estimate: zero observed target weight**. If $S_n>0$, return\n$$\\hat\\theta_{\\mathrm{SN}}:=\\frac{\\sum_{i=1}^nW_if(X_i)}{S_n}.$$\nFor consistency require $\\mathbb E_QW_1=Z_p\\in(0,\\infty)$ and $\\mathbb E_Q[W_1|f(X_1)|]<\\infty$. A ratio CLT and its Monte Carlo standard error require finite second moments of $W_1$ and $W_1f(X_1)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-multivariate-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $d\\ge1$ be a finite integer. Let $(X_k)_{k\\ge1}$ be iid $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean m and covariance Sigma. Then $$n^{-1/2}\\sum_{k=1}^n(X_k-m)\\Rightarrow N_d(0,\\Sigma).$$ The covariance may be singular.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-first-and-second-order-delta-method-for-random-vectors",
+          "source_section": "Statement",
+          "quote": "Let $d,k\\ge1$, let $r_n>0$ be deterministic with $r_n\\to\\infty$, and let $T_n$ be $\\mathbb R^d$-valued random vectors with target $\\theta\\in\\mathbb R^d$. Suppose $Z_n=r_n(T_n-\\theta)\\Rightarrow Z$ for an $\\mathbb R^d$-valued random vector $Z$. All vector norms below are Euclidean.\n\nIf $g:\\mathbb R^d\\to\\mathbb R^k$ is Borel and there is a linear map $A:\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=Ah+\\rho_1(h),\\qquad \\frac{\\|\\rho_1(h)\\|}{\\|h\\|}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n\\{g(T_n)-g(\\theta)\\}\\Rightarrow AZ.$$\n\nIf, in addition, $A=0$ and there is a continuous symmetric bilinear map $H:\\mathbb R^d\\times\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=\\frac12H[h,h]+\\rho_2(h),\\qquad \\frac{\\|\\rho_2(h)\\|}{\\|h\\|^2}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n^2\\{g(T_n)-g(\\theta)\\}\\Rightarrow \\frac12H[Z,Z].$$\nFor scalar-valued $g$, $H$ is the usual Hessian bilinear form. The second-order premise is a pointwise Peano expansion; continuous second derivatives on a neighborhood are not required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-self-normalized-importance-sampling-is-consistent-under-finite-moments",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space, $\\tilde p\\ge0$ a measurable target density with $Z_p=\\int\\tilde p\\,d\\mu\\in(0,\\infty)$, $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$, and $q\\ge0$ a measurable proposal probability density with $Q(dx)=q(x)\\mu(dx)$. Assume $q>0$ $\\pi$-almost everywhere. Let $X_1,X_2,\\ldots$ be IID with law $Q$, put $W_i=\\tilde p(X_i)/q(X_i)$ for $q(X_i)>0$ and $W_i=0$ otherwise, and let $f:\\mathsf X\\to\\mathbb R$ be measurable. Suppose\n$$\\mathbb E_QW_1=Z_p\\in(0,\\infty),\\qquad \\mathbb E_Q[W_1|f(X_1)|]<\\infty.$$\nThen the self-normalized estimate in [[alg-self-normalized-importance-sampling]] satisfies\n$$\\hat\\theta_{\\mathrm{SN},n}\\longrightarrow\\theta:=\\int f\\,d\\pi\\quad\\text{almost surely}.$$\nOn a finite prefix where all observed weights vanish, the algorithm's no-estimate status is interpreted as the value $0$ for this convergence statement; almost surely that fallback is eventually unnecessary.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-kolmogorov-iid-l1-strong-law",
+          "source_section": "Statement",
+          "quote": "For IID real $(X_n)_{n\\ge1}$ with $\\mathbb E|X_1|<\\infty$, $S_n/n\\to\\mu=\\mathbb EX_1$ almost surely.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-holder-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $p,q\\in[1,\\infty]$ be conjugate exponents. If $X$ and $Y$ are real random\nvariables in the spaces named by the corresponding clause of\n[[thm-holder-inequality-for-integrals]], then\n$$\\mathbb E[|XY|]\\le\\|X\\|_p\\|Y\\|_q.$$\n\nIn particular, $XY$ is integrable.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use [F14] with density $r=q$ for integration against $Q$ and with $r=\\tilde p/Z_p$ for integration against $\\pi$. By the support condition, $\\pi(\\{q=0\\})=0$. For each $i$, $X_i$ has law $Q$, so the given finite first moment applies to $W_i|f(X_i)|$. The integrable case of [F2] gives\n$$\\mathbb E_Q[W_i|f(X_i)|]=\\int_{\\{q>0\\}}\\frac{\\tilde p(x)|f(x)|}{q(x)}q(x)\\,d\\mu(x)=\\int_{\\{q>0\\}}\\tilde p|f|\\,d\\mu<\\infty.$$\nBy [F13], $\\int_{\\{q=0\\}}|f|\\,d\\pi=0$, and hence $\\int_{\\{q=0\\}}\\tilde p|f|\\,d\\mu=Z_p\\int_{\\{q=0\\}}|f|\\,d\\pi=0$. Thus $\\int_{\\mathsf X}\\tilde p|f|\\,d\\mu<\\infty$. For any real measurable $h$ whose absolute integral is finite against $r\\,d\\mu$, apply [F14] separately to $h^+=\\max(h,0)$ and $h^-=\\max(-h,0)$: both product integrals are finite because $h^\\pm\\le|h|$. Subtracting their finite identities yields $\\int h\\,d(r\\,d\\mu)=\\int hr\\,d\\mu$, since $(hr)^\\pm=h^\\pm r$ for $r\\ge0$ (with the density convention $0\\cdot\\infty=0$). The integrable case of [F2] applied to $W_if(X_i)$ yields\n$$\\mathbb E_Q[W_if(X_i)]=\\int_{\\{q>0\\}}\\tilde p f\\,d\\mu=\\int_{\\mathsf X}\\tilde p f\\,d\\mu=Z_p\\theta,$$\nbecause the omitted signed integral is zero by its absolute integrability on the $\\pi$-null set. The nonnegative case of",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F7",
+            "F8",
+            "given",
+            "F14"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $U_i=W_i^2(f(X_i)-\\theta)^2$, $C_i=W_i^2(f(X_i)-\\theta)$, and $B_i=W_i^2$. Their measurability follows from [F12]. The stated second moments and $(W_if(X_i)-\\theta W_i)^2\\le2(W_if(X_i))^2+2\\theta^2W_i^2$ give $\\mathbb E U_i<\\infty$ and $\\mathbb E B_i<\\infty$; [F11] gives $\\mathbb E|C_i|\\le(\\mathbb E U_i)^{1/2}(\\mathbb E B_i)^{1/2}<\\infty$. Each transformed sequence is IID by [F7] and [F8], so [F6] applies to all three. By [F5], $\\hat\\theta_{\\mathrm{SN},n}\\to\\theta$ almost surely and $\\bar W_n\\to Z_p>0$.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F11",
+            "F12",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define the Borel function $g(s,t)=t/s$ for $s>0$ and $g(s,t)=0$ for $s\\le0$; it is Borel because the ratio is continuous on the open set $s>0$ and the other branch is constant on its Borel complement. At $\\eta=(Z_p,Z_p\\theta)$, its derivative is $A(h_1,h_2)=(-\\theta h_1+h_2)/Z_p$: for $h_1$ small enough that $Z_p+h_1>0$, $g(\\eta+h)-g(\\eta)-A h=-\\frac{h_1(h_2-\\theta h_1)}{Z_p(Z_p+h_1)}=O(\\|h\\|^2)$. Since $Z_p>0$, this is a valid first-order expansion. Also $g(\\bar W_n,\\bar V_n)=\\hat\\theta_{\\mathrm{SN},n}$ by [F1], including the zero-denominator convention. Apply [F4] to step 1.1 to obtain the scalar limit $A Z$, where $Z\\sim N_2(0,\\Sigma)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F10], $AZ$ is centered normal with variance $A\\Sigma A^T$. The centered linear combination of $Z_1$ defining this variance is $Z_p^{-1}(W_1f(X_1)-\\theta W_1)$, whose mean is zero by [F2]. Therefore $A\\Sigma A^T=Z_p^{-2}\\mathbb E_Q[W_1^2(f(X_1)-\\theta)^2]=\\tau^2$, which proves the stated CLT.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F9",
+            "F10",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On the probability-one event from step 1.2 the denominator is eventually positive, and expansion of the squared residual gives $n\\widehat{\\operatorname{Var}}_{\\mathrm{MC}}=\\frac{\\bar U_n-2(\\hat\\theta_{\\mathrm{SN},n}-\\theta)\\bar C_n+(\\hat\\theta_{\\mathrm{SN},n}-\\theta)^2\\bar B_n}{\\bar W_n^2}$. The numerator tends to $\\mathbb E U_1$ and the denominator tends to $Z_p^2$, so the limit is $Z_p^{-2}\\mathbb E U_1=\\tau^2$. Continuity of the nonnegative square-root map gives $\\sqrt n\\,\\widehat{\\operatorname{se}}_{\\mathrm{MC},n}\\to\\tau$. This argument uses only the choice-free suppliers [F5], [F6], [F7], [F8], [F11], and [F12], not AC.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F11",
+            "F12",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n\u22651; an empty-sample output or claim is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 4.1 use the consistency theorem to show the denominator is eventually positive; the fallback affects only a finite prefix."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement defines the plug-in variance for any n with S_n>0; at n=1 the centered residual is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows \u03c4\u00b2=0 and defines \u03c4 as its nonnegative square root; the standard-error limit is then zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs in the Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition or proof uses no arbitrary selection; where AC is needed, it is isolated to the stated CLT branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ]
+    },
+    "def-importance-weight-effective-sample-size": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n\u22651; an empty-sample output or claim is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition requires at least one positive weight, excluding the all-zero vector where the denominator vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For one positive weight, the Definition gives ESS_w=w_1^2/w_1^2=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For n equal positive weights, the Definition gives ESS_w=n."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs in the Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition or proof uses no arbitrary selection; where AC is needed, it is isolated to the stated CLT branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": []
+    },
+    "ex-ordinary-and-self-normalized-importance-sampling-on-two-point-space": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-importance-sampling",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space. An **unnormalized target density** is a measurable function $\\tilde p:\\mathsf X\\to[0,\\infty)$ with\n$$Z_p:=\\int_{\\mathsf X}\\tilde p\\,d\\mu\\in(0,\\infty).$$\nThe target probability measure is $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$. A **proposal density** is a measurable $q:\\mathsf X\\to[0,\\infty)$ with $\\int q\\,d\\mu=1$; write $Q(dx)=q(x)\\mu(dx)$. The input integrand $f:\\mathsf X\\to\\mathbb R$ is measurable, and the input sample $X_1,\\ldots,X_n$ is IID with law $Q$, in the sense of [[def-identically-distributed-and-iid-random-variables]]. The normalizing constant $Z_p$ is known for this algorithm.\n\n**Admissible conditions for an unbiased estimate:** $n\\ge1$, $q>0$ $\\mu$-almost everywhere on $\\{x:f(x)\\tilde p(x)\\ne0\\}$, and the random variable\n$$Y:=\\begin{cases}f(X_1)\\tilde p(X_1)/(Z_pq(X_1)),&q(X_1)>0,\\\\0,&q(X_1)=0\\end{cases}$$\nis integrable under $Q$. The support condition makes the value on $q=0$ immaterial to the target integral.\n\n**Well-defined weights:** The reciprocal map $r(s)=1/s$ for $s>0$ and $r(s)=0$ for $s\\le0$ is Borel. Its composition with $q$, multiplied by the measurable inputs, makes the piecewise weight and weighted integrand measurable ([[thm-composition-with-borel-functions-preserves-measurability]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\n**Procedure and output:** For each supplied draw $X_i$, set $Y_i=f(X_i)\\tilde p(X_i)/(Z_pq(X_i))$ when $q(X_i)>0$ and set $Y_i=0$ otherwise. Return\n$$\\hat\\mu_{\\mathrm{IS}}:=\\frac1n\\sum_{i=1}^nY_i.$$\nSeparate variance and central limit claims require the corresponding weighted second-moment hypothesis.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-self-normalized-importance-sampling",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space. The unnormalized target density is a measurable $\\tilde p\\ge0$ with $0<Z_p=\\int\\tilde p\\,d\\mu<\\infty$ and target $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$. Let $q\\ge0$ be a measurable proposal probability density against $\\mu$, let $Q(dx)=q(x)\\mu(dx)$, and let $f$ be a measurable real-valued integrand. The input $X_1,\\ldots,X_n$ is an IID sample from $Q$ in the sense of [[def-identically-distributed-and-iid-random-variables]], with $n\\ge1$. For target interpretation require $q>0$ $\\pi$-almost everywhere. Write\n$$W_i:=\\begin{cases}\\tilde p(X_i)/q(X_i),&q(X_i)>0,\\\\0,&q(X_i)=0.\\end{cases}$$\nThis is a nonnegative unnormalized importance weight; the value on $q=0$ is immaterial under $Q$ and under the stated target support condition.\n\nThe reciprocal map that is $1/s$ for $s>0$ and $0$ for $s\\le0$ is Borel. Its composition with $q$, multiplied by $\\tilde p$, makes $W_i$ measurable by [[thm-composition-with-borel-functions-preserves-measurability]] and [[thm-arithmetic-and-lattice-operations-preserve-measurability]].\n\n**Procedure and output:** Compute $S_n=\\sum_{i=1}^nW_i$. If $S_n=0$, return the status **no estimate: zero observed target weight**. If $S_n>0$, return\n$$\\hat\\theta_{\\mathrm{SN}}:=\\frac{\\sum_{i=1}^nW_if(X_i)}{S_n}.$$\nFor consistency require $\\mathbb E_QW_1=Z_p\\in(0,\\infty)$ and $\\mathbb E_Q[W_1|f(X_1)|]<\\infty$. A ratio CLT and its Monte Carlo standard error require finite second moments of $W_1$ and $W_1f(X_1)$.\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ordinary-importance-sampling-is-unbiased",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space, let $\\tilde p\\ge0$ and $q\\ge0$ be measurable densities with $Z_p=\\int\\tilde p\\,d\\mu\\in(0,\\infty)$ and $\\int q\\,d\\mu=1$, and set $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$ and $Q(dx)=q(x)\\mu(dx)$. Let $f:\\mathsf X\\to\\mathbb R$ be measurable with $\\int|f|\\tilde p\\,d\\mu<\\infty$. Suppose $q>0$ $\\mu$-almost everywhere on $\\{f\\tilde p\\ne0\\}$ and $X_1,\\ldots,X_n$ are IID with law $Q$. For the ordinary importance sampling estimator in [[alg-importance-sampling]],\n$$\\mathbb E_Q[\\hat\\mu_{\\mathrm{IS}}]=\\int f\\,d\\pi.$$\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The target normalizer is $Z_p=\\tilde p(a)+\\tilde p(b)=2$, so $\\pi(a)=\\pi(b)=1/2$ and $\\theta=\\mathbb E_\\pi f=1/2$. Since both proposal probabilities are positive and $\\mathsf X$ is finite, the support and integrability assumptions of [F3] hold.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The ordinary weighted value is $0$ at $a$ and $2$ at $b$. Its expectation is $(3/4)0+(1/4)2=1/2=\\theta$, as also guaranteed by [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The self-normalized weights are $4/3$ at $a$ and $4$ at $b$, so the single-draw ratio in [F2] equals $f(X)$. Its expectation is $Q(X=b)=1/4$, and its bias for $\\theta$ is $1/4-1/2=-1/4$. This verifies that self-normalization need not be unbiased at finite sample size.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n\u22651; an empty-sample output or claim is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 include the zero ordinary estimate at a and verify positive proposal mass at both points."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example explicitly takes one draw; steps 1.1\u20133.1 compute both estimates and the ratio bias."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example uses a nonconstant integrand under a nonconstant target and makes no separate degenerate-case claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs in the Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition or proof uses no arbitrary selection; where AC is needed, it is isolated to the stated CLT branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no reverse direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "one-draw-finite-sample-bias",
+          "claim": "With target mass 1/2 at b, proposal mass 1/4 at b, and f=1_b, ordinary IS is unbiased while the one-draw self-normalized ratio has bias -1/4.",
+          "result": "Ordinary values are 0 and 2 with probabilities 3/4 and 1/4, so their mean is 1/2. The self-normalized output is f(X), with mean 1/4 and bias 1/4-1/2=-1/4."
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_uses": []
+    },
+    "cex-ordinary-importance-sampling-infinite-variance-under-light-tailed-proposal": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-importance-sampling",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space. An **unnormalized target density** is a measurable function $\\tilde p:\\mathsf X\\to[0,\\infty)$ with\n$$Z_p:=\\int_{\\mathsf X}\\tilde p\\,d\\mu\\in(0,\\infty).$$\nThe target probability measure is $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$. A **proposal density** is a measurable $q:\\mathsf X\\to[0,\\infty)$ with $\\int q\\,d\\mu=1$; write $Q(dx)=q(x)\\mu(dx)$. The input integrand $f:\\mathsf X\\to\\mathbb R$ is measurable, and the input sample $X_1,\\ldots,X_n$ is IID with law $Q$, in the sense of [[def-identically-distributed-and-iid-random-variables]]. The normalizing constant $Z_p$ is known for this algorithm.\n\n**Admissible conditions for an unbiased estimate:** $n\\ge1$, $q>0$ $\\mu$-almost everywhere on $\\{x:f(x)\\tilde p(x)\\ne0\\}$, and the random variable\n$$Y:=\\begin{cases}f(X_1)\\tilde p(X_1)/(Z_pq(X_1)),&q(X_1)>0,\\\\0,&q(X_1)=0\\end{cases}$$\nis integrable under $Q$. The support condition makes the value on $q=0$ immaterial to the target integral.\n\n**Well-defined weights:** The reciprocal map $r(s)=1/s$ for $s>0$ and $r(s)=0$ for $s\\le0$ is Borel. Its composition with $q$, multiplied by the measurable inputs, makes the piecewise weight and weighted integrand measurable ([[thm-composition-with-borel-functions-preserves-measurability]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\n**Procedure and output:** For each supplied draw $X_i$, set $Y_i=f(X_i)\\tilde p(X_i)/(Z_pq(X_i))$ when $q(X_i)>0$ and set $Y_i=0$ otherwise. Return\n$$\\hat\\mu_{\\mathrm{IS}}:=\\frac1n\\sum_{i=1}^nY_i.$$\nSeparate variance and central limit claims require the corresponding weighted second-moment hypothesis.\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+          "source_section": "Statement",
+          "quote": "Use the hypotheses and notation of [[thm-ordinary-importance-sampling-is-unbiased]]. Define\n$$Y_i:=\\begin{cases}f(X_i)\\tilde p(X_i)/(Z_pq(X_i)),&q(X_i)>0,\\\\0,&q(X_i)=0\\end{cases},\\qquad \\theta:=\\int f\\,d\\pi,\\qquad \\sigma^2:=\\operatorname{Var}_Q(Y_1).$$\nIf $\\mathbb E_Q[Y_1^2]<\\infty$, then $\\hat\\mu_{\\mathrm{IS}}$ has finite variance and\n$$\\operatorname{Var}_Q(\\hat\\mu_{\\mathrm{IS}})=\\frac{\\sigma^2}{n}=\\frac1n\\left(\\frac1{Z_p^2}\\int_{\\{q>0\\}}\\frac{f(x)^2\\tilde p(x)^2}{q(x)}\\,d\\mu(x)-\\theta^2\\right).$$\nThis conclusion is choice-free. If, in addition, AC holds, then\n$$\\sqrt n\\bigl(\\hat\\mu_{\\mathrm{IS}}-\\theta\\bigr)\\Rightarrow N(0,\\sigma^2).$$\nNo finite variance or normal-limit claim is made when the weighted second moment is infinite.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ordinary-importance-sampling-is-unbiased",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space, let $\\tilde p\\ge0$ and $q\\ge0$ be measurable densities with $Z_p=\\int\\tilde p\\,d\\mu\\in(0,\\infty)$ and $\\int q\\,d\\mu=1$, and set $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$ and $Q(dx)=q(x)\\mu(dx)$. Let $f:\\mathsf X\\to\\mathbb R$ be measurable with $\\int|f|\\tilde p\\,d\\mu<\\infty$. Suppose $q>0$ $\\mu$-almost everywhere on $\\{f\\tilde p\\ne0\\}$ and $X_1,\\ldots,X_n$ are IID with law $Q$. For the ordinary importance sampling estimator in [[alg-importance-sampling]],\n$$\\mathbb E_Q[\\hat\\mu_{\\mathrm{IS}}]=\\int f\\,d\\pi.$$\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On $\\mathbb R$ with Lebesgue measure, take target density $p(x)=\\tilde p(x)=\\tfrac12e^{-|x|}$, proposal density $q(x)=e^{-2|x|}$, and $f(x)=1$. Direct integration gives $\\int p=\\tfrac12(\\int_{-\\infty}^0e^x\\,dx+\\int_0^\\infty e^{-x}\\,dx)=1$ and $\\int q=2\\int_0^\\infty e^{-2x}\\,dx=1$. Also $q(x)>0$ for every $x$, while $f=1$ has target mean $1$ and variance $0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Use",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F5], the ordinary estimate $\\bar W_n=n^{-1}\\sum_iW_i$ has mean $1$. For each finite $n$, nonnegativity gives $\\bar W_n\\ge W_1/n$, hence $W_1^2/n^2\\le\\bar W_n^2$. Monotonicity [F6] and step 2.1 imply $\\mathbb E_Q[\\bar W_n^2]\\ge n^{-2}\\mathbb E_Q[W_1^2]=\\infty$. If its centered second moment were finite, the inequality $x^2\\le2(x-1)^2+2$ would imply $\\mathbb E_Q[\\bar W_n^2]<\\infty$, a contradiction. Thus the centered second moment is infinite, so the estimate does not have finite variance under [F4]. This refutes the sufficiency claim.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n\u22651; an empty-sample output or claim is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 integrates over the full proposal support, where q(x)>0 and W(x)>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 proves infinite second moment for every finite n\u22651, including n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example has f=1 and target variance zero, while steps 2.1\u20133.1 show the ordinary estimator has infinite variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs in the Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition or proof uses no arbitrary selection; where AC is needed, it is isolated to the stated CLT branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": []
+    },
+    "cex-importance-weight-ess-misses-target-region": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-importance-weight-effective-sample-size",
+          "source_section": "Definition",
+          "quote": "For the nonnegative importance weights $w_1,\\ldots,w_n$ in [[alg-self-normalized-importance-sampling]], with $n\\ge1$ and at least one positive weight, define the **weight-based effective sample size** by\n$$\\operatorname{ESS}_w:=\\frac{(\\sum_{i=1}^nw_i)^2}{\\sum_{i=1}^nw_i^2}.$$\nIt is a diagnostic of observed weight imbalance. It depends only on the weights, not on the integrand, proposal regions that were never sampled, or target mass outside the observed sample. It does not certify support coverage, finite variance, accuracy, or convergence.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-self-normalized-importance-sampling",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space. The unnormalized target density is a measurable $\\tilde p\\ge0$ with $0<Z_p=\\int\\tilde p\\,d\\mu<\\infty$ and target $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$. Let $q\\ge0$ be a measurable proposal probability density against $\\mu$, let $Q(dx)=q(x)\\mu(dx)$, and let $f$ be a measurable real-valued integrand. The input $X_1,\\ldots,X_n$ is an IID sample from $Q$ in the sense of [[def-identically-distributed-and-iid-random-variables]], with $n\\ge1$. For target interpretation require $q>0$ $\\pi$-almost everywhere. Write\n$$W_i:=\\begin{cases}\\tilde p(X_i)/q(X_i),&q(X_i)>0,\\\\0,&q(X_i)=0.\\end{cases}$$\nThis is a nonnegative unnormalized importance weight; the value on $q=0$ is immaterial under $Q$ and under the stated target support condition.\n\nThe reciprocal map that is $1/s$ for $s>0$ and $0$ for $s\\le0$ is Borel. Its composition with $q$, multiplied by $\\tilde p$, makes $W_i$ measurable by [[thm-composition-with-borel-functions-preserves-measurability]] and [[thm-arithmetic-and-lattice-operations-preserve-measurability]].\n\n**Procedure and output:** Compute $S_n=\\sum_{i=1}^nW_i$. If $S_n=0$, return the status **no estimate: zero observed target weight**. If $S_n>0$, return\n$$\\hat\\theta_{\\mathrm{SN}}:=\\frac{\\sum_{i=1}^nW_if(X_i)}{S_n}.$$\nFor consistency require $\\mathbb E_QW_1=Z_p\\in(0,\\infty)$ and $\\mathbb E_Q[W_1|f(X_1)|]<\\infty$. A ratio CLT and its Monte Carlo standard error require finite second moments of $W_1$ and $W_1f(X_1)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\mathsf X=\\{a,b\\}$, $\\tilde p(a)=\\tilde p(b)=1$, so $Z_p=2$ and $\\pi(b)=1/2$. Take proposal masses $q(a)=99/100$ and $q(b)=1/100$. This proposal has full target support, and the event $E_n=\\{X_1=\\cdots=X_n=a\\}$ has probability $(99/100)^n>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On $E_n$, all observed weights equal $W(a)=100/99>0$. By [F1], $\\operatorname{ESS}_w=(nW(a))^2/(nW(a)^2)=n$, while no sample is at $b$ and the target assigns $b$ probability $1/2$. Thus the claimed certification fails on an event of positive probability.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n\u22651; an empty-sample output or claim is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 have positive observed weights on the event and target mass 1/2 at the unvisited point."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The event in step 1.1 is defined for every n\u22651; at n=1 step 2.1 gives ESS=1 while b is unvisited."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no separate degenerate-case claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs in the Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition or proof uses no arbitrary selection; where AC is needed, it is isolated to the stated CLT branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no reverse direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-point-ess-missed-region",
+          "claim": "For q(a)=0.99, q(b)=0.01 and target mass \u03c0(b)=1/2, an all-a sample has ESS n and misses positive target mass.",
+          "result": "The event has probability 0.99^n>0. Each observed weight is 100/99, so (nW)^2/(nW^2)=n; no draw is b although \u03c0(b)=1/2."
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_uses": []
+    }
+  }
+}

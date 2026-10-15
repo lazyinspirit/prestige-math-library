@@ -1,0 +1,509 @@
+[
+  {
+    "order": 2116,
+    "id": "langevin-monte-carlo-mala-and-ula",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Langevin algorithms: ULA bias and MALA exactness",
+    "companion": "langevin-monte-carlo-mala-and-ula-examples",
+    "requires": [
+      "numerical-optimization-for-statistical-computation",
+      "metropolis-hastings-algorithm-and-invariance",
+      "forward-ito-sde-well-posedness",
+      "conjugate-families-and-posterior-prediction",
+      "structural-causal-models-dags-and-adjustment",
+      "linear-prediction-for-dependent-data"
+    ],
+    "items": [
+      {
+        "id": "def-v-weighted-total-variation-distance",
+        "kind": "definition",
+        "title": "Weighted total variation for probability measures",
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-probability-measure",
+          "def-total-variation-distance-for-probability-laws"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-ula-potential-coercivity-from-radial-drift",
+        "kind": "lemma",
+        "title": "Radial gradient drift forces potential coercivity",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-jacobian-matrix-and-gradient",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-fermat-for-euclidean-local-extrema",
+          "thm-newton-leibniz-with-interior-derivative"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-langevin-potential-exponential-generator-drift",
+        "kind": "lemma",
+        "title": "Exponential Lyapunov drift for the formal Langevin generator",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-hessian-and-euclidean-critical-point",
+          "def-jacobian-matrix-and-gradient",
+          "lem-ula-potential-coercivity-from-radial-drift",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-fermat-for-euclidean-local-extrema",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-newton-leibniz-with-interior-derivative"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-unadjusted-langevin-algorithm",
+        "kind": "algorithm",
+        "title": "Unadjusted Langevin algorithm (ULA)",
+        "deps": [
+          "alg-gradient-descent",
+          "def-axiom-of-choice",
+          "def-borel-and-lebesgue-measurable-function-on-rn",
+          "def-jacobian-matrix-and-gradient",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-measure-with-density",
+          "def-multivariate-normal-law",
+          "def-probability-measure",
+          "def-standard-normal-and-normal-laws"
+        ],
+        "justified_by": [
+          "lem-langevin-gaussian-proposal-kernel"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-weighted-pinsker-inequality-for-probability-laws",
+        "kind": "lemma",
+        "title": "A weighted total-variation bound from relative entropy",
+        "deps": [
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "cor-mean-value-theorem",
+          "def-axiom-of-choice",
+          "def-kullback-leibler-divergence",
+          "def-natural-logarithm",
+          "def-probability-measure",
+          "def-radon-nikodym-derivative",
+          "def-v-weighted-total-variation-distance",
+          "thm-algebra-of-derivatives",
+          "thm-integral-logarithm-derivative-and-normalisation",
+          "thm-integration-against-a-radon-nikodym-derivative",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-weighted-drift-minorization-gives-contraction-and-invariant-law",
+        "kind": "lemma",
+        "title": "Global drift and one-step minorization give weighted contraction and a unique invariant law",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-measure-kernel-and-probability-kernel",
+          "def-v-weighted-total-variation-distance",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "thm-jordan-decomposition-for-signed-measures",
+          "prop-jordan-parts-and-total-variation-formulas-for-signed-measures",
+          "thm-finite-total-variation-signed-measures-are-complete",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-measurability-of-integration-against-a-kernel",
+          "lem-finite-products-of-probability-kernels",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-dominated-convergence"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Hairer and Jonathan C. Mattingly, Yet another look at Harris' ergodic theorem for Markov chains",
+              "url": "https://arxiv.org/pdf/0810.2777",
+              "locator": "Assumptions 1-2, Theorems 1.3 and 3.1-3.2; pp. 2-6, including the complete weighted contraction and invariant existence proofs."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-langevin-gaussian-proposal-kernel",
+        "kind": "lemma",
+        "title": "The ULA Gaussian proposal is a probability kernel with a positive density",
+        "deps": [
+          "alg-unadjusted-langevin-algorithm",
+          "def-axiom-of-choice",
+          "def-borel-and-lebesgue-measurable-function-on-rn",
+          "def-borel-sigma-algebra",
+          "def-countable-choice",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-measure-kernel-and-probability-kernel",
+          "def-multivariate-normal-law",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "cor-continuous-functions-are-borel-measurable",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-nondegenerate-multivariate-normal-law-has-density"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-ula-gaussian-target-invariant-law-and-stationary-variance",
+        "kind": "theorem",
+        "title": "The Gaussian ULA invariant law has variance $2/(2-\\gamma)$",
+        "deps": [
+          "alg-unadjusted-langevin-algorithm",
+          "def-axiom-of-choice",
+          "def-jacobian-matrix-and-gradient",
+          "def-moments-variance-and-covariance",
+          "def-standard-normal-and-normal-laws",
+          "lem-characteristic-function-of-a-normal-law",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "cor-cauchy-schwarz-for-random-variables"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-ula-fixed-step-gaussian-kernel-exponential-drift",
+        "kind": "lemma",
+        "title": "ULA's Gaussian kernel satisfies an exponential drift bound",
+        "deps": [
+          "alg-unadjusted-langevin-algorithm",
+          "cor-continuous-functions-are-borel-measurable",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-euclidean-inner-product",
+          "def-jacobian-matrix-and-gradient",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-multivariate-normal-law",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "lem-langevin-gaussian-proposal-kernel",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-fermat-for-euclidean-local-extrema",
+          "thm-gaussian-integral",
+          "thm-newton-leibniz-with-interior-derivative",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-metropolis-adjusted-langevin-algorithm",
+        "kind": "algorithm",
+        "title": "Metropolis-adjusted Langevin algorithm (MALA)",
+        "deps": [
+          "alg-metropolis-hastings-kernel",
+          "alg-unadjusted-langevin-algorithm",
+          "def-axiom-of-choice",
+          "def-standard-borel-space",
+          "lem-finite-euclidean-space-is-standard-borel",
+          "lem-langevin-gaussian-proposal-kernel",
+          "lem-metropolis-hastings-density-ratio"
+        ],
+        "justified_by": [
+          "thm-metropolis-adjusted-langevin-target-invariant"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-finite-horizon-girsanov-and-relative-entropy-for-lipschitz-drifts",
+        "kind": "lemma",
+        "title": "Finite-horizon Brownian change of drift and relative entropy",
+        "deps": [
+          "thm-multidimensional-ito-formula-for-brownian-driven-processes",
+          "cor-vector-levy-characterization",
+          "thm-localized-ito-integral",
+          "thm-stopping-an-ito-integral",
+          "thm-ito-integral-process-has-a-continuous-martingale-version",
+          "thm-ito-isometry-and-linearity-in-predictable-l2",
+          "thm-doob-maximal-bound-for-the-ito-integral",
+          "def-progressively-measurable-and-predictable-process",
+          "lem-adapted-continuous-processes-are-progressively-measurable",
+          "thm-optional-sampling-for-bounded-stopping-times",
+          "thm-uniform-integrability-of-conditional-expectations-of-one-variable",
+          "thm-uniform-integrability-plus-probability-convergence-implies-l1-convergence",
+          "thm-global-strong-well-posedness-for-lipschitz-ito-sdes",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-tower-property-of-conditional-expectation",
+          "thm-likelihood-ratio-change-of-measure",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "def-kullback-leibler-divergence",
+          "thm-fatou-lemma",
+          "thm-dominated-convergence",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "cor-cauchy-schwarz-for-random-variables",
+          "def-axiom-of-choice",
+          "lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A.W. van der Vaart, Martingales, Diffusions and Financial Mathematics, Sections 6.3–6.4, Theorem 6.9 and Theorem 6.14",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            },
+            {
+              "title": "Alain Durmus and Eric Moulines, Nonasymptotic convergence analysis for the unadjusted Langevin algorithm, v3, proof of Proposition 2",
+              "url": "https://arxiv.org/pdf/1507.05021v3"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-metropolis-adjusted-langevin-target-invariant",
+        "kind": "theorem",
+        "title": "MALA preserves its target probability exactly",
+        "deps": [
+          "alg-metropolis-adjusted-langevin-algorithm",
+          "alg-metropolis-hastings-kernel",
+          "alg-unadjusted-langevin-algorithm",
+          "def-axiom-of-choice",
+          "def-borel-sigma-algebra",
+          "def-standard-borel-space",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-probability-measure",
+          "lem-finite-euclidean-space-is-standard-borel",
+          "lem-langevin-gaussian-proposal-kernel",
+          "lem-metropolis-hastings-density-ratio",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "thm-metropolis-hastings-kernel-is-reversible-and-invariant"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-ula-pathwise-kl-error-bound",
+        "kind": "lemma",
+        "title": "Pathwise relative-entropy error of the Langevin Euler interpolation",
+        "deps": [
+          "lem-finite-horizon-girsanov-and-relative-entropy-for-lipschitz-drifts",
+          "thm-global-strong-well-posedness-for-lipschitz-ito-sdes",
+          "thm-ito-isometry-and-linearity-in-predictable-l2",
+          "thm-doob-maximal-bound-for-the-ito-integral",
+          "def-d-dimensional-brownian-motion",
+          "def-kullback-leibler-divergence",
+          "thm-likelihood-ratio-change-of-measure",
+          "thm-dominated-convergence",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "cor-cauchy-schwarz-for-random-variables",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alain Durmus and Eric Moulines, Nonasymptotic convergence analysis for the unadjusted Langevin algorithm, v3, proof of Proposition 2, equations (12)–(15)",
+              "url": "https://arxiv.org/pdf/1507.05021v3"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-langevin-diffusion-density-reversibility-and-compact-minorization",
+        "kind": "lemma",
+        "title": "Langevin diffusion has a reversible density and compact minorization",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-d-dimensional-brownian-motion",
+          "lem-finite-horizon-girsanov-and-relative-entropy-for-lipschitz-drifts",
+          "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+          "lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "thm-global-strong-well-posedness-for-lipschitz-ito-sdes",
+          "thm-multidimensional-ito-formula-for-brownian-driven-processes",
+          "thm-doob-maximal-bound-for-the-ito-integral",
+          "thm-dynkin-pi-lambda",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-dominated-convergence",
+          "thm-fermat-for-euclidean-local-extrema"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durmus and Moulines, Non-asymptotic convergence analysis for the Unadjusted Langevin Algorithm, Proposition 2 and Proposition 7; local density-based replacement of the imported diffusion argument",
+              "url": "https://arxiv.org/pdf/1507.05021v3"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-ula-uniform-exponential-moments-and-invariant-laws",
+        "kind": "lemma",
+        "title": "ULA invariant laws have uniform exponential moments on the needed step ranges",
+        "deps": [
+          "def-axiom-of-choice",
+          "alg-unadjusted-langevin-algorithm",
+          "lem-langevin-gaussian-proposal-kernel",
+          "lem-ula-fixed-step-gaussian-kernel-exponential-drift",
+          "lem-ula-potential-coercivity-from-radial-drift",
+          "lem-weighted-drift-minorization-gives-contraction-and-invariant-law",
+          "thm-exponential-beats-every-polynomial",
+          "thm-fermat-for-euclidean-local-extrema",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-newton-leibniz-with-interior-derivative",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "thm-gaussian-integral",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durmus and Moulines, Non-asymptotic convergence analysis for the Unadjusted Langevin Algorithm, Proposition 8 and Theorem 10; local uniform-moment refinement",
+              "url": "https://arxiv.org/pdf/1507.05021v3"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-langevin-diffusion-weighted-geometric-ergodicity-under-radial-drift",
+        "kind": "theorem",
+        "title": "Radial drift gives weighted geometric contraction of Langevin diffusion",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-v-weighted-total-variation-distance",
+          "lem-langevin-diffusion-density-reversibility-and-compact-minorization",
+          "lem-langevin-potential-exponential-generator-drift",
+          "lem-ula-potential-coercivity-from-radial-drift",
+          "lem-weighted-drift-minorization-gives-contraction-and-invariant-law",
+          "thm-multidimensional-ito-formula-for-brownian-driven-processes",
+          "thm-stopping-an-ito-integral",
+          "thm-ito-isometry-and-linearity-in-predictable-l2",
+          "thm-fatou-lemma",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durmus and Moulines, Non-asymptotic convergence analysis for the Unadjusted Langevin Algorithm, Proposition 7 and section 4.3; local weighted-contraction proof",
+              "url": "https://arxiv.org/pdf/1507.05021v3"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-ula-quantitative-invariant-law-weighted-tv-bias",
+        "kind": "theorem",
+        "title": "ULA's invariant-law bias under smoothness and radial drift",
+        "deps": [
+          "alg-unadjusted-langevin-algorithm",
+          "def-axiom-of-choice",
+          "def-v-weighted-total-variation-distance",
+          "lem-ula-uniform-exponential-moments-and-invariant-laws",
+          "lem-ula-pathwise-kl-error-bound",
+          "lem-weighted-pinsker-inequality-for-probability-laws",
+          "thm-langevin-diffusion-weighted-geometric-ergodicity-under-radial-drift"
+        ],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alain Durmus and Éric Moulines, Non-asymptotic convergence analysis for the Unadjusted Langevin Algorithm, Theorem 10 and proof §4.6",
+              "url": "https://arxiv.org/pdf/1507.05021v3",
+              "locator": "Theorem 10 and its complete proof in §4.6; the proof uses continuous-time weighted ergodicity, a Girsanov path-space KL estimate, discrete Euler drift/ergodicity, weighted Pinsker, and an inhomogeneous moment bound."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2117,
+    "id": "langevin-monte-carlo-mala-and-ula-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Langevin algorithms: ULA bias and MALA exactness — Examples",
+    "companion": "langevin-monte-carlo-mala-and-ula",
+    "requires": [
+      "langevin-monte-carlo-mala-and-ula"
+    ],
+    "items": [
+      {
+        "id": "ex-ula-critical-step-has-no-invariant-law",
+        "kind": "example",
+        "title": "At the critical quadratic ULA step size, no invariant law exists",
+        "deps": [
+          "alg-unadjusted-langevin-algorithm",
+          "def-axiom-of-choice",
+          "def-characteristic-function-of-a-real-random-variable",
+          "def-standard-normal-and-normal-laws",
+          "lem-basic-properties-of-characteristic-functions",
+          "lem-characteristic-function-of-a-normal-law",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-ula-gaussian-target-stationary-bias",
+        "kind": "example",
+        "title": "ULA has a biased invariant variance for a standard Gaussian target",
+        "deps": [
+          "alg-unadjusted-langevin-algorithm",
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "lem-characteristic-function-of-a-normal-law",
+          "thm-ula-gaussian-target-invariant-law-and-stationary-variance"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-mala-gaussian-target-acceptance-correction",
+        "kind": "example",
+        "title": "MALA corrects the Gaussian ULA proposal with a Hastings ratio",
+        "deps": [
+          "alg-metropolis-adjusted-langevin-algorithm",
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "lem-langevin-gaussian-proposal-kernel",
+          "lem-metropolis-hastings-density-ratio",
+          "thm-metropolis-adjusted-langevin-target-invariant"
+        ],
+        "dependency_level": 5
+      }
+    ]
+  }
+]

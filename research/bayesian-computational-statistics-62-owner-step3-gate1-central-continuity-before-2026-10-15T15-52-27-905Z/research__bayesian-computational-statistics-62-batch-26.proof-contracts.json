@@ -1,0 +1,2293 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-26",
+  "scope": [
+    "def-composite-trapezoidal-rule",
+    "lem-positive-definite-gaussian-integral",
+    "lem-linear-interpolation-error-bound",
+    "thm-laplace-approximation-under-unique-interior-maximum",
+    "thm-composite-trapezoidal-rule-error-bound",
+    "ex-exact-gaussian-laplace-integral",
+    "cex-boundary-mode-changes-laplace-rate",
+    "cex-singular-interior-mode-changes-laplace-rate",
+    "cex-equal-multiple-modes-double-laplace-constant",
+    "ex-one-panel-composite-trapezoid-on-square"
+  ],
+  "contracts": {
+    "def-composite-trapezoidal-rule": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: N=1 makes the interior sum empty and leaves the two endpoint half weights."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: for f=0 every finite-sum term is zero, so T_N(f)=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: N=1 is covered explicitly by the empty-sum convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a constant function is still assigned a finite quadrature value for every N."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both endpoint values occur with weight h/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the rule uses only the specified finite sum and requires no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition introduces T_N by endpoint half weights and interior unit weights on a mesh with N>=1. Its explicit N=1 empty-sum convention determines a value; no if-and-only-if assertion connects that value to an integral.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_step3_gate1_25_28",
+            "reason": "Definition introduces T_N by endpoint half weights and interior unit weights on a mesh with N>=1. Its explicit N=1 empty-sum convention determines a value; no if-and-only-if assertion connects that value to an integral.",
+            "item_sha256": "2882e7ef096208ce03f88eeeb74ae4ca7aecb3538263355be4cbd4f27eb6800c",
+            "row_sha256": "56a5d1a983d8146b3b5b2d07330df640220ba00b59e8339f2e0db42346c683a1"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The weighted-sum Definition does not characterize integrability or exact quadrature in reverse. It permits any real-valued f on [a,b] and explicitly postpones error comparison until the integral is defined; no converse implication is present.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_step3_gate1_25_28",
+            "reason": "The weighted-sum Definition does not characterize integrability or exact quadrature in reverse. It permits any real-valued f on [a,b] and explicitly postpones error comparison until the integral is defined; no converse implication is present.",
+            "item_sha256": "2882e7ef096208ce03f88eeeb74ae4ca7aecb3538263355be4cbd4f27eb6800c",
+            "row_sha256": "05d8978059aa1546c15d820e3208dd94f3d6656a411df5acab644ec5f1573ea1"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": []
+    },
+    "lem-positive-definite-gaussian-integral": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-self-adjoint-and-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be an endomorphism. The endomorphism $T$ is **self-adjoint** when\n\n$$T^*=T,$$\n\nand **normal** when\n\n$$TT^*=T^*T,$$\n\nwhere $T^*$ is the adjoint from\n[[def-adjoint-of-a-linear-map-between-inner-product-spaces]].\n\nEvery self-adjoint endomorphism is normal, because $TT^*=T^2=T^*T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space, let\n$T:V\\to V$ be linear, and let $\\mathcal E$ be an orthonormal basis of $V$. Write\n\n$$A=[T]_{\\mathcal E}^{\\mathcal E}.$$\n\nThen:\n\n1. $T$ is self-adjoint if and only if $A=A^*$.\n2. $T$ is normal if and only if $AA^*=A^*A$.\n\nOver $\\mathbb R$, $A^*$ is just $A^{\\mathsf T}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cholesky-factorisation-with-positive-diagonal",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$ and $A\\in M_n(\\mathbb C)$; over $\\mathbb R$ the same definition uses transpose\ninstead of conjugate transpose.\n\nThe matrix $A$ is **Hermitian positive definite** if $A=A^*$ and\n\n$$x^*Ax>0$$for every nonzero vector $x\\in \\mathbb C^n$. A **Cholesky factorisation with positive diagonal** of $A$ is a factorisation$$A=LL^*,$$\n\nwhere $L$ is lower triangular and every diagonal entry of $L$ is a positive real\nnumber.\n\nThe Hermitian terminology matches\n[[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]], and the\ntriangular terminology matches\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-determinant-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring, let $n\\ge1$, and let $A=(a_{ij})\\in M_n(R)$. Its **determinant** is\n$$\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}.$$\nThe sum is finite because $S_n$ has $n!$ elements. The product is taken in $R$, so the signs $1$ and $-1$ act through the ring identities. The formula uses columns indexed by $i<n$ and rows indexed by $\\sigma(i)$.\n\nWhen $A$ is real, $|\\det A|$ means the ordinary real absolute value of its real determinant. It is not alternate notation for the determinant itself.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-determinant-of-transpose",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge1$, every commutative ring $R$, and every $A\\in M_n(R)$,\n$$\\det(A^{\\mathsf T})=\\det(A).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-determinant-of-a-triangular-matrix",
+          "source_section": "Statement",
+          "quote": "If $A=(a_{ij})\\in M_n(R)$ is upper or lower triangular over a commutative ring, with $n\\ge1$, then\n$$\\det(A)=\\prod_{i<n}a_{ii}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-gaussian-integral",
+          "source_section": "Statement",
+          "quote": "$$\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt\\pi.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-substitution-for-improper-integrals",
+          "source_section": "Statement",
+          "quote": "Let $I$ and $J$ be intervals, possibly open at finite or infinite singular ends, and let $\\phi:I\\to J$ be a monotone differentiable surjection. Assume $\\phi'$ is locally Riemann integrable and the proper change-of-variable hypotheses hold on every compact truncation. If $f$ is locally Riemann integrable on $J$, then\n$$\\int_J f(x)\\,dx\\quad\\text{and}\\quad\\int_I f(\\phi(t))|\\phi'(t)|\\,dt$$\nconverge simultaneously and, when convergent, are equal. At several singular ends this assertion is applied separately to the corresponding ends; orientation is retained for decreasing parametrizations.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra on $\\mathbb{R}^n$ and\n   $\\lambda_n$ is a measure on it ([[def-measure]]);\n2. the measure space $(\\mathbb{R}^n, \\mathcal{L}(\\mathbb{R}^n), \\lambda_n)$ is\n   complete ([[def-complete-measure-space]]), and every $S \\subseteq \\mathbb{R}^n$\n   with $\\lambda_n^*(S) = 0$ is Lebesgue measurable with $\\lambda_n(S) = 0$;\n3. every elementary set is Lebesgue measurable and\n   $\\lambda_n(A) = \\mu_0(A)$ for every $A \\in \\mathcal{E}_n$; in particular\n   $\\lambda_n(B) = \\operatorname{vol}(B)$ for every half-open box $B$,\n   $\\lambda_n(\\varnothing) = 0$ and $\\lambda_n(\\mathbb{R}^n) = +\\infty$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge1$ and every real matrix $A\\in M_n(\\mathbb R)$,\n$$A\\text{ is invertible}\\quad\\Longleftrightarrow\\quad\\det(A)\\ne0.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. A von Neumann natural is the set of its\npredecessors, $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so it can be\nused directly as an index set. Define\n\n$$\\mathbb{R}^n := \\{\\, x : x \\text{ is a function } n \\to \\mathbb{R} \\,\\},$$\n\nand write $x_k$ for $x(k)$, $k < n$. Two elements of $\\mathbb{R}^n$ are equal\nexactly when they agree at every $k < n$, functions being equal when they have\nthe same values. For $x, y \\in \\mathbb{R}^n$ put\n\n$$d_1(x,y) := \\sum_{k<n} |x_k - y_k|, \\qquad d_2(x,y) := \\sqrt{\\ \\sum_{k<n} (x_k - y_k)^2\\ }, \\qquad d_\\infty(x,y) := \\max\\{\\, |x_k - y_k| : k < n \\,\\}.$$\n\nAll three are well defined: the finite sums are those of [[def-finite-sum]]; the\nsum of squares is nonnegative ([[lem-finite-sum-laws]], [[lem-of-square-positive]])\nso it has a unique nonnegative square root ([[thm-of-square-roots]]); and\n$\\{|x_k - y_k| : k < n\\}$ is a nonempty finite subset of $\\mathbb{R}$, because\n$n \\ge 1$, so it has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**\n([[def-metric-space]]).\n\n**Why $n \\ge 1$.** For $n = 0$ the set $\\mathbb{R}^0$ has exactly one element,\nthe empty function, and $d_1$ and $d_2$ are the empty sum $0$ and its root; but\n$d_\\infty$ would be the maximum of the empty set, which does not exist. The\nhypothesis $n \\ge 1$ is therefore not decoration, and it is carried by every\nstatement about $d_\\infty$ in this library.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-composition-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g(A) \\subseteq B$, and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$. If $g$ is continuous\nat $c$ and $f$ is continuous at $g(c) \\in B$, then $f \\circ g$ is continuous at\n$c$ ([[def-continuity-real]]).\n\nConsequently, if $g$ is continuous on $A$ and $f$ is continuous on $B$, then\n$f \\circ g$ is continuous on $A$.\n\n**No side hypothesis is needed, and that is the whole point.** The composition\ntheorem for limits, [[thm-composition-of-function-limits]], must assume one of\ntwo extra conditions: either $L \\in B$ with $f(L) = M$, or $g \\ne L$ on a\npunctured neighbourhood of $c$; with both dropped the statement is false, which\nis [[fs-naive-composition-of-limits]]. The first of those conditions is exactly\n*continuity of $f$ at $L$* written out, so under the hypotheses above it holds\nautomatically and nothing has to be assumed. The mechanism is visible in the\nproof: [[def-continuity-real]] quantifies over $|y - b| < \\rho$ rather than over\n$0 < |y - b| < \\rho$, so the value $y = b$ that the limit version cannot control\nis precisely the one the continuity hypothesis does control.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue\nmeasurable ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ be a measurable space and let\n$f,g:X\\to\\overline{\\mathbb R}$ be measurable for the Borel sigma-algebra on\nthe extended real line. Products of functions use\n$\\odot_X$ from [[def-measurable-pointwise-extended-real-product]], and $cf$\nabbreviates $\\underline c\\odot_X f$ for the constant function $\\underline c$.\nThe magnitude function is $|f|=\\max(f,-f)$ as in\n[[def-positive-and-negative-parts-of-a-function]]. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if the partial pointwise sum $f+g$ is defined at every point, then it is measurable;\n4. the pointwise product $fg:=f\\odot_X g$ is measurable.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$m,n \\ge 1$. Under the identification\n$$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$\nthe Lebesgue measure $\\lambda_{m+n}$ is the completion of the product measure\n$\\lambda_m \\times \\lambda_n$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n([[def-extended-real-valued-measurable-function]]). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\n[[def-integral-of-a-nonnegative-simple-function]].\n\nThe set of admissible simple minorants is nonempty because it contains the zero\nfunction, which is simple ([[def-nonnegative-simple-measurable-function]]).",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-nonnegative-measurable-functions-admit-increasing-simple-approximations",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f : X \\to [0,+\\infty]$ be measurable. For $k \\in \\mathbb{N}$ define\n\n$$s_k := \\sum_{j=0}^{k2^k-1} j2^{-k}\\, \\mathbf{1}_{\\{j2^{-k} \\le f < (j+1)2^{-k}\\}} + k\\,\\mathbf{1}_{\\{f \\ge k\\}}.$$\n\nThen each $s_k$ is a simple measurable function,\n\n$$0 \\le s_k \\le s_{k+1} \\le f,$$\n\nand $s_k(x) \\to f(x)$ for every $x \\in X$. If $E \\subseteq X$ is a set on which\n$f \\le M < +\\infty$, then $s_k \\to f$ uniformly on $E$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], the symmetric matrix $H$ represents a self-adjoint endomorphism of $\\mathbb R^d$. By [F3], choose an orthonormal eigenbasis $q_1,\\ldots,q_d$ with eigenvalues $\\lambda_1,\\ldots,\\lambda_d$. Positive definiteness [F4] gives $\\lambda_j\\|q_j\\|_2^2=q_j^{\\mathsf T}Hq_j>0$, so each $\\lambda_j>0$. Writing $Q$ for the matrix with these columns and $\\Lambda=\\operatorname{diag}(\\lambda_1,\\ldots,\\lambda_d)$, we have $H=Q\\Lambda Q^{\\mathsf T}$ and $Q^{\\mathsf T}Q=I$ by orthonormality. By the Leibniz definition of determinant in [F5], $\\det I=1$; multiplicativity and transpose invariance then give $(\\det Q)^2=1$. Also $\\det\\Lambda=\\prod_j\\lambda_j>0$ by [F5], hence $\\det H=(\\det Q)^2\\det\\Lambda=\\prod_j\\lambda_j>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F13",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The substitution $x=\\sqrt2\\,t$ in [F8], followed by [F7], gives the improper Riemann value $\\int_{\\mathbb R}e^{-x^2/2}\\,dx=\\sqrt{2\\pi}$. On each $[-m,m]$, $m\\ge1$, the continuous integrand has equal Riemann and Lebesgue integrals by [F14] and [F18]. The nonnegative measurable functions $e^{-x^2/2}\\mathbf1_{[-m,m]}(x)$ increase to $e^{-x^2/2}$ on $\\mathbb R$, so monotone convergence [F17] identifies $G_1:=\\int_{\\mathbb R}e^{-x^2/2}\\,d\\lambda_1(x)$ with the limit of these proper integrals, namely $\\sqrt{2\\pi}$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F7",
+            "F8",
+            "F14",
+            "F17",
+            "F18",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4], choose a lower-triangular $L$ with positive diagonal such that $H=LL^{\\mathsf T}$. Then [F5] gives $\\det H=(\\det L)^2$ and $\\det L>0$, so [F6] identifies $\\sqrt{\\det H}=\\det L$. Since $\\det L>0$, [F12] also shows that $L$ is invertible.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "F5",
+            "F6",
+            "F12",
+            "F13",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For $k\\ge1$ put $G_k:=\\int_{\\mathbb R^k}e^{-\\|z\\|_2^2/2}\\,d\\lambda_k(z)$. For each $k$, the spaces $\\mathbb R^k$ and $\\mathbb R$ are sigma-finite by [F9], and [F14] makes the product integrand product-measurable. By [F15]–[F17], its integral under $\\lambda_{k+1}$ equals its integral under $\\lambda_k\\times\\lambda_1$; Tonelli [F10] then gives $G_{k+1}=G_kG_1$. Starting at [step 1.2], induction yields $G_d=(2\\pi)^{d/2}$.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "F1",
+            "F9",
+            "F10",
+            "F14",
+            "F15",
+            "F16",
+            "F17",
+            "ih",
+            "discharge-induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The linear map $T(u)=L^{\\mathsf T}u$ is a $C^1$ diffeomorphism of $\\mathbb R^d$ by step 2.1, with Jacobian determinant $\\det(L^{\\mathsf T})=\\det L>0$ by [F5]. Since $u^{\\mathsf T}Hu=\\|L^{\\mathsf T}u\\|_2^2$, [F11] gives $G_d=\\det L\\int_{\\mathbb R^d}e^{-u^{\\mathsf T}Hu/2}\\,d\\lambda_d(u)$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "F11",
+            "F13",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Substituting [step 2.2] and $\\det L=\\sqrt{\\det H}$ from [step 2.1] into [step 3.1] gives the asserted formula.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: d is required to satisfy d>=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement: positive definiteness excludes the zero or singular matrix."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof steps 2.1 and 3.1 reduce d=1 to the one-dimensional Gaussian integral and linear substitution."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement: the hypothesis requires positive definiteness, so degenerate quadratic forms are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: the integration domain is all of R^d and has no endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts & Assumptions A1 and proof steps 2.2 and 3.1 state and use Countable Choice through the measure-theoretic suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement evaluates the nonnegative Gaussian integral for an assumed symmetric positive-definite H. Current proof 1.2 explicitly bridges improper Riemann and Lebesgue integrals, and 3.1–4.1 use the Cholesky Jacobian to obtain its value; no implication characterizing H is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_step3_gate1_25_28",
+            "reason": "Statement evaluates the nonnegative Gaussian integral for an assumed symmetric positive-definite H. Current proof 1.2 explicitly bridges improper Riemann and Lebesgue integrals, and 3.1–4.1 use the Cholesky Jacobian to obtain its value; no implication characterizing H is asserted.",
+            "item_sha256": "66e5de23c5bd098315db361963465ea5271448dec835699e01fb41dbc9486868",
+            "row_sha256": "985846a70dbcf767a285bb67f873677ad8bbb664d9ff376a4f169072a5de00de"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Gaussian evaluation in Statement is not a converse criterion for positive definiteness. The domain already restricts H to symmetric positive-definite matrices; proof 2.1 derives positive det L and 4.1 substitutes the value, without deriving the hypotheses from the integral.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_step3_gate1_25_28",
+            "reason": "The Gaussian evaluation in Statement is not a converse criterion for positive definiteness. The domain already restricts H to symmetric positive-definite matrices; proof 2.1 derives positive det L and 4.1 substitutes the value, without deriving the hypotheses from the integral.",
+            "item_sha256": "66e5de23c5bd098315db361963465ea5271448dec835699e01fb41dbc9486868",
+            "row_sha256": "22cbd68dcf07abc7d28b73399502aaebfadb0bd2de86607629c35abf0377909a"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": [
+        {
+          "axiom": "def-countable-choice",
+          "steps": [
+            "1.2",
+            "2.2",
+            "3.1"
+          ],
+          "use": "Countable Choice is spent through product Lebesgue measure and the nonnegative C1 change-of-variables formula; the spectral and Cholesky steps use only finite-dimensional choices. Step 1.2 also uses Countable Choice through finite-interval Riemann–Lebesgue equality."
+        }
+      ],
+      "repair_confidence": 1,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read all six proof steps, current cited supplier statements and the Gaussian improper-integral proof with its finiteness supplier. Confirmed refuter:26:1 as a short nonfatal missing bridge. Step 1.2 now equates proper Riemann and Lebesgue integrals on [-m,m] and applies monotone convergence to nonnegative measurable truncations; Countable Choice is explicit. Positive-definite H gives positive eigenvalues and determinant; Cholesky L has det L>0 and is invertible. Tonelli applies to sigma-finite spaces and the product-measurable Gaussian; completion agreement is derived by simple approximation/MCT. The global linear diffeomorphism L-transpose has Jacobian det L and quadratic form norm-square. The d=1 base, determinant square root sign, excluded singular/zero matrices and inherited Countable Choice are checked; no full AC or iff claim. Statement unchanged; no consumer repair required."
+      }
+    },
+    "lem-linear-interpolation-error-bound": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval and $f:I\\to\\mathbb R$. Put $f^{(0)}:=f$. Recursively, wherever $f^{(j)}$ is differentiable, put $f^{(j+1)}:=(f^{(j)})'$, with derivatives at endpoints understood in the one-sided sense fixed by [[def-derivative]] and [[def-one-sided-limits]].\n\nFor $k\\in\\mathbb N$, the function is **$k$-times differentiable** on $I$ if $f^{(j)}$ exists on $I$ for every $j\\le k$. It is of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on $I$ ([[def-continuity-real]]). It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.\n\nSince $0\\in\\mathbb N$ ([[def-natural-numbers]]), $C^0$ means continuity. The definitions also give $C^{k+1}\\subseteq C^k$. Existence of $f^{(k)}$ alone does not assert that $f^{(k)}$ is continuous.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-rolle",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]), and suppose\n\n$$f(a) \\;=\\; f(b) .$$\n\nThen there is $c \\in (a,b)$ with $f'(c) = 0$.\n\n**Three hypotheses, three different jobs.** Continuity on the **closed**\ninterval is what the extreme value theorem consumes; differentiability on the\n**open** interval is what Fermat's theorem consumes, and it is asked for\nnowhere else; and $f(a) = f(b)$ is what forces the extremum inside when neither\nextremum is attained in the interior. Continuity at the two endpoints cannot be\ndropped, and a false statement later on this page records a witness for that.\n\n**Differentiability is meant with respect to the domain $[a,b]$.** For $c$ in\nthe open interval that is the same condition as differentiability of any\nrestriction of $f$ to a subinterval around $c$, since only points near $c$\nenter, but the phrase is fixed here so that the citation of\n[[thm-fermat-interior-extremum]], whose hypothesis is interiority in the\ndomain, is exact.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $L(t):=f(a)+(f(b)-f(a))(t-a)/(b-a)$. Then $L$ is affine and has the required endpoint values; any affine function agreeing with $f$ at the distinct endpoints has the same slope and intercept, so it equals $L$. By [F1] and [F2], $f''$ is bounded on $[a,b]$, so $M$ is a finite nonnegative real.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The desired inequality is equality at $x=a$ and $x=b$. Fix an interior point $x\\in(a,b)$ and put $c_x:=(f(x)-L(x))/((x-a)(b-x))$. The denominator is positive. Define $g(t):=f(t)-L(t)-c_x(t-a)(b-t)$; then $g(a)=g(x)=g(b)=0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Rolle's theorem [F3] on $[a,x]$ and $[x,b]$ gives $s_1\\in(a,x)$ and $s_2\\in(x,b)$ with $g'(s_1)=g'(s_2)=0$. Applying [F3] to $g'$ on $[s_1,s_2]$ gives $\\xi\\in(s_1,s_2)$ with $g''(\\xi)=0$. All applications are valid because $f$ is $C^2$ on a neighborhood of $[a,b]$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 2.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $L''=0$ and $((t-a)(b-t))''=-2$, step 3.1 yields $0=g''(\\xi)=f''(\\xi)+2c_x$. Thus $|c_x|=|f''(\\xi)|/2\\le M/2$. Multiplying by the positive denominator in the definition of $c_x$ proves the claimed bound at this $x$; together with the endpoint cases in step 2.1 this proves the result.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: a<b is required, so the interval is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 4.1 allow M=0; the bound then forces zero interpolation error."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement: there is no discrete sample-size parameter; endpoint behavior is recorded separately."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof steps 2.1 and 4.1 show affine f has c_x=0 and is interpolated exactly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.1 treats x=a and x=b, where both sides are zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 3.1 uses only three finite Rolle witnesses for a fixed x; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement assumes C2 regularity on a neighborhood and bounds |f(x)-L(x)|. Proof 2.1 handles the two interpolation nodes and 3.1–4.1 use three finite Rolle witnesses to obtain the interior bound. It states no if-and-only-if property.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_step3_gate1_25_28",
+            "reason": "Statement assumes C2 regularity on a neighborhood and bounds |f(x)-L(x)|. Proof 2.1 handles the two interpolation nodes and 3.1–4.1 use three finite Rolle witnesses to obtain the interior bound. It states no if-and-only-if property.",
+            "item_sha256": "6d00b7dc7f692b491a8ca37d5eaf29a7e374eeffa594387d01000d5cbb7445dd",
+            "row_sha256": "5c646adddbaefab800dfcd963d5f9e9189a91d24ceec06c22924d3526768546d"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A bound on the interpolation error is not asserted to imply C2 regularity or the neighborhood hypothesis. Statement supplies those hypotheses in advance; proof 4.1 concludes only the M(x-a)(b-x)/2 inequality.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_step3_gate1_25_28",
+            "reason": "A bound on the interpolation error is not asserted to imply C2 regularity or the neighborhood hypothesis. Statement supplies those hypotheses in advance; proof 4.1 concludes only the M(x-a)(b-x)/2 inequality.",
+            "item_sha256": "6d00b7dc7f692b491a8ca37d5eaf29a7e374eeffa594387d01000d5cbb7445dd",
+            "row_sha256": "0be610f1ecae20485ea51f6693b3d3207e0e9811024d37e739fcea28e1570b44"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read all four steps and the three current suppliers. The affine interpolant is unique since a<b; f double-prime is bounded by continuity. At endpoints the error vanishes. For interior x the positive denominator permits c_x; three finite Rolle applications yield g double-prime=f double-prime+2c_x=0 and the M/2 bound. M=0 and affine functions are included. No choice axiom or iff claim. Independently checked Suli nc.pdf section 1.1 Theorem 1 equations (5)-(6), PDF pages 5-6: degree one gives precisely the claimed bound; accept reader locator correction."
+      },
+      "repair_confidence": 1
+    },
+    "thm-laplace-approximation-under-unique-interior-maximum": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "3.3",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ck-and-multi-index-notation-in-several-variables",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R$. A **multi-index** is $\\alpha=(\\alpha_0,\\ldots,\\alpha_{m-1})\\in\\mathbb N^m$. Put\n\n$$|\\alpha|:=\\sum_{i<m}\\alpha_i,\\qquad \\alpha!:=\\prod_{i<m}\\alpha_i!,\\qquad h^\\alpha:=\\prod_{i<m}h_i^{\\alpha_i}\\quad(h\\in\\mathbb R^m).$$\n\nHere $|\\alpha|$ and $\\alpha!$ use the natural-number sum and product of [[def-nat-finite-sum-and-product]], and $n!$ is the factorial of [[def-factorial-and-falling-factorial]]. By contrast, $h^\\alpha$ is the finite product in $\\mathbb R$ of [[def-finite-sum]], with the natural exponents interpreted by [[def-integer-power]]. For the zero multi-index $0$, set $D^0f:=f$. For nonzero $\\alpha$, write\n\n$$D^\\alpha f:=\\partial_0^{\\alpha_0}\\cdots\\partial_{m-1}^{\\alpha_{m-1}}f$$\n\nfor this displayed, canonical order whenever it exists. Coordinate partial derivatives have the meaning fixed in [[def-directional-and-partial-derivatives]].\n\nFor $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word $(i_1,\\ldots,i_r)$ of coordinate indices with $0\\le r\\le k$, the iterated derivative $\\partial_{i_r}\\cdots\\partial_{i_1}f$ exists and is continuous on $U$; the word of length $0$ denotes $f$. Thus this definition does **not** presuppose that differently ordered derivatives are equal. Equality of their values is a later theorem under these regularity hypotheses.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]. A point $a$ is **critical** when its gradient $\\nabla f(a)$ is zero, with the gradient convention of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cholesky-factorisation-with-positive-diagonal",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$ and $A\\in M_n(\\mathbb C)$; over $\\mathbb R$ the same definition uses transpose\ninstead of conjugate transpose.\n\nThe matrix $A$ is **Hermitian positive definite** if $A=A^*$ and\n\n$$x^*Ax>0$$for every nonzero vector $x\\in \\mathbb C^n$. A **Cholesky factorisation with positive diagonal** of $A$ is a factorisation$$A=LL^*,$$\n\nwhere $L$ is lower triangular and every diagonal entry of $L$ is a positive real\nnumber.\n\nThe Hermitian terminology matches\n[[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]], and the\ntriangular terminology matches\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]].",
+          "uses": [
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-second-order-taylor-expansion-with-the-hessian",
+          "source_section": "Statement",
+          "quote": "For a $C^2$ scalar field near $a$,\n\n$$f(a+h)=f(a)+\\nabla f(a)\\cdot h+\\frac12\\langle H_f(a)h,h\\rangle+o(\\|h\\|^2).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-closed-subset-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $F \\subseteq X$ be closed in $X$\n([[def-metric-topology]]). Then $F$ is a compact subset of $X$: the metric\nsubspace $(F, d_F)$ is a compact metric space\n([[def-isometry-and-metric-embedding]]).\n\nNo choice principle is used.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra on $\\mathbb{R}^n$ and\n   $\\lambda_n$ is a measure on it ([[def-measure]]);\n2. the measure space $(\\mathbb{R}^n, \\mathcal{L}(\\mathbb{R}^n), \\lambda_n)$ is\n   complete ([[def-complete-measure-space]]), and every $S \\subseteq \\mathbb{R}^n$\n   with $\\lambda_n^*(S) = 0$ is Lebesgue measurable with $\\lambda_n(S) = 0$;\n3. every elementary set is Lebesgue measurable and\n   $\\lambda_n(A) = \\mu_0(A)$ for every $A \\in \\mathcal{E}_n$; in particular\n   $\\lambda_n(B) = \\operatorname{vol}(B)$ for every half-open box $B$,\n   $\\lambda_n(\\varnothing) = 0$ and $\\lambda_n(\\mathbb{R}^n) = +\\infty$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-positive-definite-gaussian-integral",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge1$ be an integer and let $H\\in M_d(\\mathbb R)$,\nthe square-matrix space of [[def-matrix-space]],\nbe symmetric positive definite in the sense of\n[[def-cholesky-factorisation-with-positive-diagonal]]. Let $\\lambda_d$ denote\nthe Lebesgue measure of\n[[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]. Interpret the\ndisplayed integral as the nonnegative Lebesgue integral of\n[[def-nonnegative-lebesgue-integral]].\n$$\\int_{\\mathbb R^d}\\exp\\!\\left(-\\frac12 u^{\\mathsf T}Hu\\right)\\,d\\lambda_d(u) =\\frac{(2\\pi)^{d/2}}{\\sqrt{\\det H}}.$$",
+          "uses": [
+            "3.3",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-compact-subset-is-closed-and-bounded",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $K \\subseteq X$ be a\ncompact subset ([[def-metric-compactness]]). Then $K$ is closed in $X$\n([[def-metric-topology]]) and bounded ([[def-metric-bounded-diameter]]).\n\nNo choice principle is used: both covers below are given by a rule, and the\nindexed form of [[lem-compactness-is-intrinsic]] returns indices rather than\nsets.\n\n**The converse is false in general.** A closed and bounded subset of an arbitrary\nmetric space need not be compact\n([[fs-closed-and-bounded-implies-compact-in-every-metric-space]]); it is exactly\nin $\\mathbb{R}^n$ that the converse holds ([[thm-heine-borel-rn]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-borel-sigma-algebra-of-a-subspace-is-the-trace",
+          "source_section": "Statement",
+          "quote": "Let $Y$ be a subspace of a topological space $X$. Then\n\n$$\\mathcal B(Y)=\\mathcal B(X)|_Y.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue\nmeasurable ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "1.1",
+            "3.3",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. If $E \\subseteq U$ is Lebesgue measurable, then $T(E)$ is\nLebesgue measurable.",
+          "uses": [
+            "1.1",
+            "3.3",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-composition-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g(A) \\subseteq B$, and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$. If $g$ is continuous\nat $c$ and $f$ is continuous at $g(c) \\in B$, then $f \\circ g$ is continuous at\n$c$ ([[def-continuity-real]]).\n\nConsequently, if $g$ is continuous on $A$ and $f$ is continuous on $B$, then\n$f \\circ g$ is continuous on $A$.\n\n**No side hypothesis is needed, and that is the whole point.** The composition\ntheorem for limits, [[thm-composition-of-function-limits]], must assume one of\ntwo extra conditions: either $L \\in B$ with $f(L) = M$, or $g \\ne L$ on a\npunctured neighbourhood of $c$; with both dropped the statement is false, which\nis [[fs-naive-composition-of-limits]]. The first of those conditions is exactly\n*continuity of $f$ at $L$* written out, so under the hypotheses above it holds\nautomatically and nothing has to be assumed. The mechanism is visible in the\nproof: [[def-continuity-real]] quantifies over $|y - b| < \\rho$ rather than over\n$0 < |y - b| < \\rho$, so the value $y = b$ that the limit version cannot control\nis precisely the one the continuity hypothesis does control.",
+          "uses": [
+            "1.1",
+            "3.3",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ be a measurable space and let\n$f,g:X\\to\\overline{\\mathbb R}$ be measurable for the Borel sigma-algebra on\nthe extended real line. Products of functions use\n$\\odot_X$ from [[def-measurable-pointwise-extended-real-product]], and $cf$\nabbreviates $\\underline c\\odot_X f$ for the constant function $\\underline c$.\nThe magnitude function is $|f|=\\max(f,-f)$ as in\n[[def-positive-and-negative-parts-of-a-function]]. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if the partial pointwise sum $f+g$ is defined at every point, then it is measurable;\n4. the pointwise product $fg:=f\\odot_X g$ is measurable.",
+          "uses": [
+            "1.1",
+            "3.3",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $f,g:X\\to\\overline{\\mathbb R}$ are measurable and $f+g$ is defined\n   pointwise, then $f+g$ is measurable.\n2. If $c\\in\\mathbb R$ and $f:X\\to\\mathbb R$ is measurable, then $cf$ is\n   measurable.\n3. If $f:X\\to\\mathbb R$ is measurable, then $f^+=\\max\\{f,0\\}$,\n   $f^-=\\max\\{-f,0\\}$, and $|f|=f^++f^-$ are measurable.\n4. If $E\\in\\mathcal A$ and $f:X\\to[0,+\\infty]$ is measurable, then\n   $f\\chi_E$ is measurable, where this function equals $f$ on $E$ and $0$\n   off $E$ (in particular, $0\\cdot(+\\infty)=0$ here).\n5. If $(f_n)$ is a sequence of measurable functions $X\\to\\overline{\\mathbb R}$,\n   then $\\inf_n f_n$ is measurable; if moreover $f_n\\uparrow f$ pointwise, then\n   $f$ is measurable.",
+          "uses": [
+            "1.1",
+            "3.3",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n([[def-extended-real-valued-measurable-function]]). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\n[[def-integral-of-a-nonnegative-simple-function]].\n\nThe set of admissible simple minorants is nonempty because it contains the zero\nfunction, which is simple ([[def-nonnegative-simple-measurable-function]]).",
+          "uses": [
+            "1.1",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.1",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. If $f,g:X\\to[0,+\\infty]$ are measurable, then\n$$\\int(f+g)\\,d\\mu=\\int f\\,d\\mu+\\int g\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "4.2",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $h_0:=h(\\hat\\theta)$. By [F12], $h$ is Lebesgue measurable on $K$; by [F11] and [F13], $a e^{nh}$ is nonnegative and measurable for each $n$. Since $h\\le h_0$ and the exponential is increasing, $0\\le a e^{nh}\\le e^{nh_0}a$. Thus [F14] and $\\int_Ka<\\infty$ show that $I_n$ is finite.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "F11",
+            "F12",
+            "F13",
+            "F14"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose $0<\\delta<\\min\\{r_0,r_1\\}$ small enough that $a(\\theta)\\le a(\\hat\\theta)+1$ whenever $\\|\\theta-\\hat\\theta\\|_2<\\delta$; this is possible by continuity of $a$ at $\\hat\\theta$. Then $\\overline B(\\hat\\theta,\\delta)\\subseteq U\\cap K$, and the local quadratic bound holds there.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The set $A:=K\\cap\\{\\theta:\\delta\\le\\|\\theta-\\hat\\theta\\|_2\\le r_1\\}$ is closed in $K$ by [F6], hence compact by [F5]. If $A$ is nonempty, [F5] gives a maximizer of $h$ on $A$; it is not $\\hat\\theta$, so uniqueness of the maximizer on $K$ gives $\\sup_A h<h_0$. Combining this gap with the assumed gap on $K\\setminus B(\\hat\\theta,r_1)$ yields some $\\eta'>0$ such that $h\\le h_0-\\eta'$ throughout $K\\setminus B(\\hat\\theta,\\delta)$; if $A$ is empty, take $\\eta'=\\eta$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For each coordinate vector $e_j$, the one-variable function $t\\mapsto h(\\hat\\theta+t e_j)$ has a local maximum at $t=0$ and is differentiable there. Its right difference quotients are nonpositive and its left difference quotients are nonnegative, so the derivative is zero. Thus every component of $\\nabla h(\\hat\\theta)$ vanishes.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "claim": "Define $F_n(\\theta):=a(\\theta)e^{n(h(\\theta)-h_0)}$ on $K\\cap B(\\hat\\theta,\\delta)$ and $F_n(\\theta):=0$ elsewhere in $\\mathbb R^d$, and put $g_n(u):=F_n(\\hat\\theta+u/\\sqrt n)$. By [F13], $F_n$ and $g_n$ are nonnegative measurable. The affine change of variables $\\theta=\\hat\\theta+u/\\sqrt n$ is a $C^1$ diffeomorphism with Jacobian $n^{-d/2}$, so [F8] gives $n^{d/2}e^{-nh_0}\\int_{K\\cap B(\\hat\\theta,\\delta)}a(\\theta)e^{nh(\\theta)}\\,d\\lambda_d(\\theta)=\\int_{\\mathbb R^d}g_n(u)\\,d\\lambda_d(u)$. Equivalently, $g_n(u)=a(\\hat\\theta+u/\\sqrt n)e^{n[h(\\hat\\theta+u/\\sqrt n)-h_0]}$ when $\\|u\\|_2<\\delta\\sqrt n$ and $g_n(u)=0$ otherwise. For all $u,n$, [given] and step 2.1 give $0\\le g_n(u)\\le(a(\\hat\\theta)+1)e^{-c\\|u\\|_2^2}$. This majorant is integrable by [F10] with $H=2cI$, which is positive definite by [F2] and $c>0$.",
+          "step": "3.3",
+          "inputs": [
+            "A1",
+            "F2",
+            "F8",
+            "F10",
+            "F13",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Fix $u\\in\\mathbb R^d$ and put $v_n:=u/\\sqrt n$. Eventually $\\|v_n\\|_2<\\delta/2$. By [F3] and step 3.2, $n(h(\\hat\\theta+v_n)-h_0)\\to-\\tfrac12u^{\\mathsf T}Hu$, because $n\\,o(\\|v_n\\|_2^2)=o(1)$. For the stronger remainder bound, the finitely many third partial derivatives are bounded on the compact set $K\\cap\\overline B(\\hat\\theta,\\delta/2)$ by [F5]; apply [F4] on the open convex ball $B(\\hat\\theta,\\delta/2)$ with $k=2$ to get a remainder $O(\\|v_n\\|_2^3)$, which also vanishes after multiplication by $n$. Continuity of $a$ gives $a(\\hat\\theta+v_n)\\to a(\\hat\\theta)$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "On $K\\setminus B(\\hat\\theta,\\delta)$, step 3.1 gives $0\\le n^{d/2}e^{-nh_0}\\int_{K\\setminus B(\\hat\\theta,\\delta)}a e^{nh}\\,d\\lambda_d\\le n^{d/2}e^{-n\\eta'}\\int_K a\\,d\\lambda_d\\longrightarrow0$. Indeed, the ratio of consecutive terms $n^{d/2}e^{-n\\eta'}$ tends to $e^{-\\eta'}<1$, so the sequence is eventually bounded by a geometric sequence tending to zero.",
+          "step": "4.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F11",
+            "F13",
+            "F14",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Steps 4.1 and 3.3 show pointwise convergence of $g_n$ to $a(\\hat\\theta)e^{-u^{\\mathsf T}Hu/2}$ and provide an integrable majorant. Applying dominated convergence [F9] and then [F10] yields $n^{d/2}e^{-nh_0}\\int_{K\\cap B(\\hat\\theta,\\delta)}a e^{nh}\\,d\\lambda_d\\longrightarrow a(\\hat\\theta)(2\\pi)^{d/2}/\\sqrt{\\det H}$.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "step 4.1",
+            "step 3.3",
+            "F7",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "By [F13] the two indicator-restricted integrands are measurable, and by [F14] the integral over $K$ is the sum of its integrals over $K\\cap B(\\hat\\theta,\\delta)$ and $K\\setminus B(\\hat\\theta,\\delta)$. Adding the local limit in step 5.1 and the vanishing off-mode term in step 4.2 gives $n^{d/2}e^{-nh_0}I_n\\longrightarrow a(\\hat\\theta)(2\\pi)^{d/2}/\\sqrt{\\det H}>0$. Dividing by this positive limit proves the stated asymptotic equivalence. The argument establishes only the leading relative equivalent; it gives no $O(n^{-1})$ remainder.",
+          "step": "6.1",
+          "inputs": [
+            "A1",
+            "given",
+            "F10",
+            "F13",
+            "F14",
+            "step 5.1",
+            "step 4.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: K is required to have positive Lebesgue measure."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement: a(hat theta)>0 is an explicit hypothesis, so zero amplitude at the mode is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: for d=1, the determinant and scaling reduce to the ordinary one-dimensional Gaussian factor; proof steps 3.1 and 4.1 apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement: the negative Hessian is required to be positive definite, excluding a degenerate mode."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof steps 2.1 and 3.2 require an interior maximizer and establish local localization around it."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Given A1 and proof steps 1.1, 3.2, and 4.1: Countable Choice is explicit in the measure and change-of-variables dependencies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement gives sufficient compact-domain, unique-interior-mode, positive-Hessian and gap hypotheses for a leading integral asymptotic. Its u_n~v_n notation defines a ratio limit, not an equivalence between analytic hypotheses; proof 5.1 applies domination to finish the forward estimate.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_step3_gate1_25_28",
+            "reason": "Statement gives sufficient compact-domain, unique-interior-mode, positive-Hessian and gap hypotheses for a leading integral asymptotic. Its u_n~v_n notation defines a ratio limit, not an equivalence between analytic hypotheses; proof 5.1 applies domination to finish the forward estimate.",
+            "item_sha256": "5c88fa68546b1879c429d5b5b0a84489aae4f3f60baeec518bd254c03b66692f",
+            "row_sha256": "ae38b53663be79bd87fb08c80266dbc4609edbd06f362c60d66f3ad9c440170e"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asymptotic value in Statement is not claimed to force uniqueness, interiority or Hessian nondegeneracy. Those are assumed; proof 3.1 handles the off-mode annulus and 4.2 discards its exponentially small contribution, without a converse classification.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_step3_gate1_25_28",
+            "reason": "The asymptotic value in Statement is not claimed to force uniqueness, interiority or Hessian nondegeneracy. Those are assumed; proof 3.1 handles the off-mode annulus and 4.2 discards its exponentially small contribution, without a converse classification.",
+            "item_sha256": "5c88fa68546b1879c429d5b5b0a84489aae4f3f60baeec518bd254c03b66692f",
+            "row_sha256": "ec76256f4e163ce586dce33f551bdbc56bdf030e24cb18253b23f773f7680460"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": [
+        {
+          "axiom": "def-countable-choice",
+          "steps": [
+            "1.1",
+            "3.3",
+            "4.2",
+            "5.1",
+            "6.1"
+          ],
+          "use": "Countable Choice is the explicit measure-theoretic premise for Lebesgue measurability, product completion, Gaussian integration, measurable pullbacks and change of variables; no full Axiom of Choice is used."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Reviewed all nine steps and each cited current supplier statement. Countable Choice is explicitly assumed in Given and axiom_use and carried to Gaussian, Lebesgue, measurable diffeomorphism and substitution uses. K compact/closed, relative Borel trace, amplitude measurability and finite nonnegative integral make I_n finite even if a is infinite away from mode. Continuity at the finite positive mode bounds a locally. The annulus is compact; empty annulus handled separately, otherwise uniqueness plus attained maximum supplies strict gap, covering also its boundaries with assumed outside gap. Coordinate difference quotients give zero gradient. Affine rescaling has Jacobian n^-d/2; zero extension and invertible affine pullback preserve measurability. Local quadratic bound gives finite integrable Gaussian majorant (a(mode)+1) exp(-c norm(u)^2); pointwise Taylor limit includes u=0, and C3 remainder is justified on smaller convex ball with compact derivative bounds. Thus g_n are finite real-valued as required by current complex-valued DCT supplier despite extended amplitude elsewhere. Outside term n^(d/2)e^(-n eta-prime) integral(a) vanishes by ratio bound. Additivity yields positive leading constant, legitimizing relative equivalent; no relative O(n^-1) or general noncompact claim."
+      }
+    },
+    "thm-composite-trapezoidal-rule-error-bound": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-composite-trapezoidal-rule",
+          "source_section": "Definition",
+          "quote": "Let $a<b$ be real numbers, let $N\\ge1$ be an integer, put\n$h:=(b-a)/N$, and let $x_j:=a+jh$ for $0\\le j\\le N$. For any real-valued\nfunction $f:[a,b]\\to\\mathbb R$, its **composite trapezoidal value** with $N$\nequal panels is\n$$T_N(f):=h\\left(\\frac{f(x_0)}2+\\sum_{j=1}^{N-1}f(x_j)+\\frac{f(x_N)}2\\right).$$\nThe sum is the finite sum of [[def-finite-sum]]; when $N=1$ it is empty and\nequals $0$. This definition gives a finite real number for every such $f$.\nAn error comparison with $\\int_a^b f$ is asserted only when that integral is\ndefined.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval and $f:I\\to\\mathbb R$. Put $f^{(0)}:=f$. Recursively, wherever $f^{(j)}$ is differentiable, put $f^{(j+1)}:=(f^{(j)})'$, with derivatives at endpoints understood in the one-sided sense fixed by [[def-derivative]] and [[def-one-sided-limits]].\n\nFor $k\\in\\mathbb N$, the function is **$k$-times differentiable** on $I$ if $f^{(j)}$ exists on $I$ for every $j\\le k$. It is of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on $I$ ([[def-continuity-real]]). It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.\n\nSince $0\\in\\mathbb N$ ([[def-natural-numbers]]), $C^0$ means continuity. The definitions also give $C^{k+1}\\subseteq C^k$. Existence of $f^{(k)}$ alone does not assert that $f^{(k)}$ is continuous.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-linear-interpolation-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $a<b$ and let $f$ be $C^2$ on an open interval containing $[a,b]$. Put\n$M:=\\sup_{t\\in[a,b]}|f''(t)|$, which is finite, and let $L$ be the unique affine\nfunction with $L(a)=f(a)$ and $L(b)=f(b)$. Then for every $x\\in[a,b]$,\n$$|f(x)-L(x)|\\le \\frac{M}{2}(x-a)(b-x).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-linearity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. $f + g$ is integrable on $[a,b]$ and\n   $\\int_a^b (f+g) = \\int_a^b f + \\int_a^b g$;\n2. for every real $\\lambda$, $\\lambda f$ is integrable on $[a,b]$ and\n   $\\int_a^b \\lambda f = \\lambda \\int_a^b f$;\n3. consequently, for all reals $\\lambda, \\mu$ the function $\\lambda f + \\mu g$ is\n   integrable and\n   $$\\int_a^b(\\lambda f + \\mu g) \\;=\\; \\lambda\\int_a^b f \\;+\\; \\mu\\int_a^b g ;$$\n4. the same identity holds with oriented limits: if $u, v \\in [a,b]$ and $f, g$\n   are integrable between $u$ and $v$ ([[def-oriented-integral]]), then\n   $\\int_u^v(\\lambda f + \\mu g) = \\lambda\\int_u^v f + \\mu\\int_u^v g$.\n\n**Linearity of the integral is not linearity of the Darboux sums**, and the\nproof of claim 1 has to squeeze rather than compute. On a subinterval the\ninequality $\\sup(f+g) \\le \\sup f + \\sup g$ can be strict — take $f(x) = x$ and\n$g(x) = -x$ on $[0,1]$, where the left side is $0$ and the right side is $1$ —\nso $U(f+g,P)$ is in general strictly below $U(f,P) + U(g,P)$ and no identity\nbetween upper sums is available. Claim 2, by contrast, is an identity at the\nlevel of the sums, with the roles of $\\sup$ and $\\inf$ exchanged when\n$\\lambda < 0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-additivity-over-subintervals",
+          "source_section": "Statement",
+          "quote": "Let $a < c < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Then:\n\n1. $f$ is integrable on $[a,b]$ ([[def-darboux-integral]]) **if and only if** its\n   restrictions to $[a,c]$ and to $[c,b]$ are integrable;\n2. and in that case\n   $$\\int_a^b f \\;=\\; \\int_a^c f \\;+\\; \\int_c^b f .$$\n3. **Oriented form.** Let $\\alpha < \\beta$ be reals, let $f : [\\alpha,\\beta] \\to\n   \\mathbb{R}$ be integrable, and let $u, v, w \\in [\\alpha,\\beta]$ be arbitrary.\n   Then, with the convention of [[def-oriented-integral]],\n   $$\\int_u^v f \\;+\\; \\int_v^w f \\;=\\; \\int_u^w f .$$\n\nClaim 3 is where [[def-oriented-integral]] earns its place: it holds for every\narrangement of the three points, including the degenerate ones, and it is the\nform used everywhere below.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $f''$ is continuous on $[a,b]$, [F3] shows it is bounded; set $M:=\\sup_{[a,b]}|f''|<\\infty$. The function $f$ is also Riemann integrable.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], the endpoint derivatives $f'(a),f''(a),f'(b),f''(b)$ are the one-sided derivatives from within $[a,b]$. Define $\\tilde f$ on $(a-1,b+1)$ by $ \\tilde f(x):=\\begin{cases} f(a)+f'(a)(x-a)+\\frac12 f''(a)(x-a)^2,&x<a,\\\\ f(x),&a\\le x\\le b,\\\\ f(b)+f'(b)(x-b)+\\frac12 f''(b)(x-b)^2,&x>b. \\end{cases} $ At each join the polynomial piece matches the value and the first two one-sided derivatives of $f$. Since $f,f',f''$ are continuous on $[a,b]$, these matches make $\\tilde f$ $C^2$ on the open interval $(a-1,b+1)$. It agrees with $f$ on $[a,b]$ and $\\sup_{[a,b]}|\\tilde f''|=M$. For $j=0,\\ldots,N-1$, let $x_j=a+jh$ and let $L_j$ be the affine interpolant between $f(x_j)$ and $f(x_{j+1})$. Put $q_j(x):=\\frac M2(x-x_j)(x_{j+1}-x)$ on that panel. Applying [F4] to $\\tilde f$ on each panel gives $|f(x)-L_j(x)|\\le q_j(x)$, and $q_j\\ge0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $P_N$ be the continuous piecewise-affine function equal to $L_j$ on each panel, and let $q_N$ be the continuous piecewise function equal to $q_j$ on each panel; continuity of $q_N$ at a knot holds because both adjacent formulas vanish there. Step 2.1 gives $-q_N\\le f-P_N\\le q_N$ throughout $[a,b]$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "By [F8], $\\int_{x_j}^{x_{j+1}}L_j=\\frac h2(f(x_j)+f(x_{j+1}))$ and $\\int_{x_j}^{x_{j+1}}q_j=\\frac{Mh^3}{12}$; the second identity follows by integrating $\\frac M2t(h-t)$ on $[0,h]$. Repeated additivity [F7] therefore gives $\\int_a^bP_N=T_N(f)$, because each interior knot occurs twice with half weight, and $\\int_a^bq_N=NMh^3/12$.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F7",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The functions $q_N$ and $f-P_N$ are continuous and hence integrable by [F3]. Applying [F5] to the two pointwise inequalities in step 3.1 and using [F6] yields $\\left|\\int_a^b f-\\int_a^b P_N\\right|\\le\\int_a^b q_N$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Substituting the identities from step 3.2 into step 4.1 gives $\\left|\\int_a^b f-T_N(f)\\right|\\le NMh^3/12=(b-a)h^2M/12$, since $Nh=b-a$. This is the claimed bound.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: a<b and N>=1 are required."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 3.1 permit M=0; the error bound becomes zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 3.1 covers N=1 as one panel, with no interior knot."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof steps 1.1, 2.1, and 3.2 show affine functions have M=0 and the interpolation and quadrature are exact."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof steps 2.1 and 3.2 include both endpoints in the panel interpolants and composite weights."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1, 2.1, 3.1, 3.2, 4.1, and 5.1 use a finite panel family and Riemann integration, with no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement derives a quadrature-error upper bound from C2 regularity. Proof 2.1 extends f by endpoint quadratic polynomials, and 3.2–5.1 integrate and sum interpolation bounds. No biconditional exactness or regularity criterion is stated.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_step3_gate1_25_28",
+            "reason": "Statement derives a quadrature-error upper bound from C2 regularity. Proof 2.1 extends f by endpoint quadratic polynomials, and 3.2–5.1 integrate and sum interpolation bounds. No biconditional exactness or regularity criterion is stated.",
+            "item_sha256": "80247e8b68f45d4cb7518b11b981716c05be43168504b60d3d53d7c5cd2c1049",
+            "row_sha256": "791af1e0e6753d938ea2015f57c8b71ef945765181598dd312e52c08019e68da"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Satisfying the displayed trapezoid error bound is not asserted to imply C2 regularity or bound the second derivative in reverse. Statement assumes the derivative hypotheses; proof 5.1 only substitutes Nh=b-a into the accumulated panel estimate.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_step3_gate1_25_28",
+            "reason": "Satisfying the displayed trapezoid error bound is not asserted to imply C2 regularity or bound the second derivative in reverse. Statement assumes the derivative hypotheses; proof 5.1 only substitutes Nh=b-a into the accumulated panel estimate.",
+            "item_sha256": "80247e8b68f45d4cb7518b11b981716c05be43168504b60d3d53d7c5cd2c1049",
+            "row_sha256": "cc91e22d02843ba41e66f5db060cb9ded0774e484c2c0c4966e3e8f470cc3839"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Reviewed six steps and all nine actual supplier definitions/statements. C2 on closed [a,b] uses one-sided endpoint derivatives; step 2.1 explicitly extends by matching quadratic Taylor polynomials to a C2 function on (a-1,b+1), meeting interpolation supplier open-neighborhood hypothesis. Each panel has h>0 and bound q_j=M(x-x_j)(x_(j+1)-x)/2. Piecewise functions match at knots; Newton-Leibniz gives integrals h(f_j+f_(j+1))/2 and Mh^3/12. Additivity gives double half-weights at interior knots; monotonicity and linearity bound absolute error. N=1 has no interior knots, M=0 includes affine exactness, a=b excluded. No choice or iff. Relevant Suli and Driscoll-Braun formulas support the cited quadrature context."
+      }
+    },
+    "ex-exact-gaussian-laplace-integral": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-integral",
+          "source_section": "Statement",
+          "quote": "$$\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt\\pi.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-substitution-for-improper-integrals",
+          "source_section": "Statement",
+          "quote": "Let $I$ and $J$ be intervals, possibly open at finite or infinite singular ends, and let $\\phi:I\\to J$ be a monotone differentiable surjection. Assume $\\phi'$ is locally Riemann integrable and the proper change-of-variable hypotheses hold on every compact truncation. If $f$ is locally Riemann integrable on $J$, then\n$$\\int_J f(x)\\,dx\\quad\\text{and}\\quad\\int_I f(\\phi(t))|\\phi'(t)|\\,dt$$\nconverge simultaneously and, when convergent, are equal. At several singular ends this assertion is applied separately to the corresponding ends; orientation is retained for decreasing parametrizations.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The derivative is $h'(\\theta)=-(\\theta-\\mu)$, so the unique maximizer is $\\hat\\theta=\\mu$; the second derivative is $h''(\\mu)=-1$ and $h(\\mu)=c$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the integral, set $u=\\sqrt{n/2}(\\theta-\\mu)$. The substitution is increasing and maps $\\mathbb R$ onto $\\mathbb R$; [F2] and [F1] give $J_n=e^{nc}\\sqrt{2/n}\\int_{\\mathbb R}e^{-u^2}\\,du=e^{nc}\\sqrt{2\\pi/n}$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting $h(\\mu)=c$ and $-h''(\\mu)=1$ into the one-dimensional quadratic expression gives $e^{nc}\\sqrt{2\\pi/n}$, which equals step 1.2 for every $n\\ge1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: n>=1 and the whole real line are required."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: c=0 is allowed and the exact formula remains finite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof step 1.2 include n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement: the mode has fixed Hessian -1, so no singular case is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: the domain is R and has no finite endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 1.2 uses one explicit affine substitution; no choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example fixes a quadratic phase and evaluates J_n exactly. Verification 1.2 changes variables by u=sqrt(n/2)(theta-mu), and 2.1 matches its explicit Gaussian value to the one-mode expression; this equality is not a two-direction implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_step3_gate1_25_28",
+            "reason": "Example fixes a quadratic phase and evaluates J_n exactly. Verification 1.2 changes variables by u=sqrt(n/2)(theta-mu), and 2.1 matches its explicit Gaussian value to the one-mode expression; this equality is not a two-direction implication.",
+            "item_sha256": "095287d2fd7d8b4063accff5947ec2425231a4253dc32c9af5511322752e76a3",
+            "row_sha256": "e31d8cc1c7d570b96e38a735cec796350371d80d872524795001484d0b7efc05"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The exact value J_n=exp(nc)sqrt(2pi/n) is not asserted to characterize all phases or all noncompact integrals. Example explicitly confines the calculation to its stated quadratic phase, and Verification 2.1 makes only that substitution.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_step3_gate1_25_28",
+            "reason": "The exact value J_n=exp(nc)sqrt(2pi/n) is not asserted to characterize all phases or all noncompact integrals. Example explicitly confines the calculation to its stated quadratic phase, and Verification 2.1 makes only that substitution.",
+            "item_sha256": "095287d2fd7d8b4063accff5947ec2425231a4253dc32c9af5511322752e76a3",
+            "row_sha256": "bc249094fc0cca9511838e8c20a0a83eafd9f08aee9614f7d54f30e901fa5c21"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "All three verification steps checked. For arbitrary real c,mu and integer n>=1, the concave quadratic has unique maximum mu, curvature -1, height c. Increasing affine substitution u=sqrt(n/2)(theta-mu) is a differentiable surjection with proper substitution valid on compact truncations; current Gaussian supplier supplies finite improper value sqrt(pi), so both tails converge. Jacobian sqrt(2/n) and positive factor e^(nc) give exact e^(nc)sqrt(2pi/n). This special noncompact example does not assert general tail control; n=0 excluded, no choice or iff."
+      }
+    },
+    "cex-boundary-mode-changes-laplace-rate": {
+      "risk": "medium",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval and $f:I\\to\\mathbb R$. Put $f^{(0)}:=f$. Recursively, wherever $f^{(j)}$ is differentiable, put $f^{(j+1)}:=(f^{(j)})'$, with derivatives at endpoints understood in the one-sided sense fixed by [[def-derivative]] and [[def-one-sided-limits]].\n\nFor $k\\in\\mathbb N$, the function is **$k$-times differentiable** on $I$ if $f^{(j)}$ exists on $I$ for every $j\\le k$. It is of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on $I$ ([[def-continuity-real]]). It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.\n\nSince $0\\in\\mathbb N$ ([[def-natural-numbers]]), $C^0$ means continuity. The definitions also give $C^{k+1}\\subseteq C^k$. Existence of $f^{(k)}$ alone does not assert that $f^{(k)}$ is continuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The phase is $C^2$, satisfies $h(0)=0$, $h(x)<0$ for every $x\\in(0,1]$, and $h''(0)=-2$. Thus its unique maximizer is the boundary point $0$, and the refuted formula predicts $\\sqrt{\\pi/n}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $x\\in[0,1]$, $h(x)=-x-x^2\\le-x$, so [F2] and [F4] give $0\\le I_n\\le\\int_0^1e^{-nx}\\,dx$. The antiderivative $G(x)=-e^{-nx}/n$ has derivative $e^{-nx}$ by [F6]; [F3, F5] evaluate the latter integral as $(1-e^{-n})/n\\le1/n$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On $[0,1/n]$ with $n\\ge1$, $n(x+x^2)\\le1+1/n\\le2$. Thus $e^{nh(x)}\\ge e^{-2}$ there and [F3, F4] give $I_n\\ge e^{-2}/n$. Together with step 1.2, this proves $e^{-2}/n\\le I_n\\le1/n$, so the boundary contribution has order $n^{-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Consequently $0\\le I_n/\\sqrt{\\pi/n}\\le1/\\sqrt{\\pi n}\\to0$. The ratio required by the refuted asymptotic formula therefore tends to $0$, not $1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement refuted: the witness uses the nonempty interval [0,1]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 2.1 gives a positive lower bound for every n>=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof steps 1.2 and 2.1 include n=1 in the displayed bounds."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Counterexample: h''(0)=-2, so this is a nondegenerate boundary mode."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 3.1 identify the unique maximizer at the left endpoint and show the incompatible n^-1 rate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1–3.1 use direct scalar inequalities and integration, with no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement refuted: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_25_28",
+            "reason": "The Statement refuted universally predicts the interior Gaussian formula for a boundary maximum with negative second derivative. The phase -x-x^2 instead has order n^-1 by counterexample 2.1; the false prediction is one-way, without a reverse implication.",
+            "item_sha256": "f9070c95bd6a9e80637e3beebc36d4f5b249ea3a491742203014792c85eb098a",
+            "row_sha256": "2938c834a817f8bff0b23d1ae4c4a427251f5e53955d77396b36457b91bd6793"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement refuted: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_25_28",
+            "reason": "The Statement refuted universally predicts the interior Gaussian formula for a boundary maximum with negative second derivative. The phase -x-x^2 instead has order n^-1 by counterexample 2.1; the false prediction is one-way, without a reverse implication.",
+            "item_sha256": "f9070c95bd6a9e80637e3beebc36d4f5b249ea3a491742203014792c85eb098a",
+            "row_sha256": "361ecfb82b72622c02d40de165c477d5ccb82e2d8be3f640df2f70b562e76212"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "All four steps checked: polynomial -x-x^2 is C2, strictly negative for x>0, uniquely maximal at boundary 0, with h double-prime=-2. Continuous integrability, exponential monotonicity/positivity, integral monotonicity and Newton-Leibniz hypotheses hold. For every n>=1, [0,1/n] is admissible; n(x+x^2)<=2 there gives e^-2/n lower bound. Antiderivative -e^-nx/n gives upper bound 1/n. Ratio to predicted sqrt(pi/n) tends to zero. No empty/zero n is claimed, no iff or choice. Source context concerns endpoint phases, not a license for an interior formula."
+      }
+    },
+    "cex-singular-interior-mode-changes-laplace-rate": {
+      "risk": "medium",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval and $f:I\\to\\mathbb R$. Put $f^{(0)}:=f$. Recursively, wherever $f^{(j)}$ is differentiable, put $f^{(j+1)}:=(f^{(j)})'$, with derivatives at endpoints understood in the one-sided sense fixed by [[def-derivative]] and [[def-one-sided-limits]].\n\nFor $k\\in\\mathbb N$, the function is **$k$-times differentiable** on $I$ if $f^{(j)}$ exists on $I$ for every $j\\le k$. It is of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on $I$ ([[def-continuity-real]]). It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.\n\nSince $0\\in\\mathbb N$ ([[def-natural-numbers]]), $C^0$ means continuity. The definitions also give $C^{k+1}\\subseteq C^k$. Existence of $f^{(k)}$ alone does not assert that $f^{(k)}$ is continuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The phase is $C^\\infty$, has its unique maximum $h(0)=0$ at the interior point $0$, and $h'(0)=h''(0)=0$. For each integer $m\\ge1$, the interval $[-1/m,1/m]$ lies in $[-1,1]$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $|x|\\le1/m$, then $m^4x^4\\le1$, so [F2] gives $e^{-m^4x^4}\\ge e^{-1}$. By [F3, F4], $I_{m^4}\\ge\\int_{-1/m}^{1/m}e^{-1}\\,dx=2e^{-1}/m$. The Gaussian scale at $n=m^4$ is $n^{-1/2}=m^{-2}$; therefore $I_{m^4}/(m^4)^{-1/2}\\ge2e^{-1}m\\longrightarrow\\infty$. Hence these integrals are not $O(n^{-1/2})$, which refutes the statement.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement refuted: the witness uses the nonempty interval [-1,1]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 2.1 identify the zero phase value at the maximizer and give a positive integral lower bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof steps 1.1–1.2 include m=1 and n=m^4."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof steps 1.1–1.2 compute h'(0)=h''(0)=0 and show the Gaussian-scale ratio diverges."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.1 places the unique maximizer at the interior point 0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1–1.2 use direct inequalities and a finite interval integral; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement refuted: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_25_28",
+            "reason": "The Statement refuted claims that smoothness and a unique interior maximum imply an O(n^-1/2) bound despite a singular Hessian. Proof 2.1 disproves it using -x^4 on n=m^4; no necessary-and-sufficient criterion is proposed.",
+            "item_sha256": "6deca00650048144a27e28a7af3fd3e74f948988f634a2baecf0890a9993850c",
+            "row_sha256": "2938c834a817f8bff0b23d1ae4c4a427251f5e53955d77396b36457b91bd6793"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement refuted: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_25_28",
+            "reason": "The Statement refuted claims that smoothness and a unique interior maximum imply an O(n^-1/2) bound despite a singular Hessian. Proof 2.1 disproves it using -x^4 on n=m^4; no necessary-and-sufficient criterion is proposed.",
+            "item_sha256": "6deca00650048144a27e28a7af3fd3e74f948988f634a2baecf0890a9993850c",
+            "row_sha256": "361ecfb82b72622c02d40de165c477d5ccb82e2d8be3f640df2f70b562e76212"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Both steps checked with current smoothness and integral/exponential supplier statements. The polynomial -x^4 has unique interior maximum at 0 and zero Hessian. Along integer n=m^4, interval [-1/m,1/m] lies in [-1,1] for every m>=1, integrand >=e^-1, yielding I_(m^4)>=2e^-1/m. Dividing by m^-2 diverges, which suffices to refute the asserted O(n^-1/2) bound. No exact asymptotic is asserted. All functions are continuous and all integrals proper; no choice or iff."
+      }
+    },
+    "cex-equal-multiple-modes-double-laplace-constant": {
+      "risk": "medium",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-laplace-approximation-under-unique-interior-maximum",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ and let $K\\subseteq\\mathbb R^d$ be compact, Lebesgue measurable,\nand of positive Lebesgue measure. Let $a:K\\to[0,+\\infty]$ be measurable with\n$\\int_K a\\,d\\lambda_d<\\infty$. Let $h:K\\to\\mathbb R$ be continuous and have\na unique maximizer $\\hat\\theta$ in the interior of $K$. Assume $a$ is\ncontinuous at $\\hat\\theta$ with $0<a(\\hat\\theta)<\\infty$. Suppose $h$ is $C^3$ on an\nopen neighborhood $U\\subseteq K$ of $\\hat\\theta$, and put\n$H:=-D^2h(\\hat\\theta)$ using the Hessian convention of\n[[def-hessian-and-euclidean-critical-point]]. Assume $H$ is symmetric positive\ndefinite in the sense of\n[[def-cholesky-factorisation-with-positive-diagonal]].\nFor $x\\in\\mathbb R^d$ and $r>0$, write\n$B(x,r):=\\{\\theta\\in\\mathbb R^d:\\|\\theta-x\\|_2<r\\}$ and\n$\\overline B(x,r):=\\{\\theta\\in\\mathbb R^d:\\|\\theta-x\\|_2\\le r\\}$.\nAssume there are\n$r_0,c,r_1,\\eta>0$ such that $\\overline B(\\hat\\theta,r_0)\\subseteq U\\cap K$,\n$$h(\\theta)\\le h(\\hat\\theta)-c\\|\\theta-\\hat\\theta\\|_2^2 \\quad(\\theta\\in\\overline B(\\hat\\theta,r_0)),$$\nand\n$$h(\\theta)\\le h(\\hat\\theta)-\\eta \\quad(\\theta\\in K\\setminus B(\\hat\\theta,r_1)).$$\nAll integrals are the nonnegative Lebesgue integral of\n[[def-nonnegative-lebesgue-integral]].\nFor $I_n:=\\int_K a(\\theta)e^{nh(\\theta)}\\,d\\lambda_d(\\theta)$, as the\npositive integer $n\\to\\infty$,\n$$I_n\\sim a(\\hat\\theta)e^{nh(\\hat\\theta)}\\left(\\frac{2\\pi}{n}\\right)^{d/2}\\frac{1}{\\sqrt{\\det H}},$$\nwhere $u_n\\sim v_n$ means $u_n/v_n\\to1$. No relative $O(n^{-1})$ remainder\nis asserted.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-additivity-over-subintervals",
+          "source_section": "Statement",
+          "quote": "Let $a < c < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Then:\n\n1. $f$ is integrable on $[a,b]$ ([[def-darboux-integral]]) **if and only if** its\n   restrictions to $[a,c]$ and to $[c,b]$ are integrable;\n2. and in that case\n   $$\\int_a^b f \\;=\\; \\int_a^c f \\;+\\; \\int_c^b f .$$\n3. **Oriented form.** Let $\\alpha < \\beta$ be reals, let $f : [\\alpha,\\beta] \\to\n   \\mathbb{R}$ be integrable, and let $u, v, w \\in [\\alpha,\\beta]$ be arbitrary.\n   Then, with the convention of [[def-oriented-integral]],\n   $$\\int_u^v f \\;+\\; \\int_v^w f \\;=\\; \\int_u^w f .$$\n\nClaim 3 is where [[def-oriented-integral]] earns its place: it holds for every\narrangement of the three points, including the degenerate ones, and it is the\nform used everywhere below.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]. A point $a$ is **critical** when its gradient $\\nabla f(a)$ is zero, with the gradient convention of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval and $f:I\\to\\mathbb R$. Put $f^{(0)}:=f$. Recursively, wherever $f^{(j)}$ is differentiable, put $f^{(j+1)}:=(f^{(j)})'$, with derivatives at endpoints understood in the one-sided sense fixed by [[def-derivative]] and [[def-one-sided-limits]].\n\nFor $k\\in\\mathbb N$, the function is **$k$-times differentiable** on $I$ if $f^{(j)}$ exists on $I$ for every $j\\le k$. It is of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on $I$ ([[def-continuity-real]]). It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.\n\nSince $0\\in\\mathbb N$ ([[def-natural-numbers]]), $C^0$ means continuity. The definitions also give $C^{k+1}\\subseteq C^k$. Existence of $f^{(k)}$ alone does not assert that $f^{(k)}$ is continuous.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Factoring gives $h(x)=-(x-1)^2(x+1)^2\\le0$, with equality exactly at $x=-1$ and $x=1$. Direct differentiation gives $h'(x)=-4x^3+4x$ and $h''(x)=4-12x^2$, so each mode is interior, has height $0$, and has negative Hessian $h''(\\pm1)=-8$ by [F5].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On $K_-=[-2,0]$, the unique maximizer is $-1$. If $|x+1|\\le1/2$, then $|x-1|\\ge1$ and $h(x)\\le-(x+1)^2$; if $x\\in K_-\\setminus B(-1,1/2)$, then $|x+1|\\ge1/2$ and $|x-1|\\ge1$, so $h(x)\\le-1/4$. Thus the Laplace theorem's local quadratic and strict global gap conditions hold on $K_-$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "On $K_+=[0,2]$, the unique maximizer is $1$. If $|x-1|\\le1/2$, then $|x+1|\\ge1$ and $h(x)\\le-(x-1)^2$; if $x\\in K_+\\setminus B(1,1/2)$, then $|x-1|\\ge1/2$ and $|x+1|\\ge1$, so $h(x)\\le-1/4$. Both intervals are compact of positive length, the amplitude $a\\equiv1$ is integrable and positive at the mode, and the polynomial $h$ is $C^3$ by [F6].",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F1] separately on $K_-$ and $K_+$. If $J_n^-:=\\int_{K_-}e^{nh}\\,d\\lambda_1$ and $J_n^+:=\\int_{K_+}e^{nh}\\,d\\lambda_1$, then $J_n^-\\sim\\sqrt\\pi/(2\\sqrt n)$ and $J_n^+\\sim\\sqrt\\pi/(2\\sqrt n)$, because each mode has height $0$ and $-h''=8$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F2] and [F4], the Riemann and Lebesgue integrals on each half agree; by [F3], $I_n=J_n^-+J_n^+$. Therefore $I_n\\sim\\sqrt\\pi/\\sqrt n$: dividing by $\\sqrt\\pi/\\sqrt n$ gives half the sum of two ratios tending to $1$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "A one-mode term is $\\sqrt\\pi/(2\\sqrt n)$, while step 3.1 gives $I_n/(\\sqrt\\pi/(2\\sqrt n))\\to2$. This ratio is not $1$, so the statement refuted fails.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement refuted: K=[-2,2] is nonempty and has positive measure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 2.1 use the common mode height zero and calculate both positive leading contributions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof steps 1.2–2.2 split the domain into two half intervals, each with one mode, then combine their limits."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.1 computes h''(±1)=-8 at both modes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof steps 1.1–1.3 put both modes strictly inside K and verify the split point is not a mode."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts & Assumptions A1 and proof steps 2.1 and 3.1 make Countable Choice explicit for the Laplace theorem and integral comparison."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement refuted: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_25_28",
+            "reason": "The Statement refuted says either one-mode term approximates the whole integral with two equal maxima. Proof 3.1 adds the two half-interval contributions and 4.1 obtains ratio two; there is no biconditional assertion.",
+            "item_sha256": "b524a6bd56d78c7d951684259207f2d12e55b938e4bfb5ae4601abc5113c0735",
+            "row_sha256": "2938c834a817f8bff0b23d1ae4c4a427251f5e53955d77396b36457b91bd6793"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement refuted: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_25_28",
+            "reason": "The Statement refuted says either one-mode term approximates the whole integral with two equal maxima. Proof 3.1 adds the two half-interval contributions and 4.1 obtains ratio two; there is no biconditional assertion.",
+            "item_sha256": "b524a6bd56d78c7d951684259207f2d12e55b938e4bfb5ae4601abc5113c0735",
+            "row_sha256": "361ecfb82b72622c02d40de165c477d5ccb82e2d8be3f640df2f70b562e76212"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": [
+        {
+          "axiom": "def-countable-choice",
+          "steps": [
+            "2.1",
+            "3.1"
+          ],
+          "use": "Countable Choice is inherited from the Laplace theorem and the Riemann-to-Lebesgue integral comparison; no full Axiom of Choice is used."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Reviewed all six steps and current supplier claims, including repaired Gaussian through Laplace. h=-(x^2-1)^2 has exactly maxima +/-1, both height 0, h double-prime=-8. Splitting at 0 leaves each mode interior to its compact half. Radius 1/2, local c=1 and global eta=1/4 satisfy inequalities, polynomial is C3 on an open neighborhood strictly inside each half around its mode; amplitude 1 is finite integrable/continuous. Countable Choice supplied via A1. Each term is sqrt(pi)/(2sqrt(n)). Finite-interval Riemann-Lebesgue equality and Riemann additivity avoid any issue from the shared boundary point 0. Whole integral has twice the one-mode constant and ratio 2, not 1. No singular/end-mode extrapolation or choice beyond stated Countable Choice."
+      }
+    },
+    "ex-one-panel-composite-trapezoid-on-square": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-composite-trapezoidal-rule",
+          "source_section": "Definition",
+          "quote": "Let $a<b$ be real numbers, let $N\\ge1$ be an integer, put\n$h:=(b-a)/N$, and let $x_j:=a+jh$ for $0\\le j\\le N$. For any real-valued\nfunction $f:[a,b]\\to\\mathbb R$, its **composite trapezoidal value** with $N$\nequal panels is\n$$T_N(f):=h\\left(\\frac{f(x_0)}2+\\sum_{j=1}^{N-1}f(x_j)+\\frac{f(x_N)}2\\right).$$\nThe sum is the finite sum of [[def-finite-sum]]; when $N=1$ it is empty and\nequals $0$. This definition gives a finite real number for every such $f$.\nAn error comparison with $\\int_a^b f$ is asserted only when that integral is\ndefined.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-composite-trapezoidal-rule-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $a<b$, let $N\\ge1$ be an integer, and put $h:=(b-a)/N$. For\n$f\\in C^2([a,b])$ in the sense of [[def-higher-derivatives-and-smoothness]],\nthe value $T_N(f)$ from [[def-composite-trapezoidal-rule]] satisfies\n$$\\left|\\int_a^b f(x)\\,dx-T_N(f)\\right|\\le\\frac{(b-a)h^2}{12}\\sup_{x\\in[a,b]}|f''(x)|.$$\nThe integral is the Riemann integral of [[def-darboux-integral]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval and $f:I\\to\\mathbb R$. Put $f^{(0)}:=f$. Recursively, wherever $f^{(j)}$ is differentiable, put $f^{(j+1)}:=(f^{(j)})'$, with derivatives at endpoints understood in the one-sided sense fixed by [[def-derivative]] and [[def-one-sided-limits]].\n\nFor $k\\in\\mathbb N$, the function is **$k$-times differentiable** on $I$ if $f^{(j)}$ exists on $I$ for every $j\\le k$. It is of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on $I$ ([[def-continuity-real]]). It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.\n\nSince $0\\in\\mathbb N$ ([[def-natural-numbers]]), $C^0$ means continuity. The definitions also give $C^{k+1}\\subseteq C^k$. Existence of $f^{(k)}$ alone does not assert that $f^{(k)}$ is continuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The function is $C^2$, with $f''(x)=2$ and $\\|f''\\|_\\infty=2$. By [F1], $T_1(f)=(f(0)+f(1))/2=1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F4], $f$ is integrable. The antiderivative $x^3/3$ and [F5] give $\\int_0^1x^2\\,dx=1/3$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore $|\\int_0^1f-T_1(f)|=|1/3-1/2|=1/6$, while the bound in [F2] is $1\\cdot1^2\\cdot2/12=1/6$. Equality holds, so this example attains the stated error bound.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the example uses the nonempty interval [0,1]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification steps 1.1–2.1 directly compute the nonzero error and matching bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.1–2.1 set N=1 and evaluate the one-panel formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement: the witness has f''=2 and does not concern a degenerate second derivative."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification steps 1.1–1.2 evaluate both endpoint weights and the endpoint integral."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification step 1.1 uses a finite one-panel sum; no choice principle is involved."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example fixes f(x)=x^2, [0,1] and N=1. Verification 1.1–1.2 compute trapezoid 1/2 and integral 1/3; 2.1 obtains error and bound 1/6. This is a witness of equality, not a biconditional about equality cases.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_step3_gate1_25_28",
+            "reason": "Example fixes f(x)=x^2, [0,1] and N=1. Verification 1.1–1.2 compute trapezoid 1/2 and integral 1/3; 2.1 obtains error and bound 1/6. This is a witness of equality, not a biconditional about equality cases.",
+            "item_sha256": "eec8f23e6c5ccbe34fb7b73d2959c2bec07b4adc75162eb821c1df22dfc6296c",
+            "row_sha256": "579d697f974a53d5cd3ce5140aff94438fdca66780ed04d6c57ef05f5afe234d"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The attained 1/6 bound in Example is not asserted to force f=x^2 or N=1 among other functions and meshes. All data are fixed before Verification, which supplies a single sharpness witness without any converse classification.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_step3_gate1_25_28",
+            "reason": "The attained 1/6 bound in Example is not asserted to force f=x^2 or N=1 among other functions and meshes. All data are fixed before Verification, which supplies a single sharpness witness without any converse classification.",
+            "item_sha256": "eec8f23e6c5ccbe34fb7b73d2959c2bec07b4adc75162eb821c1df22dfc6296c",
+            "row_sha256": "545ebaf41e8eb1dbc3e11fa9847c6d8a3067662f944972ea2cae57d406460b90"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "one-panel-square-attains-bound",
+          "claim": "For f(x)=x^2 on [0,1] with N=1, the integral is 1/3, the trapezoid value is 1/2, and the stated bound is 1/6.",
+          "result": "Verification steps 1.1–2.1 compute these exact values, giving |1/3−1/2|=1/6 and equality in the bound."
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_uses": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Reviewed all three steps and five current supplier definitions/statements. On [0,1], N=1,h=1 has an empty interior sum, so T_1(x^2)=1/2. Polynomial is C2 including one-sided endpoints and f double-prime=2. Continuous integrability and antiderivative x^3/3 satisfy Newton-Leibniz and give integral 1/3. Absolute error 1/6 equals (b-a)h^2 M/12=1/6, proving sharpness. No choice, no zero-length interval or N=0, no iff assertion."
+      }
+    }
+  }
+}

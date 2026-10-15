@@ -1,0 +1,571 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-20",
+  "scope": [
+    "lem-compact-wavelet-projection-kernel-and-commutator",
+    "lem-type-s-posterior-preliminary-contraction",
+    "thm-type-s-density-weak-bvm-on-m0w"
+  ],
+  "contracts": {
+    "lem-compact-wavelet-projection-kernel-and-commutator": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-negative-sobolev-space-for-white-noise",
+          "source_section": "Definition",
+          "quote": "Let $(\\psi_{lk})$ be a countable complete orthonormal basis of the real Hilbert space $L^2([0,1])$ ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]], [[def-hilbert-space]], [[def-l-p-space-as-a-quotient-by-null-functions]]). For a wavelet basis, index levels by $l\\ge0$, let $K_l$ have $2^l$ indices, and put $a_l=2^l$ for $l\\ge1$ and $a_0=2$ for the finite coarsest level. This finite-level convention only prevents a zero logarithmic weight and does not change any convergence criterion below. For a trigonometric basis, use its integer frequency index $l$, bounded multiplicities, and $a_l=\\max(2,|l|)$.\n\nHere an **$S$-regular wavelet basis** means a wavelet orthonormal basis whose members are $S$ times differentiable, with each derivative through order $S$ in $L^2([0,1])$, following the source convention. The weak BvM theorem below only uses the basis's completeness, orthonormality, and level counts.\n\nFor $\\delta>0$, define $H(\\delta)=H^{-1/2,\\delta}_2$ to be the space of coefficient sequences $c=(c_{lk})$ with norm\n\n$$\\|c\\|_{H(\\delta)}^2:=\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}|c_{lk}|^2<\\infty.$$\n\nIts inner product is the corresponding weighted coefficient inner product. Multiplying each coordinate by $a_l^{-1/2}(\\log a_l)^{-\\delta}$ identifies it isometrically with $\\ell^2(I)$, where $I=\\{(l,k):k\\in K_l\\}$ (or the corresponding trigonometric index set). This sequence space is complete: if $x^{(m)}$ is Cauchy, each coordinate converges to a scalar $x_i$; for every finite $F\\subset I$, the Cauchy bound passes to the limit in $\\sum_{i\\in F}|x_i^{(m)}-x_i^{(n)}|^2$, so the supremum over finite $F$ shows $x^{(m)}\\to x$ in $\\ell^2(I)$. It is separable because finite-support sequences with rational coordinates form a countable dense set. Thus $H(\\delta)$ is a separable Hilbert space without an additional choice assumption.\n\nA function $f\\in L^2([0,1])$ is identified with its coefficient sequence $c_{lk}=\\langle f,\\psi_{lk}\\rangle$. For each finite set $F$ of indices, orthonormality makes $\\sum_{(l,k)\\in F}c_{lk}\\psi_{lk}$ orthogonal to its residual in $L^2$, so the Pythagorean identity gives $\\sum_F|c_{lk}|^2\\le\\|f\\|_2^2$. Taking the supremum over finite $F$ and using the boundedness of the weights proves continuity of the coefficient map. If all coefficients of $f$ vanish, then $f$ is orthogonal to the linear span of the basis. Completeness makes this span dense, and continuity of $g\\mapsto\\langle f,g\\rangle$ gives $\\langle f,f\\rangle=0$, hence $f=0$ in $L^2$. Applying this to the difference of two functions proves injectivity. Thus the coefficient map is a continuous linear embedding $L^2([0,1])\\hookrightarrow H(\\delta)$.\n\nThe weight trace $\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}$ is finite exactly when $\\delta>1/2$: for wavelets its tail is a constant multiple of $\\sum_{l\\ge1}l^{-2\\delta}$, while for a trigonometric basis it is comparable to $\\sum_{l\\ge2}[l(\\log l)^{2\\delta}]^{-1}$. The product-prior theorem below uses the wavelet case.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The finite orthogonal projection has kernel $K_L(x,y)=\\sum_k\\phi_{Lk}(x)\\phi_{Lk}(y)$. At each $x$ only a uniformly bounded number of terms are nonzero, and each has $\\|\\phi_{Lk}\\|_1\\le C2^{-L/2}$. Thus $\\int|K_L(x,y)|dy\\le\\sum_{k:\\phi_{Lk}(x)\\ne0}|\\phi_{Lk}(x)|\\|\\phi_{Lk}\\|_1\\le C'$. A nonzero term requires $x,y$ to lie in one scaling support, giving the support bound. Also $K_L(x,x)=\\sum_k\\phi_{Lk}(x)^2\\le C'2^L$; Cauchy–Schwarz on the scaling coefficients gives the claimed $L^2$ to $L^\\infty$ bound.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $h\\in V_L$, $P_Lh=h$. Therefore $P_L(ah)(x)-a(x)h(x)=\\int K_L(x,y)(a(y)-a(x))h(y)dy$. Hölder continuity, the support bound, and the kernel integral bound give the asserted commutator estimate.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The levelwise tail satisfies $\\|\\sum_k\\langle g,\\psi_{lk}\\rangle\\psi_{lk}\\|_\\infty\\le CC_g2^{-\\alpha l}$. Summing its geometric series over $l>L$ proves uniform convergence and the claimed approximation rate. Its uniform limit agrees with its $L^2$ limit, hence with $g$ almost everywhere, and everywhere for continuous representatives.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For composition put $u_j=P_jg$ and $v_j=u_j-u_{j-1}$, with the first finite low block treated as $u_0$. Levelwise derivative bounds and overlap give $\\|v_j^{(q)}\\|_\\infty\\le C_g2^{j(q-\\alpha)}$ for $0\\le q\\le m$, and $\\|u_j^{(q)}\\|_\\infty\\le C_g^\\prime2^{jq}$ for $1\\le q\\le m$ by summing levels; also $\\sup_j\\|u_j\\|_\\infty<\\infty$. The identity $e^{u_j}-e^{u_{j-1}}=v_j\\int_0^1e^{u_{j-1}+tv_j}dt$ and repeated product and chain rules therefore give, writing $H_j=e^{u_j}-e^{u_{j-1}}$, $\\|H_j\\|_\\infty\\le C2^{-j\\alpha}$ and $\\|H_j^{(m)}\\|_\\infty\\le C2^{j(m-\\alpha)}$. Indeed a derivative of order $q$ of the exponential factor is a finite sum of products of derivatives of its exponent of total order $q$, bounded by $C2^{jq}$; pairing with the derivative of order $m-q$ of $v_j$ gives $C2^{j(m-\\alpha)}$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The telescoping series $e^g=e^{u_0}+\\sum_{j\\ge1}H_j$ converges uniformly. For a wavelet at level $l$, the terms with $j\\ge l$ have coefficients bounded by $C2^{-l/2}\\sum_{j\\ge l}2^{-j\\alpha}\\le C2^{-l(\\alpha+1/2)}$. For $j<l$, subtract the degree $m-1$ Taylor polynomial of $H_j$ about a point of the wavelet support; all its integrals vanish by the stated moments. The Taylor remainder gives $|\\langle H_j,\\psi_{lk}\\rangle|\\le C2^{-l(m+1/2)}2^{j(m-\\alpha)}$. Sum the geometric series over $j<l$ to get the same $C2^{-l(\\alpha+1/2)}$ bound. The fixed smooth $e^{u_0}$ has the stronger order $2^{-l(m+1/2)}$. This proves composition in the coefficient class directly, for every positive $\\alpha$ including integers, without presuming a Hölder–wavelet equivalence.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "claim": "For $0<\\beta<\\min(\\alpha,1)$ the levelwise derivative and supremum bounds for $g$ are respectively at most $C2^{j(1-\\beta)}$ and $C2^{-j\\beta}$. Given distance $0<\\delta<1$, choose $J$ with $2^{-J-1}<\\delta\\le2^{-J}$. The difference of the levels through $J$ is at most $C\\delta\\sum_{j\\le J}2^{j(1-\\beta)}\\le C\\delta^\\beta$ by the derivative bound; the remaining difference is at most $C\\sum_{j>J}2^{-j\\beta}\\le C\\delta^\\beta$. Thus $g$ is $\\beta$-Hölder. The exponential has bounded derivative on the bounded range of $g$, so $e^g$ has the same Hölder bound.",
+          "step": "3.3",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: V_L contains constants and has positive dimension; no empty-basis input is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof 1.2 and 2.1: h=0, g=0 and zero wavelet increments satisfy the bounds; exp(0)=1 is handled by the smooth low block in 3.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof 1.1: a coarsest one-dimensional constant space has a bounded kernel; asymptotic tail assertions concern growing levels."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof 1.2 and 3.1–3.2: constant multipliers make the commutator zero and vanishing level increments contribute zero; no strict lower coefficient bound is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Proof 3.2: boundary-corrected wavelets satisfy the explicitly required polynomial moments; Taylor expansion is on their interval support and no continuation beyond [0,1] is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Proof: finite kernel sums, explicit partial sums and geometric bounds are canonical; no arbitrary-index selection is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: only forward kernel, approximation and composition estimates are asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no reverse characterization of the coefficient or Hölder classes is asserted."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-type-s-posterior-preliminary-contraction": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-compact-wavelet-projection-kernel-and-commutator",
+          "source_section": "Statement",
+          "quote": "Let $V_L$ be the span of wavelets through level $L$ in a compactly supported orthonormal multiresolution basis on $[0,1]$, either boundary corrected or periodized. Assume constants belong to $V_L$, its dimension $d_L\\asymp2^L$, and its orthonormal scaling functions $\\phi_{Lk}$ have supremum norm at most $C2^{L/2}$, support diameter at most $C2^{-L}$, and uniformly bounded overlap. Periodized supports and distances are interpreted on the circle. Assume also $\\sum_k|\\psi_{lk}(x)|\\le C2^{l/2}$ and $\\|\\psi_{lk}\\|_1\\le C2^{-l/2}$. Let $P_L$ denote the orthogonal projection onto $V_L$.\n\nThen $P_L$ has a kernel $K_L$ satisfying $\\sup_x\\int|K_L(x,y)|dy\\le C'$ and $K_L(x,y)=0$ when $\\operatorname{dist}(x,y)>C'2^{-L}$. If $a$ is $\\beta$-Hölder for $0<\\beta\\le1$, then\n$$\\|P_L(ah)-ah\\|_\\infty\\le C'\\|a\\|_{C^\\beta}2^{-\\beta L}\\|h\\|_\\infty,\\qquad h\\in V_L.$$\nFor the composition assertion, assume additionally an integer $m>\\alpha$ such that $\\|\\psi_{lk}^{(q)}\\|_\\infty\\le C_q2^{l(q+1/2)}$ for $0\\le q\\le m$, bounded overlap also for their derivatives, and vanishing moments through degree $m-1$ for the detail wavelets, including boundary wavelets; the finite low scaling functions are $C^m$. These are the usual sufficiently regular compact wavelet hypotheses. If a bounded function $g$ has coefficients bounded by $C_g2^{-l(\\alpha+1/2)}$, with $\\alpha>0$, and its wavelet expansion represents $g$ in $L^2$, then $\\|g-P_Lg\\|_\\infty\\le C''C_g2^{-\\alpha L}$, up to equality of the continuous representatives. Under these additional derivative and cancellation hypotheses, $e^g$ also has coefficients bounded by $C_g^\\prime2^{-l(\\alpha+1/2)}$, including integer $\\alpha$, and $g,e^g$ are $\\beta$-Hölder for every $0<\\beta<\\min(\\alpha,1)$. Moreover $\\|h\\|_\\infty\\le C''\\sqrt{d_L}\\|h\\|_2$ for $h\\in V_L$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Quotient out constants before using likelihood curvature. Constants belong to the fixed low scaling space. An orthogonal change within that finite space separates $T=\\theta+c1$; integrate $c$ out of the prior and write $q_L$ for the resulting Lebesgue density on $E_L$. The likelihood depends only on $\\theta$. In S1 its product density before integration obeys $p(\\theta+u,c)/p(\\theta,c)\\in[e^{-B_L\\|u\\|_2},e^{B_L\\|u\\|_2}]$, where $B_L^2\\le C\\sum_{l\\le L}2^l\\sigma_l^{-2}\\le Cd^{2\\alpha+2}$. Integrating preserves both inequalities for $q_L$; it is positive, finite almost everywhere, and the log-Lipschitz inequality supplies its positive continuous finite version everywhere. In S2 the marginal is a nondegenerate Gaussian on $E_L$, with precision $Q_L$ equal to $\\sigma_l^{-2}$ on high wavelets and a fixed positive definite low block; hence $\\|Q_L\\|\\le Cd^{2r+1}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $f_*=e^{\\theta_*}/\\int e^{\\theta_*}$. [F1] gives $\\|f_*-f_0\\|_\\infty\\le Cd^{-\\alpha}$. For $\\ell(\\theta)=n(P_n\\theta-\\log\\int e^\\theta)$, the centered score at $\\theta_*$ has expected squared Euclidean norm at most $Cnd$: sum the coordinate variances, each bounded by $D_0$ by orthonormality. The score's deterministic mean is the coefficient vector of $n(f_0-f_*)$, with norm at most $Cnd^{-\\alpha}$. Consequently [F3] gives $\\|\\nabla\\ell(\\theta_*)\\|_2=O_P(ne_n)$. On every ball $\\|u\\|_2\\le Re_n$ with fixed $R$, [F1] and $\\sqrt d e_n\\to0$ make $f_{\\theta_*+u}$ bounded uniformly above and away from zero. For $v\\in E_L$, $\\operatorname{Var}_f(v)=\\inf_a\\int(v-a)^2f$ lies between $c\\|v\\|_2^2$ and $C\\|v\\|_2^2$, using $\\int v=0$. Thus $-\\nabla^2\\ell$ is between $cnI$ and $CnI$ on these balls. Convexity of $-\\ell$ holds globally.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "In S1, $B_L\\le Cne_n$ by either cutoff. In S2 the Hölder coefficient bound gives $G_L^2:=\\|Q_L\\theta_*\\|_2^2\\le C[1+\\sum_{l\\le L}2^{l(4r+2-2\\alpha)}]$, so $G_L\\le Cne_n$, and $\\|Q_L\\|/n\\to0$ because $r<\\alpha$. The Gaussian log-density increment is exactly $-\\langle Q_L\\theta_*,u\\rangle-\\langle Q_Lu,u\\rangle/2$. In particular its radial upper slope is at most $G_L$, and on the $e_n$ ball it is bounded below by $-G_Le_n-\\|Q_L\\|e_n^2/2$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a score event $\\|\\nabla\\ell(\\theta_*)\\|_2\\le Ane_n$. Put $r_0=Re_n$, with $R$ a large fixed constant. Taylor's formula on the $r_0$ ball bounds $\\ell(\\theta_*+r_0\\omega)-\\ell(\\theta_*)$ above by $Ane_nr_0-cnr_0^2/2$ and its radial derivative above by $Ane_n-cnr_0$. Global convexity of $-\\ell$ extends this derivative bound to every $r\\ge r_0$. Add the prior bound $B_Lr$ in S1, or $G_Lr$ with its nonpositive quadratic term in S2. For $R$ large enough the log unnormalized posterior ratio $H(r\\omega)$ relative to $\\theta_*$ is at most $-c'nr_0r$ for all $r\\ge r_0$. On $r\\le e_n$, the lower Taylor bound and the prior lower bounds instead give $H\\ge-C_Ane_n^2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Polar integration in dimension $m=d-1$ bounds the tail/normalizer ratio by $e^{C_Ane_n^2}m\\int_R^\\infty t^{m-1}e^{-c'nRe_n^2t}dt$. Here $ne_n^2\\ge d>m$. Choose $R$ so large that $\\log t\\le c'Rt/4$ for $t\\ge R$ and $C_A\\le c'R^2/4$. The integral is then at most $[m/(c''nRe_n^2)]e^{-c''nR^2e_n^2}$ after decreasing $c''>0$, and tends to zero. The denominator used here is the integral on the $e_n$ ball, at least its volume times $e^{-C_Ane_n^2}$ times the positive unnormalized value at $\\theta_*$. First increase $A$ to make its score event arbitrarily probable, then increase $R$. This proves tightness. For any $b_n\\to\\infty$, eventual containment of every fixed $Re_n$ ball in the $b_ne_n$ ball yields the stated equivalent formulation.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every modeled density is everywhere positive. Its prior predictive product density is positive and integrates to one by [F2], so it is finite Lebesgue-almost everywhere on the sample cube. The law $P_0^n$ has a bounded Lebesgue density, hence the same exceptional set is $P_0^n$-null. This proves finite positive evidence on the asserted fibers independently of the score event.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: f0 is a probability density and V_L contains constants; asymptotic d tends to infinity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof 1.1–1.2: the constant direction is integrated out before coercivity; u=0 is the reference quotient parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof 2.2: polar integration is used only at sufficiently large n, when d-1>0; finite n do not affect contraction. Proof 3.1 treats evidence for every finite n."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof 1.1: Gaussian marginal low-block precision is positive definite on the quotient; the original likelihood-degenerate constant direction is removed rather than assigned false curvature."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: alpha>1/2 and 0<r<alpha-1/4 are strict; proofs do not include excluded endpoint cases. Both cutoff choices are used in 1.2–1.3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC for imported measure/Gaussian interfaces. Proof 2.1 fixes one finite score constant and radius; no extra uncountable family of parameter choices is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Proof 2.2: tightness implies every b_n tending to infinity has vanishing exterior posterior probability."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement equivalent formulation: if tightness failed for some fixed tail error, choose increasing deterministic radii at an offending subsequence, then extend to b_n tending to infinity; this contradicts the asserted formulation."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-type-s-density-weak-bvm-on-m0w": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-type-s-posterior-preliminary-contraction",
+          "source_section": "Statement",
+          "quote": "Assume AC for the imported measure and Gaussian interfaces. Use Type-S priors and either cutoff of [[def-type-s-and-h-multiscale-density-priors]] with the compact multiresolution basis of [[lem-compact-wavelet-projection-kernel-and-commutator]], regular enough for the truth's Hölder approximation. Suppose $0<\\rho_0\\le f_0\\le D_0$, $g_0=\\log f_0\\in C^\\alpha$, and $\\alpha>1/2$. In S1 take $\\sigma_l=2^{-l(\\alpha+1/2)}$ and any probability density whose logarithm is Lipschitz on all of $\\mathbb R$. In S2 take Gaussian coefficients with $\\sigma_l=2^{-l(r+1/2)}$ and $0<r<\\alpha-1/4$.\n\nWrite $d=\\dim V_{L_n}\\asymp2^{L_n}$, $E_{L_n}=V_{L_n}\\cap\\{h:\\int h=0\\}$, $\\theta=T-\\int T$, $\\theta_*=P_{L_n}g_0-\\int g_0$, and $e_n=\\sqrt{d/n}+d^{-\\alpha}$. Under IID data of density $f_0$, the posterior distributions of $\\|\\theta-\\theta_*\\|_2/e_n$ are tight in probability. Equivalently, for every deterministic $b_n\\to\\infty$,\n$$\\Pi(\\|\\theta-\\theta_*\\|_2>b_ne_n\\mid X^n)\\to0$$\nin $P_0^n$-probability. The normalizer defining the posterior is positive and finite $P_0^n$-almost surely. The quotient prior has a positive continuous Lebesgue density $q_L$ on $E_L$. In S1 it obeys\n$$|\\log q_L(\\theta+u)-\\log q_L(\\theta)|\\le B_L\\|u\\|_2,\\qquad B_L^2\\le C\\sum_{l\\le L}2^l\\sigma_l^{-2},$$\nand a shift in a single high wavelet coordinate obeys the sharper bound $C|u_{lk}|/\\sigma_l$. The low scaling block has a fixed finite collection of analogous weighted bounds. In S2 the quotient prior is centered Gaussian, with precision $Q_L$ diagonal on high wavelets with entries $\\sigma_l^{-2}$ and a fixed positive definite low scaling block. Its log-density increment is $-\\langle Q_L\\theta,u\\rangle-\\langle Q_Lu,u\\rangle/2$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-compact-wavelet-projection-kernel-and-commutator",
+          "source_section": "Statement",
+          "quote": "Let $V_L$ be the span of wavelets through level $L$ in a compactly supported orthonormal multiresolution basis on $[0,1]$, either boundary corrected or periodized. Assume constants belong to $V_L$, its dimension $d_L\\asymp2^L$, and its orthonormal scaling functions $\\phi_{Lk}$ have supremum norm at most $C2^{L/2}$, support diameter at most $C2^{-L}$, and uniformly bounded overlap. Periodized supports and distances are interpreted on the circle. Assume also $\\sum_k|\\psi_{lk}(x)|\\le C2^{l/2}$ and $\\|\\psi_{lk}\\|_1\\le C2^{-l/2}$. Let $P_L$ denote the orthogonal projection onto $V_L$.\n\nThen $P_L$ has a kernel $K_L$ satisfying $\\sup_x\\int|K_L(x,y)|dy\\le C'$ and $K_L(x,y)=0$ when $\\operatorname{dist}(x,y)>C'2^{-L}$. If $a$ is $\\beta$-Hölder for $0<\\beta\\le1$, then\n$$\\|P_L(ah)-ah\\|_\\infty\\le C'\\|a\\|_{C^\\beta}2^{-\\beta L}\\|h\\|_\\infty,\\qquad h\\in V_L.$$\nFor the composition assertion, assume additionally an integer $m>\\alpha$ such that $\\|\\psi_{lk}^{(q)}\\|_\\infty\\le C_q2^{l(q+1/2)}$ for $0\\le q\\le m$, bounded overlap also for their derivatives, and vanishing moments through degree $m-1$ for the detail wavelets, including boundary wavelets; the finite low scaling functions are $C^m$. These are the usual sufficiently regular compact wavelet hypotheses. If a bounded function $g$ has coefficients bounded by $C_g2^{-l(\\alpha+1/2)}$, with $\\alpha>0$, and its wavelet expansion represents $g$ in $L^2$, then $\\|g-P_Lg\\|_\\infty\\le C''C_g2^{-\\alpha L}$, up to equality of the continuous representatives. Under these additional derivative and cancellation hypotheses, $e^g$ also has coefficients bounded by $C_g^\\prime2^{-l(\\alpha+1/2)}$, including integer $\\alpha$, and $g,e^g$ are $\\beta$-Hölder for every $0<\\beta<\\min(\\alpha,1)$. Moreover $\\|h\\|_\\infty\\le C''\\sqrt{d_L}\\|h\\|_2$ for $h\\in V_L$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-density-gaussian-bridge-is-borel-on-m0w",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $P_0$ have density $0\\le f_0\\le D<\\infty$ on $[0,1]$, and let $(\\psi_{lk})$ be an orthonormal wavelet system with at most $C2^l$ coordinates per level, including finitely many coarsest scaling coordinates. The Haar system is allowed. For every admissible $w$, there exists a Borel centered Gaussian random element $G_{P_0}$ of $M_0(w)$ with coefficient covariance\n$$K((l,k),(l',k'))=P_0[(\\psi_{lk}-P_0\\psi_{lk})(\\psi_{l'k'}-P_0\\psi_{l'k'})].$$\nIts Borel law is uniquely determined by these finite-coordinate Gaussian laws.",
+          "uses": [
+            "3.2",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-m0w-finite-projection-and-tail-bvm-criterion",
+          "source_section": "Statement",
+          "quote": "Let $Q_n$ be data-indexed probability measures on $M_0(w)$ and let $G$ be a fixed probability measure on this space. For the projections $P_J$ of [[lem-m0w-separable-and-projection-tails]], suppose that for every fixed $J$,\n$$\\beta_{BL}(Q_n\\circ P_J^{-1},G\\circ P_J^{-1})\\to0$$\nin probability, and that for every $\\varepsilon,\\eta>0$,\n$$\\lim_{J\\to\\infty}\\limsup_{n\\to\\infty}P\\left\\{Q_n(\\|x-P_Jx\\|_{M(w)}>\\varepsilon)>\\eta\\right\\}=0.$$\nThen $\\beta_{BL}(Q_n,G)\\to0$ in probability.",
+          "uses": [
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-iid-bounded-variance-bernstein-tail",
+          "source_section": "Statement",
+          "quote": "Let $Z_1,\\ldots,Z_m$ be independent, integrable, centered real random variables on a probability space, with $|Z_i|\\le b$ almost surely for a finite $b>0$. Put $S_m=\\sum_{i=1}^mZ_i$ and $V=\\sum_{i=1}^m\\mathbb E[Z_i^2]$. For every $t>0$, if $V>0$ then\n$$\\mathbb P(S_m\\ge t)\\le\\exp\\!\\left(-\\frac{t^2}{2(V+bt/3)}\\right),\\qquad \\mathbb P(S_m\\le-t)\\le\\exp\\!\\left(-\\frac{t^2}{2(V+bt/3)}\\right).$$\nIf $V=0$, then $S_m=0$ almost surely.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-prokhorov-tightness-theorem-on-polish-spaces",
+          "source_section": "Statement",
+          "quote": "Assume AC. A family $\\mathcal A$ of Borel probabilities on a Polish space S is tight if and only if it is relatively sequentially compact for weak convergence.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cramer-wold-device",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be a finite integer and $p_\\theta(x)=\\theta\\cdot x$ for $\\theta\\in\\mathbb R^d$. Borel probability laws on $\\mathbb R^d$ are determined by all the laws $(p_\\theta)_*\\mu$. Moreover, if $(p_\\theta)_*\\mu_n\\Rightarrow(p_\\theta)_*\\mu$ for every $\\theta$ and a specified Borel probability law $\\mu$, then $\\mu_n\\Rightarrow\\mu$. If dimension zero is admitted, interpret $\\mathbb R^0$ as the singleton empty tuple; both conclusions then hold as well.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-bounded-lipschitz-metric-characterizes-weak-convergence-on-polish-spaces",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(S,d)$ be a Polish space, and let $\\mu_n,\\mu$ be Borel probability measures on $S$. Define\n\n$$\\beta_{BL}(\\nu,\\rho):=\\sup\\left\\{\\left|\\int g\\,d\\nu-\\int g\\,d\\rho\\right|:g:S\\to\\mathbb R,\\ \\|g\\|_\\infty\\le1,\\ \\operatorname{Lip}_d(g)\\le1\\right\\},$$\n\nwhere $\\operatorname{Lip}_d(g):=\\sup_{x\\ne y}|g(x)-g(y)|/d(x,y)$, with value $0$ when $S$ has at most one point. Then\n\n$$\\mu_n\\Rightarrow\\mu\\quad\\Longleftrightarrow\\quad\\beta_{BL}(\\mu_n,\\mu)\\longrightarrow0,$$\n\nwhere $\\Rightarrow$ is weak convergence of Borel probabilities ([[def-weak-convergence-of-borel-probability-measures]]). The implication from bounded-Lipschitz convergence to weak convergence is choice-free; the reverse implication below uses AC through Prokhorov's theorem.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a deterministic $b_n\\to\\infty$ sufficiently slowly that $b_n\\sqrt d e_n\\to0$ and $b_ne_nd^{2r+1}/\\sqrt n\\to0$ in the Gaussian case. Such a choice exists: the first unmultiplied expression tends to zero because $\\alpha>1/2$, and the second is bounded by a logarithmic factor times $d^{2r-2\\alpha+1/2}\\to0$. Set $D_n=\\{\\|\\theta-\\theta_*\\|_2\\le b_ne_n\\}$ in the quotient by constants used in [F1]. Then $\\Pi(D_n\\mid X^n)\\to1$ in probability. On $D_n$, $\\|\\theta-\\theta_*\\|_\\infty\\le Cb_n\\sqrt d e_n=o(1)$; hence $\\|f-f_0\\|_\\infty=o(1)$ uniformly, and the densities are bounded above and away from zero. Write $\\Pi_D$ for the posterior conditioned on $D_n$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $\\gamma=\\psi_{lk}$, $l\\le L_n$, define $f_s=fe^{-s\\gamma/\\sqrt n}/P_fe^{-s\\gamma/\\sqrt n}$. For $|s|\\le\\sqrt{\\lambda_l}$, Taylor expansion of the log moment generating function gives $s\\sqrt n(P_f-P_n)\\gamma=\\ell_n(f_s)-\\ell_n(f)+(s^2/2)\\operatorname{Var}_f\\gamma+R$, where $|R|\\le C|s|^3\\|\\gamma\\|_\\infty/\\sqrt n$. To justify the uniform remainder, differentiate $a\\mapsto\\log P_fe^{a\\gamma}$ three times; its third derivative is the third centered moment under the tilted density, bounded by $C\\|\\gamma\\|_\\infty P_f\\gamma^2$ when $|a|\\|\\gamma\\|_\\infty=o(1)$. On $D_n$, $P_f\\gamma^2\\le C$ by orthonormality and the density bound, while $\\sqrt{L_n}2^{L_n/2}/\\sqrt n\\to0$. Thus $|R|\\le Cs^2$ and $\\operatorname{Var}_f\\gamma\\le C$. Here $\\ell_n$ is the sum log likelihood.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The map $f\\mapsto f_s$ is the quotient-coordinate translation $\\theta\\mapsto\\theta-s(\\gamma-\\int\\gamma)/\\sqrt n$. On high wavelets it shifts one coordinate; low scaling directions involve only a fixed finite-dimensional block. In S1 the absolute log prior density ratio is at most $C|s|/(\\sqrt n\\sigma_l)\\le C|s|$, since $2^{L_n(\\alpha+1/2)}\\le\\sqrt n$. In S2 it is at most $C[|s|(|g_{0,lk}|+b_ne_n)/(\\sqrt n\\sigma_l^2)+s^2/(n\\sigma_l^2)]$, with a bounded fixed low-block version. Uniformly in high $l\\le L_n$, its coefficients are bounded: $|g_{0,lk}|\\le C2^{-l(\\alpha+1/2)}$, $b_ne_nd^{2r+1}/\\sqrt n=o(1)$, and $d^{2r+1}/n=o(1)$. Changing variables in the numerator likelihood integral and discarding its transformed $D_n$ indicator therefore bounds that integral by $e^{C|s|+Cs^2}$ times the full posterior normalizer. Step 1.2 yields $E_{\\Pi_D}e^{s\\sqrt n(P_f-P_n)\\psi_{lk}}\\le Ce^{Cs^2+C|s|}/\\Pi(D_n\\mid X^n)$. No translation invariance of $D_n$ is used.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $Z_{lk}=\\sqrt n\\langle f-P_n,\\psi_{lk}\\rangle$ for $l\\le L_n$ and $p_n=\\Pi(D_n\\mid X^n)$. Exponential Markov with $s=\\pm\\sqrt{\\lambda_l}$ gives $\\Pi_D\\{|Z_{lk}|>u\\sqrt{\\lambda_l}\\}\\le Cp_n^{-1}e^{-\\lambda_l(u-C)}$. Union over the at most $C2^l$ locations shows $E_{\\Pi_D}\\max_k|Z_{lk}|\\le Cp_n^{-1}\\sqrt{\\lambda_l}$. Union also over levels and integrate in $u$ above a sufficiently large constant to obtain $E_{\\Pi_D}\\sup_{l\\le L_n,k}|Z_{lk}|/\\sqrt{\\lambda_l}\\le C/p_n$: the relevant integral is bounded by $Cp_n^{-1}\\sum_{l\\ge1}2^l\\int_M^\\infty e^{-l(u-C)}du$, plus a finite low-level term. Also the wavelet level bound and a geometric sum give $E_{\\Pi_D}\\|P_{L_n}(f-P_n)\\|_\\infty\\le Cp_n^{-1}\\sqrt{d\\lambda_{L_n}/n}$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F7",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Each empirical wavelet coordinate has variance at most $D_0/n$ and summands bounded by $C2^{l/2}$. Bernstein [F5] gives $\\Pr\\{|(P_n-P_0)\\psi_{lk}|>C[\\sqrt{t/n}+2^{l/2}t/n]\\}\\le2e^{-t}$. Choose $t=C'(l+1)+u$, union over $k$, and integrate over $u\\ge0$ to get $E\\max_k|(P_n-P_0)\\psi_{lk}|\\le C[\\sqrt{\\lambda_l/n}+2^{l/2}\\lambda_l/n]$. Summing against $2^{l/2}$ yields $\\|P_{L_n}(P_n-P_0)\\|_\\infty=O_P(\\sqrt{d\\lambda_{L_n}/n}+d\\lambda_{L_n}/n)=O_P(\\sqrt{d\\lambda_{L_n}/n})$, since $d\\lambda_{L_n}/n\\to0$. Moreover $\\|P_{L_n}f_0-f_0\\|_\\infty\\le Cd^{-\\alpha}\\le C\\sqrt{d\\lambda_{L_n}/n}$ for both cutoffs. Consequently the posterior projected density error is tight at rate $a_n=\\sqrt{d\\lambda_{L_n}/n}$.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F5",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "This projected rate controls the full supremum error. Put $h=\\theta-\\theta_*$, $f_*=e^{\\theta_*}/\\int e^{\\theta_*}$, and $v=h-P_{f_*}h\\in V_{L_n}$. Since $\\int h=0$, $\\|h\\|_\\infty\\le2\\|v\\|_\\infty$. Normalized exponential expansion gives $f-f_*=f_*v+R$ with $\\|R\\|_\\infty\\le C\\|h\\|_\\infty^2$ on $D_n$. Also $\\|f_*-f_0\\|_\\infty\\le Cd^{-\\alpha}$. For any fixed $0<\\beta<\\min(\\alpha,1)$, $f_0$ is $\\beta$-Hölder, so [F2] gives $\\|P_{L_n}(f_0v)-f_0v\\|_\\infty\\le Cd^{-\\beta}\\|v\\|_\\infty$. The lower bound $f_0\\ge\\rho_0$ and uniform boundedness of $P_{L_n}$ imply $c\\|h\\|_\\infty\\le\\|P_{L_n}(f-f_0)\\|_\\infty+C d^{-\\beta}\\|h\\|_\\infty+C\\|h\\|_\\infty^2+Cd^{-\\alpha}$. Step 1.1 makes the two terms proportional to $\\|h\\|_\\infty$ absorbable. It follows that $\\|f-f_0\\|_\\infty\\le C[\\|P_{L_n}(f-f_0)\\|_\\infty+d^{-\\alpha}]$ uniformly on $D_n$. Thus the full posterior supremum error is tight at rate $a_n$.",
+          "step": "2.3",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix a finite linear combination $\\gamma$ of wavelets and a fixed real $s$. Repeat step 1.2 with this bounded $\\gamma$. Its remainder is now $o(1)$, and $\\operatorname{Var}_f\\gamma\\to\\operatorname{Var}_0\\gamma$ uniformly on $D_n$. The prior translation involves finitely many fixed coordinates, and its density ratio tends to one uniformly on $D_n$: use the global S1 log-Lipschitz bound or the fixed Gaussian precision block and bounded quotient coordinates in S2. Let $A_s$ be the translated image of $D_n$. For large $n$, $A_s$ contains $D_n^-:=\\{\\|\\theta-\\theta_*\\|_2\\le b_ne_n/2\\}$ because the translation has norm $O(n^{-1/2})=o(b_ne_n)$. Both $\\Pi(D_n^-\\mid X^n)$ and $\\Pi(D_n\\mid X^n)$ tend to one by [F1]. Bounding the translated integral above by the full normalizer and below by its integral on $D_n^-$ therefore gives $E_{\\Pi_D}e^{s\\sqrt n(P_f-P_n)\\gamma}\\to e^{s^2\\operatorname{Var}_0(\\gamma)/2}$ in probability.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Here is the needed finite-dimensional Laplace continuity argument. Along any subsequence, extract a further subsequence on which the preceding transform convergences hold almost surely for every rational $s$ and every rational vector of finite-coordinate coefficients, using countability and convergence in probability. The transforms at the positive and negative coordinate unit vectors give tightness of these deterministic finite-dimensional laws by exponential Markov and a finite union bound. [F6] gives a weakly convergent further subsequence. For a fixed rational direction and rational $s$, its exponential is uniformly integrable: its second moment is bounded by the transform at $2s$, and Cauchy–Schwarz and Markov bound the expectation above any large cutoff. Truncation thus passes its transform to the weak limit. In each coordinate direction and then any rational linear direction, the limit has finite exponential moments of every rational order, and hence of every real order by bounding $e^{t|x|}$ by $e^{q x}+e^{-q x}$ for rational $q>|t|$. Its moment generating function is analytic: on every bounded complex disk its power series can be integrated term by term under $e^{q|x|}$. Equality with the Gaussian transform on the rationals therefore gives equality of all moments by the real power series at zero. Integrating the characteristic-function power series under the same exponential bound gives the Gaussian characteristic function. [F6] identifies every rational linear projection with the corresponding centered normal. Continuity of characteristic functions in their vector argument extends the identification to real vectors; [F6] then identifies the finite-dimensional law with the Gaussian projection of [F3]. Every weakly convergent further subsequence has that limit, so tightness implies weak convergence of the full deterministic subsequence, and [F7] gives bounded-Lipschitz convergence. The initial subsequence argument proves convergence in probability of the original random projected laws.",
+          "step": "3.2",
+          "inputs": [
+            "F3",
+            "F6",
+            "F7",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For the coefficients through $L_n$, step 2.1 and Markov give posterior tightness of $\\sup_{l\\le L_n,k}|Z_{lk}|/\\sqrt{\\lambda_l}$. Therefore for $J<L_n$, the $M(w)$ norm of the part with $J<l\\le L_n$ is at most this variable times $\\sup_{l>J}\\sqrt{\\lambda_l}/w_l$, which tends to zero as $J\\to\\infty$ by admissibility. This proves the required uniform projected posterior tail bound.",
+          "step": "4.1",
+          "inputs": [
+            "F7",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Choose $M_n\\to\\infty$ so slowly that $M_n\\sqrt{\\lambda_{L_n}}/w_{L_n}\\to0$. Step 2.3 makes the posterior probability of $\\|f-f_0\\|_\\infty>M_na_n$ tend to zero. On its complement, the $L^1$ wavelet bound and monotonicity of $w$ give $\\sqrt n\\|P_{>L_n}(f-f_0)\\|_{M(w)}\\le C\\sqrt n2^{-L_n/2}w_{L_n}^{-1}M_na_n\\le CM_n\\sqrt{\\lambda_{L_n}}/w_{L_n}\\to0$. The truth coefficients satisfy $\\sqrt n\\|P_{>L_n}f_0\\|_{M(w)}\\le C\\sqrt n d^{-\\alpha-1/2}/w_{L_n}\\le C\\sqrt{\\lambda_{L_n}}/w_{L_n}\\to0$ for either cutoff. Hence the entire density tail above $L_n$ is negligible in posterior probability.",
+          "step": "4.2",
+          "inputs": [
+            "F2",
+            "given",
+            "step 2.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-3",
+          "claim": "Each density is a finite exponential of bounded continuous functions, hence belongs to $L^2$; its coefficients, and those of $P_n(L_n)$, belong to $M_0(w)$. Removing $D_n$ changes posterior integrals of functions bounded by one by at most $2[1-\\Pi(D_n\\mid X^n)]=o_P(1)$. Step 3.2 supplies fixed finite-projection convergence to [F3], and steps 4.1–4.2 supply the posterior-tail condition. Apply [F4] to conclude the asserted bounded-Lipschitz convergence in $M_0(w)$.",
+          "step": "4.3",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 3.2",
+            "step 4.1",
+            "step 4.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the IID density model is nonempty and each finite projection retains the fixed low scaling space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof 3.1–3.2: gamma=0 and zero-variance constant directions have transform one and Dirac Gaussian limit; no variance division occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof 3.2: the Laplace continuity argument covers a single scalar coordinate, and the fixed low-level cases use lambda_l=max(l,1) in 1.2–2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof 3.2: singular finite bridge covariance is allowed because linear projections of variance zero are Dirac; F3 supplies the joint Borel Gaussian law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement retains S1 alpha>1 and S2 alpha>1/2 with strict r<alpha-1/4. The integer-alpha exp composition is supplied by F2. Both cutoffs and interval boundary wavelets are covered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement explicitly assumes full AC, used in F3 Gaussian construction and F6 Prokhorov/characteristic uniqueness; step 3.2 uses countable diagonal subsequences within that scope."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts a sufficient weak-BvM theorem, not a necessary-and-sufficient criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts no converse for failed prior or truth hypotheses."
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

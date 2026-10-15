@@ -1,0 +1,2424 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-17",
+  "scope": [
+    "lem-countable-discrete-space-is-standard-borel",
+    "def-poisson-random-measure",
+    "def-dirichlet-process",
+    "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+    "lem-dirichlet-aggregation-under-coarsening",
+    "thm-dirichlet-process-posterior-update",
+    "thm-dirichlet-process-polya-urn-predictive-law",
+    "rem-dirichlet-process-support-does-not-imply-density-contraction",
+    "ex-dirichlet-process-finite-partition-posterior-and-polya-urn",
+    "ex-dirichlet-process-alpha-null-observation-fiber"
+  ],
+  "contracts": {
+    "def-poisson-random-measure": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the empty standard Borel space has only the zero counting measure and the finite-count conditions are vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero-mean Poisson law is the point mass at zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a one-set disjoint family is covered by the finite-family count condition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the degenerate zero-intensity count is explicitly included."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition has no parameter endpoint claim beyond sigma-finite intensity and the stated zero-count convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition selects no object and assumes no nonempty choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition contains no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition contains no reverse-implication claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Reviewed full Definition and all ten actual dependency statements, including rate/exposure Poisson parameterization. A finite/countable sum of Dirac measures defines a measure, repetitions are permitted and evaluation measurability is explicit. The empty sum gives the zero measure, Pois(0) is delta_0, and disjoint finite-intensity cells have independent counts. Sigma-finiteness lets these conditions determine counts on arbitrary cells by increasing finite-intensity exhaustion; no local finiteness or topological condition is asserted. Last\u2013Penrose Definition 3.1 (printed p.19) agrees on finite-intensity cells. This is a definition, not an unproved existence claim; no choice used. Reader/refuter have no findings; no defect found."
+      }
+    },
+    "def-dirichlet-process": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes a finite nonzero base measure, so the zero-total base case is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero-parameter cells are omitted and assigned mass zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a partition with one positive-parameter cell assigns that cell mass one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the one-positive-cell and zero-cell cases are explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition asserts no topological or support endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition introduces no selection; existence is supplied by the construction theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition contains no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition contains no reverse-implication claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Reviewed the full Definition and all six dependency interfaces, including Countable Choice and strictly positive Dirichlet parameters. Finite nonzero alpha ensures a nonempty space and at least one positive partition cell. Zero cells are deterministic zero and one positive cell is deterministic one, so no zero-shape density is invoked. Evaluation cylinders are generated by finite refinements into partition cells, so the specification determines at most one probability law by finite-measure uniqueness; existence is explicitly deferred to the construction theorem. The coordinate identity is measurable. Ferguson \u00a72 and \u00a73 use the same zero-coordinate convention and finite-partition specification. No support or density assertion is made. No reader/refuter finding or defect found."
+      }
+    },
+    "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For any set $I$, standard-Borel coordinate spaces $(E_i,\\mathcal E_i)$, and consistent finite-dimensional laws $(\\mu_F)_{F\\Subset I}$, there is a unique probability measure $\\mu$ on $\\mathcal C_I$ whose $F$-coordinate marginal is $\\mu_F$ for each finite $F$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "source_section": "Statement",
+          "quote": "Every finite product of standard Borel spaces, with its finite product sigma-algebra, is standard Borel.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-countable-discrete-space-is-standard-borel",
+          "source_section": "Statement",
+          "quote": "If $S$ is a nonempty at-most-countable set, then $(S,\\mathcal P(S))$ is a\nstandard Borel space.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-poisson-law",
+          "source_section": "Definition",
+          "quote": "For exposure $e\\ge0$ and rate $\\lambda>0$, define\n$Y\\sim\\operatorname{Pois}(e\\lambda)$ to have [[def-scalar-poisson-count-law|the scalar Poisson count law]] with\nparameter $e\\lambda$. Thus for $e>0$,\n$$\\mathbb P(Y=y\\mid\\lambda,e)=e^{-e\\lambda}\\frac{(e\\lambda)^y}{y!}, \\qquad y\\in\\mathbb N_0,$$\nwith $0^0=1$; when $e=0$ this is the point mass at $y=0$. The law is normalized\nby [[lem-poisson-count-law-normalization-and-moments]]. A zero-exposure\npositive count has likelihood zero.",
+          "uses": [
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.3",
+            "4.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.3",
+            "4.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-gamma-distribution-shape-rate",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. For shape $a>0$ and rate $b>0$, the **shape-rate Gamma distribution**\n$\\operatorname{Gamma}(a,b)$ is the probability measure on $(0,\\infty)$ with\ndensity\n$$f_{a,b}(\\lambda)=\\frac{b^a}{\\Gamma(a)}\\lambda^{a-1}e^{-b\\lambda}$$\nrelative to Lebesgue measure. Its normalization is proved in\n[[lem-gamma-density-normalization]]. The second argument is a rate, not a scale.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-gamma-density-normalization",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For $a,b>0$,\n$$\\int_{(0,\\infty)}\\frac{b^a}{\\Gamma(a)}x^{a-1}e^{-bx}\\,d\\lambda_1(x)=1.$$",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-integral-exponential-agrees-with-exponential",
+          "source_section": "Statement",
+          "quote": "For every $x\\in\\mathbb R$,\n\n$$E(x)=\\exp(x).$$",
+          "uses": [
+            "1.1",
+            "3.3",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exponential-limits-and-range",
+          "source_section": "Statement",
+          "quote": "$$\\exp(x)\\to+\\infty\\quad(x\\to+\\infty),\\qquad \\exp(x)\\to0\\quad(x\\to-\\infty),$$\nand the range of $\\exp$ is contained in $(0,\\infty)$ and is unbounded above with infimum $0$.",
+          "uses": [
+            "1.1",
+            "3.3",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1",
+            "3.3",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-uniqueness-of-a-multivariate-exponential-transform",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $k\\ge0$. Let $\\nu$ be a finite complex Borel measure on $\\mathbb R^k$. Suppose there is $\\delta>0$ such that $\\int e^{\\delta\\|x\\|_1}\\,|\\nu|(dx)<\\infty$. If the Laplace transform $L(z)=\\int e^{z\\cdot x}\\,\\nu(dx)$ is zero for every real $z$ in an open neighborhood of $0$, then $\\nu=0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-nonnegative-weighted-sums-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $(\\mu_k)$ be measures on one measurable space and let $c_k\\in[0,+\\infty]$. Each scalar multiple $c_k\\mu_k$, defined by the zero, finite-positive, and positive-infinity branches of [[def-nonnegative-weighted-sum-of-measures]], is a measure. Every finite or countable weighted sum $\\sum_kc_k\\mu_k$ is also a measure.",
+          "uses": [
+            "3.1",
+            "3.3",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "3.1",
+            "3.3",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "3.1",
+            "3.3",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-dirichlet-distribution",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. For $k\\ge2$ and $\\alpha_j>0$, the **Dirichlet distribution**\n$\\operatorname{Dirichlet}(\\alpha_1,\\ldots,\\alpha_k)$ is the probability law\non the open probability simplex with density\n$$\\frac{\\Gamma(\\alpha_+)}{\\prod_j\\Gamma(\\alpha_j)} \\prod_jp_j^{\\alpha_j-1}$$\nrelative to $dp_1\\cdots dp_{k-1}$, with $p_k=1-\\sum_{j<k}p_j$. Its\nnormalization is [[thm-dirichlet-density-normalization]]. For $k=1$, define\nthe law to be the point mass at $p_1=1$. All coordinates of the parameter\nvector must be strictly positive.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-dirichlet-density-kernel",
+          "source_section": "Definition",
+          "quote": "For $k\\ge2$ and positive coordinates $\\alpha_1,\\ldots,\\alpha_k$, write\n$\\Delta_{k-1}=\\{(p_1,\\ldots,p_{k-1})\\in(0,\\infty)^{k-1}:\n\\sum_{j<k}p_j<1\\}$ and set $p_k=1-\\sum_{j<k}p_j$. The **Dirichlet density\nkernel** is the nonnegative function\n$$q_\\alpha(p_1,\\ldots,p_{k-1}) =\\frac{\\Gamma(\\alpha_+)}{\\prod_{j=1}^k\\Gamma(\\alpha_j)} \\prod_{j=1}^kp_j^{\\alpha_j-1},\\qquad \\alpha_+=\\sum_{j=1}^k\\alpha_j,$$\nrelative to coordinate Lebesgue measure $dp_1\\cdots dp_{k-1}$. This item\ndefines the density function.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-dirichlet-density-normalization",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For $k\\ge2$ and $\\alpha_j>0$,\n$$\\int_{\\Delta_{k-1}}\\prod_{j=1}^kp_j^{\\alpha_j-1}\\,dp_1\\cdots dp_{k-1} =\\frac{\\prod_{j=1}^k\\Gamma(\\alpha_j)}{\\Gamma(\\alpha_+)}\\in(0,\\infty).$$\nConsequently the density kernel in [[def-dirichlet-density-kernel]] has\nintegral one.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-pi-system",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **pi-system on $X$** is a nonempty family\n$\\mathcal P\\subseteq\\mathcal P(X)$ closed under binary intersections: if\n$A,B\\in\\mathcal P$, then $A\\cap B\\in\\mathcal P$.\n\nThe nonempty-family requirement is the convention used here. It does not require\n$X\\in\\mathcal P$ and it does not add an empty-intersection axiom.",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-finite-measure-uniqueness-on-a-pi-system",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$ and let $\\mathcal A=\\sigma_X(\\mathcal P)$. If finite measures $\\mu$ and $\\nu$ on $(X,\\mathcal A)$ agree on $\\mathcal P$ and satisfy $\\mu(X)=\\nu(X)$, then $\\mu=\\nu$ on $\\mathcal A$.\n\nThe total-mass equality is separate because this library's pi-system convention does not require $X\\in\\mathcal P$.",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "3.3",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "3.3",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "3.3",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "3.1",
+            "4.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "3.1",
+            "4.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "3.1",
+            "4.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "2.1",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-dirichlet-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal A)$ be a standard Borel space and let $\\alpha$ be a\nfinite nonzero measure on it. Write $\\mathcal P(\\mathsf X)$ for the set of\nprobability measures on $(\\mathsf X,\\mathcal A)$, equipped with the\n**evaluation sigma-algebra**\n$$\\sigma\\bigl(\\{G\\mapsto G(A):A\\in\\mathcal A\\}\\bigr).$$\nFor a probability law $P$ on this space, let $G$ be the coordinate random\nprobability measure $G(\\omega)=\\omega$. Call $P$ a **Dirichlet-process law\nwith base measure** $\\alpha$ if, for every finite measurable partition\n$(A_1,\\ldots,A_k)$ of $\\mathsf X$, the vector\n$(G(A_1),\\ldots,G(A_k))$ has the Dirichlet distribution with parameters\n$(\\alpha(A_1),\\ldots,\\alpha(A_k))$ after zero-parameter cells are omitted;\neach omitted zero-base cell has mass zero. If the partition has one\npositive-parameter cell, its mass is one. The finite-partition specification\ndetermines at most one law on the evaluation sigma-algebra. When such a law\nexists, denote it by $DP(\\alpha)$; the construction theorem on this page\nproves existence.\n\nThe Dirichlet distribution here has the positive-parameter density and\none-category convention of [[def-dirichlet-distribution]]. The definition\nasserts no weak topology, support statement, or density-contraction result.",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.3",
+            "4.1",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.3",
+            "4.1",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "def-poisson-law",
+          "source_section": "Definition",
+          "quote": "For exposure $e\\ge0$ and rate $\\lambda>0$, define\n$Y\\sim\\operatorname{Pois}(e\\lambda)$ to have [[def-scalar-poisson-count-law|the scalar Poisson count law]] with\nparameter $e\\lambda$. Thus for $e>0$,\n$$\\mathbb P(Y=y\\mid\\lambda,e)=e^{-e\\lambda}\\frac{(e\\lambda)^y}{y!}, \\qquad y\\in\\mathbb N_0,$$\nwith $0^0=1$; when $e=0$ this is the point mass at $y=0$. The law is normalized\nby [[lem-poisson-count-law-normalization-and-moments]]. A zero-exposure\npositive count has likelihood zero.",
+          "uses": [
+            "3.2",
+            "3.4"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "3.2",
+            "3.4"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "3.2",
+            "3.4"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-binomial-theorem",
+          "source_section": "Statement",
+          "quote": "For all $x, y \\in \\mathbb{R}$ and every $n \\in \\mathbb{N}$,\n\n$$(x+y)^{n} \\;=\\; \\sum_{k<n+1} \\iota\\binom{n}{k}\\, x^{k}\\, y^{\\,n-k},$$\n\nwhere the powers are the integer powers of [[def-integer-power]], the sum is the\nreal finite sum of [[def-finite-sum]] over $k = 0, 1, \\dots, n$, the difference\n$n-k$ is a genuine one because $k \\le n$ throughout the range, and $\\iota$ is the\ncanonical natural of [[def-canonical-natural]].\n\n**The coefficient is $\\iota\\binom{n}{k}$ and not $\\binom{n}{k}$.** A binomial\ncoefficient is a natural number, that is a von Neumann natural, that is a set; it\nis not an element of $\\mathbb{R}$, and it enters the field through $\\iota$.\n\n**The identity is stated in $\\mathbb{R}$ and only in $\\mathbb{R}$.** The same\nproof uses nothing but commutativity, associativity, distributivity and\nnatural-number multiples of a ring element, so a commutative-ring version is\navailable wherever rings are; rings are not available at this point in the\nreading order, and the ring statement is a separate statement, to be made where\nthey are. See the Remarks below.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "def-real-gamma-function-by-the-euler-integral",
+          "source_section": "Definition",
+          "quote": "For $s>0$, define $\\Gamma(s)=\\int_0^\\infty t^{s-1}e^{-t}\\,dt$.\n\nThe integral is improper at both $0$ and $+\\infty$. Its convergence for every $s>0$, and its failure for $s\\le0$, are proved in [[thm-real-gamma-euler-integral-convergence]], which justifies the definition on exactly the displayed domain. The integrand is positive, so $\\Gamma(s)>0$ throughout $(0,\\infty)$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "thm-real-gamma-euler-integral-convergence",
+          "source_section": "Statement",
+          "quote": "Let $s$ be real. The Euler integral $\\int_0^\\infty t^{s-1}e^{-t}\\,dt$ converges if and only if $s>0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "thm-euclidean-space-complete",
+          "source_section": "Statement",
+          "quote": "1. $(\\mathbb{R}, d_{\\mathbb{R}})$ with the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]) is a complete metric space\n   ([[def-complete-metric-space]]).\n2. Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $d_2$ be the Euclidean metric on\n   $\\mathbb{R}^n$ ([[lem-metrics-on-rn]]). Then $(\\mathbb{R}^n, d_2)$ is complete.\n\n**The hypothesis $n \\ge 1$ is inherited and is not decoration.**\n[[lem-metrics-on-rn]] defines $\\mathbb{R}^n$ and its three metrics only for\n$n \\ge 1$, because at $n = 0$ the metric $d_\\infty$ would be a maximum over the\nempty index set. Every statement about $\\mathbb{R}^n$ in this library carries the\nhypothesis, and this one does too.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "1.1",
+            "3.2",
+            "3.4",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "3.4",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "3.4",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Fix $n \\ge 1$ and let $\\lambda_n^*$ be the Lebesgue outer set function on $\\mathbb{R}^n$\n([[def-lebesgue-outer-measure]]). A set $E \\subseteq \\mathbb{R}^n$ is\n**Lebesgue measurable** when\n\n$$\\lambda_n^*(A) \\;=\\; \\lambda_n^*(A \\cap E) \\;+\\; \\lambda_n^*(A \\setminus E) \\qquad \\text{for every } A \\subseteq \\mathbb{R}^n .$$\n\nThis formula makes sense before any outer-measure theorem is invoked. Under\ncountable choice, [[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]]\nmakes $\\lambda_n^*$ an outer measure, and the displayed condition is then exactly\nCarath\u00e9odory measurability in the sense of [[def-caratheodory-measurable-set]].\n\nThe family of Lebesgue measurable sets is written $\\mathcal{L}(\\mathbb{R}^n)$,\nand **Lebesgue measure** is the restriction\n\n$$\\lambda_n \\;:=\\; \\lambda_n^*\\!\\restriction_{\\mathcal{L}(\\mathbb{R}^n)} .$$\n\nOn the real line the subscript is dropped and $\\lambda := \\lambda_1$.\n\nThe quantifier over every test set $A$ is part of the condition, and no\nhypothesis on $E$ is imposed before it is tested. That\n$\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra and that $\\lambda_n$ is a complete\nmeasure on it are not part of this definition: they are proved, under the Axiom\nof Countable Choice, in [[thm-lebesgue-measure-is-a-complete-measure]], which is\nrecorded in this item's `justified_by` because it is a statement about the\nobjects introduced here. Until that theorem the symbols $\\mathcal{L}(\\mathbb{R}^n)$\nand $\\lambda_n$ name a family of sets and a restricted set function, nothing more.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "3.4",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f:X\\to[0,+\\infty]$ be measurable and define\n$$\\nu_f(A):=\\int_A f\\,d\\mu \\qquad (A\\in\\mathcal A).$$\nThen $\\nu_f$ is a measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "3.4",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F23",
+          "source": "lem-borel-subspaces-admit-polish-presentations",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $B$ is a Borel subset of a Polish space $(P,\\tau)$, then $B$ has a finer Polish topology with exactly the trace sigma-algebra $\\mathcal B(P)|_B$. In fact there is a finer Polish topology on $P$ with the same Borel sets which makes $B$ clopen. Thus $(B,\\mathcal B(P)|_B)$ is standard Borel.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\rho(dt)=t^{-1}e^{-t}dt$ on $(0,\\infty)$; [F22] makes this a measure with a nonnegative density, relative to Lebesgue measure, and partition the mark axis into $I_0=[1,\\infty)$ and $I_m=[1/(m+1),1/m)$ for $m\\ge1$. These disjoint strips cover $(0,\\infty)$. For $m\\ge1$, $\\rho(I_m)\\le 1/m$ because $t^{-1}\\le m+1$ and $e^{-t}\\le1$ there, while $\\rho(I_m)\\ge1/(e(m+1))>0$ because $t^{-1}\\ge m$, $e^{-t}\\ge e^{-1}$, and the interval length is $1/(m(m+1))$. Also $\\rho(I_0)\\le\\int_1^\\infty e^{-t}dt<\\infty$ and $\\rho(I_0)\\ge e^{-2}/2>0$ by restricting to $[1,2]$. Thus every strip has finite positive mass. By [F3] and [F14], $\\mu=\\alpha\\otimes\\rho$ is sigma-finite and $\\mu_m:=\\mu|_{\\mathsf X\\times I_m}$ has finite positive total $\\lambda_m=\\alpha(\\mathsf X)\\rho(I_m)$. Let $Q_m=\\mu_m/\\lambda_m$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F6",
+            "F14",
+            "F22",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Index count coordinates by $m\\ge0$ and mark coordinates by $(m,\\ell)$ with $m\\ge0,\\ell\\ge1$. Their spaces are $\\mathbb N_0$ and $\\mathsf X\\times(0,\\infty)$, respectively, hence standard Borel by [F1], [F21], and [F23]. Assign every finite set of coordinates the product of the laws $\\operatorname{Pois}(\\lambda_m)$ and $Q_m$. These finite-dimensional laws are consistent because coordinate projections of a finite product recover the corresponding marginal products. By [F1] and [A1] they extend to one probability law. The product rectangle formula gives mutual independence of each finite coordinate family by [F20], and [F13] identifies its joint law with the product. Thus it supports mutually independent $N_m\\sim \\operatorname{Pois}(\\lambda_m)$ and $Z_{m\\ell}=(X_{m\\ell},T_{m\\ell})\\sim Q_m$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F13",
+            "F20",
+            "F21",
+            "F23",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Define $N=\\sum_{m\\ge0}\\sum_{\\ell\\ge1}\\mathbf1_{\\{\\ell\\le N_m\\}}\\delta_{Z_{m\\ell}}$. Each $N_m$ is finite, so this is a countable sum of Dirac measures and is a counting measure by [F8]. For every measurable $B$, its evaluation is the increasing limit of finite sums of measurable functions of the coordinates; hence $N(B)$ is measurable. Thus $N$ is a random counting measure.",
+          "step": "3.1",
+          "inputs": [
+            "F8",
+            "F12",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Fix pairwise-disjoint measurable sets $B_1,\\ldots,B_r$ with $\\mu(B_j)<\\infty$. Within strip $m$, put $q_{jm}=Q_m(B_j)$ and $q_{0m}=1-\\sum_{j=1}^r q_{jm}$. Conditional on $N_m=n$, independent marks assign counts $(k_0,k_1,\\ldots,k_r)$ with $n=k_0+\\cdots+k_r$. There are $n!/\\prod_{j=0}^r k_j!$ assignments of the $n$ mark indices to these cells, and each assignment has probability $\\prod_{j=0}^r q_{jm}^{k_j}$, so the count vector has mass $n!\\prod_{j=0}^r q_{jm}^{k_j}/\\prod_{j=0}^r k_j!$ (with $0^0=1$). Summing over $k_0$ and using the Poisson mass in [F2] gives $\\Pr\\{N_m(B_j)=k_j,\\ 1\\le j\\le r\\}=e^{-\\lambda_m}\\bigl(\\prod_{j=1}^r(\\lambda_mq_{jm})^{k_j}/k_j!\\bigr)e^{\\lambda_mq_{0m}}=\\prod_{j=1}^r e^{-\\mu_m(B_j)}\\mu_m(B_j)^{k_j}/k_j!$; here $\\lambda_mq_{jm}=\\mu_m(B_j)$ and $\\lambda_m(1-q_{0m})=\\sum_j\\mu_m(B_j)$. Thus the strip counts are independent Poisson variables with means $\\mu_m(B_j)$. The series over $k_0$ is the exponential series [F17].",
+          "step": "3.2",
+          "inputs": [
+            "F2",
+            "F17",
+            "F22",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "claim": "Define $\\Gamma(A)=\\sum_{m\\ge0}\\sum_{\\ell\\ge1} \\mathbf1_{\\{\\ell\\le N_m\\}}T_{m\\ell}\\mathbf1_{\\{X_{m\\ell}\\in A\\}}$ for $A\\in\\mathcal A$. This is a measurable nonnegative weighted sum of Dirac measures, hence a measure by [F8]. For each strip, independence of $N_m$ and its marks [F13], expectation against their law [F11], and $\\mathbb E N_m=\\lambda_m$ from [F2] give $\\mathbb E\\sum_{\\ell=1}^{N_m}T_{m\\ell}\\mathbf1_{\\{X_{m\\ell}\\in A\\}} =\\lambda_m\\int t\\mathbf1_A(x)\\,Q_m(dx,dt) =\\int_{A\\times I_m}t\\,\\mu(dx,dt)$. Monotone convergence [F16] then gives $\\mathbb E\\Gamma(A)=\\sum_m\\int_{A\\times I_m}t\\,\\mu(dx,dt) =\\alpha(A)\\int_0^\\infty e^{-t}dt=\\alpha(A)$ by [F3] and [F6].",
+          "step": "3.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "F8",
+            "F11",
+            "F13",
+            "F16",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-4",
+          "claim": "Let $A_1,\\ldots,A_r$ be pairwise disjoint and choose $|u_j|<\\delta<1$. On strip $m$, define $g_m(x,t)=\\sum_{j=1}^r e^{u_jt}\\mathbf1_{A_j}(x) +\\mathbf1_{\\mathsf X\\setminus\\cup_jA_j}(x)$. Conditional on $N_m=n$, the independent marks give the exponential factor $(\\int g_m\\,dQ_m)^n$. Summing its Poisson series yields $\\mathbb E\\exp(\\sum_j u_j\\Gamma_M(A_j)) =\\exp(\\sum_j\\alpha(A_j)\\int_{\\cup_{m\\le M}I_m} (e^{u_jt}-1)\\rho(dt))$, where $\\Gamma_M$ sums the first $M+1$ strips. The mark integral is finite on each strip because the strips are bounded away from zero and $u_j<1$; the Poisson series is [F17].",
+          "step": "3.4",
+          "inputs": [
+            "F2",
+            "F17",
+            "F22",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For each finite $M$, the sums over $m\\le M$ are independent Poisson counts: convolution and [F18] give $\\sum_{h=0}^k e^{-a}a^h/h!\\,e^{-b}b^{k-h}/(k-h)! =e^{-(a+b)}(a+b)^k/k!$, and iteration handles $M$. By [F16], their increasing total counts have $\\mathbb E N(B_j)=\\lim_{M\\to\\infty}\\sum_{m\\le M}\\mu_m(B_j)=\\mu(B_j)<\\infty$. Thus the full counts are finite almost surely and the truncated integer counts eventually stabilize. Their joint point probabilities converge both to the point probabilities of the full count vector (by eventual stabilization) and to the product Poisson masses with means $\\mu(B_j)$ (by continuity of the Poisson mass formula in its mean). Hence the full counts are independent Poisson variables with means $\\mu(B_j)$. Therefore $N$ satisfies [[def-poisson-random-measure]].",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.2",
+            "F2",
+            "F16",
+            "F18",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Since $\\mathbb E\\Gamma(\\mathsf X)=\\alpha(\\mathsf X)<\\infty$, $\\Gamma(\\mathsf X)<\\infty$ almost surely: if it were infinite on a set of positive probability, its expectation would exceed every finite bound. Also, $\\Gamma(A)$ is measurable for every $A$ as a monotone limit of finite coordinate sums.",
+          "step": "4.2",
+          "inputs": [
+            "given",
+            "F11",
+            "F12",
+            "step 3.3"
+          ]
+        },
+        {
+          "id": "step-4-3",
+          "claim": "For $u<1$, $\\int_0^\\infty(e^{ut}-1)t^{-1}e^{-t}dt =\\int_0^u(1-v)^{-1}dv=-\\log(1-u)$: use $(e^{ut}-1)/t=\\int_0^u e^{vt}dv$, Tonelli on the positive or negative part, and [F6]. In particular $\\mathbb E e^{\\delta\\Gamma(\\mathsf X)} =(1-\\delta)^{-\\alpha(\\mathsf X)}<\\infty$, by monotone convergence [F16] on the nonnegative truncations. For general $|u_j|<\\delta$, the truncated exponentials are dominated by $e^{\\delta\\Gamma(\\mathsf X)}$; [F16] therefore gives $\\mathbb E e^{\\sum_j u_j\\Gamma(A_j)} =\\prod_j(1-u_j)^{-\\alpha(A_j)}$.",
+          "step": "4.3",
+          "inputs": [
+            "F3",
+            "F6",
+            "F16",
+            "F22",
+            "step 1.1",
+            "step 3.3",
+            "step 3.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Let $J_+=\\{j: \\alpha(A_j)>0\\}$. For $j\\in J_+$, [F4], [F5], and the Euler integral [F19], with $t=(1-u)y$, give $\\mathbb E e^{uY}=\\Gamma(a)^{-1}\\int_0^\\infty y^{a-1}e^{-(1-u)y}dy=(1-u)^{-a}$ for $Y\\sim\\operatorname{Gamma}(a,1)$ and $u<1$. Thus the vector $(\\Gamma(A_j))_{j\\in J_+}$ and the product of the corresponding Gamma laws have the same moment-generating transform near zero by step 4.3; [F3] supplies that finite product law, and [F7] identifies the distributions when $J_+$ is nonempty; if $J_+$ is empty this clause is vacuous. For each $j\\notin J_+$, step 3.3 gives $\\mathbb E\\Gamma(A_j)=0$. If $\\Gamma(A_j)>0$ with positive probability, some event $\\{\\Gamma(A_j)\\ge1/q\\}$ has positive probability, forcing its nonnegative expectation to be positive; hence $\\Gamma(A_j)=0$ almost surely. Since there are finitely many cells, these zero coordinates are simultaneously zero almost surely. Their events in any measurable rectangle have probability zero or one, so adjoining these constants preserves the product law and independence.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "F19",
+            "step 3.3",
+            "step 4.3",
+            "cases",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "For a partition with $r\\ge2$ positive cells and parameters $a_1,\\ldots,a_r$, the independent Gamma increments have product density $\\prod_j z_j^{a_j-1}e^{-z_j}/\\Gamma(a_j)$. Change variables to $s=\\sum_j z_j$ and $p_j=z_j/s$ for $j<r$, with $p_r=1-\\sum_{j<r}p_j$. Its Jacobian has absolute value $s^{r-1}$: factor $s$ from each of the $r-1$ proportion columns, then add the first $r-1$ rows of the remaining matrix to its last row, whose first entry becomes $\\sum_jp_j=1$ and whose other entries become zero. The inverse map is $s=\\sum_jz_j$, $p_j=z_j/s$, so this is a $C^1$ diffeomorphism on the positive orthant and open simplex. The joint density factors as the Gamma$(\\sum_j a_j,1)$ density in $s$ times $\\Gamma(\\sum_j a_j)\\prod_jp_j^{a_j-1}/\\prod_j\\Gamma(a_j)$ on the simplex. Integrating the normalized Gamma factor in $s$, which has total mass one by [F4], leaves the second factor as the marginal density of $p$. By [F9] this is the Dirichlet law. With one positive cell the normalized mass is one, and zero-base cells have zero mass by step 5.1.",
+          "step": "6.1",
+          "inputs": [
+            "A2",
+            "F5",
+            "F4",
+            "F9",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "The total $\\Gamma(\\mathsf X)$ is Gamma$(\\alpha(\\mathsf X),1)$ by step 5.1, so it is strictly positive almost surely; step 4.2 gives finiteness. Since $\\alpha(\\mathsf X)>0$, the space $\\mathsf X$ is nonempty; choose $x_0\\in\\mathsf X$ and set $G(A)=\\Gamma(A)/\\Gamma(\\mathsf X)$ on that probability-one event, assigning $\\delta_{x_0}$ on its null complement. The event is measurable and each evaluation $G(A)$ is measurable, so [F12] makes $G$ a random probability measure with the partition laws from step 6.1.",
+          "step": "7.1",
+          "inputs": [
+            "given",
+            "F8",
+            "F12",
+            "step 4.2",
+            "step 5.1",
+            "step 6.1",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "Finite evaluation cylinders form a generating pi-system for the evaluation sigma-algebra. For any $A_1,\\ldots,A_s\\in\\mathcal A$, the nonempty intersections of $A_i$ and $A_i^c$ form a finite partition, and each $G(A_i)$ is the sum of the corresponding cell masses. Hence its joint law is fixed by step 6.1. Two probability laws with those partition laws therefore agree on the generating pi-system; [F10] gives equality on the entire evaluation sigma-algebra. By [F15], this is uniqueness of $DP(\\alpha)$.",
+          "step": "8.1",
+          "inputs": [
+            "F10",
+            "F15",
+            "step 6.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes alpha(X)>0, excluding the zero-total base measure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 5.1 proves zero-base increments vanish almost surely."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 6.1 handles a single positive partition cell directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 3.2 uses the Poisson mass convention with 0^0=1 and includes zero-mean cells."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 7.1 establishes the total Gamma mass is finite and strictly positive almost surely."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 7.1 chooses x0 from the nonempty space X; the theorem assumes full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an existence and law-identification result, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is an existence and law-identification result, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Independently reviewed Statement, A1\u2013A2, F1\u2013F23, all 13 proof steps and all 55 direct dependency statements/definitions. Strip bounds in 1.1 are positive and finite and cover the mark axis; finite product laws are consistent on standard-Borel count/mark coordinates and AC supplies Kolmogorov extension and CC. Steps 3.1\u20134.1 construct measurable counts and derive independent Poisson laws by explicit multinomial/Poisson summation and eventual stabilization on finite-intensity cells. Weighted expectations equal alpha(A), giving finite total a.s. Steps 3.4/4.3 compute the transform: the signed integral is handled by positive/negative parts, the positive delta exponential moment follows by MCT, and DCT covers mixed signs. In 5.1 both compared laws have the required exponential moment for transform uniqueness; null cells have zero nonnegative expectation. Step 6.1 has Jacobian s^(r-1), positive domains and normalized Gamma factor; the single-positive-cell branch is deterministic. Step 7.1 patches only a measurable null event, using one point of nonempty X. Step 8.1 uses finite partition refinements and probability-measure uniqueness on evaluation cylinders. Empty X/zero alpha excluded; singleton and all-null tested cells covered. Sources: Last\u2013Penrose \u00a73.2 Proposition 3.5/Theorem 3.6 (printed pp.21\u201322), read with proofs, confirm the count construction; Ferguson \u00a72 normalized Gamma representation and \u00a74 construction provide context. No unresolved defect; reader and refuter give no findings."
+      }
+    },
+    "lem-dirichlet-aggregation-under-coarsening": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\mathsf X,\\mathcal A)$ be a standard Borel\nspace and let $\\alpha$ be a finite nonzero measure on it. Then there is a\nmeasurable random probability measure $G$ whose law on the evaluation\nsigma-algebra of $\\mathcal P(\\mathsf X)$ is $DP(\\alpha)$. For every finite\nmeasurable partition $(A_1,\\ldots,A_k)$, the unnormalized increments are\nindependent with\n$\\Gamma(A_j)\\sim\\operatorname{Gamma}(\\alpha(A_j),1)$ when\n$\\alpha(A_j)>0$, and $\\Gamma(A_j)=0$ almost surely when $\\alpha(A_j)=0$.\nConsequently the normalized masses have the finite-partition Dirichlet laws\nin [[def-dirichlet-process]]. These laws determine the probability law on\n$\\mathcal P(\\mathsf X)$ uniquely.\n\nThe construction uses the Poisson random measure with intensity\n$$\\mu(dx,dt)=\\alpha(dx)t^{-1}e^{-t}\\,dt\\quad\\text{on }\\mathsf X\\times(0,\\infty),$$\nand normalizes its weighted projection onto $\\mathsf X$. It does not assume a\ngamma-process existence theorem.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gamma-distribution-shape-rate",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. For shape $a>0$ and rate $b>0$, the **shape-rate Gamma distribution**\n$\\operatorname{Gamma}(a,b)$ is the probability measure on $(0,\\infty)$ with\ndensity\n$$f_{a,b}(\\lambda)=\\frac{b^a}{\\Gamma(a)}\\lambda^{a-1}e^{-b\\lambda}$$\nrelative to Lebesgue measure. Its normalization is proved in\n[[lem-gamma-density-normalization]]. The second argument is a rate, not a scale.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-gamma-function-by-the-euler-integral",
+          "source_section": "Definition",
+          "quote": "For $s>0$, define $\\Gamma(s)=\\int_0^\\infty t^{s-1}e^{-t}\\,dt$.\n\nThe integral is improper at both $0$ and $+\\infty$. Its convergence for every $s>0$, and its failure for $s\\le0$, are proved in [[thm-real-gamma-euler-integral-convergence]], which justifies the definition on exactly the displayed domain. The integrand is positive, so $\\Gamma(s)>0$ throughout $(0,\\infty)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-real-gamma-euler-integral-convergence",
+          "source_section": "Statement",
+          "quote": "Let $s$ be real. The Euler integral $\\int_0^\\infty t^{s-1}e^{-t}\\,dt$ converges if and only if $s>0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-uniqueness-of-a-multivariate-exponential-transform",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $k\\ge0$. Let $\\nu$ be a finite complex Borel measure on $\\mathbb R^k$. Suppose there is $\\delta>0$ such that $\\int e^{\\delta\\|x\\|_1}\\,|\\nu|(dx)<\\infty$. If the Laplace transform $L(z)=\\int e^{z\\cdot x}\\,\\nu(dx)$ is zero for every real $z$ in an open neighborhood of $0$, then $\\nu=0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-dirichlet-distribution",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. For $k\\ge2$ and $\\alpha_j>0$, the **Dirichlet distribution**\n$\\operatorname{Dirichlet}(\\alpha_1,\\ldots,\\alpha_k)$ is the probability law\non the open probability simplex with density\n$$\\frac{\\Gamma(\\alpha_+)}{\\prod_j\\Gamma(\\alpha_j)} \\prod_jp_j^{\\alpha_j-1}$$\nrelative to $dp_1\\cdots dp_{k-1}$, with $p_k=1-\\sum_{j<k}p_j$. Its\nnormalization is [[thm-dirichlet-density-normalization]]. For $k=1$, define\nthe law to be the point mass at $p_1=1$. All coordinates of the parameter\nvector must be strictly positive.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-countable-discrete-space-is-standard-borel",
+          "source_section": "Statement",
+          "quote": "If $S$ is a nonempty at-most-countable set, then $(S,\\mathcal P(S))$ is a\nstandard Borel space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-nonnegative-weighted-sums-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $(\\mu_k)$ be measures on one measurable space and let $c_k\\in[0,+\\infty]$. Each scalar multiple $c_k\\mu_k$, defined by the zero, finite-positive, and positive-infinity branches of [[def-nonnegative-weighted-sum-of-measures]], is a measure. Every finite or countable weighted sum $\\sum_kc_k\\mu_k$ is also a measure.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The nonempty finite discrete space $S=\\{1,\\ldots,k\\}$ is standard Borel by [F7]. Define $\\alpha(B)=\\sum_{j\\in B}a_j$ for $B\\subseteq S$, equivalently $\\alpha=\\sum_{j=1}^k a_j\\delta_j$. By [F7] this is a measure, with finite positive total $\\sum_{j=1}^k a_j$, so [F1] applies to $(S,\\mathcal P(S),\\alpha)$. Thus the law of $P$ is that of $Z_j/\\sum_{h=1}^kZ_h$, where the $Z_j$ are independent $\\operatorname{Gamma}(a_j,1)$ variables, and it is the Dirichlet law [F6].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $u<1$, [F2] and the change of variables $t=(1-u)z$ in [F3] give $\\mathbb E e^{uZ_j}=\\Gamma(a_j)^{-1}\\int_0^\\infty z^{a_j-1}e^{-(1-u)z}dz=(1-u)^{-a_j}$. For $W_\\ell=\\sum_{j\\in I_\\ell}Z_j$, independence therefore gives the joint moment-generating function $\\prod_{\\ell=1}^r(1-u_\\ell)^{-b_\\ell}$ for $|u_\\ell|<\\delta<1$, since the groups use disjoint coordinates in the finite product law [F5].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F5], the product law of independent $\\operatorname{Gamma}(b_\\ell,1)$ variables exists and has the same joint transform. Both laws have finite exponential moment at every $0<\\delta<1$, since the transform at $(\\delta,\\ldots,\\delta)$ is finite. Applying [F4] to the difference of these two finite measures shows that $(W_1,\\ldots,W_r)$ has that product Gamma law.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F4",
+            "F5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Normalize the grouped variables by their common positive total. The resulting vector is Dirichlet with parameters $(b_1,\\ldots,b_r)$ by [F1], while $W_\\ell/\\sum_hW_h=\\sum_{j\\in I_\\ell}P_j$ by step 1.1. This proves the claim for $r\\ge2$. For $r=1$ the only coordinate sum is $\\sum_{j=1}^kP_j=1$, which is the stated one-category law.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 3.1",
+            "algebra",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires positive Dirichlet parameters and a partition into nonempty coordinate groups; an empty group is not allowed. A one-group partition is explicitly delta_1.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_block_bootstrap_resolution",
+            "reason": "Actual lem-dirichlet-aggregation-under-coarsening reviewed: Statement requires positive Dirichlet parameters and a partition into nonempty coordinate groups; an empty group is not allowed. A one-group partition is explicitly delta_1.",
+            "item_sha256": "b07993d6cd01ab597a558c34d568660a3fa51cbc2d9e8dd08b209dde96a6b642",
+            "row_sha256": "1f0de79d094c0c0e2526447da8702903dadad5f20b1dd7b28de9b26d16cec487"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "bcs_block_bootstrap_resolution",
+            "reason": "Re-read the actual Statement: each I_l is explicitly a nonempty group in a partition of the positive-parameter Dirichlet coordinates. The detected sums run over these nonempty groups, so their syntax does not admit an empty grouping. A single group is allowed and gives the stated point mass at one; an empty group is excluded by the hypothesis. The regex therefore does not contradict this empty-case exclusion.",
+            "item_sha256": "b07993d6cd01ab597a558c34d568660a3fa51cbc2d9e8dd08b209dde96a6b642",
+            "row_sha256": "1f0de79d094c0c0e2526447da8702903dadad5f20b1dd7b28de9b26d16cec487"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All Dirichlet parameters are assumed strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 4.1 computes the one-group sum as exactly one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 4.1 also gives the one-category convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no continuous endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite coordinate construction uses the stated AC interface but makes no new selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states a distributional aggregation identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states a distributional aggregation identity, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Reviewed Statement, F1\u2013F7, four proof steps and all fourteen already-opened direct suppliers. Positive parameters force k>=1, and nonempty groups give positive b_l. The finite discrete alpha construction legitimately realizes the supplied Dirichlet law by normalized independent Gamma variables; grouping the disjoint coordinates multiplies their mgfs. Both candidate product Gamma and grouped laws have exponential moments since their coordinates are nonnegative, so the cited signed-measure transform uniqueness applies to their difference. The common positive total makes normalization compatible with grouping. k=1 and r=1 give the deterministic unit mass; empty groups and zero parameters are outside this lemma. Full AC carries through construction and implies CC for densities. Ferguson \u00a72 property i (p.211) matches aggregation. Reader/refuter have no findings; no defect found."
+      }
+    },
+    "thm-dirichlet-process-posterior-update": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-dirichlet-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal A)$ be a standard Borel space and let $\\alpha$ be a\nfinite nonzero measure on it. Write $\\mathcal P(\\mathsf X)$ for the set of\nprobability measures on $(\\mathsf X,\\mathcal A)$, equipped with the\n**evaluation sigma-algebra**\n$$\\sigma\\bigl(\\{G\\mapsto G(A):A\\in\\mathcal A\\}\\bigr).$$\nFor a probability law $P$ on this space, let $G$ be the coordinate random\nprobability measure $G(\\omega)=\\omega$. Call $P$ a **Dirichlet-process law\nwith base measure** $\\alpha$ if, for every finite measurable partition\n$(A_1,\\ldots,A_k)$ of $\\mathsf X$, the vector\n$(G(A_1),\\ldots,G(A_k))$ has the Dirichlet distribution with parameters\n$(\\alpha(A_1),\\ldots,\\alpha(A_k))$ after zero-parameter cells are omitted;\neach omitted zero-base cell has mass zero. If the partition has one\npositive-parameter cell, its mass is one. The finite-partition specification\ndetermines at most one law on the evaluation sigma-algebra. When such a law\nexists, denote it by $DP(\\alpha)$; the construction theorem on this page\nproves existence.\n\nThe Dirichlet distribution here has the positive-parameter density and\none-category convention of [[def-dirichlet-distribution]]. The definition\nasserts no weak topology, support statement, or density-contraction result.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\mathsf X,\\mathcal A)$ be a standard Borel\nspace and let $\\alpha$ be a finite nonzero measure on it. Then there is a\nmeasurable random probability measure $G$ whose law on the evaluation\nsigma-algebra of $\\mathcal P(\\mathsf X)$ is $DP(\\alpha)$. For every finite\nmeasurable partition $(A_1,\\ldots,A_k)$, the unnormalized increments are\nindependent with\n$\\Gamma(A_j)\\sim\\operatorname{Gamma}(\\alpha(A_j),1)$ when\n$\\alpha(A_j)>0$, and $\\Gamma(A_j)=0$ almost surely when $\\alpha(A_j)=0$.\nConsequently the normalized masses have the finite-partition Dirichlet laws\nin [[def-dirichlet-process]]. These laws determine the probability law on\n$\\mathcal P(\\mathsf X)$ uniquely.\n\nThe construction uses the Poisson random measure with intensity\n$$\\mu(dx,dt)=\\alpha(dx)t^{-1}e^{-t}\\,dt\\quad\\text{on }\\mathsf X\\times(0,\\infty),$$\nand normalizes its weighted projection onto $\\mathsf X$. It does not assume a\ngamma-process existence theorem.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-products-of-probability-kernels",
+          "source_section": "Statement",
+          "quote": "Let $(S,\\Sigma)$ and $(T_i,\\Tau_i)$ for $i<n$ be measurable spaces, with\n$n<\\infty$, and let $K_i:S\\to T_i$ be probability kernels with the same\nsource. There is a unique probability kernel\n$$K:S\\to\\prod_{i<n}T_i$$\nwhose evaluation on every measurable rectangle is\n$$K(s,\\prod_{i<n}B_i)=\\prod_{i<n}K_i(s,B_i).$$\nFor $n=0$, the target is the empty-product singleton and $K$ is its point\nmass. For $n>0$, the product sigma-algebra is the recursive finite product\nsigma-algebra.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bayesian-model-as-prior-and-sampling-kernel",
+          "source_section": "Definition",
+          "quote": "Let\n$$\\mathsf E=((\\mathsf Y,\\mathcal Y),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$$\nbe a statistical experiment ([[def-statistical-experiment]]). Equip the parameter set with a specified measurable structure $(\\Theta,\\mathcal T)$ ([[def-measurable-space]]). A **proper Bayesian model** based on this experiment consists of a prior probability measure $\\Pi$ on $(\\Theta,\\mathcal T)$ ([[def-probability-measure]]) and a probability kernel $K$ from $(\\Theta,\\mathcal T)$ to $(\\mathsf Y,\\mathcal Y)$ ([[def-measure-kernel-and-probability-kernel]]) that represents the experiment:\n$$K(\\theta,B)=P_\\theta(B)\\qquad(\\theta\\in\\Theta,\\ B\\in\\mathcal Y).$$\nThus $\\theta\\mapsto K(\\theta,B)$ is $\\mathcal T$-measurable for every data event $B$, as required for a parameter-measurable model ([[def-parameter-measurable-statistical-model-as-markov-kernel]]). The family of measures in a parametric model alone does not supply this parameter sigma-algebra or measurability condition ([[def-parametric-statistical-model]]).\n\nThe word **proper** means that the prior is a probability measure. A sigma-finite improper prior is not a proper Bayesian model in this definition; fixed-data posterior normalizers for such priors are handled separately.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-prior-and-model-kernel-define-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathcal X,\\mathcal A)$ be measurable spaces,\nlet $\\pi$ be a probability measure on $(\\Theta,\\mathcal T)$, and let\n$K:\\Theta\\times\\mathcal A\\to[0,1]$ be a probability kernel. For\n$C\\in\\mathcal T\\otimes\\mathcal A$, write\n$C_\\theta=\\{x\\in\\mathcal X:(\\theta,x)\\in C\\}$ and set\n$$J(C)=\\int_\\Theta K(\\theta,C_\\theta)\\,\\pi(d\\theta).$$\nThen $J$ is a probability measure on the product sigma-algebra, and for every\nnonnegative product-measurable $h$,\n$$\\int_{\\Theta\\times\\mathcal X}h(\\theta,x)\\,J(d\\theta,dx)=\\int_\\Theta\\left(\\int_\\mathcal Xh(\\theta,x)\\,K(\\theta,dx)\\right)\\pi(d\\theta).$$\nIn particular, $J(A\\times B)=\\int_AK(\\theta,B)\\,\\pi(d\\theta)$ for\n$A\\in\\mathcal T$ and $B\\in\\mathcal A$.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-bayesian-posterior-as-regular-conditional-law",
+          "source_section": "Definition",
+          "quote": "Let a proper Bayesian model be given, and let $J$ be its joint prior-predictive probability on $(\\Theta\\times\\mathsf Y,\\mathcal T\\otimes\\mathcal Y)$, supplied by [[lem-prior-and-model-kernel-define-joint-law]]. More generally, let $(\\Omega,\\mathcal F,Q)$ be any probability space carrying parameter and data random elements $X:\\Omega\\to\\Theta$ and $Y:\\Omega\\to\\mathsf Y$ whose joint law is $J$ ([[def-probability-measure]], [[def-random-element-and-real-random-variable]], [[def-law-or-distribution-of-a-random-element]]). A **posterior regular conditional distribution (posterior RCD)** is a regular conditional distribution of $X$ given $\\sigma(Y)$, in the sense of [[def-regular-conditional-distribution]]. It is a kernel indexed by the sample point $\\omega\\in\\Omega$. The canonical realization is $\\Omega=\\Theta\\times\\mathsf Y$ with $Q=J$ and coordinate maps $X(\\theta,y)=\\theta$, $Y(\\theta,y)=y$.\n\nA **data-indexed posterior kernel** is a probability kernel $\\Pi_{\\cdot}$ from $(\\mathsf Y,\\mathcal Y)$ to $(\\Theta,\\mathcal T)$ ([[def-measure-kernel-and-probability-kernel]]) for which $\\omega\\mapsto\\Pi_{Y(\\omega)}$ is a conditional law of $X$ given $Y$ ([[def-conditional-law-given-a-random-element]]). Equivalently, for every $A\\in\\mathcal T$ and $B\\in\\mathcal Y$,\n$$Q(X\\in A,\\ Y\\in B)=\\int_B\\Pi_y(A)\\,Q_Y(dy),$$\nwhere $Q_Y$ is the data marginal (equal to $J_Y$). This kernel is indexed by data values, not sample points.\n\nThe definition asserts no existence of either conditional kernel. Values of a data-indexed version on a measurable $J_Y$-null set are not fixed by the conditional-law identities; replacing them there by a fixed probability preserves those identities. A dominated-density construction is a separate route: [[thm-bayes-formula-for-dominated-kernels]] requires a proper prior, a sigma-finite data measure, and a specified jointly measurable sampling density, and fills fibres whose marginal density is zero or infinite with the prior. It does not require the data space to be standard Borel.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dirichlet-multinomial-conjugate-update",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $p\\sim\\operatorname{Dirichlet}(\\alpha_1,\\ldots,\n\\alpha_k)$, with each $\\alpha_j>0$. Conditional on $p$, observe a\nMultinomial$(n,p)$ count vector $y\\in\\mathbb N_0^k$ with $\\sum_jy_j=n$.\nFor $k\\ge2$, the data space is equipped with counting measure on its finite\nset of admissible counts. The evidence is\n$$m(y)=\\frac{n!}{\\prod_jy_j!} \\frac{\\Gamma(\\alpha_+)}{\\prod_j\\Gamma(\\alpha_j)} \\frac{\\prod_j\\Gamma(\\alpha_j+y_j)}{\\Gamma(\\alpha_++n)} \\in(0,\\infty),$$\nwhere $\\alpha_+=\\sum_j\\alpha_j$, and the posterior is\n$\\operatorname{Dirichlet}(\\alpha_1+y_1,\\ldots,\\alpha_k+y_k)$.\nFor $k=1$, the parameter and count are both deterministic and the posterior\nequals the prior point mass.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-dirichlet-distribution",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. For $k\\ge2$ and $\\alpha_j>0$, the **Dirichlet distribution**\n$\\operatorname{Dirichlet}(\\alpha_1,\\ldots,\\alpha_k)$ is the probability law\non the open probability simplex with density\n$$\\frac{\\Gamma(\\alpha_+)}{\\prod_j\\Gamma(\\alpha_j)} \\prod_jp_j^{\\alpha_j-1}$$\nrelative to $dp_1\\cdots dp_{k-1}$, with $p_k=1-\\sum_{j<k}p_j$. Its\nnormalization is [[thm-dirichlet-density-normalization]]. For $k=1$, define\nthe law to be the point mass at $p_1=1$. All coordinates of the parameter\nvector must be strictly positive.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-dirichlet-aggregation-under-coarsening",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $P=(P_1,\\ldots,P_k)$ have the Dirichlet distribution with\npositive parameters $(a_1,\\ldots,a_k)$. If\n$I_1,\\ldots,I_r$ is a partition of $\\{1,\\ldots,k\\}$ into nonempty groups,\nthen\n$$\\left(\\sum_{j\\in I_1}P_j,\\ldots,\\sum_{j\\in I_r}P_j\\right)\\sim\\operatorname{Dirichlet}(b_1,\\ldots,b_r),\\qquad b_\\ell=\\sum_{j\\in I_\\ell}a_j.$$\nWhen $r=1$, the grouped vector is the point mass at $1$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-pi-system",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **pi-system on $X$** is a nonempty family\n$\\mathcal P\\subseteq\\mathcal P(X)$ closed under binary intersections: if\n$A,B\\in\\mathcal P$, then $A\\cap B\\in\\mathcal P$.\n\nThe nonempty-family requirement is the convention used here. It does not require\n$X\\in\\mathcal P$ and it does not add an empty-intersection axiom.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-measure-uniqueness-on-a-pi-system",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$ and let $\\mathcal A=\\sigma_X(\\mathcal P)$. If finite measures $\\mu$ and $\\nu$ on $(X,\\mathcal A)$ agree on $\\mathcal P$ and satisfy $\\mu(X)=\\nu(X)$, then $\\mu=\\nu$ on $\\mathcal A$.\n\nThe total-mass equality is separate because this library's pi-system convention does not require $X\\in\\mathcal P$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-nonnegative-weighted-sums-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $(\\mu_k)$ be measures on one measurable space and let $c_k\\in[0,+\\infty]$. Each scalar multiple $c_k\\mu_k$, defined by the zero, finite-positive, and positive-infinity branches of [[def-nonnegative-weighted-sum-of-measures]], is a measure. Every finite or countable weighted sum $\\sum_kc_k\\mu_k$ is also a measure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $x=(x_1,\\ldots,x_n)$ put $\\beta_x=\\alpha+\\sum_{i=1}^n\\delta_{x_i}$. This is a finite nonzero measure because its total mass is $\\alpha(\\mathsf X)+n$ by [F8]. The existence theorem [F1] therefore defines $DP(\\beta_x)$ for every $x$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "F1",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a finite evaluation cylinder $C=\\{G:(G(A_1),\\ldots,G(A_s))\\in H\\}$ with Borel $H$, and form the finite Boolean partition generated by $A_1,\\ldots,A_s$. On each cell $P_j$, the updated parameter is $\\beta_x(P_j)=\\alpha(P_j)+\\sum_i\\mathbf1_{P_j}(x_i)$. Each count is a measurable finite-valued function of $x$ by [F9], so $x\\mapsto DP(\\beta_x)(C)$ is measurable: it is constant on each of finitely many count-pattern preimages.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F9",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For each $G\\in\\mathcal P(\\mathsf X)$, the map $A\\mapsto G(A)$ is a probability kernel from the evaluation-measurable space $\\mathcal P(\\mathsf X)$ to $(\\mathsf X,\\mathcal A)$. Its finite product $G^{\\otimes n}$ is a probability kernel by [F2]; on rectangles $D_1\\times\\cdots\\times D_n$ it has value $\\prod_iG(D_i)$, which is evaluation-measurable. The proper model in [F3] therefore gives a joint probability $J$ for $(G,X_{1:n})$ and its data marginal $M$.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Fix a finite-partition cylinder $C$ and a data rectangle $D=D_1\\times\\cdots\\times D_n$. Refine the partition defining $C$ by all $D_i$ to obtain a finite measurable partition $P_1,\\ldots,P_m$ of $\\mathsf X$. The data rectangle is a disjoint union of ordered cell-pattern blocks $P_{j_1}\\times\\cdots\\times P_{j_n}$. For one such block let $y_j=\\#\\{i:j_i=j\\}$. If $y_j>0$ for a cell with $\\alpha(P_j)=0$, then $G(P_j)=0$ almost surely by [F1], so the block has prior-predictive mass zero.",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The finite evaluation cylinders form a generating pi-system. The class of sets $C$ for which $x\\mapsto DP(\\beta_x)(C)$ is measurable contains this pi-system, contains the whole space, is closed under complements, and is closed under countable disjoint unions by pointwise limits of partial sums. Dynkin's theorem [F7] gives measurability on the full evaluation sigma-algebra. Each section is a probability measure by [F1], so $K$ is a probability kernel.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Otherwise omit cells with $\\alpha(P_j)=0$ (their counts are zero). On the remaining cells the prior vector is Dirichlet with positive parameters $a_j=\\alpha(P_j)$. Given that vector, the likelihood of this particular ordered pattern is $\\prod_jG(P_j)^{y_j}$, a constant multiple $\\prod_jy_j!/n!$ of the multinomial count likelihood. By [A2] and [F5], its posterior vector is Dirichlet$(a_1+y_1,\\ldots,a_m+y_m)$ with positive finite evidence. Coarsening to the cells defining $C$ gives the same cylinder probability as $DP(\\beta_x)$ by [F6]. This probability is constant over the ordered block because its cell counts are fixed.",
+          "step": "2.2",
+          "inputs": [
+            "A2",
+            "F1",
+            "F5",
+            "F6",
+            "step 1.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Summing step 2.2 over the ordered blocks contained in $D$ gives $J(C\\times D)=\\int_DK(x,C)\\,M(dx)$ for every finite-partition cylinder $C$ and data rectangle $D$. For fixed such $C$, the two sides define finite measures of $D$; their total masses agree by taking $D=\\mathsf X^n$. Finite-measure uniqueness [F7] extends the identity to every $D\\in\\mathcal A^{\\otimes n}$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F7",
+            "F10",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Now fix any $D\\in\\mathcal A^{\\otimes n}$. The set functions $C\\mapsto J(C\\times D)$ and $C\\mapsto\\int_DK(x,C)\\,M(dx)$ are finite measures on the evaluation sigma-algebra; the second is a measure because $K$ is a probability kernel. They have common total mass $M(D)$ and agree on every finite-partition cylinder by step 3.1. These cylinders form a generating pi-system, so [F7] extends equality to every measurable $C$. By [F4], $K(x;\\cdot)$ is the claimed posterior version. Null data blocks contribute zero to both sides, so the proof imposes no pointwise uniqueness there.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement explicitly assumes n>=1; its empirical sum is therefore not an empty-data sum. The n=0 prior-only identity belongs to the predictive theorem, not this stated theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_block_bootstrap_resolution",
+            "reason": "Actual thm-dirichlet-process-posterior-update reviewed: Statement explicitly assumes n>=1; its empirical sum is therefore not an empty-data sum. The n=0 prior-only identity belongs to the predictive theorem, not this stated theorem.",
+            "item_sha256": "0c4e5c19abeca75dce2bf9abeaa703d4850e8fdc274d345e72a77ad37300d2ce",
+            "row_sha256": "642be215850e027b040b0cf030d938de17aace8d64813f922728f7d2d04edde0"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "bcs_block_bootstrap_resolution",
+            "reason": "Re-read the actual Statement: the data count is n>=1, and the displayed empirical measure is the sum from i=1 to n. Thus its detected summation is nonempty on every admitted input. The n=0 prior-only formula may be meaningful separately but is not within this theorem scope. An aggregate token alone is not evidence that the actual positive-n hypothesis permits an empty sample.",
+            "item_sha256": "0c4e5c19abeca75dce2bf9abeaa703d4850e8fdc274d345e72a77ad37300d2ce",
+            "row_sha256": "642be215850e027b040b0cf030d938de17aace8d64813f922728f7d2d04edde0"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof steps 1.4 and 2.2 show positive counts in zero-base cells have zero prior-predictive mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 2.2 applies the one-cell finite Dirichlet update under the supplier convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.4 isolates prior-predictive null blocks and step 4.1 extends the identity across them."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof step 4.1 state that kernel values on predictive-null data are version choices."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes full AC; no additional point is selected by the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves a posterior disintegration identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves a posterior disintegration identity, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Reviewed all eight proof steps, full Statement/F1\u2013F10 and all thirty actual dependency interfaces. beta_x has total alpha(X)+n>0 for every data tuple. For each finite evaluation cylinder the DP probability is constant on finitely many measurable count fibers, and the pi-lambda argument extends measurability to all evaluation events. Finite-product kernels and prior/kernel integration supply the joint law without assuming parameter-space disintegration existence. Refining both parameter cylinder and data rectangle reduces to ordered cell blocks. A block hitting an alpha-null cell has M-mass zero; otherwise omitting zero cells leaves positive parameters and ordered likelihood differs from the multinomial likelihood by the stated positive constant. Conjugacy and aggregation then identify the cylinder posterior. Finite-measure uniqueness extends first in D and then C with explicit total masses. One-cell partitions work by the deterministic conjugacy branch; n=0 is excluded. Values on null data blocks are explicitly only version choices. AC supplies the construction and CC needed by conjugacy. Ferguson \u00a73 Theorem 1, pp.217\u2013218, including its disintegration proof, supports the conclusion. No reader/refuter finding or defect found."
+      }
+    },
+    "thm-dirichlet-process-polya-urn-predictive-law": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-dirichlet-process-posterior-update",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(\\mathsf X,\\mathcal A)$ be standard Borel, let $\\alpha$ be a\nfinite nonzero measure, draw $G\\sim DP(\\alpha)$, and, conditionally on $G$,\ndraw $X_1,\\ldots,X_n$ with joint law $G^{\\otimes n}$, where $n\\ge1$. Then\n$$K(x_1,\\ldots,x_n;\\,\\cdot)=DP\\!\\left(\\alpha+\\sum_{i=1}^n\\delta_{x_i}\\right)$$\nis a measurable data-indexed posterior kernel version. It satisfies the\nposterior disintegration identity on the evaluation sigma-algebra of\n$\\mathcal P(\\mathsf X)$ and $\\mathcal A^{\\otimes n}$. On prior-predictive\nnull data sets its values are a version choice; the displayed formula is\nwell-defined there but is not asserted to be uniquely forced.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-dirichlet-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal A)$ be a standard Borel space and let $\\alpha$ be a\nfinite nonzero measure on it. Write $\\mathcal P(\\mathsf X)$ for the set of\nprobability measures on $(\\mathsf X,\\mathcal A)$, equipped with the\n**evaluation sigma-algebra**\n$$\\sigma\\bigl(\\{G\\mapsto G(A):A\\in\\mathcal A\\}\\bigr).$$\nFor a probability law $P$ on this space, let $G$ be the coordinate random\nprobability measure $G(\\omega)=\\omega$. Call $P$ a **Dirichlet-process law\nwith base measure** $\\alpha$ if, for every finite measurable partition\n$(A_1,\\ldots,A_k)$ of $\\mathsf X$, the vector\n$(G(A_1),\\ldots,G(A_k))$ has the Dirichlet distribution with parameters\n$(\\alpha(A_1),\\ldots,\\alpha(A_k))$ after zero-parameter cells are omitted;\neach omitted zero-base cell has mass zero. If the partition has one\npositive-parameter cell, its mass is one. The finite-partition specification\ndetermines at most one law on the evaluation sigma-algebra. When such a law\nexists, denote it by $DP(\\alpha)$; the construction theorem on this page\nproves existence.\n\nThe Dirichlet distribution here has the positive-parameter density and\none-category convention of [[def-dirichlet-distribution]]. The definition\nasserts no weak topology, support statement, or density-contraction result.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-dirichlet-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal A)$ be a standard Borel space and let $\\alpha$ be a\nfinite nonzero measure on it. Write $\\mathcal P(\\mathsf X)$ for the set of\nprobability measures on $(\\mathsf X,\\mathcal A)$, equipped with the\n**evaluation sigma-algebra**\n$$\\sigma\\bigl(\\{G\\mapsto G(A):A\\in\\mathcal A\\}\\bigr).$$\nFor a probability law $P$ on this space, let $G$ be the coordinate random\nprobability measure $G(\\omega)=\\omega$. Call $P$ a **Dirichlet-process law\nwith base measure** $\\alpha$ if, for every finite measurable partition\n$(A_1,\\ldots,A_k)$ of $\\mathsf X$, the vector\n$(G(A_1),\\ldots,G(A_k))$ has the Dirichlet distribution with parameters\n$(\\alpha(A_1),\\ldots,\\alpha(A_k))$ after zero-parameter cells are omitted;\neach omitted zero-base cell has mass zero. If the partition has one\npositive-parameter cell, its mass is one. The finite-partition specification\ndetermines at most one law on the evaluation sigma-algebra. When such a law\nexists, denote it by $DP(\\alpha)$; the construction theorem on this page\nproves existence.\n\nThe Dirichlet distribution here has the positive-parameter density and\none-category convention of [[def-dirichlet-distribution]]. The definition\nasserts no weak topology, support statement, or density-contraction result.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\mathsf X,\\mathcal A)$ be a standard Borel\nspace and let $\\alpha$ be a finite nonzero measure on it. Then there is a\nmeasurable random probability measure $G$ whose law on the evaluation\nsigma-algebra of $\\mathcal P(\\mathsf X)$ is $DP(\\alpha)$. For every finite\nmeasurable partition $(A_1,\\ldots,A_k)$, the unnormalized increments are\nindependent with\n$\\Gamma(A_j)\\sim\\operatorname{Gamma}(\\alpha(A_j),1)$ when\n$\\alpha(A_j)>0$, and $\\Gamma(A_j)=0$ almost surely when $\\alpha(A_j)=0$.\nConsequently the normalized masses have the finite-partition Dirichlet laws\nin [[def-dirichlet-process]]. These laws determine the probability law on\n$\\mathcal P(\\mathsf X)$ uniquely.\n\nThe construction uses the Poisson random measure with intensity\n$$\\mu(dx,dt)=\\alpha(dx)t^{-1}e^{-t}\\,dt\\quad\\text{on }\\mathsf X\\times(0,\\infty),$$\nand normalizes its weighted projection onto $\\mathsf X$. It does not assume a\ngamma-process existence theorem.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dirichlet-multinomial-conjugate-update",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $p\\sim\\operatorname{Dirichlet}(\\alpha_1,\\ldots,\n\\alpha_k)$, with each $\\alpha_j>0$. Conditional on $p$, observe a\nMultinomial$(n,p)$ count vector $y\\in\\mathbb N_0^k$ with $\\sum_jy_j=n$.\nFor $k\\ge2$, the data space is equipped with counting measure on its finite\nset of admissible counts. The evidence is\n$$m(y)=\\frac{n!}{\\prod_jy_j!} \\frac{\\Gamma(\\alpha_+)}{\\prod_j\\Gamma(\\alpha_j)} \\frac{\\prod_j\\Gamma(\\alpha_j+y_j)}{\\Gamma(\\alpha_++n)} \\in(0,\\infty),$$\nwhere $\\alpha_+=\\sum_j\\alpha_j$, and the posterior is\n$\\operatorname{Dirichlet}(\\alpha_1+y_1,\\ldots,\\alpha_k+y_k)$.\nFor $k=1$, the parameter and count are both deterministic and the posterior\nequals the prior point mass.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\beta_x=\\alpha+\\sum_{i=1}^n\\delta_{x_i}$. For $n\\ge1$, [F1]\nmakes the posterior law $DP(\\beta_x)$; for $n=0$ it is the prior $DP(\\alpha)$. In either case, $\\beta_x(\\mathsf X)=\\alpha(\\mathsf X)+n>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $b=\\beta_x(A)$ and $c=\\beta_x(A^c)$. If $b=0$, [F3] gives $G(A)=0$ almost surely under $DP(\\beta_x)$; if $c=0$, it gives $G(A)=1$ almost surely. If both are positive, apply [F4] to one Bernoulli draw on the partition $(A,A^c)$: its probability of the first cell is the Dirichlet-multinomial evidence $b/(b+c)$, which equals $\\mathbb E_{DP(\\beta_x)}G(A)$ by the sampling kernel [F2]. Thus in all cases the predictive probability is $b/(b+c)=(\\alpha(A)+\\sum_i\\mathbf1_A(x_i))/(\\alpha(\\mathsf X)+n)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "cases",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 handles n=0 by the prior law."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 2.1 gives probability zero when b=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 2.1 gives probability one when c=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 2.1 treats deterministic zero/one partition masses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.1 explicitly establishes the predictive ratio at both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof assumes AC but makes no nonempty choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states a predictive formula, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states a predictive formula, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Reviewed Statement, F1\u2013F4, both steps and all nine already-opened direct dependencies. For n>=1 the reviewed posterior kernel supplies DP(beta_x); n=0 is handled by the prior, avoiding the update supplier n>=1 restriction. The total alpha(X)+n is strictly positive. For A empty or beta_x(A)=0 predictive mass is zero; for beta_x(A^c)=0 it is one. Otherwise the one-trial two-cell conjugate evidence is b/(b+c) and equals the posterior expectation of G(A) under conditional IID sampling. The resulting explicit expression is measurable in data and is a probability measure for every tuple. The statement preserves null-data version dependence and carries AC/CC. Ferguson \u00a72 properties ii\u2013iii and \u00a73 Proposition 4/Theorem 1 agree with this mean/update computation. No reader/refuter finding or defect found."
+      }
+    },
+    "rem-dirichlet-process-support-does-not-imply-density-contraction": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Reviewed the complete current remark and its four actual suppliers after posterior-update review. The exact reader patch at dispatch log lines 11586\u201311603 reverses to pre-reader SHA256 2adfe37e8ac8cb4c86ff69a0f8a2898a8f58ba78691ef56790c0083562cec99a; current raw bytes equal post-reader SHA256 c863b0d7c66394727fe3f276b388670ebff6e90b86fd885d9aa7ee6899dd4ce8. The original Any such conclusion wrongly required a posterior-contraction proof even for weak support. Current text correctly separates topology/positive neighborhood mass from model/truth-specific density posterior arguments. Ferguson \u00a73 Proposition 3 and following support discussion (pp.215\u2013216) explicitly separate topology/support from Theorem 1 posterior conjugacy (pp.217\u2013218). Ghosal\u2013van der Vaart \u00a77 Lemma 10 (PDF p.19) gives a finite Dirichlet prior-mass bound under parameter and epsilon restrictions; it does not supply density contraction by itself. \u00a72 states an additional Gaussian-mixture model and truth assumptions. Accepted the reader repair without further item edits; synchronized the manifest summary so it no longer retains the same overstrong conflation. No Statement/Definition changed. Defect is nonfatal explanatory overstatement, now fixed; repair confidence 1."
+      },
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This scope remark has no empty-object parameter case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This scope remark has no zero-parameter theorem."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This scope remark has no one-case parameter claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This scope remark asserts no degenerate-distribution result."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This scope remark has no endpoint parameter claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The remark makes no selection or choice claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark contains no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The remark contains no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-dirichlet-process-finite-partition-posterior-and-polya-urn": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-dirichlet-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal A)$ be a standard Borel space and let $\\alpha$ be a\nfinite nonzero measure on it. Write $\\mathcal P(\\mathsf X)$ for the set of\nprobability measures on $(\\mathsf X,\\mathcal A)$, equipped with the\n**evaluation sigma-algebra**\n$$\\sigma\\bigl(\\{G\\mapsto G(A):A\\in\\mathcal A\\}\\bigr).$$\nFor a probability law $P$ on this space, let $G$ be the coordinate random\nprobability measure $G(\\omega)=\\omega$. Call $P$ a **Dirichlet-process law\nwith base measure** $\\alpha$ if, for every finite measurable partition\n$(A_1,\\ldots,A_k)$ of $\\mathsf X$, the vector\n$(G(A_1),\\ldots,G(A_k))$ has the Dirichlet distribution with parameters\n$(\\alpha(A_1),\\ldots,\\alpha(A_k))$ after zero-parameter cells are omitted;\neach omitted zero-base cell has mass zero. If the partition has one\npositive-parameter cell, its mass is one. The finite-partition specification\ndetermines at most one law on the evaluation sigma-algebra. When such a law\nexists, denote it by $DP(\\alpha)$; the construction theorem on this page\nproves existence.\n\nThe Dirichlet distribution here has the positive-parameter density and\none-category convention of [[def-dirichlet-distribution]]. The definition\nasserts no weak topology, support statement, or density-contraction result.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\mathsf X,\\mathcal A)$ be a standard Borel\nspace and let $\\alpha$ be a finite nonzero measure on it. Then there is a\nmeasurable random probability measure $G$ whose law on the evaluation\nsigma-algebra of $\\mathcal P(\\mathsf X)$ is $DP(\\alpha)$. For every finite\nmeasurable partition $(A_1,\\ldots,A_k)$, the unnormalized increments are\nindependent with\n$\\Gamma(A_j)\\sim\\operatorname{Gamma}(\\alpha(A_j),1)$ when\n$\\alpha(A_j)>0$, and $\\Gamma(A_j)=0$ almost surely when $\\alpha(A_j)=0$.\nConsequently the normalized masses have the finite-partition Dirichlet laws\nin [[def-dirichlet-process]]. These laws determine the probability law on\n$\\mathcal P(\\mathsf X)$ uniquely.\n\nThe construction uses the Poisson random measure with intensity\n$$\\mu(dx,dt)=\\alpha(dx)t^{-1}e^{-t}\\,dt\\quad\\text{on }\\mathsf X\\times(0,\\infty),$$\nand normalizes its weighted projection onto $\\mathsf X$. It does not assume a\ngamma-process existence theorem.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-dirichlet-process-posterior-update",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(\\mathsf X,\\mathcal A)$ be standard Borel, let $\\alpha$ be a\nfinite nonzero measure, draw $G\\sim DP(\\alpha)$, and, conditionally on $G$,\ndraw $X_1,\\ldots,X_n$ with joint law $G^{\\otimes n}$, where $n\\ge1$. Then\n$$K(x_1,\\ldots,x_n;\\,\\cdot)=DP\\!\\left(\\alpha+\\sum_{i=1}^n\\delta_{x_i}\\right)$$\nis a measurable data-indexed posterior kernel version. It satisfies the\nposterior disintegration identity on the evaluation sigma-algebra of\n$\\mathcal P(\\mathsf X)$ and $\\mathcal A^{\\otimes n}$. On prior-predictive\nnull data sets its values are a version choice; the displayed formula is\nwell-defined there but is not asserted to be uniquely forced.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dirichlet-process-polya-urn-predictive-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. In the conditionally IID model\n$G\\sim DP(\\alpha)$, $X_i\\mid G\\sim G$, the posterior version after\n$x_{1:n}=(x_1,\\ldots,x_n)$ has one-step predictive probability\n$$\\Pr(X_{n+1}\\in A\\mid X_{1:n}=x_{1:n})=\\frac{\\alpha(A)+\\sum_{i=1}^n\\mathbf1_A(x_i)}{\\alpha(\\mathsf X)+n}$$\nfor every measurable $A$ and every data vector. The formula is a\ndata-indexed version on prior-predictive null data sets; those pointwise\nvalues are not uniquely determined by the disintegration identity.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-countable-discrete-space-is-standard-borel",
+          "source_section": "Statement",
+          "quote": "If $S$ is a nonempty at-most-countable set, then $(S,\\mathcal P(S))$ is a\nstandard Borel space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nonnegative-weighted-sums-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $(\\mu_k)$ be measures on one measurable space and let $c_k\\in[0,+\\infty]$. Each scalar multiple $c_k\\mu_k$, defined by the zero, finite-positive, and positive-infinity branches of [[def-nonnegative-weighted-sum-of-measures]], is a measure. Every finite or countable weighted sum $\\sum_kc_k\\mu_k$ is also a measure.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The nonempty finite discrete space $\\mathsf X$ is standard Borel by [F4]. Define $\\alpha=2\\delta_a+\\delta_b+\\delta_c$, equivalently $\\alpha(B)=2\\mathbf1_B(a)+\\mathbf1_B(b)+\\mathbf1_B(c)$. By [F4] it is a measure with total mass $4$, hence finite and nonzero, so [F1] and [F2] apply. The prior vector $(G(\\{a\\}),G(\\{b\\}),G(\\{c\\}))$ has law $\\operatorname{Dirichlet}(2,1,1)$ by [F1]. The observed counts are $(1,1,0)$, so [F2] gives posterior $\\operatorname{Dirichlet}(3,2,1)$, whose parameters sum to $6$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F3] after the two observations gives next-draw probabilities $3/6=1/2$ for $a$, $2/6=1/3$ for $b$, and $1/6$ for $c$; they sum to one.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Before any draw, [F3] gives $\\Pr(X_1=a)=2/4=1/2$. After observing $X_1=a$, the same rule gives $\\Pr(X_2=a\\mid X_1=a)=3/5$. Therefore $\\Pr(X_1=a,X_2=a)=(1/2)(3/5)=3/10$: the first draw increases the next draw's mass for its cell from $2/4$ to $3/5$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example proof step 3.1 checks the first-draw prior predictive probability before any observations."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All three base masses in the example are strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example uses three positive cells and no one-cell partition."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No cell has a deterministic prior mass in this example."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example proof step 2.1 computes the displayed probabilities as 1/2, 1/3, and 1/6."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite example makes no choice of an element."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states no reverse implication."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Reviewed the full example, F1\u2013F4, three verification steps and all eight already-opened dependency interfaces. The explicitly weighted Dirac base has total 4 on a finite standard-Borel space. Observed counts (1,1,0) give Dirichlet(3,2,1), total 6; probabilities 1/2,1/3,1/6 sum to one. The separate repeated-a sequence uses the n=0 predictive probability 2/4 and then 3/5, yielding ordered joint probability 3/10. These are positive predictive events, so the null-fiber caveat does not alter the arithmetic. All parameters remain strictly positive; no zero-parameter density or empty-space construction is used. AC is explicitly inherited. Ferguson \u00a72\u2013\u00a73 conjugacy and predictive means match the supplied calculations. No reader/refuter finding or defect found."
+      }
+    },
+    "ex-dirichlet-process-alpha-null-observation-fiber": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-dirichlet-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal A)$ be a standard Borel space and let $\\alpha$ be a\nfinite nonzero measure on it. Write $\\mathcal P(\\mathsf X)$ for the set of\nprobability measures on $(\\mathsf X,\\mathcal A)$, equipped with the\n**evaluation sigma-algebra**\n$$\\sigma\\bigl(\\{G\\mapsto G(A):A\\in\\mathcal A\\}\\bigr).$$\nFor a probability law $P$ on this space, let $G$ be the coordinate random\nprobability measure $G(\\omega)=\\omega$. Call $P$ a **Dirichlet-process law\nwith base measure** $\\alpha$ if, for every finite measurable partition\n$(A_1,\\ldots,A_k)$ of $\\mathsf X$, the vector\n$(G(A_1),\\ldots,G(A_k))$ has the Dirichlet distribution with parameters\n$(\\alpha(A_1),\\ldots,\\alpha(A_k))$ after zero-parameter cells are omitted;\neach omitted zero-base cell has mass zero. If the partition has one\npositive-parameter cell, its mass is one. The finite-partition specification\ndetermines at most one law on the evaluation sigma-algebra. When such a law\nexists, denote it by $DP(\\alpha)$; the construction theorem on this page\nproves existence.\n\nThe Dirichlet distribution here has the positive-parameter density and\none-category convention of [[def-dirichlet-distribution]]. The definition\nasserts no weak topology, support statement, or density-contraction result.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\mathsf X,\\mathcal A)$ be a standard Borel\nspace and let $\\alpha$ be a finite nonzero measure on it. Then there is a\nmeasurable random probability measure $G$ whose law on the evaluation\nsigma-algebra of $\\mathcal P(\\mathsf X)$ is $DP(\\alpha)$. For every finite\nmeasurable partition $(A_1,\\ldots,A_k)$, the unnormalized increments are\nindependent with\n$\\Gamma(A_j)\\sim\\operatorname{Gamma}(\\alpha(A_j),1)$ when\n$\\alpha(A_j)>0$, and $\\Gamma(A_j)=0$ almost surely when $\\alpha(A_j)=0$.\nConsequently the normalized masses have the finite-partition Dirichlet laws\nin [[def-dirichlet-process]]. These laws determine the probability law on\n$\\mathcal P(\\mathsf X)$ uniquely.\n\nThe construction uses the Poisson random measure with intensity\n$$\\mu(dx,dt)=\\alpha(dx)t^{-1}e^{-t}\\,dt\\quad\\text{on }\\mathsf X\\times(0,\\infty),$$\nand normalizes its weighted projection onto $\\mathsf X$. It does not assume a\ngamma-process existence theorem.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\mathsf X,\\mathcal A)$ be a standard Borel\nspace and let $\\alpha$ be a finite nonzero measure on it. Then there is a\nmeasurable random probability measure $G$ whose law on the evaluation\nsigma-algebra of $\\mathcal P(\\mathsf X)$ is $DP(\\alpha)$. For every finite\nmeasurable partition $(A_1,\\ldots,A_k)$, the unnormalized increments are\nindependent with\n$\\Gamma(A_j)\\sim\\operatorname{Gamma}(\\alpha(A_j),1)$ when\n$\\alpha(A_j)>0$, and $\\Gamma(A_j)=0$ almost surely when $\\alpha(A_j)=0$.\nConsequently the normalized masses have the finite-partition Dirichlet laws\nin [[def-dirichlet-process]]. These laws determine the probability law on\n$\\mathcal P(\\mathsf X)$ uniquely.\n\nThe construction uses the Poisson random measure with intensity\n$$\\mu(dx,dt)=\\alpha(dx)t^{-1}e^{-t}\\,dt\\quad\\text{on }\\mathsf X\\times(0,\\infty),$$\nand normalizes its weighted projection onto $\\mathsf X$. It does not assume a\ngamma-process existence theorem.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-dirichlet-process-posterior-update",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(\\mathsf X,\\mathcal A)$ be standard Borel, let $\\alpha$ be a\nfinite nonzero measure, draw $G\\sim DP(\\alpha)$, and, conditionally on $G$,\ndraw $X_1,\\ldots,X_n$ with joint law $G^{\\otimes n}$, where $n\\ge1$. Then\n$$K(x_1,\\ldots,x_n;\\,\\cdot)=DP\\!\\left(\\alpha+\\sum_{i=1}^n\\delta_{x_i}\\right)$$\nis a measurable data-indexed posterior kernel version. It satisfies the\nposterior disintegration identity on the evaluation sigma-algebra of\n$\\mathcal P(\\mathsf X)$ and $\\mathcal A^{\\otimes n}$. On prior-predictive\nnull data sets its values are a version choice; the displayed formula is\nwell-defined there but is not asserted to be uniquely forced.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bayesian-posterior-as-regular-conditional-law",
+          "source_section": "Definition",
+          "quote": "Let a proper Bayesian model be given, and let $J$ be its joint prior-predictive probability on $(\\Theta\\times\\mathsf Y,\\mathcal T\\otimes\\mathcal Y)$, supplied by [[lem-prior-and-model-kernel-define-joint-law]]. More generally, let $(\\Omega,\\mathcal F,Q)$ be any probability space carrying parameter and data random elements $X:\\Omega\\to\\Theta$ and $Y:\\Omega\\to\\mathsf Y$ whose joint law is $J$ ([[def-probability-measure]], [[def-random-element-and-real-random-variable]], [[def-law-or-distribution-of-a-random-element]]). A **posterior regular conditional distribution (posterior RCD)** is a regular conditional distribution of $X$ given $\\sigma(Y)$, in the sense of [[def-regular-conditional-distribution]]. It is a kernel indexed by the sample point $\\omega\\in\\Omega$. The canonical realization is $\\Omega=\\Theta\\times\\mathsf Y$ with $Q=J$ and coordinate maps $X(\\theta,y)=\\theta$, $Y(\\theta,y)=y$.\n\nA **data-indexed posterior kernel** is a probability kernel $\\Pi_{\\cdot}$ from $(\\mathsf Y,\\mathcal Y)$ to $(\\Theta,\\mathcal T)$ ([[def-measure-kernel-and-probability-kernel]]) for which $\\omega\\mapsto\\Pi_{Y(\\omega)}$ is a conditional law of $X$ given $Y$ ([[def-conditional-law-given-a-random-element]]). Equivalently, for every $A\\in\\mathcal T$ and $B\\in\\mathcal Y$,\n$$Q(X\\in A,\\ Y\\in B)=\\int_B\\Pi_y(A)\\,Q_Y(dy),$$\nwhere $Q_Y$ is the data marginal (equal to $J_Y$). This kernel is indexed by data values, not sample points.\n\nThe definition asserts no existence of either conditional kernel. Values of a data-indexed version on a measurable $J_Y$-null set are not fixed by the conditional-law identities; replacing them there by a fixed probability preserves those identities. A dominated-density construction is a separate route: [[thm-bayes-formula-for-dominated-kernels]] requires a proper prior, a sigma-finite data measure, and a specified jointly measurable sampling density, and fills fibres whose marginal density is zero or infinite with the prior. It does not require the data space to be standard Borel.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dirichlet-process-polya-urn-predictive-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. In the conditionally IID model\n$G\\sim DP(\\alpha)$, $X_i\\mid G\\sim G$, the posterior version after\n$x_{1:n}=(x_1,\\ldots,x_n)$ has one-step predictive probability\n$$\\Pr(X_{n+1}\\in A\\mid X_{1:n}=x_{1:n})=\\frac{\\alpha(A)+\\sum_{i=1}^n\\mathbf1_A(x_i)}{\\alpha(\\mathsf X)+n}$$\nfor every measurable $A$ and every data vector. The formula is a\ndata-indexed version on prior-predictive null data sets; those pointwise\nvalues are not uniquely determined by the disintegration identity.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-bayesian-posterior-as-regular-conditional-law",
+          "source_section": "Definition",
+          "quote": "Let a proper Bayesian model be given, and let $J$ be its joint prior-predictive probability on $(\\Theta\\times\\mathsf Y,\\mathcal T\\otimes\\mathcal Y)$, supplied by [[lem-prior-and-model-kernel-define-joint-law]]. More generally, let $(\\Omega,\\mathcal F,Q)$ be any probability space carrying parameter and data random elements $X:\\Omega\\to\\Theta$ and $Y:\\Omega\\to\\mathsf Y$ whose joint law is $J$ ([[def-probability-measure]], [[def-random-element-and-real-random-variable]], [[def-law-or-distribution-of-a-random-element]]). A **posterior regular conditional distribution (posterior RCD)** is a regular conditional distribution of $X$ given $\\sigma(Y)$, in the sense of [[def-regular-conditional-distribution]]. It is a kernel indexed by the sample point $\\omega\\in\\Omega$. The canonical realization is $\\Omega=\\Theta\\times\\mathsf Y$ with $Q=J$ and coordinate maps $X(\\theta,y)=\\theta$, $Y(\\theta,y)=y$.\n\nA **data-indexed posterior kernel** is a probability kernel $\\Pi_{\\cdot}$ from $(\\mathsf Y,\\mathcal Y)$ to $(\\Theta,\\mathcal T)$ ([[def-measure-kernel-and-probability-kernel]]) for which $\\omega\\mapsto\\Pi_{Y(\\omega)}$ is a conditional law of $X$ given $Y$ ([[def-conditional-law-given-a-random-element]]). Equivalently, for every $A\\in\\mathcal T$ and $B\\in\\mathcal Y$,\n$$Q(X\\in A,\\ Y\\in B)=\\int_B\\Pi_y(A)\\,Q_Y(dy),$$\nwhere $Q_Y$ is the data marginal (equal to $J_Y$). This kernel is indexed by data values, not sample points.\n\nThe definition asserts no existence of either conditional kernel. Values of a data-indexed version on a measurable $J_Y$-null set are not fixed by the conditional-law identities; replacing them there by a fixed probability preserves those identities. A dominated-density construction is a separate route: [[thm-bayes-formula-for-dominated-kernels]] requires a proper prior, a sigma-finite data measure, and a specified jointly measurable sampling density, and fills fibres whose marginal density is zero or infinite with the prior. It does not require the data space to be standard Borel.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-countable-discrete-space-is-standard-borel",
+          "source_section": "Statement",
+          "quote": "If $S$ is a nonempty at-most-countable set, then $(S,\\mathcal P(S))$ is a\nstandard Borel space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The nonempty two-point discrete space $\\mathsf X$ is standard Borel by [F6], and $\\alpha=\\delta_a$ is a probability measure by [F6], hence a finite nonzero base measure of total mass $1$. Thus [F1] applies: $G(\\{b\\})=0$ almost surely. Since $\\Pr(X_1=b\\mid G)=G(\\{b\\})$, integration over the prior gives $\\Pr(X_1=b)=0$, also agreeing with [F3].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The formula in [F2] assigns $K(b)=DP(\\delta_a+\\delta_b)$ at the null data value. Define another kernel by $K'(a)=K(a)$ and $K'(b)=DP(\\delta_a)$. Both sections are probability measures, and $K'$ is measurable because $\\{b\\}$ is measurable in the discrete data space. For any measurable event $C$ in $\\mathcal P(\\mathsf X)$, the disintegration integrals for $K$ and $K'$ differ only at $b$, which has data-marginal mass zero by step 1.1. Thus both are posterior versions; the update formula at $b$ is a version choice, not evidence-supported learning.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the separate diffuse-base model, [F3] gives data-marginal mass $M(\\{y\\})=\\gamma(\\{y\\})/\\gamma(\\mathsf Y)=0$. Let $K(z)=DP(\\gamma+\\delta_z)$ be the posterior kernel from [F2] and set $K'(z)=K(z)$ for $z\\ne y$, $K'(y)=DP(\\gamma)$. By [F4], $\\{y\\}$ is measurable. For every measurable $C\\subseteq\\mathcal P(\\mathsf Y)$, $z\\mapsto K'(z,C)=\\mathbf1_{\\mathsf Y\\setminus\\{y\\}}(z)K(z,C)+\\mathbf1_{\\{y\\}}(z)DP(\\gamma)(C)$ is measurable; each section is a probability measure, so [F5] makes $K'$ a probability kernel. The disintegration integrals for $K$ and $K'$ agree on every measurable rectangle because the kernels differ only on $\\{y\\}$ and $M(\\{y\\})=0$. Thus $K'$ is also a posterior version, proving that the displayed update value at this fixed null fiber is not uniquely determined.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a one-observation model and no empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example proof step 1.1 computes the zero-base observation event as probability zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example proof step 2.1 uses the one-point-base posterior DP(delta_a)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example proof step 2.1 verifies the changed kernel section is a probability law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example proof steps 1.1\u20132.1 treat the zero-probability data fiber explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite example assumes AC but makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states no reverse implication."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Reviewed both Example models, F1\u2013F6, all three steps and all eleven already-opened dependency interfaces. delta_a is a legitimate finite positive base on the discrete standard-Borel two-point space. Its zero b cell gives M({b})=0; replacing only K(b) by DP(delta_a) is a measurable probability kernel and preserves every disintegration integral. The separate diffuse-base example fixes one singleton y, which is measurable by a Polish presentation, and its predictive probability is zero. Patching that one singleton preserves measurability and the identity. The two values differ: under DP(gamma), G({y})=0 almost surely, whereas DP(gamma+delta_y) has a positive-parameter y cell (and positive complementary gamma total), hence positive G({y}) almost surely. No simultaneous modification of all null singletons is asserted. Finite nonzero gamma and a fixed y exclude empty or zero-total cases; AC is inherited. The general null-version freedom matches the posterior definition and reviewed update theorem; Ferguson \u00a73 supplies update context. No reader/refuter finding or defect found."
+      }
+    },
+    "lem-countable-discrete-space-is-standard-borel": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-countable",
+          "source_section": "Definition",
+          "quote": "Recall that a natural number is a von Neumann natural\n([[def-natural-numbers]]): $0 = \\varnothing$ and $\\sigma(n) = n \\cup \\{n\\}$, so\nthat\n\n$$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\} = \\{0, 1, \\dots, n-1\\}$$\n\nis itself the set of its predecessors. Here $<$ is the order of\n[[def-nat-order]], which is defined additively, so the displayed identity is a\ntheorem and not a convention: it is [[lem-nat-order-is-membership]], proved\nimmediately above. Let $A$ be a set, and let $\\approx$ be equinumerosity\n([[def-equinumerous]]).\n\n- $A$ is **finite** if $A \\approx n$ for some $n \\in \\mathbb{N}$.\n- $A$ is **countably infinite** if $A \\approx \\mathbb{N}$.\n- $A$ is **at most countable** if it is finite or countably infinite.\n- $A$ is **uncountable** if it is not at most countable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) constructed in this\nlibrary ([[def-real-numbers]]) and carrying its order ([[def-real-order]]).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\n[[rem-metric-axiom-conventions]] records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as [[lem-metric-nonnegativity]] proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n([[def-max-min]], [[lem-finite-set-has-max]]). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $x \\in X$ and let\n$r \\in \\mathbb{R}$ with $r > 0$ ([[def-real-order]]). Define\n\n$$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}, \\qquad \\bar B(x,r) := \\{\\, y \\in X : d(x,y) \\le r \\,\\}, \\qquad S(x,r) := \\{\\, y \\in X : d(x,y) = r \\,\\}.$$\n\n$B(x,r)$ is the **open ball**, $\\bar B(x,r)$ the **closed ball** and $S(x,r)$ the\n**sphere** of **centre** $x$ and **radius** $r$. The radius is always a strictly\npositive real; a ball of radius $0$ or of negative radius is never written in\nthis library.\n\n**Immediate consequences of the definitions.** For every $x \\in X$ and $r > 0$:\n\n- $x \\in B(x,r)$, because $d(x,x) = 0 < r$ (axiom (M1) of [[def-metric-space]]);\n  in particular open and closed balls are nonempty.\n- $B(x,r) \\subseteq \\bar B(x,r)$ and $S(x,r) \\subseteq \\bar B(x,r)$, and\n  $\\bar B(x,r)$ is the disjoint union of $B(x,r)$ and $S(x,r)$, by trichotomy of\n  the order of $\\mathbb{R}$ ([[def-complete-ordered-field]], [[def-ordered-field]]):\n  each $y$ satisfies exactly one of $d(x,y) < r$, $d(x,y) = r$, $d(x,y) > r$.\n- If $0 < s \\le r$ then $B(x,s) \\subseteq B(x,r)$ and\n  $\\bar B(x,s) \\subseteq \\bar B(x,r)$, by transitivity of the order.\n- Nonnegativity of the metric ([[lem-metric-nonnegativity]]) is what forces the\n  radius convention, and it forces it for the **open** ball only: if $r \\le 0$\n  then $B(x,r) = \\{y : d(x,y) < r\\}$ is empty, because $d(x,y) \\ge 0 \\ge r$\n  for every $y$. The other two sets behave differently at $r = 0$, and the\n  convention $r > 0$ excludes them for uniformity rather than for emptiness:\n  $\\bar B(x,0) = S(x,0) = \\{x\\}$, since $d(x,y) \\le 0$ together with\n  $d(x,y) \\ge 0$ gives $d(x,y) = 0$ and hence $y = x$ by (M1). For $r < 0$ all\n  three sets are empty.\n\n**A sphere may be empty, and so the three sets are not on a par.** For $r > 0$\nthe open and closed balls always contain $x$, but nothing in the definition\nproduces a point at distance exactly $r$ from $x$. If a metric takes only the\nvalues $0$ and $1$, as the discrete metric on the companion page does, then\n$S(x,2) = \\emptyset$ while $B(x,2) = \\bar B(x,2)$ is the whole space. So\nnonemptiness of a sphere is never available by convention: where it is used, it\nis proved.\n\n**The ambient space is part of the notation.** $B(x,r)$ depends on $(X,d)$ and\nnot on $x$ and $r$ alone. When more than one space or more than one metric is in\nplay we write $B_X(x,r)$, or $B_d(x,r)$, and likewise for $\\bar B$ and $S$. This\nmatters as soon as subspaces appear ([[def-isometry-and-metric-embedding]]): a\nball of a subspace is the trace on it of a ball of the ambient space, and the two\nare different sets.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.\n\nThe collection\n\n$$\\mathcal{T}_d := \\{\\, U \\subseteq X : U \\text{ is open in } (X,d) \\,\\}$$\n\nof all open subsets is the **metric topology** of $d$ on $X$. A subset of $X$\nthat is both open and closed is called **clopen**.\n\n**Two sets are open for trivial reasons.** $\\emptyset$ is open, because the\ndefining condition quantifies over no points; and $X$ is open, because\n$B(x,r) \\subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and\n$\\emptyset$ are also closed, and both are clopen.\n\n**A neighbourhood of a point $x$** is any set containing an open set that\ncontains $x$; an **open neighbourhood** is an open set containing $x$. In a\nmetric space, a set is a neighbourhood of $x$ exactly when it contains some\nball $B(x,r)$ with $r>0$. Thus $U$ is open exactly when it is a neighbourhood of\neach of its points, and metric balls suffice to test this condition.\n\n**The metric, not the set, determines $\\mathcal{T}_d$.** Two metrics on the same\nset may have different metric topologies, and two different metrics may have the\nsame one; the systematic comparison is [[def-equivalent-metrics]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-cauchy-in-metric",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $(x_k)$ be a\nsequence in $X$, that is a function $\\mathbb{N} \\to X$ written $x_k := x(k)$\n([[def-metric-convergence]], [[def-sequence]]). As everywhere in this library\n$\\mathbb{N}$ contains $0$, so a sequence is indexed from $0$.\n\n$(x_k)$ is a **Cauchy sequence in $(X,d)$** if for every rational\n$\\varepsilon > 0$ there is $K \\in \\mathbb{N}$ such that\n\n$$d(x_m, x_n) < \\varepsilon \\qquad \\text{for all } m, n \\ge K .$$\n\n**Rational and real $\\varepsilon$ agree here.** The test is written with a\nrational $\\varepsilon$ to match [[def-real-limit]] and [[def-metric-convergence]],\nand nothing is lost by using a real one: below any real $\\eta > 0$ lies a\npositive rational ([[lem-rat-embeds-dense]]), and the index belonging to that\nrational serves for $\\eta$. So a proof may establish Cauchyness by producing an\nindex for every real $\\varepsilon > 0$, and may use a Cauchy hypothesis at a real\n$\\varepsilon$ by first passing to a rational below it. Both moves are used on\nthis page and are always cited.\n\n**The condition is exactly $d(x_m,x_n) \\to 0$ as $m$ and $n$ grow\nindependently.** The distances $d(x_m,x_n)$ are nonnegative reals\n([[lem-metric-nonnegativity]]), and the displayed condition asks them to be\nuniformly small on a tail of the doubly indexed family. It is not the same as\n$d(x_{k+1}, x_k) \\to 0$, which is a strictly weaker condition and is a standing\nsource of error. The partial sums $H_n$ of the harmonic series separate the two:\nconsecutive ones differ by $1/(n+1)$, which tends to $0$, while the sequence is\nunbounded, and an unbounded sequence of reals is not Cauchy\n([[lem-metric-cauchy-bounded]]).\n\n**Consistency with the real line.** For $X = \\mathbb{R}$ with the usual metric\n$d(x,y) = |x-y|$ ([[lem-real-line-is-a-metric-space]]) the condition above reads\n$|x_m - x_n| < \\varepsilon$ for $m,n \\ge K$, which is verbatim the definition of a\nCauchy sequence of reals ([[def-real-limit]]). So the notion introduced here\nrestricts on $\\mathbb{R}$ to the one already in use, and no ambiguity is created.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-complete-metric-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\n$(X,d)$ is **complete** if every Cauchy sequence in $(X,d)$\n([[def-cauchy-in-metric]]) converges to a point of $X$\n([[def-metric-convergence]]).\n\nA subset $A \\subseteq X$ is called **complete** when the metric subspace\n$(A, d_A)$ is complete ([[def-isometry-and-metric-embedding]]); as always, the\nmetric is part of the data, and $d_A$ is the restriction of $d$ to $A \\times A$.\n\n**The limit is unique when it exists**, since limits in a metric space are unique\n([[lem-metric-limits-unique]]), so a complete space assigns to each of its Cauchy\nsequences one point and not a set of points.\n\n**Completeness is a property of the pair $(X,d)$, not of $X$ and not of the\ntopology of $d$.** Both quantifiers in the definition are about the metric: the\nCauchy condition is stated with distances, and so is convergence. Two metrics on\nthe same set can have the same open sets while exactly one of them is complete,\nwhich is the content of [[fs-completeness-is-a-topological-property]] and its\nwitness. Read the word *complete* as an abbreviation for *complete with respect\nto this metric*, always.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-separable-space",
+          "source_section": "Definition",
+          "quote": "A topological space $X$ is **separable** if some at most countable subset $D\\subseteq X$ is dense in $X$ ([[def-dense-top]], [[def-countable]]). Equivalently, every nonempty open subset of $X$ meets $D$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $d(s,t)=0$ when $s=t$ and $d(s,t)=1$ when $s\\ne t$. These values are nonnegative, the definition is symmetric, and $d(s,t)=0$ exactly when $s=t$. If $s\\ne u$, then at least one of $s\\ne t$ or $t\\ne u$ holds, so $d(s,u)=1\\le d(s,t)+d(t,u)$; if $s=u$, the triangle inequality follows from nonnegativity. Thus [F3] makes $d$ a metric. For every $s\\in S$, [F4] gives $B(s,1/2)=\\{s\\}$, so [F5] shows that every subset of $S$ is open.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $(s_n)$ is Cauchy, [F6] with the rational $\\epsilon=1/2$ gives an index $N$ such that $d(s_m,s_n)<1/2$ for all $m,n\\ge N$. Hence all $s_n$ for $n\\ge N$ are equal, so the sequence converges in $S$; by [F7], $d$ is complete. Since $S$ is at-most-countable and dense in itself, [F8] makes $(S,d)$ separable.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "F1",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The power set is closed under relative complements and countable unions, so it is a sigma-algebra by [F2]. By [F10] and step 1.1, every subset of $S$ belongs to the Borel sigma-algebra. Conversely, every Borel set is a subset of $S$, so this sigma-algebra is exactly $\\mathcal P(S)$. Therefore $(S,d)$ is Polish by [F9], and the identity map from $(S,\\mathcal P(S))$ to $(S,\\mathcal B(S,d))$ is a measurable bijection with measurable inverse.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F10",
+            "step 1.1",
+            "F9",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The identity map in step 3.1 is a measurable isomorphism to a Polish space, so [F11] gives that $(S,\\mathcal P(S))$ is standard Borel.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F11"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: S is assumed nonempty, so the empty set is outside the lemma hypothesis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 checks d(s,t)=0 exactly when s=t, including the diagonal case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 applies to the singleton case: every Cauchy sequence is eventually constant, and S itself is a countable dense subset."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 checks the triangle inequality separately when s=u, so the singleton and repeated-point cases are covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement and proof use no interval, limiting endpoint, or one-sided boundary parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1\u20134.1 build the metric, dense set, Borel sigma-algebra and identity isomorphism explicitly; no choice of representatives or points from a family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the lemma is a one-way implication and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the lemma is a one-way implication and contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "singleton discrete metric",
+          "method": "exact finite check",
+          "input": {
+            "space": [
+              "s"
+            ]
+          },
+          "calculation": "The only metric value is d(s,s)=0; B(s,1/2)={s}; every sequence in the singleton is constant and converges.",
+          "expected": {
+            "open_sets": [
+              [],
+              [
+                "s"
+              ]
+            ],
+            "complete": true,
+            "standard_borel": true
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Reviewed Statement, F1\u2013F11, Proof 1.1\u20134.1 and all eleven actual dependency definitions. The 0/1 metric satisfies all metric axioms (including the equal endpoint branch); rational epsilon=1/2 makes every Cauchy sequence eventually constant. S itself is an at-most-countable dense subset, all subsets are open, and the identity identifies the Borel sigma-algebra with P(S). Singleton case holds; empty S is excluded. No choice is used. Marker Example 1.2, PDF p.2, confirms the complete discrete metric. Reader and refuter report no finding; no defect found."
+      }
+    }
+  }
+}

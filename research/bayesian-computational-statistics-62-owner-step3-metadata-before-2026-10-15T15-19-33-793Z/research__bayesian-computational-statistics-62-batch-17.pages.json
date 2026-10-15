@@ -1,0 +1,470 @@
+[
+  {
+    "order": 2074,
+    "id": "dirichlet-process-priors-and-finite-partition-updates",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Dirichlet-process priors and finite-partition updates",
+    "companion": "dirichlet-process-priors-and-finite-partition-updates-examples",
+    "requires": [
+      "conjugate-families-and-posterior-prediction",
+      "structural-causal-models-dags-and-adjustment"
+    ],
+    "items": [
+      {
+        "id": "lem-countable-discrete-space-is-standard-borel",
+        "kind": "lemma",
+        "title": "A countable discrete measurable space is standard Borel",
+        "deps": [
+          "def-countable",
+          "def-sigma-algebra",
+          "def-metric-space",
+          "def-metric-ball",
+          "def-metric-topology",
+          "def-cauchy-in-metric",
+          "def-complete-metric-space",
+          "def-separable-space",
+          "def-polish-space",
+          "def-borel-sigma-algebra",
+          "def-standard-borel-space"
+        ],
+        "justified_by": [],
+        "statement": "If S is nonempty and at most countable, then (S,P(S)) is standard Borel.",
+        "strategy": "Use the discrete metric: it is complete and induces the power-set Borel sigma-algebra, while S itself is an at most countable dense subset.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "David Marker, Descriptive Set Theory, Example 1.2, course notes (Fall 2002)",
+              "url": "https://homepages.math.uic.edu/~marker/math512/dst.pdf",
+              "locator": "\u00a71, Example 1.2, PDF p. 2: the discrete metric on a countable set is complete and induces the discrete topology."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-poisson-random-measure",
+        "kind": "definition",
+        "title": "Poisson random measure on a standard Borel space",
+        "statement": "Define a Poisson random measure on a standard Borel space with sigma-finite intensity through its measurable counting-measure evaluations and independent finite-intensity Poisson counts.",
+        "deps": [
+          "def-standard-borel-space",
+          "def-probability-measure",
+          "def-random-element-and-real-random-variable",
+          "def-measurable-function-between-measurable-spaces",
+          "def-measure",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "def-independent-random-elements",
+          "def-poisson-law"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "strategy": "State the measurable evaluation convention for countably additive counting measures and the finite-intensity independent-count property.",
+        "axiom_use": "No choice principle is used in the definition.",
+        "sources": {
+          "references": [
+            {
+              "title": "G\u00fcnter Last and Mathew Penrose, Lectures on the Poisson Process, 2017, Chapter 3",
+              "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+            },
+            {
+              "title": "Thomas S. Ferguson, A Bayesian Analysis of Some Nonparametric Problems, 1973",
+              "url": "https://users.wpi.edu/~balnan/Ferguson1973.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-dirichlet-process",
+        "kind": "definition",
+        "title": "Dirichlet process",
+        "statement": "Define DP(alpha) as the probability law on evaluation-measurable probability measures whose masses on each finite measurable partition have the Dirichlet law after omitting zero-base cells.",
+        "deps": [
+          "def-standard-borel-space",
+          "def-measure",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-probability-measure",
+          "def-dirichlet-distribution",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "strategy": "Specify the evaluation sigma-algebra, finite nonzero base-measure regime, positive-cell Dirichlet law, and deterministic zero-base cells.",
+        "axiom_use": "Dirichlet density normalization inherits Countable Choice from the declared BCS-03 definition.",
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas S. Ferguson, A Bayesian Analysis of Some Nonparametric Problems, 1973, Section 3",
+              "url": "https://users.wpi.edu/~balnan/Ferguson1973.pdf"
+            },
+            {
+              "title": "Subhashis Ghosal and Aad van der Vaart, Posterior convergence rates of Dirichlet mixtures at smooth densities, 2007",
+              "url": "https://arxiv.org/pdf/0708.1885"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+        "kind": "theorem",
+        "title": "Existence of a Dirichlet process by normalized gamma Poisson random measure",
+        "statement": "Under AC, construct a measurable countably additive random probability measure by normalizing a Poisson random measure with intensity alpha(dx)t^(-1)e^(-t)dt; its finite partition increments are independent Gamma(alpha(A_j),1) variables before normalization and its masses have the required Dirichlet laws.",
+        "deps": [
+          "def-dirichlet-process",
+          "def-poisson-random-measure",
+          "def-poisson-law",
+          "lem-poisson-count-law-normalization-and-moments",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-addition-formula",
+          "thm-binomial-theorem",
+          "def-gamma-distribution-shape-rate",
+          "lem-gamma-density-normalization",
+          "def-standard-borel-space",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "lem-countable-discrete-space-is-standard-borel",
+          "lem-borel-subspaces-admit-polish-presentations",
+          "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law",
+          "def-probability-measure",
+          "def-random-element-and-real-random-variable",
+          "def-law-or-distribution-of-a-random-element",
+          "def-measurable-function-between-measurable-spaces",
+          "def-measure",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-change-of-variables-for-expectation",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-dominated-convergence",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "def-dirichlet-density-kernel",
+          "def-dirichlet-distribution",
+          "thm-dirichlet-density-normalization",
+          "def-real-gamma-function-by-the-euler-integral",
+          "thm-real-gamma-euler-integral-convergence",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-integral-exponential-agrees-with-exponential",
+          "thm-exponential-limits-and-range",
+          "thm-logarithm-derivative-and-integral",
+          "lem-uniqueness-of-a-multivariate-exponential-transform",
+          "def-pi-system",
+          "thm-dynkin-pi-lambda",
+          "lem-finite-measure-uniqueness-on-a-pi-system",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-derivative-of-exponential",
+          "def-polish-space",
+          "thm-euclidean-space-complete",
+          "thm-rationals-countable",
+          "lem-rat-embeds-dense"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "strategy": "Partition the gamma mark axis into finite-intensity strips, construct independent Poisson counts and marks by countable standard-Borel product laws, prove the Poisson random-measure count laws, compute gamma increments by their exponential transforms, and normalize them.",
+        "axiom_use": "Full AC is used for the countable standard-Borel product construction through Kolmogorov extension; AC implies the Countable Choice required by the gamma and Dirichlet normalizations.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "G\u00fcnter Last and Mathew Penrose, Lectures on the Poisson Process, 2017, Chapters 1 and 3",
+              "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+            },
+            {
+              "title": "Thomas S. Ferguson, A Bayesian Analysis of Some Nonparametric Problems, 1973, Sections 2 and 3",
+              "url": "https://users.wpi.edu/~balnan/Ferguson1973.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-dirichlet-aggregation-under-coarsening",
+        "kind": "lemma",
+        "title": "Dirichlet parameters add under coarsening",
+        "statement": "For a positive-parameter Dirichlet vector, summing coordinates over a partition of the index set gives a Dirichlet vector whose parameters are the corresponding sums.",
+        "deps": [
+          "lem-countable-discrete-space-is-standard-borel",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "def-dirichlet-distribution",
+          "def-gamma-distribution-shape-rate",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "lem-uniqueness-of-a-multivariate-exponential-transform",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-real-gamma-function-by-the-euler-integral",
+          "thm-real-gamma-euler-integral-convergence"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "strategy": "Represent the positive Dirichlet vector by normalized independent shape-rate Gamma variables, identify sums over disjoint groups by their moment-generating functions, and normalize the grouped variables.",
+        "axiom_use": "Full AC is inherited through the normalized-gamma construction and the exponential-transform uniqueness lemma; no stronger choice principle is used.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas S. Ferguson, A Bayesian Analysis of Some Nonparametric Problems, 1973, Section 2",
+              "url": "https://users.wpi.edu/~balnan/Ferguson1973.pdf"
+            },
+            {
+              "title": "G\u00fcnter Last and Mathew Penrose, Lectures on the Poisson Process, 2017, Chapter 1",
+              "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-dirichlet-process-posterior-update",
+        "kind": "theorem",
+        "title": "Dirichlet-process posterior update",
+        "statement": "Under AC and conditionally IID sampling from G~DP(alpha), a measurable posterior kernel version is DP(alpha+sum_i delta_xi); the statement includes supported fibers and specifies the formula as only a version on prior-predictive null fibers.",
+        "deps": [
+          "def-standard-borel-space",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-dirichlet-process",
+          "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "lem-dirichlet-aggregation-under-coarsening",
+          "thm-dirichlet-multinomial-conjugate-update",
+          "def-dirichlet-distribution",
+          "def-bayesian-model-as-prior-and-sampling-kernel",
+          "def-bayesian-posterior-as-regular-conditional-law",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law",
+          "def-measure-kernel-and-probability-kernel",
+          "lem-finite-products-of-probability-kernels",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-measurable-function-between-measurable-spaces",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "def-probability-measure",
+          "def-law-or-distribution-of-a-random-element",
+          "def-conditional-law-given-a-random-element",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-pi-system",
+          "thm-dynkin-pi-lambda",
+          "lem-finite-measure-uniqueness-on-a-pi-system"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "strategy": "Prove measurability of the updated Dirichlet-process law on finite-partition cylinders, verify the posterior disintegration identity on common refinements using the finite-dimensional Dirichlet-multinomial update, then extend both identities by pi-lambda uniqueness.",
+        "axiom_use": "Full AC is carried from the normalized-gamma existence theorem and supplies the Countable Choice assumed by the finite-dimensional Dirichlet update.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas S. Ferguson, A Bayesian Analysis of Some Nonparametric Problems, 1973, Sections 2 and 3",
+              "url": "https://users.wpi.edu/~balnan/Ferguson1973.pdf"
+            },
+            {
+              "title": "Subhashis Ghosal and Aad van der Vaart, Posterior convergence rates of Dirichlet mixtures at smooth densities, 2007",
+              "url": "https://arxiv.org/pdf/0708.1885"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-dirichlet-process-polya-urn-predictive-law",
+        "kind": "theorem",
+        "title": "Dirichlet-process P\u00f3lya-urn predictive law",
+        "statement": "Under the posterior version DP(alpha+sum_i delta_xi), the next-draw predictive probability of a measurable set A is (alpha(A)+sum_i 1_A(x_i))/(alpha(X)+n), including zero-base and one-cell boundaries.",
+        "deps": [
+          "def-dirichlet-process",
+          "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "thm-dirichlet-process-posterior-update",
+          "thm-dirichlet-multinomial-conjugate-update",
+          "def-dirichlet-distribution",
+          "def-probability-measure",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "strategy": "Take the posterior expectation of G(A); obtain the one-cell predictive probability from the Dirichlet-multinomial update and handle zero-parameter cells by their deterministic mass.",
+        "axiom_use": "Full AC is inherited through the posterior and normalized-gamma theorems and implies the Countable Choice used in Dirichlet conjugacy.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas S. Ferguson, A Bayesian Analysis of Some Nonparametric Problems, 1973, Sections 2 and 3",
+              "url": "https://users.wpi.edu/~balnan/Ferguson1973.pdf"
+            },
+            {
+              "title": "G\u00fcnter Last and Mathew Penrose, Lectures on the Poisson Process, 2017, Chapter 1",
+              "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "rem-dirichlet-process-support-does-not-imply-density-contraction",
+        "kind": "remark",
+        "title": "Finite-partition conjugacy gives no density-contraction theorem",
+        "statement": "The normalized-gamma existence theorem and finite-partition update state no topology or density model. Weak support needs a topology and positive prior neighborhood mass; density-posterior consistency or contraction additionally needs a specified sampling model, truth class and its own proof under the relevant hypotheses.",
+        "deps": [
+          "def-dirichlet-process",
+          "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "thm-dirichlet-process-posterior-update",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "strategy": "State the precise boundary of the finite-partition existence and update results without asserting a topology-dependent support or contraction theorem.",
+        "axiom_use": "The referenced Dirichlet-process results assume full AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Subhashis Ghosal and Aad van der Vaart, Posterior convergence rates of Dirichlet mixtures at smooth densities, 2007, Section 7",
+              "url": "https://arxiv.org/pdf/0708.1885"
+            },
+            {
+              "title": "Thomas S. Ferguson, A Bayesian Analysis of Some Nonparametric Problems, 1973, Section 3",
+              "url": "https://users.wpi.edu/~balnan/Ferguson1973.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2075,
+    "id": "dirichlet-process-priors-and-finite-partition-updates-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Dirichlet-process priors and finite-partition updates \u2014 Examples",
+    "companion": "dirichlet-process-priors-and-finite-partition-updates",
+    "requires": [
+      "dirichlet-process-priors-and-finite-partition-updates"
+    ],
+    "items": [
+      {
+        "id": "ex-dirichlet-process-finite-partition-posterior-and-polya-urn",
+        "kind": "example",
+        "title": "Finite-partition posterior and P\u00f3lya-urn draws",
+        "statement": "For a three-point space with Dirichlet base masses (2,1,1), verify the posterior after observations a,b and the exact next-draw probabilities, including reinforcement after one draw of a.",
+        "deps": [
+          "lem-countable-discrete-space-is-standard-borel",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "def-dirichlet-process",
+          "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "thm-dirichlet-process-posterior-update",
+          "thm-dirichlet-process-polya-urn-predictive-law",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "strategy": "Update the three Dirichlet parameters by the cell counts and evaluate the predictive formula for the first and second draws.",
+        "axiom_use": "Full AC is inherited from the normalized-gamma construction and posterior result.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas S. Ferguson, A Bayesian Analysis of Some Nonparametric Problems, 1973, Sections 2 and 3",
+              "url": "https://users.wpi.edu/~balnan/Ferguson1973.pdf"
+            },
+            {
+              "title": "G\u00fcnter Last and Mathew Penrose, Lectures on the Poisson Process, 2017, Chapter 1",
+              "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-dirichlet-process-alpha-null-observation-fiber",
+        "kind": "example",
+        "title": "A base-null observation is a prior-predictive null fiber",
+        "statement": "On a two-point space with base measure supported at a, the event that an IID observation equals b has prior-predictive probability zero; the DP update formula at b is one valid kernel value and may be changed on that null data set.",
+        "deps": [
+          "lem-countable-discrete-space-is-standard-borel",
+          "prop-dirac-measure-is-a-probability-measure",
+          "def-dirichlet-process",
+          "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "thm-dirichlet-process-posterior-update",
+          "thm-dirichlet-process-polya-urn-predictive-law",
+          "def-bayesian-posterior-as-regular-conditional-law",
+          "def-standard-borel-space",
+          "def-measure-kernel-and-probability-kernel",
+          "def-probability-measure",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "strategy": "Use the zero-base-cell law to show the event is null, then change the posterior kernel on its measurable null fiber and check the disintegration identity is unchanged.",
+        "axiom_use": "Full AC is inherited from the normalized-gamma and posterior results.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas S. Ferguson, A Bayesian Analysis of Some Nonparametric Problems, 1973, Section 3",
+              "url": "https://users.wpi.edu/~balnan/Ferguson1973.pdf"
+            },
+            {
+              "title": "Subhashis Ghosal and Aad van der Vaart, Posterior convergence rates of Dirichlet mixtures at smooth densities, 2007, Section 7",
+              "url": "https://arxiv.org/pdf/0708.1885"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  }
+]

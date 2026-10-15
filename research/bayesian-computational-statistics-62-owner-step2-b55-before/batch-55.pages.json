@@ -1,0 +1,580 @@
+[
+  {
+    "order": 2150,
+    "id": "asymptotically-robust-permutation-tests",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Studentized permutation tests under weak parameter nulls",
+    "companion": "asymptotically-robust-permutation-tests-examples",
+    "requires": [
+      "finite-group-permutation-inference",
+      "martingale-inequalities-and-convergence",
+      "conformal-prediction-and-exchangeable-ranks",
+      "horvitz-thompson-variance-and-srswor"
+    ],
+    "items": [
+      {
+        "id": "def-two-sample-u-statistic-parameter",
+        "kind": "definition",
+        "deps": [
+          "def-probability-measure",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "def-measurable-function-between-measurable-spaces",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable"
+        ],
+        "dependency_level": 0,
+        "title": "Two-sample U-statistic parameter",
+        "justified_by": []
+      },
+      {
+        "id": "lem-finite-population-permutation-clt",
+        "kind": "lemma",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "def-independent-random-elements",
+          "def-moments-variance-and-covariance",
+          "thm-martingale-central-limit-theorem",
+          "def-square-integrable-martingale-difference-array-and-variance-clock",
+          "lem-conditional-hoeffding-bound-for-bounded-martingale-differences",
+          "def-axiom-of-choice",
+          "def-finite-population-and-sampling-design",
+          "def-simple-random-sampling-without-replacement",
+          "thm-srswor-mean-variance-and-finite-population-correction",
+          "thm-tower-property-of-conditional-expectation"
+        ],
+        "dependency_level": 0,
+        "title": "Conditional CLT for a random subset of an IID finite population",
+        "justified_by": [],
+        "statement": "Assume the Axiom of Choice. For each $N$, let $W_{N,1},\\ldots,W_{N,N}$ be IID real variables with mean $0$, variance $\\sigma_N^2\\to\\sigma^2>0$, and uniformly integrable squares:\n\n$$\\lim_{K\\to\\infty}\\sup_N E\\!\\left[W_{N,1}^2\\mathbf 1_{\\{|W_{N,1}|>K\\}}\\right]=0.$$\n\nLet $m_N+n_N=N$ with $m_N/N\\to p\\in(0,1)$, put $q=1-p$, and choose a uniformly random $m_N$-element subset $A_N\\subseteq\\{1,\\ldots,N\\}$ independently of the row. Set\n\n$$\\bar W_N=N^{-1}\\sum_{i=1}^N W_{N,i},\\qquad S_N^2=(N-1)^{-1}\\sum_{i=1}^N(W_{N,i}-\\bar W_N)^2.$$\n\nDefine\n\n$$T_N=\\frac{\\sum_{i\\in A_N}(W_{N,i}-\\bar W_N)}{\\sqrt{m_Nn_N S_N^2/N}},$$\n\nand set $T_N=0$ if $S_N^2=0$. Then the conditional distribution of $T_N$ given the finite population converges in probability to $N(0,1)$, uniformly in its real argument.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Y. Chung and J. P. Romano, Asymptotically Valid and Exact Permutation Tests Based on Two-Sample U-Statistics, Stanford Technical Report 2011-09, §3.1–3.2",
+              "url": "https://stacks.stanford.edu/file/dp187pj2131/dp187pj2131_2011-09.pdf"
+            },
+            {
+              "title": "Péter Major, Some Results About U-statistics, in On the Estimation of Multiple Random Integrals and U-Statistics, Lecture Notes in Mathematics 2079, Chapter 9",
+              "url": "https://static.renyi.hu/~major/articles/lect-note1.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-hypergeometric-binomial-contiguity-for-permutation-samples",
+        "kind": "lemma",
+        "deps": [
+          "thm-lindeberg-feller-central-limit-theorem-sufficiency",
+          "thm-real-stirling-formula",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-moments-variance-and-covariance",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 0,
+        "title": "Hypergeometric and binomial composition counts are contiguous",
+        "justified_by": []
+      },
+      {
+        "id": "lem-general-measurable-finite-group-randomization-validity",
+        "kind": "lemma",
+        "deps": [
+          "def-group",
+          "def-group-action",
+          "lem-finite-multiset-randomized-rank-is-uniform",
+          "def-independent-random-elements",
+          "def-measurable-function-between-measurable-spaces",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability"
+        ],
+        "dependency_level": 0,
+        "title": "Finite-group rank validity on a measurable sample space",
+        "justified_by": []
+      },
+      {
+        "id": "lem-random-permutation-variance-by-transpositions",
+        "kind": "lemma",
+        "title": "A successive-revelation variance bound for a uniform permutation",
+        "deps": [
+          "def-uniform-finite-probability-space",
+          "def-moments-variance-and-covariance",
+          "thm-cauchy-schwarz-finite"
+        ],
+        "justified_by": [],
+        "statement": "Let $\\pi$ be uniform on the permutations of $\\{1,\\ldots,N\\}$, where $N\\ge1$, and let $f$ be any real function on this finite set. Write $\\pi(k,l)$ for the permutation obtained by exchanging its entries in positions $k,l$, with $(k,k)$ the identity. Then\n\n$$\\operatorname{Var}(f(\\pi))\\le\\frac12\\sum_{k=1}^N\\frac1{N-k+1}\\sum_{l=k}^N E[(f(\\pi)-f(\\pi(k,l)))^2].$$\n\nIn particular, if every transposition difference has second moment at most $b$, then $\\operatorname{Var}(f(\\pi))\\le Nb/2$. These are finite-sum statements and require no choice axiom.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sourav Chatterjee, Stein's method for concentration inequalities (permutation concentration background; the successive-revelation estimate is proved locally)",
+              "url": "https://arxiv.org/pdf/math/0604352"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-two-sample-order-r-u-statistic-and-first-projections",
+        "kind": "definition",
+        "deps": [
+          "def-two-sample-u-statistic-parameter",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-statistic-and-estimator",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "lem-coordinate-maps-and-permutations-are-measurable-on-finite-products",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability"
+        ],
+        "dependency_level": 1,
+        "title": "Two-sample order-r U-statistic and first projections",
+        "justified_by": [
+          "lem-two-sample-u-statistic-projections-well-defined"
+        ]
+      },
+      {
+        "id": "lem-permutation-consistency-from-iid-mixture",
+        "kind": "lemma",
+        "deps": [
+          "lem-hypergeometric-binomial-contiguity-for-permutation-samples",
+          "def-statistic-and-estimator",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-independent-random-elements",
+          "def-probability-measure",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "title": "Consistency transfers from IID mixture samples to permuted groups",
+        "justified_by": []
+      },
+      {
+        "id": "lem-permutation-mixture-coupling-for-two-sample-u-statistics",
+        "kind": "lemma",
+        "deps": [
+          "def-two-sample-order-r-u-statistic-and-first-projections",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-independent-random-elements",
+          "def-probability-measure",
+          "def-uniform-finite-probability-space",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "def-moments-variance-and-covariance",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "lem-random-permutation-variance-by-transpositions"
+        ],
+        "dependency_level": 2,
+        "title": "Mixture coupling for permuted two-sample U-statistics",
+        "justified_by": [],
+        "statement": "Use the setup of [[def-two-sample-order-r-u-statistic-and-first-projections]] with fixed $r$, $m+n=N$, and $m/N\\to p\\in(0,1)$. Assume $h$ is symmetric within each block and antisymmetric under exchange of its two blocks. For every assignment of independent P- and Q-distributed arguments to its $2r$ positions, assume $E h^2<\\infty$.\n\nLet $\\bar P_N=(m/N)P+(n/N)Q$. Couple an IID row from $\\bar P_N$ to the original labelled sample by drawing mixture labels and matching observations until one labelled group is exhausted, then drawing fresh observations for the remaining labels. Reorder the coupled row to agree with the original $P^mQ^n$ ordering except at $D$ unmatched positions. For a uniform permutation $\\pi$ independent of this coupling,\n\n$$\\sqrt m\\,\\bigl(U_{m,n}(Z^\\pi)-U_{m,n}(\\bar Z^{\\pi\\pi_0})\\bigr)\\longrightarrow0\\quad\\text{in }L^2.$$\n\nNeither the weak null nor assignment-wise kernel centering is needed for this coupling bound. No rate for $m/N-p$ is assumed.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Y. Chung and J. P. Romano, Asymptotically Valid and Exact Permutation Tests Based on Two-Sample U-Statistics, Stanford Technical Report 2011-09, §3.1 and Appendix A, Lemma A.1",
+              "url": "https://stacks.stanford.edu/file/dp187pj2131/dp187pj2131_2011-09.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-two-sample-u-statistic-projections-well-defined",
+        "kind": "lemma",
+        "deps": [
+          "def-two-sample-order-r-u-statistic-and-first-projections",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras"
+        ],
+        "dependency_level": 2,
+        "title": "First projections are measurable and square-integrable",
+        "justified_by": []
+      },
+      {
+        "id": "lem-pooled-mixture-projection-and-variance",
+        "kind": "lemma",
+        "deps": [
+          "def-two-sample-order-r-u-statistic-and-first-projections",
+          "lem-two-sample-u-statistic-projections-well-defined",
+          "def-moments-variance-and-covariance",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 3,
+        "title": "Pooled-mixture projection and variance",
+        "justified_by": []
+      },
+      {
+        "id": "lem-two-sample-u-statistic-hoeffding-decomposition",
+        "kind": "lemma",
+        "deps": [
+          "def-two-sample-order-r-u-statistic-and-first-projections",
+          "lem-two-sample-u-statistic-projections-well-defined",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-moments-variance-and-covariance",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 3,
+        "title": "Two-sample Hoeffding decomposition",
+        "justified_by": []
+      },
+      {
+        "id": "lem-two-sample-u-statistic-degenerate-remainder-order",
+        "kind": "lemma",
+        "deps": [
+          "lem-two-sample-u-statistic-hoeffding-decomposition",
+          "def-moments-variance-and-covariance",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 4,
+        "title": "Second-moment order of the degenerate remainder",
+        "justified_by": []
+      },
+      {
+        "id": "def-studentized-two-sample-u-statistic",
+        "kind": "definition",
+        "deps": [
+          "def-two-sample-order-r-u-statistic-and-first-projections",
+          "lem-pooled-mixture-projection-and-variance",
+          "def-statistic-and-estimator",
+          "def-measurable-function-between-measurable-spaces"
+        ],
+        "dependency_level": 4,
+        "title": "Studentized two-sample U-statistic and permutation distribution",
+        "justified_by": [],
+        "statement": "For the two-sample statistic in\n[[def-two-sample-order-r-u-statistic-and-first-projections]], let\n$\\widehat\\sigma_m^2$ and $\\widehat\\sigma_n^2$ be nonnegative measurable\nstatistics of the two samples intended to estimate the variances of $g_X(X_1)$ and $g_Y(Y_1)$. Each may depend on both groups; separate-group dependence is an additional property, not part of this definition.\nDefine the estimated standard error and studentized statistic by\n\n$$V_{m,n}^{\\rm SE}:=r\\sqrt{\\frac{\\widehat\\sigma_m^2}{m}+\\frac{\\widehat\\sigma_n^2}{n}},\\qquad S_{m,n}:=\\begin{cases}U_{m,n}/V_{m,n}^{\\rm SE},&V_{m,n}^{\\rm SE}>0,\\\\0,&V_{m,n}^{\\rm SE}=0.\\end{cases}$$\n\nFor a uniform random permutation $\\pi$ of the pooled $N=m+n$ observations,\nrecompute both group statistics and both variance estimates on the permuted\ngroups; the **permutation distribution** of $S_{m,n}$ is the conditional law of\n$S_{m,n}^{\\pi}$ given the pooled observations.",
+        "strategy": "Operational definition; no phase proof applicable.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Y. Chung and J. P. Romano, Asymptotically Valid and Exact Permutation Tests Based on Two-Sample U-Statistics, Stanford Technical Report 2011-09, Theorem 3.2",
+              "url": "https://stacks.stanford.edu/file/dp187pj2131/dp187pj2131_2011-09.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-two-sample-u-statistic-projection-clt",
+        "kind": "theorem",
+        "deps": [
+          "def-two-sample-order-r-u-statistic-and-first-projections",
+          "lem-two-sample-u-statistic-degenerate-remainder-order",
+          "thm-lindeberg-levy-iid-central-limit-theorem",
+          "thm-slutsky-for-real-random-variables",
+          "def-moments-variance-and-covariance",
+          "def-axiom-of-choice",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "lem-characteristic-function-of-a-normal-law",
+          "cor-characteristic-function-criterion-for-weak-convergence"
+        ],
+        "dependency_level": 5,
+        "title": "Projection CLT for a two-sample U-statistic",
+        "justified_by": []
+      },
+      {
+        "id": "cor-two-sample-permutation-exact-under-equal-distributions",
+        "kind": "corollary",
+        "deps": [
+          "def-studentized-two-sample-u-statistic",
+          "thm-finite-group-permutation-validity",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-independent-random-elements",
+          "def-probability-measure",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "lem-coordinate-maps-and-permutations-are-measurable-on-finite-products"
+        ],
+        "dependency_level": 5,
+        "title": "Finite-sample exactness under equal distributions",
+        "justified_by": []
+      },
+      {
+        "id": "thm-two-sample-u-statistic-permutation-clt-under-weak-null",
+        "kind": "theorem",
+        "title": "Permutation CLT for a two-sample U-statistic under a weak null",
+        "deps": [
+          "def-two-sample-order-r-u-statistic-and-first-projections",
+          "lem-two-sample-u-statistic-projections-well-defined",
+          "lem-two-sample-u-statistic-hoeffding-decomposition",
+          "lem-two-sample-u-statistic-degenerate-remainder-order",
+          "lem-pooled-mixture-projection-and-variance",
+          "lem-finite-population-permutation-clt",
+          "lem-permutation-mixture-coupling-for-two-sample-u-statistics",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume AC. Let $X_1,\\ldots,X_m$ be IID $P$ and independently let\n$Y_1,\\ldots,Y_n$ be IID $Q$, with $N=m+n$, $m/N\\to p\\in(0,1)$, and\n$\\theta(P,Q;h)=0$. Fix $r$ and a measurable kernel $h$ that is symmetric in\neach block and antisymmetric under block exchange. Assume for **every**\nassignment of independent P- and Q-distributed arguments to the $2r$ positions\nthat $0<E[h^2]<\\infty$. Let\n$\\sigma_p^2=E_{\\bar P}[g_{\\bar P}^2]>0$ for\n$\\bar P=pP+(1-p)Q$, where $g_{\\bar P}$ is its first projection. Then the\nconditional permutation CDF of $\\sqrt m\\,U_{m,n}$ satisfies\n\n$$\\sup_{t\\in\\mathbb R}\\left|\\widehat R_{m,n}^{\\sqrt m U}(t)-\\Phi\\!\\left(\\frac{t}{\\tau_p}\\right)\\right|\\to_P0,\\qquad \\tau_p^2=\\frac{r^2}{1-p}\\sigma_p^2.$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Y. Chung and J. P. Romano, Asymptotically Valid and Exact Permutation Tests Based on Two-Sample U-Statistics, Stanford Technical Report 2011-09, Theorem 3.1 and Appendix A, Lemmas A.1–A.2",
+              "url": "https://stacks.stanford.edu/file/dp187pj2131/dp187pj2131_2011-09.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-two-sample-u-statistic-permutation-clt-under-mixed-centering",
+        "kind": "theorem",
+        "deps": [
+          "thm-two-sample-u-statistic-permutation-clt-under-weak-null",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 6,
+        "title": "Permutation CLT for a two-sample U-statistic under mixed-assignment centering",
+        "justified_by": [],
+        "statement": "Assume AC. Let $X_1,\\ldots,X_m$ be IID $P$ and independently let\n$Y_1,\\ldots,Y_n$ be IID $Q$, with $N=m+n$, $m/N\\to p\\in(0,1)$, and\n$\\theta(P,Q;h)=0$. Fix $r$ and a measurable kernel $h$ that is symmetric in\neach block and antisymmetric under block exchange. Assume for **every**\nassignment of independent P- and Q-distributed arguments to the $2r$ positions\nthat $E[h]=0$ and $0<E[h^2]<\\infty$. Let\n$\\sigma_p^2=E_{\\bar P}[g_{\\bar P}^2]>0$ for\n$\\bar P=pP+(1-p)Q$, where $g_{\\bar P}$ is its first projection. Then the\nconditional permutation CDF of $\\sqrt m\\,U_{m,n}$ satisfies\n\n$$\\sup_{t\\in\\mathbb R}\\left|\\widehat R_{m,n}^{\\sqrt m U}(t)-\\Phi\\!\\left(\\frac{t}{\\tau_p}\\right)\\right|\\to_P0,\\qquad \\tau_p^2=\\frac{r^2}{1-p}\\sigma_p^2.$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Y. Chung and J. P. Romano, Asymptotically Valid and Exact Permutation Tests Based on Two-Sample U-Statistics, Stanford Technical Report 2011-09, Theorem 3.1 and Appendix A, Lemmas A.1–A.2",
+              "url": "https://stacks.stanford.edu/file/dp187pj2131/dp187pj2131_2011-09.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-studentized-two-sample-u-statistic-permutation-validity",
+        "kind": "theorem",
+        "deps": [
+          "thm-two-sample-u-statistic-permutation-clt-under-weak-null",
+          "lem-permutation-consistency-from-iid-mixture",
+          "thm-two-sample-u-statistic-projection-clt",
+          "def-studentized-two-sample-u-statistic",
+          "thm-slutsky-for-real-random-variables",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 6,
+        "title": "Studentized permutation validity under a weak two-sample parameter null",
+        "justified_by": [],
+        "statement": "Assume AC. Let independent IID samples $X_1,\\ldots,X_m\\sim P$ and $Y_1,\\ldots,Y_n\\sim Q$ satisfy $N=m+n$, $m/N\\to p\\in(0,1)$, and the weak null $\\theta(P,Q;h)=0$. Fix $r$ and a measurable kernel symmetric within each block and antisymmetric under block exchange. Assume $0<E_\\eta h^2<\\infty$ for every independent P/Q assignment $\\eta$ to the $2r$ positions. Suppose the direct first-projection variances $\\sigma_X^2,\\sigma_Y^2$ and limiting pooled-mixture first-projection variance $\\sigma_p^2$ are positive and finite. Put $p_N=m/N$, $\\bar P_N=p_NP+(1-p_N)Q$, and $\\sigma_N^2=E_{\\bar P_N}g_N^2\\to\\sigma_p^2$.\n\nUse the nonnegative measurable variance estimates and zero-denominator convention in [[def-studentized-two-sample-u-statistic]]. Assume $\\widehat\\sigma_m^2\\to_P\\sigma_X^2$, $\\widehat\\sigma_n^2\\to_P\\sigma_Y^2$ under the original samples. For general estimates depending on both groups, assume also permutation consistency: for each $\\varepsilon>0$ and $k\\in\\{m,n\\}$,\n\n$$P_\\pi\\bigl(|\\widehat\\sigma_{k,\\pi}^2-\\sigma_N^2|>\\varepsilon\\mid Z\\bigr)\\to_P0.$$\n\nA sufficient condition for this last hypothesis is that each estimate is a statistic of its own group alone, and is consistent for $\\sigma_N^2$ on an IID $\\bar P_N$ sample of that group's size. Joint estimates may instead establish permutation consistency directly.\n\nThen the conditional permutation CDF of $S_{m,n}=U_{m,n}/V_{m,n}^{\\rm SE}$ converges uniformly in probability to $\\Phi$, and $S_{m,n}\\Rightarrow N(0,1)$ under the true sampling law, where\n\n$$V_{m,n}^{\\rm SE}=r\\sqrt{\\widehat\\sigma_m^2/m+\\widehat\\sigma_n^2/n}.$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Y. Chung and J. P. Romano, Asymptotically Valid and Exact Permutation Tests Based on Two-Sample U-Statistics, Stanford Technical Report 2011-09, Theorems 3.1–3.2 and Appendix A",
+              "url": "https://stacks.stanford.edu/file/dp187pj2131/dp187pj2131_2011-09.pdf"
+            },
+            {
+              "title": "E. Y. Chung and J. P. Romano, Exact and Asymptotically Robust Permutation Tests, Stanford Technical Report 2011-05, §3.4 and Appendix A",
+              "url": "https://stacks.stanford.edu/file/vs995qc2521/vs995qc2521_2011-05.pdf"
+            },
+            {
+              "title": "E. Y. Chung and J. P. Romano, Exact and asymptotically robust permutation tests, The Annals of Statistics 41(2), 2013, §§2–3.1",
+              "url": "https://arxiv.org/pdf/1304.5939"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-studentized-permutation-validity-under-mixed-assignment-centering",
+        "kind": "theorem",
+        "deps": [
+          "thm-studentized-two-sample-u-statistic-permutation-validity",
+          "thm-two-sample-u-statistic-permutation-clt-under-mixed-centering",
+          "def-studentized-two-sample-u-statistic",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 7,
+        "title": "Studentized permutation validity under mixed-assignment centering",
+        "justified_by": [],
+        "statement": "Assume AC and the sampling and kernel conditions of [[thm-two-sample-u-statistic-permutation-clt-under-mixed-centering]]. Let the direct first-projection variances $\\sigma_X^2,\\sigma_Y^2$ and pooled variance $\\sigma_p^2$ be positive and finite, and put $\\sigma_N^2=E_{\\bar P_N}g_N^2\\to\\sigma_p^2$. Use the studentized statistic in [[def-studentized-two-sample-u-statistic]]. Suppose both variance estimates are consistent for their direct projection variances under the original samples and are permutation-consistent for $\\sigma_N^2$ in the conditional sense of [[thm-studentized-two-sample-u-statistic-permutation-validity]]. A sufficient condition for the latter is that each estimate depends on its own group alone and is consistent for $\\sigma_N^2$ on an IID $\\bar P_N$ sample of that size.\n\nThen the conditional permutation CDF of $S_{m,n}=U_{m,n}/V_{m,n}^{\\rm SE}$ converges uniformly in probability to $\\Phi$, and under the true sampling law $S_{m,n}\\Rightarrow N(0,1)$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Y. Chung and J. P. Romano, Asymptotically Valid and Exact Permutation Tests Based on Two-Sample U-Statistics, Stanford Technical Report 2011-09, Theorem 3.2 and proof",
+              "url": "https://stacks.stanford.edu/file/dp187pj2131/dp187pj2131_2011-09.pdf"
+            },
+            {
+              "title": "E. Y. Chung and J. P. Romano, Exact and Asymptotically Robust Permutation Tests, Stanford Technical Report 2011-05, §3.4 and Lemma 3.3",
+              "url": "https://stacks.stanford.edu/file/vs995qc2521/vs995qc2521_2011-05.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2151,
+    "id": "asymptotically-robust-permutation-tests-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Studentized permutation tests under weak parameter nulls — Examples",
+    "companion": "asymptotically-robust-permutation-tests",
+    "requires": [
+      "asymptotically-robust-permutation-tests"
+    ],
+    "items": [
+      {
+        "id": "cex-weak-null-does-not-imply-mixed-assignment-centering",
+        "kind": "counterexample",
+        "deps": [
+          "def-two-sample-u-statistic-parameter",
+          "def-two-sample-order-r-u-statistic-and-first-projections",
+          "lem-two-sample-u-statistic-projections-well-defined"
+        ],
+        "dependency_level": 3,
+        "title": "The weak null does not center every mixed kernel assignment",
+        "justified_by": []
+      },
+      {
+        "id": "cex-positive-kernel-second-moment-does-not-imply-nondegenerate-projections",
+        "kind": "counterexample",
+        "deps": [
+          "def-two-sample-order-r-u-statistic-and-first-projections",
+          "lem-two-sample-u-statistic-degenerate-remainder-order",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-moments-variance-and-covariance"
+        ],
+        "dependency_level": 5,
+        "title": "Positive kernel second moment does not imply nondegenerate first projections",
+        "justified_by": []
+      },
+      {
+        "id": "ex-same-mean-unequal-variance-studentized-permutation-test",
+        "kind": "example",
+        "deps": [
+          "thm-studentized-permutation-validity-under-mixed-assignment-centering",
+          "thm-two-sample-u-statistic-permutation-clt-under-mixed-centering",
+          "def-studentized-two-sample-u-statistic",
+          "def-two-sample-order-r-u-statistic-and-first-projections",
+          "def-two-sample-u-statistic-parameter",
+          "def-moments-variance-and-covariance",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-chebyshev-inequality",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 8,
+        "title": "Studentized difference of means with equal means and unequal variances",
+        "justified_by": [],
+        "statement": "Assume AC. Let $P$ assign probability $1/2$ to each of $-1,1$, and let $Q$ assign\nprobability $1/2$ to $0$ and probability $1/4$ to each of $-2,2$. Take\n$h(x,y)=x-y$, so $r=1$ and $\\theta(P,Q;h)=\\mu_P-\\mu_Q$. Let\n$m/N\\to1/4$. For a group $W_1,\\ldots,W_k$, put\n$\\bar W_k=k^{-1}\\sum_{i=1}^kW_i$ and\n$\\widehat\\sigma_k^2=(k-1)^{-1}\\sum_{i=1}^k(W_i-\\bar W_k)^2$ for\n$\\widehat\\sigma_m^2$ and $\\widehat\\sigma_n^2$ in the studentized statistic.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Y. Chung and J. P. Romano, Asymptotically Valid and Exact Permutation Tests Based on Two-Sample U-Statistics, Stanford Technical Report 2011-09, Theorem 3.2 and Example 3.1",
+              "url": "https://stacks.stanford.edu/file/dp187pj2131/dp187pj2131_2011-09.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-exact-versus-weak-two-sample-null",
+        "kind": "example",
+        "deps": [
+          "cor-two-sample-permutation-exact-under-equal-distributions",
+          "thm-studentized-permutation-validity-under-mixed-assignment-centering",
+          "def-studentized-two-sample-u-statistic",
+          "def-two-sample-u-statistic-parameter",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-chebyshev-inequality",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 8,
+        "title": "Exact equality null versus weak parameter null",
+        "justified_by": [],
+        "statement": "For the sample-mean kernel $h(x,y)=x-y$, compare two cases. First take\n$P=Q$ equal to the Rademacher law. Second take the distinct laws\n$P(\\{-1,1\\})=(1/2,1/2)$ and\n$Q(\\{-2,0,2\\})=(1/4,1/2,1/4)$. Both cases satisfy the weak parameter null\n$E_PX-E_QY=0$, but only the first has an invariant pooled law under all\nlabel permutations. In both cases use the usual sample variances as\n$\\widehat\\sigma_m^2,\\widehat\\sigma_n^2$ in\n[[def-studentized-two-sample-u-statistic]], and take $m/N\\to1/2$.\nFor a group $W_1,\\ldots,W_k$, put\n$\\bar W_k=k^{-1}\\sum_{i=1}^kW_i$ and\n$\\widehat\\sigma_k^2=(k-1)^{-1}\\sum_{i=1}^k(W_i-\\bar W_k)^2$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Y. Chung and J. P. Romano, Asymptotically Valid and Exact Permutation Tests Based on Two-Sample U-Statistics, Stanford Technical Report 2011-09, §3",
+              "url": "https://stacks.stanford.edu/file/dp187pj2131/dp187pj2131_2011-09.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-studentized-rank-u-statistic-under-weak-null",
+        "kind": "example",
+        "deps": [
+          "thm-studentized-permutation-validity-under-mixed-assignment-centering",
+          "def-two-sample-u-statistic-parameter",
+          "def-two-sample-order-r-u-statistic-and-first-projections",
+          "def-studentized-two-sample-u-statistic",
+          "lem-pooled-mixture-projection-and-variance",
+          "def-moments-variance-and-covariance",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-chebyshev-inequality",
+          "lem-permutation-consistency-from-iid-mixture",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 8,
+        "title": "A studentized rank U-statistic under a weak null",
+        "justified_by": [],
+        "statement": "Let $P$ put mass $1/2$ at each of $0,2$, and let $Q$ put masses\n$1/4,1/2,1/4$ at $-1,1,3$, respectively. Take $r=1$ and $m/N\\to1/2$, and\n$$h(x,y)=\\mathbf1\\{y>x\\}-\\mathbf1\\{y<x\\}.$$\nThere are no cross-sample ties. Use the sample variances of the estimated\nfirst projections in the standard-error studentizer. Set\n$$U_{m,n}=\\frac1{mn}\\sum_{i=1}^m\\sum_{j=1}^n h(X_i,Y_j),\\qquad \\widehat g_{X,i}=\\frac1n\\sum_{j=1}^n h(X_i,Y_j)-U_{m,n},\\qquad \\widehat g_{Y,j}=\\frac1m\\sum_{i=1}^m h(X_i,Y_j)-U_{m,n}.$$\nLet $\\bar{\\widehat g}_X=m^{-1}\\sum_i\\widehat g_{X,i}$ and\n$\\bar{\\widehat g}_Y=n^{-1}\\sum_j\\widehat g_{Y,j}$, and take\n$$\\widehat\\sigma_m^2=\\frac1{m-1}\\sum_{i=1}^m(\\widehat g_{X,i}-\\bar{\\widehat g}_X)^2,\\qquad \\widehat\\sigma_n^2=\\frac1{n-1}\\sum_{j=1}^n(\\widehat g_{Y,j}-\\bar{\\widehat g}_Y)^2.$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Y. Chung and J. P. Romano, Asymptotically Valid and Exact Permutation Tests Based on Two-Sample U-Statistics, Stanford Technical Report 2011-09, Example 3.1 and Theorem 3.2",
+              "url": "https://stacks.stanford.edu/file/dp187pj2131/dp187pj2131_2011-09.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-extra-sqrt-m-after-standard-error-studentization-diverges",
+        "kind": "counterexample",
+        "deps": [
+          "thm-studentized-permutation-validity-under-mixed-assignment-centering",
+          "def-studentized-two-sample-u-statistic",
+          "def-two-sample-u-statistic-parameter",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-moments-variance-and-covariance",
+          "thm-chebyshev-inequality",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 8,
+        "title": "An extra square-root sample-size factor destroys standard-error studentization",
+        "justified_by": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,103 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "10",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "thm-posterior-consistency-under-prior-mass-and-tests",
+      "model": "gpt-6-luna",
+      "context_sha256": "4b762a9c84323b0105b26784d475e6ed45c923272cc4f24be65a6b5d22e993aa",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 3.2 uses A_n before its definition in 4.1. The later formula uniquely specifies the intended tested likelihood numerator, and its Tonelli expectation identity correctly retains the truth-support indicator, so this is a presentation defect rather than a false estimate or missing argument. Moved the definition to 3.2, explicitly set A_n=0 off the P0^n-full truth-support event, and made 4.1 cite that earlier step.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-posterior-consistency-under-prior-mass-and-tests",
+      "disposition": "repaired",
+      "post_sha256": "4d9ba1d674d0c9cdd61cfcc21c229b74fce748fa1c28161cf36874b89064867a",
+      "review_context_sha256": "384984e7fe199edc7c69ca3b866ff482cf8f99411bfe400e1f8ae458cd89fed5",
+      "reason": "Reviewed the complete statement and proof, all 35 direct supplier interfaces, owning contract, and both owning pages. Finite KL gives integrable averaged log likelihood; Jensen and the IID L1 strong law yield D_n >= Pi(B_a) exp(-nb) eventually. A block size with both errors below 1/4 yields exponentially small amplified errors with c=1/(8m). Tonelli bounds E A_n by exp(1/8-cn) without assuming Ptheta << P0; choosing 0<a<b<c makes the scaled numerator vanish by Markov and Borel-Cantelli. Pinsker and h^2<=2TV give h^4<=2KL, and joint measurability plus Tonelli gives measurable positive-prior Hellinger balls. Repaired the forward definition and corresponding contract derivations; corrected four stale contract boundary references. Statement, hypotheses, dependencies, AC scope, and page interfaces are unchanged. No independent review of this repair is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "defect_id": "bcs62-step5-initial-r1-u10-notation",
+      "run": "bayesian-computational-statistics-62",
+      "at": "2026-10-15T16:55:22.400619+00:00",
+      "class": "accuracy",
+      "subclass": "undefined-notation",
+      "severity": "nonfatal",
+      "location": "proof-step",
+      "subject": "thm-posterior-consistency-under-prior-mass-and-tests",
+      "caught_at_stage": "5-adjudicate",
+      "caught_by_role": "final-adjudicator",
+      "disposition": "fixed",
+      "batch": "10",
+      "evidence": "A_n was first defined in 4.1 after E[A_n] was used in 3.2. The exact formula makes the argument unambiguous; moving it before the estimate repairs the presentation without changing the proof claim.",
+      "repair_cost": "inline-fix",
+      "source": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u10.json"
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "defect_id": "bcs62-step5-initial-r1-u10-contract",
+      "run": "bayesian-computational-statistics-62",
+      "at": "2026-10-15T16:55:22.400619+00:00",
+      "class": "accuracy",
+      "subclass": "contract-mismatch",
+      "severity": "nonfatal",
+      "location": "contract-row",
+      "subject": "thm-posterior-consistency-under-prior-mass-and-tests",
+      "caught_at_stage": "5-adjudicate",
+      "caught_by_role": "final-adjudicator",
+      "disposition": "fixed",
+      "batch": "10",
+      "evidence": "Four boundary rows cited stale proof locations: the nonempty testing case and zero-block branch are in 1.3, finite-positive evidence follows from 1.1 and 3.1, and the KL subset is selected in 1.2. Corrected these references and synchronized the two edited derivations.",
+      "repair_cost": "contract-sync",
+      "source": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u10.json"
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "scope": "One assigned draft item in the frozen frontier; no created items or outside repairs. No gate diagnostics were assigned.",
+    "interface_comparison": "The complete original ## Statement section was compared directly during the edit and remained byte-for-byte identical (section SHA-256 da61c53629f168b51c3551c7fcfb634955fb6556c26197d3c313b9ed3849e232). No ## Definition exists. Proof-only and owning-contract repairs trigger no downstream propagation.",
+    "contract": "research/bayesian-computational-statistics-62-batch-10.proof-contracts.json: synchronized derivations 3.2 and 4.1; corrected empty, zero, one, and nonempty-choice boundary evidence. Preserved the prior risk_review record as historical evidence; its source-reading claims are not claims by this adjudicator. Used the shared metadata lock with reread/edit/check/release.",
+    "sources": "No external source was consulted in this session. The elementary likelihood-ratio, block-testing, Jensen/SLLN, and Borel-Cantelli arguments are familiar and were checked directly against the local supplier interfaces.",
+    "validation": [
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-10.proof-contracts.json --strict --items thm-posterior-consistency-under-prior-mass-and-tests",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 item checked."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-posterior-consistency-under-prior-mass-and-tests.md",
+        "exit_code": 0,
+        "result": "PASS (direct); 1 checked, 0 failing."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-posterior-consistency-under-prior-mass-and-tests.md library/bayesian-computational-statistics/posterior-consistency-and-tests.md library/bayesian-computational-statistics/posterior-consistency-and-tests-examples.md",
+        "exit_code": 0,
+        "result": "3 files passed real KaTeX and renderer YAML parsing; no delimiter or wikilink-in-math defects."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-posterior-consistency-under-prior-mass-and-tests.md",
+        "exit_code": 0,
+        "result": "1 item, 12 steps, 0 defects. Run after the final item edit."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Engine collection and any required independent rejudgment; this worker has no remaining repair obligation and launches no judges or workflow transitions.",
+    "validation_history": "The first contract check detected incorrectly extracted input lists in the two synchronized contract derivations. Corrected those lists under the shared lock, then reran the strict check successfully. No mathematical source changed after the recorded review-context hashes."
+  }
+}

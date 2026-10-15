@@ -1,0 +1,211 @@
+{
+  "group": "o",
+  "batches": ["49"],
+  "pages_read": [
+    "abc-mcmc-and-sequential-abc",
+    "abc-mcmc-and-sequential-abc-examples"
+  ],
+  "items_read": [
+    "def-abc-augmented-tolerance-target",
+    "lem-abc-augmented-target-has-tolerance-posterior-marginal",
+    "alg-abc-metropolis-hastings",
+    "alg-abc-sequential-smc",
+    "thm-abc-metropolis-hastings-invariance",
+    "thm-abc-sequential-smc-rn-weight-update",
+    "ex-abc-vanishing-acceptance",
+    "ex-abc-positive-tolerance-stationary-law",
+    "ex-abc-sequential-tolerance-schedule-and-rn-weights",
+    "ex-abc-smc-finite-particle-collapse"
+  ],
+  "conventions": [
+    {
+      "convention": "The prior is a probability measure; parameter and data spaces are standard Borel. The tolerance event is the inverse image of a closed Euclidean ball, with ε ≥ 0. The augmented target is defined only when Zε > 0; no quotient is assigned at zero event probability.",
+      "fixed_by": "def-abc-augmented-tolerance-target",
+      "matters_for": [
+        "lem-abc-augmented-target-has-tolerance-posterior-marginal",
+        "alg-abc-metropolis-hastings",
+        "alg-abc-sequential-smc",
+        "thm-abc-metropolis-hastings-invariance",
+        "thm-abc-sequential-smc-rn-weight-update",
+        "ex-abc-vanishing-acceptance",
+        "ex-abc-positive-tolerance-stationary-law",
+        "ex-abc-sequential-tolerance-schedule-and-rn-weights",
+        "ex-abc-smc-finite-particle-collapse"
+      ]
+    },
+    {
+      "convention": "ABC-MH uses the general accepted-flow construction on augmented states, with simulator proposal q(θ,dθ′)K(θ′,dy′), fixed tolerance, and rejected proposals retained as self-transitions. Its inherited RN construction assumes AC and permits density-version changes on flow-null sets.",
+      "fixed_by": "alg-abc-metropolis-hastings",
+      "matters_for": [
+        "thm-abc-metropolis-hastings-invariance",
+        "ex-abc-vanishing-acceptance",
+        "ex-abc-positive-tolerance-stationary-law"
+      ]
+    },
+    {
+      "convention": "Sequential ABC has finite horizon T ≥ 0, N ≥ 1, and ε0 ≥ ⋯ ≥ εT > 0 with every normalizer positive. Each reached proposal mixture must dominate the prior almost surely under the conditional previous-population law. The weight uses dΠ/dφ, not its reciprocal, with a jointly measurable finite-valued version.",
+      "fixed_by": "alg-abc-sequential-smc",
+      "matters_for": [
+        "thm-abc-sequential-smc-rn-weight-update",
+        "ex-abc-sequential-tolerance-schedule-and-rn-weights",
+        "ex-abc-smc-finite-particle-collapse"
+      ]
+    },
+    {
+      "convention": "Stage zero samples independent prior-simulator pairs. Later stages use multinomial ancestor sampling in sampled order. Zero total weight stops the algorithm without a normalized estimate for that or later stages; T = 0 returns the initial estimate if successful.",
+      "fixed_by": "alg-abc-sequential-smc",
+      "matters_for": [
+        "thm-abc-sequential-smc-rn-weight-update",
+        "ex-abc-sequential-tolerance-schedule-and-rn-weights",
+        "ex-abc-smc-finite-particle-collapse"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-abc-augmented-tolerance-target",
+      "statement": "Only when Zε > 0 define the augmented ABC tolerance target by Π̃ε(C) = Zε⁻¹ ∫C 1Aε(y) dH, where H is the prior-simulator joint probability law and Aε is the summary-tolerance event.",
+      "used_by": [
+        "lem-abc-augmented-target-has-tolerance-posterior-marginal",
+        "alg-abc-metropolis-hastings",
+        "alg-abc-sequential-smc",
+        "thm-abc-metropolis-hastings-invariance",
+        "thm-abc-sequential-smc-rn-weight-update",
+        "ex-abc-vanishing-acceptance",
+        "ex-abc-positive-tolerance-stationary-law",
+        "ex-abc-sequential-tolerance-schedule-and-rn-weights",
+        "ex-abc-smc-finite-particle-collapse"
+      ]
+    },
+    {
+      "id": "alg-abc-sequential-smc",
+      "statement": "Under its finite positive tolerance schedule and almost-sure prior-to-mixture domination condition, sample initial prior-simulator pairs with indicator weights; at subsequent stages use multinomial ancestors, perturbation, simulation, and weights 1Aεt(y) r_t^N(Zt−1,θ). Stop on zero total weight; otherwise normalize and report the weighted empirical measure.",
+      "used_by": [
+        "thm-abc-sequential-smc-rn-weight-update",
+        "ex-abc-sequential-tolerance-schedule-and-rn-weights",
+        "ex-abc-smc-finite-particle-collapse"
+      ]
+    },
+    {
+      "id": "thm-abc-sequential-smc-rn-weight-update",
+      "statement": "Under the algorithm's setup, the initial average unnormalized weighted f-value has expectation γ0(f). At each stage reached with positive probability, for every bounded nonnegative product-measurable f, the average unnormalized weighted candidate f-value has conditional expectation γt(f), almost surely given the previous population. Subsequent multinomial or residual resampling preserves the weighted empirical mean in conditional expectation. No unbiasedness is asserted for the self-normalized finite-N estimate.",
+      "used_by": [
+        "ex-abc-sequential-tolerance-schedule-and-rn-weights",
+        "ex-abc-smc-finite-particle-collapse"
+      ]
+    },
+    {
+      "id": "alg-abc-metropolis-hastings",
+      "statement": "For fixed ε ≥ 0 with Zε > 0, construct Pε by applying the general Metropolis–Hastings procedure with target Π̃ε and augmented proposal Q((θ,y),dθ′,dy′) = q(θ,dθ′)K(θ′,dy′). Admissible initial states satisfy y ∈ Aε.",
+      "used_by": [
+        "thm-abc-metropolis-hastings-invariance",
+        "ex-abc-vanishing-acceptance",
+        "ex-abc-positive-tolerance-stationary-law"
+      ]
+    },
+    {
+      "id": "lem-abc-augmented-target-has-tolerance-posterior-marginal",
+      "statement": "Under the hypotheses of def-abc-augmented-tolerance-target with Zε > 0, the Θ-marginal of Π̃ε is the tolerance-conditioned law Πε(· | s0) defined in def-approximate-bayesian-computation.",
+      "used_by": [
+        "ex-abc-positive-tolerance-stationary-law"
+      ]
+    },
+    {
+      "id": "thm-abc-metropolis-hastings-invariance",
+      "statement": "Assume AC and the hypotheses of alg-abc-metropolis-hastings with Zε > 0. Its output Pε is reversible with respect to and leaves invariant the augmented ABC tolerance target Π̃ε on Θ × Y. This gives no convergence or full-data posterior conclusion.",
+      "used_by": [
+        "ex-abc-positive-tolerance-stationary-law"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "lem-prior-and-model-kernel-define-joint-law",
+      "used_for": "Construction of H, its rectangle formula, and nonnegative iterated integration in the marginal and SMC weight proofs.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Pointwise probability-kernel conditions for simulators, parameter proposals, and population-indexed proposal mixtures.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Proper prior and normalized target conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Measurable augmented-state and finite-population spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-borel-space",
+      "used_for": "State-space hypotheses for MH and jointly measurable kernel RN derivatives.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+      "used_for": "Standard-Borel augmented-state and finite-population products, without an additional choice assumption.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit choice assumption inherited by accepted-flow MH and kernel RN constructions.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Measurability of simulator section integrals and integrations against probability proposal kernels.",
+      "opened": true
+    },
+    {
+      "id": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+      "used_for": "Finite sums, scalar multiples, indicator restrictions, and increasing-limit measurability in the population kernel and weight argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+      "used_for": "Extending the setwise RN identity to the nonnegative simulator-integrated test function.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-against-a-radon-nikodym-derivative",
+      "used_for": "Setwise RN integration and its finite simple-function consequence; the owned proof separately supplies the monotone extension.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Passing increasing simple approximations through the prior and weighted proposal integrals.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-abc-vanishing-acceptance",
+      "concern": "Verification 2.1 concludes that the common-flow rule accepts every in-event proposal and rejects every out-of-event proposal, and hence that “the acceptance probability is 2ε”. The cited alg-metropolis-hastings-kernel only fixes densities up to flow-null changes and explicitly allows changes at target-null starting states. For each ε > 0 choose the admissible current state x0 = (∗,1/2). Its vertical line {x0} × X is null for λ0 = μ + μᵀ because both the target and proposal are atomless. On that line set the algorithm's density representatives f = 0 and g = 1, leaving them unchanged elsewhere. These remain valid measurable RN representatives with f + g = 1 everywhere, but the algorithm then sets α(x0,y) = 1 for every proposal. Acceptance from x0 is therefore 1 for every positive ε and does not vanish. The calculation needs an explicit natural pointwise density version, or an almost-everywhere/stationary qualification; neither is stated.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "abc-mcmc-and-sequential-abc",
+      "to": "approximate-bayesian-computation-and-simulation-based-inference",
+      "faithful": true,
+      "note": "The augmented definition preserves the proper prior, simulator kernel, standard-Borel spaces, measurable Euclidean summary, closed tolerance event, and positive-normalizer restriction. The marginal lemma reproduces the supplier's tolerance-conditioned parameter law without asserting exact-data recovery."
+    },
+    {
+      "from": "abc-mcmc-and-sequential-abc",
+      "to": "metropolis-hastings-algorithm-and-invariance",
+      "faithful": true,
+      "note": "The main-page algorithm and invariance theorem preserve the supplier's AC, standard-Borel, probability-target and probability-proposal hypotheses and claim only reversibility/invariance. The companion continuous example's pointwise use of RN versions is separately recorded in concerns."
+    },
+    {
+      "from": "abc-mcmc-and-sequential-abc",
+      "to": "feynman-kac-particle-filters",
+      "faithful": true,
+      "note": "The population-indexed RN application uses standard-Borel spaces, a probability population law conditional on reaching the stage, probability kernels, and almost-sure domination. Multinomial ancestors retain sampled order, and the expected-offspring-count result is used only for conditional empirical-mean identities. No finite-N normalized unbiasedness or convergence claim is imported."
+    }
+  ]
+}

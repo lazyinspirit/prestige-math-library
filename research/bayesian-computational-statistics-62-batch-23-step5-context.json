@@ -1,0 +1,455 @@
+{
+  "group": "g",
+  "batches": [
+    "23"
+  ],
+  "pages_read": [
+    "numerical-optimization-for-statistical-computation",
+    "numerical-optimization-for-statistical-computation-examples"
+  ],
+  "items_read": [
+    "def-latent-variable-joint-and-observed-data-factorization",
+    "thm-kullback-leibler-is-nonnegative",
+    "alg-gradient-descent",
+    "alg-damped-newton",
+    "thm-observed-density-is-latent-marginal-under-tonelli",
+    "lem-armijo-backtracking-terminates-for-strict-descent-directions",
+    "thm-gradient-descent-rate-under-strong-convexity-and-smoothness",
+    "thm-newton-local-quadratic-convergence-under-lipschitz-hessian",
+    "ex-gaussian-location-kl",
+    "ex-multimodal-nonconvex-objective",
+    "ex-finite-mixture-latent-factorization",
+    "ex-zero-normalizer-latent-fiber",
+    "ex-strongly-convex-quadratic-gradient-descent"
+  ],
+  "conventions": [
+    {
+      "convention": "The complete-data density is one supplied jointly measurable nonnegative function on parameter, observation, and latent coordinates, normalized on every parameter fibre. Both reference measures are sigma-finite. Separate likelihood versions do not imply joint measurability; supplying the joint function requires no choice axiom.",
+      "fixed_by": "def-latent-variable-joint-and-observed-data-factorization",
+      "matters_for": [
+        "thm-observed-density-is-latent-marginal-under-tonelli",
+        "ex-finite-mixture-latent-factorization",
+        "ex-zero-normalizer-latent-fiber"
+      ]
+    },
+    {
+      "convention": "The normalized latent density p/m is defined only on fibres with 0<m<∞; no quotient is assigned at zero or infinite marginal.",
+      "fixed_by": "def-latent-variable-joint-and-observed-data-factorization",
+      "matters_for": [
+        "thm-observed-density-is-latent-marginal-under-tonelli",
+        "ex-finite-mixture-latent-factorization",
+        "ex-zero-normalizer-latent-fiber"
+      ]
+    },
+    {
+      "convention": "KL uses D(P||Q), with the first measure absolutely continuous with respect to the second for the RN integral formula. AC is assumed; zero divergence characterizes equality of laws. The normalized-density identity additionally requires finite-valued densities, positive finite normalizer, support inclusion, and the displayed absolute log-integrability condition.",
+      "fixed_by": "thm-kullback-leibler-is-nonnegative",
+      "matters_for": [
+        "ex-gaussian-location-kl",
+        "thm-em-observed-log-likelihood-is-nondecreasing",
+        "thm-elbo-kl-decomposition",
+        "thm-exact-coordinate-ascent-does-not-decrease-elbo"
+      ]
+    },
+    {
+      "convention": "Gradient-descent indices start at k=0 and count accepted updates. Stationarity is checked before the caller predicate. Fixed-step domain failure returns the last valid iterate. Rate statements concern generated iterates only.",
+      "fixed_by": "alg-gradient-descent",
+      "matters_for": [
+        "lem-armijo-backtracking-terminates-for-strict-descent-directions",
+        "thm-gradient-descent-rate-under-strong-convexity-and-smoothness",
+        "ex-strongly-convex-quadratic-gradient-descent",
+        "alg-four-dimensional-variational-assimilation"
+      ]
+    },
+    {
+      "convention": "Damped Newton requires a positive-definite Hessian for its Cholesky solve, tests λ²/2≤ε before line search, and uses 0<α<1/2 and 0<β<1. A stopped iterate has no asserted successor.",
+      "fixed_by": "alg-damped-newton",
+      "matters_for": [
+        "lem-armijo-backtracking-terminates-for-strict-descent-directions",
+        "thm-newton-local-quadratic-convergence-under-lipschitz-hessian"
+      ]
+    },
+    {
+      "convention": "The strongly convex rate assumes an attained minimum, 0<μ≤L, and fixed step 1/L. Its power formula is stated for k≥1; k=0 is handled separately, avoiding 0^0 when μ=L.",
+      "fixed_by": "thm-gradient-descent-rate-under-strong-convexity-and-smoothness",
+      "matters_for": [
+        "ex-strongly-convex-quadratic-gradient-descent"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-latent-variable-joint-and-observed-data-factorization",
+      "statement": "A jointly measurable latent-variable density is a specified nonnegative product-measurable p(θ,x,z), normalized on every parameter fibre. Its observed marginal is m(θ,x)=∫p(θ,x,z)μ(dz), and q=p/m is defined only where 0<m<∞.",
+      "used_by": [
+        "thm-observed-density-is-latent-marginal-under-tonelli",
+        "ex-finite-mixture-latent-factorization",
+        "ex-zero-normalizer-latent-fiber",
+        "alg-expectation-maximization",
+        "thm-em-observed-log-likelihood-is-nondecreasing"
+      ]
+    },
+    {
+      "id": "thm-kullback-leibler-is-nonnegative",
+      "statement": "Assume AC. For probability measures P,Q on one measurable space, D(P||Q)≥0, and D(P||Q)=0 if and only if P=Q. For the stated sigma-finite reference measure, finite-valued normalized-density inputs, support condition and absolute log-integrability, log Z=∫q(log γ−log q)dμ+D(qμ||πμ).",
+      "used_by": [
+        "ex-gaussian-location-kl",
+        "thm-em-observed-log-likelihood-is-nondecreasing",
+        "thm-elbo-kl-decomposition",
+        "thm-exact-coordinate-ascent-does-not-decrease-elbo"
+      ]
+    },
+    {
+      "id": "thm-observed-density-is-latent-marginal-under-tonelli",
+      "statement": "Under the latent-factorization hypotheses, m is jointly measurable, each fixed-parameter observed marginal integrates to one and is finite almost everywhere, and every positive finite fibre yields a measurable probability density q=p/m. Fubini exchanges the observed and latent integrals of hp under the stated absolute integrability.",
+      "used_by": [
+        "ex-finite-mixture-latent-factorization",
+        "ex-zero-normalizer-latent-fiber",
+        "alg-expectation-maximization",
+        "thm-em-observed-log-likelihood-is-nondecreasing"
+      ]
+    },
+    {
+      "id": "alg-gradient-descent",
+      "statement": "For a continuously Fréchet differentiable real objective on an open Euclidean domain, use the negative gradient with supplied positive fixed steps or domain-aware Armijo backtracking, subject to stationarity, caller-stop and fixed-step domain-failure branches.",
+      "used_by": [
+        "lem-armijo-backtracking-terminates-for-strict-descent-directions",
+        "thm-gradient-descent-rate-under-strong-convexity-and-smoothness",
+        "ex-multimodal-nonconvex-objective",
+        "alg-unadjusted-langevin-algorithm",
+        "alg-four-dimensional-variational-assimilation",
+        "def-hamiltonian-monte-carlo"
+      ]
+    },
+    {
+      "id": "lem-armijo-backtracking-terminates-for-strict-descent-directions",
+      "statement": "At a differentiability point in an open domain, if Df(x)[p]<0, trials start at 1 and shrink by β∈(0,1), and α∈(0,1), then the Armijo line search accepts after finitely many reductions. For the Newton branch, assume the current Hessian is symmetric positive definite.",
+      "used_by": [
+        "alg-gradient-descent",
+        "alg-damped-newton"
+      ]
+    },
+    {
+      "id": "thm-gradient-descent-rate-under-strong-convexity-and-smoothness",
+      "statement": "For continuously differentiable f on all of R^d with an attained minimum, an L-Lipschitz gradient and μ-strong convexity, where 0<μ≤L, fixed-step gradient descent with step 1/L satisfies f(x_k)−f*≤(1−μ/L)^k(f(x_0)−f*) for every generated k≥1; the initial gap is unchanged at k=0.",
+      "used_by": [
+        "ex-strongly-convex-quadratic-gradient-descent"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-hessian-is-symmetric",
+      "used_for": "Symmetry of C² Hessians in damped Newton and its local analysis.",
+      "opened": true
+    },
+    {
+      "id": "cor-integral-logarithm-agrees-with-natural-logarithm",
+      "used_for": "Identification of integral and natural logarithms in the KL proof.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Eigenvalue lower bounds and inverse-Hessian norm control.",
+      "opened": true
+    },
+    {
+      "id": "cor-second-derivative-characterises-convexity",
+      "used_for": "Convexity of t log t on positive inputs.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit choice convention inherited by KL and the Gaussian KL example.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra-on-the-extended-real-line",
+      "used_for": "Measurable valid-fibre sets and reciprocal extensions.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sigma-finite-and-semifinite-measures",
+      "used_for": "Reference-measure hypotheses and finite-mass exhaustions.",
+      "opened": true
+    },
+    {
+      "id": "def-hessian-and-euclidean-critical-point",
+      "used_for": "Hessian and critical-point conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-integral-logarithm",
+      "used_for": "Integral representation used to prove the strict logarithmic bound.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Euclidean gradient coordinates and directional derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-kullback-leibler-divergence",
+      "used_for": "Directional KL, RN representatives, finite negative part and zero-density conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-likelihood-density",
+      "used_for": "Distinguishing separate likelihood versions from a supplied jointly measurable density.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-space",
+      "used_for": "Parameter, observation and latent measurable spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Constant uniformly sigma-finite latent reference kernel.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-space",
+      "used_for": "Reference spaces in the normalized-density identity.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-with-density",
+      "used_for": "Probability measures induced by q and π.",
+      "opened": true
+    },
+    {
+      "id": "def-positive-and-negative-parts-of-a-function",
+      "used_for": "Signed-integral and absolute-integrability decompositions.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Normalization of latent and KL probability laws.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Joint measurability, section arguments and coordinate projections.",
+      "opened": true
+    },
+    {
+      "id": "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+      "used_for": "Differentiability and the strict-descent remainder estimate.",
+      "opened": true
+    },
+    {
+      "id": "lem-bernoulli-inequality",
+      "used_for": "Elementary proof that geometric backtracking trials tend to zero.",
+      "opened": true
+    },
+    {
+      "id": "lem-gaussian-location-kl-formula",
+      "used_for": "Equal-variance Gaussian KL formula under AC.",
+      "opened": true
+    },
+    {
+      "id": "lem-integral-elementary-bounds",
+      "used_for": "Integrals of comparison constants in the strict logarithmic inequality.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-abs-value",
+      "used_for": "Absolute-value estimates for weighted logarithms.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Normalization, null infinite-value sets and positive scalar factors.",
+      "opened": true
+    },
+    {
+      "id": "thm-additivity-over-subintervals",
+      "used_for": "Oriented logarithm-integral decomposition.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Derivatives of t log t.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurable density products and zero-times-infinity conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Gradient and Hessian error estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiation along line segments.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "Existence and uniqueness of the Newton factorization and solves.",
+      "opened": true
+    },
+    {
+      "id": "thm-composition-with-borel-functions-preserves-measurability",
+      "used_for": "Reciprocal and coordinate compositions.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Continuous scalar integrands on compact nondegenerate intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Absolutely integrable latent-observed exchanges with exceptional-section conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-gradient-and-hessian-of-the-frobenius-least-squares-functional",
+      "used_for": "Gradient and Hessian of the quadratic example with A=I.",
+      "opened": true
+    },
+    {
+      "id": "thm-hessian-characterises-convexity",
+      "used_for": "Convexity of the quadratic example.",
+      "opened": true
+    },
+    {
+      "id": "thm-integral-logarithm-derivative-and-normalisation",
+      "used_for": "Derivative and normalization of the logarithm.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-against-a-density",
+      "used_for": "RN ratio verification and weighted-log change of measure.",
+      "opened": true
+    },
+    {
+      "id": "thm-jensens-integral-inequality",
+      "used_for": "KL nonnegativity after checking integrability of r and r log r.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Integration of g(r)=r log r−r+1 in the KL equality case.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Joint measurability of the latent marginal using a constant uniformly sigma-finite kernel.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotonicity-of-the-integral",
+      "used_for": "Logarithmic comparison integrals and coordinatewise Newton integral estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+      "used_for": "C² order-one Taylor expansion proving local acceptance of the full Newton step.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Reciprocal and normalized-density logarithm identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-newton-leibniz-with-interior-derivative",
+      "used_for": "Objective and gradient increments along segments.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+      "used_for": "Support implications and the KL equality characterization.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-archimedean",
+      "used_for": "Nullity of infinite-density sets and finite backtracking termination.",
+      "opened": true
+    },
+    {
+      "id": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+      "used_for": "RN identities for finite probability measures under AC.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Product reference measure for latent factorization.",
+      "opened": true
+    },
+    {
+      "id": "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+      "used_for": "Borel measurability of reciprocal extensions.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Nonnegative marginal measurability and normalization.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "numerical-optimization-for-statistical-computation",
+      "to": "posterior-propriety-and-dominated-bayes-formula",
+      "faithful": true,
+      "note": "Both pages restrict normalization to finite positive evidence and distinguish supplied joint measurability from separate likelihood versions. The latent construction does not infer a Bayesian posterior or prior-predictive probability from fibrewise normalization."
+    },
+    {
+      "from": "em-algorithm-and-latent-variable-likelihood-ascent",
+      "to": "numerical-optimization-for-statistical-computation",
+      "faithful": true,
+      "note": "The EM algorithm and ascent theorem retain jointly measurable normalized complete-data input, positive finite observed fibres, directional current-to-candidate KL, AC, support inclusion and integrable logs. KL nonnegativity is used only for probability laws."
+    },
+    {
+      "from": "variational-inference-and-evidence-lower-bound",
+      "to": "numerical-optimization-for-statistical-computation",
+      "faithful": true,
+      "note": "The ELBO and coordinate-ascent proofs use the general probability-law KL nonnegativity clause under AC. They derive their density-ratio identities locally rather than applying the batch's more restrictive finite-valued, sigma-finite normalized-density clause without its hypotheses."
+    },
+    {
+      "from": "laplace-approximation-and-marginal-integration",
+      "to": "numerical-optimization-for-statistical-computation",
+      "faithful": true,
+      "note": "Contextual prerequisite: no listed Laplace or quadrature item cites a batch-23 item. The page supplies its own mode, Hessian, domination and global-gap hypotheses and imports no optimizer convergence guarantee."
+    },
+    {
+      "from": "approximate-bayesian-computation-and-simulation-based-inference",
+      "to": "numerical-optimization-for-statistical-computation",
+      "faithful": true,
+      "note": "Contextual prerequisite: no listed ABC item cites a batch-23 item. Its page preserves finite positive normalization and explicit joint-density requirements without claiming the latent or optimization results prove ABC convergence."
+    },
+    {
+      "from": "hamiltonian-monte-carlo-and-leapfrog",
+      "to": "numerical-optimization-for-statistical-computation",
+      "faithful": true,
+      "note": "The HMC definition cites the Euclidean gradient and C¹ input convention of gradient descent. It does not import descent, optimizer convergence or Newton guarantees into Hamiltonian dynamics."
+    },
+    {
+      "from": "langevin-monte-carlo-mala-and-ula",
+      "to": "numerical-optimization-for-statistical-computation",
+      "faithful": true,
+      "note": "ULA uses the fixed-step update map x−γ∇U(x) on all of R^d before adding Gaussian noise. The supplier explicitly defines this map at stationary points. No deterministic gradient-descent rate is asserted for the noisy chain."
+    },
+    {
+      "from": "data-assimilation-variational-and-ensemble-methods",
+      "to": "numerical-optimization-for-statistical-computation",
+      "faithful": true,
+      "note": "4DVAR supplies C¹ objectives on open decision domains and invokes gradient descent with a finite update limit and domain-failure handling. The supplier's caller predicate supports the update limit, and no minimizer or convergence guarantee is inferred."
+    },
+    {
+      "from": "synthetic-likelihood-and-indirect-inference",
+      "to": "numerical-optimization-for-statistical-computation",
+      "faithful": true,
+      "note": "Contextual prerequisite: no listed item cites a batch-23 item. The page explicitly treats optimization as computational setting and asserts no generic optimizer convergence or exact likelihood equivalence."
+    }
+  ]
+}

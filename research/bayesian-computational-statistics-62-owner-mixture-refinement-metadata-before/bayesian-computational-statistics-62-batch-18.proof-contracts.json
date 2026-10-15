@@ -1,0 +1,2159 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-dirichlet-normal-mixture-density-well-defined",
+    "lem-hellinger-ratio-controls-kl-moments",
+    "lem-dirichlet-normal-mixture-finite-support-approximation",
+    "lem-iid-posterior-contraction-under-countable-sieves",
+    "lem-dirichlet-normal-mixture-sieve-entropy",
+    "lem-dirichlet-normal-mixture-countable-band-entropy-sum",
+    "lem-dirichlet-process-simplex-small-ball",
+    "lem-dirichlet-normal-mixture-local-prior-mass",
+    "lem-dirichlet-normal-mixture-posterior-sieve-tail",
+    "thm-dirichlet-normal-mixture-posterior-contraction",
+    "cor-dirichlet-normal-mixture-interval-mass-refinement",
+    "ex-dirichlet-normal-mixture-compact-scale-hyperprior-and-rate",
+    "ex-dirichlet-normal-mixture-polynomial-scale-tail-outside-theorem"
+  ],
+  "contracts": {
+    "lem-dirichlet-normal-mixture-density-well-defined": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "An equivalent formulation is that a product of nonempty sets is nonempty: if $X_i \\ne \\emptyset$ for every",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-normal-location-scale-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$ of [[def-standard-normal-and-normal-laws]] has Lebesgue density $$g_{m,\\sigma}(y)=\\frac1\\sigma\\frac{e^{-((y-m)/\\sigma)^2/2}}{\\sqrt{2\\pi}}=\\frac1{\\sqrt{2\\pi\\sigma^2}}e^{-(y-m)^2/(2\\sigma^2)}.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure spaces, and let $f : X \\times Y \\to",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The kernel $K$ in [F2] is a probability kernel because, for fixed $(F,\\sigma,x)$, $A\\mapsto F(A)$ is a probability measure, while for fixed Borel $A$, $(F,\\sigma,x)\\mapsto F(A)$ is measurable by the evaluation sigma-algebra. The integrand $(\\sigma,x,z)\\mapsto(\\sigma\\sqrt{2\\pi})^{-1}\\exp(-(x-z)^2/(2\\sigma^2))$ is continuous on $(0,\\infty)\\times\\mathbb R^2$ and hence product-measurable. Therefore [F3] makes its integral against $K$ jointly measurable.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The integrand is strictly positive, so its integral against a probability measure is positive. It is bounded above by $(\\sigma\\sqrt{2\\pi})^{-1}$, so the integral is finite and has the stated upper bound.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4], $\\int_{\\mathbb R}p_{F,\\sigma}(x)\\,dx=\\int_{\\mathbb R}\\left(\\int_{\\mathbb R}\\frac{1}{\\sigma\\sqrt{2\\pi}}e^{-(x-z)^2/(2\\sigma^2)}\\,dx\\right)F(dz)=\\int_{\\mathbb R}1\\,F(dz)=1,$ where the inner integral is one by [F1] and $F$ has total mass one. Thus $p_{F,\\sigma}$ is a probability density.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement restricts the input to a nonempty probability/model object, so an empty object is not in the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 proves strict positivity for each sigma>0; sigma=0 is excluded by the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 integrates the jointly measurable mixture density to exactly one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows any probability F, including a point mass; steps 1.1–2.1 do not require non-atomicity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The scale domain is (0,infinity); steps 1.2 and 2.1 cover every admitted positive scale."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary selection from an unspecified nonempty family is made beyond the stated axiom dependencies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "A1 explicitly imports full AC for the listed supplier and proof steps."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-hellinger-ratio-controls-kl-moments": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "An equivalent formulation is that a product of nonempty sets is nonempty: if $X_i \\ne \\emptyset$ for every",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space ([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-hellinger-distance-between-density-laws",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a measure space and let $p,q:\\mathsf X\\to[0,\\infty)$ be measurable densities with $\\int p\\,d\\mu=\\int",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space ([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$, $$\\log(xy)=\\log",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $u=p/q$ on $\\{q>0\\}$. The explicit absolute-continuity premise gives $p=0$ $\\mu$-almost everywhere on $\\{q=0\\}$. Define $g(u)=(\\sqrt u-1)^2$ and $a(u)=(u\\log u-u+1)/g(u)$, $b(u)=u(\\log u)^2/g(u)$ for $u\\ne1$, with their limiting values at $u=1$ and $u=0$. These limits are finite: at $u=1$ the Taylor expansions of $\\sqrt u$ and $\\log u$ give $a(1)=2$, $b(1)=4$, while $u\\log u\\to0$ and $u(\\log u)^2\\to0$ as $u\\downarrow0$. Thus $a,b$ are continuous on $[0,2]$ and bounded there by [F3].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $u\\ge2$, $g(u)=u(1-u^{-1/2})^2\\ge u(1-2^{-1/2})^2$, while $0\\le u\\log u-u+1\\le u\\log u$ and $u(\\log u)^2$ retain their displayed forms. Hence $a(u)\\le C\\log u$ and $b(u)\\le C(\\log u)^2$ for a universal $C$. Combining with step 1.1, for every $0\\le u\\le R$, $u\\log u-u+1\\le Cg(u)(1+\\log^+R),\\qquad u(\\log u)^2\\le Cg(u)(1+\\log^+R)^2.$",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Integrating the first inequality in step 2.1 against $q\\,d\\mu$ gives the KL bound, since $\\int q(u\\log u-u+1)d\\mu=\\int p\\log(p/q)d\\mu$ by $\\int p=\\int q=1$ and [F2]. Integrating the second gives the log-square bound. Finally $\\int qg,d\\mu=h^2$ by [F1], so both right sides have the claimed factors of $h^2$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement restricts the input to a nonempty probability/model object, so an empty object is not in the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 assigns the continuous limits at ratio u=0 under p<<q."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 computes both scalar comparison-function limits at u=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If p=q almost everywhere, h=0 and step 2.1 gives both divergences equal to zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 treat u=0, u=1 and the full upper range u<=R."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary selection from an unspecified nonempty family is made beyond the stated axiom dependencies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "reason": "A1 explicitly imports full AC for the listed supplier and proof steps."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-dirichlet-normal-mixture-finite-support-approximation": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-dirichlet-normal-mixture-density-well-defined",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P(\\mathbb R)$ be the probability measures on the Borel sets of $\\mathbb R$, equipped with the",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-normal-location-scale-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$ of [[def-standard-normal-and-normal-laws]] has Lebesgue density $$g_{m,\\sigma}(y)=\\frac1\\sigma\\frac{e^{-((y-m)/\\sigma)^2/2}}{\\sqrt{2\\pi}}=\\frac1{\\sqrt{2\\pi\\sigma^2}}e^{-(y-m)^2/(2\\sigma^2)}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-monic-probabilists-hermite-polynomials",
+          "source_section": "Definition",
+          "quote": "Under the AC assumption of the Gaussian-law supplier, these are the monic orthogonal polynomials for the standard normal",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "An equivalent formulation is that a product of nonempty sets is nonempty: if $X_i \\ne \\emptyset$ for every",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Partition $[-A,A]$ into $K\\le 2A/\\sigma+1$ consecutive Borel intervals $I_i$ of length at most $\\sigma$, with left endpoints $a_i$. Ignore intervals of zero $F$-mass and let $G_i$ be the law of $W_i=(Z-a_i)/\\sigma\\in[0,1]$ conditional on $Z\\in I_i$. Approximate the moment vector $(\\int w\\,dG_i,\\ldots,\\int w^m dG_i)$ by finite sums obtained from partitions of $[0,1]$; it is therefore in the closure of the convex hull of the compact moment curve $w\\mapsto(w,\\ldots,w^m)$. Every finite convex combination with more than $m+1$ points can be reduced: affine dependence supplies coefficients $c_j$, not all zero, with $\\sum c_j=0$ and $\\sum c_jx_j=0$; moving the weights along this relation until one becomes zero preserves nonnegativity and the represented point, so iteration gives at most $m+1$ points. Thus the convex hull is the continuous image of a compact set consisting of $m+1$ curve points and simplex weights; it is compact and closed. The moment vector belongs to it, giving a probability $G'_i$ on at most $m+1$ points of $[0,1]$ matching the first $m$ moments of $G_i$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The Hermite recurrence [F3] and differentiation of $\\phi$ give $\\phi^{(r)}=(-1)^rH_r\\phi$ for every integer $r\\ge0$. The case $r=0$ is immediate. If it holds at orders $r$ and $r-1$, differentiating $H_r$'s recurrence gives $H'_{r+1}=H_r+xH'_r-rH'_{r-1}=H_r+r(xH_{r-1}-(r-1)H_{r-2})=(r+1)H_r$; the base cases $H'_0=0$ and $H'_1=1$ start this induction. Thus differentiating $(-1)^rH_r\\phi$ gives $(-1)^{r+1}H_{r+1}\\phi$. Since $H_r$ is monic, $H_r^{(r)}=r!$. Repeated integration by parts, with boundary terms zero because each derivative is a polynomial times the Gaussian, gives $\\int H_r^2\\phi=(-1)^r\\int H_r\\phi^{(r)}=\\int H_r^{(r)}\\phi=r!$. Cauchy--Schwarz therefore gives $\\|\\phi^{(r)}\\|_1\\le\\sqrt{r!}$. Also $\\phi^{(r)}$ tends to zero at $-\\infty$, so $|\\phi^{(r)}(x)|\\le\\int_{-\\infty}^x|\\phi^{(r+1)}(t)|dt\\le\\sqrt{(r+1)!}$ and $\\|\\phi^{(r)}\\|_\\infty\\le\\sqrt{(r+1)!}$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Taylor's formula with integral remainder, applied to $w\\mapsto\\phi(x-w)$ through degree $m-1$, has remainder with both $L^1(dx)$ and $L^\\infty(dx)$ norms at most $\\sqrt{m+1}/\\sqrt{m!}$ for every $0\\le w\\le1$, by step 1.2 and $w^m\\le1$. Moment matching in step 1.1 cancels the polynomial terms after integration against $G_i-G'_i$. Hence $\\|p_{G_i,1}-p_{G'_i,1}\\|_1$ and $\\|p_{G_i,1}-p_{G'_i,1}\\|_\\infty$ are each at most $2\\sqrt{m+1}/\\sqrt{m!}$. The bound $\\log(m!)=\\sum_{k=1}^m\\log k\\ge\\int_1^m\\log x\\,dx=m\\log m-m+1$ shows this error is at most $\\eta$ when $m=\\lceil c\\log(e/\\eta)\\rceil$ for a sufficiently large universal $c$, with the fixed range $\\eta\\in(0,1/2)$ absorbed by increasing $c$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Set $F'|_{I_i}=F(I_i)$ times the pushforward of $G'_i$ under $w\\mapsto a_i+\\sigma w$. The weights sum to one, all support points stay in their assigned intervals, and the total number of atoms is at most $K(m+1)\\le C(A/\\sigma\\vee1)\\log(e/\\eta)$. Translation and scaling give $p_{F(I_i)F_i,\\sigma}(x)=F(I_i)\\sigma^{-1}p_{G_i,1}((x-a_i)/\\sigma)$; summing the interval contributions and using their weights shows the $L^1$ error is at most $\\eta$ and the supremum error at most $\\eta/\\sigma$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement restricts the input to a nonempty probability/model object, so an empty object is not in the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 omits zero-mass intervals and step 3.1 permits zero-weight atoms when padding."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The finite convex-hull reduction in step 1.1 includes a one-point representation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A point-mass mixing law is admitted by the same construction in steps 1.1 and 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 partitions the closed interval [-A,A], including either endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 reduces finite convex combinations by finite affine dependence; no uncountable choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "reason": "Finite-dimensional convex-hull reduction uses only finite choice; AC is inherited from the normal-density interface."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-iid-posterior-contraction-under-countable-sieves": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "An equivalent formulation is that a product of nonempty sets is nonempty: if $X_i \\ne \\emptyset$ for every",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space ([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a measurable parameter space, $\\Pi$ a prior probability measure on it, and $p_\\theta$ a",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hellinger-distance-between-density-laws",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a measure space and let $p,q:\\mathsf X\\to[0,\\infty)$ be measurable densities with $\\int p\\,d\\mu=\\int",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-hellinger-distance-controls-l1-and-total-variation",
+          "source_section": "Statement",
+          "quote": "For probability densities $p,q$ relative to one fixed measure $\\mu$, define $h$ as in [[def-hellinger-distance-between-density-laws]] and set $d_1(P,Q):=\\int|p-q|\\,d\\mu$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure spaces, and let $f : X \\times Y \\to",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-dominated-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be a statistical experiment ([[def-statistical-experiment]]). It is **dominated** by a supplied positive measure",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be dominated by the fixed sigma-finite positive measure $\\mu$. For each $\\theta$, the",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "1. If every $g_i$ is nonnegative, then $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$ in $[0,+\\infty]$. In this finite product of expectations,",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability space and $a>0$, then $$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]).",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let $f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-covering-packing-bracketing-number-and-metric-entropy",
+          "source_section": "Definition",
+          "quote": "For a probability measure $Q$ on $(\\mathcal X,\\mathcal A)$ and a measurable real function $g$, set $\\|g\\|_{Q,r}:=(\\int |g|^r\\,dQ)^{1/r}$",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $x_n=n\\epsilon_n^2$, $y_n=n\\delta_n^2$, and let $D_n$ be the likelihood denominator relative to $p_0^n$. By [F1], on an event $\\Omega_n$ with $P_0^n(\\Omega_n^c)\\le y_n^{-1}$, $D_n\\ge e^{-(C_0+2)y_n}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write $T_n=\\sum_j\\sqrt{N_{n,j}\\pi_{n,j}}$ and $s_n=e^{-x_n}T_n$, so $s_n\\to0$. Fix $K>2(C_0+3)$ and split indices into active $J_n^+=\\{j:\\pi_{n,j}\\ge e^{-Kx_n}\\}$ and small-mass $J_n^-$. Since $N_{n,j}\\ge1$, $\\sum_{J_n^-}\\pi_{n,j}\\le e^{-Kx_n/2}T_n=e^{(1-K/2)x_n}s_n$. For active $j$, $\\sqrt{N_{n,j}\\pi_{n,j}}\\le T_n=e^{x_n}s_n$, hence $\\log(N_{n,j}/\\pi_{n,j})\\le(2+2K)x_n$ for all sufficiently large $n$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Fix a sufficiently large constant $M$. If $M\\epsilon_n\\ge\\sqrt2$, then the alternative is empty because Hellinger distance is at most $\\sqrt2$, and the desired posterior mass is zero for this $n$. For the remaining $n$, choose, by [A1], a finite $\\epsilon_n$-cover with centers in each active stratum's density image, as allowed by [F9]. For every center $q$ within $\\epsilon_n$ of a density $p_\\theta$ satisfying $h(p_\\theta,p_0)>M\\epsilon_n$, the triangle inequality gives $h(q,p_0)>(M-1)\\epsilon_n$. Set $m_n=\\left\\lceil\\frac{2\\log 8}{(M-1)^2\\epsilon_n^2}\\right\\rceil$. On a block of $m_n$ observations define $T_q=\\mathbf1\\{\\prod_iq(X_i)>\\prod_i p_0(X_i)\\}$. On rejection, $p_0^{\\otimes m_n}\\le\\sqrt{p_0^{\\otimes m_n}q^{\\otimes m_n}}$, so its type-I error is at most the product affinity; on acceptance, $q^{\\otimes m_n}\\le\\sqrt{p_0^{\\otimes m_n}q^{\\otimes m_n}}$, so its type-II error under $q$ has the same bound. By [F2], this affinity is $(1-h^2(q,p_0)/2)^{m_n}\\le e^{-m_nh^2(q,p_0)/2}\\le1/8$.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F2",
+            "F9",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $h(p_\\theta,q)\\le\\epsilon_n$, product affinity gives $h^2(P_\\theta^{m_n},Q^{m_n})=2\\left[1-\\left(1-h^2(p_\\theta,q)/2\\right)^{m_n}\\right]\\le m_n\\epsilon_n^2$, using $1-(1-u)^m\\le mu$ for $u\\in[0,1]$; [F3] bounds their total variation by $\\sqrt{m_n}\\epsilon_n$. Since $M\\epsilon_n<\\sqrt2$, $\\epsilon_n^2<2/M^2$ and $m_n\\epsilon_n^2\\le\\frac{2\\log8}{(M-1)^2}+\\frac{2}{M^2}\\le1/64$ for sufficiently large $M$. The total variation is then at most $1/8$. Therefore the block test in step 1.3 rejects with probability at least $3/4$ under every $p_\\theta$ in the alternative and at most $1/8$ under $p_0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Divide $L_n=\\lfloor n/m_n\\rfloor$ disjoint blocks and let $Y_k$ be their block-test indicators. Under each IID law the indicators are independent by [F6]; their means are at most $a=1/8$ under $P_0$ and at least $b=3/4$ under every alternative by step 2.1. For independent Bernoulli variables with means at most $a$, exponential Markov gives $P_0(L_n^{-1}\\sum Y_k\\ge t)\\le e^{-L_nD(t\\Vert a)}$; with means at least $b$, the negative-exponential bound gives $P_\\theta(L_n^{-1}\\sum Y_k<t)\\le e^{-L_nD(t\\Vert b)}$, where $D(t\\Vert u)=t\\log(t/u)+(1-t)\\log((1-t)/(1-u))$. These bounds follow by bounding each moment generating function by $1-u+ue^\\lambda$ (using $u=a$ for $\\lambda>0$, $u=b$ for $\\lambda<0$) and optimizing over $\\lambda$.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The function $D(t\\Vert a)-D(t\\Vert b)$ is affine and strictly increasing on $[a,b]$, is negative at $a$, and equals $D(b\\Vert a)>0$ at $b$. Let $t_*$ be its unique zero. For each active $j$, choose $t_j\\in[t_*,b]$ such that $L_n\\{D(t_j\\Vert a)-D(t_j\\Vert b)\\}=\\log(N_{n,j}/\\pi_{n,j})$. This is possible after increasing $M$: writing $A=2\\log 8$, $M\\epsilon_n<\\sqrt2$ implies $A/((M-1)^2\\epsilon_n^2)>2$ for sufficiently large $M$, so the ceiling in $m_n$ costs at most a fixed factor; since $n\\epsilon_n^2\\to\\infty$, the floor in $L_n$ also costs at most a fixed factor eventually. Hence $L_n\\ge cM^2x_n$ for a universal $c>0$, while step 1.2 bounds the right side by $(2+2K)x_n$. Define $\\phi_{n,j}$ as the maximum of the block-majority tests over its $N_{n,j}$ centers, using threshold $t_j$. Continuity on $[t_*,b]$ and positivity of both divergences at $t_*$ give a constant $c_*>0$ such that $(D(t\\Vert a)+D(t\\Vert b))/2\\ge c_*$ there. The null union bound and step 3.1 give $P_0^n(\\phi_{n,j}=1)\\le\\sqrt{N_{n,j}\\pi_{n,j}}e^{-c_*L_n}$; the same Chernoff bound for a center within $\\epsilon_n$ of each alternative gives $\\sup_{\\theta\\in S_{n,j}:h(p_\\theta,p_0)>M\\epsilon_n}P_\\theta^n(\\phi_{n,j}=0)\\le\\sqrt{N_{n,j}/\\pi_{n,j}}e^{-c_*L_n}$ by step 2.1.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Let $\\phi_n$ be one on the countable union of the rejection events of $\\phi_{n,j}$ over $j\\in J_n^+$ and zero otherwise; it is measurable as a countable union of measurable events. The union bound and step 4.1 give $P_0^n(\\phi_n=1)\\le T_ne^{-c_*L_n}$. For the tested likelihood numerator on an active stratum, Tonelli [F4], the jointly measurable likelihood interface [F5] and change of density give $E_0[(1-\\phi_n)\\int_{\\{\\theta\\in S_{n,j}:h(p_\\theta,p_0)>M\\epsilon_n\\}}\\prod_i\\frac{p_\\theta(X_i)}{p_0(X_i)}\\,\\Pi_n(d\\theta)]\\le\\pi_{n,j}\\sup_{\\theta\\text{ in the set}}P_\\theta^n(1-\\phi_{n,j})\\le\\sqrt{N_{n,j}\\pi_{n,j}}e^{-c_*L_n}.$",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Write $d_n=e^{-(C_0+2)y_n}$. For the active numerator $R_n^+$, step 5.1 gives $P_0^n(\\phi_n=1)\\le T_ne^{-c_*L_n}$ and $E_0[(1-\\phi_n)R_n^+]\\le T_ne^{-c_*L_n}$. Thus, for every fixed $\\zeta>0$, $P_0^n(R_n^+/D_n>\\zeta)\\le P_0^n(D_n<d_n)+T_ne^{-c_*L_n}+\\zeta^{-1}d_n^{-1}T_ne^{-c_*L_n}$. This tends to zero for sufficiently large $M$, since $T_n=e^{x_n}s_n$, $y_n\\le x_n$, $L_n\\ge cM^2x_n$, and $s_n\\to0$. For the small-mass numerator $R_n^-$, [F8] and Tonelli give $E_0[R_n^-]\\le\\sum_{J_n^-}\\pi_{n,j}\\le e^{-Kx_n/2}T_n$; hence its posterior mass tends to zero in probability by Markov and the denominator event, because $e^{(C_0+2)y_n}e^{-Kx_n/2}T_n\\le s_ne^{(C_0+3-K/2)x_n}\\to0$ when $K>2(C_0+3)$.",
+          "step": "6.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 1.2",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "The posterior outside the $M\\epsilon_n$-ball is the union of its active-stratum part, its small-mass-stratum part, and the sieve complement. Step 6.1 sends the first two parts to zero in probability, and the sieve-complement term tends to zero by hypothesis.",
+          "step": "7.1",
+          "inputs": [
+            "given",
+            "step 6.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The entropy sum excludes zero-mass strata; step 1.2 identifies the active and small-mass positive strata, and steps 5.1–6.1 account for both."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The local radii are strictly positive by the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No distinct one-element boundary claim is asserted; every admitted one-element case is covered by the same proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3 handles M epsilon_n>=sqrt(2), when the alternative set is empty."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement excludes inadmissible endpoints by its strict range conditions or handles included endpoints in the cited steps."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.3 selects the countable family of finite covers under AC; each threshold in step 4.1 is uniquely determined by a strictly increasing continuous divergence difference."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1",
+            "1.3"
+          ],
+          "reason": "AC is used by the directional KL denominator lemma and to select countably many finite covers; no uncountable family of nets is selected."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-dirichlet-normal-mixture-sieve-entropy": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-dirichlet-normal-mixture-finite-support-approximation",
+          "source_section": "Statement",
+          "quote": "There is a universal constant $C$ such that, for $A,\\sigma>0$, $0<\\eta<1/2$, and every probability measure $F$ supported on",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hellinger-distance-controls-l1-and-total-variation",
+          "source_section": "Statement",
+          "quote": "For probability densities $p,q$ relative to one fixed measure $\\mu$, define $h$ as in [[def-hellinger-distance-between-density-laws]] and set $d_1(P,Q):=\\int|p-q|\\,d\\mu$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-normal-location-scale-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$ of [[def-standard-normal-and-normal-laws]] has Lebesgue density $$g_{m,\\sigma}(y)=\\frac1\\sigma\\frac{e^{-((y-m)/\\sigma)^2/2}}{\\sqrt{2\\pi}}=\\frac1{\\sqrt{2\\pi\\sigma^2}}e^{-(y-m)^2/(2\\sigma^2)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hellinger-distance-between-density-laws",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a measure space and let $p,q:\\mathsf X\\to[0,\\infty)$ be measurable densities with $\\int p\\,d\\mu=\\int",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $K:=\\lceil C_0(A/\\tau\\vee1)\\log(e/\\epsilon)\\rceil$. By [F1], every $p_{F,\\sigma}\\in\\mathcal P_{A,\\tau}$ is within $L^1$ distance $\\epsilon^2/C_1$ of a mixture with at most $K$ atoms, for a fixed sufficiently large $C_1$. Pad shorter mixtures by zero-weight atoms.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Differentiating the density in [F3] gives $\\|\\partial_z\\phi_\\sigma(\\cdot-z)\\|_1=\\sigma^{-1}E|Z|\\le\\sigma^{-1}$, since $2|Z|\\le1+Z^2$ and $E Z^2=1$, and $\\|\\partial_\\sigma\\phi_\\sigma(\\cdot-z)\\|_1=\\sigma^{-1}E|Z^2-1|\\le2\\sigma^{-1}$ for $Z\\sim N(0,1)$. Integrating these derivatives along the location and scale segments yields $\\|\\phi_\\sigma(\\cdot-z)-\\phi_\\sigma(\\cdot-z')\\|_1\\le |z-z'|/\\sigma$ and $\\|\\phi_\\sigma-\\phi_{\\sigma'}\\|_1\\le2|\\sigma-\\sigma'|/(\\sigma\\wedge\\sigma')$. Now choose a scale grid in $[\\tau,2\\tau]$ and a location grid in $[-A,A]$, each with mesh at most $c_2\\tau\\epsilon^2$, and an $L^1$ grid on the $K$-simplex of mesh at most $c_2\\epsilon^2$. Replacing the scale, locations and weights changes the mixture density in $L^1$ by at most $C c_2\\epsilon^2$; choose $c_2$ so this plus the approximation from step 1.1 is at most $\\epsilon^2/4$. Thus the resulting finite set is an $L^1$ cover of radius $\\epsilon^2/4$, hence an $h$-cover of radius $\\epsilon/2$ by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The scale grid has at most $C\\epsilon^{-2}$ points and the location grid at most $C(1+A/(\\tau\\epsilon^2))$ points. Rounding each of the first $K-1$ weights down to a mesh proportional to $\\epsilon^2/K$ leaves the last weight nonnegative after setting it to make the sum one, gives at most $(CK/\\epsilon^2)^K$ weight vectors, and changes their $L^1$ distance by at most $2c_2\\epsilon^2$. Therefore the logarithm of the cover size is at most $C\\log(e/\\epsilon)+K\\left[\\log\\!\\left(\\frac{C(A/\\tau\\vee1)}{\\epsilon^2}\\right)+\\log\\!\\left(\\frac{CK}{\\epsilon^2}\\right)\\right]\\le C(A/\\tau\\vee1)\\left[\\log\\!\\left(\\frac{C(A/\\tau\\vee1)}{\\epsilon}\\right)\\right]^2.$ The constructed finite set is an $h$-net of radius $\\epsilon/2$, hence also a net of radius $\\epsilon$; its cardinality therefore bounds the covering number and proves the first bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $r:=F([-A,A]^c)=0$, then $F$ already belongs to the compact-location class. If $0<r\\le\\rho<1$, let $F_A$ and $F_{A^c}$ be the normalized restrictions to $[-A,A]$ and its complement. Then $p_{F,\\sigma}=(1-r)p_{F_A,\\sigma}+r p_{F_{A^c},\\sigma}$, so $\\|p_{F,\\sigma}-p_{F_A,\\sigma}\\|_1\\le2r$. By [F2], $h(p_{F,\\sigma},p_{F_A,\\sigma})\\le\\sqrt{2r}$; the triangle inequality in [F4] then transfers the compact cover to the tail-constrained class. For sufficiently small universal $c$, $\\rho\\le c\\epsilon^2$ makes the truncation error at most $\\epsilon/2$, so the radius-$\\epsilon/2$ cover from steps 2.1–2.2 becomes a radius-$\\epsilon$ cover after the constant rescaling used in the entropy bound.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement restricts the input to a nonempty probability/model object, so an empty object is not in the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 includes rho=0 by truncation to the compact-location class."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.2 allow a one-atom mixture by padding finite support with zero weights."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A point-mass mixing law is covered by the same location, scale and simplex grids in steps 2.1–2.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.2 use grids covering the closed location interval [-A,A] and scale interval [tau,2tau]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary selection from an unspecified nonempty family is made beyond the stated axiom dependencies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-dirichlet-normal-mixture-countable-band-entropy-sum": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-dirichlet-normal-mixture-sieve-entropy",
+          "source_section": "Statement",
+          "quote": "For $A\\ge1$, $\\tau>0$, and $0<\\epsilon<1/4$, let $$\\mathcal P_{A,\\tau}:=\\{p_{F,\\sigma}:F([-A,A])=1,\\ \\tau\\le\\sigma\\le2\\tau\\}.$$ There is a universal constant $C$ such that $$\\log",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hellinger-distance-controls-l1-and-total-variation",
+          "source_section": "Statement",
+          "quote": "For probability densities $p,q$ relative to one fixed measure $\\mu$, define $h$ as in [[def-hellinger-distance-between-density-laws]] and set $d_1(P,Q):=\\int|p-q|\\,d\\mu$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $x_n=nr_n^2$ and $J_n=\\max\\{j:2^j\\sigma_n\\le s_n\\}$. Since $s_n\\to0$ and $\\sigma_n\\ge c n^{-a_1}$, $J_n=O(\\log n)$. Put $u_n:=\\min\\{r_n/2,1/8\\}$. If $r_n\\le1/4$, truncate a mixing law to $[-A,A]$ and normalize it there; the removed mass is at most $r_n^2/8$, so its mixture changes by $L^1$ at most $r_n^2/4$ and by Hellinger at most $r_n/2$ using [F2]. The compact cover at radius $u_n=r_n/2$ then covers $\\mathcal P_{n,j}$ at radius $r_n$. If $r_n>1/4$, the sieve tail is at most $1/128$, so truncation changes Hellinger distance by at most $1/8$; the compact cover at radius $u_n=1/8$ then covers the class at radius at most $1/4<r_n$. Thus in both cases $N_{n,j}\\le N(u_n,\\mathcal P_{A,2^j\\sigma_n},h)$. The rate lower bound implies $\\log(1/u_n)\\le C\\log n$ and $x_n\\ge M_0^2\\sigma_n^{-1}(\\log n)^2, \\qquad x_n\\ge M_0^2\\sigma_n^{-2\\eta}.$ For $0\\le j\\le J_n$, [F1] bounds $\\log N_{n,j}\\le C\\sigma_n^{-1}(\\log n)^2$, because the band lower scale is at least $\\sigma_n$. Since $\\pi_{n,j}\\le1$, these terms contribute at most $C\\log n\\exp\\{C\\sigma_n^{-1}(\\log n)^2/2-x_n\\},$ which tends to zero for sufficiently large $M_0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For negative indices write $j=-k$, $k\\ge1$. For all sufficiently large $k$, the scale-tail premise gives $\\pi_{n,-k}\\le C\\exp(-c2^{\\gamma k})$. Also [F1] and $u_n\\ge c n^{-1/2}\\log n$ imply $\\log N_{n,-k}\\le C\\sigma_n^{-1}2^k(\\log n+k)^2.$ Choose $\\theta>0$ and $\\gamma_0<\\gamma$ sufficiently close to $0$ and $\\gamma$, respectively, so $q:=1+\\theta<\\gamma_0$ and $\\rho:=\\gamma_0/(\\gamma_0-q)<2\\eta$. Since $(\\log n+k)^2\\le C_\\theta(\\log n)^2 2^{\\theta k}$ and $e^{-c2^{\\gamma k}}\\le e^{-c'2^{\\gamma_0 k}}$, the logarithm of each summand is at most $C K_n2^{qk}-c'2^{\\gamma_0k},\\qquad K_n:=\\sigma_n^{-1}(\\log n)^2.$ Enlarging $C$ handles the finitely many smaller $k$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $p=\\gamma_0/q>1$. As a function of $v=2^{qk}\\ge1$, the exponent $CK_nv-c'v^p$ has maximum at most $C'K_n^{p/(p-1)}=C'K_n^\\rho$, by differentiation. The maximizing scale is a constant multiple of $K_n^{1/(p-1)}$, so there are $O(\\log K_n)$ indices up to any fixed multiple of that scale; their sum has logarithm at most $C''K_n^\\rho$. Choose a fixed multiple $L$ large enough that for $v\\ge L K_n^{1/(p-1)}$ the negative term is at least twice the positive term. Grouping the subsequent dyadic $v$ values gives a convergent geometric tail, also bounded by $\\exp(C''K_n^\\rho)$. Therefore $\\log\\sum_{k\\ge1}\\sqrt{N_{n,-k}\\pi_{n,-k}} \\le C''\\sigma_n^{-\\rho}(\\log n)^{2\\rho}.$ Because $\\rho<2\\eta$ and $\\sigma_n\\le C n^{-a_2}$, this is $o(\\sigma_n^{-2\\eta})=o(x_n)$. The negative-index contribution therefore vanishes after multiplication by $e^{-x_n}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $G$ is supported on $[g_-,g_+]$ with $g_->0$, only a fixed finite number of dyadic indices have positive mass. Their lower scales are at least $g_-\\sigma_n/2$, so [F1] at radius $u_n$ bounds each log covering number by $C\\sigma_n^{-1}(\\log n)^2$. The first rate term gives $x_n\\ge M_0^2\\sigma_n^{-1}(\\log n)^2$, and the finite weighted sum tends to zero for sufficiently large $M_0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement restricts the input to a nonempty probability/model object, so an empty object is not in the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 discards bands with zero prior mass; the entropy limit sums only remaining bands."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include the j=0 dyadic band."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 treats compactly supported scale laws separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement defines half-open dyadic bands covering every scale in (0,s_n], including their lower endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary selection from an unspecified nonempty family is made beyond the stated axiom dependencies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-dirichlet-process-simplex-small-ball": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "An equivalent formulation is that a product of nonempty sets is nonempty: if $X_i \\ne \\emptyset$ for every",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-dirichlet-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal A)$ be a standard Borel space and let $\\alpha$ be a finite nonzero measure on",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\mathsf X,\\mathcal A)$ be a standard Borel space and let $\\alpha$ be",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-dirichlet-distribution",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. For $k\\ge2$ and $\\alpha_j>0$, the **Dirichlet distribution** $\\operatorname{Dirichlet}(\\alpha_1,\\ldots,\\alpha_k)$ is the probability law on the open",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1]–[F2], if $\\alpha(U_0)>0$ the vector $(X_0,X_1,\\ldots,X_N):=(F(U_0),F(U_1),\\ldots,F(U_N))$ has the displayed Dirichlet density; if $\\alpha(U_0)=0$, set $X_0=0$ and use the $N$-coordinate Dirichlet density. Choose an index $i_*$ with $w_{i_*}=\\max_jw_j\\ge1/N$. For every $j\\ne i_*$ restrict $x_j$ to $[\\max(w_j-\\eta^2,\\eta^2/2),\\min(w_j+\\eta^2,1)]$, an interval of length at least $\\eta^2/2$. If $\\alpha(U_0)>0$, also restrict $x_0$ to $[\\eta^2/2,\\eta^2]$ and define $x_{i_*}=1-x_0-\\sum_{j\\ne i_*}x_j$; if $\\alpha(U_0)=0$, define $x_{i_*}=1-\\sum_{j\\ne i_*}x_j$. The deviations of the coordinates other than $i_*$ sum to at most $N\\eta^2$, so $|x_{i_*}-w_{i_*}|\\le N\\eta^2$. Consequently the total event deviation is at most $2N\\eta^2+\\eta^2\\le3\\eta$; and $x_{i_*}\\ge1/N-N\\eta^2\\ge\\eta^2/2$ because $N\\eta\\le1/4$. These choices lie in the simplex, satisfy the event, and their integration region has coordinate volume at least $(\\eta^2/2)^N$ when $\\alpha(U_0)>0$ and $(\\eta^2/2)^{N-1}$ when $\\alpha(U_0)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $0<a_j\\le1$, $\\Gamma(a_j)=\\Gamma(1+a_j)/a_j\\le C_0/a_j$, since $\\Gamma$ is bounded on $[1,2]$. Thus the Dirichlet normalizing coefficient in [F2] is at least $C_1\\prod_{j=1}^N a_j$ when $\\alpha(U_0)>0$, where $C_1>0$ depends only on $m,\\alpha(U_0)$. On the region from step 1.1, each interval coordinate satisfies $x_j^{a_j-1}\\ge1$. If $\\alpha(U_0)>1$, its factor is at least $(\\eta^2/2)^{m}$; if $0<\\alpha(U_0)\\le1$, it is at least one. Therefore integrating the density over that region gives at least $C_2(a\\eta^b)^N(\\eta^2/2)^N(\\eta^2/2)^m\\ge C\\exp\\{-cN\\log(e/\\eta)\\}.$ For $\\alpha(U_0)=0$ the same bound follows from the $N$-coordinate density, with no residual-coordinate factor. The resulting probability is the one in the Statement by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement restricts the input to a nonempty probability/model object, so an empty object is not in the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 separately omit the zero-base cell when alpha(U0)=0 and allow target coordinates w_j=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For N=1, step 1.1 has no non-residual coordinates and the same simplex event follows."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Target vectors at simplex vertices are included by the clipped intervals in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 clips coordinate intervals at 0 and 1 and preserves positive cell masses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 selects an index attaining the maximum among the finite list w_1,...,w_N."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "reason": "Full AC is inherited from the normalized-gamma existence theorem and implies the Countable Choice used to normalize the finite-dimensional Dirichlet densities."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-dirichlet-normal-mixture-local-prior-mass": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "An equivalent formulation is that a product of nonempty sets is nonempty: if $X_i \\ne \\emptyset$ for every",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\mathsf X,\\mathcal A)$ be a standard Borel space and let $\\alpha$ be",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space ([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-dirichlet-normal-mixture-density-well-defined",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P(\\mathbb R)$ be the probability measures on the Borel sets of $\\mathbb R$, equipped with the",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-dirichlet-normal-mixture-finite-support-approximation",
+          "source_section": "Statement",
+          "quote": "There is a universal constant $C$ such that, for $A,\\sigma>0$, $0<\\eta<1/2$, and every probability measure $F$ supported on",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-dirichlet-process-simplex-small-ball",
+          "source_section": "Statement",
+          "quote": "Assume AC, let $\\alpha$ be a finite nonzero measure of total mass $m$, and let $F\\sim DP(\\alpha)$. Consider",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-hellinger-ratio-controls-kl-moments",
+          "source_section": "Statement",
+          "quote": "Let $p,q$ be probability densities relative to one measure $\\mu$, assume $p\\,d\\mu\\ll q\\,d\\mu$, let $h^2:=\\int(\\sqrt p-\\sqrt q)^2d\\mu$, and",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-dirichlet-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal A)$ be a standard Borel space and let $\\alpha$ be a finite nonzero measure on",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\mathsf X,\\mathcal A)$ be a standard Borel space and let $\\alpha$ be",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-hellinger-distance-between-density-laws",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a measure space and let $p,q:\\mathsf X\\to[0,\\infty)$ be measurable densities with $\\int p\\,d\\mu=\\int",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-hellinger-distance-controls-l1-and-total-variation",
+          "source_section": "Statement",
+          "quote": "For probability densities $p,q$ relative to one fixed measure $\\mu$, define $h$ as in [[def-hellinger-distance-between-density-laws]] and set $d_1(P,Q):=\\int|p-q|\\,d\\mu$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-normal-location-scale-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$ of [[def-standard-normal-and-normal-laws]] has Lebesgue density $$g_{m,\\sigma}(y)=\\frac1\\sigma\\frac{e^{-((y-m)/\\sigma)^2/2}}{\\sqrt{2\\pi}}=\\frac1{\\sqrt{2\\pi\\sigma^2}}e^{-(y-m)^2/(2\\sigma^2)}.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $G$ is a probability on $(0,\\infty)=\\bigcup_{m\\ge1}[1/m,m]$, choose $0<s_-<s_+<\\infty$ with $g:=G([s_-,s_+])>0$. Put $\\sigma_-=s_-\\sigma_n$. By [F2] applied to the law $P_0$ at scale $\\sigma_-$, there is a finite discrete probability $F_n$ supported on $K$ with at most $C\\sigma_n^{-1}\\log n$ atoms and $\\|p_{F_n,\\sigma_-}-p_{P_0,\\sigma_-}\\|_1\\le\\eta_n$, where $\\eta_n:=\\sigma_n^8$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Choose a compact interval $D$ whose interior contains $K$ and on which the density of $\\alpha$ is bounded above and below by positive constants. Moving an atom by at most $\\eta_n\\sigma_-$ changes its normal mixture by at most $C\\eta_n$ in $L^1$: differentiating [F7] gives $\\|\\partial_z\\phi_{\\sigma_-}(\\cdot-z)\\|_1=E|Z|/\\sigma_-\\le1/\\sigma_-$, since $2|Z|\\le1+Z^2$ and $E Z^2=1$ for $Z\\sim N(0,1)$. Move each atom of $F_n$ to a nearest point of a lattice of mesh $\\eta_n\\sigma_-$ and merge coincident atoms; distinct relocated locations are separated by at least $\\eta_n\\sigma_-$. Around each relocated atom take a centered cell of length $\\ell_n=\\eta_n\\sigma_-/2$; these cells are disjoint. Each gap of length $g\\ge\\ell_n$ between the atom-cells, including the two end gaps in $D$, is split into $q=\\lceil2g/\\sigma_-\\rceil$ equal subintervals. If $q=1$, their length is $g\\ge\\ell_n$; if $q\\ge2$, then $g>\\sigma_-/2$ and $q\\le4g/\\sigma_-$, so each length lies in $[\\sigma_-/4,\\sigma_-/2]$. Thus the resulting Borel partition $U_1,\\ldots,U_N$ of $D$ has every cell length between $c\\eta_n\\sigma_-$ and $\\sigma_-/2$, every atom-cell diameter at most $2\\eta_n\\sigma_-$, and $N\\le C(m_n+\\sigma_-^{-1})\\le C\\sigma_n^{-1}\\log n$, where $m_n$ is the number of atoms. Let $w_j=F_n(U_j)$, so $\\sum_jw_j=1$. For all large $n$, the base density bounds give $c\\eta_n\\sigma_n\\le\\alpha(U_j)\\le1$. Since $\\eta_n=\\sigma_n^8$, we have $c\\eta_n\\sigma_n\\ge c'\\eta_n^2$ eventually, and $N\\eta_n\\le C\\sigma_n^7\\log n\\to0$ using $\\sigma_n\\le Cn^{-a_2}$. Apply [F3] with parameters $a=c'$, $b=2$, and $\\eta=\\eta_n$ to obtain an event $E_n$ with $\\Pi_{DP}(E_n)\\ge e^{-C N\\log(e/\\eta_n)}\\ge e^{-C\\sigma_n^{-1}(\\log n)^2},$ on which $F(D^c)\\le C\\eta_n$, $\\sum_j|F(U_j)-w_j|\\le C\\eta_n$, and $F(U_j)\\ge\\eta_n^2/2$ for every $j$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "F7",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $F$ in $E_n$, compare $p_{F,\\sigma}$ with $p_{F_n,\\sigma}$, uniformly for $s_-\\sigma_n\\le\\sigma\\le s_+\\sigma_n$. The [F7] location derivative bound and atom-cell diameter at most $2\\eta_n\\sigma_-$ make the within-cell $L^1$ error at most $C\\eta_n$; the gap cells and $D^c$ have total $F$-mass at most $C\\eta_n$, and the cell-weight discrepancies sum to at most $C\\eta_n$. Since each normal density has $L^1$ norm one, these terms give $\\|p_{F,\\sigma}-p_{F_n,\\sigma}\\|_1\\le C\\eta_n$. For $u,v>0$, completing the square gives $\\int\\phi_u(y)\\phi_v(x-y)\\,dy=\\frac{1}{\\sqrt{2\\pi(u^2+v^2)}}e^{-x^2/(2(u^2+v^2))}=\\phi_{\\sqrt{u^2+v^2}}(x),$ since $y^2/u^2+(x-y)^2/v^2=((u^2+v^2)/(u^2v^2))(y-u^2x/(u^2+v^2))^2+x^2/(u^2+v^2)$. Also, for any densities $f,g,k$, Tonelli and the triangle inequality give $\\|f*k-g*k\\|_1\\le\\int\\!\\int|f(y)-g(y)|k(x-y)\\,dy\\,dx=\\|f-g\\|_1$. Apply these identities with $u=\\sigma_-$ and $v=\\sqrt{\\sigma^2-\\sigma_-^2}$ to obtain $\\|p_{F_n,\\sigma}-p_{P_0,\\sigma}\\|_1\\le C\\eta_n$. Thus [F6] gives $h(p_{F,\\sigma},p_{P_0,\\sigma})\\le C\\sqrt{\\eta_n}$, and the assumed bias bound gives $h(p_0,p_{F,\\sigma})\\le C(\\sigma_n^2+\\sqrt{\\eta_n})\\le C\\sigma_n^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every $x\\in K$, the interval $[x-\\sigma_-,x+\\sigma_-]$ contains a full cell $U_j$ because $D$ contains a fixed neighborhood of $K$ and all cells have length at most $\\sigma_-/2$. On this interval $\\phi_\\sigma(x-z)\\ge c/\\sigma$ for $s_-\\sigma_n\\le\\sigma\\le s_+\\sigma_n$. Therefore [F1] and the cell-mass lower bound in step 1.2 give $p_{F,\\sigma}(x)\\ge c\\eta_n^2/\\sigma_n$. Since $p_0$ is bounded and vanishes outside $K$, this implies $R_n:=\\|p_0/p_{F,\\sigma}\\|_\\infty\\le C\\sigma_n\\eta_n^{-2}=C\\sigma_n^{-15}$. The polynomial lower bound on $\\sigma_n$ makes $1+\\log^+R_n\\le C\\log n$. Applying [F4] to the Hellinger bound in step 2.1 yields both local KL quantities at most $C\\sigma_n^4(\\log n)^2\\le C\\delta_n^2$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "F7",
+            "given",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The scale event $S\\in[s_-,s_+]$ has probability $g>0$ and is independent of $F$. Thus the subset $E_n\\times\\{S\\in[s_-,s_+]\\}$ is contained in the displayed local KL/log-square set and has prior probability at least $g e^{-C\\sigma_n^{-1}(\\log n)^2}$. By the definition of $\\delta_n$, $n\\delta_n^2\\ge\\sigma_n^{-1}(\\log n)^2$, so increasing $C_1$ absorbs $g$ and proves the required lower bound.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement restricts the input to a nonempty probability/model object, so an empty object is not in the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 invokes the DP simplex bound with its separate alpha(U0)=0 branch when the complement has zero base mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 selects a compact interval [s_-,s_+] with positive G mass and all scales remain positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement permits bounded compactly supported densities that vanish on part of their support; steps 2.1–2.2 use only the stated convolution-bias bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 includes the end cells of D and places every compact truth point in its interior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the countable compact exhaustion of (0,infinity) and full AC stated in A1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.2"
+          ],
+          "reason": "Full AC is inherited from the Dirichlet-process construction and the directional KL convention."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-dirichlet-normal-mixture-posterior-sieve-tail": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "An equivalent formulation is that a product of nonempty sets is nonempty: if $X_i \\ne \\emptyset$ for every",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\mathsf X,\\mathcal A)$ be a standard Borel space and let $\\alpha$ be",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space ([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-dirichlet-process-posterior-update",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(\\mathsf X,\\mathcal A)$ be standard Borel, let $\\alpha$ be a finite nonzero measure, draw $G\\sim",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-dirichlet-process-polya-urn-predictive-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. In the conditionally IID model $G\\sim DP(\\alpha)$, $X_i\\mid G\\sim G$, the posterior version after $x_{1:n}=(x_1,\\ldots,x_n)$ has",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dirichlet-process-posterior-update",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(\\mathsf X,\\mathcal A)$ be standard Borel, let $\\alpha$ be a finite nonzero measure, draw $G\\sim",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dirichlet-process-polya-urn-predictive-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. In the conditionally IID model $G\\sim DP(\\alpha)$, $X_i\\mid G\\sim G$, the posterior version after $x_{1:n}=(x_1,\\ldots,x_n)$ has",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a measurable parameter space, $\\Pi$ a prior probability measure on it, and $p_\\theta$ a",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-normal-location-scale-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$ of [[def-standard-normal-and-normal-laws]] has Lebesgue density $$g_{m,\\sigma}(y)=\\frac1\\sigma\\frac{e^{-((y-m)/\\sigma)^2/2}}{\\sqrt{2\\pi}}=\\frac1{\\sqrt{2\\pi\\sigma^2}}e^{-(y-m)^2/(2\\sigma^2)}.$$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure spaces, and let $f : X \\times Y \\to",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability space and $a>0$, then $$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-dirichlet-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal A)$ be a standard Borel space and let $\\alpha$ be a finite nonzero measure on",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\mathsf X,\\mathcal A)$ be a standard Borel space and let $\\alpha$ be",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The latent representation is $\\theta_i\\mid F\\stackrel{\\mathrm{iid}}\\sim F$ and $X_i\\mid\\theta_i,\\sigma\\sim N(\\theta_i,\\sigma^2)$ independently. Use the test $\\varphi_n=\\mathbf1\\{\\text{some }X_i\\notin I\\}$. Its type-I error is zero. For fixed $\\theta$ and $\\sigma$, set $g(\\theta)=P(\\theta+\\sigma Z\\in I)=\\Phi((U-\\theta)/\\sigma)-\\Phi((L-\\theta)/\\sigma)$. Then $g'(\\theta)=\\sigma^{-1}\\left[\\phi((L-\\theta)/\\sigma)-\\phi((U-\\theta)/\\sigma)\\right].$ For $\\theta\\le(L+U)/2$, $|L-\\theta|\\le|U-\\theta|$, so $g'(\\theta)\\ge0$ because the standard normal density decreases with absolute value; for $\\theta\\ge(L+U)/2$ the inequality reverses and $g'(\\theta)\\le0$. Thus $g$ is maximized at the midpoint, where the component leakage is $2\\Phi(-R/\\sigma)$. Every component with $\\sigma>s_n$ therefore puts probability at least $q_n=2\\Phi(-R/s_n)$ outside $I$, and $P_{F,\\sigma}^n(\\varphi_n=0)\\le(1-q_n)^n\\le e^{-nq_n}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F8] the latent DP model is a measurable prior law. Introduce the latent locations $\\theta_{1:n}$. Given these locations, $X_{1:n}$ and $\\sigma$, the observation likelihood is independent of $F$, so [F1] gives the conditional law $DP(\\alpha+\\sum_i\\delta_{\\theta_i})$. Given this updated $F$, the next latent location has conditional law $F$; applying [F3] to that predictive draw gives $E[F(A)\\mid\\theta_{1:n},X_{1:n},\\sigma]=\\frac{\\alpha(A)+\\sum_i\\mathbf1_A(\\theta_i)}{\\alpha(\\mathbb R)+n}$ for every Borel set $A$. With $A=I_d^c$, conditional Markov inequality yields $\\Pi_n(F(A)>\\epsilon_n^2,\\sigma\\le s_n\\mid X_{1:n})\\le\\frac{\\alpha(A)+\\sum_iP(\\theta_i\\in A,\\sigma\\le s_n\\mid X_{1:n})}{\\epsilon_n^2(\\alpha(\\mathbb R)+n)}.$",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F7",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Fix an index $i$ and condition on $\\theta_{-i},X_{1:n},\\sigma$. The latent vector is exchangeable because its conditional law given $F$ is IID. Reordering $\\theta_i$ last and applying [F2] shows its prior predictive law given $\\theta_{-i}$ is $H_i=(\\alpha+\\sum_{k\\ne i}\\delta_{\\theta_k})/(\\alpha(\\mathbb R)+n-1)$. Bayes' formula multiplies this measure by the likelihood $\\phi_\\sigma(X_i-t)$. Almost surely $X_i\\in I$. On $A=I_d^c$, $|X_i-t|\\ge d$, so the likelihood numerator is at most $C\\sigma^{-1}e^{-d^2/(2\\sigma^2)}$. For $\\sigma\\le s_n$, the denominator is at least the base-measure contribution $\\frac{1}{\\alpha(\\mathbb R)+n-1}\\int_{X_i-\\sigma}^{X_i+\\sigma}\\phi_\\sigma(X_i-t)\\,\\alpha(dt)\\ge\\frac{c}{\\alpha(\\mathbb R)+n-1},$ because the base density is bounded below near $I$ and $[X_i-\\sigma,X_i+\\sigma]$ lies there for all sufficiently large $n$. Consequently $P(\\theta_i\\in A\\mid\\theta_{-i},X_{1:n},\\sigma)\\le Cn\\sigma^{-1}e^{-d^2/(2\\sigma^2)}\\le Cn s_n^{-1}e^{-d^2/(2s_n^2)},$ where $s^{-1}e^{-d^2/(2s^2)}$ is increasing on $0<s<d$.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F2",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $N_n^H$ be the likelihood-ratio numerator integrated over $\\{\\sigma>s_n\\}$. By change of density and [F6], $E_0[(1-\\varphi_n)N_n^H]\\le e^{-nq_n}$. On the denominator event, [F7] therefore gives, for every $\\zeta>0$, $P_0^n\\{\\Pi_n(\\sigma>s_n\\mid X_{1:n})>\\zeta\\}\\le o(1)+\\zeta^{-1}e^{(C_0+2)n\\delta_n^2-nq_n}\\longrightarrow0.$",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substitute the step 1.3 bound into step 1.2 and use $\\alpha(A)\\le\\alpha(\\mathbb R)$. The resulting upper bound is $\\frac{\\alpha(\\mathbb R)}{\\epsilon_n^2(\\alpha(\\mathbb R)+n)}+Cn\\epsilon_n^{-2}s_n^{-1}e^{-d^2/(2s_n^2)}+\\Pi_n(\\sigma>s_n\\mid X_{1:n}),$ which tends to zero by $n\\epsilon_n^2\\to\\infty$, the second premise, and step 2.1. Thus the posterior probability of $F(I_d^c)>\\epsilon_n^2$ tends to zero. Combining with step 2.1 proves the sieve-complement claim.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "step 2.1",
+            "step 1.2",
+            "step 1.3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement restricts the input to a nonempty probability/model object, so an empty object is not in the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The scale domain is strictly positive; step 1.1 treats every sigma>s_n>0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No distinct one-element boundary claim is asserted; every admitted one-element case is covered by the same proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The midpoint maximization in step 1.1 covers every component location, including the interval endpoints."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the closed truth interval I, and step 1.3 includes equality in the bound |X_i-t|>=d."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary selection from an unspecified nonempty family is made beyond the stated axiom dependencies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1",
+            "1.3"
+          ],
+          "reason": "Full AC is inherited from the DP construction, DP posterior update, and directional KL denominator interface."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-dirichlet-normal-mixture-posterior-contraction": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "An equivalent formulation is that a product of nonempty sets is nonempty: if $X_i \\ne \\emptyset$ for every",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\mathsf X,\\mathcal A)$ be a standard Borel space and let $\\alpha$ be",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space ([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-dirichlet-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal A)$ be a standard Borel space and let $\\alpha$ be a finite nonzero measure on",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\mathsf X,\\mathcal A)$ be a standard Borel space and let $\\alpha$ be",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-dirichlet-normal-mixture-density-well-defined",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P(\\mathbb R)$ be the probability measures on the Borel sets of $\\mathbb R$, equipped with the",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-dirichlet-normal-mixture-local-prior-mass",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $p_0$ be a bounded probability density supported on a compact set $K\\subset\\mathbb R$. Let $\\alpha$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a measurable parameter space, $\\Pi$ a prior probability measure on it, and $p_\\theta$ a",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-dirichlet-normal-mixture-posterior-sieve-tail",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $p_0$ be supported on a compact interval $I=[L,U]$ with $L<U$, let $F\\sim DP(\\alpha)$ for a",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-dirichlet-normal-mixture-countable-band-entropy-sum",
+          "source_section": "Statement",
+          "quote": "Let $0<a_2<a_1<1$, $n^{-a_1}\\lesssim\\sigma_n\\lesssim n^{-a_2}$, and $\\gamma>1$. Suppose $G$ is a probability measure on $(0,\\infty)$ satisfying $G((0,s])\\le C e^{-\\beta",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-iid-posterior-contraction-under-countable-sieves",
+          "source_section": "Statement",
+          "quote": "Assume AC. For each $n$, let $\\Pi_n$ be a prior on a measurable parameter space $\\Theta_n^*$, and let",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-dominated-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be a statistical experiment ([[def-statistical-experiment]]). It is **dominated** by a supplied positive measure",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be dominated by the fixed sigma-finite positive measure $\\mu$. For each $\\theta$, the",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-hellinger-distance-between-density-laws",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a measure space and let $p,q:\\mathsf X\\to[0,\\infty)$ be measurable densities with $\\int p\\,d\\mu=\\int",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $d_n=\\max\\{(n\\sigma_n)^{-1/2}\\log n,\\sigma_n^2\\log n\\}$. By [F3], choose $C_1\\ge1$ so the prior mass is at least $e^{-C_1nd_n^2}$ on a set where both local quantities are at most $C_1d_n^2$. Set $\\bar d_n=\\sqrt{C_1}d_n$. Then the mass is at least $e^{-n\\bar d_n^2}$ and both quantities are at most $\\bar d_n^2$. By [F4], except on an event of probability at most $(n\\bar d_n^2)^{-1}$, the likelihood denominator is at least $e^{-3n\\bar d_n^2}$. Also $n\\bar d_n^2\\ge C_1\\sigma_n^{-1}(\\log n)^2\\to\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Choose a compact interval $I=[L,U]$ containing $\\operatorname{supp}(p_0)$ in its interior and contained in the open interval where the density of $\\alpha$ is continuous and strictly positive. Such an interval exists because the support is compact; its base density is bounded below on $I$. Put $R=(U-L)/2>0$ and $\\kappa=\\max\\{a_1,1-4a_2,0\\}<1$. The polynomial bandwidth bounds give $n\\bar d_n^2\\le Cn^\\kappa(\\log n)^2$. Choose $s_n=c_0(\\log n)^{-1/2}$ with $c_0$ large enough that for some $\\theta<1-\\kappa$, $q_n:=2\\Phi(-R/s_n)\\ge n^{-\\theta}$ eventually: integrating the standard normal density on $[R/s_n,R/s_n+1]$ gives the claimed lower bound once $R^2/(2c_0^2)<\\theta$. Hence $nq_n-5n\\bar d_n^2\\to\\infty$. Set $r_n=M_0\\epsilon_n$ for a fixed sufficiently large $M_0$, and $\\xi_n=\\min\\{r_n,1/4\\}/\\sqrt8$. We have $n\\xi_n^2\\to\\infty$ and $\\xi_n^{-2}\\le Cn$: if $r_n<1/4$, use $\\epsilon_n\\ge n^{-1/2}\\log n$ for all large $n$, and otherwise $\\xi_n$ is fixed. Choose $d>0$ with $d^2/(2c_0^2)>4$ and $A\\ge1$ large enough that $I_d=[L-d,U+d]\\subseteq[-A,A]$. Then $n\\xi_n^{-2}s_n^{-1}e^{-d^2/(2s_n^2)}\\to0$. Applying [F5] gives posterior concentration on $\\{F(I_d^c)\\le\\xi_n^2,\\sigma\\le s_n\\}$. Since $[-A,A]^c\\subseteq I_d^c$, the larger sieve $S_n=\\{F([-A,A]^c)\\le\\xi_n^2,\\sigma\\le s_n\\}$ also has $\\Pi_n(S_n^c\\mid X_{1:n})\\to0$.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Partition $S_n$ into dyadic scale bands $S_{n,j}=S_n\\cap\\{2^j\\sigma_n\\le\\sigma<2^{j+1}\\sigma_n\\}$ for $2^j\\sigma_n\\le s_n$. Their prior masses are bounded by $G([2^j,2^{j+1}))$. Since $\\xi_n^2=\\min\\{r_n,1/4\\}^2/8$, [F6] applies at radius $r_n$ and gives $e^{-nr_n^2}\\sum_j\\sqrt{N(r_n,\\{p_{F,\\sigma}:(F,\\sigma)\\in S_{n,j}\\},h) \\,\\Pi_n(S_{n,j})}\\longrightarrow0.$ For compactly supported $G$, only finitely many bands have positive prior mass and the first rate term suffices.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $G$ is compactly supported, put $\\epsilon_n^{\\mathrm c}=\\max\\{(n\\sigma_n)^{-1/2}\\log n,\\sigma_n^2\\log n\\}$, $r_n^{\\mathrm c}=M_0\\epsilon_n^{\\mathrm c}$ and $\\xi_n^{\\mathrm c}=\\min\\{r_n^{\\mathrm c},1/4\\}/\\sqrt8$. Since $\\sigma_n\\to0$, $n(\\epsilon_n^{\\mathrm c})^2\\ge\\sigma_n^{-1}(\\log n)^2\\to\\infty$ and $(\\epsilon_n^{\\mathrm c})^{-2}\\le Cn$. Thus $n(\\xi_n^{\\mathrm c})^2\\to\\infty$ and $(\\xi_n^{\\mathrm c})^{-2}\\le Cn$. Also $\\bar d_n\\le\\sqrt{C_1}\\epsilon_n^{\\mathrm c}$. Retain $I,s_n,d,A$ from step 1.2: its denominator, leakage bound, and exponential factor do not depend on the target radius, so the hypotheses of [F5] hold with $\\epsilon_n^{\\mathrm c}$ and $\\xi_n^{\\mathrm c}$ in place of $\\epsilon_n$ and $\\xi_n$. It yields posterior sieve complement convergence for $S_n^{\\mathrm c}=\\{F([-A,A]^c)\\le(\\xi_n^{\\mathrm c})^2,\\sigma\\le s_n\\}$. The compact branch of [F6] supplies the weighted entropy condition at radius $r_n^{\\mathrm c}$ using only the first rate term.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The prior is the measurable DP law from [F1], and [F2], [F8] give its jointly measurable density likelihoods. We have $\\bar d_n\\le\\sqrt{C_1}\\epsilon_n$, so increasing $M_0$ if necessary ensures $\\bar d_n\\le r_n$; also $n\\bar d_n^2,nr_n^2\\to\\infty$. Thus [F3] supplies the local prior-mass condition for [F7]. For general $G$, steps 1.2 and 1.3 provide a sieve with vanishing posterior complement and its weighted entropy condition. If $G$ is compactly supported, step 2.1 instead provides these two conditions at radius $r_n^{\\mathrm c}$, and its bound $\\bar d_n\\le\\sqrt{C_1}\\epsilon_n^{\\mathrm c}$ allows $M_0$ to be chosen so $\\bar d_n\\le r_n^{\\mathrm c}$. Apply [F7] with local radius $\\bar d_n$ and target radius $r_n$ in the general case, or $r_n^{\\mathrm c}$ in the compact case. It follows that for every sufficiently large fixed $M_1$, the posterior outside $M_1M_0\\epsilon_n$ (respectively $M_1M_0\\epsilon_n^{\\mathrm c}$) tends to zero in $P_0^n$-probability. Since $M_1M_0$ can be any sufficiently large fixed constant, this proves the stated rates. The measurability and dominated-likelihood requirements are supplied by [F1], [F2], and [F8], and [F9] fixes the conclusion's metric convention.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement restricts the input to a nonempty probability/model object, so an empty object is not in the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 chooses a positive target radius and scale sigma_n S with S>0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No distinct one-element boundary claim is asserted; every admitted one-element case is covered by the same proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 encloses arbitrary compact support in I; no symmetry or unimodality of p0 is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The strict tail and bandwidth boundary conditions are retained in the Statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary selection from an unspecified nonempty family is made beyond the stated axiom dependencies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "reason": "Full AC is used by the normalized-gamma DP construction and imported directional KL convention; it is stated explicitly and is not strengthened."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "cor-dirichlet-normal-mixture-interval-mass-refinement": {
+      "risk": "high",
+      "kind": "corollary",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is escalated with no completed proof; no boundary verification is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item is escalated with no completed proof; no boundary verification is claimed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item is escalated with no completed proof; no boundary verification is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item is escalated with no completed proof; no boundary verification is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item is escalated with no completed proof; no boundary verification is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item is escalated with no completed proof; no boundary verification is claimed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is escalated with no completed proof; no boundary verification is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is escalated with no completed proof; no boundary verification is claimed."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "unresolved_gaps": [
+        {
+          "id": "interval-mass-local-kl-log-square-mass",
+          "claim": "Replace sigma_n^2 log n by sigma_n^2 in the Hellinger contraction rate under the stated interval-mass condition.",
+          "missing": "A complete local supplier proving the required P0-KL and log-square prior-mass lower bound at radius sigma_n^2.",
+          "evidence": "The retrieved §9 proof invokes its Lemma 6 for a uniform bound on p0/(p0*phi_sigma); that lemma assumes unimodality and a density bounded away from zero on a central interval, neither of which is in this corollary. The interval-mass premise alone yields only a polynomial likelihood-ratio bound, so the current Hellinger-to-KL/log-square conversion retains logarithmic factors.",
+          "proposed_supplier": "lem-dirichlet-normal-mixture-interval-mass-local-prior-mass",
+          "placement": "A page immediately before cor-dirichlet-normal-mixture-interval-mass-refinement"
+        }
+      ]
+    },
+    "ex-dirichlet-normal-mixture-compact-scale-hyperprior-and-rate": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-dirichlet-normal-mixture-posterior-contraction",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $p_0$ be a finite-valued probability density on $\\mathbb R$ with compact support. Assume $p_0\\in C^2(\\mathbb",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For large $n$, $n^{-1/4}\\le\\sigma_n\\le n^{-1/6}$ because $n^{1/20}(\\log n)^{2/5}\\to\\infty$ and $n^{-1/30}(\\log n)^{2/5}\\to0$. Thus $0<a_2<a_1<1$ and $a_2=(4+\\gamma)^{-1}$. The compactly supported $G$ satisfies the lower scale-tail bound since $G(s)=0$ for $s<1$, and the upper tail is zero for $s\\ge2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Direct calculation gives $(n\\sigma_n)^{-1/2}\\log n=n^{-2/5}(\\log n)^{4/5}$ and $\\sigma_n^2\\log n=n^{-2/5}(\\log n)^{4/5}$. Hence [F1] yields this Hellinger contraction upper bound in $P_0^n$-probability. It is not a minimax claim.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement restricts the input to a nonempty probability/model object, so an empty object is not in the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the uniform scale prior has no mass below 1, and the model scale stays positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The prior is normalized on [1,2] and step 2.1 computes the two retained rate terms."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to every truth satisfying the theorem hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks both closed support endpoints [1,2] against the scale-tail bounds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary selection from an unspecified nonempty family is made beyond the stated axiom dependencies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "Bandwidth range and rate balance",
+          "method": "exact asymptotic algebra",
+          "input": {
+            "gamma": 2,
+            "sigma_n": "n^(-1/5)(log n)^(2/5)",
+            "a1": "1/4",
+            "a2": "1/6"
+          },
+          "calculation": "sigma_n/n^(-1/4)=n^(1/20)(log n)^(2/5)->infinity; sigma_n/n^(-1/6)=n^(-1/30)(log n)^(2/5)->0; each retained rate term is n^(-2/5)(log n)^(4/5).",
+          "expected": {
+            "rate": "n^(-2/5)(log n)^(4/5)",
+            "a2": "1/(4+gamma)"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-dirichlet-normal-mixture-polynomial-scale-tail-outside-theorem": {
+      "risk": "high",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-dirichlet-normal-mixture-posterior-contraction",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $p_0$ be a finite-valued probability density on $\\mathbb R$ with compact support. Assume $p_0\\in C^2(\\mathbb",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Pareto density integrates to one because $\\int_2^\\infty2s^{-2}ds=1$, so $G$ is a probability measure. For $s<1$, $G(s)=0$, which satisfies every required lower-tail upper bound near zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $s\\ge2$, the uniform component has no mass above $s$ and the Pareto survival function is $2/s$; the mixture weight $1/2$ therefore gives $1-G(s)=1/s$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any $\\beta>0$ and $\\gamma>1$, $e^{\\beta s^\\gamma}/s\\to\\infty$, so $1/s$ is not bounded above by a constant multiple of $e^{-\\beta s^\\gamma}$. Thus this prior is outside the theorem's upper-tail hypotheses. This example says nothing about whether its posterior contracts or is inconsistent.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement restricts the input to a nonempty probability/model object, so an empty object is not in the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies zero mass below 1 satisfies the lower scale-tail bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 integrates the Pareto density to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example asserts only failure of the upper-tail premise and no posterior behavior."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 includes the endpoint s=2 in the survival calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary selection from an unspecified nonempty family is made beyond the stated axiom dependencies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "Pareto normalization and survival",
+          "method": "exact integral",
+          "input": {
+            "density": "2*s^(-2) on [2,infinity)",
+            "mixture_weight": "1/2"
+          },
+          "calculation": "Integral_2^infinity 2*s^(-2) ds=1; for s>=2, the mixture survival is (1/2)*(2/s)=1/s.",
+          "expected": {
+            "total_mass": 1,
+            "survival": "1/s"
+          }
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

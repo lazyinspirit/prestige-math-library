@@ -1,0 +1,245 @@
+{
+  "group": "q",
+  "batches": ["54"],
+  "pages_read": [
+    "finite-group-permutation-inference",
+    "finite-group-permutation-inference-examples"
+  ],
+  "items_read": [
+    "def-measurable-finite-group-permutation-setup",
+    "def-measurable-finite-group-orbit-pvalues",
+    "alg-random-permutation-monte-carlo-pvalue",
+    "thm-finite-group-permutation-validity",
+    "thm-random-permutation-monte-carlo-validity",
+    "ex-exchangeable-two-sample-permutation-test",
+    "ex-unequal-assignment-sharp-null-randomization",
+    "cex-uncorrected-random-permutation-pvalue-can-be-zero"
+  ],
+  "conventions": [
+    {
+      "convention": "G is a finite group acting on the left by measurable maps on an arbitrary measurable data space; T is measurable and real-valued. Validity requires invariance under every group element for every parameter in the nonempty null.",
+      "fixed_by": "def-measurable-finite-group-permutation-setup",
+      "matters_for": [
+        "thm-finite-group-permutation-validity",
+        "thm-random-permutation-monte-carlo-validity",
+        "ex-exchangeable-two-sample-permutation-test",
+        "ex-unequal-assignment-sharp-null-randomization",
+        "cex-uncorrected-random-permutation-pvalue-can-be-zero"
+      ]
+    },
+    {
+      "convention": "Orbit ranks count group elements with multiplicity, including repeated orbit points in nonfree actions. Inclusive ranks use ≥; tie randomization uses the strict upper count plus U times the equality count, with U independent uniform on [0,1].",
+      "fixed_by": "def-measurable-finite-group-orbit-pvalues",
+      "matters_for": [
+        "thm-finite-group-permutation-validity",
+        "thm-random-permutation-monte-carlo-validity",
+        "ex-exchangeable-two-sample-permutation-test",
+        "cex-uncorrected-random-permutation-pvalue-can-be-zero"
+      ]
+    },
+    {
+      "convention": "With replacement, B ≥ 0 IID uniform group draws are independent of the data, and a distinguished identity is added even when simulated identities occur. Without replacement, B ≤ |G|−1 and a uniform B-subset of nonidentity elements is sampled independently of the data. Both denominators are B+1; B=0 returns 1.",
+      "fixed_by": "alg-random-permutation-monte-carlo-pvalue",
+      "matters_for": [
+        "thm-random-permutation-monte-carlo-validity",
+        "ex-exchangeable-two-sample-permutation-test",
+        "cex-uncorrected-random-permutation-pvalue-can-be-zero"
+      ]
+    },
+    {
+      "convention": "The with-replacement design carrier W is an unordered multiset retaining multiplicities; the without-replacement carrier is a subset. Monte Carlo superuniformity averages jointly over data and simulation design.",
+      "fixed_by": "thm-random-permutation-monte-carlo-validity",
+      "matters_for": [
+        "thm-random-permutation-monte-carlo-validity",
+        "cex-uncorrected-random-permutation-pvalue-can-be-zero"
+      ]
+    },
+    {
+      "convention": "Cutoffs reject at p ≤ α, including α=0 and α=1. Size and level terminology assumes a specified nonempty disjoint alternative; the null rejection bounds themselves do not require one.",
+      "fixed_by": "thm-finite-group-permutation-validity",
+      "matters_for": [
+        "thm-finite-group-permutation-validity",
+        "thm-random-permutation-monte-carlo-validity",
+        "cex-uncorrected-random-permutation-pvalue-can-be-zero"
+      ]
+    },
+    {
+      "convention": "The unequal-assignment example holds units and a Fisher-sharp schedule fixed and uses the actual assignment weights 0.9 and 0.1; it asserts no weak-null validity or group invariance.",
+      "fixed_by": "ex-unequal-assignment-sharp-null-randomization",
+      "matters_for": [
+        "ex-unequal-assignment-sharp-null-randomization"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-finite-group-permutation-validity",
+      "statement": "For a measurable finite-group setup with every null law invariant, Pθ(p_orb(X) ≤ u) ≤ u and Pθ(p_tie(X,U) ≤ u) = u for every θ in Θ0 and u in [0,1], where U is independent uniform on [0,1]. The inclusive cutoff has null rejection probability at most α; the tie-randomized cutoff has rejection probability exactly α under each null law.",
+      "used_by": [
+        "thm-random-permutation-monte-carlo-validity",
+        "ex-exchangeable-two-sample-permutation-test",
+        "ex-unequal-assignment-sharp-null-randomization",
+        "cor-two-sample-permutation-exact-under-equal-distributions"
+      ]
+    },
+    {
+      "id": "alg-random-permutation-monte-carlo-pvalue",
+      "statement": "With replacement, return (1 + Σ from b=1 to B of 1{T(g_b·x) ≥ T(x)})/(B+1) for IID uniform group draws independent of the data. Without replacement, adjoin the identity to a uniform B-subset of G excluding the identity and return its inclusive upper-tail count divided by B+1, requiring B ≤ |G|−1.",
+      "used_by": [
+        "thm-random-permutation-monte-carlo-validity",
+        "ex-exchangeable-two-sample-permutation-test",
+        "cex-uncorrected-random-permutation-pvalue-can-be-zero"
+      ]
+    },
+    {
+      "id": "thm-random-permutation-monte-carlo-validity",
+      "statement": "Under invariant null laws, either specified identity-corrected design gives a measurable p-value p_B on the joint data/design experiment satisfying P̃θ(p_B ≤ u) ≤ u for every θ in Θ0 and 0 ≤ u ≤ 1. Its cutoff has null rejection probability at most α. Without replacement at B=|G|−1, it equals the full-orbit value.",
+      "used_by": [
+        "cex-uncorrected-random-permutation-pvalue-can-be-zero"
+      ]
+    },
+    {
+      "id": "def-measurable-finite-group-orbit-pvalues",
+      "statement": "p_orb(x) is the number of group elements with T(g·x) ≥ T(x), divided by |G|; p_tie(x,U) is the strict-upper count plus U times the equality count, divided by |G|, with an independent uniform U.",
+      "used_by": [
+        "alg-random-permutation-monte-carlo-pvalue",
+        "thm-finite-group-permutation-validity",
+        "thm-random-permutation-monte-carlo-validity",
+        "ex-exchangeable-two-sample-permutation-test"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-statistical-experiment",
+      "used_for": "The measurable data space and parameter-indexed sampling laws, including the Monte Carlo joint experiment.",
+      "opened": true
+    },
+    {
+      "id": "def-group",
+      "used_for": "Identity, inverses, and bijective right multiplication in the rank and recentering proofs.",
+      "opened": true
+    },
+    {
+      "id": "def-group-action",
+      "used_for": "The left-action identity (gh)·x=g·(h·x).",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Measurable transformations, scores, and p-value functions.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-group-randomization-test",
+      "used_for": "The finite-space specialization and its invariant-null premise.",
+      "opened": true
+    },
+    {
+      "id": "def-orbit-rank-p-value",
+      "used_for": "Compatibility of inclusive and randomized rank formulas and transformation multiplicities.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Independent tie randomization and data-independent simulation.",
+      "opened": true
+    },
+    {
+      "id": "def-uniform-finite-probability-space",
+      "used_for": "Uniform group indices, selected positions, and subset designs.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-multiset-randomized-rank-is-uniform",
+      "used_for": "Superuniform inclusive ranks and exactly uniform randomized ranks for a uniformly selected position in a finite score list.",
+      "opened": true
+    },
+    {
+      "id": "def-p-value",
+      "used_for": "Superuniformity under every null law at every threshold in [0,1], including zero.",
+      "opened": true
+    },
+    {
+      "id": "def-randomized-procedure-as-a-markov-kernel",
+      "used_for": "Interpreting auxiliary-randomness cutoff procedures as kernels.",
+      "opened": true
+    },
+    {
+      "id": "def-randomized-test",
+      "used_for": "Binary randomized tests and their rejection functions.",
+      "opened": true
+    },
+    {
+      "id": "lem-measurable-rejection-function-defines-randomized-test",
+      "used_for": "Constructing tests from the measurable tie-randomized and simulation-averaged rejection functions.",
+      "opened": true
+    },
+    {
+      "id": "def-test-size-and-power",
+      "used_for": "Size as the supremum of null rejection probabilities and the nonempty alternative convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-p-value-superuniformity",
+      "used_for": "Converting valid p-values into threshold tests with the stated level bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-group-randomization-validity",
+      "used_for": "Checking the finite-space specialization and the downstream error-accounting example's full-orbit validity citation.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-probability-space-and-event",
+      "used_for": "Finite model weights and the example and counterexample event calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-randomized-treatment-assignment-model",
+      "used_for": "Fixed units and potential outcomes with randomness supplied by the assignment law.",
+      "opened": true
+    },
+    {
+      "id": "def-fisher-sharp-null-and-predeclared-test-orderings",
+      "used_for": "Sharp-null imputation and the predeclared assignment score.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-population-average-treatment-effect-and-weak-null",
+      "used_for": "Distinguishing a zero-average-effect null from the Fisher sharp null.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-weighted-upper-tail-pvalues-and-randomized-ties",
+      "used_for": "Checking the weighted-rank argument underlying the cited Fisher randomization theorem.",
+      "opened": true
+    },
+    {
+      "id": "thm-fisher-sharp-null-randomization-pvalues-are-valid",
+      "used_for": "Validity with actual unequal assignment weights under a fixed Fisher-sharp schedule.",
+      "opened": true
+    },
+    {
+      "id": "cex-noninvariant-null-invalidates-group-pvalue",
+      "used_for": "The examples page's cited demonstration that null invariance is essential.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "asymptotically-robust-permutation-tests",
+      "to": "finite-group-permutation-inference",
+      "faithful": true,
+      "note": "The page and cor-two-sample-permutation-exact-under-equal-distributions use the full-orbit theorem under P=Q. The corollary establishes pooled-product invariance and measurable coordinate permutations, retains the measurable zero-denominator convention, and concludes inclusive superuniformity and independent-uniform tie-randomized uniformity. This matches the supplier; no weak-null exactness is inferred."
+    },
+    {
+      "from": "statistical-and-computational-error-accounting",
+      "to": "finite-group-permutation-inference",
+      "faithful": true,
+      "note": "The A-page summary and ex-permutation-pvalue-resolution use the identity-adjoined finite-B formula only for a realized calculation and grid resolution. The repeated transformation list is compatible with replacement. The example explicitly disclaims finite-B validity, unbiasedness, and a general error bound; its full-orbit validity citation is to the published finite-space theorem. No stronger batch-54 conclusion is imported."
+    }
+  ]
+}

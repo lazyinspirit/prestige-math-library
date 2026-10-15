@@ -1,0 +1,1975 @@
+arXiv:1310.2484v4  [math.ST]  2 Oct 2014
+The Annals of Statistics
+2014, Vol. 42, No. 5, 1941–1969
+DOI: 10.1214/14-AOS1246
+c
+⃝Institute of Mathematical Statistics, 2014
+ON THE BERNSTEIN–VON MISES PHENOMENON FOR
+NONPARAMETRIC BAYES PROCEDURES
+By Isma¨el Castillo1 and Richard Nickl
+CNRS and University of Cambridge
+We continue the investigation of Bernstein–von Mises theorems
+for nonparametric Bayes procedures from [Ann. Statist. 41 (2013)
+1999–2028]. We introduce multiscale spaces on which nonparametric
+priors and posteriors are naturally deﬁned, and prove Bernstein–von
+Mises theorems for a variety of priors in the setting of Gaussian non-
+parametric regression and in the i.i.d. sampling model. From these re-
+sults we deduce several applications where posterior-based inference
+coincides with eﬃcient frequentist procedures, including Donsker–
+and Kolmogorov–Smirnov theorems for the random posterior cumu-
+lative distribution functions. We also show that multiscale posterior
+credible bands for the regression or density function are optimal fre-
+quentist conﬁdence bands.
+1. Introduction.
+The Bernstein–von Mises (BvM) theorem constitutes
+a powerful and precise tool to study Bayes procedures from a frequentist
+point of view. It gives universal conditions on the prior under which the
+posterior distribution has the approximate shape of a normal distribution.
+The theorem is well understood in ﬁnite-dimensional models (see [30] and
+[35]), but involves some delicate conceptual and mathematical issues in the
+inﬁnite-dimensional setting. There exists a Donsker-type BvM theorem for
+the cumulative distribution function based on Dirichlet process priors, see Lo
+[31], and this carries over to a variety of closely related nonparametric situ-
+ations, including quantile inference and censoring models, where Bernstein–
+von Mises results are available: see [8, 9, 21, 26, 27] and [22]. The proofs of
+these results rely on a direct analysis of the posterior distribution, which is
+explicitly given in these settings (and typically of Dirichlet form).
+Received October 2013; revised March 2014.
+1Supported in part by ANR Grants “Banhdits” ANR-2010-BLAN-0113-03 and “Cali-
+bration” ANR-2011-BS01-010-01.
+AMS 2000 subject classiﬁcations. Primary 62G20; secondary 62G15, 62G08.
+Key words and phrases. Bayesian inference, posterior asymptotics, multiscale statistics.
+This is an electronic reprint of the original article published by the
+Institute of Mathematical Statistics in The Annals of Statistics,
+2014, Vol. 42, No. 5, 1941–1969. This reprint diﬀers from the original in
+pagination and typographic detail.
+1
+
+2
+I. CASTILLO AND R. NICKL
+When considering general priors that model potentially smoother non-
+parametric objects such as densities or regression functions, the BvM phe-
+nomenon appears to be much less well understood. Notably, Freedman [14]
+has shown that in a basic Gaussian conjugate ℓ2-sequence space setting, the
+BvM theorem does not hold true in generality; see also the related recent con-
+tributions [24, 28]. In contrast, in the recent paper [4], nonparametric BvM
+theorems have been proved in a topology that is weaker than the one of ℓ2,
+and it was shown that such results can be useful for several nonparametric
+problems, including the ℓ2-setting, when applied with care. An important
+consequence is that, in contrast to the ﬁnite-dimensional situation, whether
+a nonparametric posterior credible set is a frequentist conﬁdence set or not
+depends in a possibly quite subtle way on the geometry of the set.
+The results in [4] are conﬁned to the most basic nonparametric model—
+Gaussian white noise—and strongly rely on Hilbert space techniques. The
+main novelties of the present paper are: (a) extensions of the results in [4]
+to the i.i.d. sampling model and (b) the derivation of sharp Bernstein–von
+Mises results in spaces whose geometry resembles an ℓ∞-type space and
+whose norms are strong enough to allow one to deduce some fundamental
+new applications to posterior credible bands and Kolmogorov–Smirnov type
+results. Our results are based on mathematical tools developed recently in
+Bayesian nonparametrics, particularly the papers [3, 5] and also [32]. These
+give sub-Gaussian estimates on ﬁxed (semiparametric) functionals of pos-
+terior distributions over well-chosen events in the support of the posterior,
+which in turn can be used to control the supremum-type norms relevant in
+our context via concentration properties of maxima of sub-Gaussian vari-
+ables.
+Let us outline some applications of our results: consider a prior distribu-
+tion Π on a family F of probability densities f, such as a random Dirichlet
+histogram or a Gaussian series prior on the log-density. Let Π(·|X1,...,Xn)
+be the posterior distribution obtained from observing X1,...,Xn ∼i.i.d. f.
+It is of interest to study the induced posterior distribution on the cumu-
+lative distribution function F of f. Making the “frequentist” assumption
+Xi ∼i.i.d. P0, the stochastic ﬂuctuations of F around the empirical distribu-
+tion function Fn(·) = (1/n)Pn
+i=1 1[0,·](Xi) under the posterior distribution
+will be shown to be approximately those of a P0-Brownian bridge GP0: under
+the law P N
+0 of (X1,X2,...) the distributional approximation (n →∞)
+√n(F −Fn)|X1,...,Xn ≈GP0
+(1)
+holds true, in a sense to be made fully precise below (Corollary 1). This par-
+allels Lo’s [31] results for the Dirichlet process and can be used to validate
+Bayesian Kolmogorov–Smirnov tests and credible bands from a frequentist
+point of view. Note, however, that unlike the results in [31], our techniques
+
+NONPARAMETRIC BVM’S
+3
+are not at all based on any conjugate analysis and open the door to the
+derivation of Bernstein–von Mises results in general settings of Bayesian non-
+parametrics. We also note that (1) is comparable to central limit theorems
+√n(F b
+n −Fn) →GP0 in P N
+0 -probability for bootstrapped empirical measures
+F b
+n; see the classical paper [18]. This illustrates how BvM theorems are in
+some sense the Bayesian versions of bootstrap consistency results.
+Our results also have important applications for inference on the more
+diﬃcult functional parameter f itself. For instance, we will show that certain
+1 −α posterior credible sets for a density or regression function are also
+frequentist optimal, asymptotically exact level 1 −α conﬁdence bands.
+Before we explain these applications in detail it is convenient to shed some
+more light on our general setting. The spaces in which we derive BvM-type
+results are in principle abstract and dictated by the applications we have in
+mind. They are, however, connected to the frequentist literature on nonpara-
+metric multiscale inference, as developed in the papers [10–13, 33], where
+also many further references can be found. This connection gives a further
+motivation for our general setting as well as heuristics for the inference pro-
+cedures we suggest here. Let us thus explain some main ideas behind the
+multiscale approach in the simple regression framework of observing a signal
+in Gaussian white noise
+dX(n)(t) = f(t)dt + 1
+√n dW(t),
+t ∈[0,1],n ∈N,
+(2)
+which can also be written X(n) = f +W/√n, with W a standard white noise;
+see (13) below for details. The i.i.d. sampling model, which will be treated
+below, gives rise to similar intuitions after replacing X(n) −f by Pn −P
+where Pn = (1/n)Pn
+i=1 δXi is the empirical measure from a sample from
+law P with density f. One introduces a double-indexed family of linear
+multiscale functionals
+f 7→2l/2
+Z 1
+0
+ψ(2lx −k)f(x)dx ≡⟨f,ψlk⟩,
+where l is a scaling parameter which has O(2l) associated location indices
+k. The prototypical example that we will focus on is to take a Haar wavelet
+ψ = 1(0,1/2] −1(1/2,1], or a more general wavelet function ψ generating a
+frame or orthonormal basis {ψlk} of L2. The projection of X(n) −f onto the
+ﬁrst ≤J scales gives rise to random variables
+√n⟨X(n) −f,ψlk⟩= ⟨W,ψlk⟩≡glk ∼N(0,1),
+k,l ≤J,
+and the maximum over all these statistics scaled by
+√
+l
+ZJ ≡√n max
+l≤J,k
+|⟨X(n) −f,ψlk⟩|
+√
+l
+= max
+l≤J,k
+|glk|
+√
+l
+,
+(3)
+
+4
+I. CASTILLO AND R. NICKL
+has a canonical distribution under the null hypothesis H0 = {f}. The quan-
+tity ZJ is often called a multiscale statistic, and the quantiles of its distribu-
+tion are used to test hypotheses on f. One can also construct conﬁdence sets
+Cn by simply taking Cn to consist of all those f that satisfy simultaneously
+all the linear constraints
+|⟨X(n) −f,ψlk⟩|
+√
+l
+≤cn
+∀k,l,
+where cn are suitable constants chosen in dependence of the distribution of
+ZJ. Intersecting these linear restrictions with further qualitative information
+about f, such as smoothness or shape constraints, can be shown to give
+optimal frequentist conﬁdence sets (as, e.g., in Propositions 1 and 4 below).
+A key challenge in the multiscale approach is of course the analysis of
+the distribution of the random variables ZJ. One approach is to re-center
+ZJ by a quantity of order
+√
+J and to use extreme value theory to obtain a
+Gumbel approximation of the distribution of these random variables. The
+slow convergence rates (as J →∞) of such limit theorems are often not sat-
+isfactory; see, for example, [19]. Instead we shall introduce certain sequence
+spaces in which direct Gaussian asymptotics can be obtained for multiscale
+statistics (without re-centring). This allows for faster convergence rates (by
+using standard Berry–Esseen bounds for the central limit theorem). It is also
+naturally compatible with a Bayesian approach to multiscale inference: one
+distributes independent random variables across the scales l and locations k,
+corresponding to a random series prior common in Bayesian nonparametrics.
+The posterior distribution then allows one eﬀectively to “bootstrap” the law
+of ZJ, and our BvM-results in multiscale spaces will give a full frequentist
+justiﬁcation of this approach.
+Let us illustrate the last point in a key example involving a histogram
+prior ΠL,L ∈N, equal to the law of the random probability density
+f ∼
+2L−1
+X
+k=0
+hk1IL
+k ,
+IL
+0 = [0,2−L],IL
+k = (k2−L,(k + 1)2−L],k ≥1,
+(4)
+where the hk are drawn from a D(1,...,1)-Dirichlet distribution on the unit
+simplex of R2L. Let Π(·|X1,...,Xn) denote the resulting posterior distribu-
+tion based on observing X1,...,Xn i.i.d. from density f. For any sequence
+(wl) such that wl/
+√
+l ↑∞as l →∞and for standard Haar wavelets
+ψ−10 = 1[0,1],
+ψlk = 2l/2(1(k/2l,(k+1/2)/2l] −1((k+1/2)/2l,(k+1)/2l]),
+with indices l ∈N ∪{−1,0},k = 0,...,2l −1, deﬁne
+Cn ≡
+
+f : max
+k,l≤L
+|⟨f −Pn,ψlk⟩|
+wl
+≤Rn
+√n
+
+,
+(5)
+
+NONPARAMETRIC BVM’S
+5
+where ⟨Pn,ψlk⟩= n−1 Pn
+i=1 ψlk(Xi) are the empirical wavelet coeﬃcients
+and where Rn = R(α,X1,...,Xn) are random constants chosen such that
+Π(Cn|X1,...,Xn) = 1 −α,
+0 < α < 1.
+Any set Cn satisfying the identity in the last display is a posterior credible
+set of level 1−α, or simply a (1−α)-credible set. Note that in this example
+the posterior distribution, and hence Rn, can be explicitly computed due
+to conjugacy of the Dirichlet distribution under multinomial sampling (i.e.,
+counting observation points in dyadic bins IL
+k ).
+Proposition 1.
+Consider the random histogram prior Π from (4) where
+L = Ln is such that 2Ln ∼(n/log n)1/2(γ+1). Let Cn be as in (5). Suppose
+X1,...,Xn are i.i.d. from law P0 with density f0 satisfying the H¨older con-
+dition
+sup
+x,y∈[0,1],x̸=y
+|f0(x) −f0(y)|
+|x −y|γ
+< ∞,
+1/2 < γ ≤1.
+Then we have as n →∞,
+P N
+0 (f0 ∈Cn) →1 −α.
+(6)
+Moreover, if un = wLn/√Ln, then (6) remains true with Cn replaced by
+¯Cn = Cn ∩{f :|⟨f,ψlk⟩| ≤un2−l(γ+1/2) ∀k,l},
+and the diameter | ¯Cn|∞= sup{∥f −g∥∞:f,g ∈¯Cn}, satisﬁes
+| ¯Cn|∞= OP N
+0
+log n
+n
+γ/(2γ+1)
+un
+
+.
+(7)
+We conclude that the (1 −α)-credible set Cn is an exact asymptotic fre-
+quentist (1−α)-conﬁdence set. Following the multiscale approach, the same
+is true for ¯Cn obtained from intersecting Cn with a γ-H¨older constraint
+(expressed through the decay of the Haar wavelet coeﬃcients). The L∞-
+diameter of ¯Cn shrinks at the optimal rate if the true density f0 is also
+γ-H¨older (noting un →∞as slowly as desired). For the proof see Section 4.2.
+A summary of this article is as follows: in the next section we introduce
+the multiscale framework and the statistical sampling models and show how
+to construct eﬃcient frequentist estimators in them. In Section 3 we intro-
+duce the Bayesian approach, formulate a general notion of a nonparametric
+Bernstein–von Mises phenomenon in multiscale spaces and prove that the
+phenomenon occurs for a variety of relevant nonparametric prior distribu-
+tions, including Gaussian series priors and random histograms. In Section 4
+we discuss statistical applications to Donsker–Kolmogorov–Smirnov theo-
+rems and credible bands. Section 5 contains the proofs.
+
+6
+I. CASTILLO AND R. NICKL
+2. The general framework.
+We use the usual notation for Lp = Lp([0,1])-
+spaces of integrable functions, and we denote by ℓp the usual sequence spaces.
+The usual supremum norm is denoted by ∥· ∥∞. Throughout we consider an
+S-regular, S ≥0, wavelet basis
+{ψlk :l ≥J0 −1,k = 0,...,2l −1},
+J0 ∈N ∪{0},
+(8)
+of L2([0,1]) (by convention we denote the usual “scaling function” ϕ as the
+ﬁrst wavelet ψ(J0−1)0). We restrict to Haar wavelets (S = J0 = 0), periodised
+wavelet bases (J0 = 0,S > 0) or boundary corrected wavelet bases (S > 0,
+J0 = J0(S) large enough, see [7]). Functions f ∈L2 generate double-indexed
+sequences {⟨f,ψlk⟩=
+R 1
+0 fψlk}, and conversely any sequence (xlk) generates
+wavelet series of (possibly generalised) functions P
+k,l xlkψlk on [0,1].
+We deﬁne H¨older-type spaces Cs of continuous functions on [0,1]:
+Cs([0,1]) =
+n
+f ∈C([0,1]) :∥f∥s,∞:= sup
+l,k
+2l(s+1/2)|⟨ψlk,f⟩| < ∞
+o
+.
+(9)
+When the wavelets are regular enough, this norm characterises the scale of
+H¨older (–Zygmund when s ∈N) spaces. Otherwise we work with the spaces
+deﬁned through decay of the multiscale coeﬃcients, which still contain the
+classical s-H¨older spaces by standard results in wavelet theory.
+Convergence in distribution of random variables Xn →d X in a metric
+space (S,d) can be metrised by metrising weak convergence of the induced
+laws L(Xn) to L(X) on S. For convenience we work with the bounded-
+Lipschitz metric βS: let µ,ν be probability measures on (S,d), and deﬁne
+βS(µ,ν) ≡
+sup
+F : ∥F ∥BL≤1
+
+Z
+S
+F(x)(dµ(x) −dν(x))
+,
+(10)
+∥F∥BL = sup
+x∈S
+|F(x)| +
+sup
+x̸=y,x,y∈S
+|F(x) −F(y)|
+d(x,y)
+.
+2.1. Multiscale spaces.
+For monotone increasing weighting sequences w =
+(wl :l ≥J0 −1),wl ≥1, we deﬁne multiscale sequence spaces
+M ≡M(w) ≡
+
+x = {xlk}:∥x∥M(w) ≡sup
+l
+maxk |xlk|
+wl
+< ∞
+
+.
+(11)
+The space M(w) is a nonseparable Banach space (it is isomorphic to ℓ∞).
+The (weighted) sequences in M(w) that vanish at inﬁnity form a separable
+closed subspace for the same norm
+M0 = M0(w) =
+
+x ∈M(w): lim
+l→∞max
+k
+|xlk|
+wl
+= 0
+
+.
+(12)
+We notice that wl ≥1 implies ∥x∥M ≤∥x∥ℓ2 so that M always contains
+ℓ2. For suitable divergent weighting sequences (wl), these spaces contain
+
+NONPARAMETRIC BVM’S
+7
+objects that are much less regular than ℓ2-sequences, such as a Gaussian
+white noise dW. The action of dW on {ψlk} generates an i.i.d. sequence glk
+of standard N(0,1)’s, hence whether dW deﬁnes a Gaussian Borel random
+variable W in M0 or not depends entirely on the weighting function w.
+Definition 1.
+Call a sequence (wl) admissible if wl/
+√
+l ↑∞as l →∞.
+Proposition 2.
+Let W = (
+R
+ψlk dW :l,k) = (glk),glk ∼N(0,1), be a Gaus-
+sian white noise. For ω = (ωl) =
+√
+l we have E∥W∥M(ω) < ∞. If w = (wl)
+is admissible, then W deﬁnes a tight Gaussian Borel probability measure in
+the space M0(w).
+Proof.
+Since there are 2l i.i.d. standard Gaussians glk = ⟨ψlk,dW⟩at
+the lth level, we have from a standard bound E maxk |glk| ≤C
+√
+l for some
+universal constant C. The Borell–Sudakov–Tsirelson inequality (e.g., [29])
+applied to the maximum at the lth level gives, for any M large enough,
+Pr
+
+sup
+l
+l−1/2 max
+k
+|glk| > M
+
+≤
+X
+l
+Pr
+
+max
+k
+|glk| −E max
+k
+|glk| >
+√
+lM −E max
+k
+|glk|
+
+≤2
+X
+l
+exp{−c(M −C)2l}.
+Now using E[X] ≤K +
+R ∞
+K Pr[X ≥t]dt for any real-valued random variable
+X and any K ≥0, one obtains that ∥W∥M(ω) has ﬁnite expectation.
+It now also follows immediately from the deﬁnition of the space M0(w)
+that for any sequence wl/
+√
+l ↑∞, we have W ∈M0 almost surely. Since the
+latter is a separable complete metric space, W is a tight Gaussian Borel
+random variable in it (e.g., page 374 in [1]).
+□
+Remark 1 (Admissible sequences w).
+Assuming admissibility of w is
+necessary if one wants to show that W is tight in M(w). Since weak conver-
+gence of probability measures on a complete metric space implies tightness
+of the limit distribution, it is in particular impossible, as will be relevant
+below, to converge weakly towards W in M(w) without assuming admissi-
+bility of w. To prove that admissibility is necessary, suppose on the contrary
+that W were tight in M(ω) for some sequence ωl ∼
+√
+l, hence deﬁning a
+Radon Gaussian measure in that space. Then by Theorem 3.6.1 in [1] the
+topological support of W equals the completion of the RKHS ℓ2 in the norm
+of the ambient Banach space M(ω), which is M0(ω). Since
+lim
+J→∞
+maxk |gJk|
+√
+J
+=
+p
+2log 2 ̸= 0
+
+8
+I. CASTILLO AND R. NICKL
+almost surely we have W /∈M0(ω), a contradiction, so W cannot be tight.
+The cylindrically-deﬁned law of W is in fact a “degenerate” Gaussian mea-
+sure in M(ω) that does (assuming the continuum hypothesis) not admit an
+extension to a Borel measure on M(ω); see Deﬁnition 3.6.2 and Proposition
+3.11.5 in [1]. It has further unusual properties: W has a “hole.” That is,
+for some c > 0, ∥W∥M(ω) ∈[c,∞) almost surely (see [6]), and depending on
+ﬁner properties of the sequence ω, the distribution of ∥W∥M may not be ab-
+solutely continuous, and its absolutely continuous part may have inﬁnitely
+many modes; see [23].
+2.2. Nonparametric statistical models.
+2.2.1. Nonparametric regression.
+For f ∈L2 consider observing a trajec-
+tory in the white noise model (2) which is a natural surrogate for a ﬁxed
+design nonparametric regression model with Gaussian errors. By Proposi-
+tion 2 and since any f ∈L2 has wavelet coeﬃcients {flk} ∈ℓ2 ⊂M0(w),
+equation (2) makes rigorous sense as the tight Gaussian shift experiment
+X(n) = f + 1
+√nW,
+n ∈N,
+(13)
+in M0(w) for any admissible (wl). We denote the law L(X(n)) by P n
+f . Then
+√n(X(n) −f) = W
+in M0,
+(14)
+and one deduces that X(n) is an eﬃcient estimator of f in M0.
+2.2.2. The i.i.d. sampling setting.
+Consider next the situation where we
+observe X1,...,Xn i.i.d. from law P with density f on [0,1]. Then a natural
+estimate of ⟨f,ψlk⟩is given by Pnψlk ≡⟨Pn,ψlk⟩= 1
+n
+Pn
+i=1 ψlk(Xi). By the
+central limit theorem, for k,l ﬁxed and as n →∞, the random variable
+√n(Pn −P)(ψlk) converges in distribution to
+GP (ψlk) ∼N(0,VarP (ψlk(X1))).
+(15)
+In analogy to the white noise process W, the process GP arising from (15)
+can be rigorously deﬁned as the Gaussian process indexed by the Hilbert
+space
+L2(P) ≡
+
+f :[0,1] →R:
+Z 1
+0
+f 2 dP < ∞
+
+with covariance function E[GP (g)GP (h)] =
+R 1
+0 (g −Pg)(h −Ph)dP. We call
+GP the P-white bridge process. An analogue of Proposition 2, and of the
+remark after it, holds true for GP whenever P has a bounded density.
+
+NONPARAMETRIC BVM’S
+9
+Proposition 3.
+Proposition 2 holds true for the P-white bridge GP
+replacing W whenever P has a bounded density on [0,1].
+Proof.
+The proof is exactly the same, using the standard bounds
+Var(GP(ψlk)) ≤∥f∥∞,
+E max
+k |GP (ψlk)| ≤C∥f∥1/2
+∞
+√
+l,
+where f denotes the density of P.
+□
+Any P with bounded density f has coeﬃcients ⟨f,ψlk⟩∈ℓ2 ⊂M0(w). We
+would like to formulate a statement such as
+√n(Pn −P) →d GP
+in M0,
+as n →∞, paralleling (14) in the Gaussian white noise setting. The ﬂuctu-
+ations of √n(Pn −P)(ψlk)/
+√
+l along k are stochastically bounded for l such
+that 2l ≤n, but are unbounded for high frequencies. Thus the empirical
+process √n(Pn −P) will not deﬁne an element of M0 for every admissi-
+ble sequence w. In our nonparametric setting we can restrict to frequencies
+at levels l,2l ≤n and introduce an appropriate “projection” Pn(j) of the
+empirical measure Pn onto Vj via
+⟨Pn(j),ψlk⟩=
+
+⟨Pn,ψlk⟩,
+if l ≤j,
+0,
+if l > j,
+(16)
+which deﬁnes a tight random variable in M0. The following theorem shows
+that Pn(j) estimates P eﬃciently in M0 if j is chosen appropriately. Note
+that the natural choice j = Ln such that
+2Ln ∼N 1/(2γ+1),
+where N = n (if γ > 0) or N = n/log n (if γ ≥0), is possible.
+Theorem 1.
+Let w = (wl) be admissible. Suppose P has density f in
+Cγ([0,1]) for some γ ≥0. Let jn be such that
+√n2−jn(γ+1/2)w−1
+jn = o(1),
+2jnjn
+n
+= O(1).
+Then we have, as n →∞,
+√n(Pn(jn) −P) →d GP
+in M0(w).
+3. The nonparametric Bayes approach.
+In both regression or density
+estimation one constructs a prior probability distribution from which the
+function f is drawn, and given the observations X = X(n), equal to either
+
+10
+I. CASTILLO AND R. NICKL
+X(n) ∼P n
+f or X1,...,Xn i.i.d. from density f, one computes the posterior
+distribution Π(·|X) of f. Under appropriate conditions the wavelet coeﬃ-
+cient sequence associated to a posterior draw f ∼Π(·|X) will give rise to
+a random variable in M0. If Tn = Tn(X) is an eﬃcient estimator of f in
+M0, such as X(n) or Pn(j) from the previous subsections, then one can ask,
+following [4], for a Bernstein–von Mises type result: assuming X ∼Pf0 for
+some ﬁxed f0, do we have
+L(√n(f −Tn)|X) →L(G)
+weakly in M0(w) as n →∞,
+(17)
+with Pf0-probability close to one? Here, depending on the sampling model
+considered, G equals either W or GP0,dP0(x) = f0(x)dx and Pf0 stands, in
+slight abuse of notation, for the law P n
+f0 of X(n) or the law P N
+0 of (X1,X2,...).
+To make such a statement rigorous we will metrise weak convergence of
+laws in M0(w) via βM0(w) from (10), and view the prior Π on the functional
+parameter f ∈L2 as a prior on sequence space ℓ2 under the wavelet isometry
+L2 ∼= ℓ2 [arising from an arbitrary but ﬁxed wavelet basis (8)].
+Definition 2.
+Let w be admissible, let Π be a prior and Π(·|X) the
+corresponding posterior distribution on ℓ2 ⊂M0 = M0(w), obtained from
+observations X in the white noise or i.i.d. sampling model. Let ˜Πn be the
+image measure of Π(·|X) under the mapping
+τ :f 7→√n(f −Tn),
+where Tn = Tn(X) is an estimator of f in M0. Then we say that Π satisﬁes
+the weak Bernstein–von Mises phenomenon in M0 with centring Tn if, for
+X ∼Pf0 and ﬁxed f0, as n →∞,
+βM0(˜Πn,N) →Pf0 0,
+where N is the law in M0 of W or of GP0,f0 ∈L∞, respectively.
+Remark 2.
+If convergence of moments (Bochner-integrals) E[˜Πn|X] →Pf0
+EN = 0 occurs in the above limit, then we deduce
+∥¯fn −Tn∥M0 = oPf0(1/√n),
+(18)
+where ¯fn = E(f|X) is the posterior mean. If Tn is an eﬃcient estimator of
+f ∈M0, then (18) implies that ¯fn is so too.
+In [4], Bernstein–von Mises theorems are proved in certain negative Sobolev
+spaces H(δ),δ > 1/2, and various applications of such results are presented.
+A multiscale BvM result in M0 for a prior {flk} implies a weak BvM for
+the prior P
+k,l flkψlk in H(δ), as the following result shows. In particular all
+the applications from [4] carry over to the present setting.
+
+NONPARAMETRIC BVM’S
+11
+Proposition 4.
+Suppose the weak Bernstein–von Mises phenomenon
+holds true in M0(w) with (wl) such that P
+l w2
+l l−2δ < ∞for some δ > 0.
+Then the weak Bernstein–von Mises phenomenon holds in H(δ).
+Proof.
+The norm of H(δ) is given by (see [4], Section 1.2),
+∥f∥2
+H(δ) =
+X
+l
+2−ll−2δ X
+k
+|⟨f,ψlk⟩|2
+≤sup
+l
+w−2
+l
+max
+k |⟨f,ψlk⟩|2 X
+l
+w2
+l l−2δ
+≤C∥f∥2
+M0(w),
+so that the result follows from the continuous mapping theorem.
+□
+While the above notions of the BvM phenomenon will be shown below
+to be useful and feasible in nonparametric settings, there are other ways to
+formulate BvM-type statements. For instance, one may investigate how the
+classical BvM theorem in ﬁnite-dimensions extends to parameter spaces of
+dimension that increases with n; see, [2, 15, 25] for results in this direction.
+Throughout the rest of this section M0 = M0(w) is the space deﬁned in
+(12), with w an admissible sequence as in Deﬁnition 1.
+3.1. Bernstein–von Mises theorems in M0(w): Gaussian regression case.
+In the white noise model (13) natural priors for f are obtained from dis-
+tributing random coeﬃcients on the ψlk’s.
+Condition 1.
+Consider product priors Π arising from random functions
+f(x) =
+X
+l
+σl
+X
+k
+φlkψlk(x),
+x ∈[0,1],
+where the φlk are i.i.d. from probability density ϕ:R →[0,∞) satisfying
+∃a,C > 0
+∀x ∈R,
+ϕ(x) ≤Ce−ax2,
+(E)
+and where σl = 2−l(α+(1/2)),α > 0, ensuring in particular that f ∈L2 almost
+surely.
+For X(n) ∼P n
+f0 and f0 with wavelet coeﬃcients {⟨f0,ψlk⟩} ∈ℓ2, we assume
+moreover that there exists a ﬁnite constant M > 0 such that
+sup
+l,k
+|⟨f0,ψlk⟩|
+σl
+≤M,
+(P1)
+and that there exists τ > M,cϕ > 0 such that
+on (−τ,τ) the density ϕ is continuous and satisﬁes ϕ ≥cϕ.
+(P2)
+
+12
+I. CASTILLO AND R. NICKL
+If f0 ∈Cβ,β > 0, then (P1) is satisﬁed as soon as α ≤β (so any prior that
+matches the regularity of f0, or that “undersmooths,” can be used).
+Remark 3.
+Condition 1 allows for a sub-Gaussian density ϕ. Strictly
+subexponential tails could be allowed too if the weighting sequence w sat-
+isﬁes an additional constraint: Theorem 2 below holds true for exponential-
+power densities ϕ(x) ≍e−|x|p and 1 < p < 2, provided wl/l1/p ↑∞.
+Any prior satisfying Condition 1 deﬁnes a Borel probability measure on
+L2 (using separability of the latter space), and the resulting posterior dis-
+tribution also deﬁnes an element of L2 ∼= ℓ2 ⊂M0.
+Theorem 2.
+Suppose Π satisﬁes Condition 1, and let Π(·|X(n)) be the
+posterior distribution in M0 arising from observing (13) for some ﬁxed f0 ∈
+Cβ, β > 0. Then Π satisﬁes the weak Bernstein–von Mises theorem in the
+sense of Deﬁnition 2 in the space M0 = M0(w) for any admissible w, with
+N equal to the law of W, and with centring Tn equal to X(n) or equal to the
+posterior mean E(f|X(n)).
+3.2. Bernstein–von Mises theorems in M0(w): Sampling model case.
+Let
+us now turn to the situation where one observes a sample Xi ∼i.i.d. P,
+(X1,...,Xn) ≡X(n),
+from law P with bounded probability density f on [0,1]. We deﬁne multiscale
+priors Π on some space F of probability density functions f giving rise to
+absolutely continuous probability measures. Let
+F :=
+[
+0<ρ≤D<∞
+F(ρ,D) :=
+[
+0<ρ≤D<∞
+
+f :[0,1] →[ρ,D],
+Z 1
+0
+f = 1
+
+.
+In the following we assume that the “true” density f0 belongs to F0 :=
+F(ρ0,D0), for some 0 < ρ0 ≤D0 < ∞.
+We consider various classes of priors on densities and two possible values
+for a cut-oﬀparameter Ln. For α > 0, let jn = jn(α) and ln = ln(α) be the
+largest integers such that
+2jn ≤n1/(2α+1),
+2ln ≤
+
+n
+log n
+1/(2α+1)
+,
+(19)
+and set, in slight abuse of notation, either
+Ln = jn
+(∀n ≥1)
+or
+Ln = ln
+(∀n ≥1).
+(20)
+
+NONPARAMETRIC BVM’S
+13
+(S) Priors on log-densities. Given a multiscale wavelet basis {ψlk} from
+(8), consider the prior Π induced by, for any x ∈[0,1] and Ln as in (20),
+T(x) =
+X
+l≤Ln
+2l−1
+X
+k=0
+σlαlkψlk(x),
+(21)
+f(x) = exp{T(x) −c(T)},
+c(T) = log
+Z 1
+0
+eT(x) dx,
+(22)
+where αlk are i.i.d. random variables of continuous probability density ϕ:R →
+[0,∞). We consider the choices
+ϕ(x) = ϕH(x),
+(S1)
+ϕ(x) = ϕG(x) = e−x2/2/
+√
+2π,
+(S2)
+where ϕH is any density such that log ϕH is Lipschitz on R. We call this
+the log-Lipschitz case. For instance, the αlk’s can be Laplace-distributed or
+have heavier tails. To simplify some proofs we restrict to a speciﬁc form of
+density: for a given 0 ≤τ < 1 and x ∈R, and cτ a normalising constant,
+suppose ϕH takes the form
+ϕH,τ(x) = cτ exp{−(1 + |x|)1−τ}.
+(23)
+Suppose the prior parameters σl satisfy, for α > 1/2 and 0 < r < α −1/4,
+σl = 2−l(α+1/2)
+(log-Lipschitz-case),
+(24)
+σl = 2−l(r+(1/2))
+(Gaussian-case).
+(H) Random histograms density priors. Associated to the regular dyadic
+partition of [0,1] at level L ∈N ∪{0}, given by IL
+0 = [0,2−L] and IL
+k =
+(k2−L,(k + 1)2−L] for k = 1,...,2L −1, is a natural notion of histogram
+HL =
+(
+h ∈L∞[0,1],h(x) =
+2L−1
+X
+k=0
+hk1IL
+k (x),hk ∈R,k = 0,...,2L −1
+)
+.
+Let SL = {ω ∈[0,1]2L;P2L−1
+k=0 ωk = 1} be the unit simplex in R2L. Further
+denote H1
+L the subset of HL consisting of histograms which are densities on
+[0,1] with L equally spaced dyadic knots. Let H1 be the set of all histograms
+which are densities on [0,1].
+A simple way to specify a prior Π on H1
+L is to set L = Ln deterministic
+and to ﬁx a distribution for ωL := (ω0,...,ω2L−1). Set L = Ln as deﬁned in
+(20). Choose some ﬁxed constants a,c1,c2 > 0, and let
+L = Ln,
+ωL ∼D(α0,...,α2L−1),
+c12−La ≤αk ≤c2,
+(25)
+
+14
+I. CASTILLO AND R. NICKL
+for any admissible index k, where D denotes the Dirichlet distribution on
+SL. Unlike those suggested by the notation, the coeﬃcients α of the Dirichlet
+distribution are allowed to depend on Ln, so that αk = αk,Ln.
+The priors (S), (H) above are “multiscale” priors where high frequencies
+are ignored, corresponding to truncated series priors considered frequently
+in the nonparametric Bayes literature. The resulting posterior distributions
+Π(·|X(n)) attain minimax optimal contraction rates up to logarithmic terms
+in Hellinger and L2-distance [5, 32, 37] and L∞-distance [3]. Clearly other
+priors are of interest as well, for instance, priors without or with random
+high-frequency cut-oﬀor Dirichlet mixtures of normals etc. While our cur-
+rent proofs do not cover such situations, one can note that our proof strategy
+via simultaneous control of many linear functionals is applicable in such sit-
+uations as well. Generalising the scope of our techniques is an interesting
+direction of future research.
+The projection Pn(j) as in (16), with the choice j = Ln from (20), deﬁnes
+a tight random variable in M0. For z ∈M0, the map τz :f 7→√n(f −z)
+maps M0 →M0, and we can deﬁne the shifted posterior Π(·|X(n))◦τ −1
+Pn(Ln).
+The following theorem shows that the above priors satisfy a weak BvM
+theorem in M0 in the sense of Deﬁnition 2, with eﬃcient centring Pn(Ln);
+cf. Theorem 1. Denote the law L(GP0) of GP0 from Proposition 3 by N .
+Theorem 3.
+Let M0 = M0(w) for any admissible w = (wl). Let X(n) =
+(X1,...,Xn) i.i.d. from law P0 with density f0 ∈F0. Let Π be a prior on the
+set of probability densities F, that is:
+(1) either of type (S), in which case one assumes log f0 ∈Cα for some
+α > 1,
+(2) or of type (H), and one assumes f0 ∈Cα for some 1/2 < α ≤1.
+Suppose the prior parameters satisfy (20), (24) and (25). Let Π(·|X(n)) be
+the induced posterior distribution on M0. Then, as n →∞,
+βM0(Π(·|X(n)) ◦τ −1
+Pn(Ln),N) →P N
+0 0.
+(26)
+4. Some applications.
+4.1. Donsker’s theorem for the posterior cumulative distribution function.
+Whenever a prior on f satisﬁes the weak Bernstein–von Mises phenomenon
+in the sense of Deﬁnition 2, we can deduce from the continuous mapping the-
+orem a BvM for integral functionals Lg(f) =
+R 1
+0 g(x)f(x)dx simultaneously
+for many g’s satisfying bounds on the decay of their wavelet coeﬃcients.
+More precisely a bound P
+k |⟨g,ψlk⟩| ≤cl for all l combined with a weak
+BvM for (wl) such that Pclwl < ∞is suﬃcient. Let us illustrate this in a
+key example gt = 1[0,t],t ∈[0,1], where we can derive results paralleling the
+
+NONPARAMETRIC BVM’S
+15
+classical Donsker theorem for distribution functions and its BvM version for
+the Dirichlet process proved in [31]. With the applications we have in mind,
+and to simplify some technicalities, we restrict to situations where the pos-
+terior f|X is supported in L2, and where the centring Tn in Deﬁnition 2 is
+contained in L2 (resp., equals X(n)). In this case the primitives
+F(t) =
+Z t
+0
+f(x)dx,
+Tn(t) =
+Z t
+0
+Tn(x)dx
+
+resp.,
+Z t
+0
+dX(n)(x)
+
+,
+t ∈[0,1],
+deﬁne random variables in the separable space C([0,1]) of continuous func-
+tions on [0,1], and we can formulate a BvM result in that space. Diﬀerent
+centrings (such as the empirical distribution function) are discussed below.
+Theorem 4.
+Let Π be a prior supported in L2([0,1]), and suppose the
+weak Bernstein–von Mises phenomenon in the sense of Deﬁnition 2 holds
+true in M0(w) for some sequence (wl) such that P
+l wl2−l/2 < ∞, and with
+centring Tn either equal to X(n) or such that Tn ∈L2. For f ∼Π(·|X) (con-
+ditional on X) deﬁne the posterior cumulative distribution function
+F(t) =
+Z t
+0
+f(x)dx,
+t ∈[0,1].
+(27)
+Let G be a Brownian motion (G(t):t ∈[0,1]) in the white noise model or
+a P0-Brownian bridge (G(t) ≡GP0(t):t ∈[0,1]),dP0(x) = f0(x)dx,f0 ∈L∞,
+in the sampling model. If X ∼Pf0 for some ﬁxed f0, then as n →∞,
+βC([0,1])(L(√n(F −Tn)|X),L(G)) →Pf0 0,
+(28)
+βR(L(√n∥F −Tn∥∞|X),L(∥G∥∞)) →Pf0 0.
+(29)
+Proof.
+The mapping
+L:{hlk} 7→Lt({hlk}) :=
+X
+l,k
+hlk
+Z t
+0
+ψlk(x)dx,
+t ∈[0,1],
+(30)
+is linear and continuous from M0(w) to L∞([0,1]) since, for 0 < c < C < ∞,
+
+X
+l,k
+hlk
+Z t
+0
+ψlk(x)dx
+ ≤
+X
+l,k
+|hlk||⟨1[0,t],ψlk⟩|
+≤csup
+l,k
+|hlk|
+wl
+X
+l
+wl2−l/2
+≤C∥h∥M0,
+
+16
+I. CASTILLO AND R. NICKL
+where we have used supt∈[0,1]
+P
+k |⟨1[0,t],ψlk⟩| ≤c2−l/2, shown, for example,
+as in the proof of Lemma 3 in [16]. Also, L coincides with the primitive map
+on any function h ∈L2([0,1]) with wavelet coeﬃcients {hlk} ∈ℓ2, since then
+L({hlk}) =
+X
+l,k
+hlk⟨1[0,t],ψlk⟩= ⟨h,1[0,t]⟩=
+Z t
+0
+h(x)dx,
+t ∈[0,1],
+in view of Parseval’s identity. Moreover, if G is a tight Gaussian random vari-
+able in M0, then the linear transformation L(G) is a tight Gaussian random
+variable in C([0,1]), equal in law to a Brownian motion or a P0-Brownian
+bridge for our choice G = W or G = GP0, respectively, after checking the
+identity of the corresponding reproducing kernel Hilbert spaces (cf. [36],
+and using again that L equals the primitive map on L2). The displays (28)–
+(29) now follow from Deﬁnition 2, the continuous mapping theorem applied
+to L and L ◦∥· ∥−1
+∞, respectively, and noting that L(f),L(Tn) take values
+in the closed subspace C([0,1]) of L∞([0,1]) under the maintained assump-
+tions. (Although not used here, it can in fact be checked that the general
+inclusion Im(L) ⊂C([0,1]) holds true.)
+□
+Corollary 1.
+Let Π be a prior of type (S) or (H), and suppose the
+conditions of Theorem 3 are satisﬁed. Let Fn(t) = (1/n)Pn
+i=1 1[0,t](Xi),t ∈
+[0,1], be the empirical distribution function based on a sample X1,...,Xn
+from law P0, and let F be a cumulative distribution function induced by
+Π(·|X1,...,Xn) as in (27). Then, as n →∞,
+βL∞([0,1])(L(√n(F −Fn)|X),L(GP0)) →P N
+0 0,
+βR(L(√n∥F −Fn∥∞|X),L(∥GP0∥∞)) →P N
+0 0.
+Proof.
+By Theorems 3 and 4 the result is true with Fn replaced by
+the primitive Tn of Pn(Ln). As in the proof leading to Remark 9 in [16]
+one shows ∥Tn −Fn∥∞= oP(1/√n), and hence the result follows from the
+triangle inequality. (To avoid measurability issues we note that the result
+holds for convergence in distribution in L∞([0,1]) in the generalised sense of
+empirical processes (as in [18]), or in the space of c`adl`ag functions on [0,1].)
+□
+Returning to the general setting of Theorem 4, a natural credible band
+for F is to take Cn,Rn such that, with L the map deﬁned in (30),
+Cn = {F :∥F −Tn∥∞≤Rn/√n},
+Π ◦L−1(Cn|X) = 1 −α.
+(31)
+The proof of the following result implies in particular that Cn asymptotically
+coincides with the usual Kolmogorov–Smirnov conﬁdence band. The result
+is true also with centring Tn = Fn (in which case the proof requires minor
+modiﬁcations related to the remarks at the end of the proof of Corollary 1).
+
+NONPARAMETRIC BVM’S
+17
+Corollary 2.
+Under the conditions of Theorem 4, let X ∼Pf0,F0 =
+R ·
+0 f0(t)dt and Cn as in (31). Then we have, as n →∞,
+Pf0(F0 ∈Cn) →1 −α
+and
+Rn →Pf0 const.
+Proof.
+The proof is similar to Theorem 1 in [4], replacing H(δ) there
+by C([0,1]) (a separable Banach space): the function Φ in that proof is
+strictly increasing: any shell {g ∈C([0,1]):s < ∥g∥∞< t}, 0 ≤s < t, contains
+an element of the RKHS (see [36]) of Brownian motion [in the case of the
+white noise model (2)] or of the P0-Brownian bridge (in the case of the
+i.i.d. sampling model). Using also Theorem 1 in the sampling model case,
+all arguments from the proof of Theorem 1 in [4] go through.
+□
+Remark 4.
+Equation (31) [resp., (32) below] reads conditionally on the
+existence of such a positive real Rn. More generally, one may take a gener-
+alised quantile in (31) [resp., in (32)]. Then Cn has credibility 1 −α asymp-
+totically, and one can check that the previous corollary [resp., Theorem 5]
+continues to hold.
+4.2. Conﬁdence bands for f.
+Given a posterior distribution Π(·|X) on
+the parameter f of a regression or sampling model, we can incorporate
+the multiscale approach to construct conﬁdence sets for f in a Bayesian
+way. We take an eﬃcient centring Tn [e.g., X(n),Pn(L) from above or, when
+appropriate, the posterior mean E(f|X)] and, given α > 0 and admissible
+w, choose Rn and the credible region Cn in such a way that
+Cn =
+
+f :sup
+l,k
+|⟨f −Tn,ψlk⟩|
+wl
+≤Rn
+√n
+
+,
+Π(Cn|X) = 1 −α.
+(32)
+Theorem 5.
+Let w = (wl) be admissible. Suppose the weak Bernstein–
+von Mises phenomenon holds true in M0(w) with prior Π and centring Tn.
+Let Cn be as in (32). Then, as n →∞,
+Pf0(f0 ∈Cn) →1 −α,
+Rn →Pf0 const .
+Proof.
+The proof is the same as the one of Theorem 1 in [4], replacing
+H(δ) there by M0(w), and using also Theorem 1 in the sampling model
+case.
+□
+The previous theorem can be used to control low frequencies of the estima-
+tion error, and following the multiscale approach one needs to employ further
+qualitative information about f0 to control high frequencies. In the present
+
+18
+I. CASTILLO AND R. NICKL
+case, if we assume f0 ∈Cγ for some γ > 0, we can deﬁne, for un = wjn/√jn
+and jn such that 2jn ∼(n/log n)1/(2γ+1), the conﬁdence set
+¯Cn = ¯Cn(γ) = Cn ∩{f :∥f∥Cγ ≤un}.
+(33)
+The following result combined with Theorems 3 and 5 implies in particular
+Proposition 1 from the Introduction.
+Proposition 5.
+Under the conditions of Theorem 5 suppose X ∼Pf0
+where f0 ∈Cγ([0,1]). Then, with ¯Cn as in (33), and as n →∞,
+Pf0(f0 ∈¯Cn) →1 −α
+and
+| ¯Cn|∞= OPf0((n/log n)−γ/(2γ+1)un).
+Proof.
+For n large enough such that un ≥∥f0∥Cγ we have as n →∞
+Pf0(f0 ∈¯Cn) = Pf0(f0 ∈Cn) →1 −α
+in view of Theorem 5. Moreover, for h = f −g,f,g ∈Cn arbitrary,
+∥h∥M(w) ≤∥f −Tn∥M(w) + ∥g −Tn∥M(w) = O
+ Rn
+√n
+
+= OPf0
+ 1
+√n
+
+.
+The estimate on | ¯Cn|∞now follows from
+∥h∥∞≤
+X
+l
+2l/2 max
+k |⟨h,ψlk⟩|
+combined with the bound
+X
+l≤jn
+2l/2 max
+k |⟨h,ψlk⟩| =
+X
+l≤jn
+2l/2√
+l wl
+√
+l
+w−1
+l
+max
+k |⟨h,ψlk⟩|
+≲
+r
+2jnjn
+n
+wjn
+√jn
+Rn
+= OPf0
+log n
+n
+γ/(2γ+1)
+un
+
+,
+and with
+X
+l>jn
+2l/2 max
+k |⟨h,ψlk⟩| =
+X
+l>jn
+2−lγ2l(γ+1/2) max
+k |⟨h,ψlk⟩|
+≤∥h∥Cγ2−jnγ
+= OPf0
+log n
+n
+γ/(2γ+1)
+un
+
+,
+completing the proof.
+□
+
+NONPARAMETRIC BVM’S
+19
+Remark 5 (Optimal diameter, undersmoothing, adaptation).
+The con-
+ﬁdence bands from Propositions 1 and 5 have diameter equal to the L∞-
+minimax rate over H¨older balls multiplied with an under-smoothing penalty
+un, common in frequentist constructions of conﬁdence bands; see [20] and,
+more recently, [17]. If the BvM phenomenon holds for all admissible se-
+quences w (as in the examples above), then this sequence can be taken to
+diverge at an arbitrarily slow rate.
+If a quantitative a priori bound ∥f0∥Cγ < B is available, then in the setting
+of Theorem 2 one could use a uniform wavelet prior [with ϕ = 1[−B,B]/(2B),
+for some B > 0] concentrating on a H¨older ball of radius B (as in Corollary 1,
+[4]). The set ¯Cn from (33) (even with un replaced by B) is then an exact
+level 1−α posterior credible set, consisting of the intersection of two hyper-
+rectangles in sequence space, and Proposition 5 applies to give the precise
+frequentist asymptotics of ¯Cn.
+We can also obtain adaptive conﬁdence bands by using a bandwidth choice
+ˆjn as in [17] to estimate γ by ˆγ under a self-similarity constraint on f, cor-
+responding to an empirical Bayes-type selection of γ. More Bayesian ap-
+proaches to adaptive conﬁdence sets are subject of current research; see, for
+example, the recent contribution [34].
+5. Proofs.
+5.1. Proof of Theorem 1.
+For J to be chosen below, let VJ be the sub-
+space of M(w) consisting of the scales l ≤J, and let πVJ(P) be the projection
+of f onto VJ. We have by deﬁnition of the H¨older space Cγ and assumption
+∥P −πVjn(P)∥M0 = sup
+l>jn
+maxk |⟨f,ψlk⟩|
+wl
+≲w−1
+jn 2−jn(γ+1/2)
+(34)
+= o
+ 1
+√n
+
+so that this term is negligible in the limit distribution. Writing β for βM0
+and √n(Pn(jn) −πVjn(P)) = νn, it suﬃces to show that
+β(L(νn),L(GP)) ≤β(L(νn),L(νn) ◦π−1
+VJ )
++ β(L(νn) ◦π−1
+VJ ,L(GP) ◦π−1
+VJ )
+(35)
++ β(L(GP ),L(GP ) ◦π−1
+VJ )
+converges to zero under P N. Let ε > 0 be given. The second term is less than
+ε/3 for every J ﬁxed and n large enough by the multivariate central limit
+
+20
+I. CASTILLO AND R. NICKL
+theorem applied to
+1
+√n
+n
+X
+i=1
+(ψlk(Xi) −EPψlk(X)),
+k,l ≤J,
+noting that eventually jn > J. For the ﬁrst term, by deﬁnition of β,
+β(L(νn),L(νn) ◦π−1
+VJ )
+≤E∥√n(πVjn −πVJ)(Pn −P)∥M0
+(36)
+≤
+
+max
+J<l≤jn
+√
+l
+wl
+
+E max
+J<l≤jn l−1/2 max
+k |⟨√n(Pn −P),ψlk⟩|.
+Thus for J large enough this term can be made smaller than ε/3 if we can
+show that the expectation is bounded by a ﬁxed constant. For M a large
+enough constant, this expectation is bounded above by M plus
+Z ∞
+M
+P
+
+max
+J≤l≤jn l−1/2 max
+k |⟨√n(Pn −P),ψlk⟩| > u
+
+du
+≤
+X
+J≤l≤jn,k
+Z ∞
+M
+P(|⟨√n(Pn −P),ψlk⟩| >
+√
+lu)du
+≤
+X
+J≤l≤jn
+2l
+Z ∞
+M
+e−Clu du ≲e−C′JM,
+where the second inequality follows from an application of Bernstein’s in-
+equality (e.g., [29]) together with the bounds Pψ2
+lk ≤∥f∥∞and
+√
+l∥ψlk∥∞≤
+√
+l2l/2 = O(√n) for l ≤jn, using the assumption on jn.
+For the third Gaussian term we argue similarly, replacing νn by GP in
+(36) and using that E supl maxk |GP(ψlk)|/
+√
+l < ∞by Proposition 2.
+5.2. A tightness criterion in M0.
+The following proposition considers
+general random posterior measures Π(·|X) in the setting of Deﬁnition 2.
+Proposition 6.
+Let πVJ,J ∈N, be the projection operator onto the
+ﬁnite-dimensional space spanned by the ψlk’s with scales up to l ≤J. Let
+f ∼Π(·|X), Tn = Tn(X), let ˜Πn denote the laws of √n(f −Tn) condition-
+ally on X and let N equal the Gaussian probability measure on M0(w) given
+by either W or GP from P with bounded density.
+Assume that the ﬁnite-dimensional distributions converge, that is,
+βVJ(˜Πn ◦π−1
+VJ ,N ◦π−1
+VJ ) →Pf0 0
+as n →∞,
+(37)
+
+NONPARAMETRIC BVM’S
+21
+and that for some sequence ¯w = ( ¯wl) ↑∞, ¯wl/
+√
+l ≥1,
+E[∥f −Tn∥M0( ¯w)|X] = E
+h
+sup
+l
+¯w−1
+l
+max
+k |⟨f −Tn,ψlk⟩||X
+i
+(38)
+= OPf0
+ 1
+√n
+
+.
+Then, for any w such that wl/ ¯wl ↑∞we have, as n →∞,
+βM0(w)(˜Πn,N) →Pf0 0.
+Remark 6.
+Inspection of the proof shows that the result still holds true
+if f ∼Π(·|X) is replaced by f ∼¯Π(·|X) for random measures ¯Π(·|X) s.t.
+βM0(¯Π(·|X),Π(·|X)) →Pf0 0
+as n →∞. Likewise, the posterior can be replaced by the conditional poste-
+rior ΠDn(·|X) for any sequence of sets Dn such that Π(Dn|X) →Pf0 1.
+Proof.
+Let us write β = βM0(w) and decompose
+β(˜Πn,N) ≤β(˜Πn, ˜Πn ◦π−1
+VJ ) + β(˜Πn ◦π−1
+VJ ,N ◦π−1
+VJ ) + β(N,N ◦π−1
+VJ ).
+The second term converges to zero by (37). The third term too, arguing as
+at the end of the proof of Theorem 1 (and using Proposition 2 or 3). For the
+ﬁrst term let f ∼Π(·|X) conditional on X. Then using (38) we can bound
+the β-distance by the expectation of the norm and thus by
+E[∥√n(id −πVJ)(f −Tn)∥M(w)|X]
+≤
+
+sup
+l>J
+¯wl
+wl
+
+E
+h
+sup
+l>J
+¯w−1
+l
+max
+k |√n⟨f −Tn,ψlk⟩||X
+i
+≤sup
+l>J
+¯wl
+wl
+× OPf0(1),
+which can be made as small as desired for J large enough but ﬁxed.
+□
+5.3. Proof of Theorem 2.
+We choose integers j = jn →∞such that
+σ−1
+j
+= 2j(α+1/2) ∼√n
+and note
+σl ≲1
+√n
+∀l > j.
+(39)
+Conditional on X(n), let f ∼Π(·|X(n)) and, for πVj the projection operator
+onto Vj, consider the decomposition in M0(w), under Pf0,
+√n(f −X(n)) = √n(πVj(f) −πVj(X(n))) + √n(f −πVj(f))
++ √n(πVj(f0) −f0) + (πVj(W) −W)
+= I + II + III + IV.
+
+22
+I. CASTILLO AND R. NICKL
+We verify the conditions of Proposition 6 above for the laws L(√n(f −
+X(n))|X) = ˜Πn and for the choice ¯wl =
+√
+l. From Theorem 7 in [4], with
+Condition 2 veriﬁed in the proof of Theorem 9 of that paper, we derive
+condition (37). Next we verify that (38) is satisﬁed for each of the terms
+I, II, III, IV, separately. That is, we check that each term has bounded
+M( ¯w)-norm in expectation (and apply Markov’s inequality).
+(IV) We have as in the proof of Proposition 2 that
+E sup
+k,l
+l−1/2|W(ψlk)| ≤C < ∞.
+(III) This term is nonrandom and we have by Condition 1 and deﬁnition
+of σl, and some constant 0 < M < ∞,
+√n sup
+l>j,k
+l−1/2|⟨f0,ψlk⟩| ≲M√nsup
+l>j
+l−1/2σl ≲M/
+p
+j.
+(II) For E the iterated expectation under Pf0 and Π(·|X), we can bound
+E sup
+l>j,k
+l−1/2|⟨f,ψlk⟩| ≤
+X
+l>j
+l−1/2E max
+k |⟨f,ψlk⟩|.
+Denote flk := ⟨f,ψlk⟩, f0,lk := ⟨f0,ψlk⟩and εlk := ⟨W,ψlk⟩. An application
+of Jensen’s inequality yields, for any t > 0,
+E max
+k
+|flk| ≤1
+t log
+X
+k
+E(etflk + e−tflk).
+It is now enough to bound the Laplace transform E[esflk] for s = t,−t. Both
+cases are similar, so we focus on s = t,
+E[etflk] = E
+R
+et(f0,lk+(v/√n))e−(v2/2)+εlkv(1/(√nσl))ϕ((f0,lk + (v/√n))/σl)dv
+R
+e−(v2/2)+εlkv(1/(√nσl))ϕ((f0,lk + (v/√n))/σl)dv
+=: E Nlk(t)
+Dlk
+.
+To bound the denominator Dlk from below, one applies the same technique
+as in [4], proof of Theorem 5. One ﬁrst restricts the integral to (−√nσl,√nσl).
+Next one notices, using (P1), that over this interval the argument of ϕ lies
+in a compact set, and hence the function ϕ can be bounded below by a
+constant, using (P2). Next one applies Jensen’s inequality to obtain
+Dlk ≳e
+−(1/2)
+R √nσl
+−√nσl(v2/2)dv/(√nσl) ≳e−C.
+
+NONPARAMETRIC BVM’S
+23
+To bound the numerator Nlk(t) one splits the integral into a part N1 on
+A := {v :|f0,lk + v/√n| ≤σl} and a part N2 on its complement Ac. First
+EN1 ≤etσlE
+Z
+A
+e−v2/2+εlkvϕ
+f0,lk + (v/√n)
+σl
+
+dv
+≤etσl
+Z
+A
+ϕ
+f0,lk + (v/√n)
+σl
+
+dv ≤etσl,
+using the deﬁnition of A and Fubini’s theorem. On the other hand, the term
+N2, setting w = f0,lk + v/√n and using condition (E), is bounded by
+EN2 ≤
+Z
+(−1,1)c etσlwE(e−(n/2)(wσl−f0,lk)2+εlk
+√n(wσl−f0,lk))ϕ(w)dw
+≤
+Z
+(−1,1)c etσlwϕ(w)dw ≲ed(σlt)2,
+for some d > 0. Conclude, setting t = σ−1
+l
+l1/2, that
+E max
+k
+|flk| ≤1
+t log(2l[Cetσl + Ced(σlt)2])
+≲l
+t + σl + 1
+t (σlt)2 ≲σll1/2.
+This gives the overall bound,
+X
+l>j
+2−l(1/2+α) ≲2−j(1/2+α) = O(1/√n).
+(I) For the frequencies l ≤jn one proves, as in Lemma 1 in [3], for some
+constant C > 0, the sub-Gaussian bound
+Ef0E(et√n(flk−Xlk)|X) ≤Cet2/2.
+(40)
+[All that is needed here is ϕ bounded away from zero and inﬁnity on a
+compact set, and that (f0,lk + v/√n)/σl is bounded by a ﬁxed constant,
+true for the l’s relevant here.] Then, by a standard application of Markov’s
+inequality to sub-Gaussian random variables, writing Pr for the law with
+expectation Ef0E(·|X), we have for all v > 0 and universal constants C,C′
+that
+Pr(√n|flk −Xlk| > v) ≤C′e−Cv2.
+We then bound, for M a ﬁxed constant
+Ef0E
+
+sup
+l≤j
+l−1/2 max
+k
+√n|flk −Xlk||X
+
+≤M +
+Z ∞
+M
+Pr
+
+sup
+l≤j,k
+l−1/2 max
+k
+√n|flk −Xlk| > u
+
+du.
+
+24
+I. CASTILLO AND R. NICKL
+The tail integral can be further bounded as follows:
+X
+l≤j,k
+Z ∞
+M
+Pr(√n|flk −Xlk| >
+√
+lu)du
+≲
+X
+l≤j
+2l
+Z ∞
+M
+e−Clu2 du ≲
+X
+l≤j
+2le−CM2l ≤const
+for M large enough. This completes the proof of the BvM with centring
+Tn = X(n). From weak convergence toward N of the posterior measures
+and uniform integrability (as one can uniformly bound 1 + ε-moments by
+the same arguments as above), we deduce as in Theorem 10 in [4] that
+√n(E(f|X) −X(n)) →EN = 0 in M0 in probability, so that the posterior
+mean can replace X(n) as the centring, completing the proof.
+5.4. Proof of Theorem 3.
+For h a positive function in L2, denote
+c(h) = log
+Z 1
+0
+h(u)du,
+so that he−c(h) becomes a density on [0,1]. Also, for any element g of L2(P0),
+denote ∥g∥2
+L := P0(g −P0g)2 =
+R 1
+0 (g −
+R 1
+0 g)2 dP0, where ∥· ∥L is a norm on
+the subspace of L2(P0) consisting of P0-centered functions. For simplicity of
+notation within the proof, we denote X = X(n).
+Let ρn the rate in Lemma 4, where we take Mn = (log n)∧(wLn/√Ln)1/2 →
+∞. For εn,C, respectively, the rate and constant in Lemma 3, we set
+Dn =
+n
+f = eT−c(T),∥f −f0∥∞≤ρn, max
+l≤K,k|⟨T,ψlk⟩| ≤C√nεn
+o
+,
+where the part involving the maximum in the deﬁnition of Dn is only needed
+for the prior (S2), and where K is a large enough integer. Combining Lem-
+mas 3 and 4, we have Ef0Π[Dn|X] →1. We also note that for any l > K and
+any k, the functions ψlk are orthogonal to constants in L2.
+We apply Proposition 6 and the remark after it, with the posterior con-
+ditioned on Dn, using the decomposition, for L = Ln and writing πVL(Pn)
+for πVL(Pn(L)),
+˜Yn = √n(f −Pn(L))
+= √n(πVL(f) −πVL(Pn)) + √n(f −πVL(f)) =: Yn + rn.
+Thus to prove (26) it suﬃces to show (i) that ˜Yn −Yn is asymptotically
+negligible and to check the conditions of Proposition 6, that is, (ii) that (38)
+holds for Yn, and (iii) that ﬁnite-dimensional convergence (37) occurs.
+
+NONPARAMETRIC BVM’S
+25
+(i) The term rn is zero in the case of the histogram prior (H), by deﬁ-
+nition of the prior and orthogonality of the Haar basis. To check that rn is
+negligible for the log-density priors (S), let us write f = f0 + (f −f0) and
+study separately πV c
+Lf0 and πV c
+L(f −f0). For both choices of L, we have
+L ≥ln, so
+√n∥πV c
+Lf0∥M0 ≤√n sup
+l>ln
+w−1
+l
+max
+k |⟨f0,ψlk⟩|
+≲√n(l1/2
+n /wln) sup
+l>ln
+l−1/22−l((1/2)+α) = o(1),
+using that f0 ∈Cα, admissibility of w and the deﬁnition of ln. Also,
+√n
+Z
+∥πV c
+L(f −f0)∥M0 dΠDn(f|X)
+= √n
+Z
+sup
+l>L
+w−1
+l
+max
+k |⟨f −f0,ψlk⟩|dΠDn(f|X)
+≤√nsup
+l>L
+wl−1∥ψlk∥1
+Z
+∥f −f0∥∞dΠDn(f|X)
+≲√n(L1/2/wL)L−1/22−L/2Mn(2LL/n)1/2 = o(1),
+using ∥ψlk∥1 ≲2−l/2 and Lemma 4 with Mn →∞as deﬁned above.
+(ii) To control Yn, a key ingredient is a bound on the following exponen-
+tial moment restricted to Dn. Below we prove that for universal constants
+c1,c2 and |s| ≤
+√
+l, for any l ≤L and k,
+Z
+es√n⟨f−Pn,ψlk⟩dΠDn(f|X) ≤c1ec2s2Π(Dn|X)−1.
+(41)
+Suppose for now that (41) is established. Then aiming at checking (38) with
+¯wl =
+√
+l, we can use it in the study of
+√n∥πVL(f −Pn)∥M0(
+√
+l) = √nmax
+l≤L l−1/2 max
+k |⟨f −Pn,ψlk⟩|
+in expectation under ΠDn(·|X). Denoting E and Pr, respectively, for expec-
+tation and probability under ΠDn(·|X), for any M > 0, with M0 = M0(
+√
+l),
+√nE∥πVL(f −Pn)∥M0 ≤M +
+Z ∞
+M
+Pr[√n∥πVL(f −Pn)∥M0 > u]du
+≤M +
+X
+l<L,k
+Z ∞
+M
+Pr[√n|⟨f −Pn,ψlk⟩| >
+√
+lu]du.
+An application of Markov’s inequality for u > 0 leads to
+Pr[√n|⟨f −Pn,ψlk⟩| >
+√
+lu] ≤e−luE[e
+√
+ln|⟨f−Pn,ψlk⟩|].
+
+26
+I. CASTILLO AND R. NICKL
+Combining the last two bounds with (41) leads to
+√nE∥πVL(f −Pn)∥M0 ≲M +
+X
+l<L
+2lec2lΠ(Dn|X)−1
+Z ∞
+M
+e−lu du
+≲M + Π(Dn|X)−1 X
+l<L
+l−1e[l log 2+lc2−lM].
+For M large enough, the last display is bounded by M +CΠ(Dn|X)−1. Since
+Π(Dn|X)−1 →1 in probability, one obtains
+√nE∥πVL(f −Pn)∥M0(
+√
+l) = OPf0(1).
+(42)
+Combining (42) with Markov’s inequality and Proposition 6, we see that the
+BvM result will follow from (41), and from convergence of ﬁnite-dimensional
+distributions that we check in point (iii) below.
+Now we check (41), in two steps. First, Lemma 1 below enables us to incor-
+porate the term ⟨f −Pn,ψlk⟩into the likelihood coming from Bayes’ formula
+applied to dΠDn(f|X) and reduces the problem to a change of measure with
+respect to the prior. Next, this change of measure is handled below.
+Let us now apply Lemma 1 below to Πn = ΠDn for Π, one of the consid-
+ered priors. Set γn = ψlk. First note that ∥˜γn∥2
+L =
+R
+ψ2
+lkf0 ≲∥f0∥∞, which is
+bounded by assumption for f0 ∈F0. Next note that, for l ≤L,
+∥˜γn∥∞≲∥ψlk∥∞≲2l/2 ≲2L/2.
+For h the Hellinger distance we have h(f,f0)2 ≲∥f −f0∥2
+2 ≤∥f −f0∥2
+∞valid
+for f0 ∈F0. Hence on Dn we have that h(f,f0) ≲ρn. Since α > 1/2, we have
+2L/2 log n ≤ρ−1
+n , so one can apply Lemma 1 with an = ρn and deduce
+Z
+es√n⟨f−Pn,ψlk⟩dΠDn(f|X) ≲
+eCs2
+Π(Dn|X)
+R
+Dn eℓn(fs)−ℓn(f0) dΠ(f)
+R
+eℓn(f)−ℓn(f0) dΠ(f) .
+(43)
+Now we are ready to change variables in the last ratio. For each of the
+examples of priors considered, we show that this ratio is bounded from above
+by a constant as n →∞.
+We start with case (S). By deﬁnition, the quantity fs is a function of
+log f −s˜γn/√n. Next, notice that any constant in this expression vanishes
+due to the subtraction of the renormalising constant c(·). In particular, the
+expression is a function of T −sγn/√n, where T is deﬁned in (21). The
+law of T is induced by a ﬁnite product of probability measures, via the
+distributions of the coordinates of T over {ψlk} with l < L. Since γn = ψlk,
+only one coordinate of the product measure deﬁning T is aﬀected by the
+subtraction of sγn/√n. The next step is to change variables in the numerator
+of the ratio above by shifting the corresponding coordinate by s/√n.
+
+NONPARAMETRIC BVM’S
+27
+For (S1), the change in density on this coordinate can be measured by
+ϕH(·/σl)
+ϕH((· −s/√n)/σl),
+(44)
+whose logarithm is bounded above in absolute value by 1/(√nσl) ≲1, since
+by assumption, log ϕH is Lipschitz and using (24) combined with l ≤L.
+In case (S2), the prior on each coordinate is Gaussian, and if θlk denotes
+the integrating variable with respect to the coordinate l,k (corresponding
+to integrating out the law of ⟨T,ψlk⟩) in the considered ratio of integrals, we
+have
+log
+ϕG(θlk/σl)
+ϕG((θlk −s/√n)/σl) =
+1
+nσ2
+l
+−
+s
+√nσ2
+l
+θlk.
+(45)
+Recall that we work on the set Dn, on which we have the following inequal-
+ities: ∥log(f/f0)∥2 ≤∥log(f/f0)∥∞≲ρn, using that f0 is bounded from be-
+low. Moreover, note that by deﬁnition of T, and if g := log f, g0 := log f0,
+it holds ⟨g −g0,ψlk⟩= ⟨T −c(T) −g0,ψlk⟩. Since c(T) is a constant, and
+ψlk are orthogonal to constants for l ≥K, K large enough, we deduce, if
+g0,lk := ⟨g0,ψlk⟩, that on Dn we have (θlk −g0,lk)2 ≲ρ2
+n, as soon as l ≥K.
+So, for K ≤l ≤L, we have
+|(45)| ≲
+1
+nσ2
+l
++ ρn|s|
+√nσ2
+l
++ |g0,lk||s|
+√nσ2
+l
+≲1 +
+ρn
+√nσ2
+l
+√
+l + |g0,lk|
+σl
+√
+l.
+Since log f0 belongs to Cα by assumption and with (24), the last term in the
+last display is at most a constant. We also have
+√
+lρn ≲√nσ2
+l using (24) in
+the Gaussian case, thus the previous display is at most a constant on Dn.
+Now we are left with the indexes such that l ≤K. For those, by deﬁnition of
+the set Dn, (45) is in absolute value less than (n−1 + εn)
+√
+lσ−2
+l
+. Since l ≤K
+with K ﬁxed, the last expression is bounded, which yields (41).
+Finally, the case of the histogram prior (H) is treated by studying the
+eﬀect of the change of variables on the Dirichlet distribution. The argument
+is similar to [3], Section 4.4 and is omitted.
+(iii) Convergence of ﬁnite-dimensional distributions (37). This can be
+seen to consist of establishing BvM results for the projected law of the poste-
+rior distribution on any ﬁxed ﬁnite-dimensional subspace V = Vect{ψlk,(l,k) ∈
+T }, with T a ﬁnite admissible set of indexes. By Cram´er–Wold, this is the
+same as showing a BvM for estimating the linear functional ⟨f,ψT ⟩2, with
+ψT := P
+(l,k)∈T tl,kψlk and tl,k ∈R. Denote by πT the mapping, for any ﬁnite
+set of indices T ,
+πT :f →⟨f,ψT ⟩2.
+Then it is enough to show that, for any ﬁnite T ,
+βV (Π(·|X) ◦τ −1
+Pn ◦π−1
+T ,N(0,∥ψT ∥2
+L)) →0,
+
+28
+I. CASTILLO AND R. NICKL
+as n →∞. Since T is ﬁnite, the supremum-norm ∥ψT ∥∞is bounded. Thus
+the techniques of [5] can be used for the considered priors.
+In the case of histogram priors (H), the previous display follows from the
+section on random histograms in [5], applied to dyadic histograms. The func-
+tional πT above is linear, so the no-bias condition in [5] amounts to check,
+with g[Kn] the L2 projection of a given function g in L2 onto the space of reg-
+ular dyadic histograms of level Kn, that √n
+R
+(ψT −ψT ,[Kn])(f0 −f0,[Kn]) =
+o(1). But ψT is a dyadic histogram of ﬁxed meshwidth, thus ψT ,[Kn] = ψT
+for large enough n, since Kn = Ln →∞, so this trivially holds. Finally,
+since Kn = Ln →∞, the variances
+R
+(ψT ,[Kn] −
+R
+ψT ,[Kn]f0)2f0 converge to
+R
+(ψT −
+R
+ψT f0)2f0.
+In the case of log-density priors (S), one applies the general result on
+density estimation in [5] (Theorem 4.1). The set An in that statement should
+be replaced by the set Dn deﬁned above. Since Dn is contained in An =
+{f : ∥f −f0∥1 ≤ρn} and Π(Dn|X) tends to 1 in probability, the proof of
+that Theorem goes through without further changes. It thus suﬃces to verify
+that the ratio of integrals in the former theorem from [5] holds when the
+functional f →⟨f,ψT ⟩2 is considered. Note that this is the same as proving
+that the ratio on the right-hand side of (43) goes to 1, with ψlk replaced by
+ψT and now fs = fe−tψT −c(fe−tψT ). Since only a ﬁnite number of ψlks are
+involved in the sum deﬁning ψT , the ratio involved in the change of variables
+tends to 1 in probability: in the case of log-Lipschitz densities, one uses a
+ﬁnite number of times the bound 1/(√nσl) for the logarithm of (44), which
+is of the order 1/√n because l is now bounded. For the Gaussian density
+case, one argues similarly.
+We conclude with the following auxiliary results: for Ln = ln these are
+Lemmas 3, 6, 9 and Theorems 2, 3 in [3], and the case Ln = jn is proved in
+the same way. Let h(f,g) denote the Hellinger distance between two given
+densities f,g, and write ℓn(f) = (1/n)Pn
+i=1 log f(Xi) for f > 0.
+Lemma 1.
+Let f0 belong to F0. Let {an} be a sequence of reals such
+that na2
+n ≥1 for any n ≥1. Let {Πn} be a collection of priors on densities
+restricted to the set {f,h(f,f0) ≤an}. Let {γn} be an arbitrary sequence in
+L∞[0,1]. Set ˜γn := γn −P0γn. Suppose, for some m > 0 and all n ≥1,
+∥˜γn∥L ≤m,
+∥˜γn∥∞≤(4an log(n + 1))−1.
+Then there exist C > 0 depending on m,∥f0∥∞only such that for any n ≥1
+and |t| ≤log n, with Wn(γn) = √n(Pn −P0)γn,
+EΠn[et√n⟨f−f0,γn⟩2|X(n)] ≤eCt2+tWn(γn)
+R
+eℓn(ft)−ℓn(f0) dΠn(f)
+R
+eℓn(f)−ℓn(f0) dΠn(f) ,
+where ft is deﬁned by log ft = log f −t˜γn/√n −c(fe−t˜γn/√n).
+
+NONPARAMETRIC BVM’S
+29
+Lemma 2.
+Let f,f0 be two densities such that f0 is bounded away from
+inﬁnity. Let g be an element of L∞such that h(f,f0)∥g∥∞≤C1 and ∥g∥2 ≤
+C2, for some constants C1,C2 > 0. Then
+|(P −P0)g2| ≤C2
+1 + C1
+q
+4C2∥f0∥∞+ C2
+1.
+Lemma 3.
+Let f0 ∈F0, and suppose log f0 ∈Cα, α > 1. Let ϕ = ϕG and
+σl satisfy (24), Ln be as deﬁned in (20) and the prior Π be deﬁned by (22).
+Then there exists ν > 0 such that if εn = (log n)νn−α/(2α+1), for C > 0 large
+enough and any ﬁxed given integer K,
+Ef0Π
+h
+max
+λ≤K,µ|⟨T,ψλµ⟩| ≤C√nεn|X(n)i
+→1.
+Finally, for any α > 0 and n ≥2, let us set ε∗
+n,α := (n/log n)−α/(2α+1).
+Lemma 4.
+Let Π be of the type (S) or (H) with Ln as in (20) and suppose
+(24) and (25) are, respectively, satisﬁed for the corresponding prior. Suppose
+f0 belongs to Cα, 1/2 < α ≤1 in the case of prior (H) and log f0 ∈Cα, α > 1
+for priors (S). Then, as n →∞,
+Ef0Π[f :∥f −f0∥∞> ρn|X(n)] →0,
+(46)
+where, for an arbitrary sequence Mn →∞, ρ2
+n = M2
+nLn2Ln/n. That is, ρn =
+Mnε∗
+n,α if Ln = ln and ρn = Mnε∗
+n,α
+√log n if Ln = jn.
+Acknowledgments.
+The authors thank two anonymous referees and the
+Associate Editor for comments that helped to improve the presentation of
+the paper. Richard Nickl is grateful to the LPMA at Universit´e Paris VII
+Denis Diderot for its hospitality during a visit in October–November 2012
+where this research was initiated.
+REFERENCES
+[1] Bogachev, V. I. (1998). Gaussian Measures. Amer. Math. Soc., Providence, RI.
+MR1642391
+[2] Bontemps, D. (2011). Bernstein–von Mises theorems for Gaussian regression with
+increasing number of regressors. Ann. Statist. 39 2557–2584. MR2906878
+[3] Castillo, I. (2014). On Bayesian supremum norm contraction rates. Ann. Statist.
+To appear. Available at arXiv:1304.1761v2.
+[4] Castillo, I. and Nickl, R. (2013). Nonparametric Bernstein–von Mises theorems
+in Gaussian white noise. Ann. Statist. 41 1999–2028. MR3127856
+[5] Castillo, I. and Rousseau, J. (2013). A general Bernstein–von Mises theorem in
+semiparametric models. Preprint. Available at arXiv:1305.4482.
+[6] Ciesielski, Z., Kerkyacharian, G. and Roynette, B. (1993). Quelques espaces
+fonctionnels associ´es `a des processus Gaussiens. Studia Math. 107 171–204.
+MR1244574
+
+30
+I. CASTILLO AND R. NICKL
+[7] Cohen, A., Daubechies, I. and Vial, P. (1993). Wavelets on the interval and fast
+wavelet transforms. Appl. Comput. Harmon. Anal. 1 54–81. MR1256527
+[8] Conti, P. L. (1999). Large sample Bayesian analysis for Geo/G/1 discrete-time
+queueing models. Ann. Statist. 27 1785–1807. MR1765617
+[9] Conti, P. L. (2004). Approximated inference for the quantile function via Dirichlet
+processes. Metron 62 201–222. MR2102100
+[10] Davies, P. L. and Kovac, A. (2001). Local extremes, runs, strings and multireso-
+lution. Ann. Statist. 29 1–65. MR1833958
+[11] Davies, P. L., Kovac, A. and Meise, M. (2009). Nonparametric regression, conﬁ-
+dence regions and regularization. Ann. Statist. 37 2597–2625. MR2541440
+[12] D¨umbgen, L. and Spokoiny, V. G. (2001). Multiscale testing of qualitative hy-
+potheses. Ann. Statist. 29 124–152. MR1833961
+[13] D¨umbgen, L. and Walther, G. (2008). Multiscale inference about a density. Ann.
+Statist. 36 1758–1785. MR2435455
+[14] Freedman,
+D.
+(1999).
+On
+the
+Bernstein–von
+Mises
+theorem
+with
+inﬁnite-
+dimensional parameters. Ann. Statist. 27 1119–1140. MR1740119
+[15] Ghosal, S. (1999). Asymptotic normality of posterior distributions in high-
+dimensional linear models. Bernoulli 5 315–331. MR1681701
+[16] Gin´e, E. and Nickl, R. (2009). Uniform limit theorems for wavelet density estima-
+tors. Ann. Probab. 37 1605–1646. MR2546757
+[17] Gin´e, E. and Nickl, R. (2010). Conﬁdence bands in density estimation. Ann. Statist.
+38 1122–1170. MR2604707
+[18] Gin´e, E. and Zinn, J. (1990). Bootstrapping general empirical measures. Ann.
+Probab. 18 851–869. MR1055437
+[19] Hall, P. (1979). On the rate of convergence of normal extremes. J. Appl. Probab.
+16 433–439. MR0531778
+[20] Hall, P. (1992). Eﬀect of bias estimation on coverage accuracy of bootstrap conﬁ-
+dence intervals for a probability density. Ann. Statist. 20 675–694. MR1165587
+[21] Hjort, N. L. and Petrone, S. (2007). Nonparametric quantile inference using
+Dirichlet processes. In Advances in Statistical Modeling and Inference 463–492.
+World Sci. Publ., Hackensack, NJ. MR2416129
+[22] Hjort, N. L. and Walker, S. G. (2009). Quantile pyramids for Bayesian nonpara-
+metrics. Ann. Statist. 37 105–131. MR2488346
+[23] Hoffmann-Jørgensen, J., Shepp, L. A. and Dudley, R. M. (1979). On the lower
+tail of Gaussian seminorms. Ann. Probab. 7 319–342. MR0525057
+[24] Johnstone, I. M. (2010). High dimensional Bernstein–von Mises: Simple exam-
+ples. In Borrowing Strength: Theory Powering Applications—a Festschrift for
+Lawrence D. Brown. Inst. Math. Stat. Collect. 6 87–98. IMS, Beachwood, OH.
+MR2798513
+[25] Kato, K. (2013). Quasi-Bayesian analysis of nonparametric instrumental variables
+models. Ann. Statist. 41 2359–2390. MR3127869
+[26] Kim, Y. (2006). The Bernstein–von Mises theorem for the proportional hazard model.
+Ann. Statist. 34 1678–1700. MR2283713
+[27] Kim, Y. and Lee, J. (2004). A Bernstein–von Mises theorem in the nonparametric
+right-censoring model. Ann. Statist. 32 1492–1512. MR2089131
+[28] Leahu, H. (2011). On the Bernstein–von Mises phenomenon in the Gaussian white
+noise model. Electron. J. Stat. 5 373–404. MR2802048
+[29] Ledoux, M. (2001). The Concentration of Measure Phenomenon. Mathematical Sur-
+veys and Monographs 89. Amer. Math. Soc., Providence, RI. MR1849347
+
+NONPARAMETRIC BVM’S
+31
+[30] Le Cam, L. (1986). Asymptotic Methods in Statistical Decision Theory. Springer,
+New York. MR0856411
+[31] Lo, A. Y. (1983). Weak convergence for Dirichlet processes. Sankhy¯a Ser. A 45 105–
+111. MR0749358
+[32] Rivoirard, V. and Rousseau, J. (2012). Bernstein–von Mises theorem for linear
+functionals of the density. Ann. Statist. 40 1489–1523. MR3015033
+[33] Schmidt-Hieber, J., Munk, A. and D¨umbgen, L. (2013). Multiscale methods for
+shape constraints in deconvolution: Conﬁdence statements for qualitative fea-
+tures. Ann. Statist. 41 1299–1328. MR3113812
+[34] Szab´o, B. T., van der Vaart, A. W. and van Zanten, J. H. (2013). Frequentist
+coverage of adaptive nonparametric Bayesian credible sets. Preprint. Available
+at arXiv:1310.4489.
+[35] van der Vaart, A. W. (1998). Asymptotic Statistics. Cambridge Univ. Press, Cam-
+bridge. MR1652247
+[36] van der Vaart, A. W. and van Zanten, J. H. (2008). Reproducing kernel Hilbert
+spaces of Gaussian priors. In Pushing the Limits of Contemporary Statistics:
+Contributions in Honor of Jayanta K. Ghosh. Inst. Math. Stat. Collect. 3 200–
+222. IMS, Beachwood, OH. MR2459226
+[37] van der Vaart, A. W. and van Zanten, J. H. (2008). Rates of contraction of
+posterior distributions based on Gaussian process priors. Ann. Statist. 36 1435–
+1463. MR2418663
+CNRS—Laboratoire Probabilit´es
+et Mod`eles Al´eatoires
+Universit´es Paris VI and VII
+Bˆatiment Sophie Germain
+75205 Paris Cedex 13
+France
+E-mail: ismael.castillo@upmc.fr
+Statistical Laboratory
+Department of Pure Mathematics
+and Mathematical Statistics
+University of Cambridge
+CB3 0WB Cambridge
+United Kingdom
+E-mail: r.nickl@statslab.cam.ac.uk

@@ -1,0 +1,1070 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-49",
+  "run": "bayesian-computational-statistics-62",
+  "batch": 49,
+  "scope": [
+    "def-abc-augmented-tolerance-target",
+    "lem-abc-augmented-target-has-tolerance-posterior-marginal",
+    "alg-abc-metropolis-hastings",
+    "alg-abc-sequential-smc",
+    "thm-abc-metropolis-hastings-invariance",
+    "thm-abc-sequential-smc-rn-weight-update",
+    "ex-abc-vanishing-acceptance",
+    "ex-abc-positive-tolerance-stationary-law",
+    "ex-abc-sequential-tolerance-schedule-and-rn-weights",
+    "ex-abc-smc-finite-particle-collapse"
+  ],
+  "contracts": {
+    "def-abc-augmented-tolerance-target": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires an existing prior probability and simulator probability kernel, so it makes no claim on an empty parameter-data product without such inputs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The carrier defines the normalized augmented target only when Z_epsilon>0; if Z_epsilon=0 it assigns no target."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The summary dimension condition d>=1 includes d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If h_epsilon=1 H-almost surely then Z_epsilon=1 and the target is H; if h_epsilon=0 H-almost surely then Z_epsilon=0 and no normalized target is defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The item allows epsilon=0 only when its exact-summary event has positive prior-predictive probability."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition makes no selection from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "lem-abc-augmented-target-has-tolerance-posterior-marginal": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-abc-augmented-tolerance-target",
+          "source_section": "Definition",
+          "quote": "Only when $Z_\\epsilon>0$ define the **augmented ABC tolerance target**",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-approximate-bayesian-computation",
+          "source_section": "Definition",
+          "quote": "This is exactly the conditional law of $\\theta$ under the augmented event $S(Y)\\in B_\\epsilon(s_0)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-prior-and-model-kernel-define-joint-law",
+          "source_section": "Statement",
+          "quote": "In particular, $J(A\\times B)=\\int_AK(\\theta,B)\\,\\pi(d\\theta)$ for $A\\in\\mathcal T$ and $B\\in\\mathcal A$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The augmented target's parameter marginal on a measurable A is the prior integral of the simulator probability of the tolerance event, divided by Z_epsilon.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The prior integral and denominator agree with the exact tolerance-posterior formula in the ABC supplier definition.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes the prior and simulator setup of the target definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The hypothesis Z_epsilon>0 is used for both normalized laws; the assertion does not extend to a zero-probability tolerance event."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No sample-size parameter occurs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The rectangle calculation remains valid if the tolerance event is H-almost sure; the zero-probability case is excluded by the hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The formula includes epsilon=0 when its prior-predictive probability is positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the joint-law rectangle formula and equality of the normalizers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an identity, not an equivalence."
+        }
+      ]
+    },
+    "alg-abc-metropolis-hastings": {
+      "risk": "medium",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The procedure requires a probability target on the augmented state space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The admissible input requires Z_epsilon>0; at zero the target and MH kernel are not assigned."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The construction permits a single MH iteration from an admissible augmented state."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Every rejected proposal is retained as a self-transition by the general MH procedure."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The tolerance may be zero only when the positive-normalizer admissibility condition still holds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is explicitly assumed through the generic accepted-flow RN construction; no stronger choice principle is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm asserts no equivalence."
+        }
+      ]
+    },
+    "alg-abc-sequential-smc": {
+      "risk": "medium",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The finite horizon T=0 is allowed and returns only the prior-simulator tolerance population."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Every target normalizer is required to be positive; a finite sample with zero total incremental weight stops and reports degeneracy."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: N=1 is allowed; multinomial ancestor selection and the weight normalization are defined when the sole weight is positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A zero total weight at initialization or any later stage is an explicit terminal degeneracy outcome."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The schedule is nonincreasing and every tolerance, including epsilon_T, must be strictly positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is used only to select RN derivative versions. Ancestor indices are sampled from finite categorical laws."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm asserts no equivalence."
+        }
+      ]
+    },
+    "thm-abc-metropolis-hastings-invariance": {
+      "risk": "low",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-abc-augmented-tolerance-target",
+          "source_section": "Definition",
+          "quote": "Only when $Z_\\epsilon>0$ define the **augmented ABC tolerance target**",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-abc-metropolis-hastings",
+          "source_section": "Definition",
+          "quote": "Construct the transition kernel $P_\\epsilon$ by applying [[alg-metropolis-hastings-kernel]] with target $\\widetilde\\Pi_\\epsilon$ and proposal $Q$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-metropolis-hastings-kernel-is-reversible-and-invariant",
+          "source_section": "Statement",
+          "quote": "Its output $P$ is a probability kernel, the joint measure $J_P(dx,dy)=\\pi(dx)P(x,dy)$ is symmetric under $(x,y)\\mapsto(y,x)$, and $\\pi$ is invariant for $P$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-metropolis-hastings-kernel",
+          "source_section": "Definition",
+          "quote": "The second term retains every rejected proposal as a self-transition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The positive-normalizer target is a probability and the ABC procedure returns the generic MH output for that target and its probability proposal.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "AC, the standard-Borel augmented state, and the probability target/proposal meet the general MH theorem hypotheses, so the output is reversible and invariant.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a proper prior and simulator probability kernel."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The theorem requires Z_epsilon>0; a zero event probability has no normalized augmented target."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The cited general MH invariance result covers the procedure for every admissible probability target and proposal; no iteration-count premise is needed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The result is invariance/reversibility only and makes no irreducibility or convergence assertion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Any epsilon is allowed only when its tolerance-event normalizer is positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is an explicit hypothesis, inherited from the actual general MH construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "thm-abc-sequential-smc-rn-weight-update": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-abc-augmented-tolerance-target",
+          "source_section": "Definition",
+          "quote": "Only when $Z_\\epsilon>0$ define the **augmented ABC tolerance target**",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-abc-sequential-smc",
+          "source_section": "Definition",
+          "quote": "Draw $N$ ancestor indices from the previous weights using the multinomial branch of [[alg-multinomial-and-residual-offspring-resampling]]. Conditional on those ancestors, independently draw one perturbed parameter from its $Q_t$ kernel and one datum from $K$ for each child. For a candidate $(\\theta_t^j,y_t^j)$ set $$a_t^j=\\mathbf1_{A_{\\epsilon_t}}(y_t^j)r_t^N(\\theta_t^j).$$ If $\\sum_j a_t^j=0$, stop and report finite-particle degeneracy; do not report a normalized target estimate. If the sum is positive, set $W_t^j=a_t^j/\\sum_k a_t^k$ and report the weighted empirical measure $\\widehat\\Pi_t^N=\\sum_jW_t^j\\delta_{(\\theta_t^j,y_t^j)}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative",
+          "source_section": "Statement",
+          "quote": "the Radon–Nikodym class $d\\nu/d\\mu$ has a finite-valued nonnegative measurable representative.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-integration-against-a-radon-nikodym-derivative",
+          "source_section": "Statement",
+          "quote": "If $h$ is a representative of $d\\nu/d\\mu$, then",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Then there is an increasing sequence of nonnegative simple measurable functions $(s_n)$ such that $s_n(x)\\uparrow f(x)$ for every $x\\in X$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Then $$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-multinomial-and-residual-offspring-resampling",
+          "source_section": "Definition",
+          "quote": "Each output is a length-$N$ list and a count vector summing to $N$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts",
+          "source_section": "Statement",
+          "quote": "Conditional on the input weights, for either scheme and every $1\\le j\\le N$, $$\\mathbb E[C_j\\mid a_1,\\ldots,a_N]=Np_j.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-prior-and-model-kernel-define-joint-law",
+          "source_section": "Statement",
+          "quote": "Then $J$ is a probability measure on the product sigma-algebra, and for every nonnegative product-measurable $h$,",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function $$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$ is $\\Sigma$-measurable, with infinity allowed.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $f,g:X\\to\\overline{\\mathbb R}$ are measurable and $f+g$ is defined\n   pointwise, then $f+g$ is measurable.\n2. If $c\\in\\mathbb R$ and $f:X\\to\\mathbb R$ is measurable, then $cf$ is\n   measurable.\n3. If $f:X\\to\\mathbb R$ is measurable, then $f^+=\\max\\{f,0\\}$,\n   $f^-=\\max\\{-f,0\\}$, and $|f|=f^++f^-$ are measurable.\n4. If $E\\in\\mathcal A$ and $f:X\\to[0,+\\infty]$ is measurable, then\n   $f\\chi_E$ is measurable, where this function equals $f$ on $E$ and $0$\n   off $E$ (in particular, $0\\cdot(+\\infty)=0$ here).\n5. If $(f_n)$ is a sequence of measurable functions $X\\to\\overline{\\mathbb R}$,\n   then $\\inf_n f_n$ is measurable; if moreover $f_n\\uparrow f$ pointwise, then\n   $f$ is measurable.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The initial prior-simulator draws weighted by the tolerance indicator have expected unnormalized measure gamma_0.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "1.2",
+          "claim": "For a fixed previous mixture, the RN derivative converts the proposal joint measure weighted by the tolerance indicator into the unnormalized ABC target gamma_t.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "F10",
+            "F11",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "2.1",
+          "claim": "Expected multinomial ancestor counts turn the candidate proposal average into the mixture integral, so the conditional expected weighted measure equals gamma_t.",
+          "inputs": [
+            "F2",
+            "F8",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "3.1",
+          "claim": "Conditional expected offspring counts give exactly the normalized weighted empirical mean after resampling, with no target interpretation when total weight is zero.",
+          "inputs": [
+            "F2",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model assumes an actual prior probability and simulator kernel."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Every tolerance normalizer is positive by hypothesis; a finite all-zero particle-weight event is explicitly reported as degeneracy and makes no normalized-target claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: N=1 is allowed by the resampling supplier and the finite-sum expectation identities remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The theorem states that finite candidates may miss positive target mass or have zero total weight; it asserts only unnormalized expectation and conditional resampling mean."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: All scheduled tolerances are strictly positive; no zero-tolerance target is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is explicitly used for RN derivative existence; the finite resampling calculations themselves require no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "ex-abc-vanishing-acceptance": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-abc-augmented-tolerance-target",
+          "source_section": "Definition",
+          "quote": "Only when $Z_\\epsilon>0$ define the **augmented ABC tolerance target**",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-abc-metropolis-hastings",
+          "source_section": "Definition",
+          "quote": "Each iteration proposes a new parameter from $q$, simulates new data from $K$, applies the general Metropolis–Hastings accepted-flow rule, and retains the current augmented state after rejection.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-metropolis-hastings-kernel",
+          "source_section": "Definition",
+          "quote": "$$\\alpha(x,y)=\\begin{cases}\\min\\{1,g(x,y)/f(x,y)\\},&f(x,y)>0,\\\\1,&f(x,y)=0.\\end{cases}$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The prior-predictive acceptance probability is 2 epsilon for 0 <= epsilon <= 1/2 and is 1 for epsilon > 1/2, so it is positive for every positive tolerance.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For a singleton parameter and independent simulator proposal, the augmented MH ratio is one on the tolerance event and zero off it, giving acceptance 2 epsilon and no target at epsilon zero.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The parameter space is a singleton and the data space is the nonempty interval [0,1]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: At epsilon=0 the event is the singleton {1/2}, whose uniform probability is zero, so no indicator target is defined."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example makes no sample-size claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The parameter is degenerate by construction; the example concerns the nondegenerate continuous simulator acceptance event."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: For epsilon=1/2 the interval is all of [0,1] and acceptance is one; as epsilon decreases to zero the probability is 2 epsilon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No family selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        }
+      ]
+    },
+    "ex-abc-positive-tolerance-stationary-law": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-abc-augmented-tolerance-target",
+          "source_section": "Definition",
+          "quote": "Only when $Z_\\epsilon>0$ define the **augmented ABC tolerance target**",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-abc-augmented-target-has-tolerance-posterior-marginal",
+          "source_section": "Statement",
+          "quote": "the $\\Theta$-marginal of $\\widetilde\\Pi_\\epsilon$ is the tolerance-conditioned law $\\Pi_\\epsilon(\\cdot\\mid s_0)$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-abc-metropolis-hastings",
+          "source_section": "Definition",
+          "quote": "Construct the transition kernel $P_\\epsilon$ by applying [[alg-metropolis-hastings-kernel]] with target $\\widetilde\\Pi_\\epsilon$ and proposal $Q$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-abc-metropolis-hastings-invariance",
+          "source_section": "Statement",
+          "quote": "Its output $P_\\epsilon$ is reversible with respect to and leaves invariant the augmented ABC tolerance target $\\widetilde\\Pi_\\epsilon$ on $\\Theta\\times\\mathsf Y$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-metropolis-hastings-kernel",
+          "source_section": "Definition",
+          "quote": "$$\\alpha(x,y)=\\begin{cases}\\min\\{1,g(x,y)/f(x,y)\\},&f(x,y)>0,\\\\1,&f(x,y)=0.\\end{cases}$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The listed finite prior-simulator masses give tolerance normalizer 7/8.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Normalizing the accepted joint masses yields augmented target masses and parameter marginal (4/7,3/7).",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The exact posterior given Y=0 is (2/3,1/3), distinct from the summary-tolerance marginal.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The independence proposal flow accepts every proposal in the tolerance set and rejects every outside proposal, giving the displayed mixture kernel and invariant law.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both finite state spaces and the prior/simulator are explicitly nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The state (1,2) lies outside the tolerance set and has zero target mass, while the total accepted mass is 7/8."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example makes no sample-size assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Both parameter values have positive augmented ABC marginal mass, so the target itself is nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The selected tolerance is epsilon=1/2>0 and the event has positive probability 7/8."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite state calculation uses no arbitrary family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        }
+      ]
+    },
+    "ex-abc-sequential-tolerance-schedule-and-rn-weights": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-abc-augmented-tolerance-target",
+          "source_section": "Definition",
+          "quote": "Only when $Z_\\epsilon>0$ define the **augmented ABC tolerance target**",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-abc-sequential-smc",
+          "source_section": "Definition",
+          "quote": "For each $t=1,\\ldots,T$, form the proposal mixture $$\\phi_t^N(\\cdot)=\\sum_{i=1}^N W_{t-1}^iQ_t(\\theta_{t-1}^i,\\cdot).$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-abc-sequential-smc-rn-weight-update",
+          "source_section": "Statement",
+          "quote": "For each $1\\le t\\le T$ and bounded nonnegative product-measurable $f:\\Theta\\times\\mathsf Y\\to[0,\\infty)$, condition on a previous weighted particle population",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The two positive tolerances yield normalizers 1 and 7/8 and stage-1 parameter target masses (4/7,3/7).",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "1.2",
+          "claim": "The previous population and perturbation kernel give mixture masses 99/100 and 1/100 and RN weights 50/99 and 50.",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "2.1",
+          "claim": "The proposal tolerance-match probability is 399/400; expected target-weight contributions are 1/2 and 3/8, which normalize to (4/7,3/7).",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The parameter and data spaces are explicitly finite and nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: At epsilon_1=1/2 the y=2 outcome lies outside tolerance and gets zero weight; the mixture acceptance probability remains 399/400."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The worked population has N=2 and makes no N=1 comparison."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The conditioned previous population repeats theta=0, but the perturbation mixture still assigns positive mass to both target parameter values."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The schedule epsilon_0=3/2 >= epsilon_1=1/2 is positive and has finite positive normalizers."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite prior, mixture, and categorical ancestor law are explicitly normalized."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        }
+      ]
+    },
+    "ex-abc-smc-finite-particle-collapse": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-abc-sequential-smc",
+          "source_section": "Definition",
+          "quote": "Draw $N$ ancestor indices from the previous weights using the multinomial branch of [[alg-multinomial-and-residual-offspring-resampling]]. Conditional on those ancestors, independently draw one perturbed parameter from its $Q_t$ kernel and one datum from $K$ for each child. For a candidate $(\\theta_t^j,y_t^j)$ set $$a_t^j=\\mathbf1_{A_{\\epsilon_t}}(y_t^j)r_t^N(\\theta_t^j).$$ If $\\sum_j a_t^j=0$, stop and report finite-particle degeneracy; do not report a normalized target estimate. If the sum is positive, set $W_t^j=a_t^j/\\sum_k a_t^k$ and report the weighted empirical measure $\\widehat\\Pi_t^N=\\sum_jW_t^j\\delta_{(\\theta_t^j,y_t^j)}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-abc-sequential-smc-rn-weight-update",
+          "source_section": "Statement",
+          "quote": "No unbiasedness is asserted for the self-normalized finite-$N$ estimate, and a finite sample may have zero total weight or fail to represent positive target mass.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The proposal mixture dominates the prior, its finite derivatives are 50/99 and 50, and the true tolerance target assigns mass 3/7 to theta=1.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "With probability 9801/10000, both proposals have theta=0, meet tolerance, and have equal positive weights, so the candidate empirical measure has no theta=1 mass.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The true tolerance target has theta=1 mass 3/7, so this positive-probability finite-particle outcome is unrepresentative despite valid support and weights.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite parameter and data spaces are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The y=2 outcome is outside the tolerance and has zero incremental weight, but the displayed collapse event has positive weights."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness fixes N=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example explicitly computes a positive-probability collapse to repeated theta=0 particles while target mass at theta=1 is 3/7."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The tolerance epsilon_1=1/2 is positive and its target normalizer is 7/8."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The prior, mixture proposal, and ancestor probabilities are finite explicit laws; the RN derivative is explicitly given."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        }
+      ]
+    }
+  }
+}

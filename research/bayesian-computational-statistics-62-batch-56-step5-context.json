@@ -1,0 +1,161 @@
+{
+  "group": "r",
+  "batches": [
+    "56"
+  ],
+  "pages_read": [
+    "cross-validation-risk-and-model-comparison",
+    "cross-validation-risk-and-model-comparison-examples"
+  ],
+  "items_read": [
+    "def-cross-validation-split-and-risk-target",
+    "def-risk-estimation-versus-model-identification",
+    "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+    "thm-cross-validation-risk-bias-at-training-size",
+    "lem-kfold-cv-variance-covariance-decomposition",
+    "thm-no-universal-unbiased-k-fold-cv-variance-estimator",
+    "ex-holdout-cv-training-size-bias",
+    "ex-paired-kfold-model-comparison-uncertainty",
+    "ex-random-row-split-leaks-group-information",
+    "ex-cross-validation-risk-minimization-does-not-identify-model"
+  ],
+  "conventions": [
+    {
+      "convention": "R_k averages an integrable, jointly measurable real-valued loss over k IID training observations and an independent test observation. Training tuples follow increasing index order.",
+      "fixed_by": "def-cross-validation-split-and-risk-target",
+      "matters_for": [
+        "thm-cross-validation-risk-bias-at-training-size",
+        "ex-holdout-cv-training-size-bias",
+        "ex-cross-validation-risk-minimization-does-not-identify-model"
+      ]
+    },
+    {
+      "convention": "Splits have disjoint nonempty training and validation sets covering [n]. Schedule weights are nonnegative and sum to one; randomized schedules must be independent of observations. K-fold weights are fold size divided by n.",
+      "fixed_by": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+      "matters_for": [
+        "thm-cross-validation-risk-bias-at-training-size",
+        "lem-kfold-cv-variance-covariance-decomposition",
+        "ex-random-row-split-leaks-group-information"
+      ]
+    },
+    {
+      "convention": "The covariance decomposition assumes a fixed balanced partition n=Km, symmetric learning rules, and square-integrable errors or paired differences. When m=1, the unused within-fold covariance is defined as zero.",
+      "fixed_by": "lem-kfold-cv-variance-covariance-decomposition",
+      "matters_for": [
+        "thm-no-universal-unbiased-k-fold-cv-variance-estimator",
+        "ex-paired-kfold-model-comparison-uncertainty"
+      ]
+    },
+    {
+      "convention": "A universal variance estimator may use the full sample, known rule, loss, and split, but cannot depend on the unknown law. Auxiliary randomization has a fixed law independent of the sample and unknown law.",
+      "fixed_by": "thm-no-universal-unbiased-k-fold-cv-variance-estimator",
+      "matters_for": [
+        "thm-no-universal-unbiased-k-fold-cv-variance-estimator"
+      ]
+    },
+    {
+      "convention": "Model consistency is label-specific convergence of the probability of selecting the specified true label to one. Candidate labels need not have distinct observation laws.",
+      "fixed_by": "def-risk-estimation-versus-model-identification",
+      "matters_for": [
+        "ex-cross-validation-risk-minimization-does-not-identify-model"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-cross-validation-split-and-risk-target",
+      "statement": "The risk at training size k is R_k := E[L(A_k(Z_1,…,Z_k),Z_{k+1})] under P^(k+1), with an independent test observation. The fixed-partition target is Σ_j (|I_j|/n)R_{n−|I_j|}.",
+      "used_by": [
+        "def-risk-estimation-versus-model-identification",
+        "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+        "thm-cross-validation-risk-bias-at-training-size",
+        "lem-kfold-cv-variance-covariance-decomposition",
+        "thm-no-universal-unbiased-k-fold-cv-variance-estimator",
+        "ex-holdout-cv-training-size-bias",
+        "ex-paired-kfold-model-comparison-uncertainty",
+        "ex-cross-validation-risk-minimization-does-not-identify-model"
+      ]
+    },
+    {
+      "id": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+      "statement": "For an admissible finite weighted split schedule, output Σ_r (w_r/|V_r|)Σ_{i∈V_r} L(A_|T_r|(z_T_r),z_i). Paired comparison uses the same schedule and averages validation-loss differences.",
+      "used_by": [
+        "thm-cross-validation-risk-bias-at-training-size",
+        "lem-kfold-cv-variance-covariance-decomposition",
+        "thm-no-universal-unbiased-k-fold-cv-variance-estimator",
+        "ex-holdout-cv-training-size-bias",
+        "ex-paired-kfold-model-comparison-uncertainty",
+        "ex-random-row-split-leaks-group-information"
+      ]
+    },
+    {
+      "id": "thm-cross-validation-risk-bias-at-training-size",
+      "statement": "For IID observations and a fixed admissible finite schedule with the stated measurability and integrability assumptions, E[R̂]=Σ_r w_r R_|T_r|. Its bias for R_n is Σ_r w_r(R_|T_r|−R_n). Independent finite-range schedule randomization averages the conditional identities.",
+      "used_by": [
+        "ex-holdout-cv-training-size-bias"
+      ]
+    },
+    {
+      "id": "lem-kfold-cv-variance-covariance-decomposition",
+      "statement": "Under its fixed balanced-fold, IID, symmetry, and second-moment hypotheses, Var(n⁻¹Σ_i e_i)=σ²/n+(m−1)ω/n+(n−m)γ/n, including paired loss differences.",
+      "used_by": [
+        "thm-no-universal-unbiased-k-fold-cv-variance-estimator",
+        "ex-paired-kfold-model-comparison-uncertainty"
+      ]
+    },
+    {
+      "id": "thm-no-universal-unbiased-k-fold-cv-variance-estimator",
+      "statement": "For every fixed balanced K-fold design, no sample-based procedure independent of the unknown law is unbiased for the score variance for every IID law and every symmetric learning rule with measurable loss and finite score variance. The explicit fixed product rule already prevents unbiasedness over all Bernoulli(p), 0<p<1.",
+      "used_by": [
+        "cross-validation-risk-and-model-comparison"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-statistic-and-estimator",
+      "used_for": "Learning rules are measurable statistics into a measurable predictor space.",
+      "opened": true
+    },
+    {
+      "id": "def-loss-function-and-risk",
+      "used_for": "Expected-loss risk convention; the owned definition explicitly extends to integrable signed predictive losses.",
+      "opened": true
+    },
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Common marginal law and mutual independence, and the contrast with repeated-group rows.",
+      "opened": true
+    },
+    {
+      "id": "thm-independent-random-elements-have-product-joint-law",
+      "used_for": "Training/test product laws, permutation invariance of IID samples, finite Bernoulli sample probabilities, and equal sample laws under indistinguishable labels.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Centered second-moment definitions in the covariance decomposition and numerical examples.",
+      "opened": true
+    },
+    {
+      "id": "thm-factorization-of-expectations-for-independent-variables",
+      "used_for": "Bernoulli product expectations and vanishing independent centered cross terms.",
+      "opened": true
+    },
+    {
+      "id": "def-bernoulli-and-binomial-random-variables",
+      "used_for": "Finite-support impossibility witness and the four examples' Bernoulli calculations.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "statistical-and-computational-error-accounting",
+      "to": "cross-validation-risk-and-model-comparison",
+      "faithful": true,
+      "note": "Checked both page summaries, the downstream error-ledger definition and MSE/covariance theorem, and the consumer dependency record. This is a contextual page prerequisite: the downstream identity is proved locally and imports no CV-specific risk or variance-estimation conclusion. Its covariance accounting agrees with the upstream decomposition. Independently enumerating all 16 binary samples confirmed the paired example's mean 1/8, second moment 5/64, and variance 1/16."
+    }
+  ]
+}

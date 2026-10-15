@@ -1,0 +1,1018 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-28",
+  "scope": [
+    "def-iid-monte-carlo-estimators",
+    "thm-iid-monte-carlo-mean-moments",
+    "thm-iid-monte-carlo-mean-consistency",
+    "thm-iid-monte-carlo-sample-variance-consistency",
+    "thm-iid-monte-carlo-central-limit",
+    "ex-gaussian-monte-carlo-integrand",
+    "ex-finite-mean-infinite-variance-monte-carlo-integrand"
+  ],
+  "contracts": {
+    "def-iid-monte-carlo-estimators": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition indexes the sequence by n>=1 and has no empty-sample convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: constant outputs are allowed; then population variance and sample variance are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the sample mean is defined for n=1, while sample variance and plug-in standard error start at n=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a degenerate common law is permitted and has variance zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition assumes an IID sequence and makes no selection from nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no equivalence."
+        }
+      ]
+    },
+    "thm-iid-monte-carlo-mean-moments": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-variance-adds-for-pairwise-independent-random-variables",
+          "source_section": "Statement",
+          "quote": "If $(X_i)_{i\\in I}$ is a finite pairwise-independent family of square-integrable real random variables on a common probability space, then\n$$\\operatorname{Var}\\!\\left(\\sum_{i\\in I}X_i\\right)=\\sum_{i\\in I}\\operatorname{Var}(X_i).$$\nPairwise independence, rather than mutual independence, is sufficient. In particular, the original finite-probability-space case is included, with pairwise atom independence as in the finite-valued convention. The empty sum has variance zero.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-iid-monte-carlo-estimators",
+          "source_section": "Definition",
+          "quote": "Let $(Y_i)_{i\\ge1}$ be real IID random variables on one probability space, where IID means that the variables have a common law and are mutually independent ([[def-identically-distributed-and-iid-random-variables]]). When $\\mathbb E|Y_1|<\\infty$, write $\\mu:=\\mathbb E[Y_1]$ and define the Monte Carlo estimate of this expectation by the sample mean $\\bar Y_n:=n^{-1}\\sum_{i=1}^nY_i$; this is the partial-sum convention of [[def-partial-sums-and-sample-means]]. For each $n\\ge2$ and any realized finite real sample, define its sample variance and nonnegative square root by\n$$s_n^2:=\\frac1{n-1}\\sum_{i=1}^n(Y_i-\\bar Y_n)^2,\\qquad s_n:=\\sqrt{s_n^2}.$$\nWhen $\\mathbb E[Y_1^2]<\\infty$, write $\\sigma^2:=\\operatorname{Var}(Y_1)$, using [[def-moments-variance-and-covariance]]. The population standard error of $\\bar Y_n$ is $\\sigma/\\sqrt n$, and its plug-in estimate is $\\widehat{se}_n:=s_n/\\sqrt n$. Although the finite-sample quantity $s_n$ is defined for any finite real sample, its interpretation as an estimate of a finite population standard error is used here only under the finite-second-moment condition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Every $Y_i$ has the law of $Y_1$ by [F1]. Applying [F2] to the identity map gives $\\mathbb E[Y_i]=\\mu$ when $\\mathbb E|Y_1|<\\infty$. If $\\mathbb E[Y_1^2]<\\infty$, applying [F2] to $y\\mapsto(y-\\mu)^2$ also gives $\\operatorname{Var}(Y_i)=\\sigma^2$ by [F4].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F6], $\\bar Y_n=n^{-1}\\sum_{i=1}^nY_i$. Linearity [F3] and step 1.1 therefore give $\\mathbb E[\\bar Y_n]=n^{-1}\\sum_{i=1}^n\\mathbb E[Y_i]=\\mu$.",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Assume $\\mathbb E[Y_1^2]<\\infty$. Since $|y|\\le1+y^2$ for every real $y$, each $Y_i$ is integrable as well as square-integrable. The first $n$ terms are pairwise independent by [F1], so [F5] and step 1.1 give $\\operatorname{Var}(\\sum_{i=1}^nY_i)=n\\sigma^2$. From [F4], scaling the centered sum by $1/n$ multiplies its variance by $1/n^2$; hence $\\operatorname{Var}(\\bar Y_n)=n^{-2}(n\\sigma^2)=\\sigma^2/n$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is for n>=1 and has no empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: sigma squared may be zero; the variance formula then gives zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: both formulas hold for n=1 when their moment hypotheses hold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: a constant IID output is included; its sample mean is exact and variance is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–2.1 use only finite sums, moments, and pairwise independence; no elements are selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives formulas, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives formulas, not an equivalence."
+        }
+      ]
+    },
+    "thm-iid-monte-carlo-mean-consistency": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-iid-monte-carlo-estimators",
+          "source_section": "Definition",
+          "quote": "Let $(Y_i)_{i\\ge1}$ be real IID random variables on one probability space, where IID means that the variables have a common law and are mutually independent ([[def-identically-distributed-and-iid-random-variables]]). When $\\mathbb E|Y_1|<\\infty$, write $\\mu:=\\mathbb E[Y_1]$ and define the Monte Carlo estimate of this expectation by the sample mean $\\bar Y_n:=n^{-1}\\sum_{i=1}^nY_i$; this is the partial-sum convention of [[def-partial-sums-and-sample-means]]. For each $n\\ge2$ and any realized finite real sample, define its sample variance and nonnegative square root by\n$$s_n^2:=\\frac1{n-1}\\sum_{i=1}^n(Y_i-\\bar Y_n)^2,\\qquad s_n:=\\sqrt{s_n^2}.$$\nWhen $\\mathbb E[Y_1^2]<\\infty$, write $\\sigma^2:=\\operatorname{Var}(Y_1)$, using [[def-moments-variance-and-covariance]]. The population standard error of $\\bar Y_n$ is $\\sigma/\\sqrt n$, and its plug-in estimate is $\\widehat{se}_n:=s_n/\\sqrt n$. Although the finite-sample quantity $s_n$ is defined for any finite real sample, its interpretation as an estimate of a finite population standard error is used here only under the finite-second-moment condition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-khinchin-weak-law-for-iid-integrable-variables",
+          "source_section": "Statement",
+          "quote": "If $(X_k)_{k\\ge1}$ are IID real random variables and $\\mathbb E|X_1|<\\infty$, then, with $S_n=\\sum_{k=1}^nX_k$ and $\\mu=\\mathbb EX_1$,\n$$\\mathbb E|S_n/n-\\mu|\\longrightarrow0.$$\nConsequently $S_n/n\\to\\mu$ in probability.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-kolmogorov-iid-l1-strong-law",
+          "source_section": "Statement",
+          "quote": "For IID real $(X_n)_{n\\ge1}$ with $\\mathbb E|X_1|<\\infty$, $S_n/n\\to\\mu=\\mathbb EX_1$ almost surely.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F2], $\\bar Y_n=S_n/n$. The hypotheses of [F3] hold by [F1] and the given integrability, so $\\mathbb E|\\bar Y_n-\\mu|\\to0$ and $\\bar Y_n\\to\\mu$ in probability.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Under the same hypotheses, [F4] gives $S_n/n\\to\\mu$ almost surely. Rewriting with [F2] yields $\\bar Y_n\\to\\mu$ almost surely.",
+          "inputs": [
+            "F2",
+            "F4",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement concerns sample means for n>=1, not an empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: a constant output has finite first absolute moment and both convergence conclusions hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: n=1 is a defined sample mean; the conclusions concern its sequence as n tends to infinity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: degenerate common laws satisfy the finite first-moment hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The imported integrable IID weak and strong laws use no choice axiom; this proof selects no elements."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts convergence, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts convergence, not an equivalence."
+        }
+      ]
+    },
+    "thm-iid-monte-carlo-sample-variance-consistency": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-iid-monte-carlo-estimators",
+          "source_section": "Definition",
+          "quote": "Let $(Y_i)_{i\\ge1}$ be real IID random variables on one probability space, where IID means that the variables have a common law and are mutually independent ([[def-identically-distributed-and-iid-random-variables]]). When $\\mathbb E|Y_1|<\\infty$, write $\\mu:=\\mathbb E[Y_1]$ and define the Monte Carlo estimate of this expectation by the sample mean $\\bar Y_n:=n^{-1}\\sum_{i=1}^nY_i$; this is the partial-sum convention of [[def-partial-sums-and-sample-means]]. For each $n\\ge2$ and any realized finite real sample, define its sample variance and nonnegative square root by\n$$s_n^2:=\\frac1{n-1}\\sum_{i=1}^n(Y_i-\\bar Y_n)^2,\\qquad s_n:=\\sqrt{s_n^2}.$$\nWhen $\\mathbb E[Y_1^2]<\\infty$, write $\\sigma^2:=\\operatorname{Var}(Y_1)$, using [[def-moments-variance-and-covariance]]. The population standard error of $\\bar Y_n$ is $\\sigma/\\sqrt n$, and its plug-in estimate is $\\widehat{se}_n:=s_n/\\sqrt n$. Although the finite-sample quantity $s_n$ is defined for any finite real sample, its interpretation as an estimate of a finite population standard error is used here only under the finite-second-moment condition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-kolmogorov-iid-l1-strong-law",
+          "source_section": "Statement",
+          "quote": "For IID real $(X_n)_{n\\ge1}$ with $\\mathbb E|X_1|<\\infty$, $S_n/n\\to\\mu=\\mathbb EX_1$ almost surely.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $|y|\\le1+y^2$ for every real $y$, the given second moment implies $\\mathbb E|Y_1|<\\infty$. Applying [F6] to the original IID sequence gives $\\bar Y_n\\to\\mu$ almost surely by [F1].",
+          "inputs": [
+            "F1",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The identity map on $(\\mathbb R,\\mathcal B(\\mathbb R))$ is measurable, so its pointwise product with itself is Borel measurable by [F3]; call this square map $q$. Applying [F4] with $q$ preserves independence. For any Borel set $B$, $\\mathbb P(Y_i^2\\in B)=\\mathbb P(Y_i\\in q^{-1}(B))$, so the common-law clause of [F2] gives a common law for the $Y_i^2$. By [F5], their common finite expectation is $\\mathbb E[Y_1^2]$. Thus [F6] applies to this IID sequence and gives $n^{-1}\\sum_{i=1}^nY_i^2\\to\\mathbb E[Y_1^2]$ almost surely.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Expanding the centered squares in [F1] gives $s_n^2=\\frac{n}{n-1}\\bigl(n^{-1}\\sum_{i=1}^nY_i^2-\\bar Y_n^2\\bigr)$. Steps 1.1 and 1.2 imply that the bracket tends almost surely to $\\mathbb E[Y_1^2]-\\mu^2$; also $n/(n-1)\\to1$. By [F7] and [F8], $\\mathbb E[Y_1^2]-\\mu^2=\\mathbb E[(Y_1-\\mu)^2]=\\sigma^2$. Hence $s_n^2\\to\\sigma^2$ almost surely.",
+          "inputs": [
+            "F1",
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $\\sigma^2>0$, step 2.1 gives $s_n^2/\\sigma^2\\to1$ almost surely. Both $s_n$ and $\\sigma$ are nonnegative, so continuity of the square root gives $s_n/\\sigma\\to1$. By [F1], $\\widehat{se}_n/(\\sigma/\\sqrt n)=s_n/\\sigma$, proving the relative standard-error consistency.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement defines s_n only for n>=2 and excludes an empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: sigma squared may be zero; s_n squared still converges almost surely to zero, while the relative ratio is asserted only for positive variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: sample variance starts at n=2; the limit is unaffected by the first sample size."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: constant outputs are included in s_n squared convergence; the relative standard-error clause excludes zero variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses measurable squaring and the choice-free IID L1 strong law; it makes no element selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts convergence, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts convergence, not an equivalence."
+        }
+      ]
+    },
+    "thm-iid-monte-carlo-central-limit": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-iid-monte-carlo-estimators",
+          "source_section": "Definition",
+          "quote": "Let $(Y_i)_{i\\ge1}$ be real IID random variables on one probability space, where IID means that the variables have a common law and are mutually independent ([[def-identically-distributed-and-iid-random-variables]]). When $\\mathbb E|Y_1|<\\infty$, write $\\mu:=\\mathbb E[Y_1]$ and define the Monte Carlo estimate of this expectation by the sample mean $\\bar Y_n:=n^{-1}\\sum_{i=1}^nY_i$; this is the partial-sum convention of [[def-partial-sums-and-sample-means]]. For each $n\\ge2$ and any realized finite real sample, define its sample variance and nonnegative square root by\n$$s_n^2:=\\frac1{n-1}\\sum_{i=1}^n(Y_i-\\bar Y_n)^2,\\qquad s_n:=\\sqrt{s_n^2}.$$\nWhen $\\mathbb E[Y_1^2]<\\infty$, write $\\sigma^2:=\\operatorname{Var}(Y_1)$, using [[def-moments-variance-and-covariance]]. The population standard error of $\\bar Y_n$ is $\\sigma/\\sqrt n$, and its plug-in estimate is $\\widehat{se}_n:=s_n/\\sqrt n$. Although the finite-sample quantity $s_n$ is defined for any finite real sample, its interpretation as an estimate of a finite population standard error is used here only under the finite-second-moment condition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lindeberg-levy-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X_k)_{k\\ge1}$ be iid real random variables with mean $m$ and variance $0<\\sigma^2<\\infty$. Then $$\\frac{\\sum_{k=1}^nX_k-nm}{\\sigma\\sqrt n}\\ \\Rightarrow\\ N(0,1).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuous-mapping-theorem",
+          "source_section": "Statement",
+          "quote": "Let S,T be metric spaces, $g:S\\to T$ measurable, and $\\mu_n\\Rightarrow\\mu$. If the discontinuity set $D_g$ is $\\mu$-null, then $g_*\\mu_n\\Rightarrow g_*\\mu$. Consequently $X_n\\Rightarrow X$ implies $g(X_n)\\Rightarrow g(X)$ whenever $P_X(D_g)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The hypotheses of [F3] hold by [A1], [F1], and the given positive finite variance. Since [F2] gives $\\sum_{i=1}^nY_i=n\\bar Y_n$, [F3] yields $Z_n:=\\sqrt n(\\bar Y_n-\\mu)/\\sigma\\Rightarrow N(0,1)$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The map $x\\mapsto\\sigma x$ is continuous because $\\sigma>0$. Applying [F4] to step 1.1 gives $\\sigma Z_n\\Rightarrow\\sigma Z$ for $Z\\sim N(0,1)$. By [A1] and [F5], the law of $\\sigma Z$ is $N(0,\\sigma^2)$, and $\\sigma Z_n=\\sqrt n(\\bar Y_n-\\mu)$. This is the stated convergence.",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is for a real IID sequence indexed by n>=1, not an empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: sigma squared is required to be strictly positive, so the degenerate-normal boundary is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the standardized statistic is defined for each n>=1; convergence is an n-to-infinity assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: zero variance is explicitly excluded by 0<sigma squared."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes AC; step 1.1 uses the AC-dependent Lindeberg–Levy supplier and step 2.1 uses the AC normal-law definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a limit theorem, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a limit theorem, not an equivalence."
+        }
+      ]
+    },
+    "ex-gaussian-monte-carlo-integrand": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-normal-location-scale-mean-and-variance",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$, $\\sigma\\ge0$, and a real random variable\n$X$ with law $N(m,\\sigma^2)$,\n$$E[X]=m,\\qquad \\operatorname{Var}(X)=\\sigma^2.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-iid-monte-carlo-mean-moments",
+          "source_section": "Statement",
+          "quote": "Let $(Y_i)_{i\\ge1}$ be a real IID sequence. If $\\mathbb E|Y_1|<\\infty$ and $\\mu=\\mathbb E[Y_1]$, then $\\mathbb E[\\bar Y_n]=\\mu$ for every $n\\ge1$. If also $\\mathbb E[Y_1^2]<\\infty$ and $\\sigma^2=\\operatorname{Var}(Y_1)$, then $\\operatorname{Var}(\\bar Y_n)=\\sigma^2/n$ for every $n\\ge1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-iid-monte-carlo-sample-variance-consistency",
+          "source_section": "Statement",
+          "quote": "Let $(Y_i)_{i\\ge1}$ be a real IID sequence with $\\mathbb E[Y_1^2]<\\infty$, and write $\\mu=\\mathbb E[Y_1]$ and $\\sigma^2=\\operatorname{Var}(Y_1)$. For $n\\ge2$, define $s_n^2=(n-1)^{-1}\\sum_{i=1}^n(Y_i-\\bar Y_n)^2$. Then $s_n^2\\to\\sigma^2$ almost surely. If $\\sigma^2>0$, then $\\widehat{se}_n/(\\sigma/\\sqrt n)\\to1$ almost surely.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-iid-monte-carlo-central-limit",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(Y_i)_{i\\ge1}$ be a real IID sequence with $\\mu=\\mathbb E[Y_1]$ and $0<\\sigma^2:=\\operatorname{Var}(Y_1)<\\infty$. Then\n$$\\sqrt n\\,(\\bar Y_n-\\mu)\\Rightarrow N(0,\\sigma^2).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-iid-monte-carlo-estimators",
+          "source_section": "Definition",
+          "quote": "Let $(Y_i)_{i\\ge1}$ be real IID random variables on one probability space, where IID means that the variables have a common law and are mutually independent ([[def-identically-distributed-and-iid-random-variables]]). When $\\mathbb E|Y_1|<\\infty$, write $\\mu:=\\mathbb E[Y_1]$ and define the Monte Carlo estimate of this expectation by the sample mean $\\bar Y_n:=n^{-1}\\sum_{i=1}^nY_i$; this is the partial-sum convention of [[def-partial-sums-and-sample-means]]. For each $n\\ge2$ and any realized finite real sample, define its sample variance and nonnegative square root by\n$$s_n^2:=\\frac1{n-1}\\sum_{i=1}^n(Y_i-\\bar Y_n)^2,\\qquad s_n:=\\sqrt{s_n^2}.$$\nWhen $\\mathbb E[Y_1^2]<\\infty$, write $\\sigma^2:=\\operatorname{Var}(Y_1)$, using [[def-moments-variance-and-covariance]]. The population standard error of $\\bar Y_n$ is $\\sigma/\\sqrt n$, and its plug-in estimate is $\\widehat{se}_n:=s_n/\\sqrt n$. Although the finite-sample quantity $s_n$ is defined for any finite real sample, its interpretation as an estimate of a finite population standard error is used here only under the finite-second-moment condition.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], each output has mean $\\mu$ and variance $\\sigma^2$, so its first absolute moment and second moment are finite. Applying [F2] gives $\\mathbb E[\\bar Y_n]=\\mu$ and $\\operatorname{Var}(\\bar Y_n)=\\sigma^2/n$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The finite-second-moment hypotheses of [F3] hold by [A1] and [F1]. Thus $s_n^2\\to\\sigma^2$ almost surely and, using the plug-in definition [F5], $\\widehat{se}_n/(\\sigma/\\sqrt n)\\to1$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The sequence has positive finite variance and AC is assumed, so [F4] applies and gives $\\sqrt n(\\bar Y_n-\\mu)\\Rightarrow N(0,\\sigma^2)$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example assumes an IID sequence indexed by n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: sigma is assumed strictly positive; the zero-variance normal boundary is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: the mean moment formula includes n=1; sample standard error uses n>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: sigma squared is strictly positive, so a degenerate Gaussian law is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example explicitly assumes AC for the normal-law moment result and the CLT; no further selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example states consequences, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example states consequences, not an equivalence."
+        }
+      ]
+    },
+    "ex-finite-mean-infinite-variance-monte-carlo-integrand": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-rational-power-monotone",
+          "source_section": "Statement",
+          "quote": "Let $a \\in \\mathbb{R}$ with $a > 0$ and let $r, s \\in \\mathbb{Q}$ with $r < s$\n([[def-rat-order]]), with rational powers as in [[def-rational-power]].\n\n1. **In the exponent.** If $a > 1$ then $a^{r} < a^{s}$; if $a = 1$ then $a^{r} = a^{s} = 1$; if $0 < a < 1$ then $a^{r} > a^{s}$.\n2. **In the base.** If $r \\in \\mathbb{Q}$ with $r > 0$ and $0 < a < b$, then $a^{r} < b^{r}$; so $a \\mapsto a^{r}$ is strictly increasing on $\\{a \\in \\mathbb{R} : a > 0\\}$.\n3. **Comparison with $1$.** For rational $t > 0$: $a > 1$ implies $a^{t} > 1$, and $0 < a < 1$ implies $a^{t} < 1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-probability-law-and-distribution-function-correspondence",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\n1. Let $X$ be a real random variable, let $\\mathbb P_X$ be its law, and let\n   $F_X(x)=\\mathbb P(X\\le x)$. Then $F_X$ is nondecreasing and right-continuous,\n   satisfies\n   $$\\lim_{x\\to-\\infty}F_X(x)=0,\\qquad \\lim_{x\\to+\\infty}F_X(x)=1,$$\n   and obeys\n   $$\\mathbb P_X((a,b])=F_X(b)-F_X(a)\\qquad(a<b).$$\n2. Conversely, if $F:\\mathbb R\\to\\mathbb R$ is nondecreasing and\n   right-continuous with\n   $$\\lim_{x\\to-\\infty}F(x)=0,\\qquad \\lim_{x\\to+\\infty}F(x)=1,$$\n   then there is a unique Borel probability measure $\\mu$ on $\\mathbb R$ such\n   that\n   $$\\mu((a,b])=F(b)-F(a)\\qquad(a<b),$$\n   equivalently\n   $$F(x)=\\mu((-\\infty,x])\\qquad(x\\in\\mathbb R).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-layer-cake-formulas-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n1. If $X:\\Omega\\to[0,+\\infty]$ is measurable, then\n   $$\\mathbb E[X]=\\int_0^\\infty \\mathbb P(X>t)\\,dt,$$\n   where the right-hand side may be $+\\infty$.\n2. If $X$ is an integrable real random variable, then\n   $$\\mathbb E[X]=\\int_0^\\infty \\mathbb P(X>t)\\,dt-\\int_0^\\infty \\mathbb P(X<-t)\\,dt.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-layer-cake-formula-for-l-p-powers",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $f : X \\to \\mathbb C$ be\nmeasurable, and let $0<p<\\infty$. Then\n$$\\int_X |f|^p\\,d\\mu = p\\int_0^\\infty t^{p-1}\\mu(\\{|f|>t\\})\\,dt = p\\int_0^\\infty t^{p-1}A_f(t)\\,dt,$$\nwhere either side may be $+\\infty$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-truncated-integrals-of-rational-powers",
+          "source_section": "Statement",
+          "quote": "For rational $p\\ne1$ and $0<A<B$,\n$$\\int_A^B x^{-p}\\,dx=\\frac{B^{1-p}-A^{1-p}}{1-p}.$$\nFor $p=1$ and every positive integer $N$,\n$$\\int_1^{2^N}\\frac{dx}{x}\\ge\\frac N2,\\qquad \\int_{2^{-N}}^1\\frac{dx}{x}\\ge\\frac N2.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a\\in\\mathbb R$ and let\n$f:[a,\\infty)\\to[0,\\infty)$ be Riemann integrable on every compact interval\n$[a,R]$ with $R>a$. If the improper Riemann integral\n$$\\int_a^\\infty f(x)\\,dx$$\nconverges in the sense of [[def-improper-integral-at-infinity]], then $f$ is\nLebesgue integrable on $[a,\\infty)$ and\n$$\\int_{[a,\\infty)} f\\,d\\lambda_1=\\int_a^\\infty f(x)\\,dx.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-iid-monte-carlo-mean-consistency",
+          "source_section": "Statement",
+          "quote": "Let $(Y_i)_{i\\ge1}$ be a real IID sequence with $\\mathbb E|Y_1|<\\infty$, and set $\\mu=\\mathbb E[Y_1]$. Then $\\mathbb E|\\bar Y_n-\\mu|\\to0$, so $\\bar Y_n\\to\\mu$ in probability; moreover, $\\bar Y_n\\to\\mu$ almost surely.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-iid-monte-carlo-estimators",
+          "source_section": "Definition",
+          "quote": "Let $(Y_i)_{i\\ge1}$ be real IID random variables on one probability space, where IID means that the variables have a common law and are mutually independent ([[def-identically-distributed-and-iid-random-variables]]). When $\\mathbb E|Y_1|<\\infty$, write $\\mu:=\\mathbb E[Y_1]$ and define the Monte Carlo estimate of this expectation by the sample mean $\\bar Y_n:=n^{-1}\\sum_{i=1}^nY_i$; this is the partial-sum convention of [[def-partial-sums-and-sample-means]]. For each $n\\ge2$ and any realized finite real sample, define its sample variance and nonnegative square root by\n$$s_n^2:=\\frac1{n-1}\\sum_{i=1}^n(Y_i-\\bar Y_n)^2,\\qquad s_n:=\\sqrt{s_n^2}.$$\nWhen $\\mathbb E[Y_1^2]<\\infty$, write $\\sigma^2:=\\operatorname{Var}(Y_1)$, using [[def-moments-variance-and-covariance]]. The population standard error of $\\bar Y_n$ is $\\sigma/\\sqrt n$, and its plug-in estimate is $\\widehat{se}_n:=s_n/\\sqrt n$. Although the finite-sample quantity $s_n$ is defined for any finite real sample, its interpretation as an estimate of a finite population standard error is used here only under the finite-second-moment condition.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $x\\ge1$, $x\\mapsto x^{3/2}$ is strictly increasing by [F2], so its positive reciprocal $x^{-3/2}$ is decreasing; it is continuous by [F1]. Thus the displayed $F$ is nondecreasing and right-continuous, including at $x=1$ where its two formulas agree. For $x\\ge1$, [F2] gives $x^{1/2}\\ge1$, hence $0\\le x^{-3/2}=x^{-1}x^{-1/2}\\le x^{-1}$. Since $x^{-1}\\to0$, $F(x)\\to1$ as $x\\to+\\infty$; also $F(x)\\to0$ as $x\\to-\\infty$. By [A1] and [F3], $F$ defines a Borel probability law $\\mu$. Since $F(1)=0$, $\\mu((-\\infty,1])=0$ and hence $\\mu([1,\\infty))=1$. Restricting $\\mu$ to $[1,\\infty)$ gives a probability space on which the identity random variable $Y(x)=x$ is measurable by [F4], has CDF $F$, and satisfies $Y\\ge1$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If $0\\le t<1$, $F(t)=0$ and hence $\\mathbb P(Y>t)=1$. For $t\\ge1$, the CDF gives $\\mathbb P(Y>t)=1-F(t)=t^{-3/2}$. By the nonnegative expectation definition [F5] and layer-cake formula [F6], $\\mathbb E[Y]=1+\\int_1^\\infty t^{-3/2}\\,dt$. The function $t^{-3/2}$ is nonnegative and continuous on every compact $[1,R]$ by [F1]. For $R>1$, [F8] gives $\\int_1^R t^{-3/2}\\,dt=2(1-R^{-1/2})\\to2$; [F9] identifies this finite improper integral with its Lebesgue value. Therefore $\\mathbb E[Y]=3$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "F8",
+            "F9",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Since $Y\\ge1$ on the restricted space, $\\mathbb P(|Y|>t)=\\mathbb P(Y>t)$. By the nonnegative expectation definition [F5] and [F7] with $p=2$, $\\mathbb E[Y^2]=1+2\\int_1^\\infty t^{-1/2}\\,dt$. Extend $h(t)=t^{-1/2}$ from $[1,\\infty)$ by $h(t)=1$ for $t<1$; it is continuous at $1$ and on both pieces, so [F11] makes it Borel. Since $[1,N]$ is Borel, [F12] makes each $h\\mathbf1_{[1,N]}$ measurable. For each integer $N\\ge2$, [F1] gives continuity of $t^{-1/2}$ on $[1,N]$, and [F8] and [F10] give $\\int_{[1,N]}t^{-1/2}\\,d\\lambda=2(\\sqrt N-1)$. These values diverge because the natural numbers are unbounded. The truncations increase pointwise to $t^{-1/2}\\mathbf1_{[1,\\infty)}$, so [F13] gives $\\int_{[1,\\infty)}t^{-1/2}\\,d\\lambda=+\\infty$. Hence $\\mathbb E[Y^2]=+\\infty$.",
+          "inputs": [
+            "F1",
+            "F5",
+            "F7",
+            "F8",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For any IID sequence with this law, step 2.1 gives a finite first absolute moment, so [F14] proves strong and weak consistency of $\\bar Y_n$. Step 3.1 shows the finite-second-moment condition in [F15] fails; therefore this contract gives no finite $\\sigma$ or finite $\\sigma/\\sqrt n$ standard error. The empirical formula remains a finite-sample statistic by [F15].",
+          "inputs": [
+            "F14",
+            "F15",
+            "given",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example's Monte Carlo sample is indexed by n>=1 and is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: the law is supported on [1,infinity), so the integrand and its mean are positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: the population mean is finite; the empirical standard-error formula is defined for n>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: the Pareto CDF is nondegenerate and has infinite second moment."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: F(1)=0 and the two CDF formulas agree at t=1; the tail formula includes t=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: step 1.1 invokes Countable Choice only for the CDF-to-law correspondence; it does not assume full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example states a concrete law and its consequences, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example states a concrete law and its consequences, not an equivalence."
+        }
+      ]
+    }
+  }
+}

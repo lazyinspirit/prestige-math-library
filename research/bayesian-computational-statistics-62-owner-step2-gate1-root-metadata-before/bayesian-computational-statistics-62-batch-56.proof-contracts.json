@@ -1,0 +1,1052 @@
+{
+  "version": 1,
+  "scope": [
+    "def-cross-validation-split-and-risk-target",
+    "def-risk-estimation-versus-model-identification",
+    "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+    "thm-cross-validation-risk-bias-at-training-size",
+    "lem-kfold-cv-variance-covariance-decomposition",
+    "thm-no-universal-unbiased-k-fold-cv-variance-estimator",
+    "ex-holdout-cv-training-size-bias",
+    "ex-paired-kfold-model-comparison-uncertainty",
+    "ex-random-row-split-leaks-group-information",
+    "ex-cross-validation-risk-minimization-does-not-identify-model"
+  ],
+  "contracts": {
+    "thm-cross-validation-risk-bias-at-training-size": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cross-validation-split-and-risk-target",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal F)$ be a measurable sample space with probability law $P$. For each training size $k\\ge1$, a learning rule is a measurable map $A_k:\\mathcal Z^k\\to(\\mathcal H,\\mathcal G)$, where $(\\mathcal H,\\mathcal G)$ is a measurable predictor space. This is a statistic in the sense of [[def-statistic-and-estimator]]. Let $L:\\mathcal H\\times\\mathcal Z\\to\\mathbb R$ be jointly measurable and assume $L(A_k(Z_1,\\ldots,Z_k),Z_{k+1})$ is integrable under $P^{\\otimes(k+1)}$ for every size used. The convention that risk is expected loss agrees with [[def-loss-function-and-risk]] for nonnegative losses; the integrable real-valued case is used here as well. The product law is the joint law of independent observations by [[thm-independent-random-elements-have-product-joint-law]].\n\nThe **risk at training size $k$** is\n\n$$R_k:=\\mathbb E_{P^{\\otimes(k+1)}}\\!\\left[L\\bigl(A_k(Z_1,\\ldots,Z_k),Z_{k+1}\\bigr)\\right],$$\n\nwhere $Z_{k+1}$ is independent of the training sample. A **split** of $[n]:=\\{1,\\ldots,n\\}$ is a pair $(T,V)$ of disjoint nonempty sets with $T\\cup V=[n]$; $T$ is the training index set and $V$ is the validation index set. For a fixed partition $I_1,\\ldots,I_K$ of $[n]$ into nonempty folds with $K\\ge2$, the equal-observation-weight cross-validation score is\n\n$$\\widehat R_{CV}:=\\frac1n\\sum_{j=1}^K\\sum_{i\\in I_j}L\\bigl(A_{n-|I_j|}(Z_{I_j^c}),Z_i\\bigr),$$\n\nwhere each training tuple $Z_{I_j^c}$ is ordered by increasing index and $I_j^c=[n]\\setminus I_j$. The risk corresponding to this design is the weighted training-size target $\\sum_{j=1}^K(|I_j|/n)R_{n-|I_j|}$. For equal folds of size $m$, this target is $R_{n-m}$; it is not automatically $R_n$, the risk after training on all $n$ observations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+          "source_section": "Definition",
+          "quote": "**Input:** observations $z_1,\\ldots,z_n$, learning rules $A_k$, a loss $L$, and a finite split schedule $((T_r,V_r,w_r))_{r=1}^B$. Each $(T_r,V_r)$ is a split as in [[def-cross-validation-split-and-risk-target]], $w_r\\ge0$, and $\\sum_{r=1}^B w_r=1$. A randomized schedule is admissible only when its law is specified and is independent of the observations.\n\n**Output:** the cross-validation estimate\n\n$$\\widehat R:=\\sum_{r=1}^B w_r\\frac1{|V_r|}\\sum_{i\\in V_r}L\\bigl(A_{|T_r|}(z_{T_r}),z_i\\bigr),$$\n\nwith each training tuple ordered by increasing index.\n\n**Instructions:** fit the rule on each training set, evaluate its loss on every observation in that split's validation set, average within that validation set, then combine the split averages using the declared weights. To compare two or more candidate rules, apply the same schedule and subtract their validation losses within each split before averaging; this is the paired comparison.\n\nThe following choices give standard procedures:\n\n- **Holdout:** one split, with $T$ the chosen training set, $V=T^c$, and weight $1$.\n- **Leave-one-out:** for $n\\ge2$, use $n$ splits $T_i=[n]\\setminus\\{i\\}$, $V_i=\\{i\\}$, with weights $1/n$.\n- **Leave-$p$-out:** for $n\\ge2$ and $1\\le p<n$, use one split for every $p$-element subset $J\\subseteq[n]$, with $T_J=J^c$, $V_J=J$, and weight $1/\\binom np$.\n- **$K$-fold:** for $2\\le K\\le n$ and a partition $I_1,\\ldots,I_K$ into nonempty folds, use $T_j=I_j^c$, $V_j=I_j$, and $w_j=|I_j|/n$; for equal folds this is $1/K$.\n- **Repeated $K$-fold:** for $n\\ge2$, $2\\le K\\le n$ and $R\\ge1$, apply the $K$-fold schedule to each of $R$ declared partitions and give fold $I_{rj}$ weight $|I_{rj}|/(Rn)$. If partitions are randomized, record their independent randomization law and average under that law or over the declared finite repetitions.\n\nThese instructions define estimates only. Their validity as estimates of a deployment target depends on matching the split, sampling unit, training size, and averaging law to that target.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+          "source_section": "Definition",
+          "quote": "**Input:** observations $z_1,\\ldots,z_n$, learning rules $A_k$, a loss $L$, and a finite split schedule $((T_r,V_r,w_r))_{r=1}^B$. Each $(T_r,V_r)$ is a split as in [[def-cross-validation-split-and-risk-target]], $w_r\\ge0$, and $\\sum_{r=1}^B w_r=1$. A randomized schedule is admissible only when its law is specified and is independent of the observations.\n\n**Output:** the cross-validation estimate\n\n$$\\widehat R:=\\sum_{r=1}^B w_r\\frac1{|V_r|}\\sum_{i\\in V_r}L\\bigl(A_{|T_r|}(z_{T_r}),z_i\\bigr),$$\n\nwith each training tuple ordered by increasing index.\n\n**Instructions:** fit the rule on each training set, evaluate its loss on every observation in that split's validation set, average within that validation set, then combine the split averages using the declared weights. To compare two or more candidate rules, apply the same schedule and subtract their validation losses within each split before averaging; this is the paired comparison.\n\nThe following choices give standard procedures:\n\n- **Holdout:** one split, with $T$ the chosen training set, $V=T^c$, and weight $1$.\n- **Leave-one-out:** for $n\\ge2$, use $n$ splits $T_i=[n]\\setminus\\{i\\}$, $V_i=\\{i\\}$, with weights $1/n$.\n- **Leave-$p$-out:** for $n\\ge2$ and $1\\le p<n$, use one split for every $p$-element subset $J\\subseteq[n]$, with $T_J=J^c$, $V_J=J$, and weight $1/\\binom np$.\n- **$K$-fold:** for $2\\le K\\le n$ and a partition $I_1,\\ldots,I_K$ into nonempty folds, use $T_j=I_j^c$, $V_j=I_j$, and $w_j=|I_j|/n$; for equal folds this is $1/K$.\n- **Repeated $K$-fold:** for $n\\ge2$, $2\\le K\\le n$ and $R\\ge1$, apply the $K$-fold schedule to each of $R$ declared partitions and give fold $I_{rj}$ weight $|I_{rj}|/(Rn)$. If partitions are randomized, record their independent randomization law and average under that law or over the declared finite repetitions.\n\nThese instructions define estimates only. Their validity as estimates of a deployment target depends on matching the split, sampling unit, training size, and averaging law to that target.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-cross-validation-split-and-risk-target",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal F)$ be a measurable sample space with probability law $P$. For each training size $k\\ge1$, a learning rule is a measurable map $A_k:\\mathcal Z^k\\to(\\mathcal H,\\mathcal G)$, where $(\\mathcal H,\\mathcal G)$ is a measurable predictor space. This is a statistic in the sense of [[def-statistic-and-estimator]]. Let $L:\\mathcal H\\times\\mathcal Z\\to\\mathbb R$ be jointly measurable and assume $L(A_k(Z_1,\\ldots,Z_k),Z_{k+1})$ is integrable under $P^{\\otimes(k+1)}$ for every size used. The convention that risk is expected loss agrees with [[def-loss-function-and-risk]] for nonnegative losses; the integrable real-valued case is used here as well. The product law is the joint law of independent observations by [[thm-independent-random-elements-have-product-joint-law]].\n\nThe **risk at training size $k$** is\n\n$$R_k:=\\mathbb E_{P^{\\otimes(k+1)}}\\!\\left[L\\bigl(A_k(Z_1,\\ldots,Z_k),Z_{k+1}\\bigr)\\right],$$\n\nwhere $Z_{k+1}$ is independent of the training sample. A **split** of $[n]:=\\{1,\\ldots,n\\}$ is a pair $(T,V)$ of disjoint nonempty sets with $T\\cup V=[n]$; $T$ is the training index set and $V$ is the validation index set. For a fixed partition $I_1,\\ldots,I_K$ of $[n]$ into nonempty folds with $K\\ge2$, the equal-observation-weight cross-validation score is\n\n$$\\widehat R_{CV}:=\\frac1n\\sum_{j=1}^K\\sum_{i\\in I_j}L\\bigl(A_{n-|I_j|}(Z_{I_j^c}),Z_i\\bigr),$$\n\nwhere each training tuple $Z_{I_j^c}$ is ordered by increasing index and $I_j^c=[n]\\setminus I_j$. The risk corresponding to this design is the weighted training-size target $\\sum_{j=1}^K(|I_j|/n)R_{n-|I_j|}$. For equal folds of size $m$, this target is $R_{n-m}$; it is not automatically $R_n$, the risk after training on all $n$ observations.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+          "source_section": "Definition",
+          "quote": "**Input:** observations $z_1,\\ldots,z_n$, learning rules $A_k$, a loss $L$, and a finite split schedule $((T_r,V_r,w_r))_{r=1}^B$. Each $(T_r,V_r)$ is a split as in [[def-cross-validation-split-and-risk-target]], $w_r\\ge0$, and $\\sum_{r=1}^B w_r=1$. A randomized schedule is admissible only when its law is specified and is independent of the observations.\n\n**Output:** the cross-validation estimate\n\n$$\\widehat R:=\\sum_{r=1}^B w_r\\frac1{|V_r|}\\sum_{i\\in V_r}L\\bigl(A_{|T_r|}(z_{T_r}),z_i\\bigr),$$\n\nwith each training tuple ordered by increasing index.\n\n**Instructions:** fit the rule on each training set, evaluate its loss on every observation in that split's validation set, average within that validation set, then combine the split averages using the declared weights. To compare two or more candidate rules, apply the same schedule and subtract their validation losses within each split before averaging; this is the paired comparison.\n\nThe following choices give standard procedures:\n\n- **Holdout:** one split, with $T$ the chosen training set, $V=T^c$, and weight $1$.\n- **Leave-one-out:** for $n\\ge2$, use $n$ splits $T_i=[n]\\setminus\\{i\\}$, $V_i=\\{i\\}$, with weights $1/n$.\n- **Leave-$p$-out:** for $n\\ge2$ and $1\\le p<n$, use one split for every $p$-element subset $J\\subseteq[n]$, with $T_J=J^c$, $V_J=J$, and weight $1/\\binom np$.\n- **$K$-fold:** for $2\\le K\\le n$ and a partition $I_1,\\ldots,I_K$ into nonempty folds, use $T_j=I_j^c$, $V_j=I_j$, and $w_j=|I_j|/n$; for equal folds this is $1/K$.\n- **Repeated $K$-fold:** for $n\\ge2$, $2\\le K\\le n$ and $R\\ge1$, apply the $K$-fold schedule to each of $R$ declared partitions and give fold $I_{rj}$ weight $|I_{rj}|/(Rn)$. If partitions are randomized, record their independent randomization law and average under that law or over the declared finite repetitions.\n\nThese instructions define estimates only. Their validity as estimates of a deployment target depends on matching the split, sampling unit, training size, and averaging law to that target.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a split $r$ and an index $i\\in V_r$. Since $T_r$ and $V_r$ are disjoint by [F4], $i\\notin T_r$. By [F1], the $|T_r|$ training observations $(Z_\\ell)_{\\ell\\in T_r}$ and the test observation $Z_i$ are independent, each with law $P$. By [F2], their joint law is $P^{\\otimes(|T_r|+1)}$. Hence [F3] gives $\\mathbb E[L(A_{|T_r|}(Z_{T_r}),Z_i)]=R_{|T_r|}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a fixed schedule, its score is a finite sum of the integrable terms from step 1.1, so linearity of expectation and [F4] give $\\mathbb E[\\widehat R]=\\sum_{r=1}^B(w_r/|V_r|)\\sum_{i\\in V_r}R_{|T_r|}=\\sum_{r=1}^B w_rR_{|T_r|}$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [A1], the full-sample target $R_n$ is finite. Subtracting it from step 2.1 yields $\\mathbb E[\\widehat R]-R_n=\\sum_r w_r(R_{|T_r|}-R_n)$. This expression has no fixed sign in general; if $k\\mapsto R_k$ is nonincreasing, then each difference is nonnegative because $|T_r|<n$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Let the schedule be independently randomized with finite range. Conditional on any realized schedule $s$, the sample remains IID with law $P$ by [F5], so step 2.1 applies and gives $\\mathbb E[\\widehat R\\mid S=s]=\\sum_r w_r(s)R_{|T_r(s)|}$. Averaging this identity over the finite schedule law gives the stated unconditional expectation.",
+          "step": "3.2",
+          "inputs": [
+            "F5",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "In a fixed $K$-fold partition, [F6] gives $T_j=I_j^c$, $V_j=I_j$, and $w_j=|I_j|/n$. Substituting these values in step 2.1 gives the displayed fold-size formula; equal folds of size $m$ give $R_{n-m}$. The holdout claim is the one-split case $B=1$, $w_1=1$.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every schedule entry is a split into nonempty training and validation sets, so neither set can be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 retains zero risks and zero schedule weights in the finite weighted identity; no division by either value occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At the smallest allowed sample n=2, a split has one training and one validation observation; step 1.1 still applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 and the finite-sum argument remain valid when every loss is constant and all training-size risks coincide."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit endpoint, or open/closed boundary is part of this expectation identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 use only the given finite schedules and finite sums; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states an expectation identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states an expectation identity, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axiom_uses": []
+    },
+    "lem-kfold-cv-variance-covariance-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cross-validation-split-and-risk-target",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal F)$ be a measurable sample space with probability law $P$. For each training size $k\\ge1$, a learning rule is a measurable map $A_k:\\mathcal Z^k\\to(\\mathcal H,\\mathcal G)$, where $(\\mathcal H,\\mathcal G)$ is a measurable predictor space. This is a statistic in the sense of [[def-statistic-and-estimator]]. Let $L:\\mathcal H\\times\\mathcal Z\\to\\mathbb R$ be jointly measurable and assume $L(A_k(Z_1,\\ldots,Z_k),Z_{k+1})$ is integrable under $P^{\\otimes(k+1)}$ for every size used. The convention that risk is expected loss agrees with [[def-loss-function-and-risk]] for nonnegative losses; the integrable real-valued case is used here as well. The product law is the joint law of independent observations by [[thm-independent-random-elements-have-product-joint-law]].\n\nThe **risk at training size $k$** is\n\n$$R_k:=\\mathbb E_{P^{\\otimes(k+1)}}\\!\\left[L\\bigl(A_k(Z_1,\\ldots,Z_k),Z_{k+1}\\bigr)\\right],$$\n\nwhere $Z_{k+1}$ is independent of the training sample. A **split** of $[n]:=\\{1,\\ldots,n\\}$ is a pair $(T,V)$ of disjoint nonempty sets with $T\\cup V=[n]$; $T$ is the training index set and $V$ is the validation index set. For a fixed partition $I_1,\\ldots,I_K$ of $[n]$ into nonempty folds with $K\\ge2$, the equal-observation-weight cross-validation score is\n\n$$\\widehat R_{CV}:=\\frac1n\\sum_{j=1}^K\\sum_{i\\in I_j}L\\bigl(A_{n-|I_j|}(Z_{I_j^c}),Z_i\\bigr),$$\n\nwhere each training tuple $Z_{I_j^c}$ is ordered by increasing index and $I_j^c=[n]\\setminus I_j$. The risk corresponding to this design is the weighted training-size target $\\sum_{j=1}^K(|I_j|/n)R_{n-|I_j|}$. For equal folds of size $m$, this target is $R_{n-m}$; it is not automatically $R_n$, the risk after training on all $n$ observations.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+          "source_section": "Definition",
+          "quote": "**Input:** observations $z_1,\\ldots,z_n$, learning rules $A_k$, a loss $L$, and a finite split schedule $((T_r,V_r,w_r))_{r=1}^B$. Each $(T_r,V_r)$ is a split as in [[def-cross-validation-split-and-risk-target]], $w_r\\ge0$, and $\\sum_{r=1}^B w_r=1$. A randomized schedule is admissible only when its law is specified and is independent of the observations.\n\n**Output:** the cross-validation estimate\n\n$$\\widehat R:=\\sum_{r=1}^B w_r\\frac1{|V_r|}\\sum_{i\\in V_r}L\\bigl(A_{|T_r|}(z_{T_r}),z_i\\bigr),$$\n\nwith each training tuple ordered by increasing index.\n\n**Instructions:** fit the rule on each training set, evaluate its loss on every observation in that split's validation set, average within that validation set, then combine the split averages using the declared weights. To compare two or more candidate rules, apply the same schedule and subtract their validation losses within each split before averaging; this is the paired comparison.\n\nThe following choices give standard procedures:\n\n- **Holdout:** one split, with $T$ the chosen training set, $V=T^c$, and weight $1$.\n- **Leave-one-out:** for $n\\ge2$, use $n$ splits $T_i=[n]\\setminus\\{i\\}$, $V_i=\\{i\\}$, with weights $1/n$.\n- **Leave-$p$-out:** for $n\\ge2$ and $1\\le p<n$, use one split for every $p$-element subset $J\\subseteq[n]$, with $T_J=J^c$, $V_J=J$, and weight $1/\\binom np$.\n- **$K$-fold:** for $2\\le K\\le n$ and a partition $I_1,\\ldots,I_K$ into nonempty folds, use $T_j=I_j^c$, $V_j=I_j$, and $w_j=|I_j|/n$; for equal folds this is $1/K$.\n- **Repeated $K$-fold:** for $n\\ge2$, $2\\le K\\le n$ and $R\\ge1$, apply the $K$-fold schedule to each of $R$ declared partitions and give fold $I_{rj}$ weight $|I_{rj}|/(Rn)$. If partitions are randomized, record their independent randomization law and average under that law or over the declared finite repetitions.\n\nThese instructions define estimates only. Their validity as estimates of a deployment target depends on matching the split, sampling unit, training size, and averaging law to that target.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], reordering the sample coordinates preserves their common law and mutual independence: the probability of any coordinate rectangle is the product of the same marginal probabilities in either order. Applying [F2] to the original and permuted tuples therefore gives the same joint law $P^{\\otimes n}$, so the sample distribution is invariant under every coordinate permutation.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Consider a permutation of indices that maps every fold onto a fold. The product law is invariant under it by step 1.1. Because each learning rule is symmetric, permuting a training tuple within or between folds leaves its fitted predictor unchanged, while the held-out observation is relabelled with its fold loss. Thus the vector $(e_1,\\ldots,e_n)$ is invariant in law under all such block permutations. These permutations act transitively on single indices, on ordered distinct pairs in one fold, and on ordered pairs from different folds. Therefore all marginal variances equal $\\sigma^2$, all within-fold covariances equal $\\omega$, and all between-fold covariances equal $\\gamma$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F3], the variance of the average is $n^{-2}\\sum_{i=1}^n\\sum_{i'=1}^n\\operatorname{Cov}(e_i,e_{i'})$. There are $n$ diagonal ordered pairs, $K m(m-1)=n(m-1)$ within-fold off-diagonal ordered pairs, and $n(n-m)$ ordered pairs from different folds. Substitution of the three covariance values from step 2.1 gives $\\frac1{n^2}\\{n\\sigma^2+n(m-1)\\omega+n(n-m)\\gamma\\}=\\frac{\\sigma^2}{n}+\\frac{m-1}{n}\\omega+\\frac{n-m}{n}\\gamma$. For $m=1$, the within-fold count is zero, so the declared value $\\omega=0$ contributes nothing.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes K>=2, m>=1, and n=Km, so there is a nonempty finite sample and partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 still gives zero variance when all errors are constant; every covariance term then vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1 no distinct within-fold pair exists, and step 3.1 sets its coefficient to zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 is an algebraic covariance expansion valid for singular or zero covariance matrices."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint is part of the covariance identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use only finite coordinate permutations and finite pair counts; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves a formula, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves a formula, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axiom_uses": []
+    },
+    "thm-no-universal-unbiased-k-fold-cv-variance-estimator": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cross-validation-split-and-risk-target",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal F)$ be a measurable sample space with probability law $P$. For each training size $k\\ge1$, a learning rule is a measurable map $A_k:\\mathcal Z^k\\to(\\mathcal H,\\mathcal G)$, where $(\\mathcal H,\\mathcal G)$ is a measurable predictor space. This is a statistic in the sense of [[def-statistic-and-estimator]]. Let $L:\\mathcal H\\times\\mathcal Z\\to\\mathbb R$ be jointly measurable and assume $L(A_k(Z_1,\\ldots,Z_k),Z_{k+1})$ is integrable under $P^{\\otimes(k+1)}$ for every size used. The convention that risk is expected loss agrees with [[def-loss-function-and-risk]] for nonnegative losses; the integrable real-valued case is used here as well. The product law is the joint law of independent observations by [[thm-independent-random-elements-have-product-joint-law]].\n\nThe **risk at training size $k$** is\n\n$$R_k:=\\mathbb E_{P^{\\otimes(k+1)}}\\!\\left[L\\bigl(A_k(Z_1,\\ldots,Z_k),Z_{k+1}\\bigr)\\right],$$\n\nwhere $Z_{k+1}$ is independent of the training sample. A **split** of $[n]:=\\{1,\\ldots,n\\}$ is a pair $(T,V)$ of disjoint nonempty sets with $T\\cup V=[n]$; $T$ is the training index set and $V$ is the validation index set. For a fixed partition $I_1,\\ldots,I_K$ of $[n]$ into nonempty folds with $K\\ge2$, the equal-observation-weight cross-validation score is\n\n$$\\widehat R_{CV}:=\\frac1n\\sum_{j=1}^K\\sum_{i\\in I_j}L\\bigl(A_{n-|I_j|}(Z_{I_j^c}),Z_i\\bigr),$$\n\nwhere each training tuple $Z_{I_j^c}$ is ordered by increasing index and $I_j^c=[n]\\setminus I_j$. The risk corresponding to this design is the weighted training-size target $\\sum_{j=1}^K(|I_j|/n)R_{n-|I_j|}$. For equal folds of size $m$, this target is $R_{n-m}$; it is not automatically $R_n$, the risk after training on all $n$ observations.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+          "source_section": "Definition",
+          "quote": "**Input:** observations $z_1,\\ldots,z_n$, learning rules $A_k$, a loss $L$, and a finite split schedule $((T_r,V_r,w_r))_{r=1}^B$. Each $(T_r,V_r)$ is a split as in [[def-cross-validation-split-and-risk-target]], $w_r\\ge0$, and $\\sum_{r=1}^B w_r=1$. A randomized schedule is admissible only when its law is specified and is independent of the observations.\n\n**Output:** the cross-validation estimate\n\n$$\\widehat R:=\\sum_{r=1}^B w_r\\frac1{|V_r|}\\sum_{i\\in V_r}L\\bigl(A_{|T_r|}(z_{T_r}),z_i\\bigr),$$\n\nwith each training tuple ordered by increasing index.\n\n**Instructions:** fit the rule on each training set, evaluate its loss on every observation in that split's validation set, average within that validation set, then combine the split averages using the declared weights. To compare two or more candidate rules, apply the same schedule and subtract their validation losses within each split before averaging; this is the paired comparison.\n\nThe following choices give standard procedures:\n\n- **Holdout:** one split, with $T$ the chosen training set, $V=T^c$, and weight $1$.\n- **Leave-one-out:** for $n\\ge2$, use $n$ splits $T_i=[n]\\setminus\\{i\\}$, $V_i=\\{i\\}$, with weights $1/n$.\n- **Leave-$p$-out:** for $n\\ge2$ and $1\\le p<n$, use one split for every $p$-element subset $J\\subseteq[n]$, with $T_J=J^c$, $V_J=J$, and weight $1/\\binom np$.\n- **$K$-fold:** for $2\\le K\\le n$ and a partition $I_1,\\ldots,I_K$ into nonempty folds, use $T_j=I_j^c$, $V_j=I_j$, and $w_j=|I_j|/n$; for equal folds this is $1/K$.\n- **Repeated $K$-fold:** for $n\\ge2$, $2\\le K\\le n$ and $R\\ge1$, apply the $K$-fold schedule to each of $R$ declared partitions and give fold $I_{rj}$ weight $|I_{rj}|/(Rn)$. If partitions are randomized, record their independent randomization law and average under that law or over the declared finite repetitions.\n\nThese instructions define estimates only. Their validity as estimates of a deployment target depends on matching the split, sampling unit, training size, and averaging law to that target.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-kfold-cv-variance-covariance-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $n=Km$ with integers $K\\ge2$ and $m\\ge1$. Let $Z_1,\\ldots,Z_n$ be IID, let $I_1,\\ldots,I_K$ be a fixed partition into folds of size $m$, and let $A_k$ be a permutation-symmetric measurable learning rule with a measurable loss. For $i\\in I_j$, write $e_i=L(A_{n-m}(Z_{I_j^c}),Z_i)$ and assume $\\mathbb E[e_i^2]<\\infty$. For a paired comparison, $e_i$ may instead be the difference of the two rules' losses evaluated using the same fold; assume both rules are symmetric and the differences are square-integrable. Define $\\sigma^2:=\\operatorname{Var}(e_i)$, $\\omega:=\\operatorname{Cov}(e_i,e_{i'})$ for distinct indices in one fold, and $\\gamma:=\\operatorname{Cov}(e_i,e_{i'})$ for indices in different folds. When $m=1$, set $\\omega=0$ because there is no within-fold pair. These values are well-defined, and\n\n$$\\operatorname{Var}\\!\\left(\\frac1n\\sum_{i=1}^n e_i\\right)=\\frac{\\sigma^2}{n}+\\frac{m-1}{n}\\omega+\\frac{n-m}{n}\\gamma.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.\n\nFor $n\\in\\mathbb N$, a **binomial$(n,p)$ random variable** is a sum $X=\\sum_{i<n}X_i$ of $n$ mutually independent Bernoulli$(p)$ variables. When $n=0$, this is the constant zero random variable.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F6], the K-fold score variance separates diagonal, within-fold, and between-fold covariance terms.",
+          "step": "1.1",
+          "inputs": [
+            "F6"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "To test universality, take $\\mathcal Z=\\{0,1\\}$, $Z_i\\stackrel{IID}{\\sim}\\operatorname{Bernoulli}(p)$, predictor class $\\mathcal H=\\{0,1\\}$, and loss $L(h,z)=hz$. By [F7], each $Z_i$ is one with probability $p$ and zero otherwise. For every training size $k$, let the symmetric rule $A_k(z_1,\\ldots,z_k)=\\prod_{q=1}^kz_q$. If $i\\in I_j$, its fold error is $e_i=Z_i\\prod_{\\ell\\in I_j^c}Z_\\ell$, a product of $r:=n-m+1$ distinct Bernoulli variables. By [F1]–[F3], $\\mathbb E[e_i]=p^r$, so $\\mathbb E[\\widehat R_{CV}]=p^r$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each fixed data vector $x\\in\\{0,1\\}^n$, $\\widehat R_{CV}(x)$ is a finite real number. Hence $g(p):=\\mathbb E_p[\\widehat R_{CV}^2]=\\sum_{x\\in\\{0,1\\}^n}\\widehat R_{CV}(x)^2p^{s(x)}(1-p)^{n-s(x)}$, where $s(x)$ is the number of ones in $x$, is a polynomial of degree at most $n$. It follows that $\\operatorname{Var}_p(\\widehat R_{CV})=g(p)-p^{2r}$. Since $2r-n=m(K-2)+2>0$, the term $-p^{2r}$ has degree higher than $g$, so the variance polynomial has degree $2r>n$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Any proposed estimator $T$ based on this sample, with no dependence on $p$, has conditional mean $t(x):=\\mathbb E[T\\mid Z=x]$ for each $x\\in\\{0,1\\}^n$; this is finite if $T$ is unbiased with finite expectation for every $0<p<1$, since [F7] gives every such $x$ positive probability. The auxiliary random seed has a fixed law independent of $p$, so $t(x)$ is fixed. Therefore $\\mathbb E_p[T]=\\sum_x t(x)p^{s(x)}(1-p)^{n-s(x)}$ is a polynomial of degree at most $n$. It cannot equal the degree-$2r$ variance polynomial on the whole interval $(0,1)$, because two polynomials equal on an interval must be identical. This contradiction proves the claim.",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem fixes K>=2 and m>=1, hence n=Km>=2 and a nonempty data sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 uses only the open Bernoulli interval 0<p<1, where every binary sample has positive mass and the conditional estimator mean is finite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At the smallest case K=2,m=1, step 3.1 gives 2r-n=2>0, so the degree contradiction still applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 establishes a degree mismatch for the nondegenerate subfamily 0<p<1, so universal unbiasedness already fails before degenerate laws are considered."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof requires only the open Bernoulli interval; no limiting assertion at p=0 or p=1 is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the explicit finite binary sample space and no selection of witnesses or choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves nonexistence, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves nonexistence, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "axiom_uses": []
+    },
+    "ex-holdout-cv-training-size-bias": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-cross-validation-risk-bias-at-training-size",
+          "source_section": "Statement",
+          "quote": "Let $Z_1,\\ldots,Z_n$ be IID with law $P$. Let $A_k$ and $L$ satisfy the measurability and integrability hypotheses of [[def-cross-validation-split-and-risk-target]] at every schedule training size and also at size $n$. For a fixed finite schedule $((T_r,V_r,w_r))_{r=1}^B$ as in [[alg-holdout-loo-lpo-v-fold-and-repeated-cv]], let $\\widehat R$ be its cross-validation estimate. Then\n\n$$\\mathbb E[\\widehat R]=\\sum_{r=1}^B w_rR_{|T_r|}.$$\n\nIn particular, a holdout split trained on $k$ observations has expected score $R_k$. For a fixed $K$-fold partition, this gives $\\mathbb E[\\widehat R_{CV}]=\\sum_{j=1}^K(|I_j|/n)R_{n-|I_j|}$, and for equal folds of size $m$ it gives $R_{n-m}$. For every fixed schedule, the bias for the full-sample risk $R_n$ is exactly $\\sum_r w_r(R_{|T_r|}-R_n)$; it need not have a fixed sign without an additional monotonicity hypothesis on $k\\mapsto R_k$.\n\nIf a schedule $S$ is randomized independently of the observations and takes values in a finite set of such schedules, then, conditional on each realized schedule, the same formula holds; the unconditional expectation is the corresponding average of these training-size risks.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cross-validation-split-and-risk-target",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal F)$ be a measurable sample space with probability law $P$. For each training size $k\\ge1$, a learning rule is a measurable map $A_k:\\mathcal Z^k\\to(\\mathcal H,\\mathcal G)$, where $(\\mathcal H,\\mathcal G)$ is a measurable predictor space. This is a statistic in the sense of [[def-statistic-and-estimator]]. Let $L:\\mathcal H\\times\\mathcal Z\\to\\mathbb R$ be jointly measurable and assume $L(A_k(Z_1,\\ldots,Z_k),Z_{k+1})$ is integrable under $P^{\\otimes(k+1)}$ for every size used. The convention that risk is expected loss agrees with [[def-loss-function-and-risk]] for nonnegative losses; the integrable real-valued case is used here as well. The product law is the joint law of independent observations by [[thm-independent-random-elements-have-product-joint-law]].\n\nThe **risk at training size $k$** is\n\n$$R_k:=\\mathbb E_{P^{\\otimes(k+1)}}\\!\\left[L\\bigl(A_k(Z_1,\\ldots,Z_k),Z_{k+1}\\bigr)\\right],$$\n\nwhere $Z_{k+1}$ is independent of the training sample. A **split** of $[n]:=\\{1,\\ldots,n\\}$ is a pair $(T,V)$ of disjoint nonempty sets with $T\\cup V=[n]$; $T$ is the training index set and $V$ is the validation index set. For a fixed partition $I_1,\\ldots,I_K$ of $[n]$ into nonempty folds with $K\\ge2$, the equal-observation-weight cross-validation score is\n\n$$\\widehat R_{CV}:=\\frac1n\\sum_{j=1}^K\\sum_{i\\in I_j}L\\bigl(A_{n-|I_j|}(Z_{I_j^c}),Z_i\\bigr),$$\n\nwhere each training tuple $Z_{I_j^c}$ is ordered by increasing index and $I_j^c=[n]\\setminus I_j$. The risk corresponding to this design is the weighted training-size target $\\sum_{j=1}^K(|I_j|/n)R_{n-|I_j|}$. For equal folds of size $m$, this target is $R_{n-m}$; it is not automatically $R_n$, the risk after training on all $n$ observations.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+          "source_section": "Definition",
+          "quote": "**Input:** observations $z_1,\\ldots,z_n$, learning rules $A_k$, a loss $L$, and a finite split schedule $((T_r,V_r,w_r))_{r=1}^B$. Each $(T_r,V_r)$ is a split as in [[def-cross-validation-split-and-risk-target]], $w_r\\ge0$, and $\\sum_{r=1}^B w_r=1$. A randomized schedule is admissible only when its law is specified and is independent of the observations.\n\n**Output:** the cross-validation estimate\n\n$$\\widehat R:=\\sum_{r=1}^B w_r\\frac1{|V_r|}\\sum_{i\\in V_r}L\\bigl(A_{|T_r|}(z_{T_r}),z_i\\bigr),$$\n\nwith each training tuple ordered by increasing index.\n\n**Instructions:** fit the rule on each training set, evaluate its loss on every observation in that split's validation set, average within that validation set, then combine the split averages using the declared weights. To compare two or more candidate rules, apply the same schedule and subtract their validation losses within each split before averaging; this is the paired comparison.\n\nThe following choices give standard procedures:\n\n- **Holdout:** one split, with $T$ the chosen training set, $V=T^c$, and weight $1$.\n- **Leave-one-out:** for $n\\ge2$, use $n$ splits $T_i=[n]\\setminus\\{i\\}$, $V_i=\\{i\\}$, with weights $1/n$.\n- **Leave-$p$-out:** for $n\\ge2$ and $1\\le p<n$, use one split for every $p$-element subset $J\\subseteq[n]$, with $T_J=J^c$, $V_J=J$, and weight $1/\\binom np$.\n- **$K$-fold:** for $2\\le K\\le n$ and a partition $I_1,\\ldots,I_K$ into nonempty folds, use $T_j=I_j^c$, $V_j=I_j$, and $w_j=|I_j|/n$; for equal folds this is $1/K$.\n- **Repeated $K$-fold:** for $n\\ge2$, $2\\le K\\le n$ and $R\\ge1$, apply the $K$-fold schedule to each of $R$ declared partitions and give fold $I_{rj}$ weight $|I_{rj}|/(Rn)$. If partitions are randomized, record their independent randomization law and average under that law or over the declared finite repetitions.\n\nThese instructions define estimates only. Their validity as estimates of a deployment target depends on matching the split, sampling unit, training size, and averaging law to that target.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.\n\nFor $n\\in\\mathbb N$, a **binomial$(n,p)$ random variable** is a sum $X=\\sum_{i<n}X_i$ of $n$ mutually independent Bernoulli$(p)$ variables. When $n=0$, this is the constant zero random variable.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $Z\\sim\\operatorname{Bernoulli}(p)$, [F7] gives $\\mathbb E Z=p$ and the two-point expectation gives $\\operatorname{Var}(Z)=p(1-p)$. Expanding the variance of $\\bar Z_k=k^{-1}\\sum_{q=1}^kZ_q$, the diagonal terms sum to $kp(1-p)$ and each cross covariance vanishes by [F3] and [F5]; hence $\\operatorname{Var}(\\bar Z_k)=p(1-p)/k$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The independent test variable $Z_{k+1}$ has mean $p$ and variance $p(1-p)$. Expanding $\\mathbb E[(\\bar Z_k-Z_{k+1})^2]$ around the common mean $p$, the centered cross term is zero by independence, so [F2] gives $R_k=\\operatorname{Var}(\\bar Z_k)+\\operatorname{Var}(Z_{k+1})=p(1-p)(1+1/k)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At $p=1/2$, $R_3=\\frac14(1+\\frac13)=\\frac13$ and $R_4=\\frac14(1+\\frac14)=\\frac5{16}$. The split in [F6] holds out one observation, so [F1] gives expected holdout score $R_3$; its bias for full-sample risk is $R_3-R_4=\\frac1{48}>0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes n=4, one held-out observation, and three training observations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The risk calculation in steps 1.1–2.1 permits p=0 or p=1, where both risks and the bias are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1's variance formula is valid for k=1; the example uses k=3 and compares it with k=4."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At Bernoulli endpoints p=0 or p=1, steps 1.1–2.1 give zero variance and zero bias without division by a variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint limit is part of this finite risk calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use a fixed split and finite sums only; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes risks and a bias, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes risks and a bias, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axiom_uses": []
+    },
+    "ex-paired-kfold-model-comparison-uncertainty": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cross-validation-split-and-risk-target",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal F)$ be a measurable sample space with probability law $P$. For each training size $k\\ge1$, a learning rule is a measurable map $A_k:\\mathcal Z^k\\to(\\mathcal H,\\mathcal G)$, where $(\\mathcal H,\\mathcal G)$ is a measurable predictor space. This is a statistic in the sense of [[def-statistic-and-estimator]]. Let $L:\\mathcal H\\times\\mathcal Z\\to\\mathbb R$ be jointly measurable and assume $L(A_k(Z_1,\\ldots,Z_k),Z_{k+1})$ is integrable under $P^{\\otimes(k+1)}$ for every size used. The convention that risk is expected loss agrees with [[def-loss-function-and-risk]] for nonnegative losses; the integrable real-valued case is used here as well. The product law is the joint law of independent observations by [[thm-independent-random-elements-have-product-joint-law]].\n\nThe **risk at training size $k$** is\n\n$$R_k:=\\mathbb E_{P^{\\otimes(k+1)}}\\!\\left[L\\bigl(A_k(Z_1,\\ldots,Z_k),Z_{k+1}\\bigr)\\right],$$\n\nwhere $Z_{k+1}$ is independent of the training sample. A **split** of $[n]:=\\{1,\\ldots,n\\}$ is a pair $(T,V)$ of disjoint nonempty sets with $T\\cup V=[n]$; $T$ is the training index set and $V$ is the validation index set. For a fixed partition $I_1,\\ldots,I_K$ of $[n]$ into nonempty folds with $K\\ge2$, the equal-observation-weight cross-validation score is\n\n$$\\widehat R_{CV}:=\\frac1n\\sum_{j=1}^K\\sum_{i\\in I_j}L\\bigl(A_{n-|I_j|}(Z_{I_j^c}),Z_i\\bigr),$$\n\nwhere each training tuple $Z_{I_j^c}$ is ordered by increasing index and $I_j^c=[n]\\setminus I_j$. The risk corresponding to this design is the weighted training-size target $\\sum_{j=1}^K(|I_j|/n)R_{n-|I_j|}$. For equal folds of size $m$, this target is $R_{n-m}$; it is not automatically $R_n$, the risk after training on all $n$ observations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+          "source_section": "Definition",
+          "quote": "**Input:** observations $z_1,\\ldots,z_n$, learning rules $A_k$, a loss $L$, and a finite split schedule $((T_r,V_r,w_r))_{r=1}^B$. Each $(T_r,V_r)$ is a split as in [[def-cross-validation-split-and-risk-target]], $w_r\\ge0$, and $\\sum_{r=1}^B w_r=1$. A randomized schedule is admissible only when its law is specified and is independent of the observations.\n\n**Output:** the cross-validation estimate\n\n$$\\widehat R:=\\sum_{r=1}^B w_r\\frac1{|V_r|}\\sum_{i\\in V_r}L\\bigl(A_{|T_r|}(z_{T_r}),z_i\\bigr),$$\n\nwith each training tuple ordered by increasing index.\n\n**Instructions:** fit the rule on each training set, evaluate its loss on every observation in that split's validation set, average within that validation set, then combine the split averages using the declared weights. To compare two or more candidate rules, apply the same schedule and subtract their validation losses within each split before averaging; this is the paired comparison.\n\nThe following choices give standard procedures:\n\n- **Holdout:** one split, with $T$ the chosen training set, $V=T^c$, and weight $1$.\n- **Leave-one-out:** for $n\\ge2$, use $n$ splits $T_i=[n]\\setminus\\{i\\}$, $V_i=\\{i\\}$, with weights $1/n$.\n- **Leave-$p$-out:** for $n\\ge2$ and $1\\le p<n$, use one split for every $p$-element subset $J\\subseteq[n]$, with $T_J=J^c$, $V_J=J$, and weight $1/\\binom np$.\n- **$K$-fold:** for $2\\le K\\le n$ and a partition $I_1,\\ldots,I_K$ into nonempty folds, use $T_j=I_j^c$, $V_j=I_j$, and $w_j=|I_j|/n$; for equal folds this is $1/K$.\n- **Repeated $K$-fold:** for $n\\ge2$, $2\\le K\\le n$ and $R\\ge1$, apply the $K$-fold schedule to each of $R$ declared partitions and give fold $I_{rj}$ weight $|I_{rj}|/(Rn)$. If partitions are randomized, record their independent randomization law and average under that law or over the declared finite repetitions.\n\nThese instructions define estimates only. Their validity as estimates of a deployment target depends on matching the split, sampling unit, training size, and averaging law to that target.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-kfold-cv-variance-covariance-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $n=Km$ with integers $K\\ge2$ and $m\\ge1$. Let $Z_1,\\ldots,Z_n$ be IID, let $I_1,\\ldots,I_K$ be a fixed partition into folds of size $m$, and let $A_k$ be a permutation-symmetric measurable learning rule with a measurable loss. For $i\\in I_j$, write $e_i=L(A_{n-m}(Z_{I_j^c}),Z_i)$ and assume $\\mathbb E[e_i^2]<\\infty$. For a paired comparison, $e_i$ may instead be the difference of the two rules' losses evaluated using the same fold; assume both rules are symmetric and the differences are square-integrable. Define $\\sigma^2:=\\operatorname{Var}(e_i)$, $\\omega:=\\operatorname{Cov}(e_i,e_{i'})$ for distinct indices in one fold, and $\\gamma:=\\operatorname{Cov}(e_i,e_{i'})$ for indices in different folds. When $m=1$, set $\\omega=0$ because there is no within-fold pair. These values are well-defined, and\n\n$$\\operatorname{Var}\\!\\left(\\frac1n\\sum_{i=1}^n e_i\\right)=\\frac{\\sigma^2}{n}+\\frac{m-1}{n}\\omega+\\frac{n-m}{n}\\gamma.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.\n\nFor $n\\in\\mathbb N$, a **binomial$(n,p)$ random variable** is a sum $X=\\sum_{i<n}X_i$ of $n$ mutually independent Bernoulli$(p)$ variables. When $n=0$, this is the constant zero random variable.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since the zero rule has zero loss, the four paired errors are $e_1=Z_1Z_3Z_4$, $e_2=Z_2Z_3Z_4$, $e_3=Z_3Z_1Z_2$, and $e_4=Z_4Z_1Z_2$, and $\\widehat\\Delta=\\frac14\\sum_{i=1}^4e_i$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each $e_i$ is a product of three independent Bernoulli$(1/2)$ variables, so [F3]–[F5] and [F7] give $\\mathbb E e_i=1/8$ and $\\operatorname{Var}(e_i)=1/8-(1/8)^2=7/64$. For any distinct $i,j$, the product $e_ie_j$ equals $Z_1Z_2Z_3Z_4$ because $Z_q^2=Z_q$; hence $\\mathbb E[e_ie_j]=1/16$ and $\\operatorname{Cov}(e_i,e_j)=1/16-(1/8)^2=3/64$. Thus $\\omega=\\gamma=3/64$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substituting $n=4,m=2,\\sigma^2=7/64,\\omega=\\gamma=3/64$ into [F6] gives $\\operatorname{Var}(\\widehat\\Delta)=\\frac{7}{256}+\\frac{3}{256}+\\frac{6}{256}=\\frac1{16}$. Treating the four errors as independent would keep only $7/256$, omitting the two positive covariance contributions.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Directly, if all four observations are one then $\\widehat\\Delta=1$; if exactly three are one then $\\widehat\\Delta=1/4$; with at most two ones it is zero. By [F7] these events have probabilities $1/16$, $4/16$, and $11/16$, respectively, so $\\mathbb E\\widehat\\Delta=1/8$, $\\mathbb E\\widehat\\Delta^2=5/64$, and the direct variance is $5/64-(1/8)^2=1/16$, confirming step 3.1.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes four observations in two nonempty folds."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 includes the all-zero outcome, whose paired score is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 includes the one-success outcomes among the cases with at most two ones; all have score zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The finite distribution in step 4.1 includes both constant outcome vectors and verifies their scores directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint is part of the finite binary example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 exhausts the 16 possible samples; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a variance value, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves a variance value, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "all-16-twofold-paired-score-enumeration",
+          "model": "All 16 vectors in {0,1}^4 have probability 1/16; e_i=Z_i times the product of the three training coordinates in its fold, and the paired score is (1/4) sum_i e_i.",
+          "result": "By number of ones, one vector with four ones has score 1, four vectors with three ones have score 1/4, and the other eleven vectors have score 0. Thus E[score]=1/8, E[score^2]=5/64, and Var(score)=1/16.",
+          "evidence": "Example Verification step 4.1; its variance agrees with the covariance calculation in step 3.1."
+        }
+      ],
+      "axiom_uses": []
+    },
+    "ex-random-row-split-leaks-group-information": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+          "source_section": "Definition",
+          "quote": "**Input:** observations $z_1,\\ldots,z_n$, learning rules $A_k$, a loss $L$, and a finite split schedule $((T_r,V_r,w_r))_{r=1}^B$. Each $(T_r,V_r)$ is a split as in [[def-cross-validation-split-and-risk-target]], $w_r\\ge0$, and $\\sum_{r=1}^B w_r=1$. A randomized schedule is admissible only when its law is specified and is independent of the observations.\n\n**Output:** the cross-validation estimate\n\n$$\\widehat R:=\\sum_{r=1}^B w_r\\frac1{|V_r|}\\sum_{i\\in V_r}L\\bigl(A_{|T_r|}(z_{T_r}),z_i\\bigr),$$\n\nwith each training tuple ordered by increasing index.\n\n**Instructions:** fit the rule on each training set, evaluate its loss on every observation in that split's validation set, average within that validation set, then combine the split averages using the declared weights. To compare two or more candidate rules, apply the same schedule and subtract their validation losses within each split before averaging; this is the paired comparison.\n\nThe following choices give standard procedures:\n\n- **Holdout:** one split, with $T$ the chosen training set, $V=T^c$, and weight $1$.\n- **Leave-one-out:** for $n\\ge2$, use $n$ splits $T_i=[n]\\setminus\\{i\\}$, $V_i=\\{i\\}$, with weights $1/n$.\n- **Leave-$p$-out:** for $n\\ge2$ and $1\\le p<n$, use one split for every $p$-element subset $J\\subseteq[n]$, with $T_J=J^c$, $V_J=J$, and weight $1/\\binom np$.\n- **$K$-fold:** for $2\\le K\\le n$ and a partition $I_1,\\ldots,I_K$ into nonempty folds, use $T_j=I_j^c$, $V_j=I_j$, and $w_j=|I_j|/n$; for equal folds this is $1/K$.\n- **Repeated $K$-fold:** for $n\\ge2$, $2\\le K\\le n$ and $R\\ge1$, apply the $K$-fold schedule to each of $R$ declared partitions and give fold $I_{rj}$ weight $|I_{rj}|/(Rn)$. If partitions are randomized, record their independent randomization law and average under that law or over the declared finite repetitions.\n\nThese instructions define estimates only. Their validity as estimates of a deployment target depends on matching the split, sampling unit, training size, and averaging law to that target.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.\n\nFor $n\\in\\mathbb N$, a **binomial$(n,p)$ random variable** is a sum $X=\\sum_{i<n}X_i$ of $n$ mutually independent Bernoulli$(p)$ variables. When $n=0$, this is the constant zero random variable.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a fixed group $g$, if its two rows fall in different folds, then each validation row's group ID appears in training and its memorized prediction is $Y_g$, so both losses are zero. If both rows fall in one fold, neither is in the training set for that fold; both losses are $Y_g$. Therefore the full row-split score is $\\widehat R_{row}=G^{-1}\\sum_{g=1}^G Y_g\\mathbf 1\\{\\text{the two rows of }g\\text{ share a fold}\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In a uniformly chosen balanced partition, the probability both rows of a fixed group lie in fold 1 is $\\binom{2G-2}{G-2}/\\binom{2G}{G}=(G-1)/(2(2G-1))$; the same probability holds for fold 2. Thus the probability they share a fold is $(G-1)/(2G-1)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The split is independent of $Y_g$, and [F3] gives $\\mathbb E Y_g=1/2$, so step 1.1 and the probability in step 1.2 give $\\mathbb E\\widehat R_{row}=(G-1)/(2(2G-1))<1/2$. For a new group ID no training row has that ID, so the learner predicts zero and its error probability is $\\mathbb P(Y_{new}=1)=1/2$. Row-split CV is therefore estimating an easier within-group prediction target than new-group prediction.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The example violates the independent-row premise in [F2], so it is a warning about choosing the resampling unit to match deployment; it is not a counterexample to the IID risk identity.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes G>=2 groups and two balanced nonempty folds."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives zero row loss for a group with label zero whether its rows are split or kept together."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 is valid at G=2, the smallest allowed group count."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes nondegenerate Bernoulli half labels for each group."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint is part of the finite group split calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 counts a finite uniform set of balanced partitions; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves an expectation comparison, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves an expectation comparison, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axiom_uses": []
+    },
+    "ex-cross-validation-risk-minimization-does-not-identify-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-risk-estimation-versus-model-identification",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal F)$ be an observation space, let $M$ be a nonempty finite set of candidate labels, and for each $m\\in M$ let $P_m$ be a probability law on $(\\mathcal Z,\\mathcal F)$. For each $m\\in M$ and training size $k\\ge1$, let $A_{m,k}:\\mathcal Z^k\\to(\\mathcal H,\\mathcal G)$ be a measurable learning rule into a common measurable predictor space. For a data law $P$ and loss $L$ satisfying the measurability and integrability hypotheses of [[def-cross-validation-split-and-risk-target]], write\n\n$$R_{m,k}(P):=\\mathbb E_{P^{\\otimes(k+1)}}\\!\\left[L\\bigl(A_{m,k}(Z_1,\\ldots,Z_k),Z_{k+1}\\bigr)\\right]$$\n\nfor its risk at training size $k$; when $P$ is fixed, write $R_{m,k}$. A **risk-minimizing selector** chooses a label minimizing the specified risk criterion, such as $R_{m,k}$ or its cross-validation estimate; a fixed ordering of $M$ may be used to resolve ties. This objective compares expected predictive loss.\n\nFor each $n\\ge1$, a data-based selector is a measurable map $\\widehat m_n:\\mathcal Z^n\\to M$, where $M$ has its discrete sigma-algebra. A **true model label** at sample size $n$ is a specified $m_0\\in M$ when the observations are IID with law $P_{m_0}$. The selector sequence $(\\widehat m_n)$ is **model-consistent at $m_0$** when $P_{m_0}^{\\otimes n}(\\widehat m_n=m_0)\\to1$ as $n\\to\\infty$. This identification objective is distinct from minimizing predictive risk: risk minimization alone does not assert that the family is identifiable, that one candidate is true, or that the minimum-risk label is the true label. The distinction between risk estimation/model selection for prediction and model identification follows [[def-cross-validation-split-and-risk-target]]'s risk target and the source treatments cited below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cross-validation-split-and-risk-target",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal F)$ be a measurable sample space with probability law $P$. For each training size $k\\ge1$, a learning rule is a measurable map $A_k:\\mathcal Z^k\\to(\\mathcal H,\\mathcal G)$, where $(\\mathcal H,\\mathcal G)$ is a measurable predictor space. This is a statistic in the sense of [[def-statistic-and-estimator]]. Let $L:\\mathcal H\\times\\mathcal Z\\to\\mathbb R$ be jointly measurable and assume $L(A_k(Z_1,\\ldots,Z_k),Z_{k+1})$ is integrable under $P^{\\otimes(k+1)}$ for every size used. The convention that risk is expected loss agrees with [[def-loss-function-and-risk]] for nonnegative losses; the integrable real-valued case is used here as well. The product law is the joint law of independent observations by [[thm-independent-random-elements-have-product-joint-law]].\n\nThe **risk at training size $k$** is\n\n$$R_k:=\\mathbb E_{P^{\\otimes(k+1)}}\\!\\left[L\\bigl(A_k(Z_1,\\ldots,Z_k),Z_{k+1}\\bigr)\\right],$$\n\nwhere $Z_{k+1}$ is independent of the training sample. A **split** of $[n]:=\\{1,\\ldots,n\\}$ is a pair $(T,V)$ of disjoint nonempty sets with $T\\cup V=[n]$; $T$ is the training index set and $V$ is the validation index set. For a fixed partition $I_1,\\ldots,I_K$ of $[n]$ into nonempty folds with $K\\ge2$, the equal-observation-weight cross-validation score is\n\n$$\\widehat R_{CV}:=\\frac1n\\sum_{j=1}^K\\sum_{i\\in I_j}L\\bigl(A_{n-|I_j|}(Z_{I_j^c}),Z_i\\bigr),$$\n\nwhere each training tuple $Z_{I_j^c}$ is ordered by increasing index and $I_j^c=[n]\\setminus I_j$. The risk corresponding to this design is the weighted training-size target $\\sum_{j=1}^K(|I_j|/n)R_{n-|I_j|}$. For equal folds of size $m$, this target is $R_{n-m}$; it is not automatically $R_n$, the risk after training on all $n$ observations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.\n\nFor $n\\in\\mathbb N$, a **binomial$(n,p)$ random variable** is a sum $X=\\sum_{i<n}X_i$ of $n$ mutually independent Bernoulli$(p)$ variables. When $n=0$, this is the constant zero random variable.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under either label, $Y\\sim\\operatorname{Bernoulli}(1/2)$. By [F5], the two prediction risks are $\\mathbb E[(0-Y)^2]=1/2$ and $\\mathbb E[(1-Y)^2]=1/2$, since $Y^2=Y$ and $(1-Y)^2=1-Y$. Thus the predictive-risk objective ties the labels and any fixed tie rule selects one without separating them.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For every sample size $n$, [F3]–[F4] give the same data law $P_0^{\\otimes n}=P_1^{\\otimes n}$. Therefore every measurable data-based selector has the same output distribution under labels 0 and 1. If it were model-consistent at label 0, then $P_0(\\widehat m_n=0)\\to1$, and equality of the sample laws would give $P_1(\\widehat m_n=0)\\to1$. Consistency at label 1 would also give $P_1(\\widehat m_n=1)\\to1$, impossible because these disjoint events have probabilities summing to at most one.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The example has equal predictive risk but no observable information that distinguishes the two labels, so risk minimization alone does not identify a true model.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses two candidate labels and a nonempty finite sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly evaluates the zero predictor's risk and obtains 1/2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The argument applies for every sample size n>=1; step 2.1 uses equality of the product laws."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The common Bernoulli half law is nondegenerate; no degenerate data law is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint appears in this finite identification example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use the explicit finite label set and the fixed candidate laws; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives a nonidentifiability witness, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives a nonidentifiability witness, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axiom_uses": []
+    }
+  }
+}

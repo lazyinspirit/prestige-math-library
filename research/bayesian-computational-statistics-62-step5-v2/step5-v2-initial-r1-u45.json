@@ -1,0 +1,314 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "45",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "ex-smc-multinomial-ancestry-collapse",
+      "model": "gpt-6-luna",
+      "context_sha256": "d256087764e882e5c2ee70d6ce02c0f7e0c8d776f3902639add4ee140dc2b89e",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The per-call resampling algorithm specifies independence of the two child indices conditional only on the weights, which are constant here; it does not constrain coupling across calls. Reusing a single fair IID index pair gives probability 1/2 of survival at every m, contradicting 2^{-m}. The Example and Given now explicitly prescribe independent pairs across calls, and step 2.1 gives conditional survival probability 1/2 given the full past; absorption and induction then yield 1-2^{-m}.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-smc-multinomial-fixed-horizon-clt",
+      "model": "gpt-6-luna",
+      "context_sha256": "997673834d374c92a97413cfde4bfe9a9221d9acd363396fc9bde0824ab69f4e",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The original F3 drops the resampling lemma's empirical-law premise, so steps 2.1 and 2.2 cite an incomplete version of the supplier. The already proved finite-horizon empirical-law lemma applies directly to the identical SIR flow and multinomial selections, with no extra hypotheses. It is now a dependency and F5; step 1.1 establishes its conclusions before the CLT induction. Psi supplies target L2, centered weighted proposal moments and recursive selected-test membership; the base ratio CLT, selection CLT and scalar projections then prove the unchanged vector statement, including zero-variance projections.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-smc-residual-fixed-horizon-clt-away-from-integer-weights",
+      "model": "gpt-6-luna",
+      "context_sha256": "9a5ff4f2214620d0d0543cef04aab6f6fd03569d246dcb785823f4b523f5c55b",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Steps 2.1 and 2.2 originally invoked residual selection without proving the proposal empirical-law premise stated in F3 and its supplier. The existing finite-horizon empirical-law lemma covers residual SIR under exactly this flow; it is now a dependency and F5, applied at every s in step 1.1. Recursive Psi moments and the preceding selected CLT license mutation/correction; F5, target L2 and the timewise residual-weight branch license selection. Unit weights at time zero are exactly deterministic; at later times the residual supplier excludes earlier zero-weight fallbacks of vanishing probability. Scalar projection and Cramer-Wold complete the unchanged vector claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-smc-bounded-weights-with-mixing",
+      "model": "gpt-6-luna",
+      "context_sha256": "56b1f8b8b472ef270855e867d6939ca6fcb1ab0672babff64dc770c44ae1de09",
+      "outcome": "false_positive",
+      "reason": "The rejection confuses V_t, defined as weighted-estimator covariance, with post-selection covariance widehat V_t. For the centered last-state indicator h, k_t h=0 and Var_{k_t}(h)=1/4 pointwise, so the mutation recursion gives V_t=widehat V_{t-1}(0)+1/4=1/4 (and V_0=1/4). Multinomial selection subsequently adds target variance 1/4, giving widehat V_t=1/2, not V_t=1/2. Thus mutation noise is included in the terminal contribution and the original exact value is correct. Identical rows satisfy C=1, all earlier centered images vanish, A=B=1 and rho=0 give the stated bound V_t<=1. The Example, contract and owning page consistently use V_t.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-smc-multinomial-ancestry-collapse",
+      "disposition": "repaired",
+      "post_sha256": "add5229ad89d5dcf1b6162977105dd1de0664f2b767e9393b0210f68fb21cafc",
+      "review_context_sha256": "7c0b1d23ab0630ddeaefa3ccd09faa34dbc124901062b1e383e3c422b1b8a87c",
+      "reason": "The per-call resampling algorithm specifies independence of the two child indices conditional only on the weights, which are constant here; it does not constrain coupling across calls. Reusing a single fair IID index pair gives probability 1/2 of survival at every m, contradicting 2^{-m}. The Example and Given now explicitly prescribe independent pairs across calls, and step 2.1 gives conditional survival probability 1/2 given the full past; absorption and induction then yield 1-2^{-m}.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-smc-multinomial-fixed-horizon-clt",
+      "disposition": "repaired",
+      "post_sha256": "354c41fbfa870096d5de7c394a4c02778f0d614cd296fb956352b185356e1196",
+      "review_context_sha256": "a4ff4cbec02483c6128ea556cba3e97845212b78734ee9c0b9a15e348be36213",
+      "reason": "The original F3 drops the resampling lemma's empirical-law premise, so steps 2.1 and 2.2 cite an incomplete version of the supplier. The already proved finite-horizon empirical-law lemma applies directly to the identical SIR flow and multinomial selections, with no extra hypotheses. It is now a dependency and F5; step 1.1 establishes its conclusions before the CLT induction. Psi supplies target L2, centered weighted proposal moments and recursive selected-test membership; the base ratio CLT, selection CLT and scalar projections then prove the unchanged vector statement, including zero-variance projections.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-smc-residual-fixed-horizon-clt-away-from-integer-weights",
+      "disposition": "repaired",
+      "post_sha256": "c79ca69584f3ab90fc5ee0723cee0a62dadb3477d35a8e9bcf3ca937079dfee6",
+      "review_context_sha256": "d985daecd5f7af850fbc0863f3056a15df52a97afac77aa867743518d98db2cf",
+      "reason": "Steps 2.1 and 2.2 originally invoked residual selection without proving the proposal empirical-law premise stated in F3 and its supplier. The existing finite-horizon empirical-law lemma covers residual SIR under exactly this flow; it is now a dependency and F5, applied at every s in step 1.1. Recursive Psi moments and the preceding selected CLT license mutation/correction; F5, target L2 and the timewise residual-weight branch license selection. Unit weights at time zero are exactly deterministic; at later times the residual supplier excludes earlier zero-weight fallbacks of vanishing probability. Scalar projection and Cramer-Wold complete the unchanged vector claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-smc-bounded-weights-with-mixing",
+      "disposition": "unaffected",
+      "post_sha256": "ecdc666d6705e36a0f502b1f02459003de8e31e48c75555584d3101546973772",
+      "review_context_sha256": "1313718be05f8206df4c0886380cc17133afb9f9a067ff62537e137588681cb4",
+      "reason": "The rejection confuses V_t, defined as weighted-estimator covariance, with post-selection covariance widehat V_t. For the centered last-state indicator h, k_t h=0 and Var_{k_t}(h)=1/4 pointwise, so the mutation recursion gives V_t=widehat V_{t-1}(0)+1/4=1/4 (and V_0=1/4). Multinomial selection subsequently adds target variance 1/4, giving widehat V_t=1/2, not V_t=1/2. Thus mutation noise is included in the terminal contribution and the original exact value is correct. Identical rows satisfy C=1, all earlier centered images vanish, A=B=1 and rho=0 give the stated bound V_t<=1. The Example, contract and owning page consistently use V_t.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "ex-smc-multinomial-ancestry-collapse",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "statement",
+      "status": "fixed",
+      "reason": "The per-call resampling algorithm specifies independence of the two child indices conditional only on the weights, which are constant here; it does not constrain coupling across calls. Reusing a single fair IID index pair gives probability 1/2 of survival at every m, contradicting 2^{-m}. The Example and Given now explicitly prescribe independent pairs across calls, and step 2.1 gives conditional survival probability 1/2 given the full past; absorption and induction then yield 1-2^{-m}."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "thm-smc-multinomial-fixed-horizon-clt",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "locus": "facts-block",
+      "status": "fixed",
+      "reason": "The original F3 drops the resampling lemma's empirical-law premise, so steps 2.1 and 2.2 cite an incomplete version of the supplier. The already proved finite-horizon empirical-law lemma applies directly to the identical SIR flow and multinomial selections, with no extra hypotheses. It is now a dependency and F5; step 1.1 establishes its conclusions before the CLT induction. Psi supplies target L2, centered weighted proposal moments and recursive selected-test membership; the base ratio CLT, selection CLT and scalar projections then prove the unchanged vector statement, including zero-variance projections."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "thm-smc-residual-fixed-horizon-clt-away-from-integer-weights",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "locus": "proof-step",
+      "status": "fixed",
+      "reason": "Steps 2.1 and 2.2 originally invoked residual selection without proving the proposal empirical-law premise stated in F3 and its supplier. The existing finite-horizon empirical-law lemma covers residual SIR under exactly this flow; it is now a dependency and F5, applied at every s in step 1.1. Recursive Psi moments and the preceding selected CLT license mutation/correction; F5, target L2 and the timewise residual-weight branch license selection. Unit weights at time zero are exactly deterministic; at later times the residual supplier excludes earlier zero-weight fallbacks of vanishing probability. Scalar projection and Cramer-Wold complete the unchanged vector claim."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "ex-smc-bounded-weights-with-mixing",
+      "outcome": "false_positive",
+      "status": "no-defect",
+      "reason": "The rejection confuses V_t, defined as weighted-estimator covariance, with post-selection covariance widehat V_t. For the centered last-state indicator h, k_t h=0 and Var_{k_t}(h)=1/4 pointwise, so the mutation recursion gives V_t=widehat V_{t-1}(0)+1/4=1/4 (and V_0=1/4). Multinomial selection subsequently adds target variance 1/4, giving widehat V_t=1/2, not V_t=1/2. Thus mutation noise is included in the terminal contribution and the original exact value is correct. Identical rows satisfy C=1, all earlier centered images vanish, A=B=1 and rho=0 give the stated bound V_t<=1. The Example, contract and owning page consistently use V_t."
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_change",
+      "reason": "No published carrier was edited and no potentially defective published consumer was found in the assigned mathematical review. No Statement/Definition changed, so this unit has no supplier-interface event requiring published-consumer maintenance."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "ex-smc-multinomial-ancestry-collapse",
+      "claim": "With mutually independent uniform pairs of child indices across resampling calls, the equal-weight two-particle ancestry collapse probability at m is 1-2^{-m}.",
+      "sources": [
+        "items/alg-multinomial-and-residual-offspring-resampling.md: Definition",
+        "items/thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts.md: Statement"
+      ],
+      "dependencies": [
+        "alg-multinomial-and-residual-offspring-resampling",
+        "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts"
+      ],
+      "checks": [
+        "Strict focused proof-contract: exit 0, no errors or warnings."
+      ],
+      "interface_change": false,
+      "unresolved_obligations": [],
+      "next_action": "Hand off to the engine for independent rejudgment and round closure; no judgments or certificates were written.",
+      "metadata_repairs": [
+        "Owning manifest mirrors the current assigned item interface/dependencies.",
+        "Owning contract citations and derivations match current facts and steps; risk evidence records the repaired premise."
+      ]
+    },
+    {
+      "id": "thm-smc-multinomial-fixed-horizon-clt",
+      "claim": "Both weighted and post-multinomial vector CLTs at fixed horizon for every Psi test; empirical laws are a prior theorem, not an added hypothesis.",
+      "sources": [
+        "items/lem-smc-finite-horizon-empirical-law.md: complete Statement and Proof",
+        "items/lem-smc-mutation-and-weighted-correction-clt.md: complete Statement and Proof",
+        "items/lem-smc-multinomial-resampling-clt.md: complete Statement and Proof",
+        "items/def-smc-clt-function-classes-and-variance-recursions.md: Definition"
+      ],
+      "dependencies": [
+        "lem-smc-finite-horizon-empirical-law",
+        "lem-smc-mutation-and-weighted-correction-clt",
+        "lem-smc-multinomial-resampling-clt",
+        "thm-cramer-wold-device"
+      ],
+      "interface_change": false,
+      "unresolved_obligations": [],
+      "next_action": "Hand off to the engine for independent rejudgment and round closure; no judgments or certificates were written.",
+      "metadata_repairs": [
+        "Owning manifest mirrors the current assigned item interface/dependencies.",
+        "Owning contract citations and derivations match current facts and steps; risk evidence records the repaired premise."
+      ]
+    },
+    {
+      "id": "thm-smc-residual-fixed-horizon-clt-away-from-integer-weights",
+      "claim": "Both fixed-horizon vector CLTs hold for recursive Psi tests when each proposal weight law is constant one almost everywhere or has no positive-integer atoms.",
+      "sources": [
+        "items/lem-smc-finite-horizon-empirical-law.md: complete Statement and Proof",
+        "items/lem-smc-residual-resampling-clt-away-from-integer-weights.md: complete Statement and Proof",
+        "items/lem-smc-mutation-and-weighted-correction-clt.md: complete Statement and Proof",
+        "items/def-smc-clt-function-classes-and-variance-recursions.md: Definition"
+      ],
+      "dependencies": [
+        "lem-smc-finite-horizon-empirical-law",
+        "lem-smc-mutation-and-weighted-correction-clt",
+        "lem-smc-residual-resampling-clt-away-from-integer-weights",
+        "thm-cramer-wold-device"
+      ],
+      "interface_change": false,
+      "unresolved_obligations": [],
+      "next_action": "Hand off to the engine for independent rejudgment and round closure; no judgments or certificates were written.",
+      "metadata_repairs": [
+        "Owning manifest mirrors the current assigned item interface/dependencies.",
+        "Owning contract citations and derivations match current facts and steps; risk evidence records the repaired premise."
+      ]
+    },
+    {
+      "id": "ex-smc-bounded-weights-with-mixing",
+      "claim": "V_t=1/4 for the weighted estimator at all fixed times; post-multinomial selection would give widehat V_t=1/2.",
+      "sources": [
+        "items/def-smc-clt-function-classes-and-variance-recursions.md: Definition, mutation/weighted/selected covariance equations",
+        "items/lem-smc-multinomial-variance-unrolls.md: complete Statement and Proof",
+        "items/thm-smc-time-uniform-variance-bound-under-uniform-incremental-weights.md: complete Statement and Proof",
+        "library/bayesian-computational-statistics/smc-clts-error-and-degeneracy-examples.md: Objective"
+      ],
+      "dependencies": [
+        "def-smc-clt-function-classes-and-variance-recursions",
+        "thm-smc-time-uniform-variance-bound-under-uniform-incremental-weights"
+      ],
+      "interface_change": false,
+      "unresolved_obligations": [],
+      "next_action": "Hand off to the engine for independent rejudgment and round closure; no judgments or certificates were written."
+    },
+    {
+      "scope": "focused validation and propagation",
+      "checks": [
+        {
+          "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-smc-multinomial-ancestry-collapse.md items/thm-smc-multinomial-fixed-horizon-clt.md items/thm-smc-residual-fixed-horizon-clt-away-from-integer-weights.md items/ex-smc-bounded-weights-with-mixing.md --json",
+          "exit_code": 0,
+          "result": "4 proof-bearing items checked; 0 failures."
+        },
+        {
+          "command": "node tools/rendercheck.mjs items/ex-smc-multinomial-ancestry-collapse.md items/thm-smc-multinomial-fixed-horizon-clt.md items/thm-smc-residual-fixed-horizon-clt-away-from-integer-weights.md items/ex-smc-bounded-weights-with-mixing.md --json",
+          "exit_code": 0,
+          "result": "4 files checked; no errors or warnings."
+        },
+        {
+          "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-45.proof-contracts.json --items ex-smc-multinomial-ancestry-collapse,thm-smc-multinomial-fixed-horizon-clt,thm-smc-residual-fixed-horizon-clt-away-from-integer-weights,ex-smc-bounded-weights-with-mixing --strict --json",
+          "exit_code": 0,
+          "result": "All 4 assigned contracts pass; no errors or warnings."
+        },
+        {
+          "command": "node tools/citecheck.mjs items/ex-smc-multinomial-ancestry-collapse.md items/thm-smc-multinomial-fixed-horizon-clt.md items/thm-smc-residual-fixed-horizon-clt-away-from-integer-weights.md items/ex-smc-bounded-weights-with-mixing.md --json",
+          "exit_code": 0,
+          "result": "4 items scanned; 0 warnings."
+        },
+        {
+          "command": "node tools/proof-layout.mjs items/ex-smc-multinomial-ancestry-collapse.md items/thm-smc-multinomial-fixed-horizon-clt.md items/thm-smc-residual-fixed-horizon-clt-away-from-integer-weights.md",
+          "exit_code": 0,
+          "result": "3 changed items, 13 numbered steps, 0 defects; run once after final item edits."
+        },
+        {
+          "command": "node tools/depcheck.mjs --items-file <(node --input-type=module -e 'import {readFileSync} from \"node:fs\"; const p=JSON.parse(readFileSync(\"research/bayesian-computational-statistics-62-step5-v2/initial-1.json\",\"utf8\")); console.log(JSON.stringify(p.assignments[\"45\"].map(row=>row.id)));') --json",
+          "exit_code": 0,
+          "result": "Focused 4 assigned items and 2 owning pages; prerequisite cycle closure 1309 items and 183 pages; no errors or warnings."
+        }
+      ],
+      "statement_definition_comparisons": {
+        "ex-smc-multinomial-ancestry-collapse": {
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "unchanged": true
+        },
+        "thm-smc-multinomial-fixed-horizon-clt": {
+          "before_sha256": "02943d621aa6a113cdfa20a31cf4d21b2b8d8dcad3042f84952d3ae305114787",
+          "after_sha256": "02943d621aa6a113cdfa20a31cf4d21b2b8d8dcad3042f84952d3ae305114787",
+          "unchanged": true
+        },
+        "thm-smc-residual-fixed-horizon-clt-away-from-integer-weights": {
+          "before_sha256": "1494cf2e906003ace7a4548ea65c9babab078322837127230a4cff1a256d71b2",
+          "after_sha256": "1494cf2e906003ace7a4548ea65c9babab078322837127230a4cff1a256d71b2",
+          "unchanged": true
+        },
+        "ex-smc-bounded-weights-with-mixing": {
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "unchanged": true
+        }
+      },
+      "propagation": "No original Statement or Definition changed. The ancestry Example specifies its across-call law explicitly; under the task's exact-section trigger this is not a propagation event. No new item was authored. Therefore downstream is empty.",
+      "source_familiarity": "All adjudicated arguments use familiar finite sampling, conditional CLT induction and covariance identities. Only the listed repository sources were consulted; no external source reading is claimed.",
+      "independent_review": false,
+      "unresolved_obligations": []
+    },
+    {
+      "scope": "unassigned Step-4 concerns verified while reading actual suppliers",
+      "owner_route": "Batch-45 frontier owner; these are already present in the immutable rejection-blind digest, not new assigned tuples.",
+      "findings": [
+        {
+          "id": "lem-smc-multinomial-resampling-clt",
+          "affected_use": "Proof 4.1 passes from convergence of the joint characteristic function to asymptotic independence and weak convergence without citing a characteristic-function criterion.",
+          "disposition": "Unedited, outside assigned item inventory; routine citation gap, no mathematical counterexample."
+        },
+        {
+          "id": "lem-smc-mutation-and-weighted-correction-clt",
+          "affected_use": "Proof 3.1 passes from a product Gaussian characteristic-function limit to the proposal CLT without citing a characteristic-function criterion.",
+          "disposition": "Unedited, outside assigned item inventory; routine citation gap, no mathematical counterexample."
+        },
+        {
+          "id": "lem-smc-residual-resampling-clt-away-from-integer-weights",
+          "affected_use": "Proof 4.1 passes from a product joint characteristic-function limit to joint asymptotic independence without citing a characteristic-function criterion.",
+          "disposition": "Unedited, outside assigned item inventory; routine citation gap, no mathematical counterexample."
+        }
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "supporting_evidence": {
+    "research/bayesian-computational-statistics-62-batch-45.pages.json": "9f3fc29e3b5481bbe129509abbc15559160941392f6c1c8239d6d7f1f2ff0427",
+    "research/bayesian-computational-statistics-62-batch-45.proof-contracts.json": "da429861bf9bb6b0a0f23db291e8af27fa9d96fce786ef867043b56981251227"
+  }
+}

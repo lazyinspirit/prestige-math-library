@@ -1,0 +1,457 @@
+{
+  "def-negative-sobolev-space-for-white-noise": {
+    "claim": "Let $(\\psi_{lk})$ be a countable complete orthonormal basis of the real Hilbert space $L^2([0,1])$ ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]], [[def-hilbert-space]], [[def-l-p-space-as-a-quotient-by-null-functions]]). For a wavelet basis, index levels by $l\\ge0$, let $K_l$ have $2^l$ indices, and put $a_l=2^l$ for $l\\ge1$ and $a_0=2$ for the finite coarsest level. This finite-level convention only prevents a zero logarithmic weight and does not change any convergence criterion below. For a trigonometric basis, use its integer frequency index $l$, bounded multiplicities, and $a_l=\\max(2,|l|)$.",
+    "citations": [],
+    "derivations": [],
+    "routine_steps": [],
+    "boundaries": [
+      {
+        "case": "empty",
+        "status": "not_applicable",
+        "reason": "No empty input or set is a free parameter in this claim."
+      },
+      {
+        "case": "zero",
+        "status": "not_applicable",
+        "reason": "No zero-threshold parameter or zero-valued boundary is asserted."
+      },
+      {
+        "case": "one",
+        "status": "not_applicable",
+        "reason": "No unit-parameter special case is asserted."
+      },
+      {
+        "case": "degenerate",
+        "status": "not_applicable",
+        "reason": "No degenerate-space or dimension limit is part of this claim."
+      },
+      {
+        "case": "endpoints",
+        "status": "checked",
+        "evidence": "Definition gives the finite trace threshold \u03b4>1/2; the wavelet trace diverges at \u03b4=1/2."
+      },
+      {
+        "case": "nonempty-choice",
+        "status": "not_applicable",
+        "reason": "No choice axiom is used by this claim."
+      },
+      {
+        "case": "iff-forward",
+        "status": "not_applicable",
+        "reason": "The statement is not an equivalence."
+      },
+      {
+        "case": "iff-reverse",
+        "status": "not_applicable",
+        "reason": "The statement is not an equivalence."
+      }
+    ],
+    "finite_checks": [],
+    "finite_check_disposition": "No registered finite-smoke check applies; the analytic proofs and explicit Gaussian example are handled by their stated arguments."
+  },
+  "lem-bounded-lipschitz-metric-characterizes-weak-convergence-on-polish-spaces": {
+    "claim": "Assume the Axiom of Choice. Let $(S,d)$ be a Polish space, and let $\\mu_n,\\mu$ be Borel probability measures on $S$. Define",
+    "proof_strategy": "direct",
+    "citations": [
+      {
+        "fact": "F1",
+        "source": "def-weak-convergence-of-borel-probability-measures",
+        "source_section": "Definition",
+        "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is [[def-metric-continuity]]. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in [[def-integrable-real-and-complex-functions-and-their-integrals]]. No completeness or coupling is required.",
+        "uses": [
+          "1.1",
+          "1.2",
+          "2.1",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F2",
+        "source": "thm-portmanteau-theorem",
+        "source_section": "Statement",
+        "quote": "For Borel probabilities $\\mu_n,\\mu$ on a metric space S, the following are equivalent: (i) $\\mu_n\\Rightarrow\\mu$; (ii) integrals converge for all bounded uniformly continuous real tests; (iii) $\\limsup_n\\mu_n(F)\\le\\mu(F)$ for every closed F; (iv) $\\liminf_n\\mu_n(G)\\ge\\mu(G)$ for every open G; (v) $\\mu_n(A)\\to\\mu(A)$ for every Borel A with $\\mu(\\partial A)=0$.",
+        "uses": [
+          "2.1"
+        ]
+      },
+      {
+        "fact": "F3",
+        "source": "thm-prokhorov-tightness-theorem-on-polish-spaces",
+        "source_section": "Statement",
+        "quote": "Assume AC. A family $\\mathcal A$ of Borel probabilities on a Polish space S is tight if and only if it is relatively sequentially compact for weak convergence.",
+        "uses": [
+          "2.2"
+        ]
+      },
+      {
+        "fact": "F4",
+        "source": "thm-dominated-convergence",
+        "source_section": "Statement",
+        "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+        "uses": [
+          "0.1",
+          "2.1"
+        ]
+      },
+      {
+        "fact": "F5",
+        "source": "def-polish-space",
+        "source_section": "Definition",
+        "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+        "uses": [
+          "2.2"
+        ]
+      },
+      {
+        "fact": "A1",
+        "source": "def-axiom-of-choice",
+        "source_section": "Definition",
+        "quote": "The **Axiom of Choice** (AC) is the following statement.",
+        "uses": [
+          "2.2"
+        ]
+      },
+      {
+        "fact": "F6",
+        "source": "lem-finite-measure-uniqueness-on-a-pi-system",
+        "source_section": "Statement",
+        "quote": "Let $\\mathcal P$ be a pi-system on $X$ and let $\\mathcal A=\\sigma_X(\\mathcal P)$. If finite measures $\\mu$ and $\\nu$ on $(X,\\mathcal A)$ agree on $\\mathcal P$ and satisfy $\\mu(X)=\\nu(X)$, then $\\mu=\\nu$ on $\\mathcal A$.\n\nThe total-mass equality is separate because this library's pi-system convention does not require $X\\in\\mathcal P$.",
+        "uses": [
+          "0.1"
+        ]
+      }
+    ],
+    "derivations": [
+      {
+        "id": "derivation-0.1",
+        "step": "0.1",
+        "claim": "Nonnegativity, symmetry and the triangle inequality for $\\beta_{BL}$ follow by applying these properties to the difference of the two test integrals and then taking the supremum. If $\\beta_{BL}(\\nu,\\rho)=0$, fix a nonempty closed $F$ and put $g_m=(1-md(\\cdot,F))_+$. The function $g_m/m$ is an admissible test, so $\\int g_m\\,d\\nu=\\int g_m\\,d\\rho$. By [F4], these integrals decrease to $\\nu(F)$ and $\\rho(F)$, respectively. The two probabilities therefore agree on every closed set, including the empty set. Closed sets form a pi-system generating the Borel sigma-algebra, and both total masses are one, so [F6] gives $\\nu=\\rho$. Thus $\\beta_{BL}$ is a metric; this argument uses no choice.",
+        "inputs": [
+          "given",
+          "F4",
+          "F6",
+          "algebra"
+        ]
+      },
+      {
+        "id": "derivation-1.1",
+        "claim": "Assume $\\beta_{BL}(\\mu_n,\\mu)\\to0$, and fix a nonempty closed set $F\\subseteq S$. For every integer $m\\ge1$, the function $g_m(x)=(1-md(x,F))_+$ satisfies $0\\le g_m\\le1$ and $\\operatorname{Lip}_d(g_m)\\le m$. Hence $g_m/m$ is admissible in the definition of $\\beta_{BL}$, so $\\int g_m\\,d\\mu_n\\to\\int g_m\\,d\\mu$. Since $1_F\\le g_m$, it follows that $\\limsup_n\\mu_n(F)\\le\\int g_m\\,d\\mu$ for every $m$.",
+        "step": "1.1",
+        "inputs": [
+          "given",
+          "F1"
+        ]
+      },
+      {
+        "id": "derivation-1.2",
+        "claim": "Now assume $\\mu_n\\Rightarrow\\mu$, and put $\\mathcal A=\\{\\mu\\}\\cup\\{\\mu_n:n\\ge1\\}$. Any sequence chosen from $\\mathcal A$ either has a member repeated infinitely often, yielding a constant convergent subsequence, or has a subsequence of the form $(\\mu_{n_j})$ with $n_j\\to\\infty$, which converges weakly to $\\mu$. Therefore $\\mathcal A$ is relatively sequentially compact for weak convergence.",
+        "step": "1.2",
+        "inputs": [
+          "given",
+          "F1",
+          "choose"
+        ]
+      },
+      {
+        "id": "derivation-2.1",
+        "claim": "The functions $g_m$ decrease pointwise to $1_F$ and are bounded by the integrable constant function $1$ under the probability $\\mu$. By [F4], $\\int g_m\\,d\\mu\\to\\mu(F)$, so the closed-set bound holds; it is trivial for $F=\\varnothing$. The Portmanteau theorem [F2] gives weak convergence in the sense of [F1].",
+        "step": "2.1",
+        "inputs": [
+          "F1",
+          "F2",
+          "F4",
+          "step 1.1"
+        ]
+      },
+      {
+        "id": "derivation-2.2",
+        "claim": "By [F5], $S$ is Polish; therefore [F3] applies under [A1] and $\\mathcal A$ is tight. Thus for every $\\varepsilon>0$ there is a compact $K\\subseteq S$ such that $\\sup_{\\nu\\in\\mathcal A}\\nu(K^c)<\\varepsilon$.",
+        "step": "2.2",
+        "inputs": [
+          "A1",
+          "F3",
+          "F5",
+          "step 1.2"
+        ]
+      },
+      {
+        "id": "derivation-3.1",
+        "claim": "Fix $\\eta>0$. Compactness gives a finite $\\eta/8$-net $x_1,\\dots,x_q$ of $K$. Quantize each value $g(x_i)\\in[-1,1]$ into finitely many bins of width at most $\\eta/2$. There are finitely many resulting value patterns for the bounded 1-Lipschitz test class; choose one representative $h_r$ from each nonempty pattern. If $g$ and $h_r$ share a pattern, then for $x\\in K$ a net point $x_i$ gives $|g(x)-h_r(x)|\\le2d(x,x_i)+|g(x_i)-h_r(x_i)|<\\eta$.",
+        "step": "3.1",
+        "inputs": [
+          "given",
+          "construct",
+          "choose",
+          "step 2.2"
+        ]
+      },
+      {
+        "id": "derivation-4.1",
+        "claim": "For any admissible $g$, choose the representative $h_r$ from its pattern. The integral difference is bounded by $\\left|\\int g\\,d\\mu_n-\\int g\\,d\\mu\\right|\\le\\max_r\\left|\\int h_r\\,d\\mu_n-\\int h_r\\,d\\mu\\right|+2\\eta+2\\mu_n(K^c)+2\\mu(K^c).$ The maximum tends to zero by [F1], because there are finitely many bounded continuous representatives, and the last two terms are at most $4\\varepsilon$ by step 2.2. Taking the supremum over $g$, then the limit superior in $n$, gives $\\limsup_n\\beta_{BL}(\\mu_n,\\mu)\\le2\\eta+4\\varepsilon$. Letting $\\eta,\\varepsilon\\downarrow0$ proves the reverse implication.",
+        "step": "4.1",
+        "inputs": [
+          "F1",
+          "step 2.2",
+          "step 3.1"
+        ]
+      }
+    ],
+    "routine_steps": [],
+    "boundaries": [
+      {
+        "case": "empty",
+        "status": "checked",
+        "evidence": "Steps 1.1\u20131.2 treat F=\u2205 separately in the closed-set bound."
+      },
+      {
+        "case": "zero",
+        "status": "not_applicable",
+        "reason": "No zero-threshold parameter or zero-valued boundary is asserted."
+      },
+      {
+        "case": "one",
+        "status": "not_applicable",
+        "reason": "No unit-parameter special case is asserted."
+      },
+      {
+        "case": "degenerate",
+        "status": "checked",
+        "evidence": "Definition sets Lip_d(g)=0 when S has at most one point."
+      },
+      {
+        "case": "endpoints",
+        "status": "not_applicable",
+        "reason": "No additional endpoint beyond the stated strict hypotheses is claimed."
+      },
+      {
+        "case": "nonempty-choice",
+        "status": "checked",
+        "evidence": "Statement separates the AC-dependent reverse metric direction from the choice-free forward direction."
+      },
+      {
+        "case": "iff-forward",
+        "status": "checked",
+        "evidence": "Statement is an equivalence; the proof establishes bounded-Lipschitz convergence implies weak convergence."
+      },
+      {
+        "case": "iff-reverse",
+        "status": "checked",
+        "evidence": "Statement is an equivalence; the proof establishes weak convergence implies bounded-Lipschitz convergence under AC."
+      }
+    ],
+    "finite_checks": [],
+    "finite_check_disposition": "No registered finite-smoke check applies; the analytic proofs and explicit Gaussian example are handled by their stated arguments."
+  },
+  "thm-cdf-and-multiscale-credible-band-calibration-from-bvm": {
+    "risk": "high",
+    "kind": "theorem",
+    "citations": [
+      {
+        "fact": "F1",
+        "source": "def-multiscale-coefficient-space-m0w",
+        "source_section": "Definition",
+        "quote": "Use the wavelet coefficient levels $(l,k)$ and multiplicities $|K_l|=2^l$ from [[def-negative-sobolev-space-for-white-noise]]. Let $w=(w_l)$ be nondecreasing with $w_l\\ge1$. Define\n$$M(w)=\\left\\{x=(x_{lk}):\\|x\\|_{M(w)}:=\\sup_l\\frac{\\max_{k\\in K_l}|x_{lk}|}{w_l}<\\infty\\right\\}$$\nand its closed little-o subspace\n$$M_0(w)=\\left\\{x\\in M(w):\\frac{\\max_{k\\in K_l}|x_{lk}|}{w_l}\\longrightarrow0\\text{ as }l\\to\\infty\\right\\},$$\nwith the same norm. Call $w$ admissible when $w_l/\\sqrt l\\to\\infty$. The finite coarsest level is included in the norm and does not affect this limit. Elements are coefficient sequences; in particular, they need not be $L^2$ functions. [[lem-m0w-separable-and-projection-tails]] proves that $M_0(w)$ is a separable Banach space, that $L^2$ coefficient sequences embed in it, and that finite-level projections converge in its norm.",
+        "uses": [
+          "1.1",
+          "1.2"
+        ]
+      },
+      {
+        "fact": "F2",
+        "source": "lem-m0w-separable-and-projection-tails",
+        "source_section": "Statement",
+        "quote": "For every weight sequence in [[def-multiscale-coefficient-space-m0w]], $M_0(w)$ is a separable Banach space. If $P_J$ retains exactly the coefficients at levels $l\\le J$, then $\\|P_Jx\\|_{M(w)}\\le\\|x\\|_{M(w)}$ and $\\|x-P_Jx\\|_{M(w)}\\to0$ for each $x\\in M_0(w)$. Every square-summable coefficient sequence belongs to $M_0(w)$.",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "F3",
+        "source": "lem-multiscale-primitive-map-to-continuous-cdfs",
+        "source_section": "Statement",
+        "quote": "Let $(\\psi_{lk})$ be a compactly supported wavelet basis of [[def-negative-sobolev-space-for-white-noise]]. The Haar basis with its finite scaling coordinate, as specified in [[def-multiscale-coefficient-space-m0w]], is also allowed. Assume each level-$l$ wavelet for $l\\ge l_0$ has zero integral, uniformly bounded overlap, support length at most $C_0 2^{-l}$, and $\\|\\psi_{lk}\\|_1\\le C_0 2^{-l/2}$. Let $M_0(w)$ be as in [[def-multiscale-coefficient-space-m0w]], and suppose\n$$S_w:=\\sum_{l\\ge l_0}w_l2^{-l/2}<\\infty.$$\nFor $x\\in M_0(w)$ define\n$$Jx(t):=\\sum_{l,k}x_{lk}\\langle 1_{[0,t]},\\psi_{lk}\\rangle_{L^2},\\qquad 0\\le t\\le1.$$\nThen this series converges absolutely and uniformly in $t$, $Jx\\in C([0,1])$, and $\\|Jx-Jy\\|_\\infty\\le C S_w\\|x-y\\|_{M(w)}$ after adding the finite coarsest-level constant to $C S_w$. If $x$ is the coefficient sequence of $f\\in L^2$, then $Jx(t)=\\int_0^t f(u)\\,du$.",
+        "uses": [
+          "1.1",
+          "2.1"
+        ]
+      },
+      {
+        "fact": "F4",
+        "source": "thm-continuous-mapping-theorem",
+        "source_section": "Statement",
+        "quote": "Let S,T be metric spaces, $g:S\\to T$ measurable, and $\\mu_n\\Rightarrow\\mu$. If the discontinuity set $D_g$ is $\\mu$-null, then $g_*\\mu_n\\Rightarrow g_*\\mu$. Consequently $X_n\\Rightarrow X$ implies $g(X_n)\\Rightarrow g(X)$ whenever $P_X(D_g)=0$.",
+        "uses": [
+          "2.1"
+        ]
+      },
+      {
+        "fact": "F5",
+        "source": "lem-measurable-posterior-quantile-and-cdf-bracketing",
+        "source_section": "Statement",
+        "quote": "Write $\\mathbb Q$ for the canonical image of the rationals in $\\mathbb R$ under the embedding of [[lem-rat-embeds-dense]].\n\nLet $y\\mapsto\\Pi_y$ be a probability kernel on $\\mathbb R$. For $u\\in(0,1)$ put\n$$F_y(t)=\\Pi_y((-\\infty,t]),\\qquad q_u(y)=\\inf\\{r\\in\\mathbb Q:F_y(r)\\ge u\\}.$$The infimum is taken in $\\mathbb R$; [[thm-infimum-property]] supplies it once the defining set is shown nonempty and bounded below. Then $q_u:\\mathsf Y\\to\\mathbb R$ is measurable, and$$\\Pi_y((-\\infty,q_u(y)))\\le u\\le\\Pi_y((-\\infty,q_u(y)]).$$",
+        "uses": [
+          "1.3"
+        ]
+      },
+      {
+        "fact": "F6",
+        "source": "lem-random-posterior-quantiles-stabilize-under-bvm",
+        "source_section": "Statement",
+        "quote": "Let $Q_n(y,\\cdot)$ be data-indexed probability kernels on $\\mathbb R$, let $Q$ be a fixed law with continuous CDF $F$, and suppose $\\beta_{BL}(Q_n(y,\\cdot),Q)\\to0$ in probability. Fix $0<u<1$ and let $q=q_u(Q):=\\inf\\{r\\in\\mathbb Q:Q((-\u221e,r])\\ge u\\}$, using the canonical rational embedding. Assume $F$ is strictly increasing on some open interval containing $q$. Define $q_u(Q_n(y,\\cdot))$ by the same convention. Then $q_u(Q_n)\\to q$ in probability. The local strict-increase hypothesis permits CDFs, such as norms of nonnegative random elements, that are constant on part of $\\mathbb R$.",
+        "uses": [
+          "1.2"
+        ]
+      },
+      {
+        "fact": "F7",
+        "source": "def-posterior-credible-set",
+        "source_section": "Definition",
+        "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathsf Y,\\mathcal Y)$ be measurable spaces and let $y\\mapsto\\Pi_y$ be a supplied posterior probability kernel. For $\\alpha\\in[0,1]$, a set-valued rule $C$ is **graph-measurable** when\n$$\\{(y,\\theta)\\in\\mathsf Y\\times\\Theta:\\theta\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal T.$$\nIt is a **posterior credible set at level $1-\\alpha$** when it is graph-measurable and\n$$\\Pi_y(C(y))\\ge 1-\\alpha\\qquad\\text{for every }y\\text{ in its declared data domain}.$$\nThe posterior-mass function is measurable by integration of the indicator of the membership graph against the kernel. If a density is available relative to a specified dominating measure, a highest-posterior-density region selects parameter values with largest density; such regions need not be intervals and may be disconnected or nonunique.",
+        "uses": [
+          "1.3"
+        ]
+      },
+      {
+        "fact": "F8",
+        "source": "thm-portmanteau-theorem",
+        "source_section": "Statement",
+        "quote": "For Borel probabilities $\\mu_n,\\mu$ on a metric space S, the following are equivalent: (i) $\\mu_n\\Rightarrow\\mu$; (ii) integrals converge for all bounded uniformly continuous real tests; (iii) $\\limsup_n\\mu_n(F)\\le\\mu(F)$ for every closed F; (iv) $\\liminf_n\\mu_n(G)\\ge\\mu(G)$ for every open G; (v) $\\mu_n(A)\\to\\mu(A)$ for every Borel A with $\\mu(\\partial A)=0$.",
+        "uses": [
+          "2.1"
+        ]
+      },
+      {
+        "fact": "F9",
+        "source": "thm-projected-empirical-process-clt-in-m0w",
+        "source_section": "Statement",
+        "quote": "Assume AC. Let $P_0$ have a density $f_0$ on $[0,1]$ with $\\|f_0\\|_\\infty\\le B<\\infty$. Let $(\\psi_{lk})$ be an orthonormal, compactly supported wavelet basis with $2^l$ coefficients at level $l\\ge1$, uniformly bounded overlap, and $\\|\\psi_{lk}\\|_\\infty\\le C_0 2^{l/2}$. Suppose for some $\\gamma>1/2$,\n$$\\max_k|\\langle f_0,\\psi_{lk}\\rangle|\\le C_f2^{-l(\\gamma+1/2)}.$$\nLet $w_l\\ge1$ be nondecreasing and admissible in [[def-multiscale-coefficient-space-m0w]], and choose either cutoff regime\n$$2^{L_n}\\asymp n^{1/(2\\gamma+1)}\\quad\\text{or}\\quad 2^{L_n}\\asymp(n/\\log n)^{1/(2\\gamma+1)}.$$\nFor IID $X_1,\\ldots,X_n\\sim P_0$, define the finite wavelet projection $P_n(L_n)$ by coefficients $\\langle P_n(L_n),\\psi_{lk}\\rangle=P_n\\psi_{lk}:=n^{-1}\\sum_{i=1}^n\\psi_{lk}(X_i)$ for $l\\le L_n$ and zero for $l>L_n$, with the coarsest scaling coordinates projected as well. Let $G_{P_0}$ be a Borel centered Gaussian law on $M_0(w)$ whose coefficient covariance is\n$$\\operatorname{Cov}(G_{lk},G_{l'k'})=P_0[(\\psi_{lk}-P_0\\psi_{lk})(\\psi_{l'k'}-P_0\\psi_{l'k'})].$$\nThen\n$$\\sqrt n\\{P_n(L_n)-f_0\\}\\Rightarrow G_{P_0}\\quad\\text{in }M_0(w).$$",
+        "uses": [
+          "1.2"
+        ]
+      },
+      {
+        "fact": "F10",
+        "source": "thm-subsequence-characterization-of-convergence-in-probability",
+        "source_section": "Statement",
+        "quote": "$X_n\\to X$ in probability if and only if every subsequence of $(X_n)$ has a\nfurther subsequence converging almost surely to $X$.",
+        "uses": []
+      },
+      {
+        "fact": "F11",
+        "source": "def-negative-sobolev-space-for-white-noise",
+        "source_section": "Definition",
+        "quote": "Let $(\\psi_{lk})$ be a countable complete orthonormal basis of the real Hilbert space $L^2([0,1])$ ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]], [[def-hilbert-space]], [[def-l-p-space-as-a-quotient-by-null-functions]]). For a wavelet basis, index levels by $l\\ge0$, let $K_l$ have $2^l$ indices, and put $a_l=2^l$ for $l\\ge1$ and $a_0=2$ for the finite coarsest level. This finite-level convention only prevents a zero logarithmic weight and does not change any convergence criterion below. For a trigonometric basis, use its integer frequency index $l$, bounded multiplicities, and $a_l=\\max(2,|l|)$.\n\nHere an **$S$-regular wavelet basis** means a wavelet orthonormal basis whose members are $S$ times differentiable, with each derivative through order $S$ in $L^2([0,1])$, following the source convention. The weak BvM theorem below only uses the basis's completeness, orthonormality, and level counts.\n\nFor $\\delta>0$, define $H(\\delta)=H^{-1/2,\\delta}_2$ to be the space of coefficient sequences $c=(c_{lk})$ with norm\n\n$$\\|c\\|_{H(\\delta)}^2:=\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}|c_{lk}|^2<\\infty.$$\n\nIts inner product is the corresponding weighted coefficient inner product. Multiplying each coordinate by $a_l^{-1/2}(\\log a_l)^{-\\delta}$ identifies it isometrically with $\\ell^2(I)$, where $I=\\{(l,k):k\\in K_l\\}$ (or the corresponding trigonometric index set). This sequence space is complete: if $x^{(m)}$ is Cauchy, each coordinate converges to a scalar $x_i$; for every finite $F\\subset I$, the Cauchy bound passes to the limit in $\\sum_{i\\in F}|x_i^{(m)}-x_i^{(n)}|^2$, so the supremum over finite $F$ shows $x^{(m)}\\to x$ in $\\ell^2(I)$. It is separable because finite-support sequences with rational coordinates form a countable dense set. Thus $H(\\delta)$ is a separable Hilbert space without an additional choice assumption.\n\nA function $f\\in L^2([0,1])$ is identified with its coefficient sequence $c_{lk}=\\langle f,\\psi_{lk}\\rangle$. For each finite set $F$ of indices, orthonormality makes $\\sum_{(l,k)\\in F}c_{lk}\\psi_{lk}$ orthogonal to its residual in $L^2$, so the Pythagorean identity gives $\\sum_F|c_{lk}|^2\\le\\|f\\|_2^2$. Taking the supremum over finite $F$ and using the boundedness of the weights proves that this coefficient map is a continuous embedding $L^2([0,1])\\hookrightarrow H(\\delta)$.\n\nThe weight trace $\\sum_{l,k}a_l^{-1}(\\log a_l)^{-2\\delta}$ is finite exactly when $\\delta>1/2$: for wavelets its tail is a constant multiple of $\\sum_{l\\ge1}l^{-2\\delta}$, while for a trigonometric basis it is comparable to $\\sum_{l\\ge2}[l(\\log l)^{2\\delta}]^{-1}$. The product-prior theorem below uses the wavelet case.",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "F12",
+        "source": "cor-cauchy-schwarz-for-random-variables",
+        "source_section": "Statement",
+        "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+        "uses": [
+          "1.1"
+        ]
+      }
+    ],
+    "derivations": [
+      {
+        "id": "step-1-1",
+        "claim": "The posterior draw $f$ and center $T_n$ are $L^2$-valued, so [F2] embeds $\\sqrt n(f-T_n)$ in $M_0(w)$; [F1] supplies its norm. For an $L$-Lipschitz map $T$ between metric spaces and any admissible bounded 1-Lipschitz test $h$ on its target, $h\\circ T/\\max(1,L)$ is an admissible test on its domain. Therefore\n$$\\beta_{BL}(T_\\#\\nu,T_\\#\\rho)\\le\\max(1,L)\\beta_{BL}(\\nu,\\rho).$$\nBy [F3], $J$ is linear and Lipschitz with a finite constant $L_J$. The bound applied pointwise to the data-indexed laws in [A1] gives $\\beta_{BL}(J_\\#Q_n,J_\\#G_{P_0})\\to0$ in probability. Moreover, if $\\ell:C([0,1])\\to\\mathbb R$ is continuous and linear, then $\\ell\\circ J$ is continuous and linear on $M_0(w)$. The centered Gaussian premise on $G_{P_0}$ says exactly that this scalar pushforward is centered normal, allowing zero variance. Thus $J_\\#G_{P_0}$ is a centered Gaussian Borel law. In particular, for any finite $t_1,\\ldots,t_m$ and real $a_1,\\ldots,a_m$, the functional $x\\mapsto\\sum_i a_iJx(t_i)$ is continuous and linear, so the evaluation vector $(JG_{P_0}(t_i))_{i=1}^m$ is jointly centered Gaussian. This uses only the scalar Gaussian pushforward meaning of the premise, without characteristic-function uniqueness or a Gaussian existence theorem. To identify its covariance, let $p_J1_{[0,s]}$ be the finite wavelet projection of the indicator. The finite Gaussian coefficient covariance gives\n$$\\operatorname{Cov}(J(P_JG_{P_0})(s),J(P_JG_{P_0})(t))=P_0[(p_J1_{[0,s]}-P_0p_J1_{[0,s]})(p_J1_{[0,t]}-P_0p_J1_{[0,t]})].$$\nBy [F11], $p_J1_{[0,s]}\\to1_{[0,s]}$ in Lebesgue $L^2$; since $f_0\\le B$, this is also convergence in $L^2(P_0)$. The variance of a difference of two finite projected Gaussian evaluations is the $P_0$-variance of the corresponding difference of projected indicators, so it tends to zero; hence those evaluations are Cauchy in $L^2$. They also converge almost surely to $JG_{P_0}(s)$ because $P_JG_{P_0}\\to G_{P_0}$ in $M_0(w)$ and $J$ is continuous. The almost-sure and in-probability limits coincide: for any $\\varepsilon>0$, the probability that they differ by more than $\\varepsilon$ is bounded by the two probabilities that each sequence differs from its limit by more than $\\varepsilon/2$, both tending to zero. If $U_J,V_J$ are the projected evaluations and $U,V$ their $L^2$ limits, [F12] gives\n$$|\\mathbb E[U_JV_J]-\\mathbb E[UV]|\\le\\|U_J-U\\|_2\\|V_J\\|_2+\\|U\\|_2\\|V_J-V\\|_2\\longrightarrow0;$$\nthe norms $\\|V_J\\|_2$ are bounded because $V_J\\to V$ in $L^2$, and the means converge to zero as well. Thus the finite covariance passes to the limit. The resulting covariance is $P_0[(1_{[0,s]}-F_0(s))(1_{[0,t]}-F_0(t))]=F_0(s\\wedge t)-F_0(s)F_0(t)$, the defining covariance of the $P_0$-Brownian bridge.",
+        "step": "1.1",
+        "inputs": [
+          "A1",
+          "F3",
+          "F11",
+          "F12",
+          "given",
+          "algebra"
+        ]
+      },
+      {
+        "id": "step-1-2",
+        "claim": "The norm maps $x\\mapsto\\|x\\|_{M(w)}$ and $F\\mapsto\\|F\\|_\\infty$ are 1-Lipschitz by the reverse triangle inequality. Applying the pushforward bound of step 1.1 first to the $M(w)$ norm and then to the supremum norm after $J$ gives bounded-Lipschitz convergence in probability of both posterior norm laws to their corresponding limit norm laws. Their CDFs satisfy [A3], so [F6] gives $R_n^M\\to q_M$ and $R_n^C\\to q_C$ in probability. For the projected empirical center $T_n=P_n(L_n)$, [F9] verifies [A2] under the smoothness and cutoff assumptions in [F9].",
+        "step": "1.2",
+        "inputs": [
+          "A1",
+          "A2",
+          "A3",
+          "F1",
+          "F6",
+          "F9",
+          "step 1.1"
+        ]
+      },
+      {
+        "id": "step-1-3",
+        "claim": "The posterior pushforward under either norm is a probability kernel on $[0,\\infty)$. By [F5], the two lower quantiles are measurable and their posterior CDFs at those radii are at least $1-\\alpha$. Since the centers and norms are measurable, the membership graphs of $C_n^M$ and $C_n^C$ are measurable. Thus both sets are credible by [F7].",
+        "step": "1.3",
+        "inputs": [
+          "F5",
+          "F7",
+          "given",
+          "algebra"
+        ]
+      },
+      {
+        "id": "step-2-1",
+        "claim": "By [A2] and [F4], $\\sqrt n(T_n-f_0)\\Rightarrow G_{P_0}$ and its primitive converges weakly to $B_{P_0}$. The frequentist error uses the negative center difference, but $\\|f_0-T_n\\|_{M(w)}=\\|T_n-f_0\\|_{M(w)}$ and $\\|J(f_0-T_n)\\|_\\infty=\\|J(T_n-f_0)\\|_\\infty$ because $J$ is linear. Thus each scaled frequentist error norm converges to the corresponding limit norm in [A3]. On the event that the random radius is within $\\varepsilon$ of its deterministic limit from step 1.2, coverage is bounded above and below by probabilities for the frequentist norm with fixed thresholds expanded or contracted by $\\varepsilon$. [F8] gives convergence of those fixed-threshold probabilities because [A3] makes their boundary probabilities zero. Sending $\\varepsilon\\downarrow0$ and using the CDF value $1-\\alpha$ at its quantile from [A3] yields $1-\\alpha$ for both coverage probabilities. This comparison does not require independence between the data-dependent posterior radii and the frequentist center.",
+        "step": "2.1",
+        "inputs": [
+          "A2",
+          "A3",
+          "F3",
+          "F4",
+          "F8",
+          "step 1.2",
+          "algebra"
+        ]
+      }
+    ],
+    "routine_steps": [],
+    "boundaries": [
+      {
+        "case": "empty",
+        "status": "not_applicable",
+        "reason": "Statement: the objects require the nonempty function, sequence, model, or probability-law domain declared in the hypotheses."
+      },
+      {
+        "case": "zero",
+        "status": "not_applicable",
+        "reason": "Statement: no zero-valued input or parameter is varied in this claim."
+      },
+      {
+        "case": "one",
+        "status": "not_applicable",
+        "reason": "Statement: no one-point input case affects the asserted result."
+      },
+      {
+        "case": "degenerate",
+        "status": "checked",
+        "evidence": "Statement: the positive, locally strictly increasing norm quantile assumption excludes a degenerate zero-radius limit."
+      },
+      {
+        "case": "endpoints",
+        "status": "not_applicable",
+        "reason": "Statement: the credibility level is restricted to 0<alpha<1; no endpoint level is asserted."
+      },
+      {
+        "case": "nonempty-choice",
+        "status": "not_applicable",
+        "reason": "Proof: all choices are finite or are made for a single fixed object; no choice axiom is invoked."
+      },
+      {
+        "case": "iff-forward",
+        "status": "not_applicable",
+        "reason": "Statement: no biconditional is asserted."
+      },
+      {
+        "case": "iff-reverse",
+        "status": "not_applicable",
+        "reason": "Statement: no biconditional is asserted."
+      }
+    ],
+    "finite_checks": []
+  }
+}

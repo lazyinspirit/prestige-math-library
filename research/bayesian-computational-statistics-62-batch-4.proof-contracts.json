@@ -1,0 +1,973 @@
+{
+  "version": 1,
+  "level": 0,
+  "scope": [
+    "def-bayesian-model-as-prior-and-sampling-kernel",
+    "def-bayesian-posterior-as-regular-conditional-law",
+    "cor-posterior-r-c-d-exists-for-standard-borel-parameter",
+    "thm-standard-borel-bayesian-posterior-kernel-exists",
+    "ex-finite-bayesian-posterior-and-null-version",
+    "ex-omega-indexed-bayesian-posterior-r-c-d",
+    "ex-dominated-posterior-on-nonstandard-observation-space",
+    "ex-standard-borel-posterior-kernel-on-countable-data"
+  ],
+  "contracts": {
+    "def-bayesian-model-as-prior-and-sampling-kernel": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: an empty parameter space cannot carry the required prior probability; for a nonempty parameter space an empty data space cannot carry any sampling probability section. Thus no proper model has either empty space."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition contains no numeric evidence, probability-zero event, or zero-valued parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a singleton parameter carries its unique prior; a singleton data space has its unique probability sampling section, so the proper-model interface applies in either singleton case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition states no nondegeneracy condition or consequence for a degenerate law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: parameter and data inputs are measurable spaces, not a real interval with endpoints; proper means prior total mass exactly one, excluding an improper sigma-finite prior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: prior Pi and representing probability kernel K are supplied data; specifying K(theta,B)=P_theta(B) makes no selection of a kernel from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the displayed kernel equality specifies representation of the supplied experiment; it does not assert that an arbitrary parametric family is parameter measurable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the final paragraph distinguishes proper priors from improper ones; it gives no converse theorem constructing a Bayesian model from an unspecified family."
+        }
+      ]
+    },
+    "def-bayesian-posterior-as-regular-conditional-law": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the assumed joint probability J excludes an empty canonical product; the realization Q on Omega also excludes empty Omega. An empty event still has both conditional-law sides zero."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition contains no numeric evidence, probability-zero event, or zero-valued parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: on a singleton parameter target every posterior section is the unit point mass; on a singleton data target the conditional identity returns the prior marginal."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition states no nondegeneracy condition or consequence for a degenerate law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: null data values are measurable marginal-null fibres, not numerical interval endpoints; replacing a version on such a fibre preserves the displayed rectangle identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: existence of either posterior interface is explicitly not asserted; kernels are supplied candidates, and the stated null-set replacement uses one fixed supplied probability."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: its explicit equivalently clause identifies the conditional-law interface with the rectangle identities for all A,B; this forward equivalence is part of the definition, not an absent theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: the rectangle identity is explicitly given as equivalent to the data-indexed conditional-law requirement; the reverse direction is definitional through the cited conditional-law convention."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Reviewed the full Definition against the Bayesian-model definition, joint-law lemma, RCD and conditional-law definitions and dominated Bayes theorem. A supplied Q and joint law J make both spaces nonempty. The rectangle equivalence holds since sigma(Y) consists of inverse images of data events; integration against Q_Y is the pushforward identity (first for indicators, then simple approximants). Every section is probability-valued. Null measurable-set replacement by the supplied prior preserves measurability and all bounded event integrals, including singleton targets where no distinct section exists. No existence or AC assertion is made; the dominated route requires joint measurability and sigma-finite observation measure and fills zero/infinite normalizers."
+      }
+    },
+    "cor-posterior-r-c-d-exists-for-standard-borel-parameter": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-prior-and-model-kernel-define-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathcal X,\\mathcal A)$ be measurable spaces,\nlet $\\pi$ be a probability measure on $(\\Theta,\\mathcal T)$, and let\n$K:\\Theta\\times\\mathcal A\\to[0,1]$ be a probability kernel. For\n$C\\in\\mathcal T\\otimes\\mathcal A$, write\n$C_\\theta=\\{x\\in\\mathcal X:(\\theta,x)\\in C\\}$ and set\n$$J(C)=\\int_\\Theta K(\\theta,C_\\theta)\\,\\pi(d\\theta).$$\nThen $J$ is a probability measure on the product sigma-algebra, and for every\nnonnegative product-measurable $h$,\n$$\\int_{\\Theta\\times\\mathcal X}h(\\theta,x)\\,J(d\\theta,dx)=\\int_\\Theta\\left(\\int_\\mathcal Xh(\\theta,x)\\,K(\\theta,dx)\\right)\\pi(d\\theta).$$\nIn particular, $J(A\\times B)=\\int_AK(\\theta,B)\\,\\pi(d\\theta)$ for\n$A\\in\\mathcal T$ and $B\\in\\mathcal A$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X:(\\Omega,\\mathcal F,P)\\to(E,\\mathcal S)$ be a measurable random element with standard-Borel target, and let $\\mathcal G\\subseteq\\mathcal F$ be any sub-sigma-algebra. There exists a regular conditional distribution of $X$ given $\\mathcal G$. Every section is a probability measure, including at exceptional sample points, and no countable-generation or completeness assumption on $\\mathcal G$ is required.\n\nFor this necessarily nonempty target, the construction also supplies a bimeasurable bijection $c:E\\to B$ onto a Borel set $B\\subseteq[0,1]$, and a countable algebra $\\mathcal A$ which generates $\\mathcal S$, separates points, and determines finite measures.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-bayesian-posterior-as-regular-conditional-law",
+          "source_section": "Definition",
+          "quote": "Let a proper Bayesian model be given, and let $J$ be its joint prior-predictive probability on $(\\Theta\\times\\mathsf Y,\\mathcal T\\otimes\\mathcal Y)$, supplied by [[lem-prior-and-model-kernel-define-joint-law]]. More generally, let $(\\Omega,\\mathcal F,Q)$ be any probability space carrying parameter and data random elements $X:\\Omega\\to\\Theta$ and $Y:\\Omega\\to\\mathsf Y$ whose joint law is $J$ ([[def-probability-measure]], [[def-random-element-and-real-random-variable]], [[def-law-or-distribution-of-a-random-element]]). A **posterior regular conditional distribution (posterior RCD)** is a regular conditional distribution of $X$ given $\\sigma(Y)$, in the sense of [[def-regular-conditional-distribution]]. It is a kernel indexed by the sample point $\\omega\\in\\Omega$. The canonical realization is $\\Omega=\\Theta\\times\\mathsf Y$ with $Q=J$ and coordinate maps $X(\\theta,y)=\\theta$, $Y(\\theta,y)=y$.\n\nA **data-indexed posterior kernel** is a probability kernel $\\Pi_{\\cdot}$ from $(\\mathsf Y,\\mathcal Y)$ to $(\\Theta,\\mathcal T)$ ([[def-measure-kernel-and-probability-kernel]]) for which $\\omega\\mapsto\\Pi_{Y(\\omega)}$ is a conditional law of $X$ given $Y$ ([[def-conditional-law-given-a-random-element]]). Equivalently, for every $A\\in\\mathcal T$ and $B\\in\\mathcal Y$,\n$$Q(X\\in A,\\ Y\\in B)=\\int_B\\Pi_y(A)\\,Q_Y(dy),$$\nwhere $Q_Y$ is the data marginal (equal to $J_Y$). This kernel is indexed by data values, not sample points.\n\nThe definition asserts no existence of either conditional kernel. Values of a data-indexed version on a measurable $J_Y$-null set are not fixed by the conditional-law identities; replacing them there by a fixed probability preserves those identities. A dominated-density construction is a separate route: [[thm-bayes-formula-for-dominated-kernels]] requires a proper prior, a sigma-finite data measure, and a specified jointly measurable sampling density, and fills fibres whose marginal density is zero or infinite with the prior. It does not require the data space to be standard Borel.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the model's prior and sampling kernel define the joint probability $J$ on the canonical product space. The given random elements $X,Y$ have this same joint law, and [F2] supplies the random-element and pushforward-law meanings used for this realization.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The target $(\\Theta,\\mathcal T)$ is standard Borel and AC is assumed. Apply [F3] to $(\\Omega,\\mathcal F,Q)$, the given random element $X$, and the sub-sigma-algebra $\\mathcal G=\\sigma(Y)$. It gives an RCD of $X$ given $\\sigma(Y)$; by [F4] this is the stated posterior RCD. The RCD theorem places no standard-Borel condition on $\\mathsf Y$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the proper prior and the realizing probability Q cannot be measures on empty parameter or sample spaces; empty conditioning events remain allowed with zero conditional integrals."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 invokes RCD existence without dividing by a data-event probability or evidence value; null-data values remain version-dependent."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses only the standard-Borel target condition, which includes singleton parameter spaces."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The model in step 1.1 may have a point-mass prior or a deterministic sampling kernel; no nondegeneracy premise is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the conditioning input is sigma(Y), an arbitrary sub-sigma-algebra rather than an interval; step 2.1 imposes no endpoint or standard-Borel data restriction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses AC exactly through the standard-Borel RCD existence theorem; no weaker choice principle is substituted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: AC and a standard-Borel parameter imply existence of a sample-point RCD in step 2.1; no necessary-condition characterization is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: existence of an RCD is not asserted to imply standard Borelness or AC; the conclusion is solely the sufficient-hypothesis existence result in step 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Reviewed Statement, F1-F4 and both proof steps with current joint-law, random-element, law, posterior-definition and standard-Borel RCD existence suppliers. F3 applies on the arbitrary given probability space, with measurable X, standard-Borel parameter target, G=sigma(Y) subset F and explicitly assumed AC; no condition on the observation space is required. F4 originally restricted the posterior terminology to the canonical realization, contrary to the actual definition; repaired that citation to include every realization with joint law J. This is a nonfatal citation defect: F3 already proves the full existence claim and the directly cited definition supplies the terminology. No change to Statement, dependencies or proof inference. Empty sample/parameter spaces excluded by probabilities, singleton and deterministic cases allowed, no divisions or simultaneous eventwise version selections."
+      }
+    },
+    "thm-standard-borel-bayesian-posterior-kernel-exists": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-prior-and-model-kernel-define-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathcal X,\\mathcal A)$ be measurable spaces,\nlet $\\pi$ be a probability measure on $(\\Theta,\\mathcal T)$, and let\n$K:\\Theta\\times\\mathcal A\\to[0,1]$ be a probability kernel. For\n$C\\in\\mathcal T\\otimes\\mathcal A$, write\n$C_\\theta=\\{x\\in\\mathcal X:(\\theta,x)\\in C\\}$ and set\n$$J(C)=\\int_\\Theta K(\\theta,C_\\theta)\\,\\pi(d\\theta).$$\nThen $J$ is a probability measure on the product sigma-algebra, and for every\nnonnegative product-measurable $h$,\n$$\\int_{\\Theta\\times\\mathcal X}h(\\theta,x)\\,J(d\\theta,dx)=\\int_\\Theta\\left(\\int_\\mathcal Xh(\\theta,x)\\,K(\\theta,dx)\\right)\\pi(d\\theta).$$\nIn particular, $J(A\\times B)=\\int_AK(\\theta,B)\\,\\pi(d\\theta)$ for\n$A\\in\\mathcal T$ and $B\\in\\mathcal A$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-posterior-r-c-d-exists-for-standard-borel-parameter",
+          "source_section": "Statement",
+          "quote": "Assume AC ([[def-axiom-of-choice]]). Let a proper Bayesian model have joint prior-predictive law $J$, and let $(\\Omega,\\mathcal F,Q)$ be any probability space carrying parameter and data random elements $X,Y$ whose joint law is $J$ ([[def-random-element-and-real-random-variable]], [[def-law-or-distribution-of-a-random-element]]). If $(\\Theta,\\mathcal T)$ is standard Borel ([[def-standard-borel-space]]), then a posterior RCD of $X$ given $\\sigma(Y)$ exists. The data space $(\\mathsf Y,\\mathcal Y)$ need only be measurable. In particular, the claim applies to the canonical product realization supplied by [[lem-prior-and-model-kernel-define-joint-law]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X$ and $Y$ take values in nonempty standard-Borel spaces $(E,\\mathcal S)$ and $(T,\\mathcal T)$ on a probability space $(\\Omega,\\mathcal F,P)$. Let $L$ be a specified regular conditional distribution of $X$ given $\\sigma(Y)$, everywhere a probability kernel. There is a probability kernel $K:T\\to E$ such that $L(\\omega,\\cdot)=K(Y(\\omega),\\cdot)$ simultaneously outside a single null set. In fact, with the stated everywhere-kernel convention, the construction below gives this equality for every $\\omega$. Consequently K is a conditional law of X given Y.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-conditional-law-given-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,P)\\to(E,\\mathcal S)$ and $Y:(\\Omega,\\mathcal F,P)\\to(T,\\mathcal T)$ be measurable random elements. A **conditional law of X given Y** is a probability kernel $K:(T,\\mathcal T)\\to(E,\\mathcal S)$ such that $\\omega\\mapsto K(Y(\\omega),\\cdot)$ is a regular conditional distribution of X given $\\sigma(Y)$ in [[def-regular-conditional-distribution]]. Thus for every $A\\in\\mathcal S$ and $H\\in\\sigma(Y)$,\n$$\\int_H K(Y(\\omega),A)\\,dP=P(H\\cap\\{X\\in A\\}).$$\n\nComposition with Y makes each evaluation $\\sigma(Y)$-measurable, and every section remains a probability by [[def-measure-kernel-and-probability-kernel]]. The notation $P(X\\in A\\mid Y=y)=K(y,A)$ refers to a chosen kernel; it is not a ratio involving the possibly zero probability $P(Y=y)$.\n\nWrite $P_Y(B)=P(Y^{-1}(B))$ for the law in [[def-law-or-distribution-of-a-random-element]]. If a specified countable family $\\mathcal C\\subseteq\\mathcal S$ determines probability measures, two conditional laws K,L agree as measures outside a single $\\mathcal T$-measurable $P_Y$-null set. Indeed for each $A\\in\\mathcal C$ the measurable discrepancy $D_A=\\{y:K(y,A)\\ne L(y,A)\\}$ has null inverse image under Y by [[lem-conditional-expectation-is-unique-almost-surely]]. Hence $P_Y(D_A)=0$ by the law definition; the countable union $D$ is null by [[thm-finite-and-countable-subadditivity-of-measures]], and off D the determining property gives equality of measures. This uses a supplied determining family and makes no AC assertion about obtaining one.\n\nValues on a measurable $P_Y$-null subset may be replaced by a specified fixed probability on E without changing these identities. The inverse image of that subset is measurable null, and all event evaluations are bounded, so the modified event integrals agree. Empty-event evaluations remain zero and whole-target evaluations remain one. Existence on standard-Borel spaces is proved separately; the definition alone does not assert a conditional kernel exists.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\lambda$ be a probability on $(E\\times T,\\mathcal S\\otimes\\mathcal T)$, where E and T are standard-Borel spaces, and let $\\beta(B)=\\lambda(E\\times B)$ be its second marginal. There is a probability kernel $K:(T,\\mathcal T)\\to(E,\\mathcal S)$ such that\n\n$$\\lambda(A\\times B)=\\int_B K(y,A)\\,\\beta(dy)\\quad(A\\in\\mathcal S,\\ B\\in\\mathcal T).$$\n\nIt is unique as a kernel outside a single measurable $\\beta$-null set. For every nonnegative product-measurable $f:E\\times T\\to[0,\\infty]$,\n\n$$\\int f(x,y)\\,\\lambda(d(x,y))=\\int_T\\left(\\int_E f(x,y)K(y,dx)\\right)\\beta(dy).$$\n\nIn particular this applies to the joint law of random elements $(X,Y)$, with $\\beta=P_Y$; the direction is the law of X given Y.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $J$ is a probability measure on $(\\Theta\\times\\mathsf Y,\\mathcal T\\otimes\\mathcal Y)$ and $J_Y(B)=J(\\Theta\\times B)=\\int_\\Theta K(\\theta,B)\\,\\Pi(d\\theta)$. Its coordinate maps $X$ and $Y$ are measurable by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\Theta$ is standard Borel and [A1] holds, [F3] supplies a posterior RCD $L$ of $X$ given $\\sigma(Y)$ on the canonical space of step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Both $\\Theta$ and $\\mathsf Y$ are standard Borel and [A1] holds, so [F4] factors $L$ through $Y$ as a probability kernel $\\Pi_y$; hence its evaluations are $\\mathcal Y$-measurable and every section is a probability. By [F5], the composition $\\Pi_Y$ is a posterior RCD, with rectangle identity $J(A\\times B)=\\int_B\\Pi_y(A)\\,J_Y(dy)$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "F5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply [F6] to the same joint probability $J$. It gives uniqueness of the disintegration kernel as a probability measure outside one $J_Y$-null set. Replacing a version on any measurable $J_Y$-null set by the prior $\\Pi$ preserves every rectangle identity, as [F5] records. Thus the conditional identities alone do not choose a pointwise value there; each section must still be a probability measure.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: a proper prior and sampling probabilities exclude empty parameter/data targets; step 1.1 has joint mass one, while the rectangle equation also covers empty A or B with value zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 3.1–4.1 use the conditional-law and disintegration identities without a density quotient. Step 4.1 records uniqueness only outside a marginal-null set and that changing a kernel there to the prior preserves the identities, subject to retaining probability-kernel sections."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 4.1: Singleton standard-Borel parameter and data spaces remain allowed. When the parameter space is a singleton, only one probability section exists; the revised null-set clause therefore states freedom of the identities only, subject to the kernel axioms."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement imposes no nondegeneracy condition on the prior or joint law; steps 1.1–4.1 use only probability and disintegration identities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the only exceptional data values are a measurable J_Y-null set; step 4.1 states uniqueness outside that set and makes no pointwise endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1, 3.1, and 4.1 carry the suppliers' explicit AC premise; the proof claims no choice-free version."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: standard-Borel targets and AC imply factorization into a data-indexed posterior in step 3.1; this is an existence implication, not a characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no converse infers standard Borelness from a posterior kernel; step 4.1 gives only almost-everywhere uniqueness of the supplied disintegration."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Reviewed current Statement, all F1-F6 and A1 and four proof steps, exact pre-reader archived source matching e4fca5dd... and immutable post-reader hash d144b11e.... Proper prior and pointwise probability sampling kernel give J, hence nonempty coordinate targets and measurable coordinates. AC and standard-Borel parameter give the RCD; both targets standard Borel and AC allow exact kernel factorization. Rectangle identity follows by marginal substitution. Disintegration supplies simultaneous measure-valued uniqueness outside one measurable marginal-null set. Prior replacement on such a set preserves probability sections and measurability and bounded testing integrals; singleton target permits no distinct probability measure, so reader correction of the old overstatement is sound. Amended two nonfatal interface wording errors: F2 must say from a probability space and step 3.1 composition is an RCD, while the data-indexed kernel is a conditional law. No substantive existence or uniqueness claim changed beyond the accepted null-fiber qualification. Reviewed actual direct consumers countable-data example and sufficient-summary theorem; neither uses null-fiber freedom, both retain the stated AC/standard-Borel hypotheses. No downstream repair needed."
+      }
+    },
+    "ex-finite-bayesian-posterior-and-null-version": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bayesian-model-as-prior-and-sampling-kernel",
+          "source_section": "Definition",
+          "quote": "Let\n$$\\mathsf E=((\\mathsf Y,\\mathcal Y),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$$\nbe a statistical experiment ([[def-statistical-experiment]]). Equip the parameter set with a specified measurable structure $(\\Theta,\\mathcal T)$ ([[def-measurable-space]]). A **proper Bayesian model** based on this experiment consists of a prior probability measure $\\Pi$ on $(\\Theta,\\mathcal T)$ ([[def-probability-measure]]) and a probability kernel $K$ from $(\\Theta,\\mathcal T)$ to $(\\mathsf Y,\\mathcal Y)$ ([[def-measure-kernel-and-probability-kernel]]) that represents the experiment:\n$$K(\\theta,B)=P_\\theta(B)\\qquad(\\theta\\in\\Theta,\\ B\\in\\mathcal Y).$$\nThus $\\theta\\mapsto K(\\theta,B)$ is $\\mathcal T$-measurable for every data event $B$, as required for a parameter-measurable model ([[def-parameter-measurable-statistical-model-as-markov-kernel]]). The family of measures in a parametric model alone does not supply this parameter sigma-algebra or measurability condition ([[def-parametric-statistical-model]]).\n\nThe word **proper** means that the prior is a probability measure. A sigma-finite improper prior is not a proper Bayesian model in this definition; fixed-data posterior normalizers for such priors are handled separately.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bayesian-posterior-as-regular-conditional-law",
+          "source_section": "Definition",
+          "quote": "Let a proper Bayesian model be given, and let $J$ be its joint prior-predictive probability on $(\\Theta\\times\\mathsf Y,\\mathcal T\\otimes\\mathcal Y)$, supplied by [[lem-prior-and-model-kernel-define-joint-law]]. More generally, let $(\\Omega,\\mathcal F,Q)$ be any probability space carrying parameter and data random elements $X:\\Omega\\to\\Theta$ and $Y:\\Omega\\to\\mathsf Y$ whose joint law is $J$ ([[def-probability-measure]], [[def-random-element-and-real-random-variable]], [[def-law-or-distribution-of-a-random-element]]). A **posterior regular conditional distribution (posterior RCD)** is a regular conditional distribution of $X$ given $\\sigma(Y)$, in the sense of [[def-regular-conditional-distribution]]. It is a kernel indexed by the sample point $\\omega\\in\\Omega$. The canonical realization is $\\Omega=\\Theta\\times\\mathsf Y$ with $Q=J$ and coordinate maps $X(\\theta,y)=\\theta$, $Y(\\theta,y)=y$.\n\nA **data-indexed posterior kernel** is a probability kernel $\\Pi_{\\cdot}$ from $(\\mathsf Y,\\mathcal Y)$ to $(\\Theta,\\mathcal T)$ ([[def-measure-kernel-and-probability-kernel]]) for which $\\omega\\mapsto\\Pi_{Y(\\omega)}$ is a conditional law of $X$ given $Y$ ([[def-conditional-law-given-a-random-element]]). Equivalently, for every $A\\in\\mathcal T$ and $B\\in\\mathcal Y$,\n$$Q(X\\in A,\\ Y\\in B)=\\int_B\\Pi_y(A)\\,Q_Y(dy),$$\nwhere $Q_Y$ is the data marginal (equal to $J_Y$). This kernel is indexed by data values, not sample points.\n\nThe definition asserts no existence of either conditional kernel. Values of a data-indexed version on a measurable $J_Y$-null set are not fixed by the conditional-law identities; replacing them there by a fixed probability preserves those identities. A dominated-density construction is a separate route: [[thm-bayes-formula-for-dominated-kernels]] requires a proper prior, a sigma-finite data measure, and a specified jointly measurable sampling density, and fills fibres whose marginal density is zero or infinite with the prior. It does not require the data space to be standard Borel.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-prior-and-model-kernel-define-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathcal X,\\mathcal A)$ be measurable spaces,\nlet $\\pi$ be a probability measure on $(\\Theta,\\mathcal T)$, and let\n$K:\\Theta\\times\\mathcal A\\to[0,1]$ be a probability kernel. For\n$C\\in\\mathcal T\\otimes\\mathcal A$, write\n$C_\\theta=\\{x\\in\\mathcal X:(\\theta,x)\\in C\\}$ and set\n$$J(C)=\\int_\\Theta K(\\theta,C_\\theta)\\,\\pi(d\\theta).$$\nThen $J$ is a probability measure on the product sigma-algebra, and for every\nnonnegative product-measurable $h$,\n$$\\int_{\\Theta\\times\\mathcal X}h(\\theta,x)\\,J(d\\theta,dx)=\\int_\\Theta\\left(\\int_\\mathcal Xh(\\theta,x)\\,K(\\theta,dx)\\right)\\pi(d\\theta).$$\nIn particular, $J(A\\times B)=\\int_AK(\\theta,B)\\,\\pi(d\\theta)$ for\n$A\\in\\mathcal T$ and $B\\in\\mathcal A$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The joint masses are $J(1,0)=1/12$, $J(0,0)=1/2$, $J(1,1)=1/4$, and $J(0,1)=1/6$, while both masses at data $2$ are zero. Therefore $J_Y(0)=7/12$, $J_Y(1)=5/12$, and $J_Y(2)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $\\Pi_0(1)=1/7$, $\\Pi_1(1)=3/5$, and choose any probability law for $\\Pi_2$; set $\\Pi_y(0)=1-\\Pi_y(1)$. Each $\\Pi_y$ is a probability, and measurability is automatic on the finite power-set data space. The displayed ratios give $\\Pi_0(1)J_Y(0)=J(1,0)$ and $\\Pi_1(1)J_Y(1)=J(1,1)$; subtraction from the marginal gives the same identities for parameter value $0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any $A\\subseteq\\Theta$ and $B\\subseteq Y$, summing the singleton identities in step 2.1 over $y\\in B$ gives $\\int_B\\Pi_y(A)\\,J_Y(dy)=J(A\\times B)$; the zero-mass term at $y=2$ contributes zero for every choice of $\\Pi_2$. Thus every such kernel is a data-indexed posterior version by [F2]. In particular, $\\Pi_2=\\delta_0$ and $\\widetilde\\Pi_2=\\delta_1$, with the same values at $0,1$, are distinct versions of the same posterior law.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: the parameter set has two points and data set three points, so empty spaces are not inputs; Verification step 3.1 permits empty A or B and gives zero on both rectangle sides."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly checks the y=2 fibre with prior-predictive mass zero and shows that its posterior law is arbitrary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Verification step 2.1 explicitly verifies each singleton parameter/data mass; at data 0 the posterior is 1/7 and at data 1 it is 3/5."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the zero-likelihood data fibre, while the positive-fibre calculations in step 2.1 retain both parameter values."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes data y=2 with zero probability; the posterior version there is handled in step 3.1 rather than by a quotient."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification steps 2.1/3.1 allow an arbitrary single probability at the null data value 2, and explicitly exhibit delta_0 and delta_1. This finite construction needs no family choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: the displayed joint masses yield two posterior probabilities and null-version freedom; there is no forward half of a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: distinct choices delta_0 and delta_1 at data 2 do not assert a converse characterization of all Bayesian models; only this fixed finite model is verified."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Reviewed full Example, F1-F3 and all three verification steps with model/posterior/kernel definitions and joint-law supplier. Prior and both sampling distributions normalize on their finite power sets. Recomputed four nonzero joint masses 1/12,1/2,1/4,1/6, predictive masses 7/12,5/12,0 and posterior masses 1/7,3/5. On data 2 any specified probability on the two-state parameter space is a measurable section; multiplication by zero preserves each rectangle identity. Checked complementary parameter event, empty/whole events and arbitrary unions by finite addition. The two specified Dirac fillers really differ, unlike the singleton-target caveat. No AC is used."
+      }
+    },
+    "ex-omega-indexed-bayesian-posterior-r-c-d": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bayesian-model-as-prior-and-sampling-kernel",
+          "source_section": "Definition",
+          "quote": "Let\n$$\\mathsf E=((\\mathsf Y,\\mathcal Y),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$$\nbe a statistical experiment ([[def-statistical-experiment]]). Equip the parameter set with a specified measurable structure $(\\Theta,\\mathcal T)$ ([[def-measurable-space]]). A **proper Bayesian model** based on this experiment consists of a prior probability measure $\\Pi$ on $(\\Theta,\\mathcal T)$ ([[def-probability-measure]]) and a probability kernel $K$ from $(\\Theta,\\mathcal T)$ to $(\\mathsf Y,\\mathcal Y)$ ([[def-measure-kernel-and-probability-kernel]]) that represents the experiment:\n$$K(\\theta,B)=P_\\theta(B)\\qquad(\\theta\\in\\Theta,\\ B\\in\\mathcal Y).$$\nThus $\\theta\\mapsto K(\\theta,B)$ is $\\mathcal T$-measurable for every data event $B$, as required for a parameter-measurable model ([[def-parameter-measurable-statistical-model-as-markov-kernel]]). The family of measures in a parametric model alone does not supply this parameter sigma-algebra or measurability condition ([[def-parametric-statistical-model]]).\n\nThe word **proper** means that the prior is a probability measure. A sigma-finite improper prior is not a proper Bayesian model in this definition; fixed-data posterior normalizers for such priors are handled separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bayesian-posterior-as-regular-conditional-law",
+          "source_section": "Definition",
+          "quote": "Let a proper Bayesian model be given, and let $J$ be its joint prior-predictive probability on $(\\Theta\\times\\mathsf Y,\\mathcal T\\otimes\\mathcal Y)$, supplied by [[lem-prior-and-model-kernel-define-joint-law]]. More generally, let $(\\Omega,\\mathcal F,Q)$ be any probability space carrying parameter and data random elements $X:\\Omega\\to\\Theta$ and $Y:\\Omega\\to\\mathsf Y$ whose joint law is $J$ ([[def-probability-measure]], [[def-random-element-and-real-random-variable]], [[def-law-or-distribution-of-a-random-element]]). A **posterior regular conditional distribution (posterior RCD)** is a regular conditional distribution of $X$ given $\\sigma(Y)$, in the sense of [[def-regular-conditional-distribution]]. It is a kernel indexed by the sample point $\\omega\\in\\Omega$. The canonical realization is $\\Omega=\\Theta\\times\\mathsf Y$ with $Q=J$ and coordinate maps $X(\\theta,y)=\\theta$, $Y(\\theta,y)=y$.\n\nA **data-indexed posterior kernel** is a probability kernel $\\Pi_{\\cdot}$ from $(\\mathsf Y,\\mathcal Y)$ to $(\\Theta,\\mathcal T)$ ([[def-measure-kernel-and-probability-kernel]]) for which $\\omega\\mapsto\\Pi_{Y(\\omega)}$ is a conditional law of $X$ given $Y$ ([[def-conditional-law-given-a-random-element]]). Equivalently, for every $A\\in\\mathcal T$ and $B\\in\\mathcal Y$,\n$$Q(X\\in A,\\ Y\\in B)=\\int_B\\Pi_y(A)\\,Q_Y(dy),$$\nwhere $Q_Y$ is the data marginal (equal to $J_Y$). This kernel is indexed by data values, not sample points.\n\nThe definition asserts no existence of either conditional kernel. Values of a data-indexed version on a measurable $J_Y$-null set are not fixed by the conditional-law identities; replacing them there by a fixed probability preserves those identities. A dominated-density construction is a separate route: [[thm-bayes-formula-for-dominated-kernels]] requires a proper prior, a sigma-finite data measure, and a specified jointly measurable sampling density, and fills fibres whose marginal density is zero or infinite with the prior. It does not require the data space to be standard Borel.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-prior-and-model-kernel-define-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathcal X,\\mathcal A)$ be measurable spaces,\nlet $\\pi$ be a probability measure on $(\\Theta,\\mathcal T)$, and let\n$K:\\Theta\\times\\mathcal A\\to[0,1]$ be a probability kernel. For\n$C\\in\\mathcal T\\otimes\\mathcal A$, write\n$C_\\theta=\\{x\\in\\mathcal X:(\\theta,x)\\in C\\}$ and set\n$$J(C)=\\int_\\Theta K(\\theta,C_\\theta)\\,\\pi(d\\theta).$$\nThen $J$ is a probability measure on the product sigma-algebra, and for every\nnonnegative product-measurable $h$,\n$$\\int_{\\Theta\\times\\mathcal X}h(\\theta,x)\\,J(d\\theta,dx)=\\int_\\Theta\\left(\\int_\\mathcal Xh(\\theta,x)\\,K(\\theta,dx)\\right)\\pi(d\\theta).$$\nIn particular, $J(A\\times B)=\\int_AK(\\theta,B)\\,\\pi(d\\theta)$ for\n$A\\in\\mathcal T$ and $B\\in\\mathcal A$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The joint law assigns mass $3/8$ to each diagonal point $(0,0),(1,1)$ and $1/8$ to each off-diagonal point; hence $J_Y(0)=J_Y(1)=1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $y$, $\\Pi_y$ has masses $3/4$ at $y$ and $1/4$ at $1-y$, so it is a probability, with $\\Pi_y(\\{y\\})J_Y(y)=3/8=J(y,y)$ and $\\Pi_y(\\{1-y\\})J_Y(y)=1/8=J(1-y,y)$. Define $L(\\omega,A)=\\Pi_{Y(\\omega)}(A)$. Since the spaces are finite, both $y\\mapsto\\Pi_y(A)$ and $\\omega\\mapsto L(\\omega,A)$ are measurable for every $A\\subseteq\\Theta$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every event $H\\in\\sigma(Y)$ is $\\Theta\\times B$ for some $B\\subseteq Y$. For any $A\\subseteq\\Theta$, $\\int_H L(\\omega,A)\\,J(d\\omega)=\\sum_{y\\in B}\\Pi_y(A)J_Y(y)=\\sum_{y\\in B}J(A\\times\\{y\\})=J(H\\cap\\{X\\in A\\})$. Thus $L$ is an RCD of $X$ given $\\sigma(Y)$, and by [F2] it is the posterior RCD.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: Theta=Y={0,1} and Omega=Theta times Y are explicitly nonempty; Verification step 3.1 covers the empty conditioning event by an empty sum equal to zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 shows both data values have positive marginal mass, so no null-data version is needed in this example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Verification step 2.1 gives each singleton posterior mass as 3/4 on the observed state and 1/4 on its complement; step 1.1 gives each data singleton mass 1/2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The likelihood assigns positive mass to both outcomes at each parameter, and the posterior in step 2.1 has both parameter values with positive mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: data indices are 0 and 1, not endpoints of a continuous parameter interval; both have positive mass and neither needs a null-fibre filler."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification step 2.1 explicitly defines every section Pi_y and L(omega,A)=Pi_Y(omega)(A), so no conditional kernel is selected by an existence theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: step 3.1 checks the RCD integral identity for this explicit L; it states no implication characterizing all RCDs."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: distinguishing omega-indexed L from data-indexed Pi is an explicit construction, not a converse theorem recovering a model from either kernel."
+        }
+      ]
+    },
+    "ex-standard-borel-posterior-kernel-on-countable-data": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-bayesian-model-as-prior-and-sampling-kernel",
+          "source_section": "Definition",
+          "quote": "Let\n$$\\mathsf E=((\\mathsf Y,\\mathcal Y),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$$\nbe a statistical experiment ([[def-statistical-experiment]]). Equip the parameter set with a specified measurable structure $(\\Theta,\\mathcal T)$ ([[def-measurable-space]]). A **proper Bayesian model** based on this experiment consists of a prior probability measure $\\Pi$ on $(\\Theta,\\mathcal T)$ ([[def-probability-measure]]) and a probability kernel $K$ from $(\\Theta,\\mathcal T)$ to $(\\mathsf Y,\\mathcal Y)$ ([[def-measure-kernel-and-probability-kernel]]) that represents the experiment:\n$$K(\\theta,B)=P_\\theta(B)\\qquad(\\theta\\in\\Theta,\\ B\\in\\mathcal Y).$$\nThus $\\theta\\mapsto K(\\theta,B)$ is $\\mathcal T$-measurable for every data event $B$, as required for a parameter-measurable model ([[def-parameter-measurable-statistical-model-as-markov-kernel]]). The family of measures in a parametric model alone does not supply this parameter sigma-algebra or measurability condition ([[def-parametric-statistical-model]]).\n\nThe word **proper** means that the prior is a probability measure. A sigma-finite improper prior is not a proper Bayesian model in this definition; fixed-data posterior normalizers for such priors are handled separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bayesian-posterior-as-regular-conditional-law",
+          "source_section": "Definition",
+          "quote": "Let a proper Bayesian model be given, and let $J$ be its joint prior-predictive probability on $(\\Theta\\times\\mathsf Y,\\mathcal T\\otimes\\mathcal Y)$, supplied by [[lem-prior-and-model-kernel-define-joint-law]]. More generally, let $(\\Omega,\\mathcal F,Q)$ be any probability space carrying parameter and data random elements $X:\\Omega\\to\\Theta$ and $Y:\\Omega\\to\\mathsf Y$ whose joint law is $J$ ([[def-probability-measure]], [[def-random-element-and-real-random-variable]], [[def-law-or-distribution-of-a-random-element]]). A **posterior regular conditional distribution (posterior RCD)** is a regular conditional distribution of $X$ given $\\sigma(Y)$, in the sense of [[def-regular-conditional-distribution]]. It is a kernel indexed by the sample point $\\omega\\in\\Omega$. The canonical realization is $\\Omega=\\Theta\\times\\mathsf Y$ with $Q=J$ and coordinate maps $X(\\theta,y)=\\theta$, $Y(\\theta,y)=y$.\n\nA **data-indexed posterior kernel** is a probability kernel $\\Pi_{\\cdot}$ from $(\\mathsf Y,\\mathcal Y)$ to $(\\Theta,\\mathcal T)$ ([[def-measure-kernel-and-probability-kernel]]) for which $\\omega\\mapsto\\Pi_{Y(\\omega)}$ is a conditional law of $X$ given $Y$ ([[def-conditional-law-given-a-random-element]]). Equivalently, for every $A\\in\\mathcal T$ and $B\\in\\mathcal Y$,\n$$Q(X\\in A,\\ Y\\in B)=\\int_B\\Pi_y(A)\\,Q_Y(dy),$$\nwhere $Q_Y$ is the data marginal (equal to $J_Y$). This kernel is indexed by data values, not sample points.\n\nThe definition asserts no existence of either conditional kernel. Values of a data-indexed version on a measurable $J_Y$-null set are not fixed by the conditional-law identities; replacing them there by a fixed probability preserves those identities. A dominated-density construction is a separate route: [[thm-bayes-formula-for-dominated-kernels]] requires a proper prior, a sigma-finite data measure, and a specified jointly measurable sampling density, and fills fibres whose marginal density is zero or infinite with the prior. It does not require the data space to be standard Borel.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-standard-borel-bayesian-posterior-kernel-exists",
+          "source_section": "Statement",
+          "quote": "Assume AC ([[def-axiom-of-choice]]). In a proper Bayesian model, suppose both parameter and data spaces $(\\Theta,\\mathcal T)$ and $(\\mathsf Y,\\mathcal Y)$ are standard Borel ([[def-standard-borel-space]]). Let $J$ be the joint prior-predictive law and let $J_Y$ be its data marginal. There is a data-indexed posterior probability kernel $y\\mapsto\\Pi_y$ such that, for all $A\\in\\mathcal T$ and $B\\in\\mathcal Y$,\n$$J(A\\times B)=\\int_B\\Pi_y(A)\\,J_Y(dy),\\qquad J_Y(B)=\\int_\\Theta K(\\theta,B)\\,\\Pi(d\\theta).$$\nThe composition $\\Pi_{Y(\\omega)}$ is a posterior RCD. Any two data-indexed posterior kernels agree as probability measures outside one measurable $J_Y$-null set. On any measurable $J_Y$-null set, the conditional-law identities do not select a pointwise value: replacing the kernel there by the prior $\\Pi$ preserves the identities.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The discrete metric on $\\mathbb N_0$ is complete because every Cauchy sequence is eventually constant; $\\mathbb N_0$ itself is a countable dense subset. Its topology is discrete, so its Borel sigma-algebra is the power set. The finite discrete parameter space has the same properties. Thus both spaces are standard Borel by [F5]–[F6]. By [F4], $\\sum_nf_0(n)=1$ and $\\sum_nf_1(n)=1$, so they define probability sampling laws and the prior in [F1] gives a Bayesian model.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since both spaces are standard Borel and AC holds, [F3] supplies a data-indexed posterior kernel. For every $n$, both $f_0(n)$ and $f_1(n)$ are positive and finite, so $m(n)>0$ and the displayed values are in $[0,1]$ and sum to one. Every function on the discrete data space is measurable, hence $n\\mapsto\\Pi_n$ is a probability kernel.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $i\\in\\{0,1\\}$ and every $B\\subseteq\\mathbb N_0$, $\\sum_{n\\in B}\\Pi_n(i)m(n)=\\frac12\\sum_{n\\in B}f_i(n)=J(\\{i\\}\\times B)$. Adding the identities for $i=0,1$ proves the rectangle identity for every $A\\subseteq\\Theta$ and every data event $B$. Thus the explicit kernel is a data-indexed posterior version; all its data values have positive prior-predictive mass.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: Theta={0,1} and N_0 are nonempty; Verification step 3.1 permits an empty data event B and gives the zero series on both sides."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 shows both geometric likelihoods are strictly positive at every n, so every prior-predictive mass is positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Verification step 3.1 proves each singleton parameter identity at every count n; at n=0 the sampling masses are 1/2 and 2/3 and the posterior for state 1 is 4/7."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 has both geometric likelihoods positive and finite for every n, so every posterior has both parameter atoms positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: count n=0 is included with positive evidence, and every finite n has positive mass by Verification step 2.1; infinity is not a data value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 invokes the standard-Borel theorem under AC; the explicit sum verification does not claim a weaker general existence theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: the two geometric sampling laws give the displayed posterior via Verification step 3.1, rather than a forward implication in a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: the explicit countable-space posterior is not used to infer standard Borelness; that condition is independently checked using the discrete metric in Verification step 1.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Reviewed full Example, A1/F1-F6 and all three verification steps, current standard-Borel kernel theorem and geometric-series Statement/Proof. Discrete metrics are complete since Cauchy sequences are eventually constant, with explicitly countable dense sets and power-set Borel algebras. Geometric sums (1/2)/(1-1/2)=1 and (2/3)/(1-1/3)=1 normalize the sampling probabilities. Finite parameter space makes kernel measurability immediate. AC is explicitly given for the invoked general existence route. Both likelihood masses are strictly positive finite at every n, the displayed posterior is measurable and probability-valued, and Pi_n(i)m(n)=f_i(n)/2 proves all singleton rectangles. Nonnegative countable sums and finite parameter addition give every A and B, including empty/whole events. No null singleton data or endpoint division occurs; the explicit formula needs no extra choice."
+      }
+    },
+    "ex-dominated-posterior-on-nonstandard-observation-space": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bayesian-model-as-prior-and-sampling-kernel",
+          "source_section": "Definition",
+          "quote": "Let\n$$\\mathsf E=((\\mathsf Y,\\mathcal Y),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$$\nbe a statistical experiment ([[def-statistical-experiment]]). Equip the parameter set with a specified measurable structure $(\\Theta,\\mathcal T)$ ([[def-measurable-space]]). A **proper Bayesian model** based on this experiment consists of a prior probability measure $\\Pi$ on $(\\Theta,\\mathcal T)$ ([[def-probability-measure]]) and a probability kernel $K$ from $(\\Theta,\\mathcal T)$ to $(\\mathsf Y,\\mathcal Y)$ ([[def-measure-kernel-and-probability-kernel]]) that represents the experiment:\n$$K(\\theta,B)=P_\\theta(B)\\qquad(\\theta\\in\\Theta,\\ B\\in\\mathcal Y).$$\nThus $\\theta\\mapsto K(\\theta,B)$ is $\\mathcal T$-measurable for every data event $B$, as required for a parameter-measurable model ([[def-parameter-measurable-statistical-model-as-markov-kernel]]). The family of measures in a parametric model alone does not supply this parameter sigma-algebra or measurability condition ([[def-parametric-statistical-model]]).\n\nThe word **proper** means that the prior is a probability measure. A sigma-finite improper prior is not a proper Bayesian model in this definition; fixed-data posterior normalizers for such priors are handled separately.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bayesian-posterior-as-regular-conditional-law",
+          "source_section": "Definition",
+          "quote": "Let a proper Bayesian model be given, and let $J$ be its joint prior-predictive probability on $(\\Theta\\times\\mathsf Y,\\mathcal T\\otimes\\mathcal Y)$, supplied by [[lem-prior-and-model-kernel-define-joint-law]]. More generally, let $(\\Omega,\\mathcal F,Q)$ be any probability space carrying parameter and data random elements $X:\\Omega\\to\\Theta$ and $Y:\\Omega\\to\\mathsf Y$ whose joint law is $J$ ([[def-probability-measure]], [[def-random-element-and-real-random-variable]], [[def-law-or-distribution-of-a-random-element]]). A **posterior regular conditional distribution (posterior RCD)** is a regular conditional distribution of $X$ given $\\sigma(Y)$, in the sense of [[def-regular-conditional-distribution]]. It is a kernel indexed by the sample point $\\omega\\in\\Omega$. The canonical realization is $\\Omega=\\Theta\\times\\mathsf Y$ with $Q=J$ and coordinate maps $X(\\theta,y)=\\theta$, $Y(\\theta,y)=y$.\n\nA **data-indexed posterior kernel** is a probability kernel $\\Pi_{\\cdot}$ from $(\\mathsf Y,\\mathcal Y)$ to $(\\Theta,\\mathcal T)$ ([[def-measure-kernel-and-probability-kernel]]) for which $\\omega\\mapsto\\Pi_{Y(\\omega)}$ is a conditional law of $X$ given $Y$ ([[def-conditional-law-given-a-random-element]]). Equivalently, for every $A\\in\\mathcal T$ and $B\\in\\mathcal Y$,\n$$Q(X\\in A,\\ Y\\in B)=\\int_B\\Pi_y(A)\\,Q_Y(dy),$$\nwhere $Q_Y$ is the data marginal (equal to $J_Y$). This kernel is indexed by data values, not sample points.\n\nThe definition asserts no existence of either conditional kernel. Values of a data-indexed version on a measurable $J_Y$-null set are not fixed by the conditional-law identities; replacing them there by a fixed probability preserves those identities. A dominated-density construction is a separate route: [[thm-bayes-formula-for-dominated-kernels]] requires a proper prior, a sigma-finite data measure, and a specified jointly measurable sampling density, and fills fibres whose marginal density is zero or infinite with the prior. It does not require the data space to be standard Borel.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bayes-formula-for-dominated-kernels",
+          "source_section": "Statement",
+          "quote": "Let $\\pi$ be a prior probability on $(E,\\mathcal S)$ and let $Q:E\\to T$ be a probability kernel dominated by a sigma-finite measure $\\nu$ on $(T,\\mathcal T)$, with specified nonnegative jointly measurable density $\\ell:E\\times T\\to[0,\\infty]$:\n$$Q(\\theta,B)=\\int_B\\ell(\\theta,y)\\,\\nu(dy)\\quad\\text{for every }\\theta\\in E,\\ B\\in\\mathcal T.$$\n\nDefine $m(y)=\\int_E\\ell(\\theta,y)\\,\\pi(d\\theta)$. Under the joint law with density $\\ell$ relative to $\\pi\\times\\nu$, a conditional law of the parameter given the observation is\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_A\\ell(\\theta,y)\\,\\pi(d\\theta)}{m(y)},&0<m(y)<\\infty,\\\\ \\pi(A),&m(y)=0\\text{ or }m(y)=\\infty.\\end{cases}$$\n\nThe observation marginal is $m\\,d\\nu$, and the filled fibres have marginal mass zero. This is a choice-free assertion about the explicit kernel and event identities.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The eight unions of $U,V,W$ form a sigma-algebra. Assigning mass $1/3$ to each disjoint atom defines a probability measure $\\nu$: a pairwise disjoint family has at most three nonempty members, so countable additivity reduces to finite additivity on the atoms. Distinct $u,u'\\in U$ have the same membership in every measurable set. If $(\\mathsf Y,\\mathcal Y)$ were standard Borel, [F4] would give a bimeasurable bijection $h$ to a Polish space. Let $d$ be a compatible metric. For every $z\\ne h(u)$, the ball about $z$ of radius $d(z,h(u))/2$ misses $h(u)$, so $\\{h(u)\\}$ is closed and Borel. Its inverse image under $h$ would be a measurable set separating $u$ and $u'$, a contradiction.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The joint density is $\\ell(\\theta,y)=\\frac32\\mathbf1_{\\{0\\}\\times(U\\cup V)}(\\theta,y)+3\\mathbf1_{\\{1\\}\\times U}(\\theta,y)$, a finite sum of indicators of measurable rectangles by [F6]. Its parameter sections are $f_0,f_1$, with integrals $\\int f_0\\,d\\nu=\\frac32\\cdot\\frac23=1$ and $\\int f_1\\,d\\nu=3\\cdot\\frac13=1$. Thus the sections define sampling probabilities, and the finite reference measure $\\nu$ is sigma-finite, so [F3] applies.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The marginal density is $m(y)=\\frac12f_0(y)+\\frac12f_1(y)$, hence $m=9/4$ on $U$, $m=3/4$ on $V$, and $m=0$ on $W$. Thus $J_Y(U)=3/4$, $J_Y(V)=1/4$, and $J_Y(W)=0$. The normalized formula gives $\\Pi_y(1)=2/3$ on $U$ and $0$ on $V$; on $W$ the theorem fills the zero-evidence fibre with the prior, so $\\Pi_y(1)=1/2$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $A=\\{1\\}$, the rectangle identities on $U,V,W$ are $(2/3)(3/4)=1/2=J(\\{1\\}\\times U)$, $0(1/4)=0=J(\\{1\\}\\times V)$, and $(1/2)0=0=J(\\{1\\}\\times W)$. For $A=\\{0\\}$ they are $(1/3)(3/4)=1/4=J(\\{0\\}\\times U)$, $1(1/4)=1/4=J(\\{0\\}\\times V)$, and $(1/2)0=0=J(\\{0\\}\\times W)$. Adding over atoms gives the identity for every $A\\subseteq\\Theta$ and $B\\in\\mathcal Y$, so this is a data-indexed posterior kernel despite the nonstandard-Borel data space.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: U,V,W are three nonempty uncountable atoms and Theta has two states; Verification step 4.1 allows empty parameter/data events by summing no atomic contributions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats W where m=0, assigns the prior filler, and step 4.1 verifies that the marginal fibre contributes zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Verification step 4.1 checks each singleton parameter event on each atom; no data singleton is measurable within an atom, as step 1.1 explicitly explains."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 gives a degenerate posterior on V where f1=0 and the prior filler on W where both likelihoods vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification step 3.1 treats zero-evidence atom W by the prior filler 1/2 and positive-evidence atoms U,V by masses 2/3,0; these are evidence branches, not omitted interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1–4.1 use the choice-free dominated-density theorem with a finite prior and sigma-finite reference probability."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: step 4.1 proves a posterior exists on this nonstandard observation space by explicit dominated formulas; it is an example, not an iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: posterior existence here does not imply standard Borelness; step 1.1 explicitly proves the observation space is not standard Borel."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Reviewed full Example, F1-F6 and all four verification steps with model/posterior definitions, standard-Borel and Polish definitions, product sigma-algebra and dominated Bayes supplier. Eight measurable unions form a sigma-algebra; atom weights give a countably additive probability. Distinct points in U cannot be measurably separated, contradicting the singleton Borel separation pulled back from any Polish presentation. Rectangle-simple likelihood is jointly measurable; density masses are (3/2)(2/3)=1 and 3(1/3)=1, with finite reference measure. Marginal densities 9/4,3/4,0 give atom masses 3/4,1/4,0 and posterior masses 2/3,0,1/2. Checked both parameter singleton rectangle identities on all three atoms; finite additivity covers all A,B. Null W uses prior filler without division and remains probability-valued. Construction and verification use no AC."
+      }
+    }
+  }
+}

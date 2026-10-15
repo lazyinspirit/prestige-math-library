@@ -1,0 +1,1920 @@
+{
+  "version": 1,
+  "level": "batch-23",
+  "run": "bayesian-computational-statistics-62",
+  "scope": [
+    "def-latent-variable-joint-and-observed-data-factorization",
+    "thm-kullback-leibler-is-nonnegative",
+    "alg-gradient-descent",
+    "alg-damped-newton",
+    "thm-observed-density-is-latent-marginal-under-tonelli",
+    "lem-armijo-backtracking-terminates-for-strict-descent-directions",
+    "thm-gradient-descent-rate-under-strong-convexity-and-smoothness",
+    "thm-newton-local-quadratic-convergence-under-lipschitz-hessian",
+    "ex-gaussian-location-kl",
+    "ex-multimodal-nonconvex-objective",
+    "ex-finite-mixture-latent-factorization",
+    "ex-zero-normalizer-latent-fiber",
+    "ex-strongly-convex-quadratic-gradient-descent"
+  ],
+  "contracts": {
+    "def-latent-variable-joint-and-observed-data-factorization": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This definition has no separate empty case beyond its explicit hypotheses and complete carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition restricts V to 0<m<infinity."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This definition has no separate one case beyond its explicit hypotheses and complete carrier."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This definition has no separate degenerate case beyond its explicit hypotheses and complete carrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition excludes zero and infinite marginal fibres."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition takes p as a supplied jointly measurable function and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This definition has no separate iff-forward case beyond its explicit hypotheses and complete carrier."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This definition has no separate iff-reverse case beyond its explicit hypotheses and complete carrier."
+        }
+      ]
+    },
+    "thm-kullback-leibler-is-nonnegative": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-jensens-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mathbb P)$ be a probability space, let $f\\in L^1(\\mathbb P)$\nbe real-valued, let $I\\subseteq\\mathbb R$ be an interval containing $f(x)$ for\nalmost every $x$, and let $\\varphi:I\\to\\mathbb R$ be convex with\n$\\varphi\\circ f\\in L^1(\\mathbb P)$. Then\n$$\\varphi\\!\\left(\\int f\\,d\\mathbb P\\right)\\le\\int\\varphi(f)\\,d\\mathbb P.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-integral-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define the **integral logarithm**\n\n$$L(x):=\\int_1^x\\frac{dt}{t},$$\n\nusing the oriented integral when $x<1$\n([[def-oriented-integral]]).\n\nThis is well defined. The function $t\\mapsto1/t$ is continuous wherever\n$t\\neq0$ by the quotient clause of\n[[thm-algebra-of-continuous-functions]]. For $x\\neq1$ it is therefore continuous on the nondegenerate compact interval\nwith endpoints $1$ and $x$, hence Riemann integrable there by\n[[thm-continuous-implies-integrable]], whose hypothesis is $a<b$. At $x=1$ the\ninterval is degenerate and that theorem does not apply; there\n[[def-oriented-integral]] stipulates $\\int_1^1f=0$, so $L(1)=0$ directly.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "source_section": "Statement",
+          "quote": "For every $x>0$,\n\n$$L(x)=\\log x.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-integral-logarithm-derivative-and-normalisation",
+          "source_section": "Statement",
+          "quote": "For every $x>0$,\n\n$$L'(x)=\\frac1x,$$\n\nand $L(1)=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-second-derivative-characterises-convexity",
+          "source_section": "Statement",
+          "quote": "If $f:I\\to\\mathbb R$ is twice differentiable on an open interval, then $f$ is convex if and only if $f''(x)\\ge0$ for every $x\\in I$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-additivity-over-subintervals",
+          "source_section": "Statement",
+          "quote": "Let $a < c < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Then:\n\n1. $f$ is integrable on $[a,b]$ ([[def-darboux-integral]]) **if and only if** its\n   restrictions to $[a,c]$ and to $[c,b]$ are integrable;\n2. and in that case\n   $$\\int_a^b f \\;=\\; \\int_a^c f \\;+\\; \\int_c^b f .$$\n3. **Oriented form.** Let $\\alpha < \\beta$ be reals, let $f : [\\alpha,\\beta] \\to\n   \\mathbb{R}$ be integrable, and let $u, v, w \\in [\\alpha,\\beta]$ be arbitrary.\n   Then, with the convention of [[def-oriented-integral]],\n   $$\\int_u^v f \\;+\\; \\int_v^w f \\;=\\; \\int_u^w f .$$\n\nClaim 3 is where [[def-oriented-integral]] earns its place: it holds for every\narrangement of the three points, including the degenerate ones, and it is the\nform used everywhere below.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space and let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "1.5",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-measure-space",
+          "source_section": "Definition",
+          "quote": "A **measure space** is a triple $(X,\\mathcal A,\\mu)$ in which $X$ is a set, $\\mathcal A$ is a sigma-algebra on $X$, and $\\mu$ is a measure on $(X,\\mathcal A)$ ([[def-measure]]). The members of $\\mathcal A$ are the **measurable sets** of the space.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.4",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.5",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.4",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "def-borel-sigma-algebra-on-the-extended-real-line",
+          "source_section": "Definition",
+          "quote": "The **extended real line** is\n\n$$\\overline{\\mathbb{R}} := \\mathbb{R} \\cup \\{-\\infty,+\\infty\\}$$\n\nwith the total order extending the usual order on $\\mathbb{R}$ and satisfying\n$-\\infty < x < +\\infty$ for every real $x$\n([[def-extended-reals]]).\n\nIts **Borel sigma-algebra** is the Borel sigma-algebra of that ordered\ntopological line in the sense of [[def-borel-sigma-algebra]]. On this page it is\ndenoted $\\mathcal{B}(\\overline{\\mathbb{R}})$ and is generated by the rays\n\n$$\\{\\, (a,+\\infty] : a \\in \\mathbb{R} \\,\\}.$$\n\nIn particular, $\\{+\\infty\\}$ and $\\{-\\infty\\}$ are Borel sets.",
+          "uses": [
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f : X \\to \\overline{\\mathbb{R}}$. The following are equivalent:\n\n1. $f$ is measurable;\n2. $\\{x : f(x) > a\\} \\in \\mathcal{A}$ for every real $a$;\n3. $\\{x : f(x) \\ge a\\} \\in \\mathcal{A}$ for every real $a$;\n4. $\\{x : f(x) < a\\} \\in \\mathcal{A}$ for every real $a$;\n5. $\\{x : f(x) \\le a\\} \\in \\mathcal{A}$ for every real $a$.\n\nMoreover, in any one of conditions 2 through 5 it is enough to test only\nrational thresholds $a \\in \\mathbb{Q}$.",
+          "uses": [
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.5",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "def-positive-and-negative-parts-of-a-function",
+          "source_section": "Definition",
+          "quote": "Let $f : X \\to \\overline{\\mathbb{R}}$ with $\\overline{\\mathbb{R}}$ as in\n[[def-extended-reals]]. Its **positive part** and **negative part** are\n\n$$f^+ := \\max\\{f,0\\},\\qquad f^- := \\max\\{-f,0\\}.$$\n\nPointwise, both functions take values in $[0,+\\infty]$, and one has\n\n$$f = f^+ - f^-,\\qquad |f| = f^+ + f^-.$$\n\nAt each point at least one of $f^+$ and $f^-$ is zero.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F23",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F24",
+          "source": "lem-integral-elementary-bounds",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ satisfy\n\n$$m \\;\\le\\; f(x) \\;\\le\\; M \\qquad \\text{for every } x \\in [a,b],$$\n\nwith $m, M$ real. Then $f$ is bounded ([[def-bounded-set]]), so its Darboux sums\nand integrals are defined ([[def-darboux-sums]], [[def-darboux-integral]]), and\nfor **every** partition $P$ of $[a,b]$ ([[def-partition-and-refinement]])\n\n$$m(b-a) \\;\\le\\; L(f,P) \\;\\le\\; \\underline{\\int_a^b} f \\;\\le\\; \\overline{\\int_a^b} f \\;\\le\\; U(f,P) \\;\\le\\; M(b-a) .$$\n\nIn particular, taking $f$ to be the constant function with value $c$:\n\n$$\\int_a^b c \\;=\\; c\\,(b-a) ,$$\n\nthe constant function being integrable, with $L(f,P) = U(f,P) = c(b-a)$ for\nevery partition $P$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F25",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $P\\not\\ll Q$, [F1] gives $D(P\\|Q)=+\\infty$. If $P\\ll Q$ but $D(P\\|Q)=+\\infty$, nonnegativity is immediate. It remains to consider $P\\ll Q$ with finite divergence; let $r=dP/dQ$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $\\varphi(0)=0$ and $\\varphi(t)=t\\log t$ for $t>0$. By [F5] and [F7], $\\varphi''(t)=1/t>0$ for $t>0$, so [F8] makes $\\varphi$ convex on $(0,\\infty)$. Its continuity at zero is part of [F1]; taking limits in the convexity inequality as a positive endpoint tends to zero extends convexity to $[0,\\infty)$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Define $g(t):=t\\log t-t+1$ for $t>0$ and $g(0):=1$. For $s>1$, set $c=(1+s)/2$. By [F11], $\\log s=\\int_1^cdu/u+\\int_c^sdu/u$. On $[1,c]$, $1/u\\le1$, while on $[c,s]$, $1/u\\le1/c<1$; [F9] and [F24] give $\\log s<s-1$. For $0<s<1$, set $c=(1+s)/2$. By [F11], $\\log s=-\\int_s^1du/u=-\\left(\\int_s^cdu/u+\\int_c^1du/u\\right)$. On $[s,c]$, $1/u\\ge1/c>1$, and on $[c,1]$, $1/u\\ge1$; [F9] and [F24] give $\\log s<s-1$. The integrands and comparison constants are integrable on these compact intervals by [F10]. Equality holds at $s=1$. Applying this inequality to $s=1/t$ and using [F6] gives $t\\log t\\ge t-1$, strictly unless $t=1$. Hence $g\\ge0$ and its only zero is $1$.",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "F6",
+            "F9",
+            "F10",
+            "F11",
+            "F24",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "For the normalized-density clause on the measure space [F13], put $P:=q\\,\\mu$ and $Q:=\\pi\\,\\mu$. By [F17], $\\int\\pi\\,d\\mu=Z^{-1}\\int\\gamma\\,d\\mu=1$; hence [F15] and [F14] make $P$ and $Q$ probability measures.",
+          "step": "1.4",
+          "inputs": [
+            "F13",
+            "F14",
+            "F15",
+            "F17",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "If $Q(E)=0$, [F15] gives $\\int_E\\pi\\,d\\mu=0$, hence $\\int_E\\gamma\\,d\\mu=0$ because $Z$ is finite and positive, using [F17]. By [F12], $\\gamma=0$ $\\mu$-almost everywhere on $E$. The support hypothesis on $q$ then gives $P(E)=0$, so $P\\ll Q$. Define $\\rho:[0,\\infty]\\to[0,\\infty]$ by $\\rho(t)=1/t$ for finite $t>0$ and $\\rho(0)=\\rho(+\\infty)=0$. For $a<0$, $\\{\\rho>a\\}=[0,\\infty]$; for $a=0$ it is $(0,\\infty)$; and for $a>0$ it is $(0,1/a)$. These are Borel by [F18], so [F19] makes $\\rho$ Borel. By [F20]–[F21], $r:=q\\,\\rho(\\pi)$ is measurable and equals $q/\\pi$ on $\\{\\pi>0\\}$ and zero on $\\{\\pi=0\\}$. For every measurable $E$, [F16] gives $$\\int_E r\\,dQ=\\int_Er\\pi\\,d\\mu=\\int_Eq\\,d\\mu=P(E),$$ because $q=0$ $\\mu$-almost everywhere on $\\{\\pi=0\\}$. Thus $r=dP/dQ$.",
+          "step": "1.5",
+          "inputs": [
+            "F12",
+            "F15",
+            "F16",
+            "F17",
+            "F18",
+            "F19",
+            "F20",
+            "F21",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2] with $E$ equal to the whole space, $\\int r\\,dQ=P(\\Omega)=1$. The negative part of $r\\log r$ is finite by [F1], so finiteness of $D(P\\|Q)$ also makes its positive part finite. Thus $r$ and $r\\log r$ are integrable with respect to the probability measure $Q$. The Radon–Nikodym representative here is the one whose selection is covered by [A1].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "On the $P$-full-measure subset of $\\{q>0\\}$ where $\\gamma>0$, we have $\\pi=\\gamma/Z>0$ and $\\ell:=\\log r=\\log q-\\log\\gamma+\\log Z$. Where $q=0$, the KL logarithm $\\ell$ is defined to be zero. By [F23], $q|\\ell|\\le q|\\log q|+q|\\log\\gamma|+q|\\log Z|$ almost everywhere. The right-hand side has finite integral by the hypotheses and $\\int q=1$; hence [F16] gives $\\int|\\ell|\\,dP=\\int q|\\ell|\\,d\\mu<\\infty$. By [F1], [F16], and [F22], applying [F16] to the positive and negative parts of $\\ell$ gives $$D(P\\|Q)=\\int\\log r\\,dP =\\int q(\\log q-\\log\\gamma+\\log Z)\\,d\\mu.$$ Using $\\int q\\,d\\mu=1$ and rearranging proves the identity.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F16",
+            "F22",
+            "F23",
+            "given",
+            "step 1.5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F3] on $(\\Omega,\\mathcal A,Q)$ to $r$ and $\\varphi$. Steps 2.1 and 1.2 check its integrability and convexity hypotheses, and $\\int r\\,dQ=1$ by step 2.1. Therefore $$0=\\varphi(1)=\\varphi\\!\\left(\\int r\\,dQ\\right) \\le\\int\\varphi(r)\\,dQ=D(P\\|Q).$$",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The representative $r$ is finite-valued and measurable by [F1], and $\\varphi(r)$ is measurable there; the arithmetic measurability result [F21] therefore makes $g(r)=\\varphi(r)-r+1$ measurable. It is nonnegative by step 1.3. By step 2.1, $r,\\varphi(r)\\in L^1(Q)$, and $1\\in L^1(Q)$ because $Q$ is a probability measure. Linearity [F25] now gives $g(r)\\in L^1(Q)$ and $$\\int g(r)\\,dQ=\\int\\varphi(r)\\,dQ-\\int r\\,dQ+\\int1\\,dQ=D(P\\|Q)-1+1=D(P\\|Q).$$ Thus if $D(P\\|Q)=0$, [F12] applies to the measurable nonnegative integrand and gives $g(r)=0$ $Q$-almost everywhere. By step 1.3, $r=1$ $Q$-almost everywhere, and the Radon–Nikodym identity [F2] gives $P(E)=Q(E)$ for every measurable $E$. Conversely, if $P=Q$ then $r=1$ almost everywhere and [F1] gives $D(P\\|Q)=0$.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F12",
+            "F21",
+            "F25",
+            "step 2.1",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 2.2 identifies the normalized-density divergence as finite, and step 3.1 proves it is nonnegative. Therefore $\\int q(\\log\\gamma-\\log q)\\,d\\mu\\le\\log Z$, as claimed.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A probability measure on an empty measurable space cannot have total mass one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement sets 0 log 0=0; step 1.3 defines g(0)=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 makes t=1 the sole zero of g; step 3.2 gives equality."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.2 proves D(P||Q)=0 exactly when P=Q."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires 0<Z<infinity; steps 1.4, 1.5, and 2.2 use only finite positive Z."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC; step 2.1 identifies its Radon–Nikodym use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.2 proves D(P||Q)=0 implies P=Q."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.2 proves P=Q implies D(P||Q)=0."
+        }
+      ]
+    },
+    "alg-gradient-descent": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This algorithm has no separate empty case beyond its explicit hypotheses and complete carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition stops when the gradient is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This algorithm has no separate one case beyond its explicit hypotheses and complete carrier."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This algorithm has no separate degenerate case beyond its explicit hypotheses and complete carrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition requires positive fixed steps and backtracking parameters in open intervals."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition takes an initial point and steps as inputs; it uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This algorithm has no separate iff-forward case beyond its explicit hypotheses and complete carrier."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This algorithm has no separate iff-reverse case beyond its explicit hypotheses and complete carrier."
+        }
+      ]
+    },
+    "alg-damped-newton": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This algorithm has no separate empty case beyond its explicit hypotheses and complete carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition stops and returns x_k when the gradient is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This algorithm has no separate one case beyond its explicit hypotheses and complete carrier."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition halts without an update if the Hessian is not positive definite."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition requires 0<alpha<1/2 and 0<beta<1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition specifies the solve and line search directly and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition gives an operational procedure, not a biconditional. The substring iff occurs only in the cited Cholesky supplier id, whose existence criterion is not a new equivalence claimed by this algorithm."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition invokes the Cholesky supplier when its symmetric Hessian is positive definite. The cited supplier id contains iff; the algorithm itself adds no converse assertion beyond its stated stopping and update branches."
+        }
+      ]
+    },
+    "thm-observed-density-is-latent-marginal-under-tonelli": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-latent-variable-joint-and-observed-data-factorization",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$, $(\\mathsf X,\\mathcal A)$, and\n$(\\mathsf Z,\\mathcal C)$ be measurable spaces (sets equipped with\nsigma-algebras; [[def-measurable-space]]). Let $\\nu$ and $\\mu$ be sigma-finite\nreference measures on the observation and latent spaces; each has a countable\nmeasurable cover by sets of finite measure\n([[def-finite-sigma-finite-and-semifinite-measures]]). The finite product\nsigma-algebra is generated by measurable rectangles\n([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). The product\nreference measure $\\nu\\otimes\\mu$ is the one supplied by\n[[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]].\n\nA **jointly measurable latent-variable density** is a specified function\n$$p:\\Theta\\times\\mathsf X\\times\\mathsf Z\\longrightarrow[0,\\infty]$$\nmeasurable for $\\mathcal T\\otimes\\mathcal A\\otimes\\mathcal C$ and normalized\non every parameter fibre:\n$$\\int_{\\mathsf X\\times\\mathsf Z}p(\\theta,x,z)\\, (\\nu\\otimes\\mu)(d(x,z))=1\\qquad(\\theta\\in\\Theta).$$\nHere $x$ is the observed coordinate and $z$ the latent coordinate. The\nobserved marginal density is\n$$m(\\theta,x):=\\int_{\\mathsf Z}p(\\theta,x,z)\\,\\mu(dz).$$\nThe valid-fibre set is\n$V:=\\{(\\theta,x):0<m(\\theta,x)<\\infty\\}$. Only on $V$ define the normalized\nlatent-fibre density\n$$q(z\\mid\\theta,x):=\\frac{p(\\theta,x,z)}{m(\\theta,x)}.$$\nThis definition requires a single jointly measurable density as an input.\n[[def-likelihood-density]] supplies neither a sigma-algebra on $\\Theta$ nor\njoint parameter measurability from separately specified likelihood sections;\nthe joint measurability above is an additional hypothesis. Because $p$ is\nalready supplied as one joint function, this definition uses no choice axiom.\nIt does not assert that AC can turn separately specified pointwise likelihood\nversions into a jointly measurable version. No quotient or pointwise\nconditional density is asserted on a zero or infinite marginal fibre.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-borel-sigma-algebra-on-the-extended-real-line",
+          "source_section": "Definition",
+          "quote": "The **extended real line** is\n\n$$\\overline{\\mathbb{R}} := \\mathbb{R} \\cup \\{-\\infty,+\\infty\\}$$\n\nwith the total order extending the usual order on $\\mathbb{R}$ and satisfying\n$-\\infty < x < +\\infty$ for every real $x$\n([[def-extended-reals]]).\n\nIts **Borel sigma-algebra** is the Borel sigma-algebra of that ordered\ntopological line in the sense of [[def-borel-sigma-algebra]]. On this page it is\ndenoted $\\mathcal{B}(\\overline{\\mathbb{R}})$ and is generated by the rays\n\n$$\\{\\, (a,+\\infty] : a \\in \\mathbb{R} \\,\\}.$$\n\nIn particular, $\\{+\\infty\\}$ and $\\{-\\infty\\}$ are Borel sets.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f : X \\to \\overline{\\mathbb{R}}$. The following are equivalent:\n\n1. $f$ is measurable;\n2. $\\{x : f(x) > a\\} \\in \\mathcal{A}$ for every real $a$;\n3. $\\{x : f(x) \\ge a\\} \\in \\mathcal{A}$ for every real $a$;\n4. $\\{x : f(x) < a\\} \\in \\mathcal{A}$ for every real $a$;\n5. $\\{x : f(x) \\le a\\} \\in \\mathcal{A}$ for every real $a$.\n\nMoreover, in any one of conditions 2 through 5 it is enough to test only\nrational thresholds $a \\in \\mathbb{Q}$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $\\theta$ and let $\\mathcal D_\\theta$ be the collection of subsets $E\\subseteq\\Theta\\times\\mathsf X\\times\\mathsf Z$ whose section $E_\\theta:=\\{(x,z):(\\theta,x,z)\\in E\\}$ belongs to $\\mathcal A\\otimes\\mathcal C$. Sections commute with complements and countable unions, so $\\mathcal D_\\theta$ is a sigma-algebra. It contains each measurable rectangle $T_0\\times A_0\\times C_0$, whose section is $A_0\\times C_0$ if $\\theta\\in T_0$ and empty otherwise. By [F12], every product-measurable set has a measurable section. Applying this to preimages of Borel sets shows that $p_\\theta(x,z):=p(\\theta,x,z)$ is product-measurable. For complex $h$, first compose with the continuous Borel coordinate maps $\\operatorname{Re},\\operatorname{Im}:\\mathbb C\\to\\mathbb R$; the same section argument makes both $\\operatorname{Re}h_\\theta$ and $\\operatorname{Im}h_\\theta$ measurable, hence $h_\\theta$ is complex-measurable.",
+          "step": "1.1",
+          "inputs": [
+            "F10",
+            "F12",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F13], choose a measurable exhaustion $Z_n\\uparrow\\mathsf Z$ with $\\mu(Z_n)<\\infty$. On $S:=\\Theta\\times\\mathsf X$, the constant assignment $K(s,B):=\\mu(B)$ is a measure kernel: each section is $\\mu$ and each evaluation map is constant. The same exhaustion makes it uniformly sigma-finite by [F2].",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F13",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed $\\theta$, step 1.1 makes $p_\\theta$ product-measurable, so Tonelli [F4] gives $$\\int_{\\mathsf X}m(\\theta,x)\\,\\nu(dx)=\\int_{\\mathsf X\\times\\mathsf Z}p_\\theta(x,z)\\,d(\\nu\\otimes\\mu)=1$$ by [F1]. Thus $m(\\theta,\\cdot)$ is a probability density. Also $E_\\theta:=\\{(x,z):p_\\theta(x,z)=\\infty\\}$ is measurable. For every positive integer $n$, $n\\mathbf1_{E_\\theta}\\le p_\\theta$, so [F6] gives $n(\\nu\\otimes\\mu)(E_\\theta)\\le1$. Since this holds for every $n$, [F7] implies $(\\nu\\otimes\\mu)(E_\\theta)=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "F7",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The function $p$ is nonnegative and product-measurable by [F1]. Under the finite-product identification $S\\times\\mathsf Z=(\\Theta\\times\\mathsf X)\\times\\mathsf Z$ from [F12], apply [F3] to the constant kernel $K$ from step 1.2. It follows that $s\\mapsto\\int p(s,z)\\,\\mu(dz)=m(s)$ is measurable on $S$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F12",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For fixed $\\theta$, write $u_\\theta=\\operatorname{Re}h_\\theta$ and $v_\\theta=\\operatorname{Im}h_\\theta$. Define the finite-valued measurable function $\\widetilde p_\\theta:=p_\\theta\\mathbf1_{\\{p_\\theta<\\infty\\}}$ and then $$H_\\theta:=u_\\theta\\widetilde p_\\theta+i v_\\theta\\widetilde p_\\theta.$$ By [F11] this is complex-valued product-measurable; it is defined to be zero on the null set where $p_\\theta=\\infty$. It agrees with $h_\\theta p_\\theta$ off that null set, and the assumed absolute integrability gives $\\int|H_\\theta|\\,d(\\nu\\otimes\\mu)<\\infty$. Fubini [F5] applies to this $L^1$ representative and gives $$\\int_{\\mathsf X\\times\\mathsf Z}H_\\theta\\,d(\\nu\\otimes\\mu)=\\int_{\\mathsf X}\\left(\\int_{\\mathsf Z}H_\\theta(x,z)\\,\\mu(dz)\\right)\\nu(dx)=\\int_{\\mathsf Z}\\left(\\int_{\\mathsf X}H_\\theta(x,z)\\,\\nu(dx)\\right)\\mu(dz),$$ with its zero assignment on exceptional null sections. Since $H_\\theta=hp$ almost everywhere on the fixed-$\\theta$ product space, these are the asserted exchanges for $hp$.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F11",
+            "given",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Let $E:=\\{x:m(\\theta,x)=\\infty\\}$, measurable by step 2.2. For each positive integer $n$, $n\\mathbf1_E\\le m(\\theta,\\cdot)$, so [F6] and step 2.1 give $n\\nu(E)\\le1$. Since this holds for every $n$, [F7] forces $\\nu(E)=0$. If $0<m(\\theta,x)<\\infty$, division by that scalar and the definition of $m$ give $\\int q(z\\mid\\theta,x)\\,\\mu(dz)=m(\\theta,x)/m(\\theta,x)=1$. The valid-fibre set $V=m^{-1}((0,\\infty))$ is measurable by step 2.2 and [F8]. For measurability, define $\\rho:[0,\\infty]\\to[0,\\infty]$ by $\\rho(t)=1/t$ for finite $t>0$ and $\\rho(0)=\\rho(+\\infty)=0$. For $a<0$, $\\{\\rho>a\\}=[0,\\infty]$; for $a=0$ it is $(0,\\infty)$; and for $a>0$ it is $(0,1/a)$. These sets are Borel by [F8], so [F9] makes $\\rho$ Borel. By [F10], $\\rho\\circ m$ is measurable on $\\Theta\\times\\mathsf X$. Pulling it back along the measurable coordinate projection from the finite product space, which is measurable by [F12], gives a product-measurable function; multiplying by $p$ preserves measurability by [F11]. This product restricts to $q=p/m$ on $V\\times\\mathsf Z$, so $q$ is measurable on the valid-fibre set.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 2.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 2.2, 2.1, 3.2, and 1.4 prove the marginal measurability, normalization, valid-fibre density, and integrable-exchange clauses.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.2",
+            "step 2.1",
+            "step 3.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on a normalized joint density on every parameter fibre."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 3.2 define q only when 0<m<infinity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.2 normalizes every positive finite fibre by division by m."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.2 proves the m=infinity set is nu-null and excludes it from V."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 3.2 exclude zero and infinite marginal values from V."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement takes a supplied joint p; steps 1.1, 1.2, 2.1, 2.2, 3.1, 3.2, 4.1 use explicit sigma-finite exhaustion and measure integration, with no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement derives marginal measurability, normalization and a valid-fibre quotient from a supplied complete-data density. None of these clauses is stated as an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The final Statement clause assumes absolute integrability to permit Fubini exchange; it does not claim that an exchange of iterated integrals implies absolute integrability."
+        }
+      ]
+    },
+    "lem-armijo-backtracking-terminates-for-strict-descent-directions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-gradient-descent",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and let $f:U\\to\\mathbb R$ be continuously\nFréchet differentiable. The gradient $\\nabla f(x)$ is the vector of partial\nderivatives in the Euclidean coordinates, with the convention of\n[[def-jacobian-matrix-and-gradient]]; differentiability is the Fréchet\ncondition of [[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]].\n\n**Inputs:** an initial point $x_0\\in U$; either a positive fixed-step\nsequence $(t_k)_{k\\ge0}$ or backtracking parameters $\\alpha\\in(0,1)$ and\n$\\beta\\in(0,1)$; and an optional caller stopping predicate\n$S(k,x,g)\\in\\{\\mathrm{false},\\mathrm{true}\\}$, with\n$S:\\{0,1,2,\\ldots\\}\\times U\\times\\mathbb R^d\\to\\{\\mathrm{false},\\mathrm{true}\\}$.\nIf no predicate is supplied, use $S\\equiv\\mathrm{false}$. **Output:** when the\nprocedure stops, return the last valid iterate $x_k$ and the status\n`stationary`, `caller-stop`, or `domain-failure`.\nIf no stopping status occurs, the sequence continues and there is no finite\nreturn.\nFor example, an outer procedure's at-most-$M$-updates limit, for finite real\n$M\\ge0$, is implemented by $S(k,x,g):=(k+1>M)$.\n\nAt iteration $k$, where $k$ is the number of accepted updates so far and the\ncurrent iterate is $x_k$:\n\n1. Compute $g_k:=\\nabla f(x_k)$ and set $p_k:=-g_k$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$.\n2. If $S(k,x_k,g_k)$ is true, return $(x_k,\\texttt{caller-stop})$. Check this\n   predicate at the current iterate after its gradient is computed and before\n   any step is selected.\n3. In fixed-step mode, set $t=t_k$. If $x_k+tp_k\\notin U$, return\n   $(x_k,\\texttt{domain-failure})$ without accepting that candidate.\n4. In backtracking mode, start with $t=1$ and repeatedly replace $t$ by\n   $\\beta t$ until $x_k+tp_k\\in U$ and\n   $f(x_k+tp_k)\\le f(x_k)+\\alpha t\\,\\langle g_k,p_k\\rangle$.\n5. Set $x_{k+1}:=x_k+t p_k$ and continue at iteration $k+1$.\n\nThe fixed-step update map is $x\\mapsto x-t_k\\nabla f(x)$; at a stationary\npoint its value is $x$, which is the returned iterate. A backtracking search\nthat is reached at a nonstationary iterate is well-defined by\n[[lem-armijo-backtracking-terminates-for-strict-descent-directions]]. The\nprocedure asserts no convergence or global-minimization property for an\narbitrary objective.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-damped-newton",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $U\\subseteq\\mathbb R^d$ be open, and let $f:U\\to\\mathbb R$ be twice\ncontinuously Fréchet differentiable. Write $g(x)=\\nabla f(x)$ and\n$H(x)=\\nabla^2 f(x)$ using [[def-jacobian-matrix-and-gradient]] and\n[[def-hessian-and-euclidean-critical-point]]. The Hessian is symmetric by\n[[cor-hessian-is-symmetric]].\n\n**Inputs:** $x_0\\in U$, a Newton-decrement tolerance $\\varepsilon>0$, and\nline-search parameters $\\alpha\\in(0,1/2)$ and $\\beta\\in(0,1)$. **Output:**\nwhen the procedure stops, return the last valid iterate $x_k$ and one of the\nstatuses `stationary`, `decrement`, or\n`positive-definite solve unavailable`.\nIf none of these stopping conditions occurs, the sequence continues and there\nis no finite return.\n\nAt iteration $k$ with current iterate $x_k$:\n\n1. Compute $g_k:=g(x_k)$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$.\n2. If $H_k:=H(x_k)$ is not positive definite, return\n   $(x_k,\\texttt{positive-definite solve unavailable})$ without a Newton\n   update. Otherwise compute its Cholesky factorization $H_k=L_kL_k^T$, solve\n   $L_kw=-g_k$ and $L_k^Tp_k=w$, and set\n   $$\\lambda_k^2:=-\\langle g_k,p_k\\rangle=g_k^TH_k^{-1}g_k>0.$$\n3. Before line search, if $\\lambda_k^2/2\\le\\varepsilon$, return\n   $(x_k,\\texttt{decrement})$. This is the Newton-decrement stopping test.\n4. Start with $t=1$ and repeatedly replace $t$ by $\\beta t$ until\n   $x_k+t p_k\\in U$ and\n   $f(x_k+t p_k)\\le f(x_k)+\\alpha t\\,\\langle g_k,p_k\\rangle$.\n5. Set $x_{k+1}:=x_k+t p_k$ and continue at iteration $k+1$.\n\nThe Cholesky factor exists and is unique when the symmetric Hessian is positive\ndefinite by\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]].\nIts positive diagonal makes both triangular solves unique. The backtracking\nbranch terminates whenever it is reached, since $g_k\\ne0$ and $H_k$ is\npositive definite, by\n[[lem-armijo-backtracking-terminates-for-strict-descent-directions]]. This\nprocedure makes no global-optimality claim.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "source_section": "Definition",
+          "quote": "Let $U$ be an open subset of a real matrix space $\\mathbb R^{m\\times n}$ or of\na complex matrix space $\\mathbb C^{m\\times n}$ viewed as a real vector space,\nand let $F:U\\to W$ take values in a finite-dimensional real normed vector\nspace $(W,\\|\\,\\cdot\\,\\|_W)$.\nWe say that $F$ is **real Fr\\'echet differentiable** at $A\\in U$ if there is a\nreal-linear map $L$ such that\n\n$$\\frac{\\|F(A+H)-F(A)-L[H]\\|_W}{\\|H\\|_F}\\longrightarrow0\\qquad(H\\to0,\\ H\\ne0).$$\n\nThat map $L$ is the **real Fr\\'echet derivative** of $F$ at $A$ and is denoted\n$DF(A)$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-bernoulli-inequality",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{R}$ be an ordered field ([[def-ordered-field]]), let\n$x \\in \\mathbb{R}$ with $x \\ge -1$, and let $n \\in \\mathbb{N}$, with powers as in\n[[def-integer-power]] and with $n$ also denoting the canonical field image\n$n\\cdot1_{\\mathbb{R}}$ of the natural number n ([[lem-of-naturals-positive]], [[lem-of-q-embeds]]).\nThen\n\n$$(1+x)^n \\ge 1 + nx,$$\n\nand equality holds if and only if $n \\le 1$ or $x = 0$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By linearity of $Df(x)$ and its values on the standard basis, $Df(x)[p]=\\langle\\nabla f(x),p\\rangle$. In the gradient branch, if $\\nabla f(x)\\ne0$, then $Df(x)[-\\nabla f(x)]=-\\|\\nabla f(x)\\|^2<0$ by [F1]. In the Newton branch, write $g=\\nabla f(x)$ and $Hp=-g$. If $g\\ne0$, then $p\\ne0$ by [F4] and $Df(x)[p]=g^Tp=-p^THp<0$, since $H$ is symmetric positive definite by [F2] and [F4].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Set $d:=-Df(x)[p]>0$. Fréchet differentiability gives $[f(x+tp)-f(x)]/t\\to-d$ as $t\\downarrow0$. Choose $\\delta>0$ small enough that $x+tp\\in U$ and this quotient is less than $-d+(1-\\alpha)d/2=-(1+\\alpha)d/2\\le-\\alpha d$ whenever $0<t<\\delta$. Then every such trial satisfies the Armijo test.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The trials are $t_n=\\beta^n$. Put $c=\\beta^{-1}-1>0$. By [F5], $\\beta^{-n}=(1+c)^n\\ge1+nc$, hence $t_n\\le(1+nc)^{-1}$. By [F6], for any $\\delta>0$ some $n$ is large enough that $(1+nc)^{-1}<\\delta$; thus $t_n\\to0$.",
+          "step": "1.3",
+          "inputs": [
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.2 supplies a positive interval of accepted trial sizes. The geometric sequence shown in step 1.3 eventually tests such a size, so the prescribed loop accepts after finitely many reductions in either algorithm.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes x in an open domain, so an empty domain has no instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement assumes Df(x)[p]<0, excluding a zero direction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 proves the trials start at t_0=1 and decrease geometrically."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 derives a negative Newton derivative under SPD."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires alpha,beta in (0,1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 use a local delta and Archimedean n, not arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This lemma has no separate iff-forward case beyond its explicit hypotheses and complete carrier."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This lemma has no separate iff-reverse case beyond its explicit hypotheses and complete carrier."
+        }
+      ]
+    },
+    "thm-gradient-descent-rate-under-strong-convexity-and-smoothness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-gradient-descent",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and let $f:U\\to\\mathbb R$ be continuously\nFréchet differentiable. The gradient $\\nabla f(x)$ is the vector of partial\nderivatives in the Euclidean coordinates, with the convention of\n[[def-jacobian-matrix-and-gradient]]; differentiability is the Fréchet\ncondition of [[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]].\n\n**Inputs:** an initial point $x_0\\in U$; either a positive fixed-step\nsequence $(t_k)_{k\\ge0}$ or backtracking parameters $\\alpha\\in(0,1)$ and\n$\\beta\\in(0,1)$; and an optional caller stopping predicate\n$S(k,x,g)\\in\\{\\mathrm{false},\\mathrm{true}\\}$, with\n$S:\\{0,1,2,\\ldots\\}\\times U\\times\\mathbb R^d\\to\\{\\mathrm{false},\\mathrm{true}\\}$.\nIf no predicate is supplied, use $S\\equiv\\mathrm{false}$. **Output:** when the\nprocedure stops, return the last valid iterate $x_k$ and the status\n`stationary`, `caller-stop`, or `domain-failure`.\nIf no stopping status occurs, the sequence continues and there is no finite\nreturn.\nFor example, an outer procedure's at-most-$M$-updates limit, for finite real\n$M\\ge0$, is implemented by $S(k,x,g):=(k+1>M)$.\n\nAt iteration $k$, where $k$ is the number of accepted updates so far and the\ncurrent iterate is $x_k$:\n\n1. Compute $g_k:=\\nabla f(x_k)$ and set $p_k:=-g_k$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$.\n2. If $S(k,x_k,g_k)$ is true, return $(x_k,\\texttt{caller-stop})$. Check this\n   predicate at the current iterate after its gradient is computed and before\n   any step is selected.\n3. In fixed-step mode, set $t=t_k$. If $x_k+tp_k\\notin U$, return\n   $(x_k,\\texttt{domain-failure})$ without accepting that candidate.\n4. In backtracking mode, start with $t=1$ and repeatedly replace $t$ by\n   $\\beta t$ until $x_k+tp_k\\in U$ and\n   $f(x_k+tp_k)\\le f(x_k)+\\alpha t\\,\\langle g_k,p_k\\rangle$.\n5. Set $x_{k+1}:=x_k+t p_k$ and continue at iteration $k+1$.\n\nThe fixed-step update map is $x\\mapsto x-t_k\\nabla f(x)$; at a stationary\npoint its value is $x$, which is the returned iterate. A backtracking search\nthat is reached at a nonstationary iterate is well-defined by\n[[lem-armijo-backtracking-terminates-for-strict-descent-directions]]. The\nprocedure asserts no convergence or global-minimization property for an\narbitrary objective.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "source_section": "Definition",
+          "quote": "Let $U$ be an open subset of a real matrix space $\\mathbb R^{m\\times n}$ or of\na complex matrix space $\\mathbb C^{m\\times n}$ viewed as a real vector space,\nand let $F:U\\to W$ take values in a finite-dimensional real normed vector\nspace $(W,\\|\\,\\cdot\\,\\|_W)$.\nWe say that $F$ is **real Fr\\'echet differentiable** at $A\\in U$ if there is a\nreal-linear map $L$ such that\n\n$$\\frac{\\|F(A+H)-F(A)-L[H]\\|_W}{\\|H\\|_F}\\longrightarrow0\\qquad(H\\to0,\\ H\\ne0).$$\n\nThat map $L$ is the **real Fr\\'echet derivative** of $F$ at $A$ and is denoted\n$DF(A)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $x$ and write $g:=\\nabla f(x)$ and $d:=-g/L$. Define $\\phi(s):=f(x+sd)$ on $[0,1]$. By [F2]–[F3], $\\phi'(s)=\\langle\\nabla f(x+sd),d\\rangle$ on $(0,1)$. The gradient is continuous by [A1], so $\\phi'$ is continuous and integrable by [F4]. Applying [F5] gives $$f(x-g/L)-f(x) =-\\frac1L\\int_0^1\\langle\\nabla f(x-sg/L),g\\rangle\\,ds.$$ By [A1] and [F6], $\\|\\nabla f(x-sg/L)-g\\|\\le s\\|g\\|$, whence $\\langle\\nabla f(x-sg/L),g\\rangle\\ge(1-s)\\|g\\|^2$. Integrating this bound gives $$f(x-g/L)\\le f(x)-\\frac{\\|g\\|^2}{2L}.$$",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [A2], for every $y$, $$f(y)\\ge f(x)+\\langle g,y-x\\rangle+\\frac\\mu2\\|y-x\\|^2 =f(x)-\\frac{\\|g\\|^2}{2\\mu} +\\frac\\mu2\\left\\|y-x+\\frac g\\mu\\right\\|^2.$$ Taking $y=x^*$ and using nonnegativity of the square yields $\\|g\\|^2\\ge2\\mu(f(x)-f^*)$.",
+          "step": "1.2",
+          "inputs": [
+            "A2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply steps 1.1 and 1.2 at $x=x_k$ and use [F1]. Then $$f(x_{k+1})-f^* \\le f(x_k)-f^*-\\frac{\\|\\nabla f(x_k)\\|^2}{2L} \\le\\left(1-\\frac\\mu L\\right)(f(x_k)-f^*).$$ The factor is nonnegative because $\\mu\\le L$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The $k=0$ case is equality. For $k=1$, the result is step 2.1 whenever $x_1$ is generated. If $x_{k+1}$ is generated, then $x_k$ was generated and the algorithm made the $k$th update; multiplying the bound at $k$ by $1-\\mu/L\\ge0$ and applying step 2.1 proves it at $k+1$. Induction along generated iterates gives the claim for every generated $k\\ge1$. If the stopping rule fires earlier, no later iterate is asserted.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement concerns an attained minimum on R^d."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement says the initial gap is unchanged at k=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 proves one-step contraction and step 3.1 iterates it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement handles mu=L for k>=1 and excludes 0^0 at k=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires 0<mu<=L."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement gives the attained minimizer; steps 1.1, 1.2, 2.1, 3.1 use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement gives a geometric gap bound under smoothness, strong convexity and an attained minimum; proofs 1.1–2.1 prove this sufficient implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not infer strong convexity or gradient Lipschitz continuity from a convergent run or from the displayed bound."
+        }
+      ]
+    },
+    "thm-newton-local-quadratic-convergence-under-lipschitz-hessian": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-damped-newton",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $U\\subseteq\\mathbb R^d$ be open, and let $f:U\\to\\mathbb R$ be twice\ncontinuously Fréchet differentiable. Write $g(x)=\\nabla f(x)$ and\n$H(x)=\\nabla^2 f(x)$ using [[def-jacobian-matrix-and-gradient]] and\n[[def-hessian-and-euclidean-critical-point]]. The Hessian is symmetric by\n[[cor-hessian-is-symmetric]].\n\n**Inputs:** $x_0\\in U$, a Newton-decrement tolerance $\\varepsilon>0$, and\nline-search parameters $\\alpha\\in(0,1/2)$ and $\\beta\\in(0,1)$. **Output:**\nwhen the procedure stops, return the last valid iterate $x_k$ and one of the\nstatuses `stationary`, `decrement`, or\n`positive-definite solve unavailable`.\nIf none of these stopping conditions occurs, the sequence continues and there\nis no finite return.\n\nAt iteration $k$ with current iterate $x_k$:\n\n1. Compute $g_k:=g(x_k)$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$.\n2. If $H_k:=H(x_k)$ is not positive definite, return\n   $(x_k,\\texttt{positive-definite solve unavailable})$ without a Newton\n   update. Otherwise compute its Cholesky factorization $H_k=L_kL_k^T$, solve\n   $L_kw=-g_k$ and $L_k^Tp_k=w$, and set\n   $$\\lambda_k^2:=-\\langle g_k,p_k\\rangle=g_k^TH_k^{-1}g_k>0.$$\n3. Before line search, if $\\lambda_k^2/2\\le\\varepsilon$, return\n   $(x_k,\\texttt{decrement})$. This is the Newton-decrement stopping test.\n4. Start with $t=1$ and repeatedly replace $t$ by $\\beta t$ until\n   $x_k+t p_k\\in U$ and\n   $f(x_k+t p_k)\\le f(x_k)+\\alpha t\\,\\langle g_k,p_k\\rangle$.\n5. Set $x_{k+1}:=x_k+t p_k$ and continue at iteration $k+1$.\n\nThe Cholesky factor exists and is unique when the symmetric Hessian is positive\ndefinite by\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]].\nIts positive diagonal makes both triangular solves unique. The backtracking\nbranch terminates whenever it is reached, since $g_k\\ne0$ and $H_k$ is\npositive definite, by\n[[lem-armijo-backtracking-terminates-for-strict-descent-directions]]. This\nprocedure makes no global-optimality claim.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-hessian-is-symmetric",
+          "source_section": "Statement",
+          "quote": "For a $C^2$ scalar field $f$, $H_f(a)^T=H_f(a)$ at every point $a$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]. A point $a$ is **critical** when its gradient $\\nabla f(a)$ is zero, with the gradient convention of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2]–[F3], $H(x^*)$ has an orthonormal eigenbasis with positive eigenvalues. Let $\\lambda>0$ be its smallest eigenvalue. Choose $r<R/2$ with $Kr\\le\\lambda/2$. For $\\|x-x^*\\|\\le r$ and any vector $v$, $$v^TH(x)v\\ge v^TH(x^*)v-\\|H(x)-H(x^*)\\|_{\\rm op}\\|v\\|^2 \\ge\\frac\\lambda2\\|v\\|^2.$$ Thus $H(x)$ is positive definite there and [F4] makes each Newton solve well-defined.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F9",
+            "F10",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $M_0:=\\|H(x^*)\\|_{\\rm op}+Kr$, $M:=\\sqrt d\\,M_0$, and $m:=\\lambda/2$. Along the segment $x^*+te$, where $e=x-x^*$ and $\\|e\\|\\le r$, apply [F5] to each coordinate of the gradient map $t\\mapsto\\nabla f(x^*+te)$. Its derivative is the corresponding coordinate of $H(x^*+te)e$; the integrand is continuous and hence integrable by [F6]. Newton–Leibniz [F7] and $\\nabla f(x^*)=0$ give $$\\nabla f(x)=\\int_0^1H(x^*+te)e\\,dt.$$ For every $t\\in[0,1]$, $\\|H(x^*+te)\\|_{\\rm op}\\le M_0$, so each coordinate of $H(x^*+te)e$ is bounded in absolute value by $M_0\\|e\\|$. Apply [F11] to each coordinate integral; this gives $|\\nabla f(x)_i|\\le M_0\\|e\\|$ and hence $\\|\\nabla f(x)\\|\\le M\\|e\\|$. Each coordinate of $(H(x)-H(x^*+te))e$ is bounded in absolute value by $K(1-t)\\|e\\|^2$, using the operator-norm Lipschitz bound and [F10]. Applying [F11] to these coordinate integrals gives $$\\|H(x)e-\\nabla f(x)\\| \\le\\frac{\\sqrt d\\,K}{2}\\|e\\|^2.$$",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F9",
+            "F10",
+            "F11",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $p=-H(x)^{-1}\\nabla f(x)$ be the Newton direction and $e_+:=x+p-x^*$. Since $e_+=H(x)^{-1}(H(x)e-\\nabla f(x))$ and $\\|H(x)^{-1}\\|_{\\rm op}\\le1/m=2/\\lambda$ by step 1.1 and the orthonormal eigenbasis in [F3], step 2.1 gives $$\\|e_+\\|\\le C\\|e\\|^2,\\qquad C:=\\sqrt d\\,K/\\lambda.$$ Also $\\|p\\|\\le D\\|e\\|$ with $D:=M/m=2M/\\lambda$, because $\\|p\\|\\le m^{-1}\\|\\nabla f(x)\\|$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F9",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Choose $\\rho\\le r/(1+D)$ and, if $K>0$, also choose $D\\rho\\le(1/2-\\alpha)\\lambda/K$; decrease $\\rho$ further so $C\\rho\\le1/2$. For $x\\in B(x^*,\\rho)$ the segment from $x$ to $x+p$ lies in $B(x^*,r)$. If $\\nabla f(x)=0$, step 3.1 gives $\\|e\\|\\le C\\|e\\|^2$, so the choice $C\\rho\\le1/2$ forces $e=0$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Whenever a nonzero Newton direction is sent to line search, apply [F8] with $k=1$ on the segment $x+[0,1]p$. For some $\\theta\\in(0,1)$, $$f(x+p)=f(x)+\\langle\\nabla f(x),p\\rangle +\\frac12p^TH(x+\\theta p)p.$$ Write $A:=p^TH(x)p\\ge m\\|p\\|^2$ by step 1.1. Since $\\nabla f(x)=-H(x)p$ and $H$ is $K$-Lipschitz, $$f(x+p)-f(x)-\\alpha\\langle\\nabla f(x),p\\rangle \\le-(1/2-\\alpha)A+\\frac K2\\|p\\|^3\\le0$$ by the choice of $\\rho$ in step 4.1. If $K=0$, the same inequality holds with its cubic term zero. Therefore the full step passes the Armijo test and [F1] accepts $t=1$. This is conditional on the decrement test not stopping before line search.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F8",
+            "F10",
+            "step 1.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "At any generated iterate in $B(x^*,\\rho)$, a nonstationary point has a positive-definite Hessian by step 1.1, so the unavailable-solve status cannot occur. If its decrement test stops the method, no update is attempted. Otherwise step 5.1 gives a unit step, and steps 3.1 and 5.1 give the quadratic bound and $\\|e_+\\|\\le C\\rho\\|e\\|\\le\\|e\\|/2$, so the next generated iterate remains in the ball. If an iterate is stationary, step 4.1 shows it is $x^*$. Induction over generated iterates proves the local statement, with the rate asserted exactly for updates the algorithm attempts. No claim outside this neighborhood follows.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "given",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires x* in U and d>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 proves a stationary point in the neighborhood must equal x*."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 proves each nonstationary iterate accepts t=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.1 handles K=0, when the cubic remainder vanishes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires 0<alpha<1/2 and 0<beta<1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement uses finite-dimensional data; steps 1.1, 2.1, 3.1, 4.1, 5.1, 6.1 use explicit local radius choices, with no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement proves a local attempted-update bound and unit-step acceptance under its Hessian hypotheses; proof 6.1 does not formulate an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not recover a Lipschitz Hessian or positive-definite critical point from observed quadratic error decay; stopping before line search supplies no next-iterate conclusion."
+        }
+      ]
+    },
+    "ex-gaussian-location-kl": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-gaussian-location-kl-formula",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $a,b\\in\\mathbb R$ and $\\tau>0$. For the normal location\nlaws with common variance $\\tau^2$,\n$$D\\bigl(N(a,\\tau^2)\\|N(b,\\tau^2)\\bigr)=\\frac{(a-b)^2}{2\\tau^2}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-kullback-leibler-is-nonnegative",
+          "source_section": "Statement",
+          "quote": "Assume AC and use the directional convention of\n[[def-kullback-leibler-divergence]]. For probability measures $P,Q$ on one\nmeasurable space, $D(P\\|Q)\\ge0$, and $D(P\\|Q)=0$ if and only if $P=Q$.\n\nThere is also the following normalized-density identity. Let\n$(\\mathsf X,\\mathcal A,\\mu)$ be a sigma-finite measure space: it is a set\nwith a sigma-algebra and measure ([[def-measure-space]]), and there is a\ncountable measurable cover by sets of finite $\\mu$-measure\n([[def-finite-sigma-finite-and-semifinite-measures]]). Let\n$\\gamma:\\mathsf X\\to[0,\\infty)$ be a finite-valued measurable function with\n$Z:=\\int\\gamma\\,d\\mu\\in(0,\\infty)$, and put $\\pi=\\gamma/Z$. Let\n$q:\\mathsf X\\to[0,\\infty)$ be a finite-valued measurable probability density,\nso $\\int q\\,d\\mu=1$, and suppose $q=0$ $\\mu$-almost everywhere on\n$\\{\\gamma=0\\}$. Assume\n$$\\int q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty,$$\nwhere each term with $q=0$ is defined to be zero. Then\n$$\\log Z =\\int q(\\log\\gamma-\\log q)\\,d\\mu +D(q\\,\\mu\\|\\pi\\,\\mu).$$\nIn particular, the first integral is at most $\\log Z$. This identity concerns\nnormalized densities only; it does not assert posterior existence for an\nunspecified statistical model.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F1] to the stated laws; its hypotheses are exactly $a,b\\in\\mathbb R$ and $\\tau>0$, and its AC hypothesis is [A1].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $(a-b)^2\\ge0$ and $2\\tau^2>0$, the displayed value is nonnegative and equals zero when $a=b$. In that case the two Gaussian laws coincide, so the equality clause is consistent with [F2].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example concerns two Gaussian probability laws on the nonempty real line with tau>0. The calculation in proof 1.1 has no variable index family, empty observation list or empty event to specialize."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and step 1.1 include a=b as zero divergence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example includes the tau=1 subcase under tau>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 shows a=b makes the laws coincide."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example requires tau>0, excluding tau=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Given and step 1.1 inherit the Gaussian supplier’s explicit AC assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example evaluates one Gaussian pair, not a general equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example evaluates one Gaussian pair, not a general equivalence."
+        }
+      ]
+    },
+    "ex-multimodal-nonconvex-objective": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-gradient-descent",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and let $f:U\\to\\mathbb R$ be continuously\nFréchet differentiable. The gradient $\\nabla f(x)$ is the vector of partial\nderivatives in the Euclidean coordinates, with the convention of\n[[def-jacobian-matrix-and-gradient]]; differentiability is the Fréchet\ncondition of [[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]].\n\n**Inputs:** an initial point $x_0\\in U$; either a positive fixed-step\nsequence $(t_k)_{k\\ge0}$ or backtracking parameters $\\alpha\\in(0,1)$ and\n$\\beta\\in(0,1)$; and an optional caller stopping predicate\n$S(k,x,g)\\in\\{\\mathrm{false},\\mathrm{true}\\}$, with\n$S:\\{0,1,2,\\ldots\\}\\times U\\times\\mathbb R^d\\to\\{\\mathrm{false},\\mathrm{true}\\}$.\nIf no predicate is supplied, use $S\\equiv\\mathrm{false}$. **Output:** when the\nprocedure stops, return the last valid iterate $x_k$ and the status\n`stationary`, `caller-stop`, or `domain-failure`.\nIf no stopping status occurs, the sequence continues and there is no finite\nreturn.\nFor example, an outer procedure's at-most-$M$-updates limit, for finite real\n$M\\ge0$, is implemented by $S(k,x,g):=(k+1>M)$.\n\nAt iteration $k$, where $k$ is the number of accepted updates so far and the\ncurrent iterate is $x_k$:\n\n1. Compute $g_k:=\\nabla f(x_k)$ and set $p_k:=-g_k$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$.\n2. If $S(k,x_k,g_k)$ is true, return $(x_k,\\texttt{caller-stop})$. Check this\n   predicate at the current iterate after its gradient is computed and before\n   any step is selected.\n3. In fixed-step mode, set $t=t_k$. If $x_k+tp_k\\notin U$, return\n   $(x_k,\\texttt{domain-failure})$ without accepting that candidate.\n4. In backtracking mode, start with $t=1$ and repeatedly replace $t$ by\n   $\\beta t$ until $x_k+tp_k\\in U$ and\n   $f(x_k+tp_k)\\le f(x_k)+\\alpha t\\,\\langle g_k,p_k\\rangle$.\n5. Set $x_{k+1}:=x_k+t p_k$ and continue at iteration $k+1$.\n\nThe fixed-step update map is $x\\mapsto x-t_k\\nabla f(x)$; at a stationary\npoint its value is $x$, which is the returned iterate. A backtracking search\nthat is reached at a nonstationary iterate is well-defined by\n[[lem-armijo-backtracking-terminates-for-strict-descent-directions]]. The\nprocedure asserts no convergence or global-minimization property for an\narbitrary objective.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-damped-newton",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $U\\subseteq\\mathbb R^d$ be open, and let $f:U\\to\\mathbb R$ be twice\ncontinuously Fréchet differentiable. Write $g(x)=\\nabla f(x)$ and\n$H(x)=\\nabla^2 f(x)$ using [[def-jacobian-matrix-and-gradient]] and\n[[def-hessian-and-euclidean-critical-point]]. The Hessian is symmetric by\n[[cor-hessian-is-symmetric]].\n\n**Inputs:** $x_0\\in U$, a Newton-decrement tolerance $\\varepsilon>0$, and\nline-search parameters $\\alpha\\in(0,1/2)$ and $\\beta\\in(0,1)$. **Output:**\nwhen the procedure stops, return the last valid iterate $x_k$ and one of the\nstatuses `stationary`, `decrement`, or\n`positive-definite solve unavailable`.\nIf none of these stopping conditions occurs, the sequence continues and there\nis no finite return.\n\nAt iteration $k$ with current iterate $x_k$:\n\n1. Compute $g_k:=g(x_k)$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$.\n2. If $H_k:=H(x_k)$ is not positive definite, return\n   $(x_k,\\texttt{positive-definite solve unavailable})$ without a Newton\n   update. Otherwise compute its Cholesky factorization $H_k=L_kL_k^T$, solve\n   $L_kw=-g_k$ and $L_k^Tp_k=w$, and set\n   $$\\lambda_k^2:=-\\langle g_k,p_k\\rangle=g_k^TH_k^{-1}g_k>0.$$\n3. Before line search, if $\\lambda_k^2/2\\le\\varepsilon$, return\n   $(x_k,\\texttt{decrement})$. This is the Newton-decrement stopping test.\n4. Start with $t=1$ and repeatedly replace $t$ by $\\beta t$ until\n   $x_k+t p_k\\in U$ and\n   $f(x_k+t p_k)\\le f(x_k)+\\alpha t\\,\\langle g_k,p_k\\rangle$.\n5. Set $x_{k+1}:=x_k+t p_k$ and continue at iteration $k+1$.\n\nThe Cholesky factor exists and is unique when the symmetric Hessian is positive\ndefinite by\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]].\nIts positive diagonal makes both triangular solves unique. The backtracking\nbranch terminates whenever it is reached, since $g_k\\ne0$ and $H_k$ is\npositive definite, by\n[[lem-armijo-backtracking-terminates-for-strict-descent-directions]]. This\nprocedure makes no global-optimality claim.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Factor $f(x)=(x-1)^2(x+1)^2\\ge0$ for every real $x$, with equality at $x=1$ and $x=-1$. Thus these are distinct global minimizers and the minimum value is zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $|x|<1$, $f(x)=(1-x^2)^2\\le1$, with strict inequality for $x\\ne0$; since $f(0)=1$, $x=0$ is a strict local maximum.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1–1.2 exhibit a smooth objective with two global minima and an intervening local maximum. The procedures in [F1]–[F2] are defined by local updates and make no global-minimization or initialization-independent claim.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes domain R and the nonempty minimizer set {-1,1}; proof 1.1 displays both minimizers. No empty domain or family is permitted by this concrete example."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the minimum value zero at x=1 and x=-1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 proves x=0 is a strict local maximum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 exhibits two distinct global minimizers."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example has domain all of R, with no finite domain endpoints or boundary parameter interval. The values +/-1 are interior minimizers checked in proof 1.1, and 0 is an interior local maximum in 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: the quartic verification is explicit and uses no selection principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example constructs f(x)=(x^2-1)^2 with two minima by proof 1.1; it is not an if-and-only-if claim about nonconvexity or local algorithms."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 draws no converse from an algorithm's local update rule to a particular objective shape or global-convergence failure."
+        }
+      ]
+    },
+    "ex-finite-mixture-latent-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-latent-variable-joint-and-observed-data-factorization",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$, $(\\mathsf X,\\mathcal A)$, and\n$(\\mathsf Z,\\mathcal C)$ be measurable spaces (sets equipped with\nsigma-algebras; [[def-measurable-space]]). Let $\\nu$ and $\\mu$ be sigma-finite\nreference measures on the observation and latent spaces; each has a countable\nmeasurable cover by sets of finite measure\n([[def-finite-sigma-finite-and-semifinite-measures]]). The finite product\nsigma-algebra is generated by measurable rectangles\n([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). The product\nreference measure $\\nu\\otimes\\mu$ is the one supplied by\n[[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]].\n\nA **jointly measurable latent-variable density** is a specified function\n$$p:\\Theta\\times\\mathsf X\\times\\mathsf Z\\longrightarrow[0,\\infty]$$\nmeasurable for $\\mathcal T\\otimes\\mathcal A\\otimes\\mathcal C$ and normalized\non every parameter fibre:\n$$\\int_{\\mathsf X\\times\\mathsf Z}p(\\theta,x,z)\\, (\\nu\\otimes\\mu)(d(x,z))=1\\qquad(\\theta\\in\\Theta).$$\nHere $x$ is the observed coordinate and $z$ the latent coordinate. The\nobserved marginal density is\n$$m(\\theta,x):=\\int_{\\mathsf Z}p(\\theta,x,z)\\,\\mu(dz).$$\nThe valid-fibre set is\n$V:=\\{(\\theta,x):0<m(\\theta,x)<\\infty\\}$. Only on $V$ define the normalized\nlatent-fibre density\n$$q(z\\mid\\theta,x):=\\frac{p(\\theta,x,z)}{m(\\theta,x)}.$$\nThis definition requires a single jointly measurable density as an input.\n[[def-likelihood-density]] supplies neither a sigma-algebra on $\\Theta$ nor\njoint parameter measurability from separately specified likelihood sections;\nthe joint measurability above is an additional hypothesis. Because $p$ is\nalready supplied as one joint function, this definition uses no choice axiom.\nIt does not assert that AC can turn separately specified pointwise likelihood\nversions into a jointly measurable version. No quotient or pointwise\nconditional density is asserted on a zero or infinite marginal fibre.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-observed-density-is-latent-marginal-under-tonelli",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses of\n[[def-latent-variable-joint-and-observed-data-factorization]]. Then\n$m(\\theta,x)=\\int p(\\theta,x,z)\\,\\mu(dz)$ is jointly measurable in\n$(\\theta,x)$. For each fixed $\\theta$, it is an observed-data probability\ndensity: it is $\\mathcal A$-measurable and\n$$\\int_{\\mathsf X}m(\\theta,x)\\,\\nu(dx)=1.$$\nConsequently $m(\\theta,x)<\\infty$ for $\\nu$-almost every $x$. On every valid\nfibre $0<m(\\theta,x)<\\infty$, $q(z\\mid\\theta,x)=p(\\theta,x,z)/m(\\theta,x)$ is\na measurable $\\mu$-density of total mass one. Finally, if $h:\\Theta\\times\\mathsf X\\times\\mathsf Z\\to\\mathbb C$ is product\nmeasurable and\n$\\int |h(\\theta,x,z)|p(\\theta,x,z)\\,d(\\nu\\otimes\\mu)<\\infty$ for a fixed\n$\\theta$, Fubini permits exchanging the latent and observed integrals of\n$hp$. No exchange is claimed without this absolute integrability.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map $p(x,j)=w_jf_j(x)$ is nonnegative and product measurable. With counting measure on the finite label set, $$\\int_{\\mathsf X\\times\\mathsf Z}p\\,d(\\nu\\otimes\\#) =\\sum_{j=1}^J w_j\\int_{\\mathsf X}f_j\\,d\\nu =\\sum_{j=1}^Jw_j=1.$$ It is therefore a complete-data probability density of the type in [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Integrating over the label coordinate gives $m(x)=\\int_{\\mathsf Z}p(x,j)\\,\\#(dj)=\\sum_{j=1}^Jw_jf_j(x)$. For $0<m(x)<\\infty$, the conditional label mass is $q(j\\mid x)=w_jf_j(x)/m(x)$ and its finite sum is $$\\sum_{j=1}^Jq(j\\mid x) =\\frac{\\sum_{j=1}^Jw_jf_j(x)}{m(x)}=1.$$",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The joint density, its observed marginal, and its normalized positive finite fibres therefore have exactly the finite-mixture factorization claimed.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example assumes J>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 defines q only on positive finite marginal fibres."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example with J=1 has weight one and reduces to one component."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example permits component densities to vanish at x while weights stay strictly positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example requires all w_j>0 and sum w_j=1. The J=1 endpoint forces w_1=1 and proof 2.1 yields q(1|x)=1 on 0<f_1(x)<infinity; zero or infinite marginal fibres remain excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1 use finite sums over explicit labels."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example derives the finite-mixture marginal and positive-fibre quotient from supplied weights and densities in proof 2.1; it claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 3.1 summarizes this construction; it does not infer a unique latent decomposition from the observed mixture density."
+        }
+      ]
+    },
+    "ex-zero-normalizer-latent-fiber": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-latent-variable-joint-and-observed-data-factorization",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$, $(\\mathsf X,\\mathcal A)$, and\n$(\\mathsf Z,\\mathcal C)$ be measurable spaces (sets equipped with\nsigma-algebras; [[def-measurable-space]]). Let $\\nu$ and $\\mu$ be sigma-finite\nreference measures on the observation and latent spaces; each has a countable\nmeasurable cover by sets of finite measure\n([[def-finite-sigma-finite-and-semifinite-measures]]). The finite product\nsigma-algebra is generated by measurable rectangles\n([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). The product\nreference measure $\\nu\\otimes\\mu$ is the one supplied by\n[[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]].\n\nA **jointly measurable latent-variable density** is a specified function\n$$p:\\Theta\\times\\mathsf X\\times\\mathsf Z\\longrightarrow[0,\\infty]$$\nmeasurable for $\\mathcal T\\otimes\\mathcal A\\otimes\\mathcal C$ and normalized\non every parameter fibre:\n$$\\int_{\\mathsf X\\times\\mathsf Z}p(\\theta,x,z)\\, (\\nu\\otimes\\mu)(d(x,z))=1\\qquad(\\theta\\in\\Theta).$$\nHere $x$ is the observed coordinate and $z$ the latent coordinate. The\nobserved marginal density is\n$$m(\\theta,x):=\\int_{\\mathsf Z}p(\\theta,x,z)\\,\\mu(dz).$$\nThe valid-fibre set is\n$V:=\\{(\\theta,x):0<m(\\theta,x)<\\infty\\}$. Only on $V$ define the normalized\nlatent-fibre density\n$$q(z\\mid\\theta,x):=\\frac{p(\\theta,x,z)}{m(\\theta,x)}.$$\nThis definition requires a single jointly measurable density as an input.\n[[def-likelihood-density]] supplies neither a sigma-algebra on $\\Theta$ nor\njoint parameter measurability from separately specified likelihood sections;\nthe joint measurability above is an additional hypothesis. Because $p$ is\nalready supplied as one joint function, this definition uses no choice axiom.\nIt does not assert that AC can turn separately specified pointwise likelihood\nversions into a jointly measurable version. No quotient or pointwise\nconditional density is asserted on a zero or infinite marginal fibre.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-observed-density-is-latent-marginal-under-tonelli",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses of\n[[def-latent-variable-joint-and-observed-data-factorization]]. Then\n$m(\\theta,x)=\\int p(\\theta,x,z)\\,\\mu(dz)$ is jointly measurable in\n$(\\theta,x)$. For each fixed $\\theta$, it is an observed-data probability\ndensity: it is $\\mathcal A$-measurable and\n$$\\int_{\\mathsf X}m(\\theta,x)\\,\\nu(dx)=1.$$\nConsequently $m(\\theta,x)<\\infty$ for $\\nu$-almost every $x$. On every valid\nfibre $0<m(\\theta,x)<\\infty$, $q(z\\mid\\theta,x)=p(\\theta,x,z)/m(\\theta,x)$ is\na measurable $\\mu$-density of total mass one. Finally, if $h:\\Theta\\times\\mathsf X\\times\\mathsf Z\\to\\mathbb C$ is product\nmeasurable and\n$\\int |h(\\theta,x,z)|p(\\theta,x,z)\\,d(\\nu\\otimes\\mu)<\\infty$ for a fixed\n$\\theta$, Fubini permits exchanging the latent and observed integrals of\n$hp$. No exchange is claimed without this absolute integrability.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The only nonzero summand is $p(0,0)=1$, so $\\sum_{x,z}p(x,z)=1$; this is a normalized joint density on the finite product space.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Summing over $z$ gives $m(0)=1$ and $m(1)=0$. At $x=1$, both $p(1,z)$ and $m(1)$ are zero, so the quotient $p(1,z)/m(1)$ is undefined.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $m(1)=0$, the observation $x=1$ is outside the positive finite fibre set in [F1]. The formula supplies no pointwise conditional latent density there.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes two nonempty finite spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 compute m(1)=0 and leave the quotient undefined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 computes m(0)=1; step 1.1 verifies total mass one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 places all probability on one atom."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 distinguish m(0)=1 from m(1)=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: the finite two-point sums require no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example constructs a normalized joint mass with m(1)=0 in proof 1.2; it does not assert a biconditional for arbitrary conditional laws."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 excludes the zero fibre from the quotient formula; it does not assert that all pointwise versions of a conditional distribution are impossible on that null fibre."
+        }
+      ]
+    },
+    "ex-strongly-convex-quadratic-gradient-descent": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-gradient-and-hessian-of-the-frobenius-least-squares-functional",
+          "source_section": "Statement",
+          "quote": "For fixed $A$ and $b$, let\n\n$$f(x):=\\frac12\\|Ax-b\\|_2^2.$$\n\nThen\n\n$$Df(x)[h]=\\operatorname{Re}\\langle A^\\ast(Ax-b),h\\rangle,$$\n\nso the gradient is $\\nabla f(x)=A^\\ast(Ax-b)$ and the Hessian is the constant\nmap $h\\mapsto A^\\ast Ah$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hessian-characterises-convexity",
+          "source_section": "Statement",
+          "quote": "A $C^2$ function on an open convex set is convex if and only if its Hessian is positive semidefinite at every point. Hessians and their quadratic forms have the conventions of [[def-hessian-and-euclidean-critical-point]], [[cor-hessian-is-symmetric]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gradient-descent-rate-under-strong-convexity-and-smoothness",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable and have an\nattained minimum $f^*=f(x^*)$. Say that $f$ is $L$-smooth when\n$\\|\\nabla f(x)-\\nabla f(y)\\|\\le L\\|x-y\\|$ for all $x,y$, and\n$\\mu$-strongly convex when\n$$f(y)\\ge f(x)+\\langle\\nabla f(x),y-x\\rangle +\\frac{\\mu}{2}\\|y-x\\|^2 \\qquad(x,y\\in\\mathbb R^d).$$\nIf $0<\\mu\\le L$ and [[alg-gradient-descent]] uses the fixed step $1/L$, then\nthe initial gap is unchanged at $k=0$, and for every generated iterate $x_k$\nwith integer $k\\ge1$,\n$$f(x_k)-f^*\\le \\left(1-\\frac{\\mu}{L}\\right)^k\\bigl(f(x_0)-f^*\\bigr).$$\nFor $\\mu=L$, the factor is zero only for the stated $k\\ge1$ range; no\n$0^0$ convention is used.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Take $A=I_d$ in [F1]. Then $\\nabla f(x)=x-b$ and $H_f(x)=I_d$. This Hessian is positive semidefinite, so [F2] proves convexity.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Direct expansion gives, for all $x,y$, $$f(y)=f(x)+\\langle x-b,y-x\\rangle+\\tfrac12\\|y-x\\|^2.$$ Thus the strong-convexity inequality holds with $\\mu=1$. The gradient satisfies $\\|\\nabla f(x)-\\nabla f(y)\\|=\\|x-y\\|\\le2\\|x-y\\|$, so $L=2$ is valid. The minimum is $f^*=0$ at $x=b$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Whenever the algorithm makes a fixed-step update with step $1/2$, $x_{k+1}=x_k-\\tfrac12(x_k-b)=b+\\tfrac12(x_k-b)$. Induction along the generated iterates gives $\\|x_k-b\\|^2=4^{-k}\\|x_0-b\\|^2$, so $f(x_k)-f^*=4^{-k}(f(x_0)-f^*)\\le2^{-k}(f(x_0)-f^*)$ for each generated $k\\ge1$; for $k=0$ the gap is unchanged. A caller stop ends this finite prefix and does not assert later iterates. This is the bound from [F3] with $\\mu/L=1/2$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For a generated run with no updates, Example still includes k=0 and proof 3.1 explicitly says the gap is unchanged. A caller stop ends the finite prefix; it supplies no later iterates or empty-product rate assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies f*=0 at x=b."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 computes the one-step gap factor 1/4."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At x=b, step 2.1 gives zero gap and the update remains at the minimizer."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example uses admissible mu=1 and L=2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example gives explicit vectors and minimizer; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example establishes the geometric bound for its chosen quadratic and step in proof 3.1, not an equivalence characterizing strong convexity by convergence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 3.1 obtains the stronger exact 4^(-k) gap and hence the stated 2^(-k) bound; no reverse inference from that bound to the Hessian or objective is asserted."
+        }
+      ]
+    }
+  }
+}

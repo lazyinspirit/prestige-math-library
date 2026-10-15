@@ -1,0 +1,1188 @@
+{
+  "version": 1,
+  "scope": [
+    "def-measurable-finite-group-permutation-setup",
+    "def-measurable-finite-group-orbit-pvalues",
+    "alg-random-permutation-monte-carlo-pvalue",
+    "thm-finite-group-permutation-validity",
+    "thm-random-permutation-monte-carlo-validity",
+    "ex-exchangeable-two-sample-permutation-test",
+    "ex-unequal-assignment-sharp-null-randomization",
+    "cex-uncorrected-random-permutation-pvalue-can-be-zero"
+  ],
+  "contracts": {
+    "def-measurable-finite-group-permutation-setup": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition uses a finite group, which contains its identity, and a supplied nonempty null set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Definition permits zero-probability data points and asserts no positive mass at a point."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-element group satisfies the Definition and leaves its action and score well-defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Definition makes no nondegeneracy assumption on the score or null law."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Invariance is stated for every measurable event, including the empty event and whole space."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only a finite group and a supplied experiment are used; no choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This Definition states hypotheses and terminology, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This Definition states hypotheses and terminology, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Definition and supplier interface checked against the published finite-space MSF supplier; no independent audit is recorded."
+      }
+    },
+    "def-measurable-finite-group-orbit-pvalues": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The group contains its identity, so |G| is positive and both denominators are defined."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No individual outcome probability is divided by; zero-mass data points are permitted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For |G|=1 the inclusive rank is 1 and the tie-randomized rank is U."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For a constant score the strict count is zero and the tied count is |G|."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The auxiliary uniform variable is defined on the closed interval [0,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The formulas use a finite group and the stated independent auxiliary variable."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This Definition gives formulas, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This Definition gives formulas, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "The multiplicity convention and formulas were checked against the published finite-space rank definition; no independent audit is recorded."
+      }
+    },
+    "alg-random-permutation-monte-carlo-pvalue": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition expressly permits B=0: the with-replacement sum over b=1,...,B is empty and equals zero; without replacement S is the empty subset. Both designs retain {e} and return 1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The identity contributes to the inclusive count, so the candidate statistic cannot be zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "B=0 and the one-element-group case are both executable with returned value 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Ties are included by >=, so a constant score returns 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The without-replacement design states B<=|G|-1 and both designs include their identity branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The procedure uses uniform sampling from finite groups or finite subsets only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "An algorithm defines a procedure and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "An algorithm defines a procedure and asserts no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Both simulation designs, their admissibility bounds, and the B=0 branch were checked; algorithm correctness remains the separate theorem obligation."
+      }
+    },
+    "thm-finite-group-permutation-validity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measurable-finite-group-permutation-setup",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$\\varnothing\\ne\\Theta_0\\subseteq\\Theta$, and let $G$ be a finite group\n([[def-group]]) acting on $\\mathcal X$ by a left action\n([[def-group-action]]). Require that each map $x\\mapsto g\\cdot x$ is\nmeasurable from $(\\mathcal X,\\mathcal A)$ to itself and that\n$T:\\mathcal X\\to\\mathbb R$ is measurable\n([[def-measurable-function-between-measurable-spaces]]).\n\nFor $\\theta\\in\\Theta_0$, the null law is **invariant under the action** when\n$P_\\theta(\\{x:g\\cdot x\\in A\\})=P_\\theta(A)$ for every $g\\in G$ and\n$A\\in\\mathcal A$. Equivalently, $g\\cdot X$ and $X$ have the same law when\n$X\\sim P_\\theta$. The setup defines the action and score whether or not this\ninvariance condition holds; the validity theorem below assumes it for every\nnull parameter.\n\nThe data space need not be finite, and the action need not be free. Group\nelements, including distinct elements that send $x$ to the same point, remain\ndistinct transformations in every group average. On a finite data space with\nthe full power-set sigma-algebra, if every null law is invariant, the setup specializes to\n[[def-finite-group-randomization-test]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-finite-group-orbit-pvalues",
+          "source_section": "Definition",
+          "quote": "In a setup as in [[def-measurable-finite-group-permutation-setup]], the\n**inclusive full-orbit upper-tail p-value** at $x\\in\\mathcal X$ is\n$$p_{\\mathrm{orb}}(x):=\\frac{\\#\\{g\\in G:T(g\\cdot x)\\ge T(x)\\}}{|G|}.$$\nIf $U$ is independent of the data and uniform on $[0,1]$, meaning\n$\\mathbb P(U\\le u)=u$ for every $u\\in[0,1]$, the **tie-randomized full-orbit\np-value** is\n$$p_{\\mathrm{tie}}(x,U):=\\frac{\\#\\{g\\in G:T(g\\cdot x)>T(x)\\}+U\\,\\#\\{g\\in G:T(g\\cdot x)=T(x)\\}}{|G|}.$$\nIndependence is in the sense of\n[[def-independent-random-elements]]. Each count is over group elements with\nmultiplicity, so nonfree actions are handled without replacing $|G|$ by the\nnumber of distinct orbit points.\n\nOn the finite-space special case with invariant null laws, these formulas are the inclusive and\ntie-randomized ranks of [[def-orbit-rank-p-value]]. The null-law validity\nargument is supplied separately from this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-multiset-randomized-rank-is-uniform",
+          "source_section": "Statement",
+          "quote": "Let $a_1,\\ldots,a_m\\in\\mathbb R$ with $m\\ge1$. Let $J$ be uniform on $\\{1,\\ldots,m\\}$ and let $U$ be independent of $J$ and uniform on $[0,1]$. Set\n$$R_0:=\\frac{\\#\\{i:a_i\\ge a_J\\}}{m},\\qquad R_U:=\\frac{\\#\\{i:a_i>a_J\\}+U\\#\\{i:a_i=a_J\\}}{m}.$$\nThen $R_U$ is uniform on $[0,1]$, while $R_0$ is superuniform: $P(R_0\\le u)\\le u$ for every $u\\in[0,1]$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-uniform-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega$ be a nonempty finite set. Its **uniform probability space** assigns every $\\omega\\in\\Omega$ the weight $1/|\\Omega|$. Thus every event $A\\subseteq\\Omega$ has\n$$\\mathbb P(A)=\\frac{|A|}{|\\Omega|}.$$\nNonemptiness is required so that the denominator is positive.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-p-value",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). A **p-value\nstatistic** is a statistic $p:\\mathcal X\\to[0,1]$, where $[0,1]$ carries the\ntrace of the Borel sigma-algebra, meaning\n$\\{B\\cap[0,1]:B\\in\\mathcal B(\\mathbb R)\\}$\n([[def-statistic-and-estimator]],\n[[def-measurable-function-between-measurable-spaces]]).\n\nFor a nonempty null hypothesis $\\Theta_0\\subseteq\\Theta$, the statistic is a\n**valid p-value for $\\Theta_0$** if it is superuniform under every null law:\n$$P_\\theta(\\{x:p(x)\\le u\\})\\le u\\qquad\\text{for every }\\theta\\in\\Theta_0\\text{ and }u\\in[0,1].$$\nThe variable $p(X)$ is the observed p-value when the data are $X$. The\nvalidity condition is distributional; measurability alone does not imply it.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-p-value-superuniformity",
+          "source_section": "Statement",
+          "quote": "Let $p$ be a valid p-value for a nonempty null hypothesis $\\Theta_0$ in a\nstatistical experiment. For every $\\alpha\\in[0,1]$, the deterministic test\nwith rejection function\n$$\\varphi_\\alpha(x)=\\mathbf 1_{\\{p(x)\\le\\alpha\\}}$$\nsatisfies\n$$P_\\theta(p(X)\\le\\alpha)=E_\\theta[\\varphi_\\alpha(X)]\\le\\alpha \\qquad(\\theta\\in\\Theta_0).$$\nConsequently, whenever a nonempty alternative hypothesis\n$\\Theta_1\\subseteq\\Theta\\setminus\\Theta_0$ is specified, this test has size\nat most $\\alpha$ and hence level $\\alpha$ in the sense of\n[[def-test-size-and-power]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-randomized-procedure-as-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]) and let\n$(\\mathsf D,\\mathcal G)$ be a measurable **action space**: a set of available\nactions equipped with a sigma-algebra of action events, hence a measurable\nspace ([[def-measurable-space]]). A **randomized procedure** (or\nrandomized decision rule) is a probability kernel $K$ from\n$(\\mathcal X,\\mathcal A)$ to $(\\mathsf D,\\mathcal G)$, in the pointwise sense\nof [[def-measure-kernel-and-probability-kernel]]. Thus $K(x,\\cdot)$ is a\nprobability measure on $(\\mathsf D,\\mathcal G)$ for every $x\\in\\mathcal X$,\nand $x\\mapsto K(x,B)$ is $\\mathcal A$-measurable for every $B\\in\\mathcal G$.\nAfter observing $x$, the procedure assigns probability $K(x,B)$ to taking an\naction in $B$. The kernel is specified without reference to the unknown\nparameter. This definition imposes no measurable structure on $\\Theta$. The\nkernel is the specification of the procedure; no representation by a separate\nrandom seed is asserted for arbitrary measurable action spaces.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-randomized-test",
+          "source_section": "Definition",
+          "quote": "A **randomized test** is a randomized procedure with binary action space\nwhose action set is $\\{0,1\\}$, equipped with its full sigma-algebra\n$2^{\\{0,1\\}}$ (the power set, which is a sigma-algebra by\n[[def-sigma-algebra]]), where $1$ means reject and $0$ means do not reject\n([[def-randomized-procedure-as-a-markov-kernel]]). Its **test function** is\n$$\\varphi(x)=K(x,\\{1\\}),\\qquad x\\in\\mathcal X.$$\nSince $K(x,\\cdot)$ is a probability measure and $\\{0\\},\\{1\\}$ partition the\naction set, $K(x,\\{0\\})+K(x,\\{1\\})=1$. Thus $\\varphi(x)\\in[0,1]$ and\n$1-\\varphi(x)=K(x,\\{0\\})$ is the probability of not rejecting. Give $[0,1]$\nthe trace of the Borel sigma-algebra on $[0,+\\infty]$, namely\n$\\{C\\cap[0,1]:C\\in\\mathcal B([0,+\\infty])\\}$. By\n[[lem-procedure-action-law-is-measurable]], $x\\mapsto K(x,\\{1\\})$ is\nmeasurable; since it has range in $[0,1]$, its preimage of $C\\cap[0,1]$ equals\nits preimage of $C$ and is measurable for every such $C$. Hence $\\varphi$ is a\nmeasurable map in the preimage sense of\n[[def-measurable-function-between-measurable-spaces]]. Its value is the\nrejection probability after observing $x$.\nThe convention $1=\\text{reject}$ is fixed here. No null or alternative\nhypothesis is part of this definition.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-measurable-rejection-function-defines-randomized-test",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf E=((X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment ([[def-statistical-experiment]]) and let\n$\\varphi:X\\to[0,1]$ be measurable, where $[0,1]$ has its Borel sigma-algebra.\nOn the binary action space $\\{0,1\\}$ with its full sigma-algebra, define\n$$K(x,B)=\\varphi(x)\\mathbf 1_B(1)+(1-\\varphi(x))\\mathbf 1_B(0)\\qquad (B\\subseteq\\{0,1\\}).$$\nThen $K$ is a probability kernel and hence a randomized procedure; its\nrandomized-test function under the convention $1=\\mathrm{reject}$ is\n$\\varphi$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-test-size-and-power",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). Let\n$\\Theta_0,\\Theta_1$ be nonempty disjoint subsets of $\\Theta$, called the null\nand alternative hypotheses. A hypothesis is **simple** when it is a singleton\nand **composite** when it has at least two elements.\n\nFor a randomized test with test function\n$\\varphi:\\mathcal X\\to[0,1]$ ([[def-randomized-test]]), its **power function**\nis\n$$\\beta(\\theta):=E_\\theta[\\varphi(X)]\\qquad(\\theta\\in\\Theta).$$\nIts **size** is\n$$\\sup_{\\theta\\in\\Theta_0}\\beta(\\theta),$$\nand it has **level $\\alpha$** when this supremum is at most\n$\\alpha\\in[0,1]$. The expectations exist and lie in $[0,1]$ because\n$0\\le\\varphi\\le1$ and each $P_\\theta$ is a probability measure\n([[def-probability-measure]],\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).\nThe supremum exists because $\\Theta_0$ is nonempty, the values lie in\n$[0,1]$, and $\\mathbb R$ has the least-upper-bound property\n([[def-complete-ordered-field]]).\n\nFor the binary action $a\\in\\{0,1\\}$, where $1$ means reject, the\n**zero-one error loss** is $1$ when $a=1$ and $\\theta\\in\\Theta_0$, or when\n$a=0$ and $\\theta\\in\\Theta_1$, and is $0$ otherwise. The decision-rule risk\nfrom [[def-loss-function-and-risk]] integrates this loss against the action\nkernel and data law. For each fixed $\\theta$, its section on the binary\naction space is measurable. The risk identities proved in\n[[lem-test-zero-one-loss-risk-identities]] show that risk equals\n$\\beta(\\theta)$ on $\\Theta_0$ and $1-\\beta(\\theta)$ on $\\Theta_1$. Thus size\nis the worst null error risk, and power is the rejection probability under\neach alternative parameter.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $g\\in G$, $x\\mapsto T(g\\cdot x)$ is measurable by [F1]. For measurable real functions $f,h$, $\\{f>h\\}=\\bigcup_{q\\in\\mathbb Q}\\{f>q\\}\\cap\\{h<q\\}$, so strict comparisons are measurable; equality sets are complements of the union of the two opposite strict comparisons. Finite sums show that both rank counts are measurable. The identity belongs to $G$, so the tied count is at least one and both p-value formulas take values in $[0,1]$. For the joint tie-rank formula, partition the data space by the finitely many possible integer pairs $(N_>,N_=)$; on each part it is an affine function of $U$, so it is jointly measurable.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $\\theta\\in\\Theta_0$ and let $H$ be uniform on $G$, independent of $(X,U)$. For each fixed $h\\in G$, invariance gives $h\\cdot X\\overset d=X$. Averaging over the finite law of $H$ therefore gives $(H\\cdot X,U)\\overset d=(X,U)$, so replacing $X$ by $H\\cdot X$ does not change either p-value distribution.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $x$ and form the finite list $a_g=T(g\\cdot x)$ indexed by $g\\in G$, retaining repeated values and repeated orbit points. At $H=h$, the transformed list at $h\\cdot x$ is $T((gh)\\cdot x)$ as $g$ ranges over $G$. Right multiplication $g\\mapsto gh$ is a bijection of $G$, and the observed value $T(h\\cdot x)$ is the entry indexed by $h$. Thus $p_{\\mathrm{orb}}(h\\cdot x)$ is the inclusive upper rank of a uniform index in $(a_g)_{g\\in G}$, while $p_{\\mathrm{tie}}(h\\cdot x,U)$ is its independently tie-randomized rank.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F3], conditional on each fixed $x$, the first rank in step 2.1 is superuniform and the second is uniform. Averaging over $X$ preserves these bounds. The distributional equality in step 1.2 transfers them from $H\\cdot X$ back to $X$, proving both displayed claims for this $\\theta$. Since $\\theta$ was arbitrary in $\\Theta_0$, the claims hold under every null law. No orbit quotient or freeness assumption is used.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F6], $p_{\\mathrm{orb}}$ is a valid p-value; [F7] gives its level-$\\alpha$ cutoff test when an alternative is specified. For the tied test put $N_>(x)=\\#\\{g:T(g\\cdot x)>T(x)\\}$ and $N_=(x)=\\#\\{g:T(g\\cdot x)=T(x)\\}$. Its conditional rejection probability is $\\phi_\\alpha(x)=\\min\\{1,\\max\\{0,(|G|\\alpha-N_>(x))/N_=(x)\\}\\}$, because $p_{\\mathrm{tie}}(x,U)\\le\\alpha$ exactly when $U\\le(|G|\\alpha-N_>(x))/N_=(x)$, with the threshold clipped to $[0,1]$. The counts are measurable by step 1.1 and $N_=(x)\\ge1$, so [F8] makes $\\phi_\\alpha$ a randomized test. Its null rejection probability equals $\\mathbb P_\\theta(p_{\\mathrm{tie}}(X,U)\\le\\alpha)=\\alpha$ by step 3.1, and [F9] identifies its size as $\\alpha$ when a nonempty disjoint alternative is specified. The argument uses only a finite uniform group index and the stated uniform tie randomizer; it uses no choice axiom.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and definition: the theorem assumes a finite group, whose identity makes the transformation list nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 handles alpha=0; the inclusive validity bound includes u=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 reduces a one-element group to a one-entry rank list."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 retains repeated scores and repeated orbit points; a constant score is the all-tied case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 use the closed interval endpoints u=0,1 and alpha=0,1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 uses only a finite uniform group index and the stipulated tie randomizer; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Statement is a one-way validity and uniformity assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Statement is a one-way validity and uniformity assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "trivial-group",
+          "claim": "If |G|=1, the score list has one entry; p_orb=1 and p_tie=U.",
+          "result": "Step 2.1 and the finite-rank supplier reduce to the one-entry case."
+        },
+        {
+          "id": "constant-score",
+          "claim": "If T is constant on the orbit, N_>=0 and N_=|G|.",
+          "result": "The formulas reduce to p_orb=1 and p_tie=U, so the exact randomized law holds."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-54",
+        "notes": "Independently reviewed every current proof step and F1-F9 against their supplier bodies. Measurable comparisons and finite count-pair partition establish joint measurability; H independent of (X,U), null invariance and the bijection g -> gh transfer the finite-multiset rank lemma without an orbit quotient. The lemma proves uniformity by tie-block interval lengths and inclusive superuniformity by initial-block sums. Checked |G|=1, constant scores, nonfree actions, zero-mass points and u/alpha=0,1. The equality-block denominator is positive; the clipped rejection function gives exact null probability alpha, with size language conditional on a nonempty disjoint alternative. No AC. Hemerik-Goeman arXiv:1411.7565v3 sections 2.1-2.2, pp.4-8 support the group argument; local proof establishes measurable extension. Reader and refuter report no defects. No repair required."
+      }
+    },
+    "thm-random-permutation-monte-carlo-validity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measurable-finite-group-permutation-setup",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$\\varnothing\\ne\\Theta_0\\subseteq\\Theta$, and let $G$ be a finite group\n([[def-group]]) acting on $\\mathcal X$ by a left action\n([[def-group-action]]). Require that each map $x\\mapsto g\\cdot x$ is\nmeasurable from $(\\mathcal X,\\mathcal A)$ to itself and that\n$T:\\mathcal X\\to\\mathbb R$ is measurable\n([[def-measurable-function-between-measurable-spaces]]).\n\nFor $\\theta\\in\\Theta_0$, the null law is **invariant under the action** when\n$P_\\theta(\\{x:g\\cdot x\\in A\\})=P_\\theta(A)$ for every $g\\in G$ and\n$A\\in\\mathcal A$. Equivalently, $g\\cdot X$ and $X$ have the same law when\n$X\\sim P_\\theta$. The setup defines the action and score whether or not this\ninvariance condition holds; the validity theorem below assumes it for every\nnull parameter.\n\nThe data space need not be finite, and the action need not be free. Group\nelements, including distinct elements that send $x$ to the same point, remain\ndistinct transformations in every group average. On a finite data space with\nthe full power-set sigma-algebra, if every null law is invariant, the setup specializes to\n[[def-finite-group-randomization-test]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-random-permutation-monte-carlo-pvalue",
+          "source_section": "Definition",
+          "quote": "**Input:** a measurable finite-group setup\n[[def-measurable-finite-group-permutation-setup]], an observed $x$, an\ninteger $B\\ge0$, and one of the two simulation designs below. Simulated\ntransformations are independent of $X$.\n\n1. **With replacement.** Draw $g_1,\\ldots,g_B$ independently and uniformly\n   from $G$. Set $g_0=e$, the identity, and return\n   $$\\widehat p_{B,\\mathrm{wr}}(x):=\\frac{1+\\sum_{b=1}^{B}\\mathbf 1\\{T(g_b\\cdot x)\\ge T(x)\\}}{B+1}.$$\n   A simulated draw may itself equal $e$; it is still counted in addition to\n   the distinguished identity.\n2. **Without replacement.** Require $B\\le |G|-1$. Draw a subset $S$ uniformly\n   from the $B$-element subsets of $G\\setminus\\{e\\}$, and return\n   $$\\widehat p_{B,\\mathrm{wor}}(x):=\\frac{\\#\\{g\\in\\{e\\}\\cup S:T(g\\cdot x)\\ge T(x)\\}}{B+1}.$$\n   This is a uniform-subset design; the selected transformations are distinct\n   and the identity is adjoined.\n\nIn either design, a cutoff rule rejects when the returned value is at most\n$\\alpha\\in[0,1]$. For $B=0$ the only transformation is the distinguished\nidentity and the returned value is $1$. Validity under an invariant null law,\nincluding ties, is a separate theorem on this page.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-uniform-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega$ be a nonempty finite set. Its **uniform probability space** assigns every $\\omega\\in\\Omega$ the weight $1/|\\Omega|$. Thus every event $A\\subseteq\\Omega$ has\n$$\\mathbb P(A)=\\frac{|A|}{|\\Omega|}.$$\nNonemptiness is required so that the denominator is positive.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-multiset-randomized-rank-is-uniform",
+          "source_section": "Statement",
+          "quote": "Let $a_1,\\ldots,a_m\\in\\mathbb R$ with $m\\ge1$. Let $J$ be uniform on $\\{1,\\ldots,m\\}$ and let $U$ be independent of $J$ and uniform on $[0,1]$. Set\n$$R_0:=\\frac{\\#\\{i:a_i\\ge a_J\\}}{m},\\qquad R_U:=\\frac{\\#\\{i:a_i>a_J\\}+U\\#\\{i:a_i=a_J\\}}{m}.$$\nThen $R_U$ is uniform on $[0,1]$, while $R_0$ is superuniform: $P(R_0\\le u)\\le u$ for every $u\\in[0,1]$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finite-group-permutation-validity",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf E,\\Theta_0,G,T$ be as in\n[[def-measurable-finite-group-permutation-setup]], and suppose every null law\n$P_\\theta$, $\\theta\\in\\Theta_0$, is invariant under the action. Let\n$p_{\\mathrm{orb}}$ and $p_{\\mathrm{tie}}$ be as in\n[[def-measurable-finite-group-orbit-pvalues]]. Then, for every\n$u\\in[0,1]$ and every $\\theta\\in\\Theta_0$,\n$$P_\\theta(p_{\\mathrm{orb}}(X)\\le u)\\le u,\\qquad \\mathbb P_\\theta(p_{\\mathrm{tie}}(X,U)\\le u)=u,$$\nwhere $U$ is independent uniform on $[0,1]$. Thus $p_{\\mathrm{orb}}$ is a\nvalid p-value; its cutoff has null rejection probability at most $\\alpha$,\nand hence size at most $\\alpha$ when a nonempty disjoint alternative is\nspecified. The tie-randomized cutoff is a randomized test with rejection\nprobability exactly $\\alpha$ under each null law. These level and size\nstatements use [[def-test-size-and-power]].\n\nOn finite sample spaces, the first two distributional claims specialize to\n[[thm-finite-group-randomization-validity]] and use the same multiplicity\nconvention as [[def-orbit-rank-p-value]]. The proof below supplies the\nmeasurable-space extension rather than importing it from that finite-space\nsupplier.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-p-value",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). A **p-value\nstatistic** is a statistic $p:\\mathcal X\\to[0,1]$, where $[0,1]$ carries the\ntrace of the Borel sigma-algebra, meaning\n$\\{B\\cap[0,1]:B\\in\\mathcal B(\\mathbb R)\\}$\n([[def-statistic-and-estimator]],\n[[def-measurable-function-between-measurable-spaces]]).\n\nFor a nonempty null hypothesis $\\Theta_0\\subseteq\\Theta$, the statistic is a\n**valid p-value for $\\Theta_0$** if it is superuniform under every null law:\n$$P_\\theta(\\{x:p(x)\\le u\\})\\le u\\qquad\\text{for every }\\theta\\in\\Theta_0\\text{ and }u\\in[0,1].$$\nThe variable $p(X)$ is the observed p-value when the data are $X$. The\nvalidity condition is distributional; measurability alone does not imply it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-p-value-superuniformity",
+          "source_section": "Statement",
+          "quote": "Let $p$ be a valid p-value for a nonempty null hypothesis $\\Theta_0$ in a\nstatistical experiment. For every $\\alpha\\in[0,1]$, the deterministic test\nwith rejection function\n$$\\varphi_\\alpha(x)=\\mathbf 1_{\\{p(x)\\le\\alpha\\}}$$\nsatisfies\n$$P_\\theta(p(X)\\le\\alpha)=E_\\theta[\\varphi_\\alpha(X)]\\le\\alpha \\qquad(\\theta\\in\\Theta_0).$$\nConsequently, whenever a nonempty alternative hypothesis\n$\\Theta_1\\subseteq\\Theta\\setminus\\Theta_0$ is specified, this test has size\nat most $\\alpha$ and hence level $\\alpha$ in the sense of\n[[def-test-size-and-power]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-randomized-procedure-as-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]) and let\n$(\\mathsf D,\\mathcal G)$ be a measurable **action space**: a set of available\nactions equipped with a sigma-algebra of action events, hence a measurable\nspace ([[def-measurable-space]]). A **randomized procedure** (or\nrandomized decision rule) is a probability kernel $K$ from\n$(\\mathcal X,\\mathcal A)$ to $(\\mathsf D,\\mathcal G)$, in the pointwise sense\nof [[def-measure-kernel-and-probability-kernel]]. Thus $K(x,\\cdot)$ is a\nprobability measure on $(\\mathsf D,\\mathcal G)$ for every $x\\in\\mathcal X$,\nand $x\\mapsto K(x,B)$ is $\\mathcal A$-measurable for every $B\\in\\mathcal G$.\nAfter observing $x$, the procedure assigns probability $K(x,B)$ to taking an\naction in $B$. The kernel is specified without reference to the unknown\nparameter. This definition imposes no measurable structure on $\\Theta$. The\nkernel is the specification of the procedure; no representation by a separate\nrandom seed is asserted for arbitrary measurable action spaces.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-randomized-test",
+          "source_section": "Definition",
+          "quote": "A **randomized test** is a randomized procedure with binary action space\nwhose action set is $\\{0,1\\}$, equipped with its full sigma-algebra\n$2^{\\{0,1\\}}$ (the power set, which is a sigma-algebra by\n[[def-sigma-algebra]]), where $1$ means reject and $0$ means do not reject\n([[def-randomized-procedure-as-a-markov-kernel]]). Its **test function** is\n$$\\varphi(x)=K(x,\\{1\\}),\\qquad x\\in\\mathcal X.$$\nSince $K(x,\\cdot)$ is a probability measure and $\\{0\\},\\{1\\}$ partition the\naction set, $K(x,\\{0\\})+K(x,\\{1\\})=1$. Thus $\\varphi(x)\\in[0,1]$ and\n$1-\\varphi(x)=K(x,\\{0\\})$ is the probability of not rejecting. Give $[0,1]$\nthe trace of the Borel sigma-algebra on $[0,+\\infty]$, namely\n$\\{C\\cap[0,1]:C\\in\\mathcal B([0,+\\infty])\\}$. By\n[[lem-procedure-action-law-is-measurable]], $x\\mapsto K(x,\\{1\\})$ is\nmeasurable; since it has range in $[0,1]$, its preimage of $C\\cap[0,1]$ equals\nits preimage of $C$ and is measurable for every such $C$. Hence $\\varphi$ is a\nmeasurable map in the preimage sense of\n[[def-measurable-function-between-measurable-spaces]]. Its value is the\nrejection probability after observing $x$.\nThe convention $1=\\text{reject}$ is fixed here. No null or alternative\nhypothesis is part of this definition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-measurable-rejection-function-defines-randomized-test",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf E=((X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment ([[def-statistical-experiment]]) and let\n$\\varphi:X\\to[0,1]$ be measurable, where $[0,1]$ has its Borel sigma-algebra.\nOn the binary action space $\\{0,1\\}$ with its full sigma-algebra, define\n$$K(x,B)=\\varphi(x)\\mathbf 1_B(1)+(1-\\varphi(x))\\mathbf 1_B(0)\\qquad (B\\subseteq\\{0,1\\}).$$\nThen $K$ is a probability kernel and hence a randomized procedure; its\nrandomized-test function under the convention $1=\\mathrm{reject}$ is\n$\\varphi$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-test-size-and-power",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). Let\n$\\Theta_0,\\Theta_1$ be nonempty disjoint subsets of $\\Theta$, called the null\nand alternative hypotheses. A hypothesis is **simple** when it is a singleton\nand **composite** when it has at least two elements.\n\nFor a randomized test with test function\n$\\varphi:\\mathcal X\\to[0,1]$ ([[def-randomized-test]]), its **power function**\nis\n$$\\beta(\\theta):=E_\\theta[\\varphi(X)]\\qquad(\\theta\\in\\Theta).$$\nIts **size** is\n$$\\sup_{\\theta\\in\\Theta_0}\\beta(\\theta),$$\nand it has **level $\\alpha$** when this supremum is at most\n$\\alpha\\in[0,1]$. The expectations exist and lie in $[0,1]$ because\n$0\\le\\varphi\\le1$ and each $P_\\theta$ is a probability measure\n([[def-probability-measure]],\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).\nThe supremum exists because $\\Theta_0$ is nonempty, the values lie in\n$[0,1]$, and $\\mathbb R$ has the least-upper-bound property\n([[def-complete-ordered-field]]).\n\nFor the binary action $a\\in\\{0,1\\}$, where $1$ means reject, the\n**zero-one error loss** is $1$ when $a=1$ and $\\theta\\in\\Theta_0$, or when\n$a=0$ and $\\theta\\in\\Theta_1$, and is $0$ otherwise. The decision-rule risk\nfrom [[def-loss-function-and-risk]] integrates this loss against the action\nkernel and data law. For each fixed $\\theta$, its section on the binary\naction space is measurable. The risk identities proved in\n[[lem-test-zero-one-loss-risk-identities]] show that risk equals\n$\\beta(\\theta)$ on $\\Theta_0$ and $1-\\beta(\\theta)$ on $\\Theta_1$. Thus size\nis the worst null error risk, and power is the rejection probability under\neach alternative parameter.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the selected design, $\\mathcal W$ is finite. Every $A\\in\\mathcal A\\otimes2^{\\mathcal W}$ has measurable sections $A_w=\\{x:(x,w)\\in A\\}$. The displayed finite sum $\\widetilde P_\\theta(A)=\\sum_w\\nu(w)P_\\theta(A_w)$ is nonnegative with total mass one. For disjoint $A_n$, each section $(\\bigcup_nA_n)_w$ is the disjoint union of $(A_n)_w$, so countable additivity of $P_\\theta$ and the finite sum over $w$ give countable additivity of $\\widetilde P_\\theta$. Thus [F11] makes this a joint statistical experiment. For measurable real functions $f,h$, $\\{f\\ge h\\}$ is measurable because $\\{f<h\\}=\\bigcup_{q\\in\\mathbb Q}\\{f<q\\}\\cap\\{h>q\\}$. Therefore each section $x\\mapsto p_B(x,w)$ is measurable. Since $\\mathcal W$ is finite, each sublevel set of $p_B$ is a finite union of measurable sections $A_w\\times\\{w\\}$, so $p_B$ is measurable on the joint space. The distinguished identity contributes one tied-or-higher value, so $1/(B+1)\\le p_B\\le1$; at $B=0$, $W=\\{e\\}$ and $p_B=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F11",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "First use the with-replacement design. Represent $W$ by its $B+1$ generating positions to choose an independent uniform position $J$, and write $H$ for the entry at that position. The unordered multiset $WH^{-1}$ has the same law as $W$: if $J$ is the identity position it is unchanged; if $J=j>0$, right multiplication by $H^{-1}=g_j^{-1}$ makes position $j$ equal to $e$, makes the former identity position $g_j^{-1}$ uniform on $G$, and leaves the other $B-1$ draws conditionally independent uniform on $G$. Thus, after order is ignored, there is again one distinguished identity and $B$ IID uniform group elements.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Now use the without-replacement design and put $w=B+1$. The possible sets $W$ are the $w$-element subsets of $G$ containing $e$, all equally likely. Given $W$, choose $H$ uniformly from its $w$ elements. The map $(W,H)\\mapsto(WH^{-1},H)$ is a bijection from pairs with $e\\in W$, $|W|=w$, $H\\in W$ onto pairs $(S,h)$ with $e\\in S$, $|S|=w$, $h^{-1}\\in S$: its inverse is $(S,h)\\mapsto(Sh,h)$. Each fixed $S$ in the image has exactly $w$ possible $h$, so $WH^{-1}$ has the same uniform-subset law as $W$.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $X$ is independent of $(W,J)$ and each fixed $H\\in G$ preserves its null law, conditioning on $(W,J)$ gives $H\\cdot X\\overset d=X$. By step 1.2, $WH^{-1}$ has the same design law as $W$, so $(H\\cdot X,WH^{-1})$ and $(X,W)$ have the same joint law. Now fix $x$ and a labelled presentation of a with-replacement multiset $W$ before drawing $J$. The value $p_B(H\\cdot x,WH^{-1})$ counts, with multiplicity, the entries $w\\in W$ for which $T(w\\cdot x)\\ge T(H\\cdot x)$, because $(wH^{-1})\\cdot(H\\cdot x)=w\\cdot x$. As $J$ is uniform over the $B+1$ positions, this is the inclusive upper rank of a uniform position in the score multiset $(T(w\\cdot x))_{w\\in W}$. By [F5] this rank is superuniform conditional on $x,W$; averaging and using the joint-law equality transfers the bound to $p_B(X,W)$. This proves the with-replacement case, with ties and duplicate transformations counted by position.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The auxiliary pair $(W,H)$ is independent of $X$. For each fixed value of that pair, invariance gives $H\\cdot X\\overset d=X$; step 1.3 gives $WH^{-1}$ the same design law as $W$. Hence $(H\\cdot X,WH^{-1})$ and $(X,W)$ have the same joint law. To bound the transformed p-value, fix $x,W$ before drawing $H$. Conditional on $W$, $H$ is uniform over its $B+1$ elements, and $p_B(H\\cdot x,WH^{-1})$ is the inclusive upper rank of that selected position in $(T(g\\cdot x))_{g\\in W}$, since $(gH^{-1})\\cdot(H\\cdot x)=g\\cdot x$. By [F5] this rank is superuniform conditional on $x,W$; averaging and using the joint-law equality transfers the bound to $p_B(X,W)$. This is a separate uniform-subset proof.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F7], the superuniform bounds in steps 2.1 and 2.2 make $p_B$ a valid p-value on the joint experiment. For each observed $x$, the probability over the finite simulation design of rejection is $\\phi_\\alpha(x)=\\sum_{w\\in\\mathcal W}\\nu(w)\\mathbf1\\{p_B(x,w)\\le\\alpha\\}$, a finite average of measurable indicators by step 1.1. By [F9], $\\phi_\\alpha$ defines a binary randomized test on the original experiment. Its null rejection probability is $E_\\theta[\\phi_\\alpha(X)]=\\widetilde P_\\theta(p_B\\le\\alpha)\\le\\alpha$, the rejection probability of the joint-experiment threshold test covered by [F8]. Thus, when a nonempty disjoint alternative is specified, [F10] gives size at most $\\alpha$ and hence level $\\alpha$. When $B=|G|-1$ without replacement, the only possible set is $W=G$, so the formula agrees with [F6]. No choice axiom is used.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles B=0: W={e} and p_B=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives p_B>=1/(B+1)>0 because the distinguished identity is counted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 cover B=0 and the one-element-group case; both return 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 retain every tied score in the finite rank list."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 prove the CDF bound for all u in [0,1]; step 3.1 covers alpha=0 and alpha=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 use finite lists and subsets; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Statement is a one-way superuniformity claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Statement is a one-way superuniformity claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "zero-simulations",
+          "claim": "At B=0, W={e} and p_B=1 for either design.",
+          "result": "Step 1.1 verifies the identity-only branch and its positive denominator."
+        },
+        {
+          "id": "full-subset",
+          "claim": "At B=|G|-1 without replacement, W=G.",
+          "result": "Step 3.1 identifies this case with the full-orbit p-value."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-54",
+        "notes": "Reviewed all six steps and F1-F11 independently against the current algorithm, setup, finite-rank lemma and test suppliers. For fixed selected j>0, (g_j^{-1},(g_i g_j^{-1})_{i != j}) is jointly uniform: conditioning on g_j gives the same product-uniform law for the other coordinates, hence independence from g_j^{-1}. Discarding order preserves the identity-adjoined multiset law; it need not preserve a distinguished-first ordered list. For subsets the inverse (S,h)->(Sh,h) has exactly B+1 preimages over every S, proving the separate design law. Null invariance conditional on the finite auxiliary sample makes transformed data independent of the recentered design, so the joint-law transfer and conditional uniform-position rank bound are valid on arbitrary measurable data spaces. Checked B=0, singleton groups, duplicate identity draws, constant scores, nonfree actions, u=0,1 and B=|G|-1 without replacement. Finite rejection averaging yields the randomized kernel; no AC or conditional-orbit disintegration. Hemerik-Goeman v3 Theorem 2 pp.11-12 and section 3.4 pp.15-16 support this argument; Katsevich section 3.2.4.2 equations (3.19)-(3.20) supplies the formula in its independence-null setting. Reader repair resolves the original ordered-list/multiset representation mismatch. No additional source edit."
+      }
+    },
+    "ex-exchangeable-two-sample-permutation-test": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measurable-finite-group-permutation-setup",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$\\varnothing\\ne\\Theta_0\\subseteq\\Theta$, and let $G$ be a finite group\n([[def-group]]) acting on $\\mathcal X$ by a left action\n([[def-group-action]]). Require that each map $x\\mapsto g\\cdot x$ is\nmeasurable from $(\\mathcal X,\\mathcal A)$ to itself and that\n$T:\\mathcal X\\to\\mathbb R$ is measurable\n([[def-measurable-function-between-measurable-spaces]]).\n\nFor $\\theta\\in\\Theta_0$, the null law is **invariant under the action** when\n$P_\\theta(\\{x:g\\cdot x\\in A\\})=P_\\theta(A)$ for every $g\\in G$ and\n$A\\in\\mathcal A$. Equivalently, $g\\cdot X$ and $X$ have the same law when\n$X\\sim P_\\theta$. The setup defines the action and score whether or not this\ninvariance condition holds; the validity theorem below assumes it for every\nnull parameter.\n\nThe data space need not be finite, and the action need not be free. Group\nelements, including distinct elements that send $x$ to the same point, remain\ndistinct transformations in every group average. On a finite data space with\nthe full power-set sigma-algebra, if every null law is invariant, the setup specializes to\n[[def-finite-group-randomization-test]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-finite-group-orbit-pvalues",
+          "source_section": "Definition",
+          "quote": "In a setup as in [[def-measurable-finite-group-permutation-setup]], the\n**inclusive full-orbit upper-tail p-value** at $x\\in\\mathcal X$ is\n$$p_{\\mathrm{orb}}(x):=\\frac{\\#\\{g\\in G:T(g\\cdot x)\\ge T(x)\\}}{|G|}.$$\nIf $U$ is independent of the data and uniform on $[0,1]$, meaning\n$\\mathbb P(U\\le u)=u$ for every $u\\in[0,1]$, the **tie-randomized full-orbit\np-value** is\n$$p_{\\mathrm{tie}}(x,U):=\\frac{\\#\\{g\\in G:T(g\\cdot x)>T(x)\\}+U\\,\\#\\{g\\in G:T(g\\cdot x)=T(x)\\}}{|G|}.$$\nIndependence is in the sense of\n[[def-independent-random-elements]]. Each count is over group elements with\nmultiplicity, so nonfree actions are handled without replacing $|G|$ by the\nnumber of distinct orbit points.\n\nOn the finite-space special case with invariant null laws, these formulas are the inclusive and\ntie-randomized ranks of [[def-orbit-rank-p-value]]. The null-law validity\nargument is supplied separately from this definition.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-group-permutation-validity",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf E,\\Theta_0,G,T$ be as in\n[[def-measurable-finite-group-permutation-setup]], and suppose every null law\n$P_\\theta$, $\\theta\\in\\Theta_0$, is invariant under the action. Let\n$p_{\\mathrm{orb}}$ and $p_{\\mathrm{tie}}$ be as in\n[[def-measurable-finite-group-orbit-pvalues]]. Then, for every\n$u\\in[0,1]$ and every $\\theta\\in\\Theta_0$,\n$$P_\\theta(p_{\\mathrm{orb}}(X)\\le u)\\le u,\\qquad \\mathbb P_\\theta(p_{\\mathrm{tie}}(X,U)\\le u)=u,$$\nwhere $U$ is independent uniform on $[0,1]$. Thus $p_{\\mathrm{orb}}$ is a\nvalid p-value; its cutoff has null rejection probability at most $\\alpha$,\nand hence size at most $\\alpha$ when a nonempty disjoint alternative is\nspecified. The tie-randomized cutoff is a randomized test with rejection\nprobability exactly $\\alpha$ under each null law. These level and size\nstatements use [[def-test-size-and-power]].\n\nOn finite sample spaces, the first two distributional claims specialize to\n[[thm-finite-group-randomization-validity]] and use the same multiplicity\nconvention as [[def-orbit-rank-p-value]]. The proof below supplies the\nmeasurable-space extension rather than importing it from that finite-space\nsupplier.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-random-permutation-monte-carlo-pvalue",
+          "source_section": "Definition",
+          "quote": "**Input:** a measurable finite-group setup\n[[def-measurable-finite-group-permutation-setup]], an observed $x$, an\ninteger $B\\ge0$, and one of the two simulation designs below. Simulated\ntransformations are independent of $X$.\n\n1. **With replacement.** Draw $g_1,\\ldots,g_B$ independently and uniformly\n   from $G$. Set $g_0=e$, the identity, and return\n   $$\\widehat p_{B,\\mathrm{wr}}(x):=\\frac{1+\\sum_{b=1}^{B}\\mathbf 1\\{T(g_b\\cdot x)\\ge T(x)\\}}{B+1}.$$\n   A simulated draw may itself equal $e$; it is still counted in addition to\n   the distinguished identity.\n2. **Without replacement.** Require $B\\le |G|-1$. Draw a subset $S$ uniformly\n   from the $B$-element subsets of $G\\setminus\\{e\\}$, and return\n   $$\\widehat p_{B,\\mathrm{wor}}(x):=\\frac{\\#\\{g\\in\\{e\\}\\cup S:T(g\\cdot x)\\ge T(x)\\}}{B+1}.$$\n   This is a uniform-subset design; the selected transformations are distinct\n   and the identity is adjoined.\n\nIn either design, a cutoff rule rejects when the returned value is at most\n$\\alpha\\in[0,1]$. For $B=0$ the only transformation is the distinguished\nidentity and the returned value is $1$. Validity under an invariant null law,\nincluding ties, is a separate theorem on this page.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "All four masses are nonnegative and sum to $(q+(1-q))^2=1$, so [F4] makes them a finite probability law. The swap fixes $(0,0)$ and $(1,1)$ and exchanges $(0,1)$ with $(1,0)$, which have equal mass. Thus $P_q(s^{-1}A)=P_q(A)$ for every $A\\subseteq\\Omega$, and the group action is invariant for every $q\\in[0,1]$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The subset $S$ is uniform and independent of $X$ by the Example, so it satisfies the without-replacement design premise in [F5]. In the $\\mathbb Z/6\\mathbb Z$ example, addition by any fixed group element permutes the six equally likely outcomes, so the null law is invariant. If $X=0$, only the identity in $W$ has score at least $T(X)=1$, and the without-replacement p-value is $1/3$. If $X\\ne0$, then $T(X)=0$ and every element of $W$ has score at least zero, so the p-value is $1$. Its distribution is therefore $1/3$ with probability $1/6$ and $1$ with probability $5/6$; its CDF is superuniform.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $(0,0)$ and $(1,1)$, both transformed scores are $0$, giving $p_{\\mathrm{orb}}=1$ and $p_{\\mathrm{tie}}=U$. At $(1,0)$ the two scores are $1,-1$, giving $p_{\\mathrm{orb}}=1/2$ and $p_{\\mathrm{tie}}=U/2$. At $(0,1)$ they are $-1,1$, giving $p_{\\mathrm{orb}}=1$ and $p_{\\mathrm{tie}}=(1+U)/2$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $a=q(1-q)$. Then $p_{\\mathrm{orb}}=1/2$ with probability $a$ and equals $1$ otherwise. Its CDF is $0$ for $u<1/2$, $a\\le1/4\\le u$ for $1/2\\le u<1$, and $1$ at $u=1$, so it is superuniform. For $0\\le u\\le1/2$, the tie-randomized CDF is $2au+(1-2a)u=u$: the $(1,0)$ branch contributes $2au$, the $(0,1)$ branch contributes zero except at a probability-zero endpoint, and the tied branches contribute $(1-2a)u$. For $1/2\\le u\\le1$, it is $a+a(2u-1)+(1-2a)u=u$. Thus $p_{\\mathrm{tie}}$ is uniform, in agreement with [F3].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "In the weak mean-difference example, $E[X]=E[Y]=0$. But the coordinate swap sends $(1,0)$ to $(0,1)$, and the product law assigns these points probabilities $P(X=1)Q(Y=0)=1/4$ and $P(X=0)Q(Y=1)=0$, respectively. Hence this weak null does not make the pooled law invariant under the swap, so the invariant-null premise of [F3] cannot be inferred from equality of means.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example uses four binary sample outcomes and no empty sample space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 include q=0 and q=1; the law then concentrates on a tied vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example statement fixes two observations and a two-element swap group; it does not vary sample size or group order."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 computes tied ranks at (0,0) and (1,1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 computes the CDF on closed intervals including u=0, 1/2, and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the four-point law by finite arithmetic; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Example verifies a single model and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Example verifies a single model and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "four-outcome-mass",
+          "claim": "The four masses sum to one and the discordant points have equal mass.",
+          "result": "Step 1.1 gives (q+(1-q))^2=1 and verifies swap invariance for every q."
+        },
+        {
+          "id": "orbit-rank-table",
+          "claim": "The ranks are 1 on tied samples, 1/2 at (1,0), and 1 at (0,1).",
+          "result": "Step 2.1 lists the transformed scores and tie blocks."
+        },
+        {
+          "id": "rank-cdfs",
+          "claim": "The inclusive-rank CDF is bounded by u and the randomized-rank CDF is u.",
+          "result": "Step 3.1 calculates both expressions on [0,1/2] and [1/2,1]."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-54",
+        "notes": "Reviewed the complete Example, five Verification steps and F1-F5 against current setup, rank definition, algorithm, full-orbit theorem and finite-probability definition. Bernoulli masses sum to one and discordant masses coincide, including q=0,1. Inclusive ranks are 1/2 only at (1,0); tie branches U, U/2, (1+U)/2 mix to CDF u on both sides of 1/2, with no endpoint atoms. In the six-element additive group, every one of ten subsets gives rank 1/3 only at X=0; hence probabilities 1/6 and 5/6 and the claimed superuniform CDF. The equal-mean product countermodel has mass 1/4 at (1,0) and zero at its swap, so equality of means does not imply invariance. No choice or nondegeneracy assumptions; no source repair or outside consumer consequence. Reader/refuter report no findings."
+      }
+    },
+    "ex-unequal-assignment-sharp-null-randomization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-randomized-treatment-assignment-model",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$, and let $\\mathcal I=\\{1,\\ldots,N\\}$ index the fixed\nexperimental units at the actual treatment-assignment level. Let\n$\\mathcal Z$ be a nonempty finite set of allowed assignments. If treatment\nis assigned to clusters, each cluster is one indexed unit; no separate\nprobability-sampling unit is present. The index $i$ identifies that unit,\nand no visit or repeated-measurement index is modeled here.\n\nA known assignment law is a function $p:\\mathcal Z\\to[0,1]$ satisfying\n$\\sum_{z\\in\\mathcal Z}p(z)=1$, so $(\\mathcal Z,p)$ is a finite probability\nspace ([[def-finite-probability-space-and-event]]); assignments of probability\nzero may remain in $\\mathcal Z$. A **potential-outcome schedule** is a function\n$\\theta:\\mathcal I\\times\\mathcal Z\\to\\mathbb R$, with\n$Y_i(z):=\\theta(i,z)$. The schedule and the units are fixed; the assignment\n$Z$ is the only randomness supplied by the design, and the observed response\nvector is $Y_\\theta(Z)=(Y_i(Z))_{i\\in\\mathcal I}$. The schedule is defined\nfor every allowed assignment, including zero-probability assignments, and\nmay depend on the full assignment vector, so no no-interference assumption is\nimplicit. The scientific statistical model contract\n[[def-scientific-statistical-model-contract]] requires the observation space,\nunits, quantity status, observation mechanism, support, conditioning\nconvention, and adequacy assumptions to be recorded; this model specifies\nthose fields as follows.\n\nTo express this as a statistical experiment, take the data space\n$\\mathcal X=\\mathcal Z\\times\\mathbb R^{\\mathcal I}$ with its full power-set\nsigma-algebra, which is a sigma-algebra by [[def-sigma-algebra]] and makes\n$\\mathcal X$ a measurable space ([[def-measurable-space]]), and parameter\nset $\\Theta=\\mathbb R^{\\mathcal I\\times\\mathcal Z}$. For each $\\theta\\in\\Theta$\nlet $P_\\theta$ be the law\n([[def-law-or-distribution-of-a-random-element]]) of the deterministic\nobservation map $O_\\theta(z)=(z,Y_\\theta(z))$ from $(\\mathcal Z,p)$. The map\nis measurable because its domain has the full power set, in the preimage\nsense of [[def-measurable-function-between-measurable-spaces]], and its law\nis a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]]. Thus\n$((\\mathcal X,2^{\\mathcal X}),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ is an\nexperiment in the sense of [[def-statistical-experiment]]. The assignment\nlaw asserts no response-error model, Gaussian law, superpopulation\nrandomization, or sampling representativeness beyond the stated finite\nassignment mechanism. Its finite full-measure support set is\n$$S_\\theta:=\\{(z,Y_\\theta(z)):z\\in\\mathcal Z,\\ p(z)>0\\},$$\nsince $P_\\theta(S_\\theta)=\\sum_{z:p(z)>0}p(z)=1$. The record contains the\nassigned vector and every unit's response; missing or censored outcomes and\nrepeated visits require a separately declared observation mechanism. The\ninferential target is the assignment-invariance hypothesis for these $N$\nunits, not an estimand for a wider population.\n\nInference in this page holds $\\mathcal I$ and $\\theta$ fixed and averages\nover the declared law $p$; it does not condition on the realized assignment.\nThe status of the quantities is explicit: $\\theta$ and all\n$Y_i(z)$ are fixed, $Z$ is random, $(Z,Y_\\theta(Z))$ is observed, and\npotential responses under unassigned vectors are fixed but latent. The\nassignment set, weights, and implemented randomization protocol are\ndesign-controlled and should be checked against protocol records. Assignment\nlogs and response records are empirically assessable, but those checks do not\nprove that the declared law generated the data. Potential outcomes under\nunassigned vectors are fixed and latent in the realized record. This does\nnot imply nonidentifiability from the observed-data law: for each $z$ with\n$p(z)>0$, the law assigns mass $p(z)$ to $(z,Y_\\theta(z))$, and therefore\ndetermines $Y_\\theta(z)$. Assignment invariance on this positive-probability\nset is **empirically assessable**, and the theorem tests the stronger\ninvariance hypothesis on all allowed assignments. Values at assignments\nwith $p(z)=0$, and restrictions on those values, are **substantively\nuntestable** from this law, since changing them leaves $P_\\theta$ unchanged.\nOne realized assignment does not reveal responses at other assignments.\nThese classifications do not make the design or scientific model\nempirically true.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fisher-sharp-null-and-predeclared-test-orderings",
+          "source_section": "Definition",
+          "quote": "In the finite randomized treatment-assignment model\n[[def-finite-randomized-treatment-assignment-model]], a schedule satisfies\nthe **Fisher sharp null** when for each unit $i$ there is a value $y_i$ such that\n$Y_i(z)=y_i$ for every allowed assignment $z$. The full vector\n$y=(y_i)_{i\\in\\mathcal I}$ is then imputable under every assignment.\n\nA **predeclared ordering score** is a real-valued statistic\n$T:\\mathcal Z\\times\\mathbb R^{\\mathcal I}\\to\\mathbb R$\n([[def-statistic-and-estimator]]) fixed before the\nassignment and outcomes are inspected. Its upper-tail ordering includes ties:\nassignment $z'$ is at least as extreme as $z$ when $T(z',y)\\ge T(z,y)$.\nFor a signed score $S$ and fixed null center $s_0$, the corresponding\ntwo-sided ordering is explicitly $T(z,y)=|S(z,y)-s_0|$. The center is part\nof the predeclared ordering; the sharp null alone does not force $s_0=0$\nfor an arbitrary signed score. A lower-tail ordering is represented by\nusing $-S$ as the score. A statistic in this setting is a measurable map in\nthe sense of [[def-statistic-and-estimator]]; the full power-set data\nsigma-algebra makes every such real-valued map measurable.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fisher-sharp-null-randomization-pvalues-are-valid",
+          "source_section": "Statement",
+          "quote": "In a finite randomized treatment-assignment model, fix any real-valued\npredeclared ordering score $T(z,y)$. For observed data $(z,y)$ define\n$$p_{\\rm rand}(z,y):=\\sum_{z'\\in\\mathcal Z}p(z')1\\{T(z',y)\\ge T(z,y)\\}.$$\nLet $\\lambda$ be the uniform probability measure on the Borel subsets of\n$[0,1]$. For each $\\theta$, equip $\\mathcal X\\times[0,1]$ with the product\nsigma-algebra $2^{\\mathcal X}\\otimes\\mathcal B([0,1])$ and define\n$$\\widetilde P_\\theta(E):=\\sum_{z\\in\\mathcal Z}p(z)\\,\\lambda\\bigl(\\{u\\in[0,1]:((z,Y_\\theta(z)),u)\\in E\\}\\bigr).$$\nLet $U$ be the $[0,1]$ coordinate on this extension. Define\n$$p^+(z,y,U):=\\sum_{z'\\in\\mathcal Z}p(z')1\\{T(z',y)>T(z,y)\\}+U\\sum_{z'\\in\\mathcal Z}p(z')1\\{T(z',y)=T(z,y)\\}.$$\nFor every schedule satisfying the Fisher sharp null and every\n$u\\in[0,1]$,\n$$P_\\theta\\!\\left(p_{\\rm rand}(Z,Y_\\theta(Z))\\le u\\right)\\le u,$$\nwhereas the added randomization gives\n$$\\widetilde P_\\theta\\!\\left(p^+(Z,Y_\\theta(Z),U)\\le u\\right)=u.$$\nThus $p_{\\rm rand}$ is a valid finite-sample p-value for the sharp null,\nand randomized ties give an exactly uniform p-value when the additional\nindependent uniform randomizer is used. For a two-sided test, take\n$T(z,y)=|S(z,y)-s_0|$ with its center $s_0$ fixed in advance. The result\nuses the actual, possibly unequal assignment probabilities; random\nassignment supplies no Gaussian error law, and this theorem makes no\nvalidity claim under the weak zero-average-effect null from\n[[def-finite-population-average-treatment-effect-and-weak-null]] unless it\nis also Fisher-sharp.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-group-permutation-validity",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf E,\\Theta_0,G,T$ be as in\n[[def-measurable-finite-group-permutation-setup]], and suppose every null law\n$P_\\theta$, $\\theta\\in\\Theta_0$, is invariant under the action. Let\n$p_{\\mathrm{orb}}$ and $p_{\\mathrm{tie}}$ be as in\n[[def-measurable-finite-group-orbit-pvalues]]. Then, for every\n$u\\in[0,1]$ and every $\\theta\\in\\Theta_0$,\n$$P_\\theta(p_{\\mathrm{orb}}(X)\\le u)\\le u,\\qquad \\mathbb P_\\theta(p_{\\mathrm{tie}}(X,U)\\le u)=u,$$\nwhere $U$ is independent uniform on $[0,1]$. Thus $p_{\\mathrm{orb}}$ is a\nvalid p-value; its cutoff has null rejection probability at most $\\alpha$,\nand hence size at most $\\alpha$ when a nonempty disjoint alternative is\nspecified. The tie-randomized cutoff is a randomized test with rejection\nprobability exactly $\\alpha$ under each null law. These level and size\nstatements use [[def-test-size-and-power]].\n\nOn finite sample spaces, the first two distributional claims specialize to\n[[thm-finite-group-randomization-validity]] and use the same multiplicity\nconvention as [[def-orbit-rank-p-value]]. The proof below supplies the\nmeasurable-space extension rather than importing it from that finite-space\nsupplier.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-population-average-treatment-effect-and-weak-null",
+          "source_section": "Definition",
+          "quote": "Consider the no-interference binary-treatment submodel of\n[[def-finite-randomized-treatment-assignment-model]] in which the allowed\nassignment set is $\\{0,1\\}^{\\mathcal I}$ and unit $i$'s response under\nassignment vector $z$ is $Y_i(z)=Y_i(z_i)$ for fixed real potential responses\n$Y_i(0)$ and $Y_i(1)$. For the fixed units, define the\n**finite-population average treatment effect** by\n$$\\tau_F:=\\frac1N\\sum_{i\\in\\mathcal I}\\bigl(Y_i(1)-Y_i(0)\\bigr).$$\nThe **weak zero-average-effect null** is the hypothesis $\\tau_F=0$; it\nconstrains the average of the unit-level effects, not each effect separately.\nThe Fisher sharp null in this submodel, defined in\n[[def-fisher-sharp-null-and-predeclared-test-orderings]], requires\n$Y_i(1)=Y_i(0)$ for every unit. No probability distribution on the fixed\npotential responses is part of either definition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The assignment weights are nonnegative and sum to one. Under the sharp null the same fixed response vector $y$ is available at both assignments, so the two score values in the Example are imputable before observing $Z$. The published weighted randomization theorem [F3] therefore applies to this schedule and this predeclared ordering.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $Z=a$, the only assignment with score at least $1$ is $a$, so $p_{\\mathrm{rand}}(a,y)=0.9$. If $Z=b$, both assignments have score at least $0$, so $p_{\\mathrm{rand}}(b,y)=0.9+0.1=1$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The p-value is $0.9$ with probability $0.9$ and $1$ with probability $0.1$. Its CDF is $0$ for $u<0.9$, $0.9\\le u$ for $0.9\\le u<1$, and $1$ at $u=1$, hence it is superuniform. The assignment law is not invariant under the swap $a\\leftrightarrow b$, since the two assignment masses differ, so the group-invariance theorem [F4] is not the justification here. This example uses the Fisher sharp null and makes no claim under the weaker average-effect null [F5].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example fixes two allowed assignments and has no empty assignment set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement fixes positive assignment weights 0.9 and 0.1; no zero-probability branch occurs in this example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The numerical example fixes two assignments and does not vary assignment-set size."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.2 fix distinct score values 1 and 0; this witness has no score tie."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the CDF for u<0.9, 0.9<=u<1, and u=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use finite weighted sums on two assignments."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Example verifies one design-based calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Example verifies one design-based calculation, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "weighted-upper-tail",
+          "claim": "For observed a the weighted tail is 0.9; for b it is 1.",
+          "result": "Step 1.2 sums the actual assignment weights over scores at least as large as the observed score."
+        },
+        {
+          "id": "sharp-null-cdf",
+          "claim": "The p-value has mass 0.9 at 0.9 and mass 0.1 at 1.",
+          "result": "Step 2.1 computes the CDF and verifies superuniformity."
+        },
+        {
+          "id": "group-law-check",
+          "claim": "Swapping the two assignments does not preserve the unequal assignment law.",
+          "result": "Step 2.1 explains why group-invariance validity is not the premise used here."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-54",
+        "notes": "Reviewed Example, all three Verification steps and F1-F5 against the complete assignment-model, sharp-null, weak-null definitions and Fisher validity proof, including its finite-weighted-rank supplier. A fixed common response vector under the sharp null makes both predeclared scores imputable; masses 9/10 and 1/10 give upper tails 9/10 and 1 respectively. The CDF is zero below 9/10, then 9/10 until 1, hence superuniform including both endpoints. Unequal masses are not swap-invariant, so the full-group theorem is correctly not invoked as a justification. The weak average-effect null is explicitly excluded and no unsupported extension is made. Finite enumeration uses no choice or unprovided probability construction. Reader/refuter report no findings; no edit or affected consumers."
+      }
+    },
+    "cex-uncorrected-random-permutation-pvalue-can-be-zero": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measurable-finite-group-permutation-setup",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$\\varnothing\\ne\\Theta_0\\subseteq\\Theta$, and let $G$ be a finite group\n([[def-group]]) acting on $\\mathcal X$ by a left action\n([[def-group-action]]). Require that each map $x\\mapsto g\\cdot x$ is\nmeasurable from $(\\mathcal X,\\mathcal A)$ to itself and that\n$T:\\mathcal X\\to\\mathbb R$ is measurable\n([[def-measurable-function-between-measurable-spaces]]).\n\nFor $\\theta\\in\\Theta_0$, the null law is **invariant under the action** when\n$P_\\theta(\\{x:g\\cdot x\\in A\\})=P_\\theta(A)$ for every $g\\in G$ and\n$A\\in\\mathcal A$. Equivalently, $g\\cdot X$ and $X$ have the same law when\n$X\\sim P_\\theta$. The setup defines the action and score whether or not this\ninvariance condition holds; the validity theorem below assumes it for every\nnull parameter.\n\nThe data space need not be finite, and the action need not be free. Group\nelements, including distinct elements that send $x$ to the same point, remain\ndistinct transformations in every group average. On a finite data space with\nthe full power-set sigma-algebra, if every null law is invariant, the setup specializes to\n[[def-finite-group-randomization-test]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-random-permutation-monte-carlo-pvalue",
+          "source_section": "Definition",
+          "quote": "**Input:** a measurable finite-group setup\n[[def-measurable-finite-group-permutation-setup]], an observed $x$, an\ninteger $B\\ge0$, and one of the two simulation designs below. Simulated\ntransformations are independent of $X$.\n\n1. **With replacement.** Draw $g_1,\\ldots,g_B$ independently and uniformly\n   from $G$. Set $g_0=e$, the identity, and return\n   $$\\widehat p_{B,\\mathrm{wr}}(x):=\\frac{1+\\sum_{b=1}^{B}\\mathbf 1\\{T(g_b\\cdot x)\\ge T(x)\\}}{B+1}.$$\n   A simulated draw may itself equal $e$; it is still counted in addition to\n   the distinguished identity.\n2. **Without replacement.** Require $B\\le |G|-1$. Draw a subset $S$ uniformly\n   from the $B$-element subsets of $G\\setminus\\{e\\}$, and return\n   $$\\widehat p_{B,\\mathrm{wor}}(x):=\\frac{\\#\\{g\\in\\{e\\}\\cup S:T(g\\cdot x)\\ge T(x)\\}}{B+1}.$$\n   This is a uniform-subset design; the selected transformations are distinct\n   and the identity is adjoined.\n\nIn either design, a cutoff rule rejects when the returned value is at most\n$\\alpha\\in[0,1]$. For $B=0$ the only transformation is the distinguished\nidentity and the returned value is $1$. Validity under an invariant null law,\nincluding ties, is a separate theorem on this page.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-random-permutation-monte-carlo-validity",
+          "source_section": "Statement",
+          "quote": "In a setup as in [[def-measurable-finite-group-permutation-setup]], suppose\nevery null law is invariant. Fix $B\\ge0$ and use either design of\n[[alg-random-permutation-monte-carlo-pvalue]]. With replacement, let $W$ be\nthe unordered transformation multiset, with multiplicity, represented by\n$(e,g_1,\\ldots,g_B)$, where the $g_b$ are independent uniform draws from\n$G$. Without replacement, let $W=\\{e\\}\\cup S$,\nwhere $S$ is a uniformly selected $B$-subset of $G\\setminus\\{e\\}$ and\n$B\\le|G|-1$. In both cases define\n$$p_B(X,W):=\\frac{\\#\\{g\\in W:T(g\\cdot X)\\ge T(X)\\}}{B+1},$$\ncounting multiplicity in the with-replacement case.\n\nLet $\\mathcal W$ be the finite set of possible transformation multisets for\nthe with-replacement design or subsets for the without-replacement design,\nand let $\\nu$ be the induced design law. On $\\mathcal X\\times\\mathcal W$ use the joint experiment whose law at\n$\\theta$ is\n$$\\widetilde P_\\theta(A):=\\sum_{w\\in\\mathcal W}\\nu(w)\\,P_\\theta(\\{x:(x,w)\\in A\\})$$\nfor $A$ in the product sigma-algebra. Then\n$$\\widetilde P_\\theta(p_B(X,W)\\le u)\\le u\\qquad(\\theta\\in\\Theta_0,\\ 0\\le u\\le1).$$\nThus $p_B$ is a valid p-value on the joint experiment and its cutoff has null\nrejection probability at most $\\alpha$. When a nonempty disjoint alternative\nis specified, the cutoff test has size at most $\\alpha$ and is level\n$\\alpha$. The proof treats the uniform-subset design separately; the\nwithout-replacement formula is not inferred from the with-replacement case.\nIf $B=|G|-1$ without replacement, $W=G$ and the formula reduces to the\nfull-orbit value of [[thm-finite-group-permutation-validity]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-p-value",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). A **p-value\nstatistic** is a statistic $p:\\mathcal X\\to[0,1]$, where $[0,1]$ carries the\ntrace of the Borel sigma-algebra, meaning\n$\\{B\\cap[0,1]:B\\in\\mathcal B(\\mathbb R)\\}$\n([[def-statistic-and-estimator]],\n[[def-measurable-function-between-measurable-spaces]]).\n\nFor a nonempty null hypothesis $\\Theta_0\\subseteq\\Theta$, the statistic is a\n**valid p-value for $\\Theta_0$** if it is superuniform under every null law:\n$$P_\\theta(\\{x:p(x)\\le u\\})\\le u\\qquad\\text{for every }\\theta\\in\\Theta_0\\text{ and }u\\in[0,1].$$\nThe variable $p(X)$ is the observed p-value when the data are $X$. The\nvalidity condition is distributional; measurability alone does not imply it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-uniform-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega$ be a nonempty finite set. Its **uniform probability space** assigns every $\\omega\\in\\Omega$ the weight $1/|\\Omega|$. Thus every event $A\\subseteq\\Omega$ has\n$$\\mathbb P(A)=\\frac{|A|}{|\\Omega|}.$$\nNonemptiness is required so that the denominator is positive.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $X=0$, both transformations have score at least $T(X)=0$, so $\\widetilde p_1=1$. If $X=1$, the identity gives an indicator of $1$ and the swap gives an indicator of $0$. Therefore $\\widetilde p_1=0$ exactly on $\\{X=1,g_1=s\\}$. By [F5], [F6], and independence [F7], this event has probability $(1/2)(1/2)=1/4$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Consequently $P(\\widetilde p_1\\le0)=1/4>0$, contradicting the necessary superuniform bound [F4]. Thus the uncorrected fraction can equal zero and is anti-conservative at cutoff $0$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the same witness the corrected value is $p_+=(1+\\mathbf1\\{T(g_1\\cdot X)\\ge T(X)\\})/2$, so it equals $1/2$ with probability $1/4$ and $1$ with probability $3/4$. Its CDF is $0$ below $1/2$, $1/4\\le u$ for $1/2\\le u<1$, and $1$ at $u=1$, consistent with the general identity-corrected result [F3].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Counterexample fixes a two-point sample space and a two-element group."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 give positive probability 1/4 at zero and violate the p-value bound at u=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Counterexample statement fixes B=1 and a two-element group; it does not vary either size."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Counterexample statement fixes T(x)=x on {0,1}, so the orbit score is nonconstant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 tests u=0 and step 3.1 computes the corrected CDF through u=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Counterexample steps 1.1–3.1 enumerate two outcomes and two transformations only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Counterexample refutes one universal validity assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Counterexample refutes one universal validity assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "zero-atom",
+          "claim": "The uncorrected fraction equals zero on {X=1,g_1=s}.",
+          "result": "Step 1.1 calculates that event probability as 1/4."
+        },
+        {
+          "id": "endpoint-invalidity",
+          "claim": "P(tilde p_1<=0)=1/4>0.",
+          "result": "Step 2.1 violates superuniformity at the endpoint u=0."
+        },
+        {
+          "id": "corrected-witness",
+          "claim": "The corrected value is 1/2 with probability 1/4 and 1 otherwise.",
+          "result": "Step 3.1 verifies its finite CDF is superuniform."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-54",
+        "notes": "Independently read Statement refuted, witness, all three steps and F1-F7 against current suppliers, including the corrected Monte Carlo theorem and actual identity-adjoined algorithm. The universal claim is refuted by B=1 on a uniform two-point invariant model; all four (X,g1) outcomes have mass 1/4 and exactly (1,s) yields zero. Thus the CDF violates validity at u=0 (also at every 0<u<1/4), whereas the corrected value is 1/2 with mass 1/4 and 1 otherwise, satisfying every cutoff bound. Measurability is automatic on the finite joint space; simulation is explicitly independent and multiplicities are retained. No AC. Reader changed only the F3 source quotation in this contract, not this item: current source SHA256 equals both frozen pre/post hashes. Replacing that single quote by the exact hash-verified pre-reader theorem Statement reconstructs the frozen pre-contract hash. This is audit enrichment, not a new defect or proof repair. Hemerik-Goeman section 3.2 pp.9-10 and Katsevich equation (3.20) warning support the phenomenon; finite witness is independently computed. No unresolved finding."
+      }
+    }
+  }
+}

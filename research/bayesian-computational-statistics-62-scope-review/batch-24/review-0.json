@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "24",
+  "round": 0,
+  "reviewed_items": [
+    "alg-expectation-maximization",
+    "thm-em-observed-log-likelihood-is-nondecreasing",
+    "thm-generalized-em-is-nondecreasing-under-q-ascent",
+    "rem-em-ascent-does-not-imply-global-optimality-or-convergence",
+    "ex-em-finite-mixture-responsibilities",
+    "ex-generalized-em-increases-q-without-maximizing",
+    "ex-em-likelihood-has-two-local-maxima",
+    "ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse",
+    "ex-em-support-losing-candidate-violates-finite-kl-condition"
+  ],
+  "reviewed_pages": [
+    "em-algorithm-and-latent-variable-likelihood-ascent",
+    "em-algorithm-and-latent-variable-likelihood-ascent-examples"
+  ],
+  "decision": "repair",
+  "reason": "The ascent identity and its prerequisite uses are sound under the stated fiber, support, integrability, finite-KL, and AC hypotheses. Local specification and example clarifications remain.",
+  "findings": [
+    {
+      "id": "alg-expectation-maximization",
+      "type": "local",
+      "reason": "The Definition gives the model and update branches but does not state the procedure's output or what it returns when it stops. Specify the iterate sequence or finite prefix and stopping result, as required for algorithms."
+    },
+    {
+      "id": "ex-em-likelihood-has-two-local-maxima",
+      "type": "local",
+      "reason": "The Example and step 2.1 call two distinct points strict global maxima. They are strict local maxima and global maximizers; neither is a strict global maximum when the other has the same value."
+    },
+    {
+      "id": "ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse",
+      "type": "local",
+      "reason": "The likelihood calculation is correct, but the complete-data construction in step 1.1 covers one observation and one label, while the claimed likelihood is for two independent observations. State the product complete-data density with two latent labels and verify its normalization."
+    },
+    {
+      "id": "ex-em-support-losing-candidate-violates-finite-kl-condition",
+      "type": "local",
+      "reason": "The algorithm defines Q only when its integral is finite. At the support-losing candidate the extended integral is negative infinity, so Q is undefined under that Definition and the candidate is inadmissible. Distinguish the extended diagnostic integral from defined Q."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-em-observed-log-likelihood-is-nondecreasing",
+      "decision": "accept",
+      "reason": "Its use of the algorithm's Q and admissibility conditions is sound; it does not depend on an output convention."
+    },
+    {
+      "id": "thm-generalized-em-is-nondecreasing-under-q-ascent",
+      "decision": "accept",
+      "reason": "Its use of Q-ascent and the observed-likelihood identity is sound and unaffected by the output clarification."
+    },
+    {
+      "id": "rem-em-ascent-does-not-imply-global-optimality-or-convergence",
+      "decision": "accept",
+      "reason": "Its one-step limitation claims remain valid; its forward references still support tied maxima and covariance collapse."
+    },
+    {
+      "id": "ex-em-finite-mixture-responsibilities",
+      "decision": "accept",
+      "reason": "Its use of the E-step and Q definition is sound and does not rely on the unspecified output."
+    },
+    {
+      "id": "ex-generalized-em-increases-q-without-maximizing",
+      "decision": "accept",
+      "reason": "The candidate admissibility and Q-ascent calculations are sound and unaffected by the output clarification."
+    },
+    {
+      "id": "ex-em-likelihood-has-two-local-maxima",
+      "decision": "accept",
+      "reason": "The exact-update use is sound; the strict-global-maxima wording is recorded separately for local repair."
+    },
+    {
+      "id": "ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse",
+      "decision": "accept",
+      "reason": "Its use of the ascent limitation is sound; the two-observation model clarification is recorded separately for local repair."
+    },
+    {
+      "id": "ex-em-support-losing-candidate-violates-finite-kl-condition",
+      "decision": "accept",
+      "reason": "The candidate is correctly excluded by the support and finite-KL conditions; the Q-value wording is recorded separately for local repair."
+    },
+    {
+      "id": "em-algorithm-and-latent-variable-likelihood-ascent",
+      "decision": "accept",
+      "reason": "The page summary remains aligned with the algorithm and one-step theorem after the output is made explicit."
+    },
+    {
+      "id": "em-algorithm-and-latent-variable-likelihood-ascent-examples",
+      "decision": "accept",
+      "reason": "Its example summaries remain accurate after the requested local clarifications."
+    }
+  ]
+}

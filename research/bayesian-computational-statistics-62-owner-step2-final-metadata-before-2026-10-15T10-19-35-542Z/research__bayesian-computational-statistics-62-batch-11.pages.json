@@ -1,0 +1,212 @@
+[
+  {
+    "order": 2062,
+    "id": "iid-posterior-contraction",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "IID posterior contraction by entropy and prior mass",
+    "companion": "iid-posterior-contraction-examples",
+    "requires": [
+      "posterior-consistency-and-tests"
+    ],
+    "items": [
+      {
+        "id": "def-hellinger-distance-between-density-laws",
+        "kind": "definition",
+        "title": "Root-L2 Hellinger distance between density laws",
+        "deps": [
+          "def-probability-measure"
+        ],
+        "dependency_level": 0,
+        "statement": "For probability densities p and q relative to a fixed measure, define the root-L2 Hellinger distance h(P,Q) = (integral (sqrt(p)-sqrt(q))^2 dmu)^(1/2); the integral is finite.",
+        "strategy": "Definition: specify both density representatives and bound the integrand by p+q to establish finiteness.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-iid-bounded-variance-bernstein-tail",
+        "kind": "lemma",
+        "title": "Bernstein tail bound for independent bounded sums",
+        "deps": [
+          "def-probability-measure",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-independent-random-elements",
+          "def-real-exponential-function-and-e",
+          "cor-markov-inequality-for-random-variables",
+          "thm-exponential-addition-formula",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+        ],
+        "dependency_level": 0,
+        "statement": "For independent centered real variables bounded by b with total variance V>0, each one-sided tail at t>0 is at most exp(-t^2/(2(V+bt/3))); if V=0 their sum vanishes almost surely.",
+        "strategy": "Direct: expand the bounded-variable exponential series, bound moments by variance, factor the independent moment generating functions, optimize exponential Markov, and treat zero variance separately.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+        "kind": "lemma",
+        "title": "KL prior mass gives a posterior denominator lower bound in probability",
+        "deps": [
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-moments-variance-and-covariance",
+          "cor-finite-nonnegative-integral-implies-finite-almost-everywhere",
+          "lem-measurable-functions-preserve-independence",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-variance-of-a-finite-sum",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-jensens-integral-inequality",
+          "thm-holder-inequality-for-integrals",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "cor-chebyshev-inequality-for-random-variables",
+          "def-measure-with-density",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality"
+        ],
+        "dependency_level": 0,
+        "statement": "For a jointly measurable dominated IID density model, KL/log-square prior mass at least exp(-C n epsilon_n^2) makes the likelihood denominator finite and positive almost surely and at least exp(-(C+2)n epsilon_n^2) with probability at least 1-1/(n epsilon_n^2).",
+        "strategy": "Direct: prove local-set measurability and finite evidence, bound the integrated likelihood ratio in expectation, prove positivity on the local KL set, use Jensen for the local log likelihood, derive its variance via independence and the finite-sum covariance formula, then apply Chebyshev and Jensen.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-hellinger-distance-controls-l1-and-total-variation",
+        "kind": "lemma",
+        "title": "Hellinger distance is a metric and controls L1 and total variation",
+        "deps": [
+          "def-hellinger-distance-between-density-laws",
+          "def-total-variation-distance-for-probability-laws",
+          "thm-minkowski-inequality-for-integrals",
+          "thm-holder-inequality-for-integrals",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "dependency_level": 1,
+        "statement": "For densities p,q relative to one fixed measure, h is a metric on the induced laws and h^2 <= d1(P,Q) = 2 TV(P,Q), while d1(P,Q) <= 2h, for library TV(P,Q)=sup_A |P(A)-Q(A)|.",
+        "strategy": "Direct: apply L2 Minkowski, prove zero-distance equality by threshold sets without a sigma-finiteness assumption, derive event-supremum TV as half the density L1 distance, then use Cauchy-Schwarz and the square-root pointwise bound.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-iid-sieve-entropy-produces-exponential-tests",
+        "kind": "lemma",
+        "title": "Sieve metric entropy produces uniform exponential tests",
+        "deps": [
+          "def-hellinger-distance-between-density-laws",
+          "lem-hellinger-distance-controls-l1-and-total-variation",
+          "lem-iid-bounded-variance-bernstein-tail",
+          "def-total-variation-distance-for-probability-laws",
+          "def-measure-with-density",
+          "def-identically-distributed-and-iid-random-variables",
+          "lem-measurable-functions-preserve-independence",
+          "thm-grouping-independent-sigma-algebras",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-minkowski-inequality-for-integrals",
+          "thm-holder-inequality-for-integrals",
+          "def-natural-logarithm",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-is-strictly-increasing",
+          "thm-derivative-of-exponential",
+          "lem-probability-measure-basic-identities"
+        ],
+        "dependency_level": 2,
+        "statement": "For a density family F_n with log packing number log D(epsilon_n,F_n,d) <= n epsilon_n^2, construct measurable tests with exponentially small type-I error and uniform type-II error beyond M epsilon_n for Hellinger, full density L1, or uniformly bounded density L2 distance.",
+        "strategy": "Direct: cover radial shells by finite maximal nets, construct Hellinger, L1, and bounded-L2 local tests, amplify them on independent blocks with Bernstein, and sum type-I errors over centers and shells.",
+        "justified_by": []
+      },
+      {
+        "id": "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+        "kind": "theorem",
+        "title": "IID posterior contraction by entropy and prior mass",
+        "deps": [
+          "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+          "lem-iid-sieve-entropy-produces-exponential-tests",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-probability-measure",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice",
+          "def-hellinger-distance-between-density-laws",
+          "lem-hellinger-distance-controls-l1-and-total-variation",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "cor-markov-inequality-for-random-variables"
+        ],
+        "dependency_level": 3,
+        "statement": "For a jointly measurable dominated IID model, same-metric packing entropy, exponentially small prior mass outside a measurable parameter sieve, and local directional KL/log-square prior mass, the posterior contracts at M epsilon_n in the selected metric in P0^n-probability; the L2-density case requires a uniform density bound.",
+        "strategy": "Direct: split posterior mass into the tested sieve numerator and sieve tail, lower-bound the denominator, control both numerator pieces by change of density and Markov, and combine the exponential rates.",
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 2063,
+    "id": "iid-posterior-contraction-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "IID posterior contraction by entropy and prior mass — Examples",
+    "companion": "iid-posterior-contraction",
+    "requires": [
+      "iid-posterior-contraction"
+    ],
+    "items": [
+      {
+        "id": "ex-bernoulli-density-logarithmic-contraction-rate",
+        "kind": "example",
+        "title": "A one-parameter density prior meets the logarithmic contraction conditions",
+        "deps": [
+          "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice",
+          "cor-mean-value-theorem",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "dependency_level": 4,
+        "statement": "A uniform prior on a compact Bernoulli parameter interval satisfies the global entropy, sieve-tail, and local KL/log-square prior-mass conditions at epsilon_n=2 sqrt(log n/n), yielding the source-covered logarithmic contraction rate in full density L1.",
+        "strategy": "Verification: bound the one-dimensional packing number, use a bounded second derivative and bounded log derivatives for local KL/log-square mass, then apply the local contraction theorem.",
+        "justified_by": []
+      },
+      {
+        "id": "ex-high-entropy-sieve-can-fail-without-precluding-contraction",
+        "kind": "example",
+        "title": "A sieve can miss the entropy bound while the posterior contracts exactly",
+        "deps": [
+          "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+          "lem-iid-sieve-entropy-produces-exponential-tests",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-probability-measure",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "dependency_level": 4,
+        "statement": "For the full Bernoulli density family with a point prior at the truth, a broad sieve violates the entropy bound at the chosen rate while its posterior remains exactly at the truth for every data vector.",
+        "strategy": "Verification: show the local prior mass and tail conditions hold, build a strictly separated grid to violate entropy, and compute the point-prior posterior exactly.",
+        "justified_by": []
+      },
+      {
+        "id": "ex-holder-density-rate-from-entropy-balance",
+        "kind": "example",
+        "title": "A Hölder-density entropy bound gives the source-covered rate",
+        "deps": [
+          "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+          "lem-iid-sieve-entropy-produces-exponential-tests",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice",
+          "def-natural-logarithm"
+        ],
+        "dependency_level": 4,
+        "statement": "Assuming a Hellinger packing entropy bound of order epsilon^(-1/alpha) and matching local prior mass for a Hölder density model, balancing entropy with n epsilon^2 gives epsilon_n proportional to n^(-alpha/(2 alpha+1)) under the theorem conditions.",
+        "strategy": "Verification: choose a fixed rate multiplier K, balance the assumed Hellinger entropy against n epsilon_n^2, check the zero sieve tail and stated local mass, and apply the theorem.",
+        "justified_by": []
+      }
+    ]
+  }
+]

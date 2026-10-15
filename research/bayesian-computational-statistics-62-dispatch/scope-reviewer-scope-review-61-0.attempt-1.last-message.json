@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "61",
+  "round": 0,
+  "reviewed_items": [
+    "def-synthetic-likelihood",
+    "def-binding-function-and-indirect-inference-target",
+    "lem-two-simulation-summary-covariance-is-singular-in-two-dimensions",
+    "thm-indirect-inference-target-exists-with-lexicographic-tie-break",
+    "alg-synthetic-likelihood-monte-carlo-estimation",
+    "rem-finite-simulation-synthetic-likelihood-is-a-random-approximation",
+    "ex-gaussian-synthetic-likelihood-for-bernoulli-summary-law",
+    "ex-nonunique-binding-function-target",
+    "ex-two-simulation-covariance-is-random-and-singular"
+  ],
+  "reviewed_pages": [
+    "synthetic-likelihood-and-indirect-inference",
+    "synthetic-likelihood-and-indirect-inference-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch and actual suppliers were reviewed. Two source obligations can be resolved locally within the assigned A page; downstream uses were checked.",
+  "findings": [
+    {
+      "id": "def-binding-function-and-indirect-inference-target",
+      "type": "prerequisite",
+      "reason": "The definition allows a compact metric on Θ⊂R^p without specifying that it is Euclidean. The existence proof uses Euclidean continuity of coordinate projections at step 4.1, while its Statement omits the Euclidean condition present in its Facts. Compactness and continuity of q_s in an arbitrary metric do not guarantee a lexicographically least minimizer. Specify Euclidean compactness/topology and the norm convention used in q_s, or supply the needed coordinate-continuity premise. Consumers thm-indirect-inference-target-exists-with-lexicographic-tie-break and ex-nonunique-binding-function-target were checked."
+    },
+    {
+      "id": "def-synthetic-likelihood",
+      "type": "prerequisite",
+      "reason": "The finite-simulation clause uses IID summaries from P_θ∘S⁻¹ but does not cite the IID definition or the law/pushforward definition. Add explicit references to def-identically-distributed-and-iid-random-variables and def-law-or-distribution-of-a-random-element; the actual supplier claims were checked."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-indirect-inference-target-exists-with-lexicographic-tie-break",
+      "decision": "accept",
+      "reason": "Its proof's Euclidean coordinate argument is sound once the target definition specifies the same Euclidean topology; step 4.1 is the affected use."
+    },
+    {
+      "id": "ex-nonunique-binding-function-target",
+      "decision": "accept",
+      "reason": "The finite parameter set and constant objective satisfy the target contract with the inherited Euclidean metric."
+    },
+    {
+      "id": "alg-synthetic-likelihood-monte-carlo-estimation",
+      "decision": "accept",
+      "reason": "Its simulator supplies independent observations with common P_θ law, and its IID summary use is consistent with the finite-simulation definition."
+    },
+    {
+      "id": "rem-finite-simulation-synthetic-likelihood-is-a-random-approximation",
+      "decision": "accept",
+      "reason": "Its random-approximation and unavailable claims use the finite-simulation interface consistently."
+    },
+    {
+      "id": "ex-gaussian-synthetic-likelihood-for-bernoulli-summary-law",
+      "decision": "accept",
+      "reason": "It uses the ideal Gaussian branch and makes no finite-simulation IID claim."
+    },
+    {
+      "id": "ex-two-simulation-covariance-is-random-and-singular",
+      "decision": "accept",
+      "reason": "The two draws are IID from the stated law, and the covariance and unavailable conclusions follow from the checked suppliers."
+    },
+    {
+      "id": "cex-synthetic-likelihood-changes-inferential-target",
+      "decision": "accept",
+      "reason": "Its consumer use is of the ideal Gaussian branch, which is unaffected by the finite-simulation source-link repair."
+    }
+  ]
+}

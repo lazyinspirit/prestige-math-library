@@ -1,0 +1,1152 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-61",
+  "scope": [
+    "def-synthetic-likelihood",
+    "def-binding-function-and-indirect-inference-target",
+    "lem-two-simulation-summary-covariance-is-singular-in-two-dimensions",
+    "thm-indirect-inference-target-exists-with-lexicographic-tie-break",
+    "alg-synthetic-likelihood-monte-carlo-estimation",
+    "rem-finite-simulation-synthetic-likelihood-is-a-random-approximation",
+    "ex-gaussian-synthetic-likelihood-for-bernoulli-summary-law",
+    "ex-nonunique-binding-function-target",
+    "ex-two-simulation-covariance-is-random-and-singular"
+  ],
+  "contracts": {
+    "def-synthetic-likelihood": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: summary dimension d>=1 and the simulation covariance requires m>=2. An empty parameter index set would make pointwise clauses vacuous, but supplies no theta or y at which to evaluate a likelihood.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Definition: summary dimension d>=1 and the simulation covariance requires m>=2. An empty parameter index set would make pointwise clauses vacuous, but supplies no theta or y at which to evaluate a likelihood."
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Definition: summary dimension d>=1 and the simulation covariance requires m>=2. An empty parameter index set would make pointwise clauses vacuous, but supplies no theta or y at which to evaluate a likelihood."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero or singular summary covariance leaves the Gaussian-density clause unavailable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: dimension one is permitted; finite simulation still requires m>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: singular covariance is explicitly excluded from the Gaussian-density branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition has no interval-parameter boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: AC is explicitly assumed for Gaussian density and exact pointwise likelihood comparison."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The Gaussian summary density is defined on positive-definite covariances, with unavailable finite plug-in output on singular covariance; no Gaussianity equivalence for actual summaries is asserted. The forward-equivalence axis is therefore inapplicable."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The Gaussian summary density is defined on positive-definite covariances, with unavailable finite plug-in output on singular covariance; no Gaussianity equivalence for actual summaries is asserted. No reverse-equivalence conclusion is part of this claim."
+          }
+        }
+      ],
+      "axiom_use": "AC is assumed for the multivariate-normal density and for comparison with the pointwise likelihood-density interface. No parameter-indexed measurability or extra choice is asserted.",
+      "supplier_interfaces": [
+        {
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "excerpt": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "review_scope": "The statistic interface used here is a measurable map S into the declared Borel target."
+        },
+        {
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "excerpt": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "review_scope": "Means, variance and covariance are centered Lebesgue moments, used with the finite-second-moment hypothesis."
+        },
+        {
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "excerpt": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe dominated by the fixed sigma-finite positive measure $\\mu$. For each\n$\\theta$, the Radon–Nikodym theorem gives the almost-everywhere class\n$dP_\\theta/d\\mu$; a sigma-finite exhaustion for $\\mu$ is also finite for the\nprobability measure $P_\\theta$. Under AC, select simultaneously a\nfinite-valued measurable nonnegative representative $p_\\theta$ from each\nclass. The nonnegative version exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nFor fixed observed $x\\in\\mathcal X$, the function\n$$L_x:\\Theta\\to[0,+\\infty),\\qquad L_x(\\theta):=p_\\theta(x),$$\nis the **likelihood at $x$**. This is a function on the parameter labels, not\na probability distribution on $\\Theta$. No sigma-algebra on $\\Theta$ or\nmeasurability of $L_x$ is implied. Each density is determined only\n$\\mu$-almost everywhere; there is no canonical pointwise version and, for\narbitrary uncountable $\\Theta$, no common exceptional null set is asserted.",
+          "review_scope": "Exact pointwise likelihood densities in dominated experiments require AC and do not imply a parameter-measurable family or a common null set."
+        },
+        {
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "excerpt": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "review_scope": "Positive-definite covariance is the exact hypothesis for the displayed Gaussian Lebesgue density."
+        }
+      ]
+    },
+    "def-binding-function-and-indirect-inference-target": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: Theta is required to be nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: a zero objective is allowed and may have multiple minimizers."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: p=1 is allowed; lexicographic selection then minimizes the sole coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a constant objective is allowed; the selector resolves the whole compact argmin set."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: compact parameter sets may include boundary points; no interior hypothesis is imposed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: finite coordinate minimization specifies the selector without arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: if the summary-law map is injective, equality of summary laws forces equal parameter labels, which is identifiability of the identity estimand.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Definition: if the summary-law map is injective, equality of summary laws forces equal parameter labels, which is identifiability of the identity estimand."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: identifiability of the identity estimand forces equal labels whenever summary laws coincide, hence the summary-law map is injective.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Definition: identifiability of the identity estimand forces equal labels whenever summary laws coincide, hence the summary-law map is injective."
+          }
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "excerpt": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "review_scope": "The summary is a measurable statistic on the sample space."
+        },
+        {
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "excerpt": "For an experiment on $(\\mathcal X,\\mathcal A)$, let\n$\\mathcal P(\\mathcal X,\\mathcal A)$ denote the set of all probability measures\non that measurable space. Its **parametric statistical model** is the parameter\nmap\n$$\n\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A),\\qquad \\mathsf P(\\theta)=P_\\theta,\n$$\nregarded together with its parameter set and sample space\n([[def-statistical-experiment]]). The map need not be injective. Unless a\nmeasurable structure on $\\Theta$ is supplied separately, no measurability of\n$\\mathsf P$ is asserted.",
+          "review_scope": "A parameter-indexed family of laws is a model map; no parameter measurability is asserted."
+        },
+        {
+          "source": "thm-identifiability-iff-constant-on-equivalence-classes",
+          "source_section": "Statement",
+          "excerpt": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric\nmodel, let $\\psi:\\Theta\\to\\mathcal T_0$ be an estimand, and set\n$\\mathcal M:=\\mathsf P(\\Theta)$, the set of laws in the model. For\n$\\theta\\in\\Theta$, write\n$$\n[\\theta]_\\sim:=\\{\\eta\\in\\Theta:\\eta\\sim\\theta\\}.\n$$\nThen the following are equivalent: **(i)** $\\psi$ is identifiable; **(ii)**\n$\\psi$ is constant on every observational equivalence class $[\\theta]_\\sim$;\nand **(iii)** there is a unique function $\\bar\\psi:\\mathcal M\\to\\mathcal T_0$\nsuch that $\\psi=\\bar\\psi\\circ\\mathsf P$.\n\nThe factorization is a statement about sets and functions. It asserts no\nmeasurable structure or measurable factor map.",
+          "review_scope": "Identifiability is constancy on sampling-law equivalence classes, with factorization through the image of the model map."
+        },
+        {
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "excerpt": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "review_scope": "Continuous real-valued functions on nonempty compact metric spaces attain a minimum and maximum."
+        }
+      ]
+    },
+    "lem-two-simulation-summary-covariance-is-singular-in-two-dimensions": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cholesky-factorisation-with-positive-diagonal",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$ and $A\\in M_n(\\mathbb C)$; over $\\mathbb R$ the same definition uses transpose\ninstead of conjugate transpose.\n\nThe matrix $A$ is **Hermitian positive definite** if $A=A^*$ and\n\n$$x^*Ax>0$$for every nonzero vector $x\\in \\mathbb C^n$. A **Cholesky factorisation with positive diagonal** of $A$ is a factorisation$$A=LL^*,$$\n\nwhere $L$ is lower triangular and every diagonal entry of $L$ is a positive real\nnumber.\n\nThe Hermitian terminology matches\n[[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]], and the\ntriangular terminology matches\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $v=(z_1-z_2)/2$. Then $z_1-\\bar z=v$ and $z_2-\\bar z=-v$, so $\\widehat\\Sigma=2vv^T$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $v=(a,b)$. If $v\\ne0$, choose $u=(-b,a)$; if $v=0$, choose $u=(1,0)$. In either case $u\\ne0$, $u^Tv=0$, and $u^T\\widehat\\Sigma u=2(u^Tv)^2=0$. This contradicts the strict quadratic-form condition in [F1], so $\\widehat\\Sigma$ is not positive definite.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes exactly two vectors z_1,z_2 in R^2. Removing both vectors would leave the stipulated mean undefined; it is not the sample size in this claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Statement fixes exactly two vectors z_1,z_2 in R^2. Removing both vectors would leave the stipulated mean undefined; it is not the sample size in this claim."
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Statement fixes exactly two vectors z_1,z_2 in R^2. Removing both vectors would leave the stipulated mean undefined; it is not the sample size in this claim."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 2.1 handles v=0 and constructs a nonzero null direction."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement fixes dimension two and has no one-dimensional branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 2.1 handles v=0 and v≠0 separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 2.1 constructs an explicit null vector by two finite cases; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Two centered vectors in dimension two give covariance 2vv^T and an explicit nonzero null direction; no converse covariance classification is stated. The forward-equivalence axis is therefore inapplicable."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Two centered vectors in dimension two give covariance 2vv^T and an explicit nonzero null direction; no converse covariance classification is stated. No reverse-equivalence conclusion is part of this claim."
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-sample-degenerate-and-opposite-corners",
+          "claim": "Check z1=z2=(0,0) and z1=(1,1), z2=(-1,-1) in the sample covariance formula.",
+          "result": "The first covariance is 0; the second is [[2,2],[2,2]], which has null vector (-1,1)."
+        }
+      ]
+    },
+    "thm-indirect-inference-target-exists-with-lexicographic-tie-break": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-binding-function-and-indirect-inference-target",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be a statistical experiment and let $S:\\mathcal X\\to\\mathbb R^d$ be a statistic, meaning a measurable map to its declared target as in [[def-statistic-and-estimator]], with finite second moment under each $P_\\theta$. Expectations are integrated against the law as in [[def-law-or-distribution-of-a-random-element]] and [[def-expectation-of-a-nonnegative-or-integrable-random-variable]], and covariance uses the centered second moment as in [[def-moments-variance-and-covariance]]. The **moment binding function** for this page is\n$$\nb:\\Theta\\to\\mathbb R^d,\\qquad b(\\theta):=\\mathbb E_\\theta[S].\n$$\nThe name refers here to the mean of the declared summary vector; classical indirect inference also uses bindings defined by auxiliary-model estimators, which are a different interface.\n\nThe summary-law map is itself a parametric model in the sense of [[def-parametric-statistical-model]]:\n$$\nQ:\\Theta\\to\\mathcal P(\\mathbb R^d),\\qquad Q_\\theta(B):=P_\\theta(\\{x:S(x)\\in B\\})\n$$\nfor each Borel set $B\\subseteq\\mathbb R^d$. It records the full law of the summary, whereas $b$ records only its mean.\n\nFor the finite-dimensional minimum-distance target, assume $p\\ge1$, a nonempty compact parameter set $\\Theta\\subseteq\\mathbb R^p$ with its Euclidean subspace metric ([[def-metric-compactness]] [[def-metric-space]]), a binding map $b$ continuous from this metric to the Euclidean metric on $\\mathbb R^d$ ([[def-metric-continuity]]), and a fixed summary vector $s\\in\\mathbb R^d$ (either the observed summary or a specified deterministic probability limit). Define\n$$\nq_s(\\theta):=\\|b(\\theta)-s\\|_2^2.\n$$\nHere $\\|\\cdot\\|_2$ is the Euclidean norm. Require $q_s:\\Theta\\to\\mathbb R$ to be continuous as part of this target’s admissible input contract. Its minimizer set is\n$$M_s:=\\operatorname*{arg\\,min}_{\\theta\\in\\Theta}q_s(\\theta)=\\{\\theta\\in\\Theta:q_s(\\theta)=\\inf_{\\eta\\in\\Theta}q_s(\\eta)\\}. $$\nThe **indirect-inference target** $\\theta^{\\mathrm{II}}(s)$ is the lexicographically least member of $M_s$: among all minimizers, minimize the first coordinate; among those, minimize the second; continue through coordinate $p$. The target is well-defined under exactly the stated compactness and continuity contract by [[thm-indirect-inference-target-exists-with-lexicographic-tie-break]].\n\nFor moment-based parameter recovery, the model’s identification contract must be declared for $b$ and the proposed limiting summary must be matched to a parameter, $s=b(\\theta_0)$, for some $\\theta_0\\in\\Theta$. If the method instead compares the full summary laws, its identification contract must be declared for the map $\\theta\\mapsto Q_\\theta$. By [[def-identifiability-of-an-estimand]] and [[thm-identifiability-iff-constant-on-equivalence-classes]], injectivity of the relevant law map is exactly identifiability of the parameter from that experiment. These are assumptions on the inference problem, not conclusions of this definition.\n\nNo consistency theorem for an estimated minimizer follows from this target definition. Such a theorem needs additional hypotheses controlling sampling, simulation error, separation of the population target and the optimizer; the plan does not assert those hypotheses here.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-closed-subset-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $F \\subseteq X$ be closed in $X$\n([[def-metric-topology]]). Then $F$ is a compact subset of $X$: the metric\nsubspace $(F, d_F)$ is a compact metric space\n([[def-isometry-and-metric-embedding]]).\n\nNo choice principle is used.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-metric-continuity",
+          "source_section": "Definition",
+          "quote": "Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces ([[def-metric-space]]), let\n$f : X \\to Y$ be a function and let $a \\in X$.\n\n$f$ is **continuous at $a$** if for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ such that\n\n$$d_X(x,a) < \\delta \\;\\Longrightarrow\\; d_Y\\big(f(x), f(a)\\big) < \\varepsilon \\qquad \\text{for all } x \\in X .$$\n\n$f$ is **continuous** (globally, or on $X$) if it is continuous at every point of\n$X$.\n\n**The same condition in balls.** Since $d_X(x,a) < \\delta$ says $x \\in B_X(a,\\delta)$\nand $d_Y(f(x),f(a)) < \\varepsilon$ says $f(x) \\in B_Y(f(a),\\varepsilon)$\n([[def-metric-ball]]), continuity at $a$ reads: for every $\\varepsilon > 0$ there\nis $\\delta > 0$ with\n\n$$f\\big[B_X(a,\\delta)\\big] \\subseteq B_Y\\big(f(a), \\varepsilon\\big).$$\n\nBoth forms are used below and are the same statement written twice.\n\n**Both metrics matter, and both are named.** Continuity is a property of the\ntriple $(d_X, d_Y, f)$, not of $f$ alone. When several metrics on the same\nunderlying sets are in play, as in [[def-equivalent-metrics]], the metrics are\nalways written out.\n\n**Quantifier order.** The $\\delta$ is allowed to depend on $\\varepsilon$ **and on\nthe point $a$**. Requiring one $\\delta$ to work at every point simultaneously is\na strictly stronger condition, uniform continuity; it is defined on a later page\nof this library, and at this point in the reading order it is written out in full\nwhere needed ([[def-equivalent-metrics]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-compactness",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), with open sets as in\n[[def-metric-topology]] and balls as in [[def-metric-ball]].\n\n- An **open cover** of $(X,d)$ is a family $\\mathcal{U}$ of open subsets of $X$\n  with $X = \\bigcup \\mathcal{U}$, where\n  $\\bigcup \\mathcal{U} = \\{\\, x \\in X : x \\in U \\text{ for some } U \\in \\mathcal{U} \\,\\}$.\n- A **subcover** of $\\mathcal{U}$ is a subfamily\n  $\\mathcal{V} \\subseteq \\mathcal{U}$ that is itself an open cover.\n- A family $\\mathcal{V}$ of sets is **finite** when $\\mathcal{V} = \\emptyset$ or\n  there are $n \\in \\mathbb{N}$ and sets $V_0, \\dots, V_n$ with\n  $\\mathcal{V} = \\{V_0, \\dots, V_n\\}$; repetitions in the list are allowed and\n  harmless.\n- $(X,d)$ is **compact** when every open cover of it has a finite subcover: for\n  every open cover $\\mathcal{U}$, either $X = \\emptyset$ and the empty subfamily\n  covers it, or there are $n \\in \\mathbb{N}$ and\n  $U_0, \\dots, U_n \\in \\mathcal{U}$ with\n  $$X = U_0 \\cup \\dots \\cup U_n .$$\n- A subset $A \\subseteq X$ is a **compact subset** of $X$ when the metric\n  subspace $(A, d_A)$ is a compact metric space, $d_A$ being the restriction of\n  $d$ to $A \\times A$ ([[def-isometry-and-metric-embedding]]).\n\n**Compactness of a subset is defined intrinsically, and only intrinsically.**\nThe last clause speaks about the subspace $(A,d_A)$ and its own open sets, not\nabout families of open subsets of the ambient $X$. The two readings do agree,\nbut that is a theorem and not a convention: it is\n[[lem-compactness-is-intrinsic]], and no item of this library may use the\nambient reading without citing it. Taking the intrinsic reading as the\ndefinition is what makes \"compact\" a property of the metric space $(A,d_A)$\nalone, so that a set compact in one ambient space is compact in every other one\ncontaining it isometrically.\n\n**The empty space is compact**, since the empty subfamily of any family covers\nit; this is the reason the clause above is written with the two cases. The\none-point space is compact too, and so is every space listed as\n$\\{x_0, \\dots, x_n\\}$: given a cover, each $x_i$ lies in some member, and\nfinitely many members chosen in this way already cover.\n\n**The finiteness convention, and how it is used both ways.** \"Finite\" above is\nthe listing form, matching the finite lists of\n[[def-finite-intersection-property]]. It agrees with the definition of\nfiniteness by equinumerosity with a natural number ([[def-countable]]), and\nboth directions of the agreement are available and are used below:\n\n- A nonempty finite set $F$ in the sense of [[def-countable]] satisfies\n  $F \\approx m$ for some $m \\ge 1$, and a bijection $m \\to F$ is exactly a\n  listing $F = \\{a_0, \\dots, a_{m-1}\\}$.\n- Conversely a set listed as $A = \\{a_0, \\dots, a_n\\}$, that is the image of a\n  function $a$ with domain $\\sigma(n)$, is finite in the sense of\n  [[def-countable]]: the map sending $x \\in A$ to the least $i \\le n$ with\n  $a_i = x$ is an injection of $A$ into $\\sigma(n)$, so $A$ is equinumerous with\n  a subset of $\\mathbb{N}$ bounded above, and such a subset is finite\n  ([[lem-subset-of-countable]]).\n\nNeither direction uses a choice principle: the second selects nothing, taking a\nleast index instead.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) constructed in this\nlibrary ([[def-real-numbers]]) and carrying its order ([[def-real-order]]).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\n[[rem-metric-axiom-conventions]] records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as [[lem-metric-nonnegativity]] proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n([[def-max-min]], [[lem-finite-set-has-max]]). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $q_s$ attains a minimum $c$ on $\\Theta$. Hence $M_s=\\{\\theta\\in\\Theta:q_s(\\theta)=c\\}$ is nonempty.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The set $M_s$ is closed in $\\Theta$. Indeed, if $\\theta\\notin M_s$, then $q_s(\\theta)>c$; take $\\varepsilon=(q_s(\\theta)-c)/2>0$. By [F4], some $\\delta>0$ makes $d(\\eta,\\theta)<\\delta$ imply $|q_s(\\eta)-q_s(\\theta)|<\\varepsilon$, and therefore $q_s(\\eta)>c$. This ball misses $M_s$, so every point of its complement has a neighborhood in that complement.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F3], $M_s$ is compact.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Set $M_0:=M_s$. For $k=1,\\ldots,p$, suppose $M_{k-1}$ is nonempty compact. The coordinate map $\\pi_k(x)=x_k$ is continuous because $|\\pi_k(x)-\\pi_k(y)|\\le\\|x-y\\|_2$. By [F2], it attains a minimum $a_k$ on $M_{k-1}$. Define $M_k:=\\{x\\in M_{k-1}:x_k=a_k\\}$; this set is nonempty. It is closed in $M_{k-1}$: for $x_k\\ne a_k$, a ball of radius $|x_k-a_k|/2$ around $x$ misses $M_k$ by the same coordinate inequality. Hence [F3] makes $M_k$ compact. Finite induction constructs nonempty compact $M_1,\\ldots,M_p$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 3.1",
+            "given",
+            "construct",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The nonempty set $M_p$ contains a vector whose $k$th coordinate is $a_k$ for each $k$, so it contains at most one vector and is a singleton. For any $x\\in M_s$, take the first coordinate $k$ at which $x_k\\ne a_k$, if one exists. Then $x\\in M_{k-1}$ and the definition of $a_k$ gives $x_k>a_k$. Thus the unique element of $M_p$ is lexicographically no larger than every member of $M_s$, and is the unique lexicographically least minimizer.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes a nonempty compact parameter set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For constant q_s, proof steps 2.1–5.1 still construct the unique lexicographically least member of the full minimizer set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof steps 4.1–5.1 apply with p=1 using a single attained coordinate minimum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For constant q_s, proof steps 1.1–5.1 select the lexicographically least point of Θ."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement makes no interior-minimizer assumption; compact endpoints are included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 4.1–5.1 use finitely many attained coordinate minima, not arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Compactness and continuity imply a nonempty compact argmin and unique lexicographically least minimizer; the conclusion is not asserted to imply compactness or continuity. The forward-equivalence axis is therefore inapplicable."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Compactness and continuity imply a nonempty compact argmin and unique lexicographically least minimizer; the conclusion is not asserted to imply compactness or continuity. No reverse-equivalence conclusion is part of this claim."
+          }
+        }
+      ]
+    },
+    "alg-synthetic-likelihood-monte-carlo-estimation": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition Inputs require m>=2 independent observations and an observed y, so an empty simulation list is inadmissible and no division by m or m-1 is attempted on it.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Definition Inputs require m>=2 independent observations and an observed y, so an empty simulation list is inadmissible and no division by m or m-1 is attempted on it."
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "Definition Inputs require m>=2 independent observations and an observed y, so an empty simulation list is inadmissible and no division by m or m-1 is attempted on it."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition step 3 returns unavailable for a singular covariance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits d=1 but requires m>=2 for sample covariance."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition step 3 handles any non-positive-definite empirical covariance without regularization."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The procedure has no interval parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition inherits AC only through the Gaussian-density interface; the simulation steps add no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The procedure returns unavailable for a non-positive-definite sample covariance and otherwise evaluates the Gaussian density by its unique Cholesky factor; no correctness equivalence is separately asserted. The forward-equivalence axis is therefore inapplicable."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The procedure returns unavailable for a non-positive-definite sample covariance and otherwise evaluates the Gaussian density by its unique Cholesky factor; no correctness equivalence is separately asserted. No reverse-equivalence conclusion is part of this claim."
+          }
+        }
+      ],
+      "axiom_use": "AC is inherited from the synthetic-likelihood definition and Gaussian-density supplier; the simulation and covariance calculation add no choice.",
+      "supplier_interfaces": [
+        {
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "excerpt": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "review_scope": "Exact current prerequisite definition; no inference beyond IID simulation."
+        },
+        {
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "excerpt": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "review_scope": "Exact current covariance convention."
+        },
+        {
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "excerpt": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "review_scope": "Exact positive-definite factorization interface."
+        },
+        {
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "excerpt": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "review_scope": "Exact nondegenerate Gaussian density interface."
+        }
+      ]
+    },
+    "rem-finite-simulation-synthetic-likelihood-is-a-random-approximation": {
+      "risk": "low",
+      "kind": "remark",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The remark discusses finite simulation with m>=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the algorithm returns unavailable when the empirical covariance is singular or otherwise not positive definite."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The remark has no one-dimensional endpoint regime."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the algorithm returns unavailable when the empirical covariance is singular or otherwise not positive definite."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The remark has no interval parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Remark inherits AC only from the Gaussian synthetic-likelihood definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The remark contrasts a random finite plug-in value with the ideal density and notes singular two-simulation outputs; it states neither necessary nor sufficient conditions for consistency. The forward-equivalence axis is therefore inapplicable."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The remark contrasts a random finite plug-in value with the ideal density and notes singular two-simulation outputs; it states neither necessary nor sufficient conditions for consistency. No reverse-equivalence conclusion is part of this claim."
+          }
+        }
+      ],
+      "axiom_use": "AC is inherited only through the Gaussian synthetic-likelihood definition; the finite-simulation boundary calculation is choice-free.",
+      "supplier_interfaces": [
+        {
+          "source": "alg-synthetic-likelihood-monte-carlo-estimation",
+          "source_section": "Definition",
+          "excerpt": "Assume AC only as required by the synthetic-likelihood definition and its Gaussian-density supplier ([[def-axiom-of-choice]] [[def-synthetic-likelihood]] [[thm-nondegenerate-multivariate-normal-law-has-density]]). IID means common law and mutual independence as in [[def-identically-distributed-and-iid-random-variables]]. Each real coordinate sequence uses the arithmetic sample-mean definition in [[def-iid-monte-carlo-estimators]]; covariance uses centered second moments as in [[def-moments-variance-and-covariance]].\n\n**Inputs:** A parameter $\\theta$, observed data $y$, a summary statistic $S:\\mathcal X\\to\\mathbb R^d$ satisfying the contract of [[def-synthetic-likelihood]], an integer simulation count $m\\ge2$, and a simulator that returns $m$ mutually independent observations with common law $P_\\theta$.\n\n**Output:** Either the finite-simulation plug-in synthetic-likelihood value at $S(y)$, or the explicit result **unavailable**.\n\n1. Simulate $Y_1,\\ldots,Y_m$ and compute $S_i:=S(Y_i)$. For each coordinate $j$, compute $\\bar S_{m,j}:=m^{-1}\\sum_{i=1}^m S_{i,j}$; this is the scalar Monte Carlo sample mean of [[def-iid-monte-carlo-estimators]] applied to the IID coordinate sequence.\n2. Set $\\bar S_m:=(\\bar S_{m,1},\\ldots,\\bar S_{m,d})^T$ and compute\n   $$\n   \\widehat\\Sigma_m:=(m-1)^{-1}\\sum_{i=1}^m(S_i-\\bar S_m)(S_i-\\bar S_m)^T.\n   $$\n3. If $\\widehat\\Sigma_m$ is not positive definite, stop and return **unavailable**. Do not add a ridge term or otherwise modify the covariance.\n4. If $\\widehat\\Sigma_m$ is positive definite, take its unique Cholesky factor $L$ with positive diagonal by [[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]. Return\n   $$\n   (2\\pi)^{-d/2}\\det(\\widehat\\Sigma_m)^{-1/2}\n   \\exp\\!\\left[-\\tfrac12(S(y)-\\bar S_m)^T\\widehat\\Sigma_m^{-1}(S(y)-\\bar S_m)\\right],\n   $$\n   the Gaussian density formula in [[def-synthetic-likelihood]] evaluated at the simulated mean and covariance, using [[thm-nondegenerate-multivariate-normal-law-has-density]].\n\nThis algorithm evaluates one parameter value. It does not optimize over $\\theta$ and asserts no unbiasedness, convergence, consistency, posterior calibration, or optimizer property.",
+          "review_scope": "The finite procedure returns unavailable rather than changing a non-positive-definite empirical covariance."
+        },
+        {
+          "source": "lem-two-simulation-summary-covariance-is-singular-in-two-dimensions",
+          "source_section": "Statement",
+          "excerpt": "For any two simulated vectors $z_1,z_2\\in\\mathbb R^2$, put $\\bar z=(z_1+z_2)/2$ and define the Bessel-corrected sample covariance\n$$\n\\widehat\\Sigma:=\\sum_{i=1}^2(z_i-\\bar z)(z_i-\\bar z)^T.\n$$\nThen $\\widehat\\Sigma$ is not positive definite.",
+          "review_scope": "Every two-vector covariance in R^2 is not positive definite."
+        }
+      ]
+    },
+    "ex-gaussian-synthetic-likelihood-for-bernoulli-summary-law": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-synthetic-likelihood",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be a statistical experiment and let $S:\\mathcal X\\to\\mathbb R^d$ be a statistic, meaning a measurable map to its declared Borel target as in [[def-statistic-and-estimator]], where $d\\ge1$ is finite. Expectations are Lebesgue integrals under $P_\\theta$ as in [[def-expectation-of-a-nonnegative-or-integrable-random-variable]], and variances and covariances use centered second moments as in [[def-moments-variance-and-covariance]]. For every $\\theta\\in\\Theta$, assume\n$$\\mathbb E_\\theta\\!\\left[\\|S\\|_2^2\\right]<\\infty,\\qquad \\|x\\|_2^2:=\\sum_{j=1}^d x_j^2. $$\nThe **binding mean** and **summary covariance** are the pointwise-defined quantities\n$$b_j(\\theta):=\\mathbb E_\\theta[S_j],\\qquad \\Sigma_{jk}(\\theta):=\\mathbb E_\\theta\\!\\left[(S_j-b_j(\\theta))(S_k-b_k(\\theta))\\right]\\quad(1\\le j,k\\le d). $$\nEach covariance entry is finite since $2|uv|\\le u^2+v^2$ and the coordinates are square-integrable. The matrix is symmetric and positive semidefinite because for $a\\in\\mathbb R^d$,\n$$a^T\\Sigma(\\theta)a=\\mathbb E_\\theta\\!\\left[(a^T(S-b(\\theta)))^2\\right]\\ge0. $$\nNo measurability or continuity of $\\theta\\mapsto b(\\theta)$ or $\\theta\\mapsto\\Sigma(\\theta)$ follows from these pointwise definitions.\n\nAssume AC ([[def-axiom-of-choice]]). If $\\Sigma(\\theta)$ is positive definite, the **ideal Gaussian synthetic likelihood** for observed data $y\\in\\mathcal X$ is the Gaussian density evaluated at its summary, as supplied by [[def-multivariate-normal-law]] and [[thm-nondegenerate-multivariate-normal-law-has-density]],\n$$g_{\\mathrm{SL}}(y\\mid\\theta):=\\varphi_d\\!\\left(S(y);b(\\theta),\\Sigma(\\theta)\\right)=(2\\pi)^{-d/2}\\det(\\Sigma(\\theta))^{-1/2}\\exp\\!\\left[-\\tfrac12(S(y)-b(\\theta))^T\\Sigma(\\theta)^{-1}(S(y)-b(\\theta))\\right]. $$\nHere $\\varphi_d(\\,\\cdot\\,;m,\\Sigma)$ is the Lebesgue density of $N_d(m,\\Sigma)$. If $\\Sigma(\\theta)$ is singular, this positive-definite-covariance density is not defined by this item.\n\nLet $Q_\\theta:=P_\\theta\\circ S^{-1}$ be the pushforward law of the statistic under $P_\\theta$ as in [[def-law-or-distribution-of-a-random-element]]. For $m\\ge2$, let $S_1,\\ldots,S_m$ be IID simulated summaries with common law $Q_\\theta$, where IID means a common law and mutual independence as in [[def-identically-distributed-and-iid-random-variables]]. Set\n$$\\bar S_m:=m^{-1}\\sum_{i=1}^m S_i,\\qquad \\widehat\\Sigma_m:=(m-1)^{-1}\\sum_{i=1}^m(S_i-\\bar S_m)(S_i-\\bar S_m)^T. $$\nThe **finite-simulation plug-in synthetic likelihood** is the random quantity\n$$\\widehat g_{\\mathrm{SL},m}(y\\mid\\theta):=\\varphi_d(S(y);\\bar S_m,\\widehat\\Sigma_m). $$\nwhen $\\widehat\\Sigma_m$ is positive definite, and is **unavailable** otherwise. The finite plug-in quantity is a function of simulated summaries; it is not defined as an unbiased estimator of the ideal Gaussian density.\n\nThe exact experiment’s likelihood density, when the experiment is dominated as in [[def-dominated-statistical-experiment]] and given a pointwise density as in [[def-likelihood-density]], and this Gaussian summary approximation are different objects. The latter density-selection interface assumes AC and does not assert a common exceptional null set across an arbitrary parameter set; the present definition adds no parameter-indexed measurability. This definition makes no claim that the actual summary law is Gaussian, that $g_{\\mathrm{SL}}$ equals an exact likelihood, or that it yields posterior calibration, consistency, a Bernstein–von Mises theorem, or coverage. No optimizer or optimizer convergence property is included.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The identity summary has mean $p$ and variance $p(1-p)>0$, so its ideal Gaussian synthetic likelihood is the density $g_p(x)=(2\\pi p(1-p))^{-1/2}\\exp\\!\\left(-\\frac{(x-p)^2}{2p(1-p)}\\right)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $x\\in(1/4,3/4)$ and $p\\in(0,1)$, $|x-p|<1$. Hence $g_p(x)\\ge c_p:=(2\\pi p(1-p))^{-1/2}\\exp\\!\\left(-\\frac{1}{2p(1-p)}\\right)>0$. The Gaussian law therefore assigns $(1/4,3/4)$ probability at least $c_p/2>0$, since this interval has Lebesgue length $1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The true summary law is supported on $\\{0,1\\}$, so it assigns $(1/4,3/4)$ probability zero. It differs from the Gaussian law in step 2.1. Thus the Gaussian synthetic likelihood is not the exact likelihood of this non-Gaussian summary model.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses the nonempty parameter set (0,1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: p=0 and p=1 are excluded, where the Bernoulli variance would vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: the summary is one-dimensional and the argument uses its scalar Gaussian density."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification step 1.1 proves p(1-p)>0 on the stated parameter domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example explicitly restricts p to the open interval (0,1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Given/step 2.1 carry AC only for the supplied normal-density interface; the Bernoulli calculation is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The Bernoulli summary gives zero mass to (1/4,3/4), while its positive-variance Gaussian gives positive mass there; the verification establishes inequality of these laws. The forward-equivalence axis is therefore inapplicable."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The Bernoulli summary gives zero mass to (1/4,3/4), while its positive-variance Gaussian gives positive mass there; the verification establishes inequality of these laws. No reverse-equivalence conclusion is part of this claim."
+          }
+        }
+      ],
+      "axiom_use": "AC is inherited only through the Gaussian synthetic-likelihood definition and density supplier; the finite Bernoulli calculation uses no choice.",
+      "finite_checks": [
+        {
+          "id": "bernoulli-half-summary-law",
+          "claim": "Set p=1/2, so the Bernoulli summary variance is 1/4 and the Gaussian density is positive on (1/4,3/4).",
+          "result": "The true Bernoulli summary assigns that interval probability 0, while the positive Gaussian density assigns it positive probability."
+        }
+      ]
+    },
+    "ex-nonunique-binding-function-target": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-binding-function-and-indirect-inference-target",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be a statistical experiment and let $S:\\mathcal X\\to\\mathbb R^d$ be a statistic, meaning a measurable map to its declared target as in [[def-statistic-and-estimator]], with finite second moment under each $P_\\theta$. Expectations are integrated against the law as in [[def-law-or-distribution-of-a-random-element]] and [[def-expectation-of-a-nonnegative-or-integrable-random-variable]], and covariance uses the centered second moment as in [[def-moments-variance-and-covariance]]. The **moment binding function** for this page is\n$$\nb:\\Theta\\to\\mathbb R^d,\\qquad b(\\theta):=\\mathbb E_\\theta[S].\n$$\nThe name refers here to the mean of the declared summary vector; classical indirect inference also uses bindings defined by auxiliary-model estimators, which are a different interface.\n\nThe summary-law map is itself a parametric model in the sense of [[def-parametric-statistical-model]]:\n$$\nQ:\\Theta\\to\\mathcal P(\\mathbb R^d),\\qquad Q_\\theta(B):=P_\\theta(\\{x:S(x)\\in B\\})\n$$\nfor each Borel set $B\\subseteq\\mathbb R^d$. It records the full law of the summary, whereas $b$ records only its mean.\n\nFor the finite-dimensional minimum-distance target, assume $p\\ge1$, a nonempty compact parameter set $\\Theta\\subseteq\\mathbb R^p$ with its Euclidean subspace metric ([[def-metric-compactness]] [[def-metric-space]]), a binding map $b$ continuous from this metric to the Euclidean metric on $\\mathbb R^d$ ([[def-metric-continuity]]), and a fixed summary vector $s\\in\\mathbb R^d$ (either the observed summary or a specified deterministic probability limit). Define\n$$\nq_s(\\theta):=\\|b(\\theta)-s\\|_2^2.\n$$\nHere $\\|\\cdot\\|_2$ is the Euclidean norm. Require $q_s:\\Theta\\to\\mathbb R$ to be continuous as part of this target’s admissible input contract. Its minimizer set is\n$$M_s:=\\operatorname*{arg\\,min}_{\\theta\\in\\Theta}q_s(\\theta)=\\{\\theta\\in\\Theta:q_s(\\theta)=\\inf_{\\eta\\in\\Theta}q_s(\\eta)\\}. $$\nThe **indirect-inference target** $\\theta^{\\mathrm{II}}(s)$ is the lexicographically least member of $M_s$: among all minimizers, minimize the first coordinate; among those, minimize the second; continue through coordinate $p$. The target is well-defined under exactly the stated compactness and continuity contract by [[thm-indirect-inference-target-exists-with-lexicographic-tie-break]].\n\nFor moment-based parameter recovery, the model’s identification contract must be declared for $b$ and the proposed limiting summary must be matched to a parameter, $s=b(\\theta_0)$, for some $\\theta_0\\in\\Theta$. If the method instead compares the full summary laws, its identification contract must be declared for the map $\\theta\\mapsto Q_\\theta$. By [[def-identifiability-of-an-estimand]] and [[thm-identifiability-iff-constant-on-equivalence-classes]], injectivity of the relevant law map is exactly identifiability of the parameter from that experiment. These are assumptions on the inference problem, not conclusions of this definition.\n\nNo consistency theorem for an estimated minimizer follows from this target definition. Such a theorem needs additional hypotheses controlling sampling, simulation error, separation of the population target and the optimizer; the plan does not assert those hypotheses here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-indirect-inference-target-exists-with-lexicographic-tie-break",
+          "source_section": "Statement",
+          "quote": "Let $\\Theta\\subseteq\\mathbb R^p$ be the nonempty compact parameter set of [[def-binding-function-and-indirect-inference-target]], and fix an admissible $s$ for which its objective $q_s:\\Theta\\to\\mathbb R$ is continuous. Then\n$$\nM_s:=\\operatorname*{arg\\,min}_{\\theta\\in\\Theta}q_s(\\theta)\n$$\nis a nonempty compact set and has a unique lexicographically least element. Thus the target selector specified in [[def-binding-function-and-indirect-inference-target]] exists.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-identifiability-iff-constant-on-equivalence-classes",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric\nmodel, let $\\psi:\\Theta\\to\\mathcal T_0$ be an estimand, and set\n$\\mathcal M:=\\mathsf P(\\Theta)$, the set of laws in the model. For\n$\\theta\\in\\Theta$, write\n$$\n[\\theta]_\\sim:=\\{\\eta\\in\\Theta:\\eta\\sim\\theta\\}.\n$$\nThen the following are equivalent: **(i)** $\\psi$ is identifiable; **(ii)**\n$\\psi$ is constant on every observational equivalence class $[\\theta]_\\sim$;\nand **(iii)** there is a unique function $\\bar\\psi:\\mathcal M\\to\\mathcal T_0$\nsuch that $\\psi=\\bar\\psi\\circ\\mathsf P$.\n\nThe factorization is a statement about sets and functions. It asserts no\nmeasurable structure or measurable factor map.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under either point-mass law, $S(Y)=Y^2=1$ surely. Thus $b(-1)=b(1)=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The original laws differ: $P_{-1}(\\{-1\\})=1$ but $P_1(\\{-1\\})=0$. Therefore the parameter identity is identifiable in the original experiment.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the observed summary $s=1$, $q_1$ is the constant continuous function zero on the finite compact set $\\Theta$, so $M_1=\\{-1,1\\}$. The target’s lexicographic rule selects $-1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By the pushforward-law definition [F5], both summary laws assign probability one to $\\{1\\}$, so the summary-law map is not injective and the parameter identity is not identifiable from this summary. The moment target therefore does not recover the sign, even though the raw experiment distinguishes it.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: Theta has the two elements -1 and 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 2.1 gives zero distance at both parameter labels."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example uses a scalar parameter and scalar summary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification steps 1.1 and 2.1 show a constant binding mean and zero objective at both labels."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite parameter set has no interval endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example uses finite point-mass laws and a finite lexicographic tie; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example contrasts identifiability for the raw and summary experiments but asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example contrasts identifiability for the raw and summary experiments but asserts no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-sign-summary-map",
+          "claim": "Enumerate theta=-1 and theta=1 for S(y)=y^2 and observed summary s=1.",
+          "result": "Both means are 1 and both minimum distances are 0; the lexicographic selector chooses -1 while the raw laws differ."
+        }
+      ]
+    },
+    "ex-two-simulation-covariance-is-random-and-singular": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-synthetic-likelihood-monte-carlo-estimation",
+          "source_section": "Definition",
+          "quote": "Assume AC only as required by the synthetic-likelihood definition and its Gaussian-density supplier ([[def-axiom-of-choice]] [[def-synthetic-likelihood]] [[thm-nondegenerate-multivariate-normal-law-has-density]]). IID means common law and mutual independence as in [[def-identically-distributed-and-iid-random-variables]]. This algorithm states the vector sample mean and covariance directly; covariance uses centered second moments as in [[def-moments-variance-and-covariance]].\n\n**Inputs:** A parameter $\\theta$, observed data $y$, a summary statistic $S:\\mathcal X\\to\\mathbb R^d$ satisfying the contract of [[def-synthetic-likelihood]], an integer simulation count $m\\ge2$, and a simulator that returns $m$ mutually independent observations with common law $P_\\theta$.\n\n**Output:** Either the finite-simulation plug-in synthetic-likelihood value at $S(y)$, or the explicit result **unavailable**.\n\n1. Simulate $Y_1,\\ldots,Y_m$ and compute $S_i:=S(Y_i)$. For each coordinate $j$, compute $\\bar S_{m,j}:=m^{-1}\\sum_{i=1}^m S_{i,j}$.\n2. Set $\\bar S_m:=(\\bar S_{m,1},\\ldots,\\bar S_{m,d})^T$ and compute\n   $$\n   \\widehat\\Sigma_m:=(m-1)^{-1}\\sum_{i=1}^m(S_i-\\bar S_m)(S_i-\\bar S_m)^T.\n   $$\n3. If $\\widehat\\Sigma_m$ is not positive definite, stop and return **unavailable**. Do not add a ridge term or otherwise modify the covariance.\n4. If $\\widehat\\Sigma_m$ is positive definite, take its unique Cholesky factor $L$ with positive diagonal by [[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]. Return the plug-in Gaussian density $(2\\pi)^{-d/2}\\det(\\widehat\\Sigma_m)^{-1/2}\\exp\\!\\left[-\\tfrac12(S(y)-\\bar S_m)^T\\widehat\\Sigma_m^{-1}(S(y)-\\bar S_m)\\right]$ from [[def-synthetic-likelihood]] and [[thm-nondegenerate-multivariate-normal-law-has-density]].\n\nThis algorithm evaluates one parameter value. It does not optimize over $\\theta$ and asserts no unbiasedness, convergence, consistency, posterior calibration, or optimizer property.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-two-simulation-summary-covariance-is-singular-in-two-dimensions",
+          "source_section": "Statement",
+          "quote": "For any two simulated vectors $z_1,z_2\\in\\mathbb R^2$, put $\\bar z=(z_1+z_2)/2$ and define the Bessel-corrected sample covariance\n$$\n\\widehat\\Sigma:=\\sum_{i=1}^2(z_i-\\bar z)(z_i-\\bar z)^T.\n$$\nThen $\\widehat\\Sigma$ is not positive definite.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-synthetic-likelihood-monte-carlo-estimation",
+          "source_section": "Definition",
+          "quote": "Assume AC only as required by the synthetic-likelihood definition and its Gaussian-density supplier ([[def-axiom-of-choice]] [[def-synthetic-likelihood]] [[thm-nondegenerate-multivariate-normal-law-has-density]]). IID means common law and mutual independence as in [[def-identically-distributed-and-iid-random-variables]]. This algorithm states the vector sample mean and covariance directly; covariance uses centered second moments as in [[def-moments-variance-and-covariance]].\n\n**Inputs:** A parameter $\\theta$, observed data $y$, a summary statistic $S:\\mathcal X\\to\\mathbb R^d$ satisfying the contract of [[def-synthetic-likelihood]], an integer simulation count $m\\ge2$, and a simulator that returns $m$ mutually independent observations with common law $P_\\theta$.\n\n**Output:** Either the finite-simulation plug-in synthetic-likelihood value at $S(y)$, or the explicit result **unavailable**.\n\n1. Simulate $Y_1,\\ldots,Y_m$ and compute $S_i:=S(Y_i)$. For each coordinate $j$, compute $\\bar S_{m,j}:=m^{-1}\\sum_{i=1}^m S_{i,j}$.\n2. Set $\\bar S_m:=(\\bar S_{m,1},\\ldots,\\bar S_{m,d})^T$ and compute\n   $$\n   \\widehat\\Sigma_m:=(m-1)^{-1}\\sum_{i=1}^m(S_i-\\bar S_m)(S_i-\\bar S_m)^T.\n   $$\n3. If $\\widehat\\Sigma_m$ is not positive definite, stop and return **unavailable**. Do not add a ridge term or otherwise modify the covariance.\n4. If $\\widehat\\Sigma_m$ is positive definite, take its unique Cholesky factor $L$ with positive diagonal by [[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]. Return the plug-in Gaussian density $(2\\pi)^{-d/2}\\det(\\widehat\\Sigma_m)^{-1/2}\\exp\\!\\left[-\\tfrac12(S(y)-\\bar S_m)^T\\widehat\\Sigma_m^{-1}(S(y)-\\bar S_m)\\right]$ from [[def-synthetic-likelihood]] and [[thm-nondegenerate-multivariate-normal-law-has-density]].\n\nThis algorithm evaluates one parameter value. It does not optimize over $\\theta$ and asserts no unbiasedness, convergence, consistency, posterior calibration, or optimizer property.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-synthetic-likelihood",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be a statistical experiment and let $S:\\mathcal X\\to\\mathbb R^d$ be a statistic, meaning a measurable map to its declared Borel target as in [[def-statistic-and-estimator]], where $d\\ge1$ is finite. Expectations are Lebesgue integrals under $P_\\theta$ as in [[def-expectation-of-a-nonnegative-or-integrable-random-variable]], and variances and covariances use centered second moments as in [[def-moments-variance-and-covariance]]. For every $\\theta\\in\\Theta$, assume\n$$\\mathbb E_\\theta\\!\\left[\\|S\\|_2^2\\right]<\\infty,\\qquad \\|x\\|_2^2:=\\sum_{j=1}^d x_j^2. $$\nThe **binding mean** and **summary covariance** are the pointwise-defined quantities\n$$b_j(\\theta):=\\mathbb E_\\theta[S_j],\\qquad \\Sigma_{jk}(\\theta):=\\mathbb E_\\theta\\!\\left[(S_j-b_j(\\theta))(S_k-b_k(\\theta))\\right]\\quad(1\\le j,k\\le d). $$\nEach covariance entry is finite since $2|uv|\\le u^2+v^2$ and the coordinates are square-integrable. The matrix is symmetric and positive semidefinite because for $a\\in\\mathbb R^d$,\n$$a^T\\Sigma(\\theta)a=\\mathbb E_\\theta\\!\\left[(a^T(S-b(\\theta)))^2\\right]\\ge0. $$\nNo measurability or continuity of $\\theta\\mapsto b(\\theta)$ or $\\theta\\mapsto\\Sigma(\\theta)$ follows from these pointwise definitions.\n\nAssume AC ([[def-axiom-of-choice]]). If $\\Sigma(\\theta)$ is positive definite, the **ideal Gaussian synthetic likelihood** for observed data $y\\in\\mathcal X$ is the Gaussian density evaluated at its summary, as supplied by [[def-multivariate-normal-law]] and [[thm-nondegenerate-multivariate-normal-law-has-density]],\n$$g_{\\mathrm{SL}}(y\\mid\\theta):=\\varphi_d\\!\\left(S(y);b(\\theta),\\Sigma(\\theta)\\right)=(2\\pi)^{-d/2}\\det(\\Sigma(\\theta))^{-1/2}\\exp\\!\\left[-\\tfrac12(S(y)-b(\\theta))^T\\Sigma(\\theta)^{-1}(S(y)-b(\\theta))\\right]. $$\nHere $\\varphi_d(\\,\\cdot\\,;m,\\Sigma)$ is the Lebesgue density of $N_d(m,\\Sigma)$. If $\\Sigma(\\theta)$ is singular, this positive-definite-covariance density is not defined by this item.\n\nLet $Q_\\theta:=P_\\theta\\circ S^{-1}$ be the pushforward law of the statistic under $P_\\theta$ as in [[def-law-or-distribution-of-a-random-element]]. For $m\\ge2$, let $S_1,\\ldots,S_m$ be IID simulated summaries with common law $Q_\\theta$, where IID means a common law and mutual independence as in [[def-identically-distributed-and-iid-random-variables]]. Set\n$$\\bar S_m:=m^{-1}\\sum_{i=1}^m S_i,\\qquad \\widehat\\Sigma_m:=(m-1)^{-1}\\sum_{i=1}^m(S_i-\\bar S_m)(S_i-\\bar S_m)^T. $$\nThe **finite-simulation plug-in synthetic likelihood** is the random quantity\n$$\\widehat g_{\\mathrm{SL},m}(y\\mid\\theta):=\\varphi_d(S(y);\\bar S_m,\\widehat\\Sigma_m). $$\nwhen $\\widehat\\Sigma_m$ is positive definite, and is **unavailable** otherwise. The finite plug-in quantity is a function of simulated summaries; it is not defined as an unbiased estimator of the ideal Gaussian density.\n\nThe exact experiment’s likelihood density, when the experiment is dominated as in [[def-dominated-statistical-experiment]] and given a pointwise density as in [[def-likelihood-density]], and this Gaussian summary approximation are different objects. The latter density-selection interface assumes AC and does not assert a common exceptional null set across an arbitrary parameter set; the present definition adds no parameter-indexed measurability. This definition makes no claim that the actual summary law is Gaussian, that $g_{\\mathrm{SL}}$ equals an exact likelihood, or that it yields posterior calibration, consistency, a Bernstein–von Mises theorem, or coverage. No optimizer or optimizer convergence property is included.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each coordinate has mean zero and variance one, while the cross moment is zero. Hence the population summary covariance is $I_2$, positive definite.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By independence and the four equally likely support points, $P(Z_1=Z_2)=4(1/4)^2=1/4$. On this event the sample covariance is the zero matrix.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The event $Z_1=(1,1)$ and $Z_2=(-1,-1)$ has probability $1/16$. On it, $\\bar Z_2=(0,0)$ and $\\widehat\\Sigma_2=\\begin{pmatrix}2&2\\\\2&2\\end{pmatrix}$, which differs from the zero matrix in step 1.2. Thus the sample covariance is a nonconstant random matrix.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F3], every two-simulation covariance here is not positive definite, so [F4] makes the finite plug-in synthetic likelihood unavailable for every outcome despite the positive-definite population covariance in step 1.1.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses two independent simulated summaries."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 1.2 gives zero sample covariance when the draws coincide."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes two simulations and dimension two."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification steps 1.1–3.1 compare positive-definite population covariance with singular finite covariance for every outcome."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite model has no interval parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Given and verification step 3.1 retain the algorithm’s AC interface; finite enumeration is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The four-corner model has population covariance I_2 and random sample covariances zero or a displayed rank-one matrix; every two-simulation output is unavailable. The forward-equivalence axis is therefore inapplicable."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_gate1_57_62",
+            "reason": "The four-corner model has population covariance I_2 and random sample covariances zero or a displayed rank-one matrix; every two-simulation output is unavailable. No reverse-equivalence conclusion is part of this claim."
+          }
+        }
+      ],
+      "axiom_use": "AC is inherited only through the ideal-density and algorithm interfaces; the finite enumeration itself uses no choice.",
+      "finite_checks": [
+        {
+          "id": "four-corner-two-replicate-enumeration",
+          "claim": "For two IID uniform draws from the four sign corners, compare the equal-draw event and Z1=(1,1), Z2=(-1,-1).",
+          "result": "The equal event has probability 1/4 and covariance 0; the specified opposite event has probability 1/16 and covariance [[2,2],[2,2]]. Every two-sample covariance is singular."
+        }
+      ]
+    }
+  }
+}

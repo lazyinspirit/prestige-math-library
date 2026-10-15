@@ -1,0 +1,312 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "46",
+  "pages": [
+    {
+      "page": "particle-smoothing-backward-simulation-and-rbpf",
+      "sources": [
+        {
+          "title": "Simo Särkkä, Bayesian Filtering and Smoothing (2013)",
+          "kind": "textbook",
+          "url": "https://users.aalto.fi/~ssarkka/pub/cup_book_online_20131111.pdf",
+          "locator": "Full 252-page author-hosted PDF retrieved. Inspected Chapter 7 §§7.3–7.5, PDF pp. 120–132; Chapter 11 §11.2, PDF pp. 167–169; §11.3, pp. 169–171; and §11.4, pp. 171–173, including SIS/SIR updates, Algorithm 7.6, Algorithm 11.2, the backward Bayes derivation, marginal recursion and the separate RBPS discussion.",
+          "contents": [
+            {
+              "name": "Chapter 7 §§7.3–7.4: weighted sequential importance sampling and SIR resampling procedure",
+              "disposition": "inline",
+              "item": "lem-bootstrap-particle-filter-weak-consistency",
+              "reason": "These sections establish the weighted-particle and resampling setup. Their propagation-weight-resample ordering differs from the current batch-44 resample-propagate interface; the local induction follows that actual interface and proves its own limit."
+            },
+            {
+              "name": "Chapter 7 §7.5: conditionally linear-Gaussian model factorization and Rao–Blackwellized filtering setup",
+              "disposition": "included",
+              "item": "def-conditionally-linear-gaussian-state-space-model",
+              "reason": "The source identifies the conditionally Gaussian state and latent nonlinear path factorization; the local definition states the exact hierarchical model and covariance hypotheses used by this pair."
+            },
+            {
+              "name": "Algorithm 7.6: conditional Kalman prediction, marginal observation likelihood, and Gaussian update per latent particle",
+              "disposition": "included",
+              "item": "alg-rao-blackwellized-particle-filter",
+              "reason": "This is the forward RBPF procedure. The local algorithm uses the bootstrap proposal specialization and explicitly retains finite-particle approximation limits."
+            },
+            {
+              "name": "Chapter 11 §11.2: backward particle probabilities derived from the smoothing conditional density",
+              "disposition": "included",
+              "item": "lem-smoothing-backward-kernel-bayes-factorization",
+              "reason": "The source's Bayes factorization is restated for declared reference measures, finite-positive predictive density, supplied fillers, and the general-kernel branch, then proved locally."
+            },
+            {
+              "name": "Algorithm 11.2: terminal filtering draw followed by backward particle-index simulation",
+              "disposition": "included",
+              "item": "alg-particle-backward-simulator",
+              "reason": "The local algorithm gives the exact normalized backward index weights and distinguishes them from recorded forward ancestors."
+            },
+            {
+              "name": "Chapter 11 §§11.2–11.3: fixed-path and all-marginal operation counts",
+              "disposition": "included",
+              "item": "thm-particle-backward-simulator-normalization-and-cost",
+              "reason": "The source's O(SNT) path and O(N²T) all-marginal counts are proved by explicit loop counts under a stated unit-cost density-evaluation assumption."
+            },
+            {
+              "name": "Chapter 11 §11.4: Rao–Blackwellized particle smoothing with conditional RTS passes",
+              "disposition": "out-of-scope",
+              "reason": "This is a separate smoothing algorithm that stores Gaussian histories and applies RTS smoothing; the controlling BCS-43 inventory assigns a forward Rao–Blackwellized particle filter, not this RBPS procedure."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://users.aalto.fi/~ssarkka/pub/cup_book_online_20131111.pdf",
+              "at": "2026-10-15T06:18:46.740Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-15T06:18:46.741Z",
+            "bytes": 4498379,
+            "sha256_16": "41c30a59b4e6d241",
+            "kind": "pdf",
+            "pages": 252
+          }
+        },
+        {
+          "title": "Arnaud Doucet and Adam M. Johansen, A Tutorial on Particle Filtering and Smoothing: Fifteen Years Later (2011)",
+          "kind": "survey",
+          "url": "https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF2011.pdf",
+          "locator": "Full 41-page PDF retrieved. Inspected §§3.4–3.5, PDF pp. 13–16; §2.3.1, pp. 7–8; §5.1, pp. 33–34; §5.2, pp. 34–36; and the start of §5.3, pp. 36–37, including multinomial resampling, the generic SMC order, backward formula, fixed-lag caveat and operation counts.",
+          "contents": [
+            {
+              "name": "§3.4: multinomial resampling as IID draws from normalized particle weights",
+              "disposition": "inline",
+              "item": "lem-bootstrap-particle-filter-weak-consistency",
+              "reason": "This supports the conditional resampling law used by the local concentration proof. The source's generic SMC implementation resamples after proposal weighting, while the current BCS-41 algorithm resamples before propagation; the local proof explicitly uses the latter order."
+            },
+            {
+              "name": "§3.5: generic sequential Monte Carlo procedure and its two weighted/resampled approximations",
+              "disposition": "inline",
+              "item": "lem-bootstrap-particle-filter-weak-consistency",
+              "reason": "The source gives the generic SIS/resampling decomposition but uses a different operation order. It is recorded as context only; the local result is proved for the actual resample-propagate bootstrap supplier."
+            },
+            {
+              "name": "§2.3.1: forward-backward factorization of the full smoothing path law",
+              "disposition": "included",
+              "item": "lem-smoothing-backward-kernel-bayes-factorization",
+              "reason": "The source supports the Markov backward factorization; the local proof supplies the density and regular-conditional-kernel versions and exact null-set boundaries."
+            },
+            {
+              "name": "§5.1: fixed-lag target p(x_t given observations only through t+L), with no generic fixed-L convergence to the full smoother",
+              "disposition": "included",
+              "item": "alg-fixed-lag-particle-smoother",
+              "reason": "This matches the algorithm's truncated observation horizon. The local theorem proves its exact-kernel target and the example computes a nonzero finite lag bias."
+            },
+            {
+              "name": "§5.2: particle approximation of the backward conditional and FFBSi path construction",
+              "disposition": "included",
+              "item": "alg-particle-backward-simulator",
+              "reason": "The local procedure preserves the source formula while declaring its finite-positive denominator domain and the kernel-only alternative."
+            },
+            {
+              "name": "§5.2: path-sampling versus all-marginal operation counts",
+              "disposition": "included",
+              "item": "thm-particle-backward-simulator-normalization-and-cost",
+              "reason": "The source reports linear-in-N cost for a fixed number of paths and quadratic-in-N cost for all marginal pairs; the local theorem proves both by counting evaluations."
+            },
+            {
+              "name": "§5.3: generalized two-filter formula and a distinct backward filtering algorithm",
+              "disposition": "out-of-scope",
+              "reason": "This is a separate two-filter particle method and is not among the controlling BCS-43 claims or item inventory."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF2011.pdf",
+              "at": "2026-10-15T06:18:50.856Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-15T06:18:50.856Z",
+            "bytes": 538618,
+            "sha256_16": "41e689e7ac463370",
+            "kind": "pdf",
+            "pages": 41
+          }
+        },
+        {
+          "title": "Fredrik Lindsten, Pete Bunch, Simo Särkkä, Thomas B. Schön, and Simon J. Godsill, Rao-Blackwellized Particle Smoothers for Conditionally Linear Gaussian Models (2016)",
+          "kind": "paper",
+          "url": "https://arxiv.org/pdf/1505.06357",
+          "locator": "Full 29-page arXiv PDF retrieved. Inspected §3.1, PDF pp. 4–5, and §3.2, pp. 5–6, including the particle-path approximation, conditional Gaussian mixture and RBPF likelihood-weight contract.",
+          "contents": [
+            {
+              "name": "§3.2: particle approximation of the nonlinear path marginal with one conditional Kalman Gaussian per particle",
+              "disposition": "included",
+              "item": "alg-rao-blackwellized-particle-filter",
+              "reason": "This independently supports the finite Gaussian-mixture representation; exact conditional moments are justified by the locally checked Kalman supplier rather than by the paper's informal presentation."
+            },
+            {
+              "name": "§3.2: conditional Gaussian moments along a fixed nonlinear path",
+              "disposition": "inline",
+              "item": "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+              "reason": "The article supplies context for the conditional Kalman components, while the local lemma proves the exact statement from the current Kalman-filter supplier and its stated innovation hypotheses."
+            },
+            {
+              "name": "§3.1: forward particle approximation of a state-space smoothing path law",
+              "disposition": "inline",
+              "item": "alg-particle-backward-simulator",
+              "reason": "The source motivates reducing path degeneracy by backward simulation; the exact backward kernel and finite-particle limits are separately proved or stated in the local carriers."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://arxiv.org/pdf/1505.06357",
+              "at": "2026-10-15T06:18:50.940Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-15T06:18:50.940Z",
+            "bytes": 695084,
+            "sha256_16": "d34024ab393542e4",
+            "kind": "pdf",
+            "pages": 29
+          }
+        },
+        {
+          "title": "Fredrik Lindsten and Thomas B. Schön, Backward Simulation Methods for Monte Carlo Statistical Inference (2013)",
+          "kind": "survey",
+          "url": "https://people.isy.liu.se/rt/schon/Publications/LindstenS2013.pdf",
+          "locator": "The full 143-page survey and §§3.1–3.2 were located by search, but the PDF body could not be retrieved. This source is dropped and none of its text is cited as read or used.",
+          "contents": [],
+          "source_resolution": {
+            "status": "dropped",
+            "decided_by": "step-1-scaffolder",
+            "confidence": "certain",
+            "reason": "The author-hosted URL failed DNS resolution on the initial request and five recovery retries across the original URL and official DiVA alternatives. Independent complete treatments by Särkkä and by Doucet–Johansen were retrieved, and all required local backward-kernel, consistency, fixed-lag, and operation-count arguments are supplied; this survey is not needed for any claim.",
+            "search_summary": "Search located the complete author-hosted survey, its §§3.1–3.2 headings, and an official DiVA record. The author host did not resolve; direct FULLTEXT URLs on both DiVA hostnames returned 404. The active Särkkä textbook and Doucet–Johansen survey cover backward simulation and fixed lag, and a retrieved Lindsten et al. article covers RBPF structure.",
+            "attempts": [
+              {
+                "url": "https://people.isy.liu.se/rt/schon/Publications/LindstenS2013.pdf",
+                "at": "2026-10-15; exact wall-clock time not captured",
+                "outcome": "Initial full-text fetch failed: DNS could not resolve people.isy.liu.se."
+              },
+              {
+                "url": "https://people.isy.liu.se/rt/schon/Publications/LindstenS2013.pdf",
+                "at": "2026-10-15; exact wall-clock time not captured",
+                "outcome": "Recovery retry 1 failed with the same DNS resolution error."
+              },
+              {
+                "url": "https://people.isy.liu.se/rt/schon/Publications/LindstenS2013.pdf",
+                "at": "2026-10-15; exact wall-clock time not captured",
+                "outcome": "Recovery retry 2 failed with the same DNS resolution error."
+              },
+              {
+                "url": "https://liu.diva-portal.org/smash/get/diva2:654562/FULLTEXT01.pdf",
+                "at": "2026-10-15; exact wall-clock time not captured",
+                "outcome": "Recovery retry 3 at the official DiVA record's direct FULLTEXT URL returned HTTP 404."
+              },
+              {
+                "url": "https://people.isy.liu.se/en/rt/schon/Publications/LindstenS2013.pdf",
+                "at": "2026-10-15; exact wall-clock time not captured",
+                "outcome": "Recovery retry 4 at the search-discovered author-site path failed DNS resolution."
+              },
+              {
+                "url": "https://www.diva-portal.org/smash/get/diva2:654562/FULLTEXT01.pdf",
+                "at": "2026-10-15; exact wall-clock time not captured",
+                "outcome": "Recovery retry 5 at the alternate official DiVA hostname returned HTTP 404; retrieval stopped after five recovery retries."
+              }
+            ],
+            "searches": [
+              {
+                "query": "Backward Simulation Methods for Monte Carlo Statistical Inference pdf Lindsten Schön",
+                "outcome": "Located the official author-hosted full PDF and the official DiVA publication record; the author host failed DNS and the DiVA full-text endpoint was tested."
+              },
+              {
+                "query": "site:liu.se Backward Simulation Methods Lindsten pdf",
+                "outcome": "Confirmed the author-hosted survey and its §3 backward-simulation contents; no alternate reachable full-text host was found."
+              },
+              {
+                "query": "LindstenS2013 FULLTEXT pdf",
+                "outcome": "Located the DiVA record diva2:654562; both direct FULLTEXT host variants returned 404."
+              }
+            ],
+            "alternatives": [
+              {
+                "item": "lem-smoothing-backward-kernel-bayes-factorization",
+                "argument": "The local proof forms the conditional pair law eta_t(dx) f_{t+1}(x'|x) lambda(dx'), applies the retrieved conditional-density theorem on finite-positive predictive-density fibers, cancels future Markov factors, and iterates the resulting backward RCDs to recover the smoothing path kernel. The no-density case uses a supplied backward conditional kernel.",
+                "deps": [
+                  "def-axiom-of-choice",
+                  "def-state-space-filtering-laws",
+                  "thm-state-space-filtering-and-smoothing-laws-exist",
+                  "thm-dominated-state-space-filtering-recursion",
+                  "thm-conditional-density-formula",
+                  "def-measure-kernel-and-probability-kernel",
+                  "thm-measurability-of-integration-against-a-kernel",
+                  "thm-dynkin-pi-lambda",
+                  "thm-finite-horizon-state-space-kernel-law-exists-uniquely"
+                ]
+              },
+              {
+                "item": "alg-particle-backward-simulator",
+                "argument": "The local algorithm specifies terminal filtering-weight sampling, derives each particle-index probability by normalizing w_t^i f(x'|x_t^i), rejects zero or infinite denominators, gives an exact supplied-kernel branch, and separately defines the all-marginal recursion.",
+                "deps": [
+                  "def-state-space-filtering-laws",
+                  "lem-smoothing-backward-kernel-bayes-factorization",
+                  "def-feynman-kac-path-targets-and-normalizers",
+                  "alg-sequential-importance-resampling"
+                ]
+              },
+              {
+                "item": "alg-fixed-lag-particle-smoother",
+                "argument": "The local algorithm runs backward only to s=min(t+L,T) and states its exact-kernel target as the conditional law given observations through s. The finite-state B example proves that this target can differ from the full smoother.",
+                "deps": [
+                  "def-state-space-filtering-laws",
+                  "alg-sequential-importance-resampling",
+                  "alg-particle-backward-simulator"
+                ]
+              },
+              {
+                "item": "thm-particle-smoothing-consistency-under-stated-conditions",
+                "argument": "The local proof first proves a bootstrap filter weak law under compact state spaces, Feller transitions, multinomial resampling, and bounded positive continuous potentials. It then proves uniform convergence of backward kernels by finite nets on compact spaces, composes finitely many kernels, and controls the S_N trajectory Monte Carlo error by the Chebyshev-Markov integral inequality.",
+                "deps": [
+                  "lem-smoothing-backward-kernel-bayes-factorization",
+                  "alg-particle-backward-simulator",
+                  "lem-bootstrap-particle-filter-weak-consistency",
+                  "def-weak-convergence-of-borel-probability-measures",
+                  "thm-chebyshev-markov-inequality-for-the-integral"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "source_search": [
+    {
+      "query": "Särkkä Bayesian Filtering and Smoothing 2013 PDF chapter 7 RBPF chapter 11 backward simulation",
+      "outcome": "Retrieved the complete 252-page author-hosted book and inspected §§7.5, 11.2–11.4."
+    },
+    {
+      "query": "Doucet Johansen Tutorial on Particle Filtering and Smoothing full PDF fixed lag FFBSi",
+      "outcome": "Retrieved the complete 41-page tutorial and inspected §§2.3.1, 5.1, 5.2, and the start of §5.3."
+    },
+    {
+      "query": "Lindsten Bunch Särkkä Schön Godsill Rao-Blackwellized particle smoothers arXiv PDF",
+      "outcome": "Retrieved the complete 29-page arXiv paper and inspected the particle path and RBPF sections §§3.1–3.2."
+    },
+    {
+      "query": "Backward Simulation Methods for Monte Carlo Statistical Inference pdf Lindsten Schön",
+      "outcome": "Located the full author-hosted survey and official DiVA record; retrieval failed after the initial attempt and five recovery retries, so the source was dropped with local alternative arguments."
+    },
+    {
+      "query": "site:liu.se Backward Simulation Methods Lindsten pdf",
+      "outcome": "Screened author-hosted and university alternatives; no reachable full-text endpoint replaced the successfully retrieved Särkkä and Doucet–Johansen treatments."
+    },
+    {
+      "query": "LindstenS2013 FULLTEXT pdf",
+      "outcome": "Located DiVA record diva2:654562; both official-host direct FULLTEXT URLs returned 404."
+    }
+  ],
+  "source_candidates": []
+}

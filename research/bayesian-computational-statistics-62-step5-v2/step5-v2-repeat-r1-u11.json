@@ -1,0 +1,122 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "11",
+  "input_sha256": "8a8734c8cd9afdc96618dbafe685e00ab296c41b484981fc79203392668dde20",
+  "decisions": [
+    {
+      "id": "ex-holder-density-rate-from-entropy-balance",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "cbf5a5be7de59a5a9d2a9dc1216f5428937ea47b0e02afc16e4cf563bf02803d",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The library defines real sequences on the natural numbers including 0 (items/def-sequence.md, Definition; items/def-natural-numbers.md, Definition). Since alpha>0, the negative power of 0 in the original rate formula is undefined. This is a nonfatal indexing omission: every entropy, local-mass and contraction calculation is eventual, and any positive initial term leaves those calculations unchanged. Repaired by setting epsilon_0=K and restricting the power formula to n>=1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-holder-density-rate-from-entropy-balance",
+      "disposition": "repaired",
+      "post_sha256": "d2831d1affdf2c1e21cc011c6674c9e2912b27e55b4dd07de288615d365ee1d4",
+      "review_context_sha256": "1a8b82f6d2b93b24dc917054c44530cc66a1dfb230e3b7f854b90e908032c071",
+      "reason": "Checked the full Example and Verification, its owning contract and both page interfaces, and actual dependency definitions/statements. The repaired sequence is positive everywhere, tends to zero, and satisfies n epsilon_n^2=K^2 n^(1/(2alpha+1))->infinity. K^(2+1/alpha)>=C_H supplies the same-metric entropy bound; the full sieve has zero tail and the assumed directional KL/log-square mass is exactly the remaining eventual hypothesis. Joint measurability supplies measurable Hellinger distance, the truth makes the sieve nonempty, and AC is explicitly inherited. Step 2.1 now applies the theorem eventually to the whole positive sequence; the contract mirrors that step and records the zero index. This verifies the repair locally and does not claim an independent judgment of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "bcs62-step5-repeat-r1-u11-holder-rate-zero-index",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T18:03:49.863861+00:00",
+        "class": "accuracy",
+        "subclass": "undefined-notation",
+        "severity": "nonfatal",
+        "location": "statement",
+        "subject": "ex-holder-density-rate-from-entropy-balance",
+        "caught_at_stage": "5-rejudge",
+        "caught_by_role": "judge-sol",
+        "disposition": "fixed",
+        "batch": "11",
+        "item_sha256": "c0244a7b9a9163e9285549d5b26879a2d0eb38b25e51265a03909c78ffeae531",
+        "evidence": [
+          {
+            "path": "items/ex-holder-density-rate-from-entropy-balance.md",
+            "location": "Example, rate-sequence definition; Verification step 2.1",
+            "note": "The library defines real sequences on the natural numbers including 0 (items/def-sequence.md, Definition; items/def-natural-numbers.md, Definition). Since alpha>0, the negative power of 0 in the original rate formula is undefined. This is a nonfatal indexing omission: every entropy, local-mass and contraction calculation is eventual, and any positive initial term leaves those calculations unchanged. Repaired by setting epsilon_0=K and restricting the power formula to n>=1."
+          }
+        ],
+        "repair": "Define epsilon_0=K>=1 and use the power formula only for n>=1; apply the contraction theorem eventually to this positive sequence. Synchronize the contract derivation and zero boundary.",
+        "post_sha256": "d2831d1affdf2c1e21cc011c6674c9e2912b27e55b4dd07de288615d365ee1d4"
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "none",
+      "reason": "No published supplier or consumer defect was discovered; the repair changes only this assigned draft Example and its Verification, with no Statement/Definition interface event."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "completed": [
+      "Reviewed the rejection-blind batch-11 Step-4 digest: no concerns or alerts were recorded.",
+      "Read the complete current contraction theorem proof; its conclusion uses only sufficiently large sample sizes.",
+      "No Statement or Definition section exists in this example, and none was added or changed. Per the task section-comparison rule, the Example/Verification edits do not trigger downstream propagation. No new prerequisite or published-item repair was needed.",
+      "Updated only the assigned contract derivation and zero-boundary evidence while holding step5-shared-write.lock; the focused strict contract check passed without errors or warnings.",
+      "Recorded review-contexts hashes immediately after the completed mathematical review."
+    ],
+    "validation": [
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-11.proof-contracts.json --items ex-holder-density-rate-from-entropy-balance --strict --json",
+        "exit_code": 0,
+        "result": "ok:true; assigned item checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-holder-density-rate-from-entropy-balance.md --json",
+        "exit_code": 0,
+        "result": "1 file, 1 proof checked, 0 failures; direct strategy pass."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-holder-density-rate-from-entropy-balance.md --json",
+        "exit_code": 0,
+        "result": "1 file checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-holder-density-rate-from-entropy-balance.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects."
+      },
+      {
+        "command": "Read-only native digest, itemHashGuard and statementHash comparison against repeat-1.json and the recorded review.",
+        "exit_code": 0,
+        "result": "Canonical input digest matches the exact task identity; final guard matches the recorded post_sha256; Statement/Definition section hash equals the frozen before hash."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Handoff to the engine for collection and any required independent rejudgment; no unresolved mathematical or local validation obligations.",
+    "source_evidence": {
+      "local_paths": [
+        "items/def-sequence.md, Definition",
+        "items/def-natural-numbers.md, Definition",
+        "items/thm-iid-posterior-contraction-by-entropy-and-prior-mass.md, Statement and complete Proof",
+        "items/lem-iid-sieve-entropy-produces-exponential-tests.md, Statement",
+        "items/def-kullback-leibler-divergence.md, Definition",
+        "items/def-axiom-of-choice.md, Definition",
+        "items/def-natural-logarithm.md, Definition",
+        "library/bayesian-computational-statistics/iid-posterior-contraction.md, Objective",
+        "library/bayesian-computational-statistics/iid-posterior-contraction-examples.md, Objective",
+        "research/bayesian-computational-statistics-62-batch-11.proof-contracts.json, assigned contract"
+      ],
+      "external_source_reading": "None needed or claimed; the indexing defect and entropy exponent balance are familiar elementary calculations."
+    }
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "2",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "def-euler-maruyama-step-process-and-continuous-interpolation",
+      "model": "gpt-6-luna",
+      "context_sha256": "0a33620c2025143ff23621866d7902a97544242e408903428eb3f73aab0cf25c",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Confirmed a dependency-citation applicability gap: the Definition allows every h=T/N>0 but its only justified-by theorem directly assumes h<=1. The original justification supplied no argument transferring that theorem to coarse meshes. Repaired in Remarks by normalizing time to [0,1], Brownian motion to W(Tu)/sqrt(T), drift to T b(Tu,x), and diffusion to sqrt(T) sigma(Tu,x). The normalized mesh 1/N<=1 and inherited coefficient and filtration assumptions make the theorem applicable with p=2. Its finite grid moments give finite original coefficient energy; the existing finite-step Ito lemma then supplies the original integral identity. No input or conclusion was weakened.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-euler-maruyama-step-process-and-continuous-interpolation",
+      "disposition": "repaired",
+      "post_sha256": "6f56889e1881daf56706a4aa7f1bfecf8d0e04e929bf9d9399dfa13a7e8d32b5",
+      "review_context_sha256": "aa81b72f8217c12ff58564cf2078535c6360f42a53a88eaf6ff6f79478d449ee",
+      "reason": "Authored and checked the repair: normalized Brownian increments are independent of F_(Tu) with covariance (v-u)I_m; deterministic scaling preserves Borel coefficients, global Lipschitzness, linear growth and half-Holder time modulus with finite T-dependent constants. Substitution identifies normalized grid values with Y_k and interpolation with Y_(Tu). Initial L2 data allow p=2, so every original coefficient step has finite L2 energy and the existing finite-sum lemma applies coordinatewise on one common measurable probability-one event. Adaptedness and continuity transfer under deterministic time change. No completeness or additional choice is assumed. This is repair verification, not independent review of the new text.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "path": "research/defect-ledger.jsonl",
+      "action": "append",
+      "entry": {
+        "defect_id": "bcs62-step5-initial-r1-u2-em-interpolation-coarse-grid-justification",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-16",
+        "class": "accuracy",
+        "subclass": "citation-inflated",
+        "severity": "fatal",
+        "location": "definition",
+        "subject": "def-euler-maruyama-step-process-and-continuous-interpolation",
+        "batch": "2",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "repair_cost": "repair+rejudge",
+        "subclass_note": "Confirmed a dependency-citation applicability gap: the Definition allows every h=T/N>0 but its only justified-by theorem directly assumes h<=1. The original justification supplied no argument transferring that theorem to coarse meshes. Repaired in Remarks by normalizing time to [0,1], Brownian motion to W(Tu)/sqrt(T), drift to T b(Tu,x), and diffusion to sqrt(T) sigma(Tu,x). The normalized mesh 1/N<=1 and inherited coefficient and filtration assumptions make the theorem applicable with p=2. Its finite grid moments give finite original coefficient energy; the existing finite-step Ito lemma then supplies the original integral identity. No input or conclusion was weakened.",
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u2.json",
+            "note": "Exact rejected tuple and repaired review hashes; time-rescaling argument is in the item Remarks."
+          },
+          {
+            "path": "items/def-euler-maruyama-step-process-and-continuous-interpolation.md"
+          },
+          {
+            "path": "research/bayesian-computational-statistics-62-batch-2.proof-contracts.json"
+          }
+        ],
+        "adjudication_ref": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u2.json",
+            "id": "def-euler-maruyama-step-process-and-continuous-interpolation",
+            "model": "gpt-6-luna",
+            "context_sha256": "0a33620c2025143ff23621866d7902a97544242e408903428eb3f73aab0cf25c"
+          }
+        ]
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "changed_paths": [
+      "items/def-euler-maruyama-step-process-and-continuous-interpolation.md",
+      "research/bayesian-computational-statistics-62-batch-2.proof-contracts.json"
+    ],
+    "claim_and_conventions": "All original grids T>0,N>=1,h=T/N are retained. State/noise dimensions remain finite; filtration-relative Brownian independence, initial L2 and the algorithm coefficient contract are unchanged. The local repair establishes well-definedness on all grids; the cited theorem retains its direct original-grid restriction h<=1 for its quantitative estimates.",
+    "source_evidence": "Read current alg-euler-maruyama, the complete uniform-moment theorem and its proof, and the complete square-integrable predictable finite-step Ito lemma and its proof. The time-change calculation is familiar elementary Brownian scaling and finite-dimensional algebra; no external source was consulted or claimed.",
+    "dependencies": [
+      "alg-euler-maruyama",
+      "thm-euler-maruyama-uniform-moment-and-increment-bounds",
+      "lem-square-integrable-predictable-step-ito-integral-is-finite-sum"
+    ],
+    "interface_comparison": {
+      "before_statement_sha256": "2da64bb9b2584598c5b33fa1bc8887c816aeb2e87bd1bda358d2ae5ffa36363b",
+      "after_statement_sha256": "2da64bb9b2584598c5b33fa1bc8887c816aeb2e87bd1bda358d2ae5ffa36363b",
+      "definition_unchanged": true,
+      "explanation": "Only Remarks were added to the item. Direct comparison against the frozen Statement/Definition hash gives equality; no new prerequisites or metadata edges were introduced. Consumer propagation is therefore not triggered."
+    },
+    "contract": "Under the shared-write lock, reread the current owning contract and changed only this item nonempty-choice evidence and appended a repair explanation to its risk note; ran the focused strict contract check before releasing the lock. Existing independent review notes were preserved.",
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-2.proof-contracts.json --strict --items def-euler-maruyama-step-process-and-continuous-interpolation --json",
+        "exit_code": 0,
+        "result": "ok:true; assigned item checked; errors:[]; warnings:[]"
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run bayesian-computational-statistics-62 --items def-euler-maruyama-step-process-and-continuous-interpolation",
+        "exit_code": 0,
+        "result": "Captured post_sha256 and review_context_sha256 immediately after the item review and contract update, before any other supplier edit."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-euler-maruyama-step-process-and-continuous-interpolation.md --json",
+        "exit_code": 0,
+        "result": "1 file; 0 proof sections checked; 0 failures; definition status not-applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-euler-maruyama-step-process-and-continuous-interpolation.md",
+        "exit_code": 0,
+        "result": "1 file; YAML and all math spans parse; no delimiter or wikilink-in-math defects."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-euler-maruyama-step-process-and-continuous-interpolation.md",
+        "exit_code": 0,
+        "result": "1 item, 0 numbered steps, 0 defects; run once after the final item edit."
+      }
+    ],
+    "published_ledger": "No proposed update to research/published-consumer-supplier-ledger.md: this repair changes no Statement/Definition and discovers no defective published use. No outside consumer was edited or adjudicated.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and independent current-content rejudgment remain engine duties; this report makes no certification or closure claim."
+  }
+}

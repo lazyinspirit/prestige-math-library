@@ -1,0 +1,286 @@
+{
+  "group": "i",
+  "batches": ["30"],
+  "pages_read": [
+    "rejection-sampling",
+    "rejection-sampling-examples"
+  ],
+  "items_read": [
+    "alg-rejection-sampling",
+    "thm-counting-measure-integral-is-nonnegative-series",
+    "thm-rejection-sampling-has-target-acceptance-law",
+    "thm-rejection-sampling-expected-proposal-count-under-finite-envelope",
+    "ex-rejection-sampling-tail-mismatch-no-finite-envelope",
+    "ex-rejection-sampling-bounded-likelihood-ratio",
+    "ex-rejection-sampling-unnormalized-finite-measures"
+  ],
+  "conventions": [
+    {
+      "convention": "The reference measure is arbitrary; target and proposal shapes have strictly positive finite normalizers, and the finite positive envelope constant dominates the target shape almost everywhere.",
+      "fixed_by": "alg-rejection-sampling",
+      "matters_for": [
+        "thm-rejection-sampling-has-target-acceptance-law",
+        "thm-rejection-sampling-expected-proposal-count-under-finite-envelope",
+        "ex-rejection-sampling-tail-mismatch-no-finite-envelope",
+        "ex-rejection-sampling-bounded-likelihood-ratio",
+        "ex-rejection-sampling-unnormalized-finite-measures"
+      ]
+    },
+    {
+      "convention": "Inputs are ideal independent proposal draws with normalized law G and independent uniform draws on (0,1); the proposal-uniform pairs are mutually IID. The acceptance function is zero at zero proposal density and otherwise is the density ratio clipped at one.",
+      "fixed_by": "alg-rejection-sampling",
+      "matters_for": [
+        "thm-rejection-sampling-has-target-acceptance-law",
+        "thm-rejection-sampling-expected-proposal-count-under-finite-envelope",
+        "ex-rejection-sampling-bounded-likelihood-ratio",
+        "ex-rejection-sampling-unnormalized-finite-measures"
+      ]
+    },
+    {
+      "convention": "Extended-valued shapes in the acceptance theorem are replaced by finite measurable representatives on a common measurable null exception; this leaves both density measures and the output law unchanged.",
+      "fixed_by": "thm-rejection-sampling-has-target-acceptance-law",
+      "matters_for": [
+        "thm-rejection-sampling-expected-proposal-count-under-finite-envelope"
+      ]
+    },
+    {
+      "convention": "N counts proposals through and including the first accepted proposal, so its geometric distribution starts at one. The geometric-series convention includes q^0=1 when q=0.",
+      "fixed_by": "thm-rejection-sampling-expected-proposal-count-under-finite-envelope",
+      "matters_for": [
+        "ex-rejection-sampling-bounded-likelihood-ratio",
+        "ex-rejection-sampling-unnormalized-finite-measures"
+      ]
+    },
+    {
+      "convention": "The counting-measure theorem uses N={0,1,2,...}, the full power-set sigma-algebra, and the nonnegative extended series starting at zero, including infinite sums.",
+      "fixed_by": "thm-counting-measure-integral-is-nonnegative-series",
+      "matters_for": [
+        "ex-rejection-sampling-tail-mismatch-no-finite-envelope"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-rejection-sampling",
+      "statement": "For i=1,2,..., draw (Y_i,U_i). If U_i ≤ a(Y_i), return Y_i and stop; otherwise continue to the next pair. Here a(y)=0 when the proposal shape is zero and otherwise is min{1, target shape/(c times proposal shape)}.",
+      "used_by": [
+        "thm-rejection-sampling-has-target-acceptance-law",
+        "thm-rejection-sampling-expected-proposal-count-under-finite-envelope",
+        "ex-rejection-sampling-tail-mismatch-no-finite-envelope",
+        "ex-rejection-sampling-bounded-likelihood-ratio",
+        "ex-rejection-sampling-unnormalized-finite-measures"
+      ]
+    },
+    {
+      "id": "thm-rejection-sampling-has-target-acceptance-law",
+      "statement": "For measurable nonnegative shapes on an arbitrary measure space with 0<Z_f,Z_g<∞ and a finite c>0 satisfying target shape ≤ c times proposal shape almost everywhere, rejection sampling with proposal law G terminates almost surely, has per-proposal acceptance probability p=Z_f/(cZ_g), and returns a law assigning every measurable A the mass (1/Z_f) times the integral of the target shape over A.",
+      "used_by": [
+        "thm-rejection-sampling-expected-proposal-count-under-finite-envelope",
+        "ex-rejection-sampling-bounded-likelihood-ratio",
+        "ex-rejection-sampling-unnormalized-finite-measures"
+      ]
+    },
+    {
+      "id": "thm-rejection-sampling-expected-proposal-count-under-finite-envelope",
+      "statement": "In the acceptance-law theorem's setup, with p=Z_f/(cZ_g) and q=1-p, P(N=k)=q^(k-1)p for every integer k≥1 and E[N]=1/p=cZ_g/Z_f. For normalized target and proposal densities, E[N]=c.",
+      "used_by": [
+        "ex-rejection-sampling-bounded-likelihood-ratio",
+        "ex-rejection-sampling-unnormalized-finite-measures"
+      ]
+    },
+    {
+      "id": "thm-counting-measure-integral-is-nonnegative-series",
+      "statement": "For every measurable f:N→[0,+∞], where N={0,1,2,...} has counting measure on its power set, the integral of f equals the nonnegative extended series sum from n=0 to infinity of f(n).",
+      "used_by": [
+        "ex-rejection-sampling-tail-mismatch-no-finite-envelope"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Borel measurability of the reciprocal extension in the acceptance function.",
+      "opened": true
+    },
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Mutual independence and common laws of trial pairs and acceptance events.",
+      "opened": true
+    },
+    {
+      "id": "def-law-or-distribution-of-a-random-element",
+      "used_for": "Proposal laws, null-set avoidance, and the output-law calculation.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-with-density",
+      "used_for": "Target and proposal measures defined by integrating their densities.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Normalization of positive finite density measures to probability laws.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Measurable trial-pair space and acceptance region.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Density normalization and integration of the envelope inequality.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurability of normalized densities, the acceptance function, and null-set modifications.",
+      "opened": true
+    },
+    {
+      "id": "thm-composition-with-borel-functions-preserves-measurability",
+      "used_for": "Composition with the reciprocal extension and measurable coordinate maps.",
+      "opened": true
+    },
+    {
+      "id": "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+      "used_for": "Measurability of the reciprocal extension and acceptance threshold region.",
+      "opened": true
+    },
+    {
+      "id": "cor-cauchy-reals-lub-complete",
+      "used_for": "Completeness of the real field in the counting-integral and tail-mismatch arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-counting-measure",
+      "used_for": "Singleton masses, finite-space sums, and absence of nonempty counting-null sets.",
+      "opened": true
+    },
+    {
+      "id": "def-integral-of-a-nonnegative-simple-function",
+      "used_for": "Finite-support integrals, finite-space enumeration, and zero integrals on null supports.",
+      "opened": true
+    },
+    {
+      "id": "def-nonnegative-extended-series",
+      "used_for": "The counting-integral theorem's series as a supremum of finite partial sums.",
+      "opened": true
+    },
+    {
+      "id": "def-nonnegative-lebesgue-integral",
+      "used_for": "Simple-minorant integral construction and the null-support argument.",
+      "opened": true
+    },
+    {
+      "id": "def-nonnegative-simple-measurable-function",
+      "used_for": "Finite-range capped truncations in the counting-integral proof.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-naturals-positive",
+      "used_for": "Order and positivity of canonical naturals in truncation and tail estimates.",
+      "opened": true
+    },
+    {
+      "id": "prop-counting-measure-is-a-measure",
+      "used_for": "Counting measure as a valid reference measure in the theorem and examples.",
+      "opened": true
+    },
+    {
+      "id": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+      "used_for": "Evaluation of finite-support and finite-space nonnegative integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Counting-integral capped truncations and expectation of the proposal-count truncations.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-archimedean",
+      "used_for": "Unbounded canonical naturals, eventual removal of finite caps, and the unbounded density ratio.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-ordered-field",
+      "used_for": "Ordered-field arithmetic in the counting-integral and tail-mismatch proofs.",
+      "opened": true
+    },
+    {
+      "id": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+      "used_for": "Null-set decomposition of density integrals and finite indicator sums for E[N].",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-nonnegative-integral-implies-finite-almost-everywhere",
+      "used_for": "Replacing extended-valued shapes by finite representatives on a measurable null exception.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Indicator probabilities and the extended expectation of the proposal count.",
+      "opened": true
+    },
+    {
+      "id": "def-measure",
+      "used_for": "Countable additivity over first-acceptance events and null proposal-hit events.",
+      "opened": true
+    },
+    {
+      "id": "lem-geometric-sequence-null",
+      "used_for": "Almost-sure termination from P(N>m)=q^m with 0≤q<1.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-expectation",
+      "used_for": "Expressing the acceptance-event indicator expectation using the joint law.",
+      "opened": true
+    },
+    {
+      "id": "thm-geometric-series",
+      "used_for": "Summing first-acceptance probabilities and proposal-count tails, including q=0.",
+      "opened": true
+    },
+    {
+      "id": "thm-independent-random-elements-have-product-joint-law",
+      "used_for": "The independent proposal-uniform pair has joint law G⊗Λ.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-against-a-density",
+      "used_for": "Converting the acceptance-function integral against G to the target subdensity integral.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Integrating the acceptance indicator over G⊗Λ; both factors are probability measures, so its sigma-finiteness hypotheses hold without sigma-finiteness of the reference measure.",
+      "opened": true
+    },
+    {
+      "id": "cor-archimedean-reciprocal",
+      "used_for": "Vanishing telescoping remainders in the tail-mismatch example.",
+      "opened": true
+    },
+    {
+      "id": "def-real-limit",
+      "used_for": "The rational-tolerance limit convention used to normalize the tail-mismatch masses.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-inverse-positive",
+      "used_for": "Reciprocal bounds for the telescoping remainders.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "rejection-sampling",
+      "to": "iid-monte-carlo-integration-and-error",
+      "faithful": true,
+      "note": "Read both page texts. The rejection-sampling page explicitly identifies this as an ordering dependency and states its exact IID draw interface locally. It imports no moment, consistency, standard-error, or CLT conclusion from the prerequisite page, and the prerequisite page makes no reverse rejection-sampling claim."
+    }
+  ]
+}

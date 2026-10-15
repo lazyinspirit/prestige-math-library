@@ -1,0 +1,670 @@
+{
+  "version": 1,
+  "kind": "owner-sip-intermediate-proof-proposal",
+  "run": "bayesian-computational-statistics-62",
+  "scope": [
+    "lem-finite-moment-moving-window-increments",
+    "lem-brownian-poisson-independent-clock-composition"
+  ],
+  "item_paths": [
+    "items/lem-finite-moment-moving-window-increments.md",
+    "items/lem-brownian-poisson-independent-clock-composition.md"
+  ],
+  "home_page": "mcmc-clt-and-monte-carlo-standard-error",
+  "manifest_rows": [
+    {
+      "id": "lem-finite-moment-moving-window-increments",
+      "kind": "lemma",
+      "title": "Finite moments control increments over short moving windows",
+      "deps": [
+        "def-identically-distributed-and-iid-random-variables",
+        "def-independent-random-elements",
+        "def-moments-variance-and-covariance",
+        "cor-markov-inequality-for-random-variables",
+        "thm-bernstein-independent-sums",
+        "cor-first-borel-cantelli-lemma-for-events"
+      ]
+    },
+    {
+      "id": "lem-brownian-poisson-independent-clock-composition",
+      "kind": "lemma",
+      "title": "Independent Brownian motion straightens a Poisson clock",
+      "deps": [
+        "def-axiom-of-choice",
+        "def-brownian-motion",
+        "def-scalar-poisson-count-law",
+        "def-real-exponential-function-and-e",
+        "thm-exponential-addition-formula",
+        "lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments",
+        "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+        "thm-existence-of-continuous-brownian-motion",
+        "thm-countable-product-of-probability-spaces",
+        "cor-coordinate-random-elements-on-a-countable-product-are-independent",
+        "cor-law-of-the-brownian-maximum",
+        "lem-two-sided-mills-bounds-for-standard-normal-tail",
+        "cor-markov-inequality-for-random-variables",
+        "cor-first-borel-cantelli-lemma-for-events",
+        "thm-mean-value-inequality-for-total-derivatives",
+        "thm-dynkin-pi-lambda"
+      ]
+    }
+  ],
+  "proof_contracts": {
+    "version": 1,
+    "scope": [
+      "lem-finite-moment-moving-window-increments",
+      "lem-brownian-poisson-independent-clock-composition"
+    ],
+    "contracts": {
+      "lem-finite-moment-moving-window-increments": {
+        "citations": [
+          {
+            "fact": "F1",
+            "source": "thm-bernstein-independent-sums",
+            "source_section": "Statement",
+            "quote": "Let $n\\ge1$ and let $X_1,\\ldots,X_n$ be independent centered square-integrable real random variables. Suppose $b\\ge0$ is finite and $|X_i|\\le b$ almost surely for each $i$. Put $v=\\sum_{i=1}^n\\operatorname{Var}(X_i)$. For $t>0$, if $v>0$ then\n$$\\mathbb P\\left(\\left|\\sum_{i=1}^nX_i\\right|\\ge t\\right)\\le 2\\exp\\!\\left(-\\frac{t^2}{2(v+bt/3)}\\right),$$\nand if $v=0$ then this probability is $0$.",
+            "uses": [
+              "2.1"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "cor-markov-inequality-for-random-variables",
+            "source_section": "Statement",
+            "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+            "uses": [
+              "1.1",
+              "1.2"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "cor-first-borel-cantelli-lemma-for-events",
+            "source_section": "Statement",
+            "quote": "Let $(A_n)_{n\\in\\mathbb N}$ be events in a probability space. If\n$$\\sum_{n=0}^\\infty \\mathbb P(A_n)<+\\infty,$$\nthen\n$$\\mathbb P(A_n\\ \\mathrm{i.o.})=0.$$\n\nNo independence hypothesis is needed.",
+            "uses": [
+              "1.2",
+              "2.1",
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "def-independent-random-elements",
+            "source_section": "Definition",
+            "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+            "uses": [
+              "1.2",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "def-identically-distributed-and-iid-random-variables",
+            "source_section": "Definition",
+            "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+            "uses": [
+              "1.2",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F5",
+            "source": "def-moments-variance-and-covariance",
+            "source_section": "Definition",
+            "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+            "uses": [
+              "1.1",
+              "1.2"
+            ]
+          }
+        ],
+        "derivations": [
+          {
+            "id": "lem-finite-moment-moving-window-increments-step-1-1",
+            "claim": "First assume independence and fix positive integers $A$ and $d$ with $d\\ge0$. Choose $a$ strictly between $p$ and $q$, put $M_q=\\mathbb E|Z_1|^q$, and, for dyadic integers $N=2^m\\ge2$, put $b_N=N^{1/a}$, $\\ell_N=\\log N$, and $r_N=\\lceil A N^{1/p}\\ell_N^d\\rceil$. The second moment $v=\\mathbb E Z_1^2$ is finite since $|z|^2\\le1+|z|^q$. If $v=0$, the nonnegative variable $Z_1^2$ has zero expectation and is zero almost surely: for each integer $h\\ge1$, [F2] bounds $\\mathbb P(Z_1^2\\ge1/h)$ by zero, and the union of these events is $\\{Z_1\\ne0\\}$. Equality of marginal laws and countable subadditivity make every $Z_k$ zero simultaneously almost surely. This proves the assertion in this case. Henceforth assume $v>0$.",
+            "step": "1.1",
+            "inputs": [
+              "given",
+              "F2",
+              "F5",
+              "choose"
+            ]
+          },
+          {
+            "id": "lem-finite-moment-moving-window-increments-step-1-2",
+            "claim": "The union bound and [F2] give $\\mathbb P(\\max_{k\\le N}|Z_k|>b_N)\\le M_qN^{1-q/a}$. Since $1-q/a<0$, these probabilities are summable over dyadic $N$. By [F3], eventually no one of the first $N$ variables is truncated at level $b_N$, almost surely along the dyadic horizons. Define $m_N=\\mathbb E[Z_1\\mathbf1_{\\{|Z_1|\\le b_N\\}}]$ and $V_{N,k}=Z_k\\mathbf1_{\\{|Z_k|\\le b_N\\}}-m_N$. For each fixed $N$, these variables are independent and centered, $|V_{N,k}|\\le2b_N$, and $\\operatorname{Var}(V_{N,k})\\le v$. Moreover centering of $Z_1$ gives $|m_N|\\le\\mathbb E[|Z_1|\\mathbf1_{\\{|Z_1|>b_N\\}}]\\le M_qb_N^{1-q}$.",
+            "step": "1.2",
+            "inputs": [
+              "given",
+              "F2",
+              "F3",
+              "F4",
+              "F5",
+              "step 1.1"
+            ]
+          },
+          {
+            "id": "lem-finite-moment-moving-window-increments-step-2-1",
+            "claim": "For an interval of at most $r_N$ indices, [F1] bounds the tail of its $V_{N,k}$ sum by $2\\exp(-x^2/[2(vr_N+2b_Nx/3)])$; if its actual variance is zero the bound still holds because the tail is zero. Set $x_N=C(\\sqrt{r_N\\ell_N}+b_N\\ell_N)$, where $C\\ge\\max\\{\\sqrt{20v},40/3,1\\}$. Then $2vr_N\\le x_N^2/(10\\ell_N)$ and $4b_Nx_N/3\\le x_N^2/(10\\ell_N)$, so the bound is at most $2e^{-5\\ell_N}=2N^{-5}$. There are at most $N^2$ intervals with integer endpoints in $[0,N]$. The probability that any interval of length at most $r_N$ violates the bound $x_N$ is therefore at most $2N^{-3}$, summable over dyadic $N$. By [F3], all such interval sums are bounded by $x_N$ eventually almost surely.",
+            "step": "2.1",
+            "inputs": [
+              "F1",
+              "F3",
+              "step 1.1",
+              "step 1.2",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-finite-moment-moving-window-increments-step-2-2",
+            "claim": "On the eventual no-truncation event from step 1.2, every original interval sum differs from its centered truncated sum by at most $r_N|m_N|$. Now $\\sqrt{r_N\\ell_N}=o(N^{1/p})$ because $1/(2p)<1/p$, and $b_N\\ell_N=o(N^{1/p})$ because $1/a<1/p$. Also $r_N|m_N|\\le M_qr_NN^{(1-q)/a}=o(N^{1/p})$. Thus step 2.1 proves the claimed little-o bound at dyadic horizons. These comparisons follow by dividing by $N^{1/p}$: in each expression a strictly negative power of $N$ multiplies a fixed power of $\\log N$, which tends to zero.",
+            "step": "2.2",
+            "inputs": [
+              "step 1.1",
+              "step 1.2",
+              "step 2.1",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-finite-moment-moving-window-increments-step-3-1",
+            "claim": "For $2^{m-1}<n\\le2^m=N$, monotonicity of $n^{1/p}(\\log n)^d$ gives $r_n\\le r_N$, so every admissible interval for $n$ is included among those for $N$. Since $N^{1/p}\\le2^{1/p}n^{1/p}$, step 2.2 proves the assertion at every horizon $n$. Intersect the probability-one events obtained for the countably many integer pairs $A\\ge1,d\\ge0$. For arbitrary real $A>0,d\\ge0$, choose integers $A'\\ge A$ and $d'\\ge d$; when $n\\ge3$, $\\log n\\ge1$ makes the real-parameter window no longer than the integer-parameter window. The conclusion therefore holds on one event for every $A,d$ in the Statement.",
+            "step": "3.1",
+            "inputs": [
+              "F3",
+              "step 2.2",
+              "choose"
+            ]
+          },
+          {
+            "id": "lem-finite-moment-moving-window-increments-step-4-1",
+            "claim": "Under one-dependence, each parity subsequence is independent. Indeed, the sigma-algebra of any finite initial collection of even variables is contained in $\\sigma(Z_1,\\ldots,Z_{2h})$, which is independent of $Z_{2h+2}$ by the given separation; induction on the number of factors proves the finite rectangle factorization for all even variables. The identical argument applies to the odd variables. Both subsequences retain the common centered marginal and its $q$th moment. Apply step 3.1 to each subsequence and intersect their two probability-one events. An interval of at most $r_n$ original indices splits into one contiguous interval of each parity, each with at most $r_n$ terms and with its subsequence endpoints at most $n$. Each component is $o(n^{1/p})$ by the independent result, uniformly over the original intervals; their sum has the same bound. No independence between the parity subsequences is asserted or needed. All windows are nonempty by $i<j$; empty component windows contribute zero. This completes both dependence cases, including zero variance and every permitted window parameter.",
+            "step": "4.1",
+            "inputs": [
+              "given",
+              "F4",
+              "step 1.1",
+              "step 3.1",
+              "algebra"
+            ]
+          }
+        ],
+        "routine_steps": [],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "checked",
+            "evidence": "The maximum uses i<j; empty parity-component intervals are assigned zero in step 4.1."
+          },
+          {
+            "case": "zero",
+            "status": "checked",
+            "evidence": "Step 1.1 proves the zero-second-moment sequence is zero simultaneously almost surely."
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "The Bernstein bound covers single-term intervals; r_n is a positive integer and n≥2."
+          },
+          {
+            "case": "degenerate",
+            "status": "checked",
+            "evidence": "Independent parity subsequences need not be independent of each other; step 4.1 uses only the triangle inequality between them."
+          },
+          {
+            "case": "endpoints",
+            "status": "checked",
+            "evidence": "The strict inequalities q>p>2 and choice p<a<q give every negative polynomial exponent in steps 1.2 and 2.2; n≥2 avoids log zero."
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "checked",
+            "evidence": "The open interval (p,q) contains a=(p+q)/2; integer ceilings supply the countable window parameters in step 3.1."
+          },
+          {
+            "case": "iff-forward",
+            "status": "not_applicable",
+            "reason": "The statement is a one-way implication, not a biconditional."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "not_applicable",
+            "reason": "No converse or necessity of the moment condition is asserted."
+          }
+        ],
+        "finite_checks": [],
+        "finite_smoke": [],
+        "risk_review": {
+          "status": "pass",
+          "notes": "All six steps have local derivations. The only concentration supplier is proved local Bernstein; dyadic truncation, parity independence, and countable simultaneous window parameters are explicit. Calendar-time remarks remain conditional on supplied actual cycles."
+        }
+      },
+      "lem-brownian-poisson-independent-clock-composition": {
+        "citations": [
+          {
+            "fact": "A1",
+            "source": "def-axiom-of-choice",
+            "source_section": "Definition",
+            "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+            "uses": [
+              "1.1",
+              "6.1"
+            ]
+          },
+          {
+            "fact": "F1",
+            "source": "def-brownian-motion",
+            "source_section": "Definition",
+            "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A real process\n$B=(B_t)_{t\\ge0}$ is a **standard Brownian motion** if:\n\n1. $B_0=0$ almost surely;\n2. for every finite list $0=t_0<t_1<\\cdots<t_n$, the increments\n   $B_{t_j}-B_{t_{j-1}}$ are mutually independent and have laws\n   $N(0,t_j-t_{j-1})$; and\n3. there is one measurable event $A$ with $P(A)=1$ such that\n   $t\\mapsto B_t(\\omega)$ is continuous on $[0,\\infty)$ for every\n   $\\omega\\in A$.\n\nBy\n[[lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments]],\nthe first two clauses are equivalent to saying that $B$ is a centered Gaussian\nprocess with covariance $\\min(s,t)$. Clause 3 is additional: it cannot be\nrecovered from finite-dimensional distributions alone.\n\nNo filtration is part of this definition. In particular, no completed or\nright-continuous filtration and no Markov or martingale assertion is silently\nimposed. Modifications and indistinguishability retain the distinct meanings in\n[[def-law-modification-and-indistinguishability-of-processes]]. The cases\n$n=0$, $t_1=0$, and zero-length increments are respectively vacuous or already\ncovered by $B_0=0$; the increment list itself is strictly increasing.\n\nChoice is declared because the normal-law and Gaussian/increment-equivalence\ninterfaces construct and identify normal laws under AC. The continuity clause\nselects no path and makes no additional use of choice.",
+            "uses": [
+              "1.2",
+              "2.1",
+              "2.2",
+              "2.3",
+              "3.3",
+              "5.2",
+              "6.1"
+            ]
+          },
+          {
+            "fact": "F1",
+            "source": "lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments",
+            "source_section": "Statement",
+            "quote": "Assume the Axiom of Choice. Let $X=(X_t)_{t\\ge0}$ be a real process with\n$X_0=0$ almost surely. The following are equivalent:\n\n1. $X$ is a centered Gaussian process with\n   $\\operatorname{Cov}(X_s,X_t)=\\min(s,t)$ for all $s,t\\ge0$.\n2. For every finite list $0=t_0<t_1<\\cdots<t_n$, the increments\n   $X_{t_j}-X_{t_{j-1}}$, $1\\le j\\le n$, are mutually independent and have\n   laws $N(0,t_j-t_{j-1})$.",
+            "uses": [
+              "1.2",
+              "2.1",
+              "2.2",
+              "2.3",
+              "3.3",
+              "5.2",
+              "6.1"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+            "source_section": "Statement",
+            "quote": "Assume the Axiom of Choice. Let $(U,V)$ be a jointly multivariate-normal real\nvector with finite-dimensional blocks $U\\in\\mathbb R^p$ and\n$V\\in\\mathbb R^q$, where $p,q\\ge1$. If $\\operatorname{Cov}(U_i,V_j)=0$ for every\n$1\\le i\\le p$ and $1\\le j\\le q$, then $U$ and $V$ are independent. The\ncovariance matrix may be singular.",
+            "uses": [
+              "1.2",
+              "2.2",
+              "6.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "thm-existence-of-continuous-brownian-motion",
+            "source_section": "Statement",
+            "quote": "Assume the Axiom of Choice. The canonical centered Gaussian coordinate process\nwith covariance $E[X_sX_t]=\\min(s,t)$ has a continuous modification $B$, and\n$B$ is a standard Brownian motion. In particular, standard Brownian motion\nexists.",
+            "uses": [
+              "1.1",
+              "2.1",
+              "2.2",
+              "2.3",
+              "6.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "thm-countable-product-of-probability-spaces",
+            "source_section": "Statement",
+            "quote": "Assume countable choice and dependent choice. For probability spaces\n$(E_n,\\mathcal E_n,\\mu_n)_{n\\in\\mathbb N}$ there is a unique probability measure\n$\\mu$ on $\\mathcal C_{\\mathbb N}$ such that, for every finite $F$, its\n$F$-coordinate marginal is $\\bigotimes_{n\\in F}\\mu_n$.",
+            "uses": [
+              "1.1",
+              "2.1",
+              "2.2",
+              "2.3",
+              "6.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "cor-coordinate-random-elements-on-a-countable-product-are-independent",
+            "source_section": "Statement",
+            "quote": "Under the measure of [[thm-countable-product-of-probability-spaces]], the coordinate maps $X_n(x)=x_n$ have laws $\\mu_n$ and are independent.",
+            "uses": [
+              "1.1",
+              "2.1",
+              "2.2",
+              "2.3",
+              "6.1"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "def-scalar-poisson-count-law",
+            "source_section": "Definition",
+            "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a Poisson point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+            "uses": [
+              "1.1",
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "def-real-exponential-function-and-e",
+            "source_section": "Definition",
+            "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+            "uses": [
+              "1.1",
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "thm-exponential-addition-formula",
+            "source_section": "Statement",
+            "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+            "uses": [
+              "1.1",
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F5",
+            "source": "lem-two-sided-mills-bounds-for-standard-normal-tail",
+            "source_section": "Statement",
+            "quote": "Let $\\varphi(x)=(2\\pi)^{-1/2}e^{-x^2/2}$ and\n$\\overline\\Phi(x)=\\int_x^\\infty\\varphi(y)\\,dy$ for $x\\in\\mathbb R$. Then for\nevery $x>0$\n$$\\frac{x\\,\\varphi(x)}{1+x^2}\\ \\le\\ \\overline\\Phi(x)\\ \\le\\ \\frac{\\varphi(x)}{x},$$\nand consequently, for every $x>1$,\n$$\\Bigl(\\frac1x-\\frac1{x^3}\\Bigr)\\varphi(x)\\ \\le\\ \\overline\\Phi(x)\\ \\le\\ \\frac{\\varphi(x)}{x}.$$\nBoth bounds are sharp as $x\\to\\infty$ in the sense that the ratio of each side\nto $\\overline\\Phi(x)$ tends to $1$.",
+            "uses": [
+              "3.3",
+              "5.2"
+            ]
+          },
+          {
+            "fact": "F5",
+            "source": "cor-law-of-the-brownian-maximum",
+            "source_section": "Statement",
+            "quote": "Assume the Axiom of Choice, let $B$ be a standard Brownian motion\n[[def-brownian-motion]]. Use the everywhere-continuous, zero-start\nrepresentative fixed in [[thm-brownian-reflection-principle]]: replace the\npath by zero outside a measurable probability-one event of continuity and\nzero start, retaining the notation $B$. Let $t>0$ and\n$M_t:=\\sup_{0\\le s\\le t}B_s$. This is a finite nonnegative random variable:\ncontinuity gives boundedness on $[0,t]$ and identifies its supremum with the\nsupremum over the countable dense set $(\\mathbb Q\\cap[0,t])\\cup\\{t\\}$.\nWith\n$\\Phi$ the standard normal distribution function,\n$\\Phi(x)=N(0,1)((-\\infty,x])$\n[[def-standard-normal-and-normal-laws]]\n[[def-cumulative-distribution-function-of-a-random-variable]], one has for\nevery $x\\ge0$\n$$P(M_t\\le x)=2\\Phi\\!\\left(\\frac{x}{\\sqrt t}\\right)-1 .$$\nConsequently $M_t$ has the same law as $|B_t|$, and on $x>0$ the law of $M_t$\nhas the density\n$$f(x)=\\sqrt{\\frac{2}{\\pi t}}\\,\\exp\\!\\left(-\\frac{x^2}{2t}\\right).$$",
+            "uses": [
+              "3.3",
+              "5.2"
+            ]
+          },
+          {
+            "fact": "F6",
+            "source": "cor-markov-inequality-for-random-variables",
+            "source_section": "Statement",
+            "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+            "uses": [
+              "3.1",
+              "3.2",
+              "3.3",
+              "4.3",
+              "5.2"
+            ]
+          },
+          {
+            "fact": "F6",
+            "source": "cor-first-borel-cantelli-lemma-for-events",
+            "source_section": "Statement",
+            "quote": "Let $(A_n)_{n\\in\\mathbb N}$ be events in a probability space. If\n$$\\sum_{n=0}^\\infty \\mathbb P(A_n)<+\\infty,$$\nthen\n$$\\mathbb P(A_n\\ \\mathrm{i.o.})=0.$$\n\nNo independence hypothesis is needed.",
+            "uses": [
+              "3.1",
+              "3.2",
+              "3.3",
+              "4.3",
+              "5.2"
+            ]
+          },
+          {
+            "fact": "F7",
+            "source": "thm-mean-value-inequality-for-total-derivatives",
+            "source_section": "Statement",
+            "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open, and let $f:U\\to\\mathbb R^n$ be totally differentiable at every point. If $M\\ge0$ satisfies $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ for every $z\\in U$ and $v\\in\\mathbb R^m$, then\n\n$$\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2\\qquad(x,y\\in U).$$",
+            "uses": [
+              "4.2"
+            ]
+          },
+          {
+            "fact": "F8",
+            "source": "thm-dynkin-pi-lambda",
+            "source_section": "Statement",
+            "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+            "uses": [
+              "2.3"
+            ]
+          }
+        ],
+        "derivations": [
+          {
+            "id": "lem-brownian-poisson-independent-clock-composition-step-1-1",
+            "claim": "Work on common full-measure events of Brownian continuity and the assumed clock paths. For each integer $K\\ge0$, [F4] gives $\\mathbb P(N(n)\\le K)=e^{-\\lambda n}\\sum_{k=0}^K(\\lambda n)^k/k!\\to0$. The events $\\{N(n)\\le K\\}$ decrease in $n$, so continuity of probability shows that $N(n)$ is unbounded almost surely after taking the countable union over $K$. By [A1] and [F3], extend the space by independent standard Brownian motions $(U_j)_{j\\ge0}$, independent also of the original variables. They will supply continuous bridges; the original space and all its joint laws are preserved by this product extension.",
+            "step": "1.1",
+            "inputs": [
+              "given",
+              "A1",
+              "F3",
+              "F4"
+            ]
+          },
+          {
+            "id": "lem-brownian-poisson-independent-clock-composition-step-1-2",
+            "claim": "Partition the original time axis into macrointervals $[0,1],[1,2],[2,4],[4,8],\\ldots$. For each macrointerval $I=[a,a+D]$, extract the root normal $R_I=(B(a+D)-B(a))/\\sqrt D$. For every dyadic cell $J=[b,b+d]$ inside a macrointerval, of length $d\\ge2$, extract its midpoint normal $G_J=2(B(b+d/2)-(B(b)+B(b+d))/2)/\\sqrt d$. This is a countable iid standard-normal family, independent of $\\mathcal G$. To verify independence, the midpoint contrast on $J$ has covariance zero with the endpoint increment on $J$ and with all Brownian evaluations outside its interior: for $t\\le b$ the three covariance terms cancel, and for $t\\ge b+d$ they are $2(b+d/2)-b-(b+d)=0$. Its variance is one by direct expansion of $\\min(s,t)$. Two dyadic cells are either disjoint or nested; in the nested case, the larger cell's contrast uses only evaluations outside the smaller cell's interior or at its endpoints. Hence distinct contrasts and roots have zero covariance. Every finite family is jointly Gaussian by [F1], so repeated use of [F2] proves mutual independence.",
+            "step": "1.2",
+            "inputs": [
+              "given",
+              "F1",
+              "F2",
+              "step 1.1",
+              "construct"
+            ]
+          },
+          {
+            "id": "lem-brownian-poisson-independent-clock-composition-step-2-1",
+            "claim": "For a cell $J=[b,b+d]$ put $C_J=N(b+d)-N(b)$, with half-counts $L_J=N(b+d/2)-N(b)$ and $Q_J=C_J-L_J$ when $d\\ge2$. Prescribe a $W$ increment $\\sqrt{C_I}R_I$ over the count interval $[N(a),N(a+D)]$ of each macrointerval, starting from $W(0)=0$ and concatenating the macrointervals. Given both endpoint values for $J$, if $C_J>0$ prescribe its count-midpoint value as $W(N(b))+(L_J/C_J)(W(N(b+d))-W(N(b)))+\\sqrt{L_JQ_J/C_J}\\,G_J$. When $C_J=0$ all three count times agree and the midpoint value is that endpoint. When only one half-count is zero the displayed prescription also equals the appropriate existing endpoint. Recurse down to unit cells. For a unit cell $[j,j+1]$ of count length $c>0$, with left count time $h=N(j)$ and prescribed endpoint increment $Y$, fill its count interval continuously by $W(h+s)=W(h)+(s/c)Y+\\sqrt c\\,(U_j(s/c)-(s/c)U_j(1))$ for $0\\le s\\le c$. Zero-count leaves require no filling. Unboundedness from step 1.1 makes these intervals cover $[0,\\infty)$. All operations depend measurably on finitely many integer counts and Gaussian evaluations for each fixed $W(t)$: partition by the first integer $j$ with $N(j)>t$ and its finite count history. The resulting countable pieces give measurable evaluations, including endpoints.",
+            "step": "2.1",
+            "inputs": [
+              "F1",
+              "F3",
+              "step 1.1",
+              "step 1.2",
+              "construct"
+            ]
+          },
+          {
+            "id": "lem-brownian-poisson-independent-clock-composition-step-2-2",
+            "claim": "Fix a deterministic finite count history. The Gaussian split used in step 2.1 is exact: if an interval has total increment $Y\\sim N(0,c)$ and child lengths $l,r\\ge0$, $l+r=c>0$, independent $G\\sim N(0,1)$ gives child increments $Y_L=(l/c)Y+\\sqrt{lr/c}\\,G$ and $Y_R=Y-Y_L$. Their variances are $l,r$ and their covariance is $lr/c-lr/c=0$. Thus they are independent by [F2], with zero-length increments identically zero. Recursing proves independent normal increments of the prescribed count lengths over all nonzero unit leaves, also across macrointervals. For the independent bridge $\\beta(s)=U_j(s)-sU_j(1)$, [F1] directly gives mean zero, continuous paths, endpoints zero, and covariance $\\min(s,t)-st$. Filling a leaf as in step 2.1 therefore gives centered Gaussian increments whose covariance at offsets $s,t$ is $st/c+c(\\min(s/c,t/c)-st/c^2)=\\min(s,t)$. Different leaves have independent increment processes because their endpoint increments are independent and all bridge motions are independent. Summing these increments shows that, for every finite evaluation list, $W$ has centered Gaussian covariance $\\min(s,t)$ on this fixed count history.",
+            "step": "2.2",
+            "inputs": [
+              "F1",
+              "F2",
+              "F3",
+              "step 1.2",
+              "step 2.1",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-brownian-poisson-independent-clock-composition-step-2-3",
+            "claim": "For any finite list of evaluation times, partition the original space into countably many $\\mathcal G$-events specifying a long enough finite integer count history to cover them. The Gaussian and added bridge variables are independent of $\\mathcal G$; step 2.2 shows that on every such count configuration the resulting evaluation law is the same Brownian Gaussian law. Consequently, for any $A\\in\\mathcal G$ and any Borel set $H$ of that finite evaluation vector, summing over this partition gives $\\mathbb P(A\\cap\\{(W(t_i))_i\\in H\\})=\\mathbb P(A)\\nu_H$, where $\\nu_H$ is its Brownian probability. No regular conditional probability on the original space is needed. The construction has common continuous paths: count intervals have integer endpoints, finitely many nonzero intervals meet each bounded count-time interval, their bridges are continuous, and endpoint prescriptions agree. Thus [F1] makes $W$ standard Brownian. Continuous evaluations are limits of rational evaluations, and [F8] extends the factorization from rational cylinders to $\\sigma(W(t):t\\ge0)$. Therefore $W$ is independent of all of $\\mathcal G$, not just of $N$.",
+            "step": "2.3",
+            "inputs": [
+              "F1",
+              "F3",
+              "F8",
+              "step 1.1",
+              "step 2.1",
+              "step 2.2"
+            ]
+          },
+          {
+            "id": "lem-brownian-poisson-independent-clock-composition-step-3-1",
+            "claim": "We prove the necessary uniform clock bounds directly. If $X\\sim\\operatorname{Pois}(a)$, summing [F4]'s nonnegative series gives $\\mathbb E e^{\\theta(X-a)}=\\exp(a(e^\\theta-1-\\theta))$ for every real $\\theta$. For $|\\theta|<3$, the exponential series and $k!\\ge2\\cdot3^{k-2}$ for $k\\ge2$ imply $e^\\theta-1-\\theta\\le\\theta^2/[2(1-|\\theta|/3)]$. Exponential Markov and the choice $\\theta=x/(a+x/3)$, applied with either sign, therefore give $\\mathbb P(|X-a|\\ge x)\\le2\\exp(-x^2/[2(a+x/3)])$ when $a>0,x>0$; at $a=0$ the deviation is zero. With $a=\\lambda(v-u)$ this implies $\\mathbb P(|N(v)-N(u)-\\lambda(v-u)|\\ge x)\\le2\\exp(-c_\\lambda\\min\\{x^2/(v-u),x\\})$ for a constant $c_\\lambda>0$ and integer $0\\le u<v$. This derivation uses only the Poisson mass series and Markov, not a strong approximation theorem.",
+            "step": "3.1",
+            "inputs": [
+              "given",
+              "F4",
+              "F6",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-brownian-poisson-independent-clock-composition-step-3-2",
+            "claim": "For dyadic horizons $n=2^m$, write $\\ell=\\log(n+2)$. Applying step 3.1 with $x=K(\\sqrt{(v-u)\\ell}+\\ell)$ and choosing a sufficiently large deterministic $K$ makes the probability at most $2(n+2)^{-6}$. There are at most $(n+1)^2$ integer intervals in $[0,n]$. The union bound and [F6] show that, almost surely eventually on dyadic horizons, every such interval satisfies $|N(v)-N(u)-\\lambda(v-u)|\\le K(\\sqrt{(v-u)\\ell}+\\ell)$. Choose a deterministic $A>1$ sufficiently large. For every dyadic cell of length $d\\ge A\\ell$, its normalized half-counts $\\alpha=L_J/(\\lambda d)$ and $\\beta=Q_J/(\\lambda d)$ then lie in $[1/4,3/4]$. For every integer point $j$ in the cell, with $x=(j-b)/d$ and $z=(N(j)-N(b))/(\\lambda d)$, one has $|z-x|+|\\alpha-1/2|+|\\beta-1/2|\\le C\\sqrt{\\ell/d}$. Indeed the interval estimate gives this bound first with an additional term $C\\ell/d$, which is at most another constant times $\\sqrt{\\ell/d}$ since $d\\ge A\\ell$. The same estimate implies that every integer interval of length at most $2A\\ell$ has count increase at most $C\\ell$. Constants here and below are deterministic and may depend on $\\lambda,A,K$.",
+            "step": "3.2",
+            "inputs": [
+              "F6",
+              "step 3.1",
+              "algebra",
+              "choose"
+            ]
+          },
+          {
+            "id": "lem-brownian-poisson-independent-clock-composition-step-3-3",
+            "claim": "The tail bound in [F5] gives $\\mathbb P(|G|>x)\\le2e^{-x^2/2}$ for $x\\ge1$. On $[0,n]$ the number of root and midpoint coefficients in step 1.2 is at most $2n$. A union bound with $x=K_1\\sqrt\\ell$, followed by [F6] with $K_1$ sufficiently large, shows that their maximum absolute value is $O(\\sqrt\\ell)$ almost surely eventually along dyadic horizons. Also [F5] and the union bound give, for Brownian $U$, $\\mathbb P(\\sup_{s\\le h}|U(s)|>x)\\le4e^{-x^2/(2h)}$ when $x/\\sqrt h\\ge1$. Therefore a bridge $U(s)-(s/h)U(h)$ over length $h$ has supremum tail bounded by $4e^{-x^2/(8h)}$ for $x/(2\\sqrt h)\\ge1$, since its supremum is at most twice that of $U$. These estimates also apply to translated Brownian increment paths by [F1].",
+            "step": "3.3",
+            "inputs": [
+              "F1",
+              "F5",
+              "F6",
+              "step 1.2"
+            ]
+          },
+          {
+            "id": "lem-brownian-poisson-independent-clock-composition-step-4-1",
+            "claim": "Fix a large dyadic horizon and a macrointerval $I=[a,a+D]\\subseteq[0,n]$. If $D>A\\ell$, stop its binary tree at cells with lengths in $[A\\ell,2A\\ell)$; if $D\\le A\\ell$, stop at the root. For an integer $j\\in I$, consider the piecewise-linear interpolant of $B(j)-B(a)$ on this stopped grid, and the piecewise-linear interpolant of $\\lambda^{-1/2}(W(N(j))-W(N(a)))$ on the corresponding count grid, evaluated at $N(j)$. Repeated midpoint interpolation from step 2.1 expands each interpolant in the same root normal and in the midpoint normals of its ancestor chain. In an active cell of length $d$ containing $j$ in its left half, the coefficients of its midpoint normal are respectively $\\sqrt d\\,x$ and $\\sqrt d\\,z\\sqrt{\\beta/[\\alpha(\\alpha+\\beta)]}$, with $x,z,\\alpha,\\beta$ as in step 3.2. This follows by multiplying the left interpolation fraction $z/\\alpha$ by $\\lambda^{-1/2}\\sqrt{L_JQ_J/C_J}$. In the right half the coefficients are obtained by replacing $(x,z,\\alpha,\\beta)$ by $(1-x,\\alpha+\\beta-z,\\beta,\\alpha)$. At a midpoint or endpoint these same formulas agree with the endpoint prescription.",
+            "step": "4.1",
+            "inputs": [
+              "step 1.2",
+              "step 2.1",
+              "step 3.2",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-brownian-poisson-independent-clock-composition-step-4-2",
+            "claim": "The function $z\\sqrt{\\beta/[\\alpha(\\alpha+\\beta)]}$ has uniformly bounded first derivatives for $1/4\\le\\alpha,\\beta\\le3/4$ and $0\\le z\\le2$: its displayed denominators are bounded away from zero, and differentiating gives only bounded products of these reciprocals and square roots. One may take a slightly larger open convex box still with positive $\\alpha,\\beta$ and use [F7]. At $(\\alpha,\\beta,z)=(1/2,1/2,x)$ its value is $x$. Hence step 3.2 bounds the midpoint coefficient discrepancy by $C\\sqrt\\ell$. The normalized right-half prefix differs from its deterministic value by at most another constant times $\\sqrt{\\ell/d}$, so the same bound applies there. The root coefficients for a large macrointerval are $\\sqrt D\\,x$ and $\\sqrt D\\,z/\\sqrt{C_I/(\\lambda D)}$; the same bounded-derivative argument and step 3.2 bound their discrepancy by $C\\sqrt\\ell$. By step 3.3, each shared Gaussian coefficient therefore contributes at most $C\\ell$ to the interpolant difference. At most $1+\\log_2 n$ coefficients occur on an ancestor chain, so the increment-interpolant error is $O(\\ell^2)$.",
+            "step": "4.2",
+            "inputs": [
+              "F7",
+              "step 3.2",
+              "step 3.3",
+              "step 4.1",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-brownian-poisson-independent-clock-composition-step-4-3",
+            "claim": "We control the discarded bridge pieces uniformly. Each stopped cell has deterministic length at most $2A\\ell$ and, on the count event from step 3.2, count length at most $C\\ell$. The Brownian deviation from linear interpolation on a cell is a continuous bridge with the covariance computed in step 2.2, regardless of the endpoint values. Step 3.3 therefore bounds the probability that its supremum exceeds $K_2\\ell$ by $4e^{-cK_2^2\\ell}$. There are at most $n$ stopped cells. For the $W$ bridges the same estimate holds on every count history having these length bounds, by the conditional Gaussian calculation in steps 2.2–2.3; summing over the count configurations gives the identical unconditional bound on the good count event. Choose $K_2$ large, add the summable failure probability of that count event, and apply [F6]. Thus all discarded $B$ and scaled $W$ bridge pieces are $O(\\ell)$ almost surely eventually. This argument includes zero count length, whose bridge is identically zero.",
+            "step": "4.3",
+            "inputs": [
+              "F6",
+              "step 2.2",
+              "step 2.3",
+              "step 3.2",
+              "step 3.3",
+              "step 4.1"
+            ]
+          },
+          {
+            "id": "lem-brownian-poisson-independent-clock-composition-step-5-1",
+            "claim": "A completed large macrointerval contributes only its root error $|\\sqrt D-\\sqrt{C_I/\\lambda}|\\,|R_I|\\le C\\ell$ by steps 3.2–3.3. For a macrointerval of length at most $A\\ell$, its entire $B$ increment supremum and its scaled $W$ increment supremum are $O(\\ell)$ by the same reflection and count-history argument as step 4.3, applied without subtracting an interpolant. There are at most $1+\\log_2 n$ macrointervals before time $n$. Add the root or small-macrointerval errors of the completed macrointervals, then the interpolant error from step 4.2 and the two leaf errors from step 4.3 in the last one. This gives $\\max_{j\\le n,\\ j\\in\\mathbb N_0}|B(j)-\\lambda^{-1/2}W(N(j))|=O(\\ell^2)$ almost surely along dyadic horizons.",
+            "step": "5.1",
+            "inputs": [
+              "step 3.2",
+              "step 3.3",
+              "step 4.2",
+              "step 4.3",
+              "algebra"
+            ]
+          },
+          {
+            "id": "lem-brownian-poisson-independent-clock-composition-step-5-2",
+            "claim": "For real $t\\in[j,j+1]$, Brownian reflection and a union bound over the $n$ unit intervals make $|B(t)-B(j)|=O(\\sqrt\\ell)$ uniformly eventually almost surely. Step 3.2 gives $N(j+1)-N(j)\\le C\\ell$. On every such count history, step 2.3 gives Brownian law for $W$, and reflection bounds its increment supremum on each $[N(j),N(j+1)]$ by $K_3\\ell$ except on a probability bounded by $4ne^{-cK_3^2\\ell}$; this is summable on dyadic horizons when $K_3$ is large. Integrating over the count configurations and using [F6] shows that these $W$ increments are uniformly $O(\\ell)$. Monotonicity of $N$ places $N(t)$ in that count interval. Add these two bounds to step 5.1 to obtain the required real-time supremum on dyadic horizons. For any real $n\\ge2$, the next dyadic horizon is less than $2n$, and its logarithm differs from $\\log(n+2)$ by a bounded additive constant, proving the asserted bound at every horizon.",
+            "step": "5.2",
+            "inputs": [
+              "given",
+              "F1",
+              "F5",
+              "F6",
+              "step 2.3",
+              "step 3.2",
+              "step 3.3",
+              "step 5.1"
+            ]
+          },
+          {
+            "id": "lem-brownian-poisson-independent-clock-composition-step-6-1",
+            "claim": "The finite initial time range is absorbed into the random constant: $B$ is bounded there by continuity, $N$ is bounded there by hypothesis, and $W$ is bounded on the corresponding compact count-time interval by continuity. Repeated or zero count times were treated in steps 2.1–2.2. The restriction $\\lambda>0$ is needed for the displayed scaling and the lower large-cell count bounds; no assertion is made at rate zero. Step 2.3 proves the full claimed independence, while steps 5.1–5.2 prove the approximation. AC was used precisely through [F1]–[F3] and the product extension in step 1.1; all concentration, interpolation, and countable-event arguments are local.",
+            "step": "6.1",
+            "inputs": [
+              "A1",
+              "F1",
+              "F2",
+              "F3",
+              "step 1.1",
+              "step 2.1",
+              "step 2.2",
+              "step 2.3",
+              "step 5.1",
+              "step 5.2"
+            ]
+          }
+        ],
+        "routine_steps": [],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "checked",
+            "evidence": "Empty or zero-count cells add no bridge; steps 2.1–2.2 treat their prescriptions explicitly."
+          },
+          {
+            "case": "zero",
+            "status": "checked",
+            "evidence": "Rate λ=0 is expressly excluded; zero-length Poisson count intervals have identically zero increment and bridge."
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "Unit original-time leaves are explicitly filled with independent continuous Gaussian bridges in step 2.1."
+          },
+          {
+            "case": "degenerate",
+            "status": "checked",
+            "evidence": "Step 2.2 allows zero half-counts and singular Gaussian increments without division by a zero total count; no independence of W and B is asserted."
+          },
+          {
+            "case": "endpoints",
+            "status": "checked",
+            "evidence": "Common continuous paths agree at every glued count endpoint. Large-cell estimates require λ>0 and d≥A log(n+2); short cells use separate reflection bounds."
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "checked",
+            "evidence": "AC is stated; Brownian existence and the actual countable-product suppliers provide the bridge copies on an extension preserving original joint laws."
+          },
+          {
+            "case": "iff-forward",
+            "status": "not_applicable",
+            "reason": "The statement is a one-way existence/approximation claim, not a biconditional."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "not_applicable",
+            "reason": "No converse to the Poisson or Brownian assumptions is asserted."
+          }
+        ],
+        "finite_checks": [],
+        "finite_smoke": [],
+        "risk_review": {
+          "status": "pass",
+          "notes": "All fourteen steps have local derivations. Conditional Gaussian covariance and clock-environment independence are established by finite count-history partitions; Poisson Chernoff is derived from the mass series; coefficient estimates, bridge residuals, continuous-time extension, and dyadic closeout are explicit. No KMT or imported strong approximation is used."
+        }
+      }
+    }
+  },
+  "source_reading": [
+    {
+      "url": "https://arxiv.org/pdf/2007.15481",
+      "inspected": "Actual ten-page PDF retrieved. Definitions, main theorem, joint/clock approximations pp. 1–4, complete almost-sure proof and moving-window Lemma 5 pp. 5–7 read. The supplied moving-window proof uses proved local Bernstein instead of the source Nagaev citation."
+    },
+    {
+      "url": "https://hal.science/hal-01044508v1/file/MarkovKMT15julysubmitted.pdf",
+      "inspected": "Actual complete 28-page author PDF retrieved. Introduction, theorem statements, roadmap, complete Lemma 2.4 statement, auxiliary-randomness clause and opening Haar construction read. Detailed source exponential-tail estimates not represented as independently checked. The new local proof establishes its own weaker logarithmic-square estimate."
+    }
+  ],
+  "limitations": "These two intermediate draft lemmas do not prove the full Markov-chain SIP. Its original proof-status carrier is unchanged; finite-moment iid vector coupling and correct multistep reward-cycle structure remain separate unresolved obligations.",
+  "verification_policy": "No dependency levels or verification stamps were added. This proposal supplies exact source quotes, complete proof-step derivations and manifest rows for owner integration; it is not independent acceptance evidence."
+}

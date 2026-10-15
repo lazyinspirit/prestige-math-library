@@ -1,0 +1,1750 @@
+{
+  "version": 1,
+  "scope": [
+    "def-diminishing-adaptation",
+    "lem-total-variation-coupling-and-kernel-contraction",
+    "def-adaptive-mcmc-containment",
+    "lem-adaptive-mcmc-block-perturbation-bound",
+    "lem-adaptive-mcmc-uniform-drift-minorization-bound",
+    "thm-adaptive-mcmc-converges-under-uniform-ergodicity-or-containment",
+    "cor-adaptive-mcmc-containment-from-uniform-drift-minorization",
+    "cex-diminishing-adaptation-alone-does-not-imply-strong-law",
+    "ex-adaptive-mcmc-loss-of-containment",
+    "ex-uniformly-ergodic-adaptive-mcmc-family"
+  ],
+  "contracts": {
+    "def-diminishing-adaptation": {
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition explicitly requires nonempty measurable state and parameter spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Definition allows D_n=0 and states convergence in probability without division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: Definition permits the maximum D_n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Definition admits a constant kernel family with D_n=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint, one-sided limit, or endpoint parameter is part of this item’s claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses only displayed hypotheses, explicit finite constructions, and individual existential witnesses; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way definition, implication, example, or counterexample and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted in the Statement."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "lem-total-variation-coupling-and-kernel-contraction": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-total-variation-distance-for-probability-laws",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ and $\\nu$ be probability measures on the same measurable space\n$(E,\\mathcal E)$ ([[def-probability-measure]]). Their **total variation\ndistance** is\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}:=\\sup_{A\\in\\mathcal E}\\bigl|\\mu(A)-\\nu(A)\\bigr| .$$\n\nFor every event $A$ the difference $\\mu(A)-\\nu(A)$ is a real number in\n$[-1,1]$, because both measures have total mass one; hence the set being\nmaximized is a nonempty subset of $[0,1]$ and the supremum lies in $[0,1]$.\nThe empty event and the whole space give the values $0$ and\n$|\\mu(E)-\\nu(E)|=0$, so the distance is zero when $\\mu=\\nu$, and it is symmetric\nin $\\mu$ and $\\nu$. This convention carries no factor $1/2$ in the supremum;\nit is therefore not the total variation norm of the signed measure $\\mu-\\nu$,\nwhich is twice the quantity above when that signed measure is considered on a\nmeasurable space where the decomposition is attained. On a countable state\nspace with its power-set sigma-algebra the supremum equals the half-$\\ell^1$\nsum $\\tfrac12\\sum_{x\\in E}|\\mu(\\{x\\})-\\nu(\\{x\\})|$; that identity is proved in\n[[lem-total-variation-half-l1-formula-on-a-countable-space]], not assumed here.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For measurable $f:\\mathsf X\\to[0,1]$, put $A_t=\\{x:f(x)>t\\}$ for $t\\in[0,1]$. The identity $f(x)=\\int_0^1 1_{A_t}(x)\\,dt$ and [F3] give $\\int f\\,d\\mu-\\int f\\,d\\nu=\\int_0^1[\\mu(A_t)-\\nu(A_t)]\\,dt$. Its absolute value is at most $\\int_0^1|\\mu(A_t)-\\nu(A_t)|\\,dt\\le\\lVert\\mu-\\nu\\rVert_{\\rm TV}$ by [F1]. Conversely, each indicator $1_A$ is an admissible $f$ and attains the setwise difference for its set $A$. Taking suprema proves the dual formula.",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For each $A\\in\\mathcal X$, the function $x\\mapsto P(x,A)$ is measurable and takes values in $[0,1]$ by [F2]. Apply step 1.1 to that function to obtain $|\\mu P(A)-\\nu P(A)|\\le\\lVert\\mu-\\nu\\rVert_{\\rm TV}$. Taking the supremum over $A$ proves kernel contraction.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For any $A\\in\\mathcal X$, $|\\mu(A)-\\nu(A)|=|\\mathbb E[1_A(U)-1_A(V)]|\\le\\mathbb E|1_A(U)-1_A(V)|\\le\\mathbb P(E^c)$, because the two indicators agree on $E$. Taking the supremum over $A$ proves the stated bound.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The probability-measure or probability-kernel hypotheses exclude an empty state space; step 1.1 treats measurable events in the admitted space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers mu=nu, when every setwise difference and the dual supremum are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses [0,1]-valued tests; indicators attain the setwise supremum, including distance one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 gives zero when the laws coincide; the agreement-event coupling bound remains valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint, one-sided limit, or endpoint parameter is part of this item’s claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 uses only displayed hypotheses, explicit finite constructions, and individual existential witnesses; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way definition, implication, example, or counterexample and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted in the Statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-point total-variation and agreement-event bound",
+          "method": "exact finite calculation",
+          "input": {
+            "space": [
+              "0",
+              "1"
+            ],
+            "mu": "delta_0",
+            "nu": "delta_1"
+          },
+          "calculation": "The set A={0} gives |mu(A)-nu(A)|=1. No support values agree, so a measurable agreement event E is empty and P(E^c)=1.",
+          "expected": {
+            "total_variation": "1",
+            "coupling_bound": "1"
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "def-adaptive-mcmc-containment": {
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition inherits the nonempty measurable spaces and probability target from def-diminishing-adaptation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Definition requires epsilon>0; convergence-time values may still have zero total-variation error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: Definition uses probability bounds at most one and M_epsilon may be infinite when convergence fails."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Definition also covers kernels already at stationarity, for which every convergence time is one."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint, one-sided limit, or endpoint parameter is part of this item’s claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses only displayed hypotheses, explicit finite constructions, and individual existential witnesses; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way definition, implication, example, or counterexample and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted in the Statement."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "lem-adaptive-mcmc-block-perturbation-bound": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-diminishing-adaptation",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X)$ and $(\\Gamma,\\mathcal G)$ be nonempty measurable\nspaces ([[def-measurable-space]]). Let $\\pi$ be a probability measure on\n$(\\mathsf X,\\mathcal X)$, and let $(P_\\gamma)_{\\gamma\\in\\Gamma}$ be a jointly\nmeasurable family of probability kernels on $\\mathsf X$: for every\n$A\\in\\mathcal X$, $(\\gamma,x)\\mapsto P_\\gamma(x,A)$ is\n$\\mathcal G\\otimes\\mathcal X$-measurable and each $P_\\gamma$ is a probability\nkernel ([[def-measure-kernel-and-probability-kernel]]). Assume that $\\pi$ is\ninvariant for every fixed kernel, meaning $\\pi P_\\gamma=\\pi$\n([[def-invariant-and-stationary-distribution-for-a-markov-kernel]]).\n\nAn **adaptive MCMC process** is a pair of measurable processes\n$(X_n,\\Gamma_n)_{n\\ge0}$ with $X_n\\in\\mathsf X$, $\\Gamma_n\\in\\Gamma$, and\nnatural filtration $\\mathcal F_n=\\sigma(X_0,\\Gamma_0,\\ldots,X_n,\\Gamma_n)$,\nsuch that for every $A\\in\\mathcal X$,\n$$\\mathbb P(X_{n+1}\\in A\\mid\\mathcal F_n)=P_{\\Gamma_n}(X_n,A)\\quad\\text{a.s.}$$\nThe update rule for $\\Gamma_{n+1}$ may depend on the history through time\n$n+1$; it is required only to make $\\Gamma_{n+1}$ a measurable random variable.\n\nFor $n\\ge0$, define the adaptation size\n$$D_n:=\\sup_{x\\in\\mathsf X}\\lVert P_{\\Gamma_{n+1}}(x,\\cdot)-P_{\\Gamma_n}(x,\\cdot)\\rVert_{\\rm TV},$$\nwhere total variation uses the convention\n$\\lVert\\mu-\\nu\\rVert_{\\rm TV}=\\sup_{A\\in\\mathcal X}|\\mu(A)-\\nu(A)|$\n([[def-total-variation-distance-for-probability-laws]]). Assume each $D_n$\nis measurable; it lies in $[0,1]$. The process has **diminishing\nadaptation** if $D_n\\to0$ in probability as $n\\to\\infty$. This condition does\nnot require $\\Gamma_n$ to converge.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-total-variation-coupling-and-kernel-contraction",
+          "source_section": "Statement",
+          "quote": "Let $\\mu,\\nu$ be probability measures on $(\\mathsf X,\\mathcal X)$ and let\n$P$ be a probability kernel on that space. Then\n$$\\lVert\\mu-\\nu\\rVert_{\\rm TV}=\\sup_{f:\\mathsf X\\to[0,1]\\ \\mathcal X\\text{-measurable}}\\left|\\int f\\,d\\mu-\\int f\\,d\\nu\\right|,$$\n$$\\lVert\\mu P-\\nu P\\rVert_{\\rm TV}\\le\\lVert\\mu-\\nu\\rVert_{\\rm TV}.$$\nIf $(U,V)$ is a coupling of $\\mu$ and $\\nu$ on a probability space and\n$E$ is a measurable event on which $U=V$, then\n$$\\lVert\\mu-\\nu\\rVert_{\\rm TV}\\le\\mathbb P(E^c).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix $f:\\mathsf X\\to[0,1]$ measurable. For $i=0,\\ldots,N$, set $g_i=P_{\\Gamma_n}^{N-i}f$, so $g_N=f$. Joint kernel measurability and [F3] make each $g_i$ measurable in $(\\Gamma_n,x)$ and $0\\le g_i\\le1$. Also $g_i=P_{\\Gamma_n}g_{i+1}$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The conditional transition rule [F1] and the identity in step 1.1 give $\\mathbb E[f(X_{n+N})]-\\mathbb E[P_{\\Gamma_n}^{N}f(X_n)]=\\sum_{i=0}^{N-1}\\mathbb E\\!\\left[(P_{\\Gamma_{n+i}}-P_{\\Gamma_n})g_{i+1}(X_{n+i})\\right].$ Indeed, each summand is the difference between $\\mathbb E[g_{i+1}(X_{n+i+1})]$ and $\\mathbb E[g_i(X_{n+i})]$, and these differences telescope from $i=0$ through $N-1$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F2], the absolute value of the $i$th summand in step 2.1 is at most $\\mathbb E\\!\\left[\\sup_x\\lVert P_{\\Gamma_{n+i}}(x,\\cdot)-P_{\\Gamma_n}(x,\\cdot)\\rVert_{\\rm TV}\\right]\\le\\sum_{j=0}^{i-1}\\mathbb E[D_{n+j}],$ where the last inequality is the triangle inequality applied pointwise to successive kernels. Summing gives the displayed bound for every such $f$; take the supremum using [F2]. For pairwise disjoint $A_\\ell$, countable additivity of each $P_{\\Gamma_n}^{N}(X_n,\\cdot)$ and [F4] give $Q_{n,N}(\\bigcup_\\ell A_\\ell)=\\sum_\\ell Q_{n,N}(A_\\ell)$ by monotone convergence; also $Q_{n,N}(\\mathsf X)=1$. Thus $Q_{n,N}$ is a probability measure.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The probability-measure or probability-kernel hypotheses exclude an empty state space; step 1.1 treats measurable events in the admitted space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 permits D_{n+j}=0; for block length one step 2.1 makes the perturbation zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The block length N=1 is covered by step 2.1, whose inner sum is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A constant kernel family has D_n=0, so step 2.1 gives the exact frozen/adaptive marginal identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint, one-sided limit, or endpoint parameter is part of this item’s claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 uses only displayed hypotheses, explicit finite constructions, and individual existential witnesses; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way definition, implication, example, or counterexample and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted in the Statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-step frozen-kernel comparison",
+          "method": "exact finite-horizon identity",
+          "input": {
+            "block_length": 1
+          },
+          "calculation": "Q_{n,1}(A)=E[P_{Gamma_n}(X_n,A)]=P(X_{n+1} in A) by the conditional transition rule; the displayed double sum has only i=0 and is empty.",
+          "expected": {
+            "total_variation": "0",
+            "bound": "0"
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "lem-adaptive-mcmc-uniform-drift-minorization-bound": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-small-set-minorization-and-drift",
+          "source_section": "Definition",
+          "quote": "For a probability kernel $P$ on $(\\mathsf X,\\mathcal X)$ ([[def-measure-kernel-and-probability-kernel]]), a measurable set $C$ is **$(m,\\epsilon,\\nu)$-small** if $m\\ge1$ is an integer, $0<\\epsilon\\le1$, $\\nu$ is a probability measure ([[def-probability-measure]]), and\n$$P^m(x,A)\\ge\\epsilon\\nu(A)\\quad(x\\in C,\\ A\\in\\mathcal X).$$\nThe inequality is pointwise in $x$ and holds for every measurable $A$.\n\nA **geometric drift inequality outside $C$** consists of a finite-valued measurable $V:\\mathsf X\\to[1,\\infty)$, constants $0<\\lambda<1$ and $0\\le b<\\infty$, and\n$$PV(x):=\\int V(y)P(x,dy)\\le\\lambda V(x)+b\\,1_C(x)\\quad(x\\in\\mathsf X).$$\nThe terms small set and drift are separate hypotheses; neither definition asserts the existence of the other.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a probability kernel on a measurable space $(E,\\mathcal E)$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure on $(E,\\mathcal E)$ ([[def-probability-measure]]). The\nprobability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a\n**stationary distribution** of $K$, when\n\n$$(\\pi K)(A):=\\int_E K(x,A)\\,\\pi(dx)=\\pi(A)\\qquad\\text{for every }A\\in\\mathcal E .$$\n\nThe set function $\\pi K$ is again a probability measure: for fixed $A$ the map\n$x\\mapsto K(x,A)$ is measurable and lies in $[0,1]$, so the integral exists in\n$[0,1]$; for pairwise disjoint $A_n\\in\\mathcal E$ the identity\n$K(x,\\bigcup_nA_n)=\\sum_nK(x,A_n)$ of the measure $K(x,\\cdot)$ and the\nmonotone convergence theorem for nonnegative functions\n([[thm-monotone-convergence-for-the-integral]]) give\n$\\sigma$-additivity of $\\pi K$; and $K(x,E)=1$ for every $x$ gives\n$(\\pi K)(E)=1$. Thus $(\\pi K)(A)=\\pi(A)$ is an identity between two probability\nmeasures evaluated at $A$.\n\nA $K$-chain whose initial law is $\\pi$ is called **stationary** when\n$\\pi K=\\pi$. Stationarity of the process is a statement about all of its\nfinite-dimensional laws and is proved, not assumed, from $\\pi K=\\pi$; see\n[[thm-invariant-initial-law-makes-the-chain-stationary]].\n\nOn a countable state space $E$ with sigma-algebra $2^E$ and transition matrix\n$p(x,y)=K(x,\\{y\\})$ ([[def-transition-matrix-and-n-step-transition-probabilities]]),\na measure on $E$ is its weighted sum of Dirac masses at singletons\n([[thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums]]), so\ninvariance is equivalent to the matrix identity\n\n$$\\pi(y)=\\sum_{x\\in E}\\pi(x)\\,p(x,y)\\qquad\\text{for every }y\\in E .$$\n\nThe definition fixes no irreducibility, aperiodicity or uniqueness hypothesis,\nand it selects no conditional-expectation versions; the display defines a\nsingle measure $\\pi K$ and asserts an identity for it. A transient, periodic or\nreducible chain may have several invariant probability measures or none.",
+          "uses": [
+            "1.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-total-variation-coupling-and-kernel-contraction",
+          "source_section": "Statement",
+          "quote": "Let $\\mu,\\nu$ be probability measures on $(\\mathsf X,\\mathcal X)$ and let\n$P$ be a probability kernel on that space. Then\n$$\\lVert\\mu-\\nu\\rVert_{\\rm TV}=\\sup_{f:\\mathsf X\\to[0,1]\\ \\mathcal X\\text{-measurable}}\\left|\\int f\\,d\\mu-\\int f\\,d\\nu\\right|,$$\n$$\\lVert\\mu P-\\nu P\\rVert_{\\rm TV}\\le\\lVert\\mu-\\nu\\rVert_{\\rm TV}.$$\nIf $(U,V)$ is a coupling of $\\mu$ and $\\nu$ on a probability space and\n$E$ is a measurable event on which $U=V$, then\n$$\\lVert\\mu-\\nu\\rVert_{\\rm TV}\\le\\mathbb P(E^c).$$",
+          "uses": [
+            "5.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-products-of-probability-kernels",
+          "source_section": "Statement",
+          "quote": "Let $(S,\\Sigma)$ and $(T_i,\\Tau_i)$ for $i<n$ be measurable spaces, with\n$n<\\infty$, and let $K_i:S\\to T_i$ be probability kernels with the same\nsource. There is a unique probability kernel\n$$K:S\\to\\prod_{i<n}T_i$$\nwhose evaluation on every measurable rectangle is\n$$K(s,\\prod_{i<n}B_i)=\\prod_{i<n}K_i(s,B_i).$$\nFor $n=0$, the target is the empty-product singleton and $K$ is its point\nmass. For $n>0$, the product sigma-algebra is the recursive finite product\nsigma-algebra.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "1.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix any $\\gamma$. For $r\\ge1$, set $V_r=V\\wedge r$. By [F2], $\\int(P_\\gamma V_r-V_r)\\,d\\pi=0$. On $C$ the integrand is at most $\\lambda v+b$; on $C^c\\cap\\{V\\le r\\}$ it is at most $-(1-\\lambda)V$; and on $C^c\\cap\\{V>r\\}$ it is at most zero, because $P_\\gamma V_r\\le\\min(P_\\gamma V,r)$. Hence $(1-\\lambda)\\int_{C^c\\cap\\{V\\le r\\}}V\\,d\\pi\\le(\\lambda v+b)\\pi(C)\\le\\lambda v+b.$ Letting $r\\to\\infty$ by [F7] gives the uniform finite bound $\\pi V\\le v+(\\lambda v+b)/(1-\\lambda)=:K_\\pi$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Put $\\lambda'=(1+\\lambda)/2$ and $c=b/(1-\\lambda')$. Choose $d\\ge v$ so $2c/(d+1)<1/4$, then choose $N\\ge1$ with $d(\\lambda')^N\\le1/2$, and finally choose $L>N+1$ with $(\\lambda')^L<1/4$. Let $D=\\{x:V(x)\\le d\\}$. For fixed $\\gamma$, the killed kernel $K_\\gamma(x,A)=1_{C^c}(x)P_\\gamma(x,A)$ satisfies $K_\\gamma V\\le\\lambda'V$. For $\\tau_C=\\inf\\{m\\ge0:X_m\\in C\\}$, the event $\\{\\tau_C>N\\}$ requires avoiding $C$ at times $0$ through $N$, so $\\mathbb P_x(\\tau_C>N)=K_\\gamma^{N+1}1(x)\\le K_\\gamma^{N+1}V(x)\\le(\\lambda')^{N+1}V(x)\\le1/2$ for every $x\\in D$. Hence $\\mathbb P_x(\\tau_C\\le N)\\ge1/2$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $\\nu_\\gamma(C)=1$, the minorization gives $\\nu_\\gamma P_\\gamma\\ge\\delta\\nu_\\gamma$, and induction gives $\\nu_\\gamma P_\\gamma^q\\ge\\delta^q\\nu_\\gamma$ for every $q\\ge0$. Split the $L$-step transition according to the first hit time $t\\le N$ of $C$. From a state in $C$, the first step minorizes by $\\delta\\nu_\\gamma$ and the remaining $L-t-1$ steps preserve at least $\\delta^{L-t-1}\\nu_\\gamma$. Hence, for every $x\\in D$ and measurable $A$, $P_\\gamma^L(x,A)\\ge\\sum_{t=0}^N\\mathbb P_x(\\tau_C=t)\\delta^{L-t}\\nu_\\gamma(A)\\ge\\frac{\\delta^L}{2}\\nu_\\gamma(A).$ Thus $D$ is one-step small for $Q_\\gamma=P_\\gamma^L$, with common $\\epsilon=\\delta^L/2$.",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Iterating $P_\\gamma V\\le\\lambda V+b1_C\\le\\lambda'V+b$ gives $Q_\\gamma V\\le(\\lambda')^L V+c$. Put $h(x,y)=(V(x)+V(y))/2$. Outside $D\\times D$, at least one coordinate has $V>d$ and the other has $V\\ge1$, so $(Q_\\gamma\\otimes Q_\\gamma)h(x,y)\\le(\\lambda')^Lh(x,y)+c\\le a h(x,y),\\qquad a:=(\\lambda')^L+\\frac{2c}{d+1}<1.$ This $a$ is independent of $\\gamma$.",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For $x\\in D$, $Q_\\gamma V(x)\\le d+c$. The residual probability $R_{\\gamma,x}=(Q_\\gamma(x,\\cdot)-\\epsilon\\nu_\\gamma)/(1-\\epsilon)$ is well-defined by step 2.1 and satisfies $R_{\\gamma,x}V\\le(d+c)/(1-\\epsilon)$. Consequently $R_{\\gamma,x}\\otimes R_{\\gamma,y}(h)\\le H:=(d+c)/(1-\\epsilon)$ for $x,y\\in D$. All constants here are independent of $\\gamma$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "Fix $\\gamma$ and run two $Q_\\gamma$-chains with a flag $B_k\\in\\{0,1\\}$, initially $B_0=0$. When $B_k=0$ and $(X_k,Y_k)\\notin D\\times D$, update the coordinates independently and keep the flag zero. When $B_k=0$ and $(X_k,Y_k)\\in D\\times D$, use the split decomposition from step 2.1: with probability $\\epsilon$ draw $z\\sim\\nu_\\gamma$, set $(X_{k+1},Y_{k+1})=(z,z)$ and $B_{k+1}=1$; otherwise draw independently from $R_{\\gamma,X_k},R_{\\gamma,Y_k}$ and keep the flag zero. When $B_k=1$, draw $z\\sim Q_\\gamma(X_k,\\cdot)$ and set $(X_{k+1},Y_{k+1})=(z,z)$, $B_{k+1}=1$; this mode is reached only with $X_k=Y_k$, so both marginals use $Q_\\gamma$. The diagonal map $z\\mapsto(z,z)$ is measurable because the preimage of each measurable rectangle is an intersection; [F5]–[F6] give measurable product and pair transitions. Iterating this flagged kernel defines each finite path, and on the measurable event $B_k=1$ the coordinates agree.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Let $T=\\inf\\{m\\ge1:B_m=1\\}$ and let $N_k$ count failed split attempts in the first $k$ transitions. Choose $B\\ge\\max\\{1,(1-\\epsilon)H/a\\}$ and define $Z_k=a^{-k}B^{-N_k}h(X_k,Y_k)1_{\\{T>k\\}}.$ This is a nonnegative supermartingale: on $\\{T>k\\}$ an outside-$D\\times D$ update contracts expected $h$ by step 2.2 and leaves the flag and failure count unchanged; on $D\\times D$ a successful split makes the indicator zero, while the failed-split contribution has ratio at most $(1-\\epsilon)H/(aB h(X_k,Y_k))\\le1$ because $h\\ge1$. Since $T\\ge1$, $Z_0=h(x,y)$, and therefore $\\mathbb E Z_k\\le h(x,y)$.",
+          "inputs": [
+            "step 2.2",
+            "step 3.1",
+            "step 3.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "For every integer $j\\ge1$, the probability of at least $j$ failed split attempts is at most $(1-\\epsilon)^j$, by conditioning successively at the first $j$ attempts. On $\\{T>k,N_k<j\\}$, $Z_k\\ge a^{-k}B^{-(j-1)}$, so Markov's inequality [F8] gives $\\mathbb P_{x,y}(T>k)\\le(1-\\epsilon)^j+a^kB^{j-1}h(x,y).$ Choose $\\theta>0$ with $aB^\\theta<1$ and take $j=\\max(1,\\lfloor\\theta k\\rfloor)$. Both terms are bounded by $M_0h(x,y)\\rho_0^k$ for constants $M_0<\\infty$, $0<\\rho_0<1$ determined only by $a,B,\\epsilon$. On the measurable event $\\{T\\le k\\}$ the flagged chains agree, so [F4] yields $\\lVert Q_\\gamma^k(x,\\cdot)-Q_\\gamma^k(y,\\cdot)\\rVert_{\\rm TV}\\le M_0h(x,y)\\rho_0^k.$",
+          "inputs": [
+            "F4",
+            "F8",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "Start the second chain in $Y_0\\sim\\pi$. Invariance gives $Y_k\\sim\\pi$. Integrating step 5.1 over $Y_0$ and using step 1.1 yields $\\lVert Q_\\gamma^k(x,\\cdot)-\\pi\\rVert_{\\rm TV}\\le\\frac{M_0}{2}(V(x)+\\pi V)\\rho_0^k\\le\\frac{M_0}{2}(1+K_\\pi)V(x)\\rho_0^k.$ This bound is uniform in $\\gamma$.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 5.1"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "step": "7.1",
+          "claim": "Write $n=Lk+s$ with $0\\le s<L$. By kernel contraction and $\\pi P_\\gamma^s=\\pi$, $\\lVert P_\\gamma^n(x,\\cdot)-\\pi\\rVert_{\\rm TV}\\le\\lVert Q_\\gamma^k(x,\\cdot)-\\pi\\rVert_{\\rm TV}.$ Set $\\rho=\\rho_0^{1/L}$ and enlarge the constant by $\\rho^{-(L-1)}$. The resulting $M$ is finite and depends only on $v,\\delta,\\lambda,b$, proving the stated bound.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 6.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The probability-measure or probability-kernel hypotheses exclude an empty state space; step 1.1 treats measurable events in the admitted space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement permits b=0; step 1.2 then has c=0 and its choices remain valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The endpoint delta=1 gives epsilon=delta^L/2=1/2<1, so the residual in step 3.1 is defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 applies to V=1 and the full-set kernel P=Pi; the finite check verifies the drift and minorization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement includes n=0; step 7.1 writes n=Lk+s with k=0 when n=0, and the enlarged constant covers the initial total-variation distance."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–7.1 uses only displayed hypotheses, explicit finite constructions, and individual existential witnesses; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way definition, implication, example, or counterexample and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted in the Statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-state full-set drift and minorization",
+          "method": "exact finite calculation",
+          "input": {
+            "space": [
+              "0",
+              "1"
+            ],
+            "pi": [
+              "1/2",
+              "1/2"
+            ],
+            "kernel": "Pi",
+            "C": [
+              "0",
+              "1"
+            ],
+            "V": {
+              "0": 1,
+              "1": 1
+            },
+            "v": 1,
+            "delta": 1,
+            "lambda": "1/2",
+            "b": "1/2"
+          },
+          "calculation": "P(x,A)=pi(A), nu=pi is supported on C, and PV=1=lambda V+b 1_C. At n=0 the distance from delta_x to pi is 1/2; for n>=1 the law is pi exactly.",
+          "expected": {
+            "minorization": true,
+            "drift": true,
+            "rate": "exact after one step"
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "thm-adaptive-mcmc-converges-under-uniform-ergodicity-or-containment": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-diminishing-adaptation",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X)$ and $(\\Gamma,\\mathcal G)$ be nonempty measurable\nspaces ([[def-measurable-space]]). Let $\\pi$ be a probability measure on\n$(\\mathsf X,\\mathcal X)$, and let $(P_\\gamma)_{\\gamma\\in\\Gamma}$ be a jointly\nmeasurable family of probability kernels on $\\mathsf X$: for every\n$A\\in\\mathcal X$, $(\\gamma,x)\\mapsto P_\\gamma(x,A)$ is\n$\\mathcal G\\otimes\\mathcal X$-measurable and each $P_\\gamma$ is a probability\nkernel ([[def-measure-kernel-and-probability-kernel]]). Assume that $\\pi$ is\ninvariant for every fixed kernel, meaning $\\pi P_\\gamma=\\pi$\n([[def-invariant-and-stationary-distribution-for-a-markov-kernel]]).\n\nAn **adaptive MCMC process** is a pair of measurable processes\n$(X_n,\\Gamma_n)_{n\\ge0}$ with $X_n\\in\\mathsf X$, $\\Gamma_n\\in\\Gamma$, and\nnatural filtration $\\mathcal F_n=\\sigma(X_0,\\Gamma_0,\\ldots,X_n,\\Gamma_n)$,\nsuch that for every $A\\in\\mathcal X$,\n$$\\mathbb P(X_{n+1}\\in A\\mid\\mathcal F_n)=P_{\\Gamma_n}(X_n,A)\\quad\\text{a.s.}$$\nThe update rule for $\\Gamma_{n+1}$ may depend on the history through time\n$n+1$; it is required only to make $\\Gamma_{n+1}$ a measurable random variable.\n\nFor $n\\ge0$, define the adaptation size\n$$D_n:=\\sup_{x\\in\\mathsf X}\\lVert P_{\\Gamma_{n+1}}(x,\\cdot)-P_{\\Gamma_n}(x,\\cdot)\\rVert_{\\rm TV},$$\nwhere total variation uses the convention\n$\\lVert\\mu-\\nu\\rVert_{\\rm TV}=\\sup_{A\\in\\mathcal X}|\\mu(A)-\\nu(A)|$\n([[def-total-variation-distance-for-probability-laws]]). Assume each $D_n$\nis measurable; it lies in $[0,1]$. The process has **diminishing\nadaptation** if $D_n\\to0$ in probability as $n\\to\\infty$. This condition does\nnot require $\\Gamma_n$ to converge.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-adaptive-mcmc-containment",
+          "source_section": "Definition",
+          "quote": "Use the adaptive MCMC setup of [[def-diminishing-adaptation]]. For\n$\\epsilon>0$, a state $x\\in\\mathsf X$, and a fixed parameter $\\gamma\\in\\Gamma$,\ndefine the convergence time\n$$M_\\epsilon(x,\\gamma):=\\inf\\{m\\in\\mathbb N:m\\ge1,\\ \\lVert P_\\gamma^m(x,\\cdot)-\\pi\\rVert_{\\rm TV}\\le\\epsilon\\},$$\nwith $\\inf\\varnothing=+\\infty$. The power $P_\\gamma^m$ is the $m$-fold\ncomposition of the fixed kernel $P_\\gamma$; it is not the adaptive transition\nlaw. Assume $M_\\epsilon(X_n,\\Gamma_n)$ is measurable for each $n$ and\n$\\epsilon>0$.\n\nFor a specified initial probability law $\\mu_0$ of $(X_0,\\Gamma_0)$, the\nadaptive process has **containment** if for every $\\epsilon,\\delta>0$ there is\nan integer $N=N(\\epsilon,\\delta)$ such that\n$$\\mathbb P_{\\mu_0}\\!\\left(M_\\epsilon(X_n,\\Gamma_n)\\le N\\right)\\ge1-\\delta\\quad\\text{for every }n\\ge0.$$\nA fixed initial pair $(x_*,\\gamma_*)$ is the special case\n$\\mu_0=\\delta_{(x_*,\\gamma_*)}$, equivalently the same probability bound\nconditional on $X_0=x_*$ and $\\Gamma_0=\\gamma_*$. Thus containment says that\nthe fixed-kernel convergence times, evaluated at the current state and\nparameter, form a sequence bounded in probability under the specified initial\nlaw. It does not assert a uniform deterministic bound for every possible\nstate and parameter.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a probability kernel on a measurable space $(E,\\mathcal E)$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure on $(E,\\mathcal E)$ ([[def-probability-measure]]). The\nprobability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a\n**stationary distribution** of $K$, when\n\n$$(\\pi K)(A):=\\int_E K(x,A)\\,\\pi(dx)=\\pi(A)\\qquad\\text{for every }A\\in\\mathcal E .$$\n\nThe set function $\\pi K$ is again a probability measure: for fixed $A$ the map\n$x\\mapsto K(x,A)$ is measurable and lies in $[0,1]$, so the integral exists in\n$[0,1]$; for pairwise disjoint $A_n\\in\\mathcal E$ the identity\n$K(x,\\bigcup_nA_n)=\\sum_nK(x,A_n)$ of the measure $K(x,\\cdot)$ and the\nmonotone convergence theorem for nonnegative functions\n([[thm-monotone-convergence-for-the-integral]]) give\n$\\sigma$-additivity of $\\pi K$; and $K(x,E)=1$ for every $x$ gives\n$(\\pi K)(E)=1$. Thus $(\\pi K)(A)=\\pi(A)$ is an identity between two probability\nmeasures evaluated at $A$.\n\nA $K$-chain whose initial law is $\\pi$ is called **stationary** when\n$\\pi K=\\pi$. Stationarity of the process is a statement about all of its\nfinite-dimensional laws and is proved, not assumed, from $\\pi K=\\pi$; see\n[[thm-invariant-initial-law-makes-the-chain-stationary]].\n\nOn a countable state space $E$ with sigma-algebra $2^E$ and transition matrix\n$p(x,y)=K(x,\\{y\\})$ ([[def-transition-matrix-and-n-step-transition-probabilities]]),\na measure on $E$ is its weighted sum of Dirac masses at singletons\n([[thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums]]), so\ninvariance is equivalent to the matrix identity\n\n$$\\pi(y)=\\sum_{x\\in E}\\pi(x)\\,p(x,y)\\qquad\\text{for every }y\\in E .$$\n\nThe definition fixes no irreducibility, aperiodicity or uniqueness hypothesis,\nand it selects no conditional-expectation versions; the display defines a\nsingle measure $\\pi K$ and asserts an identity for it. A transient, periodic or\nreducible chain may have several invariant probability measures or none.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-total-variation-distance-for-probability-laws",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ and $\\nu$ be probability measures on the same measurable space\n$(E,\\mathcal E)$ ([[def-probability-measure]]). Their **total variation\ndistance** is\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}:=\\sup_{A\\in\\mathcal E}\\bigl|\\mu(A)-\\nu(A)\\bigr| .$$\n\nFor every event $A$ the difference $\\mu(A)-\\nu(A)$ is a real number in\n$[-1,1]$, because both measures have total mass one; hence the set being\nmaximized is a nonempty subset of $[0,1]$ and the supremum lies in $[0,1]$.\nThe empty event and the whole space give the values $0$ and\n$|\\mu(E)-\\nu(E)|=0$, so the distance is zero when $\\mu=\\nu$, and it is symmetric\nin $\\mu$ and $\\nu$. This convention carries no factor $1/2$ in the supremum;\nit is therefore not the total variation norm of the signed measure $\\mu-\\nu$,\nwhich is twice the quantity above when that signed measure is considered on a\nmeasurable space where the decomposition is attained. On a countable state\nspace with its power-set sigma-algebra the supremum equals the half-$\\ell^1$\nsum $\\tfrac12\\sum_{x\\in E}|\\mu(\\{x\\})-\\nu(\\{x\\})|$; that identity is proved in\n[[lem-total-variation-half-l1-formula-on-a-countable-space]], not assumed here.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-total-variation-coupling-and-kernel-contraction",
+          "source_section": "Statement",
+          "quote": "Let $\\mu,\\nu$ be probability measures on $(\\mathsf X,\\mathcal X)$ and let\n$P$ be a probability kernel on that space. Then\n$$\\lVert\\mu-\\nu\\rVert_{\\rm TV}=\\sup_{f:\\mathsf X\\to[0,1]\\ \\mathcal X\\text{-measurable}}\\left|\\int f\\,d\\mu-\\int f\\,d\\nu\\right|,$$\n$$\\lVert\\mu P-\\nu P\\rVert_{\\rm TV}\\le\\lVert\\mu-\\nu\\rVert_{\\rm TV}.$$\nIf $(U,V)$ is a coupling of $\\mu$ and $\\nu$ on a probability space and\n$E$ is a measurable event on which $U=V$, then\n$$\\lVert\\mu-\\nu\\rVert_{\\rm TV}\\le\\mathbb P(E^c).$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-adaptive-mcmc-block-perturbation-bound",
+          "source_section": "Statement",
+          "quote": "Let $(X_n,\\Gamma_n)$ be an adaptive MCMC process with adaptation sizes $D_n$\nas in [[def-diminishing-adaptation]]. For integers $n\\ge0$ and $N\\ge1$, define\nthe frozen-kernel mixture $Q_{n,N}$ by\n$$Q_{n,N}(A):=\\mathbb E\\!\\left[P_{\\Gamma_n}^{N}(X_n,A)\\right]\\quad(A\\in\\mathcal X).$$\nThen $Q_{n,N}$ is a probability measure and\n$$\\left\\lVert\\mathcal L(X_{n+N})-Q_{n,N}\\right\\rVert_{\\rm TV}\\le\\sum_{i=0}^{N-1}\\sum_{j=0}^{i-1}\\mathbb E[D_{n+j}],$$\nwhere the inner sum is $0$ for $i=0$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $0\\le D_n\\le1$ and $D_n\\to0$ in probability, for each fixed $j\\ge0$ we have $\\mathbb E D_{n+j}\\to0$: for any $t>0$, $\\mathbb E D_{n+j}\\le t+\\mathbb P(D_{n+j}>t)$; first let $n\\to\\infty$ and then $t\\downarrow0$.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Assume simultaneous uniform ergodicity and fix a desired tolerance $\\eta>0$. Choose $N=N(\\eta/2)$ as in alternative 1. For the frozen mixture $Q_{n,N}$ from [F6], every state and parameter has $\\lVert P_{\\Gamma_n}^{N}(X_n,\\cdot)-\\pi\\rVert_{\\rm TV}\\le\\eta/2$, so convexity of the setwise supremum gives $\\lVert Q_{n,N}-\\pi\\rVert_{\\rm TV}\\le\\eta/2$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Now assume containment. Fix $\\eta>0$, take $\\epsilon=\\delta=\\eta/3$, and choose $N$ from alternative 2. On the event $M_\\epsilon(X_n,\\Gamma_n)\\le N$, the definition gives an iterate $m\\le N$ within $\\epsilon$ of $\\pi$; [F5] propagates this bound to the $N$th iterate. On the complementary event total variation is at most one. Therefore the frozen mixture satisfies $\\lVert Q_{n,N}-\\pi\\rVert_{\\rm TV}\\le\\epsilon+\\delta=2\\eta/3$ for every $n$.",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For this fixed $N$, [F6] and step 1.1 imply $\\lVert\\mathcal L(X_{n+N})-Q_{n,N}\\rVert_{\\rm TV}\\to0$, since its upper bound is a finite sum of expectations tending to zero. The triangle inequality and step 1.2 yield $\\limsup_{n\\to\\infty}\\lVert\\mathcal L(X_{n+N})-\\pi\\rVert_{\\rm TV}\\le\\eta/2$. As $n+N$ ranges over all sufficiently large times and $\\eta>0$ is arbitrary, the asserted convergence follows in alternative 1.",
+          "inputs": [
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The same fixed-block bound [F6] tends to zero by step 1.1. The triangle inequality gives $\\limsup_{n\\to\\infty}\\lVert\\mathcal L(X_{n+N})-\\pi\\rVert_{\\rm TV}\\le2\\eta/3<\\eta$. Again $N$ is fixed and $\\eta$ is arbitrary, proving the asserted convergence in alternative 2.",
+          "inputs": [
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The probability-measure or probability-kernel hypotheses exclude an empty state space; step 1.1 treats measurable events in the admitted space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers D_n=0; the proof takes positive eta down to zero without requiring zero tolerance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 uses the total-variation bound one on the exceptional containment event."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "On a singleton state space the marginal is pi at every time; step 1.2’s frozen mixture is exact."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint, one-sided limit, or endpoint parameter is part of this item’s claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 uses only displayed hypotheses, explicit finite constructions, and individual existential witnesses; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way definition, implication, example, or counterexample and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted in the Statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "singleton-state adaptive chain",
+          "method": "exact finite calculation",
+          "input": {
+            "space": [
+              "x"
+            ],
+            "pi": {
+              "x": 1
+            },
+            "kernel": {
+              "x": {
+                "x": 1
+              }
+            },
+            "adaptation": "constant"
+          },
+          "calculation": "The sole probability law is pi, every fixed iterate is pi, D_n=0, and the adaptive marginal equals pi at every time.",
+          "expected": {
+            "uniform_ergodicity": true,
+            "containment": true,
+            "marginal_distance": "0"
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "cor-adaptive-mcmc-containment-from-uniform-drift-minorization": {
+      "kind": "corollary",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-diminishing-adaptation",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X)$ and $(\\Gamma,\\mathcal G)$ be nonempty measurable\nspaces ([[def-measurable-space]]). Let $\\pi$ be a probability measure on\n$(\\mathsf X,\\mathcal X)$, and let $(P_\\gamma)_{\\gamma\\in\\Gamma}$ be a jointly\nmeasurable family of probability kernels on $\\mathsf X$: for every\n$A\\in\\mathcal X$, $(\\gamma,x)\\mapsto P_\\gamma(x,A)$ is\n$\\mathcal G\\otimes\\mathcal X$-measurable and each $P_\\gamma$ is a probability\nkernel ([[def-measure-kernel-and-probability-kernel]]). Assume that $\\pi$ is\ninvariant for every fixed kernel, meaning $\\pi P_\\gamma=\\pi$\n([[def-invariant-and-stationary-distribution-for-a-markov-kernel]]).\n\nAn **adaptive MCMC process** is a pair of measurable processes\n$(X_n,\\Gamma_n)_{n\\ge0}$ with $X_n\\in\\mathsf X$, $\\Gamma_n\\in\\Gamma$, and\nnatural filtration $\\mathcal F_n=\\sigma(X_0,\\Gamma_0,\\ldots,X_n,\\Gamma_n)$,\nsuch that for every $A\\in\\mathcal X$,\n$$\\mathbb P(X_{n+1}\\in A\\mid\\mathcal F_n)=P_{\\Gamma_n}(X_n,A)\\quad\\text{a.s.}$$\nThe update rule for $\\Gamma_{n+1}$ may depend on the history through time\n$n+1$; it is required only to make $\\Gamma_{n+1}$ a measurable random variable.\n\nFor $n\\ge0$, define the adaptation size\n$$D_n:=\\sup_{x\\in\\mathsf X}\\lVert P_{\\Gamma_{n+1}}(x,\\cdot)-P_{\\Gamma_n}(x,\\cdot)\\rVert_{\\rm TV},$$\nwhere total variation uses the convention\n$\\lVert\\mu-\\nu\\rVert_{\\rm TV}=\\sup_{A\\in\\mathcal X}|\\mu(A)-\\nu(A)|$\n([[def-total-variation-distance-for-probability-laws]]). Assume each $D_n$\nis measurable; it lies in $[0,1]$. The process has **diminishing\nadaptation** if $D_n\\to0$ in probability as $n\\to\\infty$. This condition does\nnot require $\\Gamma_n$ to converge.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-adaptive-mcmc-containment",
+          "source_section": "Definition",
+          "quote": "Use the adaptive MCMC setup of [[def-diminishing-adaptation]]. For\n$\\epsilon>0$, a state $x\\in\\mathsf X$, and a fixed parameter $\\gamma\\in\\Gamma$,\ndefine the convergence time\n$$M_\\epsilon(x,\\gamma):=\\inf\\{m\\in\\mathbb N:m\\ge1,\\ \\lVert P_\\gamma^m(x,\\cdot)-\\pi\\rVert_{\\rm TV}\\le\\epsilon\\},$$\nwith $\\inf\\varnothing=+\\infty$. The power $P_\\gamma^m$ is the $m$-fold\ncomposition of the fixed kernel $P_\\gamma$; it is not the adaptive transition\nlaw. Assume $M_\\epsilon(X_n,\\Gamma_n)$ is measurable for each $n$ and\n$\\epsilon>0$.\n\nFor a specified initial probability law $\\mu_0$ of $(X_0,\\Gamma_0)$, the\nadaptive process has **containment** if for every $\\epsilon,\\delta>0$ there is\nan integer $N=N(\\epsilon,\\delta)$ such that\n$$\\mathbb P_{\\mu_0}\\!\\left(M_\\epsilon(X_n,\\Gamma_n)\\le N\\right)\\ge1-\\delta\\quad\\text{for every }n\\ge0.$$\nA fixed initial pair $(x_*,\\gamma_*)$ is the special case\n$\\mu_0=\\delta_{(x_*,\\gamma_*)}$, equivalently the same probability bound\nconditional on $X_0=x_*$ and $\\Gamma_0=\\gamma_*$. Thus containment says that\nthe fixed-kernel convergence times, evaluated at the current state and\nparameter, form a sequence bounded in probability under the specified initial\nlaw. It does not assert a uniform deterministic bound for every possible\nstate and parameter.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-small-set-minorization-and-drift",
+          "source_section": "Definition",
+          "quote": "For a probability kernel $P$ on $(\\mathsf X,\\mathcal X)$ ([[def-measure-kernel-and-probability-kernel]]), a measurable set $C$ is **$(m,\\epsilon,\\nu)$-small** if $m\\ge1$ is an integer, $0<\\epsilon\\le1$, $\\nu$ is a probability measure ([[def-probability-measure]]), and\n$$P^m(x,A)\\ge\\epsilon\\nu(A)\\quad(x\\in C,\\ A\\in\\mathcal X).$$\nThe inequality is pointwise in $x$ and holds for every measurable $A$.\n\nA **geometric drift inequality outside $C$** consists of a finite-valued measurable $V:\\mathsf X\\to[1,\\infty)$, constants $0<\\lambda<1$ and $0\\le b<\\infty$, and\n$$PV(x):=\\int V(y)P(x,dy)\\le\\lambda V(x)+b\\,1_C(x)\\quad(x\\in\\mathsf X).$$\nThe terms small set and drift are separate hypotheses; neither definition asserts the existence of the other.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-adaptive-mcmc-uniform-drift-minorization-bound",
+          "source_section": "Statement",
+          "quote": "Let $(P_\\gamma)_{\\gamma\\in\\Gamma}$ be probability kernels on a measurable\nspace $(\\mathsf X,\\mathcal X)$ with a common invariant probability $\\pi$\n([[def-invariant-and-stationary-distribution-for-a-markov-kernel]]). Suppose\nthere are a measurable set $C$, a finite measurable $V:\\mathsf X\\to[1,\\infty)$,\nand constants $v\\ge1$, $0<\\delta\\le1$, $0<\\lambda<1$, and $0\\le b<\\infty$\nsuch that $\\sup_{x\\in C}V(x)\\le v$ and, for every $\\gamma$, there is a\nprobability measure $\\nu_\\gamma$ with $\\nu_\\gamma(C)=1$ satisfying\n$$P_\\gamma(x,A)\\ge\\delta\\nu_\\gamma(A)\\quad(x\\in C,\\ A\\in\\mathcal X),\\qquad P_\\gamma V(x):=\\int V(y)P_\\gamma(x,dy)\\le\\lambda V(x)+b1_C(x)\\quad(x\\in\\mathsf X).$$\nThen there are constants $M<\\infty$ and $0<\\rho<1$, depending only on\n$v,\\delta,\\lambda,b$, such that\n$$\\lVert P_\\gamma^n(x,\\cdot)-\\pi\\rVert_{\\rm TV}\\le M V(x)\\rho^n\\quad(x\\in\\mathsf X,\\ n\\ge0,\\ \\gamma\\in\\Gamma).$$\nThe support condition $\\nu_\\gamma(C)=1$ is the strong-aperiodicity\nhypothesis in the cited drift/minorization route.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-adaptive-mcmc-converges-under-uniform-ergodicity-or-containment",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal X)$ and $(\\Gamma,\\mathcal G)$, the jointly\nmeasurable probability-kernel family $(P_\\gamma)_{\\gamma\\in\\Gamma}$, common\ninvariant probability $\\pi$, and adaptive process $(X_n,\\Gamma_n)$ satisfy\n[[def-diminishing-adaptation]]. Fix an initial law $\\mu_0$ for\n$(X_0,\\Gamma_0)$; a fixed initial pair is the Dirac-law special case. If\ndiminishing adaptation holds under this law and either of the following\nconditions holds, then\n$$\\lVert\\mathcal L_{\\mu_0}(X_n)-\\pi\\rVert_{\\rm TV}\\longrightarrow0.$$\n\n1. **Simultaneous uniform ergodicity:** for every $\\epsilon>0$ there is an\n   integer $N(\\epsilon)\\ge1$ such that\n   $$\\sup_{x\\in\\mathsf X,\\,\\gamma\\in\\Gamma}\\lVert P_\\gamma^{N(\\epsilon)}(x,\\cdot)-\\pi\\rVert_{\\rm TV}\\le\\epsilon.$$\n\n2. **Containment:** for every $\\epsilon,\\delta>0$ there is an integer $N$\n   such that\n   $$\\mathbb P_{\\mu_0}\\!\\left(M_\\epsilon(X_n,\\Gamma_n)\\le N\\right)\\ge1-\\delta\\quad\\text{for every }n\\ge0,$$\n   where $M_\\epsilon$ is the fixed-kernel convergence time from\n   [[def-adaptive-mcmc-containment]].\n\nThe conclusion is convergence of the one-time marginal distributions. It does\nnot itself assert a strong law, a central limit theorem, or convergence of\nsample averages.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For each $r$, the conditional transition rule [F1] and the drift inequality [F3] give $\\mathbb E[(V\\wedge r)(X_{n+1})\\mid\\mathcal F_n]\\le\\lambda V(X_n)+b$. Take expectations and let $r\\to\\infty$ by [F6]; assuming $\\mathbb E V(X_n)<\\infty$, this gives $\\mathbb E V(X_{n+1})\\le\\lambda\\mathbb E V(X_n)+b$. Starting from the finite initial moment and iterating yields $\\sup_{n\\ge0}\\mathbb E V(X_n)\\le \\mathbb E V(X_0)+\\frac{b}{1-\\lambda}=:K<\\infty.$",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix $\\epsilon,\\delta>0$. Choose $R\\ge K/\\delta$ and then an integer $N\\ge1$ such that $MR\\rho^N\\le\\epsilon$. Markov's inequality [F7] and the moment bound in step 1.1 give $\\mathbb P(V(X_n)>R)\\le\\delta$ for every $n$. On the complementary event [F4] gives $\\lVert P_{\\Gamma_n}^{N}(X_n,\\cdot)-\\pi\\rVert_{\\rm TV}\\le\\epsilon$, so $M_\\epsilon(X_n,\\Gamma_n)\\le N$. This proves containment as defined in [F2].",
+          "inputs": [
+            "F2",
+            "F4",
+            "F7",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Diminishing adaptation is [F1], and containment is step 2.1. The containment branch of [F5] therefore gives $\\lVert\\mathcal L(X_n)-\\pi\\rVert_{\\rm TV}\\to0$.",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The probability-measure or probability-kernel hypotheses exclude an empty state space; step 1.1 treats measurable events in the admitted space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The drift constant b may be zero; steps 1.1–2.1 still give a finite moment bound and containment."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1 and [F7] use Markov’s bound for every positive delta; event probabilities remain at most one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to P=Pi and V=1; every fixed-kernel convergence time equals one."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint, one-sided limit, or endpoint parameter is part of this item’s claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 uses only displayed hypotheses, explicit finite constructions, and individual existential witnesses; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way definition, implication, example, or counterexample and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted in the Statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-state refresh kernel under shared drift data",
+          "method": "exact finite calculation",
+          "input": {
+            "space": [
+              "0",
+              "1"
+            ],
+            "pi": [
+              "1/2",
+              "1/2"
+            ],
+            "kernel": "Pi",
+            "C": [
+              "0",
+              "1"
+            ],
+            "V": {
+              "0": 1,
+              "1": 1
+            },
+            "v": 1,
+            "delta": 1,
+            "lambda": "1/2",
+            "b": "1/2",
+            "initial": "delta_0"
+          },
+          "calculation": "EV(X_0)=1. The drift and minorization hold as stated; P(x,.)=pi after one step, so M_epsilon(x,gamma)=1 for every epsilon>0 and containment holds.",
+          "expected": {
+            "initial_V_moment": 1,
+            "containment": true,
+            "marginal_distance_after_one_step": "0"
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "cex-diminishing-adaptation-alone-does-not-imply-strong-law": {
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a probability kernel on a measurable space $(E,\\mathcal E)$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure on $(E,\\mathcal E)$ ([[def-probability-measure]]). The\nprobability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a\n**stationary distribution** of $K$, when\n\n$$(\\pi K)(A):=\\int_E K(x,A)\\,\\pi(dx)=\\pi(A)\\qquad\\text{for every }A\\in\\mathcal E .$$\n\nThe set function $\\pi K$ is again a probability measure: for fixed $A$ the map\n$x\\mapsto K(x,A)$ is measurable and lies in $[0,1]$, so the integral exists in\n$[0,1]$; for pairwise disjoint $A_n\\in\\mathcal E$ the identity\n$K(x,\\bigcup_nA_n)=\\sum_nK(x,A_n)$ of the measure $K(x,\\cdot)$ and the\nmonotone convergence theorem for nonnegative functions\n([[thm-monotone-convergence-for-the-integral]]) give\n$\\sigma$-additivity of $\\pi K$; and $K(x,E)=1$ for every $x$ gives\n$(\\pi K)(E)=1$. Thus $(\\pi K)(A)=\\pi(A)$ is an identity between two probability\nmeasures evaluated at $A$.\n\nA $K$-chain whose initial law is $\\pi$ is called **stationary** when\n$\\pi K=\\pi$. Stationarity of the process is a statement about all of its\nfinite-dimensional laws and is proved, not assumed, from $\\pi K=\\pi$; see\n[[thm-invariant-initial-law-makes-the-chain-stationary]].\n\nOn a countable state space $E$ with sigma-algebra $2^E$ and transition matrix\n$p(x,y)=K(x,\\{y\\})$ ([[def-transition-matrix-and-n-step-transition-probabilities]]),\na measure on $E$ is its weighted sum of Dirac masses at singletons\n([[thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums]]), so\ninvariance is equivalent to the matrix identity\n\n$$\\pi(y)=\\sum_{x\\in E}\\pi(x)\\,p(x,y)\\qquad\\text{for every }y\\in E .$$\n\nThe definition fixes no irreducibility, aperiodicity or uniqueness hypothesis,\nand it selects no conditional-expectation versions; the display defines a\nsingle measure $\\pi K$ and asserts an identity for it. A transient, periodic or\nreducible chain may have several invariant probability measures or none.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-total-variation-distance-for-probability-laws",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ and $\\nu$ be probability measures on the same measurable space\n$(E,\\mathcal E)$ ([[def-probability-measure]]). Their **total variation\ndistance** is\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}:=\\sup_{A\\in\\mathcal E}\\bigl|\\mu(A)-\\nu(A)\\bigr| .$$\n\nFor every event $A$ the difference $\\mu(A)-\\nu(A)$ is a real number in\n$[-1,1]$, because both measures have total mass one; hence the set being\nmaximized is a nonempty subset of $[0,1]$ and the supremum lies in $[0,1]$.\nThe empty event and the whole space give the values $0$ and\n$|\\mu(E)-\\nu(E)|=0$, so the distance is zero when $\\mu=\\nu$, and it is symmetric\nin $\\mu$ and $\\nu$. This convention carries no factor $1/2$ in the supremum;\nit is therefore not the total variation norm of the signed measure $\\mu-\\nu$,\nwhich is twice the quantity above when that signed measure is considered on a\nmeasurable space where the decomposition is attained. On a countable state\nspace with its power-set sigma-algebra the supremum equals the half-$\\ell^1$\nsum $\\tfrac12\\sum_{x\\in E}|\\mu(\\{x\\})-\\nu(\\{x\\})|$; that identity is proved in\n[[lem-total-variation-half-l1-formula-on-a-countable-space]], not assumed here.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-diminishing-adaptation",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X)$ and $(\\Gamma,\\mathcal G)$ be nonempty measurable\nspaces ([[def-measurable-space]]). Let $\\pi$ be a probability measure on\n$(\\mathsf X,\\mathcal X)$, and let $(P_\\gamma)_{\\gamma\\in\\Gamma}$ be a jointly\nmeasurable family of probability kernels on $\\mathsf X$: for every\n$A\\in\\mathcal X$, $(\\gamma,x)\\mapsto P_\\gamma(x,A)$ is\n$\\mathcal G\\otimes\\mathcal X$-measurable and each $P_\\gamma$ is a probability\nkernel ([[def-measure-kernel-and-probability-kernel]]). Assume that $\\pi$ is\ninvariant for every fixed kernel, meaning $\\pi P_\\gamma=\\pi$\n([[def-invariant-and-stationary-distribution-for-a-markov-kernel]]).\n\nAn **adaptive MCMC process** is a pair of measurable processes\n$(X_n,\\Gamma_n)_{n\\ge0}$ with $X_n\\in\\mathsf X$, $\\Gamma_n\\in\\Gamma$, and\nnatural filtration $\\mathcal F_n=\\sigma(X_0,\\Gamma_0,\\ldots,X_n,\\Gamma_n)$,\nsuch that for every $A\\in\\mathcal X$,\n$$\\mathbb P(X_{n+1}\\in A\\mid\\mathcal F_n)=P_{\\Gamma_n}(X_n,A)\\quad\\text{a.s.}$$\nThe update rule for $\\Gamma_{n+1}$ may depend on the history through time\n$n+1$; it is required only to make $\\Gamma_{n+1}$ a measurable random variable.\n\nFor $n\\ge0$, define the adaptation size\n$$D_n:=\\sup_{x\\in\\mathsf X}\\lVert P_{\\Gamma_{n+1}}(x,\\cdot)-P_{\\Gamma_n}(x,\\cdot)\\rVert_{\\rm TV},$$\nwhere total variation uses the convention\n$\\lVert\\mu-\\nu\\rVert_{\\rm TV}=\\sup_{A\\in\\mathcal X}|\\mu(A)-\\nu(A)|$\n([[def-total-variation-distance-for-probability-laws]]). Assume each $D_n$\nis measurable; it lies in $[0,1]$. The process has **diminishing\nadaptation** if $D_n\\to0$ in probability as $n\\to\\infty$. This condition does\nnot require $\\Gamma_n$ to converge.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-countable-product-of-probability-spaces",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and dependent choice. For probability spaces\n$(E_n,\\mathcal E_n,\\mu_n)_{n\\in\\mathbb N}$ there is a unique probability measure\n$\\mu$ on $\\mathcal C_{\\mathbb N}$ such that, for every finite $F$, its\n$F$-coordinate marginal is $\\bigotimes_{n\\in F}\\mu_n$.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Every displayed matrix has probability rows, is symmetric, and has column sums one. Thus each is a probability kernel and $\\pi P_i=\\pi$ by [F1] and [F3]. For a two-state symmetric kernel with flip probability $q$, $(\\delta_x-\\pi)P=(1-2q)(\\delta_x-\\pi)$; induction gives $P^m(x,\\cdot)-\\pi=(1-2q)^m(\\delta_x-\\pi)$. For $P_0$ and $P_1$, $|1-2q|=4/5$, while $P_2=\\Pi$ reaches $\\pi$ in one step. Since $\\lVert\\delta_x-\\pi\\rVert_{\\rm TV}=1/2$ by [F4], $$\\sup_{x\\in\\mathsf X,\\,i\\in\\{0,1,2\\}}\\lVert P_i^m(x,\\cdot)-\\pi\\rVert_{\\rm TV}\\le\\tfrac12(4/5)^m\\quad(m\\ge0).$$ The family is simultaneously uniformly ergodic.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For $k\\in\\mathbb N$, let $L_k=2^{2^k}$ and $s_k=\\sum_{j<k}L_j$, the number of transitions before block $k$. Since $\\sum_{j<k}L_j\\le k2^{2^{k-1}}$, $$\\frac{s_k}{L_k}\\le k2^{-2^{k-1}}\\longrightarrow0.$$",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "For each $k$, equip the finite space $$\\Omega_k=\\{0,\\ldots,k\\}\\times\\{1,\\ldots,10\\}^{L_k}$$ with its uniform probability measure. Write a coordinate as $(J_k,U_{k,0},\\ldots,U_{k,L_k-1})$ and put $I_k=1_{\\{J_k=0\\}}$. Direct counting gives $\\mathbb P(I_k=1)=1/(k+1)$; conditional on any value of $J_k$, the $U_{k,t}$ are independent and uniform on $\\{1,\\ldots,10\\}$, with a law not depending on $J_k$. The countable product over $k\\in\\mathbb N$ exists by [F6] under [A1]–[A2].",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "In block $k$, for its first transition $n=s_k$ set $\\Gamma_n=2$ and use $U_{k,0}$ to draw from $P_2$ (the next state is $0$ iff $U_{k,0}\\le5$). For $n=s_k+t$ with $1\\le t<L_k$, set $\\Gamma_n=2$ if $I_k=0$; if $I_k=1$, set $\\Gamma_n=0$ when $X_n=0$ and $\\Gamma_n=1$ when $X_n=1$. Use $U_{k,t}$ to sample the selected matrix row: for $P_0$ use thresholds $9$ and $1$ for rows $0$ and $1$ respectively, for $P_1$ use thresholds $1$ and $9$, and for $P_2$ use threshold $5$; the next state is $0$ exactly when $U_{k,t}$ is at most the row's threshold. This recursively defines measurable $X_n$ and $\\Gamma_n$. Each next $U_{k,t}$ is independent of the gate and earlier block coordinates by [F2] and the finite product counting in step 1.3; different blocks have the product marginals in [F6]. Therefore conditional on the history, $X_{n+1}$ has law $P_{\\Gamma_n}(X_n,\\cdot)$, so this is an adaptive MCMC process with the stated kernel family.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "step 1.1",
+            "step 1.3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $I_k=0$, every parameter in block $k$ is $2$, and the next block also starts with parameter $2$; hence $D_n=0$ at every transition whose current block has gate zero. If $I_k=1$, then $D_n\\le1$. For each $n$ in block $k$, $$\\mathbb P(D_n>0)\\le\\mathbb P(I_k=1)=1/(k+1)\\longrightarrow0$$ as $n\\to\\infty$, because each block is finite and its index tends to infinity. Thus $D_n\\to0$ in probability by [F5].",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.2",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "Conditional on $I_k=1$, for each $1\\le t<L_k$ the active rule uses $P_0$ from state $0$ and $P_1$ from state $1$. In either case the next state is $0$ iff $U_{k,t}\\le9$. Hence $$Z_{k,t}:=1_{\\{X_{s_k+t+1}=0\\}}=1_{\\{U_{k,t}\\le9\\}}$$ are independent Bernoulli variables with success probability $p=9/10$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "step 1.3",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Put $N_k=L_k-1$ and $\\bar Z_k=N_k^{-1}\\sum_{t=1}^{N_k}Z_{k,t}$. Under $I_k=1$, each centered variable $Z_{k,t}-p$ has mean zero and second moment $p(1-p)=9/100$; distinct centered variables have zero product expectation by the finite product law of the $U_{k,t}$. Expanding the square and using [F8]–[F9] gives $$\\mathbb E[(\\bar Z_k-p)^2\\mid I_k=1]=\\frac{9}{100N_k}.$$ Since $\\bar Z_k<4/5$ implies $(\\bar Z_k-p)^2>1/100$, Markov's inequality [F10] yields $$\\mathbb P(\\bar Z_k<4/5\\mid I_k=1)\\le\\frac9{N_k}.$$",
+          "inputs": [
+            "F2",
+            "F6",
+            "F8",
+            "F9",
+            "F10",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Let $H_k=\\{I_k=1,\\ \\bar Z_k\\ge4/5\\}$. From steps 1.3 and 4.1, $$\\mathbb P(H_k)\\ge\\frac1{k+1}\\left(1-\\frac9{L_k-1}\\right)\\ge\\frac1{2(k+1)}$$ for all sufficiently large $k$, so $\\sum_k\\mathbb P(H_k)=\\infty$. Each $H_k$ is a function only of coordinate $\\Omega_k$, so [F6] makes these events independent. For any fixed $K$, $$\\mathbb P\\!\\left(\\bigcap_{k=K}^m H_k^c\\right)=\\prod_{k=K}^m(1-\\mathbb P(H_k))\\le\\exp\\!\\left(-\\sum_{k=K}^m\\mathbb P(H_k)\\right)\\longrightarrow0.$$ Thus the probability of no $H_k$ after $K$ is zero; [F7] applied to the countable union over $K$ shows that infinitely many $H_k$ occur almost surely.",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 1.3",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "At the endpoint $n_k=s_k+L_k$ of any block with $H_k$, the active outputs $X_{s_k+2},\\ldots,X_{s_k+L_k}$ contain at least $(4/5)(L_k-1)$ zeros. Therefore $$\\frac1{n_k}\\sum_{j=1}^{n_k}1_{\\{X_j=0\\}}\\ge\\frac{(4/5)(L_k-1)}{s_k+L_k}\\longrightarrow\\frac45$$ along the infinitely many such blocks, by step 1.2. But $\\pi(1_{\\{0\\}})=1/2$. The strong law fails almost surely despite simultaneous uniform ergodicity and diminishing adaptation.",
+          "inputs": [
+            "step 1.2",
+            "step 5.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The probability-measure or probability-kernel hypotheses exclude an empty state space; step 1.1 treats measurable events in the admitted space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives D_n=0 throughout every inactive block; active-block changes occur only on gates whose probability tends to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 resets each block with P2=Pi; the nonconstant indicator test still has empirical averages bounded above its target on infinitely many active-block endpoints."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 resets before each slow block, so the path behavior does not depend on a nontrivial initial state."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Block index k begins at 0; step 1.2 defines s_0=0, and step 1.3 has the singleton gate space at k=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts A1–A2 and step 1.3 explicitly invoke AC_omega and DC only through the countable-product probability theorem; schedule and finite-bit arguments are direct."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way definition, implication, example, or counterexample and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted in the Statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "finite uniformly ergodic kernel family",
+          "method": "exact finite calculation",
+          "input": {
+            "space": [
+              "0",
+              "1"
+            ],
+            "pi": [
+              "1/2",
+              "1/2"
+            ],
+            "P0": [
+              [
+                "9/10",
+                "1/10"
+              ],
+              [
+                "1/10",
+                "9/10"
+              ]
+            ],
+            "P1": [
+              [
+                "1/10",
+                "9/10"
+              ],
+              [
+                "9/10",
+                "1/10"
+              ]
+            ],
+            "P2": [
+              [
+                "1/2",
+                "1/2"
+              ],
+              [
+                "1/2",
+                "1/2"
+              ]
+            ]
+          },
+          "calculation": "All matrices are symmetric and doubly stochastic. The nontrivial eigenvalues are 4/5, -4/5, and 0, so sup_{x,i} ||P_i^m(x,.)-pi||_TV <= (1/2)(4/5)^m for every m>=0.",
+          "expected": {
+            "common_invariant": [
+              "1/2",
+              "1/2"
+            ],
+            "uniform_rate": "(1/2)(4/5)^m"
+          }
+        }
+      ],
+      "axioms_used": [
+        "AC_omega",
+        "DC"
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-countable-choice",
+          "steps": [
+            "1.3"
+          ],
+          "use": "Countable Choice is used only through the countable-product probability theorem for the finite-coordinate transition product and its finite marginals."
+        },
+        {
+          "axiom": "def-dependent-choice",
+          "steps": [
+            "1.3"
+          ],
+          "use": "Dependent Choice is used only through the same product theorem; schedule arithmetic and finite bit counts are direct."
+        }
+      ]
+    },
+    "ex-adaptive-mcmc-loss-of-containment": {
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a probability kernel on a measurable space $(E,\\mathcal E)$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure on $(E,\\mathcal E)$ ([[def-probability-measure]]). The\nprobability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a\n**stationary distribution** of $K$, when\n\n$$(\\pi K)(A):=\\int_E K(x,A)\\,\\pi(dx)=\\pi(A)\\qquad\\text{for every }A\\in\\mathcal E .$$\n\nThe set function $\\pi K$ is again a probability measure: for fixed $A$ the map\n$x\\mapsto K(x,A)$ is measurable and lies in $[0,1]$, so the integral exists in\n$[0,1]$; for pairwise disjoint $A_n\\in\\mathcal E$ the identity\n$K(x,\\bigcup_nA_n)=\\sum_nK(x,A_n)$ of the measure $K(x,\\cdot)$ and the\nmonotone convergence theorem for nonnegative functions\n([[thm-monotone-convergence-for-the-integral]]) give\n$\\sigma$-additivity of $\\pi K$; and $K(x,E)=1$ for every $x$ gives\n$(\\pi K)(E)=1$. Thus $(\\pi K)(A)=\\pi(A)$ is an identity between two probability\nmeasures evaluated at $A$.\n\nA $K$-chain whose initial law is $\\pi$ is called **stationary** when\n$\\pi K=\\pi$. Stationarity of the process is a statement about all of its\nfinite-dimensional laws and is proved, not assumed, from $\\pi K=\\pi$; see\n[[thm-invariant-initial-law-makes-the-chain-stationary]].\n\nOn a countable state space $E$ with sigma-algebra $2^E$ and transition matrix\n$p(x,y)=K(x,\\{y\\})$ ([[def-transition-matrix-and-n-step-transition-probabilities]]),\na measure on $E$ is its weighted sum of Dirac masses at singletons\n([[thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums]]), so\ninvariance is equivalent to the matrix identity\n\n$$\\pi(y)=\\sum_{x\\in E}\\pi(x)\\,p(x,y)\\qquad\\text{for every }y\\in E .$$\n\nThe definition fixes no irreducibility, aperiodicity or uniqueness hypothesis,\nand it selects no conditional-expectation versions; the display defines a\nsingle measure $\\pi K$ and asserts an identity for it. A transient, periodic or\nreducible chain may have several invariant probability measures or none.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-total-variation-distance-for-probability-laws",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ and $\\nu$ be probability measures on the same measurable space\n$(E,\\mathcal E)$ ([[def-probability-measure]]). Their **total variation\ndistance** is\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}:=\\sup_{A\\in\\mathcal E}\\bigl|\\mu(A)-\\nu(A)\\bigr| .$$\n\nFor every event $A$ the difference $\\mu(A)-\\nu(A)$ is a real number in\n$[-1,1]$, because both measures have total mass one; hence the set being\nmaximized is a nonempty subset of $[0,1]$ and the supremum lies in $[0,1]$.\nThe empty event and the whole space give the values $0$ and\n$|\\mu(E)-\\nu(E)|=0$, so the distance is zero when $\\mu=\\nu$, and it is symmetric\nin $\\mu$ and $\\nu$. This convention carries no factor $1/2$ in the supremum;\nit is therefore not the total variation norm of the signed measure $\\mu-\\nu$,\nwhich is twice the quantity above when that signed measure is considered on a\nmeasurable space where the decomposition is attained. On a countable state\nspace with its power-set sigma-algebra the supremum equals the half-$\\ell^1$\nsum $\\tfrac12\\sum_{x\\in E}|\\mu(\\{x\\})-\\nu(\\{x\\})|$; that identity is proved in\n[[lem-total-variation-half-l1-formula-on-a-countable-space]], not assumed here.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-diminishing-adaptation",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X)$ and $(\\Gamma,\\mathcal G)$ be nonempty measurable\nspaces ([[def-measurable-space]]). Let $\\pi$ be a probability measure on\n$(\\mathsf X,\\mathcal X)$, and let $(P_\\gamma)_{\\gamma\\in\\Gamma}$ be a jointly\nmeasurable family of probability kernels on $\\mathsf X$: for every\n$A\\in\\mathcal X$, $(\\gamma,x)\\mapsto P_\\gamma(x,A)$ is\n$\\mathcal G\\otimes\\mathcal X$-measurable and each $P_\\gamma$ is a probability\nkernel ([[def-measure-kernel-and-probability-kernel]]). Assume that $\\pi$ is\ninvariant for every fixed kernel, meaning $\\pi P_\\gamma=\\pi$\n([[def-invariant-and-stationary-distribution-for-a-markov-kernel]]).\n\nAn **adaptive MCMC process** is a pair of measurable processes\n$(X_n,\\Gamma_n)_{n\\ge0}$ with $X_n\\in\\mathsf X$, $\\Gamma_n\\in\\Gamma$, and\nnatural filtration $\\mathcal F_n=\\sigma(X_0,\\Gamma_0,\\ldots,X_n,\\Gamma_n)$,\nsuch that for every $A\\in\\mathcal X$,\n$$\\mathbb P(X_{n+1}\\in A\\mid\\mathcal F_n)=P_{\\Gamma_n}(X_n,A)\\quad\\text{a.s.}$$\nThe update rule for $\\Gamma_{n+1}$ may depend on the history through time\n$n+1$; it is required only to make $\\Gamma_{n+1}$ a measurable random variable.\n\nFor $n\\ge0$, define the adaptation size\n$$D_n:=\\sup_{x\\in\\mathsf X}\\lVert P_{\\Gamma_{n+1}}(x,\\cdot)-P_{\\Gamma_n}(x,\\cdot)\\rVert_{\\rm TV},$$\nwhere total variation uses the convention\n$\\lVert\\mu-\\nu\\rVert_{\\rm TV}=\\sup_{A\\in\\mathcal X}|\\mu(A)-\\nu(A)|$\n([[def-total-variation-distance-for-probability-laws]]). Assume each $D_n$\nis measurable; it lies in $[0,1]$. The process has **diminishing\nadaptation** if $D_n\\to0$ in probability as $n\\to\\infty$. This condition does\nnot require $\\Gamma_n$ to converge.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-adaptive-mcmc-containment",
+          "source_section": "Definition",
+          "quote": "Use the adaptive MCMC setup of [[def-diminishing-adaptation]]. For\n$\\epsilon>0$, a state $x\\in\\mathsf X$, and a fixed parameter $\\gamma\\in\\Gamma$,\ndefine the convergence time\n$$M_\\epsilon(x,\\gamma):=\\inf\\{m\\in\\mathbb N:m\\ge1,\\ \\lVert P_\\gamma^m(x,\\cdot)-\\pi\\rVert_{\\rm TV}\\le\\epsilon\\},$$\nwith $\\inf\\varnothing=+\\infty$. The power $P_\\gamma^m$ is the $m$-fold\ncomposition of the fixed kernel $P_\\gamma$; it is not the adaptive transition\nlaw. Assume $M_\\epsilon(X_n,\\Gamma_n)$ is measurable for each $n$ and\n$\\epsilon>0$.\n\nFor a specified initial probability law $\\mu_0$ of $(X_0,\\Gamma_0)$, the\nadaptive process has **containment** if for every $\\epsilon,\\delta>0$ there is\nan integer $N=N(\\epsilon,\\delta)$ such that\n$$\\mathbb P_{\\mu_0}\\!\\left(M_\\epsilon(X_n,\\Gamma_n)\\le N\\right)\\ge1-\\delta\\quad\\text{for every }n\\ge0.$$\nA fixed initial pair $(x_*,\\gamma_*)$ is the special case\n$\\mu_0=\\delta_{(x_*,\\gamma_*)}$, equivalently the same probability bound\nconditional on $X_0=x_*$ and $\\Gamma_0=\\gamma_*$. Thus containment says that\nthe fixed-kernel convergence times, evaluated at the current state and\nparameter, form a sequence bounded in probability under the specified initial\nlaw. It does not assert a uniform deterministic bound for every possible\nstate and parameter.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For every $\\gamma>0$, $\\pi P_\\gamma=(1-\\gamma)\\pi+\\gamma\\pi=\\pi$. The same projection identity $\\Pi^2=\\Pi$ gives $P_\\gamma^m(x,\\cdot)=(1-\\gamma)^m\\delta_x+\\bigl(1-(1-\\gamma)^m\\bigr)\\pi,$ so $\\lVert P_\\gamma^m(x,\\cdot)-\\pi\\rVert_{\\rm TV}=(1-\\gamma)^m/2\\to0$ for each fixed $\\gamma$. Thus all individual kernels are ergodic for the common invariant target.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The difference of two successive rows is $(\\Gamma_{n+1}-\\Gamma_n)(\\pi-\\delta_x)$, so $D_n=|\\Gamma_{n+1}-\\Gamma_n|/2\\to0$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Let $r_0=1$ and $r_n=\\prod_{j=0}^{n-1}(1-\\Gamma_j)$. The law recursion $\\mu_{n+1}=\\mu_nP_{\\Gamma_n}$ gives $\\mu_n=r_n\\delta_0+(1-r_n)\\pi$. Since $\\sum_j\\Gamma_j=1/2$ and $\\Gamma_j\\le1/4$, the elementary bound $\\log(1-u)\\ge-2u$ for $0\\le u\\le1/2$ yields $r_n\\ge\\exp(-2\\sum_j\\Gamma_j)=e^{-1}$. Hence $\\lVert\\mu_n-\\pi\\rVert_{\\rm TV}=r_n/2\\ge e^{-1}/2$, so the marginal law does not converge to $\\pi$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For $\\epsilon=1/4$, the formula in step 1.1 shows $M_\\epsilon(x,\\Gamma_n)\\to\\infty$ for both states as $\\Gamma_n\\to0$. Thus for every finite $N$, the probability of $M_\\epsilon(X_n,\\Gamma_n)\\le N$ is eventually zero, contradicting containment in [F5].",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The probability-measure or probability-kernel hypotheses exclude an empty state space; step 1.1 treats measurable events in the admitted space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The limit of gamma_n is zero but every fixed gamma_n is positive; step 1.3 shows the product refresh probability stays bounded away from zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1’s fixed-kernel formula is valid at gamma=1 as well as the scheduled values."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 permits gamma=1 with immediate refresh, while the example’s schedule is strictly smaller."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 covers every m>=0; the schedule uses positive gamma_n<=1/4 and treats zero only as a limiting parameter, not an included fixed kernel."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 uses only displayed hypotheses, explicit finite constructions, and individual existential witnesses; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way definition, implication, example, or counterexample and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted in the Statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-state refresh matrix at gamma one half",
+          "method": "exact finite calculation",
+          "input": {
+            "space": [
+              "0",
+              "1"
+            ],
+            "pi": [
+              "1/2",
+              "1/2"
+            ],
+            "gamma": "1/2"
+          },
+          "calculation": "P=[[3/4,1/4],[1/4,3/4]], pi P=pi, and from state 0 the distance after m steps is (1/2)^m/2. The displayed formula is finite at every m and the convergence time tends to infinity when gamma tends to zero.",
+          "expected": {
+            "one_step_distance": "1/4",
+            "invariant_law": [
+              "1/2",
+              "1/2"
+            ]
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    },
+    "ex-uniformly-ergodic-adaptive-mcmc-family": {
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-general-state-reversibility-by-symmetric-flow-measure",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X)$ be a measurable space, let $P$ be a probability\nkernel on it, meaning that $P(x,\\cdot)$ is a probability measure for each $x$\nand $x\\mapsto P(x,A)$ is measurable for each $A\\in\\mathcal X$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure, that is a countably additive measure of total mass one\n([[def-probability-measure]]). The product sigma-algebra\n$\\mathcal X\\otimes\\mathcal X$ is generated by measurable rectangles\n([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). The joint\nflow measure of $(\\pi,P)$ is the probability measure $\\Lambda_{\\pi,P}$ on\n$(\\mathsf X\\times\\mathsf X,\\mathcal X\\otimes\\mathcal X)$ given, for each\n$C\\in\\mathcal X\\otimes\\mathcal X$, by\n\n$$\\Lambda_{\\pi,P}(C):=\\int_{\\mathsf X}P(x,C_x)\\,\\pi(dx),\\qquad C_x:=\\{y\\in\\mathsf X:(x,y)\\in C\\}.$$\n\nExistence, countable additivity, and the nonnegative iterated-integral identity\nfor this measure follow from\n[[lem-prior-and-model-kernel-define-joint-law]]. Let $\\tau(x,y):=(y,x)$ be\nthe coordinate-swap map. It is measurable because the preimage of a measurable\nrectangle $A\\times B$ is $B\\times A$ and such rectangles generate the product\nsigma-algebra. Define the transpose measure by\n$\\Lambda_{\\pi,P}^{\\top}(C):=\\Lambda_{\\pi,P}(\\tau^{-1}(C))$.\n\nThe kernel $P$ is **reversible with respect to $\\pi$** when\n$$\\Lambda_{\\pi,P}=\\Lambda_{\\pi,P}^{\\top}.$$\nThis definition uses equality of measures and requires no density, standard\nBorel assumption, or prior assumption that $\\pi$ is invariant.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-general-state-reversibility-implies-invariance",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal X)$ be a measurable space, $P$ a probability kernel\n([[def-measure-kernel-and-probability-kernel]]) on it, and $\\pi$ a probability\nmeasure ([[def-probability-measure]]) on it. If $P$ is reversible with\nrespect to $\\pi$ in the sense of\n[[def-general-state-reversibility-by-symmetric-flow-measure]], then $\\pi$ is\ninvariant for $P$: for every $A\\in\\mathcal X$,\n\n$$\\int_{\\mathsf X}P(x,A)\\,\\pi(dx)=\\pi(A).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-total-variation-distance-for-probability-laws",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ and $\\nu$ be probability measures on the same measurable space\n$(E,\\mathcal E)$ ([[def-probability-measure]]). Their **total variation\ndistance** is\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}:=\\sup_{A\\in\\mathcal E}\\bigl|\\mu(A)-\\nu(A)\\bigr| .$$\n\nFor every event $A$ the difference $\\mu(A)-\\nu(A)$ is a real number in\n$[-1,1]$, because both measures have total mass one; hence the set being\nmaximized is a nonempty subset of $[0,1]$ and the supremum lies in $[0,1]$.\nThe empty event and the whole space give the values $0$ and\n$|\\mu(E)-\\nu(E)|=0$, so the distance is zero when $\\mu=\\nu$, and it is symmetric\nin $\\mu$ and $\\nu$. This convention carries no factor $1/2$ in the supremum;\nit is therefore not the total variation norm of the signed measure $\\mu-\\nu$,\nwhich is twice the quantity above when that signed measure is considered on a\nmeasurable space where the decomposition is attained. On a countable state\nspace with its power-set sigma-algebra the supremum equals the half-$\\ell^1$\nsum $\\tfrac12\\sum_{x\\in E}|\\mu(\\{x\\})-\\nu(\\{x\\})|$; that identity is proved in\n[[lem-total-variation-half-l1-formula-on-a-countable-space]], not assumed here.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-diminishing-adaptation",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X)$ and $(\\Gamma,\\mathcal G)$ be nonempty measurable\nspaces ([[def-measurable-space]]). Let $\\pi$ be a probability measure on\n$(\\mathsf X,\\mathcal X)$, and let $(P_\\gamma)_{\\gamma\\in\\Gamma}$ be a jointly\nmeasurable family of probability kernels on $\\mathsf X$: for every\n$A\\in\\mathcal X$, $(\\gamma,x)\\mapsto P_\\gamma(x,A)$ is\n$\\mathcal G\\otimes\\mathcal X$-measurable and each $P_\\gamma$ is a probability\nkernel ([[def-measure-kernel-and-probability-kernel]]). Assume that $\\pi$ is\ninvariant for every fixed kernel, meaning $\\pi P_\\gamma=\\pi$\n([[def-invariant-and-stationary-distribution-for-a-markov-kernel]]).\n\nAn **adaptive MCMC process** is a pair of measurable processes\n$(X_n,\\Gamma_n)_{n\\ge0}$ with $X_n\\in\\mathsf X$, $\\Gamma_n\\in\\Gamma$, and\nnatural filtration $\\mathcal F_n=\\sigma(X_0,\\Gamma_0,\\ldots,X_n,\\Gamma_n)$,\nsuch that for every $A\\in\\mathcal X$,\n$$\\mathbb P(X_{n+1}\\in A\\mid\\mathcal F_n)=P_{\\Gamma_n}(X_n,A)\\quad\\text{a.s.}$$\nThe update rule for $\\Gamma_{n+1}$ may depend on the history through time\n$n+1$; it is required only to make $\\Gamma_{n+1}$ a measurable random variable.\n\nFor $n\\ge0$, define the adaptation size\n$$D_n:=\\sup_{x\\in\\mathsf X}\\lVert P_{\\Gamma_{n+1}}(x,\\cdot)-P_{\\Gamma_n}(x,\\cdot)\\rVert_{\\rm TV},$$\nwhere total variation uses the convention\n$\\lVert\\mu-\\nu\\rVert_{\\rm TV}=\\sup_{A\\in\\mathcal X}|\\mu(A)-\\nu(A)|$\n([[def-total-variation-distance-for-probability-laws]]). Assume each $D_n$\nis measurable; it lies in $[0,1]$. The process has **diminishing\nadaptation** if $D_n\\to0$ in probability as $n\\to\\infty$. This condition does\nnot require $\\Gamma_n$ to converge.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-adaptive-mcmc-converges-under-uniform-ergodicity-or-containment",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal X)$ and $(\\Gamma,\\mathcal G)$, the jointly\nmeasurable probability-kernel family $(P_\\gamma)_{\\gamma\\in\\Gamma}$, common\ninvariant probability $\\pi$, and adaptive process $(X_n,\\Gamma_n)$ satisfy\n[[def-diminishing-adaptation]]. Fix an initial law $\\mu_0$ for\n$(X_0,\\Gamma_0)$; a fixed initial pair is the Dirac-law special case. If\ndiminishing adaptation holds under this law and either of the following\nconditions holds, then\n$$\\lVert\\mathcal L_{\\mu_0}(X_n)-\\pi\\rVert_{\\rm TV}\\longrightarrow0.$$\n\n1. **Simultaneous uniform ergodicity:** for every $\\epsilon>0$ there is an\n   integer $N(\\epsilon)\\ge1$ such that\n   $$\\sup_{x\\in\\mathsf X,\\,\\gamma\\in\\Gamma}\\lVert P_\\gamma^{N(\\epsilon)}(x,\\cdot)-\\pi\\rVert_{\\rm TV}\\le\\epsilon.$$\n\n2. **Containment:** for every $\\epsilon,\\delta>0$ there is an integer $N$\n   such that\n   $$\\mathbb P_{\\mu_0}\\!\\left(M_\\epsilon(X_n,\\Gamma_n)\\le N\\right)\\ge1-\\delta\\quad\\text{for every }n\\ge0,$$\n   where $M_\\epsilon$ is the fixed-kernel convergence time from\n   [[def-adaptive-mcmc-containment]].\n\nThe conclusion is convergence of the one-time marginal distributions. It does\nnot itself assert a strong law, a central limit theorem, or convergence of\nsample averages.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The matrix of $P_\\gamma$ is $\\begin{pmatrix}1-\\gamma/2&\\gamma/2\\\\\\gamma/2&1-\\gamma/2\\end{pmatrix}.$ Its rows are probability vectors by $0\\le\\gamma\\le1$ and [F1]. The matrix is symmetric, and $\\pi$ assigns equal mass to both states, so the four joint-flow atoms are symmetric under coordinate swap. Thus $P_\\gamma$ is reversible by [F2], and $\\pi$ is invariant by [F3].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The kernels satisfy $P_{\\gamma'}(x,\\cdot)-P_\\gamma(x,\\cdot)=(\\gamma'-\\gamma)(\\pi-\\delta_x)$, so $D_n=|\\Gamma_{n+1}-\\Gamma_n|/2\\to0$. This is diminishing adaptation by [F5].",
+          "inputs": [
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $\\Pi^2=\\Pi$ and $I\\Pi=\\Pi I=\\Pi$, induction gives $P_\\gamma^m=(1-\\gamma)^mI+\\bigl(1-(1-\\gamma)^m\\bigr)\\Pi.$ For either state $x$, $\\lVert\\delta_x-\\pi\\rVert_{\\rm TV}=1/2$, so $\\lVert P_\\gamma^m(x,\\cdot)-\\pi\\rVert_{\\rm TV}=(1-\\gamma)^m/2\\le2^{-m-1}$ uniformly in $x$ and $\\gamma\\in[1/2,1]$. Therefore the family is simultaneously uniformly ergodic.",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Steps 2.1 and 1.2 verify the two hypotheses in alternative 1 of [F6]. Hence $\\lVert\\mathcal L(X_n)-\\pi\\rVert_{\\rm TV}\\to0$ for every initial state.",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The probability-measure or probability-kernel hypotheses exclude an empty state space; step 1.1 treats measurable events in the admitted space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 permits zero successive-kernel change in the limit and step 2.1 handles gamma=1, where distance is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes gamma=1, where P_gamma=Pi and the distance vanishes after one step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At gamma=1 the kernel is Pi; step 2.1 gives zero distance after one step."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes gamma=1/2 and gamma=1 and proves the bound for every integer m>=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 uses only displayed hypotheses, explicit finite constructions, and individual existential witnesses; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way definition, implication, example, or counterexample and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted in the Statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "refresh-family endpoint checks",
+          "method": "exact finite calculation",
+          "input": {
+            "space": [
+              "0",
+              "1"
+            ],
+            "pi": [
+              "1/2",
+              "1/2"
+            ],
+            "gamma_values": [
+              "1/2",
+              "1"
+            ]
+          },
+          "calculation": "At gamma=1/2 the one-step distance from delta_0 to pi is 1/4; at gamma=1 it is 0. Both are bounded by 2^{-1-1}=1/4, matching the claimed uniform estimate for m=1.",
+          "expected": {
+            "distances": [
+              "1/4",
+              "0"
+            ],
+            "uniform_bound": "1/4"
+          }
+        }
+      ],
+      "axioms_used": [],
+      "axiom_uses": []
+    }
+  }
+}

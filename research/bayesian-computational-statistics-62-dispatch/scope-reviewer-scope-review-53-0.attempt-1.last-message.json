@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "53",
+  "round": 0,
+  "reviewed_items": [
+    "def-conditional-weak-convergence-in-probability",
+    "def-hadamard-differentiability-tangentially",
+    "alg-overlapping-block-resampling",
+    "alg-moving-block-bootstrap",
+    "alg-tapered-block-bootstrap",
+    "lem-moving-block-bootstrap-conditional-covariance",
+    "lem-tapered-block-bootstrap-conditional-covariance",
+    "lem-taper-window-l2-normalization",
+    "alg-k-sample-null-constrained-block-bootstrap",
+    "lem-k-sample-null-centering",
+    "thm-conditional-bootstrap-hadamard-delta-method",
+    "lem-weighted-overlapping-block-moment-and-covariance-limits",
+    "lem-conditional-independent-block-bootstrap-clt",
+    "thm-moving-block-bootstrap-clt-for-dependent-data",
+    "thm-tapered-block-bootstrap-clt-for-dependent-data",
+    "thm-k-sample-block-bootstrap-validity",
+    "ex-moving-block-bootstrap-small-sample",
+    "ex-tapered-block-bootstrap-triangular-window",
+    "ex-block-length-n-one-third",
+    "cex-pointwise-bootstrap-ar1-variance-mismatch"
+  ],
+  "reviewed_pages": [
+    "block-bootstrap-for-dependent-data",
+    "block-bootstrap-for-dependent-data-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Reviewed all 20 items and both pages. The approved B-page scope requires an example that is impossible under the assigned L2-m-approximability definition; owner reconciliation is required before acceptance. Other local prerequisite, scope, and proof repairs are identified below.",
+  "findings": [
+    {
+      "id": "def-conditional-weak-convergence-in-probability",
+      "type": "prerequisite",
+      "reason": "The definition asks for a metric d_w metrizing weak convergence on P(E) but cites no existence result or AC premise. The available thm-levy-prokhorov-metric-metrizes-weak-convergence supplies this for separable metric E under AC; record that prerequisite and make the assumption explicit."
+    },
+    {
+      "id": "thm-conditional-bootstrap-hadamard-delta-method",
+      "type": "scope",
+      "reason": "The theorem uses conditional weak convergence for general separable Banach E and F, while the definition's Remarks restrict use to separable Hilbert spaces and finite products. Clarify the definition's use scope to preserve the approved Banach-space claim, or reconcile the scope explicitly."
+    },
+    {
+      "id": "thm-conditional-bootstrap-hadamard-delta-method",
+      "type": "prerequisite",
+      "reason": "Proof step 3.1 invokes the subsequence characterization of convergence in probability, but the item does not cite thm-subsequence-characterization-of-convergence-in-probability in deps or Facts & Assumptions. Add that supplier or prove the criterion locally."
+    },
+    {
+      "id": "alg-k-sample-null-constrained-block-bootstrap",
+      "type": "local",
+      "reason": "The start-draw loop says 'for every resampled block' without specifying its count or index ranges. State k_i=ceil(n_i/b_i), the ranges of s and r, the exact final-prefix retention, and the output pseudo-series."
+    },
+    {
+      "id": "thm-k-sample-block-bootstrap-validity",
+      "type": "prerequisite",
+      "reason": "The algorithm call omits its inputs and admissibility conditions, and H is unspecified although the algorithm requires a real Hilbert space and conditional weak convergence uses a separable complete state space. Specify H, AC, M tending to infinity, and the admissible block lengths, mode, and taper inputs."
+    },
+    {
+      "id": "thm-k-sample-block-bootstrap-validity",
+      "type": "scope",
+      "reason": "The output space S is only assumed to be metric, but the stated conditional weak convergence in probability requires a metrized weak topology on its probability laws. Require S to be separable and complete, or state the result using testwise convergence in probability."
+    },
+    {
+      "id": "thm-k-sample-block-bootstrap-validity",
+      "type": "local",
+      "reason": "Proof step 2.1 applies weak convergence to the varying maps L_M without justification. Supply a compact-tightness argument using operator-norm convergence, sampling tightness, and the stated conditional tightness; cor-weakly-convergent-sequences-are-tight is an available supplier for the sampling laws."
+    },
+    {
+      "id": "thm-moving-block-bootstrap-clt-for-dependent-data",
+      "type": "local",
+      "reason": "The algorithm requires 1<=b_n<=n for every n at which it is applied, while the displayed asymptotic conditions guarantee this only eventually. State a tail-use convention or impose admissibility for all stated n."
+    },
+    {
+      "id": "thm-tapered-block-bootstrap-clt-for-dependent-data",
+      "type": "local",
+      "reason": "The algorithm requires integer 1<=b_n<=n and W_{b_n}>0. The normalization lemma gives positive norm only eventually; state that the algorithm is applied for sufficiently large n or give the admissibility conditions for every n used."
+    },
+    {
+      "id": "ex-block-length-n-one-third",
+      "type": "local",
+      "reason": "F1 requires 1<=b_n<=n, but the verification establishes b_n<n only eventually. Prove ceil(n^(1/3))<=n for all n>=1 or make the example explicitly eventual."
+    },
+    {
+      "id": "block-bootstrap-for-dependent-data",
+      "type": "scope",
+      "reason": "The page summary calls m*delta_m->0 the source's stronger rate. Under the assigned replacement definition, that rate follows from summability, so 'stronger' is inaccurate; reconcile this wording with the approved design."
+    },
+    {
+      "id": "block-bootstrap-for-dependent-data-examples",
+      "type": "scope",
+      "reason": "The approved design also calls for two-series null-centering and IID examples, which are absent. Its requested example of summable L2-m replacement errors with m*delta_m not tending to zero is impossible: given F_m=sigma(delta_t,...,delta_{t-m+1}), X_t and its independent-tail replacement X_{t,m} are conditionally iid, so delta_m^2=2 E||X_t-E[X_t|F_m]||^2. The F_m increase, making delta_m nonincreasing; summability then implies m*delta_m->0. Owner reconciliation is required; do not fabricate this example."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-moving-block-bootstrap-clt-for-dependent-data",
+      "decision": "repair",
+      "reason": "Its conditional-metric use is covered by its explicit AC and H=L2 assumptions; clarify the finite-n algorithm domain as noted in the finding."
+    },
+    {
+      "id": "thm-tapered-block-bootstrap-clt-for-dependent-data",
+      "decision": "repair",
+      "reason": "Its conditional-metric use is covered by AC and H=L2, but the theorem must state when the tapered algorithm is admissible."
+    },
+    {
+      "id": "lem-conditional-independent-block-bootstrap-clt",
+      "decision": "accept",
+      "reason": "It assumes AC and inherits H=L2 from the weighted-block lemma, so the conditional-metric supplier conditions are met."
+    },
+    {
+      "id": "thm-conditional-bootstrap-hadamard-delta-method",
+      "decision": "repair",
+      "reason": "Clarify its Banach-space use against the definition's current Hilbert-only use note, and cite the missing subsequence result."
+    },
+    {
+      "id": "lem-k-sample-null-centering",
+      "decision": "accept",
+      "reason": "Its proof uses the per-position centering formula and remains valid when the algorithm's block-count and index loops are made explicit."
+    },
+    {
+      "id": "thm-k-sample-block-bootstrap-validity",
+      "decision": "repair",
+      "reason": "It consumes the conditional-metric definition, the delta theorem, and the null-constrained algorithm; add the missing assumptions and justify the varying-map step."
+    },
+    {
+      "id": "lem-weighted-overlapping-block-moment-and-covariance-limits",
+      "decision": "accept",
+      "reason": "Its m*delta_m assumption is sufficient for its proof, although redundant under the current replacement definition."
+    },
+    {
+      "id": "block-bootstrap-for-dependent-data",
+      "decision": "repair",
+      "reason": "Update the rate description and ensure the K-sample summary reflects the reconciled theorem assumptions."
+    },
+    {
+      "id": "block-bootstrap-for-dependent-data-examples",
+      "decision": "escalate",
+      "reason": "The approved rate-separation example cannot exist under the assigned definition; the owner must reconcile that scope before the B-page examples can be accepted."
+    }
+  ]
+}

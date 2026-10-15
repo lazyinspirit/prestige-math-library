@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "kind": "research-only-smc-time-bound-branch",
+  "run": "bayesian-computational-statistics-62",
+  "date": "2026-10-15",
+  "source_edits": false,
+  "live_state_edits": false,
+  "checks_or_tests_run": false,
+  "assigned_items": [
+    "lem-smc-multinomial-variance-unrolls",
+    "lem-smc-backward-operator-oscillation-bound",
+    "lem-dobrushin-contraction-from-density-ratios",
+    "def-dobrushin-coefficient-for-probability-kernels",
+    "thm-smc-time-uniform-variance-bound-under-uniform-incremental-weights",
+    "cex-smc-time-bound-fails-with-varying-proposals"
+  ],
+  "additional_current_carriers_read": [
+    "def-smc-clt-function-classes-and-variance-recursions",
+    "ex-smc-bounded-weights-with-mixing"
+  ],
+  "source_reading": {
+    "url": "https://arxiv.org/pdf/math/0508594",
+    "method": "In-memory urllib retrieval and PyMuPDF text extraction",
+    "pdf_total_pages": 28,
+    "pages_read": [
+      14,
+      15,
+      23,
+      24,
+      25,
+      26
+    ],
+    "full_article_read": false,
+    "other_full_texts_read": []
+  },
+  "conclusions": {
+    "advertised_ratio_only_implication": "false",
+    "counterexample": "correct",
+    "dobrushin_definition_and_ratio_bound": "sound",
+    "variance_unrolling": "sound under stated recursive classes",
+    "abstract_weight_operator_theorem": "sound but stronger scope; all-h oscillation forces E_s1=1",
+    "bounded_weight_example_application": "invalid for all bounded path functions; terminal variance correct",
+    "minimal_abstract_repair": "Require contraction only for bounded pi_s-centered tests; allow designated backward-invariant filtering class.",
+    "fuller_replacement": "Add uniform g/q_s domination and initial weight bound; prove centered multistep filtering semigroup estimate C*(1-C^-2)^(t-k)*Delta; unroll.",
+    "smallest_missing_supplier": "One centered filtering Feynman-Kac semigroup contraction lemma, using existing Dobrushin density-ratio lemma."
+  },
+  "exact_repo_excerpts": {
+    "lem-smc-multinomial-variance-unrolls": "Use the operators and multinomial variance recursion of [[def-smc-clt-function-classes-and-variance-recursions]] at every selection time. For $\\phi\\in\\Psi_t^{(d)}$, put $\\bar\\phi=\\phi-\\pi_t(\\phi)$. Then\n$$V_t(\\phi)=\\sum_{k=0}^{t}\\widetilde\\pi_k\\!\\left[\\upsilon_k^2\\,E_{k+1:t}(\\bar\\phi)E_{k+1:t}(\\bar\\phi)^\\top\\right],$$\nwhere the $k=t$ term uses $E_{t+1:t}\\bar\\phi=\\bar\\phi$. Each summand is a finite positive-semidefinite matrix under the stated class conditions.",
+    "lem-smc-backward-operator-oscillation-bound": "Let $E_s$ be the forward operators of [[def-smc-clt-function-classes-and-variance-recursions]], and for bounded real $h$ put $\\operatorname{osc}(h)=\\sup h-\\inf h$. Suppose there is one $\\beta\\in[0,1)$ such that\n$$\\operatorname{osc}(E_s h)\\le\\beta\\operatorname{osc}(h)$$\nfor every $s$ and every bounded real $h$. For bounded $\\phi:\\Theta_t\\to\\mathbb R$, put $\\Delta\\phi=\\operatorname{osc}(\\phi)$ and $\\bar\\phi=\\phi-\\pi_t(\\phi)$. Then for every $0\\le k\\le t$,\n$$\\bigl\\lVert E_{k+1:t}\\bar\\phi\\bigr\\rVert_\\infty\\le\\beta^{t-k}\\Delta\\phi,$$\nwith $\\beta^0=1$ and $E_{t+1:t}$ the identity. This condition concerns the actual SMC backward operators; it is not implied merely by mixing ratios of the proposal densities.",
+    "lem-dobrushin-contraction-from-density-ratios": "Let $K:S\\rightsquigarrow E$ be a probability kernel on a nonempty measurable source space. Suppose a sigma-finite measure $\\lambda$ on $E$ and probability densities $k_x$ satisfy $K(x,A)=\\int_A k_x\\,d\\lambda$ for every $x\\in S$ and measurable $A\\subseteq E$. If $C\\ge1$ and, for every $x,x'\\in S$, $k_x(z)\\le Ck_{x'}(z)$ for $\\lambda$-almost every $z$, then the Dobrushin coefficient from [[def-dobrushin-coefficient-for-probability-kernels]] obeys\n$$\\delta(K)\\le1-C^{-1}.$$",
+    "def-dobrushin-coefficient-for-probability-kernels": "Let $(S,\\Sigma)$ and $(E,\\mathcal E)$ be measurable spaces with $S\\ne\\varnothing$, and let $K:S\\rightsquigarrow E$ be a probability kernel as in [[def-measure-kernel-and-probability-kernel]]. Its **Dobrushin contraction coefficient** is\n$$\\delta(K):=\\sup_{x,x'\\in S}\\lVert K(x,\\cdot)-K(x',\\cdot)\\rVert_{\\mathrm{TV}},$$\nwhere $\\lVert\\cdot\\rVert_{\\mathrm{TV}}$ is the event-supremum distance between probability laws in [[def-total-variation-distance-for-probability-laws]]. Thus $0\\le\\delta(K)\\le1$. The coefficient measures the largest total-variation separation between two one-step output laws.",
+    "thm-smc-time-uniform-variance-bound-under-uniform-incremental-weights": "Use multinomial offspring resampling at every time and the variance $V_t$ in [[def-smc-clt-function-classes-and-variance-recursions]]. Assume there is a constant $B<\\infty$ such that $\\upsilon_s\\le B$ $\\widetilde\\pi_s$-almost everywhere for every $s\\ge0$. Assume also that the forward operators satisfy the uniform oscillation condition of [[lem-smc-backward-operator-oscillation-bound]] with one $\\beta\\in[0,1)$ for all times. Then every bounded real test $\\phi$ with $\\Delta\\phi=\\sup\\phi-\\inf\\phi<\\infty$ satisfies\n$$V_t(\\phi)\\le\\frac{B^2(\\Delta\\phi)^2}{1-\\beta^2}\\qquad(t\\ge0).$$\nThis is a bound on the fixed-horizon CLT variance, uniform in the time index; it is not a finite-particle error bound.",
+    "cex-smc-time-bound-fails-with-varying-proposals": "refuted\n\nUniform bounds on the true transition density ratios $g(x\\mid x')/g(x\\mid x'')$ and proposal density ratios $q_t(x\\mid x')/q_t(x\\mid x'')$, together with a likelihood bounded above and away from zero and a bounded test oscillation, suffice by themselves to keep the SIR asymptotic variance $V_t(\\phi)$ bounded uniformly in time."
+  },
+  "proof_and_source_excerpts": "research/bayesian-computational-statistics-62-owner-smc-time-bound-branch.md",
+  "required_owner_actions": [
+    "Reconcile plan line 193 and source map line 475 with false source implication.",
+    "Retain counterexample.",
+    "Preserve abstract sufficient result and add full corrected filtering result.",
+    "Repair bounded-weight example path-space application."
+  ],
+  "not_claimed": [
+    "Full-text reading of entire Chopin paper",
+    "Reading other cited full texts",
+    "Current carrier certification",
+    "Native worker or gate coverage",
+    "Readiness closure"
+  ],
+  "proposed_supplier": {
+    "id_suggestion": "lem-smc-centered-filtering-feynman-kac-contraction",
+    "status": "complete mathematical proposal in research only; not an authored carrier or native review",
+    "statement": "Let (X,E) be a nonempty standard-Borel measurable space with sigma-finite measure lambda. Fix a probability eta_0. For each s>=1 let g_s(z|x) be a jointly measurable, strictly positive finite density of a probability transition with respect to lambda. Suppose a constant C>=1 satisfies g_s(z|x)<=C g_s(z|x') for every s and all x,x',z. (The time-homogeneous case g_s=g is included.) Let f_s be measurable with 0<a<=f_s(z)<=b<infinity uniformly. Define eta_s(h)=eta_{s-1}(g_s(f_s h))/eta_{s-1}(g_s f_s) and c_s=eta_{s-1}(g_s f_s). Define E_s h(x)=g_s(f_s h)(x)/c_s, acting on last-state functions. These are exactly the SIR path operators restricted to last-state functions whenever the proposal q_s has appropriate support and its normalized incremental weight is g_s(z|x)f_s(z)/(c_s q_s(z|x)). Let rho=1-C^(-2). For every bounded measurable real terminal test psi and 0<=k<t, ||E_{k+1}...E_t(psi-eta_t psi)||_infinity<=C rho^(t-k) osc(psi). For k=t the identity image is bounded by osc(psi). Here rho^n=0 for n>=1 when C=1. This is a filtering-test statement, not a statement about arbitrary path observables.",
+    "proof": "1. For fixed k<t define Q_{k,t}h(x)=integral [product_{j=k+1}^t g_j(x_j|x_{j-1})f_j(x_j)]h(x_t) d lambda^{t-k}, with x_k=x, and H_{j,t}=Q_{j,t}1, H_{t,t}=1. Kernel iteration defines these integrals without choosing product-density versions. They are measurable and a^(t-j)<=H_{j,t}<=b^(t-j), since each g_j is a probability density. They are therefore positive and finite. Comparing the first transition density in H_{j,t}(x) and H_{j,t}(x') gives H_{j,t}(x)<=C H_{j,t}(x') whenever j<t. Consequently r_{k,t}=H_{k,t}/eta_k(H_{k,t})<=C and eta_k r_{k,t}=1.\n2. For j=k+1,...,t set L_{j,t}(x,dz)=g_j(z|x)f_j(z)H_{j,t}(z)lambda(dz)/H_{j-1,t}(x). These are measurable probability kernels by the backward recursion for H. Their ordered density ratios equal [g_j(z|x)/g_j(z|x')][H_{j-1,t}(x')/H_{j-1,t}(x)]<=C^2. The established normalized-density-ratio lemma yields delta(L_{j,t})<=1-C^(-2)=rho.\n3. For a probability kernel K and a bounded measurable h with osc(h)>0, set u=(h-inf h)/osc(h), so 0<=u<=1. For any x,x', the layer-cake identity K u(x)-K u(x')=integral_0^1 [K(x,{u>r})-K(x',{u>r})]dr yields |K h(x)-K h(x')|<=delta(K)osc(h). If osc(h)=0 the same conclusion follows because K preserves constants. Taking suprema gives osc(Kh)<=delta(K)osc(h). Iterating over the L kernels gives osc(P_{k,t}h)<=rho^(t-k)osc(h), where P_{k,t}=L_{k+1,t}...L_{t,t}. Telescoping their H denominators proves P_{k,t}h=Q_{k,t}h/H_{k,t}.\n4. The recursion for eta gives eta_t h=eta_k(Q_{k,t}h)/eta_k(H_{k,t}) and product_{j=k+1}^t c_j=eta_k(H_{k,t}). Therefore E_{k+1}...E_t h=r_{k,t}P_{k,t}h. Put h=psi-eta_t psi. Then eta_k(r_{k,t}P_{k,t}h)=0. Since r_{k,t}eta_k is a probability measure, inf(P_{k,t}h)<=0<=sup(P_{k,t}h), including the case it vanishes almost everywhere. Hence ||P_{k,t}h||_infinity<=osc(P_{k,t}h)<=rho^(t-k)osc(psi). Multiplying by 0<r_{k,t}<=C proves the estimate. At k=t, eta_t psi lies between inf psi and sup psi, giving the identity-case estimate. No positivity assumption about h is used.",
+    "variance_corollary_statement": "In addition to the preceding filtering hypotheses, take measurable strictly positive finite proposal densities q_s and a uniform domination g_s(z|x)<=D q_s(z|x), with D<infinity. Suppose the initial normalized incremental Radon-Nikodym weight satisfies v_0<=B_init almost everywhere under its proposal. Use multinomial selection at every time. Set B=max(B_init,D b/a). For every bounded last-state test psi, the weighted-estimator fixed-horizon CLT asymptotic variance is bounded, uniformly over t, by B^2 C^2 osc(psi)^2/[1-(1-C^(-2))^2]. No claim about finite-particle errors or arbitrary path tests is made.",
+    "variance_corollary_proof": "The denominator c_s=eta_{s-1}(g_s f_s) lies in [a,b], so the normalized incremental weight v_s(x,z)=g_s(z|x)f_s(z)/(c_s q_s(z|x)) satisfies v_s<=Db/a for every s>=1. Together with the initial bound this gives v_s<=B at every time. Bounded filtering tests and the finite-horizon bounded E-images in the supplier meet the recursive moment-class requirements. Apply the multinomial unrolling formula to h=psi-eta_t psi. The final k=t contribution is at most B^2 osc(psi)^2. The k<t contribution is at most B^2 C^2 rho^(2(t-k))osc(psi)^2 by the supplier. Thus V_t(psi)<=B^2 osc(psi)^2[1+C^2 sum_{n=1}^t rho^(2n)]<=B^2 C^2 osc(psi)^2/(1-rho^2). When C=1, all earlier contributions vanish and the same formula holds. For each finite horizon the probability weights and bounded images make all required moments finite. The optional sharper B constant follows from v_s^2<=B v_s and proposal(v_s)=1, but is unnecessary.",
+    "dependencies_needed": [
+      "def-smc-clt-function-classes-and-variance-recursions",
+      "def-dobrushin-coefficient-for-probability-kernels",
+      "lem-dobrushin-contraction-from-density-ratios",
+      "lem-smc-multinomial-variance-unrolls"
+    ],
+    "scope_note": "All-parent/all-z strictly positive finite density versions stated above avoid joint exceptional-set/version issues in this proposed carrier. These are explicit sufficient hypotheses; this branch makes no assertion that arbitrary almost-everywhere row-ratio versions automatically provide all-parent versions."
+  }
+}

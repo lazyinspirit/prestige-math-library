@@ -1,0 +1,556 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "6",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "lem-beta-density-normalization",
+      "model": "gpt-6-luna",
+      "context_sha256": "87f5b4e62ff3808b802521a136a99667e31c8dc6047499e5e81201c52e9a74c3",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The Lebesgue definition explicitly withholds sigma-algebra and measure status, while step 2.1 applies MCT to that space. Added the existing Countable-Choice completeness theorem and Borel-inclusion theorem to F9, deps and owning metadata. Compact truncations increase, their Riemann integrals converge to the improper Beta integral, and steps 1.2/2.2 give a positive finite Gamma ratio. The Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-gamma-density-normalization",
+      "model": "gpt-6-luna",
+      "context_sha256": "cf4df54a9e063b9ba716f5347d7b7c09adcf9355a36b090364f4eb97d87bbd2f",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "MCT requires a measure space, but F8 originally cited only the Lebesgue set-function definition. Added the completeness and Borel-inclusion theorems under the existing Countable Choice hypothesis. Also corrected the digest concern: convergence supplies finiteness, while the already-declared Gamma definition explicitly supplies strict positivity. The increasing [1/m,m] exhaustion and t=bx substitution give b^(-a)Gamma(a), so division is valid. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-multinomial-law-normalization",
+      "model": "gpt-6-luna",
+      "context_sha256": "eb8bbbc04256e44dc2ef9e3f51effe573a8ccfae36788cafa830dd32aef24853",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 incorrectly sourced the factorial formula to the coloring-count definition. F1 already supplies the same formula through the declared multinomial theorem, so this is a nonfatal citation defect. Added that theorem to F2 and its contract. Also corrected the n=0 explanation: the k-factor product is not empty when k>=1; each zero-th power and every 0! equals one. The normalization and 0^0 convention are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-dirichlet-density-normalization",
+      "model": "gpt-6-luna",
+      "context_sha256": "2dd8e2d8634b0d57e0563cc0043e0e8f8ecc1537dc41f1066ec36698df84d94e",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The cited Beta proof really proves Gamma positivity in steps 1.2/2.2, but the F6 contract quotes only its Statement, which does not export that intermediate claim. Corrected this nonfatal interface citation using the existing Gamma definition and convergence theorem. Also made the Tonelli bridge explicit: Euclidean Borel products, sigma-finiteness and agreement of product/Euclidean Lebesgue measures on Borel functions. The triangular Jacobian gives exponents sum_{j>i}alpha_j-1; positive Gamma factors telescope to the unchanged ratio, including k=2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-iid-exponential-family-statistic-is-sufficient",
+      "model": "gpt-6-luna",
+      "context_sha256": "be255f0f85511476d4ec6e58bd10cc58a7160760bf503c0d3031582e0d2b6e62",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The cited closure proposition exports sums and scalar multiples, not general products. Step 1.1 needs measurable products before forming the density measure. Added the existing arithmetic-measurability theorem to F9, deps and owning metadata. Finite h and T make every density finite; Tonelli gives mass one, rectangle uniqueness gives the IID law, and a positive Borel ratio to an in-model reference yields sufficiency. The k=0 singleton case remains valid. Corrected the contract caveat: selecting one reference is not an AC use; conditional-law suppliers are.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-beta-binomial-update",
+      "model": "gpt-6-luna",
+      "context_sha256": "a8fc4078d79358196a1ba598cc9f26b82a2a955a7b12bf859da4b426342e193e",
+      "outcome": "false_positive",
+      "reason": "The update theorem explicitly assumes Countable Choice, declares Beta normalization as its choice use, and invokes the normalization lemma in steps 2.1/3.1. The example carries exactly that hypothesis, not a claim that choice is logically necessary for finite arithmetic. Its calculation gives B(5,5)=1/630, B(2,3)=1/12 and evidence 4/21; posterior shapes (5,5), (2,8) and (7,3) are positive. No repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-exposure-gamma-poisson-update",
+      "model": "gpt-6-luna",
+      "context_sha256": "fb2348fb734fd301fed84841b985e30dc8b6f7f3ac139c75a5b9d250612a513a",
+      "outcome": "false_positive",
+      "reason": "The actual update theorem declares Countable Choice through Gamma normalization and uses that supplier in steps 2.1/3.1. The example faithfully inherits that hypothesis; no minimal-axiom claim is needed. S=3, E=2 and c=4/3 give evidence (4/3)24/3^5=32/243 and shape-rate posterior Gamma(5,3). A positive count at zero exposure has identically zero likelihood and no quotient. No repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-normal-normal-conjugate-update",
+      "model": "gpt-6-luna",
+      "context_sha256": "7b0d7fa162610dc8be50a8c8fe972e0a8f285fc41035678a8a600acda8b35ff0",
+      "outcome": "false_positive",
+      "reason": "The update theorem assumes AC and explicitly invokes its Gaussian normalization suppliers in steps 1.1\u20133.1; the location-scale supplier also assumes AC. The example inherits this library hypothesis, without asserting independence or minimal necessity of AC for the numerical formula. Positive variances 4 and 1, n=2 and mean 2 give precision 9/4, variance 4/9 and posterior mean 16/9. The theorem guarantees positive finite evidence. No repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-beta-density-normalization",
+      "disposition": "repaired",
+      "post_sha256": "6d935629efa572682a5e45058316d4537f4230d5d87812bdf6ef1c8eb5e1c232",
+      "review_context_sha256": "5927ec0db8618982ad2107c3d9868380485351d259a54721d50e39aced597e5a",
+      "reason": "The Lebesgue definition explicitly withholds sigma-algebra and measure status, while step 2.1 applies MCT to that space. Added the existing Countable-Choice completeness theorem and Borel-inclusion theorem to F9, deps and owning metadata. Compact truncations increase, their Riemann integrals converge to the improper Beta integral, and steps 1.2/2.2 give a positive finite Gamma ratio. The Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-gamma-density-normalization",
+      "disposition": "repaired",
+      "post_sha256": "b10779c8ca655850254e72358bee7c2105e967641c140bbf08e560fe218fa29d",
+      "review_context_sha256": "02f18863d9e38884a022ab30626c1ec531bb6e30f96c42f17edbe87badc476e6",
+      "reason": "MCT requires a measure space, but F8 originally cited only the Lebesgue set-function definition. Added the completeness and Borel-inclusion theorems under the existing Countable Choice hypothesis. Also corrected the digest concern: convergence supplies finiteness, while the already-declared Gamma definition explicitly supplies strict positivity. The increasing [1/m,m] exhaustion and t=bx substitution give b^(-a)Gamma(a), so division is valid. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-multinomial-law-normalization",
+      "disposition": "repaired",
+      "post_sha256": "60f042883fbcb9d446c69794f1f6b895c73fb9ce7b7836310ae5bb22e7ff4f79",
+      "review_context_sha256": "016c7cf3321d828642f1bf3008481f4a5400085a37e29993c55a3e2929489aef",
+      "reason": "F2 incorrectly sourced the factorial formula to the coloring-count definition. F1 already supplies the same formula through the declared multinomial theorem, so this is a nonfatal citation defect. Added that theorem to F2 and its contract. Also corrected the n=0 explanation: the k-factor product is not empty when k>=1; each zero-th power and every 0! equals one. The normalization and 0^0 convention are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-dirichlet-density-normalization",
+      "disposition": "repaired",
+      "post_sha256": "9e8017f1918741f8c73a9868b34c7e5bf6563745090dd45da97ba67b90c0c145",
+      "review_context_sha256": "8e69ebd2a084563687d7211976f8b0064ce2090957e2fbb7acd557fdc3a514bd",
+      "reason": "The cited Beta proof really proves Gamma positivity in steps 1.2/2.2, but the F6 contract quotes only its Statement, which does not export that intermediate claim. Corrected this nonfatal interface citation using the existing Gamma definition and convergence theorem. Also made the Tonelli bridge explicit: Euclidean Borel products, sigma-finiteness and agreement of product/Euclidean Lebesgue measures on Borel functions. The triangular Jacobian gives exponents sum_{j>i}alpha_j-1; positive Gamma factors telescope to the unchanged ratio, including k=2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-iid-exponential-family-statistic-is-sufficient",
+      "disposition": "repaired",
+      "post_sha256": "0b77842ec49ea8404d474b389f1808ce38c4c2d24dee028856b14f00c40c19f1",
+      "review_context_sha256": "eefc3cb52bc7c79f86e4d1a5953ad4813db17344551bbb3d022910567bf3d3dc",
+      "reason": "The cited closure proposition exports sums and scalar multiples, not general products. Step 1.1 needs measurable products before forming the density measure. Added the existing arithmetic-measurability theorem to F9, deps and owning metadata. Finite h and T make every density finite; Tonelli gives mass one, rectangle uniqueness gives the IID law, and a positive Borel ratio to an in-model reference yields sufficiency. The k=0 singleton case remains valid. Corrected the contract caveat: selecting one reference is not an AC use; conditional-law suppliers are.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-beta-binomial-update",
+      "disposition": "unaffected",
+      "post_sha256": "9719a1c9722ded8e7fbea188deea9633500904a1d005645031decbe83160bab7",
+      "review_context_sha256": "53b71468c24c44bd51b54fc294a075716366b31ad4b9d05af5def04af5d8a380",
+      "reason": "The update theorem explicitly assumes Countable Choice, declares Beta normalization as its choice use, and invokes the normalization lemma in steps 2.1/3.1. The example carries exactly that hypothesis, not a claim that choice is logically necessary for finite arithmetic. Its calculation gives B(5,5)=1/630, B(2,3)=1/12 and evidence 4/21; posterior shapes (5,5), (2,8) and (7,3) are positive. No repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-exposure-gamma-poisson-update",
+      "disposition": "unaffected",
+      "post_sha256": "d66cd4f503101979afed7f37cbbcd85823b73aad8f6de1941f933530961d3788",
+      "review_context_sha256": "d99e92f7a70b62b4effc7db248468cc1678f3cb13a4fe2e66593d92d7cb2e9f6",
+      "reason": "The actual update theorem declares Countable Choice through Gamma normalization and uses that supplier in steps 2.1/3.1. The example faithfully inherits that hypothesis; no minimal-axiom claim is needed. S=3, E=2 and c=4/3 give evidence (4/3)24/3^5=32/243 and shape-rate posterior Gamma(5,3). A positive count at zero exposure has identically zero likelihood and no quotient. No repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-normal-normal-conjugate-update",
+      "disposition": "unaffected",
+      "post_sha256": "d2786acbea1b96410549ad0cbaf613a022a316f013132647ef089806c5dcb7db",
+      "review_context_sha256": "ca176201f537d09b32c3c95e61ac83cc3f2df23d34fcf5646ebf5a3653c382ab",
+      "reason": "The update theorem assumes AC and explicitly invokes its Gaussian normalization suppliers in steps 1.1\u20133.1; the location-scale supplier also assumes AC. The example inherits this library hypothesis, without asserting independence or minimal necessity of AC for the numerical formula. Positive variances 4 and 1, n=2 and mean 2 give precision 9/4, variance 4/9 and posterior mean 16/9. The theorem guarantees positive finite evidence. No repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u6-beta-measure-status",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T17:12:32.578272+00:00",
+        "class": "accuracy",
+        "subclass": "citation-missing",
+        "severity": "fatal",
+        "location": "facts-block",
+        "subject": "lem-beta-density-normalization",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "6",
+        "item_sha256": "c023ae6a69be970f5a1218c6e0317621221ed339e539ee2f7bf9e0c14321d787",
+        "before_guard_sha256": "98a7462f8aa547632731ed0014f48d3cb4865e364acfd48183ec4f167a02d09a",
+        "adjudication_ref": [
+          {
+            "id": "lem-beta-density-normalization",
+            "model": "gpt-6-luna",
+            "context_sha256": "87f5b4e62ff3808b802521a136a99667e31c8dc6047499e5e81201c52e9a74c3",
+            "item_sha256": "c023ae6a69be970f5a1218c6e0317621221ed339e539ee2f7bf9e0c14321d787"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u6.json",
+            "note": "The Lebesgue definition explicitly withholds sigma-algebra and measure status, while step 2.1 applies MCT to that space. Added the existing Countable-Choice completeness theorem and Borel-inclusion theorem to F9, deps and owning metadata. Compact truncations increase, their Riemann integrals converge to the improper Beta integral, and steps 1.2/2.2 give a positive finite Gamma ratio. The Statement is unchanged."
+          }
+        ],
+        "repair_cost": "inline-fix",
+        "prevention": {
+          "kind": "process",
+          "ref": "Check each fact against the exact exported supplier section and each theorem hypothesis against declared dependencies."
+        }
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u6-gamma-measure-status",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T17:12:32.578272+00:00",
+        "class": "accuracy",
+        "subclass": "citation-missing",
+        "severity": "fatal",
+        "location": "facts-block",
+        "subject": "lem-gamma-density-normalization",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "6",
+        "item_sha256": "0c06b55ae3571e7f3f8031b19dbf44d6b80521e347b196ed3e4b8abff9eafe5c",
+        "before_guard_sha256": "1bbc65c4a8191d8e6194eca31bd58017f32b681c61bad7626899c29f960c5c25",
+        "adjudication_ref": [
+          {
+            "id": "lem-gamma-density-normalization",
+            "model": "gpt-6-luna",
+            "context_sha256": "cf4df54a9e063b9ba716f5347d7b7c09adcf9355a36b090364f4eb97d87bbd2f",
+            "item_sha256": "0c06b55ae3571e7f3f8031b19dbf44d6b80521e347b196ed3e4b8abff9eafe5c"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u6.json",
+            "note": "MCT requires a measure space, but F8 originally cited only the Lebesgue set-function definition. Added the completeness and Borel-inclusion theorems under the existing Countable Choice hypothesis. Also corrected the digest concern: convergence supplies finiteness, while the already-declared Gamma definition explicitly supplies strict positivity. The increasing [1/m,m] exhaustion and t=bx substitution give b^(-a)Gamma(a), so division is valid. Statement unchanged."
+          }
+        ],
+        "repair_cost": "inline-fix",
+        "prevention": {
+          "kind": "process",
+          "ref": "Check each fact against the exact exported supplier section and each theorem hypothesis against declared dependencies."
+        }
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u6-multinomial-formula-citation",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T17:12:32.578272+00:00",
+        "class": "accuracy",
+        "subclass": "citation-misattributed",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "lem-multinomial-law-normalization",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "6",
+        "item_sha256": "9fbba746a466bc674a1c76889053520889b5ca11c63efeca0020c3255f099ea4",
+        "before_guard_sha256": "de87e504ec16b9dcda9b47b4d90864f00d56d5313eafa6cd29195da3103a0156",
+        "adjudication_ref": [
+          {
+            "id": "lem-multinomial-law-normalization",
+            "model": "gpt-6-luna",
+            "context_sha256": "eb8bbbc04256e44dc2ef9e3f51effe573a8ccfae36788cafa830dd32aef24853",
+            "item_sha256": "9fbba746a466bc674a1c76889053520889b5ca11c63efeca0020c3255f099ea4"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u6.json",
+            "note": "F2 incorrectly sourced the factorial formula to the coloring-count definition. F1 already supplies the same formula through the declared multinomial theorem, so this is a nonfatal citation defect. Added that theorem to F2 and its contract. Also corrected the n=0 explanation: the k-factor product is not empty when k>=1; each zero-th power and every 0! equals one. The normalization and 0^0 convention are unchanged."
+          }
+        ],
+        "repair_cost": "inline-fix",
+        "prevention": {
+          "kind": "process",
+          "ref": "Check each fact against the exact exported supplier section and each theorem hypothesis against declared dependencies."
+        }
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u6-dirichlet-gamma-interface",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T17:12:32.578272+00:00",
+        "class": "accuracy",
+        "subclass": "citation-misattributed",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "thm-dirichlet-density-normalization",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "6",
+        "item_sha256": "61aa3c87130c81607db90d340af16104c32e62ea7fe588fd29f5bc2cf0fdc071",
+        "before_guard_sha256": "07736326f5b97329da96aa27ed8ec768821d6b8c2c83b98ea20916c5e3b7b329",
+        "adjudication_ref": [
+          {
+            "id": "thm-dirichlet-density-normalization",
+            "model": "gpt-6-luna",
+            "context_sha256": "2dd8e2d8634b0d57e0563cc0043e0e8f8ecc1537dc41f1066ec36698df84d94e",
+            "item_sha256": "61aa3c87130c81607db90d340af16104c32e62ea7fe588fd29f5bc2cf0fdc071"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u6.json",
+            "note": "The cited Beta proof really proves Gamma positivity in steps 1.2/2.2, but the F6 contract quotes only its Statement, which does not export that intermediate claim. Corrected this nonfatal interface citation using the existing Gamma definition and convergence theorem. Also made the Tonelli bridge explicit: Euclidean Borel products, sigma-finiteness and agreement of product/Euclidean Lebesgue measures on Borel functions. The triangular Jacobian gives exponents sum_{j>i}alpha_j-1; positive Gamma factors telescope to the unchanged ratio, including k=2."
+          }
+        ],
+        "repair_cost": "inline-fix",
+        "prevention": {
+          "kind": "process",
+          "ref": "Check each fact against the exact exported supplier section and each theorem hypothesis against declared dependencies."
+        }
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u6-iid-measurable-product",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T17:12:32.578272+00:00",
+        "class": "accuracy",
+        "subclass": "citation-missing",
+        "severity": "fatal",
+        "location": "facts-block",
+        "subject": "thm-iid-exponential-family-statistic-is-sufficient",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "6",
+        "item_sha256": "1bdf7740fc9a81a7a1d1d7e93cdb7334c15e126d6a6c56d5e68616c69f086c14",
+        "before_guard_sha256": "5783cfc4949fe00bfb014991fdaf2f808355784297fd54a88bc26f4b498fdda4",
+        "adjudication_ref": [
+          {
+            "id": "thm-iid-exponential-family-statistic-is-sufficient",
+            "model": "gpt-6-luna",
+            "context_sha256": "be255f0f85511476d4ec6e58bd10cc58a7160760bf503c0d3031582e0d2b6e62",
+            "item_sha256": "1bdf7740fc9a81a7a1d1d7e93cdb7334c15e126d6a6c56d5e68616c69f086c14"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u6.json",
+            "note": "The cited closure proposition exports sums and scalar multiples, not general products. Step 1.1 needs measurable products before forming the density measure. Added the existing arithmetic-measurability theorem to F9, deps and owning metadata. Finite h and T make every density finite; Tonelli gives mass one, rectangle uniqueness gives the IID law, and a positive Borel ratio to an in-model reference yields sufficiency. The k=0 singleton case remains valid. Corrected the contract caveat: selecting one reference is not an AC use; conditional-law suppliers are."
+          }
+        ],
+        "repair_cost": "inline-fix",
+        "prevention": {
+          "kind": "process",
+          "ref": "Check each fact against the exact exported supplier section and each theorem hypothesis against declared dependencies."
+        }
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u6-gamma-positivity-citation",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T17:12:32.578272+00:00",
+        "class": "accuracy",
+        "subclass": "citation-inflated",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "lem-gamma-density-normalization",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "6",
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u6.json",
+            "note": "F2 attributed strict positivity to a convergence-only Statement. It now cites the already-declared Gamma definition, whose Definition explicitly states positivity of this positive-integrand improper integral."
+          }
+        ],
+        "repair_cost": "inline-fix"
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u6-multinomial-zero-count-explanation",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T17:12:32.578272+00:00",
+        "class": "accuracy",
+        "subclass": "invalid-inference",
+        "severity": "nonfatal",
+        "location": "proof-step",
+        "subject": "lem-multinomial-law-normalization",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "6",
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u6.json",
+            "note": "Step 2.1 called the n=0 mass an empty product although k>=1. It now computes 0!/(0!)^k times k zero-th powers, all equal to one; no normalization claim changes."
+          }
+        ],
+        "repair_cost": "inline-fix"
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u6-dirichlet-tonelli-measure-bridge",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T17:12:32.578272+00:00",
+        "class": "accuracy",
+        "subclass": "citation-missing",
+        "severity": "nonfatal",
+        "location": "proof-step",
+        "subject": "thm-dirichlet-density-normalization",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "6",
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u6.json",
+            "note": "The Euclidean change-of-variables integral was passed to product-space Tonelli without explicit measure-identification hypotheses. F3 and step 3.1 now cite sigma-finiteness, Euclidean Borel products and agreement of product/Euclidean Lebesgue measures on Borel sets."
+          }
+        ],
+        "repair_cost": "inline-fix"
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u6-iid-single-reference-choice-contract",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T17:12:32.578272+00:00",
+        "class": "accuracy",
+        "subclass": "false-boundary-disposition",
+        "severity": "nonfatal",
+        "location": "contract-row",
+        "subject": "thm-iid-exponential-family-statistic-is-sufficient",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "batch": "6",
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u6.json",
+            "note": "The nonempty-choice boundary attributed selecting one eta_0 in step 2.1 to AC. A single existential instantiation does not need AC; the contract now identifies the actual AC use in the conditional-law suppliers of step 3.1."
+          }
+        ],
+        "repair_cost": "inline-fix"
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "completed",
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-6.proof-contracts.json --strict --items lem-beta-density-normalization",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 checked"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-6.proof-contracts.json --strict --items lem-gamma-density-normalization,lem-multinomial-law-normalization",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 2/2 checked"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-6.proof-contracts.json --strict --items thm-dirichlet-density-normalization,thm-iid-exponential-family-statistic-is-sufficient",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 2/2 checked"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-beta-density-normalization.md items/lem-gamma-density-normalization.md items/lem-multinomial-law-normalization.md items/thm-dirichlet-density-normalization.md items/thm-iid-exponential-family-statistic-is-sufficient.md items/ex-beta-binomial-update.md items/ex-exposure-gamma-poisson-update.md items/ex-normal-normal-conjugate-update.md",
+        "exit_code": 0,
+        "result": "8 checked, 0 failing"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-beta-density-normalization.md items/lem-gamma-density-normalization.md items/lem-multinomial-law-normalization.md items/thm-dirichlet-density-normalization.md items/thm-iid-exponential-family-statistic-is-sufficient.md items/ex-beta-binomial-update.md items/ex-exposure-gamma-poisson-update.md items/ex-normal-normal-conjugate-update.md library/bayesian-computational-statistics/conjugate-families-and-posterior-prediction.md library/bayesian-computational-statistics/conjugate-families-and-posterior-prediction-examples.md",
+        "exit_code": 0,
+        "result": "10 files; all math spans and YAML parse; no delimiter defects"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-6.proof-contracts.json --strict --items lem-beta-density-normalization,lem-gamma-density-normalization,lem-multinomial-law-normalization,thm-dirichlet-density-normalization,thm-iid-exponential-family-statistic-is-sufficient,ex-beta-binomial-update,ex-exposure-gamma-poisson-update,ex-normal-normal-conjugate-update",
+        "exit_code": 0,
+        "result": "8/8 checked; 0 errors, 0 warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-beta-density-normalization.md items/lem-gamma-density-normalization.md items/lem-multinomial-law-normalization.md items/thm-dirichlet-density-normalization.md items/thm-iid-exponential-family-statistic-is-sufficient.md",
+        "exit_code": 0,
+        "result": "5 items, 17 steps, 0 defects; run once after final item edits"
+      },
+      {
+        "command": "Focused direct Statement-section and manifest-dependency comparison for all eight assigned IDs",
+        "exit_code": 0,
+        "result": "All eight original Statements unchanged; item deps match owning manifests and all targets exist"
+      },
+      {
+        "exit_code": 0,
+        "result": "All post_sha256 and review_context_sha256 exactly match the hashes captured immediately after the individual mathematical reviews; none refreshed",
+        "commands": [
+          "node tools/step5-workflow.mjs review-contexts --run bayesian-computational-statistics-62 --items lem-beta-density-normalization",
+          "node tools/step5-workflow.mjs review-contexts --run bayesian-computational-statistics-62 --items lem-gamma-density-normalization,lem-multinomial-law-normalization,thm-dirichlet-density-normalization,thm-iid-exponential-family-statistic-is-sufficient,ex-beta-binomial-update,ex-exposure-gamma-poisson-update,ex-normal-normal-conjugate-update"
+        ]
+      }
+    ],
+    "before_interface_sha256": {
+      "lem-beta-density-normalization": "40120dc034503b778cff8925c5e95061297e99f7fd97fc81f5cb20b4b370d59c",
+      "lem-gamma-density-normalization": "df9668b49aba0c7211b81b3ae11be3593abe5ee9316417de3a42acb2ed7bba40",
+      "lem-multinomial-law-normalization": "e8ff9d5c11f240b571f9bb1c997a67296570fccfcdd335590d14ec706ffdc0c5",
+      "thm-dirichlet-density-normalization": "bf6cf004b785d873f02b23fb7e8d09fecd4d7cde09fbfced4c8f670360fd801d",
+      "thm-iid-exponential-family-statistic-is-sufficient": "7531f672b4799a2c086d59669a666b2b13ad4b3726f6f25746db81d181dd5274",
+      "ex-beta-binomial-update": "6e7b64b26c62b4f8f95a4e443a39c5631e7e12bcb5eee69d92aa5191c3b13e9c",
+      "ex-exposure-gamma-poisson-update": "8fa06d16dbcc94e983d40b397f8a7535c323dc519a4c6064c9a748bf77a3826d",
+      "ex-normal-normal-conjugate-update": "c6ef1dcf30ffcbfbf1bf075552ee702d4dc37f385dd84025a204d563fc69fbb4"
+    },
+    "obligations": [],
+    "context_tool_issue": {
+      "original_command": "node tools/step5-workflow.mjs review-contexts --run bayesian-computational-statistics-62 --items lem-beta-density-normalization",
+      "exit_code": 1,
+      "diagnostic": "missing frontmatter: lem-qc-linear-isometry-preserves-inner-products.md",
+      "omitted_unrelated_malformed_carriers": [
+        {
+          "path": "items/lem-qc-linear-isometry-preserves-inner-products.md",
+          "raw_sha256": "52bed6ed5fe3aaeeeb2170bd217ec3321cc0f9aa14bef974be517ff38c16f413"
+        }
+      ],
+      "focused_root": "/tmp/step5-v2-initial-r1-u6-context",
+      "resolution": "Use the native read-only review-contexts helper with --root pointing to symlinks of actual well-formed items; all assigned items and their direct suppliers and references are retained unchanged. This is no gate pass or source repair. Owner must repair the unrelated malformed carrier before global collection.",
+      "final_status": "resolved externally: the ordinary native command later succeeded for all eight items and returned exactly the already-recorded hashes; no recorded review hash was replaced."
+    },
+    "unresolved_uncertainty": [],
+    "published_ledger": "No published-item defect or changed published interface was found; no update to research/published-consumer-supplier-ledger.md is proposed.",
+    "propagation": "Direct byte-section comparison confirms all eight original Statements are unchanged. No items were created, so downstream is empty; new deps name existing published suppliers only.",
+    "independence": "This report records adjudication and local repair checks, not independent acceptance of the repairs. The controller owns rejudgment, ledger integration, certification and convergence."
+  }
+}

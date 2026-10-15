@@ -1,0 +1,302 @@
+[
+  {
+    "order": 2072,
+    "id": "gaussian-process-posterior-contraction",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Gaussian-process posterior contraction",
+    "companion": "gaussian-process-posterior-contraction-examples",
+    "requires": [
+      "iid-posterior-contraction",
+      "gaussian-process-support-and-concentration"
+    ],
+    "items": [
+      {
+        "id": "lem-tight-borel-gaussian-law-has-separable-support",
+        "kind": "lemma",
+        "title": "A tight Gaussian law is carried by a separable closed subspace",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-hahn-banach-extension-principle-relative"
+        ],
+        "dependency_level": 0,
+        "statement": "A tight centered Borel Gaussian probability on any real Banach space is carried by a separable closed linear subspace E; as an E-valued law it remains tight and Gaussian, and its ambient support equals its support in E.",
+        "strategy": "Choose compact sets with probabilities tending to one, take the closed rational span of their countable dense union, and use Hahn\u2013Banach to extend continuous linear functionals from E to the ambient Banach space.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-log-gaussian-density-supnorm-controls-local-likelihood-distances",
+        "kind": "lemma",
+        "title": "Supremum distance controls local log-Gaussian density distances",
+        "deps": [
+          "def-hellinger-distance-between-density-laws",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice",
+          "def-natural-logarithm",
+          "def-real-exponential-function-and-e",
+          "thm-derivative-of-exponential",
+          "thm-logarithm-derivative-and-integral",
+          "cor-taylor-remainder-bound",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_level": 1,
+        "statement": "For p_w=e^w/\u222be^w d\u03bd and p_0=p_{w_0}, if both normalizers are finite and positive and r=\u2016w\u2212w_0\u2016\u221e\u22641, then h(p_w,p_0)\u2264e^r r, KL(P_0\u2225P_w)\u2264(e^{2r}/2)r\u00b2, and E_0[log(p_w/p_0)\u00b2]\u22644r\u00b2.",
+        "strategy": "Write g=w\u2212w0 and c=log E0 e^g. Bound |c|\u2264r, apply the exponential Taylor remainder to the centered g for directional KL, and bound the normalized log-density ratio pointwise for Hellinger and its second moment.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-binary-regression-l2-controls-local-likelihood-distances",
+        "kind": "lemma",
+        "title": "The L\u00b2 link norm controls binary-regression likelihood distances",
+        "deps": [
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice",
+          "def-natural-logarithm",
+          "def-probability-measure",
+          "def-measure-with-density",
+          "cor-mean-value-theorem",
+          "cor-differentiable-implies-continuous",
+          "thm-chain-rule",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "dependency_level": 0,
+        "statement": "For q_w(x,y)=\u03a8(w(x))^y(1\u2212\u03a8(w(x)))^{1\u2212y} relative to G\u2297counting measure, with G a probability and L=sup|\u03a8\u2032|, R=sup|\u03a8\u2032/[\u03a8(1\u2212\u03a8)]| finite, d\u2082(q_w,q_{w0})\u00b2\u22642L\u00b2\u2016w\u2212w0\u2016\u00b2_{L\u00b2(G)}, KL(Q_0\u2225Q_w)\u2264LR\u2016w\u2212w0\u2016\u00b2_{L\u00b2(G)}/2, and E_0[log(q_w/q_{w0})\u00b2]\u2264R\u00b2\u2016w\u2212w0\u2016\u00b2_{L\u00b2(G)}.",
+        "strategy": "Use the mean-value bound for \u03a8, differentiate the Bernoulli directional KL in its second logit, and bound both Bernoulli log-probability derivatives by R.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-fixed-design-gaussian-regression-controls-local-likelihood-distances",
+        "kind": "lemma",
+        "title": "Empirical mean and scale distance control Gaussian-regression likelihoods",
+        "deps": [
+          "def-standard-normal-and-normal-laws",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice",
+          "def-natural-logarithm",
+          "def-moments-variance-and-covariance",
+          "thm-chain-rule",
+          "thm-logarithm-derivative-and-integral",
+          "cor-taylor-remainder-bound",
+          "lem-gaussian-even-moment-bound-for-brownian-increments"
+        ],
+        "dependency_level": 0,
+        "statement": "For independent Y_i\u223cN(w_0(x_i),\u03c3_0\u00b2), model Y_i\u223cN(w(x_i),\u03c3\u00b2), \u03c3,\u03c30\u2208[a,b] with 0<a<b, and max_i|w(x_i)\u2212w0(x_i)|\u22641, |\u03c3\u2212\u03c30|\u22641, the averages of KL(P_{i0}\u2225P_i) and E_0[log(p_i/p_{i0})\u00b2] are each bounded by C_{a,b}(\u2016w\u2212w0\u2016_n\u00b2+|\u03c3\u2212\u03c30|\u00b2).",
+        "strategy": "Compute the normal KL formula and expand the log likelihood ratio as a constant plus linear and centered quadratic functions of the true Gaussian error; bound the scale-only term by its vanishing first derivative at \u03c30.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-gaussian-linear-and-quadratic-statistic-tail",
+        "kind": "lemma",
+        "title": "Linear and quadratic Gaussian statistics have exponential tails",
+        "deps": [
+          "def-standard-normal-and-normal-laws",
+          "def-independent-random-elements",
+          "def-axiom-of-choice",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "def-real-exponential-function-and-e",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws"
+        ],
+        "dependency_level": 0,
+        "statement": "For independent standard normals Z_i, fixed c_i, \u03c3\u2264b, and Q=n^{-1}\u2211(\u03b4_i+\u03c3Z_i)\u00b2 with \u2016\u03b4\u2016_n\u22641, the centered linear statistic n^{-1}\u2211c_i\u03c3Z_i has two-sided tail 2exp(\u2212nt\u00b2/(2\u03c3\u00b2\u2016c\u2016_n\u00b2)); for 0<t\u2264b\u00b2+2, P(|Q\u2212(\u03c3\u00b2+\u2016\u03b4\u2016_n\u00b2)|\u2265t)\u22642exp(\u2212nt\u00b2/(4V_b)), V_b=2b\u2074+4b\u00b2.",
+        "strategy": "Complete the square to compute the scalar Gaussian moment generating function and the noncentral squared-normal moment generating function; bound the latter near zero and optimize the exponential-Markov inequality.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-independent-observation-posterior-denominator-lower-bound",
+        "kind": "lemma",
+        "title": "Local KL and log-square mass bounds a non-IID posterior denominator",
+        "deps": [
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice",
+          "def-independent-random-elements",
+          "lem-measurable-functions-preserve-independence",
+          "def-moments-variance-and-covariance",
+          "def-natural-logarithm",
+          "def-measure-with-density",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-jensens-integral-inequality",
+          "thm-variance-of-a-finite-sum",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "cor-chebyshev-inequality-for-random-variables"
+        ],
+        "dependency_level": 0,
+        "statement": "For independent dominated observations and a prior subset of mass at least e^{\u2212Cn\u03b5\u00b2} on which average directional KL and average log-likelihood second moment are each at most \u03b5\u00b2, the full likelihood-ratio denominator is finite almost surely and is at least e^{\u2212(C+2)n\u03b5\u00b2} with probability at least 1\u22121/(n\u03b5\u00b2).",
+        "strategy": "Bound the integrated likelihood ratio in expectation using independence and Tonelli; Jensen lower-bounds the denominator by the prior-averaged log likelihood, whose mean and variance are bounded by n\u03b5\u00b2, and Chebyshev gives the stated event.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-independent-posterior-splitting-from-tests-and-sieve-tail",
+        "kind": "lemma",
+        "title": "Tests and a sieve tail imply posterior contraction from a denominator bound",
+        "deps": [
+          "def-likelihood-density",
+          "def-measure-with-density",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "cor-markov-inequality-for-random-variables"
+        ],
+        "dependency_level": 0,
+        "statement": "If a dominated full-data likelihood denominator is at least e^{\u2212A n\u03b5\u00b2} with probability tending to one, the prior mass outside a measurable sieve is at most e^{\u2212B n\u03b5\u00b2} with B>A, and a test has null and uniform sieve type-II errors at most e^{\u2212T n\u03b5\u00b2} with T>A, then posterior mass outside the tested set tends to zero in P0 probability.",
+        "strategy": "Split the likelihood numerator into tested sieve mass and sieve tail, change measure to bound their expectations, and apply Markov after dividing by the denominator lower bound.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-fixed-design-gaussian-regression-exponential-tests",
+        "kind": "lemma",
+        "title": "Supremum sieves admit tests in fixed-design Gaussian regression",
+        "deps": [
+          "lem-gaussian-linear-and-quadratic-statistic-tail",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "For fixed design, \u03c3\u2208[a,b], \u03b5_n\u21920, n\u03b5_n\u00b2\u2192\u221e and a measurable sieve B_n with log N(3\u03b5_n,B_n,\u2016\u00b7\u2016\u221e)\u22646C n\u03b5_n\u00b2, for any T>0 a sufficiently large fixed M gives tests of H0:(w0,\u03c30) against (w,\u03c3)\u2208B_n\u00d7[a,b] with \u2016w\u2212w0\u2016_n+|\u03c3\u2212\u03c30|>M\u03b5_n whose null and uniform alternative errors are at most e^{\u2212Tn\u03b5_n\u00b2}.",
+        "strategy": "Cover the mean functions; use Gaussian linear-score tests when the empirical mean distance is large and upper/lower residual-energy tests when the scale distance is large; union-bound the finite cover and use the Gaussian quadratic tail bound.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-nondegenerate-gaussian-small-ball-controls-log-radius",
+        "kind": "lemma",
+        "title": "A nonzero Gaussian prior forces logarithmic small-ball cost",
+        "deps": [
+          "def-standard-normal-and-normal-laws",
+          "def-real-exponential-function-and-e",
+          "def-natural-logarithm",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "dependency_level": 0,
+        "statement": "If a continuous linear functional \u2113 has Var(\u2113(W))>0, then for sufficiently small \u03b5 the concentration function satisfies \u03c6_{w0}(\u03b5)\u2265log(1/\u03b5)\u2212C_\u2113 for every w0, because the centered Gaussian small-ball probability is at most a constant times \u03b5 and the RKHS approximation cost is nonnegative.",
+        "strategy": "The norm ball {\u2016W\u2016<\u03b5} is contained in {|\u2113(W)|<\u2016\u2113\u2016\u03b5}; bound the latter by the maximum density of its nondegenerate scalar Gaussian law and use the nonnegative RKHS cost.",
+        "justified_by": []
+      },
+      {
+        "id": "thm-gaussian-process-posterior-contraction",
+        "kind": "theorem",
+        "title": "Gaussian-process posterior contraction in density and regression models",
+        "deps": [
+          "lem-tight-borel-gaussian-law-has-separable-support",
+          "lem-log-gaussian-density-supnorm-controls-local-likelihood-distances",
+          "lem-binary-regression-l2-controls-local-likelihood-distances",
+          "lem-fixed-design-gaussian-regression-controls-local-likelihood-distances",
+          "lem-gaussian-linear-and-quadratic-statistic-tail",
+          "lem-independent-observation-posterior-denominator-lower-bound",
+          "lem-independent-posterior-splitting-from-tests-and-sieve-tail",
+          "lem-fixed-design-gaussian-regression-exponential-tests",
+          "lem-nondegenerate-gaussian-small-ball-controls-log-radius",
+          "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+          "lem-iid-sieve-entropy-produces-exponential-tests",
+          "def-parameter-measurable-statistical-model-as-markov-kernel",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-measure-with-density",
+          "def-probability-measure",
+          "def-independent-random-elements",
+          "def-standard-normal-and-normal-laws",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "def-banach-gaussian-covariance-operator-and-rkhs",
+          "def-gaussian-prior-concentration-function",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-support-of-banach-gaussian-is-closure-of-rkhs",
+          "thm-gaussian-concentration-sieve-bounds",
+          "thm-borell-sudakov-tsirelson-expansion-for-banach-gaussian-law",
+          "thm-finite-dimensional-gaussian-isoperimetric-expansion"
+        ],
+        "dependency_level": 9,
+        "statement": "Under \u03b5_n\u21920, n\u03b5_n\u00b2\u2192\u221e and the stated Banach Gaussian concentration condition, the draft treats log-Gaussian density estimation in Hellinger distance, binary regression in L\u00b2(G), and fixed-design Gaussian regression in empirical L\u00b2 plus scale distance; the last branch still has an unresolved scale-local-mass case.",
+        "strategy": "Use the exact half-squared RKHS concentration convention and its support/sieve interfaces; prove model-specific likelihood-distance bounds; apply IID entropy tests and denominator bounds in the first two branches, and direct Gaussian score/energy tests with a non-IID denominator in fixed design. The fixed-scale local-mass gap remains escalated.",
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 2073,
+    "id": "gaussian-process-posterior-contraction-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Gaussian-process posterior contraction \u2014 Examples",
+    "companion": "gaussian-process-posterior-contraction",
+    "requires": [
+      "gaussian-process-posterior-contraction"
+    ],
+    "items": [
+      {
+        "id": "ex-l2-small-log-density-far-in-hellinger",
+        "kind": "example",
+        "title": "Small L\u00b2 log-density perturbations can remain far in Hellinger distance",
+        "deps": [
+          "def-hellinger-distance-between-density-laws",
+          "def-measure-with-density",
+          "def-probability-measure",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-definition-equivalence"
+        ],
+        "dependency_level": 1,
+        "statement": "On [0,1] with Lebesgue measure, w_k=k 1_[0,k^{-4}] tends to zero in L\u00b2 while the normalized log-density p_k=e^{w_k}/\u222be^{w_k} remains at Hellinger distance tending to \u221a2 from the uniform truth.",
+        "strategy": "Verification: compute the L\u00b2 norm, normalizer and Hellinger affinity explicitly; the normalized prior density concentrates on the shrinking spike.",
+        "justified_by": []
+      },
+      {
+        "id": "ex-degenerate-gp-phi-does-not-bound-unknown-scale-local-mass",
+        "kind": "example",
+        "title": "A degenerate GP concentration function does not control unknown-scale prior mass",
+        "deps": [
+          "def-natural-logarithm",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "dependency_level": 0,
+        "statement": "For W\u22610 and w0=0 the half-squared-RKHS concentration function is zero; \u03b5_n=\u221a(log log n/n) satisfies \u03c6(\u03b5_n)\u2264n\u03b5_n\u00b2 and n\u03b5_n\u00b2\u2192\u221e, while a uniform scale prior has negative log local mass asymptotic to (1/2)log n, not O(n\u03b5_n\u00b2). This identifies a missing denominator-mass check, not a posterior counterexample.",
+        "strategy": "Verification: the prior is a point mass on the zero function, so its RKHS approximation and centered small-ball costs vanish; calculate the interval mass and compare log n with log log n.",
+        "justified_by": []
+      },
+      {
+        "id": "ex-log-gaussian-uniform-density-posterior",
+        "kind": "example",
+        "title": "A constant Gaussian log-density prior gives the uniform density exactly",
+        "deps": [
+          "thm-gaussian-process-posterior-contraction",
+          "def-standard-normal-and-normal-laws",
+          "def-probability-measure"
+        ],
+        "dependency_level": 10,
+        "statement": "On the unit interval, W(x)=Z for Z\u223cN(0,1) induces the uniform density for every prior draw; for w0=0 and \u03b5_n=\u221a(log n/n), the concentration condition holds and the density posterior is exactly at truth.",
+        "strategy": "Verification: compute the normalizer, RKHS approximation term and scalar Gaussian small-ball lower bound; then normalize the identical likelihoods.",
+        "justified_by": []
+      },
+      {
+        "id": "ex-binary-regression-logistic-intercept-gp",
+        "kind": "example",
+        "title": "A one-point logistic GP regression satisfies the L\u00b2 link branch",
+        "deps": [
+          "thm-gaussian-process-posterior-contraction",
+          "def-standard-normal-and-normal-laws",
+          "def-probability-measure",
+          "def-real-exponential-function-and-e"
+        ],
+        "dependency_level": 10,
+        "statement": "For a one-point covariate space, G=\u03b4_x and W(x)=Z\u223cN(0,1), the logistic link has bounded derivative and bounded derivative-to-Bernoulli-variance ratio, w0=0 is in support, and \u03b5_n=\u221a(log n/n) satisfies the GP concentration inequality.",
+        "strategy": "Verification: evaluate the link constants, concentration function and L\u00b2(G) identification, then instantiate the binary-regression branch.",
+        "justified_by": []
+      },
+      {
+        "id": "ex-fixed-design-gaussian-constant-process-and-unknown-scale",
+        "kind": "example",
+        "title": "A constant GP on a repeated fixed design meets the nondegenerate scale branch",
+        "deps": [
+          "thm-gaussian-process-posterior-contraction",
+          "def-standard-normal-and-normal-laws",
+          "def-probability-measure"
+        ],
+        "dependency_level": 10,
+        "statement": "For repeated design point x0, W(x)=Z\u223cN(0,1), w0=0, \u03c30=1 and an independent uniform prior \u03c3\u223cUnif[1/2,3/2], \u03b5_n=2\u221a(log n/n) satisfies the concentration and scale-local-mass conditions for empirical-L\u00b2-plus-scale contraction.",
+        "strategy": "Verification: compute the scalar GP concentration bound, the uniform scale interval mass, and verify the fixed design and compact scale hypotheses.",
+        "justified_by": []
+      }
+    ]
+  }
+]

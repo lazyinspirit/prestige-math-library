@@ -1,0 +1,222 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "batch": "30",
+  "cycle": 1,
+  "generated_at": "2026-10-15T09:28:04.057848+00:00",
+  "review": "research/bayesian-computational-statistics-62-scope-review/batch-30/review-0.json",
+  "writer_check": {
+    "1-scaffold:batch-30": {
+      "stage": "1-scaffold",
+      "role": "beta",
+      "label": "batch-30",
+      "covers": [
+        "30"
+      ],
+      "attempt": 2,
+      "attempts": 2,
+      "startedAt": "2026-10-15T04:33:56.165Z",
+      "endedAt": "2026-10-15T05:01:47.516Z",
+      "lastExitOk": true
+    },
+    "2-scope-review:scope-review-30-0": {
+      "stage": "2-scope-review",
+      "role": "scope-reviewer",
+      "label": "scope-review-30-0",
+      "covers": [
+        "30"
+      ],
+      "attempt": 1,
+      "attempts": 1,
+      "startedAt": "2026-10-15T08:45:40.835Z",
+      "endedAt": "2026-10-15T08:56:26.249Z",
+      "lastExitOk": true
+    }
+  },
+  "findings": [
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "assessment": "Rejected as a substantive mathematical gap. Passing c upward to1 is ordinary real-order reasoning, valid also at extended endpoints; source made explicit to remove certification ambiguity.",
+      "repair": "c_m=m/(m+1); if finite I>L choose m>L/(I-L), so c_m I>L. Infinite I and finite L already contradict c=1/2. Existing Archimedean/completeness suppliers explicitly bound."
+    },
+    {
+      "id": "cor-finite-nonnegative-integral-implies-finite-almost-everywhere",
+      "assessment": "Rejected as a false theorem/missing measure-theoretic lemma. Unbounded natural multiples is routine Archimedean arithmetic, not a new hypothesis.",
+      "repair": "J=∫f finite; if0<μ(F)<∞ choose n>J/μ(F); infinite μ(F) contradicted at n1. Existing suppliers explicitly bound."
+    },
+    {
+      "id": "thm-rejection-sampling-has-target-acceptance-law",
+      "assessment": "Confirmed citation/prerequisite precision issue, not false termination claim: geometric-series proof already imports geometric-null but its Statement does not advertise it.",
+      "repair": "Direct deps/F12 and contract citation now explicitly import lem-geometric-sequence-null claim1; Statement and proof steps unchanged."
+    }
+  ],
+  "changes": [
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "path": "items/thm-monotone-convergence-for-the-integral.md",
+      "statement_unchanged": true,
+      "current_statement": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+      "current_facts": "**Given:** An arbitrary measure space $(X,\\mathcal A,\\mu)$ and a nondecreasing sequence $(f_n)$ of nonnegative measurable functions $f_n:X\\to[0,+\\infty]$ with pointwise limit $f$.\n\n[L1] The nonnegative integral is monotone ([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]).\n\n[L2] For a nonnegative simple function $s$, the set function $A\\mapsto\\int_A s\\,d\\mu$ is a measure ([[thm-simple-indefinite-integral-is-a-measure]]).\n\n[L3] Measures are continuous from below on increasing measurable sets ([[thm-continuity-from-below-for-measures]]).\n\n[L4] The nonnegative integral agrees with the simple integral on simple functions, and the latter is homogeneous on nonnegative simple functions ([[prop-the-nonnegative-integral-agrees-with-the-simple-integral]], [[prop-basic-properties-of-the-nonnegative-simple-integral]]).\n\n[L5] The real numbers form a complete ordered field, and for every real $x$ there is a positive integer $m>x$ ([[cor-cauchy-reals-lub-complete]], [[thm-reals-ordered-field]], [[thm-of-archimedean]]).",
+      "current_proof": "**Proof technique:** direct.\n\n1.1 By [L1], the integrals $\\int f_n\\,d\\mu$ increase and are bounded above by $\\int f\\,d\\mu$. Write $L=\\sup_n\\int f_n\\,d\\mu$, so $L\\le\\int f\\,d\\mu$ in $[0,+\\infty]$. [given, L1]\n\n1.2 Fix a finite-valued nonnegative simple function $s\\le f$ and $0<c<1$. Set $A_n=\\{f_n\\ge cs\\}$. The sets $A_n$ increase to $X$: where $s=0$ membership is automatic, and where $s>0$, the limit $f\\ge s>cs$ eventually forces $f_n\\ge cs$. Since $A\\mapsto\\int_A s\\,d\\mu$ is a measure [L2], continuity from below [L3] gives $\\int_{A_n}s\\,d\\mu\\uparrow\\int s\\,d\\mu$. [given, L2, L3]\n\n2.1 On $A_n$, $cs\\le f_n$, hence $cs\\chi_{A_n}\\le f_n$ everywhere. By monotonicity [L1] and simple-integral agreement and homogeneity [L4], $c\\int_{A_n}s\\,d\\mu\\le\\int f_n\\,d\\mu\\le L$. Letting $n\\to\\infty$ in step 1.2 yields $c\\int s\\,d\\mu\\le L$. Write $I=\\int s\\,d\\mu$. If $L=+\\infty$ there is nothing to prove. If $L<+\\infty$ and $I=+\\infty$, the inequality $cI\\le L$ is already impossible for $c=1/2$. If $I<+\\infty$ and $I>L$, choose a positive integer $m>L/(I-L)$ by [L5] and set $c_m=m/(m+1)\\in(0,1)$. Then $c_m I>L$, since $m(I-L)>L$, again contradicting $c_m I\\le L$. Thus $I\\le L$ in every case. This gives explicitly the elementary approximation $c_m\\uparrow1$, without invoking any additional convergence theorem. [step 1.2, L1, L4, L5, algebra, choose]\n\n3.1 The inequality from step 2.1 holds for every admissible simple minorant $s\\le f$. Taking their supremum, as in [[def-nonnegative-lebesgue-integral]], gives $\\int f\\,d\\mu\\le L$. Combine this with step 1.1 to obtain $\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu$. [step 1.1, step 2.1] ∎",
+      "deps_before": [
+        "def-nonnegative-lebesgue-integral",
+        "def-integral-over-a-measurable-set",
+        "thm-simple-indefinite-integral-is-a-measure",
+        "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+        "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+        "thm-continuity-from-below-for-measures",
+        "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+        "prop-basic-properties-of-the-nonnegative-simple-integral"
+      ],
+      "deps_proposed": [
+        "cor-cauchy-reals-lub-complete",
+        "thm-reals-ordered-field",
+        "thm-of-archimedean",
+        "def-nonnegative-lebesgue-integral",
+        "def-integral-over-a-measurable-set",
+        "thm-simple-indefinite-integral-is-a-measure",
+        "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+        "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+        "thm-continuity-from-below-for-measures",
+        "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+        "prop-basic-properties-of-the-nonnegative-simple-integral"
+      ],
+      "added_deps": [
+        "cor-cauchy-reals-lub-complete",
+        "thm-reals-ordered-field",
+        "thm-of-archimedean"
+      ]
+    },
+    {
+      "id": "cor-finite-nonnegative-integral-implies-finite-almost-everywhere",
+      "path": "items/cor-finite-nonnegative-integral-implies-finite-almost-everywhere.md",
+      "statement_unchanged": true,
+      "current_statement": "If $f:X\\to[0,+\\infty]$ is measurable and $\\int f\\,d\\mu<+\\infty$, then\n$f(x)<+\\infty$ for almost every $x$.",
+      "current_facts": "**Given:** A nonnegative measurable function $f$ with finite integral.\n\n[L1] The nonnegative integral is monotone and homogeneous ([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]).\n\n[L2] The nonnegative integral of the simple function $n\\chi_F$ equals its simple integral $n\\mu(F)$ ([[prop-the-nonnegative-integral-agrees-with-the-simple-integral]]).\n\n[L3] The real numbers form a complete ordered field, and for every real $x$ there is a positive integer $m>x$ ([[cor-cauchy-reals-lub-complete]], [[thm-reals-ordered-field]], [[thm-of-archimedean]]).",
+      "current_proof": "**Proof technique:** direct.\n\n1.1 Let $F:=\\{f=+\\infty\\}$, which is measurable. For every positive integer $n$, $n\\chi_F\\le f$. By [L1] and [L2], $n\\mu(F)=\\int n\\chi_F\\,d\\mu\\le\\int f\\,d\\mu<+\\infty$. [L1, L2, given]\n\n2.1 Put $J=\\int f\\,d\\mu<+\\infty$. If $\\mu(F)=+\\infty$, step 1.1 fails already for $n=1$. If $0<\\mu(F)<+\\infty$, choose a positive integer $n>J/\\mu(F)$ by [L3]. Multiplication by the positive finite number $\\mu(F)$ gives $n\\mu(F)>J$, contradicting step 1.1. Thus $\\mu(F)=0$, so the exceptional set where $f$ is infinite is null. Equivalently, $f<+\\infty$ almost everywhere. [step 1.1, L3, algebra, choose] ∎",
+      "deps_before": [
+        "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+        "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+      ],
+      "deps_proposed": [
+        "cor-cauchy-reals-lub-complete",
+        "thm-reals-ordered-field",
+        "thm-of-archimedean",
+        "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+        "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+      ],
+      "added_deps": [
+        "cor-cauchy-reals-lub-complete",
+        "thm-reals-ordered-field",
+        "thm-of-archimedean"
+      ]
+    },
+    {
+      "id": "thm-rejection-sampling-has-target-acceptance-law",
+      "path": "items/thm-rejection-sampling-has-target-acceptance-law.md",
+      "statement_unchanged": true,
+      "current_statement": "Let $(S,\\mathcal S,\\mu)$ be a measure space and let\n$\\tilde f,\\tilde g:S\\to[0,\\infty]$ be measurable with\n$0<Z_f:=\\int\\tilde f\\,d\\mu<\\infty$ and\n$0<Z_g:=\\int\\tilde g\\,d\\mu<\\infty$. Suppose $c>0$ is finite and\n$\\tilde f\\le c\\tilde g$ $\\mu$-almost everywhere. Apply\n[[alg-rejection-sampling]] with proposal law\n$G(A)=Z_g^{-1}\\int_A\\tilde g\\,d\\mu$. If $N$ is the first accepted proposal,\nthen $N<\\infty$ almost surely, the per-proposal acceptance probability is\n$$p=\\frac{Z_f}{cZ_g},$$\nand for every $A\\in\\mathcal S$,\n$$\\mathbb P(Y_N\\in A)=\\frac1{Z_f}\\int_A\\tilde f\\,d\\mu.$$\nThus the accepted law has density $\\tilde f/Z_f$. In the normalized case\n$Z_f=Z_g=1$, this gives acceptance probability $1/c$ and accepted density\n$f$; necessarily $c\\ge1$.",
+      "current_facts": "**Given:** The measure space, nonnegative measurable shapes, positive finite normalizers, a finite envelope constant, and the ideal independent draws in [[alg-rejection-sampling]].\n\n[A1] The common envelope holds outside a measurable $\\mu$-null set. The algorithm's ratio is defined to be zero where $\\tilde g=0$.\n\n[F1] [[alg-rejection-sampling]] and [[def-identically-distributed-and-iid-random-variables]]: the proposal draws have law $G$, the auxiliary draws have the uniform law on $(0,1)$, and the two IID sequences are independent.\n\n[F2] [[def-measure-with-density]] and [[def-probability-measure]]: a nonnegative measurable density $h$ defines the measure $A\\mapsto\\int_A h\\,d\\mu$; if its total mass is $Z\\in(0,\\infty)$, division by $Z$ gives a probability measure.\n\n[F3] [[cor-finite-nonnegative-integral-implies-finite-almost-everywhere]]: finite nonnegative integral implies the function is finite almost everywhere.\n\n[F4] [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]: integrable functions equal almost everywhere have equal integrals on every measurable set.\n\n[F5] [[def-expectation-of-a-nonnegative-or-integrable-random-variable]] and [[thm-change-of-variables-for-expectation]]: the expectation of a nonnegative measurable indicator is its probability, and expectations of nonnegative measurable functions equal their integrals against the random element's law.\n\n[F6] [[thm-independent-random-elements-have-product-joint-law]]: independent random elements have joint law equal to the product of their marginal laws.\n\n[F7] [[thm-tonelli-theorem-for-sigma-finite-product-spaces]]: a nonnegative product-measurable function on a product of probability spaces can be integrated in either order.\n\n[F8] [[thm-integration-against-a-density]]: if $\\nu=h\\,d\\mu$, then $\\int q\\,d\\nu=\\int qh\\,d\\mu$ for every nonnegative measurable $q$.\n\n[F9] [[alg-rejection-sampling]], [[def-product-sigma-algebra-and-finite-product-sigma-algebras]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]], [[thm-composition-with-borel-functions-preserves-measurability]], and [[thm-threshold-characterisations-of-real-and-extended-real-measurability]]: the algorithm proves its reciprocal extension Borel and its acceptance function measurable; the coordinate projections on $S\\times(0,1)$ are measurable, and $\\{(y,u):y\\in A,\\ u\\le a(y)\\}$ is a measurable threshold set.\n\n[F10] [[prop-order-and-scalar-rules-for-the-nonnegative-integral]]: pointwise order of nonnegative functions implies the same order of their integrals.\n\n[F11] [[def-measure]]: a measure is countably additive on disjoint measurable sequences.\n\n[F12] [[thm-geometric-series]] gives $\\sum_{j=0}^{\\infty}q^j=1/(1-q)$ for $0\\le q<1$; [[lem-geometric-sequence-null]], claim 1, gives $q^m\\to0$ because $|q|=q<1$, including $q=0$.\n\n[F13] [[def-law-or-distribution-of-a-random-element]]: the law of a random element assigns to each measurable set the probability of its inverse image.",
+      "current_proof": "**Given:** The objects and hypotheses in the Statement.\n\n1.1 By [F3], both shapes are finite outside null sets. Let $N$ be the union of those sets and the envelope exception from [A1]; it is measurable and null. Replace each shape by its product with $\\mathbf 1_{S\\setminus N}$. Measurability follows from [F9], and [F4] shows that neither density measure nor any displayed integral changes. In particular $\\int_N\\tilde g\\,d\\mu=0$ because $\\tilde g\\mathbf 1_N=0$ almost everywhere, so the proposal law gives $N$ mass zero. By [F13] and countable additivity [F11], the probability that any proposal hits $N$ is zero; changing the acceptance rule on $N$ leaves the output law unchanged. We may now use finite representatives satisfying $\\tilde f\\le c\\tilde g$ everywhere, so $\\tilde g=0$ implies $\\tilde f=0$. [A1, F3, F4, F9, F11, F13, given, construct]\n\n1.2 Fix $A\\in\\mathcal S$ and let $Q(A):=\\mathbb P(Y_1\\in A,\\ U_1\\le a(Y_1))$. By [F9] the event is measurable. By [F1] and [F6] the joint law of $(Y_1,U_1)$ is $G\\otimes\\Lambda$. Hence [F5] and [F13] give $Q(A)=\\int_{S\\times(0,1)}\\mathbf1_A(y)\\mathbf1_{\\{u\\le a(y)\\}}\\, (G\\otimes\\Lambda)(d(y,u)).$ [F1, F5, F6, F9, F13, given]\n\n2.1 Tonelli [F7] evaluates the last integral as $Q(A)=\\int_A\\Lambda((0,a(y)])\\,G(dy)=\\int_A a(y)\\,G(dy),$ including $a(y)=0$ and $a(y)=1$, since $\\Lambda((0,t])=t$ on $[0,1]$. [step 1.2, F7, F1]\n\n3.1 Apply [F8] to the proposal density $\\tilde g/Z_g$ and the measurable function $\\mathbf1_Aa$. Where $\\tilde g>0$, the envelope makes $a=\\tilde f/(c\\tilde g)$; where $\\tilde g=0$, [step 1.1] gives $\\tilde f=0$. Therefore $Q(A)=\\frac1{Z_g}\\int_Aa\\tilde g\\,d\\mu =\\frac1{cZ_g}\\int_A\\tilde f\\,d\\mu.$ [step 2.1, F2, F8, step 1.1, algebra]\n\n4.1 Taking $A=S$ in step 3.1 gives $p=Q(S)=Z_f/(cZ_g)>0$. Integrating the pointwise envelope and using [F10] gives $Z_f\\le cZ_g$, so $p\\le1$. For normalized densities, $Z_f=Z_g=1$, hence $p=1/c$ and $c\\ge1$. [step 3.1, F10, A1, algebra]\n\n5.1 Put $q=1-p$. Independence of the proposal-uniform pairs [F1] gives $\\mathbb P(N>m)=q^m$ for every $m\\ge1$. Since $0\\le q<1$, [F12] gives $q^m\\to0$; the event $\\{N=\\infty\\}$ is contained in every $\\{N>m\\}$, so $\\mathbb P(N=\\infty)=0$. [step 4.1, F1, F12]\n\n6.1 For each $k\\ge1$, independence across trials gives $\\mathbb P(N=k,\\ Y_k\\in A)=q^{k-1}Q(A).$ These events are disjoint, so countable additivity [F11] and the geometric series [F12] yield $\\mathbb P(\\text{the algorithm outputs a value in }A) =\\sum_{k=1}^{\\infty}q^{k-1}Q(A) =\\frac{Q(A)}p =\\frac1{Z_f}\\int_A\\tilde f\\,d\\mu.$ The almost-sure termination in step 5.1 makes this the full output law. [step 2.1, step 4.1, step 5.1, F1, F11, F12, algebra] ∎",
+      "deps_before": [
+        "alg-rejection-sampling",
+        "cor-finite-nonnegative-integral-implies-finite-almost-everywhere",
+        "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+        "def-identically-distributed-and-iid-random-variables",
+        "def-law-or-distribution-of-a-random-element",
+        "def-measure",
+        "def-measure-with-density",
+        "def-probability-measure",
+        "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+        "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+        "thm-arithmetic-and-lattice-operations-preserve-measurability",
+        "thm-change-of-variables-for-expectation",
+        "thm-composition-with-borel-functions-preserves-measurability",
+        "thm-geometric-series",
+        "thm-independent-random-elements-have-product-joint-law",
+        "thm-integration-against-a-density",
+        "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+        "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+        "thm-threshold-characterisations-of-real-and-extended-real-measurability"
+      ],
+      "deps_proposed": [
+        "alg-rejection-sampling",
+        "cor-finite-nonnegative-integral-implies-finite-almost-everywhere",
+        "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+        "def-identically-distributed-and-iid-random-variables",
+        "def-law-or-distribution-of-a-random-element",
+        "def-measure",
+        "def-measure-with-density",
+        "def-probability-measure",
+        "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+        "lem-geometric-sequence-null",
+        "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+        "thm-arithmetic-and-lattice-operations-preserve-measurability",
+        "thm-change-of-variables-for-expectation",
+        "thm-composition-with-borel-functions-preserves-measurability",
+        "thm-geometric-series",
+        "thm-independent-random-elements-have-product-joint-law",
+        "thm-integration-against-a-density",
+        "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+        "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+        "thm-threshold-characterisations-of-real-and-extended-real-measurability"
+      ],
+      "added_deps": [
+        "lem-geometric-sequence-null"
+      ]
+    }
+  ],
+  "seven_consumer_dispositions": [
+    {
+      "id": "alg-rejection-sampling",
+      "decision": "compatible after focused clarification",
+      "reason": "Definition unchanged. justified_by target law now explicitly sources geometric nullity; the ideal IID and finite-envelope input interface is unchanged."
+    },
+    {
+      "id": "thm-counting-measure-integral-is-nonnegative-series",
+      "decision": "compatible after focused clarification",
+      "reason": "Step1.1 still applies MCT to increasing measurable simple truncations. Explicit MCT real-order clarification preserves arbitrary measures and infinite integrals."
+    },
+    {
+      "id": "thm-rejection-sampling-has-target-acceptance-law",
+      "decision": "compatible after focused clarification",
+      "reason": "Step1.1 uses unchanged finite-integral corollary. Step5.1 applies geometric-null claim1 for q in[0,1), including0; step6.1 retains geometric-series summation. No added premise."
+    },
+    {
+      "id": "thm-rejection-sampling-expected-proposal-count-under-finite-envelope",
+      "decision": "compatible after focused clarification",
+      "reason": "Step3.1 retains MCT on N∧m and geometric sum; target-law termination/acceptance input unchanged."
+    },
+    {
+      "id": "ex-rejection-sampling-tail-mismatch-no-finite-envelope",
+      "decision": "compatible after focused clarification",
+      "reason": "Verification1.1 normalization uses unchanged counting-series identity;2.1 explicit Archimedean unbounded ratio remains valid."
+    },
+    {
+      "id": "ex-rejection-sampling-bounded-likelihood-ratio",
+      "decision": "compatible after focused clarification",
+      "reason": "Verification1.1 normalizers and minimal envelope;2.1 masses2/3 and expected3/2 use unchanged target/expected-count Statements."
+    },
+    {
+      "id": "ex-rejection-sampling-unnormalized-finite-measures",
+      "decision": "compatible after focused clarification",
+      "reason": "Verification1.1 Zf3,Zg2,c2;2.1–3.1 acceptance3/4,law(2/3,1/3),expectation4/3 unchanged."
+    }
+  ],
+  "scope_limits": "Only exact escalated uses and their batch30 consumers were inspected. No full-corpus proof review, external source rereading, gate, optional test, numeric-label or readiness update. Published statuses/verification history retained. All three Statements byte-identical, so changed-Statement full downstream ownership trigger does not arise.",
+  "proposals": {
+    "manifest": "research/bayesian-computational-statistics-62-owner-step2-b30-manifest-proposal.json",
+    "contracts": "research/bayesian-computational-statistics-62-owner-step2-b30-contract-proposal.json",
+    "unchanged_contracts": "All six unchanged per-item contracts and target boundary arrays preserved verbatim; only target F12 citation uses/source appended.",
+    "external_supplier_metadata": "Source frontmatter deps updated on two published items. Their exact current facts/proofs/deps appear in changes; no batch30 manifest row exists for these prerequisite-context items. Root binds external suppliers per workflow."
+  },
+  "proof_layout": {
+    "command": "node tools/proof-layout.mjs items/thm-monotone-convergence-for-the-integral.md items/cor-finite-nonnegative-integral-implies-finite-almost-everywhere.md items/thm-rejection-sampling-has-target-acceptance-law.md",
+    "exit_code": 0,
+    "output": "proof-layout: 3 items, 13 steps, 0 defects"
+  },
+  "root_actions": [
+    "Integrate proposed target manifest deps and F12 citations, preserving unchanged boundary arrays.",
+    "Bind published supplier current source/deps in external context; no theorem scope or page edge changed.",
+    "Root owns final hashes, readiness, recertification and full gates."
+  ]
+}

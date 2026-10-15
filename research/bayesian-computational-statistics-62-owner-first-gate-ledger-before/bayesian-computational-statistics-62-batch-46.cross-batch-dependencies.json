@@ -1,0 +1,258 @@
+[
+  {
+    "kind": "page",
+    "consumer": "particle-smoothing-backward-simulation-and-rbpf",
+    "supplier": "kalman-filtering",
+    "status": "verified",
+    "required_hypotheses": "Finite-horizon linear-Gaussian model with mutually independent Gaussian noises; all innovation covariances used by the Kalman procedure are positive definite. State and noise covariances may be singular.",
+    "evidence": "Read the current batch-42 alg-kalman-filter Definition and thm-kalman-filter-is-exact-posterior Statement and full induction proof. The A page uses the exact conditional Gaussian update pathwise; it does not infer a density when an innovation covariance is singular. The kalman-filtering draft page currently places these supplier items. This records the actual interface and placement, not independent review or acceptance."
+  },
+  {
+    "kind": "page",
+    "consumer": "particle-smoothing-backward-simulation-and-rbpf",
+    "supplier": "feynman-kac-particle-filters",
+    "status": "verified",
+    "required_hypotheses": "Finite-horizon standard-Borel path states; normalized Feynman–Kac targets only at finite positive normalizer; bootstrap SIR uses matching target/proposal kernels, multinomial ancestor draws, and the specified incremental potentials.",
+    "evidence": "Read the current batch-44 def-feynman-kac-path-targets-and-normalizers Definition, its forward-recursion lemma, alg-multinomial-and-residual-offspring-resampling, and alg-sequential-importance-resampling. The RBPF uses the path space z_{0:t}, path-extension proposal equal to the target transition, and the per-path Kalman predictive density as its potential. This records the current interfaces and page placement, not independent review or acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-conditionally-linear-gaussian-state-space-model",
+    "supplier": "def-state-space-filtering-laws",
+    "status": "verified",
+    "required_hypotheses": "Finite-horizon standard-Borel histories with data-indexed filtering and smoothing kernels interpreted as RCD versions; values on null observation histories are not pointwise unique.",
+    "evidence": "Read the current batch-41 Definition and confirmed it supplies exactly the stated conditional-kernel convention. The item is present in the current state-space-filtering-and-predictive-laws A-page manifest and library page. No null-history uniqueness is claimed."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+    "supplier": "lem-one-step-kalman-gaussian-conditioning",
+    "status": "verified",
+    "required_hypotheses": "For each fixed nonlinear path, independent Gaussian state and observation innovations, positive-semidefinite state/process/observation covariances, and positive-definite innovation covariance.",
+    "evidence": "Read the current batch-42 Statement and complete proof. Its Gaussian block calculation permits singular state and noise covariances and supplies the exact conditional update under the innovation-only positive-definiteness condition. The supplier is placed on kalman-filtering."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+    "supplier": "thm-kalman-filter-is-exact-posterior",
+    "status": "verified",
+    "required_hypotheses": "For each fixed nonlinear path, deterministic finite-horizon linear-Gaussian equations, mutually independent centered Gaussian noises, positive-semidefinite covariances, and positive-definite innovation matrices.",
+    "evidence": "Read the current batch-42 Statement and complete induction proof. Conditioning on a fixed path turns the coefficients into deterministic matrices, exactly as required; the local lemma separately derives the marginal Gaussian observation density and Feynman–Kac potential. This is current supplier-body verification, not acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-smoothing-backward-kernel-bayes-factorization",
+    "supplier": "thm-state-space-filtering-and-smoothing-laws-exist",
+    "status": "verified",
+    "required_hypotheses": "AC, finite horizon, standard-Borel state and observation spaces, an initial probability, and transition/observation probability kernels.",
+    "evidence": "Read the current batch-41 Statement and complete proof. It supplies regular conditional versions only, without densities or pointwise uniqueness on null histories, matching the local lemma's version caveat. The supplier is placed on the state-space-filtering-and-predictive-laws A page."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-smoothing-backward-kernel-bayes-factorization",
+    "supplier": "thm-dominated-state-space-filtering-recursion",
+    "status": "verified",
+    "required_hypotheses": "An observation kernel with a jointly measurable density over a sigma-finite observation measure; quotient updates only on finite-positive evidence fibers, with predictive-law fillers on zero/infinite fibers.",
+    "evidence": "Read the current batch-41 Statement and full proof. The exact conditional-density hypotheses and null-evidence convention are retained in the backward-kernel statement; no density is used for its supplied-kernel branch. The supplier is placed on the state-space-filtering-and-predictive-laws A page."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-particle-backward-simulator",
+    "supplier": "alg-sequential-importance-resampling",
+    "status": "verified",
+    "required_hypotheses": "A finite-horizon Feynman–Kac target, proposal path laws with the stated absolute-continuity interfaces, selected measurable derivative versions, and normalized filtering particle weights.",
+    "evidence": "Read the current batch-44 Definition. It returns weighted empirical path measures whose last-coordinate marginals are the filtering particle clouds consumed by backward simulation. The backward algorithm adds its own finite-positive backward denominator domain."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-rao-blackwellized-particle-filter",
+    "supplier": "alg-sequential-importance-resampling",
+    "status": "verified",
+    "required_hypotheses": "Bootstrap proposal specialization with initial and transition target/proposal kernels equal, finite nonnegative Feynman–Kac potentials, and multinomial resampling at each step.",
+    "evidence": "Read the current batch-44 Definition. In the RBPF, the SMC state is the nonlinear path, the proposal appends a transition draw, and the conditional Kalman observation density is the path potential. The equal target/proposal derivative versions are identically one."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-rao-blackwellized-particle-filter",
+    "supplier": "alg-multinomial-and-residual-offspring-resampling",
+    "status": "verified",
+    "required_hypotheses": "A finite particle count and normalized nonnegative input weights; the multinomial branch draws ancestor indices conditionally IID with those probabilities.",
+    "evidence": "Read the current batch-44 Definition. The RBPF explicitly selects its multinomial branch, which gives independent ancestor indices conditional on the previous cloud."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-bootstrap-particle-filter-weak-consistency",
+    "supplier": "lem-feynman-kac-path-measures-satisfy-forward-recursion",
+    "status": "verified",
+    "required_hypotheses": "Finite-horizon Feynman–Kac path measure, nonnegative potentials, and the ordered Markov-kernel recursion.",
+    "evidence": "Read the current batch-44 Statement and full proof. Taking tests that depend only on the final state and normalizing at a finite positive potential integral gives the recursion used in the local filter-consistency induction."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+    "consumer_page": "particle-smoothing-backward-simulation-and-rbpf",
+    "consumer_batch": "46",
+    "supplier": "def-feynman-kac-path-targets-and-normalizers",
+    "supplier_page": "feynman-kac-particle-filters",
+    "supplier_batch": "44",
+    "status": "verified",
+    "required_hypotheses": "AC; finite horizon; standard-Borel path spaces, initial probability, transition probability kernels, and finite nonnegative measurable potentials; normalize only when the path normalizer is finite and positive.",
+    "evidence": "Read the current batch-44 Definition; the consumer uses its path target, finite-positive normalization domain, and declared potential convention. The item is placed on feynman-kac-particle-filters (batch 44) and the dependency is declared in the batch-46 manifest. This is body-and-placement evidence, not independent review or acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-smoothing-backward-kernel-bayes-factorization",
+    "consumer_page": "particle-smoothing-backward-simulation-and-rbpf",
+    "consumer_batch": "46",
+    "supplier": "def-state-space-filtering-laws",
+    "supplier_page": "state-space-filtering-and-predictive-laws",
+    "supplier_batch": "41",
+    "status": "verified",
+    "required_hypotheses": "AC; finite horizon; standard-Borel model spaces and probability kernels; filtering and smoothing maps are conditional-law versions, with null-history values version-dependent.",
+    "evidence": "Read the current batch-41 Definition and checked its conditional-kernel and null-history convention against the local consumer. The item is placed on state-space-filtering-and-predictive-laws (batch 41) and the dependency is declared in the batch-46 manifest. This is body-and-placement evidence, not independent review or acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-particle-backward-simulator",
+    "consumer_page": "particle-smoothing-backward-simulation-and-rbpf",
+    "consumer_batch": "46",
+    "supplier": "def-state-space-filtering-laws",
+    "supplier_page": "state-space-filtering-and-predictive-laws",
+    "supplier_batch": "41",
+    "status": "verified",
+    "required_hypotheses": "AC; finite horizon; standard-Borel model spaces and probability kernels; filtering and smoothing maps are conditional-law versions, with null-history values version-dependent.",
+    "evidence": "Read the current batch-41 Definition and checked its conditional-kernel and null-history convention against the local consumer. The item is placed on state-space-filtering-and-predictive-laws (batch 41) and the dependency is declared in the batch-46 manifest. This is body-and-placement evidence, not independent review or acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-particle-backward-simulator",
+    "consumer_page": "particle-smoothing-backward-simulation-and-rbpf",
+    "consumer_batch": "46",
+    "supplier": "def-feynman-kac-path-targets-and-normalizers",
+    "supplier_page": "feynman-kac-particle-filters",
+    "supplier_batch": "44",
+    "status": "verified",
+    "required_hypotheses": "AC; finite horizon; standard-Borel path spaces, initial probability, transition probability kernels, and finite nonnegative measurable potentials; normalize only when the path normalizer is finite and positive.",
+    "evidence": "Read the current batch-44 Definition; the consumer uses its path target, finite-positive normalization domain, and declared potential convention. The item is placed on feynman-kac-particle-filters (batch 44) and the dependency is declared in the batch-46 manifest. This is body-and-placement evidence, not independent review or acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-rao-blackwellized-particle-filter",
+    "consumer_page": "particle-smoothing-backward-simulation-and-rbpf",
+    "consumer_batch": "46",
+    "supplier": "def-feynman-kac-path-targets-and-normalizers",
+    "supplier_page": "feynman-kac-particle-filters",
+    "supplier_batch": "44",
+    "status": "verified",
+    "required_hypotheses": "AC; finite horizon; standard-Borel path spaces, initial probability, transition probability kernels, and finite nonnegative measurable potentials; normalize only when the path normalizer is finite and positive.",
+    "evidence": "Read the current batch-44 Definition; the consumer uses its path target, finite-positive normalization domain, and declared potential convention. The item is placed on feynman-kac-particle-filters (batch 44) and the dependency is declared in the batch-46 manifest. This is body-and-placement evidence, not independent review or acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-bootstrap-particle-filter-weak-consistency",
+    "consumer_page": "particle-smoothing-backward-simulation-and-rbpf",
+    "consumer_batch": "46",
+    "supplier": "def-feynman-kac-path-targets-and-normalizers",
+    "supplier_page": "feynman-kac-particle-filters",
+    "supplier_batch": "44",
+    "status": "verified",
+    "required_hypotheses": "AC; finite horizon; standard-Borel path spaces, initial probability, transition probability kernels, and finite nonnegative measurable potentials; normalize only when the path normalizer is finite and positive.",
+    "evidence": "Read the current batch-44 Definition; the consumer uses its path target, finite-positive normalization domain, and declared potential convention. The item is placed on feynman-kac-particle-filters (batch 44) and the dependency is declared in the batch-46 manifest. This is body-and-placement evidence, not independent review or acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-bootstrap-particle-filter-weak-consistency",
+    "consumer_page": "particle-smoothing-backward-simulation-and-rbpf",
+    "consumer_batch": "46",
+    "supplier": "alg-sequential-importance-resampling",
+    "supplier_page": "feynman-kac-particle-filters",
+    "supplier_batch": "44",
+    "status": "verified",
+    "required_hypotheses": "Finite-horizon Feynman–Kac target and proposal path laws with the specified absolute-continuity and measurable Radon–Nikodym versions; the bootstrap specialization uses matching proposal and transition kernels.",
+    "evidence": "Read the current batch-44 Definition; the consumer follows its resample-propagate bootstrap interface with matching target and proposal transitions. The item is placed on feynman-kac-particle-filters (batch 44) and the dependency is declared in the batch-46 manifest. This is body-and-placement evidence, not independent review or acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-bootstrap-particle-filter-weak-consistency",
+    "consumer_page": "particle-smoothing-backward-simulation-and-rbpf",
+    "consumer_batch": "46",
+    "supplier": "alg-multinomial-and-residual-offspring-resampling",
+    "supplier_page": "feynman-kac-particle-filters",
+    "supplier_batch": "44",
+    "status": "verified",
+    "required_hypotheses": "Finite particle count and finite nonnegative input weights; for multinomial resampling the conditional ancestor indices are IID with the normalized input probabilities.",
+    "evidence": "Read the current batch-44 Definition; the consumer selects the multinomial branch and its conditionally IID ancestors. The item is placed on feynman-kac-particle-filters (batch 44) and the dependency is declared in the batch-46 manifest. This is body-and-placement evidence, not independent review or acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-fixed-lag-particle-smoother",
+    "consumer_page": "particle-smoothing-backward-simulation-and-rbpf",
+    "consumer_batch": "46",
+    "supplier": "def-state-space-filtering-laws",
+    "supplier_page": "state-space-filtering-and-predictive-laws",
+    "supplier_batch": "41",
+    "status": "verified",
+    "required_hypotheses": "AC; finite horizon; standard-Borel model spaces and probability kernels; filtering and smoothing maps are conditional-law versions, with null-history values version-dependent.",
+    "evidence": "Read the current batch-41 Definition and checked its conditional-kernel and null-history convention against the local consumer. The item is placed on state-space-filtering-and-predictive-laws (batch 41) and the dependency is declared in the batch-46 manifest. This is body-and-placement evidence, not independent review or acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-fixed-lag-particle-smoother",
+    "consumer_page": "particle-smoothing-backward-simulation-and-rbpf",
+    "consumer_batch": "46",
+    "supplier": "alg-sequential-importance-resampling",
+    "supplier_page": "feynman-kac-particle-filters",
+    "supplier_batch": "44",
+    "status": "verified",
+    "required_hypotheses": "Finite-horizon Feynman–Kac target and proposal path laws with the specified absolute-continuity and measurable Radon–Nikodym versions; the bootstrap specialization uses matching proposal and transition kernels.",
+    "evidence": "Read the current batch-44 Definition; the consumer follows its resample-propagate bootstrap interface with matching target and proposal transitions. The item is placed on feynman-kac-particle-filters (batch 44) and the dependency is declared in the batch-46 manifest. This is body-and-placement evidence, not independent review or acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-particle-smoothing-consistency-under-stated-conditions",
+    "consumer_page": "particle-smoothing-backward-simulation-and-rbpf",
+    "consumer_batch": "46",
+    "supplier": "thm-dominated-state-space-filtering-recursion",
+    "supplier_page": "state-space-filtering-and-predictive-laws",
+    "supplier_batch": "41",
+    "status": "verified",
+    "required_hypotheses": "AC; finite-horizon state-space model with jointly measurable observation densities relative to sigma-finite measures; normalized updates only on finite-positive evidence, with conditional-law fillers elsewhere.",
+    "evidence": "Read the current batch-41 Statement and full proof; the consumer identifies observation likelihood potentials with exact filtering kernels on finite-positive histories. The item is placed on state-space-filtering-and-predictive-laws (batch 41) and the dependency is declared in the batch-46 manifest. This is body-and-placement evidence, not independent review or acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-zero-backward-simulation-denominator",
+    "consumer_page": "particle-smoothing-backward-simulation-and-rbpf-examples",
+    "consumer_batch": "46",
+    "supplier": "def-state-space-filtering-laws",
+    "supplier_page": "state-space-filtering-and-predictive-laws",
+    "supplier_batch": "41",
+    "status": "verified",
+    "required_hypotheses": "AC; finite horizon; standard-Borel model spaces and probability kernels; filtering and smoothing maps are conditional-law versions, with null-history values version-dependent.",
+    "evidence": "Read the current batch-41 Definition and checked its conditional-kernel and null-history convention against the local consumer. The item is placed on state-space-filtering-and-predictive-laws (batch 41) and the dependency is declared in the batch-46 manifest. This is body-and-placement evidence, not independent review or acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-fixed-lag-smoothing-bias-from-delayed-information",
+    "consumer_page": "particle-smoothing-backward-simulation-and-rbpf-examples",
+    "consumer_batch": "46",
+    "supplier": "def-state-space-filtering-laws",
+    "supplier_page": "state-space-filtering-and-predictive-laws",
+    "supplier_batch": "41",
+    "status": "verified",
+    "required_hypotheses": "AC; finite horizon; standard-Borel model spaces and probability kernels; filtering and smoothing maps are conditional-law versions, with null-history values version-dependent.",
+    "evidence": "Read the current batch-41 Definition and checked its conditional-kernel and null-history convention against the local consumer. The item is placed on state-space-filtering-and-predictive-laws (batch 41) and the dependency is declared in the batch-46 manifest. This is body-and-placement evidence, not independent review or acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+    "consumer_page": "particle-smoothing-backward-simulation-and-rbpf",
+    "consumer_batch": "46",
+    "supplier": "alg-kalman-filter",
+    "supplier_page": "kalman-filtering",
+    "supplier_batch": "42",
+    "status": "verified",
+    "required_hypotheses": "Finite deterministic linear-Gaussian equations with positive-semidefinite state and noise covariances; each innovation covariance used by the update must be positive definite.",
+    "evidence": "Read the current batch-42 alg-kalman-filter Definition. The local conditional-path lemma applies it only after step 1.1 establishes positive-definite innovations from the strictly positive observation-noise covariance. The supplier is placed on kalman-filtering. This is interface and placement evidence, not independent review or acceptance."
+  }
+]

@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "items": {
+    "ex-multinomial-versus-residual-resampling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-multinomial-and-residual-offspring-resampling",
+          "source_section": "Definition",
+          "quote": "Input a particle count $N\\ge1$, nonnegative finite weights $a_1,\\ldots,a_N$, and a scheme label, either multinomial or residual. Let $A=\\sum_{j=1}^Na_j$. If $A>0$, set $p_j=a_j/A$; if $A=0$, set $p_j=1/N$ for every $j$. Thus $p$ is always a probability vector.\n\n- **Multinomial scheme.** Draw an index vector $(J_1,\\ldots,J_N)\\in\\{1,\\ldots,N\\}^N$ with conditional mass $\\mathbb P(J_1=j_1,\\ldots,J_N=j_N\\mid a)=\\prod_{\\ell=1}^Np_{j_\\ell}$. Put $C_j=\\#\\{\\ell:J_\\ell=j\\}$.\n- **Residual scheme.** Put $q_j=\\lfloor Np_j\\rfloor$, $r_j=Np_j-q_j$, and $R=\\sum_{j=1}^Nr_j=N-\\sum_{j=1}^Nq_j$, an integer in $\\{0,\\ldots,N-1\\}$. If $R=0$, put $C_j=q_j$. If $R>0$, draw $(K_1,\\ldots,K_R)$ with conditional mass $\\mathbb P(K_1=k_1,\\ldots,K_R=k_R\\mid a)=\\prod_{\\ell=1}^R(r_{k_\\ell}/R)$ and put $C_j=q_j+\\#\\{\\ell:K_\\ell=j\\}$.\n\nFor multinomial resampling, return the sampled vector $(J_1,\\ldots,J_N)$ in its sampled order, together with its count vector $(C_1,\\ldots,C_N)$; do not sort the sampled indices. For residual resampling, return the ancestor list containing exactly $C_j$ copies of index $j$, ordered by increasing index, together with its count vector. Each output is a length-$N$ list and a count vector summing to $N$. When all input weights vanish, the uniform fallback defines the procedure; any downstream normalizer already multiplied by this zero average remains zero.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts",
+          "source_section": "Statement",
+          "quote": "Fix $N\\ge1$ and nonnegative input weights $a_1,\\ldots,a_N$. Let $p$ be the normalized probability vector, with the uniform fallback when all weights vanish, and let $C_j$ be the offspring count from [[alg-multinomial-and-residual-offspring-resampling]]. Conditional on the input weights, for either scheme and every $1\\le j\\le N$,\n$$\\mathbb E[C_j\\mid a_1,\\ldots,a_N]=Np_j.$$\nThis assertion concerns the counts only; it gives no variance comparison for arbitrary weights.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The vector is a probability vector, and $Np=(31/10,7/5,1/2,0,0)=(3.1,1.4,0.5,0,0)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In multinomial resampling each count is a sum of five independent Bernoulli indicators with success probability $p_j$, so its variance is $5p_j(1-p_j)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Residual resampling has deterministic floors $(3,1,0,0,0)$ and fractional remainders $(0.1,0.4,0.5,0,0)$, whose sum is $R=1$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The expected counts agree componentwise, while for these weights each of the first three residual marginal variances is smaller than its multinomial counterpart, while the last two variances are zero in both schemes.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example has five particles, three with positive weights. Steps 1.1\u20131.3 show the last two counts and variances are zero; no empty particle population is considered."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The worked weights are all positive, so the zero-weight fallback is not activated."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes N=5 and p=(0.62,0.28,0.10,0,0), so N=1 or a unit coordinate weight is not a parameter case of this numerical witness. Step 1.3 does have exactly one residual draw R=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example has three distinct positive weights and computes the R=1 residual case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All three normalized weights lie strictly between zero and one; steps 1.1\u20131.3 calculate both schemes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20131.3 explicitly compute floors (3,1,0,0,0), one residual categorical draw, and all coordinate count moments; no choice principle enters this five-particle calculation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_empirical_bayes_resolution",
+            "reason": "The Example computes offspring means and variances for the fixed five-entry weight vector with three positive weights; it makes no equivalence claim."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_empirical_bayes_resolution",
+            "reason": "The observed strict variance reductions in the three active coordinates do not characterize residual resampling or imply a universal variance ordering; step 2.1 limits the comparison to this input."
+          }
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

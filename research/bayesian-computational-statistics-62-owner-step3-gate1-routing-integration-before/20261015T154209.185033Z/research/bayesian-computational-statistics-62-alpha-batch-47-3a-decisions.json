@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "group": "batch-47",
+  "decisions": [
+    {
+      "obligation": "touched:47:def-particle-gibbs-extended-target",
+      "id": "def-particle-gibbs-extended-target",
+      "route": "touched",
+      "verdict": "accepted_repair",
+      "evidence": "Explicit joint parameter measurability now makes the target and proposal families kernels and defines the prior-particle joint law. Reviewed standard-Borel conditional-version convention, multinomial labeled forward law, zero estimate mass and T=0. Pre-reader raw source is hash-matched by the owner-step2-gate1-45-48-before archive; current equals reader-post. See report level 4 review and contract risk_review.",
+      "defect_ids": [
+        "bcs62-b47-3a-parameter-measurability"
+      ],
+      "repair_confidence": 1,
+      "subject_sha256": "618b0099a77fc048b87ca72e23d5312c5e483f1e25ff985eddcca09cc9cb052d"
+    },
+    {
+      "obligation": "touched:47:alg-conditional-particle-gibbs",
+      "id": "alg-conditional-particle-gibbs",
+      "route": "touched",
+      "verdict": "reviewed_no_defect",
+      "evidence": "Inputs, finite-time loops, outputs and unavailable branches are explicit. Reference ancestry is fixed, and every non-reference ancestor is sampled independently with multinomial weights; all hypotheses inherit the repaired measurable family. ADH §4.3 conditional SMC and §4.5 apply. Only source-title metadata changed.",
+      "defect_ids": [],
+      "change_kind": "metadata",
+      "subject_sha256": "1edac92b4ca6636530a4c969f02a9ff5c635944bed7a59b550491a40c982cc23"
+    },
+    {
+      "obligation": "touched:47:alg-pmmh",
+      "id": "alg-pmmh",
+      "route": "touched",
+      "verdict": "accepted_repair",
+      "evidence": "The prior is a measure; pointwise pi_0(theta)>0 was undefined for this interface. Reader correctly restricts initialization positivity to p_0(theta) Lhat>0 in the density case and delegates the density-free case to general MH accepted flow. Zero proposals are rejected; rejection retains the full auxiliary state; N=1 is admissible. m_theta is explicitly a kernel and Lhat jointly measurable. Unbiasedness plus 0<C<infinity normalizes the extended law. General-state MH supplier and ADH §4.4 Theorem 4 justify the procedure; book §16.3.5 provides the likelihood-estimate/PMMH context.",
+      "defect_ids": [
+        "bcs62-b47-3a-prior-density-initialization"
+      ],
+      "repair_confidence": 1,
+      "subject_sha256": "2d854f6f8f0306de2ceea59b45fce7d376696424e81b4b751ec7cb5196290f41"
+    },
+    {
+      "obligation": "touched:47:def-particle-gibbs-backward-simulation-extended-target",
+      "id": "def-particle-gibbs-backward-simulation-extended-target",
+      "route": "touched",
+      "verdict": "reviewed_no_defect",
+      "evidence": "This variant adds sigma-finite coordinate reference measures and target/proposal densities, and uses backward indices without genealogical equality. B is W f divided by its finite positive sum. The displayed target is Lindsten–Schön §4.1 equation (7), with times 0:T instead of 1:T. Its off-path particle and reference-ancestor factors are normalized kernels; ratios use a common conull set with identity fallback. Proper prior, evidence and parameter measurability are inherited. Only source-title metadata changed.",
+      "defect_ids": [],
+      "change_kind": "metadata",
+      "subject_sha256": "180364a49b6668faf76fca4531a4ef7685937f1ff74a883d193f6a85235b2144"
+    },
+    {
+      "obligation": "touched:47:thm-particle-gibbs-selected-path-marginal",
+      "id": "thm-particle-gibbs-selected-path-marginal",
+      "route": "touched",
+      "verdict": "reviewed_no_defect",
+      "evidence": "Read both proof steps and all cited suppliers. For each fixed lineage, Zhat W_T and its selected ancestor probabilities cancel to N^{-(T+1)} times the FK path measure. The remaining factors are ordered normalized non-reference proposal/resampling kernels. There are exactly N^{T+1} lineages, giving total mass one and the full joint posterior. RN identities are needed only a.e.; selected target paths avoid exceptional versions. A zero weight prefix has zero tilted mass; T=0 gives N lineages, not N^0. No finite positive prefix-normalizer assumption from the separate unbiasedness theorem is imported. AC is inherited through RN/path laws; finite sums require no extra choice. ADH equations (36)–(37) match; Lindsten–Schön Proposition 1 is the backward analogue, not a substitute for this local proof. Reader only normalized the citation title and Given line wrap.",
+      "defect_ids": [],
+      "change_kind": "metadata",
+      "subject_sha256": "b89b2c7727186a421f3e23068c1d888e3cabe9a84549bf15728e2811649d0684"
+    },
+    {
+      "obligation": "touched:47:alg-particle-gibbs-backward-simulation",
+      "id": "alg-particle-gibbs-backward-simulation",
+      "route": "touched",
+      "verdict": "reviewed_no_defect",
+      "change_kind": "metadata",
+      "evidence": "The algorithm explicitly draws reference ancestors from B instead of fixing a genealogy; other particles use multinomial SIR. It draws a posterior parameter, regenerates the CAPF, and then samples terminal and backward indices. Finite loops include T=0; input/output extended states, failed arithmetic and good-set identity branches are specified. Lindsten–Schön Algorithms 1–3 and Proposition 2 agree. Only citation-title metadata changed.",
+      "defect_ids": [],
+      "subject_sha256": "7894319049aaf9a350cd1fb4c69b6fbaa54b4f5059094f5a0b6a5474d3037b6b"
+    },
+    {
+      "obligation": "touched:47:thm-particle-gibbs-conditional-sweep-is-gibbs",
+      "id": "thm-particle-gibbs-conditional-sweep-is-gibbs",
+      "route": "touched",
+      "verdict": "reviewed_no_defect",
+      "change_kind": "metadata",
+      "evidence": "All six steps and citations reviewed. Only W_T depends on K, giving the terminal categorical conditional. The lineage cancellation gives the posterior path factor times normalized conditional SIR and a uniform N^{-(T+1)} lineage factor. Disintegration on standard-Borel products and finite unions supply measurable common conull sets; conditional exceptional events have conditional probability zero a.e. The parameter draw is conditional on the retained path, then regenerates the other particles: together these draw a joint block, rather than conditioning theta on the old full cloud. Each block preserves the target by its conditional integral identity, and null-state identity fallback leaves its integral unchanged. Positive reference weights prevent zero sums a.e.; T=0 reduces to conditional importance resampling. ADH §4.5 and local selected-path theorem match. Reader changed the source title and Given wrapping only relative to the hash-reconstructed preimage.",
+      "defect_ids": [],
+      "subject_sha256": "10bf4416a2721f020756003f0575681a13d96b6eb07ed84efa3a4c02859dfe3f"
+    },
+    {
+      "obligation": "touched:47:cex-particle-gibbs-missing-path-support",
+      "id": "cex-particle-gibbs-missing-path-support",
+      "route": "touched",
+      "verdict": "reviewed_no_defect",
+      "change_kind": "metadata",
+      "evidence": "Read the two-step counterexample and exact support suppliers. With T=0, pi({1})=1/2 and q({1})=0, absolute continuity fails, so no finite importance-weight density can represent pi relative to q. Starting at 0 all proposed particles remain 0. This refutes well-defined usual-weight exactness without support, not a claim that every arbitrarily extended kernel is noninvariant. The example is finite, normalized and includes the missing positive-mass path explicitly. ADH Assumption 5 and Lindsten–Schön Assumption 1 enforce the needed support. Reader changed citation title and Given wrapping only.",
+      "defect_ids": [],
+      "subject_sha256": "691d2fcbfb20923be1a20c683cda2b767d3fab7bd803c4ba1e6f258fb81b3bfd"
+    },
+    {
+      "obligation": "touched:47:thm-particle-gibbs-backward-simulation-sweep-is-gibbs",
+      "id": "thm-particle-gibbs-backward-simulation-sweep-is-gibbs",
+      "route": "touched",
+      "verdict": "reviewed_no_defect",
+      "evidence": "Reviewed all six steps, density hypotheses and suppliers, and Lindsten–Schön §4.1 equation (7), Propositions 1–3 and Appendix A. Canceling the indexed joint proposals gives normalized CAPF factors with the reference ancestor categorical in B. Conditional on the cloud, successive weight substitutions yield W_T^{j_T} times the backward B product; finite backward summation normalizes this law. All ratios are on the declared common finite-positive domain; zero terms carry zero mass and conditional versions are a.e. Uniform N^{-(T+1)} index factors give exactly N^{T+1} copies of the posterior path law. The theta draw and CAPF form one joint block given path and indices; the subsequent index draw is its full conditional. Disintegration and the measurable null-state identity preserve the target integral. T=0 leaves just conditional importance resampling; no mixing/ergodicity conclusion is imported. Reader altered citation title and Given layout only; a hash-matched reconstruction of the exact pre-reader source confirms this.",
+      "defect_ids": [],
+      "change_kind": "metadata",
+      "subject_sha256": "221daef8615be5a7107285147be610c5a86d14a41649c48a306a39e5b4618d9d"
+    },
+    {
+      "obligation": "touched:47:ex-particle-gibbs-invariant-but-sticky",
+      "id": "ex-particle-gibbs-invariant-but-sticky",
+      "route": "touched",
+      "verdict": "reviewed_no_defect",
+      "evidence": "At T=0,N=2 the target/proposal weights are 99 and 1/99. Direct calculation gives P(0,1)=99/980200 and P(1,0)=9801/980200; the posterior flows both equal 9801/98020000, and P(0,1)<1/9000. The finite positive-support example therefore demonstrates invariant yet sticky behavior. Its use of the already-reviewed conditional algorithm and invariance theorem meets all hypotheses. Only citation title and Given layout changed.",
+      "defect_ids": [],
+      "change_kind": "metadata",
+      "subject_sha256": "e7e00b51aa981f8c452d806edb70515ea52abe4354db355e7932f2521776c8d9"
+    },
+    {
+      "obligation": "page:47:particle-mcmc-pmmh-and-particle-gibbs",
+      "id": "particle-mcmc-pmmh-and-particle-gibbs",
+      "route": "page",
+      "verdict": "reviewed_no_defect",
+      "evidence": "Focused outside current-page review by bcs_gate1_45_48 found no current mathematical defect. The exact current page was read against the current PMMH definition/invariance statement, genealogical extended target and CPF joint-block theorem, and density-based CAPF/backward-index algorithm and theorem. Its sampled-order multinomial restriction, PMMH unbiased resampling alternatives, retained auxiliary state, measurable standard-Borel parameter families, full target-path support, finite positive evidence, full-measure reference sets and measurable unchanged-state fallback agree with those suppliers. Finite-N invariance is correctly separated from mixing. Exact original full-page bytes for pre-reader digest 4ce016a2172d8f3664ae9ed07e80eadbc74f039111162060f34928669597a499 were not found in the bounded archive/git search; no original delta was reconstructed or reviewed. See research/bayesian-computational-statistics-62-owner-step3-page47-current-resolution.evidence.json and .report.txt. This is outside focused current-content evidence, not new native execution coverage.",
+      "defect_ids": [],
+      "historical_delta_unknown": true,
+      "change_kind": "current_content_review",
+      "owner_resolution": "The root owner explicitly authorized resolving this page obligation through the existing current_content_review route after independent current-page review if the exact pre-reader carrier was not found. This resolution accepts the supported current content only; the original full-page delta remains missing and historically unknown. No claim of metadata-only historical change, authenticated preimage recovery, original-byte review, or replacement native coverage is made. Root authorization: research/bayesian-computational-statistics-62-owner-step3-page47-current-authorization.json; exact original native escalation/report preserved in research/bayesian-computational-statistics-62-owner-step3-page47-current-native-before.",
+      "subject_sha256": "629a59bec92b4fced81cea8178c58e7791d584f6aadc3f1b13202b5171eeb903"
+    }
+  ]
+}

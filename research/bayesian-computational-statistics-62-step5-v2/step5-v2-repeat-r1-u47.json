@@ -1,0 +1,143 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "47",
+  "input_sha256": "8a8734c8cd9afdc96618dbafe685e00ab296c41b484981fc79203392668dde20",
+  "decisions": [
+    {
+      "id": "alg-particle-gibbs-backward-simulation",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "a5b35cd515a83f525afaff2f196e5eb31f451b6aed3d9faa245a4091855a6bb7",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The supplier does define D_BS in its Conditional-version convention, as a measurable full-measure set of parameter-path-index triples. Thus the asserted absence is false, but the algorithm explicitly places (theta,U,j) in that path-coordinate set. This is an ill-typed admissibility test, leaving the procedure undefined as written; defect_type other records a procedural domain defect, not a proof inference or missing citation. Repaired both initial-domain descriptions to test only (theta,x^j,j); the post-parameter-draw test already has that type.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1110.2873v2"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-particle-gibbs-backward-simulation",
+      "disposition": "repaired",
+      "post_sha256": "02cd5266884cb140af313f432b245b522dfc183a27b25c4ff75b9c708e7e6780",
+      "review_context_sha256": "7667f4a930a732dd3166d870ca8932c0ed6adb78dce5401dbb5fdf38664d7b3f",
+      "reason": "The extended-state input is projected to its selected parameter-path-index triple before testing the supplier good set; after the exact parameter draw the same coordinate type is tested. Conditional filter instructions retain SIR proposals for free particles, B-distributed reference ancestors, and terminal/backward categorical draws. Finite zero individual weights remain permitted, so the digest T=0 witness gives mixed-cloud mass 1/2 rather than 1/4. The repair preserves the selected posterior, N>=2, T=0 branch and inherited AC assumptions; it is not an independent review of my repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1110.2873v2"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-particle-gibbs-backward-simulation-sweep-is-gibbs"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "bcs62-step5-repeat-r1-u47-pgbs-domain",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-16",
+        "class": "accuracy",
+        "subclass": "ill-typed-construction",
+        "severity": "fatal",
+        "location": "definition",
+        "subject": "alg-particle-gibbs-backward-simulation",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "repair_cost": "repair+rejudge",
+        "item_sha256": "02cd5266884cb140af313f432b245b522dfc183a27b25c4ff75b9c708e7e6780",
+        "subclass_note": "The supplier does define D_BS in its Conditional-version convention, as a measurable full-measure set of parameter-path-index triples. Thus the asserted absence is false, but the algorithm explicitly places (theta,U,j) in that path-coordinate set. This is an ill-typed admissibility test, leaving the procedure undefined as written; defect_type other records a procedural domain defect, not a proof inference or missing citation. Repaired both initial-domain descriptions to test only (theta,x^j,j); the post-parameter-draw test already has that type.",
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-repeat-r1-u47.json",
+            "anchor": "decisions[0] and reviews[0]"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "none",
+      "reason": "The sole direct item consumer is a draft frontier theorem. No published or outside-frontier direct consumer or published-item defect was found in this interface examination; no published-ledger entry is warranted."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "Complete: assigned item repaired, owning metadata synchronized under the shared write lock, direct consumer and page uses examined, focused checks passed. Independent rejudgment remains controller-owned.",
+    "source_reading": "Consulted Lindsten and Schon arXiv 1110.2873v2, section 4.1 and Algorithms 1-3 (pp. 6-10), Appendix A.1-A.2 (pp. 22-23). Its conditional particle law fixes theta, selected path and index sequence; it does not supply the repository-specific good-set convention. The source proof uses ratios; the local proof instead uses product identities to include zero weights.",
+    "dependencies_examined": [
+      "def-particle-gibbs-backward-simulation-extended-target",
+      "alg-conditional-particle-gibbs",
+      "alg-sequential-importance-resampling",
+      "def-feynman-kac-path-targets-and-normalizers",
+      "thm-feynman-kac-path-radon-nikodym-weight",
+      "def-particle-gibbs-extended-target"
+    ],
+    "unresolved_mathematics": [],
+    "interface_change": {
+      "path": "items/alg-particle-gibbs-backward-simulation.md",
+      "section": "Definition",
+      "before": "Before updating, require the retained state to be in D_BS; the next paragraph places (theta,U,j) in D_BS.",
+      "after": "Require the selected parameter-path-index triple (theta,x^j,j) to be in the supplier Conditional-version convention good set. The full input (theta,U,j) is no longer declared an element of that set.",
+      "minimality": "Only two domain-description spans changed. The parameter draw, conditional filter, backward recursion, weights, exceptional-state fallback and output are unchanged. No new prerequisite or choice requirement."
+    },
+    "consumer_examination": [
+      {
+        "id": "thm-particle-gibbs-backward-simulation-sweep-is-gibbs",
+        "path": "items/thm-particle-gibbs-backward-simulation-sweep-is-gibbs.md",
+        "affected_use": "Statement conditions the remaining particle system on (theta,x^*,j); F2 imports the filter and backward draws; Proof 1.2 factors the conditional law given the reference path and indices; Proof 3.1 pulls exceptional sets back to the extended-state space; Proof 4.1 updates (theta,U_-j) given (x^j,j).",
+        "invalidated_claim": "None after repair: the corrected membership test uses precisely the retained coordinates already used throughout these arguments.",
+        "disposition": "unchanged_sound",
+        "minimality": "No theorem item edit is needed. Its contract F2 source quote is synchronized mechanically to the corrected Definition, without changing the theorem or claiming independent review coverage."
+      },
+      {
+        "page": "particle-mcmc-pmmh-and-particle-gibbs",
+        "path": "library/bayesian-computational-statistics/particle-mcmc-pmmh-and-particle-gibbs.md",
+        "affected_use": "The final paragraph states that explicit conditional formulas hold on full-posterior-measure reference sets, with a measurable unchanged-state fallback at exceptional reference values.",
+        "disposition": "unchanged_sound",
+        "reason": "Reference sets have the parameter-path-index coordinates now used in both algorithm tests; the prose does not put full particle systems inside those sets."
+      }
+    ],
+    "digest_disposition": "Both original zero-ratio concerns are resolved by the assigned current preimage, which explicitly retains finite zero ratios, importance weights and backward probabilities. At T=0 with retained state 1, target delta_1 and uniform proposal, the free particle is 0 with probability 1/2 and receives weight zero without rejection. Thus regeneration produces a mixed cloud with probability 1/2 from either old cloud, consistent with the conditional target. No further edit for that concern is necessary.",
+    "checks": [
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run bayesian-computational-statistics-62 --items alg-particle-gibbs-backward-simulation",
+        "exit_code": 0,
+        "result": "Ran immediately after item review/repair; copied both hashes into reviews[0]. No later item or supplier edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-47.proof-contracts.json --items alg-particle-gibbs-backward-simulation,thm-particle-gibbs-backward-simulation-sweep-is-gibbs --strict --json",
+        "exit_code": 0,
+        "result": "ok:true; both selected contracts checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-particle-gibbs-backward-simulation.md --json",
+        "exit_code": 0,
+        "result": "1 file, 0 checked phase proofs, 0 failures; algorithm status not-applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-particle-gibbs-backward-simulation.md --json",
+        "exit_code": 0,
+        "result": "1 file checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-particle-gibbs-backward-simulation.md",
+        "exit_code": 0,
+        "result": "1 item, 0 phase-proof steps, 0 defects; run once after final item edit."
+      }
+    ]
+  },
+  "supporting_evidence": {
+    "research/bayesian-computational-statistics-62-batch-47.pages.json": "c50e11b1ede18e00ff704a6bc22eec5fbd662da5a35047dd17629815875a7cea",
+    "research/bayesian-computational-statistics-62-batch-47.proof-contracts.json": "bc1f99188ae8b4992fc43d66497aa1c416fd0e6daf4b6e3a2ba3cdafec9078a8"
+  }
+}

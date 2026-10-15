@@ -8,11 +8,10 @@ landmark: true
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-nonnegative-lebesgue-integral, def-integral-over-a-measurable-set, thm-simple-indefinite-integral-is-a-measure, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-continuity-from-below-for-measures, prop-the-nonnegative-integral-agrees-with-the-simple-integral, prop-basic-properties-of-the-nonnegative-simple-integral]
+deps: [cor-cauchy-reals-lub-complete, thm-reals-ordered-field, thm-of-archimedean, def-nonnegative-lebesgue-integral, def-integral-over-a-measurable-set, thm-simple-indefinite-integral-is-a-measure, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-continuity-from-below-for-measures, prop-the-nonnegative-integral-agrees-with-the-simple-integral, prop-basic-properties-of-the-nonnegative-simple-integral]
 proof_strategy: direct
 verification:
-  precheck: pass
-  repair: research/mathematical-statistics-foundations-37-owner-mct-ambient-thm-monotone-convergence-for-the-integral-repair.json
+  repair: research/bayesian-computational-statistics-62-owner-step2-b30-thm-monotone-convergence-for-the-integral-published-repair.json
 sources:
   scraped: []
   references:
@@ -41,6 +40,8 @@ $$\int f_n\,d\mu\uparrow\int f\,d\mu.$$
 
 [L4] The nonnegative integral agrees with the simple integral on simple functions, and the latter is homogeneous on nonnegative simple functions ([[prop-the-nonnegative-integral-agrees-with-the-simple-integral]], [[prop-basic-properties-of-the-nonnegative-simple-integral]]).
 
+[L5] The real numbers form a complete ordered field, and for every real $x$ there is a positive integer $m>x$ ([[cor-cauchy-reals-lub-complete]], [[thm-reals-ordered-field]], [[thm-of-archimedean]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -49,6 +50,6 @@ $$\int f_n\,d\mu\uparrow\int f\,d\mu.$$
 
 1.2 Fix a finite-valued nonnegative simple function $s\le f$ and $0<c<1$. Set $A_n=\{f_n\ge cs\}$. The sets $A_n$ increase to $X$: where $s=0$ membership is automatic, and where $s>0$, the limit $f\ge s>cs$ eventually forces $f_n\ge cs$. Since $A\mapsto\int_A s\,d\mu$ is a measure [L2], continuity from below [L3] gives $\int_{A_n}s\,d\mu\uparrow\int s\,d\mu$. [given, L2, L3]
 
-2.1 On $A_n$, $cs\le f_n$, hence $cs\chi_{A_n}\le f_n$ everywhere. By monotonicity [L1] and simple-integral agreement and homogeneity [L4], $c\int_{A_n}s\,d\mu\le\int f_n\,d\mu\le L$. Letting $n\to\infty$ in step 1.2 yields $c\int s\,d\mu\le L$. Letting a fixed sequence $c_m\uparrow1$ shows $\int s\,d\mu\le L$, also when the simple integral is infinite. [step 1.2, L1, L4, algebra]
+2.1 On $A_n$, $cs\le f_n$, hence $cs\chi_{A_n}\le f_n$ everywhere. By monotonicity [L1] and simple-integral agreement and homogeneity [L4], $c\int_{A_n}s\,d\mu\le\int f_n\,d\mu\le L$. Letting $n\to\infty$ in step 1.2 yields $c\int s\,d\mu\le L$. Write $I=\int s\,d\mu$. If $L=+\infty$ there is nothing to prove. If $L<+\infty$ and $I=+\infty$, the inequality $cI\le L$ is already impossible for $c=1/2$. If $I<+\infty$ and $I>L$, choose a positive integer $m>L/(I-L)$ by [L5] and set $c_m=m/(m+1)\in(0,1)$. Then $c_m I>L$, since $m(I-L)>L$, again contradicting $c_m I\le L$. Thus $I\le L$ in every case. This gives explicitly the elementary approximation $c_m\uparrow1$, without invoking any additional convergence theorem. [step 1.2, L1, L4, L5, algebra, choose]
 
 3.1 The inequality from step 2.1 holds for every admissible simple minorant $s\le f$. Taking their supremum, as in [[def-nonnegative-lebesgue-integral]], gives $\int f\,d\mu\le L$. Combine this with step 1.1 to obtain $\int f_n\,d\mu\uparrow\int f\,d\mu$. [step 1.1, step 2.1] ∎

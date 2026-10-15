@@ -1,0 +1,185 @@
+[
+  {
+    "order": 2154,
+    "id": "statistical-and-computational-error-accounting",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Statistical, resampling, simulation, and numerical error ledger",
+    "companion": "statistical-and-computational-error-accounting-examples",
+    "requires": [
+      "iid-monte-carlo-integration-and-error",
+      "resampling-algorithms-and-sampling-units",
+      "finite-group-permutation-inference",
+      "cross-validation-risk-and-model-comparison"
+    ],
+    "items": [
+      {
+        "id": "def-statistical-and-computational-error-ledger",
+        "deps": [
+          "def-probability-measure",
+          "def-random-element-and-real-random-variable",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability"
+        ],
+        "dependency_level": 0,
+        "kind": "definition",
+        "title": "Successive statistical and computational error targets",
+        "justified_by": [],
+        "statement": "Define a same-scale reference chain from an inferential target through declared data, approximation, discretization, finite-simulation and exact-arithmetic stages to the returned numerical value; assign each adjacent difference to its declared stage."
+      },
+      {
+        "id": "thm-pathwise-error-ledger-decomposition",
+        "deps": [
+          "def-statistical-and-computational-error-ledger"
+        ],
+        "dependency_level": 1,
+        "kind": "theorem",
+        "title": "Pathwise error decomposition along a reference chain",
+        "justified_by": [],
+        "statement": "For a finite same-scale reference chain, the returned error is the sum of the successive signed stage errors and the final roundoff error, and its absolute value is at most the sum of their absolute values."
+      },
+      {
+        "id": "thm-error-ledger-mse-covariance-identity",
+        "deps": [
+          "def-moments-variance-and-covariance",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-factorization-of-expectations-for-independent-variables"
+        ],
+        "dependency_level": 0,
+        "kind": "theorem",
+        "title": "MSE of a sum of error components includes covariance terms",
+        "justified_by": [],
+        "statement": "For finitely many square-integrable scalar error components, the mean square of their sum equals squared total bias plus component variances plus twice pairwise covariances; equality with the variance sum holds exactly when this combined correction is zero, and if total bias is zero, pairwise independence is sufficient."
+      },
+      {
+        "id": "thm-independent-replicate-variance-estimator",
+        "deps": [
+          "def-moments-variance-and-covariance",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "def-identically-distributed-and-iid-random-variables"
+        ],
+        "dependency_level": 0,
+        "kind": "theorem",
+        "title": "Unbiased variance estimate from independent computation replicates",
+        "justified_by": [],
+        "statement": "For R at least two IID finite-variance replicate estimates, the quantity [R(R-1)]^{-1} times the sum of squared deviations from their average is unbiased for the variance of that replicate average."
+      },
+      {
+        "id": "cor-independent-replicate-mean-clt",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "def-moments-variance-and-covariance",
+          "thm-lindeberg-levy-iid-central-limit-theorem",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 0,
+        "kind": "corollary",
+        "title": "CLT for independent computation replicates",
+        "justified_by": [],
+        "statement": "Under AC, IID computation replicates with positive finite variance have the usual standardized sample-mean Gaussian limit as the replicate count tends to infinity."
+      }
+    ]
+  },
+  {
+    "order": 2155,
+    "id": "statistical-and-computational-error-accounting-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Statistical, resampling, simulation, and numerical error ledger — Examples",
+    "companion": "statistical-and-computational-error-accounting",
+    "requires": [
+      "statistical-and-computational-error-accounting"
+    ],
+    "items": [
+      {
+        "id": "ex-bootstrap-finite-b-versus-sampling-error",
+        "deps": [
+          "def-statistical-and-computational-error-ledger",
+          "thm-pathwise-error-ledger-decomposition",
+          "thm-independent-replicate-variance-estimator",
+          "def-identically-distributed-and-iid-random-variables",
+          "alg-n-out-of-n-bootstrap-from-empirical-law",
+          "thm-bootstrap-draws-are-conditionally-iid-empirical-law"
+        ],
+        "dependency_level": 4,
+        "kind": "example",
+        "title": "Sampling and finite-bootstrap errors for a Bernoulli mean",
+        "justified_by": [],
+        "statement": "For a fixed nonempty Bernoulli sample, calculate its data-estimator error, the exact conditional bootstrap target, and a realized finite-B bootstrap average separately."
+      },
+      {
+        "id": "ex-permutation-pvalue-resolution",
+        "deps": [
+          "def-statistical-and-computational-error-ledger",
+          "thm-pathwise-error-ledger-decomposition",
+          "def-finite-group-randomization-test",
+          "def-orbit-rank-p-value",
+          "thm-finite-group-randomization-validity"
+        ],
+        "dependency_level": 2,
+        "kind": "example",
+        "title": "Exact-orbit and finite-B permutation p-value resolution",
+        "justified_by": [],
+        "statement": "Compute a full-orbit upper-tail rank and one explicitly defined plus-one Monte Carlo value, distinguishing their finite grids without claiming the Monte Carlo value is unbiased or valid by this calculation."
+      },
+      {
+        "id": "ex-euler-discretization-bias-and-path-variance",
+        "deps": [
+          "def-statistical-and-computational-error-ledger",
+          "thm-pathwise-error-ledger-decomposition",
+          "thm-independent-replicate-variance-estimator",
+          "cor-mean-value-theorem",
+          "def-real-exponential-function-and-e",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "def-identically-distributed-and-iid-random-variables",
+          "cor-differentiable-implies-continuous",
+          "lem-measurable-functions-preserve-independence",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability"
+        ],
+        "dependency_level": 2,
+        "kind": "example",
+        "title": "Euler discretization bias and path-to-path variance",
+        "justified_by": [],
+        "statement": "For a linear equation with a random initial state, compute the one-step Euler target bias and the variance of an average over independently simulated paths."
+      },
+      {
+        "id": "ex-rqmc-replicate-error-estimate",
+        "deps": [
+          "def-statistical-and-computational-error-ledger",
+          "thm-independent-replicate-variance-estimator"
+        ],
+        "dependency_level": 1,
+        "kind": "example",
+        "title": "Replicate variance for randomized quadrature",
+        "justified_by": [],
+        "statement": "Calculate the replicate-based variance estimate from three randomized-rule outputs and identify it as computation-randomization variability for fixed data."
+      },
+      {
+        "id": "ex-dot-product-roundoff-and-conditioning",
+        "deps": [
+          "def-statistical-and-computational-error-ledger",
+          "thm-pathwise-error-ledger-decomposition",
+          "def-standard-relative-floating-point-model-and-unit-roundoff",
+          "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds"
+        ],
+        "dependency_level": 2,
+        "kind": "example",
+        "title": "Dot-product cancellation under normal-range rounding",
+        "justified_by": [],
+        "statement": "In binary64, compare an exact three-term dot product with its left-to-right rounded result and check the published gamma bound on its normal-range domain."
+      },
+      {
+        "id": "ex-correlated-error-components",
+        "deps": [
+          "def-statistical-and-computational-error-ledger",
+          "thm-error-ledger-mse-covariance-identity"
+        ],
+        "dependency_level": 1,
+        "kind": "example",
+        "title": "Perfectly correlated error components",
+        "justified_by": [],
+        "statement": "A two-point example shows that two unit-variance error components can have a sum with variance four, so variances cannot be added without covariance conditions."
+      }
+    ]
+  }
+]

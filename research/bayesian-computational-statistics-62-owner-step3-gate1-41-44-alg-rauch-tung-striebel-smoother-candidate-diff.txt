@@ -1,0 +1,18 @@
+--- research/bayesian-computational-statistics-62-owner-step2-gate1-41-44-frozen-sources/alg-rauch-tung-striebel-smoother.md
++++ items/alg-rauch-tung-striebel-smoother.md
+@@ -45,9 +45,12 @@
+ For the computation, factor $P_{k+1|k}=L_kL_k^T$ with the unique
+ positive-diagonal Cholesky factor from
+ [[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]],
+-then solve $L_kU_k=F_{k+1}P_{k|k}$ and
+-$L_k^TC_k^T=U_k$ by triangular solves. Thus no inverse is formed in the
+-procedure.
++then compute the rows of $U_k$ in increasing order by
++$$ (U_k)_{i,\cdot}=\frac{(F_{k+1}P_{k|k})_{i,\cdot}-\sum_{j=1}^{i-1}(L_k)_{ij}(U_k)_{j,\cdot}}{(L_k)_{ii}},\qquad i=1,\ldots,d_{k+1},$$
++and compute the rows of $C_k^T$ in decreasing order by
++$$ (C_k^T)_{i,\cdot}=\frac{(U_k)_{i,\cdot}-\sum_{j=i+1}^{d_{k+1}}(L_k)_{ji}(C_k^T)_{j,\cdot}}{(L_k)_{ii}},\qquad i=d_{k+1},\ldots,1.$$
++These recurrences give $L_kU_k=F_{k+1}P_{k|k}$ and $L_k^TC_k^T=U_k$, so
++$C_k=P_{k|k}F_{k+1}^TP_{k+1|k}^{-1}$; no inverse is formed in the procedure.
+ 2. Update the smoothed mean and covariance:
+ $$m_{k|T}=m_{k|k}+C_k(m_{k+1|T}-m_{k+1|k})$$
+ $$P_{k|T}=P_{k|k}+C_k(P_{k+1|T}-P_{k+1|k})C_k^T$$

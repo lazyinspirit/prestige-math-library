@@ -1,0 +1,836 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-2",
+  "scope": [
+    "lem-square-integrable-predictable-step-ito-integral-is-finite-sum",
+    "lem-euler-maruyama-one-step-moment-and-increment-estimates",
+    "thm-euler-maruyama-uniform-moment-and-increment-bounds",
+    "ex-euler-maruyama-additive-noise-constant-coefficients",
+    "ex-euler-maruyama-superlinear-drift-outside-global-lipschitz-contract"
+  ],
+  "contracts": {
+    "lem-euler-maruyama-one-step-moment-and-increment-estimates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-d-dimensional-brownian-motion",
+          "source_section": "Definition",
+          "quote": "for every finite list $0=t_0<t_1<\\cdots<t_n$, the vector increments $$B_{t_j}-B_{t_{j-1}},\\qquad 1\\le j\\le n,$$ are mutually independent and have laws $N_d(0,(t_j-t_{j-1})I_d)",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-euler-maruyama",
+          "source_section": "Definition",
+          "quote": "|b(t,x)|^2+\\|\\sigma(t,x)\\|_F^2\\le K^2(1+|x|^2)",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "gaussian-moments",
+          "claim": "Represent the increment as a scaled standard Gaussian and verify its finite pth moment from the density.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "taylor-remainder",
+          "claim": "Apply the second-order Taylor formula to the pth power of the Euclidean norm and bound its remainder.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "conditional-p-moment",
+          "claim": "Use conditional centering, the coefficient growth bound, and the Gaussian moment estimate to obtain the one-step p-moment inequality.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "A2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "conditional-increment",
+          "claim": "Use conditional centering and covariance to obtain the interpolation increment estimate, including δ=0.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The interval increment with δ=0 is zero in step 1.3, and the p-moment estimate becomes equality in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At U=0 and δ=0 the update and both sides are zero; step 2.1 covers U=0 for every δ."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers p=2 and the one-dimensional case without a separate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If b_s(U)=0 and σ_s(U)=0, then V=U and both estimates in step 1.3 and step 2.1 reduce to equality."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.3 handles δ=0, including an interpolation increment at a grid endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The lemma assumes given random variables and Brownian increments and performs finite-dimensional estimates; no nonempty family is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a pair of one-sided inequalities and contains no equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a pair of one-sided inequalities and contains no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-euler-maruyama-uniform-moment-and-increment-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-euler-maruyama",
+          "source_section": "Definition",
+          "quote": "$Y_{k+1}=Y_k+b(t_k,Y_k)h+\\sigma(t_k,Y_k)\\Delta W_k.$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-euler-maruyama-one-step-moment-and-increment-estimates",
+          "source_section": "Statement",
+          "quote": "There is a constant $C_{p,m,K}$, independent of $s,\\delta,U$, such that $$ \\mathbb E(|V|^p\\mid\\mathcal F_s)\\le (1+C_{p,m,K}\\delta)|U|^p+C_{p,m,K}\\delta $$ and $$ \\mathbb E(|V-U|^2\\mid\\mathcal F_s)\\le C_{2,m,K}\\delta(1+|U|^2). $$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-euler-maruyama-step-process-and-continuous-interpolation",
+          "source_section": "Definition",
+          "quote": "Y_t=Y_k+b(t_k,Y_k)(t-t_k)+\\sigma(t_k,Y_k)(W_t-W_{t_k})\\quad(t_k\\le t\\le t_{k+1})",
+          "uses": [
+            "1.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-exponential-dominates-one-plus-x",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $$1+x\\le\\exp(x).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-d-dimensional-brownian-motion",
+          "source_section": "Definition",
+          "quote": "for every finite list $0=t_0<t_1<\\cdots<t_n$, the vector increments $$B_{t_j}-B_{t_{j-1}},\\qquad 1\\le j\\le n,$$ are mutually independent and have laws $N_d(0,(t_j-t_{j-1})I_d)",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-square-integrable-predictable-step-ito-integral-is-finite-sum",
+          "source_section": "Statement",
+          "quote": "The continuous version of its Itô integral is indistinguishable on $[0,T]$ from $$S_t=\\sum_{k=0}^{N-1}\\xi_k\\bigl(W_{t\\wedge t_{k+1}}-W_{t\\wedge t_k}\\bigr),\\qquad 0\\le t\\le T.$$ The coefficients need not be bounded.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "A process $H=(H_t)_{t\\ge0}$ is **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is $\\mathcal P$-measurable.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "inductive-integrability",
+          "claim": "Induct over grid steps to establish adaptedness and finite pth moments.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "integral-well-definedness",
+          "claim": "Use the finite-grid growth estimate to prove the coefficient integrands have finite energy, then use the square-integrable step-integral lemma for the interpolation identity.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F5",
+            "L1",
+            "L2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "grid-moments",
+          "claim": "Iterate the conditional moment recurrence and apply 1+u≤exp(u) to obtain a bound uniform in the mesh.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "interpolation-moments",
+          "claim": "Apply the one-step moment bound inside each grid interval and include the terminal endpoint.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "interpolation-increment",
+          "claim": "Apply the one-step p=2 increment estimate and use the grid moment bound.",
+          "step": "3.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "moment-scope-and-choice",
+          "claim": "Record the finite-p initial-data condition and that no arbitrary choice is used in the estimates.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "given",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes T>0, N≥1, and h>0, so an empty time interval or empty grid is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.2 gives zero interpolation increment at every grid time; the one-step lemma also covers δ=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 holds for k=0 and N=1, so the single-step grid is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When both coefficients vanish, step 2.2 preserves Y_k=X_0 and step 3.2 has zero increment."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly treats t=T using Y_T=Y_N, and step 3.2 treats grid endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses the supplied Brownian motion and a finite induction; it does not choose elements from nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts moment and increment inequalities, not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no reverse implication in the theorem statement."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-euler-maruyama-additive-noise-constant-coefficients": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-euler-maruyama",
+          "source_section": "Definition",
+          "quote": "$Y_{k+1}=Y_k+b(t_k,Y_k)h+\\sigma(t_k,Y_k)\\Delta W_k.$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-euler-maruyama-step-process-and-continuous-interpolation",
+          "source_section": "Definition",
+          "quote": "Y_t=Y_k+b(t_k,Y_k)(t-t_k)+\\sigma(t_k,Y_k)(W_t-W_{t_k})\\quad(t_k\\le t\\le t_{k+1})",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-euler-maruyama-uniform-moment-and-increment-bounds",
+          "source_section": "Statement",
+          "quote": "There is a constant $C_{p,T,L,K,d,m}$ independent of $h$ such that $$ \\max_{0\\le k\\le N}\\mathbb E|Y_k|^p+\\sup_{0\\le t\\le T}\\mathbb E|\\bar Y_t|^p+\\sup_{0\\le t\\le T}\\mathbb E|Y_t|^p\\le C_{p,T,L,K,d,m}(1+\\mathbb E|X_0|^p). $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ito-integral-for-square-integrable-predictable-processes",
+          "source_section": "Definition",
+          "quote": "for $H\\equiv1$ every tagged sum telescopes to $B_T-B_0$, which is also its Ito integral by clause 3",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ito-sde-and-strong-solution",
+          "source_section": "Definition",
+          "quote": "A **strong solution on $[0,T]$** is an adapted continuous process satisfying this integral equation indistinguishably.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-ito-integral-process-has-a-continuous-martingale-version",
+          "source_section": "Statement",
+          "quote": "Any two such continuous versions agree at every time on one measurable event of probability one",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "check-contract",
+          "claim": "Verify the constant coefficients and zero initial value satisfy the shared coefficient and moment assumptions.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-grid-path",
+          "claim": "Telescope the scalar recursion and interpolation and identify the path t+W_t as an exact integral solution.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-moments",
+          "claim": "Apply the uniform-moment theorem for each finite p and record the inherited choice assumption.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "At the initial endpoint t=0, step 1.2 gives Y_0=X_0=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks X_0=0 and step 1.2 gives the exact initial path value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 holds for n=1, the one-step mesh."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both coefficients are fixed nonzero constants, so a zero-coefficient branch is not part of this example."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 gives Y_{t_k}=t_k+W_{t_k} at every grid endpoint, including T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example fixes all coefficients and the initial value; no choice operation occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one explicit equation and makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one explicit equation and makes no equivalence claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-euler-maruyama-superlinear-drift-outside-global-lipschitz-contract": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-euler-maruyama",
+          "source_section": "Definition",
+          "quote": "|b(t,x)|^2+\\|\\sigma(t,x)\\|_F^2\\le K^2(1+|x|^2)",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euler-maruyama-uniform-moment-and-increment-bounds",
+          "source_section": "Statement",
+          "quote": "Assume the coefficient, grid, filtered Brownian-motion, and initial-value hypotheses of [[alg-euler-maruyama]]",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "growth-failure",
+          "claim": "Compute the unbounded linear-growth ratio and Lipschitz difference quotient for b(x)=-x^3.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "theorem-inapplicable",
+          "claim": "Conclude that the global-coefficient moment theorem cannot be invoked and avoid any unstated convergence conclusion.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example concerns a coefficient map on the nonempty scalar state space R."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At x=0 the drift vanishes, and step 1.1 still verifies that the global contract fails at large |x|."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is the scalar state and scalar-noise instance of the contract."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At x=0 the drift is zero but the diffusion remains one; step 1.1 checks the complete coefficient pair."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No time endpoint or limiting mesh assertion is made in this coefficient-only example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The coefficients are explicit formulas and require no selection from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example shows failure of hypotheses, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example shows failure of hypotheses, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-square-integrable-predictable-step-ito-integral-is-finite-sum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-d-dimensional-brownian-motion",
+          "source_section": "Definition",
+          "quote": "for every finite list $0=t_0<t_1<\\cdots<t_n$, the vector increments $$B_{t_j}-B_{t_{j-1}},\\qquad 1\\le j\\le n,$$ are mutually independent and have laws $N_d(0,(t_j-t_{j-1})I_d)",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "A process $H=(H_t)_{t\\ge0}$ is **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is $\\mathcal P$-measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-elementary-predictable-brownian-integrand",
+          "source_section": "Definition",
+          "quote": "An elementary predictable Brownian integrand on $[0,T]$ is a process of the form $$H_s(\\omega)=\\sum_{k=0}^{m-1}\\xi_k(\\omega)1_{(t_k,t_{k+1}]}(s),$$ where $0=t_0<t_1<\\cdots<t_m=T$ is a finite partition of $[0,T]$, each $\\xi_k$ is a bounded real $\\mathcal F_{t_k}$-measurable random variable, and the values at the partition points are irrelevant because the intervals are left-open and right-closed.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ito-integral-of-an-elementary-predictable-process",
+          "source_section": "Definition",
+          "quote": "I_t(H):=\\sum_{k=0}^{m-1}\\xi_k\\bigl(B_{t\\wedge t_{k+1}}-B_{t\\wedge t_k}\\bigr)",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ito-integral-for-square-integrable-predictable-processes",
+          "source_section": "Definition",
+          "quote": "For $t\\in[0,T]$ put $\\int_0^tH_s\\,dB_s:=\\int_0^TH_s1_{[0,t]}(s)\\,dB_s$, the construction of clause 1 applied to the truncated process $H1_{[0,t]}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-ito-integral-process-has-a-continuous-martingale-version",
+          "source_section": "Statement",
+          "quote": "there is an adapted process $M=(M_t)_{t\\ge0}$ with continuous paths such that $M_t=\\int_0^tH_s\\,dB_s$ almost surely for every $t\\ge0$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then $$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and rational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with $|x - \\hat q| < \\hat\\varepsilon$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "declared hypothesis",
+          "source_section": "Statement",
+          "quote": "$W_t-W_s$ is independent of $\\mathcal F_s$ for every $0\\le s<t\\le T$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "In particular the indicators $1_{[0,u]}$ and $1_{(0,u]}$ are predictable for every deterministic $u\\ge0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "source_section": "Statement",
+          "quote": "In either case, with the quotient vector-space operations of [[prop-quotient-vector-space-operations-and-projection]], the resulting pair $(L^p(\\mu),\\|\\cdot\\|_p)$ is a normed space in the sense of [[def-norm-and-normed-space]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Such a law exists, has mean $m$ and covariance $\\Sigma$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-d-dimensional-brownian-motion",
+          "source_section": "Definition",
+          "quote": "there is one measurable event $A$ with $P(A)=1$ such that $t\\mapsto B_t(\\omega)$ is continuous from $[0,\\infty)$ to $\\mathbb R^d$ for every $\\omega\\in A$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "predictable-finite-energy-step",
+          "claim": "Show the finite step process is predictable and has finite product-space L2 energy.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bounded-elementary-approximation",
+          "claim": "Clip each coefficient to obtain bounded elementary integrands converging to the unbounded step integrand in L2.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "integral-as-limit-of-finite-sums",
+          "claim": "Use the extended Ito-integral definition and its bounded-elementary consistency to identify the integral at each fixed time as an L2 limit of finite sums.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "unbounded-finite-sum-limit",
+          "claim": "Use filtration-relative independence, normal increment variance, and the finite-sum L2 triangle inequality to pass from clipped sums to the unbounded-coefficient sum.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F10",
+            "F11",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "common-continuous-version",
+          "claim": "Promote equality at each fixed time to indistinguishability by equality on a countable dense set and continuity.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "F8",
+            "F9",
+            "F12",
+            "A2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes T>0 and a partition with N>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If every coefficient is zero, H, its integral, and every finite sum are zero; step 3.1 also includes zero increments."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-interval partition is included in the finite sums and clipping argument of steps 1.2-4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A zero coefficient contributes zero; strict partition inequalities exclude zero-length intervals."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 gives zero increments before the first interval and the full partition increments at t=T; step 4.1 transfers equality on [0,T]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof clips each of the finitely many given coefficients and uses no selection from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way finite-sum identity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

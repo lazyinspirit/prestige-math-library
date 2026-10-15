@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "41",
+  "round": 0,
+  "reviewed_items": [
+    "def-state-space-filtering-laws",
+    "thm-state-space-filtering-and-smoothing-laws-exist",
+    "alg-recursive-bayesian-filter",
+    "thm-dominated-state-space-filtering-recursion",
+    "ex-finite-hidden-markov-filtering-and-smoothing",
+    "ex-scalar-gaussian-state-space-filter",
+    "ex-impossible-observation-zero-evidence-fiber"
+  ],
+  "reviewed_pages": [
+    "state-space-filtering-and-predictive-laws",
+    "state-space-filtering-and-predictive-laws-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The batch scope and the other assigned claims, proofs, and supplier uses are supported. Escalation is required for an unresolved proof prerequisite in a published supplier used by the scalar Gaussian example; the example also needs local prerequisite repairs.",
+  "findings": [
+    {
+      "id": "lem-normal-density-has-total-mass-one",
+      "type": "outside-batch",
+      "reason": "Proof step 3.1 establishes that the cutoff functions are Borel measurable, then applies Lebesgue monotone convergence, which requires Lebesgue measurability. The proof omits the prerequisite thm-borel-sets-are-lebesgue-measurable (under countable choice). This published lemma supplies def-standard-normal-and-normal-laws, which ex-scalar-gaussian-state-space-filter uses at F1 and steps 1.1–3.1. Owner reconciliation is needed outside this batch."
+    },
+    {
+      "id": "ex-scalar-gaussian-state-space-filter",
+      "type": "prerequisite",
+      "reason": "The example applies the dominated recursion without establishing that Lebesgue measure is sigma-finite or that the Gaussian location families are probability kernels. Its density measurability claim needs thm-borel-products-of-euclidean-spaces-are-euclidean-borel; the translation argument and Lebesgue MCT need Borel-to-Lebesgue measurability; and step 3.1 needs a proof that lambda({2})=0. These can be supplied locally using existing results, including thm-measurability-of-integration-against-a-kernel and thm-lebesgue-measure-is-a-complete-measure."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "decision": "escalate",
+      "reason": "It directly depends on the published normal-density lemma whose proof omits the Borel-to-Lebesgue measurability prerequisite."
+    },
+    {
+      "id": "ex-scalar-gaussian-state-space-filter",
+      "decision": "escalate",
+      "reason": "It uses the affected normal-law supplier and has the additional local kernel, density, and null-singleton obligations listed above."
+    }
+  ]
+}

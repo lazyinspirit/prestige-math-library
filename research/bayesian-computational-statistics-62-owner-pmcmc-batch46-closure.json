@@ -1,0 +1,332 @@
+{
+  "version": 1,
+  "kind": "same-agent-consumer-post-drain-closure",
+  "run": "bayesian-computational-statistics-62",
+  "supplier": "alg-multinomial-and-residual-offspring-resampling",
+  "batch": 46,
+  "cycle": 2,
+  "status": "batch46-focused-closure-complete-batch45-pending",
+  "native_dispatch": {
+    "stage": "1-scaffold",
+    "role": "beta",
+    "label": "batch-46",
+    "covers": [
+      "46"
+    ],
+    "attempt": 1,
+    "attempts": 1,
+    "startedAt": "2026-10-15T05:24:57.142Z",
+    "endedAt": "2026-10-15T06:34:19.426Z",
+    "lastExitOk": true
+  },
+  "consumer_count": 10,
+  "consumer_dispositions": [
+    {
+      "id": "alg-fixed-lag-particle-smoother",
+      "path": "items/alg-fixed-lag-particle-smoother.md",
+      "batch": 46,
+      "native_dispatch": {
+        "stage": "1-scaffold",
+        "role": "beta",
+        "label": "batch-46",
+        "covers": [
+          "46"
+        ],
+        "attempt": 1,
+        "attempts": 1,
+        "startedAt": "2026-10-15T05:24:57.142Z",
+        "endedAt": "2026-10-15T06:34:19.426Z",
+        "lastExitOk": true
+      },
+      "disposition": "same-agent-post-writer-drain-boundary-check-complete",
+      "reason": "Indirect particle-cloud context or exact-kernel truncated-history target; no ordered forward ancestor mass is used. Full-measure observation/version conditions and fixed-lag bias distinction are retained.",
+      "relevant_source_lines": [],
+      "statement_or_definition": "Fix an integer lag $L\\ge0$ and the normalized filtering particle clouds and\ntransition inputs required by\n[[alg-particle-backward-simulator]]. For each time $t\\in\\{0,\\ldots,T\\}$,\nput $s_t=\\min(t+L,T)$. Run the particle backward simulator using only the\nfiltering clouds at times $0,\\ldots,s_t$, draw the requested number of paths,\nand retain only their time-$t$ coordinates. The resulting empirical law\napproximates\n$$\\mathcal L(X_t\\mid Y_{1:s_t}),$$\nnot the full smoothing law $\\mathcal L(X_t\\mid Y_{1:T})$ unless $s_t=T$ or\nthe two conditional laws happen to agree. The same procedure can use supplied\nexact backward kernels when the model has no transition density; for each\n$s_t$ it uses the supplied filtering kernel at $y_{1:s_t}$ and the backward\nkernels for the corresponding prefix histories. On histories where these\nkernels factor the truncated smoother, it samples that exact conditional law.\n\nThe procedure returns one truncated smoothing marginal per $t$. It does not\nassert a bound on the lag bias, a forgetting rate, or convergence to the\nfull-data smoother for fixed $L$. Those conclusions require separate\nconditions on the model.",
+      "checked_at": "2026-10-15T06:35:07.308608+00:00",
+      "exact_relevant_current_excerpts": []
+    },
+    {
+      "id": "alg-particle-backward-simulator",
+      "path": "items/alg-particle-backward-simulator.md",
+      "batch": 46,
+      "native_dispatch": {
+        "stage": "1-scaffold",
+        "role": "beta",
+        "label": "batch-46",
+        "covers": [
+          "46"
+        ],
+        "attempt": 1,
+        "attempts": 1,
+        "startedAt": "2026-10-15T05:24:57.142Z",
+        "endedAt": "2026-10-15T06:34:19.426Z",
+        "lastExitOk": true
+      },
+      "disposition": "same-agent-post-writer-drain-boundary-check-complete",
+      "reason": "Uses current normalized particle clouds and declared positive finite backward denominators; explicitly samples backward indices rather than tracing forward ancestry. Corrected label order does not change normalized cloud/permutation-invariant formulas or cost claims.",
+      "relevant_source_lines": [
+        "Given a requested number $S\\ge1$ of paths, repeat independently for"
+      ],
+      "statement_or_definition": "Fix a finite horizon $T\\ge0$. In the **particle mode**, the inputs are\nnormalized filtering clouds\n$$\\{(x_t^i,w_t^i):1\\le i\\le N\\},\\qquad w_t^i\\ge0,\\quad\\sum_{i=1}^Nw_t^i=1,$$\nfor $0\\le t\\le T$, produced, for example, by\n[[alg-sequential-importance-resampling]]. Each $x_t^i$ is the time-$t$\ncoordinate of its stored particle path. Write $M_{t+1}$ for the model\ntransition kernel and require a product-measurable density\n$f_{t+1}(x'\\mid x)$ relative to a declared sigma-finite measure\n$\\lambda_{t+1}$, meaning\n$$M_{t+1}(x,A)=\\int_A f_{t+1}(x'\\mid x)\\,\\lambda_{t+1}(dx')$$\nfor each measurable $A$. For every terminal particle value used in the\nbackward pass, require the finite positive denominator\n$$q_{t+1}^N(x')=\\sum_{j=1}^Nw_t^j f_{t+1}(x'\\mid x_t^j)\\in(0,\\infty).$$\nGiven a requested number $S\\ge1$ of paths, repeat independently for\n$s=1,\\ldots,S$:\n\n1. Draw $I_T^s$ from $\\{1,\\ldots,N\\}$ with probabilities $w_T^i$ and set\n   $\\widetilde X_T^s=x_T^{I_T^s}$.\n2. For $t=T-1,T-2,\\ldots,0$, form\n   $$b_t^i(\\widetilde X_{t+1}^s)=\\frac{w_t^i f_{t+1}(\\widetilde X_{t+1}^s\\mid x_t^i)}{\\sum_{j=1}^Nw_t^j f_{t+1}(\\widetilde X_{t+1}^s\\mid x_t^j)},\\qquad 1\\le i\\le N,$$\n   draw $I_t^s$ from this probability vector, and set\n   $\\widetilde X_t^s=x_t^{I_t^s}$.\n3. Return the stored particle paths indexed by\n   $(I_0^s,\\ldots,I_T^s)$. The output is a draw from the particle backward\n   approximation to the smoothing path law. This index draw is not the same\n   operation as tracing the forward filter's recorded ancestor indices.\n\nIf an exact filtering kernel $\\eta_T$ and supplied backward conditional\nkernels $B_t$ from\n[[lem-smoothing-backward-kernel-bayes-factorization]] are available for\ngeneral transition kernels, there is a separate exact-kernel mode: draw\n$X_T\\sim\\eta_T$ and then draw $X_t\\sim B_t(X_{t+1},\\cdot)$ successively\nbackward. This mode uses the actual kernels; it does not evaluate a\ntransition density or a kernel on particle singletons. It returns an exact\nsmoothing path under the supplied conditional versions.\n\nAn optional all-marginals mode computes particle smoothing weights instead\nof drawing paths. Initialize $\\bar w_{T|T}^j=w_T^j$. For\n$t=T-1,\\ldots,0$, set\n$$\\bar w_{t|T}^i=w_t^i\\sum_{j=1}^N\\bar w_{t+1|T}^j\\frac{f_{t+1}(x_{t+1}^j\\mid x_t^i)}{\\sum_{\\ell=1}^Nw_t^\\ell f_{t+1}(x_{t+1}^j\\mid x_t^\\ell)}.$$\nUnder the same finite-positive denominator condition, normalize the computed\nnonnegative values $\\bar w_{t|T}^i$ to sum one and return\n$\\sum_i\\bar w_{t|T}^i\\delta_{x_t^i}$ as the approximate smoothed marginal at\ntime $t$. The algorithm makes no finite-particle accuracy, consistency, or\nlong-time stability claim.",
+      "checked_at": "2026-10-15T06:35:07.308848+00:00",
+      "exact_relevant_current_excerpts": [
+        "backward pass, require the finite positive denominator",
+        "Given a requested number $S\\ge1$ of paths, repeat independently for",
+        "   operation as tracing the forward filter's recorded ancestor indices."
+      ]
+    },
+    {
+      "id": "alg-rao-blackwellized-particle-filter",
+      "path": "items/alg-rao-blackwellized-particle-filter.md",
+      "batch": 46,
+      "native_dispatch": {
+        "stage": "1-scaffold",
+        "role": "beta",
+        "label": "batch-46",
+        "covers": [
+          "46"
+        ],
+        "attempt": 1,
+        "attempts": 1,
+        "startedAt": "2026-10-15T05:24:57.142Z",
+        "endedAt": "2026-10-15T06:34:19.426Z",
+        "lastExitOk": true
+      },
+      "disposition": "same-agent-post-writer-drain-boundary-check-complete",
+      "reason": "Definition explicitly selects multinomial SIR and draws J_t^i independently in step1; repaired sampled-order producer now supplies this labeled law. Conditional Gaussian calculations and finite-mixture outputs are unchanged.",
+      "relevant_source_lines": [
+        "  - alg-multinomial-and-residual-offspring-resampling",
+        "[[alg-sequential-importance-resampling]] with multinomial resampling to",
+        "Initialize $N\\ge1$ particles by drawing $z_0^i\\sim\\mu_0$ independently,",
+        "1. Draw ancestor indices $J_t^1,\\ldots,J_t^N$ independently with",
+        "   probabilities $(w_{t-1}^1,\\ldots,w_{t-1}^N)$ and append independent"
+      ],
+      "statement_or_definition": "Use the conditionally linear-Gaussian model of\n[[def-conditionally-linear-gaussian-state-space-model]] and a fixed\nobservation path $y_{1:T}$. The particle state at time $t$ is the full\nnonlinear history $z_{0:t}$; finite products of the standard-Borel state\nspaces are standard Borel. Its transition appends a draw\n$z_t\\sim M_t(z_{t-1},\\cdot)$; the resulting path-extension probability\nkernel and standard-Borel path space are supplied by\n[[lem-nonlinear-path-extension-is-a-probability-kernel]]. Set the initial Feynman–Kac potential to\n$G_0\\equiv1$ and the time-$t$ potential to the conditional observation\ndensity\n$$G_t(z_{0:t})=\\ell_t(z_{0:t};y_{1:t})$$\nfrom [[lem-kalman-filter-is-exact-conditional-on-nonlinear-path]]. Use the\nsame path-extension kernel as target and proposal, so the initial and\ntransition Radon–Nikodym weights are identically one. Run\n[[alg-sequential-importance-resampling]] with multinomial resampling to\napproximate the filtering law of the nonlinear path. Each particle stores\nalongside its path the conditional Gaussian moments of $U_t$.\n\nInitialize $N\\ge1$ particles by drawing $z_0^i\\sim\\mu_0$ independently,\nsetting $w_0^i=1/N$, $m_{0|0}^i=m_0(z_0^i)$, and\n$P_{0|0}^i=P_0(z_0^i)$. For each $t=1,\\ldots,T$:\n\n1. Draw ancestor indices $J_t^1,\\ldots,J_t^N$ independently with\n   probabilities $(w_{t-1}^1,\\ldots,w_{t-1}^N)$ and append independent\n   transitions $z_t^i\\sim M_t(z_{t-1}^{J_t^i},\\cdot)$.\n2. For each particle, abbreviate its appended path by $z_{0:t}^i$ and compute\n   $$m_{t|t-1}^i=A_t(z_{0:t}^i)m_{t-1|t-1}^{J_t^i},\\qquad P_{t|t-1}^i=A_t(z_{0:t}^i)P_{t-1|t-1}^{J_t^i}A_t(z_{0:t}^i)^T+Q_t(z_{0:t}^i).$$\n   Form $v_t^i=y_t-C_t(z_{0:t}^i)m_{t|t-1}^i$ and\n   $S_t^i=C_t(z_{0:t}^i)P_{t|t-1}^iC_t(z_{0:t}^i)^T+R_t(z_{0:t}^i)$.\n3. Set the incremental weight to the finite positive Gaussian density\n   $$a_t^i=(2\\pi)^{-p_t/2}\\det(S_t^i)^{-1/2}\\exp\\!\\left(-\\tfrac12(v_t^i)^T(S_t^i)^{-1}v_t^i\\right),$$\n   and normalize $w_t^i=a_t^i/\\sum_j a_t^j$.\n4. Update the conditional Gaussian moments by\n   $$K_t^i=P_{t|t-1}^iC_t(z_{0:t}^i)^T(S_t^i)^{-1},\\qquad m_{t|t}^i=m_{t|t-1}^i+K_t^iv_t^i,\\qquad P_{t|t}^i=P_{t|t-1}^i-K_t^iS_t^i(K_t^i)^T.$$\n\nThe procedure returns the weighted nonlinear particle paths and the Gaussian\nmixture\n$$\\widehat\\pi_t^N(du_t,dz_{0:t})=\\sum_{i=1}^Nw_t^iN(du_t;m_{t|t}^i,P_{t|t}^i)\\,\\delta_{z_{0:t}^i}(dz_{0:t}).$$\nIts conditional mean is $\\sum_iw_t^im_{t|t}^i$ and its conditional covariance\nis $\\sum_iw_t^i[P_{t|t}^i+(m_{t|t}^i-\\bar m_t)(m_{t|t}^i-\\bar m_t)^T]$,\nwhere $\\bar m_t=\\sum_iw_t^im_{t|t}^i$. These are moments of the finite\nmixture approximation; for finite $N$ the algorithm remains an approximation\nto the full nonlinear filter. It makes no general variance-reduction,\nconvergence-rate, or long-time accuracy claim.",
+      "checked_at": "2026-10-15T06:35:07.309047+00:00",
+      "exact_relevant_current_excerpts": [
+        "  - alg-multinomial-and-residual-offspring-resampling",
+        "[[alg-sequential-importance-resampling]] with multinomial resampling to",
+        "Initialize $N\\ge1$ particles by drawing $z_0^i\\sim\\mu_0$ independently,",
+        "1. Draw ancestor indices $J_t^1,\\ldots,J_t^N$ independently with",
+        "   probabilities $(w_{t-1}^1,\\ldots,w_{t-1}^N)$ and append independent"
+      ]
+    },
+    {
+      "id": "ex-fixed-lag-smoothing-bias-from-delayed-information",
+      "path": "items/ex-fixed-lag-smoothing-bias-from-delayed-information.md",
+      "batch": 46,
+      "native_dispatch": {
+        "stage": "1-scaffold",
+        "role": "beta",
+        "label": "batch-46",
+        "covers": [
+          "46"
+        ],
+        "attempt": 1,
+        "attempts": 1,
+        "startedAt": "2026-10-15T05:24:57.142Z",
+        "endedAt": "2026-10-15T06:34:19.426Z",
+        "lastExitOk": true
+      },
+      "disposition": "same-agent-post-writer-drain-boundary-check-complete",
+      "reason": "Indirect particle-cloud context or exact-kernel truncated-history target; no ordered forward ancestor mass is used. Full-measure observation/version conditions and fixed-lag bias distinction are retained.",
+      "relevant_source_lines": [],
+      "statement_or_definition": "Let $X_0\\sim\\operatorname{Bernoulli}(1/2)$ and set $X_1=X_0$ and\n$X_2=X_1$. Let $Y_1=0$ deterministically and $Y_2=X_2$. For target time\n$t=0$ and lag $L=1$, the fixed-lag procedure conditions only on $Y_1$,\nwhereas the full smoother also uses $Y_2$. In the exact-kernel mode of\n[[alg-fixed-lag-particle-smoother]], the lagged law is\n$\\operatorname{Bernoulli}(1/2)$ while, for either observed value $Y_2=b$,\nthe full smoothing law is $\\delta_b$. Their total-variation distance under\nthe convention $\\sup_A|\\mu(A)-\\nu(A)|$ is $1/2$. Increasing the number of\nparticles does not remove this truncation bias at fixed lag.",
+      "checked_at": "2026-10-15T06:35:07.309277+00:00",
+      "exact_relevant_current_excerpts": []
+    },
+    {
+      "id": "ex-switching-linear-gaussian-rbpf",
+      "path": "items/ex-switching-linear-gaussian-rbpf.md",
+      "batch": 46,
+      "native_dispatch": {
+        "stage": "1-scaffold",
+        "role": "beta",
+        "label": "batch-46",
+        "covers": [
+          "46"
+        ],
+        "attempt": 1,
+        "attempts": 1,
+        "startedAt": "2026-10-15T05:24:57.142Z",
+        "endedAt": "2026-10-15T06:34:19.426Z",
+        "lastExitOk": true
+      },
+      "disposition": "same-agent-post-writer-drain-boundary-check-complete",
+      "reason": "Indirect RBPF finite Gaussian-mixture example: conditional component calculations and finite-mixture caveat are unchanged; any multinomial particle selection now uses corrected IID labels.",
+      "relevant_source_lines": [
+        "where $a_0=0$, $a_1=1$, and $\\xi_1,\\varepsilon_1$ are independent",
+        "$N(0,1)$ variables, independent of $U_0$. Observe $Y_1=0$. The exact",
+        "1.1 The state and observation noises are independent centered Gaussians, the conditional initial covariance is $1$, the process covariance is $1$, and the observation covariance is $1>0$. Thus the model satisfies [F1] and the exact conditional Kalman interface [F2]. [A1, F1, F2, given]"
+      ],
+      "statement_or_definition": "Let $Z_0$ be uniform on $\\{0,1\\}$ and let $Z_1=Z_0$. Conditional on\n$Z_0=z$, take $U_0\\sim N(0,1)$ and\n$$U_1=a_zU_0+\\xi_1,\\qquad Y_1=U_1+\\varepsilon_1,$$\nwhere $a_0=0$, $a_1=1$, and $\\xi_1,\\varepsilon_1$ are independent\n$N(0,1)$ variables, independent of $U_0$. Observe $Y_1=0$. The exact\nconditional posterior is the two-component mixture\n$$\\mathcal L(U_1,Z_1\\mid Y_1=0)=\\frac{\\sqrt3}{\\sqrt3+\\sqrt2}N(0,1/2)\\otimes\\delta_0+\\frac{\\sqrt2}{\\sqrt3+\\sqrt2}N(0,2/3)\\otimes\\delta_1.$$\nThese are the component moments and mode weights that the Rao–Blackwellized\nfilter represents analytically; a finite particle cloud still approximates\nthe mode mixture.",
+      "checked_at": "2026-10-15T06:35:07.309618+00:00",
+      "exact_relevant_current_excerpts": [
+        "where $a_0=0$, $a_1=1$, and $\\xi_1,\\varepsilon_1$ are independent",
+        "$N(0,1)$ variables, independent of $U_0$. Observe $Y_1=0$. The exact",
+        "1.1 The state and observation noises are independent centered Gaussians, the conditional initial covariance is $1$, the process covariance is $1$, and the observation covariance is $1>0$. Thus the model satisfies [F1] and the exact conditional Kalman interface [F2]. [A1, F1, F2, given]"
+      ]
+    },
+    {
+      "id": "ex-zero-backward-simulation-denominator",
+      "path": "items/ex-zero-backward-simulation-denominator.md",
+      "batch": 46,
+      "native_dispatch": {
+        "stage": "1-scaffold",
+        "role": "beta",
+        "label": "batch-46",
+        "covers": [
+          "46"
+        ],
+        "attempt": 1,
+        "attempts": 1,
+        "startedAt": "2026-10-15T05:24:57.142Z",
+        "endedAt": "2026-10-15T06:34:19.426Z",
+        "lastExitOk": true
+      },
+      "disposition": "same-agent-post-writer-drain-boundary-check-complete",
+      "reason": "Supplied incompatible finite clouds yield zero backward denominator; example correctly treats density-mode input as inadmissible, independently of forward resampling label law.",
+      "relevant_source_lines": [],
+      "statement_or_definition": "Take $E_0=E_1=\\{0,1\\}$ with counting measure, initial law $\\delta_0$, and\ndeterministic transition $X_1=X_0$. Its transition density is\n$f_1(x'\\mid x)=1$ when $x'=x$ and $0$ otherwise. A supplied pair of\nparticle clouds with time-zero particle $x_0^1=0,w_0^1=1$ and terminal\nparticle $x_1^1=1,w_1^1=1$ has backward denominator\n$$\\sum_{j=1}^1w_0^jf_1(x_1^1\\mid x_0^j)=0.$$\nThis terminal cloud is inconsistent with the transition and filtering law;\nthe particle backward algorithm must report its density-mode input as\ninadmissible rather than inventing uniform backward weights.",
+      "checked_at": "2026-10-15T06:35:07.309798+00:00",
+      "exact_relevant_current_excerpts": [
+        "id: ex-zero-backward-simulation-denominator",
+        "title: A zero backward-simulation denominator is inadmissible",
+        "particle $x_1^1=1,w_1^1=1$ has backward denominator",
+        "[F2] A density-based backward kernel is normalized only when its predictive denominator is finite and positive. [[lem-smoothing-backward-kernel-bayes-factorization]]",
+        "[F3] The particle backward algorithm requires finite positive denominators and declares other particle-mode inputs inadmissible. [[alg-particle-backward-simulator]]",
+        "1.1 Substitution gives $f_1(1\\mid0)=0$ and $w_0^1=1$, so the unique backward score is zero and its normalizing denominator is zero. No division by this quantity defines a probability vector. [F2, F3, given, algebra]",
+        "3.1 Because [F3] restricts the density-based backward draw to a finite positive denominator, the procedure rejects this input; a uniform choice would be an unsupported choice of conditional version, not a consequence of Bayes' formula. [A1, F1, F3, step 1.1, step 2.1] ∎"
+      ]
+    },
+    {
+      "id": "lem-bootstrap-particle-filter-weak-consistency",
+      "path": "items/lem-bootstrap-particle-filter-weak-consistency.md",
+      "batch": 46,
+      "native_dispatch": {
+        "stage": "1-scaffold",
+        "role": "beta",
+        "label": "batch-46",
+        "covers": [
+          "46"
+        ],
+        "attempt": 1,
+        "attempts": 1,
+        "startedAt": "2026-10-15T05:24:57.142Z",
+        "endedAt": "2026-10-15T06:34:19.426Z",
+        "lastExitOk": true
+      },
+      "disposition": "same-agent-post-writer-drain-boundary-check-complete",
+      "reason": "Statement uses multinomial bootstrap. F2 and proof1.2 need conditionally IID parent indices and hence IID propagated mixture particles; corrected unsorted sampled labels supply this exact requirement. Positive bounded potentials and compact/Feller fixed-horizon assumptions unchanged.",
+      "relevant_source_lines": [
+        "  - alg-multinomial-and-residual-offspring-resampling",
+        "multinomial resampling in",
+        "multinomial bootstrap particle system.",
+        "[F1] The bootstrap specialization of the sequential importance-resampling algorithm uses IID initial particles, multinomial parent indices, conditionally independent propagation through $M_t$, and incremental weights $G_t(X_t^i)$. [[alg-sequential-importance-resampling]]",
+        "[F2] Multinomial parent indices are conditionally IID with the normalized input weights. [[alg-multinomial-and-residual-offspring-resampling]]",
+        "1.2 Suppose $\\eta_{t-1}^N(g)\\to\\eta_{t-1}(g)$ in probability for every bounded continuous $g$. Conditional on the previous particles, [F1]–[F2] make $X_t^1,\\ldots,X_t^N$ IID with common law $\\eta_{t-1}^N M_t$. For bounded continuous $h$, the squared error of their empirical average under this product law is the sum of $N$ diagonal centered terms divided by $N^2$; the cross terms vanish by independence, and each diagonal term is at most $\\|h\\|_\\infty^2$. Thus its integral is at most $\\|h\\|_\\infty^2/N$. Applying [F5] under the conditional product law and then integrating over the previous particles gives $\\nu_t^N(h)-\\eta_{t-1}^N(M_th)\\to0$ in probability. The Feller hypothesis makes $M_th$ bounded continuous, so the induction hypothesis gives $\\eta_{t-1}^N(M_th)\\to\\eta_{t-1}(M_th)$. [F1, F2, F4, F5, given]"
+      ],
+      "statement_or_definition": "Assume AC. Let $E_0,\\ldots,E_T$ be compact metric spaces, let $\\mu_0$ be a probability\non $E_0$, and let $M_t$ be a Feller probability kernel from $E_{t-1}$ to\n$E_t$. Here **Feller** means that $x\\mapsto M_t h(x):=\\int h(x')M_t(x,dx')$\nis continuous for every bounded continuous real $h$ on $E_t$. Let each\npotential $G_t:E_t\\to\\mathbb R$ be continuous and satisfy fixed bounds\n$0<c\\le G_t(x)\\le C<\\infty$. Let $P_t^M$ be the Markov path law and\n$Z_t=\\int\\prod_{s=0}^tG_s(x_s)\\,P_t^M(dx_{0:t})$ the Feynman–Kac normalizer\nfrom [[def-feynman-kac-path-targets-and-normalizers]]. Since $P_t^M$ is a\nprobability, $c^{t+1}\\le Z_t\\le C^{t+1}$, so the normalized path target exists.\nFor the initial law and transitions use the\nbootstrap proposals $\\nu_0=\\mu_0$, $R_t=M_t$, initial potential $G_0$, and\nmultinomial resampling in\n[[alg-sequential-importance-resampling]]. Write $\\eta_t$ for the last-state\nmarginal of $\\gamma_t/Z_t$ and\n$\\eta_t^N=\\sum_iw_t^i\\delta_{X_t^i}$ for the particle filter's current\nweighted empirical measure. For every fixed $t\\le T$,\n$$\\eta_t^N\\Rightarrow\\eta_t\\quad\\hbox{in probability as }N\\to\\infty,$$\nwhere convergence in probability means that for every bounded continuous\n$h:E_t\\to\\mathbb R$, $\\int h\\,d\\eta_t^N\\to\\int h\\,d\\eta_t$ in probability.\nThis is a fixed-horizon, positive-bounded-potential result; it asserts no\ntime-uniform bound and no particle central limit theorem.",
+      "checked_at": "2026-10-15T06:35:07.309925+00:00",
+      "exact_relevant_current_excerpts": [
+        "  - alg-multinomial-and-residual-offspring-resampling",
+        "multinomial resampling in",
+        "multinomial bootstrap particle system.",
+        "[F1] The bootstrap specialization of the sequential importance-resampling algorithm uses IID initial particles, multinomial parent indices, conditionally independent propagation through $M_t$, and incremental weights $G_t(X_t^i)$. [[alg-sequential-importance-resampling]]",
+        "[F2] Multinomial parent indices are conditionally IID with the normalized input weights. [[alg-multinomial-and-residual-offspring-resampling]]",
+        "1.2 Suppose $\\eta_{t-1}^N(g)\\to\\eta_{t-1}(g)$ in probability for every bounded continuous $g$. Conditional on the previous particles, [F1]–[F2] make $X_t^1,\\ldots,X_t^N$ IID with common law $\\eta_{t-1}^N M_t$. For bounded continuous $h$, the squared error of their empirical average under this product law is the sum of $N$ diagonal centered terms divided by $N^2$; the cross terms vanish by independence, and each diagonal term is at most $\\|h\\|_\\infty^2$. Thus its integral is at most $\\|h\\|_\\infty^2/N$. Applying [F5] under the conditional product law and then integrating over the previous particles gives $\\nu_t^N(h)-\\eta_{t-1}^N(M_th)\\to0$ in probability. The Feller hypothesis makes $M_th$ bounded continuous, so the induction hypothesis gives $\\eta_{t-1}^N(M_th)\\to\\eta_{t-1}(M_th)$. [F1, F2, F4, F5, given]"
+      ]
+    },
+    {
+      "id": "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+      "path": "items/thm-fixed-lag-smoother-targets-truncated-conditional-law.md",
+      "batch": 46,
+      "native_dispatch": {
+        "stage": "1-scaffold",
+        "role": "beta",
+        "label": "batch-46",
+        "covers": [
+          "46"
+        ],
+        "attempt": 1,
+        "attempts": 1,
+        "startedAt": "2026-10-15T05:24:57.142Z",
+        "endedAt": "2026-10-15T06:34:19.426Z",
+        "lastExitOk": true
+      },
+      "disposition": "same-agent-post-writer-drain-boundary-check-complete",
+      "reason": "Indirect particle-cloud context or exact-kernel truncated-history target; no ordered forward ancestor mass is used. Full-measure observation/version conditions and fixed-lag bias distinction are retained.",
+      "relevant_source_lines": [
+        "history in the full-measure set on which their factorization holds for every"
+      ],
+      "statement_or_definition": "Assume AC and a finite-horizon Markov state-space model with standard-Borel\nstate and observation spaces. Supply the exact filtering and backward\nconditional kernels of\n[[lem-smoothing-backward-kernel-bayes-factorization]]. Fix an observation\nhistory in the full-measure set on which their factorization holds for every\nprefix horizon $s\\le T$. In the exact-kernel mode of\n[[alg-fixed-lag-particle-smoother]], fix $t$ and set\n$s=\\min(t+L,T)$. Each returned path's time-$t$ coordinate has conditional\nlaw $\\mathcal L(X_t\\mid Y_{1:s})$ (for the supplied conditional versions),\nso the empirical measure of finitely many paths is a Monte Carlo estimate of\nthat marginal. The target equals the full smoothing marginal only when later\nobservations do not change the conditional law; increasing the particle count\ncannot remove a difference caused by truncating the observation history.",
+      "checked_at": "2026-10-15T06:35:07.310140+00:00",
+      "exact_relevant_current_excerpts": []
+    },
+    {
+      "id": "thm-particle-backward-simulator-normalization-and-cost",
+      "path": "items/thm-particle-backward-simulator-normalization-and-cost.md",
+      "batch": 46,
+      "native_dispatch": {
+        "stage": "1-scaffold",
+        "role": "beta",
+        "label": "batch-46",
+        "covers": [
+          "46"
+        ],
+        "attempt": 1,
+        "attempts": 1,
+        "startedAt": "2026-10-15T05:24:57.142Z",
+        "endedAt": "2026-10-15T06:34:19.426Z",
+        "lastExitOk": true
+      },
+      "disposition": "same-agent-post-writer-drain-boundary-check-complete",
+      "reason": "Uses current normalized particle clouds and declared positive finite backward denominators; explicitly samples backward indices rather than tracing forward ancestry. Corrected label order does not change normalized cloud/permutation-invariant formulas or cost claims.",
+      "relevant_source_lines": [],
+      "statement_or_definition": "Assume the finite particle-mode inputs and denominator conditions of\n[[alg-particle-backward-simulator]]. The backward index probabilities at\neach step are nonnegative and sum to one. In the all-marginals recursion,\nthe raw updated smoothing weights also sum to one, so the optional explicit\nnormalization in the algorithm leaves them unchanged. Count one transition\ndensity evaluation and a bounded number of real arithmetic operations as\nunit cost, and sample from a categorical vector by a linear scan of its $N$\nentries. Then drawing $S$ backward paths costs $O(SN(T+1))$ operations,\nincluding terminal draws, and computing all smoothed marginal weights costs\n$O(N+N^2T)$, including initialization and output. For $T\\ge1$ these are\nrespectively $O(SNT)$ and $O(N^2T)$; for fixed $S$, path sampling costs\n$O(N(T+1))$.",
+      "checked_at": "2026-10-15T06:35:07.310283+00:00",
+      "exact_relevant_current_excerpts": []
+    },
+    {
+      "id": "thm-particle-smoothing-consistency-under-stated-conditions",
+      "path": "items/thm-particle-smoothing-consistency-under-stated-conditions.md",
+      "batch": 46,
+      "native_dispatch": {
+        "stage": "1-scaffold",
+        "role": "beta",
+        "label": "batch-46",
+        "covers": [
+          "46"
+        ],
+        "attempt": 1,
+        "attempts": 1,
+        "startedAt": "2026-10-15T05:24:57.142Z",
+        "endedAt": "2026-10-15T06:34:19.426Z",
+        "lastExitOk": true
+      },
+      "disposition": "same-agent-post-writer-drain-boundary-check-complete",
+      "reason": "Inherits completed multinomial bootstrap weak-consistency supplier. Backward path draws are conditionally IID given clouds; their law and positive continuous transition-density bounds do not depend on ancestor sorting. Fixed-horizon and S_N->infinity conditions retained.",
+      "relevant_source_lines": [
+        "$y_{1:T}$ in the full-measure finite-positive set where",
+        "multinomial bootstrap particle filter. With $N\\ge1$ particles, independently",
+        "[F1] The filtering empirical measures converge weakly in probability under the bounded positive-potential, Feller, multinomial bootstrap assumptions. [[lem-bootstrap-particle-filter-weak-consistency]]",
+        "5.1 Conditional on the particle clouds, the $S_N$ backward paths are IID with law $\\widehat\\psi_T^N$. Their conditional sample mean has variance at most $\\|\\Phi\\|_\\infty^2/S_N$. Applying [F5] to its squared centered deviation shows that its difference from $\\widehat\\psi_T^N(\\Phi)$ converges to zero in probability because $S_N\\to\\infty$. Combining this with step 4.1 proves the second limit. If $S_N$ is fixed, this variance bound need not vanish, so no convergence of the path average is asserted. [F3, F5, step 4.1, given] ∎"
+      ],
+      "statement_or_definition": "Assume AC and a finite-horizon state-space model with compact metric state\nspaces $E_0,\\ldots,E_T$, dominated observation kernels, and an observation\nhistory\n$y_{1:T}$ in the full-measure finite-positive set where\n[[lem-smoothing-backward-kernel-bayes-factorization]] applies. Let $g_t(x,y)$\nbe the specified product-measurable observation density relative to its\nsigma-finite observation measure, as in\n[[thm-dominated-state-space-filtering-recursion]], and set\n$G_t(x)=g_t(x,y_t)$ for $1\\le t\\le T$ and $G_0\\equiv1$. Suppose each $G_t$\nis continuous and there are constants $0<c\\le1\\le C<\\infty$ such that\n$c\\le G_t(x)\\le C$ for every state and time. For each $0\\le t<T$, let\n$M_{t+1}$ be the state transition from time $t$ to time $t+1$ and suppose it has a jointly continuous\ndensity $f_{t+1}(x'\\mid x)$ relative to a Borel probability measure\n$\\lambda_{t+1}$, meaning\n$$M_{t+1}(x,A)=\\int_A f_{t+1}(x'\\mid x)\\,\\lambda_{t+1}(dx')$$\nfor measurable $A$, with uniform bounds\n$$0<a\\le f_{t+1}(x'\\mid x)\\le b<\\infty$$\nfor all $x,x'$. Write $\\eta_t$ for the exact filtering-kernel value at\n$y_{1:t}$ and $\\psi_T$ for the exact smoothing-kernel value at $y_{1:T}$.\nUse the model initial law as the initial proposal, these same\n$M_t$ as transition proposals, and these $G_t$ as potentials in the\nmultinomial bootstrap particle filter. With $N\\ge1$ particles, independently\ndraw $S_N\\ge1$ backward paths conditional on the resulting clouds, where\n$S_N\\to\\infty$ as $N\\to\\infty$. Let $\\widehat\\psi_T^N$ be the conditional\nlaw of one backward-simulated path given the clouds. For every continuous\n$\\Phi:E_0\\times\\cdots\\times E_T\\to\\mathbb R$,\n$$\\widehat\\psi_T^N(\\Phi)\\to\\psi_T(\\Phi)\\quad\\hbox{in probability},\\qquad \\frac1{S_N}\\sum_{s=1}^{S_N}\\Phi(\\widetilde X_{0:T}^s)\\to\\psi_T(\\Phi)\\quad\\hbox{in probability}.$$\nFor a fixed number of simulated paths, their conditional path law is\nconsistent but the empirical path average retains its Monte Carlo error.\nNo time-uniform-in-$T$ convergence claim is made.",
+      "checked_at": "2026-10-15T06:35:07.310450+00:00",
+      "exact_relevant_current_excerpts": [
+        "multinomial bootstrap particle filter. With $N\\ge1$ particles, independently",
+        "[F1] The filtering empirical measures converge weakly in probability under the bounded positive-potential, Feller, multinomial bootstrap assumptions. [[lem-bootstrap-particle-filter-weak-consistency]]",
+        "2.1 By [F1] and [F6], for every $0\\le t\\le T$ the random filtering measure $\\eta_t^N$ converges weakly in probability to the exact filtering law $\\eta_t$ at the fixed observation history. For each $0\\le t<T$, put $q_{t+1}(x')=\\int f_{t+1}(x'\\mid x)\\eta_t(dx)$ and $q_{t+1}^N(x')=\\int f_{t+1}(x'\\mid x)\\eta_t^N(dx)$. The density bounds imply $a\\le q_{t+1}(x'),q_{t+1}^N(x')\\le b$ for every $x'$, so every backward denominator used by the algorithm is finite positive. [A1, F1, F2, F3, F6, step 1.1, given]",
+        "5.1 Conditional on the particle clouds, the $S_N$ backward paths are IID with law $\\widehat\\psi_T^N$. Their conditional sample mean has variance at most $\\|\\Phi\\|_\\infty^2/S_N$. Applying [F5] to its squared centered deviation shows that its difference from $\\widehat\\psi_T^N(\\Phi)$ converges to zero in probability because $S_N\\to\\infty$. Combining this with step 4.1 proves the second limit. If $S_N$ is fixed, this variance bound need not vanish, so no convergence of the path average is asserted. [F3, F5, step 4.1, given] ∎"
+      ]
+    }
+  ],
+  "source_repairs_required": false,
+  "remaining_batches": [
+    45
+  ],
+  "scope": "Only actual effects of sampled-order multinomial Definition correction on current46 direct/indirect consumers; no new smoothing proof audit.",
+  "hashes_or_readiness_written": false,
+  "tests_run": false
+}

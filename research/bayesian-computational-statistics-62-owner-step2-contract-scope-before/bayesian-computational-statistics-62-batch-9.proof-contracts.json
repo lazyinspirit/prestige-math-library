@@ -1,0 +1,1060 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-balanced-one-way-random-effects-expected-mean-squares",
+    "def-marginal-likelihood-and-bayes-factor",
+    "thm-finite-model-posterior-odds-from-marginal-evidence",
+    "def-type-ii-marginal-likelihood-and-empirical-bayes-posterior",
+    "ex-negative-balanced-anova-moment-estimate",
+    "ex-improper-flat-prior-arbitrary-evidence-scale",
+    "ex-diffuse-normal-prior-changes-bayes-factor",
+    "ex-point-null-needs-a-model-atom",
+    "ex-hyperparameter-uncertainty-can-induce-group-dependence"
+  ],
+  "contracts": {
+    "thm-balanced-one-way-random-effects-expected-mean-squares": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-normal-location-scale-mean-and-variance",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$, $\\sigma\\ge0$, and a real random variable\n$X$ with law $N(m,\\sigma^2)$,\n$$E[X]=m,\\qquad \\operatorname{Var}(X)=\\sigma^2.$$",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-variance-adds-for-pairwise-independent-random-variables",
+          "source_section": "Statement",
+          "quote": "If $(X_i)_{i\\in I}$ is a finite pairwise-independent family of square-integrable real random variables on a common probability space, then\n$$\\operatorname{Var}\\!\\left(\\sum_{i\\in I}X_i\\right)=\\sum_{i\\in I}\\operatorname{Var}(X_i).$$\nPairwise independence, rather than mutual independence, is sufficient. In particular, the original finite-probability-space case is included, with pairwise atom independence as in the finite-valued convention. The empty sum has variance zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\bar\\epsilon_i=r^{-1}\\sum_j\\epsilon_{ij}$. By [F1], every error has mean zero and variance $\\sigma^2$; [F6] gives $\\mathbb E[\\bar\\epsilon_i]=0$. By [F2], the variance of $\\sum_j\\epsilon_{ij}$ is $r\\sigma^2$, and the variance definition [F4] gives $\\operatorname{Var}(\\bar\\epsilon_i)=r^{-2}r\\sigma^2=\\sigma^2/r$. Since $a_i$ is independent of the error vector, [F3] makes $a_i$ independent of $\\bar\\epsilon_i$. Thus [F2] gives $\\operatorname{Var}(\\bar Y_{i\\cdot})=\\tau^2+\\sigma^2/r$, and [F6] gives $\\mathbb E[\\bar Y_{i\\cdot}]=\\mu$. Applying [F3] to the independent group blocks shows that the group means are independent by [F7].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any numbers $x_1,\\ldots,x_k$ with mean $\\bar x$, expansion gives $\\sum_i(x_i-\\bar x)^2=\\sum_i(x_i-\\mu)^2-k(\\bar x-\\mu)^2$. Apply this with $x_i=\\bar Y_{i\\cdot}$. By [F2], $\\operatorname{Var}(\\bar Y_{\\cdot\\cdot})=(\\tau^2+\\sigma^2/r)/k$; [F4], [F5], and [F6] therefore give $\\mathbb E\\sum_i(\\bar Y_{i\\cdot}-\\bar Y_{\\cdot\\cdot})^2=(k-1)(\\tau^2+\\sigma^2/r)$. Multiplying by $r/(k-1)$ yields $\\mathbb E[MSB]=r\\tau^2+\\sigma^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Since $Y_{ij}-\\bar Y_{i\\cdot}=\\epsilon_{ij}-\\bar\\epsilon_i$, expansion gives $\\sum_j(\\epsilon_{ij}-\\bar\\epsilon_i)^2=\\sum_j\\epsilon_{ij}^2-r\\bar\\epsilon_i^2$. By [F1], [F4], and [F5], $\\mathbb E[\\sum_j\\epsilon_{ij}^2]=r\\sigma^2$ and $\\mathbb E[\\bar\\epsilon_i^2]=\\operatorname{Var}(\\bar\\epsilon_i)=\\sigma^2/r$; hence each group contributes expected within sum of squares $(r-1)\\sigma^2$. Summing over $k$ groups and dividing by $k(r-1)$ proves $\\mathbb E[MSW]=\\sigma^2$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Solving $\\mathbb E[MSW]=\\sigma^2$ and $\\mathbb E[MSB]=\\sigma^2+r\\tau^2$ for the two variance components gives $\\widehat{\\sigma^2}_{\\rm MOM}=MSW$ and $\\widehat{\\tau^2}_{\\rm MOM}=(MSB-MSW)/r$. The algebra imposes no nonnegativity constraint on the second expression.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes integers k,r at least two, so empty group or replicate index sets are excluded by the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement permits tau squared equal to zero, and step 1.1 uses the normal-moment supplier at that endpoint."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The between and within denominators require k,r at least two in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 and the Statement include the zero between-group variance case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement requires sigma squared positive and identifies the tau squared zero endpoint explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a probability model is already given and does not construct one from nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an expectation theorem, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an expectation theorem, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "k2-r2-moment-check",
+          "claim": "For k=r=2, tau squared 3, and sigma squared 2, the formulas give E(MSB)=8, E(MSW)=2, and the moment solution for tau squared is 3.",
+          "result": "r tau squared plus sigma squared is 2*3+2=8; MSW expectation is 2; (8-2)/2=3."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-marginal-likelihood-and-bayes-factor": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes a finite model index set with at least two models and proper within-model priors."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero evidence is an allowed extended value, but no Bayes factor is defined unless both model evidences are positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition assumes at least two model labels so a pairwise Bayes factor can be formed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: equal positive evidences give a Bayes factor equal to one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Bayes factors are restricted to finite positive evidence values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition fixes a finite index set and supplied proper priors; it makes no selection assertion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-model-ratio",
+          "claim": "If two model evidences are 2 and 6, then the Bayes factor of model 2 against model 1 is 3.",
+          "result": "The defining ratio is 6/2=3, with both evidences finite and positive."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-finite-model-posterior-odds-from-marginal-evidence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-marginal-likelihood-and-bayes-factor",
+          "source_section": "Definition",
+          "quote": "Let $I=\\{1,\\ldots,N\\}$ with $N\\ge2$ be a finite model index set. For each\n$i\\in I$, let $(\\Theta_i,\\mathcal T_i)$ be a measurable parameter space, let\n$\\Pi_i$ be a probability measure ([[def-probability-measure]]) on it, and let\n$Q_i$ be a sampling kernel for a statistical experiment\n([[def-statistical-experiment]]) on one common data space\n$(\\mathcal Y,\\mathcal A)$. Assume the experiments are dominated\n([[def-dominated-statistical-experiment]]) by the same supplied sigma-finite\nmeasure $\\mu$. Fix a specified likelihood density\n([[def-likelihood-density]])\n$f_i:\\Theta_i\\times\\mathcal Y\\to[0,\\infty]$ such that\n$$Q_i(\\theta,B)=\\int_B f_i(\\theta,y)\\,\\mu(dy)\\qquad(B\\in\\mathcal A).$$\nRequire that each $f_i$ is jointly measurable in parameter and data; separate\nlikelihood versions do not imply this joint measurability. Assign prior model\nweights $w_i>0$ with $\\sum_iw_i=1$. The **marginal likelihood**, or **model\nevidence**, at $y$ is the possibly extended value\n$$m_i(y):=\\int_{\\Theta_i} f_i(\\theta,y)\\,\\Pi_i(d\\theta)\\in[0,\\infty].$$\nThis is the BCS-02 evidence normalizer\n([[def-posterior-evidence-normalizer-and-fiberwise-update]]) specialized to a\nproper model prior, and is the prior-predictive density relative to the\nspecified common data measure. For models $i,j$ whose evidences at $y$ are both finite and positive,\nthe **Bayes factor for $j$ against $i$** is\n$$BF_{ji}(y):=\\frac{m_j(y)}{m_i(y)}.$$\nThe corresponding prior model odds are $w_j/w_i$. No Bayes factor is defined\nhere using an arbitrarily scaled improper parameter prior.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-fiberwise-posterior-propriety-iff-finite-positive-evidence",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T,\\Pi)$ be a measure space, let $L_y:\\Theta\\to[0,+\\infty]$\nbe measurable for a fixed datum $y$, and put\n$Z:=\\int_\\Theta L_y\\,d\\Pi$. For a finite positive constant $c$, the set\nfunction\n$$A\\longmapsto c\\int_A L_y\\,d\\Pi$$\nis a probability measure if and only if $0<Z<+\\infty$ and $c=Z^{-1}$. In\nparticular, if $Z=0$ or $Z=+\\infty$, no finite positive scaling makes the\nfiberwise update a probability measure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bayes-formula-for-dominated-kernels",
+          "source_section": "Statement",
+          "quote": "Let $\\pi$ be a prior probability on $(E,\\mathcal S)$ and let $Q:E\\to T$ be a probability kernel dominated by a sigma-finite measure $\\nu$ on $(T,\\mathcal T)$, with specified nonnegative jointly measurable density $\\ell:E\\times T\\to[0,\\infty]$:\n$$Q(\\theta,B)=\\int_B\\ell(\\theta,y)\\,\\nu(dy)\\quad\\text{for every }\\theta\\in E,\\ B\\in\\mathcal T.$$\n\nDefine $m(y)=\\int_E\\ell(\\theta,y)\\,\\pi(d\\theta)$. Under the joint law with density $\\ell$ relative to $\\pi\\times\\nu$, a conditional law of the parameter given the observation is\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_A\\ell(\\theta,y)\\,\\pi(d\\theta)}{m(y)},&0<m(y)<\\infty,\\\\ \\pi(A),&m(y)=0\\text{ or }m(y)=\\infty.\\end{cases}$$\n\nThe observation marginal is $m\\,d\\nu$, and the filled fibres have marginal mass zero. This is a choice-free assertion about the explicit kernel and event identities.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-bayes-theorem",
+          "source_section": "Statement",
+          "quote": "Let $B_0,\\ldots,B_{n-1}$ be a finite partition with $\\mathbb P(B_i)>0$ for every $i<n$. If $\\mathbb P(A)>0$, then for every $j<n$,\n$$\\mathbb P(B_j\\mid A)=\\frac{\\mathbb P(A\\mid B_j)\\mathbb P(B_j)}{\\sum_{i<n}\\mathbb P(A\\mid B_i)\\mathbb P(B_i)}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe dominated by the fixed sigma-finite positive measure $\\mu$. For each\n$\\theta$, the Radon–Nikodym theorem gives the almost-everywhere class\n$dP_\\theta/d\\mu$; a sigma-finite exhaustion for $\\mu$ is also finite for the\nprobability measure $P_\\theta$. Under AC, select simultaneously a\nfinite-valued measurable nonnegative representative $p_\\theta$ from each\nclass. The nonnegative version exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nFor fixed observed $x\\in\\mathcal X$, the function\n$$L_x:\\Theta\\to[0,+\\infty),\\qquad L_x(\\theta):=p_\\theta(x),$$\nis the **likelihood at $x$**. This is a function on the parameter labels, not\na probability distribution on $\\Theta$. No sigma-algebra on $\\Theta$ or\nmeasurability of $L_x$ is implied. Each density is determined only\n$\\mu$-almost everywhere; there is no canonical pointwise version and, for\narbitrary uncountable $\\Theta$, no common exceptional null set is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Form the measurable disjoint union $E=\\bigsqcup_{i\\in I}(\\{i\\}\\times\\Theta_i)$ and put $\\Pi(A)=\\sum_iw_i\\Pi_i(A_i)$, where $A_i=\\{\\theta:(i,\\theta)\\in A\\}$. This is a probability measure because each $\\Pi_i$ is a probability measure and the finite weights sum to one. On $(i,\\theta)$ use the observation kernel $Q_i(\\theta,\\cdot)$ with density $\\ell((i,\\theta),y)=f_i(\\theta,y)$. Each section is a probability kernel, and finite piecewise measurability plus the stipulated joint measurability makes $\\ell$ a specified jointly measurable density; [F5] warns that separate density versions alone would not suffice. Its prior-predictive density is $m(y)=\\sum_iw_i m_i(y)$. The given finite-positive hypotheses make $m(y)$ finite and positive, so [F2] confirms its likelihood-weighted prior has a probability normalization.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F3] to $(E,\\Pi)$ and this dominated observation kernel. Define its global posterior kernel $K(y,\\cdot)$ by the normalized likelihood-weighted prior on $G=\\{y:0<m(y)<\\infty\\}$ and by the fixed prior $\\Pi$ on $G^c$, exactly as in [F3]. The set $G$ is measurable, and [F3] states that $G^c$ has predictive probability zero. At the specified fiber, where every model evidence is finite and positive, this posterior kernel assigns the tagged slice $\\{i\\}\\times\\Theta_i$ mass $\\int_{\\{i\\}\\times\\Theta_i}\\ell((l,\\theta),y)\\,\\Pi(d l,d\\theta)/m(y)=w_i\\int_{\\Theta_i}f_i(\\theta,y)\\,\\Pi_i(d\\theta)/(\\sum_lw_lm_l(y))=w_im_i(y)/(\\sum_lw_lm_l(y))$. The model-index map $(i,\\theta)\\mapsto i$ is measurable, so the image of this regular conditional law is the stated posterior model probability.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any measurable data event $B$ with positive predictive probability, the global kernel in step 2.1 has the event identity $\\int_B K(y,\\{i\\}\\times\\Theta_i)m(y)\\,d\\mu(y)=w_i\\int_Bm_i(y)\\,d\\mu(y)$ by [F3]. The integral on the left means integration against the predictive measure $m\\,d\\mu$, so no product with an infinite density on an exceptional fiber is evaluated pointwise. Dividing by the event probability agrees with [F4]. This event identity uses the global kernel, whereas the displayed odds claim only concerns the given finite-positive fiber. At that fiber, divide the positive finite probabilities from step 2.1 for $j$ and $i$; [F1] gives $(w_j/w_i)(m_j/m_i)=(w_j/w_i)BF_{ji}$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The models and observations in the Statement or Example are nonempty; no empty-family result is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof restrict odds quotients and normalized updates to finite positive evidence; zero or infinite evidence fibers use a supplied probability filler where a global posterior kernel is needed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no unit-probability endpoint assertion; credibility lies strictly between zero and one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Example explicitly retain proper finite priors, fixed positive normal variance or a singleton dominated observation model, as applicable."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and Example specify finite positive evidence or the stated improper-prior convention; proof uses no undefined quotient at zero or infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Example use only explicit finite constructions and their stated choice assumptions; Type-II maximizers are exhibited on the singleton data space."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-type-ii-marginal-likelihood-and-empirical-bayes-posterior": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes a supplied finite-group hierarchy and proper conditional kernels."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero selected evidence has no plug-in posterior update."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: on a singleton hyperparameter space any finite positive marginal likelihood is an attained maximum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: multiple maximizers are allowed, but the selected maximizer must be specified."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the selected maximum must be finite and positive before normalization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: a measurable selection is required when a data-indexed rule is claimed; existence is not asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "nonunique-type-ii-maximum",
+          "claim": "On a singleton data space with two hyperparameter values and marginal likelihood 1 at both, both values maximize; selecting either gives a defined plug-in update.",
+          "result": "The maximum 1 is attained at both values, and the selected evidence is positive finite."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-negative-balanced-anova-moment-estimate": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-balanced-one-way-random-effects-expected-mean-squares",
+          "source_section": "Statement",
+          "quote": "Let $k,r\\ge2$, let $\\mu\\in\\mathbb R$, $\\tau^2\\ge0$, and $\\sigma^2>0$.\nFor $i=1,\\ldots,k$, let the group blocks\n$U_i=(a_i,\\boldsymbol\\epsilon_i)$ be independent random elements on one\nprobability space, where $\\boldsymbol\\epsilon_i=(\\epsilon_{i1},\\ldots,\\epsilon_{ir})$.\nWithin each block, $a_i$ and $\\boldsymbol\\epsilon_i$ are independent and the\ncoordinates of $\\boldsymbol\\epsilon_i$ are mutually independent. Assume\n$a_i\\sim N(0,\\tau^2)$ and\n$\\epsilon_{ij}\\sim N(0,\\sigma^2)$. Put\n$Y_{ij}=\\mu+a_i+\\epsilon_{ij}$,\n$\\bar Y_{i\\cdot}=r^{-1}\\sum_{j=1}^rY_{ij}$, and\n$\\bar Y_{\\cdot\\cdot}=k^{-1}\\sum_{i=1}^k\\bar Y_{i\\cdot}$. Define\n$$MSB=\\frac{r}{k-1}\\sum_{i=1}^k(\\bar Y_{i\\cdot}-\\bar Y_{\\cdot\\cdot})^2,\\qquad MSW=\\frac{1}{k(r-1)}\\sum_{i=1}^k\\sum_{j=1}^r(Y_{ij}-\\bar Y_{i\\cdot})^2.$$\nThen\n$$\\mathbb E[MSB]=\\sigma^2+r\\tau^2,\\qquad \\mathbb E[MSW]=\\sigma^2.$$\nEquating these two population moments to the observed mean squares gives the\nraw method-of-moments estimates\n$$\\widehat{\\sigma^2}_{\\rm MOM}=MSW,\\qquad \\widehat{\\tau^2}_{\\rm MOM}=\\frac{MSB-MSW}{r}.$$\nThe second estimate is not constrained to be nonnegative.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-normal-location-scale-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$\nof [[def-standard-normal-and-normal-laws]] has Lebesgue density\n$$g_{m,\\sigma}(y)=\\frac1\\sigma\\frac{e^{-((y-m)/\\sigma)^2/2}}{\\sqrt{2\\pi}}=\\frac1{\\sqrt{2\\pi\\sigma^2}}e^{-(y-m)^2/(2\\sigma^2)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both group means and the grand mean are zero, so $MSB=2(0^2+0^2)=0$. Each of the four within-group residuals is either $-1$ or $1$, hence $MSW=(1+1+1+1)/2=2$. By [F1], the raw estimate is $(0-2)/2=-1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The map from the four observations to $(MSB-MSW)/2$ is a polynomial divided by the fixed positive integer $2$, hence continuous. At the displayed table its value is $-1$ by step 1.1, so some open neighborhood of the table still has negative estimates. The latent vector $(a_1,a_2,\\epsilon_{11},\\epsilon_{12},\\epsilon_{21},\\epsilon_{22})=(0,0,-1,1,-1,1)$ maps to that table. Since every coordinate has a strictly positive normal density by [F2], an open rectangle around this latent vector has positive probability by independence [F3]; it can be chosen inside the preimage of the negative-estimate neighborhood. Thus negative estimates occur with positive probability even when $\\tau^2>0$, so replacing them by zero changes the estimator and does not prove a structural zero.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses the stated nonempty two-by-two observation table."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The probabilistic neighborhood argument fixes both true variances strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is fixed at k=r=2, so neither ANOVA denominator is one-indexed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The latent normal coordinates have strictly positive variances in the positive-probability argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 covers every tau squared and sigma squared strictly above zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example assumes its finite probability model and does not construct one from nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example does not state a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example does not state a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "four-observation-witness",
+          "claim": "For table rows (-1,1) and (-1,1), MSB=0, MSW=2, and the raw estimate equals -1.",
+          "result": "Both group means and the grand mean are 0; within residual-square sum is 4, so MSW=4/2=2 and (0-2)/2=-1."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-improper-flat-prior-arbitrary-evidence-scale": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-marginal-likelihood-and-bayes-factor",
+          "source_section": "Definition",
+          "quote": "Let $I=\\{1,\\ldots,N\\}$ with $N\\ge2$ be a finite model index set. For each\n$i\\in I$, let $(\\Theta_i,\\mathcal T_i)$ be a measurable parameter space, let\n$\\Pi_i$ be a probability measure ([[def-probability-measure]]) on it, and let\n$Q_i$ be a sampling kernel for a statistical experiment\n([[def-statistical-experiment]]) on one common data space\n$(\\mathcal Y,\\mathcal A)$. Assume the experiments are dominated\n([[def-dominated-statistical-experiment]]) by the same supplied sigma-finite\nmeasure $\\mu$. Fix a specified likelihood density\n([[def-likelihood-density]])\n$f_i:\\Theta_i\\times\\mathcal Y\\to[0,\\infty]$ such that\n$$Q_i(\\theta,B)=\\int_B f_i(\\theta,y)\\,\\mu(dy)\\qquad(B\\in\\mathcal A).$$\nRequire that each $f_i$ is jointly measurable in parameter and data; separate\nlikelihood versions do not imply this joint measurability. Assign prior model\nweights $w_i>0$ with $\\sum_iw_i=1$. The **marginal likelihood**, or **model\nevidence**, at $y$ is the possibly extended value\n$$m_i(y):=\\int_{\\Theta_i} f_i(\\theta,y)\\,\\Pi_i(d\\theta)\\in[0,\\infty].$$\nThis is the BCS-02 evidence normalizer\n([[def-posterior-evidence-normalizer-and-fiberwise-update]]) specialized to a\nproper model prior, and is the prior-predictive density relative to the\nspecified common data measure. For models $i,j$ whose evidences at $y$ are both finite and positive,\nthe **Bayes factor for $j$ against $i$** is\n$$BF_{ji}(y):=\\frac{m_j(y)}{m_i(y)}.$$\nThe corresponding prior model odds are $w_j/w_i$. No Bayes factor is defined\nhere using an arbitrarily scaled improper parameter prior.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-posterior-evidence-normalizer-and-fiberwise-update",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a measurable parameter space, let $\\Pi$ be a\nsigma-finite measure on it, and fix a data value $y$. Let\n$L_y:\\Theta\\to[0,+\\infty]$ be a $\\mathcal T$-measurable function. Define its\n**evidence normalizer** by\n$$Z_\\Pi(y):=\\int_\\Theta L_y(\\theta)\\,\\Pi(d\\theta)\\in[0,+\\infty].$$\nOnly when $0<Z_\\Pi(y)<+\\infty$ define the **fiberwise posterior update** by\n$$\\Pi_y(A):=\\frac{\\int_A L_y(\\theta)\\,\\Pi(d\\theta)}{Z_\\Pi(y)}\\qquad(A\\in\\mathcal T).$$\nThe definition makes no quotient at zero or infinite evidence. A prior is\n**proper** when $\\Pi(\\Theta)=1$, as in\n[[def-bayesian-model-as-prior-and-sampling-kernel]]. We call a sigma-finite\nprior **improper** when $\\Pi(\\Theta)=+\\infty$; the formula also applies to\nother sigma-finite measures. For an improper prior, $Z_\\Pi(y)$ is a fiberwise\nnormalizer only; it does not by itself define a prior-predictive probability or\na conditional law.\n\nWhen the data are described by a dominated experiment, the dominating measure\nand its sigma-finiteness are as in\n[[def-dominated-statistical-experiment]]. A family of pointwise likelihood\nsections is not assumed to be jointly measurable in parameter and data; that\nadditional condition must be supplied separately whenever Tonelli is used.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\lambda_n$ is sigma-finite ([[def-finite-sigma-finite-and-semifinite-measures]]):\n   the cubes $(-k,k]^n$ are Lebesgue measurable with\n   $\\lambda_n\\big((-k,k]^n\\big) = (2k)^n < +\\infty$, they increase with $k$, and\n   their union over $k \\in \\mathbb{N}$ is $\\mathbb{R}^n$.\n2. Every bounded subset $E \\subseteq \\mathbb{R}^n$\n   ([[def-metric-bounded-diameter]]) has $\\lambda_n^*(E) < +\\infty$; a bounded\n   Lebesgue measurable set therefore has finite measure, and every compact\n   subset of $\\mathbb{R}^n$ is Lebesgue measurable of finite measure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-normal-location-scale-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$\nof [[def-standard-normal-and-normal-laws]] has Lebesgue density\n$$g_{m,\\sigma}(y)=\\frac1\\sigma\\frac{e^{-((y-m)/\\sigma)^2/2}}{\\sqrt{2\\pi}}=\\frac1{\\sqrt{2\\pi\\sigma^2}}e^{-(y-m)^2/(2\\sigma^2)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1, F3, F4], $\\lambda$ is sigma-finite, so $\\Pi_c=c\\lambda$ is sigma-finite. By [F5], $\\Pi_c([-n,n])=2cn$ for every positive integer $n$, hence $\\Pi_c(\\mathbb R)=+\\infty$ and it is improper in the sense of [F2]. By [F6], its formal likelihood integral is $\\int_{\\mathbb R}\\frac{c}{\\sqrt{2\\pi\\sigma^2}}\\exp\\!\\left(-\\frac{(y-\\theta)^2}{2\\sigma^2}\\right)d\\theta$. The substitution $z=(y-\\theta)/\\sigma$ has absolute Jacobian $\\sigma$, so this equals $c\\int_{\\mathbb R}(2\\pi)^{-1/2}e^{-z^2/2}\\,dz=c$. This value is positive and finite for every fixed $c>0$, but $\\Pi_c(\\mathbb R)=+\\infty$, so it is not an evidence under [F1].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the two copies of the same normal-location likelihood specified above, with model-specific constants $c_1,c_2>0$, the formal ratio is $c_2/c_1$ by step 1.1. Rescaling either improper prior changes this ratio arbitrarily while leaving its unnormalized density proportional to Lebesgue measure; hence no generic Bayes factor is defined by these improper priors.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The models and observations in the Statement or Example are nonempty; no empty-family result is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof restrict odds quotients and normalized updates to finite positive evidence; zero or infinite evidence fibers use a supplied probability filler where a global posterior kernel is needed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no unit-probability endpoint assertion; credibility lies strictly between zero and one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Example explicitly retain proper finite priors, fixed positive normal variance or a singleton dominated observation model, as applicable."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and Example specify finite positive evidence or the stated improper-prior convention; proof uses no undefined quotient at zero or infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Example use only explicit finite constructions and their stated choice assumptions; Type-II maximizers are exhibited on the singleton data space."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-diffuse-normal-prior-changes-bayes-factor": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-marginal-likelihood-and-bayes-factor",
+          "source_section": "Definition",
+          "quote": "Let $I=\\{1,\\ldots,N\\}$ with $N\\ge2$ be a finite model index set. For each\n$i\\in I$, let $(\\Theta_i,\\mathcal T_i)$ be a measurable parameter space, let\n$\\Pi_i$ be a probability measure ([[def-probability-measure]]) on it, and let\n$Q_i$ be a sampling kernel for a statistical experiment\n([[def-statistical-experiment]]) on one common data space\n$(\\mathcal Y,\\mathcal A)$. Assume the experiments are dominated\n([[def-dominated-statistical-experiment]]) by the same supplied sigma-finite\nmeasure $\\mu$. Fix a specified likelihood density\n([[def-likelihood-density]])\n$f_i:\\Theta_i\\times\\mathcal Y\\to[0,\\infty]$ such that\n$$Q_i(\\theta,B)=\\int_B f_i(\\theta,y)\\,\\mu(dy)\\qquad(B\\in\\mathcal A).$$\nRequire that each $f_i$ is jointly measurable in parameter and data; separate\nlikelihood versions do not imply this joint measurability. Assign prior model\nweights $w_i>0$ with $\\sum_iw_i=1$. The **marginal likelihood**, or **model\nevidence**, at $y$ is the possibly extended value\n$$m_i(y):=\\int_{\\Theta_i} f_i(\\theta,y)\\,\\Pi_i(d\\theta)\\in[0,\\infty].$$\nThis is the BCS-02 evidence normalizer\n([[def-posterior-evidence-normalizer-and-fiberwise-update]]) specialized to a\nproper model prior, and is the prior-predictive density relative to the\nspecified common data measure. For models $i,j$ whose evidences at $y$ are both finite and positive,\nthe **Bayes factor for $j$ against $i$** is\n$$BF_{ji}(y):=\\frac{m_j(y)}{m_i(y)}.$$\nThe corresponding prior model odds are $w_j/w_i$. No Bayes factor is defined\nhere using an arbitrarily scaled improper parameter prior.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-normal-location-scale-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$\nof [[def-standard-normal-and-normal-laws]] has Lebesgue density\n$$g_{m,\\sigma}(y)=\\frac1\\sigma\\frac{e^{-((y-m)/\\sigma)^2/2}}{\\sqrt{2\\pi}}=\\frac1{\\sqrt{2\\pi\\sigma^2}}e^{-(y-m)^2/(2\\sigma^2)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $m_0(0)=(2\\pi\\sigma^2)^{-1/2}$. The alternative evidence is $m_1(0)=\\int_{\\mathbb R}\\frac{e^{-\\theta^2/(2\\tau^2)}}{\\sqrt{2\\pi\\tau^2}}\\,\\frac{e^{-\\theta^2/(2\\sigma^2)}}{\\sqrt{2\\pi\\sigma^2}}\\,d\\theta$. The exponent coefficient is $(\\tau^2+\\sigma^2)/(2\\tau^2\\sigma^2)$; substituting $z=\\theta\\sqrt{(\\tau^2+\\sigma^2)/(\\tau^2\\sigma^2)}$ and using the standard normal integral gives $m_1(0)=(2\\pi(\\tau^2+\\sigma^2))^{-1/2}$. Both evidences are finite and positive.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], the alternative-to-null Bayes factor is $BF_{10}(0)=m_1(0)/m_0(0)=\\sqrt{\\sigma^2/(\\sigma^2+\\tau^2)}$. As $\\tau^2\\to\\infty$ with $\\sigma^2$ fixed, this tends to zero. Therefore the evidence ratio changes with the proper alternative prior's spread even though the observed datum and point-null model remain fixed.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both normal models are defined on the nonempty real parameter and observation spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves each evidence is strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example compares two models to define a Bayes factor."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both variances are assumed strictly positive in the Example."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies finite positive evidence for every tau squared and sigma squared in the stated domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proper normal laws and priors are supplied as part of the Example."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example does not state a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example does not state a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "unit-variance-prior-sensitivity",
+          "claim": "At sigma squared 1 and tau squared 1, BF_10(0)=1/sqrt(2); at tau squared 4 it is 1/sqrt(5).",
+          "result": "The formula evaluates to the two distinct values, and for fixed sigma squared its limit is zero as tau squared grows."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-point-null-needs-a-model-atom": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-finite-model-posterior-odds-from-marginal-evidence",
+          "source_section": "Statement",
+          "quote": "Assume the finite dominated model setup of\n[[def-marginal-likelihood-and-bayes-factor]]. Fix a data value $y$ such that\n$0<m_i(y)<\\infty$ for every $i\\in I$. A version of the posterior model\nprobabilities at this fiber is\n$$\\Pr(M=i\\mid y)=\\frac{w_i m_i(y)}{\\sum_{\\ell\\in I}w_\\ell m_\\ell(y)}.$$\nFor any two models $i,j\\in I$, the posterior odds satisfy\n$$\\frac{\\Pr(M=j\\mid y)}{\\Pr(M=i\\mid y)}=\\frac{w_j}{w_i}\\,BF_{ji}(y).$$\nThe displayed version uses the specified jointly measurable density\nrepresentatives; no quotient is formed if an evidence is zero or infinite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-marginal-likelihood-and-bayes-factor",
+          "source_section": "Definition",
+          "quote": "Let $I=\\{1,\\ldots,N\\}$ with $N\\ge2$ be a finite model index set. For each\n$i\\in I$, let $(\\Theta_i,\\mathcal T_i)$ be a measurable parameter space, let\n$\\Pi_i$ be a probability measure ([[def-probability-measure]]) on it, and let\n$Q_i$ be a sampling kernel for a statistical experiment\n([[def-statistical-experiment]]) on one common data space\n$(\\mathcal Y,\\mathcal A)$. Assume the experiments are dominated\n([[def-dominated-statistical-experiment]]) by the same supplied sigma-finite\nmeasure $\\mu$. Fix a specified likelihood density\n([[def-likelihood-density]])\n$f_i:\\Theta_i\\times\\mathcal Y\\to[0,\\infty]$ such that\n$$Q_i(\\theta,B)=\\int_B f_i(\\theta,y)\\,\\mu(dy)\\qquad(B\\in\\mathcal A).$$\nRequire that each $f_i$ is jointly measurable in parameter and data; separate\nlikelihood versions do not imply this joint measurability. Assign prior model\nweights $w_i>0$ with $\\sum_iw_i=1$. The **marginal likelihood**, or **model\nevidence**, at $y$ is the possibly extended value\n$$m_i(y):=\\int_{\\Theta_i} f_i(\\theta,y)\\,\\Pi_i(d\\theta)\\in[0,\\infty].$$\nThis is the BCS-02 evidence normalizer\n([[def-posterior-evidence-normalizer-and-fiberwise-update]]) specialized to a\nproper model prior, and is the prior-predictive density relative to the\nspecified common data measure. For models $i,j$ whose evidences at $y$ are both finite and positive,\nthe **Bayes factor for $j$ against $i$** is\n$$BF_{ji}(y):=\\frac{m_j(y)}{m_i(y)}.$$\nThe corresponding prior model odds are $w_j/w_i$. No Bayes factor is defined\nhere using an arbitrarily scaled improper parameter prior.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Fix $n \\ge 1$ and let $\\lambda_n^*$ be the Lebesgue outer set function on $\\mathbb{R}^n$\n([[def-lebesgue-outer-measure]]). A set $E \\subseteq \\mathbb{R}^n$ is\n**Lebesgue measurable** when\n\n$$\\lambda_n^*(A) \\;=\\; \\lambda_n^*(A \\cap E) \\;+\\; \\lambda_n^*(A \\setminus E) \\qquad \\text{for every } A \\subseteq \\mathbb{R}^n .$$\n\nThis formula makes sense before any outer-measure theorem is invoked. Under\ncountable choice, [[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]]\nmakes $\\lambda_n^*$ an outer measure, and the displayed condition is then exactly\nCarathéodory measurability in the sense of [[def-caratheodory-measurable-set]].\n\nThe family of Lebesgue measurable sets is written $\\mathcal{L}(\\mathbb{R}^n)$,\nand **Lebesgue measure** is the restriction\n\n$$\\lambda_n \\;:=\\; \\lambda_n^*\\!\\restriction_{\\mathcal{L}(\\mathbb{R}^n)} .$$\n\nOn the real line the subscript is dropped and $\\lambda := \\lambda_1$.\n\nThe quantifier over every test set $A$ is part of the condition, and no\nhypothesis on $E$ is imposed before it is tested. That\n$\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra and that $\\lambda_n$ is a complete\nmeasure on it are not part of this definition: they are proved, under the Axiom\nof Countable Choice, in [[thm-lebesgue-measure-is-a-complete-measure]], which is\nrecorded in this item's `justified_by` because it is a statement about the\nobjects introduced here. Until that theorem the symbols $\\mathcal{L}(\\mathbb{R}^n)$\nand $\\lambda_n$ name a family of sets and a restricted set function, nothing more.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1, F3], $\\lambda([0,1])=1$, so the uniform prior is proper. Under $M_0$, $m_0(0)=1$. Under $M_1$, its density is $1$ on $[0,1]$, so $m_1(0)=\\int_0^1(1-\\theta)\\,d\\theta=1/2$. Both evidences are finite and positive, and [F1] gives $\\Pr(M_0\\mid y=0)=w_0/(w_0+w_1/2)>0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], the degenerate closed interval $[0,0]=\\{0\\}$ is Lebesgue measurable and has measure zero; [F4] identifies this measure as $\\lambda$. Thus the uniform prior assigns the singleton mass $\\int_{\\{0\\}}1\\,d\\lambda=0$. The separate model atom in step 1.1 instead gives $\\theta=0$ prior weight $w_0$ and positive posterior probability.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example supplies two nonempty model spaces and one observed Bernoulli outcome."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives model evidences 1 and 1/2, both strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example compares a point-null model with a continuous alternative model."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the degenerate interval [0,0] explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses finite positive evidence; step 2.1 verifies the parameter endpoint atom is zero under the continuous prior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only the supplied finite model weights and uniform prior."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example does not state a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example does not state a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "uniform-point-null-example",
+          "claim": "With w0=w1=1/2, y=0, and evidences 1 and 1/2, the posterior null probability is 2/3.",
+          "result": "(1/2)/(1/2+(1/2)(1/2))=2/3, while the continuous prior assigns {0} mass zero."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-hyperparameter-uncertainty-can-induce-group-dependence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hierarchical-bayesian-model",
+          "source_section": "Definition",
+          "quote": "Fix a finite group count $m\\ge1$, a standard Borel hyperparameter space\n$(H,\\mathcal H)$, and a standard Borel parameter space $(\\Theta,\\mathcal T)$.\nLet $\\Pi$ be a probability measure on $(H,\\mathcal H)$ and let\n$$G:H\\times\\mathcal T\\to[0,1]$$\nbe a probability kernel. For each $j\\in\\{1,\\ldots,m\\}$, let\n$(\\mathcal Y_j,\\mathcal A_j)$ be a measurable observation space, let $\\nu_j$\nbe a sigma-finite measure on it, and let $K_j$ be a probability kernel from\n$(\\Theta,\\mathcal T)$ to $(\\mathcal Y_j,\\mathcal A_j)$ with a specified\njointly measurable density $f_j:\\Theta\\times\\mathcal Y_j\\to[0,\\infty]$:\n$$K_j(\\theta,B)=\\int_B f_j(\\theta,y_j)\\,\\nu_j(dy_j)\\qquad(B\\in\\mathcal A_j).$$\n\nThe **finite-group hierarchical model** is the following specified kernel\nconstruction. First draw $\\eta\\sim\\Pi$. Conditional on $\\eta$, draw\n$\\theta_1,\\ldots,\\theta_m$ from the finite product kernel\n$$G_\\eta^{\\otimes m}(d\\theta_1\\cdots d\\theta_m)=\\bigotimes_{j=1}^mG_\\eta(d\\theta_j).$$\nThus the group parameters are conditionally independent and have the same\nconditional law $G_\\eta$. Conditional on the parameter tuple, draw the group\nobservations from the product kernel $\\bigotimes_{j=1}^mK_j(\\theta_j,\\cdot)$.\nThe product-kernel laws are probability kernels by\n[[lem-finite-products-of-probability-kernels]]. For each fixed $\\eta$, the\ncoordinate maps under $G_\\eta^{\\otimes m}$ are independent random elements,\nso their joint law is the finite product law\n([[thm-independent-random-elements-have-product-joint-law]]).\n\nPut $\\Xi=H\\times\\Theta^m$ with its finite product sigma-algebra. The proper\nlatent prior $P_0$ on $\\Xi$ is\n$$P_0(d\\eta,d\\theta_1\\cdots d\\theta_m)=\\Pi(d\\eta)\\prod_{j=1}^mG_\\eta(d\\theta_j),$$\nwell-defined by [[lem-prior-and-model-kernel-define-joint-law]]. For\n$\\xi=(\\eta,\\theta_1,\\ldots,\\theta_m)\\in\\Xi$, lift each observation kernel\nto the common source $\\Xi$ by\n$$M_j(\\xi,B)=K_j(\\theta_j,B)\\qquad(B\\in\\mathcal A_j).$$\nThe coordinate projection $\\xi\\mapsto\\theta_j$ is measurable, so the kernel\ndefinition shows that each $M_j$ is a probability kernel. Its specified\njointly measurable density is $(\\xi,y_j)\\mapsto f_j(\\theta_j,y_j)$, by\ncomposition with the same measurable coordinate projection. Let\n$\\mathcal Y=\\prod_{j=1}^m\\mathcal Y_j$,\n$\\nu=\\bigotimes_{j=1}^m\\nu_j$, and $y=(y_1,\\ldots,y_m)$. The observation\nkernel from $\\Xi$ has jointly measurable density\n$$L_y(\\eta,\\theta_1\\cdots\\theta_m)=\\prod_{j=1}^m f_j(\\theta_j,y_j)$$\nwith respect to $\\nu$, by [[lem-finite-products-of-dominated-kernels-have-product-density]].\nIts **evidence** is the possibly extended nonnegative number\n$$Z(y)=\\int_\\Xi L_y(\\eta,\\theta_1\\cdots\\theta_m)\\,P_0(d\\eta,d\\theta_1\\cdots d\\theta_m).$$\nThe normalized likelihood measure is called a pointwise joint posterior on a\nfiber only when $0<Z(y)<\\infty$; no quotient is formed at zero or infinite\nevidence.\n\nFor each group, $\\theta\\mapsto K_j(\\theta,\\cdot)$ is a parametric statistical\nmodel in the sense of [[def-parametric-statistical-model]], with its\nparameter-measurable kernel representation as in\n[[def-parameter-measurable-statistical-model-as-markov-kernel]]. Here\n“conditionally independent given $\\eta$” is shorthand for the explicit\nfinite product-kernel specification above. The library's random-element\nconditional-independence terminology is defined in\n[[def-conditional-independence-given-a-sigma-algebra]]; its\nconditional-expectation-class convention assumes AC. The finite\nproduct-kernel definition here does not use that class convention or any\nchoice axiom.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hierarchical-posterior-normalization-on-positive-finite-evidence",
+          "source_section": "Statement",
+          "quote": "Assume the finite-group hierarchical model of\n[[def-hierarchical-bayesian-model]]. Write $P_0$ for its proper prior on\n$\\Xi=H\\times\\Theta^m$, let $L_y(\\xi)$ be its specified product likelihood\ndensity with respect to the finite product measure $\\nu$, and define\n$$Z(y)=\\int_\\Xi L_y(\\xi)\\,P_0(d\\xi).$$\nFor every observation $y$ with $0<Z(y)<\\infty$, the measure\n$$P_y(A)=\\frac{\\int_A L_y(\\xi)\\,P_0(d\\xi)}{Z(y)}\\qquad(A\\in\\mathcal H\\otimes\\mathcal T^{\\otimes m})$$\nis the joint posterior law of the latent tuple. Defining $P_y=P_0$ when\n$Z(y)=0$ or $Z(y)=\\infty$ gives a regular conditional distribution under the\nprior-predictive law; no quotient is formed on either exceptional fiber.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-type-ii-marginal-likelihood-and-empirical-bayes-posterior",
+          "source_section": "Definition",
+          "quote": "Assume a finite-group hierarchy as in\n[[def-hierarchical-bayesian-model]], with hyperparameter $\\eta\\in H$, group\nparameters $\\theta_1,\\ldots,\\theta_m$, conditional probability kernel\n$G_\\eta$ ([[def-measure-kernel-and-probability-kernel]]) on the group-parameter\nspace, and specified jointly measurable\nlikelihood density\n$$L_y(\\theta_{1:m})=\\prod_{j=1}^m f_j(\\theta_j,y_j)$$\nagainst the common product data measure. For fixed $\\eta$, define its\n**marginal likelihood**\n$$m(y\\mid\\eta):=\\int_{\\Theta^m}L_y(\\theta_{1:m})\\,G_\\eta^{\\otimes m}(d\\theta_{1:m})\\in[0,\\infty].$$\nWhere the function $\\eta\\mapsto m(y\\mid\\eta)$ is finite-valued and attains a\npositive finite maximum, a **Type-II maximum marginal likelihood choice** is\nany\n$$\\widehat\\eta(y)\\in\\operatorname*{arg\\,max}_{\\eta\\in H}m(y\\mid\\eta).$$\nThis definition does not assert that a maximum exists. A data-indexed choice\nrequires a selected measurable maximizer on its domain.\n\nOnly when $0<m(y\\mid\\widehat\\eta(y))<\\infty$ define the corresponding\n**empirical-Bayes plug-in posterior** on a measurable\n$A\\subseteq\\Theta^m$ by\n$$\\Pi_{\\widehat\\eta(y),y}(A):=\\frac{\\int_A L_y(\\theta_{1:m})\\,G_{\\widehat\\eta(y)}^{\\otimes m}(d\\theta_{1:m})}{m(y\\mid\\widehat\\eta(y))}.$$\nThe finite-positive condition makes this a probability update by\n[[prop-fiberwise-posterior-propriety-iff-finite-positive-evidence]].\n\nUnder a proper hyperprior $H_0$, at a data fiber with finite positive joint evidence\n$0<Z(y):=\\int_Hm(y\\mid\\eta)H_0(d\\eta)<\\infty$, full Bayes instead retains the posterior law of\n$\\eta$ jointly with the group parameters, as in\n[[thm-hierarchical-posterior-normalization-on-positive-finite-evidence]].\nIntegrating over a shared uncertain hyperparameter can induce dependence\nbetween group parameters, while a plug-in update fixes that hyperparameter at\none selected value; special cases can leave the groups independent. This\ndefinition asserts no generic empirical-Bayes risk, consistency, dominance,\nor credible-coverage guarantee.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The finite discrete spaces are standard Borel by [F4]. The two-point hyperprior is proper, $G_0=\\delta_0$ and $G_1=\\delta_1$ are probability kernels, and each singleton observation measure $\\nu_j$ is finite, hence sigma-finite. Its observation kernel has the specified density $f_j(\\theta_j,*)=1$, jointly measurable on the finite product space. Thus the hierarchy in [F1] is well-defined and its joint evidence is $Z(*)=1$. By [F2], the full posterior equals the prior: it assigns probability $1/2$ to $(\\eta,\\theta_1,\\theta_2)=(0,0,0)$ and $1/2$ to $(1,1,1)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For either fixed $\\eta$, the conditional marginal likelihood is $m(*\\mid\\eta)=1$, so both values attain the maximum. The map from the singleton data space to $\\eta=0$ is measurable, hence [F3] permits the plug-in choice $\\widehat\\eta(*)=0$; its posterior is $\\delta_0\\otimes\\delta_0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under the full posterior in step 1.1, $\\Pr(\\theta_1=1)=\\Pr(\\theta_2=1)=1/2$ but $\\Pr(\\theta_1=1,\\theta_2=1)=1/2\\ne1/4$. Therefore the group parameters are dependent after the shared hyperparameter is integrated out, and the full posterior differs from the plug-in posterior in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The models and observations in the Statement or Example are nonempty; no empty-family result is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof restrict odds quotients and normalized updates to finite positive evidence; zero or infinite evidence fibers use a supplied probability filler where a global posterior kernel is needed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no unit-probability endpoint assertion; credibility lies strictly between zero and one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Example explicitly retain proper finite priors, fixed positive normal variance or a singleton dominated observation model, as applicable."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and Example specify finite positive evidence or the stated improper-prior convention; proof uses no undefined quotient at zero or infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Example use only explicit finite constructions and their stated choice assumptions; Type-II maximizers are exhibited on the singleton data space."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

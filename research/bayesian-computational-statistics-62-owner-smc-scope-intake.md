@@ -1,0 +1,11 @@
+# SMC scope and proof escalation — intake cycle 1
+
+The five native45 scope holds reflect real false promises in the controlling BCS42 design, not missing author effort. Independent focused branches confirm the current Psi moments, residual no-positive-integer-atom conditions and constant-weight specialization are sound repairs and preserve both weighted and post-selection fixed-horizon CLTs. The initial denominator needs only its normalized first moment; no denominator-L2 condition should be added.
+
+Actual Chopin Theorem5(15) states the same within-predecessor row ratios as the design. Its AppendixA.4 closing weight-bound inference does not follow from those ratios. A predecessor-independent proposal with a time-vanishing mass on a true positive-mass state satisfies both row ratios withC1 but has diverging terminal asymptotic variance. The local counterexample correctly demonstrates this interface failure.
+
+Root approved the fuller true replacement: retain the abstract B/operator sufficient branch, add a multistep centered-image theorem, and prove last-state FK/Doob contraction from true-transition row ratios plus bounded likelihood. Add explicit g/q domination and initial normalized-weight bound to recover bounded incremental weights. This supplies a genuine HMM bounded-asymptotic-variance branch without claiming arbitrary path-function contraction or finite-N time-uniform error.
+
+Small local proof completions remain: selected-law LLN at timezero; weighted-correction preceding-CLT specialization; arbitrary separate Fourier coefficients for joint asymptotic independence; absolute noninteger moments in the residual triangular limit; and a terminal-test-only application in the bounded-mixing example, preserving its exact variance1/4. Exact findings, current held-item excerpts and proposed hypotheses are in the companion JSON and three branch reports.
+
+Native45 remains active; no source edits, tests, metadata, hashes or readiness changes were made. After its confirmed drain, archive exact current preimages, recheck actual carriers, apply the necessary true-scope correction/local proofs, check all affected consumers under the same coordinator, and provide root source-exact proposals. Final resampling Definition consumer closure for45 remains part of that same second cycle.

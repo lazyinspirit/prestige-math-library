@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "6",
+  "round": 0,
+  "reviewed_items": [
+    "lem-beta-density-normalization",
+    "lem-binomial-count-law",
+    "lem-gamma-density-normalization",
+    "def-poisson-law",
+    "def-exponential-conjugate-prior-family",
+    "lem-finite-euclidean-space-is-standard-borel",
+    "def-dirichlet-density-kernel",
+    "lem-multinomial-law-normalization",
+    "thm-multivariate-normal-conditional-law",
+    "thm-iid-exponential-family-statistic-is-sufficient",
+    "def-beta-distribution",
+    "def-gamma-distribution-shape-rate",
+    "thm-dirichlet-density-normalization",
+    "def-multinomial-distribution",
+    "def-dirichlet-distribution",
+    "thm-beta-binomial-conjugate-update",
+    "thm-gamma-poisson-exposure-adjusted-update",
+    "thm-exponential-family-conjugate-update",
+    "thm-dirichlet-multinomial-conjugate-update",
+    "thm-normal-normal-conjugate-update",
+    "ex-multivariate-normal-conditioning-singular-state",
+    "ex-beta-binomial-update",
+    "ex-exposure-gamma-poisson-update",
+    "ex-normal-normal-conjugate-update",
+    "ex-dirichlet-multinomial-update"
+  ],
+  "reviewed_pages": [
+    "conjugate-families-and-posterior-prediction",
+    "conjugate-families-and-posterior-prediction-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete batch review found two measurability obligations that can be resolved locally without changing approved claims or interfaces.",
+  "findings": [
+    {
+      "id": "def-exponential-conjugate-prior-family",
+      "type": "prerequisite",
+      "reason": "The definition integrates a density involving A(η(θ)), but def-exponential-family defines A pointwise and does not establish its Borel measurability. Measurability of η alone therefore does not establish that the prior density is measurable or that Z is defined. Add a local proved result and dependency establishing that A is Borel on the natural-parameter domain, using measurability of the parameterized integral. This supports thm-exponential-family-conjugate-update, especially its use of the prior in steps 1.1–3.1, without narrowing the definition."
+    },
+    {
+      "id": "thm-gamma-poisson-exposure-adjusted-update",
+      "type": "local",
+      "reason": "Step 1.1 asserts parameter-measurable Poisson probability kernels, but def-poisson-law supplies only fixed-parameter laws; Bayes-formula step 3.1 requires a jointly measurable density. Add the local argument that each count mass is continuous in λ and that countable sums give measurable kernel evaluations; the explicit mass function is then jointly measurable on the countable discrete data space."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-exponential-family-conjugate-update",
+      "decision": "accept",
+      "reason": "Its update algebra and finite-positive evidence conditions are sound; the requested support establishes measurability of the existing prior definition without changing its interface."
+    },
+    {
+      "id": "ex-exposure-gamma-poisson-update",
+      "decision": "accept",
+      "reason": "The evidence arithmetic, posterior parameters, and zero-exposure case are correct; the requested repair supplies kernel measurability without changing the update theorem's statement."
+    }
+  ]
+}

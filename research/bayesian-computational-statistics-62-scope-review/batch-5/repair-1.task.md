@@ -1,0 +1,15 @@
+# Batch 5: repair 1
+
+Run: bayesian-computational-statistics-62
+Batch: 5
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: posterior-propriety-and-dominated-bayes-formula, posterior-propriety-and-dominated-bayes-formula-examples
+Items: def-posterior-evidence-normalizer-and-fiberwise-update, prop-fiberwise-posterior-propriety-iff-finite-positive-evidence, ex-valid-finite-evidence-and-normalized-update, ex-prior-predictive-null-fiber, ex-flat-prior-normal-mean-proper-posterior, ex-improper-beta-zero-zero-endpoint-divergence
+Consolidated findings: [{"id":"prop-fiberwise-posterior-propriety-iff-finite-positive-evidence","type":"local","reason":"Fact [F1] omits the sigma-finite prior hypothesis of its definition supplier, while the proposition quantifies over arbitrary measure spaces. The broader result follows from the stated integral and [F2]; qualify [F1] so it does not imply that the definition supplies its evidence notation or update outside its domain."},{"id":"ex-improper-beta-zero-zero-endpoint-divergence","type":"prerequisite","reason":"Verification 1.1 uses the density 1/[p(1-p)] as measurable on (0,1) based only on continuity there. Add a short argument that it is measurable on the restricted Lebesgue sigma-algebra before applying [F5]; the available continuous-to-Borel supplier is stated for full Euclidean domains."}]
+Authorized source files: ["items/def-posterior-evidence-normalizer-and-fiberwise-update.md","items/prop-fiberwise-posterior-propriety-iff-finite-positive-evidence.md","items/ex-valid-finite-evidence-and-normalized-update.md","items/ex-prior-predictive-null-fiber.md","items/ex-flat-prior-normal-mean-proper-posterior.md","items/ex-improper-beta-zero-zero-endpoint-divergence.md","library/bayesian-computational-statistics/posterior-propriety-and-dominated-bayes-formula.md","library/bayesian-computational-statistics/posterior-propriety-and-dominated-bayes-formula-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

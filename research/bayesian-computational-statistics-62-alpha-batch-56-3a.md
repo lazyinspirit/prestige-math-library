@@ -1,0 +1,44 @@
+# Batch 56 Step 3a Alpha review
+
+Run: `bayesian-computational-statistics-62`; group: `batch-56`.
+
+Scope owes no touched, page, reader or refuter decisions. Reader findings and refuter flagged arrays are empty; pre/post inventories and hashes agree. Work is seven risk reviews in generated order. No items or pages edited.
+
+## Completed item reviews
+
+- `lem-kfold-cv-variance-covariance-decomposition`: Proof 1.1–3.1: IID product-law invariance and symmetric rules give the three transitive block-permutation covariance classes. Square integrability makes the covariance sum finite. Ordered-pair counts n, n(m−1), n(n−m) yield the formula. At m=1 the within-fold count is zero and omega is explicitly defined as zero. K=2, constant losses and paired differences satisfy the argument. Checked F1–F5 current suppliers and Bengio–Grandvalet §§2.5–3, Lemma 1/Corollaries 2–3, pp.1094–1096. No AC or loss independence needed. Reader and refuter report no findings; independent review found no defect.
+
+- `thm-cross-validation-risk-bias-at-training-size`: Proof 1.1–4.1: disjoint training/test indices under mutual IID have exactly the ordered product law required by R_k; symmetry of A is unnecessary. Finite linearity handles unequal folds, zero weights and n=2. Full-sample integrability explicitly ensures finite R_n. An independent finite-range schedule preserves this identity conditionally (on its support) and unconditionally. Bias sign needs monotonicity; deterministic size-dependent constant rules show both signs are possible. Checked F1–F6/A1 and current definitions/product-law supplier; Arlot–Celisse §5.1.1 and Bengio–Grandvalet §2.3 agree on training-size targets. No AC used. Reader and refuter report no findings; independent review found no defect.
+
+- `ex-cross-validation-risk-minimization-does-not-identify-model`: Verification 1.1–2.1: both constant predictors have squared-loss risk 1/2 at every size. Identical Bernoulli product laws imply identical distributions for every measurable selector, so the two mutually exclusive correct-label events cannot both tend to probability one. This proves failure of identification across the family, without claiming inconsistency at every individual label or deterministic equality of empirical CV scores. Checked current F1–F5 (risk/model-consistency definitions, IID/product law and Bernoulli law). n=1 and a fixed tie rule cause no exception. No AC used; example is self-contained. Reader and refuter report no findings; independent review found no defect.
+
+- `ex-random-row-split-leaks-group-information`: Verification 1.1–3.1: separated duplicates produce zero errors, same-fold duplicates produce two copies of Y_g, hence score G^{-1} sum Y_g 1_same. Uniform balanced splitting gives same-fold probability (G−1)/(2G−1), including G=2; independence of split and labels yields expectation (G−1)/(2(2G−1)). A new independent Bernoulli-half group with unseen ID has error 1/2. Current F1–F3 support the calculation and expressly exclude IID rows. Majority ties are immaterial for repeated identical labels. No AC used; no claim to refute the IID theorem. Reader and refuter report no findings; independent review found no defect.
+
+- `thm-no-universal-unbiased-k-fold-cv-variance-estimator`: Proof 1.1–3.1: the explicit fixed symmetric binary product learner and loss hz are measurable and bounded. Each e_i contains r=n−m+1 distinct IID Bernoulli factors, so its mean is p^r by the current factorization supplier (bounded integrable case). Every sample-function second moment is polynomial of degree at most n; variance has uncancellable leading term −p^{2r} since 2r−n=m(K−2)+2>0, including K=2 and m=1. An integrable unbiased estimator with a fixed independent seed has finite, p-independent means on every binary sample vector because each vector has positive probability for interior p. Its expectation has degree at most n, giving contradiction on (0,1). Negative estimator values do not evade this argument; endpoints are not needed. Read all F1–F7, including covariance supplier and full factorization proof. Bengio–Grandvalet §4 Theorem 6 uses a different error-vector framework; the stronger raw-sample statement here follows from this local argument, without adopting that paper’s analytic reduction. No AC or unresolved prerequisite. Reader/refuter findings are empty; independent review found no defect.
+
+- `ex-holdout-cv-training-size-bias`: Verification 1.1–3.1: independent centered Bernoulli terms give variance p(1−p)/k for the training mean and zero covariance with the fresh test value. Thus R_k=p(1−p)(1+1/k), including k=1 and p=0,1. At p=1/2, R_3=1/3 and R_4=5/16, hence bias 1/48. The held-out fourth observation estimates R_3; evaluating R_4 entails a fresh fifth observation as required by the risk definition. Bounded loss supplies all moment/integrability hypotheses of F1–F7; current factorization and training-size suppliers give exactly the used directions. No AC needed. Reader/refuter findings are empty; independent review found no defect.
+
+- `ex-paired-kfold-model-comparison-uncertainty`: Verification 1.1–4.1: both learners are symmetric; all four paired errors are bounded triple products under the same declared partition. For each distinct pair the union of factors is all four Bernoulli coordinates, yielding mean product 1/16 and covariance 3/64; marginal variance is 7/64. Current covariance lemma applies with n=4,m=2, giving 16/256=1/16. Independent enumeration of all 16 sample vectors yields score probabilities 11/16 at 0, 4/16 at 1/4, 1/16 at 1, hence second moment 5/64 and variance 1/16. Zero-rule loss is identically zero and no fold-error independence is assumed. Checked F1–F7 current statements and full factorization proof; Bengio–Grandvalet §§2.4–3 supports paired-difference convention. No AC needed. Reader/refuter findings are empty; independent review found no defect.
+
+## Evidence and sources
+
+Read the dispatched scope/order, reader report/findings, refuter artifact, pre/post snapshots, current manifest and cross-batch dependency input, all ten item carriers, both page carriers, current contract citations/derivations/boundaries, and all seven distinct external direct item suppliers. The product-joint-law and expectation-factorization proofs were read fully; their transitive closures were not independently audited. All local cited statements supply the hypotheses actually used. No substantial unmet prerequisite was found.
+
+- [Bengio–Grandvalet](https://jmlr.org/papers/volume5/grandvalet04a/grandvalet04a.pdf): §§2.3–3, printed pp.1092–1096, for the target, paired convention and covariance formula; §4, Theorem 6, pp.1097–1098, for comparison with the locally proved nonexistence claim. Its analytic reduction is not a premise of the local proof.
+- [Arlot–Celisse](https://arxiv.org/pdf/0907.4728): §5.1.1, equation (12), PDF p.17, for the training-size expectation and monotonicity qualification; §8.3, PDF p.27, for the independent-validation interpretation and dependent-data caveat. The examples' finite arguments were independently checked locally rather than inferred from the survey.
+- The cited ISLR PDF at `https://www.statlearning.com/s/ISLR-Seventh-Printing.pdf` returned a browser internal extraction error. No claim of reading that source is made; the local proofs and accessible primary sources suffice for these reviews.
+
+## Disposition and local checks
+
+No confirmed defects, published-supplier findings, repairs, withdrawals or escalations. No defect-ledger rows are warranted. No statements or definitions changed, so no consumer repair propagation is triggered. The batch cross-batch dependency input is `[]`; the frontier dependency ledger records that unchanged disposition. Existing stable IDs and proposed withdrawals are preserved.
+
+Only seven `risk_review` objects were added to the owning proof contract; all earlier contract content is retained. The report and decisions file are task-named. Exactly zero routed decisions are owed and `decisions` is empty; risk-only reviews do not create touched obligations.
+
+Checks completed:
+
+- `node tools/risk-report.mjs research/bayesian-computational-statistics-62-batch-56.proof-contracts.json`: zero errors; six HIGH and one CRITICAL item identified before review.
+- The same command with `--require-reviewed`: zero errors after seven complete, item-specific reviews.
+- Read-only Python SHA-256 comparison: all ten current raw item hashes and both page hashes match both pre/post snapshots; pre/post carrier/contract/manifest entries agree.
+- Exact rational enumeration of 16 binary vectors: paired mean `1/8`, second moment `5/64`, variance `1/16`.
+
+No item changed: proof-layout, reflow and item precheck are not applicable. No judge, stamp, gate battery, stage transition, publication or commit was performed. Engine-owned hash stamping and gates remain pending. Blockers: none. Next action: engine collection of this dispatch.

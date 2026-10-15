@@ -1,0 +1,1203 @@
+{
+  "version": 1,
+  "scope": [
+    "alg-rejection-sampling",
+    "thm-counting-measure-integral-is-nonnegative-series",
+    "thm-rejection-sampling-has-target-acceptance-law",
+    "thm-rejection-sampling-expected-proposal-count-under-finite-envelope",
+    "ex-rejection-sampling-tail-mismatch-no-finite-envelope",
+    "ex-rejection-sampling-bounded-likelihood-ratio",
+    "ex-rejection-sampling-unnormalized-finite-measures"
+  ],
+  "contracts": {
+    "alg-rejection-sampling": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "As an algorithm definition, this item states its admissible input and procedure but has no phase proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "As an algorithm definition, this item states its admissible input and procedure but has no phase proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "As an algorithm definition, this item states its admissible input and procedure but has no phase proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "As an algorithm definition, this item states its admissible input and procedure but has no phase proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "As an algorithm definition, this item states its admissible input and procedure but has no phase proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "As an algorithm definition, this item states its admissible input and procedure but has no phase proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "As an algorithm definition, this item states its admissible input and procedure but has no phase proof."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "As an algorithm definition, this item states its admissible input and procedure but has no phase proof."
+        }
+      ],
+      "well_definedness": {
+        "proved_by": "thm-rejection-sampling-has-target-acceptance-law",
+        "evidence": "The Definition proves normalization of the density measures using nonnegative-integral homogeneity, proves measurability of the reciprocal acceptance function using Borel threshold sets and the cited closure/composition results, and the target-law theorem proves almost-sure loop termination under the stated positive-mass finite-envelope hypotheses."
+      }
+    },
+    "thm-rejection-sampling-has-target-acceptance-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-rejection-sampling",
+          "source_section": "Definition",
+          "quote": "The stochastic input is an ideal sequence of independent proposal draws $Y_i$ with common law $G$ and independent auxiliary draws $U_i$ with common law $\\Lambda$, where $\\Lambda$ is the uniform probability law ",
+          "uses": [
+            "1.2",
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise in",
+          "uses": [
+            "1.2",
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "The **measure with density $f$ relative to $\\mu$** is the measure $$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$ whose measure property is supplied by [[thm-indefinite-integral-of-a-n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-finite-nonnegative-integral-implies-finite-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to[0,+\\infty]$ is measurable and $\\int f\\,d\\mu<+\\infty$, then $f(x)<+\\infty$ for almost every $x$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Then the following are equivalent: 1. $f=g$ almost everywhere; 2. for every measurable $A$, $$\\int_A f\\,d\\mu=\\int_A g\\,d\\mu.$$ For integrable real or complex $h$, the notation in condition 2 means $\\int_A h\\,d\\",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "its **expectation** is the extended-valued integral $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$ - If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense of [[def-integrabl",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let $\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or $g:(S,\\Sigma)\\to\\mathbb C$ be measurable. 1. If $g\\ge0$, then $$\\mathb",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "be independent random elements. Define $$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$ Then $X$ is a random element of $\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the finite produc",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "be sigma-finite measure spaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then $x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable, and $$\\int_{X \\times Y} f\\,d(\\mu",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable. Then $$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Their **product sigma-algebra** is $$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$ the sigma-algebra on $X \\times Y$ generated by the measurable rectangles of ",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "pointwise defined, then $f+g$ is measurable; 4. with the convention of [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise product $fg$ is measurable.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and $g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then $g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable. In particular, if $f",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$. 1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$. 2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$, the integral of ",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "A **measure** on $(X,\\mathcal A)$ is a function $$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$ such that: 1. $\\mu(\\varnothing)=0$; 2. for every pairwise disjoint sequence $(E_k)_{k\\in",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "series $\\sum r^k$ converges ([[def-series]]) and $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$ 2. If $|r| \\ge 1$ then $\\sum r^k$ diverges. The series starts at $k = 0$ and its first term is $r^0 = 1$; in ",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Its **law** or **distribution** is the set function $$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$ Thus the law of $X$ records the probability of each measurable target set by",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+          "source_section": "Statement",
+          "quote": "The following are equivalent: 1. $f$ is measurable; 2. $\\{x : f(x) > a\\} \\in \\mathcal{A}$ for every real $a$; 3. $\\{x : f(x) \\ge a\\} \\in \\mathcal{A}$ for every real $a$; 4. $\\{x : f(x) < a\\} \\in \\mathcal{A}$ fo",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "alg-rejection-sampling",
+          "source_section": "Definition",
+          "quote": "The reciprocal extension $h:[0,\\infty)\\to[0,\\infty)$, $h(t)=1/t$ for $t>0$ and $h(0)=0$, is Borel: for every real $r$, its strict upper level set is $[0,\\infty)$ if $r<0$, $(0,\\infty)$ if",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-versions",
+          "claim": "Finite-valued versions satisfying the envelope pointwise may be used without changing density measures, displayed integrals, or the algorithm law.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F9",
+            "F11",
+            "F13"
+          ]
+        },
+        {
+          "id": "one-step-accepted-subdensity",
+          "claim": "The probability of an accepted proposal in A equals the integral of the acceptance function over A under G.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F9",
+            "F13"
+          ]
+        },
+        {
+          "id": "uniform-integration",
+          "claim": "Integrating the acceptance indicator over U gives the acceptance function, including thresholds zero and one.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F7"
+          ]
+        },
+        {
+          "id": "subdensity-calculation",
+          "claim": "The accepted subprobability has density tilde f/(c Z_g) relative to mu.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "F8",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "acceptance-mass",
+          "claim": "The total one-step accepted mass is p=Z_f/(c Z_g), and it lies in (0,1].",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F10",
+            "A1"
+          ]
+        },
+        {
+          "id": "almost-sure-termination",
+          "claim": "The probability that all first m proposals fail tends to zero, so the procedure terminates almost surely.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "F1",
+            "F12"
+          ]
+        },
+        {
+          "id": "first-accepted-law",
+          "claim": "Summing the disjoint first-acceptance events and normalizing the subdensity gives the target law.",
+          "step": "6.1",
+          "inputs": [
+            "step 2.1",
+            "step 4.1",
+            "step 5.1",
+            "F1",
+            "F11",
+            "F12"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Taking A=∅ in the accepted subdensity formula of step 3.1 gives zero accepted mass, and step 6.1 gives zero output mass."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The hypothesis Z_f>0 makes p>0 in step 4.1; a zero target normalizer is excluded by the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The p=1 case gives q=0 in step 5.1 and the geometric series in step 6.1 has only its first nonzero term."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The measure argument in steps 1.2–6.1 also applies to a one-point measurable space; no nondegeneracy premise appears in the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly covers acceptance thresholds a(y)=0 and a(y)=1; the uniform law gives masses 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof assumes one ideal IID stream and makes no arbitrary-index selection or choice-axiom use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way distribution theorem and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way distribution theorem and contains no biconditional."
+        }
+      ]
+    },
+    "thm-rejection-sampling-expected-proposal-count-under-finite-envelope": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-rejection-sampling",
+          "source_section": "Definition",
+          "quote": "The stochastic input is an ideal sequence of independent proposal draws $Y_i$ with common law $G$ and independent auxiliary draws $U_i$ with common law $\\Lambda$, where $\\Lambda$ is the uniform probability law ",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise in",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rejection-sampling-has-target-acceptance-law",
+          "source_section": "Statement",
+          "quote": "In the normalized case $Z_f=Z_g=1$, this gives acceptance probability $1/c$ and accepted density $f$; necessarily $c\\ge1$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "its **expectation** is the extended-valued integral $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$ - If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense of [[def-integrabl",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "source_section": "Statement",
+          "quote": "arbitrary measure space. If $f,g:X\\to[0,+\\infty]$ are measurable, then $$\\int(f+g)\\,d\\mu=\\int f\\,d\\mu+\\int g\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then $$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "series $\\sum r^k$ converges ([[def-series]]) and $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$ 2. If $|r| \\ge 1$ then $\\sum r^k$ diverges. The series starts at $k = 0$ and its first term is $r^0 = 1$; in ",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "geometric-count",
+          "claim": "Independence of per-trial acceptance events gives the geometric probability mass and tail formulas.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "truncated-count",
+          "claim": "The truncated count is a finite sum of tail indicators, so its expectation is the finite geometric partial sum.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "mean-count",
+          "claim": "Monotone convergence and the geometric series give E[N]=1/p.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "normalizer-substitution",
+          "claim": "Substitution of the one-step acceptance probability yields both normalized and unnormalized formulas.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "N starts at 1, so step 1.1 assigns probability zero to N=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement assumes Z_f>0 and a finite c, so step 1.1 has p>0; the zero-success case is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When p=1, q=0 and step 1.1 gives N=1 almost surely; step 3.1 gives mean 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The geometric formula in steps 1.1–3.1 permits p=1, including a one-point target/proposal law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint p=1 is included and evaluated in step 3.1; p=0 is excluded by step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection is made; the proof uses the supplied IID stream and deterministic truncations."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a direct expectation identity and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a direct expectation identity and contains no biconditional."
+        }
+      ]
+    },
+    "ex-rejection-sampling-bounded-likelihood-ratio": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-counting-measure",
+          "source_section": "Definition",
+          "quote": "The **counting set function** on $\\mathcal P(X)$ is $$\\#_X(E):=\\begin{cases}|E|,&E\\text{ is finite},\\\\+\\infty,&E\\text{ is infinite},\\end{cases}$$ where finite means equinumerous with a natural number ([[def-cou",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-counting-measure-is-a-measure",
+          "source_section": "Statement",
+          "quote": "For every set $X$, the counting set function $\\#_X$ of [[def-counting-measure]] is a measure on $(X,\\mathcal P(X))$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Its **simple integral** is $$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$ where $\\mu$ is the given measure ([[def-measure]]) and the convention $0\\cdot(+\\infty)=0$ is fixed once and for all. The next lemma proves ",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative Lebesgue integral equals its simple integral: $$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rejection-sampling-has-target-acceptance-law",
+          "source_section": "Statement",
+          "quote": "In the normalized case $Z_f=Z_g=1$, this gives acceptance probability $1/c$ and accepted density $f$; necessarily $c\\ge1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-rejection-sampling-expected-proposal-count-under-finite-envelope",
+          "source_section": "Statement",
+          "quote": "Thus $N$ is geometric on $\\{1,2,\\ldots\\}$. For normalized target and proposal densities, $\\mathbb E[N]=c$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-rejection-sampling",
+          "source_section": "Definition",
+          "quote": "The stochastic input is an ideal sequence of independent proposal draws $Y_i$ with common law $G$ and independent auxiliary draws $U_i$ with common law $\\Lambda$, where $\\Lambda$ is the uniform probability law ",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-density-check",
+          "claim": "The two masses normalize and their largest target-to-proposal ratio is 3/2.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "finite-accepted-law",
+          "claim": "The accepted masses, acceptance probability, and expected count match the theorem formulas; direct submass enumeration verifies the law.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The imported target law formula in step 2.1 applies to every event, including the empty set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Both target and proposal masses are strictly positive at a and b; this example has no zero-mass atom."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At b the ratio equals c in step 1.1, so the acceptance probability is exactly one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both laws place positive mass on both atoms, so the example is not a point-mass case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The sample space is finite and has no interval endpoint convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The verification enumerates two fixed atoms and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a direct envelope calculation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a direct envelope calculation, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-point-normalized-envelope",
+          "model": "S={a,b}; target=(1/4,3/4); proposal=(1/2,1/2); c=3/2.",
+          "result": "Exact submasses (1/6,1/2) total 2/3; conditional accepted masses are (1/4,3/4).",
+          "evidence": "Proof step 2.1"
+        }
+      ]
+    },
+    "ex-rejection-sampling-tail-mismatch-no-finite-envelope": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-rejection-sampling",
+          "source_section": "Definition",
+          "quote": "The stochastic input is an ideal sequence of independent proposal draws $Y_i$ with common law $G$ and independent auxiliary draws $U_i$ with common law $\\Lambda$, where $\\Lambda$ is the uniform probability law ",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-counting-measure",
+          "source_section": "Definition",
+          "quote": "The **counting set function** on $\\mathcal P(X)$ is $$\\#_X(E):=\\begin{cases}|E|,&E\\text{ is finite},\\\\+\\infty,&E\\text{ is infinite},\\end{cases}$$ where finite means equinumerous with a natural number ([[def-cou",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-counting-measure-is-a-measure",
+          "source_section": "Statement",
+          "quote": "For every set $X$, the counting set function $\\#_X$ of [[def-counting-measure]] is a measure on $(X,\\mathcal P(X))$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-counting-measure-integral-is-nonnegative-series",
+          "source_section": "Statement",
+          "quote": "For every measurable $f:\\mathbb N\\to[0,+\\infty]$, $$\\int_{\\mathbb N} f\\,d\\#=\\sum_{n=0}^{\\infty}f(n),$$ where the right side is the nonnegative extended series of",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-real-order]] is well defined and makes $\\mathbb{R}$ ([[thm-reals-field]]) a totally ordered field.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-cauchy-reals-lub-complete",
+          "source_section": "Statement",
+          "quote": "The Cauchy-sequence reals $\\mathbb{R}_C$ have the **least-upper-bound property**: every nonempty $S \\subseteq \\mathbb{R}_C$ that is bounded above has a least upper bound $\\sup S \\in \\mathbb{R}_C$. Hence, togeth",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let $\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number $n \\ge 1$ such that $$\\frac{1}{n \\cdot 1_F} < \\varepsilon ",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-of-inverse-positive",
+          "source_section": "Statement",
+          "quote": "If $a > 0$ then $a^{-1} > 0$. 2. If $0 < a < b$ then $0 < b^{-1} < a^{-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Then for every $n \\ge 1$: - $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$; - the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$; - $(m+n) \\cdot 1_F = m \\cdo",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-limit",
+          "source_section": "Definition",
+          "quote": "A sequence $(x_k)$ of reals **converges** to $x \\in \\mathbb{R}$ when for every rational $\\varepsilon > 0$ there is $K$ with $|x_k - x| < \\hat\\varepsilon$ for all $k \\ge K$. It is **Cauchy** when for every ratio",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean: for every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$, where $n \\cdot 1_F$ is the canonical natural of ",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "normalization",
+          "claim": "Telescoping partial sums show both countable mass functions have total mass one.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "unbounded-ratio",
+          "claim": "The pointwise target-to-proposal ratio exceeds every finite envelope constant at an integer in the common support.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F7",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example proves failure of a finite envelope and makes no accepted-event distribution claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Both masses vanish at n=0 and are positive for n≥1 in the Example; the unbounded-ratio argument is restricted to n≥1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The ratio equals one at n=2, but step 2.1 shows it exceeds every finite c at a larger n."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both normalized masses have infinite support, so neither law is degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lower support point n=1 is included in step 1.1; the ratio grows without a finite upper bound in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit integer formulas and a single Archimedean witness for each proposed c."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a one-way counterexample to existence of a finite envelope, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a one-way counterexample to existence of a finite envelope, not an equivalence."
+        }
+      ]
+    },
+    "ex-rejection-sampling-unnormalized-finite-measures": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-counting-measure",
+          "source_section": "Definition",
+          "quote": "The **counting set function** on $\\mathcal P(X)$ is $$\\#_X(E):=\\begin{cases}|E|,&E\\text{ is finite},\\\\+\\infty,&E\\text{ is infinite},\\end{cases}$$ where finite means equinumerous with a natural number ([[def-cou",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-counting-measure-is-a-measure",
+          "source_section": "Statement",
+          "quote": "For every set $X$, the counting set function $\\#_X$ of [[def-counting-measure]] is a measure on $(X,\\mathcal P(X))$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Its **simple integral** is $$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$ where $\\mu$ is the given measure ([[def-measure]]) and the convention $0\\cdot(+\\infty)=0$ is fixed once and for all. The next lemma proves ",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative Lebesgue integral equals its simple integral: $$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rejection-sampling-has-target-acceptance-law",
+          "source_section": "Statement",
+          "quote": "In the normalized case $Z_f=Z_g=1$, this gives acceptance probability $1/c$ and accepted density $f$; necessarily $c\\ge1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-rejection-sampling-expected-proposal-count-under-finite-envelope",
+          "source_section": "Statement",
+          "quote": "Thus $N$ is geometric on $\\{1,2,\\ldots\\}$. For normalized target and proposal densities, $\\mathbb E[N]=c$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-rejection-sampling",
+          "source_section": "Definition",
+          "quote": "The stochastic input is an ideal sequence of independent proposal draws $Y_i$ with common law $G$ and independent auxiliary draws $U_i$ with common law $\\Lambda$, where $\\Lambda$ is the uniform probability law ",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-normalizers-envelope",
+          "claim": "The two unnormalized masses have Z_f=3, Z_g=2, and satisfy the envelope with c=2.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "finite-target-law",
+          "claim": "The normalizer formula gives acceptance probability 3/4 and normalized accepted masses (2/3,1/3).",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "finite-direct-enumeration",
+          "claim": "Direct enumeration of the proposal atoms reproduces the acceptance probability and target law, and the count theorem gives mean 4/3.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The finite density sums in step 1.1 and the target-law identity in step 2.1 assign zero mass to the empty set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Both unnormalized shapes are positive at both atoms, so this finite example has no zero-mass atom."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At a the unnormalized acceptance threshold is exactly one, as computed from the algorithm in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The normalized target and proposal both give positive mass to each of the two atoms."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The sample space is finite and has no interval endpoint convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The calculation enumerates two fixed atoms and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example checks a direct normalization calculation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example checks a direct normalization calculation, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-point-unnormalized-envelope",
+          "model": "S={a,b}; tilde f=(2,1); tilde g=(1,1); c=2.",
+          "result": "Proposal masses (1/2,1/2); accepted submasses (1/2,1/4); p=3/4; normalized accepted masses (2/3,1/3); E[N]=4/3.",
+          "evidence": "Proof steps 1.1–3.1"
+        }
+      ]
+    },
+    "thm-counting-measure-integral-is-nonnegative-series": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-counting-measure",
+          "source_section": "Definition",
+          "quote": "The **counting set function** on $\\mathcal P(X)$ is $$\\#_X(E):=\\begin{cases}|E|,&E\\text{ is finite},\\\\+\\infty,&E\\text{ is infinite},\\end{cases}$$ where finite means equinumerous with a",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-counting-measure-is-a-measure",
+          "source_section": "Statement",
+          "quote": "For every set $X$, the counting set function $\\#_X$ of [[def-counting-measure]] is a measure on $(X,\\mathcal P(X))$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nonnegative-simple-measurable-function",
+          "source_section": "Definition",
+          "quote": "is a **nonnegative simple measurable function** when it has finite range. Equivalently, there are pairwise disjoint measurable sets $E_1,\\dots,E_m\\in\\mathcal A$ and coefficients",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Its **simple integral** is $$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$ where $\\mu$ is the given measure ([[def-measure]]) and the convention $0\\cdot(+\\infty)=0$ is fixed once and for all.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative Lebesgue integral equals its simple integral: $$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-nonnegative-extended-series",
+          "source_section": "Definition",
+          "quote": "nonnegative extended sum** is $$\\sum_{k=0}^{\\infty}a_k:=\\sup_{n\\in\\mathbb N}s_n\\in[0,+\\infty],$$ whose existence follows from completeness of the extended real line",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-cauchy-reals-lub-complete",
+          "source_section": "Statement",
+          "quote": "The Cauchy-sequence reals $\\mathbb{R}_C$ have the **least-upper-bound property**: every nonempty $S \\subseteq \\mathbb{R}_C$ that is bounded above has a least upper bound $\\sup S \\in",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-real-order]] is well defined and makes $\\mathbb{R}$ ([[thm-reals-field]]) a totally ordered field.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean: for every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$, where $n \\cdot 1_F$ is the",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Then for every $n \\ge 1$: - $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$; - the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$; -",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-support-approximation",
+          "claim": "Finite-valued, finite-support simple truncations increase pointwise to f, so monotone convergence reduces the integral to a limit of finite sums.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "simple-integrals",
+          "claim": "Each truncation integral is its diagonal finite sum because every singleton has counting measure one.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "diagonal-series-limit",
+          "claim": "The diagonal finite sums increase to the supremum of all finite partial sums, including when a term is infinite.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "integral-series-identity",
+          "claim": "Combining monotone convergence with the diagonal-sum limit proves the claimed integral-series identity.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain is the fixed nonempty set N; the identity concerns a function, not an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For f identically zero, step 1.1 gives s_m=0 and step 1.2 gives D_m=0, so both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a function supported on one atom, steps 1.2–2.1 reduce both sides to that atom’s value, including an infinite value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If f(n0)=+infinity at any atom, step 3.1 shows D_m≥m for all sufficiently large m, so both sides are +infinity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "N has no interval endpoints; the empty partial sum P_0=0 is included in the series definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The truncation sequence is explicitly defined and uses only one Archimedean witness for a fixed finite partial sum; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a direct identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a direct identity, not an equivalence."
+        }
+      ]
+    }
+  }
+}

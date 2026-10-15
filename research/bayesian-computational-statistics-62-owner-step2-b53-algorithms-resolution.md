@@ -1,0 +1,21 @@
+# Batch 53 algorithms and examples focused resolution
+
+Escalation cycle: 1. Source repairs only; no native report, live manifest, live proof contract, level, source hash, readiness carrier or page was edited. Exact pre-edit copies of the four changed existing sources are under `research/bayesian-computational-statistics-62-owner-step2-b53-algorithms-before/items/`.
+
+The null-constrained algorithm now explicitly takes a real Hilbert space, positive integer sample sizes and integer admissible block lengths; defines `k_i=ceil(n_i/b_i)` and all candidate/start/position ranges; and outputs exactly `n_i` entries using `q_{i,s}=min(b_i,n_i-(s-1)b_i)`. Its residual arrays, positionwise centers, pooled location and independent uniform start law are unchanged. In particular divisible samples retain a complete final block and nondivisible samples retain its prefix.
+
+Actual existing consumers were found by searching all current item sources. `lem-k-sample-null-centering` uses uniform selection at each retained position; its entire existing proof remains valid for the explicit finite ranges, including the partial prefix. `thm-k-sample-block-bootstrap-validity` is the only other existing algorithm consumer; its input/admissibility repair is assigned to the sibling reviewer through the parent. The algorithm has no other current item consumers, and the null-centering lemma is also consumed by `thm-k-sample-block-bootstrap-validity`; its common-mean conclusion is unchanged and is available with the exact same hypotheses. The new two-series example consumes both and was checked against the repaired algorithm. The parent owns page prose and placement.
+
+Both bootstrap CLT theorems retain every original distributional, covariance, nondivisibility, process and taper claim and their complete existing proofs. Their Statements now specify an admissible asymptotic tail. MBB uses that b_n grows and b_n/sqrt(n) tends to zero to ensure integer 1<=b_n<=n eventually. TBB explicitly specifies integer block lengths and uses the existing normalization lemma to ensure positive W_b eventually. Their existing proofs operate on exactly this tail. There are no existing current item consumers of either theorem; the new IID example checks all of both theorem interfaces explicitly. The description of m*delta_m as stronger remains for the parent's coordinated rate-design correction.
+
+`ex-block-length-n-one-third` now proves ceil(n^(1/3))<=n at every positive integer sample size, since n is itself an integer upper bound for n^(1/3); both original asymptotic claims remain unchanged. This example has no existing item consumers.
+
+New draft examples supply the missing approved IID and two-series scope. `ex-two-series-block-bootstrap-null-centering` computes all candidate residuals, exact position centers, pooled location 58/7, independent finite offset laws, unequal observed means and the retained one-entry final prefix. `ex-iid-functional-data-block-bootstrap` uses IID signs times the constant L2 unit function, with a measurable innovation-only filter, replacement errors identically zero, the n^(1/3) regime and a constant-on-[0,1] admissible taper whose midpoint norm is positive for every n. No source reading or independent theorem proof is claimed for these direct local calculations.
+
+Root integration proposals are in `research/bayesian-computational-statistics-62-owner-step2-b53-algorithms-proof-contract-proposals.json` and `research/bayesian-computational-statistics-62-owner-step2-b53-algorithms-manifest-frontmatter-proposals.json`. They contain full contracts and exact current source projections; they are proposals only. The root must merge all concurrent supplier quote changes, compute levels and currency, register new examples and place them on the B page. No generated example is used as a logical supplier.
+
+After the final source edit, mandatory layout command:
+
+`node tools/proof-layout.mjs items/alg-k-sample-null-constrained-block-bootstrap.md items/thm-moving-block-bootstrap-clt-for-dependent-data.md items/thm-tapered-block-bootstrap-clt-for-dependent-data.md items/ex-block-length-n-one-third.md items/ex-two-series-block-bootstrap-null-centering.md items/ex-iid-functional-data-block-bootstrap.md`
+
+Actual result: `proof-layout: 6 items, 12 steps, 0 defects`, exit 0. No optional tests or gates were run.

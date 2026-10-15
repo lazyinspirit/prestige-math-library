@@ -1,0 +1,2139 @@
+{
+  "version": 1,
+  "scope": [
+    "def-hellinger-distance-between-density-laws",
+    "lem-iid-bounded-variance-bernstein-tail",
+    "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+    "lem-hellinger-distance-controls-l1-and-total-variation",
+    "lem-iid-sieve-entropy-produces-exponential-tests",
+    "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+    "ex-bernoulli-density-logarithmic-contraction-rate",
+    "ex-high-entropy-sieve-can-fail-without-precluding-contraction",
+    "ex-holder-density-rate-from-entropy-balance"
+  ],
+  "contracts": {
+    "def-hellinger-distance-between-density-laws": {
+      "risk": "medium",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A density has integral one, so the empty function family is not an instance of the definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the integrand may vanish pointwise where p=q, and null changes of representatives do not alter h."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: each admissible density has integral one and the displayed integral is finite."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a singleton-support probability density is permitted whenever it is measurable and integrates to one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: p and q may take the endpoint value zero; their square roots and the p+q bound remain defined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition: the formula is pointwise in two supplied densities and makes no selection from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "opposite point masses on a two-point counting space",
+          "method": "exact finite calculation",
+          "input": {
+            "p": [
+              1,
+              0
+            ],
+            "q": [
+              0,
+              1
+            ]
+          },
+          "calculation": "The root-L2 Hellinger square is (1-0)^2+(0-1)^2=2, so the integral is finite for these endpoint-valued densities.",
+          "expected": {
+            "h_squared": "2"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-iid-bounded-variance-bernstein-tail": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space and let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix one centered variable $Z$ with $|Z|\\le b$ and let $\\sigma^2=\\mathbb E[Z^2]$. For every integer $k\\ge2$, the power functions are Borel and $x\\mapsto e^{\\lambda x}$ is continuous by [F9], so their compositions with $Z$ are measurable by [F10]; the almost-sure bound gives integrability of each power. Thus $|\\mathbb E[Z^k]|\\le\\mathbb E[|Z|^k]\\le b^{k-2}\\sigma^2$. For fixed real $\\lambda$, the exponential series converges uniformly on $[-b,b]$: its tail is bounded by $\\sum_{k>N}(|\\lambda|b)^k/k!\\to0$. Thus finite linearity [F2] and the uniform tail bound permit termwise expectation in [F3], and the centered first-order term vanishes.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F9",
+            "F10",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $k\\ge2$, $k!\\ge2\\cdot3^{k-2}$, by induction from $2!=2$ and the fact that each next factor is at least $3$. If $|\\lambda|b<3$, [F3] and step 1.1 therefore give $\\mathbb E e^{\\lambda Z}\\le1+\\sigma^2\\sum_{k\\ge2}\\frac{|\\lambda|^k b^{k-2}}{k!}\\le1+\\frac{\\lambda^2\\sigma^2}{2(1-|\\lambda|b/3)}\\le\\exp\\!\\left(\\frac{\\lambda^2\\sigma^2}{2(1-|\\lambda|b/3)}\\right),$ where the last inequality follows from $1+x\\le e^x$ for $x\\ge0$, which follows termwise from [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F9",
+            "F10",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $0<\\lambda<3/b$, repeated use of [F4] gives $e^{\\lambda S_m}=\\prod_{i=1}^m e^{\\lambda Z_i}$. Each $Z_i$ is measurable, scalar multiplication preserves measurability by [F10], and $x\\mapsto e^x$ is Borel by [F9], so the factors are measurable by composition. They are nonnegative functions of the independent variables, so [F5] and step 2.1 yield $\\mathbb E e^{\\lambda S_m}=\\prod_{i=1}^m\\mathbb E e^{\\lambda Z_i}\\le\\exp\\!\\left(\\frac{\\lambda^2V}{2(1-\\lambda b/3)}\\right).$",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F8",
+            "F9",
+            "F10",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $V>0$, take $\\lambda=t/(V+bt/3)$; then $0<\\lambda b/3=bt/(3V+bt)<1$. The finite sum $S_m$ and its threshold event are measurable by [F10]. Since [F9] makes $e^x$ increasing, on $\\{S_m\\ge t\\}$ one has $e^{\\lambda S_m}\\ge e^{\\lambda t}$. Markov [F6] and step 3.1 give $\\mathbb P(S_m\\ge t)\\le\\exp\\!\\left(\\frac{\\lambda^2V}{2(1-\\lambda b/3)}-\\lambda t\\right)=\\exp\\!\\left(-\\frac{t^2}{2(V+bt/3)}\\right).$",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "F9",
+            "F10",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Applying step 4.1 to $-Z_1,\\ldots,-Z_m$ gives the lower-tail bound, since this family remains independent, centered, bounded by $b$, and has the same total second moment $V$. If $V=0$, each nonnegative $Z_i^2$ has expectation zero, so [F7] makes every $Z_i=0$ almost surely; their finite sum is then zero almost surely.",
+          "step": "5.1",
+          "inputs": [
+            "F7",
+            "given",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 5.1 treats V=0 by a finite family argument; the empty sum is zero by convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 proves V=0 implies S_m=0 almost surely."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 apply without requiring m>1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.1 covers deterministic centered variables through V=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: no interval endpoint parameter is present; b>0 and t>0 are strict."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the given finite family directly and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "one Rademacher summand at t=1",
+          "method": "exact finite calculation",
+          "input": {
+            "values": [
+              -1,
+              1
+            ],
+            "probabilities": [
+              "1/2",
+              "1/2"
+            ],
+            "b": 1,
+            "t": 1
+          },
+          "calculation": "V=1 and P(Z≥1)=P(Z≤-1)=1/2. The stated bound is exp(-3/8), which exceeds 1/2; the V=0 deterministic case gives S=0.",
+          "expected": {
+            "tail_bound": "exp(-3/8)",
+            "actual_one_sided_tail": "1/2"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-iid-posterior-denominator-lower-bound-from-kl-mass": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-dominated-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). It is\n**dominated** by a supplied positive measure $\\mu$ on\n$(\\mathcal X,\\mathcal A)$ when $\\mu$ is sigma-finite\n([[def-finite-sigma-finite-and-semifinite-measures]]) and\n$P_\\theta\\ll\\mu$ for every $\\theta\\in\\Theta$\n([[def-absolutely-continuous-with-respect-to-a-positive-measure]]).\nThe dominating measure is part of the specified setup. This condition adds no\nmeasurable structure on $\\Theta$ and no measurability of\n$\\theta\\mapsto P_\\theta$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe dominated by the fixed sigma-finite positive measure $\\mu$. For each\n$\\theta$, the Radon–Nikodym theorem gives the almost-everywhere class\n$dP_\\theta/d\\mu$; a sigma-finite exhaustion for $\\mu$ is also finite for the\nprobability measure $P_\\theta$. Under AC, select simultaneously a\nfinite-valued measurable nonnegative representative $p_\\theta$ from each\nclass. The nonnegative version exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nFor fixed observed $x\\in\\mathcal X$, the function\n$$L_x:\\Theta\\to[0,+\\infty),\\qquad L_x(\\theta):=p_\\theta(x),$$\nis the **likelihood at $x$**. This is a function on the parameter labels, not\na probability distribution on $\\Theta$. No sigma-algebra on $\\Theta$ or\nmeasurability of $L_x$ is implied. Each density is determined only\n$\\mu$-almost everywhere; there is no canonical pointwise version and, for\narbitrary uncountable $\\Theta$, no common exceptional null set is asserted.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-jensens-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mathbb P)$ be a probability space, let $f\\in L^1(\\mathbb P)$\nbe real-valued, let $I\\subseteq\\mathbb R$ be an interval containing $f(x)$ for\nalmost every $x$, and let $\\varphi:I\\to\\mathbb R$ be convex with\n$\\varphi\\circ f\\in L^1(\\mathbb P)$. Then\n$$\\varphi\\!\\left(\\int f\\,d\\mathbb P\\right)\\le\\int\\varphi(f)\\,d\\mathbb P.$$",
+          "uses": [
+            "1.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-chebyshev-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X$ is a square-integrable real random variable and $a>0$, then\n$$\\mathbb P(|X-\\mathbb E[X]|\\ge a)\\le\\frac{\\operatorname{Var}(X)}{a^2}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-variance-of-a-finite-sum",
+          "source_section": "Statement",
+          "quote": "For a finite family $(X_i)_{i\\in I}$ of square-integrable real random variables on one common probability space,\n$$\\operatorname{Var}\\!\\left(\\sum_{i\\in I}X_i\\right)=\\sum_{i\\in I}\\operatorname{Var}(X_i)+2\\sum_{\\{i,j\\}\\subseteq I}\\operatorname{Cov}(X_i,X_j).$$\nEquivalently, it is $\\sum_{i,j\\in I}\\operatorname{Cov}(X_i,X_j)$. The empty sum has variance zero, and the singleton formula is the identity.\nThe original finite-probability-space case is included, since every real random variable there is square-integrable and the covariance/variance definitions agree with the finite centered-product/square formulas.\nIn the first display, the second sum is over two-element subsets of $I$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "cor-finite-nonnegative-integral-implies-finite-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to[0,+\\infty]$ is measurable and $\\int f\\,d\\mu<+\\infty$, then\n$f(x)<+\\infty$ for almost every $x$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "1.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space and let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $k(\\theta,x)=p_0(x)\\log(p_0(x)/p_\\theta(x))$ as $0$ when $p_0=0$ and as $+\\infty$ when $p_0>0,p_\\theta=0$. The sets $\\{p_0=0\\}$, $\\{p_0>0,p_\\theta=0\\}$, and $\\{p_0>0,p_\\theta>0\\}$ are product-measurable; on the last set the logarithm is a difference of measurable logarithms by [F13]–[F14]. Thus $k^+$ and $k^-$ are product-measurable by [F10]. Where $p_\\theta>p_0>0$, setting $u=p_0/p_\\theta\\in(0,1)$ gives $-u\\log u\\le1/e$, so $k^-\\le p_\\theta/e$ and $\\int k^-d\\mu\\le1/e$. If $P_0\\ll P_\\theta$, then $P_0\\{p_\\theta=0\\}=0$; [F17] gives $p_0=0$ $\\mu$-almost everywhere there. Consequently, for every measurable $A$, the function $r_\\theta=p_0/p_\\theta$ on $\\{p_\\theta>0\\}$ and $0$ otherwise satisfies $\\int_A r_\\theta\\,dP_\\theta=\\int_{A\\cap\\{p_\\theta>0\\}}p_0d\\mu=P_0(A)$. By [F18], it is a Radon–Nikodym derivative, so [F3] identifies $\\mathrm{KL}(P_0\\Vert P_\\theta)=\\int k(\\theta,x)d\\mu$. Conversely, if $P_0\\{p_\\theta=0\\}=0$, then every $P_\\theta$-null set $A$ has $p_\\theta=0$ $\\mu$-almost everywhere on $A$, hence $P_0(A)=0$; thus failure of $P_0\\ll P_\\theta$ implies $P_0\\{p_\\theta=0\\}>0$. In that case the same integral is $+\\infty$, again equal to [F3]. Finally, Tonelli [F4] makes the integrals of $k^+$ and $k^-$ measurable in $\\theta$; the latter is finite, so their difference gives a measurable extended-real KL map. For the log-square coordinate, the specified ratio conventions and [F10], [F13], [F14] give a nonnegative product-measurable integrand, whose section integral is measurable by [F4]. Hence $K_n\\in\\mathcal T$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F10",
+            "F13",
+            "F14",
+            "F17",
+            "F18",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Set $Y_{\\theta,i}:=p_\\theta(X_i)/p_0(X_i)$ when $p_0(X_i)>0$ and $0$ otherwise. This is a measurable function of $X_i$ by [F10, F14]. Since $P_0\\{p_0=0\\}=\\int_{\\{p_0=0\\}}p_0\\,d\\mu=0$, change of density using [F1, F2] gives $\\mathbb E_{P_0}Y_{\\theta,i}=\\int_{\\{p_0>0\\}}p_\\theta\\,d\\mu\\le1$. For each fixed $\\theta$, the $Y_{\\theta,i}$ are independent measurable transforms of the IID coordinates; [F6, F7, F12] therefore give $\\mathbb E_{P_0^n}\\prod_iY_{\\theta,i}\\le1$. Joint measurability and Tonelli [F4] imply $\\mathbb E_{P_0^n}D_n\\le1$, so [F15] gives $D_n<\\infty$ almost surely.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F7",
+            "F10",
+            "F12",
+            "F14",
+            "F15",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "By [A1, F3], every $\\theta\\in K_n$ satisfies $P_0\\ll P_\\theta$, so $P_0\\{p_\\theta=0\\}=0$. For each fixed $\\theta$, the IID sample therefore has $\\prod_i p_\\theta(X_i)>0$ almost surely. Apply Tonelli [F4] to the zero-product indicator on $K_n\\times\\mathsf X^n$ with the product of the prior conditioned on K_n and the n-fold sampling law: for $P_0^n$-almost every sample, the conditional prior measure of parameters with zero product is zero. Hence the product likelihood is positive for prior-almost every $\\theta\\in K_n$, and [F17] implies its integral over the positive-mass set $K_n$ is positive. On the full-probability event where each $p_0(X_i)>0$, this implies $D_n>0$.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F17",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Write $\\bar\\Pi_n=\\Pi(\\cdot\\mid K_n)$ and define the jointly measurable extended-real function $\\ell(\\theta,x)$ by the ratio conventions in the Statement: it is zero on $\\{p_0=0\\}$, equals $\\log(p_\\theta/p_0)$ where $p_0,p_\\theta>0$, and is $-\\infty$ where $p_0>0,p_\\theta=0$; the stated arithmetic and Borel-composition facts [F10, F13, F14] justify this measurability. This avoids assuming a common $P_0$-full set on which all densities in an uncountable family are positive. For every $\\theta\\in K_n$, finite KL gives $P_0\\ll P_\\theta$, so $\\ell(\\theta,\\cdot)$ is finite $P_0$-almost everywhere; the local second-moment condition gives $\\mathbb E_{P_0}\\ell(\\theta,X_1)^2\\le\\epsilon_n^2$. Holder [F16] on the probability space yields $\\mathbb E_{P_0}|\\ell(\\theta,X_1)|\\le\\epsilon_n$, and the directional convention [F3] gives $\\mathbb E_{P_0}\\ell(\\theta,X_1)=-\\mathrm{KL}(P_0\\Vert P_\\theta)\\ge-\\epsilon_n^2$. Tonelli [F4] applied to the positive and negative parts therefore makes $Z(x):=\\int\\ell(\\theta,x)\\,\\bar\\Pi_n(d\\theta)$ finite almost everywhere, measurable after assigning zero on the null exceptional set, and integrable with $\\mathbb E_{P_0}Z(X_1)\\ge-\\epsilon_n^2$. Tonelli also gives $\\mathbb E_{P_0}\\int\\ell(\\theta,X_1)^2\\,\\bar\\Pi_n(d\\theta)\\le\\epsilon_n^2$; for $P_0$-almost every $x$, Jensen [F5] for $z\\mapsto z^2$ gives $Z(x)^2\\le\\int\\ell(\\theta,x)^2\\,\\bar\\Pi_n(d\\theta)$. Hence $\\mathbb E_{P_0}Z(X_1)^2\\le\\epsilon_n^2$.",
+          "step": "1.4",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "F10",
+            "F13",
+            "F14",
+            "F16",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $Z_i:=Z(X_i)$. By [F6] and [F7], the $Z_i$ are IID; [F8] and step 1.4 imply $\\operatorname{Var}(Z_i)\\le\\epsilon_n^2$, so the centered variables are square-integrable and integrable. For $i\\ne j$, the centered variables are independent measurable transforms of independent coordinates, so [F12] factors their product expectation and their covariance is zero. Applying [F11] to their finite sum therefore gives $\\operatorname{Var}(n^{-1}\\sum_i Z_i)=n^{-2}\\sum_i\\operatorname{Var}(Z_i)\\le\\epsilon_n^2/n$.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "F11",
+            "F12",
+            "step 1.4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The mean of $n^{-1}\\sum_i Z_i$ is at least $-\\epsilon_n^2$ and its variance is at most $\\epsilon_n^2/n$, by independence in step 2.1. Thus the event $n^{-1}\\sum_iZ_i<-2\\epsilon_n^2$ forces a deviation from its mean of at least $\\epsilon_n^2$. Chebyshev [F9] yields $P_0^n\\!\\left\\{n^{-1}\\sum_iZ_i<-2\\epsilon_n^2\\right\\}\\le\\frac1{n\\epsilon_n^2}.$",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F8",
+            "F9",
+            "step 1.4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By Tonelli [F4] and the local second-moment bound, for $P_0^n$-almost every sample each of the finitely many functions $\\theta\\mapsto\\ell(\\theta,X_i)$ is square-integrable under $\\bar\\Pi_n$; Cauchy–Schwarz [F16] makes their sum integrable. Step 1.3 and the $P_0^n$-full event where each $p_0(X_i)>0$ ensure that $\\exp(\\sum_i\\ell(\\theta,X_i))=\\prod_i p_\\theta(X_i)/p_0(X_i)$ for $\\bar\\Pi_n$-almost every $\\theta$. Step 1.2 bounds the integrated exponential by the finite $D_n/\\Pi(K_n)$, so Jensen [F5] applies to that sum and the exponential. On the complementary event, it gives $D_n\\ge\\Pi(K_n)\\int\\exp\\!\\left(\\sum_i\\ell(\\theta,X_i)\\right)\\bar\\Pi_n(d\\theta)\\ge\\Pi(K_n)\\exp\\!\\left(\\sum_iZ_i\\right)\\ge e^{-(C+2)n\\epsilon_n^2}.$ Combining with step 3.1 proves the probability bound.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F16",
+            "step 1.2",
+            "step 1.3",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.3 treats the local set as a positive-prior-mass set, which is guaranteed by the premise."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement: epsilon_n is required to be strictly positive; zero rate is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–4.1 allow n=1; asymptotic large-n conditions are not assumed here."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 yields D_n=1 when the prior is concentrated at the truth."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: there is no interval parameter or endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement supplies a jointly measurable density family; only the imported KL convention carries AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "prior concentrated at the true density",
+          "method": "exact finite calculation",
+          "input": {
+            "n": 1,
+            "prior": "delta at theta0",
+            "p_theta_equals_p0": true
+          },
+          "calculation": "Every likelihood ratio is 1, so D_n=1. The local KL and log-square moments are zero and the prior mass condition holds for every C>0; hence the claimed lower bound is at most 1.",
+          "expected": {
+            "denominator": "1",
+            "posterior_lower_probability": "1"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-hellinger-distance-controls-l1-and-total-variation": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hellinger-distance-between-density-laws",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a measure space and let $p,q:\\mathsf X\\to[0,\\infty)$ be measurable densities with $\\int p\\,d\\mu=\\int q\\,d\\mu=1$. They define probability laws $P(B)=\\int_Bp\\,d\\mu$ and $Q(B)=\\int_Bq\\,d\\mu$ ([[def-probability-measure]]). Their **root-L2 Hellinger distance**, with the root-L2 normalization, is\n$$h(P,Q):=\\left(\\int_{\\mathsf X}(\\sqrt p-\\sqrt q)^2\\,d\\mu\\right)^{1/2}.$$\n\nThe dominating measure $\\mu$ is fixed throughout a use of this definition. Changing either density on a $\\mu$-null set does not change the value, since the integrand changes only on a null set. This definition does not assert that separate choices of density versions are jointly measurable in an additional parameter.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-minkowski-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $1\\le p<\\infty$ and $f,g\\in\\mathcal L^p(\\mu)$, then\n   $$\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p.$$\n2. If $f,g\\in L^\\infty(\\mu)$, then\n   $$\\|f+g\\|_\\infty\\le\\|f\\|_\\infty+\\|g\\|_\\infty.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-total-variation-distance-for-probability-laws",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ and $\\nu$ be probability measures on the same measurable space\n$(E,\\mathcal E)$ ([[def-probability-measure]]). Their **total variation\ndistance** is\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}:=\\sup_{A\\in\\mathcal E}\\bigl|\\mu(A)-\\nu(A)\\bigr| .$$\n\nFor every event $A$ the difference $\\mu(A)-\\nu(A)$ is a real number in\n$[-1,1]$, because both measures have total mass one; hence the set being\nmaximized is a nonempty subset of $[0,1]$ and the supremum lies in $[0,1]$.\nThe empty event and the whole space give the values $0$ and\n$|\\mu(E)-\\nu(E)|=0$, so the distance is zero when $\\mu=\\nu$, and it is symmetric\nin $\\mu$ and $\\nu$. This convention carries no factor $1/2$ in the supremum;\nit is therefore not the total variation norm of the signed measure $\\mu-\\nu$,\nwhich is twice the quantity above when that signed measure is considered on a\nmeasurable space where the decomposition is attained. On a countable state\nspace with its power-set sigma-algebra the supremum equals the half-$\\ell^1$\nsum $\\tfrac12\\sum_{x\\in E}|\\mu(\\{x\\})-\\nu(\\{x\\})|$; that identity is proved in\n[[lem-total-variation-half-l1-formula-on-a-countable-space]], not assumed here.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space and let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. If $f,g:X\\to[0,+\\infty]$ are measurable, then\n$$\\int(f+g)\\,d\\mu=\\int f\\,d\\mu+\\int g\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $p,q$ are measurable, [F8] makes $\\sqrt p,\\sqrt q$ measurable and [F7] makes their difference and absolute value measurable. Their unit integrals put both roots in $L^2(\\mu)$. The triangle inequality in [F2] gives symmetry, nonnegativity, and the triangle inequality for $h$. If $h(P,Q)=0$, [F5] gives $\\sqrt p=\\sqrt q$ almost everywhere, hence $p=q$ almost everywhere and $P=Q$. Conversely, put $g=p-q\\in L^1(\\mu)$ by [F6]. If $P=Q$, then for every measurable $A$, $\\int g\\mathbf1_A\\,d\\mu=\\int p\\mathbf1_A\\,d\\mu-\\int q\\mathbf1_A\\,d\\mu=P(A)-Q(A)=0$ by [F6]. For each integer $m\\ge1$, the set $E_m:=\\{g\\ge1/m\\}$ is measurable by [F8]. Define $u_m:=g\\mathbf1_{E_m}$; it is nonnegative and measurable by [F7], and linearity gives $\\int u_m\\,d\\mu=0$. By [F5], $u_m=0$ almost everywhere; since $u_m\\ge1/m$ on $E_m$, $\\mu(E_m)=0$. Applying the same argument to $(q-p)\\mathbf1_{\\{q-p\\ge1/m\\}}$ shows $\\mu(\\{g\\le-1/m\\})=0$. Since $\\{g\\ne0\\}$ is the countable union of these null sets, $p=q$ almost everywhere and $h(P,Q)=0$. Thus $h$ is a metric on these laws.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $g:=p-q$ and $A:=\\{x:g(x)\\ge0\\}$, which is measurable by [F7, F8]. Since $\\int g\\,d\\mu=0$, the positive and negative parts have equal integral, so $\\int_Ag\\,d\\mu=\\frac12\\int|g|\\,d\\mu$. For every measurable $B$, positivity of $g$ on $A$ and nonpositivity on $A^c$, together with monotonicity [F9], give $\\int_{A^c}g\\le\\int_Bg\\le\\int_Ag$; equality in the absolute supremum is attained at $A$ (or $A^c$). Thus [F4] gives $\\lVert P-Q\\rVert_{\\rm TV}=\\frac12d_1(P,Q)$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The functions in the pointwise inequality are measurable by [F7, F8]. If $p\\ge q$, then $(\\sqrt p-\\sqrt q)^2\\le p-q$, because $0\\le(\\sqrt p-\\sqrt q)/(\\sqrt p+\\sqrt q)\\le1$ when the denominator is positive; the case $q\\ge p$ is symmetric, and when both vanish the inequality is zero on both sides. Monotonicity [F9] and [F1] give $h(P,Q)^2\\le d_1(P,Q)$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F7",
+            "F8",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F7, F8], the displayed products and sums of square roots are measurable. Factor $|p-q|=|\\sqrt p-\\sqrt q|(\\sqrt p+\\sqrt q)$. By [F3], $d_1(P,Q)\\le h(P,Q)\\lVert\\sqrt p+\\sqrt q\\rVert_2$. Also $\\lVert\\sqrt p+\\sqrt q\\rVert_2^2=2+2\\int\\sqrt{pq}\\,d\\mu\\le4$, again by [F3] and the unit $L^2$ norms. Hence $d_1(P,Q)\\le2h(P,Q)$, and step 1.2 gives $\\lVert P-Q\\rVert_{\\rm TV}\\le h(P,Q)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the claim concerns two probability densities, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves h(P,Q)=0 exactly when the induced laws agree."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 derives d1=2 TV for arbitrary unit-mass densities."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.3 include equality and zero-integrand cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.3 handles p=q=0 pointwise; no positivity lower bound is assumed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses threshold sets and a countable union; it selects no density representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves h=0 implies equality of induced laws."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 proves equality of induced laws implies h=0."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "complementary Bernoulli laws",
+          "method": "exact finite calculation",
+          "input": {
+            "p": [
+              "1/4",
+              "3/4"
+            ],
+            "q": [
+              "3/4",
+              "1/4"
+            ]
+          },
+          "calculation": "The density L1 distance is 1 and event-supremum TV is 1/2. The Hellinger square is 2-√3, so h²≤1 and 1≤2√(2-√3).",
+          "expected": {
+            "d1": "1",
+            "tv": "1/2",
+            "h_squared": "2-√3"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-iid-sieve-entropy-produces-exponential-tests": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hellinger-distance-between-density-laws",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a measure space and let $p,q:\\mathsf X\\to[0,\\infty)$ be measurable densities with $\\int p\\,d\\mu=\\int q\\,d\\mu=1$. They define probability laws $P(B)=\\int_Bp\\,d\\mu$ and $Q(B)=\\int_Bq\\,d\\mu$ ([[def-probability-measure]]). Their **root-L2 Hellinger distance**, with the root-L2 normalization, is\n$$h(P,Q):=\\left(\\int_{\\mathsf X}(\\sqrt p-\\sqrt q)^2\\,d\\mu\\right)^{1/2}.$$\n\nThe dominating measure $\\mu$ is fixed throughout a use of this definition. Changing either density on a $\\mu$-null set does not change the value, since the integrand changes only on a null set. This definition does not assert that separate choices of density versions are jointly measurable in an additional parameter.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hellinger-distance-controls-l1-and-total-variation",
+          "source_section": "Statement",
+          "quote": "For probability densities $p,q$ relative to one fixed measure $\\mu$, define $h$ as in [[def-hellinger-distance-between-density-laws]] and set $d_1(P,Q):=\\int|p-q|\\,d\\mu$. Then $h$ is a metric on the induced probability laws and\n$$h(P,Q)^2\\le d_1(P,Q)=2\\lVert P-Q\\rVert_{\\rm TV},\\qquad d_1(P,Q)\\le2h(P,Q),$$\nwhere library total variation is the event supremum $\\lVert P-Q\\rVert_{\\rm TV}=\\sup_{A\\in\\mathcal A}|P(A)-Q(A)|$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-total-variation-distance-for-probability-laws",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ and $\\nu$ be probability measures on the same measurable space\n$(E,\\mathcal E)$ ([[def-probability-measure]]). Their **total variation\ndistance** is\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}:=\\sup_{A\\in\\mathcal E}\\bigl|\\mu(A)-\\nu(A)\\bigr| .$$\n\nFor every event $A$ the difference $\\mu(A)-\\nu(A)$ is a real number in\n$[-1,1]$, because both measures have total mass one; hence the set being\nmaximized is a nonempty subset of $[0,1]$ and the supremum lies in $[0,1]$.\nThe empty event and the whole space give the values $0$ and\n$|\\mu(E)-\\nu(E)|=0$, so the distance is zero when $\\mu=\\nu$, and it is symmetric\nin $\\mu$ and $\\nu$. This convention carries no factor $1/2$ in the supremum;\nit is therefore not the total variation norm of the signed measure $\\mu-\\nu$,\nwhich is twice the quantity above when that signed measure is considered on a\nmeasurable space where the decomposition is attained. On a countable state\nspace with its power-set sigma-algebra the supremum equals the half-$\\ell^1$\nsum $\\tfrac12\\sum_{x\\in E}|\\mu(\\{x\\})-\\nu(\\{x\\})|$; that identity is proved in\n[[lem-total-variation-half-l1-formula-on-a-countable-space]], not assumed here.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-iid-bounded-variance-bernstein-tail",
+          "source_section": "Statement",
+          "quote": "Let $Z_1,\\ldots,Z_m$ be independent, integrable, centered real random variables on a probability space, with $|Z_i|\\le b$ almost surely for a finite $b>0$. Put $S_m=\\sum_{i=1}^mZ_i$ and $V=\\sum_{i=1}^m\\mathbb E[Z_i^2]$. For every $t>0$, if $V>0$ then\n$$\\mathbb P(S_m\\ge t)\\le\\exp\\!\\left(-\\frac{t^2}{2(V+bt/3)}\\right),\\qquad \\mathbb P(S_m\\le-t)\\le\\exp\\!\\left(-\\frac{t^2}{2(V+bt/3)}\\right).$$\nIf $V=0$, then $S_m=0$ almost surely.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-grouping-independent-sigma-algebras",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal F_i)_{i\\in I}$ be an independent family of sigma-algebras on a\nprobability space, and let $J_0,\\dots,J_{m-1}\\subseteq I$ be pairwise disjoint\nindex sets. For each $r<m$, define\n\n$$\\mathcal G_r:=\\sigma\\left(\\bigcup_{i\\in J_r}\\mathcal F_i\\right).$$\n\nThen the sigma-algebras $\\mathcal G_0,\\dots,\\mathcal G_{m-1}$ are independent.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-minkowski-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $1\\le p<\\infty$ and $f,g\\in\\mathcal L^p(\\mu)$, then\n   $$\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p.$$\n2. If $f,g\\in L^\\infty(\\mu)$, then\n   $$\\|f+g\\|_\\infty\\le\\|f\\|_\\infty+\\|g\\|_\\infty.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. If $f,g:X\\to[0,+\\infty]$ are measurable, then\n$$\\int(f+g)\\,d\\mu=\\int f\\,d\\mu+\\int g\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\eta:=1/128$ and, for integers $j\\ge0$, set $a_j:=(M+j)\\epsilon_n$ and $S_{n,j}:=\\{p\\in\\mathcal F_n:a_j<d(p,p_0)\\le a_j+\\epsilon_n\\}$. These shells cover every $p$ with $d(p,p_0)>M\\epsilon_n$. The selected metrics are bounded on probability densities: $h^2\\le2$ by [F1], $d_1\\le2$ by [F17] and the unit-mass densities, and in the $d_2$ branch only, [A2] and [F17] give $d_2^2\\le\\int(p+p_0)^2d\\mu\\le2B\\int(p+p_0)d\\mu=4B$. Thus only finitely many shells are nonempty for fixed $n$. For each nonempty shell choose a maximal subset $Q_{n,j}\\subseteq S_{n,j}$ whose distinct points are more than $r_j:=\\eta a_j$ apart. Since $a_j\\ge M\\epsilon_n$ and $M\\ge128$, $r_j\\ge\\epsilon_n$; its size is at most $D(\\epsilon_n,\\mathcal F_n,d)\\le e^{n\\epsilon_n^2}$. Maximality puts every shell member within $r_j$ of a center, and the triangle inequality gives $d(q,p_0)>(1-\\eta)a_j$ for each center. Only finitely many choices are made for each $n$, so no arbitrary-index choice axiom is used to form the nets.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "F5",
+            "F9",
+            "F14",
+            "F17",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Now let $d=d_1$. For a center $q$ in shell $j$, put $s:=d_1(q,p_0)>(1-\\eta)a$, $r=\\eta a$, and $f(x):=\\operatorname{sign}(q(x)-p_0(x))$, with $\\operatorname{sign}(0)=1$. By [F15, F16], $f$ is measurable, so its sample mean and threshold event are measurable. Then $|f|\\le1$, $P_qf-P_0f=s$, and every $p$ with $d_1(p,q)\\le r$ satisfies $P_pf-P_0f\\ge\\Delta:=s-r>(1-2\\eta)a$. Test by whether the sample mean of $f(X_i)$ is at least $P_0f+\\Delta/2$. Under either law, the centered summands have variance at most one and absolute value at most two; also $\\Delta\\le s\\le2$. Bernstein [F4] with $t=n\\Delta/2$, total variance at most $n$ and bound $b=2$ gives exponent at least $n\\Delta^2/[8(1+\\Delta/3)]\\ge3n\\Delta^2/40$, so each error is at most $\\exp(-3n\\Delta^2/40)$. Thus this branch has $c_1=3(1-2\\eta)^2/40$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F15",
+            "F16",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Now let $d=d_2$ and assume [A2]. At center $q$, put $s:=\\lVert q-p_0\\rVert_2>(1-\\eta)a$, $r=\\eta a$, and $f:=q-p_0$. This is measurable by [F15]. Then $P_qf-P_0f=s^2$. Since $r/s<\\eta/(1-\\eta)<1/2$, every $p$ with $\\lVert p-q\\rVert_2\\le r$ satisfies, by [F10], $P_pf-P_0f\\ge\\Delta:=s^2-rs\\ge s^2/2$. Also $\\Delta\\le s^2$, $\\mathbb E_R f(X)^2\\le B s^2$ for $R=P_0$ or $P$ by [A2] and monotonicity [F17], and $|f(X)-R f|\\le2B$ under either law because $|f|\\le B$. Testing the sample mean at threshold $P_0f+\\Delta/2$ and applying [F4] with total variance at most $nBs^2$, bound $b=2B$, and $t=n\\Delta/2$ gives exponent at least $3ns^2/(128B)\\ge3na^2/(512B)$. Thus each error is at most $\\exp(-3na^2/(512B))$ and $c_2=3/(512B)$.",
+          "step": "1.3",
+          "inputs": [
+            "A2",
+            "F4",
+            "F10",
+            "F15",
+            "F17",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a nonempty shell, write $a:=a_j$, $r:=\\eta a$, and let $q\\in Q_{n,j}$. First consider $d=h$. Write $s_0=(1-\\eta)a$ and $\\rho:=\\int\\sqrt{p_0q}\\,d\\mu=1-h(P_0,Q)^2/2$. By [F10], $0\\le\\rho\\le1$; the affinity integrand is measurable by [F15, F16]. Since $h(P_0,Q)>s_0$, this gives $\\rho\\le1-s_0^2/2$. By step 1.1 and nonemptiness, $s_0^2\\le2$. Set $m:=\\lceil2\\log(8)/s_0^2\\rceil$. For $u=s_0^2/2\\in[0,1]$, $e^{-u}-(1-u)$ has value zero at $u=0$ and derivative $1-e^{-u}\\ge0$ by monotonicity of the exponential; hence $1-u\\le e^{-u}$. On a block of $m$ observations use $T=\\mathbf1\\{\\prod_{i=1}^m q(X_i)>\\prod_{i=1}^m p_0(X_i)\\}$. The products and comparison event are measurable by [F15, F16]. Tonelli on the finite product space gives product affinity $\\rho^m$, and $\\rho^m\\le(1-u)^m\\le e^{-mu}\\le1/8$. Its type-I error under $P_0^m$ is at most this affinity, since on $T=1$ the product density $p_0^{\\otimes m}$ is at most $\\sqrt{p_0^{\\otimes m}q^{\\otimes m}}$; its type-II error under $Q^m$ is at most the same bound by the symmetric inequality on $T=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F7",
+            "F10",
+            "F11",
+            "F12",
+            "F15",
+            "F16",
+            "step 1.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $p$ lies in the Hellinger ball $h(P,Q)\\le r$, then Tonelli on the measurable product densities gives $h(P^m,Q^m)^2=2(1-\\rho(P,Q)^m)\\le m h(P,Q)^2$, since $1-z^m=(1-z)(1+z+\\cdots+z^{m-1})\\le m(1-z)$ for $0\\le z\\le1$. By [F2], $\\lVert P^m-Q^m\\rVert_{\\rm TV}\\le h(P^m,Q^m)\\le\\sqrt m\\,r$. Since $a\\le\\sqrt2$ for a nonempty Hellinger shell, $s_0^2\\le2$, $m\\le8/s_0^2$, and $m r^2\\le8\\eta^2/(1-\\eta)^2<1/64$, so $\\sqrt m\\,r<1/8$. Indeed, [F11] gives $e^3>1+3+9/2>8$, hence $\\log8<3$; also $1-\\eta>1/2$. For the event $\\{T=0\\}$, the change in probability from $Q^m$ to $P^m$ is at most TV, so the type-II error is at most $1/8+1/8=1/4$ uniformly over this ball.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F7",
+            "F11",
+            "F15",
+            "F16",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Divide the first $Nm$ observations into $N:=\\lfloor n/m\\rfloor$ disjoint blocks and reject when at least half of their block tests reject. The block indicators are independent under both $P_0^n$ and $P^n$ by [F5]–[F6]. Under $P_0$, each has mean at most $1/8$; under the ball alternatives each has mean at least $3/4$. Their variances are at most $1/4$ and their centered absolute values at most one. Under $P_0$, rejection forces an upward deviation at least $3N/8$, so [F4] gives $\\exp[-(3N/8)^2/(2(N/4+(3N/8)/3))]=e^{-3N/16}\\le e^{-3N/32}$. Under an alternative, acceptance forces a downward deviation at least $N/4$, so [F4] gives $\\exp[-(N/4)^2/(2(N/4+(N/4)/3))]=e^{-3N/32}$. Since $m\\le32/a^2$, $na^2\\to\\infty$ implies $n/m\\ge2$ eventually and $N\\ge n/(2m)\\ge na^2/64$; hence both errors are at most $e^{-3na^2/2048}$. Thus $c_h=3/2048$.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "In the selected branch let $c_d$ be its constant from steps 4.1, 1.2, or 1.3. If there are no nonempty shells, the alternative set is empty and define $\\phi_n\\equiv0$. Otherwise choose each center's local test and let $\\phi_n$ be their maximum over the finitely many centers in the nonempty shells. The local tests are measurable by the density-difference, product, and threshold measurability in [F15, F16]; a finite maximum remains measurable. For a fixed alternative in shell $j$, its nearby center supplies type-II error at most $e^{-c_dn a_j^2}\\le e^{-c_dM^2n\\epsilon_n^2}$. For type I, the union bound over at most $e^{n\\epsilon_n^2}$ centers per shell gives $P_0^n(\\phi_n=1)\\le e^{n\\epsilon_n^2}\\sum_{j=0}^\\infty e^{-c_dn(M+j)^2\\epsilon_n^2}\\le2e^{-(c_dM^2-1)n\\epsilon_n^2}$ for all sufficiently large $n$: writing $x=n\\epsilon_n^2$, the sum is $e^{-c_dM^2x}\\sum_{j=0}^\\infty e^{-c_dx(2Mj+j^2)}$, whose consecutive-term ratio is at most $e^{-c_dx(2M+1)}\\le1/2$. This proves the two test bounds for the same metric used in the packing condition.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "F13",
+            "F15",
+            "F16",
+            "step 1.1",
+            "step 4.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 5.1 defines the zero test if all alternative shells are empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 and the shell definition exclude the truth at distance zero from the separated alternatives."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits any n for which the displayed asymptotic conditions hold; the construction uses N=floor(n/m)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 include zero affinity endpoints and steps 1.2–1.3 use bounded contrasts."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 1.2–1.3 explicitly handle zero density values and sign(0)=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses only finite maximal nets; no arbitrary-index selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-iid-posterior-contraction-by-entropy-and-prior-mass": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a measurable parameter space, $\\Pi$ a prior probability measure on it, and $p_\\theta$ a jointly measurable family of finite-valued probability densities relative to one fixed sigma-finite measure $\\mu$. Let $P_0$ have finite-valued density $p_0$ relative to $\\mu$, and let $X_1,\\ldots,X_n$ be IID with law $P_0$. Assume the Axiom of Choice for the imported directional KL convention ([[def-axiom-of-choice]]). The jointly measurable density family is explicit input, so no arbitrary-index selection of versions is used here. In the expression below, the weighted log terms are set to zero on $\\{p_0=0\\}$; on $\\{p_0>0,p_\\theta=0\\}$ the log ratio is $-\\infty$ and its square is $+\\infty$. For $\\epsilon_n>0$, define\n$$K_n:=\\left\\{\\theta:\\mathrm{KL}(P_0\\Vert P_\\theta)\\le\\epsilon_n^2,\\quad \\int\\left[\\log\\frac{p_\\theta}{p_0}\\right]^2p_0\\,d\\mu\\le\\epsilon_n^2\\right\\}.$$\nJoint measurability and Tonelli make $K_n$ measurable, as verified below. If $\\Pi(K_n)\\ge e^{-Cn\\epsilon_n^2}$ for $C>0$ and $\\mathrm{KL}(P_0\\Vert P_\\theta)$ uses the direction in [[def-kullback-leibler-divergence]], then, defining the ratio to be zero on the $P_0$-null set where $p_0=0$, the likelihood denominator\n$$D_n:=\\int_\\Theta\\prod_{i=1}^n\\frac{p_\\theta(X_i)}{p_0(X_i)}\\,\\Pi(d\\theta)$$\nis finite and positive $P_0^n$-almost surely and\n$$P_0^n\\!\\left\\{D_n\\ge e^{-(C+2)n\\epsilon_n^2}\\right\\}\\ge1-\\frac1{n\\epsilon_n^2}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-iid-sieve-entropy-produces-exponential-tests",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a measure space with a fixed sigma-finite measure. A probability density is a finite-valued nonnegative measurable $p$ with $\\int p\\,d\\mu=1$, and its induced law is $P_p=p\\,d\\mu$ as in [[def-measure-with-density]]. Let $p_0$ be a probability density and write $P_0:=p_0\\,d\\mu$. Let $\\mathcal F$ be a family of such densities, write $P_p:=p\\,d\\mu$ for $p\\in\\mathcal F$, and let $\\mathcal F_n\\subseteq\\mathcal F$ be nonempty. Let $X_1,\\ldots,X_n$ be IID under each law used below. The selected metric $d$ is one of:\n\n- the root-L2 Hellinger distance $h$ of [[def-hellinger-distance-between-density-laws]];\n- the full density distance $d_1(p,q):=\\int|p-q|\\,d\\mu$;\n- the density distance $d_2(p,q):=(\\int|p-q|^2\\,d\\mu)^{1/2}$, provided a fixed $B>0$ bounds $p_0$ and every $p\\in\\mathcal F$ by $B$ almost everywhere.\n\nFor $r>0$, let $D(r,\\mathcal F_n,d)$ be the supremum of the cardinalities of finite subsets of $\\mathcal F_n$ whose distinct points have $d$-distance greater than $r$. Suppose $\\epsilon_n>0$, $\\epsilon_n\\to0$, $n\\epsilon_n^2\\to\\infty$, and\n$$\\log D(\\epsilon_n,\\mathcal F_n,d)\\le n\\epsilon_n^2.$$\nThen for every fixed $M\\ge128$ and all sufficiently large $n$, there is a measurable test $\\phi_n:\\mathsf X^n\\to\\{0,1\\}$ such that, for some $c_d>0$ depending only on the selected metric (and on $B$ in the $d_2$ case),\n$$P_0^n(\\phi_n=1)\\le2e^{-(c_dM^2-1)n\\epsilon_n^2},$$\nand $P_p^n(\\phi_n=0)\\le e^{-c_dM^2n\\epsilon_n^2}$ for every $p\\in\\mathcal F_n$ with $d(p,p_0)>M\\epsilon_n$.\n\nThe entropy metric is the same metric used in the separation and test-error conclusion. The $d_1$ convention is the full integral $\\int|p-q|\\,d\\mu$, which equals twice the library event-supremum total variation distance.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. If $f,g:X\\to[0,+\\infty]$ are measurable, then\n$$\\int(f+g)\\,d\\mu=\\int f\\,d\\mu+\\int g\\,d\\mu.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On the $P_0^n$-full event where $0<\\prod_i p_0(X_i)<\\infty$, set $R_n(\\theta):=\\prod_{i=1}^np_\\theta(X_i)/p_0(X_i)$ and $D_n:=\\int R_n(\\theta)\\,\\Pi(d\\theta)$. By [F1], on an event $\\Omega_n$ with $P_0^n(\\Omega_n^c)\\le1/(n\\epsilon_n^2)$, the scaled denominator $D_n$ is finite and at least $e^{-(C+2)n\\epsilon_n^2}$. The evidence $\\int\\prod_i p_\\theta(X_i)\\Pi(d\\theta)=D_n\\prod_i p_0(X_i)$ is therefore finite and positive, and on this event the posterior is the quotient of these likelihood integrals.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Joint measurability of $p_\\theta$ and the arithmetic/Borel-composition rules [F6] make each nonnegative distance integrand $|p_\\theta-p_0|$, $|p_\\theta-p_0|^2$, or $(\\sqrt{p_\\theta}-\\sqrt{p_0})^2$ product-measurable. Tonelli [F3] therefore gives measurability of $\\theta\\mapsto d(p_\\theta,p_0)$. Its values are finite: the Hellinger bound follows from the definition remark, $d_1\\le2$ follows from $|p_\\theta-p_0|\\le p_\\theta+p_0$ and [F7], and in the $d_2$ case [F7] and the uniform bound give $d_2^2\\le\\int(p_\\theta+p_0)^2d\\mu\\le2B\\int(p_\\theta+p_0)d\\mu=4B$. Thus $A_n$ is measurable. Apply [F2] with the selected metric and choose $M$ large enough that $c_dM^2\\ge C+4$. The resulting test $\\phi_n$ has $P_0^n(\\phi_n=1)\\to0$ and error at most $e^{-c_dM^2n\\epsilon_n^2}$ for every $\\theta\\in\\Theta_n$ with $d(p_\\theta,p_0)>M\\epsilon_n$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Put $A_n:=\\{\\theta:d(p_\\theta,p_0)>M\\epsilon_n\\}$, $N_n:=\\int_{A_n\\cap\\Theta_n}R_n(\\theta)\\,\\Pi(d\\theta)$ and $T_n:=\\int_{A_n\\cap\\Theta_n^c}R_n(\\theta)\\,\\Pi(d\\theta)$. The piecewise likelihood ratio is jointly measurable: on the measurable set where $p_0>0$ it is a Borel function of $(p_\\theta,p_0)$, and it is zero where $p_0=0$, by [F6]. Thus [F3], joint measurability, and change of density on the $P_0$-support give $\\mathbb E_{P_0^n}[(1-\\phi_n)N_n]\\le\\int_{A_n\\cap\\Theta_n}P_\\theta^n(1-\\phi_n)\\,\\Pi(d\\theta)\\le e^{-c_dM^2n\\epsilon_n^2}.$ The first inequality allows $P_\\theta$ to put mass outside the support of $P_0$, since the likelihood-ratio integral then contains only the $P_0$-support and is no larger than the full $P_\\theta^n$ probability.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "For every fixed $\\theta$, $\\mathbb E_{P_0}[p_\\theta(X_1)/p_0(X_1)]=\\int_{\\{p_0>0\\}}p_\\theta\\,d\\mu\\le1$. Independence and [F4] therefore give $\\mathbb E_{P_0^n}R_n(\\theta)\\le1$. Tonelli [F3] and the sieve-tail premise yield $\\mathbb E_{P_0^n}T_n\\le\\Pi(\\Theta_n^c)\\le e^{-(C+4)n\\epsilon_n^2}.$",
+          "step": "1.4",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $\\delta>0$. On $\\Omega_n\\cap\\{\\phi_n=0\\}$, posterior mass $\\Pi(A_n\\mid X^n)>\\delta$ implies $(1-\\phi_n)(N_n+T_n)>\\delta e^{-(C+2)n\\epsilon_n^2}$. Markov's inequality [F5], step 1.1, and [F2]–[F3] give $P_0^n\\{\\Pi(A_n\\mid X^n)>\\delta\\}\\le\\frac1{n\\epsilon_n^2}+2e^{-(c_dM^2-1)n\\epsilon_n^2}+\\frac{e^{(C+2)n\\epsilon_n^2}}{\\delta}\\left(e^{-c_dM^2n\\epsilon_n^2}+e^{-(C+4)n\\epsilon_n^2}\\right).$ By the choice $c_dM^2\\ge C+4$ and $n\\epsilon_n^2\\to\\infty$, the right side tends to zero. Since this holds for every $\\delta>0$, the posterior mass outside the stated ball converges to zero in $P_0^n$-probability.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes a nonempty sieve; the test lemma makes an empty separated alternative contribute zero."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement: epsilon_n is strictly positive and n epsilon_n^2 tends to infinity."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Conclusion and hypotheses are asymptotic and hold for all sufficiently large n."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement allows a prior concentrated at the truth when its displayed hypotheses hold."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: no interval parameter or endpoint is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the imported AC requirement for the directional KL convention; the supplied joint family avoids further selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "A1 imports the stated Axiom of Choice requirement."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-bernoulli-density-logarithmic-contraction-rate": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a sample space with a fixed sigma-finite dominating measure. Let $(\\Theta,\\mathcal T)$ be a measurable parameter space with prior probability measure $\\Pi$, and let $p_\\theta$ be finite-valued probability densities relative to $\\mu$ such that $(\\theta,x)\\mapsto p_\\theta(x)$ is jointly measurable. Let $p_0$ be a true density relative to $\\mu$, and observe $X_1,\\ldots,X_n$ IID from $P_0$, the law with density $p_0$. Assume AC for the imported directional KL convention ([[def-axiom-of-choice]]). The joint density family is explicit input; no arbitrary-index selection of versions is performed in this theorem.\n\nChoose one metric $d$ for both the entropy and conclusion: the root-L2 Hellinger distance $h$ of [[def-hellinger-distance-between-density-laws]], the full density distance $d_1(p,q)=\\int|p-q|\\,d\\mu$, or the density distance $d_2(p,q)=(\\int|p-q|^2\\,d\\mu)^{1/2}$. In the $d_2$ case assume one finite constant $B$ bounds $p_0$ and every density $p_\\theta$ in the model by $B$ $\\mu$-almost everywhere. For each $n$, let $\\Theta_n\\in\\mathcal T$ be a nonempty measurable parameter sieve and put $\\mathcal F_n:=\\{p_\\theta:\\theta\\in\\Theta_n\\}$. Assume $\\theta\\mapsto d(p_\\theta,p_0)$ is measurable; this follows from the jointly measurable density family by integration of the relevant nonnegative distance integrands. Let $D(r,\\mathcal F_n,d)$ be the packing number defined in [[lem-iid-sieve-entropy-produces-exponential-tests]]. Suppose $C>0$, $\\epsilon_n>0$, $\\epsilon_n\\to0$, $n\\epsilon_n^2\\to\\infty$, and\n$$\\log D(\\epsilon_n,\\mathcal F_n,d)\\le n\\epsilon_n^2,\\qquad \\Pi(\\Theta_n^c)\\le e^{-(C+4)n\\epsilon_n^2},$$\nwhile\n$$\\Pi\\!\\left\\{\\theta:\\mathrm{KL}(P_0\\Vert P_\\theta)\\le\\epsilon_n^2,\\quad \\int\\left[\\log\\frac{p_\\theta}{p_0}\\right]^2p_0\\,d\\mu\\le\\epsilon_n^2\\right\\}\\ge e^{-Cn\\epsilon_n^2}.$$\nHere $\\mathrm{KL}(P_0\\Vert P_\\theta)$ has the directional convention of [[def-kullback-leibler-divergence]]. Define the data-indexed posterior by normalizing $\\prod_i p_\\theta(X_i)$ against $\\Pi$ on fibers with finite positive evidence. Then for all sufficiently large fixed $M$, the posterior contracts outside the $M\\epsilon_n$-ball in the selected metric:\n$$\\Pi\\{\\theta:d(p_\\theta,p_0)>M\\epsilon_n\\mid X_1,\\ldots,X_n\\}\\longrightarrow0$$\nin $P_0^n$-probability.\n\nFor $d=d_1$, the radius is in the full density L1 norm; by [[lem-hellinger-distance-controls-l1-and-total-variation]], $d_1=2\\lVert P-Q\\rVert_{\\rm TV}$ under the library event-supremum convention. The theorem asserts only convergence in probability and gives no automatic almost-sure or minimax-optimality conclusion.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a sample space with a fixed sigma-finite dominating measure. Let $(\\Theta,\\mathcal T)$ be a measurable parameter space with prior probability measure $\\Pi$, and let $p_\\theta$ be finite-valued probability densities relative to $\\mu$ such that $(\\theta,x)\\mapsto p_\\theta(x)$ is jointly measurable. Let $p_0$ be a true density relative to $\\mu$, and observe $X_1,\\ldots,X_n$ IID from $P_0$, the law with density $p_0$. Assume AC for the imported directional KL convention ([[def-axiom-of-choice]]). The joint density family is explicit input; no arbitrary-index selection of versions is performed in this theorem.\n\nChoose one metric $d$ for both the entropy and conclusion: the root-L2 Hellinger distance $h$ of [[def-hellinger-distance-between-density-laws]], the full density distance $d_1(p,q)=\\int|p-q|\\,d\\mu$, or the density distance $d_2(p,q)=(\\int|p-q|^2\\,d\\mu)^{1/2}$. In the $d_2$ case assume one finite constant $B$ bounds $p_0$ and every density $p_\\theta$ in the model by $B$ $\\mu$-almost everywhere. For each $n$, let $\\Theta_n\\in\\mathcal T$ be a nonempty measurable parameter sieve and put $\\mathcal F_n:=\\{p_\\theta:\\theta\\in\\Theta_n\\}$. Assume $\\theta\\mapsto d(p_\\theta,p_0)$ is measurable; this follows from the jointly measurable density family by integration of the relevant nonnegative distance integrands. Let $D(r,\\mathcal F_n,d)$ be the packing number defined in [[lem-iid-sieve-entropy-produces-exponential-tests]]. Suppose $C>0$, $\\epsilon_n>0$, $\\epsilon_n\\to0$, $n\\epsilon_n^2\\to\\infty$, and\n$$\\log D(\\epsilon_n,\\mathcal F_n,d)\\le n\\epsilon_n^2,\\qquad \\Pi(\\Theta_n^c)\\le e^{-(C+4)n\\epsilon_n^2},$$\nwhile\n$$\\Pi\\!\\left\\{\\theta:\\mathrm{KL}(P_0\\Vert P_\\theta)\\le\\epsilon_n^2,\\quad \\int\\left[\\log\\frac{p_\\theta}{p_0}\\right]^2p_0\\,d\\mu\\le\\epsilon_n^2\\right\\}\\ge e^{-Cn\\epsilon_n^2}.$$\nHere $\\mathrm{KL}(P_0\\Vert P_\\theta)$ has the directional convention of [[def-kullback-leibler-divergence]]. Define the data-indexed posterior by normalizing $\\prod_i p_\\theta(X_i)$ against $\\Pi$ on fibers with finite positive evidence. Then for all sufficiently large fixed $M$, the posterior contracts outside the $M\\epsilon_n$-ball in the selected metric:\n$$\\Pi\\{\\theta:d(p_\\theta,p_0)>M\\epsilon_n\\mid X_1,\\ldots,X_n\\}\\longrightarrow0$$\nin $P_0^n$-probability.\n\nFor $d=d_1$, the radius is in the full density L1 norm; by [[lem-hellinger-distance-controls-l1-and-total-variation]], $d_1=2\\lVert P-Q\\rVert_{\\rm TV}$ under the library event-supremum convention. The theorem asserts only convergence in probability and gives no automatic almost-sure or minimax-optimality conclusion.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-differentiable-implies-continuous",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\nlimit point of $A$ ([[def-limit-point-r]]). If $f$ is differentiable at $c$\n([[def-derivative]]) then $f$ is continuous at $c$ ([[def-continuity-real]]).\n\nConsequently, if $f$ is differentiable on a set $S \\subseteq A$ then $f$ is\ncontinuous at every point of $S$.\n\n**No converse is asserted, and none holds.** Continuity at $c$ does not give\ndifferentiability at $c$, and the standard witness is worked out on the\ncompanion page.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\epsilon_n:=2\\sqrt{\\log n/n}$ for $n\\ge3$. For two parameters, $d_1(p_\\theta,p_{\\theta'})=2|\\theta-\\theta'|$. Hence an $\\epsilon_n$-packing of $\\mathcal F_n$ has at most $1+2(b-a)/\\epsilon_n$ points, so $\\log D(\\epsilon_n,\\mathcal F_n,d_1)\\le\\frac12\\log n+O(1)\\le4\\log n=n\\epsilon_n^2$ for all sufficiently large $n$. Since $\\Theta_n=[a,b]$, its prior complement has mass zero. Also $\\epsilon_n\\to0$ and $n\\epsilon_n^2=4\\log n\\to\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $g(\\theta):=\\mathrm{KL}(P_0\\Vert P_\\theta)$, use [F5] to write $g(\\theta)=c_0-\\theta_0\\log\\theta-(1-\\theta_0)\\log(1-\\theta)$, with $c_0=\\theta_0\\log\\theta_0+(1-\\theta_0)\\log(1-\\theta_0)$. The chain, sum, and scalar rules [F6], together with [F4], give $g(\\theta_0)=g'(\\theta_0)=0$ and $g''(\\theta)=\\frac{\\theta_0}{\\theta^2}+\\frac{1-\\theta_0}{(1-\\theta)^2}$; the reciprocal-power derivative in this computation is [F7]. These formulas show that $g$ and $g'$ are differentiable on $(0,1)$; hence they are continuous there by [F8], so the mean value theorem hypotheses hold on the relevant subintervals of $[a,b]$. The explicit bound $|g''(\\theta)|\\le L:=\\theta_0/a^2+(1-\\theta_0)/(1-b)^2$ holds there. Apply the mean-value theorem [F3] first to $g$ and then to $g'$ to obtain $|g(\\theta)|\\le L|\\theta-\\theta_0|^2$. Put $C_1:=L$. For the log-square term, apply [F3] to $\\log\\theta$ and $\\log(1-\\theta)$; these functions are continuous on $[a,b]$ by [F5], and the chain rule [F6] and derivative bounds $1/\\theta\\le1/a$ and $1/(1-\\theta)\\le1/(1-b)$ give $\\int\\left[\\log\\frac{p_\\theta}{p_0}\\right]^2p_0\\,d\\mu\\le C_2|\\theta-\\theta_0|^2$, for example with $C_2=L$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose $c>0$ with $c^2\\max(C_1,C_2)\\le1$. For all sufficiently large $n$, the interval $[\\theta_0-c\\epsilon_n,\\theta_0+c\\epsilon_n]$ lies in $[a,b]$ and is contained in the theorem's local KL/log-square set. Its uniform prior mass is $2c\\epsilon_n/(b-a)$. Since $-\\log\\epsilon_n=\\frac12\\log n+O(\\log\\log n)$ while $n\\epsilon_n^2=4\\log n$, there is a fixed $C>0$ such that this mass is at least $e^{-Cn\\epsilon_n^2}$ for large $n$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "All hypotheses of [F1] now hold with $d=d_1$; consequently the posterior mass of $\\{\\theta:d_1(p_\\theta,p_0)>M\\epsilon_n\\}$ tends to zero in $P_0^n$-probability for sufficiently large fixed $M$. The rate furnished by this global-entropy theorem is $2M\\sqrt{\\log n/n}$ in the full density $L^1$ norm; this example makes no minimax-optimality claim.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the strict inequalities a<theta0<b make the parameter interval nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 has zero KL and log-square contrast at theta=theta0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example: epsilon_n is defined for n>=3 and all claims are asymptotic."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Example: the uniform prior on a nontrivial interval is nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the strict interior condition to contain a small local interval while a,b remain inside (0,1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 records the inherited AC convention and step 1.1 uses only the explicit Bernoulli family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: no equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: no equivalence is asserted."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "2.1",
+            "3.1"
+          ],
+          "reason": "A1 imports the explicit choice requirement for the stated theorem convention."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "finite entropy bound at a compact Bernoulli interval",
+          "method": "exact finite calculation",
+          "input": {
+            "a": "1/4",
+            "theta0": "1/2",
+            "b": "3/4",
+            "n": 1000
+          },
+          "calculation": "epsilon=2√(log(1000)/1000)≈0.1663. The packing bound is at most 1+2(b-a)/epsilon≈7.01, whose logarithm is about 1.95, while n epsilon²=4 log(1000)≈27.63. This finite check illustrates the packing calculation; the proof uses the eventual bound.",
+          "expected": {
+            "log_packing_upper": "about 1.95",
+            "n_epsilon_squared": "about 27.63"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-high-entropy-sieve-can-fail-without-precluding-contraction": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a sample space with a fixed sigma-finite dominating measure. Let $(\\Theta,\\mathcal T)$ be a measurable parameter space with prior probability measure $\\Pi$, and let $p_\\theta$ be finite-valued probability densities relative to $\\mu$ such that $(\\theta,x)\\mapsto p_\\theta(x)$ is jointly measurable. Let $p_0$ be a true density relative to $\\mu$, and observe $X_1,\\ldots,X_n$ IID from $P_0$, the law with density $p_0$. Assume AC for the imported directional KL convention ([[def-axiom-of-choice]]). The joint density family is explicit input; no arbitrary-index selection of versions is performed in this theorem.\n\nChoose one metric $d$ for both the entropy and conclusion: the root-L2 Hellinger distance $h$ of [[def-hellinger-distance-between-density-laws]], the full density distance $d_1(p,q)=\\int|p-q|\\,d\\mu$, or the density distance $d_2(p,q)=(\\int|p-q|^2\\,d\\mu)^{1/2}$. In the $d_2$ case assume one finite constant $B$ bounds $p_0$ and every density $p_\\theta$ in the model by $B$ $\\mu$-almost everywhere. For each $n$, let $\\Theta_n\\in\\mathcal T$ be a nonempty measurable parameter sieve and put $\\mathcal F_n:=\\{p_\\theta:\\theta\\in\\Theta_n\\}$. Assume $\\theta\\mapsto d(p_\\theta,p_0)$ is measurable; this follows from the jointly measurable density family by integration of the relevant nonnegative distance integrands. Let $D(r,\\mathcal F_n,d)$ be the packing number defined in [[lem-iid-sieve-entropy-produces-exponential-tests]]. Suppose $C>0$, $\\epsilon_n>0$, $\\epsilon_n\\to0$, $n\\epsilon_n^2\\to\\infty$, and\n$$\\log D(\\epsilon_n,\\mathcal F_n,d)\\le n\\epsilon_n^2,\\qquad \\Pi(\\Theta_n^c)\\le e^{-(C+4)n\\epsilon_n^2},$$\nwhile\n$$\\Pi\\!\\left\\{\\theta:\\mathrm{KL}(P_0\\Vert P_\\theta)\\le\\epsilon_n^2,\\quad \\int\\left[\\log\\frac{p_\\theta}{p_0}\\right]^2p_0\\,d\\mu\\le\\epsilon_n^2\\right\\}\\ge e^{-Cn\\epsilon_n^2}.$$\nHere $\\mathrm{KL}(P_0\\Vert P_\\theta)$ has the directional convention of [[def-kullback-leibler-divergence]]. Define the data-indexed posterior by normalizing $\\prod_i p_\\theta(X_i)$ against $\\Pi$ on fibers with finite positive evidence. Then for all sufficiently large fixed $M$, the posterior contracts outside the $M\\epsilon_n$-ball in the selected metric:\n$$\\Pi\\{\\theta:d(p_\\theta,p_0)>M\\epsilon_n\\mid X_1,\\ldots,X_n\\}\\longrightarrow0$$\nin $P_0^n$-probability.\n\nFor $d=d_1$, the radius is in the full density L1 norm; by [[lem-hellinger-distance-controls-l1-and-total-variation]], $d_1=2\\lVert P-Q\\rVert_{\\rm TV}$ under the library event-supremum convention. The theorem asserts only convergence in probability and gives no automatic almost-sure or minimax-optimality conclusion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-iid-sieve-entropy-produces-exponential-tests",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a measure space with a fixed sigma-finite measure. A probability density is a finite-valued nonnegative measurable $p$ with $\\int p\\,d\\mu=1$, and its induced law is $P_p=p\\,d\\mu$ as in [[def-measure-with-density]]. Let $p_0$ be a probability density and write $P_0:=p_0\\,d\\mu$. Let $\\mathcal F$ be a family of such densities, write $P_p:=p\\,d\\mu$ for $p\\in\\mathcal F$, and let $\\mathcal F_n\\subseteq\\mathcal F$ be nonempty. Let $X_1,\\ldots,X_n$ be IID under each law used below. The selected metric $d$ is one of:\n\n- the root-L2 Hellinger distance $h$ of [[def-hellinger-distance-between-density-laws]];\n- the full density distance $d_1(p,q):=\\int|p-q|\\,d\\mu$;\n- the density distance $d_2(p,q):=(\\int|p-q|^2\\,d\\mu)^{1/2}$, provided a fixed $B>0$ bounds $p_0$ and every $p\\in\\mathcal F$ by $B$ almost everywhere.\n\nFor $r>0$, let $D(r,\\mathcal F_n,d)$ be the supremum of the cardinalities of finite subsets of $\\mathcal F_n$ whose distinct points have $d$-distance greater than $r$. Suppose $\\epsilon_n>0$, $\\epsilon_n\\to0$, $n\\epsilon_n^2\\to\\infty$, and\n$$\\log D(\\epsilon_n,\\mathcal F_n,d)\\le n\\epsilon_n^2.$$\nThen for every fixed $M\\ge128$ and all sufficiently large $n$, there is a measurable test $\\phi_n:\\mathsf X^n\\to\\{0,1\\}$ such that, for some $c_d>0$ depending only on the selected metric (and on $B$ in the $d_2$ case),\n$$P_0^n(\\phi_n=1)\\le2e^{-(c_dM^2-1)n\\epsilon_n^2},$$\nand $P_p^n(\\phi_n=0)\\le e^{-c_dM^2n\\epsilon_n^2}$ for every $p\\in\\mathcal F_n$ with $d(p,p_0)>M\\epsilon_n$.\n\nThe entropy metric is the same metric used in the separation and test-error conclusion. The $d_1$ convention is the full integral $\\int|p-q|\\,d\\mu$, which equals twice the library event-supremum total variation distance.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $t_n:=\\log n$. For $n\\ge3$, $t_n>1$, and $\\epsilon_n^2=\\frac{\\sqrt{t_n}}{n},\\qquad n\\epsilon_n^2=\\sqrt{t_n}\\longrightarrow\\infty.$ The integral formula [F5] gives $\\log n\\le2\\sqrt n$ for $n\\ge1$, hence $\\epsilon_n^2\\le\\sqrt2\\,n^{-3/4}\\to0$. Thus $\\epsilon_n\\to0$ and the rate conditions in [F1] hold.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $j=0,\\ldots,\\lfloor1/\\epsilon_n\\rfloor$, set $\\theta_j=j\\epsilon_n$. These parameters lie in $[0,1]$, and $d_1(p_{\\theta_j},p_{\\theta_k})=2|\\theta_j-\\theta_k|> \\epsilon_n\\quad(j\\ne k).$ Therefore $D(\\epsilon_n,\\mathcal F_n,d_1)\\ge\\lfloor1/\\epsilon_n\\rfloor+1>1/\\epsilon_n$ and $\\log D(\\epsilon_n,\\mathcal F_n,d_1)>\\log(1/\\epsilon_n)=\\frac12t_n-\\frac14\\log t_n.$ For $t\\ge1$, [F5] gives $\\log t\\le2\\sqrt t$. If $t_n\\ge64$, then $\\frac12t_n-\\frac14\\log t_n\\ge\\frac12t_n-\\frac12\\sqrt{t_n}>\\sqrt{t_n}=n\\epsilon_n^2$. Hence the entropy premise fails for all sufficiently large $n$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F5",
+            "given",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The sieve is the full parameter space, so $\\Pi(\\Theta_n^c)=0$. Its local KL/log-square set contains $\\theta_0$, where $\\mathrm{KL}(P_0\\Vert P_{\\theta_0})=0$ and $\\log(p_{\\theta_0}/p_0)=0$; consequently its prior mass is $1$, which exceeds $e^{-Cn\\epsilon_n^2}$ for every $C>0$.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any data vector $x_{1:n}$, the likelihood at the sole prior atom is $p_{\\theta_0}^{\\otimes n}(x_{1:n})=2^{-n}>0$, so the evidence is also $2^{-n}$. The normalization in [F1] therefore gives $\\Pi(\\cdot\\mid x_{1:n})=\\delta_{\\theta_0}$. For every $M>0$, its mass on $\\{\\theta:d_1(p_\\theta,p_0)>M\\epsilon_n\\}$ is exactly zero for every sample, and thus it contracts in $P_0^n$-probability under the IID data law [F4, F6] despite the failed entropy condition.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the sieve is the full nonempty Bernoulli parameter interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.3 has zero KL/log-square contrast at the truth, and step 2.1 gives zero outside-ball posterior mass."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example: n>=3 and the entropy failure is asserted for all sufficiently large n."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the degenerate point prior exactly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the parameter endpoints 0 and 1 as allowed members of the full Bernoulli family."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the imported KL convention and all Bernoulli densities and posterior updates are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: no equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: no equivalence is asserted."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.3"
+          ],
+          "reason": "A1 imports the stated Axiom of Choice requirement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "finite grid lower bound at n=ceil(exp(64))",
+          "method": "exact finite inequality check",
+          "input": {
+            "n": "ceil(exp(64))",
+            "t_lower_bound": 64
+          },
+          "calculation": "For t=log n≥64, log D>t/2-(log t)/4≥t/2-√t/2>√t=n epsilon², using log t≤2√t and t≥64. The point-prior posterior is delta at theta0 for every finite data vector.",
+          "expected": {
+            "entropy_premise": "fails",
+            "posterior_outside_truth_ball": "0"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-holder-density-rate-from-entropy-balance": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a sample space with a fixed sigma-finite dominating measure. Let $(\\Theta,\\mathcal T)$ be a measurable parameter space with prior probability measure $\\Pi$, and let $p_\\theta$ be finite-valued probability densities relative to $\\mu$ such that $(\\theta,x)\\mapsto p_\\theta(x)$ is jointly measurable. Let $p_0$ be a true density relative to $\\mu$, and observe $X_1,\\ldots,X_n$ IID from $P_0$, the law with density $p_0$. Assume AC for the imported directional KL convention ([[def-axiom-of-choice]]). The joint density family is explicit input; no arbitrary-index selection of versions is performed in this theorem.\n\nChoose one metric $d$ for both the entropy and conclusion: the root-L2 Hellinger distance $h$ of [[def-hellinger-distance-between-density-laws]], the full density distance $d_1(p,q)=\\int|p-q|\\,d\\mu$, or the density distance $d_2(p,q)=(\\int|p-q|^2\\,d\\mu)^{1/2}$. In the $d_2$ case assume one finite constant $B$ bounds $p_0$ and every density $p_\\theta$ in the model by $B$ $\\mu$-almost everywhere. For each $n$, let $\\Theta_n\\in\\mathcal T$ be a nonempty measurable parameter sieve and put $\\mathcal F_n:=\\{p_\\theta:\\theta\\in\\Theta_n\\}$. Assume $\\theta\\mapsto d(p_\\theta,p_0)$ is measurable; this follows from the jointly measurable density family by integration of the relevant nonnegative distance integrands. Let $D(r,\\mathcal F_n,d)$ be the packing number defined in [[lem-iid-sieve-entropy-produces-exponential-tests]]. Suppose $C>0$, $\\epsilon_n>0$, $\\epsilon_n\\to0$, $n\\epsilon_n^2\\to\\infty$, and\n$$\\log D(\\epsilon_n,\\mathcal F_n,d)\\le n\\epsilon_n^2,\\qquad \\Pi(\\Theta_n^c)\\le e^{-(C+4)n\\epsilon_n^2},$$\nwhile\n$$\\Pi\\!\\left\\{\\theta:\\mathrm{KL}(P_0\\Vert P_\\theta)\\le\\epsilon_n^2,\\quad \\int\\left[\\log\\frac{p_\\theta}{p_0}\\right]^2p_0\\,d\\mu\\le\\epsilon_n^2\\right\\}\\ge e^{-Cn\\epsilon_n^2}.$$\nHere $\\mathrm{KL}(P_0\\Vert P_\\theta)$ has the directional convention of [[def-kullback-leibler-divergence]]. Define the data-indexed posterior by normalizing $\\prod_i p_\\theta(X_i)$ against $\\Pi$ on fibers with finite positive evidence. Then for all sufficiently large fixed $M$, the posterior contracts outside the $M\\epsilon_n$-ball in the selected metric:\n$$\\Pi\\{\\theta:d(p_\\theta,p_0)>M\\epsilon_n\\mid X_1,\\ldots,X_n\\}\\longrightarrow0$$\nin $P_0^n$-probability.\n\nFor $d=d_1$, the radius is in the full density L1 norm; by [[lem-hellinger-distance-controls-l1-and-total-variation]], $d_1=2\\lVert P-Q\\rVert_{\\rm TV}$ under the library event-supremum convention. The theorem asserts only convergence in probability and gives no automatic almost-sure or minimax-optimality conclusion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-iid-sieve-entropy-produces-exponential-tests",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a measure space with a fixed sigma-finite measure. A probability density is a finite-valued nonnegative measurable $p$ with $\\int p\\,d\\mu=1$, and its induced law is $P_p=p\\,d\\mu$ as in [[def-measure-with-density]]. Let $p_0$ be a probability density and write $P_0:=p_0\\,d\\mu$. Let $\\mathcal F$ be a family of such densities, write $P_p:=p\\,d\\mu$ for $p\\in\\mathcal F$, and let $\\mathcal F_n\\subseteq\\mathcal F$ be nonempty. Let $X_1,\\ldots,X_n$ be IID under each law used below. The selected metric $d$ is one of:\n\n- the root-L2 Hellinger distance $h$ of [[def-hellinger-distance-between-density-laws]];\n- the full density distance $d_1(p,q):=\\int|p-q|\\,d\\mu$;\n- the density distance $d_2(p,q):=(\\int|p-q|^2\\,d\\mu)^{1/2}$, provided a fixed $B>0$ bounds $p_0$ and every $p\\in\\mathcal F$ by $B$ almost everywhere.\n\nFor $r>0$, let $D(r,\\mathcal F_n,d)$ be the supremum of the cardinalities of finite subsets of $\\mathcal F_n$ whose distinct points have $d$-distance greater than $r$. Suppose $\\epsilon_n>0$, $\\epsilon_n\\to0$, $n\\epsilon_n^2\\to\\infty$, and\n$$\\log D(\\epsilon_n,\\mathcal F_n,d)\\le n\\epsilon_n^2.$$\nThen for every fixed $M\\ge128$ and all sufficiently large $n$, there is a measurable test $\\phi_n:\\mathsf X^n\\to\\{0,1\\}$ such that, for some $c_d>0$ depending only on the selected metric (and on $B$ in the $d_2$ case),\n$$P_0^n(\\phi_n=1)\\le2e^{-(c_dM^2-1)n\\epsilon_n^2},$$\nand $P_p^n(\\phi_n=0)\\le e^{-c_dM^2n\\epsilon_n^2}$ for every $p\\in\\mathcal F_n$ with $d(p,p_0)>M\\epsilon_n$.\n\nThe entropy metric is the same metric used in the separation and test-error conclusion. The $d_1$ convention is the full integral $\\int|p-q|\\,d\\mu$, which equals twice the library event-supremum total variation distance.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-iid-posterior-contraction-by-entropy-and-prior-mass",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a sample space with a fixed sigma-finite dominating measure. Let $(\\Theta,\\mathcal T)$ be a measurable parameter space with prior probability measure $\\Pi$, and let $p_\\theta$ be finite-valued probability densities relative to $\\mu$ such that $(\\theta,x)\\mapsto p_\\theta(x)$ is jointly measurable. Let $p_0$ be a true density relative to $\\mu$, and observe $X_1,\\ldots,X_n$ IID from $P_0$, the law with density $p_0$. Assume AC for the imported directional KL convention ([[def-axiom-of-choice]]). The joint density family is explicit input; no arbitrary-index selection of versions is performed in this theorem.\n\nChoose one metric $d$ for both the entropy and conclusion: the root-L2 Hellinger distance $h$ of [[def-hellinger-distance-between-density-laws]], the full density distance $d_1(p,q)=\\int|p-q|\\,d\\mu$, or the density distance $d_2(p,q)=(\\int|p-q|^2\\,d\\mu)^{1/2}$. In the $d_2$ case assume one finite constant $B$ bounds $p_0$ and every density $p_\\theta$ in the model by $B$ $\\mu$-almost everywhere. For each $n$, let $\\Theta_n\\in\\mathcal T$ be a nonempty measurable parameter sieve and put $\\mathcal F_n:=\\{p_\\theta:\\theta\\in\\Theta_n\\}$. Assume $\\theta\\mapsto d(p_\\theta,p_0)$ is measurable; this follows from the jointly measurable density family by integration of the relevant nonnegative distance integrands. Let $D(r,\\mathcal F_n,d)$ be the packing number defined in [[lem-iid-sieve-entropy-produces-exponential-tests]]. Suppose $C>0$, $\\epsilon_n>0$, $\\epsilon_n\\to0$, $n\\epsilon_n^2\\to\\infty$, and\n$$\\log D(\\epsilon_n,\\mathcal F_n,d)\\le n\\epsilon_n^2,\\qquad \\Pi(\\Theta_n^c)\\le e^{-(C+4)n\\epsilon_n^2},$$\nwhile\n$$\\Pi\\!\\left\\{\\theta:\\mathrm{KL}(P_0\\Vert P_\\theta)\\le\\epsilon_n^2,\\quad \\int\\left[\\log\\frac{p_\\theta}{p_0}\\right]^2p_0\\,d\\mu\\le\\epsilon_n^2\\right\\}\\ge e^{-Cn\\epsilon_n^2}.$$\nHere $\\mathrm{KL}(P_0\\Vert P_\\theta)$ has the directional convention of [[def-kullback-leibler-divergence]]. Define the data-indexed posterior by normalizing $\\prod_i p_\\theta(X_i)$ against $\\Pi$ on fibers with finite positive evidence. Then for all sufficiently large fixed $M$, the posterior contracts outside the $M\\epsilon_n$-ball in the selected metric:\n$$\\Pi\\{\\theta:d(p_\\theta,p_0)>M\\epsilon_n\\mid X_1,\\ldots,X_n\\}\\longrightarrow0$$\nin $P_0^n$-probability.\n\nFor $d=d_1$, the radius is in the full density L1 norm; by [[lem-hellinger-distance-controls-l1-and-total-variation]], $d_1=2\\lVert P-Q\\rVert_{\\rm TV}$ under the library event-supremum convention. The theorem asserts only convergence in probability and gives no automatic almost-sure or minimax-optimality conclusion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The chosen $K$ is fixed and $1/(2\\alpha+1)>0$, so $\\epsilon_n\\to0$ and $n\\epsilon_n^2=K^2 n^{1/(2\\alpha+1)}\\to\\infty$. For all sufficiently large $n$, the assumed entropy bound gives $\\log D(\\epsilon_n,\\mathcal F,h)\\le C_HK^{-1/\\alpha}n^{1/(2\\alpha+1)}\\le K^2n^{1/(2\\alpha+1)}=n\\epsilon_n^2,$ because $K^{2+1/\\alpha}\\ge C_H$. The full-space sieve has $\\Pi(\\Theta_n^c)=0$, and the local prior-mass premise is exactly the theorem's remaining prior condition.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "All hypotheses of [F3] now hold with the Hellinger metric and $\\epsilon_n=K n^{-\\alpha/(2\\alpha+1)}$. Hence for sufficiently large fixed $M$, the posterior mass outside the Hellinger ball of radius $MK n^{-\\alpha/(2\\alpha+1)}$ tends to zero in $P_0^n$-probability. This is a sufficient-condition rate calculation only; it does not prove the class's entropy bound or assert a minimax lower bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the full parameter space is the stated density class and its prior is proper."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the assumed local prior-mass set and a positive rate epsilon_n."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example: the result is asymptotic in n."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Example: the class and prior are not required to be nondegenerate; the rate calculation is conditional on the displayed premises."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement permits alpha=1 and uses the whole compact domain [0,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the inherited AC convention; the entropy inequality itself is an assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: no equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: no equivalence is asserted."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "A1 imports the explicit choice requirement for the stated theorem convention."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "finite exponent balance at alpha=1",
+          "method": "exact finite calculation",
+          "input": {
+            "alpha": 1,
+            "C_H": 1,
+            "K": 1,
+            "n": 100
+          },
+          "calculation": "epsilon=100^(-1/3), so C_H epsilon^(-1/alpha)=100^(1/3)=n epsilon² exactly when the assumed entropy inequality is evaluated at this rate.",
+          "expected": {
+            "entropy_exponent": "100^(1/3)",
+            "n_epsilon_squared": "100^(1/3)"
+          }
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

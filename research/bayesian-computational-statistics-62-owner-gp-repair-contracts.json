@@ -1,0 +1,1902 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-finite-dimensional-gaussian-isoperimetric-expansion",
+    "thm-borell-sudakov-tsirelson-expansion-for-banach-gaussian-law",
+    "thm-gaussian-concentration-sieve-bounds",
+    "lem-nondegenerate-gaussian-small-ball-controls-log-radius",
+    "thm-gaussian-process-posterior-contraction",
+    "ex-log-gaussian-uniform-density-posterior",
+    "ex-fixed-design-gaussian-constant-process-and-unknown-scale",
+    "ex-binary-regression-logistic-intercept-gp",
+    "ex-degenerate-gp-phi-does-not-bound-unknown-scale-local-mass",
+    "cex-degenerate-gaussian-scale-prior-can-break-arbitrary-concentration-rate"
+  ],
+  "contracts": {
+    "thm-finite-dimensional-gaussian-isoperimetric-expansion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $m\\ge1$ be finite, let $d_j\\ge1$, and let\n$Z_j$ for $1\\le j\\le m$ be mutually independent random elements of\n$\\mathbb R^{d_j}$. Suppose $Z_j\\sim N_{d_j}(a_j,\\Sigma_j)$, where each\n$\\Sigma_j$ is symmetric positive semidefinite. Put\n$D=\\sum_{j=1}^m d_j$, $Z=(Z_1,\\ldots,Z_m)$,\n$a=(a_1,\\ldots,a_m)$, and\n$\\Sigma=\\operatorname{diag}(\\Sigma_1,\\ldots,\\Sigma_m)$. Then\n$$Z\\sim N_D(a,\\Sigma).$$\nNo covariance block needs to be invertible.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-standard-normal-cdf-is-continuous-and-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Phi(x)=P(Z\\le x)$ for $Z\\sim N(0,1)$. Then $\\Phi$ is continuous and strictly increasing on $\\mathbb R$, with $\\lim_{x\\to-\\infty}\\Phi(x)=0$ and $\\lim_{x\\to+\\infty}\\Phi(x)=1$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-differentiation-under-the-integral-sign",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an open interval and let $f:X\\times I\\to\\mathbb C$\nbe such that:\n\n1. for every $t\\in I$, the function $x\\mapsto f(x,t)$ is integrable;\n2. for almost every $x$, the map $t\\mapsto f(x,t)$ is differentiable on $I$;\n3. for every $t\\in I$, the function\n   $$x\\mapsto \\frac{\\partial f}{\\partial t}(x,t),$$\n   extended by zero where the derivative is undefined, is measurable;\n4. there are a measurable null set $N$ and a nonnegative measurable function\n   $g$ with\n   $$\\int g\\,d\\mu<+\\infty$$\n   and\n   $$\\left|\\frac{\\partial f}{\\partial t}(x,t)\\right|\\le g(x)$$\n   for every $t\\in I$ and every $x\\in X\\setminus N$.\n\nThen\n$$F(t):=\\int f(x,t)\\,d\\mu(x)$$\nis differentiable on $I$, and\n$$F'(t)=\\int \\frac{\\partial f}{\\partial t}(x,t)\\,d\\mu(x),$$\nwith the same zero extension in the last integral.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-integration-by-parts-for-absolutely-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axioms of Countable Choice and Dependent Choice. For $F,G\\in AC[a,b]$,\n$$\\int_a^bFG'+\\int_a^bF'G=F(b)G(b)-F(a)G(a).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axioms of Countable Choice and Dependent Choice. For $F:[a,b]\\to\\mathbb R$, the following are equivalent:\n\n1. $F$ is absolutely continuous.\n2. $F'$ exists almost everywhere, $F'\\in L^1[a,b]$, and\n$$F(x)-F(a)=\\int_a^xF'(t)\\,dt\\quad\\text{for every }x\\in[a,b].$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-borel-probability-measures-on-polish-spaces-are-inner-regular",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. If $P$ is Polish and $\\mu$ is a Borel probability measure on $P$, then for every Borel $A\\subseteq P$ and $\\varepsilon>0$ there is a compact $K\\subseteq A$ with $\\mu(A\\setminus K)<\\varepsilon$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi \\in C_c^\\infty(\\mathbb{R}^n)$ satisfy\n\n$$ \\int_{\\mathbb{R}^n} \\varphi(x)\\,dx = 1. $$\n\nFor $\\varepsilon > 0$, define\n\n$$ \\varphi_\\varepsilon(x) := \\varepsilon^{-n}\\varphi(x/\\varepsilon) \\qquad(x \\in \\mathbb{R}^n). $$\n\nThe family $(\\varphi_\\varepsilon)_{\\varepsilon>0}$ is the **mollifier family\ngenerated by $\\varphi$**.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Differentiating $\\varphi'=-x\\varphi$ and $(\\Phi^{-1})'=1/I$ gives $I'=-\\Phi^{-1}$ and $II''=-1$. The function $I$ is continuous on $[0,1]$, positive on $(0,1)$ and bounded by $(2\\pi)^{-1/2}$. First take a smooth $f$ valued in $[\\eta,1-\\eta]$, $0<\\eta<1/2$, with all derivatives bounded. Define $P_tf(x)=\\int f(e^{-t}x+\\sqrt{1-e^{-2t}}y)\\gamma_d(dy)$ and $u_t=P_tf$. Gaussian integration by parts in $y$ gives $\\partial_tu_t=Lu_t$, $L=\\Delta-x\\cdot\\nabla$, while $\\nabla P_tf=e^{-t}P_t\\nabla f$. Invariance $\\int P_tg\\,d\\gamma_d=\\int g\\,d\\gamma_d$ follows because $e^{-t}X+\\sqrt{1-e^{-2t}}Y$ is standard Gaussian for independent standard $X,Y$. Differentiation is justified by [F2]; the integration-by-parts boundary terms vanish by bounded derivatives and Gaussian decay.",
+          "inputs": [
+            "F2",
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Put $v=\\nabla u_t$, $H=D^2u_t$, $K=I(u_t)^2+|v|^2$ and $J(t)=\\int\\sqrt K\\,d\\gamma_d$. The identity $\\nabla Lu=L\\nabla u-\\nabla u$, Gaussian integration by parts, and $II''=-1$ give $$J'(t)=\\int\\frac{-\\|I'(u_t)vv^T-I(u_t)H\\|_F^2+|Hv|^2-\\|H\\|_F^2|v|^2}{K^{3/2}}\\,d\\gamma_d\\le0.$$ To verify the displayed computation, differentiating $J$ first gives $\\int[II'Lu+v\\cdot\\nabla Lu]/\\sqrt K$. Integrating both $Lu$ and each $Lv_i$ by parts leaves numerator $-I'^2|v|^4+2II'v^THv-I^2\\|H\\|_F^2-\\|H\\|_F^2|v|^2+|Hv|^2$, the displayed square expansion. Rowwise Cauchy–Schwarz gives $|Hv|^2\\le\\|H\\|_F^2|v|^2$. All operations on compact time intervals are dominated because $I(u_t)$ has a fixed positive lower bound, derivatives are bounded, and Gaussian polynomial moments are finite.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "As $t\\to\\infty$, $u_t(x)\\to\\int f\\,d\\gamma_d$ and $|\\nabla u_t|\\le e^{-t}\\|\\nabla f\\|_\\infty\\to0$. Dominated convergence and step 1.2 yield $$I\\left(\\int f\\,d\\gamma_d\\right)\\le\\int\\sqrt{I(f)^2+|\\nabla f|^2}\\,d\\gamma_d\\le\\int I(f)\\,d\\gamma_d+\\int|\\nabla f|\\,d\\gamma_d.$$ Replacing a smooth $[0,1]$-valued $f$ by $\\eta+(1-2\\eta)f$ and letting $\\eta\\downarrow0$ extends this inequality to smooth $[0,1]$-valued functions with bounded derivatives.",
+          "inputs": [
+            "step 1.2",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Let $D$ be a nonempty finite union of closed balls of one common positive radius. Its boundary is contained in finitely many spheres, which have Lebesgue and hence Gaussian measure zero. For $h>0$ put $f_h=(1-\\operatorname{dist}(\\cdot,D)/h)_+$. Distance is $1$-Lipschitz, since $\\operatorname{dist}(x,D)\\le|x-y|+\\operatorname{dist}(y,D)$ and one may interchange $x,y$. Thus $0\\le f_h\\le1$ and it is $1/h$-Lipschitz. Outside finitely many inner and outer cutoff spheres and nearest-center bisector hyperplanes it is smooth, its gradient has norm at most $1/h$, and its gradient vanishes outside $(D+hB_2^d)\\setminus D$. These exceptional sets have Lebesgue measure zero by Fubini in suitable orthogonal coordinates.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "Convolve $f_h$ with the nonnegative bumps $\\rho_\\delta$ from [F5]. The convolutions are smooth, valued in $[0,1]$, have bounded derivatives, and converge uniformly to $f_h$. On almost every coordinate line the distance formula is a finite piecewise smooth minimum of distances to centers, so $f_h$ is absolutely continuous there with derivative bounded by $1/h$. One-dimensional integration by parts and Fubini show $\\nabla(f_h*\\rho_\\delta)=(\\nabla f_h)*\\rho_\\delta$. At each point off the exceptional hypersurfaces the latter converges to $\\nabla f_h$, and its norm is at most $1/h$. Dominated convergence against Gaussian probability therefore passes step 2.1 to $f_h$ and gives $$I\\left(\\int f_h\\,d\\gamma_d\\right)\\le\\int I(f_h)\\,d\\gamma_d+\\frac{\\gamma_d(D+hB_2^d)-\\gamma_d(D)}h.$$ As $h\\downarrow0$, $f_h\\to\\mathbf1_D$ and $I(f_h)\\to0$, so $I(\\gamma_d(D))$ is at most the lower right derivative of the neighborhood mass.",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "F2",
+            "F3",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Set $D_t=D+tB_2^d$ and $V(t)=\\gamma_d(D_t)$. On each bounded time interval $V$ is Lipschitz: for $h>0$, $V(t+h)-V(t)$ is bounded by the sum of masses of finitely many spherical shells. Gaussian density is bounded; the Euclidean volume of a shell of bounded radius is at most a constant times $h$, by polar coordinates or the volume formula for balls. Each $D_t$ is again a finite union of equal-radius balls, so step 3.2 gives $V'(t)\\ge I(V(t))$ almost everywhere. On a compact time interval $0<V(t)<1$, since $D_t$ is nonempty with interior and bounded; hence $\\Phi^{-1}\\circ V$ is absolutely continuous there and has derivative $V'/I(V)\\ge1$ almost everywhere. The fundamental theorem gives $$\\gamma_d(D+rB_2^d)\\ge\\Phi(\\Phi^{-1}(\\gamma_d(D))+r).$$",
+          "inputs": [
+            "step 3.2",
+            "F1",
+            "F3",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "For nonempty compact $K$ and $r>0$, choose $0<\\delta<r$ and cover $K$ by finitely many closed $\\delta$-balls centered in $K$; call their union $D_\\delta$. Then $K\\subseteq D_\\delta\\subseteq K+\\delta B_2^d$ and $D_\\delta+(r-\\delta)B_2^d\\subseteq K+rB_2^d$. Step 4.1 gives $\\gamma_d(K+rB_2^d)\\ge\\Phi(\\Phi^{-1}(\\gamma_d(K))+r-\\delta)$; let $\\delta\\downarrow0$. For Borel $A$, inner regularity provides compact $K\\subseteq A$ with mass arbitrarily close to $\\gamma_d(A)$. Each $K+rB_2^d$ is compact and contained in $A+rB_2^d$, so taking the supremum gives the asserted inner-measure bound. If $\\gamma_d(A)=0$ the right side is zero; if it is one, compact inner approximation gives lower bound one. At $r=0$, [F4] identifies the inner and ordinary measures of $A$.",
+          "inputs": [
+            "step 4.1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step5.1 handle empty/zero/full Gaussian mass and r=0; d>=1 is explicit. Finite choices use AC, and DC/CC for the calculus suppliers follows from AC in F3."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step5.1 handle empty/zero/full Gaussian mass and r=0; d>=1 is explicit. Finite choices use AC, and DC/CC for the calculus suppliers follows from AC in F3."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step5.1 handle empty/zero/full Gaussian mass and r=0; d>=1 is explicit. Finite choices use AC, and DC/CC for the calculus suppliers follows from AC in F3."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step5.1 handle empty/zero/full Gaussian mass and r=0; d>=1 is explicit. Finite choices use AC, and DC/CC for the calculus suppliers follows from AC in F3."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step5.1 handle empty/zero/full Gaussian mass and r=0; d>=1 is explicit. Finite choices use AC, and DC/CC for the calculus suppliers follows from AC in F3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step5.1 handle empty/zero/full Gaussian mass and r=0; d>=1 is explicit. Finite choices use AC, and DC/CC for the calculus suppliers follows from AC in F3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-forward branch beyond the explicit Statement/Definition/Example hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-reverse branch beyond the explicit Statement/Definition/Example hypotheses."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-borell-sudakov-tsirelson-expansion-for-banach-gaussian-law": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-hahn-banach-dominated-extension",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X$ be a real vector space, let\n$M \\subseteq X$ be a linear subspace, let\n$p:X \\to \\mathbb{R}$ be sublinear, and let $f:M \\to \\mathbb{R}$ be linear with\n$f(m) \\le p(m)$ for every $m \\in M$. Then there exists a linear functional\n$F:X \\to \\mathbb{R}$ such that $F|_M=f$ and $F(x) \\le p(x)$ for every $x \\in X$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "Work over ZF. The **real dominated-extension principle**, denoted **HB**, is the following assertion:\n\nFor every real vector space $X$, every sublinear functional $p:X\\to\\mathbb R$ in the sense of [[def-sublinear-functional]], every real linear subspace $M\\le X$ in the sense of [[def-linear-subspace]], and every real linear functional $g:M\\to\\mathbb R$ in the sense of [[def-algebraic-dual-and-linear-functional]],\n$$\\bigl(\\forall m\\in M,\\ g(m)\\le p(m)\\bigr)\\ \\Longrightarrow\\ \\exists F:X\\to\\mathbb R\\ \\bigl(F\\text{ is real linear},\\ F|_M=g,\\ \\forall x\\in X,\\ F(x)\\le p(x)\\bigr).$$\n\nThis names an additional principle; it does not assert a proof of HB in ZF. Subsequent results explicitly state when they assume HB. Neither topology nor completeness is part of this assertion. The subspace may be $\\{0\\}$ or all of $X$. Sublinearity at scalar zero gives $p(0)=0$, and a linear functional has value zero at zero.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-finite-dimensional-gaussian-isoperimetric-expansion",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $d\\ge1$, let $\\gamma_d$ be standard Gaussian measure on $\\mathbb R^d$,\nlet $A\\subseteq\\mathbb R^d$ be Borel, and let\n$A+rB_2^d=\\{a+ru:a\\in A,\\ |u|\\le1\\}$. Then for every $r\\ge0$,\n$$\\gamma_{d,*}(A+rB_2^d)\\ge \\Phi\\!\\left(\\Phi^{-1}(\\gamma_d(A))+r\\right),$$\nwhere $\\gamma_{d,*}(S)=\\sup\\{\\gamma_d(K):K\\subseteq S,\\ K\\text{ compact}\\}$ is Gaussian inner measure, and $\\Phi^{-1}(0)=-\\infty$, $\\Phi^{-1}(1)=+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-banach-gaussian-covariance-operator-and-rkhs",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $W$ be a centered Borel Gaussian random element in a real separable\nBanach space $B$, with law $\\mu$. For $\\ell\\in B^*$ define\n$$C\\ell=E[\\ell(W)W]\\in B,\\qquad Q(\\ell,m)=E[\\ell(W)m(W)]\\quad(\\ell,m\\in B^*).$$\nThe **Cameron–Martin reproducing-kernel Hilbert space** $H$ is the completion\nof $B^*/N$ in the inner product induced by $Q$, where\n$N=\\{\\ell\\in B^*:Q(\\ell,\\ell)=0\\}$. The canonical map sends the class of\n$\\ell$ to $C\\ell$ and extends continuously to an injective map $i:H\\to B$;\nwe identify $H$ with its image in $B$ and use the completed Hilbert norm\n$\\|\\cdot\\|_H$. The preceding construction is well-defined by\n[[thm-banach-gaussian-covariance-rkhs-is-well-defined]].\n\nThe term *RKHS* here denotes this covariance-induced Hilbert space of shifts\ninside $B$; it is not the space of all continuous functions on an arbitrary\nindex set.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-banach-gaussian-covariance-rkhs-is-well-defined",
+          "source_section": "Statement",
+          "quote": "Assume AC. Under the hypotheses and notation of\n[[def-banach-gaussian-covariance-operator-and-rkhs]], each $C\\ell$ exists as a\nBochner integral; $Q$ is a finite positive-semidefinite bilinear form;\n$N=\\{\\ell:Q(\\ell,\\ell)=0\\}$ is its nullspace; and the induced map from the\ncompletion of $B^*/N$ to $B$ is continuous and injective. Thus the definition\nidentifies a Hilbert space of shifts in $B$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-banach-gaussian-rkhs-unit-ball-is-compact",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\mu$ be a centered tight Borel Gaussian law on a real separable Banach\nspace $B$, and let $H\\subset B$ be its covariance RKHS. The closed Hilbert\nunit ball\n$$H_1=\\{h\\in H:\\|h\\|_H\\le1\\}$$\nis compact in the Banach norm.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-borel-probability-measures-on-polish-spaces-are-inner-regular",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. If $P$ is Polish and $\\mu$ is a Borel probability measure on $P$, then for every Borel $A\\subseteq P$ and $\\varepsilon>0$ there is a compact $K\\subseteq A$ with $\\mu(A\\setminus K)<\\varepsilon$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-separable-space",
+          "source_section": "Definition",
+          "quote": "A topological space $X$ is **separable** if some at most countable subset $D\\subseteq X$ is dense in $X$ ([[def-dense-top]], [[def-countable]]). Equivalently, every nonempty open subset of $X$ meets $D$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuity-from-above-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be a decreasing sequence of measurable sets for a measure $\\mu$. If $\\mu(E_{n_0})<+\\infty$ for some $n_0$, then\n\n$$\\mu\\left(\\bigcap_{n\\in\\mathbb N}E_n\\right)=\\inf_{n\\in\\mathbb N}\\mu(E_n).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-relative-hahn-banach-dual-norming",
+          "source_section": "Statement",
+          "quote": "Assume HB and let $X$ be a real or complex normed space. For each $x\\ne0$ there is $f\\in X^*$ with $\\|f\\|=1$ and $f(x)=\\|x\\|$, a positive real number also in the complex case. Hence $X^*$ separates distinct points, and\n$$\\|x\\|=\\max_{f\\in X^*,\\ \\|f\\|\\le1}|f(x)|\\qquad(x\\in X).$$\nThe formula includes $x=0$ and the zero space. Moreover, if $H\\subseteq X^*$ has norm-dense scalar-linear span and $h(x)=0$ for all $h\\in H$, then $x=0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "First let $F=T^{-1}(M)$ be a closed finite-coordinate cylinder, with $T=(\\ell_1,\\ldots,\\ell_k):B\\to\\mathbb R^k$ continuous and $M$ closed. Let $Q=\\operatorname{span}\\{[\\ell_i]:1\\le i\\le k\\}\\subset H$, choose an orthonormal basis $e_1,\\ldots,e_m$, and choose representatives $\\varphi_j\\in B^*$ for $e_j$. Set $G=\\sum_{j=1}^m\\varphi_j(W)e_j$ and $S=T\\circ i|_Q$. The vector of coefficients is standard Gaussian on $Q$ because its covariance matrix is the identity. For each $i$, $[\\ell_i]=\\sum_j\\langle[\\ell_i],e_j\\rangle_H e_j$; by the covariance quotient and [F2], the residual $\\ell_i(W)-\\ell_i(iG)$ has variance $\\|[\\ell_i]-\\sum_j\\langle[\\ell_i],e_j\\rangle_H e_j\\|_H^2=0$. Hence $T(W)=S(G)$ almost surely. The map $S$ is injective: if $S(q)=0$, then $\\langle q,[\\ell_i]\\rangle_H=0$ for every $i$, and these classes span $Q$, so $q=0$.",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Now let $A\\subseteq B$ be Borel with $0<\\mu(A)<1$, and fix $\\beta<\\Phi^{-1}(\\mu(A))$. By [F4] choose compact $K\\subseteq A$ with $\\mu(K)>\\Phi(\\beta)$. For each $x\\notin K$ and $y\\in K$, [F7] gives $\\ell_y\\in B^*$ with $\\ell_y(x)\\ne\\ell_y(y)$. The open sets $U_y=\\{z:|\\ell_y(z)-\\ell_y(y)|<|\\ell_y(x)-\\ell_y(y)|/3\\}$ cover $K$; compactness gives a finite subcover $U_{y_1},\\ldots,U_{y_q}$. For every $z\\in K$, some $i$ has $z\\in U_{y_i}$, which forces $\\ell_{y_i}(z)\\ne\\ell_{y_i}(x)$. Thus the finite coordinate map $T_x=(\\ell_{y_1},\\ldots,\\ell_{y_q})$ satisfies $T_x(x)\\notin T_x(K)$. The cylinder $F_x=T_x^{-1}(T_x(K))$ is closed, contains $K$, and excludes $x$, since $T_x(K)$ is compact. The open complements $B\\setminus F_x$ cover $B\\setminus K$. By [F5] this cover has a countable subcover: for every basis element meeting $B\\setminus K$ and contained in a cover member, countable choice selects one such member; every point is covered by one selected member. If the subcover is finite, repeat one member to index it by $j\\ge1$.",
+          "inputs": [
+            "F4",
+            "F7",
+            "F5",
+            "A1",
+            "A2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If $m=0$, then $T(W)=0$ almost surely, so $\\mu(F)$ is zero or one; the endpoint convention, $0\\in H_1$, and inner regularity [F4] give the claimed inequality. If $m>0$, define $E=S^{-1}(M)\\subset Q$. It is closed and $\\mu(F)=\\gamma_Q(E)$. For $r\\ge0$, $E_r=E+r(Q\\cap H_1)$ is closed because its second summand is compact. Thus [F4] identifies its inner and ordinary Gaussian measures, and [F1] gives $\\gamma_Q(E_r)\\ge\\Phi(\\Phi^{-1}(\\gamma_Q(E))+r)$. Let $C_r=T^{-1}(S(E_r))$, a closed finite-coordinate cylinder because $S$ is a linear isomorphism from finite-dimensional $Q$ onto the closed subspace $S(Q)$; injectivity of $S$ and $T(W)=S(G)$ give $\\mu(C_r)=\\gamma_Q(E_r)$. If $y\\in C_r$, write $T(y)=S(u+v)$ with $u\\in E$ and $v\\in r(Q\\cap H_1)$. Then $T(y-i(v))=S(u)\\in M$, so $y-i(v)\\in F$ and $y\\in F+rH_1$. Hence $C_r\\subseteq F+rH_1$, and inner regularity [F4] gives $\\mu_*(F+rH_1)\\ge\\mu(C_r)\\ge\\Phi(\\Phi^{-1}(\\mu(F))+r)$.",
+          "inputs": [
+            "F4",
+            "F1",
+            "A1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Let $G_n=\\bigcap_{j\\le n}F_{x_j}$ for the countable subcover in step 1.2. Each $G_n$ is a closed finite-coordinate cylinder because it is a finite intersection of such cylinders; the sequence decreases, $\\bigcap_nG_n=K$, and $\\mu(G_n)\\ge\\mu(K)>\\Phi(\\beta)$. Applying step 2.1 yields $\\mu_*(G_n+rH_1)\\ge\\Phi(\\beta+r)$. The set $G_n+rH_1$ is closed: if $a_j+h_j$ converges with $a_j\\in G_n$ and $h_j\\in rH_1$, compactness [F3] gives a convergent subsequence of $h_j$, after which closedness of $G_n$ gives a limit representation. Thus [F4] gives equality of its inner and ordinary measures.",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The closed sets $G_n+rH_1$ decrease and their intersection is $K+rH_1$. Indeed, if $x=a_n+h_n$ with $a_n\\in G_n$ and $h_n\\in rH_1$ for every $n$, compactness [F3] gives a subsequence $h_{n_j}\\to h\\in rH_1$; then $a_{n_j}\\to x-h$, and for each fixed $N$ the tail belongs to the closed set $G_N$, so $x-h\\in K$. The reverse inclusion is immediate. Continuity from above [F6] gives $\\mu(K+rH_1)\\ge\\Phi(\\beta+r)$. Since $K\\subseteq A$, $\\mu_*(A+rH_1)\\ge\\Phi(\\beta+r)$. Letting $\\beta\\uparrow\\Phi^{-1}(\\mu(A))$ proves the interior-probability case. If $\\mu(A)=0$ the right side is zero; if $\\mu(A)=1$, inner regularity [F4] and $0\\in H_1$ give $\\mu_*(A+rH_1)=1$.",
+          "inputs": [
+            "F3",
+            "F6",
+            "F4",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-forward branch beyond the explicit Statement/Definition/Example hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-reverse branch beyond the explicit Statement/Definition/Example hypotheses."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-gaussian-concentration-sieve-bounds": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-hahn-banach-dominated-extension",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X$ be a real vector space, let\n$M \\subseteq X$ be a linear subspace, let\n$p:X \\to \\mathbb{R}$ be sublinear, and let $f:M \\to \\mathbb{R}$ be linear with\n$f(m) \\le p(m)$ for every $m \\in M$. Then there exists a linear functional\n$F:X \\to \\mathbb{R}$ such that $F|_M=f$ and $F(x) \\le p(x)$ for every $x \\in X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "Work over ZF. The **real dominated-extension principle**, denoted **HB**, is the following assertion:\n\nFor every real vector space $X$, every sublinear functional $p:X\\to\\mathbb R$ in the sense of [[def-sublinear-functional]], every real linear subspace $M\\le X$ in the sense of [[def-linear-subspace]], and every real linear functional $g:M\\to\\mathbb R$ in the sense of [[def-algebraic-dual-and-linear-functional]],\n$$\\bigl(\\forall m\\in M,\\ g(m)\\le p(m)\\bigr)\\ \\Longrightarrow\\ \\exists F:X\\to\\mathbb R\\ \\bigl(F\\text{ is real linear},\\ F|_M=g,\\ \\forall x\\in X,\\ F(x)\\le p(x)\\bigr).$$\n\nThis names an additional principle; it does not assert a proof of HB in ZF. Subsequent results explicitly state when they assume HB. Neither topology nor completeness is part of this assertion. The subspace may be $\\{0\\}$ or all of $X$. Sublinearity at scalar zero gives $p(0)=0$, and a linear functional has value zero at zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gaussian-prior-concentration-function",
+          "source_section": "Definition",
+          "quote": "Assume AC and countable choice. Let $\\mu$ be a centered tight Borel Gaussian law on a real separable Banach\nspace $B$, with covariance RKHS $H$, and let $w_0\\in\\overline H^{\\,B}$. For\n$\\varepsilon>0$, write\n$\\varepsilon B^\\circ=\\{x\\in B:\\|x\\|_B<\\varepsilon\\}$ and define the\n**concentration function**\n$$\\phi_{w_0}(\\varepsilon) =\\inf_{\\substack{h\\in H\\\\\\|h-w_0\\|_B<\\varepsilon}} \\left\\{\\|h\\|_H^2-\\log\\mu(\\varepsilon B^\\circ)\\right\\}.$$\nThe feasible set is nonempty because $w_0$ lies in the Banach-norm closure of\n$H$. Also $\\mu(\\varepsilon B^\\circ)>0$ because $0\\in\\operatorname{supp}\\mu$;\nthus the logarithm is finite. The value is finite and nonnegative. The support assertion used here is\n[[thm-support-of-banach-gaussian-is-closure-of-rkhs]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cameron-martin-translation-for-separable-banach-gaussian-law",
+          "source_section": "Statement",
+          "quote": "Assume AC and countable choice. Let $W$ be a centered Borel Gaussian random\nelement in a real separable\nBanach space $B$, with law $\\mu$ and covariance RKHS $H\\subseteq B$. For\n$h\\in H$, let $z_h$ be the $L^2(\\mu)$-limit of the coordinate functions\n$\\ell(x)$ representing a sequence of classes $[\\ell]\\to i^{-1}h$ in the\ncompletion $H$. The limit has a $\\mu$-measurable version and does not depend\non the approximating sequence. If $\\mu_h$ denotes the law of $W+h$, then\n$$\\frac{d\\mu_h}{d\\mu}(x) =\\exp\\!\\left(z_h(x)-\\frac12\\|h\\|_H^2\\right).$$\nIn particular, $\\mu_h$ and $\\mu$ are equivalent. If $h=C\\ell$ for\n$\\ell\\in B^*$, then $z_h(x)=\\ell(x)$ $\\mu$-almost surely and\n$\\|h\\|_H^2=E[\\ell(W)^2]$; these formulas are independent of the choice of\nrepresentative $\\ell$.",
+          "uses": [
+            "1.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-borell-sudakov-tsirelson-expansion-for-banach-gaussian-law",
+          "source_section": "Statement",
+          "quote": "Assume AC and countable choice. Let $\\mu$ be a centered tight Borel Gaussian law on a real separable Banach\nspace $B$, with covariance RKHS $H$ and unit ball $H_1$. For every Borel set\n$A\\subseteq B$ and $r\\ge0$,\n$$\\mu_*(A+rH_1)\\ge \\Phi\\!\\left(\\Phi^{-1}(\\mu(A))+r\\right),$$\nwhere $\\mu_*(S)=\\sup\\{\\mu(K):K\\subseteq S,\\ K\\text{ compact}\\}$ is the inner\nmeasure and $\\Phi^{-1}(0)=-\\infty$, $\\Phi^{-1}(1)=+\\infty$. When\n$A+rH_1$ is Borel, its inner measure equals its ordinary $\\mu$-measure.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-banach-gaussian-rkhs-unit-ball-is-compact",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\mu$ be a centered tight Borel Gaussian law on a real separable Banach\nspace $B$, and let $H\\subset B$ be its covariance RKHS. The closed Hilbert\nunit ball\n$$H_1=\\{h\\in H:\\|h\\|_H\\le1\\}$$\nis compact in the Banach norm.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-borel-probability-measures-on-polish-spaces-are-inner-regular",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. If $P$ is Polish and $\\mu$ is a Borel probability measure on $P$, then for every Borel $A\\subseteq P$ and $\\varepsilon>0$ there is a compact $K\\subseteq A$ with $\\mu(A\\setminus K)<\\varepsilon$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-separable-banach-has-countable-norming-family",
+          "source_section": "Statement",
+          "quote": "Assume HB and countable choice. Let $B$ be a real separable Banach space. There is a sequence\n$(\\ell_j)_{j\\ge1}\\subseteq B^*$ with $\\|\\ell_j\\|=1$ such that\n$$\\|x\\|=\\sup_{j\\ge1}|\\ell_j(x)|\\qquad(x\\in B).$$\nIf $B=\\{0\\}$, the conclusion is interpreted using the zero functional and the\nsupremum is $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-countable-norming-family-determines-borel-laws",
+          "source_section": "Statement",
+          "quote": "Let $B$ be a separable Banach space, and let $(\\ell_j)_{j\\ge1}\\subseteq B^*$ satisfy the norming identity $\\|x\\|=\\sup_{j\\ge1}|\\ell_j(x)|$ for every $x\\in B$. If Borel probabilities $\\mu,\\nu$ on $B$ have equal finite-dimensional pushforwards under every finite subfamily of $(\\ell_j)$, then $\\mu=\\nu$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cameron-martin-translation-for-separable-banach-gaussian-law",
+          "source_section": "Statement",
+          "quote": "Assume AC and countable choice. Let $W$ be a centered Borel Gaussian random\nelement in a real separable\nBanach space $B$, with law $\\mu$ and covariance RKHS $H\\subseteq B$. For\n$h\\in H$, let $z_h$ be the $L^2(\\mu)$-limit of the coordinate functions\n$\\ell(x)$ representing a sequence of classes $[\\ell]\\to i^{-1}h$ in the\ncompletion $H$. The limit has a $\\mu$-measurable version and does not depend\non the approximating sequence. If $\\mu_h$ denotes the law of $W+h$, then\n$$\\frac{d\\mu_h}{d\\mu}(x) =\\exp\\!\\left(z_h(x)-\\frac12\\|h\\|_H^2\\right).$$\nIn particular, $\\mu_h$ and $\\mu$ are equivalent. If $h=C\\ell$ for\n$\\ell\\in B^*$, then $z_h(x)=\\ell(x)$ $\\mu$-almost surely and\n$\\|h\\|_H^2=E[\\ell(W)^2]$; these formulas are independent of the choice of\nrepresentative $\\ell$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The hypothesis [F1] implies $p\\ge e^{-t}>0$, because every candidate $h$ has $\\|h\\|_H^2\\ge0$. Fix $h\\in H$. Take a countable norming family for $B$ and append the scalar coordinate $z_h$; this is a countable norming family for $B\\times\\mathbb R$ with the maximum product norm. By [F7], each finite coordinate vector is centered Gaussian and hence invariant under negation, so countable law determination makes the joint law symmetric under $(x,z)\\mapsto(-x,-z)$. Thus, since $\\varepsilon B^\\circ$ is symmetric, $\\int_{\\varepsilon B^\\circ}e^{-z_h(x)}\\,d\\mu(x) =\\int_{\\varepsilon B^\\circ}\\cosh(z_h(x))\\,d\\mu(x) \\ge p.$ The Cameron–Martin identity [F2] for $-h$ now gives $\\mu(h+\\varepsilon B^\\circ)\\ge e^{-\\|h\\|_H^2/2}p$.",
+          "inputs": [
+            "F1",
+            "F7",
+            "F2",
+            "A1",
+            "A2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For each $\\delta>0$, choose $h\\in H$ with $\\|h-w_0\\|_B<\\varepsilon$ and $\\|h\\|_H^2-\\log p<\\phi_{w_0}(\\varepsilon)+\\delta\\le t+\\delta$. Since $\\|h\\|_H^2/2-\\log p\\le\\|h\\|_H^2-\\log p<t+\\delta$, and $h+\\varepsilon B^\\circ\\subset w_0+2\\varepsilon B^\\circ$, step 1.1 gives $\\mu\\{\\|W-w_0\\|_B<2\\varepsilon\\}\\ge e^{-t-\\delta}$. Letting $\\delta\\downarrow0$ proves the small-ball lower bound.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Let $b=\\Phi^{-1}(e^{-Ct})<0$ and $M=-2b>0$, and set $B_n=\\varepsilon B^\\circ+MH_1$. This is open, hence measurable. Since $p\\ge e^{-t}$ and $C>1$, monotonicity of $\\Phi^{-1}$ gives $\\Phi^{-1}(p)>b$. By [F3], $\\mu(B_n)\\ge \\Phi(\\Phi^{-1}(p)+M) >\\Phi(-b)=1-e^{-Ct}.$ The set $B_n$ is open and therefore Borel, so [F6] identifies its inner measure with $\\mu(B_n)$. Thus $\\mu(B\\setminus B_n)\\le e^{-Ct}$.",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "step": "2.3",
+          "claim": "Choose a maximal finite set $\\{h_1,\\ldots,h_N\\}\\subset MH_1$ with pairwise distances greater than $2\\varepsilon$; such a set exists and covers $MH_1$ by closed $2\\varepsilon$-balls because $MH_1$ is compact by [F4]. The open balls $h_i+\\varepsilon B^\\circ$ are disjoint. Step 1.1 and $\\|h_i\\|_H\\le M$ imply each has $\\mu$-measure at least $e^{-M^2/2}p$. Hence $N e^{-M^2/2}p\\le1$ and $\\log N\\le M^2/2-\\log p\\le M^2/2+t$. Every point of $B_n$ lies within $3\\varepsilon$ of one of the $h_i$, so $N(3\\varepsilon,B_n,\\|\\cdot\\|_B)\\le N$.",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Completing the square in the standard normal density [F5] gives $E e^{-\\lambda Z}=e^{\\lambda^2/2}$. For $x\\ge0$, on $\\{Z\\le-x\\}$ one has $e^{-xZ}\\ge e^{x^2}$, so $\\Phi(-x)=P(Z\\le-x)\\le e^{-x^2}E e^{-xZ}=e^{-x^2/2}$. With $x=\\sqrt{2Ct}$ this gives $\\Phi(-\\sqrt{2Ct})\\le e^{-Ct}=\\Phi(b)$, hence $-\\sqrt{2Ct}\\le b<0$ and $b^2\\le2Ct$. Consequently $\\log N(3\\varepsilon,B_n,\\|\\cdot\\|_B)\\le2b^2+t\\le4Ct+t\\le5Ct\\le6Ct$, using $C>1$. Step 2.2 supplies the complement bound and step 2.1 the small-ball bound. No posterior statement follows from these three prior inequalities alone.",
+          "inputs": [
+            "F5",
+            "step 2.2",
+            "step 2.1",
+            "step 2.3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-forward branch beyond the explicit Statement/Definition/Example hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-reverse branch beyond the explicit Statement/Definition/Example hypotheses."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-nondegenerate-gaussian-small-ball-controls-log-radius": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "On the event $\\{\\|W\\|_B<\\epsilon\\}$, continuity and linearity give $|\\ell(W)|\\le\\|\\ell\\|_{B^*}\\|W\\|_B<\\|\\ell\\|_{B^*}\\epsilon$. The interval $(-\\|\\ell\\|\\epsilon,\\|\\ell\\|\\epsilon)$ has length $2\\|\\ell\\|\\epsilon$, so its scalar Gaussian probability is at most its length times the density bound in [F1]. Therefore $\\Pr(\\|W\\|_B<\\epsilon)\\le\\frac{2\\|\\ell\\|_{B^*}}{\\sqrt{2\\pi}\\tau}\\epsilon.$",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The approximation penalty in the displayed definition is nonnegative. Taking negative logarithms of the bound in step 1.1 and adding this penalty yields $\\phi_{w_0}(\\epsilon)\\ge\\log(1/\\epsilon)-\\log(2\\|\\ell\\|_{B^*}/(\\sqrt{2\\pi}\\tau))$, which is the asserted constant.",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-forward branch beyond the explicit Statement/Definition/Example hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-reverse branch beyond the explicit Statement/Definition/Example hypotheses."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-gaussian-process-posterior-contraction": {
+      "citations": [
+        {
+          "fact": "F8",
+          "source": "thm-support-of-banach-gaussian-is-closure-of-rkhs",
+          "source_section": "Statement",
+          "quote": "Assume AC and countable choice. Let $\\mu$ be a centered tight Borel Gaussian\nlaw on a real separable Banach\nspace $B$, and let $H\\subseteq B$ be its covariance RKHS. Define\n$\\operatorname{supp}\\mu$ to be the set of $x\\in B$ for which every open\nneighborhood has positive $\\mu$-measure. Then\n$$\\operatorname{supp}\\mu=\\overline H^{\\,B}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-gaussian-prior-concentration-function",
+          "source_section": "Definition",
+          "quote": "Assume AC and countable choice. Let $\\mu$ be a centered tight Borel Gaussian law on a real separable Banach\nspace $B$, with covariance RKHS $H$, and let $w_0\\in\\overline H^{\\,B}$. For\n$\\varepsilon>0$, write\n$\\varepsilon B^\\circ=\\{x\\in B:\\|x\\|_B<\\varepsilon\\}$ and define the\n**concentration function**\n$$\\phi_{w_0}(\\varepsilon) =\\inf_{\\substack{h\\in H\\\\\\|h-w_0\\|_B<\\varepsilon}} \\left\\{\\|h\\|_H^2-\\log\\mu(\\varepsilon B^\\circ)\\right\\}.$$\nThe feasible set is nonempty because $w_0$ lies in the Banach-norm closure of\n$H$. Also $\\mu(\\varepsilon B^\\circ)>0$ because $0\\in\\operatorname{supp}\\mu$;\nthus the logarithm is finite. The value is finite and nonnegative. The support assertion used here is\n[[thm-support-of-banach-gaussian-is-closure-of-rkhs]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-gaussian-concentration-sieve-bounds",
+          "source_section": "Statement",
+          "quote": "Assume AC and countable choice. Let $\\mu$ be a centered tight Borel Gaussian\nlaw on a real separable Banach\nspace $B$, with covariance RKHS $H$, and let $w_0\\in\\overline H^{\\,B}$.\nSuppose $n\\ge1$, $\\varepsilon>0$, $C>1$,\n$e^{-Cn\\varepsilon^2}<1/2$, and\n$\\phi_{w_0}(\\varepsilon)\\le n\\varepsilon^2$, where $\\phi_{w_0}$ is the\nconcentration function. Then there is a measurable set $B_n\\subseteq B$\nsuch that\n$$\\log N(3\\varepsilon,B_n,\\|\\cdot\\|_B)\\le6Cn\\varepsilon^2,\\qquad \\mu(B\\setminus B_n)\\le e^{-Cn\\varepsilon^2},$$\nand\n$$\\mu\\{\\|W-w_0\\|_B<2\\varepsilon\\}\\ge e^{-n\\varepsilon^2}.$$\nThese are prior-mass and sieve bounds only; they assert no posterior\ncontraction without separate statistical-distance and Kullback–Leibler\ncomparisons.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "3.1",
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space and let $B$ be a real\nseparable Banach space with its norm Borel sigma-algebra. A map\n$W:\\Omega\\to B$ is a **centered Borel Gaussian random element** if it is\nBorel-measurable and, for every $\\ell\\in B^*$, the real random variable\n$\\ell(W)$ has a centered (possibly zero-variance) normal law. Its law is the\nBorel probability $\\mu=P\\circ W^{-1}$. When the word *tight* is used, it means\nthat for every $\\delta>0$ there is a norm-compact $K\\subseteq B$ with\n$\\mu(K)>1-\\delta$.\n\nThis definition concerns a random element in $B$. A Gaussian process on an\narbitrary index set with only a cylinder-space law does not satisfy it unless\na Borel $B$-valued realization is separately constructed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-banach-gaussian-covariance-operator-and-rkhs",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $W$ be a centered Borel Gaussian random element in a real separable\nBanach space $B$, with law $\\mu$. For $\\ell\\in B^*$ define\n$$C\\ell=E[\\ell(W)W]\\in B,\\qquad Q(\\ell,m)=E[\\ell(W)m(W)]\\quad(\\ell,m\\in B^*).$$\nThe **Cameron–Martin reproducing-kernel Hilbert space** $H$ is the completion\nof $B^*/N$ in the inner product induced by $Q$, where\n$N=\\{\\ell\\in B^*:Q(\\ell,\\ell)=0\\}$. The canonical map sends the class of\n$\\ell$ to $C\\ell$ and extends continuously to an injective map $i:H\\to B$;\nwe identify $H$ with its image in $B$ and use the completed Hilbert norm\n$\\|\\cdot\\|_H$. The preceding construction is well-defined by\n[[thm-banach-gaussian-covariance-rkhs-is-well-defined]].\n\nThe term *RKHS* here denotes this covariance-induced Hilbert space of shifts\ninside $B$; it is not the space of all continuous functions on an arbitrary\nindex set.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A4",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "Work over ZF. The **real dominated-extension principle**, denoted **HB**, is the following assertion:\n\nFor every real vector space $X$, every sublinear functional $p:X\\to\\mathbb R$ in the sense of [[def-sublinear-functional]], every real linear subspace $M\\le X$ in the sense of [[def-linear-subspace]], and every real linear functional $g:M\\to\\mathbb R$ in the sense of [[def-algebraic-dual-and-linear-functional]],\n$$\\bigl(\\forall m\\in M,\\ g(m)\\le p(m)\\bigr)\\ \\Longrightarrow\\ \\exists F:X\\to\\mathbb R\\ \\bigl(F\\text{ is real linear},\\ F|_M=g,\\ \\forall x\\in X,\\ F(x)\\le p(x)\\bigr).$$\n\nThis names an additional principle; it does not assert a proof of HB in ZF. Subsequent results explicitly state when they assume HB. Neither topology nor completeness is part of this assertion. The subspace may be $\\{0\\}$ or all of $X$. Sublinearity at scalar zero gives $p(0)=0$, and a linear functional has value zero at zero.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-iid-posterior-denominator-lower-bound-from-kl-mass",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a measurable parameter space, $\\Pi$ a prior probability measure on it, and $p_\\theta$ a jointly measurable family of finite-valued probability densities relative to one fixed sigma-finite measure $\\mu$. Let $P_0$ have finite-valued density $p_0$ relative to $\\mu$, and let $X_1,\\ldots,X_n$ be IID with law $P_0$. Assume the Axiom of Choice for the imported directional KL convention ([[def-axiom-of-choice]]). The jointly measurable density family is explicit input, so no arbitrary-index selection of versions is used here. In the expression below, the weighted log terms are set to zero on $\\{p_0=0\\}$; on $\\{p_0>0,p_\\theta=0\\}$ the log ratio is $-\\infty$ and its square is $+\\infty$. For $\\epsilon_n>0$, define\n$$K_n:=\\left\\{\\theta:\\mathrm{KL}(P_0\\Vert P_\\theta)\\le\\epsilon_n^2,\\quad \\int\\left[\\log\\frac{p_\\theta}{p_0}\\right]^2p_0\\,d\\mu\\le\\epsilon_n^2\\right\\}.$$\nJoint measurability and Tonelli make $K_n$ measurable, as verified below. If $\\Pi(K_n)\\ge e^{-Cn\\epsilon_n^2}$ for $C>0$ and $\\mathrm{KL}(P_0\\Vert P_\\theta)$ uses the direction in [[def-kullback-leibler-divergence]], then, defining the ratio to be zero on the $P_0$-null set where $p_0=0$, the likelihood denominator\n$$D_n:=\\int_\\Theta\\prod_{i=1}^n\\frac{p_\\theta(X_i)}{p_0(X_i)}\\,\\Pi(d\\theta)$$\nis finite and positive $P_0^n$-almost surely and\n$$P_0^n\\!\\left\\{D_n\\ge e^{-(C+2)n\\epsilon_n^2}\\right\\}\\ge1-\\frac1{n\\epsilon_n^2}.$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-iid-sieve-entropy-produces-exponential-tests",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal A,\\mu)$ be a measure space with a fixed sigma-finite measure. A probability density is a finite-valued nonnegative measurable $p$ with $\\int p\\,d\\mu=1$, and its induced law is $P_p=p\\,d\\mu$ as in [[def-measure-with-density]]. Let $p_0$ be a probability density and write $P_0:=p_0\\,d\\mu$. Let $\\mathcal F$ be a family of such densities, write $P_p:=p\\,d\\mu$ for $p\\in\\mathcal F$, and let $\\mathcal F_n\\subseteq\\mathcal F$ be nonempty. Let $X_1,\\ldots,X_n$ be IID under each law used below. The selected metric $d$ is one of:\n\n- the root-L2 Hellinger distance $h$ of [[def-hellinger-distance-between-density-laws]];\n- the full density distance $d_1(p,q):=\\int|p-q|\\,d\\mu$;\n- the density distance $d_2(p,q):=(\\int|p-q|^2\\,d\\mu)^{1/2}$, provided a fixed $B>0$ bounds $p_0$ and every $p\\in\\mathcal F$ by $B$ almost everywhere.\n\nFor $r>0$, let $D(r,\\mathcal F_n,d)$ be the supremum of the cardinalities of finite subsets of $\\mathcal F_n$ whose distinct points have $d$-distance greater than $r$. Suppose $\\epsilon_n>0$, $\\epsilon_n\\to0$, $n\\epsilon_n^2\\to\\infty$, and\n$$\\log D(\\epsilon_n,\\mathcal F_n,d)\\le n\\epsilon_n^2.$$\nThen for every fixed $M\\ge128$ and all sufficiently large $n$, there is a measurable test $\\phi_n:\\mathsf X^n\\to\\{0,1\\}$ such that, for some $c_d>0$ depending only on the selected metric (and on $B$ in the $d_2$ case),\n$$P_0^n(\\phi_n=1)\\le2e^{-(c_dM^2-1)n\\epsilon_n^2},$$\nand $P_p^n(\\phi_n=0)\\le e^{-c_dM^2n\\epsilon_n^2}$ for every $p\\in\\mathcal F_n$ with $d(p,p_0)>M\\epsilon_n$.\n\nThe entropy metric is the same metric used in the separation and test-error conclusion. The $d_1$ convention is the full integral $\\int|p-q|\\,d\\mu$, which equals twice the library event-supremum total variation distance.",
+          "uses": [
+            "1.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-log-gaussian-density-supnorm-controls-local-likelihood-distances",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal A,\\nu)$ be a measure space, and let $w,w_0:\\mathsf X\\to\\mathbb R$ be measurable with finite positive normalizers $Z_w=\\int e^w\\,d\\nu$ and $Z_0=\\int e^{w_0}\\,d\\nu$. Set $p_w=e^w/Z_w$, $p_0=e^{w_0}/Z_0$, and $r=\\|w-w_0\\|_\\infty\\le1$. With root-L2 Hellinger distance as in [[def-hellinger-distance-between-density-laws]], and the directional convention of [[def-kullback-leibler-divergence]],\n$$h(P_w,P_0)\\le e^r r,\\qquad \\mathrm{KL}(P_0\\Vert P_w)\\le \\tfrac12 e^{2r}r^2,\\qquad \\int\\left(\\log\\frac{p_w}{p_0}\\right)^2p_0\\,d\\nu\\le4r^2.$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "3.1",
+            "3.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-binary-regression-l2-controls-local-likelihood-distances",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a probability measure on $(\\mathsf X,\\mathcal A)$, let $\\Psi:\\mathbb R\\to(0,1)$ be differentiable, and suppose\n$$L:=\\sup_{u\\in\\mathbb R}|\\Psi'(u)|<\\infty,\\qquad R:=\\sup_{u\\in\\mathbb R}\\left|\\frac{\\Psi'(u)}{\\Psi(u)(1-\\Psi(u))}\\right|<\\infty.$$\nFor measurable real functions $w,w_0$, define Bernoulli densities relative to $G\\otimes\\#$, where $\\#$ is counting measure on $\\{0,1\\}$, by\n$$q_w(x,y)=\\Psi(w(x))^y(1-\\Psi(w(x)))^{1-y},\\qquad q_{w_0}(x,y)=\\Psi(w_0(x))^y(1-\\Psi(w_0(x)))^{1-y}.$$\nIf $w-w_0\\in L^2(G)$, then, with $d_2(q_w,q_{w_0})^2=\\int|q_w-q_{w_0}|^2\\,d(G\\otimes\\#)$,\n$$d_2(q_w,q_{w_0})^2\\le2L^2\\|w-w_0\\|_{L^2(G)}^2,$$\n$$\\mathrm{KL}(Q_{w_0}\\Vert Q_w)\\le\\frac{LR}{2}\\|w-w_0\\|_{L^2(G)}^2,\\qquad E_{Q_{w_0}}\\!\\left[\\left(\\log\\frac{q_w(X,Y)}{q_{w_0}(X,Y)}\\right)^2\\right]\\le R^2\\|w-w_0\\|_{L^2(G)}^2.$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "3.1",
+            "3.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fixed-design-gaussian-regression-controls-local-likelihood-distances",
+          "source_section": "Statement",
+          "quote": "Let $0<a<b<\\infty$, let $\\sigma_0,\\sigma\\in[a,b]$, and fix design points $x_1,\\ldots,x_n$. Under the true independent laws $Y_i\\sim N(w_0(x_i),\\sigma_0^2)$, the model has independent laws $Y_i\\sim N(w(x_i),\\sigma^2)$. Write $\\delta_i=w(x_i)-w_0(x_i)$ and $\\|\\delta\\|_n^2=n^{-1}\\sum_i\\delta_i^2$. There is a finite constant $C_{a,b}$, depending only on $a,b$, such that whenever $\\max_i|\\delta_i|\\le1$ and $|\\sigma-\\sigma_0|\\le1$,\n$$\\frac1n\\sum_{i=1}^n\\mathrm{KL}(P_{i0}\\Vert P_i)\\le C_{a,b}(\\|\\delta\\|_n^2+|\\sigma-\\sigma_0|^2),$$\n$$\\frac1n\\sum_{i=1}^n E_{i0}\\!\\left[\\left(\\log\\frac{p_i(Y_i)}{p_{i0}(Y_i)}\\right)^2\\right]\\le C_{a,b}(\\|\\delta\\|_n^2+|\\sigma-\\sigma_0|^2).$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "3.1",
+            "3.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-independent-observation-posterior-denominator-lower-bound",
+          "source_section": "Statement",
+          "quote": "Assume AC. For each $n$, let $Y_1,\\ldots,Y_n$ be independent, with true densities $p_{i0}$ and candidate densities $p_{i\\theta}$ relative to supplied sigma-finite measures $\\mu_i$. Assume $(\\theta,y)\\mapsto p_{i\\theta}(y)$ is jointly measurable and let $\\Pi$ be a prior. If a measurable set $K_n$ satisfies\n$$\\Pi(K_n)\\ge e^{-Cn\\epsilon_n^2},\\quad \\sup_{\\theta\\in K_n}\\frac1n\\sum_{i=1}^n\\mathrm{KL}(P_{i0}\\Vert P_{i\\theta})\\le\\epsilon_n^2,\\quad \\sup_{\\theta\\in K_n}\\frac1n\\sum_{i=1}^n E_{i0}\\!\\left[\\log\\frac{p_{i\\theta}(Y_i)}{p_{i0}(Y_i)}\\right]^2\\le\\epsilon_n^2,$$\nthen the denominator\n$$D_n=\\int\\prod_{i=1}^n\\frac{p_{i\\theta}(Y_i)}{p_{i0}(Y_i)}\\,\\Pi(d\\theta)$$\nis finite $P_0^{(n)}$-almost surely and satisfies\n$$P_0^{(n)}\\{D_n\\ge e^{-(C+2)n\\epsilon_n^2}\\}\\ge1-\\frac1{n\\epsilon_n^2}.$$",
+          "uses": [
+            "1.4",
+            "3.1",
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-independent-posterior-splitting-from-tests-and-sieve-tail",
+          "source_section": "Statement",
+          "quote": "For each $n$, let $P_{\\theta,n}$ and $P_{0,n}$ have jointly measurable densities $p_{\\theta,n}$ and $p_{0,n}$ relative to a common sigma-finite measure, and let $\\Pi$ be a prior. Let $\\Theta_n$ be a measurable sieve, let\n$$A_n=\\{\\theta:d_n(\\theta,\\theta_0)>r_n\\},$$\nand let $D_n=\\int p_{\\theta,n}(Y)/p_{0,n}(Y)\\,\\Pi(d\\theta)$ be the likelihood-ratio denominator on the $P_{0,n}$-full set where $p_{0,n}(Y)>0$. Suppose $\\epsilon_n>0$, $n\\epsilon_n^2\\to\\infty$, and constants $A<B$, $T>A$ satisfy\n$$P_{0,n}\\{D_n<e^{-An\\epsilon_n^2}\\}\\to0,\\qquad \\Pi(\\Theta_n^c)\\le e^{-Bn\\epsilon_n^2},$$\nand there are measurable tests $\\phi_n$ with\n$$P_{0,n}(\\phi_n=1)\\le e^{-Tn\\epsilon_n^2},\\qquad \\sup_{\\theta\\in A_n\\cap\\Theta_n}P_{\\theta,n}(\\phi_n=0)\\le e^{-Tn\\epsilon_n^2}.$$\nThen the posterior mass of $A_n$ tends to zero in $P_{0,n}$-probability.",
+          "uses": [
+            "1.4",
+            "3.1",
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-tight-borel-gaussian-law-has-separable-support",
+          "source_section": "Statement",
+          "quote": "Let $B$ be a real Banach space and let $W$ be a Borel measurable $B$-valued random element with tight law $\\mu$. Tight means that for every $\\eta>0$ some compact $K\\subset B$ satisfies $\\mu(K)>1-\\eta$. Assume $W$ is centered Gaussian, meaning that every continuous real linear functional $\\ell:B\\to\\mathbb R$ makes $\\ell(W)$ a centered scalar normal random variable. Then there is a separable closed linear subspace $E\\subset B$ with $\\mu(E)=1$. The law of $W$ viewed as an $E$-valued random element is tight and centered Gaussian, and its support in $E$ is exactly the support of $\\mu$ in $B$, viewed as a subset of $B$. In particular, every ambient support point belongs to $E$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-nondegenerate-gaussian-small-ball-controls-log-radius",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a centered Gaussian random element in a real normed space $B$. Let $\\ell\\in B^*$ satisfy $\\operatorname{Var}(\\ell(W))=\\tau^2>0$, and let $\\mathbb H$ be a Hilbert subspace of $B$ with nonnegative squared norm. For $w_0\\in B$, define\n$$\\phi_{w_0}(\\epsilon)=\\inf_{\\substack{h\\in\\mathbb H\\\\\\|h-w_0\\|_B<\\epsilon}}\\left\\{\\|h\\|_{\\mathbb H}^2\\right\\}-\\log\\Pr(\\|W\\|_B<\\epsilon),$$\nwith $\\inf\\varnothing=+\\infty$. Then for every $\\epsilon>0$,\n$$\\phi_{w_0}(\\epsilon)\\ge \\log(1/\\epsilon)-C_\\ell,\\qquad C_\\ell=\\log\\!\\left(\\frac{2\\|\\ell\\|_{B^*}}{\\sqrt{2\\pi}\\tau}\\right).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-separable-banach-has-countable-norming-family",
+          "source_section": "Statement",
+          "quote": "Assume HB and countable choice. Let $B$ be a real separable Banach space. There is a sequence\n$(\\ell_j)_{j\\ge1}\\subseteq B^*$ with $\\|\\ell_j\\|=1$ such that\n$$\\|x\\|=\\sup_{j\\ge1}|\\ell_j(x)|\\qquad(x\\in B).$$\nIf $B=\\{0\\}$, the conclusion is interpreted using the zero functional and the\nsupremum is $0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "lem-fixed-design-gaussian-regression-exponential-tests",
+          "source_section": "Statement",
+          "quote": "Let $x_1,\\ldots,x_n$ be deterministic, $Y_i=w_0(x_i)+\\sigma_0Z_i$ under the truth with independent $Z_i\\sim N(0,1)$, and let candidate parameters be $(w,\\sigma)$ with $\\sigma\\in[a,b]$, $0<a<b$, and $\\sigma_0\\in[a,b]$. Put $\\|u\\|_n^2=n^{-1}\\sum_i u(x_i)^2$. Suppose $\\epsilon_n\\to0$, $n\\epsilon_n^2\\to\\infty$, and a measurable function sieve $B_n$ has a finite supremum-norm cover of radius $3\\epsilon_n$ with at most $\\exp(6C n\\epsilon_n^2)$ centers, for a fixed $C>0$. For every $T>0$, there is a sufficiently large fixed $M$ and a measurable test $\\phi_n$ such that, for all sufficiently large $n$,\n$$P_0^n(\\phi_n=1)\\le e^{-Tn\\epsilon_n^2},\\qquad \\sup_{\\substack{w\\in B_n,\\ \\sigma\\in[a,b]\\\\ \\|w-w_0\\|_n+|\\sigma-\\sigma_0|>M\\epsilon_n}}P_{w,\\sigma}^n(\\phi_n=0)\\le e^{-Tn\\epsilon_n^2}.$$",
+          "uses": [
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "lem-gaussian-linear-and-quadratic-statistic-tail",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $Z_1,\\ldots,Z_n$ be independent $N(0,1)$ variables, let $c_1,\\ldots,c_n,\\delta_1,\\ldots,\\delta_n\\in\\mathbb R$, and let $0<\\sigma\\le b$. Put $\\|c\\|_n^2=n^{-1}\\sum_i c_i^2$ and $\\|\\delta\\|_n^2=n^{-1}\\sum_i\\delta_i^2$. For $t>0$,\n$$\\Pr\\!\\left(\\left|n^{-1}\\sum_i c_i\\sigma Z_i\\right|\\ge t\\right)\\le2\\exp\\!\\left(-\\frac{nt^2}{2\\sigma^2\\|c\\|_n^2}\\right),$$\nwith zero probability when $\\|c\\|_n=0$. If $\\|\\delta\\|_n\\le1$ and $0<t\\le b^2+2$, then\n$$\\Pr\\!\\left(\\left|n^{-1}\\sum_i(\\delta_i+\\sigma Z_i)^2-(\\sigma^2+\\|\\delta\\|_n^2)\\right|\\ge t\\right)\\le2\\exp\\!\\left(-\\frac{nt^2}{4V_b}\\right),\\qquad V_b=2b^4+4b^2.$$",
+          "uses": [
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The separable-support reduction [F5] leaves the inherited norm, law and support point unchanged. For the first two branches use the rate $r_n=\\epsilon_n$; for the universal fixed-design branch use $r_n=\\rho_n$. The concentration function is nonincreasing in its radius, because its feasible RKHS approximation set grows and centered small-ball probabilities increase. Thus $\\phi_{w_0}(r_n)\\le\\phi_{w_0}(\\epsilon_n)\\le n\\epsilon_n^2\\le nr_n^2$. Both choices satisfy $r_n\\to0$ and $nr_n^2\\to\\infty$. By [F8], the support point lies in the RKHS closure.",
+          "inputs": [
+            "F5",
+            "F8",
+            "A3",
+            "A4",
+            "F9",
+            "F11",
+            "F12",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "In log-Gaussian density estimation, evaluation measurability and Tonelli [F6] make $w\\mapsto Z_w$ measurable. On its full-prior positive-finite set, $(w,x)\\mapsto e^{w(x)}/Z_w$ is a jointly measurable density family. The $2r_n$ supremum ball has directional KL at most $2e^{4r_n}r_n^2$ and log-square at most $16r_n^2$ by [F3]. Choose a fixed sufficiently large $k$. Its prior mass is at least $e^{-nr_n^2}$ by [F10], so [F1] at radius $kr_n$ gives a denominator at least $e^{-A nr_n^2}$ for fixed $A=1+2k^2$ except with probability tending to zero.",
+          "inputs": [
+            "F6",
+            "F3",
+            "F10",
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "In binary regression, [F3] places the $2r_n$ prior ball in a directional KL/log-square set of radius $k^2r_n^2$ for a fixed sufficiently large $k$. Its mass is at least $e^{-nr_n^2}$ by [F10], so [F1] gives the same type of denominator bound. The joint Bernoulli densities relative to $G\\otimes\\#$ are bounded by one, as required for the density-$L^2$ tests in [F2].",
+          "inputs": [
+            "F3",
+            "F10",
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "1.4",
+          "claim": "For the universal fixed-design branch take $r_n=\\rho_n$. On $\\|w-w_0\\|_\\infty<2r_n$ and $|\\sigma-\\sigma_0|<r_n$, [F3] bounds average directional KL and log-square by $Kr_n^2$ for fixed $K$. Independence and [A2], together with [F10], give joint local prior mass at least $cr_ne^{-nr_n^2}$. Since $r_n\\ge\\sqrt{\\log n/n}$, eventually $\\log(1/r_n)\\le\\tfrac12\\log n\\le\\tfrac12nr_n^2$; hence this mass is at least $e^{-C_0nr_n^2}$ for fixed $C_0$. The independent-observation denominator lemma in [F4] applies.",
+          "inputs": [
+            "F3",
+            "A2",
+            "F10",
+            "F4",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For each branch choose $C>1$ larger than its denominator exponent; eventually $e^{-Cnr_n^2}<1/2$. Apply the prior sieve theorem [F10] using step 1.1 to get measurable $B_n$ with entropy at radius $3r_n$ at most $6Cnr_n^2$ and tail at most $e^{-Cnr_n^2}$. The same theorem supplies the local prior mass used in steps 1.2–1.4.",
+          "inputs": [
+            "F10",
+            "step 1.1",
+            "step 1.2",
+            "step 1.4",
+            "A3",
+            "F8",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In the density branch intersect $B_n$ with the measurable positive-finite-normalizer set, changing its prior tail by zero. From a radius-$3r_n$ cover, select a valid center for every cover ball meeting that intersection; finite selection doubles the radius to $6r_n$ without increasing the number. The pairwise norm comparison [F3] sends this to a Hellinger cover of radius at most $7r_n$ for large $n$. Thus any $14r_n$-separated set has size at most $e^{6Cnr_n^2}$. Taking packing radius at least $\\max\\{14,\\sqrt{6C}\\}r_n$, [F2] gives tests with null and uniform sieve alternative errors at most $e^{-Tnr_n^2}$ for any fixed desired $T>A$, by increasing the alternative multiple. The denominator and sieve tail now satisfy the posterior split in [F4], proving contraction in probability.",
+          "inputs": [
+            "F3",
+            "F2",
+            "F4",
+            "F6",
+            "F10",
+            "step 1.2",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "In binary regression the norm-ball and sieve cover map by [F3] to density-$L^2$ balls and covers of constant times $r_n$. Taking packing radius at least twice the cover radius and at least $\\sqrt{6C}r_n$ gives packing entropy at most its squared radius times $n$. By [F2] and [F4], the tests, denominator and sieve tail prove contraction in probability. Since the joint Bernoulli densities satisfy $d_2(q_w,q_{w_0})=\\sqrt2\\|\\Psi(w)-f_0\\|_{L^2(G)}$, this is the stated binary distance.",
+          "inputs": [
+            "F3",
+            "F2",
+            "F4",
+            "F10",
+            "step 1.3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "step": "3.3",
+          "claim": "In fixed-design regression take the product sieve $B_n\\times[a,b]$. Its prior tail is at most $e^{-Cnr_n^2}$, and its function component has the radius-$3r_n$ cover from step 2.1. The local fixed-design testing lemma [F14] gives tests outside $\\|w-w_0\\|_n+|\\sigma-\\sigma_0|>Mr_n$ with errors at most $e^{-Tnr_n^2}$ for any fixed $T$ by choosing fixed $M$ large. Choose $T$ and $C$ above the denominator exponent in step 1.4. The posterior split [F4] proves the universal $\\rho_n$ contraction in probability.",
+          "inputs": [
+            "step 2.1",
+            "F14",
+            "step 1.4",
+            "F4",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "If the Gaussian law is not $\\delta_0$, [F13] supplies a continuous linear functional with nonzero Gaussian variance. Indeed, otherwise every member of a countable norming family would vanish almost surely, forcing $\\|W\\|=0$ almost surely. By [F7] there is a fixed constant $D$ such that $\\log(1/\\epsilon_n)\\le n\\epsilon_n^2+D$. Put $t_n=n\\epsilon_n^2\\to\\infty$; then $\\log n=\\log t_n+2\\log(1/\\epsilon_n)\\le3t_n+2D$ eventually, since $\\log t_n\\le t_n$. Consequently $\\rho_n\\le C_1\\epsilon_n$ for fixed $C_1$. The universal conclusion in step 3.3 therefore proves the sharper $\\epsilon_n$ conclusion after enlarging $M$ by $C_1$.",
+          "inputs": [
+            "F13",
+            "F7",
+            "step 3.3",
+            "A3",
+            "A4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "step": "4.2",
+          "claim": "Now suppose $W=0$ almost surely and its scale density $g$ is bounded above by $U<\\infty$ on $|\\sigma-\\sigma_0|<\\delta$ within $[a,b]$. The support assumption forces $w_0=0$. Put $S_n=\\sum_iY_i^2$, $q=S_n/(n\\sigma_0^2)$, and $L_n(\\sigma)=(\\sigma_0/\\sigma)^n\\exp[(1-\\sigma_0^2/\\sigma^2)S_n/(2\\sigma_0^2)]$. On $E_R=\\{|S_n-n\\sigma_0^2|\\le R\\sqrt n\\}$, write $z=(\\sigma-\\sigma_0)/\\sigma_0$. Compactness of the positive scale interval and Taylor's formula give constants $c,C>0$ independent of $n,R$ with $$-Cn(\\sigma-\\sigma_0)^2-CR\\sqrt n|\\sigma-\\sigma_0|\\le\\log L_n(\\sigma)\\le-cn(\\sigma-\\sigma_0)^2+CR\\sqrt n|\\sigma-\\sigma_0|.$$ For verification, its deterministic part is $n[-\\log(1+z)+(1-(1+z)^{-2})/2]$, negative away from zero, with second derivative $-2$ at zero; the remaining term is $(S_n-n\\sigma_0^2)(1-(1+z)^{-2})/(2\\sigma_0^2)$, bounded by $CR\\sqrt n|z|$. The residual-energy tail in [F15] with zero mean shift gives $\\limsup_nP_0(E_R^c)\\le2e^{-c_0R^2}$ for fixed $R$.",
+          "inputs": [
+            "F15",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-3",
+          "step": "4.3",
+          "claim": "On $E_R$ integrate the likelihood over $|\\sigma-\\sigma_0|\\le1/\\sqrt n$ within $[a,b]$. This interval has length at least $1/\\sqrt n$ for large $n$, even at an endpoint; [A2] and step 4.2 bound its integral below by $c_R/\\sqrt n$ for some $c_R>0$. On the local neighborhood where $g\\le U$, substitute $u=\\sqrt n(\\sigma-\\sigma_0)$ in the numerator outside $M\\epsilon_n$. Dividing by that lower bound gives at most $C_R\\int_{|u|>M\\sqrt n\\epsilon_n}e^{-cu^2+CR|u|}du\\to0$, since $n\\epsilon_n^2\\to\\infty$. Outside the local neighborhood, step 4.2 bounds $L_n$ by $e^{-c'n}$ for large $n$, whose integral against the entire probability prior is at most $e^{-c'n}$; after dividing by the denominator this also tends to zero. First let $n\\to\\infty$ and then $R\\to\\infty$. This proves the sharper degenerate-prior contraction in probability for every fixed $M>0$.",
+          "inputs": [
+            "A2",
+            "step 4.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "In each proved branch the posterior tail is a random variable $T_n\\in[0,1]$ converging to zero in probability. For $\\eta>0$, $ET_n\\le\\eta+P(T_n>\\eta)$; first take the limit superior and then $\\eta\\downarrow0$. Thus all asserted expectation limits follow. The universal fixed-design rate requires no upper bound on the scale density; the sharper degenerate alternative uses only the explicitly local upper bound.",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "step 3.3",
+            "step 4.1",
+            "step 4.3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and steps1.1,1.4,4.1,4.2,4.3 retain zero Gaussian law, nonzero Gaussian law, scale interval endpoints, positive finite evidence and all-prior rate floor; the sharper degenerate alternative is explicitly locally upper-bounded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps1.1,1.4,4.1,4.2,4.3 retain zero Gaussian law, nonzero Gaussian law, scale interval endpoints, positive finite evidence and all-prior rate floor; the sharper degenerate alternative is explicitly locally upper-bounded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps1.1,1.4,4.1,4.2,4.3 retain zero Gaussian law, nonzero Gaussian law, scale interval endpoints, positive finite evidence and all-prior rate floor; the sharper degenerate alternative is explicitly locally upper-bounded."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps1.1,1.4,4.1,4.2,4.3 retain zero Gaussian law, nonzero Gaussian law, scale interval endpoints, positive finite evidence and all-prior rate floor; the sharper degenerate alternative is explicitly locally upper-bounded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and steps1.1,1.4,4.1,4.2,4.3 retain zero Gaussian law, nonzero Gaussian law, scale interval endpoints, positive finite evidence and all-prior rate floor; the sharper degenerate alternative is explicitly locally upper-bounded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps1.1,1.4,4.1,4.2,4.3 retain zero Gaussian law, nonzero Gaussian law, scale interval endpoints, positive finite evidence and all-prior rate floor; the sharper degenerate alternative is explicitly locally upper-bounded."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-forward branch beyond the explicit Statement/Definition/Example hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-reverse branch beyond the explicit Statement/Definition/Example hypotheses."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-log-gaussian-uniform-density-posterior": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gaussian-process-posterior-contraction",
+          "source_section": "Statement",
+          "quote": "Let $\\epsilon_n>0$ satisfy $\\epsilon_n\\to0$ and $n\\epsilon_n^2\\to\\infty$. For the centered tight Gaussian prior in each branch, let $\\mu$ be its law and let $B$ be a separable closed Banach carrier with the norm inherited from that branch's stated function space, as supplied by [[lem-tight-borel-gaussian-law-has-separable-support]]. Write $\\mathbb H$ for the covariance RKHS of $\\mu$ on $B$, and define\n$$\\phi_{w_0}(\\epsilon)=\\inf_{\\substack{h\\in\\mathbb H\\\\\\|h-w_0\\|_B<\\epsilon}}\\left\\{\\|h\\|_{\\mathbb H}^2-\\log\\mu(\\epsilon B^\\circ)\\right\\},\\qquad \\epsilon B^\\circ=\\{u\\in B:\\|u\\|_B<\\epsilon\\}.$$\nSuppose $\\phi_{w_0}(\\epsilon_n)\\le n\\epsilon_n^2$.\n\nIn each branch, parameter-to-data densities are jointly measurable and the posterior $\\Pi_n$ is the data-indexed normalization of the prior times the likelihood on fibers with finite positive evidence.\n\n1. **Log-Gaussian density estimation.** On a measurable space $(\\mathsf X,\\mathcal A)$ with sigma-finite measure $\\nu$, let $W$ be a tight centered Borel Gaussian random element in $\\ell^\\infty(\\mathsf X)$, and let $w_0$ belong to its support. Assume path evaluation $(w,x)\\mapsto w(x)$ is jointly measurable, $Z_w=\\int e^w\\,d\\nu\\in(0,\\infty)$ for prior-almost every $w$ and for $w_0$, and set $p_w=e^w/Z_w$, $p_0=p_{w_0}$. For IID data $X_1,\\ldots,X_n\\sim P_0$, sufficiently large fixed $M$ gives\n$$E_0\\Pi_n\\{w:h(P_w,P_0)>M\\epsilon_n\\mid X^n\\}\\longrightarrow0.$$\nWhen $0<\\nu(\\mathsf X)<\\infty$, bounded paths imply the required normalizers are finite and positive.\n\n2. **Binary regression.** Let $(X_i,Y_i)$ be IID, with $X_i\\sim G$, $Y_i\\in\\{0,1\\}$ and $P_0(Y=1\\mid X=x)=f_0(x)=\\Psi(w_0(x))\\in(0,1)$. Assume $\\Psi:\\mathbb R\\to(0,1)$ is differentiable, $\\sup|\\Psi'|<\\infty$, and $\\sup|\\Psi'/[\\Psi(1-\\Psi)]|<\\infty$. Suppose the prior is either a tight centered Gaussian law in $L^2(G)$ with a jointly measurable evaluation version representing its $L^2(G)$ element almost everywhere, or a tight centered Gaussian law in $\\ell^\\infty(\\mathsf X)$ with jointly measurable evaluation and bounded $w_0$; in either case $w_0$ belongs to the prior support. Then for sufficiently large fixed $M$,\n$$E_0\\Pi_n\\{\\|\\Psi(w)-f_0\\|_{L^2(G)}>M\\epsilon_n\\mid (X_i,Y_i)_{i=1}^n\\}\\longrightarrow0.$$\n\n3. **Fixed-design Gaussian regression.** For deterministic $x_1,\\ldots,x_n$, assume independent $Y_i\\sim N(w_0(x_i),\\sigma_0^2)$, a centered tight Borel Gaussian prior $W$ in $\\ell^\\infty(\\mathsf X)$ with $w_0$ in support, and an independent prior on the standard deviation $\\sigma$ supported on a fixed $[a,b]\\subset(0,\\infty)$ containing $\\sigma_0$, with Lebesgue density bounded below by a positive constant. Put $\\rho_n=\\max\\{\\epsilon_n,\\sqrt{\\log n/n}\\}$ for $n\\ge2$. Then for sufficiently large fixed $M$,\n$$E_0\\Pi_n\\{\\|w-w_0\\|_n+|\\sigma-\\sigma_0|>M\\rho_n\\mid Y_{1:n}\\}\\longrightarrow0.$$\nThe sharper conclusion with $\\epsilon_n$ in place of $\\rho_n$ holds if the Gaussian law is not the point mass at zero. It also holds when $W=0$ almost surely and the scale-prior density is bounded above on a neighborhood of $\\sigma_0$; this extra upper bound is needed only for that sharper degenerate-prior alternative, not for the universal $\\rho_n$ conclusion. In the nondegenerate case $\\rho_n=O(\\epsilon_n)$, so the two formulations differ only by the fixed constant $M$. Here $\\|w-w_0\\|_n^2=n^{-1}\\sum_i(w(x_i)-w_0(x_i))^2$.\n\nThe concentration-function hypothesis is interpreted on a separable Banach space carrying the prior. For a tight Gaussian law initially given in nonseparable $\\ell^\\infty(\\mathsf X)$, the separable-support reduction is [[lem-tight-borel-gaussian-law-has-separable-support]]; the norm and prior law are restricted to that support space.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Every prior path is constant, so $Z_W=\\int_0^1 e^Zdx=e^Z$ and $p_W(x)=1=p_0(x)$. Thus the posterior distribution of the density itself is the point mass at $p_0$ for every data vector; its posterior mass outside every positive Hellinger ball is exactly zero.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The RKHS approximation term at $w_0=0$ is zero because the zero vector belongs to every Hilbert space. For $0<\\epsilon\\le1$, [F1] gives $\\Pr(\\|W\\|_\\infty<\\epsilon)=\\Pr(|Z|<\\epsilon)\\ge2\\varphi(1)\\epsilon$, hence $\\phi_0(\\epsilon)\\le-\\log(2\\varphi(1)\\epsilon)$. For $\\epsilon_n=\\sqrt{\\log n/n}$, $n\\epsilon_n^2=\\log n$ and $-\\log\\epsilon_n\\le\\frac12\\log n$ for large n, so $\\phi_0(\\epsilon_n)\\le n\\epsilon_n^2$ eventually.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The density family is jointly measurable and all normalizers are positive and finite. Step 1.2 verifies the concentration premise; applying the log-Gaussian branch of [F2] gives the stated rate, while step 1.1 gives the stronger exact posterior conclusion.",
+          "inputs": [
+            "step 1.2",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-forward branch beyond the explicit Statement/Definition/Example hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-reverse branch beyond the explicit Statement/Definition/Example hypotheses."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-fixed-design-gaussian-constant-process-and-unknown-scale": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gaussian-process-posterior-contraction",
+          "source_section": "Statement",
+          "quote": "Let $\\epsilon_n>0$ satisfy $\\epsilon_n\\to0$ and $n\\epsilon_n^2\\to\\infty$. For the centered tight Gaussian prior in each branch, let $\\mu$ be its law and let $B$ be a separable closed Banach carrier with the norm inherited from that branch's stated function space, as supplied by [[lem-tight-borel-gaussian-law-has-separable-support]]. Write $\\mathbb H$ for the covariance RKHS of $\\mu$ on $B$, and define\n$$\\phi_{w_0}(\\epsilon)=\\inf_{\\substack{h\\in\\mathbb H\\\\\\|h-w_0\\|_B<\\epsilon}}\\left\\{\\|h\\|_{\\mathbb H}^2-\\log\\mu(\\epsilon B^\\circ)\\right\\},\\qquad \\epsilon B^\\circ=\\{u\\in B:\\|u\\|_B<\\epsilon\\}.$$\nSuppose $\\phi_{w_0}(\\epsilon_n)\\le n\\epsilon_n^2$.\n\nIn each branch, parameter-to-data densities are jointly measurable and the posterior $\\Pi_n$ is the data-indexed normalization of the prior times the likelihood on fibers with finite positive evidence.\n\n1. **Log-Gaussian density estimation.** On a measurable space $(\\mathsf X,\\mathcal A)$ with sigma-finite measure $\\nu$, let $W$ be a tight centered Borel Gaussian random element in $\\ell^\\infty(\\mathsf X)$, and let $w_0$ belong to its support. Assume path evaluation $(w,x)\\mapsto w(x)$ is jointly measurable, $Z_w=\\int e^w\\,d\\nu\\in(0,\\infty)$ for prior-almost every $w$ and for $w_0$, and set $p_w=e^w/Z_w$, $p_0=p_{w_0}$. For IID data $X_1,\\ldots,X_n\\sim P_0$, sufficiently large fixed $M$ gives\n$$E_0\\Pi_n\\{w:h(P_w,P_0)>M\\epsilon_n\\mid X^n\\}\\longrightarrow0.$$\nWhen $0<\\nu(\\mathsf X)<\\infty$, bounded paths imply the required normalizers are finite and positive.\n\n2. **Binary regression.** Let $(X_i,Y_i)$ be IID, with $X_i\\sim G$, $Y_i\\in\\{0,1\\}$ and $P_0(Y=1\\mid X=x)=f_0(x)=\\Psi(w_0(x))\\in(0,1)$. Assume $\\Psi:\\mathbb R\\to(0,1)$ is differentiable, $\\sup|\\Psi'|<\\infty$, and $\\sup|\\Psi'/[\\Psi(1-\\Psi)]|<\\infty$. Suppose the prior is either a tight centered Gaussian law in $L^2(G)$ with a jointly measurable evaluation version representing its $L^2(G)$ element almost everywhere, or a tight centered Gaussian law in $\\ell^\\infty(\\mathsf X)$ with jointly measurable evaluation and bounded $w_0$; in either case $w_0$ belongs to the prior support. Then for sufficiently large fixed $M$,\n$$E_0\\Pi_n\\{\\|\\Psi(w)-f_0\\|_{L^2(G)}>M\\epsilon_n\\mid (X_i,Y_i)_{i=1}^n\\}\\longrightarrow0.$$\n\n3. **Fixed-design Gaussian regression.** For deterministic $x_1,\\ldots,x_n$, assume independent $Y_i\\sim N(w_0(x_i),\\sigma_0^2)$, a centered tight Borel Gaussian prior $W$ in $\\ell^\\infty(\\mathsf X)$ with $w_0$ in support, and an independent prior on the standard deviation $\\sigma$ supported on a fixed $[a,b]\\subset(0,\\infty)$ containing $\\sigma_0$, with Lebesgue density bounded below by a positive constant. Put $\\rho_n=\\max\\{\\epsilon_n,\\sqrt{\\log n/n}\\}$ for $n\\ge2$. Then for sufficiently large fixed $M$,\n$$E_0\\Pi_n\\{\\|w-w_0\\|_n+|\\sigma-\\sigma_0|>M\\rho_n\\mid Y_{1:n}\\}\\longrightarrow0.$$\nThe sharper conclusion with $\\epsilon_n$ in place of $\\rho_n$ holds if the Gaussian law is not the point mass at zero. It also holds when $W=0$ almost surely and the scale-prior density is bounded above on a neighborhood of $\\sigma_0$; this extra upper bound is needed only for that sharper degenerate-prior alternative, not for the universal $\\rho_n$ conclusion. In the nondegenerate case $\\rho_n=O(\\epsilon_n)$, so the two formulations differ only by the fixed constant $M$. Here $\\|w-w_0\\|_n^2=n^{-1}\\sum_i(w(x_i)-w_0(x_i))^2$.\n\nThe concentration-function hypothesis is interpreted on a separable Banach space carrying the prior. For a tight Gaussian law initially given in nonseparable $\\ell^\\infty(\\mathsf X)$, the separable-support reduction is [[lem-tight-borel-gaussian-law-has-separable-support]]; the norm and prior law are restricted to that support space.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The support of $W$ is the line of constant functions, which contains $w_0$. The RKHS approximation cost at zero is zero, and $\\|W\\|_\\infty=|Z|$. For $\\epsilon\\le1$, [F1] gives $\\Pr(\\|W\\|_\\infty<\\epsilon)\\ge2\\varphi(1)\\epsilon$, so $\\phi_0(\\epsilon)\\le-\\log(2\\varphi(1)\\epsilon)$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "At $\\epsilon_n=2\\sqrt{\\log n/n}$, $n\\epsilon_n^2=4\\log n$ while $-\\log(2\\varphi(1)\\epsilon_n)=\\frac12\\log n-\\frac12\\log\\log n+O(1)$, so the concentration inequality holds for large n. Also, for $\\epsilon_n<1/2$, the uniform scale prior assigns mass $2\\epsilon_n$ to $(1-\\epsilon_n,1+\\epsilon_n)$; its negative log is $O(\\log n)=O(n\\epsilon_n^2)$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The scale prior is independent and has density one, the true scale lies in the interior of its fixed positive interval, and every design point is $x_0$. Steps 1.1–1.2 verify the concentration and scale-local-mass checks, so the sharper fixed-design conclusion follows from [F2]: this Gaussian law is nonzero and the stated rate already satisfies $\\rho_n=\\epsilon_n$.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-forward branch beyond the explicit Statement/Definition/Example hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-reverse branch beyond the explicit Statement/Definition/Example hypotheses."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-binary-regression-logistic-intercept-gp": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gaussian-process-posterior-contraction",
+          "source_section": "Statement",
+          "quote": "Let $\\epsilon_n>0$ satisfy $\\epsilon_n\\to0$ and $n\\epsilon_n^2\\to\\infty$. For the centered tight Gaussian prior in each branch, let $\\mu$ be its law and let $B$ be a separable closed Banach carrier with the norm inherited from that branch's stated function space, as supplied by [[lem-tight-borel-gaussian-law-has-separable-support]]. Write $\\mathbb H$ for the covariance RKHS of $\\mu$ on $B$, and define\n$$\\phi_{w_0}(\\epsilon)=\\inf_{\\substack{h\\in\\mathbb H\\\\\\|h-w_0\\|_B<\\epsilon}}\\left\\{\\|h\\|_{\\mathbb H}^2-\\log\\mu(\\epsilon B^\\circ)\\right\\},\\qquad \\epsilon B^\\circ=\\{u\\in B:\\|u\\|_B<\\epsilon\\}.$$\nSuppose $\\phi_{w_0}(\\epsilon_n)\\le n\\epsilon_n^2$.\n\nIn each branch, parameter-to-data densities are jointly measurable and the posterior $\\Pi_n$ is the data-indexed normalization of the prior times the likelihood on fibers with finite positive evidence.\n\n1. **Log-Gaussian density estimation.** On a measurable space $(\\mathsf X,\\mathcal A)$ with sigma-finite measure $\\nu$, let $W$ be a tight centered Borel Gaussian random element in $\\ell^\\infty(\\mathsf X)$, and let $w_0$ belong to its support. Assume path evaluation $(w,x)\\mapsto w(x)$ is jointly measurable, $Z_w=\\int e^w\\,d\\nu\\in(0,\\infty)$ for prior-almost every $w$ and for $w_0$, and set $p_w=e^w/Z_w$, $p_0=p_{w_0}$. For IID data $X_1,\\ldots,X_n\\sim P_0$, sufficiently large fixed $M$ gives\n$$E_0\\Pi_n\\{w:h(P_w,P_0)>M\\epsilon_n\\mid X^n\\}\\longrightarrow0.$$\nWhen $0<\\nu(\\mathsf X)<\\infty$, bounded paths imply the required normalizers are finite and positive.\n\n2. **Binary regression.** Let $(X_i,Y_i)$ be IID, with $X_i\\sim G$, $Y_i\\in\\{0,1\\}$ and $P_0(Y=1\\mid X=x)=f_0(x)=\\Psi(w_0(x))\\in(0,1)$. Assume $\\Psi:\\mathbb R\\to(0,1)$ is differentiable, $\\sup|\\Psi'|<\\infty$, and $\\sup|\\Psi'/[\\Psi(1-\\Psi)]|<\\infty$. Suppose the prior is either a tight centered Gaussian law in $L^2(G)$ with a jointly measurable evaluation version representing its $L^2(G)$ element almost everywhere, or a tight centered Gaussian law in $\\ell^\\infty(\\mathsf X)$ with jointly measurable evaluation and bounded $w_0$; in either case $w_0$ belongs to the prior support. Then for sufficiently large fixed $M$,\n$$E_0\\Pi_n\\{\\|\\Psi(w)-f_0\\|_{L^2(G)}>M\\epsilon_n\\mid (X_i,Y_i)_{i=1}^n\\}\\longrightarrow0.$$\n\n3. **Fixed-design Gaussian regression.** For deterministic $x_1,\\ldots,x_n$, assume independent $Y_i\\sim N(w_0(x_i),\\sigma_0^2)$, a centered tight Borel Gaussian prior $W$ in $\\ell^\\infty(\\mathsf X)$ with $w_0$ in support, and an independent prior on the standard deviation $\\sigma$ supported on a fixed $[a,b]\\subset(0,\\infty)$ containing $\\sigma_0$, with Lebesgue density bounded below by a positive constant. Put $\\rho_n=\\max\\{\\epsilon_n,\\sqrt{\\log n/n}\\}$ for $n\\ge2$. Then for sufficiently large fixed $M$,\n$$E_0\\Pi_n\\{\\|w-w_0\\|_n+|\\sigma-\\sigma_0|>M\\rho_n\\mid Y_{1:n}\\}\\longrightarrow0.$$\nThe sharper conclusion with $\\epsilon_n$ in place of $\\rho_n$ holds if the Gaussian law is not the point mass at zero. It also holds when $W=0$ almost surely and the scale-prior density is bounded above on a neighborhood of $\\sigma_0$; this extra upper bound is needed only for that sharper degenerate-prior alternative, not for the universal $\\rho_n$ conclusion. In the nondegenerate case $\\rho_n=O(\\epsilon_n)$, so the two formulations differ only by the fixed constant $M$. Here $\\|w-w_0\\|_n^2=n^{-1}\\sum_i(w(x_i)-w_0(x_i))^2$.\n\nThe concentration-function hypothesis is interpreted on a separable Banach space carrying the prior. For a tight Gaussian law initially given in nonseparable $\\ell^\\infty(\\mathsf X)$, the separable-support reduction is [[lem-tight-borel-gaussian-law-has-separable-support]]; the norm and prior law are restricted to that support space.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Differentiation gives $\\Psi'(u)=\\Psi(u)(1-\\Psi(u))$, so $|\\Psi'(u)|\\le1/4$ and $|\\Psi'(u)/[\\Psi(u)(1-\\Psi(u))]|=1$. The true response probability is $\\Psi(0)=1/2\\in(0,1)$, and $w_0=0$ is in the support of the scalar standard-normal prior.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Here $L^2(G)$ is isometric to $\\mathbb R$ and $\\|W\\|_{L^2(G)}=|Z|$. The RKHS approximation cost at zero is zero. By [F1], for $0<\\epsilon\\le1$, $\\Pr(|Z|<\\epsilon)\\ge2\\varphi(1)\\epsilon$, so $\\phi_0(\\epsilon_n)\\le-\\log(2\\varphi(1)\\epsilon_n)$. With $\\epsilon_n=\\sqrt{\\log n/n}$, this is at most $n\\epsilon_n^2=\\log n$ for all sufficiently large n.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The joint Bernoulli density relative to $G\\otimes\\#$ is bounded by one, and the constant-process evaluation is jointly measurable. Steps 1.1–1.2 verify the remaining link, truth-support and concentration conditions; applying the binary-regression branch of [F2] yields expected posterior contraction in $L^2(G)$.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-forward branch beyond the explicit Statement/Definition/Example hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-reverse branch beyond the explicit Statement/Definition/Example hypotheses."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-degenerate-gp-phi-does-not-bound-unknown-scale-local-mass": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The RKHS of the point-mass prior is $\\{0\\}$; its approximation cost at $w_0=0$ is zero. Also $\\Pr(|W|<\\epsilon)=1$ for every $\\epsilon>0$, so the explicitly defined concentration function satisfies $\\phi_0(\\epsilon)=0$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For $n$ sufficiently large, $\\epsilon_n<1/2$, hence the uniform prior assigns mass $2\\epsilon_n$ to $(1-\\epsilon_n,1+\\epsilon_n)$. Therefore $-\\log(2\\epsilon_n)=\\tfrac12\\log n-\\tfrac12\\log\\log\\log n-\\log2,$ while $n\\epsilon_n^2=\\log\\log n$. Along $n_m=\\lceil e^{e^m}\\rceil$, the first quantity grows on the order of $e^m$ and the second on the order of $m$, so their ratio is unbounded.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $\\log\\log n\\to\\infty$ and $\\log\\log n/n\\to0$, the rate has $n\\epsilon_n^2\\to\\infty$ and $\\epsilon_n\\to0$ while the scale interval mass has negative logarithm not $O(n\\epsilon_n^2)$ by step 1.2. Thus the Gaussian concentration condition does not establish this particular denominator-mass check; it does not establish failure of posterior contraction. A locally bounded scale density, as in this uniform example, admits a separate parametric contraction argument.",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-forward branch beyond the explicit Statement/Definition/Example hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-reverse branch beyond the explicit Statement/Definition/Example hypotheses."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "cex-degenerate-gaussian-scale-prior-can-break-arbitrary-concentration-rate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nonnegative-weighted-sums-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $(\\mu_k)$ be measures on one measurable space and let $c_k\\in[0,+\\infty]$. Each scalar multiple $c_k\\mu_k$, defined by the zero, finite-positive, and positive-infinity branches of [[def-nonnegative-weighted-sum-of-measures]], is a measure. Every finite or countable weighted sum $\\sum_kc_k\\mu_k$ is also a measure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-gaussian-linear-and-quadratic-statistic-tail",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $Z_1,\\ldots,Z_n$ be independent $N(0,1)$ variables, let $c_1,\\ldots,c_n,\\delta_1,\\ldots,\\delta_n\\in\\mathbb R$, and let $0<\\sigma\\le b$. Put $\\|c\\|_n^2=n^{-1}\\sum_i c_i^2$ and $\\|\\delta\\|_n^2=n^{-1}\\sum_i\\delta_i^2$. For $t>0$,\n$$\\Pr\\!\\left(\\left|n^{-1}\\sum_i c_i\\sigma Z_i\\right|\\ge t\\right)\\le2\\exp\\!\\left(-\\frac{nt^2}{2\\sigma^2\\|c\\|_n^2}\\right),$$\nwith zero probability when $\\|c\\|_n=0$. If $\\|\\delta\\|_n\\le1$ and $0<t\\le b^2+2$, then\n$$\\Pr\\!\\left(\\left|n^{-1}\\sum_i(\\delta_i+\\sigma Z_i)^2-(\\sigma^2+\\|\\delta\\|_n^2)\\right|\\ge t\\right)\\le2\\exp\\!\\left(-\\frac{nt^2}{4V_b}\\right),\\qquad V_b=2b^4+4b^2.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The intervals $I_k$ are disjoint subsets of $[1/2,3/2]$, since $\\delta_{k+1}=\\delta_k^{k+1}$ and $\\delta_{k+1}+\\delta_{k+1}^4<\\delta_k$. The series $S=\\sum_{k\\ge k_0}\\sqrt{\\delta_k}$ is positive and finite, bounded by $\\sum_{k\\ge k_0}e^{-k/2}$ using $k!\\ge k$ and [F3]. Define $$\\Pi_\\sigma=\\tfrac12U_{[1/2,3/2]}+\\sum_{k\\ge k_0}m_kU_{I_k},\\qquad m_k=\\frac{\\sqrt{\\delta_k}}{2S}.$$ By [F2] this is a probability measure with a measurable Lebesgue density bounded below by $1/2$ on the required interval. Its spike densities need not be bounded above near $1$.",
+          "inputs": [
+            "F3",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The zero Gaussian law is tight and centered, with support $\\{0\\}$, covariance RKHS $\\{0\\}$ and $\\phi_0(\\epsilon)=0$ for every positive $\\epsilon$. For all sufficiently large $n$ define $\\epsilon_n=\\sqrt{\\log\\log\\log n/n}$, choosing arbitrary positive initial terms. Then $\\epsilon_n\\to0$, $n\\epsilon_n^2\\to\\infty$ and the concentration condition holds. Put $n_k=\\lceil k^4\\delta_k^{-2}\\rceil$. Since $\\log n_k=2k!+O(\\log k)$, $\\log\\log\\log n_k=O(\\log k)$ and tends to infinity; hence $\\epsilon_{n_k}/\\delta_k=O(\\sqrt{\\log k}/k^2)\\to0$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Put $S_n=\\sum_iY_i^2$. By [F1] the likelihood ratio relative to true scale $1$ is $$L_n(\\sigma)=\\exp\\{-n\\log\\sigma+(1-\\sigma^{-2})S_n/2\\}.$$ On $E_k=\\{|S_{n_k}-n_k|\\le k\\sqrt{n_k}\\}$, [F4] gives $P_0(E_k^c)\\to0$. Write $q=S_{n_k}/n_k$. Maximizing the log likelihood over all positive $\\sigma$ gives its maximum $n_k(q-1-\\log q)/2$ at $\\sigma^2=q$. Since $|q-1|\\le k/\\sqrt{n_k}$, Taylor's formula gives $\\sup_{\\sigma\\in[1/2,3/2]}L_{n_k}(\\sigma)\\le e^{Ck^2}$ for a constant independent of $k$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "A1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Uniformly on $I_k$, $|\\sigma-1|\\le2\\delta_k$. The function $d(\\sigma)=-\\log\\sigma+(1-\\sigma^{-2})/2$ satisfies $d(1)=d'(1)=0$ and has bounded second derivative near $1$, while $|1-\\sigma^{-2}|\\le C|\\sigma-1|$. On $E_k$ this gives $$\\log L_{n_k}(\\sigma)\\ge-Cn_k\\delta_k^2-Ck\\sqrt{n_k}\\delta_k\\ge-C'k^4.$$ Thus the posterior denominator is at least $m_ke^{-C'k^4}$ on $E_k$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Fix $M>0$. Since $\\epsilon_{n_k}/\\delta_k\\to0$, the set $J_k=\\{|\\sigma-1|\\le M\\epsilon_{n_k}\\}$ misses $I_k$ and all earlier spikes for large $k$. Its prior mass is at most $M\\epsilon_{n_k}+\\sum_{j>k}m_j$. The later sum is $O(\\sqrt{\\delta_{k+1}})$: successive square-root terms have ratio at most $1/2$ for $k\\ge k_0$, so [F3] bounds the tail by twice its first term. Steps 2.1–2.2 therefore give $$\\Pi_\\sigma(J_k\\mid Y^{n_k})\\le e^{Ck^2+C'k^4}\\frac{M\\epsilon_{n_k}+O(\\sqrt{\\delta_{k+1}})}{m_k}.$$ Both terms tend to zero: $\\epsilon_{n_k}/\\sqrt{\\delta_k}=O(e^{-k!/2}\\sqrt{\\log k}/k^2)$ and $\\sqrt{\\delta_{k+1}/\\delta_k}=e^{-kk!/2}$ dominate the polynomial exponent.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 2.2",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "On events with probability tending to one, step 3.1 makes posterior mass within $M\\epsilon_{n_k}$ tend to zero for every fixed $M$. Thus its expected mass outside that radius tends to one, by boundedness and $P_0(E_k^c)\\to0$. The mean function is identically its truth, so this is exactly failure for the combined empirical-mean-plus-scale distance. All original scale-prior and Gaussian concentration assumptions are satisfied, refuting the unrestricted rate claim.",
+          "inputs": [
+            "step 3.1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Definition/Example hypotheses and the explicit phase steps state the finite/positive domain and the applicable zero, boundary and axiom conventions. No new converse or unstated nonempty choice is inferred."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-forward branch beyond the explicit Statement/Definition/Example hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no separate iff-reverse branch beyond the explicit Statement/Definition/Example hypotheses."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    }
+  }
+}

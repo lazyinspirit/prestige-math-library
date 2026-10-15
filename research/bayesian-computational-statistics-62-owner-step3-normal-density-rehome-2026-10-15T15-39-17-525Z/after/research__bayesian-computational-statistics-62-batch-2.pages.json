@@ -1,0 +1,138 @@
+[
+  {
+    "order": 2044,
+    "id": "euler-maruyama-scheme-and-conditions",
+    "kind": "A",
+    "category": "numerical-analysis",
+    "title": "Euler–Maruyama Scheme and Coefficient Conditions",
+    "companion": "euler-maruyama-scheme-and-conditions-examples",
+    "requires": [
+      "forward-ito-sde-well-posedness"
+    ],
+    "items": [
+      {
+        "id": "alg-euler-maruyama",
+        "kind": "algorithm",
+        "title": "Euler–Maruyama recursion",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-d-dimensional-brownian-motion"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-square-integrable-predictable-step-ito-integral-is-finite-sum",
+        "kind": "lemma",
+        "title": "A square-integrable predictable step Itô integral is its finite sum",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-d-dimensional-brownian-motion",
+          "def-progressively-measurable-and-predictable-process",
+          "def-elementary-predictable-brownian-integrand",
+          "def-ito-integral-of-an-elementary-predictable-process",
+          "def-ito-integral-for-square-integrable-predictable-processes",
+          "thm-ito-integral-process-has-a-continuous-martingale-version",
+          "thm-monotone-convergence-for-the-integral",
+          "lem-rat-embeds-dense",
+          "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "def-multivariate-normal-law"
+        ],
+        "dependency_level": 0,
+        "statement": "For a finite predictable step process with square-integrable left-endpoint coefficients, every continuous Itô-integral version equals its finite Brownian-increment sum at all times on one measurable probability-one event; on a complete probability space the agreement is indistinguishability. Boundedness of coefficients is not required."
+      },
+      {
+        "id": "def-euler-maruyama-step-process-and-continuous-interpolation",
+        "kind": "definition",
+        "title": "Euler–Maruyama step process and continuous interpolation",
+        "deps": [
+          "alg-euler-maruyama",
+          "def-axiom-of-choice",
+          "def-d-dimensional-brownian-motion",
+          "def-ito-integral-for-square-integrable-predictable-processes",
+          "def-progressively-measurable-and-predictable-process",
+          "def-elementary-predictable-brownian-integrand",
+          "lem-square-integrable-predictable-step-ito-integral-is-finite-sum"
+        ],
+        "dependency_level": 1,
+        "justified_by": [
+          "thm-euler-maruyama-uniform-moment-and-increment-bounds"
+        ]
+      },
+      {
+        "id": "lem-euler-maruyama-one-step-moment-and-increment-estimates",
+        "kind": "lemma",
+        "title": "Euler–Maruyama one-step moment and increment estimates",
+        "strategy": "Use finite Gaussian p-moments and a second-order Taylor estimate for x ↦ |x|^p to bound one recursion step conditionally; use conditional centering and covariance for the interpolation increment.",
+        "deps": [
+          "alg-euler-maruyama",
+          "def-euler-maruyama-step-process-and-continuous-interpolation",
+          "def-axiom-of-choice",
+          "def-d-dimensional-brownian-motion",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-euler-maruyama-uniform-moment-and-increment-bounds",
+        "kind": "theorem",
+        "title": "Euler–Maruyama uniform moments and interpolation increments",
+        "strategy": "Prove one-step integrability and adaptedness by induction, iterate the conditional p-moment recursion with (1+Ch)^k ≤ exp(Ckh), then apply the p=2 increment estimate within each grid interval.",
+        "deps": [
+          "alg-euler-maruyama",
+          "def-euler-maruyama-step-process-and-continuous-interpolation",
+          "lem-euler-maruyama-one-step-moment-and-increment-estimates",
+          "def-axiom-of-choice",
+          "def-d-dimensional-brownian-motion",
+          "def-ito-integral-for-square-integrable-predictable-processes",
+          "def-progressively-measurable-and-predictable-process",
+          "lem-exponential-dominates-one-plus-x",
+          "lem-square-integrable-predictable-step-ito-integral-is-finite-sum"
+        ],
+        "dependency_level": 3
+      }
+    ]
+  },
+  {
+    "order": 2045,
+    "id": "euler-maruyama-scheme-and-conditions-examples",
+    "kind": "B",
+    "category": "numerical-analysis",
+    "title": "Euler–Maruyama Scheme and Coefficient Conditions — Examples",
+    "companion": "euler-maruyama-scheme-and-conditions",
+    "requires": [
+      "euler-maruyama-scheme-and-conditions"
+    ],
+    "items": [
+      {
+        "id": "ex-euler-maruyama-additive-noise-constant-coefficients",
+        "kind": "example",
+        "title": "Euler–Maruyama for a constant-coefficient additive-noise equation",
+        "strategy": "Check the shared coefficient hypotheses, telescope the scalar recursion and interpolation to t+W_t, and use Gaussian moments and the uniform-moment theorem.",
+        "deps": [
+          "alg-euler-maruyama",
+          "def-euler-maruyama-step-process-and-continuous-interpolation",
+          "thm-euler-maruyama-uniform-moment-and-increment-bounds",
+          "def-axiom-of-choice",
+          "def-d-dimensional-brownian-motion",
+          "def-ito-integral-for-square-integrable-predictable-processes",
+          "def-ito-sde-and-strong-solution",
+          "thm-ito-integral-process-has-a-continuous-martingale-version"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-euler-maruyama-superlinear-drift-outside-global-lipschitz-contract",
+        "kind": "example",
+        "title": "A superlinear drift outside the Euler–Maruyama moment contract",
+        "strategy": "Show directly that b(x)=-x^3 violates both the uniform linear-growth and global Lipschitz conditions, so the uniform-moment theorem is unavailable.",
+        "deps": [
+          "alg-euler-maruyama",
+          "thm-euler-maruyama-uniform-moment-and-increment-bounds",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 4
+      }
+    ]
+  }
+]

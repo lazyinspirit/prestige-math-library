@@ -1,0 +1,5 @@
+# Frozen-frontier deletion observations
+
+In centralized Step5 certification mode, changed, created and deleted observations use the frozen run frontier. Deleting a frontier item or its current logical supplier remains an error. The protected supplier cone follows deps and justified_by, resolves canonical IDs before aliases, and uses the original native pack's alias map so a deleted canonical supplier reached by an alias remains protected. Missing protected inputs fail closed; without that original alias context the historical strict deletion policy is retained.
+
+Unrelated deletions remain visible in the raw deleted inventory and excluded.deleted. They are observations outside this run, explicitly excluded and not passed, just as outside changed/created items already are. No foreign item is restored, licensed, certified or reviewed. Legacy mode without the centralized frozen-frontier protocol retains its global deletion rejection. The full native battery's ordinary dependency and frontier integrity checks remain mandatory.

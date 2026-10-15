@@ -1,0 +1,317 @@
+[
+  {
+    "order": 2122,
+    "id": "state-space-filtering-and-predictive-laws",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "State-space models and exact Bayesian filtering",
+    "companion": "state-space-filtering-and-predictive-laws-examples",
+    "requires": [
+      "posterior-propriety-and-dominated-bayes-formula",
+      "state-space-models-as-probability-laws"
+    ],
+    "items": [
+      {
+        "id": "def-state-space-filtering-laws",
+        "kind": "definition",
+        "title": "Filtering, predictive, and smoothing laws in a finite-horizon state-space model",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-parametric-statistical-model",
+          "def-standard-borel-space",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-measure-kernel-and-probability-kernel",
+          "def-regular-conditional-distribution",
+          "def-conditional-law-given-a-random-element",
+          "def-general-state-space-model-by-kernels",
+          "thm-finite-horizon-state-space-kernel-law-exists-uniquely",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Assume AC and fix a finite horizon $T\\ge0$ with a state-space model by\nprobability kernels as in\n[[def-general-state-space-model-by-kernels]]. If $T=0$, put $\\Omega_T=E_0$;\notherwise put $\\Omega_T=E_0\\times E_1\\times F_1\\times\\cdots\\times E_T\\times\nF_T$. Let $\\mathcal Z_T$ be the corresponding finite-product sigma-algebra\nand write $(\\Omega_T,\\mathcal Z_T,P_T)$ for its finite-horizon probability\nspace. The law $P_T$ is the unique law supplied by\n[[thm-finite-horizon-state-space-kernel-law-exists-uniquely]]. Let $X_t$ and\n$Y_t$ be the coordinate random elements taking values in $E_t$ and $F_t$. For\n$t\\ge1$, write $Y_{1:t}:=(Y_1,\\ldots,Y_t)$ and\n$\\mathsf F_{1:t}:=F_1\\times\\cdots\\times F_t$ with its finite-product\nsigma-algebra; let $\\mathsf F_{1:0}$ be a singleton and $Y_{1:0}$ its constant\nmap. The factors are standard Borel, meaning measurably isomorphic to Polish\nspaces ([[def-standard-borel-space]]), and their finite products are standard\nBorel ([[lem-finite-products-of-standard-borel-spaces-are-standard-borel]]).\n\nThe **initial filtering kernel** $\\pi_0:\\mathsf F_{1:0}\\to E_0$ assigns\n$\\mu_0$ to the unique empty history; it is the conditional law of $X_0$ given\nthe trivial history. For $1\\le t\\le T$, a **filtering kernel at time $t$** is\na probability kernel $\\pi_t:\\mathsf F_{1:t}\\to E_t$ such that\n$\\omega\\mapsto\\pi_t(Y_{1:t}(\\omega),\\cdot)$ is a regular conditional\ndistribution of $X_t$ given $\\sigma(Y_{1:t})$. For $1\\le t\\le T$, a\n**predictive kernel at time $t$** is a probability kernel\n$\\pi_{t|t-1}:\\mathsf F_{1:t-1}\\to E_t$ whose composition with $Y_{1:t-1}$\nis a regular conditional distribution of $X_t$ given\n$\\sigma(Y_{1:t-1})$. A **finite-horizon smoothing kernel** is a probability\nkernel $\\psi_T:\\mathsf F_{1:T}\\to E_0\\times\\cdots\\times E_T$ whose\ncomposition with $Y_{1:T}$ is a regular conditional distribution of the full\nstate path $(X_0,\\ldots,X_T)$ given $\\sigma(Y_{1:T})$. Here a regular\nconditional distribution is an everywhere probability kernel satisfying the\nconditional event identities in\n[[def-regular-conditional-distribution]], and a conditional law given a\nrandom element is its data-indexed kernel form in\n[[def-conditional-law-given-a-random-element]].\n\nThese kernels are versions: their values can be changed on a measurable set\nof observation histories of probability zero without changing the conditional\nidentities. No density is assumed in these definitions. The state-space model\nhere is one fixed law. A parametric statistical model is instead a map\n$\\theta\\mapsto P_\\theta$ from a parameter set to probability laws; its\nmeasurability is not asserted without a parameter sigma-algebra\n([[def-parametric-statistical-model]]).",
+        "axiom_use": "Assume AC as in the finite-horizon model contract for the path law. This definition adds no choice; existence of the conditional kernels is stated separately.",
+        "sources": {
+          "references": [
+            {
+              "title": "Simo Särkkä and Lennart Svensson, Bayesian Filtering and Smoothing, 2nd ed., Chapter 6",
+              "url": "https://users.aalto.fi/~ssarkka/pub/bfs_book_2023_online.pdf"
+            },
+            {
+              "title": "Arnaud Doucet and Adam M. Johansen, A Tutorial on Particle Filtering and Smoothing: Fifteen Years Later, §§2.1–2.3",
+              "url": "https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF2011.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-state-space-filtering-and-smoothing-laws-exist",
+        "kind": "theorem",
+        "title": "Filtering and finite-horizon smoothing laws exist",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-state-space-filtering-laws",
+          "def-standard-borel-space",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-measure-kernel-and-probability-kernel",
+          "def-regular-conditional-distribution",
+          "def-conditional-law-given-a-random-element",
+          "def-general-state-space-model-by-kernels",
+          "thm-finite-horizon-state-space-kernel-law-exists-uniquely",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets",
+          "lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Assume AC and a finite-horizon state-space model by standard-Borel state and\nobservation spaces, an initial probability measure, and transition and\nobservation probability kernels, as in\n[[def-general-state-space-model-by-kernels]]. Let $P_T$ be its finite-horizon\npath law. The initial filtering kernel is $\\pi_0=\\mu_0$ on the singleton\nempty-history space. For each $1\\le t\\le T$, data-indexed filtering and\npredictive kernels from [[def-state-space-filtering-laws]] exist. A\ndata-indexed finite-horizon smoothing kernel for the full state path also\nexists, including when $T=0$. The claim is existence of conditional versions\nonly; it asserts no density, filtering recursion, uniqueness on null\nobservation histories, or numerical approximation.",
+        "strategy": "direct",
+        "axiom_use": "Assume AC. It is used through the finite-horizon path-law theorem and the RCD existence and factorization theorems. The finite-product standard-Borel closure result itself is choice-free.",
+        "sources": {
+          "references": [
+            {
+              "title": "Simo Särkkä and Lennart Svensson, Bayesian Filtering and Smoothing, 2nd ed., Chapter 6",
+              "url": "https://users.aalto.fi/~ssarkka/pub/bfs_book_2023_online.pdf"
+            },
+            {
+              "title": "Arnaud Doucet and Adam M. Johansen, A Tutorial on Particle Filtering and Smoothing: Fifteen Years Later, §§2.1–2.3",
+              "url": "https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF2011.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "alg-recursive-bayesian-filter",
+        "kind": "algorithm",
+        "title": "Recursive Bayesian filtering under dominated observations",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-state-space-filtering-laws",
+          "def-general-state-space-model-by-kernels",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-bayes-formula-for-dominated-kernels"
+        ],
+        "justified_by": [
+          "thm-dominated-state-space-filtering-recursion"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume AC and a finite-horizon model as in\n[[def-general-state-space-model-by-kernels]]. For each $1\\le t\\le T$, suppose\nthe observation kernel has a supplied product-measurable density\n$g_t:E_t\\times F_t\\to[0,\\infty]$ with respect to a sigma-finite measure\n$\\nu_t$ on $F_t$, normalized so that\n$$G_t(x,B)=\\int_Bg_t(x,y)\\,\\nu_t(dy),\\qquad\\int_{F_t}g_t(x,y)\\,\\nu_t(dy)=1$$\nfor every state $x$ and measurable $B\\subseteq F_t$.\n\nThe procedure takes the initial law $\\mu_0$, transition kernels $K_t$,\nobservation densities $g_t$ and measures $\\nu_t$ as inputs. It defines\ndata-indexed prediction, evidence, and filtering functions on every\nobservation history as follows.\n\n1. Initialize $\\pi_0$ on the singleton empty-history space by\n$\\pi_0(*,A)=\\mu_0(A)$.\n\n2. For $t=1,\\ldots,T$, each history $h\\in\\mathsf F_{1:t-1}$ and each\nmeasurable state set $A\\in\\mathcal E_t$, form the predictive measure\n$$\\widehat\\pi_t(h,A):=\\int_{E_{t-1}}K_t(x,A)\\,\\pi_{t-1}(h,dx).$$\n\n3. For each $y\\in F_t$, calculate the evidence density\n$$z_t(h,y):=\\int_{E_t}g_t(x,y)\\,\\widehat\\pi_t(h,dx).$$\n\n4. Define the filtering measure at $(h,y)$ by\n$$\\pi_t(h,y,A):=\\begin{cases}\\displaystyle\\frac{\\int_Ag_t(x,y)\\,\\widehat\\pi_t(h,dx)}{z_t(h,y)},&0<z_t(h,y)<\\infty,\\\\[6pt]\\widehat\\pi_t(h,A),&z_t(h,y)=0\\text{ or }z_t(h,y)=\\infty.\\end{cases}$$\nUse $\\pi_t$ as the input filtering function at the next time step.\n\nThe procedure returns the initialized filter $\\pi_0=\\mu_0$ and, for every\n$1\\le t\\le T$, $\\widehat\\pi_t$, $z_t$, and $\\pi_t$. It is an exact\nmeasure-valued recursion; it makes no claim that the integrals have closed\nforms or can be evaluated with finite computational cost.\n[[thm-dominated-state-space-filtering-recursion]] proves that the returned\ntime-$t$ functions are predictive and filtering kernels for the specified\nfinite-horizon model.",
+        "axiom_use": "AC is assumed through the state-space model and conditional-kernel setup. Once the model kernels and densities are supplied, the recursive integrations, finite-positive normalization, and predictive fillers use no additional choice.",
+        "sources": {
+          "references": [
+            {
+              "title": "Simo Särkkä and Lennart Svensson, Bayesian Filtering and Smoothing, 2nd ed., Chapter 6",
+              "url": "https://users.aalto.fi/~ssarkka/pub/bfs_book_2023_online.pdf"
+            },
+            {
+              "title": "Arnaud Doucet and Adam M. Johansen, A Tutorial on Particle Filtering and Smoothing: Fifteen Years Later, §§2.1–2.2",
+              "url": "https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF2011.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-dominated-state-space-filtering-recursion",
+        "kind": "theorem",
+        "title": "Exact state-space filtering recursion under dominated observations",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-state-space-filtering-laws",
+          "alg-recursive-bayesian-filter",
+          "thm-state-space-filtering-and-smoothing-laws-exist",
+          "def-measure-kernel-and-probability-kernel",
+          "def-general-state-space-model-by-kernels",
+          "thm-finite-horizon-state-space-kernel-law-exists-uniquely",
+          "thm-conditional-integration-through-a-regular-conditional-law",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-bayes-formula-for-dominated-kernels",
+          "thm-monotone-convergence-for-the-integral",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-dynkin-pi-lambda",
+          "def-law-or-distribution-of-a-random-element",
+          "thm-change-of-variables-for-expectation"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Assume AC and a finite-horizon model as in\n[[def-general-state-space-model-by-kernels]]. For each $1\\le t\\le T$, let\n$\\nu_t$ be a sigma-finite measure on $(F_t,\\mathcal F_t)$ and suppose the\nobservation kernel has a specified product-measurable density\n$g_t:E_t\\times F_t\\to[0,\\infty]$ with respect to $\\mathcal E_t\\otimes\\mathcal F_t$:\n$$G_t(x,B)=\\int_B g_t(x,y)\\,\\nu_t(dy),\\qquad\\int_{F_t}g_t(x,y)\\,\\nu_t(dy)=1$$\nfor every state $x\\in E_t$ and measurable $B\\subseteq F_t$. For\n$h\\in\\mathsf F_{1:t-1}$, let $\\pi_{t-1}$ be the filtering kernel at time\n$t-1$ from\n[[def-state-space-filtering-laws]] when $t>1$, and for $t=1$ let $\\pi_0$ be\nthe initial kernel $\\mu_0$ on the singleton empty-history space. For\n$A\\in\\mathcal E_t$, define the predictive kernel\n$$\\widehat\\pi_t(h,A):=\\int_{E_{t-1}}K_t(x,A)\\,\\pi_{t-1}(h,dx),$$\nthe evidence density\n$$z_t(h,y):=\\int_{E_t}g_t(x,y)\\,\\widehat\\pi_t(h,dx),$$\nand for $h\\in\\mathsf F_{1:t-1}$, $y\\in F_t$, and $A\\in\\mathcal E_t$ define\nthe update\n$$\\pi_t(h,y,A):=\\begin{cases}\\displaystyle\\frac{\\int_Ag_t(x,y)\\,\\widehat\\pi_t(h,dx)}{z_t(h,y)},&0<z_t(h,y)<\\infty,\\\\[6pt]\\widehat\\pi_t(h,A),&z_t(h,y)=0\\text{ or }z_t(h,y)=\\infty.\\end{cases}$$\nThen $\\widehat\\pi_t$ is a predictive kernel for $X_t$ given $Y_{1:t-1}$,\nand $\\pi_t$ is a filtering kernel for $X_t$ given $Y_{1:t}$. For each fixed\nhistory $h$, the observation marginal under the conditional version\ndetermined by $\\widehat\\pi_t(h,\\cdot)$ has density\n$z_t(h,\\cdot)$ with respect to $\\nu_t$ and assigns zero mass to both\n$\\{y:z_t(h,y)=0\\}$ and $\\{y:z_t(h,y)=\\infty\\}$. Thus the formula never\ndivides by zero or infinity; values on those fibers are conditional-law\nfillers. The statement is exact and finite-horizon and gives no numerical\napproximation or long-time stability claim.",
+        "strategy": "direct",
+        "axiom_use": "Assume AC to use the data-indexed conditional kernels supplied by the RCD existence and factorization result. Once a predictive probability kernel is supplied, the dominated Bayes update and its zero/infinite-fiber filler require no additional choice.",
+        "sources": {
+          "references": [
+            {
+              "title": "Simo Särkkä and Lennart Svensson, Bayesian Filtering and Smoothing, 2nd ed., Chapter 6",
+              "url": "https://users.aalto.fi/~ssarkka/pub/bfs_book_2023_online.pdf"
+            },
+            {
+              "title": "Arnaud Doucet and Adam M. Johansen, A Tutorial on Particle Filtering and Smoothing: Fifteen Years Later, §§2.1–2.3",
+              "url": "https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF2011.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2123,
+    "id": "state-space-filtering-and-predictive-laws-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "State-space models and exact Bayesian filtering — Examples",
+    "companion": "state-space-filtering-and-predictive-laws",
+    "requires": [
+      "state-space-filtering-and-predictive-laws"
+    ],
+    "items": [
+      {
+        "id": "ex-finite-hidden-markov-filtering-and-smoothing",
+        "kind": "example",
+        "title": "A two-state hidden Markov filter and smoother",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-state-space-filtering-laws",
+          "alg-recursive-bayesian-filter",
+          "thm-state-space-filtering-and-smoothing-laws-exist",
+          "thm-dominated-state-space-filtering-recursion",
+          "def-general-state-space-model-by-kernels",
+          "thm-finite-horizon-state-space-kernel-law-exists-uniquely"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Let $E_0=E_1=E_2=F_1=F_2=\\{0,1\\}$ with counting measure. Take\n$\\mu_0=(1/2,1/2)$ and transition matrix\n$$M=\\begin{pmatrix}3/4&1/4\\\\1/4&3/4\\end{pmatrix},$$\nwhere rows index the current state. At each time let\n$G_t(1\\mid0)=1/4$ and $G_t(1\\mid1)=3/4$, with the complementary\nprobabilities for observation $0$. For observations $Y_1=1,Y_2=0$, the exact\nfilter at time $2$ is $(9/14,5/14)$ on states $(0,1)$, while the smoothing\nlaw of $X_1$ given both observations is $(5/14,9/14)$. This finite model has\npositive evidence at both observed times.",
+        "strategy": "direct",
+        "axiom_use": "The example inherits AC only for existence of the conditional-kernel versions; its finite probability calculations are choice-free.",
+        "sources": {
+          "references": [
+            {
+              "title": "Simo Särkkä and Lennart Svensson, Bayesian Filtering and Smoothing, 2nd ed., Chapter 6",
+              "url": "https://users.aalto.fi/~ssarkka/pub/bfs_book_2023_online.pdf"
+            },
+            {
+              "title": "Arnaud Doucet and Adam M. Johansen, A Tutorial on Particle Filtering and Smoothing: Fifteen Years Later, §2.1",
+              "url": "https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF2011.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-scalar-gaussian-state-space-filter",
+        "kind": "example",
+        "title": "A scalar Gaussian state-space update by completing the square",
+        "deps": [
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-measurability-of-integration-against-a-kernel",
+          "prop-measure-monotonicity",
+          "cor-integral-over-a-null-set-vanishes",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "def-state-space-filtering-laws",
+          "alg-recursive-bayesian-filter",
+          "thm-state-space-filtering-and-smoothing-laws-exist",
+          "thm-dominated-state-space-filtering-recursion",
+          "def-general-state-space-model-by-kernels",
+          "thm-finite-horizon-state-space-kernel-law-exists-uniquely",
+          "def-standard-normal-and-normal-laws",
+          "thm-gaussian-integral",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-translation-of-a-set-in-rn",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-lebesgue-measure-under-dilations-and-reflections",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "thm-monotone-convergence-for-the-integral",
+          "cor-continuous-functions-are-borel-measurable"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Take scalar state spaces and horizon $T=1$. Let $X_0\\sim N(0,1)$,\n$K_1(x,dx_1)=N(x,1)(dx_1)$, and $G_1(x_1,dy)=N(x_1,1)(dy)$, with the\nstandard Lebesgue densities. Observe $Y_1=2$. The predictive state law is\n$N(0,2)$, the evidence density at $2$ is\n$z_1(2)=e^{-2/3}/\\sqrt{6\\pi}>0$, and the filtering version selected by the\nspecified dominated density formula has value $N(4/3,2/3)$. Since the\nsingleton $\\{2\\}$ has observation probability zero, another conditional-law\nversion may take a different value there.",
+        "strategy": "direct",
+        "axiom_use": "AC is used through the normal-law and conditional-kernel suppliers. Countable Choice follows from AC via lem-ac-supplies-sequential-choices-for-probability-constructions and is used by the Lebesgue dilation theorem and the continuous-to-Borel corollary. The local density algebra adds no choice.",
+        "sources": {
+          "references": [
+            {
+              "title": "Simo Särkkä and Lennart Svensson, Bayesian Filtering and Smoothing, 2nd ed., Chapter 6",
+              "url": "https://users.aalto.fi/~ssarkka/pub/bfs_book_2023_online.pdf"
+            },
+            {
+              "title": "Arnaud Doucet and Adam M. Johansen, A Tutorial on Particle Filtering and Smoothing: Fifteen Years Later, Example 2 and §2.2",
+              "url": "https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF2011.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-impossible-observation-zero-evidence-fiber",
+        "kind": "example",
+        "title": "An impossible observation has zero evidence and only a filler filter value",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-state-space-filtering-laws",
+          "alg-recursive-bayesian-filter",
+          "thm-state-space-filtering-and-smoothing-laws-exist",
+          "thm-dominated-state-space-filtering-recursion",
+          "def-general-state-space-model-by-kernels",
+          "thm-finite-horizon-state-space-kernel-law-exists-uniquely"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Let $E_0=E_1=\\{0,1\\}$ and $F_1=\\{a,b\\}$ with counting measure. Set\n$\\mu_0=\\delta_0$ and let the transition kernel preserve the state,\n$K_1(x,\\cdot)=\\delta_x$. Let $G_1(0,\\{a\\})=1$ and\n$G_1(1,\\{b\\})=1$. Then the predictive law is $\\delta_0$, and the evidence\nfor observing $b$ is zero. The update at $b$ is therefore the supplied\npredictive filler $\\delta_0$; it is not a quotient posterior. Because\n$P(Y_1=b)=0$, any probability assigned at $b$ would satisfy the same RCD\nidentities.",
+        "strategy": "direct",
+        "axiom_use": "The example inherits AC only for existence of the conditional-kernel versions; its finite probability calculations are choice-free.",
+        "sources": {
+          "references": [
+            {
+              "title": "Simo Särkkä and Lennart Svensson, Bayesian Filtering and Smoothing, 2nd ed., Chapter 6",
+              "url": "https://users.aalto.fi/~ssarkka/pub/bfs_book_2023_online.pdf"
+            },
+            {
+              "title": "Arnaud Doucet and Adam M. Johansen, A Tutorial on Particle Filtering and Smoothing: Fifteen Years Later, §2.2",
+              "url": "https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF2011.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

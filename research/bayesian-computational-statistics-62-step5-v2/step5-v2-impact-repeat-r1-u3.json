@@ -1,0 +1,89 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "impact-repeat",
+  "round": 1,
+  "unit": "3",
+  "input_sha256": "30e5ad57cc61f1341903e588c6268549f6ab6eb66f4cb349c4d92592e3db2e1c",
+  "decisions": [],
+  "reviews": [
+    {
+      "id": "thm-particle-gibbs-backward-simulation-sweep-is-gibbs",
+      "disposition": "unaffected",
+      "post_sha256": "0a36c1fe7d4619835b882a904154243c6125d09c6ff8a2849af466492ec1aa97",
+      "review_context_sha256": "439d3c324b0ec2d58747a6c52272c550d2d0633361b63f1f2309979a4d803ca0",
+      "reason": "The corrected algorithm tests (theta,x^j,j), exactly the retained parameter-path-index coordinates used by the Statement and Proof 1.2, 3.1 and 4.1. The reference-ancestor B factors and backward-index conditional are unchanged. Proof 3.1 pulls marginal-null exceptional events back to the extended state, and Proof 4.1 combines the exact parameter draw with filter regeneration into the joint conditional block; the corrected initial-domain test therefore preserves the existing invariance argument. The owning contract F2 quote already matches the repaired Definition. No item or contract correction is required.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1110.2873"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "Complete: assigned consumer examined and unchanged, relevant frozen ledger proposal reconciled under the shared lock, and focused strict contract check passed. No item, contract, manifest or page was edited.",
+    "supplier_interface_event": {
+      "supplier": "alg-particle-gibbs-backward-simulation",
+      "section": "Definition",
+      "change": "The initial D_BS admissibility test now uses (theta,x^j,j) rather than the extended particle-state coordinates (theta,U,j). The post-parameter-draw test already used (theta-prime,x^j,j); particle updates, weights, backward draws and failure handling are unchanged.",
+      "origin_report": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-repeat-r1-u47.json"
+    },
+    "consumer_check": {
+      "id": "thm-particle-gibbs-backward-simulation-sweep-is-gibbs",
+      "affected_use": "Statement conditions on (theta,x^*,j); F2 and Proof 1.2 identify the conditional filter, Proof 2.1 identifies backward indices, Proof 3.1 transports exceptional sets to the common extended space, and Proof 4.1 updates (theta,U_-j) given (x^j,j).",
+      "disposition": "unaffected",
+      "details": "The retained-coordinate projection is measurable on the finite standard-Borel particle product. Its bad-set preimage is extended-target null. Disintegration makes a fresh theta outside the good set a conditional null event for posterior-almost every retained path and index; identity fallback therefore leaves the invariant integral unchanged. Finite zero individual weights remain valid. T=0 leaves conditional importance resampling; the AC assumptions and N>=2 restriction remain as stated."
+    },
+    "sources_consulted": [
+      {
+        "url": "https://arxiv.org/pdf/1110.2873",
+        "locators": "Section 4.1, equations (6)-(7), Algorithm 2, Propositions 1-3 and Algorithm 3 (printed pp. 6-10); Appendix A.1-A.2 (printed pp. 22-23).",
+        "check": "Read the conditional-filter and backward-index factorizations and checked their SIR specialization independently. The paper uses ratios; the local product identities handle zero terms. The repository-specific D_BS and null-state fallback follow from the local disintegration supplier, not from an asserted pointwise source convention."
+      }
+    ],
+    "repository_evidence_read": [
+      "items/thm-particle-gibbs-backward-simulation-sweep-is-gibbs.md: Statement, Facts and all six proof steps",
+      "items/alg-particle-gibbs-backward-simulation.md: complete Definition",
+      "items/def-particle-gibbs-backward-simulation-extended-target.md: Definition and Conditional-version convention",
+      "items/thm-disintegration-of-a-joint-law-on-standard-borel-spaces.md: Statement",
+      "items/thm-feynman-kac-path-radon-nikodym-weight.md: Statement",
+      "items/def-feynman-kac-path-targets-and-normalizers.md: Definition",
+      "items/def-particle-gibbs-extended-target.md: Definition",
+      "research/bayesian-computational-statistics-62-batch-47.proof-contracts.json: assigned theorem contract"
+    ],
+    "checks": [
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run bayesian-computational-statistics-62 --items thm-particle-gibbs-backward-simulation-sweep-is-gibbs",
+        "exit_code": 0,
+        "result": "Executed immediately after mathematical review; both hashes copied verbatim. Item guard equals the frozen before guard."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-47.proof-contracts.json --items thm-particle-gibbs-backward-simulation-sweep-is-gibbs --strict --json",
+        "exit_code": 0,
+        "result": "ok:true; the assigned theorem contract passed with zero errors and zero warnings."
+      },
+      {
+        "command": "Direct frozen-assignment and itemHashGuard comparison",
+        "result": "Normalized frozen input digest matches input_sha256; unit 3 contains precisely the reviewed ID; current item guard equals both frozen before and reported post_sha256."
+      }
+    ],
+    "unresolved_mathematics": [],
+    "next_action": "Handoff to the controller. No unresolved in-scope mathematical repairs, new interfaces or additional downstream consumers.",
+    "ledger_reconciliation": {
+      "ledger": "research/defect-ledger.jsonl",
+      "defect_id": "bcs62-step5-repeat-r1-u47-pgbs-domain",
+      "action": "appended the exact frozen proposal after rereading and deduplicating under the shared lock",
+      "validation": "All previous ledger bytes preserved; appended row parses as JSON and the defect ID occurs exactly once. Lock released immediately after the append and validation.",
+      "published_ledger": "No change required: the assigned consumer and the repaired supplier are draft frontier items, and this examination found no published-item defect.",
+      "other_proposals": "Other supplier proposals in the shared frozen pack belong to the other lanes or controller; this lane reconciled only the particle-Gibbs supplier event for its assigned consumer."
+    },
+    "proof_layout": "No item files changed, so there are no changed item paths requiring the post-edit proof-layout command."
+  },
+  "supporting_evidence": {
+    "research/bayesian-computational-statistics-62-batch-47.proof-contracts.json": "bc1f99188ae8b4992fc43d66497aa1c416fd0e6daf4b6e3a2ba3cdafec9078a8",
+    "research/bayesian-computational-statistics-62-step5-v2/step5-v2-repeat-r1-u47.json": "99ca921d8033c587b6f4ddb7ff0ae24d50b0c7da6c9159a1698c3329aac05ceb"
+  }
+}

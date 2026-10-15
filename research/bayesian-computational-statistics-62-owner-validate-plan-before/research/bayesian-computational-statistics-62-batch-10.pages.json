@@ -1,0 +1,187 @@
+[
+  {
+    "order": 2060,
+    "id": "posterior-consistency-and-tests",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Hellinger geometry and posterior consistency",
+    "companion": "posterior-consistency-and-tests-examples",
+    "requires": [
+      "posterior-propriety-and-dominated-bayes-formula",
+      "minimax-lower-bounds-and-information-theoretic-methods"
+    ],
+    "items": [
+      {
+        "id": "def-hellinger-distance-for-dominated-laws",
+        "kind": "definition",
+        "title": "Root-L2 Hellinger distance for dominated laws",
+        "statement": "For probability laws P and Q with supplied densities p and q against one sigma-finite measure, define h(P,Q)^2 = integral (sqrt(p)-sqrt(q))^2. The companion comparison theorem proves the expression is independent of the common dominating measure.",
+        "strategy": "Definition: state the common sigma-finite dominating measure and the supplied finite-valued density representatives; make the root-L2 convention explicit.",
+        "deps": [
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-probability-measure",
+          "def-axiom-of-choice",
+          "def-nonnegative-lebesgue-integral",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-hellinger-tv-comparison-under-library-convention",
+        "kind": "theorem",
+        "title": "Hellinger invariance and comparison with library total variation",
+        "statement": "The root-L2 Hellinger expression is invariant under replacing one common sigma-finite dominating measure by another, and under the library convention TV(P,Q)=sup_A |P(A)-Q(A)| it satisfies TV(P,Q) <= h(P,Q) and h(P,Q)^2 <= 2 TV(P,Q).",
+        "strategy": "Direct: compare both common-measure expressions to the finite canonical measure P+Q, derive TV as half the L1 density distance, then apply Cauchy-Schwarz and a pointwise square-root inequality.",
+        "deps": [
+          "def-hellinger-distance-for-dominated-laws",
+          "def-total-variation-distance-for-probability-laws",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-probability-measure",
+          "thm-holder-inequality-for-integrals",
+          "def-axiom-of-choice",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+          "thm-integration-against-a-density",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-posterior-consistency-under-prior-mass-and-tests",
+        "kind": "theorem",
+        "title": "Posterior consistency from KL support and uniformly summable tests",
+        "statement": "For a well-specified dominated IID Bayesian model with a proper prior, jointly measurable normalized likelihood density, positive mass in every KL neighborhood, and for each metric-separated complement tests whose type-I and uniform type-II errors are summable, the posterior mass of that complement tends to zero almost surely. Under AC, KL support also implies Hellinger support through h^4 <= 2 KL under the library conventions.",
+        "strategy": "Direct: prove an almost-sure exponential lower bound for the posterior denominator by Jensen and the IID strong law; amplify the given tests by independent blocks using the bounded-variable Hoeffding MGF bound; split the posterior numerator, integrate its tested part by Tonelli, and apply Markov plus Borel-Cantelli. Use Pinsker only for the separate KL-to-Hellinger support consequence.",
+        "deps": [
+          "def-hellinger-distance-for-dominated-laws",
+          "thm-hellinger-tv-comparison-under-library-convention",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-kullback-leibler-divergence",
+          "thm-pinsker",
+          "def-total-variation-distance-for-probability-laws",
+          "thm-bayes-formula-for-dominated-kernels",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-kolmogorov-iid-l1-strong-law",
+          "def-identically-distributed-and-iid-random-variables",
+          "lem-measurable-functions-preserve-independence",
+          "thm-independent-random-elements-have-product-joint-law",
+          "lem-bounded-variable-hoeffding-mgf",
+          "cor-first-borel-cantelli-lemma-for-events",
+          "cor-markov-inequality-for-random-variables",
+          "thm-jensens-integral-inequality",
+          "thm-exponential-two-point-convexity",
+          "def-parameter-measurable-statistical-model-as-markov-kernel",
+          "def-measurable-function-between-measurable-spaces",
+          "thm-sections-of-product-measurable-functions-are-measurable",
+          "def-probability-measure",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "def-natural-logarithm",
+          "thm-logarithm-derivative-and-integral",
+          "def-axiom-of-choice",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-geometric-series"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "cex-identifiability-alone-does-not-imply-posterior-consistency",
+        "kind": "counterexample",
+        "title": "Identifiability and KL support do not replace testability",
+        "statement": "An identifiable, well-specified dominated IID Bernoulli model can have KL support at its truth yet fail posterior consistency for a metric on its law space when no uniformly consistent tests exist.",
+        "strategy": "Counterexample: use a countable injective Bernoulli family converging to the truth in Hellinger distance, a discrete metric on the distinct laws, and a proper prior that omits the truth but charges every KL neighborhood; prove product-law alternatives become indistinguishable while the posterior remains on the metric-separated prior support.",
+        "deps": [
+          "def-hellinger-distance-for-dominated-laws",
+          "thm-hellinger-tv-comparison-under-library-convention",
+          "def-identifiability-of-an-estimand",
+          "def-kullback-leibler-divergence",
+          "def-total-variation-distance-for-probability-laws",
+          "thm-bayes-formula-for-dominated-kernels",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-independent-random-elements-have-product-joint-law",
+          "def-parameter-measurable-statistical-model-as-markov-kernel",
+          "thm-geometric-series",
+          "thm-logarithm-derivative-and-integral",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-probability-measure",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      }
+    ]
+  },
+  {
+    "order": 2061,
+    "id": "posterior-consistency-and-tests-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Hellinger geometry and posterior consistency — Examples",
+    "companion": "posterior-consistency-and-tests",
+    "requires": [
+      "posterior-consistency-and-tests"
+    ],
+    "items": [
+      {
+        "id": "ex-identifiable-finite-model",
+        "kind": "example",
+        "title": "A finite identifiable model with posterior consistency",
+        "statement": "In a two-point Bernoulli model with distinct success probabilities, positive prior mass at the true law and exponentially consistent tests verify the posterior consistency theorem's hypotheses.",
+        "strategy": "Verification: check injectivity, KL support, and the two Bernoulli tail bounds, then apply the locally proved posterior consistency theorem.",
+        "deps": [
+          "thm-posterior-consistency-under-prior-mass-and-tests",
+          "def-identifiability-of-an-estimand",
+          "def-kullback-leibler-divergence",
+          "def-total-variation-distance-for-probability-laws",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-independent-random-elements-have-product-joint-law",
+          "lem-bounded-variable-hoeffding-mgf",
+          "cor-markov-inequality-for-random-variables",
+          "thm-geometric-series",
+          "def-axiom-of-choice",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-probability-measure",
+          "def-parameter-measurable-statistical-model-as-markov-kernel",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-l1-distance-convention-factor-of-two",
+        "kind": "example",
+        "title": "The factor of two between density L1 and library total variation",
+        "statement": "For two disjoint point-mass laws, density L1 distance is 2, event-supremum total variation is 1, and root-L2 Hellinger distance is sqrt(2), so h^2 <= 2 TV is sharp.",
+        "strategy": "Verification: compute both densities on a two-point space, take the event supremum, and evaluate the two Hellinger summands exactly.",
+        "deps": [
+          "def-hellinger-distance-for-dominated-laws",
+          "thm-hellinger-tv-comparison-under-library-convention",
+          "def-total-variation-distance-for-probability-laws",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      }
+    ]
+  }
+]

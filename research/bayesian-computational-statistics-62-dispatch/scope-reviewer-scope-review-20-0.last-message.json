@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "20",
+  "round": 0,
+  "reviewed_items": [
+    "def-multiscale-coefficient-space-m0w",
+    "def-sobolev-linear-functional-for-white-noise",
+    "def-type-s-and-h-multiscale-density-priors",
+    "lem-m0w-separable-and-projection-tails",
+    "lem-multiscale-primitive-map-to-continuous-cdfs",
+    "lem-random-posterior-quantiles-stabilize-under-bvm",
+    "lem-smooth-functional-extends-to-negative-sobolev-space",
+    "lem-type-s-h-prior-draws-are-l2-densities",
+    "lem-m0w-finite-projection-and-tail-bvm-criterion",
+    "thm-linear-functional-bvm-and-credible-coverage",
+    "thm-nonlinear-functional-bvm-and-credible-coverage",
+    "thm-projected-empirical-process-clt-in-m0w",
+    "thm-cdf-and-multiscale-credible-band-calibration-from-bvm",
+    "thm-multiscale-credible-band-holder-diameter",
+    "cex-credible-posterior-set-with-zero-frequency-coverage",
+    "ex-type-s-and-h-density-prior-contracts",
+    "ex-nonlinear-functional-remainder-at-parametric-scale",
+    "ex-smooth-linear-functional-in-white-noise"
+  ],
+  "reviewed_pages": [
+    "functional-bayesian-limits-and-credible-set-calibration",
+    "functional-bayesian-limits-and-credible-set-calibration-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The assigned conditional results are mostly sound, but the approved Type-S/Type-H density BvM application is absent and requires owner reconciliation. The CDF theorem also has a repairable local proof gap.",
+  "findings": [
+    {
+      "id": "functional-bayesian-limits-and-credible-set-calibration",
+      "type": "scope",
+      "reason": "The approved BCS-17 design includes the IID density weak BvM for Type-S/Type-H priors under the stated cutoffs and truth conditions. The A-page objective explicitly excludes that source-specific result, and no assigned item proves it."
+    },
+    {
+      "id": "thm-cdf-and-multiscale-credible-band-calibration-from-bvm",
+      "type": "prerequisite",
+      "reason": "The theorem's premise (i) is not established for either Type-S or Type-H priors. The BCS-08 contraction theorem requires entropy and prior-mass conditions that are not verified here and does not supply the needed multiscale posterior BvM. Castillo–Nickl (2014), Theorem 3 and §5.4, requires posterior concentration on D_n, restricted exponential-moment bounds, and finite-dimensional density BvM limits; its Type-H shift argument is deferred there. The smallest missing prerequisite is the Type-S/Type-H posterior weak BvM in M0(w), under the approved conditions. See the [primary source](https://arxiv.org/pdf/1310.2484), §5.4, printed pp. 23–28."
+    },
+    {
+      "id": "thm-cdf-and-multiscale-credible-band-calibration-from-bvm",
+      "type": "local",
+      "reason": "Steps 1.1–1.2 use the continuous mapping theorem to obtain weak convergence, but then apply the quantile lemma, which requires bounded-Lipschitz convergence. Supply the direct Lipschitz pushforward bound for J and the norm maps. Step 1.1 also identifies the covariance of J#G without stating why the continuous linear image of the Gaussian law G is Gaussian."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-cdf-and-multiscale-credible-band-calibration-from-bvm",
+      "decision": "escalate",
+      "reason": "Its conditional calibration argument does not establish the Type-S/Type-H posterior BvM needed to instantiate premise (i)."
+    },
+    {
+      "id": "thm-multiscale-credible-band-holder-diameter",
+      "decision": "escalate",
+      "reason": "Its generic diameter proof is conditional on the calibrated M0(w) credible ball; the Type-S/Type-H application inherits the missing BvM prerequisite."
+    }
+  ]
+}

@@ -1,0 +1,458 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": 36,
+  "scope": [
+    "thm-mcmc-clt-sufficient-regimes"
+  ],
+  "contracts": {
+    "thm-mcmc-clt-sufficient-regimes": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-measurable-observation-does-not-increase-mixing-coefficients",
+          "source_section": "Statement",
+          "quote": "Let $X=(X_k)_{k\\ge0}$ be a strictly stationary process on a measurable state\nspace and let $h$ be a measurable real-valued function. Put $Y_k=h(X_k)$.\nThen $Y$ is strictly stationary and, for every $n\\ge1$,\n$$\\alpha_Y(n)\\le\\alpha_X(n),\\qquad \\phi_Y(n)\\le\\phi_X(n),\\qquad \\rho_Y(n)\\le\\rho_X(n),$$\nwhere the coefficients are as in\n[[def-mixing-coefficients-for-stationary-markov-chain]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-polynomial-ergodicity-with-integrable-rate-envelope",
+          "source_section": "Definition",
+          "quote": "Let $P$ be a probability kernel with invariant probability $\\pi$. For $m>0$, say that $P$ has **polynomial total-variation rate of order $m$ with an integrable envelope** if there is a measurable $M:\\mathsf X\\to[0,\\infty)$ with $\\pi(M)<\\infty$ such that\n$$\\|P^n(x,\\cdot)-\\pi\\|_{\\mathrm{TV}}\\le M(x)n^{-m}\\quad(x\\in\\mathsf X,\\ n\\ge1).$$\n\nThis is the specific envelope condition used with the polynomial-rate CLT cases on this page. It does not claim that every definition of polynomial ergodicity in the literature includes integrability of $M$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-geometric-and-uniform-ergodicity-for-mcmc-clt",
+          "source_section": "Definition",
+          "quote": "Let $P$ be a probability kernel with invariant probability $\\pi$ on a measurable space $(\\mathsf X,\\mathcal X)$. Write $P^n(x,\\cdot)$ for its $n$-step transition probability and use $\\|\\mu-\\nu\\|_{\\mathrm{TV}}=\\sup_{A\\in\\mathcal X}|\\mu(A)-\\nu(A)|$ for probability measures.\n\nThe chain is **geometrically ergodic** if there are a measurable finite function $M:\\mathsf X\\to[0,\\infty)$ and $r\\in(0,1)$ such that\n$$\\|P^n(x,\\cdot)-\\pi\\|_{\\mathrm{TV}}\\le M(x)r^n\\quad(x\\in\\mathsf X,\\ n\\ge1).$$\n\nIt is **uniformly ergodic** if this bound holds with $M$ bounded on $\\mathsf X$. These are convergence-rate properties, not conclusions about a particular function's CLT or long-run variance. If a proof needs $\\int M\\,d\\pi<\\infty$, that integrability is an additional stated hypothesis unless a cited theorem establishes it.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-markov-property-for-bounded-future-path-functionals",
+          "source_section": "Statement",
+          "quote": "Assume Choice. Let $X$ be a $K$-chain and let\n$H:E^{\\mathbb N_0}\\to\\mathbb R$ be bounded and product-measurable. Then\n$$h(x):=\\mathbb E_x[H(X_0,X_1,\\ldots)]$$ is $\\mathcal E$-measurable and, for every $n\\ge0$, $$ \\mathbb E[H(X_n,X_{n+1},\\ldots)\\mid\\mathcal F_n]=h(X_n)\\quad\\text{a.s.} $$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chapman-kolmogorov-equations",
+          "source_section": "Statement",
+          "quote": "For $m,n\\ge0$,\n$$K^{m+n}=K^mK^n.$$ Assume Choice and let $X$ be a Markov chain with kernel $K$ relative to $(\\mathcal F_n)$. For every bounded measurable real $f$, $$ \\mathbb E[f(X_{m+n})\\mid\\mathcal F_m]=K^nf(X_m)\\quad\\text{a.s.} $$ Equivalently, for $A\\in\\mathcal E$, $$ \\mathbb P(X_{m+n}\\in A\\mid\\mathcal F_m)=K^n(X_m,A)\\quad\\text{a.s.} $$\nBoth assertions include $m=0$ and $n=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-total-variation-distance-for-probability-laws",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ and $\\nu$ be probability measures on the same measurable space\n$(E,\\mathcal E)$ ([[def-probability-measure]]). Their **total variation\ndistance** is\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}:=\\sup_{A\\in\\mathcal E}\\bigl|\\mu(A)-\\nu(A)\\bigr| .$$\n\nFor every event $A$ the difference $\\mu(A)-\\nu(A)$ is a real number in\n$[-1,1]$, because both measures have total mass one; hence the set being\nmaximized is a nonempty subset of $[0,1]$ and the supremum lies in $[0,1]$.\nThe empty event and the whole space give the values $0$ and\n$|\\mu(E)-\\nu(E)|=0$, so the distance is zero when $\\mu=\\nu$, and it is symmetric\nin $\\mu$ and $\\nu$. This convention carries no factor $1/2$ in the supremum;\nit is therefore not the total variation norm of the signed measure $\\mu-\\nu$,\nwhich is twice the quantity above when that signed measure is considered on a\nmeasurable space where the decomposition is attained. On a countable state\nspace with its power-set sigma-algebra the supremum equals the half-$\\ell^1$\nsum $\\tfrac12\\sum_{x\\in E}|\\mu(\\{x\\})-\\nu(\\{x\\})|$; that identity is proved in\n[[lem-total-variation-half-l1-formula-on-a-countable-space]], not assumed here.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-strong-mixing-clt-with-moment-conditions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(Y_k)_{k\\ge0}$ be a centered strictly stationary real sequence with $\\mathbb E[Y_0^2]<\\infty$, and define $S_n=\\sum_{k=1}^nY_k$. Each of the following is sufficient:\n\n1. There is $B<\\infty$ with $|Y_0|\\le B$ almost surely and $\\sum_{n\\ge1}\\alpha_Y(n)<\\infty$.\n2. For some $\\delta>0$, $\\mathbb E|Y_0|^{2+\\delta}<\\infty$ and $\\sum_{n\\ge1}\\alpha_Y(n)^{\\delta/(2+\\delta)}<\\infty$.\n3. For some $a\\in(0,1)$, $\\alpha_Y(n)=O(a^n)$ and $\\mathbb E[Y_0^2\\log^+|Y_0|]<\\infty$, where $\\log^+u=\\max(0,\\log u)$ for $u>0$ and $0\\log^+0:=0$.\n\nIn each case the covariance series\n$$\\sigma_Y^2:=\\mathbb E[Y_0^2]+2\\sum_{k=1}^{\\infty}\\operatorname{Cov}(Y_0,Y_k)$$\nconverges absolutely and is nonnegative, and\n$$n^{-1/2}S_n\\Rightarrow N(0,\\sigma_Y^2).$$\nThis includes the degenerate law $N(0,0)$ when $\\sigma_Y^2=0$, as in [[lem-zero-long-run-variance-gives-degenerate-clt]]. The coefficient $\\alpha_Y$ and strict stationarity have the meanings in [[def-mixing-coefficients-for-stationary-markov-chain]].",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-harris-geometric-ergodicity-has-integrable-rate-envelope",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $P$ be a probability kernel on a measurable space\n$(\\mathsf X,\\mathcal X)$ with invariant probability $\\pi$. Assume it is\n$\\phi$-irreducible\n([[def-phi-irreducible-chain]]), aperiodic\n([[def-general-state-aperiodic-markov-chain]]), and Harris recurrent relative\nto its nonzero $\\sigma$-finite irreducibility measure $\\phi$\n([[def-harris-recurrent-markov-chain]]). Suppose $P$ is geometrically\nergodic in the sense of\n[[def-geometric-and-uniform-ergodicity-for-mcmc-clt]]. Then there exist a\nmeasurable $M:\\mathsf X\\to[0,\\infty)$ with $\\pi(M)<\\infty$ and $r\\in(0,1)$ such\nthat\n$$\\|P^n(x,\\cdot)-\\pi\\|_{\\mathrm{TV}}\\le M(x)r^n\\quad(x\\in\\mathsf X,\\ n\\ge1).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-geometric-total-variation-rate-controls-strong-mixing",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X_k)_{k\\ge0}$ be a stationary time-homogeneous Markov chain\nwith invariant probability $\\pi$. Suppose there are a measurable\n$M:\\mathsf X\\to[0,\\infty)$ with $\\pi(M)<\\infty$ and $r\\in(0,1)$ such that\n$$\\|P^n(x,\\cdot)-\\pi\\|_{\\mathrm{TV}}\\le M(x)r^n\\quad\\text{for every }x\\in\\mathsf X,\\ n\\ge1.$$\nThen the strong-mixing coefficient of the stationary process satisfies\n$$\\alpha_X(n)\\le\\pi(M)r^n\\quad(n\\ge1).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-geometric-reversible-chain-rho-mixing",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $P$ be a probability kernel on $(\\mathsf X,\\mathcal X)$ with invariant\nprobability $\\pi$, and consider its stationary output process $X$. Assume it is $\\phi$-irreducible ([[def-phi-irreducible-chain]]), aperiodic\n([[def-general-state-aperiodic-markov-chain]]), and Harris recurrent relative\nto its nonzero $\\sigma$-finite irreducibility measure $\\phi$\n([[def-harris-recurrent-markov-chain]]). Suppose it is geometrically\nergodic in the sense of\n[[def-geometric-and-uniform-ergodicity-for-mcmc-clt]] and reversible with\nrespect to $\\pi$ in the symmetric-flow sense of\n[[def-general-state-reversibility-by-symmetric-flow-measure]]. Then there are\n$C<\\infty$ and $r\\in(0,1)$ such that its maximal-correlation mixing\ncoefficient satisfies\n$$\\rho_X(n)\\le Cr^n\\quad(n\\ge1).$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-rho-mixing-clt-for-square-integrable-sequences",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(Y_k)_{k\\ge0}$ be a centered strictly stationary real sequence with $\\mathbb E[Y_0^2]<\\infty$. If\n$$\\sum_{n=1}^{\\infty}\\rho_Y(n)<\\infty,$$\nthen the covariance series\n$$\\sigma_Y^2:=\\mathbb E[Y_0^2]+2\\sum_{k=1}^{\\infty}\\operatorname{Cov}(Y_0,Y_k)$$\nconverges absolutely and is nonnegative. If $\\sigma_Y^2>0$, then for $S_n=\\sum_{k=1}^nY_k$,\n$$n^{-1/2}S_n\\Rightarrow N(0,\\sigma_Y^2).$$\nIf $\\sigma_Y^2=0$, [[lem-zero-long-run-variance-gives-degenerate-clt]] gives the degenerate normal limit.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-uniform-ergodicity-controls-uniform-mixing",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X_k)_{k\\ge0}$ be a stationary time-homogeneous Markov chain\nwith invariant probability $\\pi$. If for constants $C<\\infty$ and $r\\in(0,1)$\n$$\\sup_{x\\in\\mathsf X}\\|P^n(x,\\cdot)-\\pi\\|_{\\mathrm{TV}}\\le Cr^n\\quad(n\\ge1),$$\nthen the uniform-mixing coefficient satisfies\n$$\\phi_X(n)\\le Cr^n\\quad(n\\ge1).$$",
+          "uses": [
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-uniform-mixing-clt-for-square-integrable-sequences",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(Y_k)_{k\\ge0}$ be a centered strictly stationary real sequence with $\\mathbb E[Y_0^2]<\\infty$. If\n$$\\sum_{n=1}^{\\infty}\\sqrt{\\phi_Y(n)}<\\infty,$$\nthen the covariance series\n$$\\sigma_Y^2:=\\mathbb E[Y_0^2]+2\\sum_{k=1}^{\\infty}\\operatorname{Cov}(Y_0,Y_k)$$\nconverges absolutely and is nonnegative. If $\\sigma_Y^2>0$, then for $S_n=\\sum_{k=1}^nY_k$,\n$$n^{-1/2}S_n\\Rightarrow N(0,\\sigma_Y^2).$$\nIf $\\sigma_Y^2=0$, [[lem-zero-long-run-variance-gives-degenerate-clt]] gives the degenerate normal limit.",
+          "uses": [
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-zero-long-run-variance-gives-degenerate-clt",
+          "source_section": "Statement",
+          "quote": "Let $(Y_k)_{k\\ge0}$ be a centered, strictly stationary, square-integrable real process ([[def-l-p-space-as-a-quotient-by-null-functions]]), and put $\\gamma_k=\\operatorname{Cov}(Y_0,Y_k)$. If $\\sum_{k\\ge1}|\\gamma_k|<\\infty$ and\n$$\\gamma_0+2\\sum_{k=1}^{\\infty}\\gamma_k=0,$$\nthen $n^{-1/2}\\sum_{k=1}^nY_k\\to0$ in $L^2$ and hence in distribution to $N(0,0)$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-long-run-variance-for-stationary-markov-chain",
+          "source_section": "Definition",
+          "quote": "Let $(X_k)_{k\\ge0}$ be a stationary time-homogeneous Markov chain with invariant probability $\\pi$, and let $f$ be real Borel with $\\pi(f)=0$ and $\\pi(f^2)<\\infty$. For $k\\ge0$, set $\\gamma_k:=\\operatorname{Cov}_{\\pi}(f(X_0),f(X_k))$. When the Markov-chain CLT $n^{-1/2}\\sum_{k=0}^{n-1}f(X_k)\\Rightarrow N(0,\\sigma_f^2)$ holds with finite variance parameter and $\\sum_{k\\ge1}|\\gamma_k|<\\infty$, the **covariance long-run variance** is\n$$\\sigma^2_{\\mathrm{LR}}(f):=\\gamma_0+2\\sum_{k=1}^{\\infty}\\gamma_k.$$\n\nThis definition does not infer a CLT from covariance summability, or infer that a weak-limit variance equals the covariance sum. Whenever $\\sigma^2_{\\mathrm{LR}}(f)$ is used as the variance parameter in a CLT or MCSE claim, that equality must be established by the theorem being applied. For example, the local Poisson-equation theorem proves the equality under its square-integrable solution hypotheses.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-mcmc-clt-sufficient-regimes-1.1",
+          "step": "1.1",
+          "claim": "Put $Y_k=f(X_k)$. This is a centered stationary real sequence by [F1]. It is square-integrable in every case: boundedness suffices in case 1, the power moment suffices in cases 2 and 3 on the probability space, and cases 5 and 6 assume $L^2$. In case 4, split at $|f|=e$: on the bounded part $f^2\\le e^2$, and on the other part $f^2\\le f^2\\log|f|$, so the stated logarithmic moment implies $L^2$. All sequence suppliers below therefore have their centering, stationarity and second-moment premises.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-mcmc-clt-sufficient-regimes-1.2",
+          "step": "1.2",
+          "claim": "Suppose a pointwise rate $\\|P^n(x,\\cdot)-\\pi\\|_{\\mathrm{TV}}\\le M(x)a_n$ is available with $\\pi(M)<\\infty$. For any past event $A\\in\\sigma(X_0,\\ldots,X_j)$ and separated future event $B\\in\\sigma(X_{j+n},X_{j+n+1},\\ldots)$, [F3] supplies $0\\le h\\le1$ with $E[\\mathbf1_B\\mid\\sigma(X_0,\\ldots,X_j)]=P^nh(X_j)$ and $P(B)=\\pi(h)$. Approximating $h$ uniformly by dyadic averages of its superlevel indicators gives $|P^nh(x)-\\pi(h)|\\le\\|P^n(x,\\cdot)-\\pi\\|_{\\mathrm{TV}}$: each indicator discrepancy is bounded by the defining event supremum. Consequently\n$$|P(A\\cap B)-P(A)P(B)|=|E[\\mathbf1_A(P^nh(X_j)-\\pi(h))]|\\le\\pi(M)a_n.$$\nTaking the suprema and then applying [F1] gives $\\alpha_Y(n)\\le\\alpha_X(n)\\le\\pi(M)a_n$. No measurability of an uncountable total-variation supremum is needed, because its measurable envelope bounds each event discrepancy pointwise.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-mcmc-clt-sufficient-regimes-2.1",
+          "step": "2.1",
+          "claim": "In case 1, take $a_n=n^{-m}$ in step 1.2. Since $m>1$, grouping $2^j\\le n<2^{j+1}$ bounds each block of $\\sum_n n^{-m}$ by $2^{-j(m-1)}$; [F9] makes the resulting geometric series finite. Thus $\\sum_n\\alpha_Y(n)<\\infty$. The bounded branch of [F4] gives absolute covariance summability and the asserted normal limit for the normalized sums of $Y$. This uses the whole approved range $m>1$.",
+          "inputs": [
+            "F2",
+            "F4",
+            "F9",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-mcmc-clt-sufficient-regimes-2.2",
+          "step": "2.2",
+          "claim": "In case 2, put $\\theta=\\delta/(2+\\delta)$. Step 1.2 gives $\\alpha_Y(n)^\\theta\\le\\pi(M)^\\theta n^{-m\\theta}$. The exact assumption $m\\delta>2+\\delta$ says $m\\theta>1$, so the same dyadic argument and [F9] make these bounds summable. The power-moment branch of [F4] proves the same covariance and distribution conclusions.",
+          "inputs": [
+            "F2",
+            "F4",
+            "F9",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-mcmc-clt-sufficient-regimes-3.1",
+          "step": "3.1",
+          "claim": "In cases 3 and 4, [F5] replaces the possibly nonintegrable original envelope by a finite integrable geometric envelope with some rate $a\\in(0,1)$. Thus $\\alpha_Y(n)\\le Ca^n$ by [F1] and [F5]. In case 3, every positive power of this bound is summable, so the $L^{2+\\delta}$ branch of [F4] applies. In case 4, its exponential/logarithmic-moment branch applies directly. Each yields absolute covariance summability and the normal limit without strengthening the given moment assumption.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F9",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-mcmc-clt-sufficient-regimes-4.1",
+          "step": "4.1",
+          "claim": "In case 5, reversibility and the geometric-rate assumptions allow [F6] to give $\\rho_X(n)\\le Cr^n$ for some $r<1$. By [F1], $\\rho_Y(n)\\le\\rho_X(n)$, so its series is summable. The $L^2$ rho-mixing theorem in [F6] proves the required covariance-summable CLT.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F6",
+            "F9",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-mcmc-clt-sufficient-regimes-4.2",
+          "step": "4.2",
+          "claim": "In case 6, [F7] gives $\\phi_X(n)\\le Cr^n$ for some $r<1$. By [F1], $\\sum_n\\sqrt{\\phi_Y(n)}\\le\\sqrt C\\sum_n r^{n/2}<\\infty$. The uniform-mixing $L^2$ theorem in [F7] therefore gives the same conclusions.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F7",
+            "F9",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-mcmc-clt-sufficient-regimes-5.1",
+          "step": "5.1",
+          "claim": "In all six cases the covariance series is absolutely convergent, its sum is finite and nonnegative, and the normalized sum converges to the centered normal with precisely that covariance sum. If the sum is zero, [F8] also proves the degenerate limit directly in $L^2$, so no division by an asymptotic variance is made. Stationarity makes $\\sum_{k=0}^{n-1}Y_k$ and $\\sum_{k=1}^{n}Y_k$ equal in law. The established limit is therefore exactly the displayed limit in the Statement, and only now does [F8] identify its variance as $\\sigma_f^2$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "step 4.1",
+            "step 4.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes an invariant probability and a stationary chain, so its state space cannot be empty; the conclusion is an n-to-infinity claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 explicitly includes zero covariance long-run variance via the zero-variance lemma, without division by it."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement concerns normalized sums as n tends to infinity, not a one-sample normality assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 5.1 admit identically zero f and singular/zero variance; the limiting centered normal may be the point mass N(0,0)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 use the strict m>1 or m delta>2+delta thresholds; no equality endpoint is inferred. Step 1.1 handles log-plus near zero by the bounded split."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 explicitly assume AC, as required by the repaired local conditional-expectation, path-space and martingale suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Each of the six regimes is sufficient; the Statement claims no if-and-only-if characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement claims no necessity direction."
+        }
+      ]
+    }
+  },
+  "manifest_rows": [
+    {
+      "id": "thm-mcmc-clt-sufficient-regimes",
+      "kind": "theorem",
+      "title": "Sufficient MCMC CLT regimes",
+      "deps": [
+        "def-axiom-of-choice",
+        "def-general-state-aperiodic-markov-chain",
+        "def-general-state-reversibility-by-symmetric-flow-measure",
+        "def-geometric-and-uniform-ergodicity-for-mcmc-clt",
+        "def-harris-recurrent-markov-chain",
+        "def-l-p-space-as-a-quotient-by-null-functions",
+        "def-long-run-variance-for-stationary-markov-chain",
+        "def-measure-kernel-and-probability-kernel",
+        "def-phi-irreducible-chain",
+        "def-polynomial-ergodicity-with-integrable-rate-envelope",
+        "def-total-variation-distance-for-probability-laws",
+        "lem-geometric-reversible-chain-rho-mixing",
+        "lem-geometric-total-variation-rate-controls-strong-mixing",
+        "lem-harris-geometric-ergodicity-has-integrable-rate-envelope",
+        "lem-measurable-observation-does-not-increase-mixing-coefficients",
+        "lem-uniform-ergodicity-controls-uniform-mixing",
+        "lem-zero-long-run-variance-gives-degenerate-clt",
+        "thm-chapman-kolmogorov-equations",
+        "thm-geometric-series",
+        "thm-invariant-initial-law-makes-the-chain-stationary",
+        "thm-markov-property-for-bounded-future-path-functionals",
+        "thm-rho-mixing-clt-for-square-integrable-sequences",
+        "thm-strong-mixing-clt-with-moment-conditions",
+        "thm-taking-out-what-is-known",
+        "thm-uniform-mixing-clt-for-square-integrable-sequences"
+      ],
+      "statement": "Assume AC. Let $(\\mathsf X,\\mathcal X)$ be countably generated, let $P$ be a\n$\\phi$-irreducible probability kernel ([[def-phi-irreducible-chain]], [[def-measure-kernel-and-probability-kernel]]), aperiodic\n([[def-general-state-aperiodic-markov-chain]]), and Harris recurrent relative\nto $\\phi$ ([[def-harris-recurrent-markov-chain]]) with invariant probability\n$\\pi$, and let $(X_k)_{k\\ge0}$ be a stationary\n$P$-chain whose canonical left shift preserves its path law and whose\nshift-invariant measurable events have probability zero or one. We take the\ninitial law to be $\\pi$, which implies stationarity by\n[[thm-invariant-initial-law-makes-the-chain-stationary]]. Let\n$f:\\mathsf X\\to\\mathbb R$\nbe Borel with $\\pi(f)=0$. Define\n$\\sigma_f^2=\\pi(f^2)+2\\sum_{k\\ge1}\\operatorname{Cov}_{\\pi}(f(X_0),f(X_k))$\nonly when the covariance series is absolutely convergent and the CLT is\nestablished, as in\n[[def-long-run-variance-for-stationary-markov-chain]].\n\nEach of the following six conditions is sufficient for absolute convergence\nof the covariance series and\n$$\\frac1{\\sqrt n}\\sum_{k=0}^{n-1}f(X_k)\\Rightarrow N(0,\\sigma_f^2):$$\n\n1. $P$ has polynomial total-variation rate of order $m>1$ with an integrable\n   envelope ([[def-polynomial-ergodicity-with-integrable-rate-envelope]]),\n   and $f$ is essentially bounded under $\\pi$ (there is $B<\\infty$ with\n   $|f|\\le B$ $\\pi$-almost everywhere).\n2. $P$ has polynomial total-variation rate of order $m>0$ with an integrable\n   envelope ([[def-polynomial-ergodicity-with-integrable-rate-envelope]]),\n   $f\\in L^{2+\\delta}(\\pi)$ for some $\\delta>0$\n   ([[def-l-p-space-as-a-quotient-by-null-functions]]), and\n   $m\\delta>2+\\delta$.\n3. $P$ is geometrically ergodic ([[def-geometric-and-uniform-ergodicity-for-mcmc-clt]]) and $f\\in L^{2+\\delta}(\\pi)$ for some\n   $\\delta>0$ ([[def-l-p-space-as-a-quotient-by-null-functions]]).\n4. $P$ is geometrically ergodic ([[def-geometric-and-uniform-ergodicity-for-mcmc-clt]]) and\n   $\\pi\\bigl(f^2\\log^+|f|\\bigr)<\\infty$, with\n   $0\\log^+0:=0$.\n5. $P$ is geometrically ergodic ([[def-geometric-and-uniform-ergodicity-for-mcmc-clt]]), reversible with respect to $\\pi$ in the symmetric-flow sense ([[def-general-state-reversibility-by-symmetric-flow-measure]]), and $f\\in L^2(\\pi)$ ([[def-l-p-space-as-a-quotient-by-null-functions]]).\n6. $P$ is uniformly ergodic ([[def-geometric-and-uniform-ergodicity-for-mcmc-clt]]) and $f\\in L^2(\\pi)$ ([[def-l-p-space-as-a-quotient-by-null-functions]]).\n\nIn case 4, the displayed logarithmic moment implies $f\\in L^2(\\pi)$: on $\\{|f|\\le e\\}$ one has $f^2\\le e^2$, and on $\\{|f|>e\\}$ one has $f^2\\le f^2\\log|f|$.\n\nWhen $\\sigma_f^2=0$, the zero-variance lemma\n[[lem-zero-long-run-variance-gives-degenerate-clt]] gives the degenerate\nnormal limit from absolute covariance summability. Finite variance of $f$\nalone is not one of the sufficient conditions.",
+      "strategy": "direct",
+      "provenance": {
+        "statement": "literature-derived",
+        "proof": "ai-altered"
+      },
+      "sources": {
+        "references": [
+          {
+            "title": "Galin L. Jones, On the Markov Chain Central Limit Theorem, Theorem 9 and Corollaries 1–5",
+            "url": "https://arxiv.org/pdf/math/0409112"
+          },
+          {
+            "title": "Charles J. Geyer, Markov Chain Monte Carlo Lecture Notes, §§4.8–4.9",
+            "url": "https://www.stat.umn.edu/geyer/f05/8931/n1998.pdf"
+          },
+          {
+            "title": "Gareth O. Roberts and Jeffrey S. Rosenthal, General State Space Markov Chains and MCMC Algorithms, §5",
+            "url": "https://www.probability.ca/jeff/ftpdir/probsurv.pdf"
+          }
+        ]
+      }
+    }
+  ],
+  "existing_frontmatter_actions": {
+    "proof_strategy": "direct",
+    "provenance.proof": "ai-altered",
+    "deps": [
+      "def-axiom-of-choice",
+      "def-general-state-aperiodic-markov-chain",
+      "def-general-state-reversibility-by-symmetric-flow-measure",
+      "def-geometric-and-uniform-ergodicity-for-mcmc-clt",
+      "def-harris-recurrent-markov-chain",
+      "def-l-p-space-as-a-quotient-by-null-functions",
+      "def-long-run-variance-for-stationary-markov-chain",
+      "def-measure-kernel-and-probability-kernel",
+      "def-phi-irreducible-chain",
+      "def-polynomial-ergodicity-with-integrable-rate-envelope",
+      "def-total-variation-distance-for-probability-laws",
+      "lem-geometric-reversible-chain-rho-mixing",
+      "lem-geometric-total-variation-rate-controls-strong-mixing",
+      "lem-harris-geometric-ergodicity-has-integrable-rate-envelope",
+      "lem-measurable-observation-does-not-increase-mixing-coefficients",
+      "lem-uniform-ergodicity-controls-uniform-mixing",
+      "lem-zero-long-run-variance-gives-degenerate-clt",
+      "thm-chapman-kolmogorov-equations",
+      "thm-geometric-series",
+      "thm-invariant-initial-law-makes-the-chain-stationary",
+      "thm-markov-property-for-bounded-future-path-functionals",
+      "thm-rho-mixing-clt-for-square-integrable-sequences",
+      "thm-strong-mixing-clt-with-moment-conditions",
+      "thm-taking-out-what-is-known",
+      "thm-uniform-mixing-clt-for-square-integrable-sequences"
+    ],
+    "verification": "Root reconciles old precheck:n/a after its checks; no stamp created here.",
+    "axiom_use": "AC is explicit in the unchanged Statement and used through the supplied local probability, path-space and martingale interfaces; no stronger principle is introduced."
+  },
+  "statement_unchanged": true,
+  "consumer_dispositions": [
+    {
+      "id": "thm-overlapping-batch-means-strong-consistency",
+      "use": "Its declared main-theorem dependency can supply stationary centered covariance CLT only after actual hypotheses are verified. It cannot alone establish the current arbitrary-initial SIP or rate; OBM remains explicitly held on that distinct supplier."
+    },
+    {
+      "id": "mcmc-clt-and-monte-carlo-standard-error",
+      "use": "Page summary needs to describe completed six-regime proofs while retaining the separate unresolved SIP/OBM hold. Root integrates new helper placements."
+    }
+  ],
+  "not_a_readiness_or_hash_stamp": true
+}

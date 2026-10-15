@@ -1,0 +1,866 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "scope": [
+    "lem-geometrically-ergodic-chain-has-standard-borel-observation-factor",
+    "lem-geometric-markov-chain-has-adjacent-iid-split-tours"
+  ],
+  "contracts": {
+    "lem-geometrically-ergodic-chain-has-standard-borel-observation-factor": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-countably-generated-kernel-stable-sub-sigma-field",
+          "source_section": "Statement",
+          "quote": "Let $P$ be a probability kernel on an arbitrary measurable space $(X,\\mathcal F)$, and let $f:X\\to\\mathbb R$ be measurable. There is a countably generated sub-sigma-field $\\mathcal G\\subseteq\\mathcal F$ such that $f$ is $\\mathcal G$-measurable and $P$, restricted to events in $\\mathcal G$, is a probability kernel $P_{\\mathcal G}$ on $(X,\\mathcal G)$. For every $n\\ge0$, $x\\in X$, and $B\\in\\mathcal G$,\n$$P_{\\mathcal G}^n(x,B)=P^n(x,B).$$\nIf $\\pi$ is invariant for $P$, then $\\pi|_{\\mathcal G}$ is invariant for $P_{\\mathcal G}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-standard-borel-spaces-admit-bimeasurable-real-codings",
+          "source_section": "Statement",
+          "quote": "Assume AC. Every standard-Borel space $(E,\\mathcal S)$ is measurably isomorphic to a Borel subset of $[0,1]$, including $E=\\varnothing$.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "source_section": "Statement",
+          "quote": "Every finite product of standard Borel spaces, with its finite product sigma-algebra, is standard Borel.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-real-line-is-standard-borel",
+          "source_section": "Statement",
+          "quote": "The measurable space $(\\mathbb R,\\mathcal B(\\mathbb R))$ with its usual\ntopology is standard Borel.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-doob-dynkin-lemma",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $f : X \\to \\mathbb{R}$ and $g : X \\to \\overline{\\mathbb{R}}$. Then $g$ is\n$\\sigma(f)$-measurable if and only if there is a Borel measurable function\n$h : \\mathbb{R} \\to \\overline{\\mathbb{R}}$ such that\n\n$$g = h \\circ f.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\lambda$ be a probability on $(E\\times T,\\mathcal S\\otimes\\mathcal T)$, where E and T are standard-Borel spaces, and let $\\beta(B)=\\lambda(E\\times B)$ be its second marginal. There is a probability kernel $K:(T,\\mathcal T)\\to(E,\\mathcal S)$ such that\n\n$$\\lambda(A\\times B)=\\int_B K(y,A)\\,\\beta(dy)\\quad(A\\in\\mathcal S,\\ B\\in\\mathcal T).$$\n\nIt is unique as a kernel outside a single measurable $\\beta$-null set. For every nonnegative product-measurable $f:E\\times T\\to[0,\\infty]$,\n\n$$\\int f(x,y)\\,\\lambda(d(x,y))=\\int_T\\left(\\int_E f(x,y)K(y,dx)\\right)\\beta(dy).$$\n\nIn particular this applies to the joint law of random elements $(X,Y)$, with $\\beta=P_Y$; the direction is the law of X given Y.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-markov-property-for-bounded-future-path-functionals",
+          "source_section": "Statement",
+          "quote": "Assume Choice. Let $X$ be a $K$-chain and let\n$H:E^{\\mathbb N_0}\\to\\mathbb R$ be bounded and product-measurable. Then\n$$h(x):=\\mathbb E_x[H(X_0,X_1,\\ldots)]$$ is $\\mathcal E$-measurable and, for every $n\\ge0$, $$ \\mathbb E[H(X_n,X_{n+1},\\ldots)\\mid\\mathcal F_n]=h(X_n)\\quad\\text{a.s.} $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "source_section": "Statement",
+          "quote": "Assume Choice. Let $(E_n,\\mathcal E_n)_{n\\ge0}$ be measurable spaces, let\n$\\mu_0$ be a probability measure on $E_0$, and, for each $n\\ge0$, let $K_n$ be\na probability kernel from $E_0\\times\\cdots\\times E_n$ to $E_{n+1}$. There is a\nunique probability measure $P$ on\n$$ \\left(\\prod_{n\\ge0}E_n,\\ \\bigotimes_{n\\ge0}\\mathcal E_n\\right) $$ whose finite-prefix laws are the prescribed iterated integrals $$ \\mu_0(dx_0)K_0(x_0,dx_1)K_1(x_0,x_1,dx_2)\\cdots K_{r-1}(x_0,\\ldots,x_{r-1},dx_r). $$\nIn particular, if every $E_n=E$ and\n$K_n(x_0,\\ldots,x_n,A)=K(x_n,A)$, the coordinate process is a homogeneous\n$K$-chain with initial law $\\mu_0$.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "1.2",
+            "2.3",
+            "2.4",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-countable-products-and-g-delta-subspaces-of-polish-spaces-are-polish",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. A countable product of Polish spaces is Polish, and every $G_\\delta$ subspace of a Polish space is Polish.",
+          "uses": [
+            "1.2",
+            "2.3",
+            "2.4",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a probability kernel on a measurable space $(E,\\mathcal E)$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure on $(E,\\mathcal E)$ ([[def-probability-measure]]). The\nprobability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a\n**stationary distribution** of $K$, when\n\n$$(\\pi K)(A):=\\int_E K(x,A)\\,\\pi(dx)=\\pi(A)\\qquad\\text{for every }A\\in\\mathcal E .$$\n\nThe set function $\\pi K$ is again a probability measure: for fixed $A$ the map\n$x\\mapsto K(x,A)$ is measurable and lies in $[0,1]$, so the integral exists in\n$[0,1]$; for pairwise disjoint $A_n\\in\\mathcal E$ the identity\n$K(x,\\bigcup_nA_n)=\\sum_nK(x,A_n)$ of the measure $K(x,\\cdot)$ and the\nmonotone convergence theorem for nonnegative functions\n([[thm-monotone-convergence-for-the-integral]]) give\n$\\sigma$-additivity of $\\pi K$; and $K(x,E)=1$ for every $x$ gives\n$(\\pi K)(E)=1$. Thus $(\\pi K)(A)=\\pi(A)$ is an identity between two probability\nmeasures evaluated at $A$.\n\nA $K$-chain whose initial law is $\\pi$ is called **stationary** when\n$\\pi K=\\pi$. Stationarity of the process is a statement about all of its\nfinite-dimensional laws and is proved, not assumed, from $\\pi K=\\pi$; see\n[[thm-invariant-initial-law-makes-the-chain-stationary]].\n\nOn a countable state space $E$ with sigma-algebra $2^E$ and transition matrix\n$p(x,y)=K(x,\\{y\\})$ ([[def-transition-matrix-and-n-step-transition-probabilities]]),\na measure on $E$ is its weighted sum of Dirac masses at singletons\n([[thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums]]), so\ninvariance is equivalent to the matrix identity\n\n$$\\pi(y)=\\sum_{x\\in E}\\pi(x)\\,p(x,y)\\qquad\\text{for every }y\\in E .$$\n\nThe definition fixes no irreducibility, aperiodicity or uniqueness hypothesis,\nand it selects no conditional-expectation versions; the display defines a\nsingle measure $\\pi K$ and asserts an identity for it. A transient, periodic or\nreducible chain may have several invariant probability measures or none.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-iterated-transition-kernels",
+          "source_section": "Definition",
+          "quote": "For a probability kernel $K$ on $(E,\\mathcal E)$, let $I$ be the identity\nkernel $I(x,A)=1_A(x)$ and define\n$$ K^0:=I,\\qquad K^{n+1}:=K^nK, $$ where composition is in chronological order: $$ K^{n+1}(x,A)=\\int_E K(y,A)K^n(x,dy). $$\nThe identity map makes $I$ a probability kernel, including on a one-point\nspace. Induction using the published kernel-composition lemma shows that every\n$K^n$ is a probability kernel. Associativity makes products of several copies\nof $K$ unambiguous. No conditional-expectation version is selected and no form\nof Choice is used.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-geometrically-ergodic-chain-has-standard-borel-observation-factor-step-1-1",
+          "claim": "Define\n$$\\lambda=\\tfrac12\\pi+\\tfrac12\\sum_{k\\ge0}2^{-k-1}\\mu P^k.$$\nThis is a probability by [F8], $\\pi,\\mu\\ll\\lambda$, and $\\lambda P\\ll\\lambda$: if $\\lambda(A)=0$, then $\\pi(A)=0$ and $\\mu P^k(A)=0$ for every $k$, which also makes $\\lambda P(A)=0$. Thus $\\lambda P^j\\ll\\lambda$ for every $j$. Apply [F2] to code the pair $(f,M)$ into one real observable, and apply [F1] to it. The resulting countably generated $\\mathcal G\\subseteq\\mathcal F$ is kernel-stable and contains both $f$ and $M$, since the coding has a Borel inverse.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F8",
+            "F10",
+            "construct",
+            "given"
+          ]
+        },
+        {
+          "id": "lem-geometrically-ergodic-chain-has-standard-borel-observation-factor-step-1-2",
+          "claim": "Enumerate generators $A_j$ of $\\mathcal G$ and set $c(x)=\\sum_{j\\ge1}2\\cdot3^{-j}1_{A_j}(x)$, taking values in the closed Cantor subset $C$ of $[0,1]$. Its coordinate digits recover every $A_j$, so $\\sigma(c)=\\mathcal G$. The target $C$ is standard Borel by [F9]; no Borel-image assertion about $c(X)$ is needed. By [F3], write $f=\\varphi_0\\circ c$ and $M=m_0\\circ c$ for Borel extended-real functions on $C$. Put $\\lambda_c=c_*\\lambda$, $\\pi_c=c_*\\pi$ and $\\mu_c=c_*\\mu$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F3",
+            "F9",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "lem-geometrically-ergodic-chain-has-standard-borel-observation-factor-step-2-1",
+          "claim": "Push the probability $\\lambda(dx)P(x,dy)$ to $(c(x),c(y))\\in C^2$ and disintegrate by [F4], obtaining a Borel kernel $T:C\\to C$. For each $B$ in a fixed countable generating algebra of $C$, kernel stability and [F3] factor $P(x,c^{-1}B)$ through $c(x)$. Its value is the conditional mean of $1_B(c(X_1))$ given $c(X_0)$ under this reference joint law. Hence $T(c(x),B)=P(x,c^{-1}B)$ for $\\lambda$-almost every $x$. Intersect over the countable algebra and apply [F5] to obtain equality of these probability measures simultaneously on every Borel $B$, on one $\\lambda$-full set. In particular $\\lambda_cT=c_*(\\lambda P)\\ll\\lambda_c$, and $\\pi_cT=\\pi_c$ because $\\pi\\ll\\lambda$ and $\\pi P=\\pi$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "F10",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "lem-geometrically-ergodic-chain-has-standard-borel-observation-factor-step-2-2",
+          "claim": "Iterating that kernel equality gives $T^n(c(x),\\cdot)=c_*P^n(x,\\cdot)$ for $\\lambda$-almost every $x$, simultaneously for all $n\\ge0$. At the induction step, $P(x,\\cdot)$ avoids the preceding $\\lambda$-null exceptional set for $\\lambda$-almost every $x$, since $\\lambda P\\ll\\lambda$; integration of a nonnegative Borel function of $c$ agrees under the two one-step measures by simple approximation and [F8]. The geometric hypothesis therefore implies $\\|T^n(z,\\cdot)-\\pi_c\\|_{\\mathrm{TV}}\\le m_0(z)r^n$ for $\\lambda_c$-almost every $z$, simultaneously for $n\\ge1$.",
+          "step": "2.2",
+          "inputs": [
+            "F8",
+            "F10",
+            "step 1.1",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "lem-geometrically-ergodic-chain-has-standard-borel-observation-factor-step-2-3",
+          "claim": "On $C$ the total-variation supremum can be taken over its fixed countable generating algebra. Indeed, for any two probabilities, every Borel set is approximable in symmetric-difference measure by that algebra under their finite sum: the approximable sets form a sigma-field, using complements and first approximating a countable union by a finite union. Its probability difference is approximated too. Thus the supremum over the algebra equals the full supremum and is measurable as a function of the starting point. Let $B_0$ be the Borel set where all the bounds in step 2.2 hold and $\\varphi_0,m_0$ are finite with $m_0\\ge0$. It is $\\lambda_c$-full by step 1.2 and the finiteness of $f,M$. Define $B_{j+1}=B_j\\cap\\{z:T(z,B_j)=1\\}$ and $S=\\bigcap_{j\\ge0}B_j$. Absolute continuity $\\lambda_cT\\ll\\lambda_c$ makes every $B_j$ full. If $z\\in S$, continuity from above gives $T(z,S)=1$. Thus $S$ is nonempty, Borel and absorbing.",
+          "step": "2.3",
+          "inputs": [
+            "F8",
+            "F9",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "lem-geometrically-ergodic-chain-has-standard-borel-observation-factor-step-2-4",
+          "claim": "Restrict $T$ to $S$, and set $\\widehat\\pi=\\pi_c|_S$, $\\widehat\\mu=\\mu_c|_S$, $\\varphi=\\varphi_0|_S$ and $\\widehat M=m_0|_S$. These are probabilities and finite functions because $\\pi_c,\\mu_c\\ll\\lambda_c$. Absorption preserves $\\widehat\\pi T=\\widehat\\pi$. By the definition of $B_0$ the geometric bound now holds for every state in $S$, with the original rate $r$. Its total variation on $S$ is the same as on $C$ for measures supported on $S$.",
+          "step": "2.4",
+          "inputs": [
+            "F9",
+            "F10",
+            "step 2.1",
+            "step 2.3",
+            "construct"
+          ]
+        },
+        {
+          "id": "lem-geometrically-ergodic-chain-has-standard-borel-observation-factor-step-3-1",
+          "claim": "For an original chain with initial law $\\mu$, every $X_k$ has law $\\mu P^k\\ll\\lambda$. Thus step 2.1 and [F6], followed by conditioning on the coded past, show that $c(X_k)$ is a $T$-chain. Countably many time and algebra tests suffice; [F5] and bounded approximation extend them to every bounded Borel test. The code chain remains in $S$ almost surely and $f(X_k)=\\varphi(c(X_k))$ simultaneously for every $k$. The same argument applies with initial law $\\pi$. This proves the complete initial and stationary observation-path equalities and, by pushforward integration, every stated stationary moment identity.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "F8",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.4"
+          ]
+        },
+        {
+          "id": "lem-geometrically-ergodic-chain-has-standard-borel-observation-factor-step-3-2",
+          "claim": "A countable path space over a standard-Borel space is standard Borel: code its coordinates by [F2] into a Borel subset $D$ of $[0,1]$; then $D^{\\mathbb N_0}$ is Borel in the Polish cube $[0,1]^{\\mathbb N_0}$ by a countable intersection of coordinate tests, using [F9]. In particular the real observation-path space is standard Borel. Disintegrate any specified joint law of this path and a standard-Borel auxiliary random element conditional on the path by [F4]. Evaluate that kernel at the actual original observation path and use [F7] to extend the original probability space. Its original marginal is unchanged, and the observation/auxiliary joint law is exactly the specified law. This proves the final lifting assertion without any conditional kernel on the original arbitrary state space.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "F7",
+            "F9",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The invariant probability excludes an empty original state space; the pruned full-measure factor is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Time-zero iterates and the initial law are retained; the code may represent a constant observable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The factor construction allows a singleton space and retains n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No Borel-image assumption on the original code image is used; the reference-law factor is pruned on a Borel full set."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The original 0<r<1 and everywhere finite envelope hold on every state of the pruned factor."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit for real coding, Doob-Dynkin, disintegration and extension; the lambda-full factor is nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Full local source proof authored and parent source review requested; root normalization, native review and certification remain pending. No proof acceptance or gate evidence is fabricated."
+      }
+    },
+    "lem-geometric-markov-chain-has-adjacent-iid-split-tours": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-phi-irreducible-chain",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X)$ be a countably generated measurable space ([[def-measurable-space]]), $P$ a probability kernel ([[def-measure-kernel-and-probability-kernel]]), and $\\phi$ a nonzero $\\sigma$-finite measure ([[def-finite-sigma-finite-and-semifinite-measures]]) on $\\mathcal X$. Write $P^n$ for the $n$-fold kernel iterate. The kernel is **$\\phi$-irreducible** if, for every $A\\in\\mathcal X$ with $\\phi(A)>0$ and every $x\\in\\mathsf X$, there is an integer $n\\ge1$ such that $P^n(x,A)>0$. Equivalently, the sum of these nonnegative probabilities over $n\\ge1$ is positive. No recurrence or invariant law is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-phi-irreducible-chain-has-small-set",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal X)$ be countably generated, let $P$ be a probability kernel, and let $\\phi$ be a nonzero $\\sigma$-finite irreducibility measure. Then there are an integer $m\\ge1$, a measurable $C$ with $\\phi(C)>0$, a probability $\\nu$ with $\\nu(C)>0$, and $\\epsilon>0$ such that $P^m(x,\\cdot)\\ge\\epsilon\\nu(\\cdot)$ for every $x\\in C$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-geometric-split-renewal-gives-integrable-hitting-time",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $Q$ be a probability kernel on any measurable space $(X,\\mathcal G)$, with invariant probability $\\pi$. Let $C\\in\\mathcal G$ satisfy $\\pi(C)>0$, and suppose\n$$Q(x,\\cdot)\\ge\\epsilon\\nu(\\cdot)\\quad(x\\in C),\\qquad 0<\\epsilon<1,$$\nwhere $\\nu$ is a probability measure. Suppose some $A<\\infty$ and $0<\\theta<1$ satisfy\n$$|\\nu Q^n(C)-\\pi(C)|\\le A\\theta^n\\quad(n\\ge0).$$\nFor a $Q$-chain started at $x$, put $\\sigma_C=\\inf\\{n\\ge0:X_n\\in C\\}$. Then some $s>1$ makes\n$$H(x)=\\mathbb E_x[s^{\\sigma_C}]\\quad\\text{measurable},\\qquad \\pi(H)<\\infty,$$\nwhere $s^\\infty=\\infty$. In particular $H$ is finite $\\pi$-almost everywhere; finiteness at every state is not asserted.\n\nFor the same hypotheses, the split construction also has the following return and occupation properties. Put $w_1(x)=\\epsilon1_C(x)$ and $w_0(x)=1-w_1(x)$. Define $K_{x,1}=\\nu$, $K_{x,0}=(Q(x,\\cdot)-\\epsilon\\nu)/(1-\\epsilon)$ on $C$, and $K_{x,0}=Q(x,\\cdot)$ off $C$. On $X\\times\\{0,1\\}$ use the kernel\n$$\\widetilde Q((x,i),dy\\times\\{j\\})=K_{x,i}(dy)w_j(y)$$\nand invariant law $\\widetilde\\pi(dx,i)=w_i(x)\\pi(dx)$. Its atom $\\alpha=C\\times\\{1\\}$ has mass $p=\\epsilon\\pi(C)>0$. If $Z_0$ has law $\\kappa=\\widetilde\\pi(\\cdot\\mid\\alpha)$ and $\\tau=\\inf\\{n\\ge1:Z_n\\in\\alpha\\}$, then some $b>1$ satisfies\n$$\\mathbb E_\\kappa b^\\tau<\\infty,$$\nand for every nonnegative measurable $g$ on the split space,\n$$\\widetilde\\pi(g)=p\\,\\mathbb E_\\kappa\\sum_{k=0}^{\\tau-1}g(Z_k).$$\nIn particular $\\tau<\\infty$ almost surely and $\\mathbb E_\\kappa\\tau=1/p$. These additional assertions use exactly the construction and hypotheses above; they do not assert an exponential entrance-time moment from every state.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\lambda$ be a probability on $(E\\times T,\\mathcal S\\otimes\\mathcal T)$, where E and T are standard-Borel spaces, and let $\\beta(B)=\\lambda(E\\times B)$ be its second marginal. There is a probability kernel $K:(T,\\mathcal T)\\to(E,\\mathcal S)$ such that\n\n$$\\lambda(A\\times B)=\\int_B K(y,A)\\,\\beta(dy)\\quad(A\\in\\mathcal S,\\ B\\in\\mathcal T).$$\n\nIt is unique as a kernel outside a single measurable $\\beta$-null set. For every nonnegative product-measurable $f:E\\times T\\to[0,\\infty]$,\n\n$$\\int f(x,y)\\,\\lambda(d(x,y))=\\int_T\\left(\\int_E f(x,y)K(y,dx)\\right)\\beta(dy).$$\n\nIn particular this applies to the joint law of random elements $(X,Y)$, with $\\beta=P_Y$; the direction is the law of X given Y.",
+          "uses": [
+            "3.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "source_section": "Statement",
+          "quote": "Every finite product of standard Borel spaces, with its finite product sigma-algebra, is standard Borel.",
+          "uses": [
+            "3.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-standard-borel-spaces-admit-bimeasurable-real-codings",
+          "source_section": "Statement",
+          "quote": "Assume AC. Every standard-Borel space $(E,\\mathcal S)$ is measurably isomorphic to a Borel subset of $[0,1]$, including $E=\\varnothing$.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-countable-products-and-g-delta-subspaces-of-polish-spaces-are-polish",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. A countable product of Polish spaces is Polish, and every $G_\\delta$ subspace of a Polish space is Polish.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-canonical-markov-chain-on-path-space",
+          "source_section": "Statement",
+          "quote": "Assume Choice. For every probability measure $\\mu$ and probability kernel $K$\non an arbitrary measurable space $(E,\\mathcal E)$, the canonical path space\n$$ (E^{\\mathbb N_0},\\mathcal E^{\\otimes\\mathbb N_0}) $$\ncarries a unique probability $\\mathbb P_\\mu$ under which the coordinate maps\nform a Markov chain with initial law $\\mu$ and transition kernel $K$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.3",
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-countable-product-of-probability-spaces",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and dependent choice. For probability spaces\n$(E_n,\\mathcal E_n,\\mu_n)_{n\\in\\mathbb N}$ there is a unique probability measure\n$\\mu$ on $\\mathcal C_{\\mathbb N}$ such that, for every finite $F$, its\n$F$-coordinate marginal is $\\bigotimes_{n\\in F}\\mu_n$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.3",
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "source_section": "Statement",
+          "quote": "Assume Choice. Let $(E_n,\\mathcal E_n)_{n\\ge0}$ be measurable spaces, let\n$\\mu_0$ be a probability measure on $E_0$, and, for each $n\\ge0$, let $K_n$ be\na probability kernel from $E_0\\times\\cdots\\times E_n$ to $E_{n+1}$. There is a\nunique probability measure $P$ on\n$$ \\left(\\prod_{n\\ge0}E_n,\\ \\bigotimes_{n\\ge0}\\mathcal E_n\\right) $$ whose finite-prefix laws are the prescribed iterated integrals $$ \\mu_0(dx_0)K_0(x_0,dx_1)K_1(x_0,x_1,dx_2)\\cdots K_{r-1}(x_0,\\ldots,x_{r-1},dx_r). $$\nIn particular, if every $E_n=E$ and\n$K_n(x_0,\\ldots,x_n,A)=K(x_n,A)$, the coordinate process is a homogeneous\n$K$-chain with initial law $\\mu_0$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.3",
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "4.2",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-minkowski-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $1\\le p<\\infty$ and $f,g\\in\\mathcal L^p(\\mu)$, then\n   $$\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p.$$\n2. If $f,g\\in L^\\infty(\\mu)$, then\n   $$\\|f+g\\|_\\infty\\le\\|f\\|_\\infty+\\|g\\|_\\infty.$$",
+          "uses": [
+            "4.2",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a probability kernel on a measurable space $(E,\\mathcal E)$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure on $(E,\\mathcal E)$ ([[def-probability-measure]]). The\nprobability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a\n**stationary distribution** of $K$, when\n\n$$(\\pi K)(A):=\\int_E K(x,A)\\,\\pi(dx)=\\pi(A)\\qquad\\text{for every }A\\in\\mathcal E .$$\n\nThe set function $\\pi K$ is again a probability measure: for fixed $A$ the map\n$x\\mapsto K(x,A)$ is measurable and lies in $[0,1]$, so the integral exists in\n$[0,1]$; for pairwise disjoint $A_n\\in\\mathcal E$ the identity\n$K(x,\\bigcup_nA_n)=\\sum_nK(x,A_n)$ of the measure $K(x,\\cdot)$ and the\nmonotone convergence theorem for nonnegative functions\n([[thm-monotone-convergence-for-the-integral]]) give\n$\\sigma$-additivity of $\\pi K$; and $K(x,E)=1$ for every $x$ gives\n$(\\pi K)(E)=1$. Thus $(\\pi K)(A)=\\pi(A)$ is an identity between two probability\nmeasures evaluated at $A$.\n\nA $K$-chain whose initial law is $\\pi$ is called **stationary** when\n$\\pi K=\\pi$. Stationarity of the process is a statement about all of its\nfinite-dimensional laws and is proved, not assumed, from $\\pi K=\\pi$; see\n[[thm-invariant-initial-law-makes-the-chain-stationary]].\n\nOn a countable state space $E$ with sigma-algebra $2^E$ and transition matrix\n$p(x,y)=K(x,\\{y\\})$ ([[def-transition-matrix-and-n-step-transition-probabilities]]),\na measure on $E$ is its weighted sum of Dirac masses at singletons\n([[thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums]]), so\ninvariance is equivalent to the matrix identity\n\n$$\\pi(y)=\\sum_{x\\in E}\\pi(x)\\,p(x,y)\\qquad\\text{for every }y\\in E .$$\n\nThe definition fixes no irreducibility, aperiodicity or uniqueness hypothesis,\nand it selects no conditional-expectation versions; the display defines a\nsingle measure $\\pi K$ and asserts an identity for it. A transient, periodic or\nreducible chain may have several invariant probability measures or none.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-iterated-transition-kernels",
+          "source_section": "Definition",
+          "quote": "For a probability kernel $K$ on $(E,\\mathcal E)$, let $I$ be the identity\nkernel $I(x,A)=1_A(x)$ and define\n$$ K^0:=I,\\qquad K^{n+1}:=K^nK, $$ where composition is in chronological order: $$ K^{n+1}(x,A)=\\int_E K(y,A)K^n(x,dy). $$\nThe identity map makes $I$ a probability kernel, including on a one-point\nspace. Induction using the published kernel-composition lemma shows that every\n$K^n$ is a probability kernel. Associativity makes products of several copies\nof $K$ unambiguous. No conditional-expectation version is selected and no form\nof Choice is used.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+          "uses": [
+            "3.1",
+            "3.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-geometric-markov-chain-has-adjacent-iid-split-tours-step-1-1",
+          "claim": "For every $\\pi$-positive measurable set $A$, the geometric bound implies $P^n(x,A)>0$ for all sufficiently large $n$, for each $x$. Thus $P$ is $\\pi$-irreducible. By [F4], a standard-Borel space has a countable generating algebra, so [F1] gives $m\\ge1$, $D_0$ with $\\pi(D_0)>0$, a probability $\\nu_0$ with $\\nu_0(D_0)>0$, and $\\epsilon_0>0$ such that $P^m(x,\\cdot)\\ge\\epsilon_0\\nu_0$ on $D_0$. Choose an integer $K$ so $C=D_0\\cap\\{M\\le K\\}$ is positive under both $\\pi$ and $\\nu_0$, and restrict $\\nu_0$ to $\\{M\\le L\\}$ for a finite integer $L\\ge K$, then normalize. Decrease the minorization constant to $0<\\epsilon<1$. With $Q=P^m$, the resulting probability $\\nu$ satisfies $Q(x,\\cdot)\\ge\\epsilon\\nu$ on $C$, $\\nu(M)\\le L$ and $\\pi(C)>0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "given",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "lem-geometric-markov-chain-has-adjacent-iid-split-tours-step-1-2",
+          "claim": "Put $p=\\epsilon\\pi(C)>0$. Invariance [F8] gives $\\pi\\ge p\\nu$. The geometric bound gives $|\\nu Q^n(C)-\\pi(C)|\\le L(r^m)^n$ for $n\\ge1$; for $n=0$ use $1$. Thus [F2] applies to this exact split. Its atom $\\alpha=C\\times\\{1\\}$ has a positive return time $\\tau$ with $\\mathbb E b^\\tau<\\infty$ for some $b>1$. The transition out of $\\alpha$ draws the next skeleton state from $\\nu$ independently of the previous state, and assigns its fresh flag with success probability $\\epsilon1_C$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F8",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "lem-geometric-markov-chain-has-adjacent-iid-split-tours-step-2-1",
+          "claim": "Define the substochastic failure kernel $K_0(x,dy)=Q(x,dy)-\\epsilon1_C(x)\\nu(dy)$, and let $a(x)$ be the probability of never obtaining a successful split coin, starting with a fresh coin at $x$. This is measurable by [F5] and [F6], lies in $[0,1]$, and satisfies $a=K_0a=Qa-\\epsilon1_C\\nu(a)$. Integrate against $\\pi$ to get $p\\nu(a)=0$, hence $\\nu(a)=0$. Therefore $a=Qa$ at every state and $a=Q^na$ for all $n$. Convergence of $Q^n(x,\\cdot)$ to $\\pi$ implies $a(x)=\\pi(a)$ for every $x$, since for a measurable $[0,1]$-valued function its expectation difference is bounded by total variation, by integrating level-set indicators. Integrating this constant against $\\nu$ makes it zero. Thus every state and every initial law has a finite first success; its post-transition calendar time is an almost surely finite $D\\in m\\mathbb N$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F8",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-geometric-markov-chain-has-adjacent-iid-split-tours-step-2-2",
+          "claim": "A skeleton core starts from the $\\nu$ endpoint just after a success and includes the successive states through the next successful coin, excluding that successful transition's endpoint. A core of length $\\ell$ has probability measure\n$$\\nu(dx_0)\\prod_{i=0}^{\\ell-2}K_0(x_i,dx_{i+1})\\,\\epsilon1_C(x_{\\ell-1}).$$\nThe sum over $\\ell\\ge1$ has mass one by step 2.1. Its length has the law of $\\tau$ in step 1.2: starting in the split atom, one transition draws its initial $\\nu$ state, and the next atom visit occurs at precisely that core's inclusive coin count. Hence its length has an exponential moment. Taking iid copies of this core measure supplies all post-success cores; the first state of the next copy supplies the independent $\\nu$ endpoint of the preceding successful transition. Multiplying these core kernels reconstructs the split skeleton law. The analogous initial core starts from the given initial law and ends at its first success, before the endpoint drawn from the first iid core.",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.2",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "lem-geometric-markov-chain-has-adjacent-iid-split-tours-step-3-1",
+          "claim": "To restore the intermediate states, choose $\\rho=\\tfrac12\\pi+\\tfrac12\\sum_{k\\ge0}2^{-k-1}\\mu P^k$ for the given initial law $\\mu$. Then $\\pi,\\mu\\ll\\rho$ and $\\rho P\\ll\\rho$, by the null-set calculation used directly on this displayed sum. Disintegrate the intermediate word $(X_1,\\ldots,X_{m-1})$ conditional on $(X_0,X_m)$ under initial law $\\rho$, using [F3]; for $m=1$ take the unique empty word. Denote the kernel by $B(x,y;d\\mathbf w)$. Its bridge identity holds for $\\rho$-almost every starting point, simultaneously as a probability identity by [F9]. Every starting distribution encountered in a split skeleton is $\\rho$-absolutely continuous: $K_0\\le Q$ propagates this through failures, and $\\nu\\ll\\pi\\ll\\rho$ handles successes. Both success and failure endpoint-pair measures are absolutely continuous with respect to $\\rho(dx)Q(x,dy)$, because their endpoint kernels are bounded by $Q$. Thus this bridge identity holds on every transition actually sampled.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F6",
+            "F8",
+            "F9",
+            "step 1.2",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "lem-geometric-markov-chain-has-adjacent-iid-split-tours-step-3-2",
+          "claim": "The bridge kernel has a jointly measurable uniform sampler. Code its standard-Borel word space into a Borel subset of $[0,1]$ by [F4]. Its distribution-function evaluations at rational cuts are measurable. The generalized inverse, defined by an infimum over those cuts, is jointly measurable in the endpoints and a uniform variable and has the coded probability law. Its output lies in the coded image almost surely for each endpoint; use a fixed valid word on the Borel complement and decode. For completeness, the word and sequence spaces here are standard Borel: code $S$ into a Borel subset $A\\subseteq[0,1]$; $A^{\\mathbb N}$ is Borel in the Polish cube by coordinate tests, and finite words are the Borel union of length-marked sequences with fixed trailing coordinates. The extra uniform sequences have the same property.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "lem-geometric-markov-chain-has-adjacent-iid-split-tours-step-3-3",
+          "claim": "Let $U_j$ consist of the $j$th iid core and an independent infinite sequence of bridge uniforms, using [F5]. For a nonterminal core transition both skeleton endpoints lie in $U_j$. For its terminal successful transition the starting endpoint lies in $U_j$ and the ending endpoint is the first state in $U_{j+1}$; use a uniform in $U_j$ for its bridge. Concatenate each transition's starting state and its $m-1$ intermediate states, excluding its endpoint. This gives a measurable finite word $W(U_j,U_{j+1})$ of length $L(U_j)=m\\ell(U_j)$. Concatenate also the finite initial segment from step 2.2, with its terminal bridge ending at the first state's value in $U_0$. Success and failure endpoint kernels add to $Q$, and step 3.1's bridge kernel then restores the original $m$-step path law. Iterating these identities gives the original full $P$-chain law from $\\mu$. Thus these words are the claimed delayed calendar tours in a chain copy, with rewards and absolute envelopes measurable functions of two adjacent seeds.",
+          "step": "3.3",
+          "inputs": [
+            "F5",
+            "F6",
+            "F9",
+            "step 2.2",
+            "step 3.1",
+            "step 3.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "lem-geometric-markov-chain-has-adjacent-iid-split-tours-step-4-1",
+          "claim": "The invariant identity is $\\pi=\\pi K_0+p\\nu$. Iteration gives $\\pi=p\\sum_{j=0}^{n-1}\\nu K_0^j+\\pi K_0^n$. The remainder's total mass is the stationary probability of no successful coin in its first $n$ opportunities, which tends to zero by step 2.1 and monotone convergence. Therefore the potential measure $\\eta=\\sum_{j\\ge0}\\nu K_0^j$ equals $\\pi/p$. It counts every core state before its fresh coin is sampled, including the state of the terminal successful coin. In particular $\\mathbb E\\ell=\\eta(S)=1/p$ and $\\mathbb EL=m/p$.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "F8",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-geometric-markov-chain-has-adjacent-iid-split-tours-step-4-2",
+          "claim": "For nonnegative measurable $b$, set $c_b(x)=\\sum_{i=0}^{m-1}P^ib(x)$. The event that a skeleton state is counted in the core is determined before its fresh coin and bridge are sampled. Averaging that coin, its endpoint and bridge makes the conditional expected calendar-block cost $c_b(x)$, because their endpoint mixture is $Q$ and their restored block law is the original one. Hence [F6] and step 4.1 give\n$$\\mathbb E\\sum_{t\\text{ in one full tour}}b(X_t)=\\eta(c_b)=\\frac{\\pi(c_b)}p=\\frac m p\\pi(b)=\\mu_L\\pi(b).$$\nThis includes the cost inside the terminal successful bridge. Apply the identity to the positive and negative parts of $f$; $\\pi|f|<\\infty$ follows from its stated $v$th moment and [F7]. Thus $\\mathbb EZ_0=0$.",
+          "step": "4.2",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "step 3.1",
+            "step 3.3",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "lem-geometric-markov-chain-has-adjacent-iid-split-tours-step-4-3",
+          "claim": "By step 2.2, $\\mathbb E\\exp(aL)<\\infty$ for $a=(\\log b)/m>0$. Starting just after a success, the reconstructed infinite chain has initial law $\\nu$ and its original $P$-chain marginal, by step 3.3. Since $\\pi\\ge p\\nu$, invariance gives $\\mathbb E_\\nu|f(X_t)|^v\\le\\pi(|f|^v)/p$ at every calendar time. For $1\\le q<v$, Minkowski and Holder [F7], first on finite sums, imply\n$$\\left\\|\\sum_{t=0}^{L-1}|f(X_t)|\\right\\|_q\\le\\left(\\frac{\\pi(|f|^v)}p\\right)^{1/v}\\sum_{t\\ge0}\\Pr_\\nu(L>t)^{1/q-1/v}<\\infty.$$\nThe exponential length moment makes the series finite; [F6] passes through the increasing finite sums. This proves every claimed spare moment, while $|Z_0|\\le H_0$.",
+          "step": "4.3",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "step 1.2",
+            "step 2.2",
+            "step 3.3"
+          ]
+        },
+        {
+          "id": "lem-geometric-markov-chain-has-adjacent-iid-split-tours-step-5-1",
+          "claim": "The constructed state path, its finite delay, and its iid seed sequence have a joint law on standard-Borel spaces by the explicit countable coding in step 3.2. Disintegrate that law conditional on the full state path by [F3], and evaluate the auxiliary kernel at the actual given chain path. Extend its probability space by [F5]. The original entire process is preserved, and its joint law with the seeds and delay is the constructed one. Thus the word equalities, iid seed law, occupation identity and moment conclusions hold on this extension. The initial segment is almost surely finite by step 2.1; since $f$ is finite, its absolute reward is finite, even without an initial-law moment bound.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "step 3.2",
+            "step 3.3",
+            "step 4.2",
+            "step 4.3"
+          ]
+        },
+        {
+          "id": "lem-geometric-markov-chain-has-adjacent-iid-split-tours-step-5-2",
+          "claim": "Each length depends only on $U_j$, so the lengths are iid with positive finite mean. Each reward and envelope depends on $(U_j,U_{j+1})$, so their joint sequence with the centered lengths is adjacent-iid, with $\\mathbb EZ_0=0$ and all the stated moments. Disjoint seed pairs are independent, giving one-dependence without claiming iid full tours. The same $m,C,\\nu$ and core law were selected from $P,\\pi,M$, and the single bridge version in step 3.1 uses a $\\rho$ dominating both the specified initial law and $\\pi$. Thus the same seed law and word functions work from either initial law; only the initial segment and its lifting kernel change. All properties in the Statement follow. The chosen split came from step 1.1 and never used positivity of any supplied one-step minorization, which can therefore be vacuous.",
+          "step": "5.2",
+          "inputs": [
+            "F5",
+            "step 3.1",
+            "step 3.3",
+            "step 4.1",
+            "step 4.2",
+            "step 4.3",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The state space is nonempty and supports an invariant probability; empty intermediate words when m=1 are explicitly allowed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The supplied one-step minorization may be zero; a useful multistep minorization is constructed instead. The observable may vanish identically."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "m=1 uses the unique empty intermediate bridge; core length one is included in the core law."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Full tours remain adjacent-iid even when a terminal bridge depends on the next seed; no iid-tour or positive-variance assumption is made."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The minorization parameter is decreased to 0<epsilon<1; every 1<=q<v is handled, including q=1, and no all-start exponential-delay claim is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit; positive bounded-envelope levels and minorization mass supply C,nu,epsilon. Standard-Borel seed and bridge kernels are constructed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Full local source proof authored and parent source review requested; root normalization, native review and certification remain pending. No proof acceptance or gate evidence is fabricated."
+      }
+    }
+  },
+  "manifest_rows": [
+    {
+      "id": "lem-geometrically-ergodic-chain-has-standard-borel-observation-factor",
+      "kind": "lemma",
+      "title": "A geometrically ergodic chain has an all-start standard-Borel observation factor",
+      "deps": [
+        "def-axiom-of-choice",
+        "def-standard-borel-space",
+        "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+        "def-iterated-transition-kernels",
+        "lem-countably-generated-kernel-stable-sub-sigma-field",
+        "thm-standard-borel-spaces-admit-bimeasurable-real-codings",
+        "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+        "lem-real-line-is-standard-borel",
+        "thm-doob-dynkin-lemma",
+        "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+        "thm-dynkin-pi-lambda",
+        "thm-markov-property-for-bounded-future-path-functionals",
+        "thm-measurability-of-integration-against-a-kernel",
+        "thm-ionescu-tulcea-construction-of-a-markov-chain",
+        "thm-monotone-convergence-for-the-integral",
+        "cor-countable-products-and-g-delta-subspaces-of-polish-spaces-are-polish"
+      ]
+    },
+    {
+      "id": "lem-geometric-markov-chain-has-adjacent-iid-split-tours",
+      "kind": "lemma",
+      "title": "Geometric Markov chains admit delayed adjacent-iid split tours with spare moments",
+      "deps": [
+        "def-axiom-of-choice",
+        "def-standard-borel-space",
+        "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+        "def-iterated-transition-kernels",
+        "def-phi-irreducible-chain",
+        "lem-phi-irreducible-chain-has-small-set",
+        "lem-geometric-split-renewal-gives-integrable-hitting-time",
+        "thm-standard-borel-spaces-admit-bimeasurable-real-codings",
+        "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+        "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+        "thm-dynkin-pi-lambda",
+        "thm-measurability-of-integration-against-a-kernel",
+        "thm-ionescu-tulcea-construction-of-a-markov-chain",
+        "cor-canonical-markov-chain-on-path-space",
+        "thm-countable-product-of-probability-spaces",
+        "cor-countable-products-and-g-delta-subspaces-of-polish-spaces-are-polish",
+        "thm-holder-inequality-for-integrals",
+        "thm-minkowski-inequality-for-integrals",
+        "thm-monotone-convergence-for-the-integral",
+        "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+      ]
+    }
+  ],
+  "owner_actions": [
+    "Normalize numeric dependency levels and integrate both sources into the current batch and page.",
+    "Use the exact current appended atom-return Statement of lem-geometric-split-renewal-gives-integrable-hitting-time; its quote is included in the tour contract.",
+    "Preserve the explicit same-post-delay-tour-law clause for specified initial law and pi, needed by variance identification.",
+    "Reconcile provenance and verification metadata through the root workflow; this proposal adds no stamps."
+  ],
+  "checks_run": [
+    {
+      "command": "node tools/proof-layout.mjs items/lem-geometrically-ergodic-chain-has-standard-borel-observation-factor.md items/lem-geometric-markov-chain-has-adjacent-iid-split-tours.md",
+      "exit_code": 0,
+      "output": "proof-layout: 2 items, 20 steps, 0 defects"
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "53",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "alg-moving-block-bootstrap",
+      "model": "gpt-6-luna",
+      "context_sha256": "cf304e4a25f575d662ce3b8fec38fd9b6c49368710bc607b104e7a41cf81b5cb",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "For n=3 and b=2 the procedure retains a complete selected pair followed by only the first record of a second pair. The original assertion that every selected length-b group is resampled intact is false and cannot establish compatibility for a design declaring those pairs indivisible. Replaced that assertion with complete time-record units, explicit final-prefix retention, and the exact no-split condition for target-specific unit compatibility; the output law, block order and conditional center are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-pointwise-bootstrap-ar1-variance-mismatch",
+      "model": "gpt-6-luna",
+      "context_sha256": "7b87332a08f73435b05cb1dd40dc20428e91d042d29635396d19672e7e3c2ff5",
+      "outcome": "false_positive",
+      "reason": "The supplier Statement assumes only that a real random variable written X_t-X_s has law N(0,|t-s|); it imposes no Brownian-process hypothesis. It explicitly states E|Z|^(2m)=(2m-1)!! for Z~N(0,1), proved by truncated density integration and integration by parts in steps 1.1-2.1. The already cited normal-law definition represents N(0,v) as the law of sqrt(v) Z, so scaling yields E X_0^4=3v^2. Alternatively take s=0, t=v, Y_0=0, Y_v=X_0 in the supplier. The AR(1) law was established in step 2.1; no construction as a Brownian increment is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-moving-block-bootstrap",
+      "disposition": "repaired",
+      "post_sha256": "60d441089d5c14fc211d7f0c2ad85d13b2e403539d578da41b34d0e7f8903148",
+      "review_context_sha256": "4ee03827450b769005bb3056195752760e7908c0ccd02c379cb9906aa248e221",
+      "reason": "Checked the complete Definition against the called overlapping-index sampler and the sampling-unit contract. Positive integer block lengths give N=n-b+1>=1 and ceil(n/b) finite independent uniform draws; complete blocks and the last initial prefix yield exactly n records. The repaired interface no longer asserts preservation of an indivisible length-b group; unit compatibility is explicitly conditioned on preserving the target design bundles. Input domain, resampling law, mean and conditional center are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-pointwise-bootstrap-ar1-variance-mismatch",
+      "disposition": "unaffected",
+      "post_sha256": "76e10be0663106983dc90ab79b518f4a9310c987f1f1af8448cc8a4fc13f8e40",
+      "review_context_sha256": "a0a8b9aa92241fccf90ae5cd20142fb30054eb312e818382f6bd7f72bc874b27",
+      "reason": "Reviewed all five steps against the actual suppliers. The geometric innovation filter converges absolutely almost surely and in L2; finite-dimensional shift invariance gives strict stationarity and v=4 sigma^2/3. Characteristic functions identify N(0,v), and the cited even-moment statement plus normal-law scaling gives fourth moment 3v^2. Independence of past and future yields gamma(h)=v 2^(-h) and Cov(X_0^2,X_h^2)=2v^2 4^(-h). Summable covariances and Markov give the empirical-variance limit v; lag counting gives the sampling limit 3v=4 sigma^2. The changed moving-block interface preserves the b=1 empirical draws used in F8 and step 4.1. Item bytes remain unchanged. Metadata-only repair: shortened the F8 contract quote to the unchanged Output paragraph of the repaired supplier; no counterexample item edit was made.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "metadata_repair_only": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-k-sample-null-constrained-block-bootstrap",
+    "cex-pointwise-bootstrap-ar1-variance-mismatch",
+    "ex-moving-block-bootstrap-small-sample",
+    "lem-moving-block-bootstrap-conditional-covariance",
+    "lem-weighted-overlapping-block-moment-and-covariance-limits",
+    "thm-moving-block-bootstrap-clt-for-dependent-data"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "rows": [
+        {
+          "defect_id": "bcs62-b53-step5-initial-r1-mbb-intact",
+          "run": "bayesian-computational-statistics-62",
+          "at": "2026-10-16",
+          "batch": "53",
+          "class": "accuracy",
+          "subclass": "false-or-overstrong-statement",
+          "severity": "fatal",
+          "location": "definition",
+          "subject": "alg-moving-block-bootstrap",
+          "caught_at_stage": "5-adjudicate",
+          "caught_by_role": "group-alpha",
+          "disposition": "fixed",
+          "repair_cost": "repair+rejudge",
+          "subclass_note": "For n=3 and b=2 the procedure retains a complete selected pair followed by only the first record of a second pair. The original assertion that every selected length-b group is resampled intact is false and cannot establish compatibility for a design declaring those pairs indivisible. Replaced that assertion with complete time-record units, explicit final-prefix retention, and the exact no-split condition for target-specific unit compatibility; the output law, block order and conditional center are preserved.",
+          "adjudication_ref": [
+            {
+              "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u53.json",
+              "anchor": "decisions:alg-moving-block-bootstrap"
+            }
+          ],
+          "evidence": [
+            {
+              "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u53.json",
+              "anchor": "decisions:alg-moving-block-bootstrap"
+            },
+            {
+              "path": "items/alg-moving-block-bootstrap.md",
+              "anchor": "Definition"
+            }
+          ]
+        },
+        {
+          "defect_id": "bcs62-b53-step5-initial-r1-ar1-gaussian-moment-fp",
+          "run": "bayesian-computational-statistics-62",
+          "at": "2026-10-16",
+          "batch": "53",
+          "class": "accuracy",
+          "subclass": "citation-inflated",
+          "severity": "fatal",
+          "location": "facts-block",
+          "subject": "cex-pointwise-bootstrap-ar1-variance-mismatch",
+          "caught_at_stage": "5-adjudicate",
+          "caught_by_role": "group-alpha",
+          "disposition": "false-positive",
+          "repair_cost": "none",
+          "subclass_note": "The supplier Statement assumes only that a real random variable written X_t-X_s has law N(0,|t-s|); it imposes no Brownian-process hypothesis. It explicitly states E|Z|^(2m)=(2m-1)!! for Z~N(0,1), proved by truncated density integration and integration by parts in steps 1.1-2.1. The already cited normal-law definition represents N(0,v) as the law of sqrt(v) Z, so scaling yields E X_0^4=3v^2. Alternatively take s=0, t=v, Y_0=0, Y_v=X_0 in the supplier. The AR(1) law was established in step 2.1; no construction as a Brownian increment is needed.",
+          "adjudication_ref": [
+            {
+              "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u53.json",
+              "anchor": "decisions:cex-pointwise-bootstrap-ar1-variance-mismatch"
+            }
+          ],
+          "evidence": [
+            {
+              "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u53.json",
+              "anchor": "decisions:cex-pointwise-bootstrap-ar1-variance-mismatch"
+            },
+            {
+              "path": "items/cex-pointwise-bootstrap-ar1-variance-mismatch.md",
+              "anchor": "Facts & Assumptions F5; Counterexample 2.1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update",
+      "reason": "No published consumer of the changed moving-block Definition was found in the complete current direct dependency/reference inventory. The published Gaussian even-moment lemma was read in full and is sound for the assigned AR(1) use; its hypotheses do not require a Brownian process. No published item was edited or newly audited."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Assigned repair complete: only items/alg-moving-block-bootstrap.md changed. Its last Definition paragraph is replaced; the input domain, uniform block-start law, complete blocks plus final prefix, conditional mean and conditional center are preserved. Original counterexample itemHashGuard remains 76e10be0663106983dc90ab79b518f4a9310c987f1f1af8448cc8a4fc13f8e40. No created item, new prerequisite or extra choice assumption is required.",
+    "Both mathematical reviews were followed immediately by review-contexts before any other supplier edit. The AR(1) review used the repaired moving-block interface. Later edits were confined to assigned metadata and do not alter these item/dependency review hashes. This report records author repair checking, not independent review of the repair.",
+    "Used tools/step5-shared-write-lock.mjs acquire/reread/edit/check/release for shared metadata. In research/bayesian-computational-statistics-62-batch-53.pages.json only the moving-block statement mirror changed. In the owning proof-contracts.json only the moving-block definition_review and iff-reverse boundary wording, plus the assigned counterexample F8 supplier quote, changed. The latter quote is now the unchanged Output paragraph sufficient for its b=1 use.",
+    "Focused checks: rendercheck over both assigned items exits 0 with 2 checked, 0 errors and 0 warnings. Precheck over both exits 0 with algorithm not-applicable, counterexample pass, 1 checked proof and 0 failures. Strict proof-contract check for both assigned IDs initially detected the obsolete F8 quote, then exits 0 after synchronization with both checked and no errors/warnings. Final proof-layout command over the only changed item, items/alg-moving-block-bootstrap.md, exits 0: 1 item, 0 numbered steps, 0 defects.",
+    "Exact original/current Definition comparison triggers the six-item downstream inventory. Current dependencies/references and a text search of items/library agree on those direct consumers, all draft and inside the frozen frontier. Their actual uses remain sound and are recorded in downstream_reviews; no consumer item changes or further mathematical propagation are needed. Owning-page summaries remain sound. No outside-frontier or published consumer is routed to maintenance.",
+    "Owner metadata follow-up for unassigned consumers: full old supplier-Definition quotations remain in the contracts for lem-moving-block-bootstrap-conditional-covariance (F1), thm-moving-block-bootstrap-clt-for-dependent-data (F3), ex-moving-block-bootstrap-small-sample (F1), and lem-weighted-overlapping-block-moment-and-covariance-limits (F5). These quotations contain the removed intact-group paragraph. Synchronize only those supplier quotes to current relevant text during the ordinary frontier-owner pass; their mathematical claims and proofs need no repair. They were not edited under this assignment.",
+    "Source evidence for the AR(1) false positive is local: items/lem-gaussian-even-moment-bound-for-brownian-increments.md, full Statement and Proof 1.1-3.1; items/def-standard-normal-and-normal-laws.md, Definition; items/lem-characteristic-function-of-a-normal-law.md, Statement and complete proof. The even-moment recurrence is c_m=(2m-1)c_{m-1}, c_0=1, with the compact boundary term explicitly controlled; scaling gives every N(0,v) moment needed here. No external source reading is claimed. Remaining workflow action: controller collects these findings, performs the frontier-owner metadata synchronization, and obtains independent current judgments as required; the repaired fatal item still counts in this round.",
+    "Final evidence verification: input pack digest and exact rejected-tuple coverage match; assigned manifest mirror matches the current Definition; counterexample guard remains unchanged. Earlier required review-contexts commands succeeded immediately after each review. A later optional whole-library context recheck failed because unrelated items/lem-qc-linear-isometry-preserves-inner-products.md has no recognizable frontmatter. No foreign item was modified. Native reviewMatchesCurrent applied to the assigned roots and every direct supplier interface passes both original recorded review hashes, so the scoped reviews remain current. The unrelated global-scan defect is an owner operational follow-up, not an assigned mathematical or gate diagnostic."
+  ],
+  "downstream_reviews": [
+    {
+      "id": "alg-k-sample-null-constrained-block-bootstrap",
+      "path": "items/alg-k-sample-null-constrained-block-bootstrap.md",
+      "affected_use": "Definition: moving mode sets A_{i,j,r}=R_{i,j+r-1}, samples independent uniform starts and retains q_{i,s}=min(b_i,n_i-(s-1)b_i) positions.",
+      "disposition": "unchanged_sound",
+      "reason": "The supplier law and final-prefix convention are unchanged; the K-sample instructions already explicitly retain a prefix and do not require indivisible length-b groups."
+    },
+    {
+      "id": "cex-pointwise-bootstrap-ar1-variance-mismatch",
+      "path": "items/cex-pointwise-bootstrap-ar1-variance-mismatch.md",
+      "affected_use": "Facts F8 and Counterexample step 4.1 identify b=1 moving-block resampling with independent uniform draws from the empirical distribution.",
+      "disposition": "unchanged_sound",
+      "reason": "At b=1 there is no final truncation, and the independent uniform-index law is preserved. Assigned review completed after supplier repair; only the contract F8 quotation needs synchronization."
+    },
+    {
+      "id": "ex-moving-block-bootstrap-small-sample",
+      "path": "items/ex-moving-block-bootstrap-small-sample.md",
+      "affected_use": "Example and Verification F1, steps 1.1-2.1: for n=4,b=2, draw two independent overlapping pairs from (0,1),(1,2),(2,3), yielding conditional mean 3/2.",
+      "disposition": "unchanged_sound",
+      "reason": "The divisible n=4,b=2 procedure, complete-pair retention and conditional mean are unchanged. Its obsolete full-Definition contract quotation needs owner metadata reconciliation, without an item edit."
+    },
+    {
+      "id": "lem-moving-block-bootstrap-conditional-covariance",
+      "path": "items/lem-moving-block-bootstrap-conditional-covariance.md",
+      "affected_use": "Statement, F1 and Proof step 1.1 decompose n times the mean into k complete independent block sums plus one independent length-r prefix from the same N candidate starts.",
+      "disposition": "unchanged_sound",
+      "reason": "This is exactly the retained law, giving n Cov*(bar X*)=(k C_b+C_r)/n. The proof never assumes every drawn group is retained intact. Only its full-Definition contract quotation needs owner reconciliation."
+    },
+    {
+      "id": "lem-weighted-overlapping-block-moment-and-covariance-limits",
+      "path": "items/lem-weighted-overlapping-block-moment-and-covariance-limits.md",
+      "affected_use": "Statement MBB specialization, F5 and Proof step 8.1 use c_{b,l}=1, squared normalization b^(-1) sum c^2=1 and fixed-lag autocorrelation (1-h/b)_+.",
+      "disposition": "unchanged_sound",
+      "reason": "No block weighting was changed, so the normalization and autocorrelation calculations remain exact. The stored full supplier-Definition citation needs owner metadata reconciliation, without changing the result or proof."
+    },
+    {
+      "id": "thm-moving-block-bootstrap-clt-for-dependent-data",
+      "path": "items/thm-moving-block-bootstrap-clt-for-dependent-data.md",
+      "affected_use": "Statement invokes MBB on the eventual admissible tail; F3 and Proof step 2.1 use k complete blocks plus a length-r prefix with the same N=n-b+1 uniform starts and conditional-mean centering.",
+      "disposition": "unchanged_sound",
+      "reason": "The revised interface preserves that exact random variable, and the proof explicitly handles arbitrary n through its partial-block remainder. No target-design bundle compatibility claim is used. Only the contract supplier quotation needs owner metadata reconciliation."
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/bayesian-computational-statistics/block-bootstrap-for-dependent-data.md",
+      "affected_use": "Page inventory includes the algorithm; Summary promises covariance identities, sample-mean CLTs and negligibility of the final partial block for arbitrary sample sizes.",
+      "disposition": "unchanged_sound",
+      "reason": "The procedure and all limit and covariance interfaces are unchanged; no summary assertion relies on indivisible length-b group preservation."
+    },
+    {
+      "path": "library/bayesian-computational-statistics/block-bootstrap-for-dependent-data-examples.md",
+      "affected_use": "Summary describes a finite MBB mean and the marginal-versus-long-run AR(1) variance counterexample.",
+      "disposition": "unchanged_sound",
+      "reason": "Both examples use the same law after the supplier clarification; this contextual page makes no indivisible-block promise."
+    }
+  ]
+}

@@ -7,16 +7,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [prop-the-nonnegative-integral-agrees-with-the-simple-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral]
+deps: [cor-cauchy-reals-lub-complete, thm-reals-ordered-field, thm-of-archimedean, prop-the-nonnegative-integral-agrees-with-the-simple-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral]
 proof_strategy: direct
 verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (cor-finite-nonnegative-integral-implies-finite-almost-everywhere). No independent judge or whole-closure certification.
-    delegated_by: owner
+  repair: research/bayesian-computational-statistics-62-owner-step2-b30-cor-finite-nonnegative-integral-implies-finite-almost-everywhere-published-repair.json
 sources:
   scraped: []
   references:
@@ -39,10 +33,12 @@ $f(x)<+\infty$ for almost every $x$.
 
 [L2] The nonnegative integral of the simple function $n\chi_F$ equals its simple integral $n\mu(F)$ ([[prop-the-nonnegative-integral-agrees-with-the-simple-integral]]).
 
+[L3] The real numbers form a complete ordered field, and for every real $x$ there is a positive integer $m>x$ ([[cor-cauchy-reals-lub-complete]], [[thm-reals-ordered-field]], [[thm-of-archimedean]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 Let $F:=\{f=+\infty\}$, which is measurable. For every positive integer $n$, $n\chi_F\le f$. By [L1] and [L2], $n\mu(F)=\int n\chi_F\,d\mu\le\int f\,d\mu<+\infty$. [L1, L2, given]
 
- 2.1 If $\mu(F)>0$, the inequalities in step 1.1 fail for sufficiently large $n$; if $\mu(F)=+\infty$, they fail already for $n=1$. Thus $\mu(F)=0$, so the exceptional set where $f$ is infinite is null. Equivalently, $f<+\infty$ almost everywhere. [step 1.1, algebra] ∎ 
+2.1 Put $J=\int f\,d\mu<+\infty$. If $\mu(F)=+\infty$, step 1.1 fails already for $n=1$. If $0<\mu(F)<+\infty$, choose a positive integer $n>J/\mu(F)$ by [L3]. Multiplication by the positive finite number $\mu(F)$ gives $n\mu(F)>J$, contradicting step 1.1. Thus $\mu(F)=0$, so the exceptional set where $f$ is infinite is null. Equivalently, $f<+\infty$ almost everywhere. [step 1.1, L3, algebra, choose] ∎

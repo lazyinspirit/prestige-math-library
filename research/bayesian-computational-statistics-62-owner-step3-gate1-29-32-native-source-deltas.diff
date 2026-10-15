@@ -1,0 +1,35 @@
+--- research/bayesian-computational-statistics-62-owner-step3-gate1-29-32-alg-rejection-sampling-authenticated-readerpre.md
++++ items/alg-rejection-sampling.md
+@@ -71,10 +71,12 @@
+ $a(y)=\min\{1,\tilde f(y)h(\tilde g(y))/c\}$. Arithmetic operations and Borel
+ composition preserve measurability by
+ [[thm-arithmetic-and-lattice-operations-preserve-measurability]] and
+-[[thm-composition-with-borel-functions-preserves-measurability]]. On the
+-envelope set this is exactly $\tilde f(y)/(c\tilde g(y))$. If the quotient
+-exceeds $1$ at an exceptional point, replacing it by $1$ does not change the
+-test $U_i\le\tilde f(y)/(c\tilde g(y))$, since $U_i\in(0,1)$.
++[[thm-composition-with-borel-functions-preserves-measurability]]. Where the
++envelope holds and $\tilde g(y)>0$, this is exactly
++$\tilde f(y)/(c\tilde g(y))$; where $\tilde g(y)=0$, $a(y)=0$. At an
++exceptional point with $\tilde g(y)>0$ where the quotient exceeds $1$,
++replacing it by $1$ does not change the test
++$U_i\le\tilde f(y)/(c\tilde g(y))$, since $U_i\in(0,1)$.
+ 
+ **Procedure.** For $i=1,2,\ldots$, draw $(Y_i,U_i)$. If $U_i\le a(Y_i)$,
+ return $Y_i$ and stop; otherwise continue to the next pair. When
+
+--- research/bayesian-computational-statistics-62-owner-step3-gate1-29-32-cex-importance-weight-ess-misses-target-region-authenticated-readerpre.md
++++ items/cex-importance-weight-ess-misses-target-region.md
+@@ -29,10 +29,10 @@
+ 
+ [F1] [[def-importance-weight-effective-sample-size]]: For nonnegative weights with positive sum, $\operatorname{ESS}_w=(\sum_iw_i)^2/\sum_iw_i^2$.
+ 
+-[F2] [[alg-self-normalized-importance-sampling]]: The unnormalized importance weight at a proposal draw is $W=\tilde p(X)/q(X)$ when $q(X)>0$.
++[F2] [[alg-self-normalized-importance-sampling]]: The input $X_1,\ldots,X_n$ is IID from the proposal law $Q$, and the unnormalized importance weight at a draw is $W=\tilde p(X)/q(X)$ when $q(X)>0$.
+ 
+ ## Counterexample
+ 
+-1.1 Let $\mathsf X=\{a,b\}$, $\tilde p(a)=\tilde p(b)=1$, so $Z_p=2$ and $\pi(b)=1/2$. Take proposal masses $q(a)=99/100$ and $q(b)=1/100$. This proposal has full target support, and the event $E_n=\{X_1=\cdots=X_n=a\}$ has probability $(99/100)^n>0$. [given, algebra]
++1.1 Equip $\mathsf X=\{a,b\}$ with counting measure $\mu$, set $\tilde p(a)=\tilde p(b)=1$, and let $q(a)=99/100$ and $q(b)=1/100$. Then $Z_p=2$ and $\pi(b)=1/2$, and the proposal law $Q(dx)=q(x)\mu(dx)$ has full target support. For any $n\ge1$, take the IID $Q$-sample $X_1,\ldots,X_n$ from [F2]. The event $E_n=\{X_1=\cdots=X_n=a\}$ has probability $(99/100)^n>0$. [given, F2, algebra]
+ 
+ 2.1 On $E_n$, all observed weights equal $W(a)=100/99>0$. By [F1], $\operatorname{ESS}_w=(nW(a))^2/(nW(a)^2)=n$, while no sample is at $b$ and the target assigns $b$ probability $1/2$. Thus the claimed certification fails on an event of positive probability. [F1, F2, step 1.1, algebra] ∎

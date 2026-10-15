@@ -1,0 +1,72 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "18",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "lem-dirichlet-process-simplex-small-ball",
+      "model": "gpt-6-luna",
+      "context_sha256": "fac40c23027561452524f3c6184a0358e1e8162020a2c6c7e9952177139e9127",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Proof 1.1 incorrectly called the single surviving coordinate a Dirichlet density when alpha(U0)=0 and N=1; def-dirichlet-distribution defines that law as the point mass at one. This is nonfatal because the original Proof 2.1 already established probability one for precisely this case without density integration. The repair handles it before the density argument and retains the existing quantitative claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-dirichlet-process-simplex-small-ball",
+      "disposition": "repaired",
+      "post_sha256": "0229a49e3da5b797b546bb00ee63ab8b5918bb5cd007719d3f7abb516342841c",
+      "review_context_sha256": "736f26f9ff90b800d010433bfde09ecf3f7d065b47f103fe469590a6bba98835",
+      "reason": "Checked the DP finite-partition and one-category interfaces, the contained rectangle, coordinate lower bounds, Gamma normalizer estimate, and compact-J uniformity. Proof 1.1 now first proves the probability-one case; the remaining density arguments have at least two positive cells. Proof 2.1 refers back to that case. Statement, dependencies, AC scope and page interface are unchanged. This is verification of the local repair, not independent review of my own edits.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u18-single-category-density",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T16:55:37.420954+00:00",
+        "class": "accuracy",
+        "subclass": "citation-inaccurate",
+        "severity": "nonfatal",
+        "location": "proof-step",
+        "subject": "lem-dirichlet-process-simplex-small-ball",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "batch": "18",
+        "repair_cost": "inline-fix",
+        "source": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u18.json",
+        "reason": "Proof 1.1 incorrectly called the single surviving coordinate a Dirichlet density when alpha(U0)=0 and N=1; def-dirichlet-distribution defines that law as the point mass at one. This is nonfatal because the original Proof 2.1 already established probability one for precisely this case without density integration. The repair handles it before the density argument and retains the existing quantitative claim.",
+        "pre_sha256": "17708c5c07fe476065d3f97698bc35b3a33fce678daa052df17e71878e882ae8",
+        "post_sha256": "0229a49e3da5b797b546bb00ee63ab8b5918bb5cd007719d3f7abb516342841c",
+        "adjudication_ref": {
+          "id": "lem-dirichlet-process-simplex-small-ball",
+          "model": "gpt-6-luna",
+          "context_sha256": "fac40c23027561452524f3c6184a0358e1e8162020a2c6c7e9952177139e9127"
+        }
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Assigned item is draft and belongs to the frozen frontier. Exact preimage recovered by reversing only the two proof edits matches assignment guard 17708c5c07fe476065d3f97698bc35b3a33fce678daa052df17e71878e882ae8. Direct Statement comparison is identical; native statementHash remains 6743ea4a0a4856fa3f90b0fc073e3b30a000fa4e53b4f83b9ae604e153a8adf8. No downstream propagation or published-consumer ledger update is required.",
+    "Source evidence actually read: items/def-dirichlet-distribution.md Definition (k>=2 density and k=1 point mass), items/def-dirichlet-process.md Definition (zero cells omitted and one positive cell has mass one), the normalized-gamma construction theorem Statement, Gamma definition/convergence/functional-equation/smoothness Statements, owning contract, and library/bayesian-computational-statistics/dirichlet-normal-mixture-contraction.md. No external source reading is claimed.",
+    "Rectangle check: every non-maximal target coordinate differs by at most eta^2 and is at least eta^2/2; N eta<=1/4 ensures the reconstructed maximal coordinate is at least eta^2/2. With a positive residual, include its interval [eta^2/2,eta^2]; dimension is N, otherwise N-1>=1. A different eliminated coordinate is a simplex coordinate change with absolute determinant one. All x_j^(alpha_j-1)>=1 for j>=1; the residual factor is >=(eta^2/2)^m if alpha(U0)>1, and >=1 otherwise. Gamma(alpha_j)^(-1)>=alpha_j/(1+2/e). Positivity of the fixed Gamma factors and continuity on compact J give the claimed constants.",
+    "Contract updates only mirror the two repaired derivation claims and clarify its N=1 boundary. Prior independent-review records were preserved. Used tools/step5-shared-write-lock.mjs acquire, reread, edit, strict scoped check, release. Re-examined the synchronized contract and captured review-contexts after integration; its context hash remained the same. No verification.judge stamp was present or written.",
+    "Checks passed: node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-18.proof-contracts.json --strict --items lem-dirichlet-process-simplex-small-ball (1/1, zero errors/warnings); node tools/tsx-run.mjs tools/precheck.mts items/lem-dirichlet-process-simplex-small-ball.md (1 checked, zero failures); node tools/rendercheck.mjs items/lem-dirichlet-process-simplex-small-ball.md (one file, YAML and KaTeX passed); node tools/proof-layout.mjs items/lem-dirichlet-process-simplex-small-ball.md (1 item, 2 steps, zero defects).",
+    "No new prerequisites, unresolved mathematics, assigned gate diagnostics, or new outside-lane findings. The digest concern about the bandwidth-rate example is a different item outside this adjudication assignment; it was not edited or independently adjudicated here. Engine collection and any renewed judgment remain controller duties."
+  ]
+}

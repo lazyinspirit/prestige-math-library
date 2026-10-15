@@ -1,0 +1,185 @@
+[
+  {
+    "order": 2128,
+    "id": "feynman-kac-particle-filters",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Feynman–Kac targets and sequential particle filters",
+    "companion": "feynman-kac-particle-filters-examples",
+    "requires": [
+      "state-space-filtering-and-predictive-laws",
+      "importance-sampling-and-weight-diagnostics"
+    ],
+    "items": [
+      {
+        "id": "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels",
+        "kind": "lemma",
+        "dependency_level": 0,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-standard-borel-space",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-sections-of-product-measurable-functions-are-measurable",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "thm-integration-against-a-radon-nikodym-derivative",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "cor-standard-borel-spaces-have-countable-generating-and-measure-determining-algebras"
+        ],
+        "statement": "Assume AC. Let $(E,\\mathcal E)$ and $(F,\\mathcal F)$ be standard Borel spaces, let $\\lambda$ be a probability measure on $E$, and let $M$ and $R$ be probability kernels from $E$ to $F$. Suppose $M(x,\\cdot)\\ll R(x,\\cdot)$ for $\\lambda$-almost every $x$. Then there is an $(\\mathcal E\\otimes\\mathcal F)$-measurable function $r:E\\times F\\to[0,\\infty]$ such that, for $\\lambda$-almost every $x$ and every $B\\in\\mathcal F$,\n$$M(x,B)=\\int_B r(x,y)\\,R(x,dy).$$\nThe exceptional set in $x$ is a single null set, independent of $B$.",
+        "title": "Jointly measurable Radon–Nikodym derivatives for probability kernels"
+      },
+      {
+        "id": "alg-multinomial-and-residual-offspring-resampling",
+        "kind": "algorithm",
+        "dependency_level": 0,
+        "deps": [],
+        "statement": "Input a particle count $N\\ge1$, nonnegative finite weights $a_1,\\ldots,a_N$, and a scheme label, either multinomial or residual. Let $A=\\sum_{j=1}^Na_j$. If $A>0$, set $p_j=a_j/A$; if $A=0$, set $p_j=1/N$ for every $j$. Thus $p$ is always a probability vector.\n\n- **Multinomial scheme.** Draw an index vector $(J_1,\\ldots,J_N)\\in\\{1,\\ldots,N\\}^N$ with conditional mass $\\mathbb P(J_1=j_1,\\ldots,J_N=j_N\\mid a)=\\prod_{\\ell=1}^Np_{j_\\ell}$. Put $C_j=\\#\\{\\ell:J_\\ell=j\\}$.\n- **Residual scheme.** Put $q_j=\\lfloor Np_j\\rfloor$, $r_j=Np_j-q_j$, and $R=\\sum_{j=1}^Nr_j=N-\\sum_{j=1}^Nq_j$, an integer in $\\{0,\\ldots,N-1\\}$. If $R=0$, put $C_j=q_j$. If $R>0$, draw $(K_1,\\ldots,K_R)$ with conditional mass $\\mathbb P(K_1=k_1,\\ldots,K_R=k_R\\mid a)=\\prod_{\\ell=1}^R(r_{k_\\ell}/R)$ and put $C_j=q_j+\\#\\{\\ell:K_\\ell=j\\}$.\n\nFor multinomial resampling, return the sampled vector $(J_1,\\ldots,J_N)$ in its sampled order, together with its count vector $(C_1,\\ldots,C_N)$; do not sort the sampled indices. For residual resampling, return the ancestor list containing exactly $C_j$ copies of index $j$, ordered by increasing index, together with its count vector. Each output is a length-$N$ list and a count vector summing to $N$. When all input weights vanish, the uniform fallback defines the procedure; any downstream normalizer already multiplied by this zero average remains zero.",
+        "title": "Multinomial and residual offspring resampling"
+      },
+      {
+        "id": "def-feynman-kac-path-targets-and-normalizers",
+        "kind": "definition",
+        "dependency_level": 1,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-standard-borel-space",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "def-state-space-filtering-laws"
+        ],
+        "statement": "Assume AC and fix a finite horizon $T\\in\\mathbb N_0$. For each $0\\le k\\le T$, let $(\\mathsf X_k,\\mathcal X_k)$ be a standard Borel space. Let $\\mu_0$ be a probability measure on $\\mathsf X_0$, and for $1\\le k\\le T$ let $M_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be a probability kernel. A **potential** at time $k$ is a finite-valued nonnegative measurable function $G_k:\\mathsf X_k\\to[0,\\infty)$. Write $\\mathsf X_{0:t}=\\prod_{k=0}^t\\mathsf X_k$ with its finite-product sigma-algebra.\n\nFor each $0\\le t\\le T$, let $P_t^M$ be the finite path law with ordered kernel integral $\\mu_0(dx_0)\\prod_{k=1}^tM_k(x_{k-1},dx_k)$, supplied by Ionescu–Tulcea ([[thm-ionescu-tulcea-construction-of-a-markov-chain]]). The **unnormalized Feynman–Kac path measure** is\n$$\\gamma_t(A)=\\int_{\\mathsf X_{0:t}}\\mathbf 1_A(x_{0:t})\\prod_{k=0}^tG_k(x_k)\\,P_t^M(dx_{0:t}),\\qquad A\\in\\bigotimes_{k=0}^t\\mathcal X_k.$$\nIts **normalizer** is $Z_t=\\gamma_t(\\mathsf X_{0:t})=\\gamma_t(1)\\in[0,\\infty]$. Only when $0<Z_t<\\infty$ define the normalized path target $\\pi_t^{\\mathrm{FK}}=\\gamma_t/Z_t$. The sequence $(\\gamma_t)$ with its kernels and potentials is the Feynman–Kac flow.\n\nState-space filtering kernels are conditional-law versions as in [[def-state-space-filtering-laws]]. A Feynman–Kac path target is not by itself an assertion that a pointwise conditional version has been selected at observation-null histories.",
+        "title": "Feynman–Kac path targets and normalizers"
+      },
+      {
+        "id": "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts",
+        "kind": "theorem",
+        "dependency_level": 1,
+        "deps": [
+          "alg-multinomial-and-residual-offspring-resampling"
+        ],
+        "statement": "Fix $N\\ge1$ and nonnegative input weights $a_1,\\ldots,a_N$. Let $p$ be the normalized probability vector, with the uniform fallback when all weights vanish, and let $C_j$ be the offspring count from [[alg-multinomial-and-residual-offspring-resampling]]. Conditional on the input weights, for either scheme and every $1\\le j\\le N$,\n$$\\mathbb E[C_j\\mid a_1,\\ldots,a_N]=Np_j.$$\nThis assertion concerns the counts only; it gives no variance comparison for arbitrary weights.",
+        "title": "Multinomial and residual resampling have unbiased offspring counts"
+      },
+      {
+        "id": "lem-feynman-kac-path-measures-satisfy-forward-recursion",
+        "kind": "lemma",
+        "dependency_level": 2,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-feynman-kac-path-targets-and-normalizers",
+          "thm-measurability-of-integration-against-a-kernel"
+        ],
+        "statement": "Assume AC and the finite-horizon setup of [[def-feynman-kac-path-targets-and-normalizers]]. For $1\\le k\\le T$ and every nonnegative product-measurable $\\varphi:\\mathsf X_{0:k}\\to[0,\\infty]$,\n$$\\gamma_k(\\varphi)=\\int_{\\mathsf X_{0:k-1}}\\gamma_{k-1}(dx_{0:k-1})\\int_{\\mathsf X_k}G_k(x_k)\\varphi(x_{0:k})M_k(x_{k-1},dx_k),$$\nwith equality in $[0,\\infty]$.",
+        "title": "Feynman–Kac path measures satisfy the forward recursion"
+      },
+      {
+        "id": "thm-feynman-kac-path-radon-nikodym-weight",
+        "kind": "theorem",
+        "dependency_level": 2,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-feynman-kac-path-targets-and-normalizers",
+          "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "thm-integration-against-a-radon-nikodym-derivative"
+        ],
+        "statement": "Assume AC and the setup of [[def-feynman-kac-path-targets-and-normalizers]] through a fixed horizon $t\\le T$. Let $\\nu_0$ be a proposal probability on $\\mathsf X_0$, and for $1\\le k\\le t$ let $R_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be proposal probability kernels. Define $Q_s(dx_{0:s})=\\nu_0(dx_0)\\prod_{k=1}^sR_k(x_{k-1},dx_k)$. Suppose $\\mu_0\\ll\\nu_0$, and for each $k$ suppose $M_k(x,\\cdot)\\ll R_k(x,\\cdot)$ for almost every $x$ under the last-coordinate marginal of $Q_{k-1}$. Choose a measurable version $\\rho_0=d\\mu_0/d\\nu_0$ and, using [[lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels]], measurable versions $r_k(x,\\cdot)=dM_k(x,\\cdot)/dR_k(x,\\cdot)$ for these preceding-state marginals.\n\nThen $\\gamma_s\\ll Q_s$ for every $s\\le t$, with product density\n$$W_s(x_{0:s})=G_0(x_0)\\rho_0(x_0)\\prod_{k=1}^sG_k(x_k)r_k(x_{k-1},x_k).$$\nThat is, $\\gamma_s(A)=\\int_AW_s\\,dQ_s$ for every measurable $A\\subseteq\\mathsf X_{0:s}$. If $0<Z_s<\\infty$, the normalized path target has density $W_s/Z_s$ with respect to $Q_s$.",
+        "title": "Feynman–Kac path Radon–Nikodym weight"
+      },
+      {
+        "id": "alg-sequential-importance-resampling",
+        "kind": "algorithm",
+        "dependency_level": 3,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-feynman-kac-path-targets-and-normalizers",
+          "thm-feynman-kac-path-radon-nikodym-weight",
+          "alg-multinomial-and-residual-offspring-resampling"
+        ],
+        "statement": "Use the finite-horizon target and proposal setting of [[def-feynman-kac-path-targets-and-normalizers]]. For admissible inputs require $\\mu_0\\ll\\nu_0$ and, for each $k\\ge1$, $M_k(x,\\cdot)\\ll R_k(x,\\cdot)$ for almost every $x$ under the last-coordinate marginal of the proposal path law $Q_{k-1}$. Select the joint measurable versions $\\rho_0=d\\mu_0/d\\nu_0$ and $r_k(x,\\cdot)=dM_k(x,\\cdot)/dR_k(x,\\cdot)$ supplied by [[thm-feynman-kac-path-radon-nikodym-weight]]. Fix $N\\ge1$ and select either multinomial or residual resampling at each time. The algorithm returns a weighted empirical path measure and a normalizer estimate.\n\n1. Draw $X_0^1,\\ldots,X_0^N$ independently from $\\nu_0$. Set $a_0^i=G_0(X_0^i)\\rho_0(X_0^i)$ and $\\widehat Z_0=N^{-1}\\sum_{i=1}^Na_0^i$. If $\\sum_i a_0^i>0$, put $\\bar w_0^i=a_0^i/\\sum_j a_0^j$; otherwise put $\\bar w_0^i=1/N$. Each initial path is $X_{0:0}^i=X_0^i$.\n2. For $k=1,\\ldots,t$, do the following:\n   1. Apply [[alg-multinomial-and-residual-offspring-resampling]] to the previous normalized weights $(\\bar w_{k-1}^1,\\ldots,\\bar w_{k-1}^N)$, obtaining ancestor indices $A_k^1,\\ldots,A_k^N$.\n   2. Given the previous paths and these indices, draw $(X_k^1,\\ldots,X_k^N)$ with joint conditional law $\\bigotimes_{i=1}^N R_k(X_{k-1}^{A_k^i},\\cdot)$ and set $X_{0:k}^i=(X_{0:k-1}^{A_k^i},X_k^i)$.\n   3. Set $a_k^i=G_k(X_k^i)r_k(X_{k-1}^{A_k^i},X_k^i)$ and $\\widehat Z_k=\\widehat Z_{k-1}(N^{-1}\\sum_{i=1}^Na_k^i)$. If $\\sum_i a_k^i>0$, put $\\bar w_k^i=a_k^i/\\sum_j a_k^j$; otherwise put $\\bar w_k^i=1/N$.\n3. Return $\\widehat Z_t$ and the weighted empirical path probability measure $\\widehat\\pi_t^N=\\sum_{i=1}^N\\bar w_t^i\\delta_{X_{0:t}^i}$. Its last-coordinate marginal is the corresponding empirical filtering approximation.\n\nThe all-zero fallback only defines a probability measure for reporting and future sampling. Once a zero average weight occurs, $\\widehat Z$ remains zero. The procedure makes no finite-particle accuracy, consistency, or long-time stability claim.",
+        "title": "Sequential importance resampling for Feynman–Kac path targets"
+      },
+      {
+        "id": "thm-sequential-particle-estimator-is-unbiased",
+        "kind": "theorem",
+        "dependency_level": 4,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-feynman-kac-path-targets-and-normalizers",
+          "alg-sequential-importance-resampling",
+          "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts",
+          "lem-feynman-kac-path-measures-satisfy-forward-recursion",
+          "thm-feynman-kac-path-radon-nikodym-weight",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-conditional-expectation-exists-by-radon-nikodym",
+          "thm-tower-property-of-conditional-expectation",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-change-of-variables-for-expectation",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable"
+        ],
+        "statement": "Assume AC and the finite-horizon setup of [[def-feynman-kac-path-targets-and-normalizers]] and [[alg-sequential-importance-resampling]]. Fix $N\\ge1$ and $t\\le T$. Suppose every prefix normalizer satisfies $0<Z_k<\\infty$ for $0\\le k\\le t$. For any nonnegative measurable $\\varphi:\\mathsf X_{0:t}\\to[0,\\infty]$ with $\\gamma_t(\\varphi)<\\infty$, define $\\widehat\\gamma_t^N(\\varphi)=\\int\\varphi\\,d(\\widehat Z_t\\widehat\\pi_t^N)$. Then\n$$\\mathbb E[\\widehat\\gamma_t^N(\\varphi)]=\\gamma_t(\\varphi).$$\nIn particular, with $\\varphi=1$, the product-of-average-incremental-weights estimator in the algorithm satisfies $\\mathbb E[\\widehat Z_t]=Z_t$. At each time either multinomial or residual offspring resampling may be used. The theorem asserts no unbiasedness for the normalized empirical measure $\\widehat\\pi_t^N$ by itself.",
+        "title": "The sequential particle estimator is unbiased for Feynman–Kac path integrals"
+      }
+    ]
+  },
+  {
+    "order": 2129,
+    "id": "feynman-kac-particle-filters-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Feynman–Kac targets and sequential particle filters — Examples",
+    "companion": "feynman-kac-particle-filters",
+    "requires": [
+      "feynman-kac-particle-filters"
+    ],
+    "items": [
+      {
+        "id": "ex-multinomial-versus-residual-resampling",
+        "kind": "example",
+        "dependency_level": 2,
+        "deps": [
+          "alg-multinomial-and-residual-offspring-resampling",
+          "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts"
+        ],
+        "statement": "Resample $N=5$ particles from normalized weights $p=(31/50,7/25,1/10)=(0.62,0.28,0.10)$. Compare the expected offspring counts and marginal count variances for the multinomial and residual schemes.",
+        "title": "Multinomial and residual resampling on three weights"
+      },
+      {
+        "id": "ex-bootstrap-and-informed-proposal-particle-filter",
+        "kind": "example",
+        "dependency_level": 4,
+        "deps": [
+          "def-feynman-kac-path-targets-and-normalizers",
+          "thm-feynman-kac-path-radon-nikodym-weight",
+          "alg-sequential-importance-resampling",
+          "alg-importance-sampling",
+          "thm-ordinary-importance-sampling-is-unbiased",
+          "thm-change-of-variables-for-expectation",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable"
+        ],
+        "statement": "Let $\\mathsf X_0=\\{*\\}$ and $\\mathsf X_1=\\{a,b\\}$ with counting sigma-algebras. Set $\\mu_0=\\nu_0=\\delta_*$, $M_1(*,\\{a\\})=M_1(*,\\{b\\})=1/2$, $G_0(*)=1$, $G_1(a)=1/5$, and $G_1(b)=4/5$. Compare the bootstrap proposal $R_1=M_1$ with the informed proposal $R_1(*,\\{a\\})=1/5$, $R_1(*,\\{b\\})=4/5$. With one particle, the bootstrap normalizer estimate is random, while the informed proposal gives the exact normalizer at this horizon.",
+        "title": "Bootstrap and informed proposals on a two-state particle filter"
+      },
+      {
+        "id": "cex-particle-filter-proposal-misses-target-support",
+        "kind": "counterexample",
+        "dependency_level": 4,
+        "deps": [
+          "def-feynman-kac-path-targets-and-normalizers",
+          "alg-sequential-importance-resampling"
+        ],
+        "statement": "**False claim:** The transition support condition $M_k(x,\\cdot)\\ll R_k(x,\\cdot)$ may be dropped while the same proposal-weighted particle measure still represents the Feynman–Kac target.",
+        "title": "A particle proposal can miss positive target mass"
+      }
+    ]
+  }
+]

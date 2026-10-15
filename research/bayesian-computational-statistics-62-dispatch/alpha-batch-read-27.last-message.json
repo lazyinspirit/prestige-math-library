@@ -1,0 +1,404 @@
+{
+  "group": "h",
+  "batches": ["27"],
+  "pages_read": [
+    "approximate-bayesian-computation-and-simulation-based-inference",
+    "approximate-bayesian-computation-and-simulation-based-inference-examples"
+  ],
+  "items_read": [
+    "def-approximate-bayesian-computation",
+    "alg-abc-rejection",
+    "thm-abc-rejection-target-is-tolerance-conditioned-posterior",
+    "thm-abc-zero-tolerance-target-is-summary-posterior-under-density-regularity",
+    "thm-sufficient-summary-recovers-full-posterior",
+    "cex-abc-zero-tolerance-limit-fails-without-integrable-envelope",
+    "cex-identifiable-model-with-insufficient-abc-summary",
+    "ex-abc-vanishing-acceptance-rate",
+    "ex-abc-finite-sample-sufficient-summary"
+  ],
+  "conventions": [
+    {
+      "convention": "ABC uses a proper prior, standard Borel parameter and data spaces, and a measurable summary into R^d, with d ≥ 1. Tolerance balls are closed and ε ≥ 0.",
+      "fixed_by": "def-approximate-bayesian-computation",
+      "matters_for": [
+        "alg-abc-rejection",
+        "thm-abc-rejection-target-is-tolerance-conditioned-posterior",
+        "thm-abc-zero-tolerance-target-is-summary-posterior-under-density-regularity",
+        "cex-identifiable-model-with-insufficient-abc-summary",
+        "ex-abc-finite-sample-sufficient-summary"
+      ]
+    },
+    {
+      "convention": "The tolerance-conditioned target is defined only when its prior-predictive event probability is positive; no quotient is assigned at zero probability.",
+      "fixed_by": "def-approximate-bayesian-computation",
+      "matters_for": [
+        "alg-abc-rejection",
+        "thm-abc-rejection-target-is-tolerance-conditioned-posterior",
+        "thm-abc-zero-tolerance-target-is-summary-posterior-under-density-regularity",
+        "ex-abc-vanishing-acceptance-rate",
+        "ex-abc-finite-sample-sufficient-summary"
+      ]
+    },
+    {
+      "convention": "Rejection proposals are mutually IID prior-simulator pairs indexed from 1; the algorithm returns the first accepted parameter.",
+      "fixed_by": "thm-abc-rejection-target-is-tolerance-conditioned-posterior",
+      "matters_for": [
+        "cex-identifiable-model-with-insufficient-abc-summary",
+        "ex-abc-vanishing-acceptance-rate",
+        "ex-abc-finite-sample-sufficient-summary"
+      ]
+    },
+    {
+      "convention": "The zero-tolerance limit uses a specified jointly measurable nonnegative density version, almost-everywhere continuity at s₀, a single integrable envelope throughout a closed neighborhood, finite positive density evidence, and Countable Choice. It selects a density-based update rather than every RCD version on a null fiber.",
+      "fixed_by": "thm-abc-zero-tolerance-target-is-summary-posterior-under-density-regularity",
+      "matters_for": [
+        "cex-abc-zero-tolerance-limit-fails-without-integrable-envelope",
+        "ex-abc-vanishing-acceptance-rate"
+      ]
+    },
+    {
+      "convention": "Sufficiency requires one parameter-independent conditional-data probability kernel. Posterior preservation is version-wise; pointwise dominated cancellation requires 0 < g(y) < ∞ and finite positive summary evidence. The general theorem assumes AC.",
+      "fixed_by": "thm-sufficient-summary-recovers-full-posterior",
+      "matters_for": [
+        "thm-sufficient-summary-recovers-full-posterior"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-approximate-bayesian-computation",
+      "statement": "Only when pε(s₀) > 0 define Πε(A | s₀) := M(A × Bε(s₀))/pε(s₀). This is the conditional law of θ under the augmented tolerance event.",
+      "used_by": [
+        "alg-abc-rejection",
+        "thm-abc-rejection-target-is-tolerance-conditioned-posterior",
+        "thm-abc-zero-tolerance-target-is-summary-posterior-under-density-regularity",
+        "cex-abc-zero-tolerance-limit-fails-without-integrable-envelope",
+        "cex-identifiable-model-with-insufficient-abc-summary",
+        "ex-abc-vanishing-acceptance-rate",
+        "ex-abc-finite-sample-sufficient-summary",
+        "def-abc-augmented-tolerance-target",
+        "lem-abc-augmented-target-has-tolerance-posterior-marginal",
+        "cex-identifiable-nonconstant-summary-loses-parameter",
+        "cex-positive-abc-tolerance-changes-posterior-target"
+      ]
+    },
+    {
+      "id": "thm-abc-rejection-target-is-tolerance-conditioned-posterior",
+      "statement": "For an IID sequence of prior-simulator pairs and p = M(Θ × Bε(s₀)) > 0, the first accepted index is finite almost surely and P(ΘN ∈ A) = M(A × Bε(s₀))/p = Πε(A | s₀) for every A ∈ T.",
+      "used_by": [
+        "cex-identifiable-model-with-insufficient-abc-summary",
+        "ex-abc-vanishing-acceptance-rate",
+        "ex-abc-finite-sample-sufficient-summary",
+        "cex-positive-abc-tolerance-changes-posterior-target"
+      ]
+    },
+    {
+      "id": "thm-abc-zero-tolerance-target-is-summary-posterior-under-density-regularity",
+      "statement": "Under Countable Choice, the specified jointly measurable summary-density version, almost-everywhere continuity at s₀, an integrable local envelope, and 0 < z₀ < ∞ imply total-variation convergence of the positive-tolerance ABC targets to the density-selected summary posterior as ε ↓ 0.",
+      "used_by": [
+        "cex-abc-zero-tolerance-limit-fails-without-integrable-envelope",
+        "ex-abc-vanishing-acceptance-rate"
+      ]
+    },
+    {
+      "id": "alg-abc-rejection",
+      "statement": "With positive prior-predictive acceptance probability, repeatedly draw fresh independent prior-simulator pairs and return the first parameter whose simulated summary lies in the closed tolerance ball.",
+      "used_by": [
+        "thm-abc-rejection-target-is-tolerance-conditioned-posterior",
+        "ex-abc-vanishing-acceptance-rate",
+        "ex-abc-finite-sample-sufficient-summary"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-probability-measure",
+      "used_for": "Proper priors, probability kernels, and normalization.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-borel-space",
+      "used_for": "Parameter, data, and summary measurable-space hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "def-statistic-and-estimator",
+      "used_for": "Measurability of summary maps.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Simulator kernels, common conditional-data kernels, and finite integration kernels.",
+      "opened": true
+    },
+    {
+      "id": "lem-prior-and-model-kernel-define-joint-law",
+      "used_for": "Prior-simulator joint probabilities and their integration identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-expectation",
+      "used_for": "Identifying the summary-predictive pushforward law.",
+      "opened": true
+    },
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Mutual independence of rejection proposal-simulator pairs.",
+      "opened": true
+    },
+    {
+      "id": "thm-geometric-series",
+      "used_for": "Almost-sure rejection termination and the accepted-output law, including p = 1.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Choice assumptions in the density-limit theorem and continuous examples.",
+      "opened": true
+    },
+    {
+      "id": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+      "used_for": "Summary densities, tolerance-ball volumes, and interval calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-total-variation-distance-for-probability-laws",
+      "used_for": "Event-supremum TV convention and lower bounds from fixed events.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "L¹ convergence of averaged summary densities.",
+      "opened": true
+    },
+    {
+      "id": "thm-sequential-criterion-for-function-limits",
+      "used_for": "Passing from arbitrary tolerance sequences to the real-parameter limit under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "lem-metrics-on-rn",
+      "used_for": "Euclidean metric and tolerance-ball geometry.",
+      "opened": true
+    },
+    {
+      "id": "prop-measure-monotonicity",
+      "used_for": "Bounding tolerance-ball volume between cube volumes.",
+      "opened": true
+    },
+    {
+      "id": "thm-borel-sets-are-lebesgue-measurable",
+      "used_for": "Lebesgue measurability of closed tolerance balls under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-metric-open-set-algebra",
+      "used_for": "Closedness and Borel measurability of positive-radius tolerance balls.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "used_for": "Positive finite ball-volume bounds and interval acceptance probabilities.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Measurability of the averaged summary densities.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Nonnegative density integration and product-law identities.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The general sufficient-summary posterior theorem's explicit AC assumption.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-law-given-a-random-element",
+      "used_for": "Conditional-law event identities and version conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-dominated-statistical-experiment",
+      "used_for": "Sigma-finite reference measures in the dominated sufficiency branch.",
+      "opened": true
+    },
+    {
+      "id": "def-likelihood-density",
+      "used_for": "Specified likelihood versions and the absence of automatic joint measurability.",
+      "opened": true
+    },
+    {
+      "id": "def-polish-space",
+      "used_for": "Explicit standard Borel presentations in the examples.",
+      "opened": true
+    },
+    {
+      "id": "def-separable-space",
+      "used_for": "Finite, countable discrete, and real Polish presentations.",
+      "opened": true
+    },
+    {
+      "id": "def-sufficient-statistic",
+      "used_for": "The common parameter-independent conditional-data kernel criterion.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurability of bounded products in the sufficient-summary proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-bayes-formula-for-dominated-kernels",
+      "used_for": "Explicit posterior normalization on positive finite evidence fibers.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Extending conditional-law rectangle identities to bounded measurable functions.",
+      "opened": true
+    },
+    {
+      "id": "def-countable",
+      "used_for": "The countable discrete parameter space in the moving-spike example.",
+      "opened": true
+    },
+    {
+      "id": "def-dirac-measure",
+      "used_for": "The countable prior and the finite conditional-kernel construction.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-with-density",
+      "used_for": "Constructing the spike and uniform simulator laws.",
+      "opened": true
+    },
+    {
+      "id": "def-nonnegative-weighted-sum-of-measures",
+      "used_for": "The countable atomic prior.",
+      "opened": true
+    },
+    {
+      "id": "prop-dirac-measure-is-a-probability-measure",
+      "used_for": "Atomic probability laws and the off-support conditional-kernel fill.",
+      "opened": true
+    },
+    {
+      "id": "cor-archimedean-reciprocal",
+      "used_for": "The telescoping prior's total mass and reciprocal tolerances.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonnegative-weighted-sums-of-measures",
+      "used_for": "The measure property of the countable atomic prior.",
+      "opened": true
+    },
+    {
+      "id": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+      "used_for": "Simulator measures defined by nonnegative densities.",
+      "opened": true
+    },
+    {
+      "id": "def-identifiability-of-an-estimand",
+      "used_for": "Identifiability of the binary experiment despite summary information loss.",
+      "opened": true
+    },
+    {
+      "id": "def-parametric-statistical-model",
+      "used_for": "The parameter-to-sampling-law map.",
+      "opened": true
+    },
+    {
+      "id": "def-observational-equivalence",
+      "used_for": "Distinguishing the binary sampling laws.",
+      "opened": true
+    },
+    {
+      "id": "def-estimand-on-a-statistical-model",
+      "used_for": "The identity parameter as the identifiable target.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Discrete and real Borel measurable structures.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-ball",
+      "used_for": "Metric presentations used to establish real standard Borel summary spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-topology",
+      "used_for": "Discrete and usual real topology conventions.",
+      "opened": true
+    },
+    {
+      "id": "lem-rat-embeds-dense",
+      "used_for": "Separability of the real summary space.",
+      "opened": true
+    },
+    {
+      "id": "thm-rationals-countable",
+      "used_for": "A countable dense subset of the real summary space.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-cauchy-complete",
+      "used_for": "Completeness of the usual real metric.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "cex-abc-zero-tolerance-limit-fails-without-integrable-envelope",
+      "concern": "Step 2.1 says 'For measurable A ... and Lebesgue-measurable C ... the ABC definition gives M(A × C)'. The cited definition constructs the summary law on the real Borel space; arbitrary Lebesgue-measurable C requires an explicitly specified extension. The calculations only need Borel intervals, so restricting this assertion to Borel C closes the domain mismatch.",
+      "severity": "presentation"
+    },
+    {
+      "id": "cex-abc-zero-tolerance-limit-fails-without-integrable-envelope",
+      "concern": "The counterexample uses headings '## Statement' and '## Proof'; SCHEMA.md prescribes '## Statement refuted' and '## Counterexample' for this kind.",
+      "severity": "presentation"
+    },
+    {
+      "id": "cex-identifiable-model-with-insufficient-abc-summary",
+      "concern": "The counterexample uses '## Statement' rather than the '## Statement refuted' heading prescribed for counterexamples by SCHEMA.md.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "cex-positive-abc-tolerance-changes-posterior-target",
+      "finding": "Step 1.2 states 'The closed ε-ball around 1 is {1/2,1}.' The declared summary target is R and ε = 3/5, so that ball is [2/5,8/5]. Its intersection with the finite data support is {1/2,1}; the subsequent probabilities correctly use this intersection.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-exact-inferential-target-and-approximation-chain",
+      "finding": "The Definition says 'def-likelihood-density selects versions separately for fixed observations'. The cited Definition instead says 'For each θ ... select simultaneously a ... representative pθ', then evaluates those representatives at a fixed observation. Selection is indexed by parameters, not observations. The consumer separately supplies the required measurable fixed-data likelihood, so its target definition remains supported.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "approximate-bayesian-computation-and-simulation-based-inference",
+      "to": "numerical-optimization-for-statistical-computation",
+      "faithful": true,
+      "note": "The prerequisite is contextual. No assigned item imports an optimization theorem or algorithm from that page; the ABC claims do not strengthen its interfaces."
+    },
+    {
+      "from": "abc-mcmc-and-sequential-abc",
+      "to": "approximate-bayesian-computation-and-simulation-based-inference",
+      "faithful": true,
+      "note": "The augmented-target Definition and marginal lemma preserve the proper-prior/kernel setup, closed ε ≥ 0 tolerance event, positive normalizer, and exact tolerance-posterior marginal. They do not identify that marginal with the full-data posterior."
+    },
+    {
+      "from": "identifiability-and-approximation-bias-in-computational-inference",
+      "to": "approximate-bayesian-computation-and-simulation-based-inference",
+      "faithful": true,
+      "note": "The nonconstant-summary and positive-tolerance examples faithfully apply positive-event ABC conditioning. The rejection citation explicitly retains IID proposals and positive acceptance. The finite-support description of the tolerance ball needs the presentation correction recorded in alerts."
+    }
+  ]
+}

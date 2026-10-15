@@ -1,0 +1,853 @@
+{
+  "version": 1,
+  "scope": [
+    "def-fixed-interval-gaussian-smoothing-law",
+    "lem-backward-gaussian-kernel-is-valid-under-full-smoothing-data",
+    "alg-rauch-tung-striebel-smoother",
+    "thm-rauch-tung-striebel-fixed-interval-recursion",
+    "ex-two-time-scalar-rauch-tung-striebel-smoother",
+    "ex-singular-forecast-covariance-outside-rts-domain"
+  ],
+  "contracts": {
+    "def-fixed-interval-gaussian-smoothing-law": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model has positive finite-dimensional Euclidean state spaces, so an empty state target is outside the definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the smoothing kernel is an everywhere probability kernel; no evidence normalization is performed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: each section is a probability measure and the RCD identity is stated for every data event."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: no covariance nonsingularity or density assumption is imposed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: k ranges from 0 through T, and the empty data product is a singleton at T=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: AC is inherited from the model convention; defining the term makes no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms_used": [
+        "AC"
+      ]
+    },
+    "lem-backward-gaussian-kernel-is-valid-under-full-smoothing-data": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-gaussian-state-space-model-with-independent-noises",
+          "source_section": "Definition",
+          "quote": "allows singular covariance matrices",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-kalman-filter",
+          "source_section": "Definition",
+          "quote": "m_{k|k-1}=F_km_{k-1|k-1}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kalman-filter-is-exact-posterior",
+          "source_section": "Statement",
+          "quote": "an everywhere-defined filtering kernel",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-independent-noise-extends-a-conditional-law",
+          "source_section": "Statement",
+          "quote": "is a conditional law of",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "source_section": "Statement",
+          "quote": "No covariance block needs to be invertible.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-multivariate-normal-conditional-law",
+          "source_section": "Statement",
+          "quote": "Positive definiteness of $B$ is required",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linear-gaussian-state-space-path-law-is-jointly-gaussian",
+          "source_section": "Statement",
+          "quote": "the general kernel-product law of",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "with infinity allowed.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-state-space-filtering-laws",
+          "source_section": "Definition",
+          "quote": "is a probability kernel",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Singular Sigma is allowed.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Extend the exact filtering kernel by the independent process noise, form the jointly Gaussian state/next-state block, and apply the SPD observed-block conditioner to obtain the backward kernel and PSD Schur complement.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F8",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Use the finite-horizon kernel product to factor past, transition, and future observations; the one-step backward disintegration then factors the joint law with the future kernel depending only on X_{k+1}.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Integrate the factorization over any conditioning event to verify the RCD identity of Q_k given the complete data and next state.",
+          "inputs": [
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma assumes k<T and positive finite-dimensional state and observation dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only P_{k+1|k}≻0; no zero or singular forecast is inverted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs an everywhere conditional kernel for every next-state value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 permits singular P_{k|k}, Q_{k+1}, and V_k when the forecast remains SPD."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 include k=0 and k=T−1; the past or future history may be empty."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement A1 records AC through the Gaussian suppliers; step 1.1 introduces no stronger choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms_used": [
+        "AC"
+      ]
+    },
+    "alg-rauch-tung-striebel-smoother": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes a finite-horizon model with positive state dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: every forecast covariance solved is required to be positive definite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: Cholesky factorization is specified only for positive-definite forecasts."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: filtered state and noise covariances may be singular, but no forecast inverse is taken outside the stated SPD domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: at T=0 the loop is empty and returns the initial filtered pair."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the procedure is deterministic and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms_used": []
+    },
+    "thm-rauch-tung-striebel-fixed-interval-recursion": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-gaussian-state-space-model-with-independent-noises",
+          "source_section": "Definition",
+          "quote": "allows singular covariance matrices",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-kalman-filter",
+          "source_section": "Definition",
+          "quote": "positive definite",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kalman-filter-is-exact-posterior",
+          "source_section": "Statement",
+          "quote": "an everywhere-defined filtering kernel",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fixed-interval-gaussian-smoothing-law",
+          "source_section": "Definition",
+          "quote": "whose composition with the full observation vector",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-backward-gaussian-kernel-is-valid-under-full-smoothing-data",
+          "source_section": "Statement",
+          "quote": "also a version of the conditional law of",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "with infinity allowed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "0\\le f_1\\le f_2",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "generated by the measurable rectangles",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "any lambda-system",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "for measurable rectangles,",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "source_section": "Statement",
+          "quote": "No covariance block needs to be invertible.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Singular Sigma is allowed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "is **independent** when",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "The exact terminal filtering kernel gives the base fixed-interval smoothing RCD and has PSD covariance.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "base"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Compose the backward conditional kernel with the next smoothed kernel; construct its joint-data measure, identify it with the actual joint law on rectangles and extend by pi-lambda to verify the RCD event identity.",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "construct",
+            "ih"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Evaluate the Gaussian affine-kernel mixture on a finite product probability space; the independent affine image is Gaussian with the RTS mean and covariance, which is a sum of PSD terms.",
+          "inputs": [
+            "A1",
+            "F5",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "Finite backward induction identifies every recursion output with an everywhere smoothing RCD, including T=0, and uses no singular forecast inverse.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model has positive finite-dimensional state spaces and a finite horizon."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 require an SPD forecast covariance and the filter requires SPD innovations; no zero matrix is inverted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 and the conditional-kernel construction give normalized probability sections."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 allow singular state, process, measurement, filtered, and smoothed covariances while retaining SPD solve conditions."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the terminal case; step 4.1 handles T=0 and the initial state endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement A1 names AC through the Gaussian suppliers; the finite backward induction adds no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms_used": [
+        "AC"
+      ]
+    },
+    "ex-two-time-scalar-rauch-tung-striebel-smoother": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-gaussian-state-space-model-with-independent-noises",
+          "source_section": "Definition",
+          "quote": "allows singular covariance matrices",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-kalman-filter",
+          "source_section": "Definition",
+          "quote": "m_{k|k-1}=F_km_{k-1|k-1}",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-rauch-tung-striebel-smoother",
+          "source_section": "Definition",
+          "quote": "C_k=P_{k|k}F_{k+1}^TP_{k+1|k}^{-1}",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rauch-tung-striebel-fixed-interval-recursion",
+          "source_section": "Statement",
+          "quote": "is an everywhere-defined fixed-interval smoothing kernel",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "The selected scalar model has predicted variance two and positive first innovation variance three.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "The second filtering update gives m_{2|2}=3/2, P_{2|2}=5/8, and positive S_2=8/3 and P_{2|1}=5/3.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Both backward gains and updates yield the stated exact rational smoothed moments, which the RTS theorem identifies with conditional-law versions.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The scalar example uses positive state and observation dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 2.1 compute S_1=3 and S_2=8/3, both positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 applies the exact smoothing theorem to normalized Gaussian laws."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example uses strictly positive prior and noise variances, so degeneracy is not part of this example."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 cover the two forward times and backward steps k=1,0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement A1 supplies the Gaussian-law convention; steps 1.1–3.1 use only finite exact arithmetic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "rts-two-time-scalar",
+          "claim": "For X_0~N(0,1), unit random-walk and observation variances, and data (1,2), the RTS smoother returns means (1/2,1,3/2) and variances (5/8,1/2,5/8).",
+          "result": "Steps 1.1–3.1 compute the forward and backward gains and moments by exact rational arithmetic."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms_used": [
+        "AC"
+      ]
+    },
+    "ex-singular-forecast-covariance-outside-rts-domain": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-gaussian-state-space-model-with-independent-noises",
+          "source_section": "Definition",
+          "quote": "allows singular covariance matrices",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Singular Sigma is allowed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-kalman-filter",
+          "source_section": "Definition",
+          "quote": "S_k=H_kP_{k|k-1}H_k^T+R_k",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-rauch-tung-striebel-smoother",
+          "source_section": "Definition",
+          "quote": "Assume each forecast covariance used below is positive definite",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-fixed-interval-gaussian-smoothing-law",
+          "source_section": "Definition",
+          "quote": "whose composition with the full observation vector",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "The degenerate Gaussian initial state and process noise make X_0=X_1=0 almost surely, while Y_1 is the independent observation noise.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "The forward forecast covariance is zero but the innovation covariance is S_1=1, so filtering is admissible and the ordinary RTS inverse is undefined.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "The constant point-mass kernel satisfies the RCD event identity for every observation event, establishing a smoothing law outside the ordinary RTS domain.",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is one-dimensional and has nonempty Euclidean state and observation spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives S_1=1>0 while P_{1|0}=0, so the singular inverse boundary is explicit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies a normalized point-mass RCD for all observation events."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses a degenerate Gaussian state and process noise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The horizon is T=1; step 2.1 checks the only forecast and innovation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement A1 is inherited from the degenerate Gaussian-law definition; steps 1.1–3.1 make no further choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "rts-singular-forecast-boundary",
+          "claim": "For P_0=Q_1=0, F_1=1, H_1=0, R_1=1, the forward filter has S_1=1 but P_{1|0}=0.",
+          "result": "Step 2.1 verifies the exact scalar arithmetic; step 3.1 verifies that delta_0 is the RCD for X_0 given Y_1."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms_used": [
+        "AC"
+      ]
+    }
+  }
+}

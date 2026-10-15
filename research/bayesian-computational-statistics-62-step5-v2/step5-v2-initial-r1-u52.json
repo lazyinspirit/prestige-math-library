@@ -1,0 +1,216 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "52",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "lem-pointwise-cdf-convergence-to-a-continuous-law-is-uniform",
+      "model": "gpt-6-luna",
+      "context_sha256": "fe03c7b77c5a0ef12fb37b95ad13b6e04c1927106197ec22ce57337b97c6ec19",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "On Borel [0,1] with Lebesgue probability, let A be a non-Borel subset of a Borel null Cantor set N and F the uniform [2,3] CDF. The diagonal perturbation G_n(x)(omega)=F(x)+1{omega in A and x=omega} has measurable fixed-x evaluations and CDF paths outside N, with pointwise convergence in probability, but its raw supremum error is the nonmeasurable 1_A. The conclusion was undefined. Repaired by specifying everywhere-CDF paths and a measurable-null-set replacement convention, retaining the almost-sure input case through versions.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-uniform-cdf-order-and-quantile-coverage",
+      "model": "gpt-6-luna",
+      "context_sha256": "2d2cd00e385b20e49b33fae3ad1a83ecca1c3c700bea51293fe001e21ab49798",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "On Borel [0,1] with Lebesgue probability, take non-Borel A inside a Borel null Cantor set, X=3/2, F its point-mass CDF, and Ghat(x)(omega)=F(x)+1{omega in A and x=omega}. Every fixed-x evaluation is measurable and the paths are CDFs outside the null set. With epsilon=2 and delta=0 the error hypothesis is the whole space, but q_Ghat(1/2) equals omega on A and 3/2 otherwise. For alpha_1=0 and alpha_2=1/2, coverage is the nonmeasurable complement of A. Repaired with everywhere-CDF versions and explicit exceptional-set handling before any quantile, supremum or probability is formed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-pointwise-cdf-convergence-to-a-continuous-law-is-uniform",
+      "disposition": "repaired",
+      "post_sha256": "f190b1688768c3f3d94a20db639973dc9f01d824db5d9977bb5173cfefa8683c",
+      "review_context_sha256": "393ce6aadfe502b25520b62ad59015548c13f940f1ff12db7c1b44f0093d54a7",
+      "reason": "Checked the CDF and measure-continuity suppliers and choice-free Heine-Cantor interface. Null-set replacement preserves measurable evaluations and fixed-x convergence. Everywhere right-continuity makes the supremum equal its rational supremum pointwise. The finite grid union bound gives interior error at most 3 eta and both tail errors at most 2 eta. Continuity is required only of F; neither completeness, independence nor additional choice is used. This is repair verification, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-uniform-cdf-order-and-quantile-coverage",
+      "disposition": "repaired",
+      "post_sha256": "0227d30063cdcad56c5876a28b368b01f535aac553bb9419ca6fd30542f3bb02",
+      "review_context_sha256": "b8363e82d402c1096b04912bf212fa731056d9e3552b1856484165761a993d01",
+      "reason": "Checked quantile finiteness and attainment by measure continuity, both CDF-order directions, strict lower tails at atoms, and constant extended endpoint quantiles. Null-set replacement preserves measurable evaluations; everywhere-CDF paths make the rational quantile identity and rational supremum identity hold pointwise. Measurability is established before the trivial-bound branch. In the nontrivial branch all shifted levels lie in (0,1); deterministic tail inclusions and a union bound prove coverage without independence. Parts 1 and 2 and all numerical constants remain unchanged. This verifies the repair without claiming independent review.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-m-out-of-n-resampling-valid-for-uniform-endpoint",
+    "thm-bootstrap-fails-at-nonsmooth-boundary-and-degenerate-mean-functionals",
+    "thm-uniform-subsampling-coverage-under-root-law-control",
+    "ex-weak-metric-does-not-guarantee-uniform-bootstrap-coverage"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "operation": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u52-cdf-supremum-measurability",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-16",
+        "class": "accuracy",
+        "subclass": "missing-hypothesis",
+        "severity": "fatal",
+        "location": "statement",
+        "subject": "lem-pointwise-cdf-convergence-to-a-continuous-law-is-uniform",
+        "caught_at_stage": "4-judge",
+        "caught_by_role": "reader",
+        "disposition": "fixed",
+        "subclass_note": "On Borel [0,1] with Lebesgue probability, let A be a non-Borel subset of a Borel null Cantor set N and F the uniform [2,3] CDF. The diagonal perturbation G_n(x)(omega)=F(x)+1{omega in A and x=omega} has measurable fixed-x evaluations and CDF paths outside N, with pointwise convergence in probability, but its raw supremum error is the nonmeasurable 1_A. The conclusion was undefined. Repaired by specifying everywhere-CDF paths and a measurable-null-set replacement convention, retaining the almost-sure input case through versions.",
+        "adjudication_ref": [
+          {
+            "ledger": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u52.json",
+            "model": "gpt-6-luna",
+            "context_sha256": "fe03c7b77c5a0ef12fb37b95ad13b6e04c1927106197ec22ce57337b97c6ec19"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u52.json",
+            "anchor": "decisions[0]"
+          }
+        ]
+      },
+      "reason": "Confirmed and repaired fatal measurability defect; keep both the original Step-4 digest concern and exact rejected tuple as historical evidence. This proposal records a local repair, not independent acceptance."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "operation": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u52-quantile-coverage-measurability",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-16",
+        "class": "accuracy",
+        "subclass": "missing-hypothesis",
+        "severity": "fatal",
+        "location": "statement",
+        "subject": "lem-uniform-cdf-order-and-quantile-coverage",
+        "caught_at_stage": "4-judge",
+        "caught_by_role": "reader",
+        "disposition": "fixed",
+        "subclass_note": "On Borel [0,1] with Lebesgue probability, take non-Borel A inside a Borel null Cantor set, X=3/2, F its point-mass CDF, and Ghat(x)(omega)=F(x)+1{omega in A and x=omega}. Every fixed-x evaluation is measurable and the paths are CDFs outside the null set. With epsilon=2 and delta=0 the error hypothesis is the whole space, but q_Ghat(1/2) equals omega on A and 3/2 otherwise. For alpha_1=0 and alpha_2=1/2, coverage is the nonmeasurable complement of A. Repaired with everywhere-CDF versions and explicit exceptional-set handling before any quantile, supremum or probability is formed.",
+        "adjudication_ref": [
+          {
+            "ledger": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u52.json",
+            "model": "gpt-6-luna",
+            "context_sha256": "2d2cd00e385b20e49b33fae3ad1a83ecca1c3c700bea51293fe001e21ab49798"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u52.json",
+            "anchor": "decisions[1]"
+          }
+        ]
+      },
+      "reason": "Confirmed and repaired fatal measurability defect; keep both the original Step-4 digest concern and exact rejected tuple as historical evidence. This proposal records a local repair, not independent acceptance."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "completed",
+    "sources_consulted": [
+      "items/def-cumulative-distribution-function-of-a-random-variable.md: Definition",
+      "items/thm-continuity-from-above-for-measures.md: Statement and Proof",
+      "items/thm-continuity-from-below-for-measures.md: Statement and Proof",
+      "items/thm-heine-cantor-r.md: Statement and Proof",
+      "items/def-probability-measure.md: Definition"
+    ],
+    "page_interface": {
+      "path": "library/bayesian-computational-statistics/bootstrap-failure-and-subsampling.md",
+      "disposition": "unaffected",
+      "reason": "The page places both supplier lemmas and describes quantile and uniform CDF control without asserting an exceptional-set convention or completeness; the corrected item statements supply that convention. The examples page contains neither supplier reference nor a use of exceptional paths."
+    },
+    "consumer_inventory": "Current dependency/reference parser and textual search of items/ and library/ agree on all four direct item consumers; neither assigned item has aliases. All four consumers are draft frozen-frontier items. No published or outside-frontier direct consumers were discovered; no maintenance edit or further propagation is required by the examined mathematics.",
+    "contract_scope": "Regenerated citations and derivations only for the two assigned contract entries under tools/step5-shared-write-lock.mjs; preserved earlier risk_review records and added explicit Step-5 corrections without claiming independent acceptance. Also corrected the quantile contract boundary locator: q(1) is defined in the Statement, not Proof 1.1. Direct-consumer contracts still quote the original supplier Statements and require quote synchronization in the ordinary owner lanes for these interface events; their mathematical uses remain sound. No consumer item was edited.",
+    "published_ledger": "No update to research/published-consumer-supplier-ledger.md is proposed: the examined suppliers are sound and all direct consumers are draft frontier items.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts --json items/lem-pointwise-cdf-convergence-to-a-continuous-law-is-uniform.md",
+        "exit_code": 0,
+        "result": "1 proof checked; 0 failed"
+      },
+      {
+        "command": "node tools/rendercheck.mjs --json items/lem-pointwise-cdf-convergence-to-a-continuous-law-is-uniform.md",
+        "exit_code": 0,
+        "result": "1 item checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts --json items/lem-uniform-cdf-order-and-quantile-coverage.md",
+        "exit_code": 0,
+        "result": "1 proof checked; 0 failed"
+      },
+      {
+        "command": "node tools/rendercheck.mjs --json items/lem-uniform-cdf-order-and-quantile-coverage.md",
+        "exit_code": 0,
+        "result": "1 item checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-pointwise-cdf-convergence-to-a-continuous-law-is-uniform.md items/lem-uniform-cdf-order-and-quantile-coverage.md",
+        "exit_code": 0,
+        "result": "2 items, 6 steps, 0 defects"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-52.proof-contracts.json --strict --items lem-pointwise-cdf-convergence-to-a-continuous-law-is-uniform,lem-uniform-cdf-order-and-quantile-coverage --json",
+        "exit_code": 0,
+        "result": "Both assigned contracts checked; ok=true; no errors or warnings"
+      }
+    ],
+    "interface_changes": "Compared the actual Statement sections with the frozen before_statements guards: both changed. The new clauses require CDF paths for every outcome and explicitly supply measurable-null-set replacement versions for initial almost-sure paths. All inequalities, quantile endpoint conventions and convergence claims are retained under those versions. The sole changes to proofs establish measurability with that convention; no new dependency or AC premise was introduced.",
+    "remaining_work": "No unresolved mathematical uncertainty or incomplete assigned repair. Controller owns consumer context/quote synchronization, current independent rejudgment, further rounds and certification. Two confirmed-fatal items in this round prohibit zero-defect closure even though repaired."
+  },
+  "downstream_reviews": [
+    {
+      "supplier": "lem-pointwise-cdf-convergence-to-a-continuous-law-is-uniform",
+      "id": "thm-m-out-of-n-resampling-valid-for-uniform-endpoint",
+      "path": "items/thm-m-out-of-n-resampling-valid-for-uniform-endpoint.md",
+      "affected_use": "F7 and Proof 5.1 upgrade the conditional with-replacement and without-replacement root CDFs from pointwise to uniform convergence in probability.",
+      "disposition": "unaffected",
+      "reason": "For every real data tuple the two conditional laws are uniform finite mixtures over index tuples or m-subsets. Their CDFs are everywhere right-continuous and their evaluations are finite sums of measurable threshold indicators. The continuous limit F is verified in Proof 1.1, so the corrected supplier applies with empty exceptional sets."
+    },
+    {
+      "supplier": "lem-pointwise-cdf-convergence-to-a-continuous-law-is-uniform",
+      "id": "thm-bootstrap-fails-at-nonsmooth-boundary-and-degenerate-mean-functionals",
+      "path": "items/thm-bootstrap-fails-at-nonsmooth-boundary-and-degenerate-mean-functionals.md",
+      "affected_use": "F7 and Proof 1.2 derive Delta_n=sup_x|G_n^*(x)-Phi(x)| tending to zero in probability for the centered finite empirical-bootstrap mean.",
+      "disposition": "unaffected",
+      "reason": "The conditional mean-root law is a finite mixture over the n^n index tuples for every real sample. This yields an everywhere-CDF version with measurable evaluations. Phi is continuous; existing AC premises are retained and no new choice premise is required."
+    },
+    {
+      "supplier": "lem-uniform-cdf-order-and-quantile-coverage",
+      "id": "thm-uniform-subsampling-coverage-under-root-law-control",
+      "path": "items/thm-uniform-subsampling-coverage-under-root-law-control.md",
+      "affected_use": "F4 and Proof 2.1 apply part 3 to F=J_{n,P}, Ghat=Hhat_{m,n}, epsilon=2 eta and delta=delta_n; Proof 2.2 uses the deterministic quantile-order bounds for each one-sided interval.",
+      "disposition": "unaffected",
+      "reason": "The conditional CDF defined by either finite resampling procedure has a canonical everywhere-CDF version. If an initial almost-sure version is used instead, the Statement explicitly requires measurable interval endpoints and well-defined feasible-error event probabilities. These measurable events agree with their version counterparts off the specified measurable null set, so their probabilities coincide without completeness. The corrected lemma therefore yields the original interval coverage. Parts 1 and 2 used for one-sided bounds are unchanged."
+    },
+    {
+      "supplier": "lem-uniform-cdf-order-and-quantile-coverage",
+      "id": "ex-weak-metric-does-not-guarantee-uniform-bootstrap-coverage",
+      "path": "items/ex-weak-metric-does-not-guarantee-uniform-bootstrap-coverage.md",
+      "affected_use": "Facts Given and F14 fix generalized quantile conventions; Verification 2.2 uses q_n=0 for the point-mass bootstrap root on the all-ones data event.",
+      "disposition": "unaffected",
+      "reason": "The quantile formula and endpoint conventions are unchanged. All possible Bernoulli data samples form a finite measurable space; every conditional root law is a finite probability law. Its interior quantile on the all-ones sample is exactly zero, so no changed hypothesis or exceptional path affects the witness."
+    }
+  ],
+  "supporting_evidence": {
+    "research/bayesian-computational-statistics-62-batch-52.proof-contracts.json": "6649da4298b4146e2ad1c8f47d7524be0d9f525887c466d43c65519a9ecf883d"
+  }
+}

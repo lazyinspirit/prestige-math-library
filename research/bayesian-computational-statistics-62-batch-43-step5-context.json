@@ -1,0 +1,157 @@
+{
+  "group": "m",
+  "batches": [
+    "43"
+  ],
+  "pages_read": [
+    "kalman-smoothing-and-rts-recursion",
+    "kalman-smoothing-and-rts-recursion-examples"
+  ],
+  "items_read": [
+    "def-fixed-interval-gaussian-smoothing-law",
+    "lem-backward-gaussian-kernel-is-valid-under-full-smoothing-data",
+    "alg-rauch-tung-striebel-smoother",
+    "thm-rauch-tung-striebel-fixed-interval-recursion",
+    "ex-two-time-scalar-rauch-tung-striebel-smoother",
+    "ex-singular-forecast-covariance-outside-rts-domain"
+  ],
+  "conventions": [
+    {
+      "convention": "Smoothing means the single-state conditional law given all observations Y₁,…,Y_T. Kernels are everywhere defined versions; values on null observation sets need not be unique. The empty observation product at T=0 is a singleton.",
+      "fixed_by": "def-fixed-interval-gaussian-smoothing-law",
+      "matters_for": [
+        "thm-rauch-tung-striebel-fixed-interval-recursion",
+        "ex-two-time-scalar-rauch-tung-striebel-smoother",
+        "ex-singular-forecast-covariance-outside-rts-domain"
+      ]
+    },
+    {
+      "convention": "The forward Kalman filter must have positive-definite innovation covariances, and every forecast covariance solved in the backward pass must be positive definite. Ordinary inverses are used; no singular-forecast pseudoinverse extension is claimed.",
+      "fixed_by": "alg-rauch-tung-striebel-smoother",
+      "matters_for": [
+        "thm-rauch-tung-striebel-fixed-interval-recursion",
+        "ex-two-time-scalar-rauch-tung-striebel-smoother",
+        "ex-singular-forecast-covariance-outside-rts-domain"
+      ]
+    },
+    {
+      "convention": "The backward gain is C_k=P_{k|k}F_{k+1}ᵀP_{k+1|k}^{−1}; the backward loop runs from T−1 through 0 and is empty for T=0.",
+      "fixed_by": "alg-rauch-tung-striebel-smoother",
+      "matters_for": [
+        "thm-rauch-tung-striebel-fixed-interval-recursion",
+        "ex-two-time-scalar-rauch-tung-striebel-smoother"
+      ]
+    },
+    {
+      "convention": "AC is assumed, while initial, process, measurement, filtered, and smoothed Gaussian covariances may be positive semidefinite and singular.",
+      "fixed_by": "thm-rauch-tung-striebel-fixed-interval-recursion",
+      "matters_for": [
+        "ex-two-time-scalar-rauch-tung-striebel-smoother",
+        "ex-singular-forecast-covariance-outside-rts-domain"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-backward-gaussian-kernel-is-valid-under-full-smoothing-data",
+      "statement": "Under AC, the finite-horizon linear-Gaussian model, admissible Kalman filter, and P_{k+1|k}≻0, the displayed Gaussian Q_k is an everywhere probability kernel with V_k⪰0. It is a conditional law of X_k given (Y_{1:k},X_{k+1}) and also a version given (Y_{1:T},X_{k+1}).",
+      "used_by": [
+        "thm-rauch-tung-striebel-fixed-interval-recursion"
+      ]
+    },
+    {
+      "id": "thm-rauch-tung-striebel-fixed-interval-recursion",
+      "statement": "Assume AC and the finite-horizon linear-Gaussian model with positive-semidefinite model covariances, positive-definite forward innovation covariances, and positive-definite one-step forecast covariances for 0≤k<T. For every 0≤k≤T, the RTS output N_{d_k}(m_{k|T}(y_{1:T}),P_{k|T}) is an everywhere-defined fixed-interval smoothing kernel, and P_{k|T}⪰0.",
+      "used_by": [
+        "ex-two-time-scalar-rauch-tung-striebel-smoother"
+      ]
+    },
+    {
+      "id": "alg-rauch-tung-striebel-smoother",
+      "statement": "Given admissible forward Kalman output and positive-definite forecast covariances, initialize at the terminal filter and, for k=T−1,…,0, compute C_k by Cholesky row substitutions and update m_{k|T}=m_{k|k}+C_k(m_{k+1|T}−m_{k+1|k}) and P_{k|T}=P_{k|k}+C_k(P_{k+1|T}−P_{k+1|k})C_kᵀ. Return all smoothed pairs.",
+      "used_by": [
+        "thm-rauch-tung-striebel-fixed-interval-recursion",
+        "ex-two-time-scalar-rauch-tung-striebel-smoother",
+        "ex-singular-forecast-covariance-outside-rts-domain"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicit inherited AC assumption.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-gaussian-state-space-model-with-independent-noises",
+      "used_for": "Finite horizon, compatible matrix dimensions, independent Gaussian noises, and allowance for singular model covariances.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Gaussian laws with positive-semidefinite covariance, affine projection characterization, and the zero-covariance point mass.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Independence convention for Gaussian coordinates on the auxiliary product space.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Rectangle-generated product sigma-algebras and the empty-product convention.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+      "used_for": "Joint Gaussianity of independent stacks, including singular covariance blocks.",
+      "opened": true
+    },
+    {
+      "id": "thm-linear-gaussian-state-space-path-law-is-jointly-gaussian",
+      "used_for": "Independent-noise realization and identification with the ordered transition-observation kernel law used in the backward factorization.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Measurability of translated Gaussian kernels and backward kernel compositions.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Countable additivity of the measure obtained by integrating the smoothing kernel.",
+      "opened": true
+    },
+    {
+      "id": "thm-dynkin-pi-lambda",
+      "used_for": "Extending equality of finite joint measures from rectangles.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "The auxiliary product probability space carrying independent Gaussian vectors.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "Existence and uniqueness of positive-diagonal Cholesky factors for the forecast solves.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "kalman-smoothing-and-rts-recursion",
+      "to": "kalman-filtering",
+      "faithful": true,
+      "note": "The forward algorithm and exactness theorem supply Gaussian filtering versions with possibly singular state covariances under positive-definite innovations. The smoothing consumers preserve those hypotheses and explicitly add positive-definite forecast covariances."
+    },
+    {
+      "from": "data-assimilation-variational-and-ensemble-methods",
+      "to": "kalman-smoothing-and-rts-recursion",
+      "faithful": true,
+      "note": "The downstream page explicitly retains the positive-definite forecast requirement for ordinary RTS. Its data-assimilation definition uses the terminal-observation smoothing convention and preserves the null-history version caveat; it attributes general conditional-kernel existence to the separate state-space existence theorem."
+    }
+  ]
+}

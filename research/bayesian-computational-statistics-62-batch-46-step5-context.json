@@ -1,0 +1,231 @@
+{
+  "group": "n",
+  "batches": [
+    "46"
+  ],
+  "pages_read": [
+    "particle-smoothing-backward-simulation-and-rbpf",
+    "particle-smoothing-backward-simulation-and-rbpf-examples"
+  ],
+  "items_read": [
+    "lem-nonlinear-path-extension-is-a-probability-kernel",
+    "def-conditionally-linear-gaussian-state-space-model",
+    "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+    "lem-smoothing-backward-kernel-bayes-factorization",
+    "alg-particle-backward-simulator",
+    "alg-rao-blackwellized-particle-filter",
+    "lem-bootstrap-particle-filter-weak-consistency",
+    "alg-fixed-lag-particle-smoother",
+    "thm-particle-backward-simulator-normalization-and-cost",
+    "thm-particle-smoothing-consistency-under-stated-conditions",
+    "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+    "ex-switching-linear-gaussian-rbpf",
+    "ex-zero-backward-simulation-denominator",
+    "ex-fixed-lag-smoothing-bias-from-delayed-information"
+  ],
+  "conventions": [
+    {
+      "convention": "The horizon is finite, states start at time 0, observations start at time 1, and the empty observation history leaves the initial law unchanged.",
+      "fixed_by": "def-conditionally-linear-gaussian-state-space-model",
+      "matters_for": [
+        "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+        "alg-rao-blackwellized-particle-filter",
+        "ex-switching-linear-gaussian-rbpf"
+      ]
+    },
+    {
+      "convention": "The nonlinear transition depends only on the preceding nonlinear state, not on the linear state. Conditional Gaussian coefficients may depend measurably on the nonlinear prefix; initial and process covariances may be singular, while observation covariances are positive definite.",
+      "fixed_by": "def-conditionally-linear-gaussian-state-space-model",
+      "matters_for": [
+        "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+        "alg-rao-blackwellized-particle-filter",
+        "ex-switching-linear-gaussian-rbpf"
+      ]
+    },
+    {
+      "convention": "Backward conditional kernels and smoothing laws are versions; their factorization holds observation-almost everywhere, and null-history values need not be unique.",
+      "fixed_by": "lem-smoothing-backward-kernel-bayes-factorization",
+      "matters_for": [
+        "alg-particle-backward-simulator",
+        "thm-particle-smoothing-consistency-under-stated-conditions",
+        "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+        "ex-zero-backward-simulation-denominator"
+      ]
+    },
+    {
+      "convention": "Particle backward denominators must be finite and strictly positive at every reachable child, or every active smoothing child in all-marginals mode. Zero-weight terms are omitted before density evaluation; no uniform fallback repairs an inadmissible denominator.",
+      "fixed_by": "alg-particle-backward-simulator",
+      "matters_for": [
+        "alg-fixed-lag-particle-smoother",
+        "thm-particle-backward-simulator-normalization-and-cost",
+        "thm-particle-smoothing-consistency-under-stated-conditions",
+        "ex-zero-backward-simulation-denominator"
+      ]
+    },
+    {
+      "convention": "Rao–Blackwellized filtering identifies the nonlinear conditional target only on observation paths with finite positive evidence at every prefix. Exact conditional Gaussian components do not make the finite particle mixture exact.",
+      "fixed_by": "alg-rao-blackwellized-particle-filter",
+      "matters_for": [
+        "ex-switching-linear-gaussian-rbpf"
+      ]
+    },
+    {
+      "convention": "Fixed lag L uses the observation horizon min(t+L,T), with L a nonnegative integer; each requested marginal is sampled separately.",
+      "fixed_by": "alg-fixed-lag-particle-smoother",
+      "matters_for": [
+        "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+        "ex-fixed-lag-smoothing-bias-from-delayed-information"
+      ]
+    },
+    {
+      "convention": "Consistency is fixed-horizon convergence in probability against continuous tests. The empirical backward-path average requires the number of conditionally independent backward draws to tend to infinity.",
+      "fixed_by": "thm-particle-smoothing-consistency-under-stated-conditions",
+      "matters_for": [
+        "thm-particle-smoothing-consistency-under-stated-conditions"
+      ]
+    },
+    {
+      "convention": "Total-variation distance in the delayed-information example is sup over measurable A of the absolute probability difference.",
+      "fixed_by": "ex-fixed-lag-smoothing-bias-from-delayed-information",
+      "matters_for": [
+        "ex-fixed-lag-smoothing-bias-from-delayed-information"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-smoothing-backward-kernel-bayes-factorization",
+      "statement": "For a finite-horizon standard-Borel Markov state-space model with dominated observations, the displayed density quotient on finite-positive predictive-density fibers, with the filtering-law filler elsewhere, is a backward conditional-kernel version. The smoother factors into the terminal filter and successive backward kernels for observation-almost every full history. With general transitions, the factorization uses supplied regular conditional backward kernels.",
+      "used_by": [
+        "alg-particle-backward-simulator",
+        "thm-particle-smoothing-consistency-under-stated-conditions",
+        "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+        "ex-zero-backward-simulation-denominator",
+        "ex-fixed-lag-smoothing-bias-from-delayed-information"
+      ]
+    },
+    {
+      "id": "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+      "statement": "Under the conditionally linear-Gaussian model, fixing a nonlinear path gives the exact conditional Gaussian Kalman filter, positive-definite innovation matrices, and finite strictly positive Borel observation likelihoods. On finite-positive observation-evidence fibers, the nonlinear posterior is the normalized Feynman–Kac path measure with these likelihood potentials.",
+      "used_by": [
+        "alg-rao-blackwellized-particle-filter",
+        "ex-switching-linear-gaussian-rbpf"
+      ]
+    },
+    {
+      "id": "alg-particle-backward-simulator",
+      "statement": "Given normalized filtering clouds and admissible transition-density denominators, sample a terminal filtering index and successive backward indices proportional to filtering weight times transition density. Separate modes use exact supplied backward kernels or compute all particle smoothing marginals.",
+      "used_by": [
+        "alg-fixed-lag-particle-smoother",
+        "thm-particle-backward-simulator-normalization-and-cost",
+        "thm-particle-smoothing-consistency-under-stated-conditions",
+        "ex-zero-backward-simulation-denominator"
+      ]
+    },
+    {
+      "id": "lem-bootstrap-particle-filter-weak-consistency",
+      "statement": "On compact metric state spaces with Feller transitions, continuous potentials bounded between fixed positive finite constants, bootstrap proposals, and multinomial resampling, the weighted empirical filter converges weakly in probability at every fixed time.",
+      "used_by": [
+        "thm-particle-smoothing-consistency-under-stated-conditions"
+      ]
+    },
+    {
+      "id": "lem-nonlinear-path-extension-is-a-probability-kernel",
+      "statement": "The displayed nonlinear path-extension map is a probability kernel, its finite target path space is standard Borel, and its ordered iterates append nonlinear states with the original transition law.",
+      "used_by": [
+        "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+        "alg-rao-blackwellized-particle-filter"
+      ]
+    },
+    {
+      "id": "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+      "statement": "On histories where the supplied exact backward factorization holds for every prefix, each returned time-t coordinate in exact-kernel fixed-lag mode has conditional law L(X_t given Y_1:s), where s=min(t+L,T). Increasing particle count cannot remove a difference caused by truncating the observation history.",
+      "used_by": [
+        "ex-fixed-lag-smoothing-bias-from-delayed-information"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicitly inherited choice assumptions for Gaussian laws and conditional-law interfaces.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-borel-space",
+      "used_for": "The measurable-space convention for nonlinear states and finite path spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Pointwise probability sections and measurable evaluations in path extension and backward kernels.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Finite path sigma-algebras, measurable projections, and rectangle generators.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+      "used_for": "Standard-Borel closure of nonlinear prefix spaces, including finite-product boundary conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Measurability of path-extension evaluations and backward-kernel integrals against probability kernels.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-gaussian-state-space-model-with-independent-noises",
+      "used_for": "The deterministic conditional Gaussian model, positive dimensions, independent noises, and permission for singular state covariances.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Gaussian components with positive-semidefinite, possibly singular covariances.",
+      "opened": true
+    },
+    {
+      "id": "thm-nondegenerate-multivariate-normal-law-has-density",
+      "used_for": "The positive-definite innovation-density formula and the two-mode likelihood calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-conditional-density-formula",
+      "used_for": "Backward density quotients and nonlinear posterior normalization only on finite-positive evidence fibers, with a supplied probability filler elsewhere.",
+      "opened": true
+    },
+    {
+      "id": "thm-dynkin-pi-lambda",
+      "used_for": "Extending finite-measure identities from generating rectangles.",
+      "opened": true
+    },
+    {
+      "id": "def-weak-convergence-of-borel-probability-measures",
+      "used_for": "Continuous-test formulation of weak convergence.",
+      "opened": true
+    },
+    {
+      "id": "thm-chebyshev-markov-inequality-for-the-integral",
+      "used_for": "Converting squared-error bounds into convergence in probability for particle filters and backward Monte Carlo averages.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "particle-smoothing-backward-simulation-and-rbpf",
+      "to": "kalman-filtering",
+      "faithful": true,
+      "note": "The conditional-path lemma uses the actual Kalman algorithm and exactness theorem with deterministic matrices after fixing the nonlinear path. Positive observation covariance ensures positive innovation covariance; singular state and process covariances remain allowed. Conditional-version qualifications are preserved."
+    },
+    {
+      "from": "particle-smoothing-backward-simulation-and-rbpf",
+      "to": "feynman-kac-particle-filters",
+      "faithful": true,
+      "note": "The Rao–Blackwellized procedure uses nonlinear prefixes as states, path-extension kernels as bootstrap proposals, G0=1, and conditional Gaussian likelihood potentials. It retains finite-positive prefix normalizers. The consistency lemma separately proves continuous-test convergence under its stronger assumptions and correctly uses multinomial, conditionally IID resampling rather than attributing that property to residual resampling."
+    }
+  ]
+}

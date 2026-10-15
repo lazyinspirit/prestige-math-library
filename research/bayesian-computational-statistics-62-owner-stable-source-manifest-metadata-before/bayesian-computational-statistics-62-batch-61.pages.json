@@ -1,0 +1,397 @@
+[
+  {
+    "order": 2162,
+    "id": "synthetic-likelihood-and-indirect-inference",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Synthetic likelihood and indirect inference",
+    "companion": "synthetic-likelihood-and-indirect-inference-examples",
+    "requires": [
+      "numerical-optimization-for-statistical-computation",
+      "iid-monte-carlo-integration-and-error"
+    ],
+    "items": [
+      {
+        "id": "def-synthetic-likelihood",
+        "kind": "definition",
+        "title": "Ideal and finite-simulation synthetic likelihood",
+        "deps": [
+          "def-statistic-and-estimator",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-determinant-differential-and-jacobis-formula"
+        ],
+        "justified_by": [],
+        "statement": "Define the exact summary mean and covariance, the Gaussian synthetic-likelihood density when covariance is positive definite, and the finite-simulation plug-in approximation with its distinct assumptions.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Victor M.-H. Ong et al., “Variational Bayes with Synthetic Likelihood,” Statistics and Computing 28(4), 971–988 (2018)",
+              "url": "https://arxiv.org/pdf/1608.03069",
+              "locator": "§1, PDF pp. 1–2, equation (1): Gaussian summary likelihood and finite-simulation plug-in mean/covariance."
+            },
+            {
+              "title": "Christopher C. Drovandi et al., “Approximating the Likelihood in Approximate Bayesian Computation,” Handbook of Approximate Bayesian Computation (2020)",
+              "url": "https://arxiv.org/pdf/1803.06645",
+              "locator": "§2, PDF pp. 2–3, and §2.1, PDF pp. 3–4: Gaussian summary likelihood, finite-simulation covariance, and relation to indirect inference."
+            },
+            {
+              "title": "David T. Frazier et al., “Bayesian Inference Using Synthetic Likelihood: Asymptotics and Adjustments,” Journal of the American Statistical Association 118(544), 2821–2832 (2023)",
+              "url": "https://researchmgt.monash.edu/ws/portalfiles/portal/565177239/392125894_oa.pdf",
+              "locator": "§1 and §2, PDF pp. 1–3, equations (1)–(2): ideal versus finite-simulation plug-in BSL targets and simulation covariance."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "AC is explicitly assumed for the multivariate-normal density and the pointwise likelihood-density comparison; the definition does not assert parameter measurability or equality to the exact summary law."
+      },
+      {
+        "id": "def-binding-function-and-indirect-inference-target",
+        "kind": "definition",
+        "title": "Binding function and indirect-inference target",
+        "deps": [
+          "def-statistic-and-estimator",
+          "def-law-or-distribution-of-a-random-element",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance",
+          "def-parametric-statistical-model",
+          "def-identifiability-of-an-estimand",
+          "thm-identifiability-iff-constant-on-equivalence-classes",
+          "def-metric-space",
+          "def-metric-compactness",
+          "def-metric-continuity"
+        ],
+        "justified_by": [
+          "thm-indirect-inference-target-exists-with-lexicographic-tie-break"
+        ],
+        "statement": "Define the moment binding map, the continuous compact-domain minimum-distance target and the identification contracts required for parameter recovery.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Gouriéroux, Alain Monfort, and Eric Renault, “Indirect Inference,” Journal of Applied Econometrics 8, Supplement, S85–S118 (1993)",
+              "url": "https://www.stat.cmu.edu/~cshalizi/462/readings/Indirect%20Inference%20%28Gourieroux%2C%20Monfort%20and%20Renault%29.pdf",
+              "locator": "§2.2, printed pp. S88–S89: binding-function definition and one-to-one identification condition; §7, printed pp. S103–S104: non-injective binding-function example."
+            },
+            {
+              "title": "Thomas J. Sargent and John Stachurski, Intermediate Quantitative Economics with Python, Chapter 38 “Which Moments to Match?”",
+              "url": "https://python.quantecon.org/gallant_tauchen.html",
+              "locator": "§38.1 and §38.7: simulated/observed auxiliary parameters, binding function, and minimum-distance target."
+            },
+            {
+              "title": "Christopher C. Drovandi et al., “Approximating the Likelihood in Approximate Bayesian Computation,” Handbook of Approximate Bayesian Computation (2020)",
+              "url": "https://arxiv.org/pdf/1803.06645",
+              "locator": "§2.1, PDF pp. 3–4: relation of synthetic likelihood to simulated quasi-maximum likelihood and a binding function."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-two-simulation-summary-covariance-is-singular-in-two-dimensions",
+        "kind": "lemma",
+        "title": "A two-simulation covariance in two dimensions is singular",
+        "deps": [
+          "def-cholesky-factorisation-with-positive-diagonal"
+        ],
+        "justified_by": [],
+        "statement": "For any two vectors in R^2, the Bessel-corrected sample covariance has a nonzero null direction and therefore is not positive definite.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "David T. Frazier et al., “Bayesian Inference Using Synthetic Likelihood: Asymptotics and Adjustments,” Journal of the American Statistical Association 118(544), 2821–2832 (2023)",
+              "url": "https://researchmgt.monash.edu/ws/portalfiles/portal/565177239/392125894_oa.pdf",
+              "locator": "§2, PDF pp. 2–3, equation (1) and following paragraph: simulated covariance estimator and positive-definiteness boundary."
+            },
+            {
+              "title": "Victor M.-H. Ong et al., “Variational Bayes with Synthetic Likelihood,” Statistics and Computing 28(4), 971–988 (2018)",
+              "url": "https://arxiv.org/pdf/1608.03069",
+              "locator": "§1, PDF pp. 1–2, equation (1): finite-simulation sample covariance plug-in."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-indirect-inference-target-exists-with-lexicographic-tie-break",
+        "kind": "theorem",
+        "title": "Existence and lexicographic tie-breaking for the indirect-inference target",
+        "deps": [
+          "def-binding-function-and-indirect-inference-target",
+          "thm-extreme-value-metric",
+          "lem-closed-subset-of-a-compact-space-is-compact",
+          "def-metric-compactness",
+          "def-metric-continuity",
+          "def-metric-space"
+        ],
+        "justified_by": [],
+        "statement": "On the declared nonempty compact parameter set and continuous objective, the argmin is nonempty compact and has a unique lexicographically least element.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Gouriéroux, Alain Monfort, and Eric Renault, “Indirect Inference,” Journal of Applied Econometrics 8, Supplement, S85–S118 (1993)",
+              "url": "https://www.stat.cmu.edu/~cshalizi/462/readings/Indirect%20Inference%20%28Gourieroux%2C%20Monfort%20and%20Renault%29.pdf",
+              "locator": "§2.2, printed pp. S88–S89: binding-function definition and one-to-one identification condition; §7, printed pp. S103–S104: non-injective binding-function example."
+            },
+            {
+              "title": "Thomas J. Sargent and John Stachurski, Intermediate Quantitative Economics with Python, Chapter 38 “Which Moments to Match?”",
+              "url": "https://python.quantecon.org/gallant_tauchen.html",
+              "locator": "§38.1 and §38.7: simulated/observed auxiliary parameters, binding function, and minimum-distance target."
+            },
+            {
+              "title": "Christopher C. Drovandi et al., “Approximating the Likelihood in Approximate Bayesian Computation,” Handbook of Approximate Bayesian Computation (2020)",
+              "url": "https://arxiv.org/pdf/1803.06645",
+              "locator": "§2.1, PDF pp. 3–4: relation of synthetic likelihood to simulated quasi-maximum likelihood and a binding function."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-synthetic-likelihood-monte-carlo-estimation",
+        "kind": "algorithm",
+        "title": "Finite-simulation plug-in synthetic-likelihood evaluation",
+        "deps": [
+          "def-synthetic-likelihood",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-moments-variance-and-covariance",
+          "def-axiom-of-choice",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-nondegenerate-multivariate-normal-law-has-density"
+        ],
+        "justified_by": [],
+        "statement": "Specify IID summary simulation, the plug-in mean/covariance, the positive-definiteness failure branch and the exact Gaussian-density evaluation when defined.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Victor M.-H. Ong et al., “Variational Bayes with Synthetic Likelihood,” Statistics and Computing 28(4), 971–988 (2018)",
+              "url": "https://arxiv.org/pdf/1608.03069",
+              "locator": "§1, PDF pp. 1–2, equation (1): Gaussian summary likelihood and finite-simulation plug-in mean/covariance."
+            },
+            {
+              "title": "Christopher C. Drovandi et al., “Approximating the Likelihood in Approximate Bayesian Computation,” Handbook of Approximate Bayesian Computation (2020)",
+              "url": "https://arxiv.org/pdf/1803.06645",
+              "locator": "§2, PDF pp. 2–3, and §2.1, PDF pp. 3–4: Gaussian summary likelihood, finite-simulation covariance, and relation to indirect inference."
+            },
+            {
+              "title": "David T. Frazier et al., “Bayesian Inference Using Synthetic Likelihood: Asymptotics and Adjustments,” Journal of the American Statistical Association 118(544), 2821–2832 (2023)",
+              "url": "https://researchmgt.monash.edu/ws/portalfiles/portal/565177239/392125894_oa.pdf",
+              "locator": "§1 and §2, PDF pp. 1–3, equations (1)–(2): ideal versus finite-simulation plug-in BSL targets and simulation covariance."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "AC is inherited from def-synthetic-likelihood and the nondegenerate Gaussian-density supplier; no unbiasedness, consistency or convergence property is asserted."
+      },
+      {
+        "id": "rem-finite-simulation-synthetic-likelihood-is-a-random-approximation",
+        "kind": "remark",
+        "title": "Finite-simulation synthetic likelihood is a random approximation",
+        "deps": [
+          "def-synthetic-likelihood",
+          "alg-synthetic-likelihood-monte-carlo-estimation",
+          "lem-two-simulation-summary-covariance-is-singular-in-two-dimensions",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "statement": "The finite-simulation plug-in depends on simulation output, may be unavailable when the sample covariance is not positive definite, and is not identified with the true summary likelihood by definition.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "David T. Frazier et al., “Bayesian Inference Using Synthetic Likelihood: Asymptotics and Adjustments,” Journal of the American Statistical Association 118(544), 2821–2832 (2023)",
+              "url": "https://researchmgt.monash.edu/ws/portalfiles/portal/565177239/392125894_oa.pdf",
+              "locator": "§2, PDF pp. 2–3, equation (1) and following paragraph: simulated covariance estimator and positive-definiteness boundary."
+            },
+            {
+              "title": "Victor M.-H. Ong et al., “Variational Bayes with Synthetic Likelihood,” Statistics and Computing 28(4), 971–988 (2018)",
+              "url": "https://arxiv.org/pdf/1608.03069",
+              "locator": "§1, PDF pp. 1–2, equation (1): finite-simulation sample covariance plug-in."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "The remark uses the AC-dependent synthetic-likelihood definition and adds no further choice.",
+        "forward_refs": [
+          "ex-two-simulation-covariance-is-random-and-singular"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 2163,
+    "id": "synthetic-likelihood-and-indirect-inference-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Synthetic likelihood and indirect inference — Examples",
+    "companion": "synthetic-likelihood-and-indirect-inference",
+    "requires": [
+      "synthetic-likelihood-and-indirect-inference"
+    ],
+    "items": [
+      {
+        "id": "ex-gaussian-synthetic-likelihood-for-bernoulli-summary-law",
+        "kind": "example",
+        "title": "A Gaussian synthetic likelihood for a Bernoulli summary is not exact",
+        "deps": [
+          "def-synthetic-likelihood",
+          "def-statistic-and-estimator",
+          "def-law-or-distribution-of-a-random-element",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance",
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "thm-nondegenerate-multivariate-normal-law-has-density"
+        ],
+        "justified_by": [],
+        "statement": "For a Bernoulli observation and identity summary, compute the Gaussian synthetic likelihood and show its Gaussian summary law differs from the true two-point law.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Victor M.-H. Ong et al., “Variational Bayes with Synthetic Likelihood,” Statistics and Computing 28(4), 971–988 (2018)",
+              "url": "https://arxiv.org/pdf/1608.03069",
+              "locator": "§1, PDF pp. 1–2, equation (1): Gaussian summary likelihood and finite-simulation plug-in mean/covariance."
+            },
+            {
+              "title": "Christopher C. Drovandi et al., “Approximating the Likelihood in Approximate Bayesian Computation,” Handbook of Approximate Bayesian Computation (2020)",
+              "url": "https://arxiv.org/pdf/1803.06645",
+              "locator": "§2, PDF pp. 2–3, and §2.1, PDF pp. 3–4: Gaussian summary likelihood, finite-simulation covariance, and relation to indirect inference."
+            },
+            {
+              "title": "David T. Frazier et al., “Bayesian Inference Using Synthetic Likelihood: Asymptotics and Adjustments,” Journal of the American Statistical Association 118(544), 2821–2832 (2023)",
+              "url": "https://researchmgt.monash.edu/ws/portalfiles/portal/565177239/392125894_oa.pdf",
+              "locator": "§1 and §2, PDF pp. 1–3, equations (1)–(2): ideal versus finite-simulation plug-in BSL targets and simulation covariance."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "AC is assumed only through the Gaussian synthetic-likelihood definition and density supplier."
+      },
+      {
+        "id": "ex-nonunique-binding-function-target",
+        "kind": "example",
+        "title": "A non-injective binding map cannot recover a sign",
+        "deps": [
+          "def-binding-function-and-indirect-inference-target",
+          "thm-indirect-inference-target-exists-with-lexicographic-tie-break",
+          "def-statistic-and-estimator",
+          "def-law-or-distribution-of-a-random-element",
+          "def-identifiability-of-an-estimand",
+          "thm-identifiability-iff-constant-on-equivalence-classes"
+        ],
+        "justified_by": [],
+        "statement": "A two-point parameter model has distinct full-data laws but a constant squared summary and a two-point indirect-inference minimizer set.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Gouriéroux, Alain Monfort, and Eric Renault, “Indirect Inference,” Journal of Applied Econometrics 8, Supplement, S85–S118 (1993)",
+              "url": "https://www.stat.cmu.edu/~cshalizi/462/readings/Indirect%20Inference%20%28Gourieroux%2C%20Monfort%20and%20Renault%29.pdf",
+              "locator": "§2.2, printed pp. S88–S89: binding-function definition and one-to-one identification condition; §7, printed pp. S103–S104: non-injective binding-function example."
+            },
+            {
+              "title": "Thomas J. Sargent and John Stachurski, Intermediate Quantitative Economics with Python, Chapter 38 “Which Moments to Match?”",
+              "url": "https://python.quantecon.org/gallant_tauchen.html",
+              "locator": "§38.1 and §38.7: simulated/observed auxiliary parameters, binding function, and minimum-distance target."
+            },
+            {
+              "title": "Christopher C. Drovandi et al., “Approximating the Likelihood in Approximate Bayesian Computation,” Handbook of Approximate Bayesian Computation (2020)",
+              "url": "https://arxiv.org/pdf/1803.06645",
+              "locator": "§2.1, PDF pp. 3–4: relation of synthetic likelihood to simulated quasi-maximum likelihood and a binding function."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-two-simulation-covariance-is-random-and-singular",
+        "kind": "example",
+        "title": "Two simulated square summaries give a random singular covariance",
+        "deps": [
+          "alg-synthetic-likelihood-monte-carlo-estimation",
+          "def-synthetic-likelihood",
+          "lem-two-simulation-summary-covariance-is-singular-in-two-dimensions",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-moments-variance-and-covariance",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "statement": "Enumerate equal and opposite Rademacher-vector simulation pairs to show a random covariance that is always singular.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "David T. Frazier et al., “Bayesian Inference Using Synthetic Likelihood: Asymptotics and Adjustments,” Journal of the American Statistical Association 118(544), 2821–2832 (2023)",
+              "url": "https://researchmgt.monash.edu/ws/portalfiles/portal/565177239/392125894_oa.pdf",
+              "locator": "§2, PDF pp. 2–3, equation (1) and following paragraph: simulated covariance estimator and positive-definiteness boundary."
+            },
+            {
+              "title": "Victor M.-H. Ong et al., “Variational Bayes with Synthetic Likelihood,” Statistics and Computing 28(4), 971–988 (2018)",
+              "url": "https://arxiv.org/pdf/1608.03069",
+              "locator": "§1, PDF pp. 1–2, equation (1): finite-simulation sample covariance plug-in."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "AC is inherited only from the algorithm and synthetic-likelihood definition; the finite enumeration is choice-free."
+      }
+    ]
+  }
+]

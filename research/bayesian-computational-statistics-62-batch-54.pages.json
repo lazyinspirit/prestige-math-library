@@ -1,0 +1,154 @@
+[
+  {
+    "order": 2148,
+    "id": "finite-group-permutation-inference",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Exact permutation tests and random-permutation Monte Carlo",
+    "companion": "finite-group-permutation-inference-examples",
+    "requires": [
+      "conditional-and-finite-group-exact-inference",
+      "randomized-treatment-assignment-and-sharp-null-tests"
+    ],
+    "items": [
+      {
+        "id": "def-measurable-finite-group-permutation-setup",
+        "kind": "definition",
+        "title": "Measurable finite-group permutation setups",
+        "deps": [
+          "def-statistical-experiment",
+          "def-group",
+          "def-group-action",
+          "def-measurable-function-between-measurable-spaces",
+          "def-finite-group-randomization-test"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-measurable-finite-group-orbit-pvalues",
+        "kind": "definition",
+        "title": "Full-orbit and tie-randomized permutation p-values",
+        "deps": [
+          "def-measurable-finite-group-permutation-setup",
+          "def-orbit-rank-p-value",
+          "def-independent-random-elements"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-random-permutation-monte-carlo-pvalue",
+        "kind": "algorithm",
+        "title": "Identity-corrected random-permutation Monte Carlo p-value",
+        "deps": [
+          "def-measurable-finite-group-permutation-setup",
+          "def-measurable-finite-group-orbit-pvalues",
+          "def-independent-random-elements",
+          "def-uniform-finite-probability-space"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-finite-group-permutation-validity",
+        "kind": "theorem",
+        "title": "Exact finite-group permutation p-values and tests",
+        "deps": [
+          "def-measurable-finite-group-permutation-setup",
+          "def-measurable-finite-group-orbit-pvalues",
+          "def-independent-random-elements",
+          "def-uniform-finite-probability-space",
+          "lem-finite-multiset-randomized-rank-is-uniform",
+          "def-finite-group-randomization-test",
+          "def-orbit-rank-p-value",
+          "thm-finite-group-randomization-validity",
+          "def-p-value",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "def-randomized-test",
+          "lem-measurable-rejection-function-defines-randomized-test",
+          "def-test-size-and-power",
+          "thm-p-value-superuniformity"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-random-permutation-monte-carlo-validity",
+        "kind": "theorem",
+        "title": "Validity of identity-corrected random-permutation Monte Carlo p-values",
+        "deps": [
+          "def-measurable-finite-group-permutation-setup",
+          "def-measurable-finite-group-orbit-pvalues",
+          "def-statistical-experiment",
+          "alg-random-permutation-monte-carlo-pvalue",
+          "thm-finite-group-permutation-validity",
+          "def-independent-random-elements",
+          "def-uniform-finite-probability-space",
+          "lem-finite-multiset-randomized-rank-is-uniform",
+          "def-p-value",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "def-randomized-test",
+          "lem-measurable-rejection-function-defines-randomized-test",
+          "def-test-size-and-power",
+          "thm-p-value-superuniformity"
+        ],
+        "dependency_level": 3
+      }
+    ]
+  },
+  {
+    "order": 2149,
+    "id": "finite-group-permutation-inference-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Exact permutation tests and random-permutation Monte Carlo — Examples",
+    "companion": "finite-group-permutation-inference",
+    "requires": [
+      "finite-group-permutation-inference"
+    ],
+    "items": [
+      {
+        "id": "ex-exchangeable-two-sample-permutation-test",
+        "kind": "example",
+        "title": "A tied two-sample Bernoulli permutation test",
+        "deps": [
+          "def-measurable-finite-group-permutation-setup",
+          "def-measurable-finite-group-orbit-pvalues",
+          "alg-random-permutation-monte-carlo-pvalue",
+          "def-finite-probability-space-and-event",
+          "thm-finite-group-permutation-validity"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $\\Omega=\\{0,1\\}^2$, and for $q\\in[0,1]$ assign the four vectors masses\n$$P_q(0,0)=(1-q)^2,\\quad P_q(0,1)=q(1-q),\\quad P_q(1,0)=q(1-q),\\quad P_q(1,1)=q^2.$$\nThese are two independent Bernoulli$(q)$ observations, one in each sample.\nLet $G=S_2$ act by swapping coordinates and take the signed two-sample score\n$T(x)=x_1-x_2$. Under the equal-distribution null, the law is invariant under\nthis swap. For the discordant sample $x=(1,0)$ the full-orbit p-value is\n$1/2$; for $x=(0,1)$ it is $1$, and either tied sample has inclusive p-value\n$1$.\n\nFor a uniform-subset Monte Carlo example without replacement, let\n$G=\\mathbb Z/6\\mathbb Z$ act on itself by addition with its full power-set\nsigma-algebra, let $X$ be uniform on $G$, and take\n$T(x)=\\mathbf 1\\{x=0\\}$. Set $B=2$, choose $S$ uniformly from the ten\ntwo-element subsets of $G\\setminus\\{0\\}$ independently of $X$, and use $W=\\{0\\}\\cup S$. This is\nthe identity-adjoined design of\n[[alg-random-permutation-monte-carlo-pvalue]], with\n$$p_{2,\\mathrm{wor}}(x)=\\frac{\\#\\{g\\in W:T(g+x)\\ge T(x)\\}}{3}.$$\n\nThe equal-distribution null above is stronger than equality of means. For a\nweak mean-difference null, use the data space $D^2$ with full power-set\nsigma-algebra, where $D=\\{-2,-1,0,1,2\\}$, and let $S_2$ act by swapping\ncoordinates. On $D^2$ assign $(x,y)$ mass $P\\{x\\}Q\\{y\\}$, where $P$ puts\nmass $1/2$ on each of $-1,1$ and $Q$ puts masses $1/4,1/2,1/4$ on\n$-2,0,2$, respectively. Use the score $T(x,y)=x-y$. Both coordinate means\nare zero, so the weak mean-difference null $E[X]=E[Y]$ holds. The pooled law\nis not invariant under the swap."
+      },
+      {
+        "id": "ex-unequal-assignment-sharp-null-randomization",
+        "kind": "example",
+        "title": "Unequal assignment weights under the Fisher sharp null",
+        "deps": [
+          "def-measurable-finite-group-permutation-setup",
+          "def-measurable-finite-group-orbit-pvalues",
+          "thm-finite-group-permutation-validity",
+          "def-finite-randomized-treatment-assignment-model",
+          "def-fisher-sharp-null-and-predeclared-test-orderings",
+          "def-finite-population-average-treatment-effect-and-weak-null",
+          "thm-fisher-sharp-null-randomization-pvalues-are-valid"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "cex-uncorrected-random-permutation-pvalue-can-be-zero",
+        "kind": "counterexample",
+        "title": "The uncorrected Monte Carlo permutation fraction can be zero and invalid",
+        "deps": [
+          "def-measurable-finite-group-permutation-setup",
+          "def-measurable-finite-group-orbit-pvalues",
+          "alg-random-permutation-monte-carlo-pvalue",
+          "def-p-value",
+          "def-finite-probability-space-and-event",
+          "def-uniform-finite-probability-space",
+          "def-independent-random-elements",
+          "thm-random-permutation-monte-carlo-validity"
+        ],
+        "dependency_level": 4
+      }
+    ]
+  }
+]

@@ -1,0 +1,1398 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-44",
+  "scope": [
+    "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels",
+    "alg-multinomial-and-residual-offspring-resampling",
+    "def-feynman-kac-path-targets-and-normalizers",
+    "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts",
+    "lem-feynman-kac-path-measures-satisfy-forward-recursion",
+    "thm-feynman-kac-path-radon-nikodym-weight",
+    "alg-sequential-importance-resampling",
+    "thm-sequential-particle-estimator-is-unbiased",
+    "ex-multinomial-versus-residual-resampling",
+    "ex-bootstrap-and-informed-proposal-particle-filter",
+    "cex-particle-filter-proposal-misses-target-support"
+  ],
+  "contracts": {
+    "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "source_section": "Statement",
+          "quote": "Assume Choice. Let $(E_n,\\mathcal E_n)_{n\\ge0}$ be measurable spaces, let\n$\\mu_0$ be a probability measure on $E_0$, and, for each $n\\ge0$, let $K_n$ be\na probability kernel from $E_0\\times\\cdots\\times E_n$ to $E_{n+1}$. There is a\nunique probability measure $P$ on\n$$ \\left(\\prod_{n\\ge0}E_n,\\ \\bigotimes_{n\\ge0}\\mathcal E_n\\right) $$ whose finite-prefix laws are the prescribed iterated integrals $$ \\mu_0(dx_0)K_0(x_0,dx_1)K_1(x_0,x_1,dx_2)\\cdots K_{r-1}(x_0,\\ldots,x_{r-1},dx_r). $$\nIn particular, if every $E_n=E$ and\n$K_n(x_0,\\ldots,x_n,A)=K(x_n,A)$, the coordinate process is a homogeneous\n$K$-chain with initial law $\\mu_0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space and let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-standard-borel-spaces-have-countable-generating-and-measure-determining-algebras",
+          "source_section": "Statement",
+          "quote": "Assume AC. Every standard-Borel space $(E,\\mathcal S)$ has a countable algebra $\\mathcal A$ which generates $\\mathcal S$, separates points, and determines finite measures: if finite measures $\\mu,\\nu$ agree on $\\mathcal A$, then $\\mu=\\nu$. In particular it determines probability measures.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-integration-against-a-radon-nikodym-derivative",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a sigma-finite positive measure and let $\\nu$ be a signed measure or a finite complex measure with $\\nu\\ll\\mu$. If $h$ is a representative of $d\\nu/d\\mu$, then\n$$\\nu(E)=\\int_E h\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nMore generally, if\n$$g=\\sum_{j=1}^m c_j\\mathbf 1_{E_j}$$\nis the canonical disjoint representation of a simple measurable function and $|\\nu|(E_j)<+\\infty$ for every $j$, then\n$$\\int g\\,d\\nu=\\sum_{j=1}^m c_j\\int_{E_j} h\\,d\\mu.$$\nIn particular, whenever the Lebesgue integral of $gh$ is defined, one has\n$$\\int g\\,d\\nu=\\int gh\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-sections-of-product-measurable-functions-are-measurable",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces, and let\n$$f : X \\times Y \\to \\overline{\\mathbb R}$$\nbe $(\\mathcal A \\otimes \\mathcal B,\\mathcal B(\\overline{\\mathbb R}))$-measurable.\nThen $f_x : Y \\to \\overline{\\mathbb R}$ is $\\mathcal B$-measurable for every\n$x \\in X$, and $f^y : X \\to \\overline{\\mathbb R}$ is $\\mathcal A$-measurable\nfor every $y \\in Y$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f:X\\to[0,+\\infty]$ be measurable and define\n$$\\nu_f(A):=\\int_A f\\,d\\mu \\qquad (A\\in\\mathcal A).$$\nThen $\\nu_f$ is a measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels-step-1.1",
+          "step": "1.1",
+          "claim": "Apply [F3] to $\\lambda$ and each one-step kernel to obtain joint laws $P(dx,dy)=\\lambda(dx)M(x,dy)$ and $Q(dx,dy)=\\lambda(dx)R(x,dy)$. For any product-measurable $A$, the section integrals are measurable by [F4]. If $Q(A)=0$, then $R(x,A_x)=0$ for $\\lambda$-almost every $x$ by [F5]; intersecting with the conull kernel-domination set gives $M(x,A_x)=0$ there, hence $P(A)=0$. Thus $P\\ll Q$.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels-step-2.1",
+          "step": "2.1",
+          "claim": "By [F6], choose a product-measurable density $h=dP/dQ$. On $N=\\{h<0\\}$, positivity of $P$ gives $0\\le P(N)=\\int_Nh\\,dQ=-\\int_Nh^-\\,dQ$, so [F5] makes $h^-=0$ $Q$-almost everywhere on $N$. The Borel positive-part map preserves measurability by [F9], so replacing $h$ by $h^+=\\max(h,0)$ leaves the density unchanged $Q$-almost everywhere and makes it nonnegative.",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "F9",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels-step-3.1",
+          "step": "3.1",
+          "claim": "Let $\\mathcal C$ be a countable measure-determining algebra on $F$ from [F7], containing $F$. For each $B\\in\\mathcal C$ and $D\\in\\mathcal E$, the rectangle laws and density identity [F8] give $\\int_D M(x,B)\\lambda(dx)=P(D\\times B)=\\int_D(\\int_Bh(x,y)R(x,dy))\\lambda(dx)$. Both integrands are measurable by [F2] and [F4] and integrable because their integrals over $E$ are at most one. Uniqueness of Radon–Nikodym densities in [F6] makes them equal $\\lambda$-almost everywhere for each fixed $B$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels-step-4.1",
+          "step": "4.1",
+          "claim": "Intersect the conull sets from step 3.1 over the countable algebra $\\mathcal C$. For each $x$ in the intersection, the section $h(x,\\cdot)$ is measurable by [F10], so [F11] makes $B\\mapsto\\int_Bh(x,y)R(x,dy)$ a measure. The kernel section $M(x,\\cdot)$ is a probability measure by [F2]. These two measures agree on $\\mathcal C$ and have total mass one because $F\\in\\mathcal C$ and step 3.1 includes $B=F$. The measure-determining property [F7] makes them equal on every $B\\in\\mathcal F$, with the same exceptional null set for all $B$. Taking $r=h$ proves the assertion.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F7",
+            "F10",
+            "F11",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 includes the empty set among every measurable B and extends equality from the determining algebra."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles Q(A)=0 by the nonnegative zero-integral criterion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 verifies both section measures have mass one using F in the algebra."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The proof permits M=R; no strict domination or nondegeneracy is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 cover null sections and the full target set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 cite A1 for path-law, RN, and countable determining-algebra uses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-multinomial-and-residual-offspring-resampling": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input stipulates N≥1 and excludes an empty particle list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: when A=0, p_j=1/N in both branches; the returned multinomial indices keep their sampled order and any downstream zero normalizer stays zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: N>=1 includes N=1; the sole ancestor is index1, and residual R=0 returns its deterministic count."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: residual R=0 assigns C_j=floor(Np_j) without random draws; multinomial returns the sampled J vector without sorting, preserving its displayed product mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This case is not a separate parameter or boundary in the stated definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no choice-axiom claim; finite definitions and calculations are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-feynman-kac-path-targets-and-normalizers": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input stipulates N≥1 and excludes an empty particle list."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This case is not a separate parameter or boundary in the stated definition."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This case is not a separate parameter or boundary in the stated definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This case is not a separate parameter or boundary in the stated definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This case is not a separate parameter or boundary in the stated definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: AC is assumed through the finite path-law construction in Ionescu–Tulcea."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-multinomial-and-residual-offspring-resampling",
+          "source_section": "Definition",
+          "quote": "Input a particle count $N\\ge1$, nonnegative finite weights $a_1,\\ldots,a_N$, and a scheme label, either multinomial or residual. Let $A=\\sum_{j=1}^Na_j$. If $A>0$, set $p_j=a_j/A$; if $A=0$, set $p_j=1/N$ for every $j$. Thus $p$ is always a probability vector.\n\n- **Multinomial scheme.** Draw an index vector $(J_1,\\ldots,J_N)\\in\\{1,\\ldots,N\\}^N$ with conditional mass $\\mathbb P(J_1=j_1,\\ldots,J_N=j_N\\mid a)=\\prod_{\\ell=1}^Np_{j_\\ell}$. Put $C_j=\\#\\{\\ell:J_\\ell=j\\}$.\n- **Residual scheme.** Put $q_j=\\lfloor Np_j\\rfloor$, $r_j=Np_j-q_j$, and $R=\\sum_{j=1}^Nr_j=N-\\sum_{j=1}^Nq_j$, an integer in $\\{0,\\ldots,N-1\\}$. If $R=0$, put $C_j=q_j$. If $R>0$, draw $(K_1,\\ldots,K_R)$ with conditional mass $\\mathbb P(K_1=k_1,\\ldots,K_R=k_R\\mid a)=\\prod_{\\ell=1}^R(r_{k_\\ell}/R)$ and put $C_j=q_j+\\#\\{\\ell:K_\\ell=j\\}$.\n\nFor multinomial resampling, return the sampled vector $(J_1,\\ldots,J_N)$ in its sampled order, together with its count vector $(C_1,\\ldots,C_N)$; do not sort the sampled indices. For residual resampling, return the ancestor list containing exactly $C_j$ copies of index $j$, ordered by increasing index, together with its count vector. Each output is a length-$N$ list and a count vector summing to $N$. When all input weights vanish, the uniform fallback defines the procedure; any downstream normalizer already multiplied by this zero average remains zero.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts-step-1.1",
+          "step": "1.1",
+          "claim": "In the multinomial branch, $C_j=\\sum_{\\ell=1}^N\\mathbf 1_{\\{J_\\ell=j\\}}$ and each indicator has conditional expectation $p_j$ by the specified product mass. Linearity of a finite sum gives $\\mathbb E[C_j\\mid a]=Np_j$, including the uniform fallback.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts-step-1.2",
+          "step": "1.2",
+          "claim": "In the residual branch, write $q_j=\\lfloor Np_j\\rfloor$ and $r_j=Np_j-q_j$. The remainder $R=\\sum_jr_j=N-\\sum_jq_j$ is an integer. If $R=0$, every $r_j=0$ and $C_j=q_j=Np_j$; if $R>0$, then $C_j=q_j+\\sum_{\\ell=1}^{R}\\mathbf 1_{\\{K_\\ell=j\\}}$ with each indicator having conditional expectation $r_j/R$, so $\\mathbb E[C_j\\mid a]=q_j+R(r_j/R)=Np_j$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts-step-2.1",
+          "step": "2.1",
+          "claim": "Steps 1.1 and 1.2 establish the same conditional expected-count identity for both schemes in the procedure, completing the assertion.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input stipulates N≥1 and excludes an empty particle list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the uniform fallback for all-zero weights; step 1.2 handles R=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For N=1, p_1=1 and both count formulas give C_1=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The R=0 case gives deterministic counts when all Np_j are integers, including point-mass weights."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 treats R=0 separately from R>0, including zero fractional remainders."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no choice-axiom claim; finite definitions and calculations are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-feynman-kac-path-measures-satisfy-forward-recursion": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-feynman-kac-path-targets-and-normalizers",
+          "source_section": "Definition",
+          "quote": "Assume AC and fix a finite horizon $T\\in\\mathbb N_0$. For each $0\\le k\\le T$, let $(\\mathsf X_k,\\mathcal X_k)$ be a standard Borel space. Let $\\mu_0$ be a probability measure on $\\mathsf X_0$, and for $1\\le k\\le T$ let $M_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be a probability kernel. A **potential** at time $k$ is a finite-valued nonnegative measurable function $G_k:\\mathsf X_k\\to[0,\\infty)$. Write $\\mathsf X_{0:t}=\\prod_{k=0}^t\\mathsf X_k$ with its finite-product sigma-algebra.\n\nFor each $0\\le t\\le T$, let $P_t^M$ be the finite path law with ordered kernel integral $\\mu_0(dx_0)\\prod_{k=1}^tM_k(x_{k-1},dx_k)$, supplied by Ionescu–Tulcea ([[thm-ionescu-tulcea-construction-of-a-markov-chain]]). The **unnormalized Feynman–Kac path measure** is\n$$\\gamma_t(A)=\\int_{\\mathsf X_{0:t}}\\mathbf 1_A(x_{0:t})\\prod_{k=0}^tG_k(x_k)\\,P_t^M(dx_{0:t}),\\qquad A\\in\\bigotimes_{k=0}^t\\mathcal X_k.$$\nIts **normalizer** is $Z_t=\\gamma_t(\\mathsf X_{0:t})=\\gamma_t(1)\\in[0,\\infty]$. Only when $0<Z_t<\\infty$ define the normalized path target $\\pi_t^{\\mathrm{FK}}=\\gamma_t/Z_t$. The sequence $(\\gamma_t)$ with its kernels and potentials is the Feynman–Kac flow.\n\nState-space filtering kernels are conditional-law versions as in [[def-state-space-filtering-laws]]. A Feynman–Kac path target is not by itself an assertion that a pointwise conditional version has been selected at observation-null histories.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-feynman-kac-path-measures-satisfy-forward-recursion-step-1.1",
+          "step": "1.1",
+          "claim": "By [F1], expand $\\gamma_k(\\varphi)$ against the finite path law as the ordered integral of $\\varphi(x_{0:k})\\prod_{j=0}^kG_j(x_j)$ with respect to $\\mu_0(dx_0)\\prod_{j=1}^kM_j(x_{j-1},dx_j)$. Group the first $k$ potentials and the first $k$ state coordinates; their iterated integral is exactly $\\gamma_{k-1}(dx_{0:k-1})$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "lem-feynman-kac-path-measures-satisfy-forward-recursion-step-2.1",
+          "step": "2.1",
+          "claim": "The remaining last-coordinate integral is the displayed inner kernel integral. It is measurable in $x_{0:k-1}$ by [F2]; all integrands are nonnegative, so the ordered iterated integrals agree even if their common value is infinite. This proves the recursion.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input stipulates N≥1 and excludes an empty particle list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Potentials may vanish; nonnegative integrals agree, including zero-valued sides."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For k=1, steps 1.1–2.1 group the initial law then add the first transition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Point-mass transition kernels are allowed; no nondegeneracy premise is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The assertion starts at 1≤k≤T; k=0 is the base measure in the definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 cite A1 for the finite path law; regrouping adds no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-feynman-kac-path-radon-nikodym-weight": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-feynman-kac-path-targets-and-normalizers",
+          "source_section": "Definition",
+          "quote": "Assume AC and fix a finite horizon $T\\in\\mathbb N_0$. For each $0\\le k\\le T$, let $(\\mathsf X_k,\\mathcal X_k)$ be a standard Borel space. Let $\\mu_0$ be a probability measure on $\\mathsf X_0$, and for $1\\le k\\le T$ let $M_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be a probability kernel. A **potential** at time $k$ is a finite-valued nonnegative measurable function $G_k:\\mathsf X_k\\to[0,\\infty)$. Write $\\mathsf X_{0:t}=\\prod_{k=0}^t\\mathsf X_k$ with its finite-product sigma-algebra.\n\nFor each $0\\le t\\le T$, let $P_t^M$ be the finite path law with ordered kernel integral $\\mu_0(dx_0)\\prod_{k=1}^tM_k(x_{k-1},dx_k)$, supplied by Ionescu–Tulcea ([[thm-ionescu-tulcea-construction-of-a-markov-chain]]). The **unnormalized Feynman–Kac path measure** is\n$$\\gamma_t(A)=\\int_{\\mathsf X_{0:t}}\\mathbf 1_A(x_{0:t})\\prod_{k=0}^tG_k(x_k)\\,P_t^M(dx_{0:t}),\\qquad A\\in\\bigotimes_{k=0}^t\\mathcal X_k.$$\nIts **normalizer** is $Z_t=\\gamma_t(\\mathsf X_{0:t})=\\gamma_t(1)\\in[0,\\infty]$. Only when $0<Z_t<\\infty$ define the normalized path target $\\pi_t^{\\mathrm{FK}}=\\gamma_t/Z_t$. The sequence $(\\gamma_t)$ with its kernels and potentials is the Feynman–Kac flow.\n\nState-space filtering kernels are conditional-law versions as in [[def-state-space-filtering-laws]]. A Feynman–Kac path target is not by itself an assertion that a pointwise conditional version has been selected at observation-null histories.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(E,\\mathcal E)$ and $(F,\\mathcal F)$ be standard Borel spaces, let $\\lambda$ be a probability measure on $E$, and let $M$ and $R$ be probability kernels from $E$ to $F$. Suppose $M(x,\\cdot)\\ll R(x,\\cdot)$ for $\\lambda$-almost every $x$. Then there is an $(\\mathcal E\\otimes\\mathcal F)$-measurable function $r:E\\times F\\to[0,\\infty]$ such that, for $\\lambda$-almost every $x$ and every $B\\in\\mathcal F$,\n$$M(x,B)=\\int_B r(x,y)\\,R(x,dy).$$\nThe exceptional set in $x$ is a single null set, independent of $B$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "source_section": "Statement",
+          "quote": "Assume Choice. Let $(E_n,\\mathcal E_n)_{n\\ge0}$ be measurable spaces, let\n$\\mu_0$ be a probability measure on $E_0$, and, for each $n\\ge0$, let $K_n$ be\na probability kernel from $E_0\\times\\cdots\\times E_n$ to $E_{n+1}$. There is a\nunique probability measure $P$ on\n$$ \\left(\\prod_{n\\ge0}E_n,\\ \\bigotimes_{n\\ge0}\\mathcal E_n\\right) $$ whose finite-prefix laws are the prescribed iterated integrals $$ \\mu_0(dx_0)K_0(x_0,dx_1)K_1(x_0,x_1,dx_2)\\cdots K_{r-1}(x_0,\\ldots,x_{r-1},dx_r). $$\nIn particular, if every $E_n=E$ and\n$K_n(x_0,\\ldots,x_n,A)=K(x_n,A)$, the coordinate process is a homogeneous\n$K$-chain with initial law $\\mu_0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-integration-against-a-radon-nikodym-derivative",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a sigma-finite positive measure and let $\\nu$ be a signed measure or a finite complex measure with $\\nu\\ll\\mu$. If $h$ is a representative of $d\\nu/d\\mu$, then\n$$\\nu(E)=\\int_E h\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nMore generally, if\n$$g=\\sum_{j=1}^m c_j\\mathbf 1_{E_j}$$\nis the canonical disjoint representation of a simple measurable function and $|\\nu|(E_j)<+\\infty$ for every $j$, then\n$$\\int g\\,d\\nu=\\sum_{j=1}^m c_j\\int_{E_j} h\\,d\\mu.$$\nIn particular, whenever the Lebesgue integral of $gh$ is defined, one has\n$$\\int g\\,d\\nu=\\int gh\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then there is an increasing sequence of\nnonnegative simple measurable functions $(s_n)$ such that $s_n(x)\\uparrow f(x)$\nfor every $x\\in X$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space and let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $0\\le s\\le t$, let $P_s^M$ and $Q_s$ be the target and proposal finite-prefix path laws supplied by [F3]. Initially choose a real-valued Radon–Nikodym representative $\\widetilde\\rho_0$ from [F4]. Since $\\mu_0$ is positive, for $N_-:=\\{\\widetilde\\rho_0<0\\}$ its setwise identity gives $0\\le\\mu_0(N_-)=\\int_{N_-}\\widetilde\\rho_0\\,d\\nu_0\\le0$. Thus $\\int_{N_-}\\widetilde\\rho_0^-\\,d\\nu_0=0$, and [F9] implies $\\widetilde\\rho_0^-=0$ $\\nu_0$-almost everywhere. Replace $\\widetilde\\rho_0$ by the measurable nonnegative version $\\rho_0=\\max(\\widetilde\\rho_0,0)$; [F10] gives measurability and the modification preserves the setwise density identity. Hence $P_0^M\\ll Q_0$ with base density $\\rho_0$; after weighting by $G_0$ in [F1], $\\gamma_0$ has density $W_0=G_0\\rho_0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F9",
+            "F10",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "First record the nonnegative extension used below. If finite measures $P,Q$ satisfy $P(A)=\\int_Au\\,dQ$ for every measurable $A$, with $u\\ge0$, choose by [F7] simple functions $g_n\\uparrow g$ for any nonnegative measurable $g$. The simple-function identity in [F5] gives $\\int g_n\\,dP=\\int g_nu\\,dQ$ for each $n$; [F8] and monotone convergence of $g_nu$ give $\\int g\\,dP=\\int gu\\,dQ$, with infinity allowed. All measures to which this fact is applied below are probabilities, so the finite-level-set condition in [F5] holds.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $1\\le k\\le t$ and assume $P_{k-1}^M\\ll Q_{k-1}$ with density $D_{k-1}(x_{0:k-1})=\\rho_0(x_0)\\prod_{j=1}^{k-1}r_j(x_{j-1},x_j)$. For nonnegative product-measurable $h$, define $\\psi(x_{0:k-1})=\\int h(x_{0:k-1},x_k)M_k(x_{k-1},dx_k)$; [F6] makes $\\psi$ measurable. For $Q_{k-1}$-almost every history, the kernel Radon–Nikodym identity and step 2.1 give $\\psi(x_{0:k-1})=\\int h(x_{0:k-1},x_k)r_k(x_{k-1},x_k)R_k(x_{k-1},dx_k)$. Step 2.1 also extends the induction density identity from sets to $\\psi$, so ordered integration from [F3] gives\n$$\\begin{aligned}\n\\int h\\,dP_k^M\n&=\\int\\psi\\,dP_{k-1}^M\\\\\n&=\\int D_{k-1}(x_{0:k-1})\\,\\psi(x_{0:k-1})\\,Q_{k-1}(dx_{0:k-1})\\\\\n&=\\int h(x_{0:k})D_{k-1}(x_{0:k-1})r_k(x_{k-1},x_k)\\,Q_k(dx_{0:k}).\n\\end{aligned}$$\nThus $P_k^M\\ll Q_k$ with density $D_k=D_{k-1}r_k$. The kernel identity is needed only on a $Q_{k-1}$-conull set; the same is true for $P_{k-1}^M$ by the induction density, and changes on the exceptional set do not affect these nonnegative integrals.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Induction in step 3.1 gives the proposal density of every finite-horizon state path. The target measure $\\gamma_s$ is obtained by integrating the nonnegative path potential $V_s=\\prod_{j=0}^sG_j$ against $P_s^M$. For each measurable $A$, apply step 2.1 to $g=\\mathbf1_A V_s$ and the density $D_s=\\rho_0\\prod_{j=1}^sr_j$ to obtain\n$$\\gamma_s(A)=\\int_A V_sD_s\\,dQ_s=\\int_AW_s\\,dQ_s.$$\nDividing by $Z_s$ is valid exactly when $0<Z_s<\\infty$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input stipulates N≥1 and excludes an empty particle list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The unnormalized density formula permits zero potentials and Z_s=0; normalization requires 0<Z_s<∞."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 establishes the s=0 base derivative rho_0 and W_0=G_0 rho_0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Point-mass kernels are allowed when the stated absolute-continuity hypotheses hold."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At s=0 the transition product is empty and step 1.1 proves the base case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 cite A1 for path-law and RN construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-sequential-importance-resampling": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input stipulates N≥1 and excludes an empty particle list."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This case is not a separate parameter or boundary in the stated definition."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This case is not a separate parameter or boundary in the stated definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This case is not a separate parameter or boundary in the stated definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This case is not a separate parameter or boundary in the stated definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: AC is inherited through the path-law and RN suppliers; the finite-particle instructions add no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-sequential-particle-estimator-is-unbiased": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-sequential-importance-resampling",
+          "source_section": "Definition",
+          "quote": "Use the finite-horizon target and proposal setting of [[def-feynman-kac-path-targets-and-normalizers]]. For admissible inputs require $\\mu_0\\ll\\nu_0$ and, for each $k\\ge1$, $M_k(x,\\cdot)\\ll R_k(x,\\cdot)$ for almost every $x$ under the last-coordinate marginal of the proposal path law $Q_{k-1}$. Select the joint measurable versions $\\rho_0=d\\mu_0/d\\nu_0$ and $r_k(x,\\cdot)=dM_k(x,\\cdot)/dR_k(x,\\cdot)$ supplied by [[thm-feynman-kac-path-radon-nikodym-weight]]. Fix $N\\ge1$ and select either multinomial or residual resampling at each time. The algorithm returns a weighted empirical path measure and a normalizer estimate.\n\n1. Draw $X_0^1,\\ldots,X_0^N$ independently from $\\nu_0$. Set $a_0^i=G_0(X_0^i)\\rho_0(X_0^i)$ and $\\widehat Z_0=N^{-1}\\sum_{i=1}^Na_0^i$. If $\\sum_i a_0^i>0$, put $\\bar w_0^i=a_0^i/\\sum_j a_0^j$; otherwise put $\\bar w_0^i=1/N$. Each initial path is $X_{0:0}^i=X_0^i$.\n2. For $k=1,\\ldots,t$, do the following:\n   1. Apply [[alg-multinomial-and-residual-offspring-resampling]] to the previous normalized weights $(\\bar w_{k-1}^1,\\ldots,\\bar w_{k-1}^N)$, obtaining ancestor indices $A_k^1,\\ldots,A_k^N$.\n   2. Given the previous paths and these indices, draw $(X_k^1,\\ldots,X_k^N)$ with joint conditional law $\\bigotimes_{i=1}^N R_k(X_{k-1}^{A_k^i},\\cdot)$ and set $X_{0:k}^i=(X_{0:k-1}^{A_k^i},X_k^i)$.\n   3. Set $a_k^i=G_k(X_k^i)r_k(X_{k-1}^{A_k^i},X_k^i)$ and $\\widehat Z_k=\\widehat Z_{k-1}(N^{-1}\\sum_{i=1}^Na_k^i)$. If $\\sum_i a_k^i>0$, put $\\bar w_k^i=a_k^i/\\sum_j a_k^j$; otherwise put $\\bar w_k^i=1/N$.\n3. Return $\\widehat Z_t$ and the weighted empirical path probability measure $\\widehat\\pi_t^N=\\sum_{i=1}^N\\bar w_t^i\\delta_{X_{0:t}^i}$. Its last-coordinate marginal is the corresponding empirical filtering approximation.\n\nThe all-zero fallback only defines a probability measure for reporting and future sampling. Once a zero average weight occurs, $\\widehat Z$ remains zero. The procedure makes no finite-particle accuracy, consistency, or long-time stability claim.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts",
+          "source_section": "Statement",
+          "quote": "Fix $N\\ge1$ and nonnegative input weights $a_1,\\ldots,a_N$. Let $p$ be the normalized probability vector, with the uniform fallback when all weights vanish, and let $C_j$ be the offspring count from [[alg-multinomial-and-residual-offspring-resampling]]. Conditional on the input weights, for either scheme and every $1\\le j\\le N$,\n$$\\mathbb E[C_j\\mid a_1,\\ldots,a_N]=Np_j.$$\nThis assertion concerns the counts only; it gives no variance comparison for arbitrary weights.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-feynman-kac-path-measures-satisfy-forward-recursion",
+          "source_section": "Statement",
+          "quote": "Assume AC and the finite-horizon setup of [[def-feynman-kac-path-targets-and-normalizers]]. For $1\\le k\\le T$ and every nonnegative product-measurable $\\varphi:\\mathsf X_{0:k}\\to[0,\\infty]$,\n$$\\gamma_k(\\varphi)=\\int_{\\mathsf X_{0:k-1}}\\gamma_{k-1}(dx_{0:k-1})\\int_{\\mathsf X_k}G_k(x_k)\\varphi(x_{0:k})M_k(x_{k-1},dx_k),$$\nwith equality in $[0,\\infty]$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-feynman-kac-path-radon-nikodym-weight",
+          "source_section": "Statement",
+          "quote": "Assume AC and the setup of [[def-feynman-kac-path-targets-and-normalizers]] through a fixed horizon $t\\le T$. Let $\\nu_0$ be a proposal probability on $\\mathsf X_0$, and for $1\\le k\\le t$ let $R_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be proposal probability kernels. Define $Q_s(dx_{0:s})=\\nu_0(dx_0)\\prod_{k=1}^sR_k(x_{k-1},dx_k)$. Suppose $\\mu_0\\ll\\nu_0$, and for each $k$ suppose $M_k(x,\\cdot)\\ll R_k(x,\\cdot)$ for almost every $x$ under the last-coordinate marginal of $Q_{k-1}$. Choose a measurable version $\\rho_0=d\\mu_0/d\\nu_0$ and, using [[lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels]], measurable versions $r_k(x,\\cdot)=dM_k(x,\\cdot)/dR_k(x,\\cdot)$ for these preceding-state marginals.\n\nThen $\\gamma_s\\ll Q_s$ for every $s\\le t$, with product density\n$$W_s(x_{0:s})=G_0(x_0)\\rho_0(x_0)\\prod_{k=1}^sG_k(x_k)r_k(x_{k-1},x_k).$$\nThat is, $\\gamma_s(A)=\\int_AW_s\\,dQ_s$ for every measurable $A\\subseteq\\mathsf X_{0:s}$. If $0<Z_s<\\infty$, the normalized path target has density $W_s/Z_s$ with respect to $Q_s$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-conditional-expectation-exists-by-radon-nikodym",
+          "source_section": "Statement",
+          "quote": "Assume AC. For every real integrable $X$ on $(\\Omega,\\mathcal F,P)$ and every sub-sigma-algebra $\\mathcal G$, a conditional-expectation version of $X$ given $\\mathcal G$ exists.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-tower-property-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $\\mathcal H\\subseteq\\mathcal G\\subseteq\\mathcal F$ and $X\\in L^1(P)$, then $E[E[X\\mid\\mathcal G]\\mid\\mathcal H]=E[X\\mid\\mathcal H]$ and $E[E[X\\mid\\mathcal H]\\mid\\mathcal G]=E[X\\mid\\mathcal H]$ almost surely. Also, if a version of $E[X\\mid\\mathcal G]$ is $\\mathcal H$-measurable, it is a version of $E[X\\mid\\mathcal H]$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "source_section": "Statement",
+          "quote": "Assume Choice. Let $(E_n,\\mathcal E_n)_{n\\ge0}$ be measurable spaces, let\n$\\mu_0$ be a probability measure on $E_0$, and, for each $n\\ge0$, let $K_n$ be\na probability kernel from $E_0\\times\\cdots\\times E_n$ to $E_{n+1}$. There is a\nunique probability measure $P$ on\n$$ \\left(\\prod_{n\\ge0}E_n,\\ \\bigotimes_{n\\ge0}\\mathcal E_n\\right) $$ whose finite-prefix laws are the prescribed iterated integrals $$ \\mu_0(dx_0)K_0(x_0,dx_1)K_1(x_0,x_1,dx_2)\\cdots K_{r-1}(x_0,\\ldots,x_{r-1},dx_r). $$\nIn particular, if every $E_n=E$ and\n$K_n(x_0,\\ldots,x_n,A)=K(x_n,A)$, the coordinate process is a homogeneous\n$K$-chain with initial law $\\mu_0$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space and let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-integration-against-a-radon-nikodym-derivative",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a sigma-finite positive measure and let $\\nu$ be a signed measure or a finite complex measure with $\\nu\\ll\\mu$. If $h$ is a representative of $d\\nu/d\\mu$, then\n$$\\nu(E)=\\int_E h\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nMore generally, if\n$$g=\\sum_{j=1}^m c_j\\mathbf 1_{E_j}$$\nis the canonical disjoint representation of a simple measurable function and $|\\nu|(E_j)<+\\infty$ for every $j$, then\n$$\\int g\\,d\\nu=\\sum_{j=1}^m c_j\\int_{E_j} h\\,d\\mu.$$\nIn particular, whenever the Lebesgue integral of $gh$ is defined, one has\n$$\\int g\\,d\\nu=\\int gh\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then there is an increasing sequence of\nnonnegative simple measurable functions $(s_n)$ such that $s_n(x)\\uparrow f(x)$\nfor every $x\\in X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "First, extend each setwise density identity needed here to nonnegative measurable integrands. If $P(A)=\\int_Au\\,dQ$ for every measurable $A$, with $u\\ge0$, choose simple $g_n\\uparrow g$ by [F15]. The simple-function identity [F14] gives $\\int g_n\\,dP=\\int g_nu\\,dQ$ for each $n$, and [F16] on both sides yields $\\int g\\,dP=\\int gu\\,dQ$, allowing infinity. This applies to the initial law pair and, for almost every preceding proposal state, to each transition-kernel pair in [F5]. At time zero, the algorithm gives $\\widehat\\gamma_0^N(\\varphi)=N^{-1}\\sum_{i=1}^NG_0(X_0^i)\\rho_0(X_0^i)\\varphi(X_0^i)$, with zero-weight terms interpreted by the nonnegative-integral convention $0\\cdot\\infty=0$. Each $X_0^i$ has law $\\nu_0$, so [F6], finite-sum linearity [F7], and the just-proved extension give $\\mathbb E[\\widehat\\gamma_0^N(\\varphi)]=\\int G_0\\rho_0\\varphi\\,d\\nu_0=\\gamma_0(\\varphi)$. The finite target integral makes this random variable integrable.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "F14",
+            "F15",
+            "F16",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Every time-zero particle path has law $Q_0$. Inductively, resampling copies only paths already present. If $Q_k(A)=0$, its iterated-kernel formula from [F12] and [F13] gives $R_k(x,A_x)=0$ for $Q_{k-1}$-almost every history; propagation therefore avoids $A$ almost surely whenever every previous particle path avoids each fixed $Q_{k-1}$-null set. Thus sampled parent states lie in the proposal-marginal full sets where the kernel derivatives apply. Each initial or kernel derivative has reference integral one by [F5]. If such a nonnegative derivative were infinite on a set of positive reference measure, its integral would exceed every finite bound; hence all these derivatives are finite almost everywhere. The potentials are finite-valued, so all particle weights are finite almost surely.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "F12",
+            "F13",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $\\mathcal F_{k-1}$ for the previous particle histories and weights. Let $H_k$ be the integral of $\\widehat\\gamma_k^N(\\varphi)$ against the algorithm's conditional finite-step transition law. By [F3], the expected number of children from parent $j$ is $N\\bar w_{k-1}^j$. For each parent outside the exceptional proposal-marginal null set, apply the simple-approximation extension in step 1.1 to the nonnegative measurable function $x_k\\mapsto G_k(x_k)\\varphi(x_{0:k})$; the setwise identity in [F5] then gives $\\int G_k\\varphi\\,r_k\\,dR_k=\\int G_k\\varphi\\,dM_k$, including infinite values. Integrating each child's incremental weight and summing the expected counts therefore gives $H_k=\\widehat\\gamma_{k-1}^N(g_k)$, where $g_k(x_{0:k-1})=\\int G_k(x_k)\\varphi(x_{0:k})M_k(x_{k-1},dx_k)$. If the previous normalizer estimate is zero, both sides vanish by the algorithm's zero-weight convention. Measurability follows from [F11]. This is initially a nonnegative conditional-kernel integral, not yet an $L^1$ conditional expectation.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F5",
+            "F11",
+            "F12",
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4], the target integral of $g_k$ is $\\gamma_{k-1}(g_k)=\\gamma_k(\\varphi)<\\infty$. The induction hypothesis therefore gives $\\mathbb E[H_k]=\\gamma_k(\\varphi)$. For every prior event $B\\in\\mathcal F_{k-1}$, the ordered joint law of the prior histories and the algorithm's conditional finite-step transition law [F12], integrated with the nonnegative integrand $\\mathbf1_B\\widehat\\gamma_k^N(\\varphi)$, gives\n$$\\mathbb E[\\mathbf1_B\\widehat\\gamma_k^N(\\varphi)]=\\mathbb E[\\mathbf1_BH_k].$$\nThis identity is valid before any integrability assumption, by nonnegative iterated integration. Taking $B=\\Omega$ shows that $\\widehat\\gamma_k^N(\\varphi)$ has finite expectation $\\gamma_k(\\varphi)$, so it is in $L^1$; $H_k$ is also in $L^1$ by its finite expectation. Thus the event identities and measurability make $H_k$ a version of $\\mathbb E[\\widehat\\gamma_k^N(\\varphi)\\mid\\mathcal F_{k-1}]$ by [F2] and [F10]. The tower property [F9] now yields $\\mathbb E[\\widehat\\gamma_k^N(\\varphi)]=\\gamma_k(\\varphi)$, completing the induction step.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "F8",
+            "F9",
+            "F10",
+            "F12",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply the established identity at $k=t$ to the constant function $\\varphi=1$. Then $\\widehat\\gamma_t^N(1)=\\widehat Z_t\\widehat\\pi_t^N(1)=\\widehat Z_t$, while $\\gamma_t(1)=Z_t$, proving the stated normalizer unbiasedness.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The allowed test function includes φ=0, for which the proof retains zero integrals."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 says a zero previous estimate makes both conditional expressions vanish under the fallback."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: N=1 satisfies the finite-sum and expected-count argument without a larger-N premise."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The hypotheses permit zero particle weights; the uniform fallback is used in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 is the t=0 base and steps 2.1–3.1 cover each later update."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 is used in steps 1.1–3.1 through path-law and RN suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-multinomial-versus-residual-resampling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-multinomial-and-residual-offspring-resampling",
+          "source_section": "Definition",
+          "quote": "Input a particle count $N\\ge1$, nonnegative finite weights $a_1,\\ldots,a_N$, and a scheme label, either multinomial or residual. Let $A=\\sum_{j=1}^Na_j$. If $A>0$, set $p_j=a_j/A$; if $A=0$, set $p_j=1/N$ for every $j$. Thus $p$ is always a probability vector.\n\n- **Multinomial scheme.** Draw an index vector $(J_1,\\ldots,J_N)\\in\\{1,\\ldots,N\\}^N$ with conditional mass $\\mathbb P(J_1=j_1,\\ldots,J_N=j_N\\mid a)=\\prod_{\\ell=1}^Np_{j_\\ell}$. Put $C_j=\\#\\{\\ell:J_\\ell=j\\}$.\n- **Residual scheme.** Put $q_j=\\lfloor Np_j\\rfloor$, $r_j=Np_j-q_j$, and $R=\\sum_{j=1}^Nr_j=N-\\sum_{j=1}^Nq_j$, an integer in $\\{0,\\ldots,N-1\\}$. If $R=0$, put $C_j=q_j$. If $R>0$, draw $(K_1,\\ldots,K_R)$ with conditional mass $\\mathbb P(K_1=k_1,\\ldots,K_R=k_R\\mid a)=\\prod_{\\ell=1}^R(r_{k_\\ell}/R)$ and put $C_j=q_j+\\#\\{\\ell:K_\\ell=j\\}$.\n\nFor multinomial resampling, return the sampled vector $(J_1,\\ldots,J_N)$ in its sampled order, together with its count vector $(C_1,\\ldots,C_N)$; do not sort the sampled indices. For residual resampling, return the ancestor list containing exactly $C_j$ copies of index $j$, ordered by increasing index, together with its count vector. Each output is a length-$N$ list and a count vector summing to $N$. When all input weights vanish, the uniform fallback defines the procedure; any downstream normalizer already multiplied by this zero average remains zero.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts",
+          "source_section": "Statement",
+          "quote": "Fix $N\\ge1$ and nonnegative input weights $a_1,\\ldots,a_N$. Let $p$ be the normalized probability vector, with the uniform fallback when all weights vanish, and let $C_j$ be the offspring count from [[alg-multinomial-and-residual-offspring-resampling]]. Conditional on the input weights, for either scheme and every $1\\le j\\le N$,\n$$\\mathbb E[C_j\\mid a_1,\\ldots,a_N]=Np_j.$$\nThis assertion concerns the counts only; it gives no variance comparison for arbitrary weights.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-multinomial-versus-residual-resampling-step-1.1",
+          "step": "1.1",
+          "claim": "The vector is a probability vector, and $Np=(31/10,7/5,1/2)=(3.1,1.4,0.5)$. By [F2], both schemes therefore have those expected counts.",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-multinomial-versus-residual-resampling-step-1.2",
+          "step": "1.2",
+          "claim": "In multinomial resampling each count is a sum of five independent Bernoulli indicators with success probability $p_j$, so its variance is $5p_j(1-p_j)$. The three marginal variances are $1.178$, $1.008$, and $0.45$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-multinomial-versus-residual-resampling-step-1.3",
+          "step": "1.3",
+          "claim": "Residual resampling has deterministic floors $(3,1,0)$ and fractional remainders $(0.1,0.4,0.5)$, whose sum is $R=1$. It draws one extra index with these probabilities, so the marginal count variances are $0.1(0.9)=0.09$, $0.4(0.6)=0.24$, and $0.5(0.5)=0.25$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-multinomial-versus-residual-resampling-step-2.1",
+          "step": "2.1",
+          "claim": "The expected counts agree componentwise, while for these weights each residual marginal variance is smaller than the corresponding multinomial marginal variance. This is a calculation for this input vector, not a general variance-ordering claim.",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input stipulates N≥1 and excludes an empty particle list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The worked weights are all positive, so the zero-weight fallback is not activated."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This case is not a separate parameter or boundary in the stated definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example has three distinct positive weights and computes the R=1 residual case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All three normalized weights lie strictly between zero and one; steps 1.1–1.3 calculate both schemes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no choice-axiom claim; finite definitions and calculations are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-bootstrap-and-informed-proposal-particle-filter": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-feynman-kac-path-targets-and-normalizers",
+          "source_section": "Definition",
+          "quote": "Assume AC and fix a finite horizon $T\\in\\mathbb N_0$. For each $0\\le k\\le T$, let $(\\mathsf X_k,\\mathcal X_k)$ be a standard Borel space. Let $\\mu_0$ be a probability measure on $\\mathsf X_0$, and for $1\\le k\\le T$ let $M_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be a probability kernel. A **potential** at time $k$ is a finite-valued nonnegative measurable function $G_k:\\mathsf X_k\\to[0,\\infty)$. Write $\\mathsf X_{0:t}=\\prod_{k=0}^t\\mathsf X_k$ with its finite-product sigma-algebra.\n\nFor each $0\\le t\\le T$, let $P_t^M$ be the finite path law with ordered kernel integral $\\mu_0(dx_0)\\prod_{k=1}^tM_k(x_{k-1},dx_k)$, supplied by Ionescu–Tulcea ([[thm-ionescu-tulcea-construction-of-a-markov-chain]]). The **unnormalized Feynman–Kac path measure** is\n$$\\gamma_t(A)=\\int_{\\mathsf X_{0:t}}\\mathbf 1_A(x_{0:t})\\prod_{k=0}^tG_k(x_k)\\,P_t^M(dx_{0:t}),\\qquad A\\in\\bigotimes_{k=0}^t\\mathcal X_k.$$\nIts **normalizer** is $Z_t=\\gamma_t(\\mathsf X_{0:t})=\\gamma_t(1)\\in[0,\\infty]$. Only when $0<Z_t<\\infty$ define the normalized path target $\\pi_t^{\\mathrm{FK}}=\\gamma_t/Z_t$. The sequence $(\\gamma_t)$ with its kernels and potentials is the Feynman–Kac flow.\n\nState-space filtering kernels are conditional-law versions as in [[def-state-space-filtering-laws]]. A Feynman–Kac path target is not by itself an assertion that a pointwise conditional version has been selected at observation-null histories.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-sequential-importance-resampling",
+          "source_section": "Definition",
+          "quote": "Use the finite-horizon target and proposal setting of [[def-feynman-kac-path-targets-and-normalizers]]. For admissible inputs require $\\mu_0\\ll\\nu_0$ and, for each $k\\ge1$, $M_k(x,\\cdot)\\ll R_k(x,\\cdot)$ for almost every $x$ under the last-coordinate marginal of the proposal path law $Q_{k-1}$. Select the joint measurable versions $\\rho_0=d\\mu_0/d\\nu_0$ and $r_k(x,\\cdot)=dM_k(x,\\cdot)/dR_k(x,\\cdot)$ supplied by [[thm-feynman-kac-path-radon-nikodym-weight]]. Fix $N\\ge1$ and select either multinomial or residual resampling at each time. The algorithm returns a weighted empirical path measure and a normalizer estimate.\n\n1. Draw $X_0^1,\\ldots,X_0^N$ independently from $\\nu_0$. Set $a_0^i=G_0(X_0^i)\\rho_0(X_0^i)$ and $\\widehat Z_0=N^{-1}\\sum_{i=1}^Na_0^i$. If $\\sum_i a_0^i>0$, put $\\bar w_0^i=a_0^i/\\sum_j a_0^j$; otherwise put $\\bar w_0^i=1/N$. Each initial path is $X_{0:0}^i=X_0^i$.\n2. For $k=1,\\ldots,t$, do the following:\n   1. Apply [[alg-multinomial-and-residual-offspring-resampling]] to the previous normalized weights $(\\bar w_{k-1}^1,\\ldots,\\bar w_{k-1}^N)$, obtaining ancestor indices $A_k^1,\\ldots,A_k^N$.\n   2. Given the previous paths and these indices, draw $(X_k^1,\\ldots,X_k^N)$ with joint conditional law $\\bigotimes_{i=1}^N R_k(X_{k-1}^{A_k^i},\\cdot)$ and set $X_{0:k}^i=(X_{0:k-1}^{A_k^i},X_k^i)$.\n   3. Set $a_k^i=G_k(X_k^i)r_k(X_{k-1}^{A_k^i},X_k^i)$ and $\\widehat Z_k=\\widehat Z_{k-1}(N^{-1}\\sum_{i=1}^Na_k^i)$. If $\\sum_i a_k^i>0$, put $\\bar w_k^i=a_k^i/\\sum_j a_k^j$; otherwise put $\\bar w_k^i=1/N$.\n3. Return $\\widehat Z_t$ and the weighted empirical path probability measure $\\widehat\\pi_t^N=\\sum_{i=1}^N\\bar w_t^i\\delta_{X_{0:t}^i}$. Its last-coordinate marginal is the corresponding empirical filtering approximation.\n\nThe all-zero fallback only defines a probability measure for reporting and future sampling. Once a zero average weight occurs, $\\widehat Z$ remains zero. The procedure makes no finite-particle accuracy, consistency, or long-time stability claim.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-importance-sampling",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space. An **unnormalized target density** is a measurable function $\\tilde p:\\mathsf X\\to[0,\\infty)$ with\n$$Z_p:=\\int_{\\mathsf X}\\tilde p\\,d\\mu\\in(0,\\infty).$$\nThe target probability measure is $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$. A **proposal density** is a measurable $q:\\mathsf X\\to[0,\\infty)$ with $\\int q\\,d\\mu=1$; write $Q(dx)=q(x)\\mu(dx)$. The input integrand $f:\\mathsf X\\to\\mathbb R$ is measurable, and the input sample $X_1,\\ldots,X_n$ is IID with law $Q$, in the sense of [[def-identically-distributed-and-iid-random-variables]]. The normalizing constant $Z_p$ is known for this algorithm.\n\n**Admissible conditions for an unbiased estimate:** $n\\ge1$, $q>0$ $\\mu$-almost everywhere on $\\{x:f(x)\\tilde p(x)\\ne0\\}$, and the random variable\n$$Y:=\\begin{cases}f(X_1)\\tilde p(X_1)/(Z_pq(X_1)),&q(X_1)>0,\\\\0,&q(X_1)=0\\end{cases}$$\nis integrable under $Q$. The support condition makes the value on $q=0$ immaterial to the target integral.\n\n**Well-defined weights:** The reciprocal map $r(s)=1/s$ for $s>0$ and $r(s)=0$ for $s\\le0$ is Borel. Its composition with $q$, multiplied by the measurable inputs, makes the piecewise weight and weighted integrand measurable ([[thm-composition-with-borel-functions-preserves-measurability]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\n**Procedure and output:** For each supplied draw $X_i$, set $Y_i=f(X_i)\\tilde p(X_i)/(Z_pq(X_i))$ when $q(X_i)>0$ and set $Y_i=0$ otherwise. Return\n$$\\hat\\mu_{\\mathrm{IS}}:=\\frac1n\\sum_{i=1}^nY_i.$$\nSeparate variance and central limit claims require the corresponding weighted second-moment hypothesis.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ordinary-importance-sampling-is-unbiased",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space, let $\\tilde p\\ge0$ and $q\\ge0$ be measurable densities with $Z_p=\\int\\tilde p\\,d\\mu\\in(0,\\infty)$ and $\\int q\\,d\\mu=1$, and set $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$ and $Q(dx)=q(x)\\mu(dx)$. Let $f:\\mathsf X\\to\\mathbb R$ be measurable with $\\int|f|\\tilde p\\,d\\mu<\\infty$. Suppose $q>0$ $\\mu$-almost everywhere on $\\{f\\tilde p\\ne0\\}$ and $X_1,\\ldots,X_n$ are IID with law $Q$. For the ordinary importance sampling estimator in [[alg-importance-sampling]],\n$$\\mathbb E_Q[\\hat\\mu_{\\mathrm{IS}}]=\\int f\\,d\\pi.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-bootstrap-and-informed-proposal-particle-filter-step-1.1",
+          "step": "1.1",
+          "claim": "The unnormalized path masses are $\\gamma_1(a)=M_1(*,\\{a\\})G_1(a)=1/10$ and $\\gamma_1(b)=M_1(*,\\{b\\})G_1(b)=2/5$. Thus $Z_1=1/2$ and the normalized target masses are $(1/5,4/5)$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-bootstrap-and-informed-proposal-particle-filter-step-2.1",
+          "step": "2.1",
+          "claim": "For the bootstrap proposal, $\\rho_0=1$ and $r_1(a)=r_1(b)=1$. The one-particle incremental weight is therefore $1/5$ with probability $1/2$ and $4/5$ with probability $1/2$, so its expectation is $1/2$ but it is not constant.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-bootstrap-and-informed-proposal-particle-filter-step-2.2",
+          "step": "2.2",
+          "claim": "For the informed proposal, $r_1(a)=(1/2)/(1/5)=5/2$ and $r_1(b)=(1/2)/(4/5)=5/8$. Multiplication by $G_1$ gives $G_1(a)r_1(a)=G_1(b)r_1(b)=1/2$, so the one-particle normalizer estimate equals $Z_1$ for either sampled state.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-bootstrap-and-informed-proposal-particle-filter-step-3.1",
+          "step": "3.1",
+          "claim": "Against counting measure, the unnormalized target density is $\\widetilde p(a)=1/10$, $\\widetilde p(b)=2/5$, and both proposal densities are strictly positive, so the support and finite-integrability hypotheses of [F4] hold. Setting $f=1$ in [F4] gives $\\mathbb E_Q[\\widetilde p(X)/q(X)]=Z_1$ after multiplying the unbiased normalized estimate by $Z_1$; the explicit bootstrap and informed weights above are exactly these ordinary importance-sampling ratios.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input stipulates N≥1 and excludes an empty particle list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: All potentials and proposal masses are positive, so both total weights are nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example explicitly uses one particle."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: Transition and proposal masses are positive on both states; no degenerate support is hidden."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The horizon is t=1; step 1.1 computes target masses and steps 2.1–2.2 compute updates."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no choice-axiom claim; finite definitions and calculations are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-particle-filter-proposal-misses-target-support": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-feynman-kac-path-targets-and-normalizers",
+          "source_section": "Definition",
+          "quote": "Assume AC and fix a finite horizon $T\\in\\mathbb N_0$. For each $0\\le k\\le T$, let $(\\mathsf X_k,\\mathcal X_k)$ be a standard Borel space. Let $\\mu_0$ be a probability measure on $\\mathsf X_0$, and for $1\\le k\\le T$ let $M_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be a probability kernel. A **potential** at time $k$ is a finite-valued nonnegative measurable function $G_k:\\mathsf X_k\\to[0,\\infty)$. Write $\\mathsf X_{0:t}=\\prod_{k=0}^t\\mathsf X_k$ with its finite-product sigma-algebra.\n\nFor each $0\\le t\\le T$, let $P_t^M$ be the finite path law with ordered kernel integral $\\mu_0(dx_0)\\prod_{k=1}^tM_k(x_{k-1},dx_k)$, supplied by Ionescu–Tulcea ([[thm-ionescu-tulcea-construction-of-a-markov-chain]]). The **unnormalized Feynman–Kac path measure** is\n$$\\gamma_t(A)=\\int_{\\mathsf X_{0:t}}\\mathbf 1_A(x_{0:t})\\prod_{k=0}^tG_k(x_k)\\,P_t^M(dx_{0:t}),\\qquad A\\in\\bigotimes_{k=0}^t\\mathcal X_k.$$\nIts **normalizer** is $Z_t=\\gamma_t(\\mathsf X_{0:t})=\\gamma_t(1)\\in[0,\\infty]$. Only when $0<Z_t<\\infty$ define the normalized path target $\\pi_t^{\\mathrm{FK}}=\\gamma_t/Z_t$. The sequence $(\\gamma_t)$ with its kernels and potentials is the Feynman–Kac flow.\n\nState-space filtering kernels are conditional-law versions as in [[def-state-space-filtering-laws]]. A Feynman–Kac path target is not by itself an assertion that a pointwise conditional version has been selected at observation-null histories.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-sequential-importance-resampling",
+          "source_section": "Definition",
+          "quote": "Use the finite-horizon target and proposal setting of [[def-feynman-kac-path-targets-and-normalizers]]. For admissible inputs require $\\mu_0\\ll\\nu_0$ and, for each $k\\ge1$, $M_k(x,\\cdot)\\ll R_k(x,\\cdot)$ for almost every $x$ under the last-coordinate marginal of the proposal path law $Q_{k-1}$. Select the joint measurable versions $\\rho_0=d\\mu_0/d\\nu_0$ and $r_k(x,\\cdot)=dM_k(x,\\cdot)/dR_k(x,\\cdot)$ supplied by [[thm-feynman-kac-path-radon-nikodym-weight]]. Fix $N\\ge1$ and select either multinomial or residual resampling at each time. The algorithm returns a weighted empirical path measure and a normalizer estimate.\n\n1. Draw $X_0^1,\\ldots,X_0^N$ independently from $\\nu_0$. Set $a_0^i=G_0(X_0^i)\\rho_0(X_0^i)$ and $\\widehat Z_0=N^{-1}\\sum_{i=1}^Na_0^i$. If $\\sum_i a_0^i>0$, put $\\bar w_0^i=a_0^i/\\sum_j a_0^j$; otherwise put $\\bar w_0^i=1/N$. Each initial path is $X_{0:0}^i=X_0^i$.\n2. For $k=1,\\ldots,t$, do the following:\n   1. Apply [[alg-multinomial-and-residual-offspring-resampling]] to the previous normalized weights $(\\bar w_{k-1}^1,\\ldots,\\bar w_{k-1}^N)$, obtaining ancestor indices $A_k^1,\\ldots,A_k^N$.\n   2. Given the previous paths and these indices, draw $(X_k^1,\\ldots,X_k^N)$ with joint conditional law $\\bigotimes_{i=1}^N R_k(X_{k-1}^{A_k^i},\\cdot)$ and set $X_{0:k}^i=(X_{0:k-1}^{A_k^i},X_k^i)$.\n   3. Set $a_k^i=G_k(X_k^i)r_k(X_{k-1}^{A_k^i},X_k^i)$ and $\\widehat Z_k=\\widehat Z_{k-1}(N^{-1}\\sum_{i=1}^Na_k^i)$. If $\\sum_i a_k^i>0$, put $\\bar w_k^i=a_k^i/\\sum_j a_k^j$; otherwise put $\\bar w_k^i=1/N$.\n3. Return $\\widehat Z_t$ and the weighted empirical path probability measure $\\widehat\\pi_t^N=\\sum_{i=1}^N\\bar w_t^i\\delta_{X_{0:t}^i}$. Its last-coordinate marginal is the corresponding empirical filtering approximation.\n\nThe all-zero fallback only defines a probability measure for reporting and future sampling. Once a zero average weight occurs, $\\widehat Z$ remains zero. The procedure makes no finite-particle accuracy, consistency, or long-time stability claim.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "cex-particle-filter-proposal-misses-target-support-step-1.1",
+          "step": "1.1",
+          "claim": "Let $\\mathsf X_0=\\{*\\}$ and $\\mathsf X_1=\\{a,b\\}$. Take $\\mu_0=\\nu_0=\\delta_*$, $M_1(*,\\{a\\})=M_1(*,\\{b\\})=1/2$, $R_1(*,\\{a\\})=1$, $R_1(*,\\{b\\})=0$, and $G_0=G_1=1$. By [F1], $\\gamma_1$ is the transition law itself, $Z_1=1$, and the normalized target assigns mass $1/2$ to $b$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cex-particle-filter-proposal-misses-target-support-step-2.1",
+          "step": "2.1",
+          "claim": "The support premise fails because $M_1(*,\\{b\\})=1/2$ while $R_1(*,\\{b\\})=0$. A proposal path drawn from $Q_1=\\nu_0R_1$ equals $(*,a)$ with probability one, so every empirical measure formed from such paths assigns mass zero to the event $\\{x_1=b\\}$.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "cex-particle-filter-proposal-misses-target-support-step-3.1",
+          "step": "3.1",
+          "claim": "If a kernel derivative $r_1$ represented $M_1(*,\\cdot)$ with respect to $R_1(*,\\cdot)$, then $M_1(*,\\{b\\})=\\int_{\\{b\\}}r_1(*,y)R_1(*,dy)=0$, contradicting the value $1/2$. Thus the required importance weight does not exist on this target-positive, proposal-null set, and the false claim fails.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input stipulates N≥1 and excludes an empty particle list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Counterexample: The proposal mass of b is zero while the target mass there is 1/2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Counterexample: For every N≥1, all proposals have terminal state a and the empirical measure misses b."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Counterexample: The proposal is concentrated at a while the target assigns positive mass to both states."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 give Z_1=1, the missing proposal support, and the derivative contradiction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no choice-axiom claim; finite definitions and calculations are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

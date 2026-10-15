@@ -1,0 +1,7 @@
+# Step5.2 ledger taxonomy correction proposal
+
+Use the existing native append-only supersedes mechanism. Append two owner-attributed5-adjudicate corrections for the same run and same subjects: typing→ill-typed-construction for the prior-measure initialization expression, and incorrect-step-reference→citation-inaccurate for the internal PMMH proof-step reference. Preserve original nonfatal severity, fixed disposition and original native repair evidence. These are taxonomy corrections of two already recorded physical defects, not new mathematical findings or fresh source repairs.
+
+The original rows and original Step3 report/decisions remain unchanged. The existing ledger validator treats superseded taxonomy as historical while keeping every other schema check. The original149Step3rows remain identical because step3-close selects only3a-adjudicate/3b-cross, whereas new corrections are caught at5-adjudicate. No code expansion, Step3 resealing, source change or historical byte recovery is necessary.
+
+Root can invoke `node tools/defect-ledger.mjs append --file research/bayesian-computational-statistics-62-owner-step5-ledger-taxonomy-correction/rows.proposed.json`. This native command locks, validates the incoming rows, appends them and regenerates the view/fingerprint. Keep the lane3report's original failing operator_work observation as history and record the owner resolution separately. Root owns final bindings/recertification and the complete native battery. No live file, test, gate or model call was changed/run by this investigation.

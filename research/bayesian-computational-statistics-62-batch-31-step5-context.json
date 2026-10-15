@@ -1,0 +1,245 @@
+{
+  "group": "i",
+  "batches": [
+    "31"
+  ],
+  "pages_read": [
+    "importance-sampling-and-weight-diagnostics",
+    "importance-sampling-and-weight-diagnostics-examples"
+  ],
+  "items_read": [
+    "alg-importance-sampling",
+    "thm-ordinary-importance-sampling-is-unbiased",
+    "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+    "alg-self-normalized-importance-sampling",
+    "thm-self-normalized-importance-sampling-is-consistent-under-finite-moments",
+    "thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse",
+    "def-importance-weight-effective-sample-size",
+    "ex-ordinary-and-self-normalized-importance-sampling-on-two-point-space",
+    "cex-ordinary-importance-sampling-infinite-variance-under-light-tailed-proposal",
+    "cex-importance-weight-ess-misses-target-region"
+  ],
+  "conventions": [
+    {
+      "convention": "Ordinary importance sampling assumes a known normalizer 0 < Z_p < ∞, real measurable f, n ≥ 1, and proposal positivity μ-almost everywhere wherever f times the unnormalized target is nonzero. The weighted integrand is zero on q = 0.",
+      "fixed_by": "alg-importance-sampling",
+      "matters_for": [
+        "thm-ordinary-importance-sampling-is-unbiased",
+        "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+        "ex-ordinary-and-self-normalized-importance-sampling-on-two-point-space",
+        "cex-ordinary-importance-sampling-infinite-variance-under-light-tailed-proposal"
+      ]
+    },
+    {
+      "convention": "Self-normalized weights are W = p̃/q on q > 0 and zero otherwise; target interpretation requires q > 0 π-almost everywhere. A zero observed weight sum returns a no-estimate status.",
+      "fixed_by": "alg-self-normalized-importance-sampling",
+      "matters_for": [
+        "thm-self-normalized-importance-sampling-is-consistent-under-finite-moments",
+        "thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse",
+        "def-importance-weight-effective-sample-size",
+        "cex-importance-weight-ess-misses-target-region"
+      ]
+    },
+    {
+      "convention": "For convergence statements, the self-normalized estimator is assigned numerical value zero when its denominator vanishes; almost surely this fallback is eventually unnecessary.",
+      "fixed_by": "thm-self-normalized-importance-sampling-is-consistent-under-finite-moments",
+      "matters_for": [
+        "thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse"
+      ]
+    },
+    {
+      "convention": "AC is assumed for the ordinary importance-sampling CLT, including its normal-law notation; the finite-variance identity is choice-free. Zero variance is allowed and yields the Dirac limit N(0,0).",
+      "fixed_by": "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+      "matters_for": [
+        "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment"
+      ]
+    },
+    {
+      "convention": "The self-normalized CLT assumes finite second moments of both W and Wf and AC. The plug-in variance and standard-error consistency claims use those moments without AC and allow zero asymptotic variance.",
+      "fixed_by": "thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse",
+      "matters_for": [
+        "thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse"
+      ]
+    },
+    {
+      "convention": "Weight ESS is (Σw_i)²/Σw_i² for n ≥ 1 nonnegative weights with at least one positive weight. It diagnoses observed imbalance and does not certify coverage, finite variance, accuracy, or convergence.",
+      "fixed_by": "def-importance-weight-effective-sample-size",
+      "matters_for": [
+        "cex-importance-weight-ess-misses-target-region"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-self-normalized-importance-sampling",
+      "statement": "Compute S_n = ΣW_i. If S_n = 0, return the status no estimate: zero observed target weight. If S_n > 0, return ΣW_if(X_i)/S_n.",
+      "used_by": [
+        "thm-self-normalized-importance-sampling-is-consistent-under-finite-moments",
+        "thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse",
+        "def-importance-weight-effective-sample-size",
+        "ex-ordinary-and-self-normalized-importance-sampling-on-two-point-space",
+        "cex-importance-weight-ess-misses-target-region"
+      ]
+    },
+    {
+      "id": "alg-importance-sampling",
+      "statement": "For each supplied IID proposal draw X_i, set Y_i = f(X_i)p̃(X_i)/(Z_pq(X_i)) when q(X_i) > 0 and Y_i = 0 otherwise. Return n⁻¹ΣY_i.",
+      "used_by": [
+        "thm-ordinary-importance-sampling-is-unbiased",
+        "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+        "ex-ordinary-and-self-normalized-importance-sampling-on-two-point-space",
+        "cex-ordinary-importance-sampling-infinite-variance-under-light-tailed-proposal",
+        "ex-bootstrap-and-informed-proposal-particle-filter"
+      ]
+    },
+    {
+      "id": "thm-ordinary-importance-sampling-is-unbiased",
+      "statement": "For measurable target and proposal densities with 0 < Z_p < ∞, measurable real f with ∫|f|p̃ dμ < ∞, q > 0 μ-almost everywhere on {fp̃ ≠ 0}, and IID Q draws, the ordinary importance-sampling estimator satisfies E_Q[μ̂_IS] = ∫f dπ.",
+      "used_by": [
+        "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+        "ex-ordinary-and-self-normalized-importance-sampling-on-two-point-space",
+        "cex-ordinary-importance-sampling-infinite-variance-under-light-tailed-proposal",
+        "ex-bootstrap-and-informed-proposal-particle-filter"
+      ]
+    },
+    {
+      "id": "thm-self-normalized-importance-sampling-is-consistent-under-finite-moments",
+      "statement": "For IID Q draws, q > 0 π-almost everywhere, E_QW_1 = Z_p ∈ (0,∞), and E_Q[W_1|f(X_1)|] < ∞, the self-normalized estimate converges almost surely to θ = ∫f dπ, with numerical zero on a zero-denominator prefix and an eventually positive denominator almost surely.",
+      "used_by": [
+        "thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse"
+      ]
+    },
+    {
+      "id": "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+      "statement": "Under the unbiasedness theorem's hypotheses, E_Q[Y_1²] < ∞ implies Var_Q(μ̂_IS) = Var_Q(Y_1)/n. With AC, √n(μ̂_IS − θ) converges in distribution to N(0,Var_Q(Y_1)), including zero variance.",
+      "used_by": [
+        "cex-ordinary-importance-sampling-infinite-variance-under-light-tailed-proposal"
+      ]
+    },
+    {
+      "id": "def-importance-weight-effective-sample-size",
+      "statement": "For nonnegative importance weights w_1,…,w_n, with n ≥ 1 and at least one positive weight, ESS_w := (Σw_i)²/Σw_i².",
+      "used_by": [
+        "cex-importance-weight-ess-misses-target-region"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Common-law and mutual-independence conventions for proposal draws and transformed outputs.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Finite signed expectations and extended nonnegative expectations.",
+      "opened": true
+    },
+    {
+      "id": "thm-composition-with-borel-functions-preserves-measurability",
+      "used_for": "Measurability of the reciprocal extended by zero and composed weight maps.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurability of weights, weighted outputs, absolute values, and residual products.",
+      "opened": true
+    },
+    {
+      "id": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "used_for": "Absolute integrability and the positive-minus-negative extension of density integration.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-against-a-density",
+      "used_for": "Changing integrals against Q and π to integrals against μ, including infinite nonnegative second moments.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-expectation",
+      "used_for": "Expressing expectations of proposal-draw functions as integrals against their law.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Unbiasedness of finite averages of integrable weighted outputs.",
+      "opened": true
+    },
+    {
+      "id": "cor-integral-over-a-null-set-vanishes",
+      "used_for": "Removing the π-null set where q vanishes in self-normalized target identities.",
+      "opened": true
+    },
+    {
+      "id": "lem-measurable-functions-preserve-independence",
+      "used_for": "IID transformed weights, weighted outputs, pairs, and residual moment sequences.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Variance identities, covariance calculations, and the infinite-centered-second-moment counterexample.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Normal-limit notation and the zero-variance Dirac case.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Linear projections of the possibly singular bivariate Gaussian limit.",
+      "opened": true
+    },
+    {
+      "id": "cor-holder-inequality-for-random-variables",
+      "used_for": "Integrability of W²(f−θ) from the two square-integrable factors.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+      "used_for": "The zero-variance ordinary importance-sampling limit.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Transferring the infinite second moment of one nonnegative weight to every finite sample average.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit choice assumptions inherited by the Gaussian CLT branches.",
+      "opened": true
+    },
+    {
+      "id": "thm-kolmogorov-iid-l1-strong-law",
+      "used_for": "Almost-sure convergence of the integrable residual moment averages and denominator in the MCSE proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariate-iid-central-limit-theorem",
+      "used_for": "The joint sample-mean CLT for (W,Wf), allowing singular covariance under AC.",
+      "opened": true
+    },
+    {
+      "id": "thm-first-and-second-order-delta-method-for-random-vectors",
+      "used_for": "The first-order delta limit for the globally Borel, zero-extended ratio map at a positive denominator.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "importance-sampling-and-weight-diagnostics",
+      "to": "iid-monte-carlo-integration-and-error",
+      "faithful": true,
+      "note": "Opened the supplier page and the mean-moments, mean-consistency, and central-limit items. The consumers preserve integrability, IID transformations, finite second moments, and AC for the CLT. The ordinary-IS proof handles zero variance separately because the cited scalar Monte Carlo CLT requires positive variance."
+    },
+    {
+      "from": "feynman-kac-particle-filters",
+      "to": "importance-sampling-and-weight-diagnostics",
+      "faithful": true,
+      "note": "The recorded seam is realized by ex-bootstrap-and-informed-proposal-particle-filter on the companion examples page. Its F3–F4 and step 3.1 use strictly positive finite-space proposals and explicitly multiply the normalized unbiased estimate by Z_1 to obtain E_Q[p̃/q] = Z_1. The arithmetic and normalization agree with the supplier algorithm and unbiasedness theorem; no self-normalized or CLT conclusion is imported."
+    }
+  ]
+}

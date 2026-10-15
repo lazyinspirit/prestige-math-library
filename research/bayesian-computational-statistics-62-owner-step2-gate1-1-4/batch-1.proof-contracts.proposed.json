@@ -1,0 +1,1287 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-1",
+  "scope": [
+    "def-ito-sde-and-strong-solution",
+    "lem-lipschitz-sde-map-is-well-defined",
+    "lem-lipschitz-sde-local-solution-has-finite-path-moment",
+    "thm-global-strong-well-posedness-for-lipschitz-ito-sdes",
+    "thm-finite-horizon-moments-for-lipschitz-ito-sdes",
+    "ex-global-lipschitz-scalar-ornstein-uhlenbeck-well-posedness",
+    "ex-singular-initial-law-at-sde-endpoint"
+  ],
+  "contracts": {
+    "lem-lipschitz-sde-map-is-well-defined": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ito-sde-and-strong-solution",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as required by the stochastic-integral interfaces\nbelow. Fix a finite horizon $T\\ge0$ and finite integers $d,m\\ge1$. Work on\na complete filtered probability space\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{0\\le t\\le T},P)$ whose filtration is\nright-continuous and contains every $P$-null subset of $\\mathcal F$ in\n$\\mathcal F_0$ (the usual conditions).\n\nLet $W=(W_t)_{0\\le t\\le T}$ be a standard $m$-dimensional Brownian motion\n[[def-d-dimensional-brownian-motion]] adapted to this filtration, with\n$W_t-W_s$ independent of $\\mathcal F_s$ and distributed as\n$N_m(0,(t-s)I_m)$ for $0\\le s<t\\le T$. Let\n$X_0:\\Omega\\to\\mathbb R^d$ be $\\mathcal F_0$-measurable, satisfy\n$E|X_0|^2<\\infty$, and be independent of the future Brownian increments.\nExplicitly, $X_0$ is independent of the sigma-algebra\n$\\sigma(W_t-W_0:0\\le t\\le T)$.\n\nContinuity of a process means continuity on one measurable event of\nprobability one. We use an everywhere-continuous adapted representative: if\nthe chosen process is continuous only on such an event $A$, replace it off $A$\nby its initial value. Since $A^c$ is a null set and the filtration is complete,\n$A^c\\in\\mathcal F_0$; the replacement preserves adaptedness and changes the\nSDE identity only on a null event, hence preserves it up to\nindistinguishability.\n\nThe drift and diffusion coefficients are jointly Borel maps\n$$b:[0,T]\\times\\mathbb R^d\\to\\mathbb R^d,\\qquad \\sigma:[0,T]\\times\\mathbb R^d\\to\\mathbb R^{d\\times m}.$$\nFor nonnegative finite constants $L,K$, assume for every $t\\in[0,T]$ and\n$x,y\\in\\mathbb R^d$ that\n$$|b(t,x)-b(t,y)|+\\|\\sigma(t,x)-\\sigma(t,y)\\|_F\\le L|x-y|,$$\n$$|b(t,x)|+\\|\\sigma(t,x)\\|_F\\le K(1+|x|).$$\nHere $|\\cdot|$ is the Euclidean norm and\n$\\|A\\|_F^2=\\sum_{i=1}^d\\sum_{k=1}^m|A^{ik}|^2$ is the Frobenius norm.\n\nFor an adapted continuous candidate $X:[0,T]\\times\\Omega\\to\\mathbb R^d$,\nthe vector It\u00f4 equation\n$$X_t=X_0+\\int_0^t b(s,X_s)\\,ds+\\left(\\sum_{k=1}^m\\int_0^t\\sigma^{ik}(s,X_s)\\,dW_s^k\\right)_{i=1}^d,\\qquad 0\\le t\\le T.$$\nuses a pathwise Lebesgue integral for the drift and, in each coordinate, the\nlocalized It\u00f4 integral from\n[[def-continuous-brownian-ito-process]], clause 2. Require\n$\\int_0^T|b(s,X_s)|ds<\\infty$ and\n$\\int_0^T\\|\\sigma(s,X_s)\\|_F^2ds<\\infty$ almost surely; these are the local\ncoefficient-integrability conditions in that definition. When a coordinate\nintegrand has finite expected energy, its integral is the square-integrable\nIt\u00f4 integral of [[def-ito-integral-for-square-integrable-predictable-processes]];\nthe Picard estimates below establish that stronger condition for every input\nin $\\mathcal H_T$. Equality of processes means\nequality for every $t$ on one measurable event of probability one, that is,\nindistinguishability\n[[def-law-modification-and-indistinguishability-of-processes]]. A **strong\nsolution on $[0,T]$** is an adapted continuous process satisfying this\nintegral equation indistinguishably. No moment bound is included in the\ndefinition; the existence theorem proves its $L^2$ path-sup bound.\nThe usual-filtration, continuity, and finite-coordinate conventions agree\nwith the multidimensional class of continuous Brownian It\u00f4 processes\n[[def-continuous-brownian-ito-process]]. This definition makes no ellipticity,\ntransition-density, forward-equation, or time-reversal assertion.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-adapted-continuous-processes-are-progressively-measurable",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$, and let $X=(X_t)_{t\\ge0}$ be a real process\nthat satisfies $X_t:\\Omega\\to\\mathbb R$ is $\\mathcal F_t$-measurable for every $t\\ge0$, and has\ncontinuous paths, in the strong sense that $s\\mapsto X_s(\\omega)$ is continuous\non $[0,\\infty)$ for every $\\omega\\in\\Omega$. Then $X$ is progressively\nmeasurable and predictable relative to $(\\mathcal F_t)$ in the sense of\n[[def-progressively-measurable-and-predictable-process]], including at time\nzero under the generator convention $\\{0\\}\\times A$, $A\\in\\mathcal F_0$. No\nchoice principle is used. Here a filtration means an increasing family of\nsub-sigma-algebras of $\\mathcal F$. The fixed-time measurability hypothesis\nis the adaptedness terminology of clause 1 of\n[[def-continuous-time-adapted-process-and-martingale]]; only that clause is\nused, not its conditional-expectation or martingale interface and its Choice\nassumption.\n\nIf instead the paths are continuous only on an event $A\\in\\mathcal F$ with\n$P(A)=1$, the conclusion holds for the modification that is set equal to $0$\noff $A$ provided $A\\in\\mathcal F_0$; without such a measurability assumption on\nthe continuity event no predictability claim is made, because predictability\nis a property of the given joint map.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes here\nare real-valued and indexed by $[0,\\infty)$. AC is inherited from the cited\ncontinuous-time-filtration interface, whose separate martingale clause uses\nconditional expectation. Once the filtered probability space and stopping\ntimes are given, the progressive and predictable constructions below make no\nadditional choice: they use only generated sigma-algebras and product\nrectangles.\n\n1. **Progressively measurable.** A process $X=(X_t)_{t\\ge0}$ is\n   **progressively measurable** relative to $(\\mathcal F_t)$ when for every\n   $t\\ge0$ the restricted map\n   $[0,t]\\times\\Omega\\to\\mathbb R$, $(s,\\omega)\\mapsto X_s(\\omega)$, is\n   measurable for the product sigma-algebra\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$\n   [[def-product-sigma-algebra-and-finite-product-sigma-algebras]].\n\n2. **Time-zero and interval generators.** On the product space\n   $[0,\\infty)\\times\\Omega$, let $\\mathcal P$ be the sigma-algebra generated by\n   the family\n   $$\\mathcal G:=\\bigl\\{(s,u]\\times A:\\ 0\\le s<u<\\infty,\\ A\\in\\mathcal F_s\\bigr\\}\\ \\cup\\ \\bigl\\{\\{0\\}\\times A:\\ A\\in\\mathcal F_0\\bigr\\}.$$\n   The interval generators with $s=0$ are included, so $(0,u]\\times A$ with\n   $A\\in\\mathcal F_0$ is a generator. The sigma-algebra $\\mathcal P$ exists by\n   [[thm-generated-sigma-algebra-exists-and-is-minimal]] and is called the\n   **predictable sigma-algebra**. A process $H=(H_t)_{t\\ge0}$ is\n   **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is\n   $\\mathcal P$-measurable. For a finite horizon $T>0$ we write\n   $\\mathcal P_T$ for the sigma-algebra on $[0,T]\\times\\Omega$ generated by the\n   same family restricted to $u\\le T$ together with the time-zero generators;\n   this is the trace of $\\mathcal P$ on $[0,T]\\times\\Omega$. Indeed, the\n   trace of an interval generator is empty when $s\\ge T$, and otherwise is\n   $(s,\\min(u,T)]\\times A$, while time-zero generators are unchanged.\n   Conversely every listed finite-horizon generator is such a trace.\n\n3. **Sections, adaptedness, and null sets.** Two structural conventions are\n   used repeatedly and are part of the definition.\n   (a) Every generator is a measurable rectangle of\n   $\\mathcal B([0,\\infty))\\otimes\\mathcal F$, hence\n   $\\mathcal P\\subseteq\\mathcal B([0,\\infty))\\otimes\\mathcal F$; the time-zero\n   generator $\\{0\\}\\times A$ has $dt\\otimes P$-measure zero for every $A$. A\n   set in $\\mathcal P$ has its section at each fixed time $s$ in $\\mathcal F_s$:\n   sets with that section property form a sigma-algebra, and each generator\n   has the property by the increasing-filtration condition. Its section at\n   each fixed $\\omega$ is Borel in time, by the same sigma-algebra argument.\n   (b) If a process is predictable then it is progressively measurable: for\n   $s\\le t$ the section $\\omega\\mapsto H_s(\\omega)$ is $\\mathcal F_s$-measurable\n   $\\subseteq\\mathcal F_t$-measurable, and the progressive-measurability claim\n   is the restriction of the joint map to $[0,t]\\times\\Omega$; the restriction\n   of a $\\mathcal P$-measurable map to $[0,t]\\times\\Omega$ is measurable for\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$ because every generator with $u\\le t$\n   lies in that product sigma-algebra and the generators with $u>t$ have\n   intersection with $[0,t]\\times\\Omega$ of the form $(s,t]\\times A$ with\n   $s<t$ and $A\\in\\mathcal F_s$, or the empty set when $s\\ge t$.\n   The time-zero generators also lie in\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$.\n\nThe family $\\mathcal G$ need not itself contain the whole space, but a finite intersection\nof generators is empty or again a generator, or a time-zero generator, because\n$(s,u]\\cap(s',u']=(s\\vee s',u\\wedge u']$ and $A\\cap A'\\in\\mathcal F_{s\\vee s'}$\nwhenever $A\\in\\mathcal F_s$, $A'\\in\\mathcal F_{s'}$, while\n$\\{0\\}\\times A$ is disjoint from every interval generator, including\n$(0,u]\\times A'$. Two time-zero generators intersect in\n$\\{0\\}\\times(A\\cap A')$ with $A\\cap A'\\in\\mathcal F_0$.\nThus the family consisting of the whole space\ntogether with finite intersections of generators is a pi-system generating\n$\\mathcal P$; this is the structural fact used by the density theorem below.\n\nBecause predictability is a measurability requirement for the joint map, it is\npreserved by pointwise limits, products and linear combinations of predictable\nprocesses. A deterministic function $h$ of time defines a predictable process\nexactly when $h$ is Borel measurable: the sets $C$ for which\n$C\\times\\Omega\\in\\mathcal P$ form a sigma-algebra containing the intervals\n$(s,u]$ and $\\{0\\}$, hence all Borel sets. Conversely, take any fixed\n$\\omega\\in\\Omega$ (a probability space is nonempty) and use the Borel\ntime-section property from 3(a) on every inverse image of an open set.\nThis single choice uses no choice axiom. In particular the\nindicators $1_{[0,u]}$ and $1_{(0,u]}$ are predictable for every deterministic\n$u\\ge0$, and the process $s\\mapsto 1_{s\\le\\tau(\\omega)}$ for a stopping time\n$\\tau$ [[def-continuous-time-stopping-time]] is predictable, since\n$$\\{(s,\\omega):s>\\tau(\\omega)\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}(q,\\infty)\\times\\{\\tau<q\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}\\bigcup_{n>q}(q,n]\\times\\{\\tau<q\\}$$\nis a countable union of generators: for rational $q>0$ one has\n$\\{\\tau<q\\}=\\bigcup_{q'<q,\\ q'\\in\\mathbb Q}\\{\\tau\\le q'\\}\\in\\mathcal F_q$. The\ncomplement of that set inside $[0,\\infty)\\times\\Omega$ is the event of the\nindicator, so $1_{[0,\\tau]}$ is predictable; its left-continuity in the time\nvariable is the visual form of the same computation.\n\nNo completeness of the filtration and no right continuity of $(\\mathcal F_t)$\nis used or assumed. Apart from the inherited ambient assumption just recorded,\nthe constructions in this definition are choice-free.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ito-integral-for-square-integrable-predictable-processes",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Fix a horizon $T>0$ and let\n$\\mathcal P_T$ be the predictable sigma-algebra on $[0,T]\\times\\Omega$\n[[def-progressively-measurable-and-predictable-process]]. Let $H$ be a\npredictable process with\n$$E\\int_0^TH_s^2\\,ds=\\int_{[0,T]\\times\\Omega}H^2\\,d(\\mathrm dt\\otimes P)<\\infty ,$$\nso that $H$ is an element of the quotient space\n$L^2(\\mathrm dt\\otimes P)$ over $\\mathcal P_T$; its class is what is integrated.\nThe **Ito integral** $\\int_0^TH_s\\,dB_s$, also written $H\\cdot B$ or $I_T(H)$,\nis defined as follows.\n\n1. **Construction.** By the density theorem\n   [[thm-density-of-elementary-predictable-processes-in-predictable-l2]] there\n   is a sequence $(H^n)$ of bounded elementary predictable integrands\n   [[def-elementary-predictable-brownian-integrand]] with\n   $\\|H^n-H\\|_{L^2(\\mathrm dt\\otimes P)}\\to0$. For such a sequence the\n   elementary integrals $I_T(H^n)$\n   [[def-ito-integral-of-an-elementary-predictable-process]] form a Cauchy\n   sequence in $L^2(P)$: by the elementary isometry\n   [[thm-ito-isometry-for-elementary-integrands]] and the well-definedness of\n   the elementary integral,\n   $$E\\bigl(I_T(H^n)-I_T(H^m)\\bigr)^2=E\\int_0^T(H^n-H^m)^2ds=\\|H^n-H^m\\|^2_{L^2(\\mathrm dt\\otimes P)} ,$$\n   and the right-hand side tends to $0$. Since $L^2(P)$ is complete\n   [[thm-riesz-fischer-completeness-of-l-p]], the classes $I_T(H^n)$ converge\n   in $L^2(P)$; the limit is a class in $L^2(P)$, and\n   $$\\int_0^TH_s\\,dB_s:=\\lim_{n\\to\\infty}I_T(H^n)\\qquad\\text{in }L^2(P).$$\n   The limit is a random variable only up to almost-sure equality; statements\n   about it are statements about that class. The limit does not depend on the\n   chosen sequence: if another elementary sequence $K^n\\to H$ is used, then\n   the elementary isometry and linearity give\n   $$\\|I_T(H^n)-I_T(K^n)\\|_{L^2(P)} =\\|H^n-K^n\\|_{L^2(\\mathrm dt\\otimes P)} \\le\\|H^n-H\\|_2+\\|K^n-H\\|_2\\longrightarrow0,$$\n   so the two $L^2(P)$ limits agree.\n\n2. **Integrals at a time.** For $t\\in[0,T]$ put\n   $\\int_0^tH_s\\,dB_s:=\\int_0^TH_s1_{[0,t]}(s)\\,dB_s$, the construction of\n   clause 1 applied to the truncated process $H1_{[0,t]}$. That process is\n   predictable: $H$ is $\\mathcal P_T$-measurable and $1_{[0,t]}$ is a\n   deterministic predictable indicator, so the product is\n   $\\mathcal P_T$-measurable; and it is square-integrable because\n   $|H1_{[0,t]}|\\le|H|$ pointwise. The same construction applied to $H$\n   itself gives $t=T$. The family\n   $\\bigl(\\int_0^tH\\,dB\\bigr)_{t\\in[0,T]}$ is a family of $L^2(P)$-classes\n   indexed by $t$; its continuous version is supplied by item 13, and no path\n   property is asserted by this definition.\n\n3. **Consistency with elementary integrands.** If $H$ is itself elementary,\n   then the constant sequence $H^n:=H$ is admissible in clause 1, so\n   $\\int_0^TH\\,dB$ is the limit of the constant sequence of elementary sums,\n   namely the elementary sum $I_T(H)$ of\n   [[def-ito-integral-of-an-elementary-predictable-process]]. The same argument\n   with $H1_{[0,t]}$ in place of $H$, and the finite telescoping of the\n   elementary sum over a refinement containing $t$, gives\n   $\\int_0^tH\\,dB=I_t(H)$ for every $t\\in[0,T]$. In particular the general\n   definition extends, rather than replaces, the elementary definition.\n\n4. **Linearity in the integrand is not asserted here.** Clause 1 defines each\n   integral separately from an arbitrary approximating sequence; the linear and\n   isometric properties of the extension are item 12. Until item 12 is proved,\n   linearity may be used only for elementary integrands, where it is part of\n   [[def-ito-integral-of-an-elementary-predictable-process]].\n\n5. **Comparison with deterministic Riemann integration.** The integral is a\n   stochastic integral: the integrand is paired with the Brownian path through\n   left-endpoint sums and an $L^2(P)$ limit. This definition does not assert\n   convergence of arbitrary tagged Riemann--Stieltjes sums for a general\n   predictable integrand. Particular integrands can have a pathwise\n   interpretation: for $H\\equiv1$ every tagged sum telescopes to $B_T-B_0$,\n   which is also its Ito integral by clause 3 (the value at time zero is\n   irrelevant to its product-measure class). The notation $\\int_0^TH\\,dB$\n   here always refers to the $L^2(P)$-class defined above.\n\nThe Axiom of Choice is declared because the construction selects an\napproximating sequence and uses the completeness and conditional-expectation\ninterfaces that assume it; the inherited obligations are declared as\ndependencies of this item. An alternative construction that avoids selecting the sequence is\nnot needed, because clause 1 shows every sequence gives the same class.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ito-isometry-and-linearity-in-predictable-l2",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Fix $T>0$. For predictable\n$H,K$ with finite energy $E\\int_0^TH^2ds,E\\int_0^TK^2ds<\\infty$ the integrals\n$\\int_0^TH\\,dB$ of\n[[def-ito-integral-for-square-integrable-predictable-processes]] satisfy\n$$\\int_0^T(H+K)\\,dB=\\int_0^TH\\,dB+\\int_0^TK\\,dB,\\qquad \\int_0^T(aH)\\,dB=a\\int_0^TH\\,dB\\quad(a\\in\\mathbb R),$$\nand the identities are equalities of $L^2(P)$-classes (almost sure\nequalities). Moreover the map $H\\mapsto\\int_0^TH\\,dB$ is an isometry,\n$$E\\Bigl(\\int_0^TH\\,dB\\Bigr)^2=E\\int_0^TH^2ds=\\|H\\|^2_{L^2(\\mathrm dt\\otimes P)},$$\nit takes values in the mean-zero subspace of $L^2(P)$, and the bilinear cross\nidentity\n$$E\\Bigl[\\Bigl(\\int_0^TH\\,dB\\Bigr)\\Bigl(\\int_0^TK\\,dB\\Bigr)\\Bigr]=E\\int_0^TH_sK_s\\,ds$$\nholds for all such $H,K$. In particular the image of the map is a closed\nsubspace of $L^2(P)$ isometric to the predictable $L^2$ space of $H$'s, and\n$H\\mapsto\\int_0^TH\\,dB$ is injective up to the $(\\mathrm dt\\otimes P)$-class.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ito-integral-process-has-a-continuous-martingale-version",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Let $H$ be a predictable\nprocess with $E\\int_0^TH_s^2ds<\\infty$ for every finite $T$. Then there is an\nadapted process $M=(M_t)_{t\\ge0}$ with continuous paths such that\n$M_t=\\int_0^tH_s\\,dB_s$ almost surely for every $t\\ge0$\n[[def-ito-integral-for-square-integrable-predictable-processes]], and $M$ is a\nsquare-integrable martingale relative to $(\\mathcal F_t)$\n[[def-continuous-time-adapted-process-and-martingale]]: $EM_t^2=E\\int_0^tH_s^2ds<\\infty$\nfor every $t$. Any two such continuous versions agree at every time on one\nmeasurable event of probability one; in particular the continuous version is\nunique in this common-full-measure-event sense, and it is the only continuous\nsquare-integrable martingale whose value at each deterministic $t$ is the\nintegral class.\n\nThis conclusion is deliberately distinguished from the exact definition of\nindistinguishability in\n[[def-law-modification-and-indistinguishability-of-processes]]. On a\nnoncomplete probability space the full equality set, although it contains the\nmeasurable probability-one event constructed below, need not itself be\nmeasurable. On a complete probability space the two notions coincide, because\nthe complement of the equality set is then a measurable subset of a null set.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-doob-maximal-bound-for-the-ito-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Let $H$ be a predictable\nprocess on $[0,T]$, where $T\\ge0$, with $E\\int_0^TH_s^2ds<\\infty$. Extend $H$ by zero after $T$ when applying the global continuous-version theorem, and let\n$M_t=\\int_0^tH_s\\,dB_s$ be the continuous version of\n[[thm-ito-integral-process-has-a-continuous-martingale-version]]. Then\n$$E\\sup_{0\\le t\\le T}|M_t|^2\\le4\\,E\\int_0^TH_s^2\\,ds .$$\nThe left-hand side is finite and does not depend on the chosen version, since\nany two continuous versions are indistinguishable. Every continuous version of\nthe integral process satisfies the same bound. The path supremum in this\nexpectation means its measurable version $S_D=\\sup_{q\\in D}|M_q|$ on the\ncountable scaled dyadic grid $D$ (including both endpoints). Continuity\nidentifies it with the path supremum on a measurable event of probability one.\nIndistinguishability here uses that full-event convention, as in the cited\ncontinuous-version theorem, without assuming completeness of the filtration.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $Z\\in\\mathcal H_T$, the path supremum is measurable by [F5], [F3] makes each coefficient composition predictable, and [F1] and Tonelli's theorem [F2] give $E\\int_0^T\\bigl(|b(s,Z_s)|^2+\\|\\sigma(s,Z_s)\\|_F^2\\bigr)ds\\le2K^2\\int_0^T(1+E|Z_s|^2)ds\\le2K^2T(1+\\|Z\\|_T^2)<\\infty.$ This nonnegative energy is finite almost surely; on each such path, applying $0\\le\\int_0^T(g-\\bar g)^2ds$ to $g(s)=|b(s,Z_s)|$ and its average gives $\\int_0^T|b(s,Z_s)|ds\\le\\sqrt{T}(\\int_0^T|b(s,Z_s)|^2ds)^{1/2}<\\infty$. Every scalar diffusion coordinate has finite energy. By [F4] each scalar integral has a continuous adapted version; their finite sum and the drift integral define $\\Phi(Z)$ continuously and adaptedly.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write $S_t=(\\sum_k\\int_0^t\\sigma^{ik}(s,Z_s)dW_s^k)_{i=1}^d$. For vectors $z_1,\\dots,z_m$, expansion gives $m\\sum_k|z_k|^2-|\\sum_kz_k|^2=\\sum_{k<\\ell}|z_k-z_\\ell|^2\\ge0$. Hence $\\sup_{u\\le t}|S_u|^2\\le m\\sum_k\\sum_i\\sup_{u\\le t}|M^{ik}_u|^2$ for the scalar coordinate integrals $M^{ik}$. Applying [F4] to each gives $E\\sup_{u\\le t}|S_u|^2\\le4mE\\int_0^t\\|\\sigma(s,Z_s)\\|_F^2ds$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a square-integrable vector path $h$ on $[0,u]$, put $\\bar h=u^{-1}\\int_0^u h(s)ds$ when $u>0$. The identity $0\\le\\int_0^u|h-\\bar h|^2ds=\\int_0^u|h|^2ds-u^{-1}|\\int_0^u h(s)ds|^2$ gives $|\\int_0^u h(s)ds|^2\\le u\\int_0^u|h(s)|^2ds$; for $u=0$ both sides vanish. Applying this pathwise to the drift and using $|X_0+D+S|^2\\le3(|X_0|^2+|D|^2+|S|^2)$ give $E\\sup_{u\\le t}|\\Phi(Z)_u|^2\\le3E|X_0|^2+3tE\\int_0^t|b(s,Z_s)|^2ds+12mE\\int_0^t\\|\\sigma(s,Z_s)\\|_F^2ds.$ By [F1], each squared coefficient is at most $2K^2(1+|Z_s|^2)$. Since $t\\le T$, the last display is at most $3E|X_0|^2+(6K^2T+24mK^2)\\int_0^t(1+\\|Z\\|_s^2)ds$. Hence $\\Phi(Z)\\in\\mathcal H_T$ and the first bound holds.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For $Z,V\\in\\mathcal H_T$, the initial terms cancel. The two-term square inequality, the drift Cauchy\u2013Schwarz bound, the coordinate estimate of step 1.2, and the Lipschitz part of [F1] give $E\\sup_{u\\le t}|\\Phi(Z)_u-\\Phi(V)_u|^2\\le2tL^2\\int_0^tE|Z_s-V_s|^2ds+8mL^2\\int_0^tE|Z_s-V_s|^2ds\\le(2TL^2+8mL^2)\\int_0^tE\\sup_{r\\le s}|Z_r-V_r|^2ds.$ This is the second bound.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "For the constant input $Z_t=X_0$, apply $|D+S|^2\\le2|D|^2+2|S|^2$ to $\\Phi(Z)-X_0$. Cauchy\u2013Schwarz bounds the drift term by $2T\\int_0^T E|b(s,X_0)|^2ds\\le4K^2T^2(1+E|X_0|^2)$; step 1.2 and [F1] bound the diffusion term by $8m\\int_0^T E\\|\\sigma(s,X_0)\\|_F^2ds\\le16mK^2T(1+E|X_0|^2)$. Their sum is the stated base-iterate bound.",
+          "step": "2.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $T=0$, both integrals vanish, $\\Phi(Z)_0=X_0$, and all three estimates hold with zero integral terms; for $T>0$, the preceding steps establish every assertion. The coordinate sums are finite and no nondegeneracy of $\\sigma$ is used. The Axiom of Choice enters only through the interfaces recorded in [F6].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement boundary: the proof treats T=0 and sets the integrals to zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: When K=0 the growth bound forces b and sigma to vanish; the proof then give zero integral terms."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: For d=m=1 every finite-coordinate sum in the proof has one term."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: the proof explicitly uses no nondegeneracy of sigma."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement boundary: the proof handles T=0; the estimates are stated for every t in [0,T]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement boundary: the proof says AC is inherited only through the interfaces; no new selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states estimates and contains no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states estimates and contains no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-lipschitz-sde-local-solution-has-finite-path-moment": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ito-sde-and-strong-solution",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as required by the stochastic-integral interfaces\nbelow. Fix a finite horizon $T\\ge0$ and finite integers $d,m\\ge1$. Work on\na complete filtered probability space\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{0\\le t\\le T},P)$ whose filtration is\nright-continuous and contains every $P$-null subset of $\\mathcal F$ in\n$\\mathcal F_0$ (the usual conditions).\n\nLet $W=(W_t)_{0\\le t\\le T}$ be a standard $m$-dimensional Brownian motion\n[[def-d-dimensional-brownian-motion]] adapted to this filtration, with\n$W_t-W_s$ independent of $\\mathcal F_s$ and distributed as\n$N_m(0,(t-s)I_m)$ for $0\\le s<t\\le T$. Let\n$X_0:\\Omega\\to\\mathbb R^d$ be $\\mathcal F_0$-measurable, satisfy\n$E|X_0|^2<\\infty$, and be independent of the future Brownian increments.\nExplicitly, $X_0$ is independent of the sigma-algebra\n$\\sigma(W_t-W_0:0\\le t\\le T)$.\n\nContinuity of a process means continuity on one measurable event of\nprobability one. We use an everywhere-continuous adapted representative: if\nthe chosen process is continuous only on such an event $A$, replace it off $A$\nby its initial value. Since $A^c$ is a null set and the filtration is complete,\n$A^c\\in\\mathcal F_0$; the replacement preserves adaptedness and changes the\nSDE identity only on a null event, hence preserves it up to\nindistinguishability.\n\nThe drift and diffusion coefficients are jointly Borel maps\n$$b:[0,T]\\times\\mathbb R^d\\to\\mathbb R^d,\\qquad \\sigma:[0,T]\\times\\mathbb R^d\\to\\mathbb R^{d\\times m}.$$\nFor nonnegative finite constants $L,K$, assume for every $t\\in[0,T]$ and\n$x,y\\in\\mathbb R^d$ that\n$$|b(t,x)-b(t,y)|+\\|\\sigma(t,x)-\\sigma(t,y)\\|_F\\le L|x-y|,$$\n$$|b(t,x)|+\\|\\sigma(t,x)\\|_F\\le K(1+|x|).$$\nHere $|\\cdot|$ is the Euclidean norm and\n$\\|A\\|_F^2=\\sum_{i=1}^d\\sum_{k=1}^m|A^{ik}|^2$ is the Frobenius norm.\n\nFor an adapted continuous candidate $X:[0,T]\\times\\Omega\\to\\mathbb R^d$,\nthe vector It\u00f4 equation\n$$X_t=X_0+\\int_0^t b(s,X_s)\\,ds+\\left(\\sum_{k=1}^m\\int_0^t\\sigma^{ik}(s,X_s)\\,dW_s^k\\right)_{i=1}^d,\\qquad 0\\le t\\le T.$$\nuses a pathwise Lebesgue integral for the drift and, in each coordinate, the\nlocalized It\u00f4 integral from\n[[def-continuous-brownian-ito-process]], clause 2. Require\n$\\int_0^T|b(s,X_s)|ds<\\infty$ and\n$\\int_0^T\\|\\sigma(s,X_s)\\|_F^2ds<\\infty$ almost surely; these are the local\ncoefficient-integrability conditions in that definition. When a coordinate\nintegrand has finite expected energy, its integral is the square-integrable\nIt\u00f4 integral of [[def-ito-integral-for-square-integrable-predictable-processes]];\nthe Picard estimates below establish that stronger condition for every input\nin $\\mathcal H_T$. Equality of processes means\nequality for every $t$ on one measurable event of probability one, that is,\nindistinguishability\n[[def-law-modification-and-indistinguishability-of-processes]]. A **strong\nsolution on $[0,T]$** is an adapted continuous process satisfying this\nintegral equation indistinguishably. No moment bound is included in the\ndefinition; the existence theorem proves its $L^2$ path-sup bound.\nThe usual-filtration, continuity, and finite-coordinate conventions agree\nwith the multidimensional class of continuous Brownian It\u00f4 processes\n[[def-continuous-brownian-ito-process]]. This definition makes no ellipticity,\ntransition-density, forward-equation, or time-reversal assertion.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-continuous-brownian-ito-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]: $B$ is a standard Brownian\nmotion on a filtered probability space, adapted to $(\\mathcal F_t)_{t\\ge0}$,\nwith $B_t-B_s$ independent of $\\mathcal F_s$ of law $N(0,t-s)$ for $0\\le s<t$.\nFor this localized-calculus definition the filtration satisfies the usual\nconditions, as required by\n[[def-locally-square-integrable-predictable-brownian-integrand]].\n\n1. **Real continuous Brownian Ito process.** A real progressively measurable process\n   $X=(X_t)_{t\\ge0}$ is a **continuous Brownian Ito process** when there are\n   * a finite real $\\mathcal F_0$-measurable $X_0$,\n   * a real progressively measurable process $b=(b_s)_{s\\ge0}$\n     [[def-progressively-measurable-and-predictable-process]] with\n     $\\int_0^t|b_s|\\,ds<\\infty$ almost surely for every finite $t\\ge0$, and\n   * a real predictable process $\\sigma=(\\sigma_s)_{s\\ge0}$, locally\n     square-integrable in the sense that $\\int_0^t\\sigma_s^2\\,ds<\\infty$\n     almost surely for every finite $t$\n     [[def-locally-square-integrable-predictable-brownian-integrand]],\n\n   such that, up to equality at all times on a measurable probability-one event,\n   $$X_t=X_0+\\int_0^tb_s\\,ds+\\int_0^t\\sigma_s\\,dB_s,\\qquad t\\ge0,$$\n   where the first integral is the pathwise Lebesgue integral of $s\\mapsto\n   b_s(\\omega)$ and the second is the localized Ito integral\n   $\\sigma\\cdot B$ of [[thm-localized-ito-integral]]. One writes\n   $\\displaystyle dX_t=b_t\\,dt+\\sigma_t\\,dB_t$ for the display, and $b$ is\n   called the **drift** and $\\sigma$ the **diffusion coefficient** of this\n   representation.\n\n2. **Multidimensional Brownian-driven process.** Let $d\\ge1$ and $m\\ge1$ be\n   finite integers, let $B=(B^1,\\dots,B^m)$ be a standard $m$-dimensional\n   Brownian motion [[def-d-dimensional-brownian-motion]] that is adapted to\n   $(\\mathcal F_t)$ and whose vector increment $B_t-B_s$ is independent of\n   $\\mathcal F_s$ for $0\\le s<t$, let $X_0$ be a finite\n   $\\mathcal F_0$-measurable $\\mathbb R^d$-valued random vector, let $b$ be an\n   $\\mathbb R^d$-valued progressively measurable process with\n   $\\int_0^t|b^i_s|\\,ds<\\infty$ almost surely for every $i$ and finite $t$, and let\n   $\\sigma=(\\sigma^{ik})$ be an $\\mathbb R^{d\\times m}$-valued predictable\n   process, each entry predictable\n   [[def-progressively-measurable-and-predictable-process]], with\n   $\\int_0^t(\\sigma^{ik}_s)^2\\,ds<\\infty$ almost surely for every $i,k$ and finite $t$.\n   Then\n   $$X^i_t=X^i_0+\\int_0^tb^i_s\\,ds+\\sum_{k=1}^m\\int_0^t\\sigma^{ik}_s\\,dB^k_s, \\qquad i=1,\\dots,d,$$\n   defines an $\\mathbb R^d$-valued **continuous Brownian Ito process** driven by\n   $B$, using the progressive integral versions of [[thm-localized-ito-integral]]. Other progressive representatives agreeing on one measurable full event at every time represent the same process. No claim is made that an arbitrary null-path modification remains adapted.\n\nThe following well-definedness clauses are part of the definition and are used\nthroughout.\n\n3. **The drift integral is a genuine pathwise integral.** Progressive\n   measurability gives measurable sections and makes the positive and negative\n   integrals $\\mathcal F_t$-measurable by the parameter-integral part of Tonelli\n   [[thm-tonelli-theorem-for-sigma-finite-product-spaces]], applied to Lebesgue measure on $[0,t]$ and the probability measure on $\\mathcal F_t$.\n   On the event where both extended integrals are finite, their difference is\n   the drift integral; set it to zero otherwise. This is an adapted measurable\n   convention, is finite everywhere, and on one probability-one event is\n   absolutely continuous on every finite interval (take the countable\n   intersection over integer horizons). It is progressive: the map\n   $(t,\\omega)\\mapsto\\int_0^tb_s(\\omega)\\,ds$, with the preceding finite-value\n   convention, is measurable on every $[0,T]\\times\\Omega$ by parameter\n   integration, and is adapted. Thus the definition uses the standard\n   almost-sure drift and local-energy classes under the usual conditions.\n\n4. **The stochastic integral exists, is unique and is continuous.** By\n   [[def-locally-square-integrable-predictable-brownian-integrand]] and\n   [[thm-localized-ito-integral]] the localized integral $\\sigma\\cdot B$ is a\n   well-defined adapted process with continuous paths, unique up to\n   indistinguishability, and each of its finite-energy pieces is a\n   square-integrable martingale. The displayed integral representative is progressive; $X$ is adapted by its required progressive measurability and has\n   continuous paths, $X_t$ is finite almost surely for each $t$, and\n   $M^i_t:=\\sum_k\\int_0^t\\sigma^{ik}_s\\,dB^k_s$ is a continuous local\n   martingale relative to $(\\mathcal F_t)$ in the sense of\n   [[def-continuous-time-adapted-process-and-martingale]] for every $i$, with the common energy localizers described in clause 6.\n\n5. **The coefficients are not part of the process.** A continuous Brownian Ito\n   process may admit several representations $X=X_0+b\\cdot\\mathrm{Leb}\n   +\\sigma\\cdot B$ with different pointwise representatives $(b,\\sigma)$ (for example, altering a coefficient only at the single time zero), even for the same Brownian\n   motion and filtration; this does not assert nonuniqueness of their equivalence classes modulo $\\mathrm dt\\otimes P$; conversely, two processes with the same displayed\n   integral representation and the same $X_0$ are indistinguishable. Every\n   statement on this page that mentions a decomposition uses only properties\n   common to all representations of the given process. The separate\n   quadratic-covariation definition that follows this item on its owning page\n   is formulated from $X$ itself and not from $(b,\\sigma)$; no\n   quadratic-covariation definition is made inside this item.\n\n6. **The class is closed under stopping and under linear combinations.**\n   If $\\tau$ is a stopping time, the literal stopped process $X^\\tau$ is\n   progressive. Indeed on $[0,T]\\times\\Omega$ the map\n   $(t,\\omega)\\mapsto(t\\wedge\\tau(\\omega),\\omega)$ is measurable into\n   $\\mathcal B([0,T])\\otimes\\mathcal F_T$: the truncated time $\\tau\\wedge T$\n   is $\\mathcal F_T$-measurable, minimum is continuous, and rectangle inverse\n   images give the assertion. Compose with the progressive restriction of $X$.\n   Its drift is $b1_{[0,\\tau]}$ and its diffusion is\n   $\\sigma1_{[0,\\tau]}$; these retain almost-sure integrability and the required\n   progressive/predictable measurability. The drift identity is pathwise.\n   For the stochastic identity, apply the finite-energy stopping identity of\n   [[thm-localized-ito-integral]], clause 4, on the canonical energy intervals\n   of $\\sigma$. The truncated integrand has finite energy on these same\n   intervals. Comparing its canonical intervals with them at their pairwise\n   minima by clause 4 identifies the localized integrals there. Countably\n   many full-event agreements and exhaustion then give the identity at all\n   times on one full event. Thus stopping closure uses localization, not a\n   direct application of clause 4 to a possibly infinite-energy integrand.\n   For finitely many coefficients, use the common continuous energy\n   $E_t=\\sum_{i,k}\\int_0^t(\\sigma^{ik}_s)^2ds$ and times\n   $\\kappa_n=\\inf\\{t:E_t\\ge n\\}\\wedge n$, $n\\ge1$.\n   The same continuous-energy test as in the local-integrability definition\n   makes these stopping times increasing to infinity almost surely, and bounds\n   every stopped coefficient's expected energy by $n$. The preceding\n   pairwise-minimum comparison shows that every integral stopped there is its\n   finite-energy integral. Finite sums of these square-integrable martingales\n   are martingales: finite sums preserve adaptation and integrability, and summing the integral test over any $A\\in\\mathcal F_s$ proves the conditional-expectation identity; hence their sums\n   are local martingales with this common sequence. For fixed real constants,\n   finite linear combinations of processes driven by the same vector Brownian\n   motion have the combined coefficients. Their integrability follows from\n   the triangle inequality and $(\\sum_{j=1}^r u_j)^2\\le r\\sum_j u_j^2$.\n\n7. **No pathwise integral against Brownian motion is defined.** The display\n   defines the stochastic integral only as the localized limit of\n   [[thm-localized-ito-integral]]; no integral $\\int_0^tH_s(\\omega)\\,dB_s(\\omega)$\n   along the individual path is asserted, and the page's examples show that\n   the pathwise Riemann--Stieltjes route is unavailable.\n\nNo choice beyond the declared AC of the ambient interfaces enters the\nconstruction: the coefficients $b,\\sigma$ and the process are given data, and\nthe canonically localized integral is constructed in\n[[thm-localized-ito-integral]]. The Axiom of Choice is declared because the\nconditional-expectation and $L^2$ interfaces used downstream assume it, and\nthe countable-choice obligations inherited from those interfaces are declared\nas dependencies of this item.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-adapted-continuous-processes-are-progressively-measurable",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$, and let $X=(X_t)_{t\\ge0}$ be a real process\nthat satisfies $X_t:\\Omega\\to\\mathbb R$ is $\\mathcal F_t$-measurable for every $t\\ge0$, and has\ncontinuous paths, in the strong sense that $s\\mapsto X_s(\\omega)$ is continuous\non $[0,\\infty)$ for every $\\omega\\in\\Omega$. Then $X$ is progressively\nmeasurable and predictable relative to $(\\mathcal F_t)$ in the sense of\n[[def-progressively-measurable-and-predictable-process]], including at time\nzero under the generator convention $\\{0\\}\\times A$, $A\\in\\mathcal F_0$. No\nchoice principle is used. Here a filtration means an increasing family of\nsub-sigma-algebras of $\\mathcal F$. The fixed-time measurability hypothesis\nis the adaptedness terminology of clause 1 of\n[[def-continuous-time-adapted-process-and-martingale]]; only that clause is\nused, not its conditional-expectation or martingale interface and its Choice\nassumption.\n\nIf instead the paths are continuous only on an event $A\\in\\mathcal F$ with\n$P(A)=1$, the conclusion holds for the modification that is set equal to $0$\noff $A$ provided $A\\in\\mathcal F_0$; without such a measurability assumption on\nthe continuity event no predictability claim is made, because predictability\nis a property of the given joint map.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes here\nare real-valued and indexed by $[0,\\infty)$. AC is inherited from the cited\ncontinuous-time-filtration interface, whose separate martingale clause uses\nconditional expectation. Once the filtered probability space and stopping\ntimes are given, the progressive and predictable constructions below make no\nadditional choice: they use only generated sigma-algebras and product\nrectangles.\n\n1. **Progressively measurable.** A process $X=(X_t)_{t\\ge0}$ is\n   **progressively measurable** relative to $(\\mathcal F_t)$ when for every\n   $t\\ge0$ the restricted map\n   $[0,t]\\times\\Omega\\to\\mathbb R$, $(s,\\omega)\\mapsto X_s(\\omega)$, is\n   measurable for the product sigma-algebra\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$\n   [[def-product-sigma-algebra-and-finite-product-sigma-algebras]].\n\n2. **Time-zero and interval generators.** On the product space\n   $[0,\\infty)\\times\\Omega$, let $\\mathcal P$ be the sigma-algebra generated by\n   the family\n   $$\\mathcal G:=\\bigl\\{(s,u]\\times A:\\ 0\\le s<u<\\infty,\\ A\\in\\mathcal F_s\\bigr\\}\\ \\cup\\ \\bigl\\{\\{0\\}\\times A:\\ A\\in\\mathcal F_0\\bigr\\}.$$\n   The interval generators with $s=0$ are included, so $(0,u]\\times A$ with\n   $A\\in\\mathcal F_0$ is a generator. The sigma-algebra $\\mathcal P$ exists by\n   [[thm-generated-sigma-algebra-exists-and-is-minimal]] and is called the\n   **predictable sigma-algebra**. A process $H=(H_t)_{t\\ge0}$ is\n   **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is\n   $\\mathcal P$-measurable. For a finite horizon $T>0$ we write\n   $\\mathcal P_T$ for the sigma-algebra on $[0,T]\\times\\Omega$ generated by the\n   same family restricted to $u\\le T$ together with the time-zero generators;\n   this is the trace of $\\mathcal P$ on $[0,T]\\times\\Omega$. Indeed, the\n   trace of an interval generator is empty when $s\\ge T$, and otherwise is\n   $(s,\\min(u,T)]\\times A$, while time-zero generators are unchanged.\n   Conversely every listed finite-horizon generator is such a trace.\n\n3. **Sections, adaptedness, and null sets.** Two structural conventions are\n   used repeatedly and are part of the definition.\n   (a) Every generator is a measurable rectangle of\n   $\\mathcal B([0,\\infty))\\otimes\\mathcal F$, hence\n   $\\mathcal P\\subseteq\\mathcal B([0,\\infty))\\otimes\\mathcal F$; the time-zero\n   generator $\\{0\\}\\times A$ has $dt\\otimes P$-measure zero for every $A$. A\n   set in $\\mathcal P$ has its section at each fixed time $s$ in $\\mathcal F_s$:\n   sets with that section property form a sigma-algebra, and each generator\n   has the property by the increasing-filtration condition. Its section at\n   each fixed $\\omega$ is Borel in time, by the same sigma-algebra argument.\n   (b) If a process is predictable then it is progressively measurable: for\n   $s\\le t$ the section $\\omega\\mapsto H_s(\\omega)$ is $\\mathcal F_s$-measurable\n   $\\subseteq\\mathcal F_t$-measurable, and the progressive-measurability claim\n   is the restriction of the joint map to $[0,t]\\times\\Omega$; the restriction\n   of a $\\mathcal P$-measurable map to $[0,t]\\times\\Omega$ is measurable for\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$ because every generator with $u\\le t$\n   lies in that product sigma-algebra and the generators with $u>t$ have\n   intersection with $[0,t]\\times\\Omega$ of the form $(s,t]\\times A$ with\n   $s<t$ and $A\\in\\mathcal F_s$, or the empty set when $s\\ge t$.\n   The time-zero generators also lie in\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$.\n\nThe family $\\mathcal G$ need not itself contain the whole space, but a finite intersection\nof generators is empty or again a generator, or a time-zero generator, because\n$(s,u]\\cap(s',u']=(s\\vee s',u\\wedge u']$ and $A\\cap A'\\in\\mathcal F_{s\\vee s'}$\nwhenever $A\\in\\mathcal F_s$, $A'\\in\\mathcal F_{s'}$, while\n$\\{0\\}\\times A$ is disjoint from every interval generator, including\n$(0,u]\\times A'$. Two time-zero generators intersect in\n$\\{0\\}\\times(A\\cap A')$ with $A\\cap A'\\in\\mathcal F_0$.\nThus the family consisting of the whole space\ntogether with finite intersections of generators is a pi-system generating\n$\\mathcal P$; this is the structural fact used by the density theorem below.\n\nBecause predictability is a measurability requirement for the joint map, it is\npreserved by pointwise limits, products and linear combinations of predictable\nprocesses. A deterministic function $h$ of time defines a predictable process\nexactly when $h$ is Borel measurable: the sets $C$ for which\n$C\\times\\Omega\\in\\mathcal P$ form a sigma-algebra containing the intervals\n$(s,u]$ and $\\{0\\}$, hence all Borel sets. Conversely, take any fixed\n$\\omega\\in\\Omega$ (a probability space is nonempty) and use the Borel\ntime-section property from 3(a) on every inverse image of an open set.\nThis single choice uses no choice axiom. In particular the\nindicators $1_{[0,u]}$ and $1_{(0,u]}$ are predictable for every deterministic\n$u\\ge0$, and the process $s\\mapsto 1_{s\\le\\tau(\\omega)}$ for a stopping time\n$\\tau$ [[def-continuous-time-stopping-time]] is predictable, since\n$$\\{(s,\\omega):s>\\tau(\\omega)\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}(q,\\infty)\\times\\{\\tau<q\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}\\bigcup_{n>q}(q,n]\\times\\{\\tau<q\\}$$\nis a countable union of generators: for rational $q>0$ one has\n$\\{\\tau<q\\}=\\bigcup_{q'<q,\\ q'\\in\\mathbb Q}\\{\\tau\\le q'\\}\\in\\mathcal F_q$. The\ncomplement of that set inside $[0,\\infty)\\times\\Omega$ is the event of the\nindicator, so $1_{[0,\\tau]}$ is predictable; its left-continuity in the time\nvariable is the visual form of the same computation.\n\nNo completeness of the filtration and no right continuity of $(\\mathcal F_t)$\nis used or assumed. Apart from the inherited ambient assumption just recorded,\nthe constructions in this definition are choice-free.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-multidimensional-ito-formula-for-brownian-driven-processes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Let $m,d\\ge1$ be finite\nintegers, let $B=(B^1,\\dots,B^m)$ be a standard $m$-dimensional Brownian motion,\nand let $X$ be an $\\mathbb R^d$-valued continuous Brownian Ito process\n$$X^i_t=X^i_0+\\int_0^tb^i_s\\,ds+\\sum_{k=1}^m\\int_0^t\\sigma^{ik}_s\\,dB^k_s, \\qquad i=1,\\dots,d,$$\nin the sense of [[def-continuous-brownian-ito-process]], including its usual-filtration and almost-sure coefficient-integrability conventions. Let\n$f\\in C^{1,2}([0,\\infty)\\times\\mathbb R^d)$, meaning that $f,\\partial_tf$,\n$\\partial_if$ and $\\partial_i\\partial_jf$ ($1\\le i,j\\le d$) exist and are\ncontinuous. Then, up to indistinguishability, for every $t\\ge0$\n$$f(t,X_t)=f(0,X_0)+\\int_0^t\\Bigl(\\partial_tf+\\sum_ib^i\\partial_if+\\tfrac12\\sum_{i,j}(\\sigma\\sigma^{\\mathsf T})^{ij}\\partial_i\\partial_jf\\Bigr)(s,X_s)\\,ds+\\sum_{i,k}\\int_0^t\\partial_if(s,X_s)\\sigma^{ik}_s\\,dB^k_s,$$\nFor the displayed integrands, intersect the measurable full events of continuity and the decomposition of $X$, and of coefficient integrability at all integer horizons. Its null complement belongs to $\\mathcal F_0$ under the usual conditions. Set $X,X_0,b,\\sigma$ to zero there. These representatives preserve all coefficient classes and the decomposition up to indistinguishability, with everywhere continuous $X$ and everywhere locally finite coefficient path integrals. All displayed integrands use these representatives.\n\nThe stochastic integrals are localized Ito integrals of the predictable\nlocally square-integrable integrands $\\partial_if(\\cdot,X)\\sigma^{ik}$, and\n$(\\sigma\\sigma^{\\mathsf T})^{ij}_s=\\sum_k\\sigma^{ik}_s\\sigma^{jk}_s$. In\ndifferential form,\n$df(t,X_t)=\\bigl(\\partial_tf+\\sum_ib^i\\partial_if+\\tfrac12\\sum_{i,j}(\\sigma\\sigma^{\\mathsf T})^{ij}\\partial_i\\partial_jf\\bigr)(t,X_t)\\,dt+\\sum_{i,k}\\partial_if(t,X_t)\\sigma^{ik}_t\\,dB^k_t$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-stopping-an-ito-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Let $H$ be a locally\nsquare-integrable predictable process\n[[def-locally-square-integrable-predictable-brownian-integrand]] with localized\nintegral $H\\cdot B$ in the progressively measurable version of\n[[thm-localized-ito-integral]], with its measurable-full-event convention\nfor indistinguishability. The filtration satisfies the usual conditions and\nlocal energy is finite almost surely on every finite horizon, as required by\nthe local-integrability definition. Let $\\tau$ be a\nstopping time [[def-continuous-time-stopping-time]]. Then the process\n$s\\mapsto(H\\cdot B)_{s\\wedge\\tau}$ and the localized integral of the process\n$1_{[0,\\tau]}H$ are indistinguishable:\n$$(H\\cdot B)_{t\\wedge\\tau}=\\int_0^t1_{[0,\\tau]}(s)H_s\\,dB_s\\qquad\\text{for every }t\\ge0\\text{, up to indistinguishability}.$$\nIn particular, for $H$ of finite energy this reduces to the stopping identity\nof [[thm-localized-ito-integral]], and for $\\tau\\equiv\\infty$ it is the\ndefinition of the localized integral.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ito-integral-process-has-a-continuous-martingale-version",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Let $H$ be a predictable\nprocess with $E\\int_0^TH_s^2ds<\\infty$ for every finite $T$. Then there is an\nadapted process $M=(M_t)_{t\\ge0}$ with continuous paths such that\n$M_t=\\int_0^tH_s\\,dB_s$ almost surely for every $t\\ge0$\n[[def-ito-integral-for-square-integrable-predictable-processes]], and $M$ is a\nsquare-integrable martingale relative to $(\\mathcal F_t)$\n[[def-continuous-time-adapted-process-and-martingale]]: $EM_t^2=E\\int_0^tH_s^2ds<\\infty$\nfor every $t$. Any two such continuous versions agree at every time on one\nmeasurable event of probability one; in particular the continuous version is\nunique in this common-full-measure-event sense, and it is the only continuous\nsquare-integrable martingale whose value at each deterministic $t$ is the\nintegral class.\n\nThis conclusion is deliberately distinguished from the exact definition of\nindistinguishability in\n[[def-law-modification-and-indistinguishability-of-processes]]. On a\nnoncomplete probability space the full equality set, although it contains the\nmeasurable probability-one event constructed below, need not itself be\nmeasurable. On a complete probability space the two notions coincide, because\nthe complement of the equality set is then a measurable subset of a null set.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ito-isometry-and-linearity-in-predictable-l2",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Fix $T>0$. For predictable\n$H,K$ with finite energy $E\\int_0^TH^2ds,E\\int_0^TK^2ds<\\infty$ the integrals\n$\\int_0^TH\\,dB$ of\n[[def-ito-integral-for-square-integrable-predictable-processes]] satisfy\n$$\\int_0^T(H+K)\\,dB=\\int_0^TH\\,dB+\\int_0^TK\\,dB,\\qquad \\int_0^T(aH)\\,dB=a\\int_0^TH\\,dB\\quad(a\\in\\mathbb R),$$\nand the identities are equalities of $L^2(P)$-classes (almost sure\nequalities). Moreover the map $H\\mapsto\\int_0^TH\\,dB$ is an isometry,\n$$E\\Bigl(\\int_0^TH\\,dB\\Bigr)^2=E\\int_0^TH^2ds=\\|H\\|^2_{L^2(\\mathrm dt\\otimes P)},$$\nit takes values in the mean-zero subspace of $L^2(P)$, and the bilinear cross\nidentity\n$$E\\Bigl[\\Bigl(\\int_0^TH\\,dB\\Bigr)\\Bigl(\\int_0^TK\\,dB\\Bigr)\\Bigr]=E\\int_0^TH_sK_s\\,ds$$\nholds for all such $H,K$. In particular the image of the map is a closed\nsubspace of $L^2(P)$ isometric to the predictable $L^2$ space of $H$'s, and\n$H\\mapsto\\int_0^TH\\,dB$ is injective up to the $(\\mathrm dt\\otimes P)$-class.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-doob-maximal-bound-for-the-ito-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Let $H$ be a predictable\nprocess on $[0,T]$, where $T\\ge0$, with $E\\int_0^TH_s^2ds<\\infty$. Extend $H$ by zero after $T$ when applying the global continuous-version theorem, and let\n$M_t=\\int_0^tH_s\\,dB_s$ be the continuous version of\n[[thm-ito-integral-process-has-a-continuous-martingale-version]]. Then\n$$E\\sup_{0\\le t\\le T}|M_t|^2\\le4\\,E\\int_0^TH_s^2\\,ds .$$\nThe left-hand side is finite and does not depend on the chosen version, since\nany two continuous versions are indistinguishable. Every continuous version of\nthe integral process satisfies the same bound. The path supremum in this\nexpectation means its measurable version $S_D=\\sup_{q\\in D}|M_q|$ on the\ncountable scaled dyadic grid $D$ (including both endpoints). Continuity\nidentifies it with the path supremum on a measurable event of probability one.\nIndistinguishability here uses that full-event convention, as in the cited\ncontinuous-version theorem, without assuming completeness of the filtration.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-continuous-time-stopping-time",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space and let\n$(\\mathcal F_t)_{t\\ge0}$ be a continuous-time filtration\n[[def-continuous-time-filtration-and-all-pairs-martingale]].\n\n1. A map $\\tau:\\Omega\\to[0,\\infty]$ (infinite values allowed) is a **stopping\n   time** for $(\\mathcal F_t)$ when\n   $$\\{\\tau\\le t\\}\\in\\mathcal F_t\\qquad\\text{for every }t\\ge0 .$$\n2. For a stopping time $\\tau$ its **stopped sigma-algebra** is\n   $$\\mathcal F_\\tau:=\\{A\\in\\mathcal F:A\\cap\\{\\tau\\le t\\}\\in\\mathcal F_t \\text{ for every }t\\ge0\\}.$$\n\nThe following facts are used below, and each is a direct set computation.\n\n(a) $\\mathcal F_\\tau$ is a sigma-algebra: $\\emptyset\\cap\\{\\tau\\le\n    t\\}=\\emptyset\\in\\mathcal F_t$; for $A\\in\\mathcal F_\\tau$ one has\n    $A^c\\cap\\{\\tau\\le t\\}=\\{\\tau\\le t\\}\\setminus(A\\cap\\{\\tau\\le t\\})\\in\\mathcal\n    F_t$; and for a sequence $A_n\\in\\mathcal F_\\tau$ the union satisfies\n    $\\bigl(\\bigcup_nA_n\\bigr)\\cap\\{\\tau\\le t\\}=\\bigcup_n(A_n\\cap\\{\\tau\\le\n    t\\})\\in\\mathcal F_t$. All operations are literal, not modulo null sets, and\n    no completeness of the filtration is assumed.\n(b) If $\\tau\\equiv t_0<\\infty$ is deterministic, then\n    $A\\cap\\{\\tau\\le t\\}$ is $A$ for $t\\ge t_0$ and $\\emptyset$ for $t<t_0$, so\n    $\\mathcal F_\\tau=\\bigcap_{t\\ge t_0}\\mathcal F_t=\\mathcal F_{t_0}$, where\n    the last equality follows because the intersection includes its least\n    member $\\mathcal F_{t_0}$. If $\\tau\\equiv\\infty$, then every test event\n    $\\{\\tau\\le t\\}$ is empty and $\\mathcal F_\\tau=\\mathcal F$.\n(c) Suppose the filtration is right-continuous. Then $\\tau$ is a stopping time\n    if and only if $\\{\\tau<t\\}\\in\\mathcal F_t$ for every $t>0$. Indeed\n    $$\\{\\tau<t\\}=\\bigcup_{n\\ge1}\\{\\tau\\le t-\\tfrac1n\\}$$\n    (with the terms for $t-\\tfrac1n<0$ read as the empty set, since\n    $\\tau\\ge0$), which gives the forward implication; conversely\n    $$\\{\\tau\\le t\\}=\\bigcap_{n\\ge1}\\{\\tau<t+\\tfrac1n\\},$$\n    and $\\bigcap_n\\mathcal F_{t+1/n}=\\bigcap_{s>t}\\mathcal F_s=\\mathcal F_t$ by\n    right-continuity together with monotonicity of the filtration.\n(d) Under the same right-continuity assumption, for $A\\in\\mathcal F$ one has\n    $A\\in\\mathcal F_\\tau$ if and only if $A\\cap\\{\\tau<t\\}\\in\\mathcal F_t$ for\n    every $t>0$: the forward implication follows from\n    $A\\cap\\{\\tau<t\\}=\\bigcup_n(A\\cap\\{\\tau\\le t-\\tfrac1n\\})$ and the converse\n    from $A\\cap\\{\\tau\\le t\\}=\\bigcap_n(A\\cap\\{\\tau<t+\\tfrac1n\\})$ together with\n    $\\bigcap_n\\mathcal F_{t+1/n}=\\mathcal F_t$.\n\nBecause the two versions of each test are interchangeable exactly when the\nfiltration is right-continuous, the convention is recorded here once: the\nBrownian strong Markov theorem is stated for the usual augmentation, which is\nright-continuous, and the raw-filtration statements use the non-strict test\ndirectly. No choice principle is used by this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fatou-lemma",
+          "source_section": "Statement",
+          "quote": "Let $(f_n)$ be nonnegative measurable functions. Then\n$$\\int \\liminf_{n\\to\\infty}f_n\\,d\\mu\\le\\liminf_{n\\to\\infty}\\int f_n\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $T=0$, $Y_0=X_0$ and the claim is $E|X_0|^2<\\infty$. Suppose $T>0$. Use the everywhere-continuous representative permitted by [F1]; changing it on the $\\mathcal F_0$-measurable continuity-null complement preserves the equation up to indistinguishability. Since $Y$ is continuous and adapted, [F2] gives the required progressive/predictable representatives. For $R>0$ define $\\tau_R:=\\inf\\{s\\in[0,T]:|Y_s|\\ge R\\}\\wedge T$, with $\\inf\\emptyset=+\\infty$. For $t<T$, $\\{\\tau_R\\le t\\}=\\{\\sup_{s\\le t}|Y_s|\\ge R\\}$, which is $\\mathcal F_t$-measurable because the supremum equals the supremum over rational times in $[0,t]$ and $t$ by [F4]; for $t\\ge T$ the event is all of $\\Omega$. Thus $\\tau_R$ is a stopping time. On $[0,\\tau_R]$ the process is bounded by $R$, unless $|X_0|\\ge R$, when $\\tau_R=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The multidimensional It\u00f4 formula [F2] for $U(x)=1+|x|^2$, stopped at $\\tau_R$, has drift $2Y_s\\cdot b(s,Y_s)+\\|\\sigma(s,Y_s)\\|_F^2$ and martingale integrand $2Y_s^{\\mathsf T}\\sigma(s,Y_s)$. By step 1.1 and the linear-growth bound, the stopped martingale integrand has finite energy on $[0,T]$, so [F3] and the stopping identity make its expectation zero. Since $2K|y|(1+|y|)\\le3K(1+|y|^2)$ and $K^2(1+|y|)^2\\le2K^2(1+|y|^2)$, the generator is at most $C_0(1+|y|^2)$, where $C_0=3K+2K^2$. Hence, for $g_R(t):=E(1+|Y_{t\\wedge\\tau_R}|^2)$, $g_R(t)\\le E(1+|X_0|^2)+C_0\\int_0^t g_R(s)ds.$ The stopped variables are integrable because $Y$ is bounded before the stop and $X_0\\in L^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Set $H_R(t)=E(1+|X_0|^2)+C_0\\int_0^tg_R(s)ds$. Then $g_R\\le H_R$ and $H_R'\\le C_0H_R$ almost everywhere, so $(e^{-C_0t}H_R(t))'\\le0$. Therefore $g_R(t)\\le E(1+|X_0|^2)e^{C_0t}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Take $R=n\\in\\mathbb N$ and let $n\\to\\infty$. Every continuous path on $[0,T]$ is bounded, so $Y_{t\\wedge\\tau_n}\\to Y_t$ almost surely for each fixed $t$. Fatou's lemma [F5] gives $\\sup_{t\\le T}E|Y_t|^2\\le E(1+|X_0|^2)e^{C_0T}=:M_T<\\infty$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The growth bound and step 4.1 imply $E\\int_0^T|b(s,Y_s)|^2ds\\le2K^2T(1+M_T)$ and $E\\int_0^T\\|\\sigma(s,Y_s)\\|_F^2ds\\le2K^2T(1+M_T)$. Pathwise Cauchy\u2013Schwarz for the drift and finite-energy It\u00f4 theory therefore put $Y$ in the continuous Brownian It\u00f4-process class of [F1]. The vector martingale part $N_t=(\\sum_k\\int_0^t\\sigma^{ik}(s,Y_s)dW_s^k)_{i=1}^d$ satisfies $E\\sup_{t\\le T}|N_t|^2\\le4mE\\int_0^T\\|\\sigma(s,Y_s)\\|_F^2ds,$ by the finite-coordinate inequality $|\\sum_kz_k|^2\\le m\\sum_k|z_k|^2$ and the scalar bound in [F3]. Likewise, pathwise Cauchy\u2013Schwarz gives $E\\sup_{t\\le T}|\\int_0^tb(s,Y_s)ds|^2\\le T E\\int_0^T|b(s,Y_s)|^2ds$. Thus the SDE equation and $|X_0+D+N|^2\\le3(|X_0|^2+|D|^2+|N|^2)$ imply $E\\sup_{t\\le T}|Y_t|^2<\\infty$. AC is inherited exactly as recorded in [F6].",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "step 4.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 directly treats T=0: the entire path has sole value X_0 and its squared supremum expectation is the assumed finite E|X_0|^2; an empty state space is excluded by finite positive dimension."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: If K=0, the generator bound in the proof is zero and the same stopped estimate applies."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: the proof use finite coordinate sums, which include d=m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: The It\u00f4 and maximal estimates in the proof do not require nondegenerate diffusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement boundary: the proof treats T=0 and the proof bounds the full interval [0,T]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement boundary: the proof records AC as inherited; the stopping radii are the canonical integers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way moment implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts no converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-global-strong-well-posedness-for-lipschitz-ito-sdes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-lipschitz-sde-map-is-well-defined",
+          "source_section": "Statement",
+          "quote": "Use the data and coefficient bounds of\n[[def-ito-sde-and-strong-solution]] on $[0,T]$, with $T\\ge0$, dimensions\n$d,m\\ge1$, Lipschitz constant $L$, and growth constant $K$. Let\n$\\mathcal H_T$ be the set of adapted continuous $\\mathbb R^d$-valued\nprocesses $Z$ with $\\|Z\\|_t^2:=E\\sup_{0\\le u\\le t}|Z_u|^2<\\infty$ for\n$0\\le t\\le T$. Use everywhere-continuous adapted representatives as in [[def-ito-sde-and-strong-solution]]; changing them on the $\\mathcal F_0$-measurable null complement of a common continuity event preserves the path norm and It\u00f4-integral classes. For $Z\\in\\mathcal H_T$ define\n$$\\Phi(Z)_t:=X_0+\\int_0^t b(s,Z_s)\\,ds+\\left(\\sum_{k=1}^m\\int_0^t\\sigma^{ik}(s,Z_s)\\,dW_s^k\\right)_{i=1}^d.$$\nThe integrals are well-defined, $\\Phi(Z)\\in\\mathcal H_T$, and, with\n$$C_g:=6K^2T+24mK^2,\\qquad C_d:=2TL^2+8mL^2,$$\nthe following bounds hold for every $t\\in[0,T]$ and $Z,V\\in\\mathcal H_T$:\n$$E\\sup_{0\\le u\\le t}|\\Phi(Z)_u|^2\\le 3E|X_0|^2+C_g\\int_0^t(1+\\|Z\\|_s^2)\\,ds,$$\n$$E\\sup_{0\\le u\\le t}|\\Phi(Z)_u-\\Phi(V)_u|^2\\le C_d\\int_0^t E\\sup_{0\\le r\\le s}|Z_r-V_r|^2\\,ds.$$\nFor the constant input $Z_t=X_0$,\n$$E\\sup_{0\\le t\\le T}|\\Phi(Z)_t-X_0|^2\\le (4K^2T^2+16mK^2T)(1+E|X_0|^2).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ito-sde-and-strong-solution",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as required by the stochastic-integral interfaces\nbelow. Fix a finite horizon $T\\ge0$ and finite integers $d,m\\ge1$. Work on\na complete filtered probability space\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{0\\le t\\le T},P)$ whose filtration is\nright-continuous and contains every $P$-null subset of $\\mathcal F$ in\n$\\mathcal F_0$ (the usual conditions).\n\nLet $W=(W_t)_{0\\le t\\le T}$ be a standard $m$-dimensional Brownian motion\n[[def-d-dimensional-brownian-motion]] adapted to this filtration, with\n$W_t-W_s$ independent of $\\mathcal F_s$ and distributed as\n$N_m(0,(t-s)I_m)$ for $0\\le s<t\\le T$. Let\n$X_0:\\Omega\\to\\mathbb R^d$ be $\\mathcal F_0$-measurable, satisfy\n$E|X_0|^2<\\infty$, and be independent of the future Brownian increments.\nExplicitly, $X_0$ is independent of the sigma-algebra\n$\\sigma(W_t-W_0:0\\le t\\le T)$.\n\nContinuity of a process means continuity on one measurable event of\nprobability one. We use an everywhere-continuous adapted representative: if\nthe chosen process is continuous only on such an event $A$, replace it off $A$\nby its initial value. Since $A^c$ is a null set and the filtration is complete,\n$A^c\\in\\mathcal F_0$; the replacement preserves adaptedness and changes the\nSDE identity only on a null event, hence preserves it up to\nindistinguishability.\n\nThe drift and diffusion coefficients are jointly Borel maps\n$$b:[0,T]\\times\\mathbb R^d\\to\\mathbb R^d,\\qquad \\sigma:[0,T]\\times\\mathbb R^d\\to\\mathbb R^{d\\times m}.$$\nFor nonnegative finite constants $L,K$, assume for every $t\\in[0,T]$ and\n$x,y\\in\\mathbb R^d$ that\n$$|b(t,x)-b(t,y)|+\\|\\sigma(t,x)-\\sigma(t,y)\\|_F\\le L|x-y|,$$\n$$|b(t,x)|+\\|\\sigma(t,x)\\|_F\\le K(1+|x|).$$\nHere $|\\cdot|$ is the Euclidean norm and\n$\\|A\\|_F^2=\\sum_{i=1}^d\\sum_{k=1}^m|A^{ik}|^2$ is the Frobenius norm.\n\nFor an adapted continuous candidate $X:[0,T]\\times\\Omega\\to\\mathbb R^d$,\nthe vector It\u00f4 equation\n$$X_t=X_0+\\int_0^t b(s,X_s)\\,ds+\\left(\\sum_{k=1}^m\\int_0^t\\sigma^{ik}(s,X_s)\\,dW_s^k\\right)_{i=1}^d,\\qquad 0\\le t\\le T.$$\nuses a pathwise Lebesgue integral for the drift and, in each coordinate, the\nlocalized It\u00f4 integral from\n[[def-continuous-brownian-ito-process]], clause 2. Require\n$\\int_0^T|b(s,X_s)|ds<\\infty$ and\n$\\int_0^T\\|\\sigma(s,X_s)\\|_F^2ds<\\infty$ almost surely; these are the local\ncoefficient-integrability conditions in that definition. When a coordinate\nintegrand has finite expected energy, its integral is the square-integrable\nIt\u00f4 integral of [[def-ito-integral-for-square-integrable-predictable-processes]];\nthe Picard estimates below establish that stronger condition for every input\nin $\\mathcal H_T$. Equality of processes means\nequality for every $t$ on one measurable event of probability one, that is,\nindistinguishability\n[[def-law-modification-and-indistinguishability-of-processes]]. A **strong\nsolution on $[0,T]$** is an adapted continuous process satisfying this\nintegral equation indistinguishably. No moment bound is included in the\ndefinition; the existence theorem proves its $L^2$ path-sup bound.\nThe usual-filtration, continuity, and finite-coordinate conventions agree\nwith the multidimensional class of continuous Brownian It\u00f4 processes\n[[def-continuous-brownian-ito-process]]. This definition makes no ellipticity,\ntransition-density, forward-equation, or time-reversal assertion.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fatou-lemma",
+          "source_section": "Statement",
+          "quote": "Let $(f_n)$ be nonnegative measurable functions. Then\n$$\\int \\liminf_{n\\to\\infty}f_n\\,d\\mu\\le\\liminf_{n\\to\\infty}\\int f_n\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-lipschitz-sde-local-solution-has-finite-path-moment",
+          "source_section": "Statement",
+          "quote": "Use the coefficient and initial-value hypotheses of\n[[def-ito-sde-and-strong-solution]] on a finite horizon $[0,T]$. If $Y$ is\nany adapted continuous solution of that SDE whose drift and diffusion\nintegrals are locally defined as in the Definition, then\n$$E\\sup_{0\\le t\\le T}|Y_t|^2<\\infty.$$\nThus the usual local-integrability definition of strong solution entails the\npath-sup square-integrability used by the Picard estimates.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers ([[def-real-limit]]) converges to a real\nnumber. Together with [[thm-reals-ordered-field]], this completes the\nconstruction: $\\mathbb{R}$ is a complete totally ordered field.\nThe proof uses no form of the axiom of choice.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $T=0$, set $X_0$ as the sole value of the process; both integrals vanish, the path-sup bound follows from $(1+3E|X_0|^2)\\ge E|X_0|^2$, and any two solutions with that initial value agree. For $T>0$, let $\\Phi$ be the map of [F1], set $X^0_t=X_0$, and recursively set $X^{n+1}=\\Phi(X^n)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $a_n(t)=E\\sup_{u\\le t}|X^n_u-X^{n-1}_u|^2$ for $n\\ge1$. By [F1], $a_1(T)\\le A_T:= (4K^2T^2+16mK^2T)(1+E|X_0|^2)$ and $a_{n+1}(t)\\le C_d\\int_0^t a_n(s)ds$. Induction on $n$ gives $a_n(t)\\le A_TC_d^{n-1}t^{n-1}/(n-1)!$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The majorant series $\\sum_{n\\ge1}\\sqrt{A_TC_d^{n-1}T^{n-1}/(n-1)!}$ converges. If $A_T=0$, it is identically zero; if $C_dT=0$, every term after the first is zero; otherwise the ratio of consecutive terms is $\\sqrt{C_dT/n}\\to0$. By [F4], $E\\sup|X^n-X^{n-1}|\\le\\sqrt{a_n(T)}$ and monotone convergence gives $E\\sum_n\\sup|X^n-X^{n-1}|=\\sum_nE\\sup|X^n-X^{n-1}|<\\infty$; hence that nonnegative series is finite almost surely. On this event, for every $t$ the vector sequence $(X^n_t)_n$ is Cauchy, since $\\sup_{u\\le T}|X^m_u-X^n_u|\\le\\sum_{j=n+1}^m\\sup_{u\\le T}|X^j_u-X^{j-1}_u|$; [F7] gives the coordinate limits and therefore a vector limit $X_t$. Letting $m\\to\\infty$ in the same inequality bounds $\\sup_{t\\le T}|X^n_t-X_t|$ by the tail of the summable series, which tends to zero. Thus the convergence is almost surely uniform. For finite tails the $L^2$ triangle inequality follows by expanding the square and applying Cauchy\u2013Schwarz, so $\\|X^m-X^n\\|_{L^2(\\sup)}\\le\\sum_{j=n+1}^m\\sqrt{a_j(T)}$. Fatou's lemma [F4] then gives $E\\sup_{t\\le T}|X^n_t-X_t|^2\\le(\\sum_{j=n+1}^{\\infty}\\sqrt{a_j(T)})^2\\to0$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "step 2.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $A$ be the measurable probability-one event on which that series of path suprema is finite; measurability follows because each supremum is a supremum over the countable dense set in [F5]. Uniform convergence makes $X$ continuous on $A$; completeness gives $A^c\\in\\mathcal F_0$, so set $X_t=X_0$ on $A^c$. For each fixed $t$, the limit on $A$ of the $\\mathcal F_t$-measurable $X^n_t$, together with the $\\mathcal F_0$-measurable value on $A^c$, is $\\mathcal F_t$-measurable. Thus $X$ is adapted and continuous, and its $L^2$ path-sup convergence places it in the class of [F2].",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 3.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For every $n$, $X^{n+1}=\\Phi(X^n)$. The difference estimate of [F1] gives $E\\sup_{u\\le T}|\\Phi(X^n)_u-\\Phi(X)_u|^2\\le C_dT E\\sup_{u\\le T}|X^n_u-X_u|^2\\to0$. Since $X^{n+1}\\to X$ in the same norm by step 3.1, uniqueness of an $L^2$ limit implies $\\Phi(X)=X$ indistinguishably. Hence $X$ satisfies the SDE.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Write $f(t)=E\\sup_{u\\le t}|X_u|^2$. The growth estimate of [F1] and $X=\\Phi(X)$ imply $f(t)\\le3E|X_0|^2+C_T\\int_0^t(1+f(s))ds$. Put $g=1+f$ and $H(t)=1+3E|X_0|^2+C_T\\int_0^tg(s)ds$. Then $g\\le H$, $H(0)=1+3E|X_0|^2$, and $H'(t)=C_Tg(t)\\le C_TH(t)$ almost everywhere. Consequently $(e^{-C_Tt}H(t))'\\le0$ almost everywhere, so $f(T)\\le g(T)\\le(1+3E|X_0|^2)e^{C_TT}$.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "If $Y$ is any other strong solution with the same data, then $Y=\\Phi(Y)$ by [F2] and $Y\\in\\mathcal H_T$ by [F6]. The difference estimate in [F1] gives $q(t):=E\\sup_{u\\le t}|X_u-Y_u|^2\\le C_d\\int_0^tq(s)ds$. With $Q(t)=C_d\\int_0^tq(s)ds$, one has $Q(0)=0$ and $Q'\\le C_dQ$ almost everywhere, hence $Q=q=0$. Thus $\\sup_{t\\le T}|X_t-Y_t|=0$ almost surely, which is indistinguishability. AC is exactly the inherited assumption [F3].",
+          "step": "7.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 handles T=0 with the sole process value X_0, vanishing drift/noise integrals and immediate uniqueness; the horizon singleton is not an unhandled empty path."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: When K=0 the coefficients vanish; the proof still give the stated bound and uniqueness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: The finite-dimensional estimates in the proof\u20132.1 include d=m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: The Statement imposes no ellipticity, and the proof proves uniqueness for any sigma."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement boundary: the proof treats T=0; the proof bounds the endpoint T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement boundary: the proof uses the countable Picard recursion; the proof records only inherited AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts existence and uniqueness, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem contains no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-finite-horizon-moments-for-lipschitz-ito-sdes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-global-strong-well-posedness-for-lipschitz-ito-sdes",
+          "source_section": "Statement",
+          "quote": "Assume the data and hypotheses of\n[[def-ito-sde-and-strong-solution]] on $[0,T]$, with $T\\ge0$, finite\ndimensions $d,m\\ge1$, Lipschitz constant $L$, and linear-growth constant\n$K$. There is a strong solution $X$ on the given filtered probability space.\nIt is unique up to indistinguishability among strong solutions with the same\ninitial value and Brownian driver, and it satisfies\n$$E\\sup_{0\\le t\\le T}|X_t|^2\\le(1+3E|X_0|^2)e^{C_TT},\\qquad C_T:=6K^2T+24mK^2.$$\nThe bound is independent of any later numerical mesh.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-adapted-continuous-processes-are-progressively-measurable",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$, and let $X=(X_t)_{t\\ge0}$ be a real process\nthat satisfies $X_t:\\Omega\\to\\mathbb R$ is $\\mathcal F_t$-measurable for every $t\\ge0$, and has\ncontinuous paths, in the strong sense that $s\\mapsto X_s(\\omega)$ is continuous\non $[0,\\infty)$ for every $\\omega\\in\\Omega$. Then $X$ is progressively\nmeasurable and predictable relative to $(\\mathcal F_t)$ in the sense of\n[[def-progressively-measurable-and-predictable-process]], including at time\nzero under the generator convention $\\{0\\}\\times A$, $A\\in\\mathcal F_0$. No\nchoice principle is used. Here a filtration means an increasing family of\nsub-sigma-algebras of $\\mathcal F$. The fixed-time measurability hypothesis\nis the adaptedness terminology of clause 1 of\n[[def-continuous-time-adapted-process-and-martingale]]; only that clause is\nused, not its conditional-expectation or martingale interface and its Choice\nassumption.\n\nIf instead the paths are continuous only on an event $A\\in\\mathcal F$ with\n$P(A)=1$, the conclusion holds for the modification that is set equal to $0$\noff $A$ provided $A\\in\\mathcal F_0$; without such a measurability assumption on\nthe continuity event no predictability claim is made, because predictability\nis a property of the given joint map.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes here\nare real-valued and indexed by $[0,\\infty)$. AC is inherited from the cited\ncontinuous-time-filtration interface, whose separate martingale clause uses\nconditional expectation. Once the filtered probability space and stopping\ntimes are given, the progressive and predictable constructions below make no\nadditional choice: they use only generated sigma-algebras and product\nrectangles.\n\n1. **Progressively measurable.** A process $X=(X_t)_{t\\ge0}$ is\n   **progressively measurable** relative to $(\\mathcal F_t)$ when for every\n   $t\\ge0$ the restricted map\n   $[0,t]\\times\\Omega\\to\\mathbb R$, $(s,\\omega)\\mapsto X_s(\\omega)$, is\n   measurable for the product sigma-algebra\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$\n   [[def-product-sigma-algebra-and-finite-product-sigma-algebras]].\n\n2. **Time-zero and interval generators.** On the product space\n   $[0,\\infty)\\times\\Omega$, let $\\mathcal P$ be the sigma-algebra generated by\n   the family\n   $$\\mathcal G:=\\bigl\\{(s,u]\\times A:\\ 0\\le s<u<\\infty,\\ A\\in\\mathcal F_s\\bigr\\}\\ \\cup\\ \\bigl\\{\\{0\\}\\times A:\\ A\\in\\mathcal F_0\\bigr\\}.$$\n   The interval generators with $s=0$ are included, so $(0,u]\\times A$ with\n   $A\\in\\mathcal F_0$ is a generator. The sigma-algebra $\\mathcal P$ exists by\n   [[thm-generated-sigma-algebra-exists-and-is-minimal]] and is called the\n   **predictable sigma-algebra**. A process $H=(H_t)_{t\\ge0}$ is\n   **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is\n   $\\mathcal P$-measurable. For a finite horizon $T>0$ we write\n   $\\mathcal P_T$ for the sigma-algebra on $[0,T]\\times\\Omega$ generated by the\n   same family restricted to $u\\le T$ together with the time-zero generators;\n   this is the trace of $\\mathcal P$ on $[0,T]\\times\\Omega$. Indeed, the\n   trace of an interval generator is empty when $s\\ge T$, and otherwise is\n   $(s,\\min(u,T)]\\times A$, while time-zero generators are unchanged.\n   Conversely every listed finite-horizon generator is such a trace.\n\n3. **Sections, adaptedness, and null sets.** Two structural conventions are\n   used repeatedly and are part of the definition.\n   (a) Every generator is a measurable rectangle of\n   $\\mathcal B([0,\\infty))\\otimes\\mathcal F$, hence\n   $\\mathcal P\\subseteq\\mathcal B([0,\\infty))\\otimes\\mathcal F$; the time-zero\n   generator $\\{0\\}\\times A$ has $dt\\otimes P$-measure zero for every $A$. A\n   set in $\\mathcal P$ has its section at each fixed time $s$ in $\\mathcal F_s$:\n   sets with that section property form a sigma-algebra, and each generator\n   has the property by the increasing-filtration condition. Its section at\n   each fixed $\\omega$ is Borel in time, by the same sigma-algebra argument.\n   (b) If a process is predictable then it is progressively measurable: for\n   $s\\le t$ the section $\\omega\\mapsto H_s(\\omega)$ is $\\mathcal F_s$-measurable\n   $\\subseteq\\mathcal F_t$-measurable, and the progressive-measurability claim\n   is the restriction of the joint map to $[0,t]\\times\\Omega$; the restriction\n   of a $\\mathcal P$-measurable map to $[0,t]\\times\\Omega$ is measurable for\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$ because every generator with $u\\le t$\n   lies in that product sigma-algebra and the generators with $u>t$ have\n   intersection with $[0,t]\\times\\Omega$ of the form $(s,t]\\times A$ with\n   $s<t$ and $A\\in\\mathcal F_s$, or the empty set when $s\\ge t$.\n   The time-zero generators also lie in\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$.\n\nThe family $\\mathcal G$ need not itself contain the whole space, but a finite intersection\nof generators is empty or again a generator, or a time-zero generator, because\n$(s,u]\\cap(s',u']=(s\\vee s',u\\wedge u']$ and $A\\cap A'\\in\\mathcal F_{s\\vee s'}$\nwhenever $A\\in\\mathcal F_s$, $A'\\in\\mathcal F_{s'}$, while\n$\\{0\\}\\times A$ is disjoint from every interval generator, including\n$(0,u]\\times A'$. Two time-zero generators intersect in\n$\\{0\\}\\times(A\\cap A')$ with $A\\cap A'\\in\\mathcal F_0$.\nThus the family consisting of the whole space\ntogether with finite intersections of generators is a pi-system generating\n$\\mathcal P$; this is the structural fact used by the density theorem below.\n\nBecause predictability is a measurability requirement for the joint map, it is\npreserved by pointwise limits, products and linear combinations of predictable\nprocesses. A deterministic function $h$ of time defines a predictable process\nexactly when $h$ is Borel measurable: the sets $C$ for which\n$C\\times\\Omega\\in\\mathcal P$ form a sigma-algebra containing the intervals\n$(s,u]$ and $\\{0\\}$, hence all Borel sets. Conversely, take any fixed\n$\\omega\\in\\Omega$ (a probability space is nonempty) and use the Borel\ntime-section property from 3(a) on every inverse image of an open set.\nThis single choice uses no choice axiom. In particular the\nindicators $1_{[0,u]}$ and $1_{(0,u]}$ are predictable for every deterministic\n$u\\ge0$, and the process $s\\mapsto 1_{s\\le\\tau(\\omega)}$ for a stopping time\n$\\tau$ [[def-continuous-time-stopping-time]] is predictable, since\n$$\\{(s,\\omega):s>\\tau(\\omega)\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}(q,\\infty)\\times\\{\\tau<q\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}\\bigcup_{n>q}(q,n]\\times\\{\\tau<q\\}$$\nis a countable union of generators: for rational $q>0$ one has\n$\\{\\tau<q\\}=\\bigcup_{q'<q,\\ q'\\in\\mathbb Q}\\{\\tau\\le q'\\}\\in\\mathcal F_q$. The\ncomplement of that set inside $[0,\\infty)\\times\\Omega$ is the event of the\nindicator, so $1_{[0,\\tau]}$ is predictable; its left-continuity in the time\nvariable is the visual form of the same computation.\n\nNo completeness of the filtration and no right continuity of $(\\mathcal F_t)$\nis used or assumed. Apart from the inherited ambient assumption just recorded,\nthe constructions in this definition are choice-free.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-continuous-brownian-ito-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]: $B$ is a standard Brownian\nmotion on a filtered probability space, adapted to $(\\mathcal F_t)_{t\\ge0}$,\nwith $B_t-B_s$ independent of $\\mathcal F_s$ of law $N(0,t-s)$ for $0\\le s<t$.\nFor this localized-calculus definition the filtration satisfies the usual\nconditions, as required by\n[[def-locally-square-integrable-predictable-brownian-integrand]].\n\n1. **Real continuous Brownian Ito process.** A real progressively measurable process\n   $X=(X_t)_{t\\ge0}$ is a **continuous Brownian Ito process** when there are\n   * a finite real $\\mathcal F_0$-measurable $X_0$,\n   * a real progressively measurable process $b=(b_s)_{s\\ge0}$\n     [[def-progressively-measurable-and-predictable-process]] with\n     $\\int_0^t|b_s|\\,ds<\\infty$ almost surely for every finite $t\\ge0$, and\n   * a real predictable process $\\sigma=(\\sigma_s)_{s\\ge0}$, locally\n     square-integrable in the sense that $\\int_0^t\\sigma_s^2\\,ds<\\infty$\n     almost surely for every finite $t$\n     [[def-locally-square-integrable-predictable-brownian-integrand]],\n\n   such that, up to equality at all times on a measurable probability-one event,\n   $$X_t=X_0+\\int_0^tb_s\\,ds+\\int_0^t\\sigma_s\\,dB_s,\\qquad t\\ge0,$$\n   where the first integral is the pathwise Lebesgue integral of $s\\mapsto\n   b_s(\\omega)$ and the second is the localized Ito integral\n   $\\sigma\\cdot B$ of [[thm-localized-ito-integral]]. One writes\n   $\\displaystyle dX_t=b_t\\,dt+\\sigma_t\\,dB_t$ for the display, and $b$ is\n   called the **drift** and $\\sigma$ the **diffusion coefficient** of this\n   representation.\n\n2. **Multidimensional Brownian-driven process.** Let $d\\ge1$ and $m\\ge1$ be\n   finite integers, let $B=(B^1,\\dots,B^m)$ be a standard $m$-dimensional\n   Brownian motion [[def-d-dimensional-brownian-motion]] that is adapted to\n   $(\\mathcal F_t)$ and whose vector increment $B_t-B_s$ is independent of\n   $\\mathcal F_s$ for $0\\le s<t$, let $X_0$ be a finite\n   $\\mathcal F_0$-measurable $\\mathbb R^d$-valued random vector, let $b$ be an\n   $\\mathbb R^d$-valued progressively measurable process with\n   $\\int_0^t|b^i_s|\\,ds<\\infty$ almost surely for every $i$ and finite $t$, and let\n   $\\sigma=(\\sigma^{ik})$ be an $\\mathbb R^{d\\times m}$-valued predictable\n   process, each entry predictable\n   [[def-progressively-measurable-and-predictable-process]], with\n   $\\int_0^t(\\sigma^{ik}_s)^2\\,ds<\\infty$ almost surely for every $i,k$ and finite $t$.\n   Then\n   $$X^i_t=X^i_0+\\int_0^tb^i_s\\,ds+\\sum_{k=1}^m\\int_0^t\\sigma^{ik}_s\\,dB^k_s, \\qquad i=1,\\dots,d,$$\n   defines an $\\mathbb R^d$-valued **continuous Brownian Ito process** driven by\n   $B$, using the progressive integral versions of [[thm-localized-ito-integral]]. Other progressive representatives agreeing on one measurable full event at every time represent the same process. No claim is made that an arbitrary null-path modification remains adapted.\n\nThe following well-definedness clauses are part of the definition and are used\nthroughout.\n\n3. **The drift integral is a genuine pathwise integral.** Progressive\n   measurability gives measurable sections and makes the positive and negative\n   integrals $\\mathcal F_t$-measurable by the parameter-integral part of Tonelli\n   [[thm-tonelli-theorem-for-sigma-finite-product-spaces]], applied to Lebesgue measure on $[0,t]$ and the probability measure on $\\mathcal F_t$.\n   On the event where both extended integrals are finite, their difference is\n   the drift integral; set it to zero otherwise. This is an adapted measurable\n   convention, is finite everywhere, and on one probability-one event is\n   absolutely continuous on every finite interval (take the countable\n   intersection over integer horizons). It is progressive: the map\n   $(t,\\omega)\\mapsto\\int_0^tb_s(\\omega)\\,ds$, with the preceding finite-value\n   convention, is measurable on every $[0,T]\\times\\Omega$ by parameter\n   integration, and is adapted. Thus the definition uses the standard\n   almost-sure drift and local-energy classes under the usual conditions.\n\n4. **The stochastic integral exists, is unique and is continuous.** By\n   [[def-locally-square-integrable-predictable-brownian-integrand]] and\n   [[thm-localized-ito-integral]] the localized integral $\\sigma\\cdot B$ is a\n   well-defined adapted process with continuous paths, unique up to\n   indistinguishability, and each of its finite-energy pieces is a\n   square-integrable martingale. The displayed integral representative is progressive; $X$ is adapted by its required progressive measurability and has\n   continuous paths, $X_t$ is finite almost surely for each $t$, and\n   $M^i_t:=\\sum_k\\int_0^t\\sigma^{ik}_s\\,dB^k_s$ is a continuous local\n   martingale relative to $(\\mathcal F_t)$ in the sense of\n   [[def-continuous-time-adapted-process-and-martingale]] for every $i$, with the common energy localizers described in clause 6.\n\n5. **The coefficients are not part of the process.** A continuous Brownian Ito\n   process may admit several representations $X=X_0+b\\cdot\\mathrm{Leb}\n   +\\sigma\\cdot B$ with different pointwise representatives $(b,\\sigma)$ (for example, altering a coefficient only at the single time zero), even for the same Brownian\n   motion and filtration; this does not assert nonuniqueness of their equivalence classes modulo $\\mathrm dt\\otimes P$; conversely, two processes with the same displayed\n   integral representation and the same $X_0$ are indistinguishable. Every\n   statement on this page that mentions a decomposition uses only properties\n   common to all representations of the given process. The separate\n   quadratic-covariation definition that follows this item on its owning page\n   is formulated from $X$ itself and not from $(b,\\sigma)$; no\n   quadratic-covariation definition is made inside this item.\n\n6. **The class is closed under stopping and under linear combinations.**\n   If $\\tau$ is a stopping time, the literal stopped process $X^\\tau$ is\n   progressive. Indeed on $[0,T]\\times\\Omega$ the map\n   $(t,\\omega)\\mapsto(t\\wedge\\tau(\\omega),\\omega)$ is measurable into\n   $\\mathcal B([0,T])\\otimes\\mathcal F_T$: the truncated time $\\tau\\wedge T$\n   is $\\mathcal F_T$-measurable, minimum is continuous, and rectangle inverse\n   images give the assertion. Compose with the progressive restriction of $X$.\n   Its drift is $b1_{[0,\\tau]}$ and its diffusion is\n   $\\sigma1_{[0,\\tau]}$; these retain almost-sure integrability and the required\n   progressive/predictable measurability. The drift identity is pathwise.\n   For the stochastic identity, apply the finite-energy stopping identity of\n   [[thm-localized-ito-integral]], clause 4, on the canonical energy intervals\n   of $\\sigma$. The truncated integrand has finite energy on these same\n   intervals. Comparing its canonical intervals with them at their pairwise\n   minima by clause 4 identifies the localized integrals there. Countably\n   many full-event agreements and exhaustion then give the identity at all\n   times on one full event. Thus stopping closure uses localization, not a\n   direct application of clause 4 to a possibly infinite-energy integrand.\n   For finitely many coefficients, use the common continuous energy\n   $E_t=\\sum_{i,k}\\int_0^t(\\sigma^{ik}_s)^2ds$ and times\n   $\\kappa_n=\\inf\\{t:E_t\\ge n\\}\\wedge n$, $n\\ge1$.\n   The same continuous-energy test as in the local-integrability definition\n   makes these stopping times increasing to infinity almost surely, and bounds\n   every stopped coefficient's expected energy by $n$. The preceding\n   pairwise-minimum comparison shows that every integral stopped there is its\n   finite-energy integral. Finite sums of these square-integrable martingales\n   are martingales: finite sums preserve adaptation and integrability, and summing the integral test over any $A\\in\\mathcal F_s$ proves the conditional-expectation identity; hence their sums\n   are local martingales with this common sequence. For fixed real constants,\n   finite linear combinations of processes driven by the same vector Brownian\n   motion have the combined coefficients. Their integrability follows from\n   the triangle inequality and $(\\sum_{j=1}^r u_j)^2\\le r\\sum_j u_j^2$.\n\n7. **No pathwise integral against Brownian motion is defined.** The display\n   defines the stochastic integral only as the localized limit of\n   [[thm-localized-ito-integral]]; no integral $\\int_0^tH_s(\\omega)\\,dB_s(\\omega)$\n   along the individual path is asserted, and the page's examples show that\n   the pathwise Riemann--Stieltjes route is unavailable.\n\nNo choice beyond the declared AC of the ambient interfaces enters the\nconstruction: the coefficients $b,\\sigma$ and the process are given data, and\nthe canonically localized integral is constructed in\n[[thm-localized-ito-integral]]. The Axiom of Choice is declared because the\nconditional-expectation and $L^2$ interfaces used downstream assume it, and\nthe countable-choice obligations inherited from those interfaces are declared\nas dependencies of this item.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-multidimensional-ito-formula-for-brownian-driven-processes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Let $m,d\\ge1$ be finite\nintegers, let $B=(B^1,\\dots,B^m)$ be a standard $m$-dimensional Brownian motion,\nand let $X$ be an $\\mathbb R^d$-valued continuous Brownian Ito process\n$$X^i_t=X^i_0+\\int_0^tb^i_s\\,ds+\\sum_{k=1}^m\\int_0^t\\sigma^{ik}_s\\,dB^k_s, \\qquad i=1,\\dots,d,$$\nin the sense of [[def-continuous-brownian-ito-process]], including its usual-filtration and almost-sure coefficient-integrability conventions. Let\n$f\\in C^{1,2}([0,\\infty)\\times\\mathbb R^d)$, meaning that $f,\\partial_tf$,\n$\\partial_if$ and $\\partial_i\\partial_jf$ ($1\\le i,j\\le d$) exist and are\ncontinuous. Then, up to indistinguishability, for every $t\\ge0$\n$$f(t,X_t)=f(0,X_0)+\\int_0^t\\Bigl(\\partial_tf+\\sum_ib^i\\partial_if+\\tfrac12\\sum_{i,j}(\\sigma\\sigma^{\\mathsf T})^{ij}\\partial_i\\partial_jf\\Bigr)(s,X_s)\\,ds+\\sum_{i,k}\\int_0^t\\partial_if(s,X_s)\\sigma^{ik}_s\\,dB^k_s,$$\nFor the displayed integrands, intersect the measurable full events of continuity and the decomposition of $X$, and of coefficient integrability at all integer horizons. Its null complement belongs to $\\mathcal F_0$ under the usual conditions. Set $X,X_0,b,\\sigma$ to zero there. These representatives preserve all coefficient classes and the decomposition up to indistinguishability, with everywhere continuous $X$ and everywhere locally finite coefficient path integrals. All displayed integrands use these representatives.\n\nThe stochastic integrals are localized Ito integrals of the predictable\nlocally square-integrable integrands $\\partial_if(\\cdot,X)\\sigma^{ik}$, and\n$(\\sigma\\sigma^{\\mathsf T})^{ij}_s=\\sum_k\\sigma^{ik}_s\\sigma^{jk}_s$. In\ndifferential form,\n$df(t,X_t)=\\bigl(\\partial_tf+\\sum_ib^i\\partial_if+\\tfrac12\\sum_{i,j}(\\sigma\\sigma^{\\mathsf T})^{ij}\\partial_i\\partial_jf\\bigr)(t,X_t)\\,dt+\\sum_{i,k}\\partial_if(t,X_t)\\sigma^{ik}_t\\,dB^k_t$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-stopping-an-ito-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Let $H$ be a locally\nsquare-integrable predictable process\n[[def-locally-square-integrable-predictable-brownian-integrand]] with localized\nintegral $H\\cdot B$ in the progressively measurable version of\n[[thm-localized-ito-integral]], with its measurable-full-event convention\nfor indistinguishability. The filtration satisfies the usual conditions and\nlocal energy is finite almost surely on every finite horizon, as required by\nthe local-integrability definition. Let $\\tau$ be a\nstopping time [[def-continuous-time-stopping-time]]. Then the process\n$s\\mapsto(H\\cdot B)_{s\\wedge\\tau}$ and the localized integral of the process\n$1_{[0,\\tau]}H$ are indistinguishable:\n$$(H\\cdot B)_{t\\wedge\\tau}=\\int_0^t1_{[0,\\tau]}(s)H_s\\,dB_s\\qquad\\text{for every }t\\ge0\\text{, up to indistinguishability}.$$\nIn particular, for $H$ of finite energy this reduces to the stopping identity\nof [[thm-localized-ito-integral]], and for $\\tau\\equiv\\infty$ it is the\ndefinition of the localized integral.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ito-integral-process-has-a-continuous-martingale-version",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Let $H$ be a predictable\nprocess with $E\\int_0^TH_s^2ds<\\infty$ for every finite $T$. Then there is an\nadapted process $M=(M_t)_{t\\ge0}$ with continuous paths such that\n$M_t=\\int_0^tH_s\\,dB_s$ almost surely for every $t\\ge0$\n[[def-ito-integral-for-square-integrable-predictable-processes]], and $M$ is a\nsquare-integrable martingale relative to $(\\mathcal F_t)$\n[[def-continuous-time-adapted-process-and-martingale]]: $EM_t^2=E\\int_0^tH_s^2ds<\\infty$\nfor every $t$. Any two such continuous versions agree at every time on one\nmeasurable event of probability one; in particular the continuous version is\nunique in this common-full-measure-event sense, and it is the only continuous\nsquare-integrable martingale whose value at each deterministic $t$ is the\nintegral class.\n\nThis conclusion is deliberately distinguished from the exact definition of\nindistinguishability in\n[[def-law-modification-and-indistinguishability-of-processes]]. On a\nnoncomplete probability space the full equality set, although it contains the\nmeasurable probability-one event constructed below, need not itself be\nmeasurable. On a complete probability space the two notions coincide, because\nthe complement of the equality set is then a measurable subset of a null set.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ito-isometry-and-linearity-in-predictable-l2",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Fix $T>0$. For predictable\n$H,K$ with finite energy $E\\int_0^TH^2ds,E\\int_0^TK^2ds<\\infty$ the integrals\n$\\int_0^TH\\,dB$ of\n[[def-ito-integral-for-square-integrable-predictable-processes]] satisfy\n$$\\int_0^T(H+K)\\,dB=\\int_0^TH\\,dB+\\int_0^TK\\,dB,\\qquad \\int_0^T(aH)\\,dB=a\\int_0^TH\\,dB\\quad(a\\in\\mathbb R),$$\nand the identities are equalities of $L^2(P)$-classes (almost sure\nequalities). Moreover the map $H\\mapsto\\int_0^TH\\,dB$ is an isometry,\n$$E\\Bigl(\\int_0^TH\\,dB\\Bigr)^2=E\\int_0^TH^2ds=\\|H\\|^2_{L^2(\\mathrm dt\\otimes P)},$$\nit takes values in the mean-zero subspace of $L^2(P)$, and the bilinear cross\nidentity\n$$E\\Bigl[\\Bigl(\\int_0^TH\\,dB\\Bigr)\\Bigl(\\int_0^TK\\,dB\\Bigr)\\Bigr]=E\\int_0^TH_sK_s\\,ds$$\nholds for all such $H,K$. In particular the image of the map is a closed\nsubspace of $L^2(P)$ isometric to the predictable $L^2$ space of $H$'s, and\n$H\\mapsto\\int_0^TH\\,dB$ is injective up to the $(\\mathrm dt\\otimes P)$-class.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-continuous-time-stopping-time",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space and let\n$(\\mathcal F_t)_{t\\ge0}$ be a continuous-time filtration\n[[def-continuous-time-filtration-and-all-pairs-martingale]].\n\n1. A map $\\tau:\\Omega\\to[0,\\infty]$ (infinite values allowed) is a **stopping\n   time** for $(\\mathcal F_t)$ when\n   $$\\{\\tau\\le t\\}\\in\\mathcal F_t\\qquad\\text{for every }t\\ge0 .$$\n2. For a stopping time $\\tau$ its **stopped sigma-algebra** is\n   $$\\mathcal F_\\tau:=\\{A\\in\\mathcal F:A\\cap\\{\\tau\\le t\\}\\in\\mathcal F_t \\text{ for every }t\\ge0\\}.$$\n\nThe following facts are used below, and each is a direct set computation.\n\n(a) $\\mathcal F_\\tau$ is a sigma-algebra: $\\emptyset\\cap\\{\\tau\\le\n    t\\}=\\emptyset\\in\\mathcal F_t$; for $A\\in\\mathcal F_\\tau$ one has\n    $A^c\\cap\\{\\tau\\le t\\}=\\{\\tau\\le t\\}\\setminus(A\\cap\\{\\tau\\le t\\})\\in\\mathcal\n    F_t$; and for a sequence $A_n\\in\\mathcal F_\\tau$ the union satisfies\n    $\\bigl(\\bigcup_nA_n\\bigr)\\cap\\{\\tau\\le t\\}=\\bigcup_n(A_n\\cap\\{\\tau\\le\n    t\\})\\in\\mathcal F_t$. All operations are literal, not modulo null sets, and\n    no completeness of the filtration is assumed.\n(b) If $\\tau\\equiv t_0<\\infty$ is deterministic, then\n    $A\\cap\\{\\tau\\le t\\}$ is $A$ for $t\\ge t_0$ and $\\emptyset$ for $t<t_0$, so\n    $\\mathcal F_\\tau=\\bigcap_{t\\ge t_0}\\mathcal F_t=\\mathcal F_{t_0}$, where\n    the last equality follows because the intersection includes its least\n    member $\\mathcal F_{t_0}$. If $\\tau\\equiv\\infty$, then every test event\n    $\\{\\tau\\le t\\}$ is empty and $\\mathcal F_\\tau=\\mathcal F$.\n(c) Suppose the filtration is right-continuous. Then $\\tau$ is a stopping time\n    if and only if $\\{\\tau<t\\}\\in\\mathcal F_t$ for every $t>0$. Indeed\n    $$\\{\\tau<t\\}=\\bigcup_{n\\ge1}\\{\\tau\\le t-\\tfrac1n\\}$$\n    (with the terms for $t-\\tfrac1n<0$ read as the empty set, since\n    $\\tau\\ge0$), which gives the forward implication; conversely\n    $$\\{\\tau\\le t\\}=\\bigcap_{n\\ge1}\\{\\tau<t+\\tfrac1n\\},$$\n    and $\\bigcap_n\\mathcal F_{t+1/n}=\\bigcap_{s>t}\\mathcal F_s=\\mathcal F_t$ by\n    right-continuity together with monotonicity of the filtration.\n(d) Under the same right-continuity assumption, for $A\\in\\mathcal F$ one has\n    $A\\in\\mathcal F_\\tau$ if and only if $A\\cap\\{\\tau<t\\}\\in\\mathcal F_t$ for\n    every $t>0$: the forward implication follows from\n    $A\\cap\\{\\tau<t\\}=\\bigcup_n(A\\cap\\{\\tau\\le t-\\tfrac1n\\})$ and the converse\n    from $A\\cap\\{\\tau\\le t\\}=\\bigcap_n(A\\cap\\{\\tau<t+\\tfrac1n\\})$ together with\n    $\\bigcap_n\\mathcal F_{t+1/n}=\\mathcal F_t$.\n\nBecause the two versions of each test are interchangeable exactly when the\nfiltration is right-continuous, the convention is recorded here once: the\nBrownian strong Markov theorem is stated for the usual augmentation, which is\nright-continuous, and the raw-filtration statements use the non-strict test\ndirectly. No choice principle is used by this definition.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fatou-lemma",
+          "source_section": "Statement",
+          "quote": "Let $(f_n)$ be nonnegative measurable functions. Then\n$$\\int \\liminf_{n\\to\\infty}f_n\\,d\\mu\\le\\liminf_{n\\to\\infty}\\int f_n\\,d\\mu.$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $T=0$, then $|X_0|^p\\le2^{p/2}(1+|X_0|^p)$ and the result follows. For $T>0$, put $V(x)=(1+|x|^2)^{p/2}$. It is $C^2$ and $\\partial_iV=p x_i(1+|x|^2)^{p/2-1},\\quad \\partial_{ij}V=p\\delta_{ij}(1+|x|^2)^{p/2-1}+p(p-2)x_ix_j(1+|x|^2)^{p/2-2}.$ The gradient bound follows from $|x|\\le(1+|x|^2)^{1/2}$. The Hessian is a nonnegative multiple of $I$ plus a nonnegative multiple of $xx^{\\mathsf T}$, so it is positive semidefinite. Its eigenvalues orthogonal to $x$ are $p(1+|x|^2)^{p/2-1}$, and the eigenvalue in the $x$ direction is $p(1+|x|^2)^{p/2-2}(1+(p-1)|x|^2)$; each is at most $p(p-1)(1+|x|^2)^{p/2-1}$ because $p\\ge2$. At $x=0$ all eigenvalues equal $p$, which obeys the same bound.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F1], $E\\sup_{t\\le T}|X_t|^2<\\infty$, so [F2] makes $b(\\cdot,X_\\cdot)$ progressive and $\\sigma(\\cdot,X_\\cdot)$ predictable. The growth bound gives $E\\int_0^T\\bigl(|b(s,X_s)|^2+\\|\\sigma(s,X_s)\\|_F^2\\bigr)ds\\le2K^2T(1+E\\sup_{s\\le T}|X_s|^2)<\\infty.$ Thus the drift-square integral and diffusion energy are finite almost surely; pathwise Cauchy\u2013Schwarz gives $\\int_0^T|b(s,X_s)|ds\\le\\sqrt T(\\int_0^T|b(s,X_s)|^2ds)^{1/2}<\\infty$. Hence $X$ satisfies the continuous Brownian It\u00f4-process hypotheses in [F2].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For $R>0$ define $\\tau_R:=\\inf\\{s\\in[0,T]:|X_s|\\ge R\\}\\wedge T$, with $\\inf\\emptyset=+\\infty$. For $t<T$, $\\{\\tau_R\\le t\\}=\\{\\sup_{s\\le t}|X_s|\\ge R\\}$; by continuity and [F4] that supremum is measurable using the countable rational times in $[0,t]$ and $t$, all of which are $\\mathcal F_t$-measurable. For $t\\ge T$ the event is all of $\\Omega$, so $\\tau_R$ is a stopping time. On $[0,\\tau_R]$ the process is bounded by $R$ unless $|X_0|\\ge R$, in which case $\\tau_R=0$. Hence $1_{[0,\\tau_R]}\\nabla V(X_s)^{\\mathsf T}\\sigma(s,X_s)$ is predictable and has finite energy on $[0,T]$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $\\mathcal L_sV(x)=b(s,x)\\cdot\\nabla V(x)+\\tfrac12\\operatorname{tr}(\\sigma\\sigma^{\\mathsf T}(s,x)D^2V(x))$. The inequality $1+|x|\\le\\sqrt{2(1+|x|^2)}$ follows by squaring and using $(|x|-1)^2\\ge0$, so the drift term has absolute value at most $\\sqrt2\\,pK V(x)$. For each diffusion column $\\sigma_{\\cdot k}$, positive semidefiniteness and the operator-norm bound give $0\\le\\sigma_{\\cdot k}^{\\mathsf T}D^2V\\,\\sigma_{\\cdot k}\\le\\|D^2V\\|_{op}|\\sigma_{\\cdot k}|^2$. Summing over the finite $m$ columns yields $0\\le\\tfrac12\\operatorname{tr}(\\sigma\\sigma^{\\mathsf T}D^2V)\\le p(p-1)K^2V(x)$. Thus $\\mathcal L_sV(x)\\le C_pV(x)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the multidimensional It\u00f4 formula [F2] to $V(X)$ and evaluate the common continuous identity at $t\\wedge\\tau_R$. By the stopping identity and mean-zero finite-energy martingale facts in [F3], the stopped stochastic integral has expectation zero. With $g_R(t):=EV(X_{t\\wedge\\tau_R})$, nonnegativity of $V$ and step 2.1 therefore give $g_R(t)=EV(X_0)+E\\int_0^t1_{[0,\\tau_R]}(s)\\mathcal L_sV(X_s)ds\\le EV(X_0)+C_p\\int_0^tg_R(s)ds.$ The right side is finite: before stopping $X$ is bounded, and on paths stopped at zero the value is $X_0$ with finite $p$th moment.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Set $H_R(t)=EV(X_0)+C_p\\int_0^tg_R(s)ds$. By step 3.1, $g_R\\le H_R$; also $H_R$ is absolutely continuous and $H_R'(t)=C_pg_R(t)\\le C_pH_R(t)$ almost everywhere. Thus $(e^{-C_pt}H_R(t))'\\le0$ almost everywhere, giving $g_R(t)\\le EV(X_0)e^{C_pt}$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Take $R=n\\in\\mathbb N$ and let $n\\to\\infty$. Every continuous path on $[0,T]$ is bounded, so for each fixed $t$ one has $X_{t\\wedge\\tau_n}\\to X_t$ almost surely. Fatou's lemma [F5] and step 4.1 give $EV(X_t)\\le EV(X_0)e^{C_pT}$. Also $V(X_0)=(1+|X_0|^2)^{p/2}\\le2^{p/2}(1+|X_0|^p)$ and $|X_t|^p\\le V(X_t)$. Taking the supremum over $0\\le t\\le T$ proves the stated moment bound. AC is only the inherited interface assumption [F6].",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 4.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 handles T=0 by |X_0|^p<=2^(p/2)(1+|X_0|^p); the time supremum then has only the initial value."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: If the coefficients vanish, the generator bound in the proof is zero and the estimate remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: the proof sum over finite coordinates and include d=m=1 and p=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: The Lyapunov generator bound in the proof uses no nondegeneracy of sigma."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement boundary: the proof treats T=0 and the proof takes the supremum over all t in [0,T]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement boundary: the proof records inherited AC; the stopping radii are the canonical integers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states a one-way moment bound."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts no converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-global-lipschitz-scalar-ornstein-uhlenbeck-well-posedness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ito-sde-and-strong-solution",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as required by the stochastic-integral interfaces\nbelow. Fix a finite horizon $T\\ge0$ and finite integers $d,m\\ge1$. Work on\na complete filtered probability space\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{0\\le t\\le T},P)$ whose filtration is\nright-continuous and contains every $P$-null subset of $\\mathcal F$ in\n$\\mathcal F_0$ (the usual conditions).\n\nLet $W=(W_t)_{0\\le t\\le T}$ be a standard $m$-dimensional Brownian motion\n[[def-d-dimensional-brownian-motion]] adapted to this filtration, with\n$W_t-W_s$ independent of $\\mathcal F_s$ and distributed as\n$N_m(0,(t-s)I_m)$ for $0\\le s<t\\le T$. Let\n$X_0:\\Omega\\to\\mathbb R^d$ be $\\mathcal F_0$-measurable, satisfy\n$E|X_0|^2<\\infty$, and be independent of the future Brownian increments.\nExplicitly, $X_0$ is independent of the sigma-algebra\n$\\sigma(W_t-W_0:0\\le t\\le T)$.\n\nContinuity of a process means continuity on one measurable event of\nprobability one. We use an everywhere-continuous adapted representative: if\nthe chosen process is continuous only on such an event $A$, replace it off $A$\nby its initial value. Since $A^c$ is a null set and the filtration is complete,\n$A^c\\in\\mathcal F_0$; the replacement preserves adaptedness and changes the\nSDE identity only on a null event, hence preserves it up to\nindistinguishability.\n\nThe drift and diffusion coefficients are jointly Borel maps\n$$b:[0,T]\\times\\mathbb R^d\\to\\mathbb R^d,\\qquad \\sigma:[0,T]\\times\\mathbb R^d\\to\\mathbb R^{d\\times m}.$$\nFor nonnegative finite constants $L,K$, assume for every $t\\in[0,T]$ and\n$x,y\\in\\mathbb R^d$ that\n$$|b(t,x)-b(t,y)|+\\|\\sigma(t,x)-\\sigma(t,y)\\|_F\\le L|x-y|,$$\n$$|b(t,x)|+\\|\\sigma(t,x)\\|_F\\le K(1+|x|).$$\nHere $|\\cdot|$ is the Euclidean norm and\n$\\|A\\|_F^2=\\sum_{i=1}^d\\sum_{k=1}^m|A^{ik}|^2$ is the Frobenius norm.\n\nFor an adapted continuous candidate $X:[0,T]\\times\\Omega\\to\\mathbb R^d$,\nthe vector It\u00f4 equation\n$$X_t=X_0+\\int_0^t b(s,X_s)\\,ds+\\left(\\sum_{k=1}^m\\int_0^t\\sigma^{ik}(s,X_s)\\,dW_s^k\\right)_{i=1}^d,\\qquad 0\\le t\\le T.$$\nuses a pathwise Lebesgue integral for the drift and, in each coordinate, the\nlocalized It\u00f4 integral from\n[[def-continuous-brownian-ito-process]], clause 2. Require\n$\\int_0^T|b(s,X_s)|ds<\\infty$ and\n$\\int_0^T\\|\\sigma(s,X_s)\\|_F^2ds<\\infty$ almost surely; these are the local\ncoefficient-integrability conditions in that definition. When a coordinate\nintegrand has finite expected energy, its integral is the square-integrable\nIt\u00f4 integral of [[def-ito-integral-for-square-integrable-predictable-processes]];\nthe Picard estimates below establish that stronger condition for every input\nin $\\mathcal H_T$. Equality of processes means\nequality for every $t$ on one measurable event of probability one, that is,\nindistinguishability\n[[def-law-modification-and-indistinguishability-of-processes]]. A **strong\nsolution on $[0,T]$** is an adapted continuous process satisfying this\nintegral equation indistinguishably. No moment bound is included in the\ndefinition; the existence theorem proves its $L^2$ path-sup bound.\nThe usual-filtration, continuity, and finite-coordinate conventions agree\nwith the multidimensional class of continuous Brownian It\u00f4 processes\n[[def-continuous-brownian-ito-process]]. This definition makes no ellipticity,\ntransition-density, forward-equation, or time-reversal assertion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-global-strong-well-posedness-for-lipschitz-ito-sdes",
+          "source_section": "Statement",
+          "quote": "Assume the data and hypotheses of\n[[def-ito-sde-and-strong-solution]] on $[0,T]$, with $T\\ge0$, finite\ndimensions $d,m\\ge1$, Lipschitz constant $L$, and linear-growth constant\n$K$. There is a strong solution $X$ on the given filtered probability space.\nIt is unique up to indistinguishability among strong solutions with the same\ninitial value and Brownian driver, and it satisfies\n$$E\\sup_{0\\le t\\le T}|X_t|^2\\le(1+3E|X_0|^2)e^{C_TT},\\qquad C_T:=6K^2T+24mK^2.$$\nThe bound is independent of any later numerical mesh.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The coefficients are jointly Borel. For all $x,y$, $|b(t,x)-b(t,y)|+|\\sigma(t,x)-\\sigma(t,y)|=\\theta|x-y|$, so the uniform Lipschitz constant can be $L=\\theta$. Also $|b(t,x)|+|\\sigma(t,x)|=\\theta|x|+|\\sigma_0|\\le(\\theta+|\\sigma_0|)(1+|x|)$, so the linear-growth constant can be $K=\\theta+|\\sigma_0|$. Finally $\\sigma_0^2>0$, so the constant scalar diffusion is nondegenerate.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The initial value and Brownian motion satisfy the filtration and moment assumptions by the example's hypotheses. Step 1.1 verifies both coefficient bounds, so [F2] gives a unique adapted continuous strong solution on $[0,T]$ and its finite path-sup second moment.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes T>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example boundary: The allowed case theta=0 is covered by the coefficient estimates in the proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example boundary: The example is scalar and the proof checks the one-dimensional coefficient bounds."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes sigma_0 is nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example boundary: the proof applies the strong-solution theorem on the full interval [0,T]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example boundary: the proof inherits the theorem\u2019s AC premise and makes no new selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one coefficient choice and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-singular-initial-law-at-sde-endpoint": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ito-sde-and-strong-solution",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as required by the stochastic-integral interfaces\nbelow. Fix a finite horizon $T\\ge0$ and finite integers $d,m\\ge1$. Work on\na complete filtered probability space\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{0\\le t\\le T},P)$ whose filtration is\nright-continuous and contains every $P$-null subset of $\\mathcal F$ in\n$\\mathcal F_0$ (the usual conditions).\n\nLet $W=(W_t)_{0\\le t\\le T}$ be a standard $m$-dimensional Brownian motion\n[[def-d-dimensional-brownian-motion]] adapted to this filtration, with\n$W_t-W_s$ independent of $\\mathcal F_s$ and distributed as\n$N_m(0,(t-s)I_m)$ for $0\\le s<t\\le T$. Let\n$X_0:\\Omega\\to\\mathbb R^d$ be $\\mathcal F_0$-measurable, satisfy\n$E|X_0|^2<\\infty$, and be independent of the future Brownian increments.\nExplicitly, $X_0$ is independent of the sigma-algebra\n$\\sigma(W_t-W_0:0\\le t\\le T)$.\n\nContinuity of a process means continuity on one measurable event of\nprobability one. We use an everywhere-continuous adapted representative: if\nthe chosen process is continuous only on such an event $A$, replace it off $A$\nby its initial value. Since $A^c$ is a null set and the filtration is complete,\n$A^c\\in\\mathcal F_0$; the replacement preserves adaptedness and changes the\nSDE identity only on a null event, hence preserves it up to\nindistinguishability.\n\nThe drift and diffusion coefficients are jointly Borel maps\n$$b:[0,T]\\times\\mathbb R^d\\to\\mathbb R^d,\\qquad \\sigma:[0,T]\\times\\mathbb R^d\\to\\mathbb R^{d\\times m}.$$\nFor nonnegative finite constants $L,K$, assume for every $t\\in[0,T]$ and\n$x,y\\in\\mathbb R^d$ that\n$$|b(t,x)-b(t,y)|+\\|\\sigma(t,x)-\\sigma(t,y)\\|_F\\le L|x-y|,$$\n$$|b(t,x)|+\\|\\sigma(t,x)\\|_F\\le K(1+|x|).$$\nHere $|\\cdot|$ is the Euclidean norm and\n$\\|A\\|_F^2=\\sum_{i=1}^d\\sum_{k=1}^m|A^{ik}|^2$ is the Frobenius norm.\n\nFor an adapted continuous candidate $X:[0,T]\\times\\Omega\\to\\mathbb R^d$,\nthe vector It\u00f4 equation\n$$X_t=X_0+\\int_0^t b(s,X_s)\\,ds+\\left(\\sum_{k=1}^m\\int_0^t\\sigma^{ik}(s,X_s)\\,dW_s^k\\right)_{i=1}^d,\\qquad 0\\le t\\le T.$$\nuses a pathwise Lebesgue integral for the drift and, in each coordinate, the\nlocalized It\u00f4 integral from\n[[def-continuous-brownian-ito-process]], clause 2. Require\n$\\int_0^T|b(s,X_s)|ds<\\infty$ and\n$\\int_0^T\\|\\sigma(s,X_s)\\|_F^2ds<\\infty$ almost surely; these are the local\ncoefficient-integrability conditions in that definition. When a coordinate\nintegrand has finite expected energy, its integral is the square-integrable\nIt\u00f4 integral of [[def-ito-integral-for-square-integrable-predictable-processes]];\nthe Picard estimates below establish that stronger condition for every input\nin $\\mathcal H_T$. Equality of processes means\nequality for every $t$ on one measurable event of probability one, that is,\nindistinguishability\n[[def-law-modification-and-indistinguishability-of-processes]]. A **strong\nsolution on $[0,T]$** is an adapted continuous process satisfying this\nintegral equation indistinguishably. No moment bound is included in the\ndefinition; the existence theorem proves its $L^2$ path-sup bound.\nThe usual-filtration, continuity, and finite-coordinate conventions agree\nwith the multidimensional class of continuous Brownian It\u00f4 processes\n[[def-continuous-brownian-ito-process]]. This definition makes no ellipticity,\ntransition-density, forward-equation, or time-reversal assertion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-global-strong-well-posedness-for-lipschitz-ito-sdes",
+          "source_section": "Statement",
+          "quote": "Assume the data and hypotheses of\n[[def-ito-sde-and-strong-solution]] on $[0,T]$, with $T\\ge0$, finite\ndimensions $d,m\\ge1$, Lipschitz constant $L$, and linear-growth constant\n$K$. There is a strong solution $X$ on the given filtered probability space.\nIt is unique up to indistinguishability among strong solutions with the same\ninitial value and Brownian driver, and it satisfies\n$$E\\sup_{0\\le t\\le T}|X_t|^2\\le(1+3E|X_0|^2)e^{C_TT},\\qquad C_T:=6K^2T+24mK^2.$$\nThe bound is independent of any later numerical mesh.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-lebesgue-outer-measure",
+          "source_section": "Definition",
+          "quote": "Fix $n \\ge 1$. **Lebesgue outer measure** $\\lambda_n^*$ on $\\mathbb{R}^n$ is the\nouter set function induced by the premeasure $\\mu_0$ of\n[[thm-box-volume-is-a-premeasure-on-the-elementary-algebra]] on the algebra\n$\\mathcal{E}_n$ of elementary sets ([[def-elementary-set-in-rn]]), in the sense\nof [[def-outer-measure-induced-by-a-premeasure]]:\n\n$$\\lambda_n^*(E) \\;:=\\; \\inf\\left\\{\\ \\sum_{k=0}^{\\infty}\\mu_0(A_k)\\ :\\ A_k \\in \\mathcal{E}_n \\text{ for every } k \\in \\mathbb{N} \\text{ and } E \\subseteq \\bigcup_{k\\in\\mathbb{N}}A_k \\ \\right\\}$$\n\nfor $E \\subseteq \\mathbb{R}^n$, the series being the nonnegative extended sum of\n[[def-nonnegative-extended-series]]. The family of covering costs is nonempty,\nbecause $\\mathbb{R}^n \\in \\mathcal{E}_n$ and the sequence\n$(\\mathbb{R}^n,\\varnothing,\\varnothing,\\dots)$ covers every $E$, so the infimum\nis a well-determined element of $[0,+\\infty]$. On the real line the subscript is\ndropped and $\\lambda^* := \\lambda_1^*$.\n\nThe values $\\lambda_n^*(E)$ are defined for **every** subset of $\\mathbb{R}^n$,\nwith no measurability hypothesis. That the resulting set function is an outer\nmeasure, and that it agrees with $\\mu_0$ on $\\mathcal{E}_n$, are proved in\n[[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]]; until\nthen the name *outer measure* is not claimed, exactly as\n[[def-outer-measure-induced-by-a-premeasure]] stipulates.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-half-open-box",
+          "source_section": "Definition",
+          "quote": "Fix $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $\\mathbb{R}^n$ be the set of\nfunctions $n \\to \\mathbb{R}$, writing $x_i := x(i)$ for $i < n$\n([[lem-metrics-on-rn]]). A **parameter** is a function $n \\to\n\\overline{\\mathbb{R}}$, where $\\overline{\\mathbb{R}} = \\mathbb{R} \\cup\n\\{-\\infty, +\\infty\\}$ carries the total order of [[def-extended-reals]]. For a\npair $(a,b)$ of parameters set\n\n$$B(a,b) \\;:=\\; \\{\\, x \\in \\mathbb{R}^n \\;:\\; a_i < x_i \\le b_i \\ \\text{ for every } i < n \\,\\},$$\n\nboth comparisons taken in $\\overline{\\mathbb{R}}$. A **half-open box** is a set\nof this form. For a single $u \\in \\overline{\\mathbb{R}}$ write $\\mathbf{u}$ for\nthe constant parameter with value $u$, and abbreviate\n$(u,v]^n := B(\\mathbf{u}, \\mathbf{v})$; thus $\\mathbb{R}^n = (-\\infty,+\\infty]^n$\nand $(0,1]^n$ is the **unit cube**. At $n = 1$, and for real $a_0 < b_0$, the box\n$B(a,b)$ is the half-open interval $(a_0,b_0]$ of [[def-interval]].\n\n**A box is nonempty exactly when $a_i < b_i$ for every $i < n$.** If some\n$a_i \\ge b_i$ then no real $x_i$ satisfies both $a_i < x_i$ and $x_i \\le b_i$, by\ntransitivity of the order, so $B(a,b) = \\varnothing$. Conversely suppose\n$a_i < b_i$ for every $i$. Then in each coordinate some real $t$ satisfies\n$a_i < t \\le b_i$: if $b_i \\in \\mathbb{R}$ take $t := b_i$, which is $> a_i$; if\n$b_i = +\\infty$ then $a_i \\ne +\\infty$, so take $t := a_i + 1$ when $a_i$ is real\nand $t := 0$ when $a_i = -\\infty$. Assembling one such $t$ in each coordinate\ngives a point of $B(a,b)$; the assembly is a definition by cases on finitely many\ncoordinates and selects nothing.\n\n**The parameters of a nonempty box are determined by the set.** Let\n$B := B(a,b) \\ne \\varnothing$, fix $i < n$ and put\n$S_i := \\{\\, x_i : x \\in B \\,\\}$. Then $S_i = \\{\\, t \\in \\mathbb{R} : a_i < t \\le b_i \\,\\}$:\nthe inclusion $\\subseteq$ is the defining condition, and for $\\supseteq$ take any\n$y \\in B$ and replace its $i$-th coordinate by $t$, which leaves every other\ndefining inequality untouched. Now $b_i = +\\infty$ exactly when $S_i$ has no\nupper bound in $\\mathbb{R}$, and otherwise $b_i$ is the greatest element of\n$S_i$; likewise $a_i = -\\infty$ exactly when $S_i$ has no lower bound in\n$\\mathbb{R}$, and otherwise $a_i$ is the greatest lower bound of $S_i$ in\n$\\mathbb{R}$. So $B$ determines $a_i$ and $b_i$ for every $i$, and hence\ndetermines $(a,b)$.\n\n**Volume.** For a half-open box $B$ define $\\operatorname{vol}(B) \\in\n[0,+\\infty] \\subseteq \\overline{\\mathbb{R}}$ by\n\n- $\\operatorname{vol}(\\varnothing) := 0$;\n- if $B \\ne \\varnothing$, with its unique parameter pair $(a,b)$, then\n  $\\operatorname{vol}(B) := +\\infty$ when $a_i = -\\infty$ or $b_i = +\\infty$ for\n  some $i < n$, and\n  $$\\operatorname{vol}(B) := \\prod_{i<n}(b_i - a_i)$$\n  when every $a_i$ and every $b_i$ is real.\n\nThe product is the finite product of [[def-finite-sum]]. In the last clause every\nfactor $b_i - a_i$ is a strictly positive real, since $a_i < b_i$ in\n$\\mathbb{R}$, so the product is a strictly positive real ([[lem-finite-sum-laws]],\nclaim 6) and in particular no factor is $0$ and no product of the form\n$0 \\cdot (\\pm\\infty)$ is ever formed. That is what the case split buys: a box\nwith a degenerate side is **empty**, not a box of volume $0$ with an infinite\nside. So $\\operatorname{vol}$ is a total function on the half-open boxes with\nvalues in $[0,+\\infty]$, and $\\operatorname{vol}(\\mathbb{R}^n) = +\\infty$,\n$\\operatorname{vol}\\big((0,1]^n\\big) = 1$.\n\n**Agreement with the published rectangle volume.** For real parameters with\n$a_i < b_i$ for every $i < n$, the closed rectangle $[a,b]$ of\n[[def-multidimensional-rectangle-and-volume]] has\n$\\operatorname{vol}[a,b] = \\prod_{j<n}(b_j-a_j)$, which is the value assigned\nabove to $B(a,b)$. The two notions of volume therefore agree wherever both are\nwritten, and no second notion of volume is introduced.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra on $\\mathbb{R}^n$ and\n   $\\lambda_n$ is a measure on it ([[def-measure]]);\n2. the measure space $(\\mathbb{R}^n, \\mathcal{L}(\\mathbb{R}^n), \\lambda_n)$ is\n   complete ([[def-complete-measure-space]]), and every $S \\subseteq \\mathbb{R}^n$\n   with $\\lambda_n^*(S) = 0$ is Lebesgue measurable with $\\lambda_n(S) = 0$;\n3. every elementary set is Lebesgue measurable and\n   $\\lambda_n(A) = \\mu_0(A)$ for every $A \\in \\mathcal{E}_n$; in particular\n   $\\lambda_n(B) = \\operatorname{vol}(B)$ for every half-open box $B$,\n   $\\lambda_n(\\varnothing) = 0$ and $\\lambda_n(\\mathbb{R}^n) = +\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Fix $n \\ge 1$ and let $\\lambda_n^*$ be the Lebesgue outer set function on $\\mathbb{R}^n$\n([[def-lebesgue-outer-measure]]). A set $E \\subseteq \\mathbb{R}^n$ is\n**Lebesgue measurable** when\n\n$$\\lambda_n^*(A) \\;=\\; \\lambda_n^*(A \\cap E) \\;+\\; \\lambda_n^*(A \\setminus E) \\qquad \\text{for every } A \\subseteq \\mathbb{R}^n .$$\n\nThis formula makes sense before any outer-measure theorem is invoked. Under\ncountable choice, [[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]]\nmakes $\\lambda_n^*$ an outer measure, and the displayed condition is then exactly\nCarath\u00e9odory measurability in the sense of [[def-caratheodory-measurable-set]].\n\nThe family of Lebesgue measurable sets is written $\\mathcal{L}(\\mathbb{R}^n)$,\nand **Lebesgue measure** is the restriction\n\n$$\\lambda_n \\;:=\\; \\lambda_n^*\\!\\restriction_{\\mathcal{L}(\\mathbb{R}^n)} .$$\n\nOn the real line the subscript is dropped and $\\lambda := \\lambda_1$.\n\nThe quantifier over every test set $A$ is part of the condition, and no\nhypothesis on $E$ is imposed before it is tested. That\n$\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra and that $\\lambda_n$ is a complete\nmeasure on it are not part of this definition: they are proved, under the Axiom\nof Countable Choice, in [[thm-lebesgue-measure-is-a-complete-measure]], which is\nrecorded in this item's `justified_by` because it is a statement about the\nobjects introduced here. Until that theorem the symbols $\\mathcal{L}(\\mathbb{R}^n)$\nand $\\lambda_n$ name a family of sets and a restricted set function, nothing more.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let\n$f:X\\to[0,+\\infty]$ be measurable, and let $E\\in\\mathcal A$. Since\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]]\nimplies that $f\\chi_E$ is measurable, define the **integral of $f$ over $E$**\nby\n$$\\int_E f\\,d\\mu:=\\int f\\chi_E\\,d\\mu,$$\nwhere the integral on the right is the nonnegative Lebesgue integral of\n[[def-nonnegative-lebesgue-integral]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n([[def-extended-real-valued-measurable-function]]). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\n[[def-integral-of-a-nonnegative-simple-function]].\n\nThe set of admissible simple minorants is nonempty because it contains the zero\nfunction, which is simple ([[def-nonnegative-simple-measurable-function]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The maps $b(t,x)=0$ and $\\sigma(t,x)=1$ are jointly Borel. Their state Lipschitz constant is $L=0$, and $|b(t,x)|+|\\sigma(t,x)|=1\\le1(1+|x|)$ gives $K=1$. The constant diffusion is nondegenerate because its scalar variance is $1$. The deterministic $X_0=0$ is $\\mathcal F_0$-measurable, square-integrable, and independent of the Brownian increments, so [F1] holds; applying [F2] gives strong well-posedness.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F3], the initial law $\\mu$ satisfies $\\mu(\\{0\\})=P(X_0=0)=1$. For every $n\\ge1$, the half-open interval $(-1/n,1/n]$ covers $\\{0\\}$ and has volume $2/n$, so [F4] gives $0\\le\\lambda^*(\\{0\\})\\le2/n$ for every $n$ and hence $\\lambda^*(\\{0\\})=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F5], $\\{0\\}$ is Lebesgue measurable and $\\lambda(\\{0\\})=0$. If a Lebesgue density $g$ for $\\mu$ existed, [F6] would give $\\mu(\\{0\\})=\\int_{\\{0\\}}g\\,d\\lambda=0$: every nonnegative simple minorant of $g1_{\\{0\\}}$ has integral zero because each of its level sets is contained in the null singleton, so their supremum is zero. This contradicts step 1.2. Thus the initial law has no Lebesgue density at $t=0$; no claim about positive-time densities is made.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "step 1.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes T>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example boundary: The deterministic initial value is X_0=0, and the proof computes its point-mass law."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example boundary: The example is scalar and the proof checks the scalar SDE data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes sigma=1, so a degenerate diffusion case is outside its scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example boundary: the proof proves absence of a density only at t=0 and explicitly makes no positive-time claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example boundary: the proof uses countable choice supplied by Full AC to place the null singleton in the Lebesgue sigma-algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a one-way no-density conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states no converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-ito-sde-and-strong-solution": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: T=0 is allowed and the integral equation reduces to X_0 with both integrals zero; d,m>=1 and the given probability space exclude empty coordinate/sample targets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: b=sigma=0 is allowed by nonnegative L,K and gives X_t=X_0; the required local drift/diffusion energies then vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: d=m=1 yields the scalar drift plus one scalar Ito integral; at T=0 there is only the initial-time value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: X_0 may be deterministic and sigma may be singular or zero; no ellipticity, transition density or full-rank condition is imposed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the indistinguishable integral equation holds for every t in the closed interval[0,T]; its common event includes both0andT."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: AC is explicitly inherited from stochastic-integral interfaces; the filtered space, Brownian driver and X_0 are supplied, and no strong solution existence is asserted by this definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: strong solution means adapted continuous process satisfying the specified integral equation indistinguishably, with the stated local coefficient integrability; no sufficient-condition theorem is being inferred."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the label strong solution introduces that exact integral-equation interface; it does not assert the converse of a later existence/moment theorem."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

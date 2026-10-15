@@ -1,0 +1,409 @@
+{
+  "group": "p",
+  "batches": [
+    "51"
+  ],
+  "pages_read": [
+    "iid-bootstrap-and-jackknife-validity",
+    "iid-bootstrap-and-jackknife-validity-examples"
+  ],
+  "items_read": [
+    "alg-lower-empirical-bootstrap-quantile",
+    "def-iid-empirical-bootstrap-sample",
+    "lem-iid-sample-covariance-converges",
+    "alg-basic-bootstrap-interval",
+    "alg-bias-corrected-bootstrap-interval",
+    "alg-bootstrap-t-interval",
+    "alg-percentile-bootstrap-interval",
+    "lem-empirical-bootstrap-law-is-a-probability-measure",
+    "thm-delete-one-jackknife-linearization-for-smooth-statistics",
+    "lem-finite-bootstrap-cdf-supremum-is-measurable",
+    "alg-delete-one-jackknife-acceleration",
+    "lem-finite-index-bootstrap-sample-is-conditionally-iid",
+    "alg-bca-bootstrap-interval",
+    "thm-conditional-iid-bootstrap-clt-for-empirical-law",
+    "thm-iid-bootstrap-validity-for-smooth-statistics",
+    "ex-delete-one-jackknife-for-sample-mean",
+    "ex-discrete-median-bootstrap-ties",
+    "cex-iid-bootstrap-inconsistency-at-absolute-mean-kink",
+    "ex-iid-bootstrap-smooth-mean"
+  ],
+  "conventions": [
+    {
+      "convention": "The ideal size-n bootstrap averages uniformly over all n^n ordered index tuples; repeated observations retain their index multiplicities.",
+      "fixed_by": "def-iid-empirical-bootstrap-sample",
+      "matters_for": [
+        "lem-empirical-bootstrap-law-is-a-probability-measure",
+        "lem-finite-index-bootstrap-sample-is-conditionally-iid",
+        "lem-finite-bootstrap-cdf-supremum-is-measurable",
+        "thm-conditional-iid-bootstrap-clt-for-empirical-law",
+        "thm-iid-bootstrap-validity-for-smooth-statistics",
+        "ex-discrete-median-bootstrap-ties"
+      ]
+    },
+    {
+      "convention": "The lower empirical quantile selects order statistic max(1, ceil(Bp)), retaining ties without interpolation; Q_B(0) is the minimum and Q_B(1) the maximum.",
+      "fixed_by": "alg-lower-empirical-bootstrap-quantile",
+      "matters_for": [
+        "alg-basic-bootstrap-interval",
+        "alg-bias-corrected-bootstrap-interval",
+        "alg-bootstrap-t-interval",
+        "alg-percentile-bootstrap-interval",
+        "alg-bca-bootstrap-interval",
+        "ex-discrete-median-bootstrap-ties"
+      ]
+    },
+    {
+      "convention": "Bias correction counts strict inequalities plus half the ties, and extends the normal inverse at probabilities zero and one to negative and positive infinity.",
+      "fixed_by": "alg-bias-corrected-bootstrap-interval",
+      "matters_for": [
+        "alg-bias-corrected-bootstrap-interval",
+        "alg-bca-bootstrap-interval"
+      ]
+    },
+    {
+      "convention": "Bootstrap-t returns undefined for nonpositive or nonfinite standard errors; the standard-error procedure is supplied as input.",
+      "fixed_by": "alg-bootstrap-t-interval",
+      "matters_for": [
+        "alg-bootstrap-t-interval"
+      ]
+    },
+    {
+      "convention": "Jackknife acceleration uses deviations equal to the average delete-one estimate minus each delete-one estimate, and is undefined when their squared sum is zero.",
+      "fixed_by": "alg-delete-one-jackknife-acceleration",
+      "matters_for": [
+        "alg-delete-one-jackknife-acceleration",
+        "alg-bca-bootstrap-interval"
+      ]
+    },
+    {
+      "convention": "The jackknife variance multiplier is (n-1)/n, pseudovalues are n times the full estimate minus (n-1) times the delete-one estimate, and the asymptotic theorem requires neighborhood C1 smoothness.",
+      "fixed_by": "thm-delete-one-jackknife-linearization-for-smooth-statistics",
+      "matters_for": [
+        "alg-delete-one-jackknife-acceleration",
+        "ex-delete-one-jackknife-for-sample-mean"
+      ]
+    },
+    {
+      "convention": "Conditional bootstrap mean roots are centered at the observed mean and scaled by sqrt(n); the projected CLT assumes AC and strictly positive projected variance.",
+      "fixed_by": "thm-conditional-iid-bootstrap-clt-for-empirical-law",
+      "matters_for": [
+        "thm-iid-bootstrap-validity-for-smooth-statistics",
+        "cex-iid-bootstrap-inconsistency-at-absolute-mean-kink",
+        "ex-iid-bootstrap-smooth-mean"
+      ]
+    },
+    {
+      "convention": "Smooth-statistic validity requires Borel g differentiable at the population mean, finite second moments and positive projected variance; it concerns the ideal conditional law and asserts no interval coverage.",
+      "fixed_by": "thm-iid-bootstrap-validity-for-smooth-statistics",
+      "matters_for": [
+        "ex-iid-bootstrap-smooth-mean"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-conditional-iid-bootstrap-clt-for-empirical-law",
+      "statement": "Assume AC. For IID R^d-valued vectors with finite second moment and fixed a with σ² = aᵀΣa > 0, the finite-index empirical-bootstrap root sqrt(n) aᵀ(bar X_n* − bar X_n) has conditional CDF whose supremum distance from the N(0,σ²) CDF converges to zero in probability.",
+      "used_by": [
+        "thm-iid-bootstrap-validity-for-smooth-statistics",
+        "cex-iid-bootstrap-inconsistency-at-absolute-mean-kink",
+        "thm-bootstrap-fails-at-nonsmooth-boundary-and-degenerate-mean-functionals"
+      ]
+    },
+    {
+      "id": "lem-iid-sample-covariance-converges",
+      "statement": "For finite d and IID R^d-valued vectors with E||X_1||² < ∞, bar X_n converges in probability to μ and every entry of the empirical covariance with divisor n converges in probability to the corresponding entry of Σ.",
+      "used_by": [
+        "thm-delete-one-jackknife-linearization-for-smooth-statistics",
+        "thm-conditional-iid-bootstrap-clt-for-empirical-law",
+        "thm-iid-bootstrap-validity-for-smooth-statistics"
+      ]
+    },
+    {
+      "id": "def-iid-empirical-bootstrap-sample",
+      "statement": "For n,d ≥ 1 and fixed data x_1,…,x_n, assign mass n^(-n) to each function [n] → [n] and set X_j* = x_{I_j}. For Borel g, define the observed and bootstrap statistics as g(bar X_n) and g(bar X_n*).",
+      "used_by": [
+        "lem-empirical-bootstrap-law-is-a-probability-measure",
+        "lem-finite-index-bootstrap-sample-is-conditionally-iid",
+        "lem-finite-bootstrap-cdf-supremum-is-measurable",
+        "thm-conditional-iid-bootstrap-clt-for-empirical-law",
+        "thm-iid-bootstrap-validity-for-smooth-statistics",
+        "thm-delete-one-jackknife-linearization-for-smooth-statistics"
+      ]
+    },
+    {
+      "id": "lem-finite-bootstrap-cdf-supremum-is-measurable",
+      "statement": "For a measurable finite sample vector, fixed projection a and fixed continuous CDF G, the supremum over real t of the absolute difference between the finite-index conditional bootstrap CDF and G is a measurable real random variable.",
+      "used_by": [
+        "thm-conditional-iid-bootstrap-clt-for-empirical-law"
+      ]
+    },
+    {
+      "id": "thm-delete-one-jackknife-linearization-for-smooth-statistics",
+      "statement": "For IID finite-second-moment vectors and Borel g continuously Fréchet differentiable near μ, with a = ∇g(μ) and 0 < aᵀΣa < ∞, the average squared error of p_{n,i} relative to hat θ_n + aᵀ(X_i − bar X_n) converges to zero in probability, and n V_{J,n} converges in probability to aᵀΣa.",
+      "used_by": [
+        "alg-delete-one-jackknife-acceleration",
+        "ex-delete-one-jackknife-for-sample-mean"
+      ]
+    },
+    {
+      "id": "thm-iid-bootstrap-validity-for-smooth-statistics",
+      "statement": "Assume AC. For IID finite-second-moment vectors and Borel g Fréchet differentiable at μ with positive finite projected variance σ², sqrt(n)(hat θ_n − θ) converges in distribution to N(0,σ²), and the conditional CDF of sqrt(n)(hat θ_n* − hat θ_n) converges in probability to that normal CDF at every fixed real x.",
+      "used_by": [
+        "ex-iid-bootstrap-smooth-mean"
+      ]
+    },
+    {
+      "id": "alg-lower-empirical-bootstrap-quantile",
+      "statement": "For a nonempty finite real list and p ∈ [0,1], return the order statistic with index 1 when p = 0 and otherwise the least integer k ≥ Bp.",
+      "used_by": [
+        "alg-basic-bootstrap-interval",
+        "alg-bias-corrected-bootstrap-interval",
+        "alg-bootstrap-t-interval",
+        "alg-percentile-bootstrap-interval",
+        "alg-bca-bootstrap-interval",
+        "ex-discrete-median-bootstrap-ties"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-statistic-and-estimator",
+      "used_for": "Measurable-map meaning of statistics and estimators.",
+      "opened": true
+    },
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Mutual independence and equality of laws, without implicit moment assumptions.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Means, second moments, covariance entries and projected variances.",
+      "opened": true
+    },
+    {
+      "id": "def-partial-sums-and-sample-means",
+      "used_for": "Sample means and finite-sum conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Borel statistics and measurable bootstrap constructions.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Measurable structures on Euclidean data and statistics.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Total-mass-one criterion for empirical laws.",
+      "opened": true
+    },
+    {
+      "id": "def-dirac-measure",
+      "used_for": "Empirical-law representation as an average of point masses.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-probability-space-and-event",
+      "used_for": "Uniform probability on the finite bootstrap index space.",
+      "opened": true
+    },
+    {
+      "id": "thm-cardinality-of-a-set-of-functions",
+      "used_for": "The n^n bootstrap index tuples.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurability of finite sums, differences, absolute values and maxima.",
+      "opened": true
+    },
+    {
+      "id": "lem-measurable-functions-preserve-independence",
+      "used_for": "IID coordinate projections, coordinate products and bootstrap values.",
+      "opened": true
+    },
+    {
+      "id": "thm-khinchin-weak-law-for-iid-integrable-variables",
+      "used_for": "Convergence of coordinate means and empirical second moments.",
+      "opened": true
+    },
+    {
+      "id": "def-measure",
+      "used_for": "Countable-additivity obligation for the empirical law.",
+      "opened": true
+    },
+    {
+      "id": "def-nonnegative-extended-series",
+      "used_for": "Finite-sum interchange with nonnegative series in the empirical-measure proof.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited assumption for normal-law constructions and CLTs.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Normal limits and normal quantiles in BC and BCa procedures.",
+      "opened": true
+    },
+    {
+      "id": "lem-standard-normal-cdf-is-continuous-and-strictly-increasing",
+      "used_for": "Normal quantiles, continuous limiting CDFs and positive interval masses.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-and-countable-subadditivity-of-measures",
+      "used_for": "Maximum-deletion bounds and summable exceptional-event bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-frechet-derivative-between-banach-spaces",
+      "used_for": "Neighborhood C1 hypothesis in jackknife linearization.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+      "used_for": "Differentiating deletion segments.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Pointwise deletion-secant remainder bounds.",
+      "opened": true
+    },
+    {
+      "id": "prop-indicator-function-is-measurable-iff-its-set-is-measurable",
+      "used_for": "Measurability of finite-bootstrap comparison indicators.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-preimages-of-borel-sets-are-borel",
+      "used_for": "Measurability of continuous CDF compositions.",
+      "opened": true
+    },
+    {
+      "id": "def-cumulative-distribution-function-of-a-random-variable",
+      "used_for": "Conditional CDF values and monotonicity conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-row-wise-independent-centered-triangular-array",
+      "used_for": "Conditional bootstrap rows on probability spaces that may vary with row.",
+      "opened": true
+    },
+    {
+      "id": "def-total-row-variance-and-lindeberg-condition",
+      "used_for": "Exact normalized empirical-tail Lindeberg quantity.",
+      "opened": true
+    },
+    {
+      "id": "def-convergence-in-distribution-for-real-random-variables",
+      "used_for": "CDF characterization of real weak convergence.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Vanishing integrable second-moment tails.",
+      "opened": true
+    },
+    {
+      "id": "cor-markov-inequality-for-random-variables",
+      "used_for": "Empirical-tail convergence and conditional bootstrap tightness.",
+      "opened": true
+    },
+    {
+      "id": "thm-lindeberg-feller-central-limit-theorem-sufficiency",
+      "used_for": "Pathwise conditional triangular-array CLT after subsequence extraction.",
+      "opened": true
+    },
+    {
+      "id": "thm-slutsky-for-real-random-variables",
+      "used_for": "Rescaling conditional normalized roots and adding the kink-example error.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-cantor-metric",
+      "used_for": "Finite-grid upgrade from pointwise to uniform normal-CDF convergence.",
+      "opened": true
+    },
+    {
+      "id": "thm-well-ordering-principle",
+      "used_for": "Least-index subsequence selection.",
+      "opened": true
+    },
+    {
+      "id": "cor-archimedean-reciprocal",
+      "used_for": "Reducing arbitrary positive tail thresholds to reciprocal-integer thresholds.",
+      "opened": true
+    },
+    {
+      "id": "thm-almost-sure-convergence-implies-convergence-in-probability",
+      "used_for": "Closing the subsequence contradiction for the measurable CDF distance.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Identification of the projected Gaussian sampling limit.",
+      "opened": true
+    },
+    {
+      "id": "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+      "used_for": "Pointwise first-order remainder expansion in the smooth bootstrap proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-vector-stochastic-order-calculus",
+      "used_for": "Boundedness in probability of the centered sampling root.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariate-iid-central-limit-theorem",
+      "used_for": "Sampling CLT under finite second moments, allowing singular covariance.",
+      "opened": true
+    },
+    {
+      "id": "thm-first-and-second-order-delta-method-for-random-vectors",
+      "used_for": "First-order sampling limit through the pointwise derivative of g.",
+      "opened": true
+    },
+    {
+      "id": "thm-lindeberg-levy-iid-central-limit-theorem",
+      "used_for": "Rademacher sample-mean CLT in the absolute-mean counterexample.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-mapping-theorem",
+      "used_for": "Absolute-value and normal-CDF transforms in the kink counterexample.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-conditional-iid-bootstrap-clt-for-empirical-law",
+      "concern": "Step 5.1 says “Slutsky's theorem [F6] gives” the unnormalized conditional limit. The cited thm-slutsky-for-real-random-variables assumes that both entire sequences are “on one probability space,” whereas these conditional bootstrap rows live on different finite index spaces. The conclusion follows immediately by squeezing the normalized conditional CDF at x/s_n between nearby fixed thresholds, since s_n → σ > 0 and the limiting normal CDF is continuous, but that justification or a common-space realization is unstated.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "iid-bootstrap-and-jackknife-validity",
+      "to": "resampling-algorithms-and-sampling-units",
+      "faithful": true,
+      "note": "The supplier defines complete sampling units, multiplicity-preserving empirical measures and independent uniform-index resampling, without a validity claim. The consumer's Euclidean IID construction agrees with that interface and proves its own asymptotic validity."
+    },
+    {
+      "from": "bootstrap-failure-and-subsampling",
+      "to": "iid-bootstrap-and-jackknife-validity",
+      "faithful": true,
+      "note": "The downstream nonsmooth/degenerate-functional theorem explicitly carries AC and specializes the conditional CLT to IID standard-normal observations with d=1, a=1 and variance 1. Its root has the supplier's exact centering and sqrt(n) scale. Uniform CDF control supports its data-dependent interval probabilities, including left limits; no smooth-statistic validity is asserted for the nonsmooth or degenerate functionals."
+    }
+  ]
+}

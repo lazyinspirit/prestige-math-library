@@ -1,0 +1,9 @@
+# Variance-reduction boundary — final cycle 2
+
+Both native authors28/29 have successfully drained. The completed IID Monte Carlo supplier and all15 current variance-reduction carriers/contracts were inspected at the precise escalated boundary. The earlier missing-inventory/body condition is resolved. No missing supplier result, extra item edge or source rewrite is required for this boundary.
+
+The consumer proofs derive their finite-sample identities locally. Their15 manifest dependency sets and15 contract citation inventories contain no batch28 logical item import. The scheme of assumptions remains compatible with the completed supplier: L1 for means; L2 for variance; independent pairs with within-pair covariance retained; positive strata and fixed proportional integer allocation for the variance comparison; fourth moments/fixed dimension for fitted-control remainder; and an integrable pilot independent of the full production sigma-algebra for conditional unbiasedness. No Monte Carlo CLT, sample-variance consistency or strong law is imported from batch28.
+
+Current source arguments additionally spell out grouped-stratum independence, measurable IID raw moment sequences and pilot sigma-algebra independence. The six examples remain conditional on their own A suppliers and finite specified laws. Exact15 IDs, current statement/definition and argument excerpts, source byte lengths/mtime observations, and current contract import inventories are in the companion JSON. Root owns final cryptographic fingerprints and metadata changes.
+
+Root may now replace the stale invalid `unresolved` page-status row using the supported schema, retain the page prerequisite, and reconcile the15 obsolete readiness escalations through the native mechanism. This resolves only the missing-supplier boundary; it is not a full proof review, audit stamp, gate result or readiness certificate. No source or metadata/readiness carrier was edited and no tests were run.

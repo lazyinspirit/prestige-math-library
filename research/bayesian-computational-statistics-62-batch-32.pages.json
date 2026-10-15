@@ -1,0 +1,109 @@
+[
+  {
+    "order": 2104,
+    "id": "general-state-mcmc-kernels-and-reversibility",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "General-state Markov kernels, invariance, and reversibility",
+    "companion": "general-state-mcmc-kernels-and-reversibility-examples",
+    "requires": [
+      "stationary-markov-chains-and-ergodic-limits",
+      "losses-risk-and-decision-rules"
+    ],
+    "items": [
+      {
+        "id": "def-general-state-reversibility-by-symmetric-flow-measure",
+        "kind": "definition",
+        "title": "General-state reversibility by symmetric flow measure",
+        "statement": "On an arbitrary measurable state space, define the joint flow measure Lambda(dx,dy)=pi(dx)P(x,dy) for a probability measure pi and probability kernel P; call P reversible with respect to pi exactly when this measure is invariant under coordinate swap, without requiring a density or assuming pi is invariant in advance.",
+        "strategy": "Use the probability-kernel joint-law theorem to define Lambda on the product sigma-algebra, define its transpose by the measurable coordinate-swap map, and state reversibility as equality of these two probability measures.",
+        "deps": [
+          "def-measure-kernel-and-probability-kernel",
+          "def-probability-measure",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "lem-prior-and-model-kernel-define-joint-law"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-general-state-reversibility-implies-invariance",
+        "kind": "theorem",
+        "title": "General-state reversibility implies invariance",
+        "statement": "For any measurable state space, probability kernel P, and probability measure pi, symmetry of Lambda(dx,dy)=pi(dx)P(x,dy) implies pi P=pi on every measurable set.",
+        "strategy": "Apply the kernel joint-law/Tonelli identity to the nonnegative indicator of X×A; symmetry swaps X×A and A×X, and the probability-kernel row mass makes the latter marginal equal pi(A).",
+        "deps": [
+          "def-probability-measure",
+          "def-general-state-reversibility-by-symmetric-flow-measure",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "def-measure-kernel-and-probability-kernel"
+        ],
+        "dependency_level": 1
+      }
+    ]
+  },
+  {
+    "order": 2105,
+    "id": "general-state-mcmc-kernels-and-reversibility-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "General-state Markov kernels, invariance, and reversibility — Examples",
+    "companion": "general-state-mcmc-kernels-and-reversibility",
+    "requires": [
+      "general-state-mcmc-kernels-and-reversibility",
+      "orthonormal-bases-parseval-and-fourier-series"
+    ],
+    "items": [
+      {
+        "id": "ex-finite-two-state-reversible-markov-kernel",
+        "kind": "example",
+        "title": "A finite reversible two-state Markov kernel",
+        "statement": "For 0<a,b≤1, the transition matrix [[1−a,a],[b,1−b]] is reversible with respect to pi=(b/(a+b),a/(a+b)) and therefore has that invariant probability.",
+        "strategy": "Check the row sums and normalization, compare all four joint-flow atom masses under coordinate swap, and apply the general-state detailed-balance implication.",
+        "deps": [
+          "def-probability-measure",
+          "def-measure-kernel-and-probability-kernel",
+          "def-general-state-reversibility-by-symmetric-flow-measure",
+          "thm-general-state-reversibility-implies-invariance"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-continuous-symmetric-random-walk-on-the-circle",
+        "kind": "example",
+        "title": "A symmetric random walk on the circle",
+        "statement": "On the circle T=R/Z with normalized Haar probability m, the kernel P(x,A)=1/2 1_A(x+h)+1/2 1_A(x−h), for fixed 0<h<1/2, is reversible and invariant with respect to m; this remains a measure-level argument for its atomic transition law.",
+        "strategy": "Use countable choice only through the existing normalized-circle-measure interface, verify the pointwise probability-kernel conditions, express the joint flow on product-measurable sets, and use translation invariance to show its coordinate transpose has the same measure.",
+        "deps": [
+          "def-countable-choice",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "def-measure-preserving-transformation-and-system",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "def-measure-kernel-and-probability-kernel",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "def-general-state-reversibility-by-symmetric-flow-measure",
+          "thm-general-state-reversibility-implies-invariance"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "cex-systematic-composition-of-reversible-kernels-is-not-reversible",
+        "kind": "counterexample",
+        "title": "A systematic composition of reversible kernels need not be reversible",
+        "statement": "The chronological composition of two kernels that are each reversible for the same probability can preserve that probability without being reversible: two transposition updates on three states compose to a directed three-cycle.",
+        "strategy": "Verify each deterministic transposition kernel has symmetric uniform flow, compute their chronological composition using the kernel-composition convention, and compare one off-diagonal atom with its transpose while checking the uniform invariant law directly.",
+        "deps": [
+          "def-probability-measure",
+          "def-measure-kernel-and-probability-kernel",
+          "def-composition-of-probability-kernels",
+          "lem-kernel-composition-is-well-defined-and-associative",
+          "def-general-state-reversibility-by-symmetric-flow-measure",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "thm-general-state-reversibility-implies-invariance"
+        ],
+        "dependency_level": 2
+      }
+    ]
+  }
+]

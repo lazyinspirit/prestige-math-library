@@ -1,0 +1,196 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "57",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "ex-dot-product-roundoff-and-conditioning",
+      "model": "gpt-6-luna",
+      "context_sha256": "4dc8b8d78daca0fa3d456748f3dfc5083bee519e0d7bcb363261ad2e0a2bb92c",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 did not explicitly distinguish exact products from rounded products p_j, both required by the cited theorem Statement and contract quote. This is nonfatal for the example: step 1.1 proves all products exact, and step 1.2 checks their normal magnitudes, hence the rounded products meet the condition too. F1 now states n>=1 and both product conditions explicitly.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-euler-discretization-bias-and-path-variance",
+      "model": "gpt-6-luna",
+      "context_sha256": "d9be8e8eef02714f5ef505e5b8c6d1fdf89d32762944c4010274df0559a04ca7",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F4 omits a<b from cor-mean-value-theorem, so its unrestricted existential conclusion fails at a=b, where (a,b) is empty. This is nonfatal to the endpoint argument, which only applies MVT on [0,1] with 0<1 and verified endpoint continuity. F4 now states a<b explicitly. Also closed the Step-4 elementary inverse-identity gap by applying the existing derivative-zero/MVT calculation to exp(-t)exp(t), giving exp(-1)e=1 before recovering x(1).",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-dot-product-roundoff-and-conditioning",
+      "disposition": "repaired",
+      "post_sha256": "c060056d617c764e778c9ef4e815ffad153e05894cfb4073cbadfcca2dc2dc7e",
+      "review_context_sha256": "3bf67227788685e4a1f14bda51aac8c988edfd930e4673ec0f86f591c1068655",
+      "reason": "Checked the supplier Statement/Proof, relative-model Definition/Remarks, ledger interfaces, owning proof contract and both page interfaces. Binary64 spacing 2 and the even lower significand give computed sum 2 versus exact sum 3. Exact and rounded products and partial sums are normal; 3u<1, the magnitude sum is 19999999999999999, and gamma_3=3/(2^53-3) gives a bound greater than 1. The nonzero exact result licenses kappa and relative error 1/3; the m=0 ledger gives -1. Only F1 changed; no Statement/Definition changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-euler-discretization-bias-and-path-variance",
+      "disposition": "repaired",
+      "post_sha256": "fa65e48ba801222a15853ef23dc3a36369b2bc363d898f6720103ca354b00d81",
+      "review_context_sha256": "09c7158ed118ac325dbdad57fc3d03d40a50048862bfefd4d04c6f4b68148b46",
+      "reason": "Checked all eleven actual supplier Statement/Definition interfaces, the owning contract, and both page interfaces. Differentiability on an open neighborhood gives endpoint continuity. The displayed difference quotient, chain rule on R, and MVT on [0,1] establish both integrating-factor constancy and exp(-1)e=1 without assuming an exponential addition theorem. Thus theta=(5/2)e^2; the Euler target is 10 with strictly negative bias since e>2. IID squared endpoints have values 4,16, mean 10 and variance 36; measurable transformation preserves independence and the average has variance 36/M for M>=2. The signed ledger identity follows with no independence assumption on arbitrary stages, no AC, and no asymptotic assertion. F4 and Verification 1.1 changed; no Statement/Definition changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u57-dot-rounded-products",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-16",
+        "class": "accuracy",
+        "subclass": "citation-inaccurate",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "ex-dot-product-roundoff-and-conditioning",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "repair_cost": "inline-fix",
+        "item_sha256": "c060056d617c764e778c9ef4e815ffad153e05894cfb4073cbadfcca2dc2dc7e",
+        "subclass_note": "F1 did not explicitly distinguish exact from rounded products required by its supplier. All concrete products are exact and normal by steps 1.1-1.2, so the bound application was already valid. F1 now explicitly includes both, with n>=1.",
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u57.json",
+            "anchor": "ex-dot-product-roundoff-and-conditioning"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u57-euler-mvt-interval",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-16",
+        "class": "accuracy",
+        "subclass": "missing-hypothesis",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "ex-euler-discretization-bias-and-path-variance",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "repair_cost": "inline-fix",
+        "item_sha256": "fa65e48ba801222a15853ef23dc3a36369b2bc363d898f6720103ca354b00d81",
+        "subclass_note": "F4 omitted a<b, making the existential MVT restatement false at a=b. Both actual uses have a=0<b=1 with endpoint continuity. Inserted the strict interval hypothesis without changing the endpoint, target or variance claims.",
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u57.json",
+            "anchor": "ex-euler-discretization-bias-and-path-variance"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u57-euler-exp-inverse",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-16",
+        "class": "accuracy",
+        "subclass": "unsupported-inference",
+        "severity": "nonfatal",
+        "location": "proof-step",
+        "subject": "ex-euler-discretization-bias-and-path-variance",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "repair_cost": "inline-fix",
+        "item_sha256": "fa65e48ba801222a15853ef23dc3a36369b2bc363d898f6720103ca354b00d81",
+        "subclass_note": "Verification 1.1 recovered x(1)=e X0 from exp(-1)x(1)=X0 without establishing exp(-1)e=1. Reusing the displayed derivative-zero calculation for exp(-t)exp(t), MVT on [0,1], and exp(0)=1 proves the identity from existing facts. This elementary gap is nonfatal and fully repaired.",
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u57.json",
+            "anchor": "ex-euler-discretization-bias-and-path-variance"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "none",
+      "reason": "No published-item mathematical defect or changed supplier interface was found in this assigned draft-only review; no published maintenance entry is proposed."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "ex-dot-product-roundoff-and-conditioning",
+      "status": "mathematical review and focused checks complete",
+      "changed_sections": [
+        "Facts & Assumptions/F1"
+      ],
+      "dependencies": [
+        "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+        "def-standard-relative-floating-point-model-and-unit-roundoff",
+        "def-statistical-and-computational-error-ledger",
+        "thm-pathwise-error-ledger-decomposition"
+      ],
+      "source_evidence": "Local supplier Statement explicitly requires exact products, rounded products and intermediate sums normal; its proof expands the rounded recursion and bounds at most n error factors per term. Owning contract citations F1-F4 and derivations already match the checked mathematics. No external source reading claimed.",
+      "unresolved_obligations": [],
+      "next_action": "Engine collection and independent rejudgment."
+    },
+    {
+      "id": "ex-euler-discretization-bias-and-path-variance",
+      "status": "mathematical review and focused checks complete",
+      "changed_sections": [
+        "Facts & Assumptions/F4",
+        "Verification/1.1"
+      ],
+      "source_evidence": "Read local cor-mean-value-theorem Statement (requires a<b), exponential Definition and derivative Statement, chain-rule and differentiability-continuity Statements; verified remaining ledger/IID/measurable-transform suppliers. Step-4 digest concern is an elementary missing explanation, now supplied from existing dependencies. No external source reading claimed.",
+      "contract": "Existing contract already quotes a<b exactly, maps every unchanged step input and citation use, and its risk_review explicitly derives exp(-t)exp(t)=1 by derivative zero and MVT. No contract change is necessary; strict focused validation passes.",
+      "unresolved_obligations": [],
+      "next_action": "Record validation evidence and proposed defect-ledger updates; hand off for engine collection and independent rejudgment."
+    },
+    {
+      "validation": [
+        {
+          "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-dot-product-roundoff-and-conditioning.md items/ex-euler-discretization-bias-and-path-variance.md",
+          "exit_code": 0,
+          "result": "2 checked, 0 failing; both direct proofs pass."
+        },
+        {
+          "command": "node tools/rendercheck.mjs items/ex-dot-product-roundoff-and-conditioning.md items/ex-euler-discretization-bias-and-path-variance.md",
+          "exit_code": 0,
+          "result": "2 files clean; all math parses under real KaTeX and frontmatter under renderer YAML."
+        },
+        {
+          "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-57.proof-contracts.json --items ex-dot-product-roundoff-and-conditioning,ex-euler-discretization-bias-and-path-variance --strict --json",
+          "exit_code": 0,
+          "result": "ok:true; both items checked; no errors or warnings."
+        },
+        {
+          "command": "node tools/proof-layout.mjs items/ex-dot-product-roundoff-and-conditioning.md items/ex-euler-discretization-bias-and-path-variance.md",
+          "exit_code": 0,
+          "result": "2 items, 9 steps, 0 defects; run once after final item edits."
+        }
+      ],
+      "interface_comparison": "Native statementHash of each current item equals its frozen initial-1.json before_statements hash. Both have unchanged Example interfaces; only F1, F4 and Euler Verification 1.1 were edited. No new prerequisite, no new interface, and no downstream examination inventory is triggered.",
+      "audit_status": "These are adjudications and author repairs, not independent reviews of the repaired text. No judges, stamps, certificates, shared ledger writes or round transitions were performed. Controller collection and independent rejudgment remain engine-owned.",
+      "unresolved_obligations": []
+    }
+  ]
+}

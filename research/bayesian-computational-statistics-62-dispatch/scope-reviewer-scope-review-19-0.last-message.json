@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "19",
+  "round": 0,
+  "reviewed_items": [
+    "def-negative-sobolev-space-for-white-noise",
+    "lem-wavelet-product-prior-is-l2-valued",
+    "lem-bounded-lipschitz-metric-characterizes-weak-convergence-on-polish-spaces",
+    "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space",
+    "lem-product-prior-coordinate-posterior-law",
+    "lem-product-prior-posterior-second-moment-in-negative-sobolev-space",
+    "lem-finite-coordinate-posterior-total-variation-limit",
+    "cor-canonical-white-noise-law-is-tight-under-choice",
+    "thm-weak-nonparametric-bernstein-von-mises-for-product-priors",
+    "cor-weak-posterior-convergence-in-negative-sobolev-space",
+    "cor-continuous-functionals-of-the-scaled-posterior-converge",
+    "ex-white-noise-is-not-l2-valued",
+    "ex-gaussian-product-prior-satisfies-weak-bvm"
+  ],
+  "reviewed_pages": [
+    "weak-nonparametric-bernstein-von-mises",
+    "weak-nonparametric-bernstein-von-mises-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The full batch and prerequisite arguments were reviewed. A significant unacknowledged full-AC dependency in the white-noise Gaussian result conflicts with the main theorem's stated ACω-only scope; local proof defects are also identified.",
+  "findings": [
+    {
+      "id": "def-negative-sobolev-space-for-white-noise",
+      "type": "local",
+      "reason": "The proof establishes continuity of the L² coefficient map but not injectivity, although the definition calls it an embedding. Add the short argument that a function with all basis coefficients zero is orthogonal to the dense span and hence is zero."
+    },
+    {
+      "id": "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space",
+      "type": "prerequisite",
+      "reason": "Step 4.1 identifies the limiting characteristic function with a normal law without citing the characteristic-function uniqueness result, which assumes full AC. The matching Borel Gaussian definition also imports full AC through the normal-law definition. This item states no AC premise, while the main theorem's Facts say its result uses no full AC and its stated choice premise is only ACω. The current proof route therefore does not establish the main theorem's advertised choice scope; the owner must reconcile it or obtain a choice-free proof."
+    },
+    {
+      "id": "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space",
+      "type": "local",
+      "reason": "In step 1.1 the dyadic blocks for the series ∑l l⁻ʳ contribute order 2ᵐ⁽¹⁻ʳ⁾, not m⁻ʳ; the convergence conclusion is correct but the comparison should be stated accurately. Step 5.1 also uses countable subadditivity to pass from null tail events to their union without citing that prerequisite."
+    },
+    {
+      "id": "lem-bounded-lipschitz-metric-characterizes-weak-convergence-on-polish-spaces",
+      "type": "local",
+      "reason": "The proof establishes the convergence characterization but does not show that βBL separates probability measures. The corollaries use it as a metric. Add an identity-of-indiscernibles argument, for example by testing closed-set distance approximants and then using uniqueness on a generating π-system."
+    },
+    {
+      "id": "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space",
+      "type": "outside-batch",
+      "reason": "A choice-scope change would affect outside-batch consumers thm-linear-functional-bvm-and-credible-coverage, thm-nonlinear-functional-bvm-and-credible-coverage, and lem-product-prior-predictive-and-fixed-truth-data-laws-equivalent. The first two already depend on the AC-assuming normal-law definition despite recording ACω-only axiom_use; the predictive-law item has no full-AC premise."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-product-prior-posterior-second-moment-in-negative-sobolev-space",
+      "decision": "accept",
+      "reason": "Its trace-weight use is valid; the local trace-comparison clarification does not change the interface."
+    },
+    {
+      "id": "cor-canonical-white-noise-law-is-tight-under-choice",
+      "decision": "accept",
+      "reason": "Its statement already assumes full AC."
+    },
+    {
+      "id": "thm-weak-nonparametric-bernstein-von-mises-for-product-priors",
+      "decision": "escalate",
+      "reason": "It uses the white-noise Gaussian result in F3 and steps 1.2–2.1 but states only the ACω route."
+    },
+    {
+      "id": "cor-weak-posterior-convergence-in-negative-sobolev-space",
+      "decision": "accept",
+      "reason": "Its statement already assumes full AC, which covers the white-noise dependency."
+    },
+    {
+      "id": "cor-continuous-functionals-of-the-scaled-posterior-converge",
+      "decision": "accept",
+      "reason": "Its statement already assumes full AC, which covers the inherited theorem dependency."
+    },
+    {
+      "id": "ex-white-noise-is-not-l2-valued",
+      "decision": "accept",
+      "reason": "Its statement already assumes full AC."
+    },
+    {
+      "id": "ex-gaussian-product-prior-satisfies-weak-bvm",
+      "decision": "escalate",
+      "reason": "It invokes the main theorem under countable choice only, so inherits the unresolved choice-scope gap."
+    },
+    {
+      "id": "thm-linear-functional-bvm-and-credible-coverage",
+      "decision": "escalate",
+      "reason": "Outside batch: its axiom_use says ACω-only, but its normal-law dependency assumes full AC; owner reconciliation is needed."
+    },
+    {
+      "id": "thm-nonlinear-functional-bvm-and-credible-coverage",
+      "decision": "escalate",
+      "reason": "Outside batch: its axiom_use says ACω-only, but its normal-law dependency assumes full AC; owner reconciliation is needed."
+    },
+    {
+      "id": "lem-product-prior-predictive-and-fixed-truth-data-laws-equivalent",
+      "decision": "escalate",
+      "reason": "Outside batch: it consumes the white-noise Gaussian result without a full-AC premise."
+    }
+  ]
+}

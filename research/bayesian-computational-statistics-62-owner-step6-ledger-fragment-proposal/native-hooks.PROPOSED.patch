@@ -1,0 +1,425 @@
+--- a/WORKFLOW.md
++++ b/WORKFLOW.md
+@@ -410,7 +410,12 @@
+ and [mechanical check map](tools/STEP6-MECHANICAL-CHECKS.md). New v3 stages require
+ an explicit guarded cutover for historical frozen runs; installation alone does
+ not migrate or resume them. Legacy closeout/recovery commands remain available
+-for their original historical receipts.
++for their original historical receipts. Exact owner-authorized addition-only
++published-ledger fragments are supported only by the v3 transaction: authority
++and evidence are sealed before preparation, while separate current HEAD/index
++foreign residuals and all working bytes are preserved at the actual ref boundary.
++They grant record-level commit authority only, without mathematical acceptance
++or ownership of the entire shared carrier. Conflicts fail closed.
+ 
+ Readiness and closeout treat both `ENOENT` and `ENOTDIR` as an absent path:
+ a regular file cannot contain child evidence files. Readiness follows existing
+--- a/tools/STEP6-REBUILD.md
++++ b/tools/STEP6-REBUILD.md
+@@ -55,8 +55,22 @@
+ selected item carriers. Incidental supplier mentions and reachable prerequisite IDs
+ remain readiness context and confer no commit ownership. Foreign-only ledger
+ changes stay outside the commit even when relevant as context. Mixed changes to
+-owned and foreign ledger records fail closed for separate integration; table
+-records are classified individually. This ownership rule applies only to explicit
++owned and foreign ledger records fail closed unless an exact owner-authorized
++addition-only fragment is bound in `closeout-scope.shared_fragments`; table
++records are classified individually. A fragment binds a run-local authority file
++and its SHA-256, exact before/target owned records, and hashed native evidence.
++It cannot remove, replace, or reorder existing records. Both the authority and
++evidence are sealed before the actual metadata/render pass and full battery.
++The v3 transaction composes additions separately into the current HEAD and index
++under the normal index lock and ref compare-and-swap, retaining their separate
++foreign bytes and staged content. It inserts no foreign working content, checks
++exact base reconstruction and residuals, and leaves the full working file
++unchanged. Terminal record line endings are normalized only for boundary
++signatures; original bytes are retained. Unrelated foreign changes may continue
++between gates; relevant semantic context remains sealed. Fragment authority
++remains selected after integration for truthful retry handling. Legacy closeout
++rejects fragments. Missing or changed authority, conflicting owned records,
++unsupported index flags or modes, or residual changes fail closed. This ownership rule applies only to explicit
+ policies; default shared-input restrictions and readiness context seals remain.
+ 
+ The final report records status, frontier counts, material caveats, measured
+--- a/tools/run-commit-scope.mjs
++++ b/tools/run-commit-scope.mjs
+@@ -1,5 +1,6 @@
+ // Optional owner-authorized closeout. Imported only when a run has a policy.
+ // The engine's mathematical/readiness/report gates remain unchanged.
++import { validateFragment, decodeLedger } from './step6-ledger-fragment.mjs';
+ import { spawnSync } from 'node:child_process';
+ import { accessSync, constants, copyFileSync, existsSync, lstatSync, mkdirSync,
+   mkdtempSync, readFileSync, readdirSync, readlinkSync, rmSync, statSync,
+@@ -292,12 +293,14 @@
+   const policyPath = 'research/' + run + '-closeout-scope.json';
+   regularPath(root, policyPath);
+   const policyText = readFileSync(join(root, policyPath), 'utf8'), policy = JSON.parse(policyText);
+-  const keys = new Set(['version', 'run', 'authorized_by', 'authorization', 'additional_paths', 'reviewed_hook']);
++  const keys = new Set(['version', 'run', 'authorized_by', 'authorization', 'additional_paths', 'reviewed_hook', 'shared_fragments']);
+   if (Object.keys(policy).some(key => !keys.has(key)) || policy.version !== 1 || policy.run !== run
+     || policy.authorized_by !== 'owner' || typeof policy.authorization !== 'string'
+     || policy.authorization.trim().length < 20 || !Array.isArray(policy.additional_paths)) {
+     throw Error('closeout: invalid owner-authorized run-local scope policy');
+   }
++  if (policy.shared_fragments !== undefined && (!Array.isArray(policy.shared_fragments) || policy.shared_fragments.length > 1))
++    throw Error('closeout: invalid bounded shared-fragment authority');
+   const reviewedHook = policy.reviewed_hook ?? null;
+   if (Object.hasOwn(policy, 'reviewed_hook') && (!reviewedHook
+     || Object.keys(reviewedHook).length !== Object.keys(inertHook).length
+@@ -434,6 +437,37 @@
+     }
+     required.add(path);
+   }
++  // Only the fresh v3 transaction composes shared fragments. Legacy git-add
++  // closeout must never acquire this path as whole-file commit authority.
++  const fragments = [];
++  if (policy.shared_fragments?.length) {
++    if (finalReceipt !== `research/${run}-dispatch/tool-step6-finalize-v3.result.json`)
++      throw Error('closeout: shared fragments require the native v3 transaction');
++    const ownedIds = new Set([...selected.items.map(row => row.id), ...selected.pages.map(row => row.id),
++      ...claims.map(row => row.id), ...policy.additional_paths.flatMap(row => /^items\/([^/]+)\.md$/.exec(row.path)?.slice(1) ?? [])]);
++    for (const row of policy.shared_fragments) {
++      if (!row || Object.keys(row).some(key => !['path', 'authority', 'sha256'].includes(key))
++        || row.path !== 'research/published-consumer-supplier-ledger.md'
++        || !runResearch(run, safePath(row.authority)) || !/^[a-f0-9]{64}$/.test(row.sha256 ?? ''))
++        throw Error('closeout: invalid exact shared-fragment binding');
++      regularPath(root, row.authority);
++      const bytes = readFileSync(join(root, row.authority));
++      if (sha256(bytes) !== row.sha256) throw Error('closeout: fragment authority changed');
++      const spec = JSON.parse(decodeLedger(bytes));
++      validateFragment(spec, run, ownedIds, decodeLedger(readFileSync(join(root, row.path))));
++      required.add(row.authority);
++      for (const evidence of spec.evidence) {
++        if (!evidence || Object.keys(evidence).some(key => !['path', 'sha256'].includes(key))
++          || !runResearch(run, safePath(evidence.path)) || !/^[a-f0-9]{64}$/.test(evidence.sha256 ?? ''))
++          throw Error('closeout: invalid fragment supporting evidence');
++        regularPath(root, evidence.path);
++        if (sha256(readFileSync(join(root, evidence.path))) !== evidence.sha256)
++          throw Error('closeout: fragment supporting evidence changed');
++        required.add(evidence.path);
++      }
++      fragments.push({ path: row.path, authority: row.authority, sha256: row.sha256, spec, ownedIds: [...ownedIds].sort() });
++    }
++  }
+   const additional = new Set();
+   for (const row of policy.additional_paths) {
+     if (!row || Object.keys(row).some(key => !['path', 'sha256', 'reason', 'ownership_evidence'].includes(key))
+@@ -505,9 +539,10 @@
+     input: pathsInput(paths), optional: true, literalPathspecs: false,
+   }) || Buffer.alloc(0));
+   if (ignored.length) throw Error('closeout: required/authorized artifact is ignored by Git: ' + ignored[0]);
+-  return { policyPath, policySha256: sha256(policyText), paths, owns, inventory, reviewedHook,
++  return { policyPath, policySha256: sha256(policyText), paths, owns, inventory, reviewedHook, fragments,
+     contextSha256: sha256(JSON.stringify({ ...(physics ? { domain: 'physics' } : {}), selected, required: [...required].sort(),
+-      claims: sha256(claimsText), noopClosures, operationalContexts: exclusions.sha256, additional: policy.additional_paths })) };
++      claims: sha256(claimsText), noopClosures, operationalContexts: exclusions.sha256, additional: policy.additional_paths,
++      sharedFragments: fragments.map(({ path, authority, sha256 }) => ({ path, authority, sha256 })) })) };
+ }
+ 
+ // Read-only binding helper for an owner administrative reseal. It does not
+--- a/tools/step6-commit.mjs
++++ b/tools/step6-commit.mjs
+@@ -1,5 +1,6 @@
+ // Final transaction only. Git plumbing never touches foreign working files,
+ // runs filters, or checks out a tree. All content gates precede this operation.
++import { composeFragment, fragmentRecords, recordSignature, decodeLedger } from './step6-ledger-fragment.mjs';
+ import { copyFileSync, existsSync, lstatSync, mkdirSync, mkdtempSync, openSync,
+   closeSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
+ import { dirname, join, resolve, relative } from 'node:path';
+@@ -38,7 +39,18 @@
+   // Retain original Git side-effect refusals. Plumbing uses no filters or
+   // commit hooks even when a previously reviewed inert hook is allowed.
+   refuseGitSideEffects(gitRoot, paths, policy?.reviewedHook ?? verifiedInertHook(gitRoot));
+-  indexEntries(gitRoot); // checks conflicts, flags, unsupported submodules
++  const preflightIndex = indexEntries(gitRoot); // checks conflicts, flags, unsupported submodules
++  // Fail incompatible owned bases during real preparation, before final gates.
++  // This read-only preflight is not an atomic snapshot; commit recomposes at CAS.
++  const preflightHead = policy?.fragments?.length ? treeEntries(gitRoot) : [];
++  for (const fragment of policy?.fragments ?? []) {
++    const path = (prefix ? prefix + '/' : '') + fragment.path;
++    const headRow = preflightHead.find(row => row.path === path), indexRow = preflightIndex.find(row => row.path === path);
++    if (!headRow || !indexRow || headRow.mode !== '100644' || indexRow.mode !== '100644' || indexRow.flags !== '0')
++      throw Error('step6 commit: fragment requires existing ordinary HEAD/index carrier');
++    for (const row of [headRow, indexRow])
++      composeFragment(decodeLedger(git(gitRoot, ['cat-file', 'blob', row.oid])), fragment.spec, run, new Set(fragment.ownedIds));
++  }
+   const scope = runScope(run, root);
+   for (const row of [...scope.items, ...scope.pages]) {
+     if (!localPaths.includes(row.file)) throw Error(`step6 commit: selected carrier is not owned: ${row.file}`);
+@@ -48,7 +60,7 @@
+   const ignored = git(gitRoot, ['check-ignore', '-z', '--stdin'],
+     { input: nul(paths), optional: true, literalPathspecs: false });
+   if (ignored?.length) throw Error('step6 commit: an owned artifact is ignored');
+-  return { root, gitRoot, prefix, localPaths, paths, finalReceipt, policy,
++  return { root, gitRoot, prefix, localPaths, paths, finalReceipt, policy, fragments: policy?.fragments ?? [],
+     owns: path => paths.includes(path) };
+ }
+ 
+@@ -74,6 +86,23 @@
+     const originalIndex = readFileSync(actualIndex);
+     const beforeIndex = indexEntries(gitRoot), beforeTree = treeEntries(gitRoot, beforeHead);
+     const outsideIndex = outside(beforeIndex), outsideTree = outside(beforeTree);
++    const fragmentStates = new Map();
++    for (const fragment of scope.fragments) {
++      const path = (scope.prefix ? scope.prefix + '/' : '') + fragment.path;
++      const headRow = beforeTree.find(row => row.path === path), indexRow = beforeIndex.find(row => row.path === path);
++      if (!headRow || !indexRow || headRow.mode !== '100644' || indexRow.mode !== '100644' || indexRow.flags !== '0')
++        throw Error('step6 commit: fragment requires existing ordinary HEAD/index carrier');
++      const headText = decodeLedger(git(gitRoot, ['cat-file', 'blob', headRow.oid]));
++      const indexText = decodeLedger(git(gitRoot, ['cat-file', 'blob', indexRow.oid]));
++      const ids = new Set(fragment.ownedIds);
++      const head = composeFragment(headText, fragment.spec, run, ids);
++      const index = composeFragment(indexText, fragment.spec, run, ids);
++      const residual = text => fragmentRecords(text, run, ids).filter(row => !row.owned).map(row => recordSignature(row.text));
++      equal(residual(head.text), residual(headText), 'fragment HEAD foreign residual');
++      equal(residual(index.text), residual(indexText), 'fragment index foreign residual');
++      fragmentStates.set(path, { fragment, head, index, headRow, indexRow,
++        headForeign: digest(residual(headText)), indexForeign: digest(residual(indexText)) });
++    }
+     const validated = paths.filter(path => path !== (scope.prefix ? scope.prefix + '/' : '') + finalReceipt)
+       .map(path => fileState(gitRoot, path));
+     mkdirSync(dirname(receiptFile), { recursive: true });
+@@ -83,7 +112,11 @@
+         outside_index_sha256: digest(outsideIndex), outside_head_sha256: digest(outsideTree),
+         outside_working: 'Preserved by construction: only owned files written; no checkout, filters, hooks or foreign content scan.',
+         policy_sha256: scope.policy?.policySha256 ?? null,
+-        context_sha256: scope.policy?.contextSha256 ?? null } }, null, 2) + '\n');
++        context_sha256: scope.policy?.contextSha256 ?? null,
++        shared_fragments: [...fragmentStates].map(([path, row]) => ({ path, authority: row.fragment.authority,
++          authority_sha256: row.fragment.sha256, before_head_blob: row.headRow.oid, before_index_blob: row.indexRow.oid,
++          head_foreign_sha256: row.headForeign, index_foreign_sha256: row.indexForeign,
++          head_result_sha256: sha256(row.head.text), index_result_sha256: sha256(row.index.text) })) } }, null, 2) + '\n');
+     // Keep native coverage FALSE until every commit/index assertion succeeds.
+     // The tree receives the prospective successful blob; a crash before final
+     // materialization leaves an explicit pending result, never adoptable success.
+@@ -91,7 +124,7 @@
+       run, covers: ['all'], ok: false, transaction_pending: true, before_head: beforeHead }, null, 2) + '\n');
+     writeFileSync(receiptFile, pendingReceipt);
+     const expectedReceipt = pendingReceipt;
+-    const present = paths.filter(path => regularPath(gitRoot, path, true));
++    const present = paths.filter(path => !fragmentStates.has(path) && regularPath(gitRoot, path, true));
+     const oids = textGit(gitRoot, ['hash-object', '-w', '--no-filters', '--stdin-paths'],
+       { input: Buffer.from(present.join('\n') + '\n') }).split('\n');
+     if (oids.length !== present.length) throw Error('step6 commit: incomplete owned object inventory');
+@@ -100,31 +133,53 @@
+     const blobs = new Map(present.map((path, i) => [path, { path, oid: oids[i],
+       mode: !checkModes && oldTree.get(path) ? oldTree.get(path).mode
+         : lstatSync(join(gitRoot, path)).mode & 0o111 ? '100755' : '100644' }]));
++    const indexBlobs = new Map(blobs);
++    for (const [path, row] of fragmentStates) {
++      const object = text => textGit(gitRoot, ['hash-object', '-w', '--no-filters', '--stdin'], { input: Buffer.from(text) });
++      blobs.set(path, { path, mode: '100644', oid: object(row.head.text) });
++      indexBlobs.set(path, { path, mode: '100644', oid: object(row.index.text) });
++    }
++    const assertFragmentTree = (tree, kind, label) => {
++      const entries = new Map(treeEntries(gitRoot, tree).map(row => [row.path, row]));
++      for (const [path, row] of fragmentStates) {
++        const actual = entries.get(path), expected = (kind === 'head' ? blobs : indexBlobs).get(path);
++        if (!actual || actual.oid !== expected.oid || actual.mode !== expected.mode)
++          throw Error(`step6 commit: ${label} fragment blob mismatch`);
++        const text = decodeLedger(git(gitRoot, ['cat-file', 'blob', actual.oid]));
++        const residual = fragmentRecords(text, run, new Set(row.fragment.ownedIds))
++          .filter(record => !record.owned).map(record => recordSignature(record.text));
++        equal(digest(residual), kind === 'head' ? row.headForeign : row.indexForeign, label + ' fragment residual');
++      }
++    };
+     const receiptGitPath = (scope.prefix ? scope.prefix + '/' : '') + finalReceipt;
+     const receiptBlob = textGit(gitRoot, ['hash-object', '-w', '--no-filters', '--stdin'], { input: successfulReceipt });
+     blobs.get(receiptGitPath).oid = receiptBlob;
+     const zero = '0'.repeat(beforeHead.length);
+-    const updates = paths.flatMap(path => {
+-      const row = blobs.get(path);
++    const updatesFor = source => paths.flatMap(path => {
++      const row = source.get(path);
+       return [`0 ${zero}\t${path}`, ...(row ? [`${row.mode} ${row.oid}\t${path}`] : [])];
+     });
++    const updates = updatesFor(blobs), indexUpdates = updatesFor(indexBlobs);
+     git(gitRoot, ['read-tree', beforeHead], { env });
+     git(gitRoot, ['update-index', '-z', '--index-info'], { env, input: nul(updates) });
+     const tree = textGit(gitRoot, ['write-tree'], { env });
+     equal(outside(treeEntries(gitRoot, tree)), outsideTree, 'outside proposed HEAD');
++    assertFragmentTree(tree, 'head', 'proposed HEAD');
+     const commit = textGit(gitRoot, ['commit-tree', tree, '-p', beforeHead], {
+       input: Buffer.from(`chore(${run}): close out validated frontier\n\n${paths.length} exact owned paths; no push or publication.\n`) });
+     // Construct the real-index result from its exact original, preserving all
+     // foreign staged blobs and flags. update-index never reads working bytes.
+     copyFileSync(actualIndex, integrateIndex);
+     git(gitRoot, ['update-index', '-z', '--index-info'],
+-      { env: { GIT_INDEX_FILE: integrateIndex }, input: nul(updates) });
++      { env: { GIT_INDEX_FILE: integrateIndex }, input: nul(indexUpdates) });
++    assertFragmentTree(textGit(gitRoot, ['write-tree'], { env: { GIT_INDEX_FILE: integrateIndex } }), 'index', 'proposed integrated index');
+     equal(paths.filter(path => path !== (scope.prefix ? scope.prefix + '/' : '') + finalReceipt)
+       .map(path => fileState(gitRoot, path)), validated, 'validated owned working bytes');
+     if (!readFileSync(receiptFile).equals(expectedReceipt)) throw Error('step6 commit: receipt changed');
+     const currentScope = preflightStep6(root, run, { physics, finalReceipt });
+     equal(currentScope.paths, paths, 'owned inventory');
+     equal(currentScope.policy?.contextSha256 ?? null, scope.policy?.contextSha256 ?? null, 'scope authority');
++    equal(currentScope.fragments, scope.fragments, 'fragment authority');
+     if (!readFileSync(actualIndex).equals(originalIndex)) throw Error('step6 commit: real index changed despite lock');
+     if (textGit(gitRoot, ['symbolic-ref', '--short', 'HEAD']) !== 'main') throw Error('step6 commit: branch changed');
+     // Recheck only the validated frontier/context at the atomic ref boundary,
+@@ -140,11 +195,18 @@
+     const committed = new Map(afterTree.map(row => [row.path, row]));
+     const indexed = new Map(afterIndex.map(row => [row.path, row]));
+     for (const path of paths) {
+-      const expected = blobs.get(path);
+-      for (const actual of [committed.get(path), indexed.get(path)]) {
++      for (const [actual, expected] of [[committed.get(path), blobs.get(path)], [indexed.get(path), indexBlobs.get(path)]]) {
+         if (expected ? !actual || actual.oid !== expected.oid || actual.mode !== expected.mode : actual)
+           throw Error(`step6 commit: owned committed/index blob mismatch: ${path}`);
+       }
++    }
++    for (const [path, row] of fragmentStates) {
++      const ids = new Set(row.fragment.ownedIds);
++      const residual = text => fragmentRecords(text, run, ids).filter(record => !record.owned).map(record => recordSignature(record.text));
++      const committedText = decodeLedger(git(gitRoot, ['cat-file', 'blob', committed.get(path).oid]));
++      const indexedText = decodeLedger(git(gitRoot, ['cat-file', 'blob', indexed.get(path).oid]));
++      equal(digest(residual(committedText)), row.headForeign, 'committed fragment foreign residual');
++      equal(digest(residual(indexedText)), row.indexForeign, 'indexed fragment foreign residual');
+     }
+     equal(paths.filter(path => path !== (scope.prefix ? scope.prefix + '/' : '') + finalReceipt)
+       .map(path => fileState(gitRoot, path)), validated, 'committed owned working bytes');
+--- /dev/null
++++ b/tools/step6-ledger-fragment.mjs
+@@ -0,0 +1,87 @@
++// Exact owner-authorized addition-only shared-ledger commit fragments.
++import { createHash } from 'node:crypto';
++const sha = text => createHash('sha256').update(text).digest('hex');
++// Only a terminal record line terminator is non-content. Original bytes are
++// retained; this accounts for EOF becoming an interior blank-line separator.
++export const decodeLedger = bytes => new TextDecoder('utf-8', { fatal: true, ignoreBOM: true }).decode(bytes);
++export const recordSignature = text => text.replace(/\r?\n$/, '');
++const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
++const refuse = why => { throw Error(`shared ledger fragment: ${why}`); };
++export function fragmentRecords(text, run, ownedIds) {
++  const records = [];
++  const owns = value => value.includes(run) || ownedIds.has(/^\s*(?:\|\s*)?(?:`|\[\[)?([a-z][a-z0-9]*(?:-[a-z0-9]+)+)(?=[`|\]\s])/.exec(value)?.[1]);
++  const emit = (start, end) => {
++    const block = text.slice(start, end);
++    if (!block.trim()) return;
++    if (!block.trimStart().startsWith('|')) records.push({ start, end, text: block, owned: owns(block) });
++    else {
++      let at = start;
++      for (const line of block.split('\n')) {
++        records.push({ start: at, end: at + line.length, text: line, owned: owns(line) });
++        at += line.length + 1;
++      }
++    }
++  };
++  let cursor = 0;
++  for (const match of text.matchAll(/\n\s*\n/g)) { emit(cursor, match.index); cursor = match.index + match[0].length; }
++  emit(cursor, text.length);
++  return records;
++}
++export function validateFragment(spec, run, actualOwnedIds, working) {
++  if (spec.version !== 1 || spec.kind !== 'published-ledger-addition-fragment' || spec.run !== run
++    || spec.path !== 'research/published-consumer-supplier-ledger.md' || spec.authorized_by !== 'owner'
++    || typeof spec.authorization !== 'string' || spec.authorization.length < 20
++    || !Array.isArray(spec.base_owned_records) || !Array.isArray(spec.target_owned_records)
++    || !Array.isArray(spec.evidence) || !spec.evidence.length) refuse('invalid exact owner authority');
++  // Caller verifies every evidence path/hash and descriptor raw hash, and binds
++  // this descriptor in native scope policy/readiness before actual preparation.
++  const ids = new Set(actualOwnedIds);
++  const own = text => fragmentRecords(text, run, ids).filter(r => r.owned).map(r => recordSignature(r.text));
++  for (const rows of [spec.base_owned_records, spec.target_owned_records]) {
++    if (rows.some(row => typeof row !== 'string' || !same(own(row), [recordSignature(row)])) || new Set(rows.map(recordSignature)).size !== rows.length)
++      refuse('non-owned or duplicate authorized record');
++  }
++  const before = spec.base_owned_records.map(recordSignature), target = spec.target_owned_records.map(recordSignature);
++  const retained = target.filter(row => before.includes(row));
++  if (!same(retained, before) || target.length <= retained.length)
++    refuse('authority must add records only; no replacement, deletion, or reorder');
++  if (!same(own(working), target)) refuse('working owned projection differs from authority');
++  return { ids, own };
++}
++export function composeFragment(base, spec, run, ids) {
++  const rows = fragmentRecords(base, run, ids), owned = rows.filter(r => r.owned);
++  const current = owned.map(r => recordSignature(r.text)), target = spec.target_owned_records.map(recordSignature);
++  const before = spec.base_owned_records.map(recordSignature);
++  if (same(current, target)) return { text: base, already_integrated: true, base_sha256: sha(base), insertions: [] };
++  if (!same(current, before)) refuse('HEAD/index owned projection is neither exact before nor target');
++  const pending = new Map(); let additions = [];
++  for (const record of target) {
++    if (before.includes(record)) {
++      if (additions.length) pending.set(record, additions);
++      additions = [];
++    } else additions.push(record);
++  }
++  const insertions = [];
++  for (const record of owned) {
++    if (pending.has(recordSignature(record.text))) insertions.push({ at: record.start, text: pending.get(recordSignature(record.text)).join('\n\n') + '\n\n' });
++  }
++  if (additions.length) insertions.push({ at: base.length, text: (base.length && !base.endsWith('\n\n') ? base.endsWith('\n') ? '\n' : '\n\n' : '') + additions.join('\n\n') + '\n\n' });
++  // This construction only inserts. Every byte of the HEAD/index input occurs
++  // unchanged and in order in its corresponding result; no working foreign
++  // bytes are copied into either tree or index.
++  let text = '', cursor = 0; const applied = [];
++  for (const insertion of insertions) {
++    text += base.slice(cursor, insertion.at);
++    applied.push({ at: text.length, length: insertion.text.length });
++    text += insertion.text; cursor = insertion.at;
++  }
++  text += base.slice(cursor);
++  let reconstructed = text;
++  for (const span of [...applied].reverse()) reconstructed = reconstructed.slice(0, span.at) + reconstructed.slice(span.at + span.length);
++  if (reconstructed !== base) refuse('composition failed exact base-byte reconstruction');
++  const after = fragmentRecords(text, run, ids);
++  if (!same(after.filter(r => r.owned).map(r => recordSignature(r.text)), target)
++    || !same(after.filter(r => !r.owned).map(r => recordSignature(r.text)), rows.filter(r => !r.owned).map(r => recordSignature(r.text))))
++    refuse('composition changed owned projection or foreign residual');
++  return { text, already_integrated: false, base_sha256: sha(base), insertions };
++}
+--- a/tools/step6-owned-inputs.mjs
++++ b/tools/step6-owned-inputs.mjs
+@@ -13,8 +13,9 @@
+   if (!/^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(run)) throw Error('invalid scoped run identity');
+   const finalReceipt = `research/${run}-dispatch/tool-step6-finalize-v3.result.json`;
+   if (existsSync(join(root, `research/${run}-closeout-scope.json`))) {
+-    const selected = new Set(preflightCloseoutScope(root, run, finalReceipt, { physics }).paths);
+-    return selectSharedOwnership(run, root, { physics, scope: runScope(run, root), selected, policy: true });
++    const authority = preflightCloseoutScope(root, run, finalReceipt, { physics });
++    const selected = new Set(authority.paths);
++    return selectSharedOwnership(run, root, { physics, scope: runScope(run, root), selected, policy: true, fragments: authority.fragments });
+   }
+   const scope = runScope(run, root);
+   if (!scope.items.length || !scope.pages.length) throw Error('empty closeout source frontier');
+@@ -92,7 +93,7 @@
+   return Object.fromEntries(Object.entries(parts).map(([key, rows]) => [key, JSON.stringify(rows)]));
+ }
+ 
+-function selectSharedOwnership(run, root, { physics, scope, selected, policy }) {
++function selectSharedOwnership(run, root, { physics, scope, selected, policy, fragments = [] }) {
+   // Preserve unchanged and foreign-only shared edits outside the commit.
+   // Reuse precisely the native scientific projections, not a filename-prefix
+   // approximation or a whole-ledger object hash. A relevant change still
+@@ -122,6 +123,9 @@
+     // Explicit policy owns only its selected carriers. Other relevant shared
+     // records remain sealed context, without acquiring commit ownership.
+     if (policy && !selected.has(path)) continue;
++    // Explicit fragment authority remains stable after commit/retry; the v3
++    // transaction validates and composes only its exact owned-record additions.
++    if (fragments.some(fragment => fragment.path === path)) continue;
+     if (policy && path === 'research/published-consumer-supplier-ledger.md') {
+       const ownedIds = new Set([...scope.items.map(row => row.id), ...scope.pages.map(row => row.id),
+         ...[...selected].flatMap(file => /^items\/([^/]+)\.md$/.exec(file)?.slice(1) ?? [])]);
+--- a/tools/step6-scoped-tree.mjs
++++ b/tools/step6-scoped-tree.mjs
+@@ -180,6 +180,18 @@
+     if (policy.version !== 1 || policy.run !== run || policy.authorized_by !== 'owner'
+       || !Array.isArray(policy.additional_paths)) throw Error('invalid exact closeout scope policy');
+     add(policyFile);
++    for (const row of policy.shared_fragments ?? []) {
++      if (row.path !== 'research/published-consumer-supplier-ledger.md'
++        || typeof row.authority !== 'string' || !row.authority.startsWith(`research/${run}-`)
++        || row.authority.split('/').includes('..')) throw Error('invalid shared-fragment ownership path');
++      add(row.authority);
++      const fragment = JSON.parse(readSource(row.authority));
++      for (const evidence of fragment.evidence ?? []) {
++        if (typeof evidence.path !== 'string' || !evidence.path.startsWith(`research/${run}-`)
++          || evidence.path.split('/').includes('..')) throw Error('invalid shared-fragment evidence path');
++        add(evidence.path);
++      }
++    }
+     for (const row of policy.additional_paths) {
+       if (typeof row.path !== 'string' || row.path.startsWith('/') || row.path.split('/').includes('..')
+         || typeof row.ownership_evidence !== 'string' || !row.ownership_evidence.startsWith(`research/${run}-`)

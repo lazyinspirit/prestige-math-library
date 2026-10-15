@@ -1,0 +1,139 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "12",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "lem-likelihood-tilted-measure-is-sigma-finite",
+      "model": "gpt-6-luna",
+      "context_sha256": "db0fdcac53dfaad3beda1a418d88d3fae265535d58638b7442ab4da1ba6f19b7",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F2 supplies scalar multiples, defined sums, products and lattice operations, but no reciprocals. Original step 1.1 therefore fails to justify the measurable ratio needed by F3. Repaired by proving {r_theta>a}={p_theta*>0} intersect {p_theta-a p_theta*>0} for a>=0, with the whole space for a<0, and citing the existing threshold-characterisation theorem. Finite-valued densities ensure the difference and ratio are finite everywhere, including the zero-denominator convention. Also supplied the omitted explicit unit-mass argument at theta*.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-likelihood-tilted-measure-is-sigma-finite",
+      "disposition": "repaired",
+      "post_sha256": "1c81c47208f68ea559c29fd1c09382cb9fbac0504a0bfe3f70ee314f55966f9b",
+      "review_context_sha256": "7a4a4112e34aaa4d362539578b9dc4ddac24b69b5ca826f989bcb132de24abf7",
+      "reason": "The original ratio measurability citation was insufficient. Step 1.1 now proves each strict threshold set using the measurable finite difference p_theta-a p_theta* and the exact existing threshold criterion. Step 2.1 constructs measurable sublevel sets exhausting the whole sample space with Q_theta(E_k)<=k, and identifies the selected-minimizer ratio with the indicator of a P0-full set to obtain unit mass. No total-mass finiteness or normalization is assumed for other theta. The original Statement and page interface are unchanged; the assigned manifest dependency and proof contract were synchronized under the shared write lock. This is a repair self-check, not independent judgment of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "lem-likelihood-tilted-measure-is-sigma-finite",
+      "class": "accuracy",
+      "subclass": "citation-inflated",
+      "severity": "fatal",
+      "location": "proof-step",
+      "disposition": "fixed",
+      "reason": "Original F2 and step 1.1 infer quotient measurability from a theorem without a quotient clause. The repair proves threshold measurability explicitly using finite scalar differences and the published threshold theorem; the original Statement is preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "lem-likelihood-tilted-measure-is-sigma-finite",
+      "class": "accuracy",
+      "subclass": "unsupported-inference",
+      "severity": "nonfatal",
+      "location": "proof-step",
+      "disposition": "fixed",
+      "reason": "The original proof ended at sigma-finiteness without deriving the stated selected-minimizer normalization. Final step 2.1 now identifies r_theta* with the indicator of {p_theta*>0}, whose P0 mass is one by the Given almost-sure positivity.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "id": "thm-finite-union-bound",
+      "consumer": "cex-weak-tilted-tests-do-not-imply-almost-sure-consistency",
+      "action": "retain-existing-repair",
+      "disposition": "unaffected",
+      "affected_use": "items/cex-weak-tilted-tests-do-not-imply-almost-sure-consistency.md, F6 and step 2.1: bounds the chance that any of n continuously distributed observations exceeds b_n.",
+      "reason": "The rejection-blind digest alert describes earlier finite-space-only premises. The current published supplier instead assumes an arbitrary probability space and proves the finite union bound by measurable disjointification, general measure monotonicity and countable additivity (steps 1.1-3.1). That covers the actual continuous-sample use. The canonical ledger already records this exact published repair under local-published-repair:bayesian-computational-statistics-62:step4-b12:thm-finite-union-bound. No published carrier was edited or adjudicated, and no new audit or receipt validation is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "Assigned review, repair, metadata synchronization and focused checks complete; controller owns independent rejudgment and certification.",
+    "claim": "Each likelihood tilt is sigma-finite; the selected minimizer tilt has total mass one.",
+    "conventions": "Supplied densities are finite-valued and nonnegative; the ratio is zero on the denominator-zero null set. No additional choice is used.",
+    "sources_consulted": [
+      "items/def-likelihood-tilted-measure-at-kl-projection.md, Definition",
+      "items/def-kl-projection-set-and-relative-kl-neighborhoods.md, Definition",
+      "items/thm-arithmetic-and-lattice-operations-preserve-measurability.md, Statement and Proof",
+      "items/thm-threshold-characterisations-of-real-and-extended-real-measurability.md, Statement and Proof",
+      "items/thm-indefinite-integral-of-a-nonnegative-function-is-a-measure.md, Statement and Proof",
+      "items/def-probability-measure.md, Definition",
+      "items/def-measure.md, Definition"
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-likelihood-tilted-measure-is-sigma-finite.md --json",
+        "exit_code": 0,
+        "result": "1 proof checked; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-likelihood-tilted-measure-is-sigma-finite.md --json",
+        "exit_code": 0,
+        "result": "1 item checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-likelihood-tilted-measure-is-sigma-finite.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-12.proof-contracts.json --items lem-likelihood-tilted-measure-is-sigma-finite --strict --json",
+        "exit_code": 0,
+        "result": "ok:true; selected item checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run bayesian-computational-statistics-62 --items lem-likelihood-tilted-measure-is-sigma-finite",
+        "exit_code": 0,
+        "result": "Captured post_sha256 and review_context_sha256 immediately after review and metadata integration."
+      },
+      {
+        "command": "Read-only Node assertions against initial-1.json, current item, report and owning manifest",
+        "exit_code": 0,
+        "result": "Identity/input digest, exact rejected tuple coverage, current item guard, byte-identical original Statement text/hash and manifest dependency mirror all pass."
+      }
+    ],
+    "interface": "No Statement or Definition change; proof and dependency repair only. No downstream interface event.",
+    "unresolved_mathematics": [],
+    "next_action": "Controller merges ledger proposals and schedules independent current-content rejudgment; no unresolved mathematical obligations remain in this unit.",
+    "statement_comparison": "Compared the original Statement read before editing with the current section: all original sentences, mathematics and references are unchanged. The patch changes only deps, F2, added F5 and proof steps 1.1 and 2.1.",
+    "changed_files": [
+      "items/lem-likelihood-tilted-measure-is-sigma-finite.md",
+      "research/bayesian-computational-statistics-62-batch-12.pages.json",
+      "research/bayesian-computational-statistics-62-batch-12.proof-contracts.json",
+      "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u12.json"
+    ],
+    "dependency_ids": [
+      "def-likelihood-tilted-measure-at-kl-projection",
+      "def-measure",
+      "def-probability-measure",
+      "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+      "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure"
+    ]
+  }
+}

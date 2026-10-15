@@ -1,0 +1,199 @@
+{
+  "group": "o",
+  "batches": [
+    "47"
+  ],
+  "pages_read": [
+    "particle-mcmc-pmmh-and-particle-gibbs",
+    "particle-mcmc-pmmh-and-particle-gibbs-examples"
+  ],
+  "items_read": [
+    "alg-pmmh",
+    "thm-pmmh-exact-invariance",
+    "alg-monte-carlo-within-metropolis",
+    "def-particle-gibbs-extended-target",
+    "alg-conditional-particle-gibbs",
+    "thm-particle-gibbs-selected-path-marginal",
+    "thm-particle-gibbs-conditional-sweep-is-gibbs",
+    "def-particle-gibbs-backward-simulation-extended-target",
+    "alg-particle-gibbs-backward-simulation",
+    "thm-particle-gibbs-backward-simulation-sweep-is-gibbs",
+    "ex-pseudo-marginal-rejection",
+    "cex-monte-carlo-within-metropolis-not-exact",
+    "ex-particle-gibbs-invariant-but-sticky",
+    "cex-particle-gibbs-missing-path-support"
+  ],
+  "conventions": [
+    {
+      "convention": "PMMH stores the complete auxiliary state, including the likelihood estimate and selected terminal index; rejection retains that state. Its likelihood estimator is jointly measurable, nonnegative and unbiased, with finite positive evidence.",
+      "fixed_by": "alg-pmmh",
+      "matters_for": [
+        "thm-pmmh-exact-invariance",
+        "ex-pseudo-marginal-rejection",
+        "alg-monte-carlo-within-metropolis",
+        "cex-monte-carlo-within-metropolis-not-exact"
+      ]
+    },
+    {
+      "convention": "MCWM uses the common-density branch, draws fresh independent auxiliary values for the current and proposed parameters each iteration, and requires strictly positive estimates almost surely at every parameter it can propose or visit.",
+      "fixed_by": "alg-monte-carlo-within-metropolis",
+      "matters_for": [
+        "cex-monte-carlo-within-metropolis-not-exact"
+      ]
+    },
+    {
+      "convention": "Genealogical particle Gibbs uses N ≥ 2, multinomial resampling with ancestor indices in sampled order, common standard-Borel state spaces, and jointly measurable parameterized model, proposal, potential and weight versions. The selected trajectory follows the actual ancestor arrays.",
+      "fixed_by": "def-particle-gibbs-extended-target",
+      "matters_for": [
+        "alg-conditional-particle-gibbs",
+        "thm-particle-gibbs-selected-path-marginal",
+        "thm-particle-gibbs-conditional-sweep-is-gibbs",
+        "def-particle-gibbs-backward-simulation-extended-target"
+      ]
+    },
+    {
+      "convention": "Explicit conditional-filter formulas apply on a measurable full-measure good set of retained parameter-path-lineage values; exceptional retained states use an identity fallback. Topological support alone does not establish admissibility.",
+      "fixed_by": "def-particle-gibbs-extended-target",
+      "matters_for": [
+        "alg-conditional-particle-gibbs",
+        "thm-particle-gibbs-conditional-sweep-is-gibbs"
+      ]
+    },
+    {
+      "convention": "Backward simulation uses declared sigma-finite coordinate reference measures and transition/proposal densities. Its selected index sequence need not follow the ancestor arrays; backward probabilities are proportional to W_t^i f_{t+1}(z | X_t^i).",
+      "fixed_by": "def-particle-gibbs-backward-simulation-extended-target",
+      "matters_for": [
+        "alg-particle-gibbs-backward-simulation",
+        "thm-particle-gibbs-backward-simulation-sweep-is-gibbs"
+      ]
+    },
+    {
+      "convention": "The parameter posterior draw and subsequent conditional particle regeneration together constitute one joint conditional-block update given the retained path and index sequence.",
+      "fixed_by": "thm-particle-gibbs-conditional-sweep-is-gibbs",
+      "matters_for": [
+        "alg-conditional-particle-gibbs",
+        "thm-particle-gibbs-backward-simulation-sweep-is-gibbs"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-particle-gibbs-extended-target",
+      "statement": "The genealogical particle Gibbs extended target is φ_N(dθ,du,k) = C⁻¹ π₀(dθ) ψ_θ(du) Ẑ_T(u) W_T^k(u), for k ∈ {1,…,N}, under the stated measurable-family, support, multinomial-resampling and finite-positive-evidence assumptions.",
+      "used_by": [
+        "alg-conditional-particle-gibbs",
+        "thm-particle-gibbs-selected-path-marginal",
+        "thm-particle-gibbs-conditional-sweep-is-gibbs",
+        "def-particle-gibbs-backward-simulation-extended-target"
+      ]
+    },
+    {
+      "id": "thm-particle-gibbs-selected-path-marginal",
+      "statement": "Under the hypotheses of def-particle-gibbs-extended-target and alg-sequential-importance-resampling, with multinomial resampling in sampled order, the stated support conditions, 0 < L_θ < ∞ prior-almost everywhere and 0 < C < ∞, φ_N is a probability measure with selected (θ,X_{0:T}^K) marginal C⁻¹ π₀(dθ) γ_{θ,T}(dx_{0:T}), for every N ≥ 2.",
+      "used_by": [
+        "thm-particle-gibbs-conditional-sweep-is-gibbs",
+        "ex-particle-gibbs-invariant-but-sticky",
+        "cex-particle-gibbs-missing-path-support"
+      ]
+    },
+    {
+      "id": "alg-pmmh",
+      "statement": "Apply general Metropolis–Hastings to extended target π̃(dθ,du) = C⁻¹ π₀(dθ)m_θ(du)L̂_θ(u), proposing θ′ from R(θ,·) and U′ from m_{θ′}; on rejection retain the complete current pair (θ,U).",
+      "used_by": [
+        "thm-pmmh-exact-invariance",
+        "alg-monte-carlo-within-metropolis",
+        "ex-pseudo-marginal-rejection"
+      ]
+    },
+    {
+      "id": "thm-pmmh-exact-invariance",
+      "statement": "Under alg-pmmh, its unbiasedness identity and finite positive evidence, π̃ is a probability with parameter marginal π_y and selected parameter-path marginal C⁻¹ π₀(dθ)γ_{θ,T}(dx_{0:T}); the PMMH kernel is reversible and invariant for π̃ for every fixed N ≥ 1, without an irreducibility, uniqueness, convergence-rate or mixing-speed conclusion.",
+      "used_by": [
+        "ex-pseudo-marginal-rejection",
+        "cex-monte-carlo-within-metropolis-not-exact"
+      ]
+    },
+    {
+      "id": "def-particle-gibbs-backward-simulation-extended-target",
+      "statement": "The backward-simulation extended density is the exact selected-path posterior density divided by N^{T+1}, multiplied by the SIR forward density divided by the selected particles' initial and ancestor-proposal factors, and multiplied by the backward probabilities for their actual ancestors.",
+      "used_by": [
+        "alg-particle-gibbs-backward-simulation",
+        "thm-particle-gibbs-backward-simulation-sweep-is-gibbs"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicit AC assumption inherited through Radon–Nikodym, finite path-law and standard-Borel disintegration suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-measure",
+      "used_for": "Measure conventions for weighted extended targets and particle path measures.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Normalization requirements for priors, auxiliary laws and extended targets.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-borel-space",
+      "used_for": "The measurable-space hypothesis supporting conditional probability kernels.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Pointwise probability-kernel and parameter-measurability requirements for proposals and particle laws.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Finite particle, parameter and path product measurable spaces.",
+      "opened": true
+    },
+    {
+      "id": "lem-prior-and-model-kernel-define-joint-law",
+      "used_for": "Construction and iterated integration of the prior–particle joint probability law.",
+      "opened": true
+    },
+    {
+      "id": "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+      "used_for": "Existence and simultaneous almost-everywhere uniqueness of conditional probability kernels, including posterior parameter conditionals and exceptional-set conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+      "used_for": "The exact measure identity meant by PMMH invariance.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-particle-gibbs-backward-simulation",
+      "concern": "The opening rule says, “If a required ratio or normalizing sum is undefined, zero or nonfinite during a sweep, return the old retained state.” The closing rule likewise rejects any required density ratio that is zero. Zero importance ratios are admissible and can occur with positive conditional probability. Concrete witness: singleton parameter, T=0, N=2, counting reference measure on {0,1}, target initial law μ₀=δ₁, G₀=1, and proposal q₀=(δ₀+δ₁)/2. Domination and positive finite evidence hold; backward-denominator conditions are vacuous. The retained selected state is 1, while the free particle equals 0 with probability 1/2 and has the perfectly defined ratio μ₀(0)/q₀(0)=0. The stated rule rejects that draw. Under the displayed extended target the cloud is mixed with probability 1/2. After this algorithm it is mixed with probability 1/4: an old mixed cloud survives only when the newly drawn free particle is 0, and an old all-ones cloud cannot generate a mixed cloud. Thus the procedure is not its claimed conditional filter and does not preserve the extended target. A full-measure good-set restriction cannot remove this positive-probability event.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "thm-particle-gibbs-backward-simulation-sweep-is-gibbs",
+      "concern": "The Statement claims that the conditional remaining-particle law “is the stated conditional auxiliary particle filter” and that the algorithm's updates preserve the extended target. Proof step 3.1 asserts that “undefined ratio or normalization events within a conditional factorization have zero conditional mass on this good set,” but it does not justify the algorithm's additional rejection of zero density ratios. The T=0, N=2, μ₀=δ₁, G₀=1, uniform-proposal witness described for alg-particle-gibbs-backward-simulation has a zero free-particle ratio with conditional probability 1/2 and changes mixed-cloud mass from 1/2 to 1/4. Consequently the theorem's claim about the algorithm as written is false, although the normalized target factorization permits those zero-weight free particles.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "particle-mcmc-pmmh-and-particle-gibbs",
+      "to": "metropolis-hastings-algorithm-and-invariance",
+      "faithful": true,
+      "note": "Read the supplier page, alg-metropolis-hastings-kernel and thm-metropolis-hastings-kernel-is-reversible-and-invariant. PMMH uses their standard-Borel accepted-flow construction for a probability target and proposal kernel, retains rejected extended states, and imports only reversibility and invariance. The consumer preserves the supplier's absence of ergodicity and mixing conclusions."
+    },
+    {
+      "from": "particle-mcmc-pmmh-and-particle-gibbs",
+      "to": "feynman-kac-particle-filters",
+      "faithful": true,
+      "note": "Read the supplier page, path-target definition, path Radon–Nikodym theorem, resampling procedure, SIR procedure and particle-estimator unbiasedness theorem. PMMH uses unnormalized path-integral unbiasedness with finite positive prefix normalizers, rather than claiming unbiased normalized empirical measures. Genealogical and backward particle Gibbs explicitly select sampled-order multinomial resampling and retain the proposal-domination hypotheses; they do not import residual resampling into the labeled genealogical factorization."
+    }
+  ]
+}

@@ -1,0 +1,294 @@
+[
+  {
+    "order": 2090,
+    "id": "variational-inference-and-evidence-lower-bound",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Variational inference and the evidence lower bound",
+    "companion": "variational-inference-and-evidence-lower-bound-examples",
+    "requires": [
+      "numerical-optimization-for-statistical-computation"
+    ],
+    "items": [
+      {
+        "id": "def-variational-family-and-elbo",
+        "kind": "definition",
+        "title": "Variational family and evidence lower bound",
+        "deps": [
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-likelihood-density",
+          "def-measurable-space",
+          "def-measure",
+          "def-natural-logarithm",
+          "def-probability-measure",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-bayes-formula-for-dominated-kernels",
+          "thm-conditional-density-formula",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 0,
+        "statement": "On a measure space (Ω,𝒜,μ), let γ≥0 be measurable with Z=∫γ dμ∈(0,∞), and define π=γ/Z. A probability density q is admissible when q=0 μ-a.e. on {π=0} and ∫q(|log γ|+|log q|)dμ<∞, with zero-density terms set to zero. Define ELBO(q)=∫q(log γ−log q)dμ. A variational family is a nonempty set of admissible q. On a finite product reference space, the mean-field family consists of admissible product densities q(z)=∏j qj(zj).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David M. Blei, Alp Kucukelbir, and Jon D. McAuliffe, Variational Inference: A Review for Statisticians (2017)",
+              "url": "https://www.cs.columbia.edu/~blei/papers/BleiKucukelbirMcAuliffe2017.pdf",
+              "locator": "§§1, 2.1–2.4, PDF pp. 1–6"
+            },
+            {
+              "title": "Michael I. Jordan, Zoubin Ghahramani, Tommi S. Jaakkola, and Lawrence K. Saul, An Introduction to Variational Methods for Graphical Models (1999)",
+              "url": "https://people.eecs.berkeley.edu/~jordan/papers/variational-intro.pdf",
+              "locator": "§§6.1–6.3, printed pp. 213–220, PDF pp. 31–38"
+            },
+            {
+              "title": "Ronghuo Zheng, Zhiting Hu, and Yuntian Deng, 10-708 Probabilistic Graphical Models, Lecture 13: Variational Inference II (2015)",
+              "url": "https://www.cs.cmu.edu/~epxing/Class/10708-15/notes/10708_scribe_lecture13.pdf",
+              "locator": "Complete 9-page lecture note; §§2.3.2–3.2, PDF pp. 3–6"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-elbo-kl-decomposition",
+        "kind": "theorem",
+        "title": "Evidence lower bound is log evidence minus reverse KL",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-kullback-leibler-divergence",
+          "def-probability-measure",
+          "def-variational-family-and-elbo",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-kullback-leibler-is-nonnegative",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "statement": "For every admissible q, let Q=qμ and Π=πμ. The density identity log Z=ELBO(q)+D(Q∥Π) holds under the library KL convention and AC. Since D(Q∥Π)≥0, ELBO(q)≤log Z. The identity is in the reverse-KL direction Q∥Π.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David M. Blei, Alp Kucukelbir, and Jon D. McAuliffe, Variational Inference: A Review for Statisticians (2017)",
+              "url": "https://www.cs.columbia.edu/~blei/papers/BleiKucukelbirMcAuliffe2017.pdf",
+              "locator": "§2.2, equations (11)–(14), PDF pp. 3–4"
+            },
+            {
+              "title": "Ronghuo Zheng, Zhiting Hu, and Yuntian Deng, 10-708 Probabilistic Graphical Models, Lecture 13: Variational Inference II (2015)",
+              "url": "https://www.cs.cmu.edu/~epxing/Class/10708-15/notes/10708_scribe_lecture13.pdf",
+              "locator": "§2.3.2, PDF pp. 3–4"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-coordinate-ascent-variational-inference",
+        "kind": "algorithm",
+        "title": "Coordinate-ascent variational inference",
+        "deps": [
+          "def-variational-family-and-elbo",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 1,
+        "statement": "For a finite product reference space and an admissible initial mean-field density, perform a finite number of coordinate sweeps. For coordinate j, define hj(zj)=E_{q−j}logγ(zj,Z−j). Use qj*(zj)=exp(hj(zj))/cj only when the conditional expectation is well-defined and finite qj-a.e., cj=∫exp(hj)dμj is positive finite, and qj*q−j is admissible. Otherwise stop without that update. No convergence or global-optimality guarantee is part of the algorithm.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David M. Blei, Alp Kucukelbir, and Jon D. McAuliffe, Variational Inference: A Review for Statisticians (2017)",
+              "url": "https://www.cs.columbia.edu/~blei/papers/BleiKucukelbirMcAuliffe2017.pdf",
+              "locator": "§2.4, equations (17)–(18) and Algorithm 1, PDF pp. 5–6"
+            },
+            {
+              "title": "Ronghuo Zheng, Zhiting Hu, and Yuntian Deng, 10-708 Probabilistic Graphical Models, Lecture 13: Variational Inference II (2015)",
+              "url": "https://www.cs.cmu.edu/~epxing/Class/10708-15/notes/10708_scribe_lecture13.pdf",
+              "locator": "§3.2, PDF pp. 5–6"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-mean-field-variational-inference-underestimates-correlated-gaussian-variance",
+        "kind": "counterexample",
+        "title": "Gaussian mean-field reverse KL underestimates correlated marginal variance",
+        "deps": [
+          "def-variational-family-and-elbo",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-gaussian-integral",
+          "thm-integration-against-a-density",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "statement": "For a centered bivariate normal target with correlation ρ satisfying 0<|ρ|<1, maximization of the ELBO over independent Gaussian factors gives both factor variances 1−ρ², strictly below the target marginal variance 1.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David M. Blei, Alp Kucukelbir, and Jon D. McAuliffe, Variational Inference: A Review for Statisticians (2017)",
+              "url": "https://www.cs.columbia.edu/~blei/papers/BleiKucukelbirMcAuliffe2017.pdf",
+              "locator": "§2.3, Figure 1 and discussion, PDF pp. 2–3"
+            },
+            {
+              "title": "Michael I. Jordan, Zoubin Ghahramani, Tommi S. Jaakkola, and Lawrence K. Saul, An Introduction to Variational Methods for Graphical Models (1999)",
+              "url": "https://people.eecs.berkeley.edu/~jordan/papers/variational-intro.pdf",
+              "locator": "§6.3.1, printed pp. 216–218, PDF pp. 33–35"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-exact-coordinate-ascent-does-not-decrease-elbo",
+        "kind": "theorem",
+        "title": "Attained exact coordinate ascent does not decrease ELBO",
+        "deps": [
+          "alg-coordinate-ascent-variational-inference",
+          "def-axiom-of-choice",
+          "def-kullback-leibler-divergence",
+          "def-variational-family-and-elbo",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-integration-against-a-density",
+          "thm-kullback-leibler-is-nonnegative",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "statement": "For a mean-field update satisfying the algorithm's finite conditional-expectation and positive finite normalizer conditions, if the resulting product density is admissible, then the displayed coordinate factor is an attained exact maximizer of ELBO over admissible replacements of that coordinate. Consequently each such update does not decrease ELBO. No convergence, stationary-point, or global-optimum conclusion follows.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David M. Blei, Alp Kucukelbir, and Jon D. McAuliffe, Variational Inference: A Review for Statisticians (2017)",
+              "url": "https://www.cs.columbia.edu/~blei/papers/BleiKucukelbirMcAuliffe2017.pdf",
+              "locator": "§2.4, equations (17)–(18), PDF pp. 5–6"
+            },
+            {
+              "title": "Michael I. Jordan, Zoubin Ghahramani, Tommi S. Jaakkola, and Lawrence K. Saul, An Introduction to Variational Methods for Graphical Models (1999)",
+              "url": "https://people.eecs.berkeley.edu/~jordan/papers/variational-intro.pdf",
+              "locator": "§6.3, printed pp. 217–220, PDF pp. 35–38"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-high-elbo-alone-does-not-certify-posterior-calibration",
+        "kind": "remark",
+        "title": "A high ELBO alone does not certify posterior calibration",
+        "deps": [
+          "def-variational-family-and-elbo",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-elbo-kl-decomposition",
+          "thm-natural-logarithm-laws"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "statement": "An absolute ELBO value does not by itself bound approximation error or calibration: multiplying γ by e^c leaves π unchanged, increases log Z and every ELBO by c, and leaves KL(Q∥Π) unchanged. Any accuracy or calibration conclusion needs an additional bound relative to the normalizer or a separate theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David M. Blei, Alp Kucukelbir, and Jon D. McAuliffe, Variational Inference: A Review for Statisticians (2017)",
+              "url": "https://www.cs.columbia.edu/~blei/papers/BleiKucukelbirMcAuliffe2017.pdf",
+              "locator": "§2.2 and §5, PDF pp. 3–4 and 10–13"
+            },
+            {
+              "title": "Michael I. Jordan, Zoubin Ghahramani, Tommi S. Jaakkola, and Lawrence K. Saul, An Introduction to Variational Methods for Graphical Models (1999)",
+              "url": "https://people.eecs.berkeley.edu/~jordan/papers/variational-intro.pdf",
+              "locator": "§7.1.4, printed pp. 228–229, PDF pp. 45–46"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2091,
+    "id": "variational-inference-and-evidence-lower-bound-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Variational inference and the evidence lower bound — Examples",
+    "companion": "variational-inference-and-evidence-lower-bound",
+    "requires": [
+      "variational-inference-and-evidence-lower-bound"
+    ],
+    "items": [
+      {
+        "id": "ex-discrete-elbo-equality-at-exact-posterior",
+        "kind": "example",
+        "title": "Exact discrete variational family attains log evidence",
+        "deps": [
+          "def-variational-family-and-elbo",
+          "thm-natural-logarithm-laws"
+        ],
+        "dependency_level": 1,
+        "statement": "On a two-point counting space with γ(0)=2 and γ(1)=1, the posterior density is (2/3,1/3). Taking q equal to this posterior attains ELBO=log 3, while q=(1/2,1/2) gives a strictly smaller value.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-variational-candidate-outside-posterior-support",
+        "kind": "example",
+        "title": "A candidate outside posterior support is not admissible",
+        "deps": [
+          "def-variational-family-and-elbo"
+        ],
+        "dependency_level": 1,
+        "statement": "On a two-point counting space with γ=(1,0), the candidate density q=(0,1) violates q≪π and cannot have a finite ELBO.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-coordinate-update-normalizer-can-diverge-despite-admissibility",
+        "kind": "example",
+        "title": "An admissible mean-field density can have no normalized coordinate update",
+        "deps": [
+          "alg-coordinate-ascent-variational-inference",
+          "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "def-integral-logarithm",
+          "def-variational-family-and-elbo",
+          "thm-monotonicity-of-the-integral",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 2,
+        "statement": "There is a finite-evidence target and an admissible product density whose expected-log coordinate function is identically zero on a countably infinite counting space, so the coordinate exponential has infinite normalizer.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

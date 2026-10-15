@@ -1,0 +1,89 @@
+---
+id: ex-improper-beta-zero-zero-endpoint-divergence
+kind: example
+title: The improper Beta(0,0) prior has a divergent binomial endpoint posterior
+status: draft
+origin: pipeline
+pipeline_run: bayesian-computational-statistics-62
+dependency_level: 3
+deps:
+  - def-posterior-evidence-normalizer-and-fiberwise-update
+  - prop-fiberwise-posterior-propriety-iff-finite-positive-evidence
+  - def-countable-choice
+  - def-axiom-of-choice
+  - thm-choice-implies-dependent-implies-countable-choice
+  - def-lebesgue-measure-and-the-lebesgue-sigma-algebra
+  - def-finite-sigma-finite-and-semifinite-measures
+  - thm-lebesgue-measure-of-a-box-of-every-kind
+  - thm-indefinite-integral-of-a-nonnegative-function-is-a-measure
+  - prop-order-and-scalar-rules-for-the-nonnegative-integral
+proof_strategy: direct
+axiom_use: "Axiom of Choice is used only to supply countable choice for the library's Lebesgue-measure, box-measure, and Borel-measurability suppliers; the endpoint integral comparisons make no further choice."
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  precheck: pass
+sources:
+  references:
+    - title: "Gelman et al., Bayesian Data Analysis, 3rd ed., §2.8"
+      url: "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+---
+
+## Example
+
+Let $n\ge1$ and suppose $Y\mid p\sim\operatorname{Binomial}(n,p)$ for
+$p\in(0,1)$, equipped with the restricted Lebesgue sigma-algebra
+$\mathcal L(\mathbb R)|_{(0,1)}:=\{A\cap(0,1):A\in\mathcal L(\mathbb R)\}$.
+Use the prior measure with density $1/[p(1-p)]$ relative to Lebesgue measure
+restricted to $(0,1)$:
+$$\Pi(dp)=\frac{dp}{p(1-p)}.$$
+Equivalently, for an observed count $y\in\{0,\ldots,n\}$ the likelihood is
+$L_y(p)=\binom ny p^y(1-p)^{n-y}$.
+For an observed count $y=0$, the posterior normalizer diverges as $p\downarrow0$;
+for $y=n$, it diverges as $p\uparrow1$. In either endpoint case, this
+likelihood and prior do not define a posterior probability by normalization.
+
+## Facts & Assumptions
+
+[F1] [[def-posterior-evidence-normalizer-and-fiberwise-update]]: a fiberwise
+update is defined only when its likelihood integral against the prior is finite
+and positive.
+
+[F2] [[prop-fiberwise-posterior-propriety-iff-finite-positive-evidence]]: when
+the normalizer is infinite, no finite positive constant makes the integrated
+likelihood a probability measure.
+
+[A1] [[def-axiom-of-choice]]: the Axiom of Choice is assumed only to obtain the
+countable-choice premise used by the Lebesgue-measure, box-measure, and
+Borel-measurability suppliers.
+
+[F3] [[def-finite-sigma-finite-and-semifinite-measures]]: a measure is
+sigma-finite if the space is a countable union of measurable sets of finite
+measure.
+
+[F4] [[thm-lebesgue-measure-of-a-box-of-every-kind]]: assuming countable choice,
+each interval with finite endpoints is Lebesgue measurable and has measure its
+length.
+
+[F5] [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]]: for a
+nonnegative measurable density, integration over measurable sets defines a
+measure.
+
+[F6] [[prop-order-and-scalar-rules-for-the-nonnegative-integral]]: the
+nonnegative integral is monotone and homogeneous for finite positive scalars.
+
+[F7] [[thm-choice-implies-dependent-implies-countable-choice]]: in particular,
+the Axiom of Choice implies countable choice.
+
+**Given:** An integer $n\ge1$, a count $y\in\{0,\ldots,n\}$, the binomial
+likelihood, and the prior measure in the Example.
+
+## Verification
+
+1.1 By [A1] and [F7], countable choice is available for [F3] and [F4]. Write $f(p)=1/[p(1-p)]$ on $(0,1)$. For any continuous $g:(0,1)\to\mathbb R$ and every open $U\subseteq\mathbb R$, continuity makes $g^{-1}(U)$ open in the subspace $(0,1)$, so $g^{-1}(U)=O\cap(0,1)$ for some open $O\subseteq\mathbb R$. Rational open intervals form a countable base, hence this intersection is a countable union of intervals with finite endpoints. Each is Lebesgue measurable by [F4], so $g^{-1}(U)$ belongs to the restricted Lebesgue sigma-algebra on $(0,1)$. Since open sets generate the Borel sigma-algebra of $\mathbb R$, $g$ is measurable for that restricted sigma-algebra. This applies to $f$ and to every binomial likelihood section, which is a polynomial. Thus [F5] defines the prior measure $\Pi(A)=\int_A f\,d\lambda$. For integers $k\ge3$, the sets $E_k=[1/k,1-1/k]$ cover $(0,1)$ and $f(p)\le k^2$ on $E_k$. Their Lebesgue lengths are at most one by [F4], so homogeneity and monotonicity [F6] give $\Pi(E_k)\le k^2<\infty$; [F3] makes this a sigma-finite prior. It is not finite: on each disjoint interval $I_j=(2^{-j-1},2^{-j}]$, $j\ge1$, one has $f(p)\ge1/p\ge2^j$ and $\lambda(I_j)=2^{-j-1}$ by [F4]. Homogeneity and monotonicity [F6] give $\Pi(I_j)=\int_{I_j}f\,d\lambda\ge1/2$. By [F5], $\Pi$ is a measure, so the prior mass of the union of the first $m$ such intervals is at least $m/2$ for every $m$. Hence $\Pi((0,1))=+\infty$ and the prior is improper. [given, A1, F3, F4, F5, F6, F7, algebra]
+
+2.1 For $y=0$, put $\nu_0(A):=\int_A L_0\,d\Pi$; it is a measure by [F5], and $Z(0)=\nu_0((0,1))$ by [F1]. The likelihood is $L_0(p)=\binom n0(1-p)^n=(1-p)^n$, so on each $I_j$ from step 1.1, $p\le1/2$ gives $L_0(p)\ge2^{-n}$. Also $\Pi(I_j)\ge1/2$ by step 1.1. Monotonicity and homogeneity [F6] therefore give $\nu_0(I_j)\ge2^{-n-1}$. The intervals are pairwise disjoint, so measure additivity gives $\nu_0(\bigcup_{j=1}^m I_j)\ge m2^{-n-1}$; since this union is contained in $(0,1)$, countable additivity gives $\nu_0((0,1))\ge m2^{-n-1}$ for every $m$. Thus $Z(0)=+\infty$ and [F1] leaves the quotient undefined. [step 1.1, given, F1, F4, F5, F6, algebra]
+
+3.1 For $y=n$, put $\nu_n(A):=\int_A L_n\,d\Pi$; it is a measure by [F5], and $Z(n)=\nu_n((0,1))$ by [F1]. Here $L_n(p)=\binom nn p^n=p^n$. On each reflected interval $J_j=[1-2^{-j},1-2^{-j-1})$, $j\ge1$, one has $p\ge1/2$, so $L_n(p)\ge2^{-n}$. Also $f(p)\ge1/(1-p)\ge2^j$ there and $\lambda(J_j)=2^{-j-1}$ by [F4], so $\Pi(J_j)\ge1/2$ by [F6]. Monotonicity and homogeneity [F6] give $\nu_n(J_j)\ge2^{-n-1}$. The intervals are pairwise disjoint, and additivity followed by nonnegativity on their complement gives $Z(n)=\nu_n((0,1))\ge m2^{-n-1}$ for every $m$. Thus $Z(n)=+\infty$ and [F1] leaves this quotient undefined. By [F2], neither endpoint fiber admits a normalized posterior probability. [step 1.1, step 2.1, given, F1, F2, F4, F5, F6, algebra] ∎
+

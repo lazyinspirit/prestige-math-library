@@ -1,0 +1,454 @@
+{
+  "group": "q",
+  "batches": ["53"],
+  "pages_read": [
+    "block-bootstrap-for-dependent-data",
+    "block-bootstrap-for-dependent-data-examples"
+  ],
+  "items_read": [
+    "def-conditional-weak-convergence-in-probability",
+    "def-hadamard-differentiability-tangentially",
+    "alg-overlapping-block-resampling",
+    "alg-moving-block-bootstrap",
+    "alg-tapered-block-bootstrap",
+    "lem-moving-block-bootstrap-conditional-covariance",
+    "lem-tapered-block-bootstrap-conditional-covariance",
+    "lem-taper-window-l2-normalization",
+    "alg-k-sample-null-constrained-block-bootstrap",
+    "lem-k-sample-null-centering",
+    "thm-conditional-bootstrap-hadamard-delta-method",
+    "lem-weighted-overlapping-block-moment-and-covariance-limits",
+    "lem-conditional-independent-block-bootstrap-clt",
+    "thm-k-sample-block-bootstrap-validity",
+    "lem-independent-tail-replacement-errors-are-monotone",
+    "thm-moving-block-bootstrap-clt-for-dependent-data",
+    "thm-tapered-block-bootstrap-clt-for-dependent-data",
+    "ex-moving-block-bootstrap-small-sample",
+    "ex-tapered-block-bootstrap-triangular-window",
+    "ex-block-length-n-one-third",
+    "cex-pointwise-bootstrap-ar1-variance-mismatch",
+    "ex-two-series-block-bootstrap-null-centering",
+    "ex-iid-functional-data-block-bootstrap"
+  ],
+  "conventions": [
+    {
+      "convention": "Conditional weak convergence is convergence in probability of a supplied weak-convergence metric to a fixed limiting law; the metric distance must be measurable.",
+      "fixed_by": "def-conditional-weak-convergence-in-probability",
+      "matters_for": [
+        "thm-conditional-bootstrap-hadamard-delta-method",
+        "lem-conditional-independent-block-bootstrap-clt",
+        "thm-k-sample-block-bootstrap-validity",
+        "thm-moving-block-bootstrap-clt-for-dependent-data",
+        "thm-tapered-block-bootstrap-clt-for-dependent-data"
+      ]
+    },
+    {
+      "convention": "Hadamard differentiability uses positive scalar sequences tending to zero and all convergent admissible direction sequences with limit in the specified tangent subspace; the derivative is continuous and linear.",
+      "fixed_by": "def-hadamard-differentiability-tangentially",
+      "matters_for": [
+        "thm-conditional-bootstrap-hadamard-delta-method"
+      ]
+    },
+    {
+      "convention": "Block starts are independent uniforms on the same N=n−b+1 candidate starts. Concatenation retains exactly n observations, truncating only the final block to its initial prefix.",
+      "fixed_by": "alg-overlapping-block-resampling",
+      "matters_for": [
+        "alg-moving-block-bootstrap",
+        "alg-tapered-block-bootstrap",
+        "lem-moving-block-bootstrap-conditional-covariance",
+        "lem-tapered-block-bootstrap-conditional-covariance",
+        "lem-conditional-independent-block-bootstrap-clt"
+      ]
+    },
+    {
+      "convention": "The MBB root is centered at its own conditional expectation, which need not equal the observed sample mean.",
+      "fixed_by": "alg-moving-block-bootstrap",
+      "matters_for": [
+        "thm-moving-block-bootstrap-clt-for-dependent-data",
+        "ex-moving-block-bootstrap-small-sample"
+      ]
+    },
+    {
+      "convention": "Taper weights use midpoint locations (r−1/2)/b and scale a_b=√b/W_b, where W_b² is the sum of squared weights. Observations are sample-centered before tapering, and finite procedures require W_b>0.",
+      "fixed_by": "alg-tapered-block-bootstrap",
+      "matters_for": [
+        "lem-tapered-block-bootstrap-conditional-covariance",
+        "lem-taper-window-l2-normalization",
+        "thm-tapered-block-bootstrap-clt-for-dependent-data",
+        "ex-tapered-block-bootstrap-triangular-window",
+        "ex-iid-functional-data-block-bootstrap"
+      ]
+    },
+    {
+      "convention": "The K-sample procedure subtracts each candidate-position average, adds the sample-size-weighted pooled mean, and uses independent starts across both blocks and series.",
+      "fixed_by": "alg-k-sample-null-constrained-block-bootstrap",
+      "matters_for": [
+        "lem-k-sample-null-centering",
+        "thm-k-sample-block-bootstrap-validity",
+        "ex-two-series-block-bootstrap-null-centering"
+      ]
+    },
+    {
+      "convention": "The Hilbert bootstrap CLTs assume AC, the published independent-tail L²-m-approximable shift convention, and integer block lengths b_n→∞ with b_n/√n→0; procedures and limits are restricted to their eventually admissible tail.",
+      "fixed_by": "thm-moving-block-bootstrap-clt-for-dependent-data",
+      "matters_for": [
+        "thm-tapered-block-bootstrap-clt-for-dependent-data",
+        "ex-block-length-n-one-third",
+        "ex-iid-functional-data-block-bootstrap"
+      ]
+    },
+    {
+      "convention": "K-sample validity assumes both the sampling joint limit and the same conditional bootstrap joint limit, together with conditional tightness; it does not derive these assumptions from single-series CLTs.",
+      "fixed_by": "thm-k-sample-block-bootstrap-validity",
+      "matters_for": [
+        "block-bootstrap-for-dependent-data"
+      ]
+    },
+    {
+      "convention": "The AR(1) counterexample refutes variance consistency only and makes no general claim that variance inconsistency alone disproves convergence in every distribution metric.",
+      "fixed_by": "cex-pointwise-bootstrap-ar1-variance-mismatch",
+      "matters_for": [
+        "block-bootstrap-for-dependent-data-examples"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-weighted-overlapping-block-moment-and-covariance-limits",
+      "statement": "Assume AC and a centered L²-m-approximable causal Bernoulli shift in H=L²([0,1];R), additionally with mδ_m→0. For deterministic uniformly bounded block weights, squared normalized weighted-block norms are uniformly integrable, and the stated prefix, empirical-mean and projection-tail second-moment bounds hold. If b→∞, b/n→0, the squared weights average to one, and every fixed-lag weight autocorrelation tends to one, the centered overlapping-block covariance converges to Γ in L¹ trace norm. MBB and eventually admissible TBB weights satisfy these weight hypotheses.",
+      "used_by": [
+        "lem-conditional-independent-block-bootstrap-clt",
+        "thm-moving-block-bootstrap-clt-for-dependent-data",
+        "thm-tapered-block-bootstrap-clt-for-dependent-data"
+      ]
+    },
+    {
+      "id": "lem-conditional-independent-block-bootstrap-clt",
+      "statement": "Assume AC and all process and weight hypotheses of the weighted-block lemma, including squared normalization and fixed-lag autocorrelation convergence. For b→∞ with b/√n→0, the conditionally centered sum of independent resampled complete blocks and the final prefix, divided by √n, converges conditionally weakly in probability to the centered Hilbert Gaussian of covariance Γ; its conditional covariance converges in trace norm in probability. Conditional tightness, complete-block Lindeberg and an O(b/n) expected conditional squared-norm bound for the final prefix also hold. Subtracting a common data-dependent center leaves the centered blocks unchanged.",
+      "used_by": [
+        "thm-moving-block-bootstrap-clt-for-dependent-data",
+        "thm-tapered-block-bootstrap-clt-for-dependent-data"
+      ]
+    },
+    {
+      "id": "lem-independent-tail-replacement-errors-are-monotone",
+      "statement": "Under the actual independent-tail replacement construction, an F_m-measurable square-integrable conditional mean g_m satisfies δ_m²=2E‖X−g_m‖² and minimizes squared approximation error over square-integrable F_m-measurable competitors. Consequently δ_{m+1}≤δ_m for every m≥1, and summability of δ_m implies mδ_m→0.",
+      "used_by": [
+        "thm-moving-block-bootstrap-clt-for-dependent-data",
+        "thm-tapered-block-bootstrap-clt-for-dependent-data",
+        "block-bootstrap-for-dependent-data",
+        "block-bootstrap-for-dependent-data-examples"
+      ]
+    },
+    {
+      "id": "lem-taper-window-l2-normalization",
+      "statement": "For a window satisfying the taper algorithm's conditions, w² is Riemann integrable and b⁻¹Σ_{j=1}^b w((j−1/2)/b)²→I_w=∫₀¹w(u)²du>0. Consequently W_b>0 eventually and a_b→I_w⁻¹ᐟ².",
+      "used_by": [
+        "lem-weighted-overlapping-block-moment-and-covariance-limits",
+        "thm-tapered-block-bootstrap-clt-for-dependent-data",
+        "ex-tapered-block-bootstrap-triangular-window"
+      ]
+    },
+    {
+      "id": "lem-k-sample-null-centering",
+      "statement": "For fixed data and either mode of the null-constrained K-sample algorithm, every pseudo-observation has conditional expectation equal to the pooled mean. Consequently E*bar Y_i*=bar Y_P for every series i.",
+      "used_by": [
+        "thm-k-sample-block-bootstrap-validity",
+        "ex-two-series-block-bootstrap-null-centering"
+      ]
+    },
+    {
+      "id": "thm-conditional-bootstrap-hadamard-delta-method",
+      "statement": "For separable Banach spaces E,F, a closed tangent subspace E₀, a Borel neighbourhood D of θ, t_n↓0, tight data-measurable Z_n∈E₀, and conditionally convergent and conditionally tight Z_n*∈E₀, a Borel map Ψ:D→F Hadamard differentiable at θ tangentially to E₀ yields conditional convergence of t_n⁻¹{Ψ(θ+t_n(Z_n+Z_n*))−Ψ(θ+t_nZ_n)} to Ψ′_θ(G). The stated domain-event and measurable weak-metric hypotheses apply, with zero assigned outside the domain.",
+      "used_by": [
+        "thm-k-sample-block-bootstrap-validity"
+      ]
+    },
+    {
+      "id": "thm-moving-block-bootstrap-clt-for-dependent-data",
+      "statement": "Assume AC and a centered L²-m-approximable causal Bernoulli shift in H=L²([0,1]). For integer b_n→∞ with b_n/√n→0, apply MBB on the eventually admissible tail. The conditional law of √n(bar X_n*−E*bar X_n*) converges weakly in probability to the centered Gaussian with long-run covariance Γ, and ‖n Cov*(bar X_n*)−Γ‖HS→0 in probability.",
+      "used_by": [
+        "ex-iid-functional-data-block-bootstrap"
+      ]
+    },
+    {
+      "id": "thm-tapered-block-bootstrap-clt-for-dependent-data",
+      "statement": "Assume AC and a centered L²-m-approximable causal Bernoulli shift in H=L²([0,1]). For integer b_n→∞ with b_n/√n→0 and a taper satisfying the algorithm's support, positivity, symmetry and monotonicity conditions, apply TBB on the eventually admissible tail. The conditional law of √n(bar Y_n*−E*bar Y_n*) converges weakly in probability to the centered Gaussian with long-run covariance Γ, and ‖n Cov*(bar Y_n*)−Γ‖HS→0 in probability.",
+      "used_by": [
+        "ex-iid-functional-data-block-bootstrap"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-weak-convergence-of-borel-probability-measures",
+      "used_for": "Bounded-continuous-test definition of weak convergence and the K-sample testwise conclusion.",
+      "opened": true
+    },
+    {
+      "id": "def-l2-m-approximable-causal-bernoulli-shift",
+      "used_for": "Exact Hilbert space, innovation measurability, independent replacement arrays, stationarity and summable L² replacement errors.",
+      "opened": true
+    },
+    {
+      "id": "lem-long-run-covariance-is-trace-class",
+      "used_for": "Absolute trace-norm convergence of the long-run covariance series and positivity of Γ.",
+      "opened": true
+    },
+    {
+      "id": "thm-hilbert-valued-clt-for-l2-m-approximable-bernoulli-shifts",
+      "used_for": "Sampling-law Gaussian target under AC; checked its proof and its distinction from a path-process FCLT.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit choice assumptions inherited by Gaussian, basis, normal-law and probability constructions.",
+      "opened": true
+    },
+    {
+      "id": "cor-orthonormal-eigenbasis-for-a-compact-self-adjoint-operator",
+      "used_for": "Complete orthonormal eigenbasis for positive compact covariance, including its kernel.",
+      "opened": true
+    },
+    {
+      "id": "lem-l2-basis-projections-converge-and-satisfy-parseval",
+      "used_for": "Norm convergence of finite-coordinate projections and vanishing projected second-moment tails.",
+      "opened": true
+    },
+    {
+      "id": "lem-nuclear-series-characterizes-trace-norm",
+      "used_for": "Rank-one trace norms, nuclear estimates and comparison with Hilbert–Schmidt norm.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-class-is-a-two-sided-banach-operator-ideal",
+      "used_for": "Trace-class completeness and bounded-operator compression estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues",
+      "used_for": "Positive covariance trace and summability of Gaussian eigenvalue tails.",
+      "opened": true
+    },
+    {
+      "id": "def-hilbert-schmidt-operator",
+      "used_for": "Basis square-sum definition of Hilbert–Schmidt norm.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-bessel-inequality",
+      "used_for": "Finite-coordinate bounds in the nuclear-to-Hilbert–Schmidt norm comparison.",
+      "opened": true
+    },
+    {
+      "id": "lem-bochner-integral-norm-inequality",
+      "used_for": "Expected trace-norm tensor bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-bounded-linear-maps-commute-with-bochner-integration",
+      "used_for": "Pairing operator-valued expectations against vectors and scalar functionals.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Hilbert norm, covariance and projection estimates.",
+      "opened": true
+    },
+    {
+      "id": "cor-cauchy-schwarz-for-random-variables",
+      "used_for": "L² product bounds, truncation errors and AR(1) moment estimates.",
+      "opened": true
+    },
+    {
+      "id": "cor-markov-inequality-for-random-variables",
+      "used_for": "Probability bounds for covariance errors, Lindeberg terms, projection tails and AR(1) empirical moments.",
+      "opened": true
+    },
+    {
+      "id": "lem-measurable-functions-preserve-independence",
+      "used_for": "Independence of filtered variables using disjoint innovation groups.",
+      "opened": true
+    },
+    {
+      "id": "thm-grouping-independent-sigma-algebras",
+      "used_for": "Independence of replacement blocks, residue classes and AR(1) past/future innovation groups.",
+      "opened": true
+    },
+    {
+      "id": "thm-independent-random-elements-have-product-joint-law",
+      "used_for": "Product integration for independent prefix/tail variables and centered Hilbert tensors.",
+      "opened": true
+    },
+    {
+      "id": "thm-factorization-of-expectations-for-independent-variables",
+      "used_for": "Vanishing independent centered cross terms and AR(1) covariance calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Integrating out independent centered vectors in tensor and bounded fourth-moment expansions.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Measurable section averages and summable approximation increments in the replacement-error lemma.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Truncation limits, projection tails, conditional-mean approximation and AR(1) limits.",
+      "opened": true
+    },
+    {
+      "id": "thm-fatou-lemma",
+      "used_for": "L² bounds for the explicitly constructed conditional mean.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-and-countable-subadditivity-of-measures",
+      "used_for": "Null-union rule in conditional-mean construction.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-mapping-theorem",
+      "used_for": "Conditional delta-method linear image and continuous K-sample statistics.",
+      "opened": true
+    },
+    {
+      "id": "thm-portmanteau-theorem",
+      "used_for": "Closed-neighbourhood perturbation arguments and bounded uniformly continuous test characterization.",
+      "opened": true
+    },
+    {
+      "id": "thm-subsequence-characterization-of-convergence-in-probability",
+      "used_for": "Converting outcome-wise conditional weak convergence on extracted subsequences into convergence in probability.",
+      "opened": true
+    },
+    {
+      "id": "thm-almost-sure-subsequence-from-convergence-in-probability",
+      "used_for": "Almost-sure extraction for covariance and conditional Lindeberg errors.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuity-from-above-for-measures",
+      "used_for": "Shrinking closed neighbourhoods and vanishing norm tails in K-sample arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-levy-prokhorov-metric-metrizes-weak-convergence",
+      "used_for": "Weak-convergence metric on separable Hilbert space under AC.",
+      "opened": true
+    },
+    {
+      "id": "lem-second-order-characteristic-function-expansion",
+      "used_for": "Explicit Taylor-remainder estimates in the conditional block CLT.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+      "used_for": "Products of conditional characteristic functions and finite Gaussian filter sums.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-function-of-a-normal-law",
+      "used_for": "Gaussian characteristic functions, means and variances, including degenerate limits.",
+      "opened": true
+    },
+    {
+      "id": "cor-characteristic-function-criterion-for-weak-convergence",
+      "used_for": "Scalar conditional Gaussian convergence under AC.",
+      "opened": true
+    },
+    {
+      "id": "thm-cramer-wold-device",
+      "used_for": "Finite-dimensional projected conditional Gaussian convergence, including singular covariance.",
+      "opened": true
+    },
+    {
+      "id": "cor-archimedean-reciprocal",
+      "used_for": "Vanishing mesh and Darboux gaps for taper integrability.",
+      "opened": true
+    },
+    {
+      "id": "def-darboux-integral",
+      "used_for": "Integral bounds by lower sums and positivity of the taper squared integral.",
+      "opened": true
+    },
+    {
+      "id": "def-darboux-sums",
+      "used_for": "Combined half-interval partitions and the central-interval lower-sum estimate.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-implies-integrable",
+      "used_for": "Uniform-partition Darboux gap on each monotone half of the taper.",
+      "opened": true
+    },
+    {
+      "id": "thm-riemann-criterion",
+      "used_for": "Riemann integrability of w² from arbitrarily small Darboux gaps.",
+      "opened": true
+    },
+    {
+      "id": "thm-darboux-equals-riemann",
+      "used_for": "Convergence of midpoint taper sums for all sufficiently fine tagged partitions.",
+      "opened": true
+    },
+    {
+      "id": "thm-real-power-continuity-and-derivatives",
+      "used_for": "Continuity of x↦x⁻¹ᐟ² on positive arguments in taper normalization.",
+      "opened": true
+    },
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Mutual independence and identical laws of AR(1) innovations.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "AR(1) innovation laws and their AC convention.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Centered moment definitions and finite lag-pair variance expansions.",
+      "opened": true
+    },
+    {
+      "id": "def-strict-and-weak-stationarity-for-time-series",
+      "used_for": "Exact finite-dimensional-law definition of strict stationarity for the AR(1) witness.",
+      "opened": true
+    },
+    {
+      "id": "lem-gaussian-even-moment-bound-for-brownian-increments",
+      "used_for": "Fourth and higher even moments of centered Gaussian variables in the AR(1) calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Almost-sure absolute convergence of the AR(1) innovation series.",
+      "opened": true
+    },
+    {
+      "id": "thm-riesz-fischer-completeness-of-l-p",
+      "used_for": "L² limit of finite AR(1) filter sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+      "used_for": "Identification of the AR(1) marginal normal law under AC.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "block-bootstrap-for-dependent-data",
+      "to": "resampling-algorithms-and-sampling-units",
+      "faithful": true,
+      "note": "Checked the supplier page and def-resampling-sampling-unit-contract against both block algorithms. The consumer declares consecutive blocks as grouped resampling units and preserves their within-block order. Both sides explicitly distinguish the unit contract from validity; the consumer proves its own validity results under additional hypotheses."
+    }
+  ]
+}

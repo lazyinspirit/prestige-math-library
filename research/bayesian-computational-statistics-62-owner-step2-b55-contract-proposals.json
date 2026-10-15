@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "items": {
+    "thm-studentized-wilcoxon-validity-under-heterogeneous-laws": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-studentized-two-sample-u-statistic-permutation-validity",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let independent IID samples $X_1,\\ldots,X_m\\sim P$ and $Y_1,\\ldots,Y_n\\sim Q$ satisfy $N=m+n$, $m/N\\to p\\in(0,1)$, and the weak null $\\theta(P,Q;h)=0$. Fix $r$ and a measurable kernel symmetric within each block and antisymmetric under block exchange. Assume $0<E_\\eta h^2<\\infty$ for every independent P/Q assignment $\\eta$ to the $2r$ positions. Suppose the direct first-projection variances $\\sigma_X^2,\\sigma_Y^2$ and limiting pooled-mixture first-projection variance $\\sigma_p^2$ are positive and finite. Put $p_N=m/N$, $\\bar P_N=p_NP+(1-p_N)Q$, and $\\sigma_N^2=E_{\\bar P_N}g_N^2\\to\\sigma_p^2$.\n\nUse the nonnegative measurable variance estimates and zero-denominator convention in [[def-studentized-two-sample-u-statistic]]. Assume $\\widehat\\sigma_m^2\\to_P\\sigma_X^2$, $\\widehat\\sigma_n^2\\to_P\\sigma_Y^2$ under the original samples. For general estimates depending on both groups, assume also permutation consistency: for each $\\varepsilon>0$ and $k\\in\\{m,n\\}$,\n\n$$P_\\pi\\bigl(|\\widehat\\sigma_{k,\\pi}^2-\\sigma_N^2|>\\varepsilon\\mid Z\\bigr)\\to_P0.$$\n\nA sufficient condition for this last hypothesis is that each estimate is a statistic of its own group alone, and is consistent for $\\sigma_N^2$ on an IID $\\bar P_N$ sample of that group's size. Joint estimates may instead establish permutation consistency directly.\n\nThen the conditional permutation CDF of $S_{m,n}=U_{m,n}/V_{m,n}^{\\rm SE}$ converges uniformly in probability to $\\Phi$, and $S_{m,n}\\Rightarrow N(0,1)$ under the true sampling law, where\n\n$$V_{m,n}^{\\rm SE}=r\\sqrt{\\widehat\\sigma_m^2/m+\\widehat\\sigma_n^2/n}.$$",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-studentized-two-sample-u-statistic",
+          "source_section": "Definition",
+          "quote": "For the two-sample statistic in\n[[def-two-sample-order-r-u-statistic-and-first-projections]], let\n$\\widehat\\sigma_m^2$ and $\\widehat\\sigma_n^2$ be nonnegative measurable\nstatistics of the two samples intended to estimate the variances of $g_X(X_1)$ and $g_Y(Y_1)$. Each may depend on both groups; separate-group dependence is an additional property, not part of this definition.\nDefine the estimated standard error and studentized statistic by\n\n$$V_{m,n}^{\\rm SE}:=r\\sqrt{\\frac{\\widehat\\sigma_m^2}{m}+\\frac{\\widehat\\sigma_n^2}{n}},\\qquad S_{m,n}:=\\begin{cases}U_{m,n}/V_{m,n}^{\\rm SE},&V_{m,n}^{\\rm SE}>0,\\\\0,&V_{m,n}^{\\rm SE}=0.\\end{cases}$$\n\nFor a uniform random permutation $\\pi$ of the pooled $N=m+n$ observations,\nrecompute both group statistics and both variance estimates on the permuted\ngroups; the **permutation distribution** of $S_{m,n}$ is the conditional law of\n$S_{m,n}^{\\pi}$ given the pooled observations.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-studentized-two-sample-u-permutation-test",
+          "source_section": "Definition",
+          "quote": "**Inputs:** Two samples of sizes $m,n\\ge r$, a measurable order-$(r,r)$ kernel symmetric within each group, two supplied nonnegative measurable variance-estimation routines, and a significance level $\\alpha\\in(0,1)$. Use the U-statistic in [[def-two-sample-order-r-u-statistic-and-first-projections]] and the standard-error pivot $S$ in [[def-studentized-two-sample-u-statistic]], including its value zero when the estimated standard error is zero. Choose the upper alternative statistic $T=S$, lower alternative statistic $T=-S$, or two-sided statistic $T=|S|$. Optionally supply an independent uniform random variable $U\\in[0,1]$ for ties.\n\n1. Pool the observations into $z=(X_1,\\ldots,X_m,Y_1,\\ldots,Y_n)$ and compute $T(z)$.\n2. Enumerate all $N!$ coordinate permutations $\\pi$ of $N=m+n$. For each permutation, treat its first $m$ observations as the first group and its last $n$ as the second. Recompute the U-statistic **and both variance estimates** from those groups, apply the same zero-denominator rule, and compute $T(z^\\pi)$.\n3. Return the inclusive p-value $p_{\\rm inc}=N!^{-1}\\#\\{\\pi:T(z^\\pi)\\ge T(z)\\}$ and reject when $p_{\\rm inc}\\le\\alpha$. If tie randomization was requested, instead return $p_U=N!^{-1}\\{\\#\\{\\pi:T(z^\\pi)>T(z)\\}+U\\#\\{\\pi:T(z^\\pi)=T(z)\\}\\}$ and reject when $p_U\\le\\alpha$.\n\nThis is complete finite enumeration, with permutations counted with their multiplicities even when observations repeat. It does not define a Monte Carlo approximation using a subset of permutations. No generic weak-null validity is asserted by the procedure alone; that requires the applicable studentization and estimator-consistency theorem.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-two-sample-permutation-exact-under-equal-distributions",
+          "source_section": "Statement",
+          "quote": "For the studentized statistic in [[def-studentized-two-sample-u-statistic]],\nassume $P=Q$, $m,n\\ge r$, and use the convention there when a permuted\ndenominator is zero. For every such finite $m,n$, the inclusive permutation\np-value is superuniform under this null. If an independent uniform $[0,1]$\nvariable randomizes within the tied boundary rank, the resulting permutation\np-value is exactly uniform.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-general-measurable-finite-group-randomization-validity",
+          "source_section": "Statement",
+          "quote": "Let a finite group $G$ act on a measurable space $(\\mathsf S,\\mathcal S)$ by\nmeasurable maps, and let $P$ be an invariant probability law: $P(g^{-1}A)=P(A)$\nfor every $g\\in G$ and $A\\in\\mathcal S$. For a measurable statistic\n$T:\\mathsf S\\to\\mathbb R$, define\n\n$$p_0(x)=\\frac{\\#\\{g\\in G:T(g\\cdot x)\\ge T(x)\\}}{|G|},\\qquad p_U(x,u)=\\frac{\\#\\{g:T(g\\cdot x)>T(x)\\}+u\\#\\{g:T(g\\cdot x)=T(x)\\}}{|G|}.$$\n\nIf $X\\sim P$ and $U$ is independent uniform on $[0,1]$, then $p_0(X)$ is\nsuperuniform and $p_U(X,U)$ is uniform on $[0,1]$. The sample space need not\nbe finite; only the acting group is finite.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-chebyshev-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X$ is a square-integrable real random variable and $a>0$, then\n$$\\mathbb P(|X-\\mathbb E[X]|\\ge a)\\le\\frac{\\operatorname{Var}(X)}{a^2}.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The bounded measurable kernel is antisymmetric and $h(x,x)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conditional on $X_i$, $R_i$ averages $n$ independent variables bounded by one, so $E(R_i-a(X_i))^2\\le1/n$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a deterministic pooled list $z_1,\\ldots,z_N$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F5",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Under the original independent pooled observations, $A_N=N^{-3}\\sum_{i,j,k}h(Z_i,Z_j)h(Z_i,Z_k)$ is a bounded ordered-triple average.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F5",
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1\u20132.2 verify every premise of [F1] for $r=1$ and the actual empirical estimates.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For $T=S$, $-S$ or $|S|$, the two limits in step 3.1 imply convergence of the sampling CDF and the conditional permutation CDF to the same continuous limit $H$, respectively the standard normal or absolute-standard-normal law.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement defines S=0 on zero estimated standard error, and step 3.1 invokes the general theorem proving that event vanishes asymptotically under the positive-projection assumptions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement fixes r=1; steps 1.1 and 3.1 explicitly specialize the U-statistic theorem at this order."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement excludes zero direct or pooled projection variance only for the asymptotic conclusions; step 3.2 retains finite-sample exactness when P=Q without this restriction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement assumes m,n\u22652, limiting fraction p in (0,1), and significance in (0,1) through the algorithm. Step 2.1 treats the finite split moments."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement inherits AC from the general permutation theorem; finite sums and all-permutation enumeration introduce no new selection."
+        },
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-family assertion or equivalence is claimed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No empty-family assertion or equivalence is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No empty-family assertion or equivalence is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-studentized-two-sample-u-permutation-test": null
+  }
+}

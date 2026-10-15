@@ -1,0 +1,196 @@
+{
+  "group": "g",
+  "batches": ["24"],
+  "pages_read": [
+    "em-algorithm-and-latent-variable-likelihood-ascent",
+    "em-algorithm-and-latent-variable-likelihood-ascent-examples"
+  ],
+  "items_read": [
+    "alg-expectation-maximization",
+    "thm-em-observed-log-likelihood-is-nondecreasing",
+    "thm-generalized-em-is-nondecreasing-under-q-ascent",
+    "rem-em-ascent-does-not-imply-global-optimality-or-convergence",
+    "ex-em-finite-mixture-responsibilities",
+    "ex-generalized-em-increases-q-without-maximizing",
+    "ex-em-likelihood-has-two-local-maxima",
+    "ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse",
+    "ex-em-support-losing-candidate-violates-finite-kl-condition"
+  ],
+  "conventions": [
+    {
+      "convention": "The complete-data density is supplied as one jointly measurable function, normalized on every parameter fibre. Joint measurability is not inferred from separate likelihood versions.",
+      "fixed_by": "alg-expectation-maximization",
+      "matters_for": [
+        "thm-em-observed-log-likelihood-is-nondecreasing",
+        "ex-em-finite-mixture-responsibilities",
+        "ex-generalized-em-increases-q-without-maximizing",
+        "ex-em-likelihood-has-two-local-maxima",
+        "ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse",
+        "ex-em-support-losing-candidate-violates-finite-kl-condition"
+      ]
+    },
+    {
+      "convention": "Latent densities and observed log likelihoods are defined only on fibres with positive finite observed marginal. Q is assigned only when its integral is finite; absolute log-integrability is required for admissibility.",
+      "fixed_by": "alg-expectation-maximization",
+      "matters_for": [
+        "thm-em-observed-log-likelihood-is-nondecreasing",
+        "thm-generalized-em-is-nondecreasing-under-q-ascent",
+        "ex-em-support-losing-candidate-violates-finite-kl-condition"
+      ]
+    },
+    {
+      "convention": "KL runs from the current latent law to the candidate latent law. Admissibility requires current-to-candidate absolute continuity and finite directional KL. AC is assumed for the Radon–Nikodym branch; failure of absolute continuity gives infinite KL without selecting a derivative.",
+      "fixed_by": "alg-expectation-maximization",
+      "matters_for": [
+        "thm-em-observed-log-likelihood-is-nondecreasing",
+        "thm-generalized-em-is-nondecreasing-under-q-ascent",
+        "ex-generalized-em-increases-q-without-maximizing",
+        "ex-em-support-losing-candidate-violates-finite-kl-condition"
+      ]
+    },
+    {
+      "convention": "Exact mode selects an attained Q maximizer over an admissible candidate set containing the current iterate. Generalized mode requires only nondecreasing Q. Iteration starts at t=0; unavailable updates stop without appending a failed candidate.",
+      "fixed_by": "alg-expectation-maximization",
+      "matters_for": [
+        "thm-em-observed-log-likelihood-is-nondecreasing",
+        "thm-generalized-em-is-nondecreasing-under-q-ascent",
+        "ex-generalized-em-increases-q-without-maximizing",
+        "ex-em-likelihood-has-two-local-maxima"
+      ]
+    },
+    {
+      "convention": "Use log 0 = −∞ and assign q_t times absolute log density the value zero wherever q_t=0. An extended diagnostic integral equal to −∞ is not a value of the algorithm's finite-valued Q.",
+      "fixed_by": "alg-expectation-maximization",
+      "matters_for": [
+        "thm-em-observed-log-likelihood-is-nondecreasing",
+        "ex-em-support-losing-candidate-violates-finite-kl-condition"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-expectation-maximization",
+      "statement": "Defines EM on supplied jointly measurable normalized complete-data densities, with positive finite marginal fibres, finite log-integrable Q, support-compatible finite-KL candidates, attained exact updates or Q-nondecreasing generalized updates, and explicit stopping on unavailable updates.",
+      "used_by": [
+        "thm-em-observed-log-likelihood-is-nondecreasing",
+        "thm-generalized-em-is-nondecreasing-under-q-ascent",
+        "ex-em-finite-mixture-responsibilities",
+        "ex-generalized-em-increases-q-without-maximizing",
+        "ex-em-likelihood-has-two-local-maxima",
+        "ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse",
+        "ex-em-support-losing-candidate-violates-finite-kl-condition"
+      ]
+    },
+    {
+      "id": "thm-em-observed-log-likelihood-is-nondecreasing",
+      "statement": "Assume AC, a jointly measurable normalized complete-data density, fixed observed data, positive finite current and candidate marginals, current-to-candidate latent absolute continuity, absolute integrability of both complete-data log densities under the current latent law, and finite directional KL. Then ℓ_x(θ)−ℓ_x(θ_t)=Q(θ|θ_t)−Q(θ_t|θ_t)+D(q_t μ||q_θ^x μ). Consequently an admissible Q-nondecreasing update does not decrease ℓ_x; an attained exact maximizer over an admissible set containing θ_t has this property.",
+      "used_by": [
+        "thm-generalized-em-is-nondecreasing-under-q-ascent",
+        "rem-em-ascent-does-not-imply-global-optimality-or-convergence",
+        "ex-em-likelihood-has-two-local-maxima",
+        "ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse"
+      ]
+    },
+    {
+      "id": "thm-generalized-em-is-nondecreasing-under-q-ascent",
+      "statement": "Assume AC and the model, fibre, support, integrability, and finite-KL hypotheses of the EM ascent theorem. An admissible candidate with Q(θ_{t+1}|θ_t)≥Q(θ_t|θ_t) satisfies ℓ_x(θ_{t+1})≥ℓ_x(θ_t). The Q maximizer need not be attained.",
+      "used_by": [
+        "rem-em-ascent-does-not-imply-global-optimality-or-convergence"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited choice assumption for the KL/Radon–Nikodym branch and normal-density supplier.",
+      "opened": true
+    },
+    {
+      "id": "def-kullback-leibler-divergence",
+      "used_for": "Directional KL definition, finite-valued Radon–Nikodym representative, and infinite divergence when absolute continuity fails.",
+      "opened": true
+    },
+    {
+      "id": "def-likelihood-density",
+      "used_for": "Distinguishing supplied joint measurability from independently selected pointwise likelihood versions.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-with-density",
+      "used_for": "Interpreting current and candidate latent densities as probability measures.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Showing integrable density infinite-value sets are null and normalizing positive finite fibres.",
+      "opened": true
+    },
+    {
+      "id": "cor-integral-over-a-null-set-vanishes",
+      "used_for": "Removing measurable infinite-density null sets in the EM density-ratio proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-against-a-density",
+      "used_for": "Identifying the density ratio and converting latent-law integrals to reference-measure integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-archimedean",
+      "used_for": "Concluding nullity from n times the measure of an infinite-value set being at most one for every positive integer n.",
+      "opened": true
+    },
+    {
+      "id": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+      "used_for": "Almost-everywhere uniqueness identifying r q_candidate with q_current; the sigma-finite reference exhaustion also has finite current-law mass.",
+      "opened": true
+    },
+    {
+      "id": "thm-conditional-density-formula",
+      "used_for": "Identifying mixture responsibilities with a supplied conditional-law version on positive finite fibres.",
+      "opened": true
+    },
+    {
+      "id": "thm-bayes-formula-for-dominated-kernels",
+      "used_for": "Computing mixture responsibilities from the proper finite latent prior and dominated component likelihoods.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Checking the marginalization supplier and the Gaussian example's nonnegative product-density normalization.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Checking that the marginalization supplier restricts signed or complex integral exchanges to absolute integrability and handles exceptional sections.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Checking joint marginal measurability through the supplied constant uniformly sigma-finite latent kernel.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "em-algorithm-and-latent-variable-likelihood-ascent",
+      "to": "numerical-optimization-for-statistical-computation",
+      "faithful": true,
+      "note": "Checked supplier page and actual factorization, marginalization, and KL nonnegativity items against the EM consumers. Positive finite fibres, supplied joint measurability, directional KL, AC, and absolute-integrability restrictions are preserved. The EM density-ratio identity is proved locally."
+    },
+    {
+      "from": "em-algorithm-and-latent-variable-likelihood-ascent-examples",
+      "to": "hierarchical-bayesian-models-and-partial-pooling",
+      "faithful": true,
+      "note": "Checked the hierarchical page and normal-density context against the covariance-collapse example's actual location-scale supplier. All scales used in the model are strictly positive, and AC is explicit. The example proves unbounded likelihood as ε approaches zero without defining a zero-variance normal density or claiming an EM trajectory reaches that boundary."
+    },
+    {
+      "from": "identifiability-and-approximation-bias-in-computational-inference",
+      "to": "em-algorithm-and-latent-variable-likelihood-ascent",
+      "faithful": true,
+      "note": "Checked both page summaries and the downstream page-prerequisite record. This is contextual use: the downstream page makes no item-level invocation of the EM theorem and claims no global optimizer convergence. Its distinction between an inferential target and algorithmic approximation agrees with the EM page's one-step ascent limitation."
+    }
+  ]
+}

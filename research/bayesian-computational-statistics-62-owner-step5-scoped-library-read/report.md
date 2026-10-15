@@ -1,0 +1,13 @@
+# Final cycle2: explicit run-scoped concurrent inventory
+
+Bounded retries cannot repair a foreign authoring carrier placeholder that persists beyond3.1seconds. The proposed explicit readLibraryItems(repo,{run,requiredIds}) policy retains strict legacy behavior when no run context is supplied. Native workflow helpers and maintenance callers now pass run explicitly; review contexts and outside maintenance assignments add their exact required IDs. No process-global run is introduced.
+
+All readable outside items remain in the inventory, preserving downstream discovery. Only a bounded-read failure can become an exclusion, and only after validating this run's original/current frontier and resolving its full current supplier closure, including current and original alias mappings. Required/unresolved/ambiguous aliases and suppliers fail closed. The exact invalid filename must occur in one other run's current manifest, with an active native beta writer for that exact batch recorded in its state. No prefix-based exemption exists. A known foreign manifest consumer of this run's frontier is also not considered independent.
+
+Each admitted unavailable foreign authoring carrier produces an immutable content-addressed outside-inflight observation in this run's workflow directory, explicitly observed/excluded/notpassed, with exact manifest fingerprint and active native ownership fields. This is neither a source review nor certification coverage. No original evidence is rewritten and no file is silently dropped globally. Persistent invalid current-run/required/unowned inputs still error; scopes and existing frozen/evidence checks remain.
+
+This code/docs proposal is not installed or executed. No live tool/source/metadata/state file, foreign run, test, partial gate or model call was changed/run. Root owns independent code review, commit, recertification and complete native batteries.
+
+Required closure is checked on every explicit-run read, even when no malformed file was caught. Canonical precedence includes the original native pack inventory and enumerated invalid filenames, so a deleted/malformed canonical item cannot disappear behind a same-named alias. Foreign ownership is read only to classify actual invalid candidates; no foreign source or session control is changed.
+
+Foreign manifest/state ownership establishes active authoring responsibility, not the unreadable file's draft/published status. Observations therefore make no status claim. Each observation binds the exact raw state hash and captured dispatch stage/role/label/covers/attempt/timestamps, plus the manifest hash; these are individual actual reads, not an atomic cross-file or whole-corpus snapshot.

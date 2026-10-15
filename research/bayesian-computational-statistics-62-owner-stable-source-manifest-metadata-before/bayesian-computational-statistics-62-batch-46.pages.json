@@ -1,0 +1,207 @@
+[
+  {
+    "order": 2132,
+    "id": "particle-smoothing-backward-simulation-and-rbpf",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Particle smoothing, backward simulation, and Rao–Blackwellized filters",
+    "companion": "particle-smoothing-backward-simulation-and-rbpf-examples",
+    "requires": [
+      "kalman-filtering",
+      "feynman-kac-particle-filters"
+    ],
+    "items": [
+      {
+        "id": "lem-nonlinear-path-extension-is-a-probability-kernel",
+        "kind": "lemma",
+        "deps": [
+          "def-standard-borel-space",
+          "def-measure-kernel-and-probability-kernel",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-measurability-of-integration-against-a-kernel",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-conditionally-linear-gaussian-state-space-model",
+        "kind": "definition",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-standard-borel-space",
+          "def-measure-kernel-and-probability-kernel",
+          "def-general-state-space-model-by-kernels",
+          "def-linear-gaussian-state-space-model-with-independent-noises",
+          "def-state-space-filtering-laws"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+        "kind": "lemma",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-conditionally-linear-gaussian-state-space-model",
+          "def-linear-gaussian-state-space-model-with-independent-noises",
+          "def-multivariate-normal-law",
+          "def-feynman-kac-path-targets-and-normalizers",
+          "alg-kalman-filter",
+          "lem-one-step-kalman-gaussian-conditioning",
+          "thm-kalman-filter-is-exact-posterior",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "thm-conditional-density-formula"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-smoothing-backward-kernel-bayes-factorization",
+        "kind": "lemma",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-state-space-filtering-laws",
+          "thm-state-space-filtering-and-smoothing-laws-exist",
+          "thm-dominated-state-space-filtering-recursion",
+          "thm-conditional-density-formula",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-dynkin-pi-lambda",
+          "thm-finite-horizon-state-space-kernel-law-exists-uniquely"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-particle-backward-simulator",
+        "kind": "algorithm",
+        "deps": [
+          "def-state-space-filtering-laws",
+          "lem-smoothing-backward-kernel-bayes-factorization",
+          "def-feynman-kac-path-targets-and-normalizers",
+          "alg-sequential-importance-resampling"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "alg-rao-blackwellized-particle-filter",
+        "kind": "algorithm",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "def-conditionally-linear-gaussian-state-space-model",
+          "lem-nonlinear-path-extension-is-a-probability-kernel",
+          "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+          "def-feynman-kac-path-targets-and-normalizers",
+          "alg-sequential-importance-resampling",
+          "alg-multinomial-and-residual-offspring-resampling",
+          "thm-measurability-of-integration-against-a-kernel",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-bootstrap-particle-filter-weak-consistency",
+        "kind": "lemma",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-feynman-kac-path-targets-and-normalizers",
+          "alg-sequential-importance-resampling",
+          "alg-multinomial-and-residual-offspring-resampling",
+          "lem-feynman-kac-path-measures-satisfy-forward-recursion",
+          "def-weak-convergence-of-borel-probability-measures",
+          "thm-chebyshev-markov-inequality-for-the-integral"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "alg-fixed-lag-particle-smoother",
+        "kind": "algorithm",
+        "deps": [
+          "def-state-space-filtering-laws",
+          "alg-sequential-importance-resampling",
+          "alg-particle-backward-simulator"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-particle-backward-simulator-normalization-and-cost",
+        "kind": "theorem",
+        "deps": [
+          "alg-particle-backward-simulator"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-particle-smoothing-consistency-under-stated-conditions",
+        "kind": "theorem",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-smoothing-backward-kernel-bayes-factorization",
+          "alg-particle-backward-simulator",
+          "lem-bootstrap-particle-filter-weak-consistency",
+          "thm-dominated-state-space-filtering-recursion",
+          "def-weak-convergence-of-borel-probability-measures",
+          "thm-chebyshev-markov-inequality-for-the-integral"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+        "kind": "theorem",
+        "deps": [
+          "def-axiom-of-choice",
+          "alg-fixed-lag-particle-smoother",
+          "lem-smoothing-backward-kernel-bayes-factorization"
+        ],
+        "dependency_level": 6
+      }
+    ]
+  },
+  {
+    "order": 2133,
+    "id": "particle-smoothing-backward-simulation-and-rbpf-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Particle smoothing, backward simulation, and Rao–Blackwellized filters — Examples",
+    "companion": "particle-smoothing-backward-simulation-and-rbpf",
+    "requires": [
+      "particle-smoothing-backward-simulation-and-rbpf"
+    ],
+    "items": [
+      {
+        "id": "ex-switching-linear-gaussian-rbpf",
+        "kind": "example",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "def-conditionally-linear-gaussian-state-space-model",
+          "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+          "alg-rao-blackwellized-particle-filter",
+          "thm-nondegenerate-multivariate-normal-law-has-density"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-zero-backward-simulation-denominator",
+        "kind": "example",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-state-space-filtering-laws",
+          "lem-smoothing-backward-kernel-bayes-factorization",
+          "alg-particle-backward-simulator"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-fixed-lag-smoothing-bias-from-delayed-information",
+        "kind": "example",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-state-space-filtering-laws",
+          "lem-smoothing-backward-kernel-bayes-factorization",
+          "alg-fixed-lag-particle-smoother",
+          "thm-fixed-lag-smoother-targets-truncated-conditional-law"
+        ],
+        "dependency_level": 7
+      }
+    ]
+  }
+]

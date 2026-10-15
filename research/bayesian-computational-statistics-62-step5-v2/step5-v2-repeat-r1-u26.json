@@ -1,0 +1,97 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "26",
+  "input_sha256": "8a8734c8cd9afdc96618dbafe685e00ab296c41b484981fc79203392668dde20",
+  "decisions": [
+    {
+      "id": "cex-singular-interior-mode-changes-laplace-rate",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "24393070d4c8c6210ba881913896c976f669e7f0b2777274d8f71865a51d8d0a",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Confirmed dependency-citation defect: F1 attributes polynomial smoothness and differentiation rules to a definition that only defines higher derivatives and C^k. Step 1.1 needs these facts to verify the smooth singular-mode witness. Repaired using the existing polynomial power-rule and continuity suppliers, explicitly computing derivatives -4x^3, -12x^2, -24x, -24, and zero thereafter. No new prerequisite item is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "cex-singular-interior-mode-changes-laplace-rate",
+      "disposition": "repaired",
+      "post_sha256": "fe9cd11cae6bfca21a1ff9462ab1ed188d9c15dd160bdf5eaa5f58ffefd1dd4f",
+      "review_context_sha256": "b8df23fba9c758963be25f017eb4f6d60a6e51aa30524d3b281cf480e3928539",
+      "reason": "Checked the entire local witness: -x^4 has unique interior maximum 0, all derivatives are continuous by the added polynomial suppliers, and its second derivative vanishes at 0. Composition with the continuous positive exponential is now justified explicitly. For n=m^4 the central interval has integrand at least exp(-1), and additivity plus nonnegative outer integrals gives I_(m^4)>=2exp(-1)/m, including m=1 via zero endpoint integrals. Dividing by m^-2 diverges and disproves the claimed O(n^-1/2) bound. The Statement refuted and all hypotheses are unchanged; no choice principle is used. This is verification of my own repair, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "cex-singular-interior-mode-changes-laplace-rate",
+      "locus": "facts-block",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "status": "fixed",
+      "reason": "Confirmed dependency-citation defect: F1 attributes polynomial smoothness and differentiation rules to a definition that only defines higher derivatives and C^k. Step 1.1 needs these facts to verify the smooth singular-mode witness. Repaired using the existing polynomial power-rule and continuity suppliers, explicitly computing derivatives -4x^3, -12x^2, -24x, -24, and zero thereafter. No new prerequisite item is needed.",
+      "affected_use": "F1 and Counterexample step 1.1: the C-infinity definition did not establish the needed polynomial differentiation and continuity.",
+      "repair": "Correct F1; add F6/F7/F8 and their three published dependencies; compute every derivative of the quartic and justify exponential composition; synchronize the owning manifest and proof contract.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "id": "cex-singular-interior-mode-changes-laplace-rate",
+      "status": "no-published-repair-required",
+      "reason": "The published higher-derivative definition accurately states its interface; the defect was its use by this draft consumer. No published supplier or consumer was edited or found defective, and no Statement or Definition changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "scope": "Only the assigned draft item and its owning manifest/proof-contract entry were changed. The digest heading concern is already resolved in the assigned carrier, which has ## Counterexample. No Statement/Definition interface changed, no downstream event is triggered, and there are no unresolved mathematical obligations.",
+    "dependencies_added": [
+      "lem-derivative-of-a-power",
+      "thm-algebra-of-continuous-functions",
+      "thm-composition-of-continuous-functions"
+    ],
+    "source_evidence": "Read the complete assigned carrier and its six original suppliers; read the power-rule, polynomial-continuity, and continuous-composition suppliers. Elementary calculus and Riemann inequalities are familiar; no external source was consulted or is claimed as read.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-singular-interior-mode-changes-laplace-rate.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/cex-singular-interior-mode-changes-laplace-rate.md",
+        "exit_code": 0,
+        "result": "1 file; math and YAML parse successfully"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-26.proof-contracts.json --strict --items cex-singular-interior-mode-changes-laplace-rate",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 checked"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/cex-singular-interior-mode-changes-laplace-rate.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects"
+      }
+    ],
+    "integration": "Owning manifest and proof contract were reread, updated, and checked while holding the step5 shared-write lock; the lock was released. Current review-context hashes were captured immediately after completion of the mathematical review.",
+    "next_action": "Controller-owned evidence collection and independent rejudgment for the repaired carrier; no judge, stamp, certificate, or round state was written."
+  },
+  "supporting_evidence": {
+    "research/bayesian-computational-statistics-62-batch-26.proof-contracts.json": "b4a65a540293dc6103897792b4b2abaae2c4bcf0749a0c3668678498432dd57b",
+    "research/bayesian-computational-statistics-62-batch-26.pages.json": "a044dcdc5dd4bb8880ed83b64cd18aa24a78385aa5e393024fa67966a77c7ad6"
+  }
+}

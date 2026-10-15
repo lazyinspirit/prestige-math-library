@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": 54,
+  "decision": "resolved by minimal explicit design premise",
+  "confirmed_defect": "Uniformity of the chosen subset did not explicitly state independence from data X required by its declared algorithm supplier.",
+  "correction": "Added independently of X in the Example and F5, and checked that premise explicitly at Verification4.1. All numerical p-value/CDF and weak-mean counterexample claims retained.",
+  "source_path": "items/ex-exchangeable-two-sample-permutation-test.md",
+  "before_file": "research/bayesian-computational-statistics-62-owner-step2-b54-before.md",
+  "manifest_row_proposal": {
+    "id": "ex-exchangeable-two-sample-permutation-test",
+    "kind": "example",
+    "title": "A tied two-sample Bernoulli permutation test",
+    "deps": [
+      "def-measurable-finite-group-permutation-setup",
+      "def-measurable-finite-group-orbit-pvalues",
+      "def-finite-probability-space-and-event",
+      "thm-finite-group-permutation-validity"
+    ],
+    "dependency_level": 3,
+    "statement": "Let $\\Omega=\\{0,1\\}^2$, and for $q\\in[0,1]$ assign the four vectors masses\n$$P_q(0,0)=(1-q)^2,\\quad P_q(0,1)=q(1-q),\\quad P_q(1,0)=q(1-q),\\quad P_q(1,1)=q^2.$$\nThese are two independent Bernoulli$(q)$ observations, one in each sample.\nLet $G=S_2$ act by swapping coordinates and take the signed two-sample score\n$T(x)=x_1-x_2$. Under the equal-distribution null, the law is invariant under\nthis swap. For the discordant sample $x=(1,0)$ the full-orbit p-value is\n$1/2$; for $x=(0,1)$ it is $1$, and either tied sample has inclusive p-value\n$1$.\n\nFor a uniform-subset Monte Carlo example without replacement, let\n$G=\\mathbb Z/6\\mathbb Z$ act on itself by addition with its full power-set\nsigma-algebra, let $X$ be uniform on $G$, and take\n$T(x)=\\mathbf 1\\{x=0\\}$. Set $B=2$, choose $S$ uniformly from the ten\ntwo-element subsets of $G\\setminus\\{0\\}$ independently of $X$, and use $W=\\{0\\}\\cup S$. This is\nthe identity-adjoined design of\n[[alg-random-permutation-monte-carlo-pvalue]], with\n$$p_{2,\\mathrm{wor}}(x)=\\frac{\\#\\{g\\in W:T(g+x)\\ge T(x)\\}}{3}.$$\n\nThe equal-distribution null above is stronger than equality of means. For a\nweak mean-difference null, use the data space $D^2$ with full power-set\nsigma-algebra, where $D=\\{-2,-1,0,1,2\\}$, and let $S_2$ act by swapping\ncoordinates. On $D^2$ assign $(x,y)$ mass $P\\{x\\}Q\\{y\\}$, where $P$ puts\nmass $1/2$ on each of $-1,1$ and $Q$ puts masses $1/4,1/2,1/4$ on\n$-2,0,2$, respectively. Use the score $T(x,y)=x-y$. Both coordinate means\nare zero, so the weak mean-difference null $E[X]=E[Y]$ holds. The pooled law\nis not invariant under the swap."
+  },
+  "contract_proposal": {
+    "citations": [
+      {
+        "fact": "F1",
+        "source": "def-measurable-finite-group-permutation-setup",
+        "source_section": "Definition",
+        "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$\\varnothing\\ne\\Theta_0\\subseteq\\Theta$, and let $G$ be a finite group\n([[def-group]]) acting on $\\mathcal X$ by a left action\n([[def-group-action]]). Require that each map $x\\mapsto g\\cdot x$ is\nmeasurable from $(\\mathcal X,\\mathcal A)$ to itself and that\n$T:\\mathcal X\\to\\mathbb R$ is measurable\n([[def-measurable-function-between-measurable-spaces]]).\n\nFor $\\theta\\in\\Theta_0$, the null law is **invariant under the action** when\n$P_\\theta(\\{x:g\\cdot x\\in A\\})=P_\\theta(A)$ for every $g\\in G$ and\n$A\\in\\mathcal A$. Equivalently, $g\\cdot X$ and $X$ have the same law when\n$X\\sim P_\\theta$. The setup defines the action and score whether or not this\ninvariance condition holds; the validity theorem below assumes it for every\nnull parameter.",
+        "uses": [
+          "1.1",
+          "4.1",
+          "5.1"
+        ]
+      },
+      {
+        "fact": "F2",
+        "source": "def-measurable-finite-group-orbit-pvalues",
+        "source_section": "Definition",
+        "quote": "In a setup as in [[def-measurable-finite-group-permutation-setup]], the\n**inclusive full-orbit upper-tail p-value** at $x\\in\\mathcal X$ is\n$$p_{\\mathrm{orb}}(x):=\\frac{\\#\\{g\\in G:T(g\\cdot x)\\ge T(x)\\}}{|G|}.$$\nIf $U$ is independent of the data and uniform on $[0,1]$, meaning\n$\\mathbb P(U\\le u)=u$ for every $u\\in[0,1]$, the **tie-randomized full-orbit\np-value** is\n$$p_{\\mathrm{tie}}(x,U):=\\frac{\\#\\{g\\in G:T(g\\cdot x)>T(x)\\}+U\\,\\#\\{g\\in G:T(g\\cdot x)=T(x)\\}}{|G|}.$$\nIndependence is in the sense of\n[[def-independent-random-elements]]. Each count is over group elements with\nmultiplicity, so nonfree actions are handled without replacing $|G|$ by the\nnumber of distinct orbit points.",
+        "uses": [
+          "2.1",
+          "3.1"
+        ]
+      },
+      {
+        "fact": "F3",
+        "source": "thm-finite-group-permutation-validity",
+        "source_section": "Statement",
+        "quote": "Let $\\mathsf E,\\Theta_0,G,T$ be as in\n[[def-measurable-finite-group-permutation-setup]], and suppose every null law\n$P_\\theta$, $\\theta\\in\\Theta_0$, is invariant under the action. Let\n$p_{\\mathrm{orb}}$ and $p_{\\mathrm{tie}}$ be as in\n[[def-measurable-finite-group-orbit-pvalues]]. Then, for every\n$u\\in[0,1]$ and every $\\theta\\in\\Theta_0$,\n$$P_\\theta(p_{\\mathrm{orb}}(X)\\le u)\\le u,\\qquad \\mathbb P_\\theta(p_{\\mathrm{tie}}(X,U)\\le u)=u,$$\nwhere $U$ is independent uniform on $[0,1]$. Thus $p_{\\mathrm{orb}}$ is a\nvalid p-value; its cutoff has null rejection probability at most $\\alpha$,\nand hence size at most $\\alpha$ when a nonempty disjoint alternative is\nspecified. The tie-randomized cutoff is a randomized test with rejection\nprobability exactly $\\alpha$ under each null law. These level and size\nstatements use [[def-test-size-and-power]].\n\nOn finite sample spaces, the first two distributional claims specialize to\n[[thm-finite-group-randomization-validity]] and use the same multiplicity\nconvention as [[def-orbit-rank-p-value]]. The proof below supplies the\nmeasurable-space extension rather than importing it from that finite-space\nsupplier.",
+        "uses": [
+          "3.1"
+        ]
+      },
+      {
+        "fact": "F4",
+        "source": "def-finite-probability-space-and-event",
+        "source_section": "Definition",
+        "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+        "uses": [
+          "1.1",
+          "4.1",
+          "5.1"
+        ]
+      },
+      {
+        "fact": "F5",
+        "source": "alg-random-permutation-monte-carlo-pvalue",
+        "source_section": "Definition",
+        "quote": "**Input:** a measurable finite-group setup\n[[def-measurable-finite-group-permutation-setup]], an observed $x$, an\ninteger $B\\ge0$, and one of the two simulation designs below. Simulated\ntransformations are independent of $X$.\n\n1. **With replacement.** Draw $g_1,\\ldots,g_B$ independently and uniformly\n   from $G$. Set $g_0=e$, the identity, and return\n   $$\\widehat p_{B,\\mathrm{wr}}(x):=\\frac{1+\\sum_{b=1}^{B}\\mathbf 1\\{T(g_b\\cdot x)\\ge T(x)\\}}{B+1}.$$\n   A simulated draw may itself equal $e$; it is still counted in addition to\n   the distinguished identity.\n2. **Without replacement.** Require $B\\le |G|-1$. Draw a subset $S$ uniformly\n   from the $B$-element subsets of $G\\setminus\\{e\\}$, and return\n   $$\\widehat p_{B,\\mathrm{wor}}(x):=\\frac{\\#\\{g\\in\\{e\\}\\cup S:T(g\\cdot x)\\ge T(x)\\}}{B+1}.$$\n   This is a uniform-subset design; the selected transformations are distinct\n   and the identity is adjoined.\n\nIn either design, a cutoff rule rejects when the returned value is at most\n$\\alpha\\in[0,1]$. For $B=0$ the only transformation is the distinguished\nidentity and the returned value is $1$. Validity under an invariant null law,\nincluding ties, is a separate theorem on this page.",
+        "uses": [
+          "4.1"
+        ]
+      }
+    ],
+    "derivations": [
+      {
+        "id": "derivation-1-1",
+        "claim": "All four masses are nonnegative and sum to $(q+(1-q))^2=1$, so [F4] makes them a finite probability law. The swap fixes $(0,0)$ and $(1,1)$ and exchanges $(0,1)$ with $(1,0)$, which have equal mass. Thus $P_q(s^{-1}A)=P_q(A)$ for every $A\\subseteq\\Omega$, and the group action is invariant for every $q\\in[0,1]$.",
+        "step": "1.1",
+        "inputs": [
+          "F1",
+          "F4",
+          "given",
+          "algebra"
+        ]
+      },
+      {
+        "id": "derivation-2-1",
+        "claim": "At $(0,0)$ and $(1,1)$, both transformed scores are $0$, giving $p_{\\mathrm{orb}}=1$ and $p_{\\mathrm{tie}}=U$. At $(1,0)$ the two scores are $1,-1$, giving $p_{\\mathrm{orb}}=1/2$ and $p_{\\mathrm{tie}}=U/2$. At $(0,1)$ they are $-1,1$, giving $p_{\\mathrm{orb}}=1$ and $p_{\\mathrm{tie}}=(1+U)/2$.",
+        "step": "2.1",
+        "inputs": [
+          "F2",
+          "step 1.1",
+          "algebra"
+        ]
+      },
+      {
+        "id": "derivation-3-1",
+        "claim": "Put $a=q(1-q)$. Then $p_{\\mathrm{orb}}=1/2$ with probability $a$ and equals $1$ otherwise. Its CDF is $0$ for $u<1/2$, $a\\le1/4\\le u$ for $1/2\\le u<1$, and $1$ at $u=1$, so it is superuniform. For $0\\le u\\le1/2$, the tie-randomized CDF is $2au+(1-2a)u=u$: the $(1,0)$ branch contributes $2au$, the $(0,1)$ branch contributes zero except at a probability-zero endpoint, and the tied branches contribute $(1-2a)u$. For $1/2\\le u\\le1$, it is $a+a(2u-1)+(1-2a)u=u$. Thus $p_{\\mathrm{tie}}$ is uniform, in agreement with [F3].",
+        "step": "3.1",
+        "inputs": [
+          "F2",
+          "F3",
+          "step 2.1",
+          "algebra"
+        ]
+      },
+      {
+        "id": "derivation-4-1",
+        "claim": "The subset $S$ is uniform and independent of $X$ by the Example, so it satisfies the without-replacement design premise in [F5]. In the $\\mathbb Z/6\\mathbb Z$ example, addition by any fixed group element permutes the six equally likely outcomes, so the null law is invariant. If $X=0$, only the identity in $W$ has score at least $T(X)=1$, and the without-replacement p-value is $1/3$. If $X\\ne0$, then $T(X)=0$ and every element of $W$ has score at least zero, so the p-value is $1$. Its distribution is therefore $1/3$ with probability $1/6$ and $1$ with probability $5/6$; its CDF is superuniform.",
+        "step": "4.1",
+        "inputs": [
+          "F1",
+          "F4",
+          "F5",
+          "given",
+          "algebra"
+        ]
+      },
+      {
+        "id": "derivation-5-1",
+        "claim": "In the weak mean-difference example, $E[X]=E[Y]=0$. But the coordinate swap sends $(1,0)$ to $(0,1)$, and the product law assigns these points probabilities $P(X=1)Q(Y=0)=1/4$ and $P(X=0)Q(Y=1)=0$, respectively. Hence this weak null does not make the pooled law invariant under the swap, so the invariant-null premise of [F3] cannot be inferred from equality of means.",
+        "step": "5.1",
+        "inputs": [
+          "F1",
+          "F4",
+          "given",
+          "algebra"
+        ]
+      }
+    ],
+    "routine_steps": [],
+    "boundaries": [
+      {
+        "case": "empty",
+        "status": "checked",
+        "evidence": "The Example uses four binary sample outcomes and no empty sample space."
+      },
+      {
+        "case": "zero",
+        "status": "checked",
+        "evidence": "Steps 1.1 and 3.1 include q=0 and q=1; the law then concentrates on a tied vector."
+      },
+      {
+        "case": "one",
+        "status": "checked",
+        "evidence": "Example statement fixes two observations and a two-element swap group; it does not vary sample size or group order."
+      },
+      {
+        "case": "degenerate",
+        "status": "checked",
+        "evidence": "Step 2.1 computes tied ranks at (0,0) and (1,1)."
+      },
+      {
+        "case": "endpoints",
+        "status": "checked",
+        "evidence": "Step 3.1 computes the CDF on closed intervals including u=0, 1/2, and 1."
+      },
+      {
+        "case": "nonempty-choice",
+        "status": "checked",
+        "evidence": "Step 1.1 checks the four-point law by finite arithmetic; no choice is used."
+      },
+      {
+        "case": "iff-forward",
+        "status": "checked",
+        "evidence": "The Example verifies a single model and asserts no equivalence."
+      },
+      {
+        "case": "iff-reverse",
+        "status": "checked",
+        "evidence": "The Example verifies a single model and asserts no equivalence."
+      }
+    ],
+    "finite_checks": [
+      {
+        "id": "four-outcome-mass",
+        "claim": "The four masses sum to one and the discordant points have equal mass.",
+        "result": "Step 1.1 gives (q+(1-q))^2=1 and verifies swap invariance for every q."
+      },
+      {
+        "id": "orbit-rank-table",
+        "claim": "The ranks are 1 on tied samples, 1/2 at (1,0), and 1 at (0,1).",
+        "result": "Step 2.1 lists the transformed scores and tie blocks."
+      },
+      {
+        "id": "rank-cdfs",
+        "claim": "The inclusive-rank CDF is bounded by u and the randomized-rank CDF is u.",
+        "result": "Step 3.1 calculates both expressions on [0,1/2] and [1/2,1]."
+      }
+    ],
+    "finite_smoke": [],
+    "risk_review": {
+      "status": "open",
+      "notes": "The finite mass table, invariance calculation, tie branches, and CDF endpoints were checked directly; independent review remains open."
+    }
+  },
+  "consumer_checks": [
+    {
+      "id": "finite-group-permutation-inference-examples",
+      "decision": "accept",
+      "reason": "Only actual consumer is its home page; it accurately advertises the same uniform-subset no-replacement example and weak-mean noninvariance. Adding the required independent randomization makes that advertised algorithm instantiation explicit. No page edit needed."
+    }
+  ],
+  "other_consumers": "Actual items/library text search finds no item consumer and no other page link; no supplier Statement or algorithm Definition changed.",
+  "validation": {
+    "command": "node tools/proof-layout.mjs items/ex-exchangeable-two-sample-permutation-test.md",
+    "exit_code": 0,
+    "output": "proof-layout: 1 items, 5 steps, 0 defects"
+  },
+  "metadata": "Root owns live contract/manifest synchronization, hashes and readiness. No native metadata/state/report/counter edited; no optional tests or partial gates."
+}

@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "35",
+  "round": 1,
+  "reviewed_items": [
+    "def-petite-set-for-markov-kernel",
+    "def-phi-irreducible-chain",
+    "def-small-set-minorization-and-drift",
+    "lem-countably-generated-kernel-lebesgue-decomposition",
+    "lem-positive-triple-set-yields-uniform-overlap",
+    "def-general-state-aperiodic-markov-chain",
+    "def-harris-recurrent-markov-chain",
+    "lem-bivariate-drift-minorization-coupling-rate",
+    "lem-drift-sublevel-union-is-petite",
+    "lem-invariant-law-integrates-bounded-set-drift",
+    "lem-invariant-law-positive-set-and-almost-sure-hitting",
+    "lem-iterated-kernel-density-convolution-bounds",
+    "thm-uniform-ergodicity-from-whole-space-minorization",
+    "lem-aperiodic-minorization-times-are-cofinite",
+    "lem-phi-irreducible-chain-has-small-set",
+    "lem-aperiodic-petite-set-with-accessible-small-set-is-small",
+    "lem-small-set-coupling-converges-from-almost-every-start",
+    "lem-geometric-drift-minorization-reduces-to-bounded-small-set",
+    "thm-general-state-markov-chain-convergence-under-recurrence-conditions",
+    "thm-geometric-ergodicity-under-drift-and-minorization",
+    "ex-null-set-start-fails-total-variation-convergence",
+    "ex-periodic-finite-chain-fails-time-convergence",
+    "ex-uniformly-ergodic-chains-can-mix-arbitrarily-slowly",
+    "ex-gibbs-chain-invariant-but-reducible",
+    "ex-sticky-general-state-chain-is-not-geometrically-ergodic",
+    "ex-drift-minorization-geometric-ergodicity-on-a-birth-death-chain"
+  ],
+  "reviewed_pages": [
+    "mcmc-ergodicity-and-mixing",
+    "mcmc-ergodicity-and-mixing-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The final review found a false proof equality and an unmet finite-moment prerequisite in the geometric-ergodicity proof. Owner reconciliation is required.",
+  "findings": [
+    {
+      "id": "lem-invariant-law-positive-set-and-almost-sure-hitting",
+      "type": "local",
+      "reason": "Step 2.2 equates the event {S=r, X_{jL} not in A} with a future event that avoids A at every time. The latter is only a subset of the former, so the displayed equality is false; the lower bound needed for the contradiction follows with ≥. This remains unresolved on the final review."
+    },
+    {
+      "id": "thm-geometric-ergodicity-under-drift-and-minorization",
+      "type": "prerequisite",
+      "reason": "Step 1.2 applies the invariant-drift lemma, whose statement requires a bounded drift set (sup_C V < infinity). The theorem assumes only a finite-valued V and small C, and does not derive that premise or pi V < infinity. The reduction proof constructs a bounded set with an improved drift, but the reduction statement does not expose that result and the theorem does not use it. Make this application explicit or supply the missing finite-moment result."
+    },
+    {
+      "id": "def-small-set-minorization-and-drift",
+      "type": "scope",
+      "reason": "The approved BCS-32 design both defines drift pairs using globally finite V and describes the geometric theorem with V finite pi-almost everywhere. The current definition and theorem require global finiteness. If the a.e. clause permits infinite values on a pi-null set, that approved case is not covered; the owner should reconcile the intended scope."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-phi-irreducible-chain-has-small-set",
+      "decision": "accept",
+      "reason": "The sigma-finite measure is explicitly converted to an equivalent finite probability before the overlap argument."
+    },
+    {
+      "id": "lem-invariant-law-integrates-bounded-set-drift",
+      "decision": "accept",
+      "reason": "The empty-set case is handled by contradiction with invariance."
+    },
+    {
+      "id": "lem-invariant-law-positive-set-and-almost-sure-hitting",
+      "decision": "escalate",
+      "reason": "Its step 2.2 equality is false; the stationary hitting conclusion used downstream is not fully proved as written."
+    },
+    {
+      "id": "lem-bivariate-drift-minorization-coupling-rate",
+      "decision": "accept",
+      "reason": "The TV coupling supplier is imported and its coupling bound applies to the constructed marginal chains."
+    },
+    {
+      "id": "lem-iterated-kernel-density-convolution-bounds",
+      "decision": "accept",
+      "reason": "Its density supplier is repaired and its convolution bounds follow from the actual iterated-kernel definition."
+    },
+    {
+      "id": "lem-drift-sublevel-union-is-petite",
+      "decision": "accept",
+      "reason": "The killed-kernel drift argument yields the stated uniform finite-time entrance bound."
+    },
+    {
+      "id": "lem-aperiodic-petite-set-with-accessible-small-set-is-small",
+      "decision": "accept",
+      "reason": "The proof establishes statewise access to the common minorization and applies the cofinite-times result with positive exponents."
+    },
+    {
+      "id": "thm-uniform-ergodicity-from-whole-space-minorization",
+      "decision": "accept",
+      "reason": "The TV contraction supplier is imported and supports the skeleton contraction bound."
+    },
+    {
+      "id": "lem-small-set-coupling-converges-from-almost-every-start",
+      "decision": "escalate",
+      "reason": "Step 2.1 relies on the almost-sure hitting conclusion of lem-invariant-law-positive-set-and-almost-sure-hitting, whose proof has the unresolved step 2.2 equality."
+    },
+    {
+      "id": "lem-geometric-drift-minorization-reduces-to-bounded-small-set",
+      "decision": "accept",
+      "reason": "The repaired proof establishes nu' absolutely continuous with respect to pi; its use of the invariant-mass subclaim is supported by the supplier's step 1.1."
+    },
+    {
+      "id": "thm-general-state-markov-chain-convergence-under-recurrence-conditions",
+      "decision": "escalate",
+      "reason": "Its pi-almost-everywhere conclusion uses the unresolved small-set coupling result in step 1.1."
+    },
+    {
+      "id": "thm-geometric-ergodicity-under-drift-and-minorization",
+      "decision": "escalate",
+      "reason": "Step 1.2 applies the invariant-drift lemma without establishing its bounded drift-set hypothesis."
+    },
+    {
+      "id": "ex-null-set-start-fails-total-variation-convergence",
+      "decision": "accept",
+      "reason": "The survival probability and resulting positive TV limit are computed directly."
+    },
+    {
+      "id": "ex-periodic-finite-chain-fails-time-convergence",
+      "decision": "accept",
+      "reason": "The alternating laws remain at TV distance one half from the invariant law."
+    },
+    {
+      "id": "ex-uniformly-ergodic-chains-can-mix-arbitrarily-slowly",
+      "decision": "accept",
+      "reason": "The whole-space minorization and the family lower bound are verified directly."
+    },
+    {
+      "id": "ex-gibbs-chain-invariant-but-reducible",
+      "decision": "accept",
+      "reason": "The supplied full conditionals, random-scan invariance result, and closed singleton classes support the claim."
+    },
+    {
+      "id": "ex-sticky-general-state-chain-is-not-geometrically-ergodic",
+      "decision": "escalate",
+      "reason": "Its all-start convergence claim uses the unresolved general-state convergence theorem."
+    },
+    {
+      "id": "ex-drift-minorization-geometric-ergodicity-on-a-birth-death-chain",
+      "decision": "escalate",
+      "reason": "Its geometric-rate conclusion relies on the theorem with the unmet finite-moment prerequisite."
+    },
+    {
+      "id": "mcmc-ergodicity-and-mixing",
+      "decision": "escalate",
+      "reason": "The page summary includes the geometric-rate claim whose theorem proof has an unmet prerequisite."
+    },
+    {
+      "id": "mcmc-ergodicity-and-mixing-examples",
+      "decision": "escalate",
+      "reason": "The page summary includes the sticky-chain and drift-certificate conclusions affected by unresolved suppliers."
+    }
+  ]
+}

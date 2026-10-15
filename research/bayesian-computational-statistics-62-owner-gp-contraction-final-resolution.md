@@ -1,0 +1,35 @@
+# GP contraction final supplier-first resolution — cycle2
+
+Completed the missing sharp finite-dimensional Gaussian expansion proof and checked its valid Banach/sieve consumers. Corrected the small-ball constant sign. The full three-branch GP theorem now retains every scale prior at the universal fixed-design rate floor and retains both sharper epsilon alternatives: nonzero Gaussian law, or a locally upper-bounded scale density only in the zero-Gaussian case.
+
+An explicit spiky-prior posterior counterexample proves why the unrestricted degenerate epsilon-rate assertion was false. All three model examples remain valid with their original Statements; the existing uniform-prior interval-mass example remains a separate proof-gap illustration.
+
+Both native writers drained before repair. Exact9before images are preserved. Complete10source-exact contracts and metadata/manifest/coverage/page proposals are supplied for root integration.
+
+## Exact7 historical holds
+
+| Item | Final focused disposition |
+|---|---|
+| `thm-finite-dimensional-gaussian-isoperimetric-expansion` | Source proof/scope correction complete; root current binding and native evidence integration pending. |
+| `thm-borell-sudakov-tsirelson-expansion-for-banach-gaussian-law` | Source proof/scope correction complete; root current binding and native evidence integration pending. |
+| `thm-gaussian-concentration-sieve-bounds` | Source proof/scope correction complete; root current binding and native evidence integration pending. |
+| `thm-gaussian-process-posterior-contraction` | Source proof/scope correction complete; root current binding and native evidence integration pending. |
+| `ex-log-gaussian-uniform-density-posterior` | Source proof/scope correction complete; root current binding and native evidence integration pending. |
+| `ex-fixed-design-gaussian-constant-process-and-unknown-scale` | Source proof/scope correction complete; root current binding and native evidence integration pending. |
+| `ex-binary-regression-logistic-intercept-gp` | Source proof/scope correction complete; root current binding and native evidence integration pending. |
+
+## Proof and consumer evidence
+
+- Native15 completed06:59:09.159Z and native16 completed07:04:45.326Z, both lastExitOk=true. Nine exact final native source preimages were archived before editing, including the three model examples and the separate degenerate interval-mass example.
+- The finite-dimensional Gaussian isoperimetric Statement is unchanged. It now has a complete local proof: explicit OU semigroup differentiation/integration by parts, a nonpositive Frobenius-square functional derivative, distance cutoff mollification for finite unions of equal-radius balls, absolute-continuous neighborhood-mass integration, then compact/Borel inner approximation with endpoints. No spherical isoperimetry, coarea or Rademacher result is used as an unproved supplier.
+- The valid final Banach expansion proof and full-squared sieve proof retain their Statements and mathematical arguments. The native author had already fixed the historical countable-subcover fact mapping and full-vs-half convention. Reviewer removed obsolete missing-proof prose and repaired one unclosed math delimiter in sieve proof1.1. Banach finite-cylinder/RKHS projection and compact-cylinder approximation, and sieve shifted-ball/packing/tail uses of the completed sharp supplier, were checked in the same supplier-first pass.
+- The exact small-ball constant now has C_ell=log(2||ell||/(sqrt(2pi)tau)), agreeing with its local interval-density proof. The GP consumer still obtains log(1/epsilon)<=n epsilon²+constant and hence log n=O(n epsilon²) for every nonzero Gaussian law, via the countable norming family.
+- Original branch3 arbitrary-epsilon conclusion was false for W=0 and an unrestricted lower-bounded scale density. The explicit new generated counterexample gives a uniform floor plus disjoint spikes at delta_k=e^{-k!}, widthdelta_k^4 and mass proportional sqrt(delta_k), proving posterior mass outside every M epsilon_nk tends to1 at allowed epsilon_n=sqrt(logloglog n/n). This is distinct from the older uniform-prior interval-mass proof-gap example, which remains true and is not relabeled as posterior failure.
+- The corrected GP theorem preserves all original prior models and all three branches. Density and binary branches retain epsilon. Universal fixed-design contraction is at rho=max(epsilon,sqrt(log n/n)), proved from the full-squared concentration monotonicity, scale interval mass, actual local comparison/testing/denominator/split suppliers. It separately retains sharp epsilon for every nonzero Gaussian law because rho=Oepsilon.
+- The second sharp alternative retains W=0 at arbitrary epsilon with n epsilon²→infinity when only its scale density is locally bounded above near truth (the global lower bound remains). A complete local likelihood proof treats endpoints, gives denominator≥c_R/sqrt n and Gaussian-tail numerator after u=sqrt n(sigma-sigma0), handles remote priors by exponential likelihood decay, and then sends n and R to infinity. No global upper density bound is imposed and no allowed prior is discarded from the universal conclusion.
+- The three direct GP model examples were all checked under the changed Statement. Constant log-density gives an exact uniform-density posterior; one-point logistic preserves its link/L² rate; the constant nonzero Gaussian unknown-scale example has epsilon=2sqrt(log n/n), hence rho=epsilon and qualifies for the sharp nonzero branch. Stale proof-escalation prose was removed without changing those original Statements or conclusions. The older degenerate uniform-prior example now points out its separate parametric argument without pretending that a failed local-mass check is itself posterior failure.
+- Exact source identifier searches over all items/library show no other logical item consumer of the changed finiteGaussian/Banach/sieve/smallball/GPtheorem chain. Context is the support/concentration and GP A pages; the three GP examples exhaust theorem item consumers. New counterexample is contextual only in GP Remarks via a declared later-page forward reference, never a logical supplier. No active outside source writer was touched.
+- The seven genuine existing holds remain untouched as historical author records. Complete source-exact10 contract objects, complete10 frontmatter/manifest row proposals, coherent page/counterexample placements and coverage15/16 proposals are supplied in separate research files. Root owns all numeric labels, current hashes, readiness/gates and required native integration.
+- Final explicit proof-layout on exact10 changed/new paths passed10items49steps0defects,exit0. No optional tests, hashes, native readiness/audit stamps or live manifest/contract/coverage/page edits were performed by reviewer. This completes cycle2 actual repair; no third delegated mathematical review is proposed.
+
+Final explicit proof-layout:10items49steps0defects. Root owns labels, hashes, readiness, new-item ownership and all gates. No optional tests or acceptance stamps performed.

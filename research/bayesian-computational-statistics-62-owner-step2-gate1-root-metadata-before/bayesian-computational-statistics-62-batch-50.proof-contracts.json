@@ -1,0 +1,1404 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-50",
+  "run": "bayesian-computational-statistics-62",
+  "batch": 50,
+  "scope": [
+    "def-resampling-sampling-unit-contract",
+    "def-empirical-measure",
+    "lem-uniform-law-on-finite-subset-families",
+    "lem-empirical-measure-is-a-probability-measure",
+    "alg-delete-d-jackknife-replicates",
+    "alg-uniform-subsampling-without-replacement",
+    "alg-n-out-of-n-bootstrap-from-empirical-law",
+    "thm-bootstrap-draws-are-conditionally-iid-empirical-law",
+    "ex-two-point-bootstrap-sample-mean",
+    "ex-delete-d-and-subsampling",
+    "ex-cluster-resampling-unit",
+    "cex-pointwise-bootstrap-does-not-preserve-dependent-pair-law",
+    "ex-assignment-randomization-versus-bootstrap"
+  ],
+  "contracts": {
+    "def-resampling-sampling-unit-contract": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition concerns a declared unit mechanism and does not specify an empty dataset."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Definition has no numerical mass or zero-valued parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a single indexed unit is an indivisible sampling unit."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Definition does not classify distributions or degeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "def-empirical-measure": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated input requires n>=1 or a nonempty sample, so no empty-sample convention is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: any measurable set containing none of the observed unit records has empirical mass zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for n=1 the empirical measure is the single Dirac measure."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: repeated observations are counted with their index multiplicities."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "alg-delete-d-jackknife-replicates": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm requires n>=2 and 1<=d<n, so each complement is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The algorithm has no zero-valued tuning parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: n=2 and d=1 are allowed; the sole complement has one record."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the procedure applies to repeated records and a declared statistic."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both d=1 and d=n-1 satisfy the stated range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the finite subset lemma supplies a nonempty deletion family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "alg-uniform-subsampling-without-replacement": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm requires n>=2 and 1<=b<n."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The algorithm has no zero-valued tuning parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the lower endpoint b=1 is allowed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: repeated observed records are allowed; the selected indices remain distinct."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both b=1 and b=n-1 satisfy the stated range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the finite subset lemma supplies a nonempty selection family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "alg-n-out-of-n-bootstrap-from-empirical-law": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated input requires n>=1 or a nonempty sample, so no empty-sample convention is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: an unobserved unit record has empirical mass zero and is never selected."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: n=1 gives a well-defined one-index replicate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: repeated observed values retain their index multiplicities."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: each replicate uses an explicit finite index vector; no arbitrary choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "lem-uniform-law-on-finite-subset-families": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{N}$ is the set of von Neumann naturals\n([[def-natural-numbers]]): $0 = \\varnothing$, $\\sigma(n) = n \\cup \\{n\\}$, and\n$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ is itself the set of its predecessors,\nthe order being the additive order of [[def-nat-order]] identified with\nmembership in [[lem-nat-order-is-membership]]. Write $A \\approx B$ when a\nbijection $A \\to B$ exists ([[def-equinumerous]],\n[[def-injection-surjection-bijection]]). A set $A$ is **finite** when\n$A \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-countable]]).\n\n**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write\n\n$$\\lvert A\\rvert := \\text{that } n,$$\n\nthe **cardinality**, or number of elements, of $A$. The notation $\\lvert A\\rvert$\nis defined for finite $A$ only, and its value is a natural number.\n\n**Why exactly one, which is the whole content of the definition.** At least one\nsuch $n$ exists: that is literally what \"$A$ is finite\" says. At most one exists:\nif $A \\approx n$ and $A \\approx m$ with $n, m \\in \\mathbb{N}$, then $n \\approx A$,\nbecause the inverse of a bijection is a bijection, and hence $n \\approx m$,\nbecause a composition of bijections is a bijection\n([[def-injection-surjection-bijection]]); and $n \\approx m$ forces $n = m$ by\nclaim 3 of [[lem-pigeonhole]]. So $\\lvert A\\rvert$ names a single natural number\nand not a family of choices.\n\n**Four consequences, proved here because everything on this page uses them.**\n\n**(a) $\\lvert n\\rvert = n$ for every $n \\in \\mathbb{N}$.** The identity map\n$\\mathrm{id}_n$ is a bijection $n \\to n$, so $n \\approx n$; thus $n$ is finite and\nthe unique natural equinumerous with it is $n$ itself.\n\n**(b) $\\lvert\\varnothing\\rvert = 0$, and a finite $A$ satisfies\n$\\lvert A\\rvert = 0$ if and only if $A = \\varnothing$.** Since $0 = \\varnothing$,\npart (a) gives $\\lvert\\varnothing\\rvert = 0$. Conversely, if $\\lvert A\\rvert = 0$\nthen there is a bijection $f : A \\to \\varnothing$; were some $a \\in A$, the value\n$f(a)$ would be an element of $\\varnothing$, and $\\varnothing$ has none, so\n$A = \\varnothing$.\n\n**(c) Transport along a bijection.** If $A$ is finite and $f : A \\to B$ is a\nbijection, then $B$ is finite and $\\lvert B\\rvert = \\lvert A\\rvert$. Indeed\n$B \\approx A$ through $f^{-1}$ and $A \\approx \\lvert A\\rvert$, so\n$B \\approx \\lvert A\\rvert$ by transitivity.\n\n**(d) Equality of cardinalities is equinumerosity.** For finite $A$ and $B$:\n$\\lvert A\\rvert = \\lvert B\\rvert$ if and only if $A \\approx B$. If the\ncardinalities agree then $A \\approx \\lvert A\\rvert = \\lvert B\\rvert \\approx B$;\nconversely $A \\approx B$ gives $\\lvert B\\rvert = \\lvert A\\rvert$ by (c).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cardinality-of-a-set-of-functions",
+          "source_section": "Statement",
+          "quote": "Let $A$ and $B$ be finite sets and write\n\n$$A^{B} := \\{\\, f : f \\text{ is a function } B \\to A \\,\\}.$$\n\nThen $A^{B}$ is finite and $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$,\nthe power being the $\\mathbb{N}$-valued exponentiation of [[def-nat-power]].\n\nBoth degenerate cases are covered and neither is a stipulation. If\n$B = \\varnothing$ there is exactly one function $B \\to A$, the empty function, so\n$\\lvert A^{\\varnothing}\\rvert = 1 = \\lvert A\\rvert^{0}$ **even when\n$A = \\varnothing$**. If $A = \\varnothing$ and $B \\ne \\varnothing$ there is no\nfunction at all, so $\\lvert A^{B}\\rvert = 0 = 0^{\\lvert B\\rvert}$ with\n$\\lvert B\\rvert \\ge 1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-subset-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite set ([[def-countable]]) and let $B \\subseteq A$. Then:\n\n1. $B$ is finite;\n2. $\\lvert B\\rvert \\le \\lvert A\\rvert$ ([[def-finite-cardinality]]);\n3. $\\lvert B\\rvert = \\lvert A\\rvert$ if and only if $B = A$;\n4. every injection $f : A \\to A$ is a bijection, and every surjection\n   $f : A \\to A$ is a bijection.\n\nClause 3 is the finite form of the Dedekind statement: a finite set is not\nequinumerous with a proper subset of itself. Clause 4 is its working form, and\n**finiteness is exactly the hypothesis that fails in general**: the successor map\nis an injection of $\\mathbb{N}$ into itself that is not surjective, which is the\nfalse statement recorded on this page's companion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{N}$ is the set of von Neumann naturals\n([[def-natural-numbers]]): $0 = \\varnothing$, $\\sigma(n) = n \\cup \\{n\\}$, and\n$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ is itself the set of its predecessors,\nthe order being the additive order of [[def-nat-order]] identified with\nmembership in [[lem-nat-order-is-membership]]. Write $A \\approx B$ when a\nbijection $A \\to B$ exists ([[def-equinumerous]],\n[[def-injection-surjection-bijection]]). A set $A$ is **finite** when\n$A \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-countable]]).\n\n**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write\n\n$$\\lvert A\\rvert := \\text{that } n,$$\n\nthe **cardinality**, or number of elements, of $A$. The notation $\\lvert A\\rvert$\nis defined for finite $A$ only, and its value is a natural number.\n\n**Why exactly one, which is the whole content of the definition.** At least one\nsuch $n$ exists: that is literally what \"$A$ is finite\" says. At most one exists:\nif $A \\approx n$ and $A \\approx m$ with $n, m \\in \\mathbb{N}$, then $n \\approx A$,\nbecause the inverse of a bijection is a bijection, and hence $n \\approx m$,\nbecause a composition of bijections is a bijection\n([[def-injection-surjection-bijection]]); and $n \\approx m$ forces $n = m$ by\nclaim 3 of [[lem-pigeonhole]]. So $\\lvert A\\rvert$ names a single natural number\nand not a family of choices.\n\n**Four consequences, proved here because everything on this page uses them.**\n\n**(a) $\\lvert n\\rvert = n$ for every $n \\in \\mathbb{N}$.** The identity map\n$\\mathrm{id}_n$ is a bijection $n \\to n$, so $n \\approx n$; thus $n$ is finite and\nthe unique natural equinumerous with it is $n$ itself.\n\n**(b) $\\lvert\\varnothing\\rvert = 0$, and a finite $A$ satisfies\n$\\lvert A\\rvert = 0$ if and only if $A = \\varnothing$.** Since $0 = \\varnothing$,\npart (a) gives $\\lvert\\varnothing\\rvert = 0$. Conversely, if $\\lvert A\\rvert = 0$\nthen there is a bijection $f : A \\to \\varnothing$; were some $a \\in A$, the value\n$f(a)$ would be an element of $\\varnothing$, and $\\varnothing$ has none, so\n$A = \\varnothing$.\n\n**(c) Transport along a bijection.** If $A$ is finite and $f : A \\to B$ is a\nbijection, then $B$ is finite and $\\lvert B\\rvert = \\lvert A\\rvert$. Indeed\n$B \\approx A$ through $f^{-1}$ and $A \\approx \\lvert A\\rvert$, so\n$B \\approx \\lvert A\\rvert$ by transitivity.\n\n**(d) Equality of cardinalities is equinumerosity.** For finite $A$ and $B$:\n$\\lvert A\\rvert = \\lvert B\\rvert$ if and only if $A \\approx B$. If the\ncardinalities agree then $A \\approx \\lvert A\\rvert = \\lvert B\\rvert \\approx B$;\nconversely $A \\approx B$ gives $\\lvert B\\rvert = \\lvert A\\rvert$ by (c).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{N}$ is the set of von Neumann naturals\n([[def-natural-numbers]]): $0 = \\varnothing$, $\\sigma(n) = n \\cup \\{n\\}$, and\n$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ is itself the set of its predecessors,\nthe order being the additive order of [[def-nat-order]] identified with\nmembership in [[lem-nat-order-is-membership]]. Write $A \\approx B$ when a\nbijection $A \\to B$ exists ([[def-equinumerous]],\n[[def-injection-surjection-bijection]]). A set $A$ is **finite** when\n$A \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-countable]]).\n\n**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write\n\n$$\\lvert A\\rvert := \\text{that } n,$$\n\nthe **cardinality**, or number of elements, of $A$. The notation $\\lvert A\\rvert$\nis defined for finite $A$ only, and its value is a natural number.\n\n**Why exactly one, which is the whole content of the definition.** At least one\nsuch $n$ exists: that is literally what \"$A$ is finite\" says. At most one exists:\nif $A \\approx n$ and $A \\approx m$ with $n, m \\in \\mathbb{N}$, then $n \\approx A$,\nbecause the inverse of a bijection is a bijection, and hence $n \\approx m$,\nbecause a composition of bijections is a bijection\n([[def-injection-surjection-bijection]]); and $n \\approx m$ forces $n = m$ by\nclaim 3 of [[lem-pigeonhole]]. So $\\lvert A\\rvert$ names a single natural number\nand not a family of choices.\n\n**Four consequences, proved here because everything on this page uses them.**\n\n**(a) $\\lvert n\\rvert = n$ for every $n \\in \\mathbb{N}$.** The identity map\n$\\mathrm{id}_n$ is a bijection $n \\to n$, so $n \\approx n$; thus $n$ is finite and\nthe unique natural equinumerous with it is $n$ itself.\n\n**(b) $\\lvert\\varnothing\\rvert = 0$, and a finite $A$ satisfies\n$\\lvert A\\rvert = 0$ if and only if $A = \\varnothing$.** Since $0 = \\varnothing$,\npart (a) gives $\\lvert\\varnothing\\rvert = 0$. Conversely, if $\\lvert A\\rvert = 0$\nthen there is a bijection $f : A \\to \\varnothing$; were some $a \\in A$, the value\n$f(a)$ would be an element of $\\varnothing$, and $\\varnothing$ has none, so\n$A = \\varnothing$.\n\n**(c) Transport along a bijection.** If $A$ is finite and $f : A \\to B$ is a\nbijection, then $B$ is finite and $\\lvert B\\rvert = \\lvert A\\rvert$. Indeed\n$B \\approx A$ through $f^{-1}$ and $A \\approx \\lvert A\\rvert$, so\n$B \\approx \\lvert A\\rvert$ by transitivity.\n\n**(d) Equality of cardinalities is equinumerosity.** For finite $A$ and $B$:\n$\\lvert A\\rvert = \\lvert B\\rvert$ if and only if $A \\approx B$. If the\ncardinalities agree then $A \\approx \\lvert A\\rvert = \\lvert B\\rvert \\approx B$;\nconversely $A \\approx B$ gives $\\lvert B\\rvert = \\lvert A\\rvert$ by (c).",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $B=\\{0,1\\}$. The shift $j\\mapsto j-1$ is a bijection from the conventional index set $[n]=\\{1,\\ldots,n\\}$ to the von Neumann natural $n=\\{0,\\ldots,n-1\\}$; for $n=0$ both sets are empty. Thus $[n]$ is finite by [F1]. The set $B$ is bijective with $2$, so it is finite as well. For each $I\\in\\mathcal S_{n,r}$ define its indicator function $\\chi_I:[n]\\to B$ by $\\chi_I(j)=1$ if $j\\in I$ and $0$ otherwise. The map $I\\mapsto\\chi_I$ is injective because equal indicator functions have equal inverse images of $\\{1\\}$. Its image is a subset of the finite set $B^{[n]}$, which is finite by [F2] and [F3]. Therefore some natural $k$ is bijective with this image; composing that bijection with $I\\mapsto\\chi_I$ makes $\\mathcal S_{n,r}$ bijective with $k$, so [F1] makes it finite.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $r=0$, then $\\varnothing\\in\\mathcal S_{n,r}$. If $r>0$, then $\\{1,\\ldots,r\\}\\subseteq[n]$ because $r\\le n$, and the shift $j\\mapsto j-1$ is a bijection from $\\{1,\\ldots,r\\}$ to the von Neumann natural $r$; hence this subset has cardinality $r$ by [F1, F5], so $\\{1,\\ldots,r\\}\\in\\mathcal S_{n,r}$. Thus $\\mathcal S_{n,r}$ is nonempty. By [F5], its cardinality $M:=|\\mathcal S_{n,r}|$ is defined; by [F6] and nonemptiness, $M\\ge1$. Give each $I\\in\\mathcal S_{n,r}$ weight $q(I)=1/M$. These weights are nonnegative and their finite sum is $M(1/M)=1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The outcome set is finite by step 1.1 and its weights satisfy the conditions in step 1.2, so [F4] makes $(\\mathcal S_{n,r},q)$ a finite probability space. The argument includes $n=0$, $r=0$, and $r=n$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include n=0,r=0, where the unique subset is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2: r=0 gives the nonempty singleton family containing the empty subset."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2: n=1 permits r=0 and r=1, both with nonempty families."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: the cases r=0 and r=n are included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.1 cover both endpoints 0<=r<=n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 constructs an explicit member; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "lem-empirical-measure-is-a-probability-measure": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-empirical-measure",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal F)$ be a measurable unit space ([[def-measurable-space]]), let $n\\ge1$, and fix an observed ordered tuple $z_1,\\ldots,z_n\\in\\mathcal Z$. Its **empirical measure** is the set function\n$$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{z_i},\\qquad P_n(A)=\\frac1n\\sum_{i=1}^n1\\{z_i\\in A\\}\\quad(A\\in\\mathcal F),$$\nwhere $\\delta_{z_i}$ is the Dirac set function from [[def-dirac-measure]]. Repeated observations contribute once for each index at which they occur. The statement that $P_n$ is a probability measure is established in [[lem-empirical-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any $A\\in\\mathcal F$, the finite sum in [F1] is nonnegative by [F2]. Also $P_n(\\varnothing)=0$ and $P_n(\\mathcal Z)=\\frac1n\\sum_{i=1}^n1=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $(A_k)_{k\\ge1}$ be pairwise disjoint members of $\\mathcal F$. For each fixed $i$, at most one term $\\delta_{z_i}(A_k)$ is nonzero, and countable additivity in [F2] gives $\\delta_{z_i}(\\bigcup_k A_k)=\\sum_k\\delta_{z_i}(A_k)$. Because the sum over $i$ is finite and there are at most $n$ nonzero terms in the resulting double sum, we may regroup to obtain $P_n(\\bigcup_k A_k)=\\frac1n\\sum_{i=1}^n\\sum_k\\delta_{z_i}(A_k)=\\sum_k\\frac1n\\sum_{i=1}^n\\delta_{z_i}(A_k)=\\sum_kP_n(A_k)$. Thus $P_n$ is countably additive.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By step 1.1, $P_n$ has total mass $1$, and by step 1.2 it is countably additive and vanishes on the empty set. Therefore it is a measure of total mass $1$, hence a probability measure by [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated input requires n>=1 or a nonempty sample, so no empty-sample convention is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: sets disjoint from the observed tuple have zero mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the formula is valid for n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–1.2: repeated observations remain separate summands."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 use only the fixed finite tuple and finite sums."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "thm-bootstrap-draws-are-conditionally-iid-empirical-law": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-n-out-of-n-bootstrap-from-empirical-law",
+          "source_section": "Definition",
+          "quote": "**Input.** Let $n\\ge1$, let $(\\mathcal Z,\\mathcal F)$ be the declared measurable space of sampling units, and fix the observed ordered tuple $z=(z_1,\\ldots,z_n)$. Let $P_n$ be its empirical probability measure from [[def-empirical-measure]] and [[lem-empirical-measure-is-a-probability-measure]]. Declare a sample sigma-algebra $\\mathcal F_n$ on the ordered tuple space $\\mathcal Z^n$ and provide a statistic $T_n:(\\mathcal Z^n,\\mathcal F_n)\\to(\\mathbb R^q,\\mathcal B_q)$, where $q\\ge1$ is finite and $\\mathcal B_q$ is the declared target sigma-algebra; \"statistic\" has the measurable-map meaning in [[def-statistic-and-estimator]].\n\nWrite $[n]:=\\{1,\\ldots,n\\}$ for the indexing set.\n\n**Procedure.** Draw indices $I_1,\\ldots,I_n$ independently and uniformly from $[n]$, so repeated indices are allowed. Set $Z_j^*:=z_{I_j}$ for $j=1,\\ldots,n$. Return the bootstrap tuple $(Z_1^*,\\ldots,Z_n^*)$ and the replicate $T_n(Z_1^*,\\ldots,Z_n^*)$. Generate further replicates by repeating the index draws with fresh randomness. These are resampling units only when the tuple entries satisfy the unit contract in [[def-resampling-sampling-unit-contract]].\n\nThe conditional IID law of the draws is proved in [[thm-bootstrap-draws-are-conditionally-iid-empirical-law]]. This algorithm does not claim that its conditional law consistently approximates any sampling law; such validity requires separate hypotheses and a separate theorem.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-empirical-measure",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal F)$ be a measurable unit space ([[def-measurable-space]]), let $n\\ge1$, and fix an observed ordered tuple $z_1,\\ldots,z_n\\in\\mathcal Z$. Its **empirical measure** is the set function\n$$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{z_i},\\qquad P_n(A)=\\frac1n\\sum_{i=1}^n1\\{z_i\\in A\\}\\quad(A\\in\\mathcal F),$$\nwhere $\\delta_{z_i}$ is the Dirac set function from [[def-dirac-measure]]. Repeated observations contribute once for each index at which they occur. The statement that $P_n$ is a probability measure is established in [[lem-empirical-measure-is-a-probability-measure]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cardinality-of-a-set-of-functions",
+          "source_section": "Statement",
+          "quote": "Let $A$ and $B$ be finite sets and write\n\n$$A^{B} := \\{\\, f : f \\text{ is a function } B \\to A \\,\\}.$$\n\nThen $A^{B}$ is finite and $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$,\nthe power being the $\\mathbb{N}$-valued exponentiation of [[def-nat-power]].\n\nBoth degenerate cases are covered and neither is a stipulation. If\n$B = \\varnothing$ there is exactly one function $B \\to A$, the empty function, so\n$\\lvert A^{\\varnothing}\\rvert = 1 = \\lvert A\\rvert^{0}$ **even when\n$A = \\varnothing$**. If $A = \\varnothing$ and $B \\ne \\varnothing$ there is no\nfunction at all, so $\\lvert A^{B}\\rvert = 0 = 0^{\\lvert B\\rvert}$ with\n$\\lvert B\\rvert \\ge 1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-product-rule",
+          "source_section": "Statement",
+          "quote": "1. If $A$ and $B$ are finite then $A \\times B$ is finite and\n   $\\lvert A \\times B\\rvert = \\lvert A\\rvert \\cdot \\lvert B\\rvert$\n   ([[def-finite-cardinality]]).\n2. Let $m \\in \\mathbb{N}$ and let $A_0, \\dots, A_{m-1}$ be finite sets. Write\n   $$\\prod_{i<m} A_i := \\{\\, f : f \\text{ is a function with domain } m \\text{ and } f(i) \\in A_i \\text{ for every } i < m \\,\\}.$$\n   Then $\\prod_{i<m} A_i$ is finite and\n   $\\big\\lvert\\prod_{i<m} A_i\\big\\rvert = \\prod_{i<m}\\lvert A_i\\rvert$, the\n   right-hand product being the $\\mathbb{N}$-valued one of\n   [[def-nat-finite-sum-and-product]].\n\nAt $m = 0$ clause 2 reads $\\big\\lvert\\prod_{i<0} A_i\\big\\rvert = 1$: there is\nexactly one function with domain $\\varnothing$, the empty function, and the empty\nproduct is $1$. Both sides are computed, not stipulated.\n\n```tikz\n\\begin{tikzpicture}[x=1.45cm,y=0.9cm]\n  \\node at (0,2.45) {$a_0$};\n  \\node at (1,2.45) {$a_1$};\n  \\node at (2,2.45) {$a_2$};\n  \\node at (-1.1,1.5) {$b_0$};\n  \\node at (-1.1,0.5) {$b_1$};\n  \\draw (-0.5,0) rectangle (2.5,2);\n  \\draw (0.5,0) -- (0.5,2);\n  \\draw (1.5,0) -- (1.5,2);\n  \\draw (-0.5,1) -- (2.5,1);\n  \\node at (0,1.5) {$(a_0,b_0)$};\n  \\node at (1,1.5) {$(a_1,b_0)$};\n  \\node at (2,1.5) {$(a_2,b_0)$};\n  \\node at (0,0.5) {$(a_0,b_1)$};\n  \\node at (1,0.5) {$(a_1,b_1)$};\n  \\node at (2,0.5) {$(a_2,b_1)$};\n  \\node at (1,-0.6) {$|A\\times B|=3\\cdot2=6$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-independent-sigma-algebras-and-events",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\nA family $(\\mathcal F_i)_{i\\in I}$ of sub-sigma-algebras of $\\mathcal F$ is\n**independent** when it is independent as a family of event classes in the\nsense of [[def-independent-families-of-event-classes]].\n\nA family $(A_i)_{i\\in I}$ of events is **independent** when the singleton event\nclasses $\\bigl(\\{A_i\\}\\bigr)_{i\\in I}$ are independent. Equivalently, for every\nfinite choice of distinct indices $i_0,\\dots,i_{n-1}$,\n\n$$\\mathbb P\\left(\\bigcap_{k<n}A_{i_k}\\right)=\\prod_{k<n}\\mathbb P(A_{i_k}).$$\n\nFor two events this reduces to the familiar identity\n$\\mathbb P(A\\cap B)=\\mathbb P(A)\\mathbb P(B)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{N}$ is the set of von Neumann naturals\n([[def-natural-numbers]]): $0 = \\varnothing$, $\\sigma(n) = n \\cup \\{n\\}$, and\n$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ is itself the set of its predecessors,\nthe order being the additive order of [[def-nat-order]] identified with\nmembership in [[lem-nat-order-is-membership]]. Write $A \\approx B$ when a\nbijection $A \\to B$ exists ([[def-equinumerous]],\n[[def-injection-surjection-bijection]]). A set $A$ is **finite** when\n$A \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-countable]]).\n\n**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write\n\n$$\\lvert A\\rvert := \\text{that } n,$$\n\nthe **cardinality**, or number of elements, of $A$. The notation $\\lvert A\\rvert$\nis defined for finite $A$ only, and its value is a natural number.\n\n**Why exactly one, which is the whole content of the definition.** At least one\nsuch $n$ exists: that is literally what \"$A$ is finite\" says. At most one exists:\nif $A \\approx n$ and $A \\approx m$ with $n, m \\in \\mathbb{N}$, then $n \\approx A$,\nbecause the inverse of a bijection is a bijection, and hence $n \\approx m$,\nbecause a composition of bijections is a bijection\n([[def-injection-surjection-bijection]]); and $n \\approx m$ forces $n = m$ by\nclaim 3 of [[lem-pigeonhole]]. So $\\lvert A\\rvert$ names a single natural number\nand not a family of choices.\n\n**Four consequences, proved here because everything on this page uses them.**\n\n**(a) $\\lvert n\\rvert = n$ for every $n \\in \\mathbb{N}$.** The identity map\n$\\mathrm{id}_n$ is a bijection $n \\to n$, so $n \\approx n$; thus $n$ is finite and\nthe unique natural equinumerous with it is $n$ itself.\n\n**(b) $\\lvert\\varnothing\\rvert = 0$, and a finite $A$ satisfies\n$\\lvert A\\rvert = 0$ if and only if $A = \\varnothing$.** Since $0 = \\varnothing$,\npart (a) gives $\\lvert\\varnothing\\rvert = 0$. Conversely, if $\\lvert A\\rvert = 0$\nthen there is a bijection $f : A \\to \\varnothing$; were some $a \\in A$, the value\n$f(a)$ would be an element of $\\varnothing$, and $\\varnothing$ has none, so\n$A = \\varnothing$.\n\n**(c) Transport along a bijection.** If $A$ is finite and $f : A \\to B$ is a\nbijection, then $B$ is finite and $\\lvert B\\rvert = \\lvert A\\rvert$. Indeed\n$B \\approx A$ through $f^{-1}$ and $A \\approx \\lvert A\\rvert$, so\n$B \\approx \\lvert A\\rvert$ by transitivity.\n\n**(d) Equality of cardinalities is equinumerosity.** For finite $A$ and $B$:\n$\\lvert A\\rvert = \\lvert B\\rvert$ if and only if $A \\approx B$. If the\ncardinalities agree then $A \\approx \\lvert A\\rvert = \\lvert B\\rvert \\approx B$;\nconversely $A \\approx B$ gives $\\lvert B\\rvert = \\lvert A\\rvert$ by (c).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{N}$ is the set of von Neumann naturals\n([[def-natural-numbers]]): $0 = \\varnothing$, $\\sigma(n) = n \\cup \\{n\\}$, and\n$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ is itself the set of its predecessors,\nthe order being the additive order of [[def-nat-order]] identified with\nmembership in [[lem-nat-order-is-membership]]. Write $A \\approx B$ when a\nbijection $A \\to B$ exists ([[def-equinumerous]],\n[[def-injection-surjection-bijection]]). A set $A$ is **finite** when\n$A \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-countable]]).\n\n**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write\n\n$$\\lvert A\\rvert := \\text{that } n,$$\n\nthe **cardinality**, or number of elements, of $A$. The notation $\\lvert A\\rvert$\nis defined for finite $A$ only, and its value is a natural number.\n\n**Why exactly one, which is the whole content of the definition.** At least one\nsuch $n$ exists: that is literally what \"$A$ is finite\" says. At most one exists:\nif $A \\approx n$ and $A \\approx m$ with $n, m \\in \\mathbb{N}$, then $n \\approx A$,\nbecause the inverse of a bijection is a bijection, and hence $n \\approx m$,\nbecause a composition of bijections is a bijection\n([[def-injection-surjection-bijection]]); and $n \\approx m$ forces $n = m$ by\nclaim 3 of [[lem-pigeonhole]]. So $\\lvert A\\rvert$ names a single natural number\nand not a family of choices.\n\n**Four consequences, proved here because everything on this page uses them.**\n\n**(a) $\\lvert n\\rvert = n$ for every $n \\in \\mathbb{N}$.** The identity map\n$\\mathrm{id}_n$ is a bijection $n \\to n$, so $n \\approx n$; thus $n$ is finite and\nthe unique natural equinumerous with it is $n$ itself.\n\n**(b) $\\lvert\\varnothing\\rvert = 0$, and a finite $A$ satisfies\n$\\lvert A\\rvert = 0$ if and only if $A = \\varnothing$.** Since $0 = \\varnothing$,\npart (a) gives $\\lvert\\varnothing\\rvert = 0$. Conversely, if $\\lvert A\\rvert = 0$\nthen there is a bijection $f : A \\to \\varnothing$; were some $a \\in A$, the value\n$f(a)$ would be an element of $\\varnothing$, and $\\varnothing$ has none, so\n$A = \\varnothing$.\n\n**(c) Transport along a bijection.** If $A$ is finite and $f : A \\to B$ is a\nbijection, then $B$ is finite and $\\lvert B\\rvert = \\lvert A\\rvert$. Indeed\n$B \\approx A$ through $f^{-1}$ and $A \\approx \\lvert A\\rvert$, so\n$B \\approx \\lvert A\\rvert$ by transitivity.\n\n**(d) Equality of cardinalities is equinumerosity.** For finite $A$ and $B$:\n$\\lvert A\\rvert = \\lvert B\\rvert$ if and only if $A \\approx B$. If the\ncardinalities agree then $A \\approx \\lvert A\\rvert = \\lvert B\\rvert \\approx B$;\nconversely $A \\approx B$ gives $\\lvert B\\rvert = \\lvert A\\rvert$ by (c).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{N}$ is the set of von Neumann naturals\n([[def-natural-numbers]]): $0 = \\varnothing$, $\\sigma(n) = n \\cup \\{n\\}$, and\n$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ is itself the set of its predecessors,\nthe order being the additive order of [[def-nat-order]] identified with\nmembership in [[lem-nat-order-is-membership]]. Write $A \\approx B$ when a\nbijection $A \\to B$ exists ([[def-equinumerous]],\n[[def-injection-surjection-bijection]]). A set $A$ is **finite** when\n$A \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-countable]]).\n\n**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write\n\n$$\\lvert A\\rvert := \\text{that } n,$$\n\nthe **cardinality**, or number of elements, of $A$. The notation $\\lvert A\\rvert$\nis defined for finite $A$ only, and its value is a natural number.\n\n**Why exactly one, which is the whole content of the definition.** At least one\nsuch $n$ exists: that is literally what \"$A$ is finite\" says. At most one exists:\nif $A \\approx n$ and $A \\approx m$ with $n, m \\in \\mathbb{N}$, then $n \\approx A$,\nbecause the inverse of a bijection is a bijection, and hence $n \\approx m$,\nbecause a composition of bijections is a bijection\n([[def-injection-surjection-bijection]]); and $n \\approx m$ forces $n = m$ by\nclaim 3 of [[lem-pigeonhole]]. So $\\lvert A\\rvert$ names a single natural number\nand not a family of choices.\n\n**Four consequences, proved here because everything on this page uses them.**\n\n**(a) $\\lvert n\\rvert = n$ for every $n \\in \\mathbb{N}$.** The identity map\n$\\mathrm{id}_n$ is a bijection $n \\to n$, so $n \\approx n$; thus $n$ is finite and\nthe unique natural equinumerous with it is $n$ itself.\n\n**(b) $\\lvert\\varnothing\\rvert = 0$, and a finite $A$ satisfies\n$\\lvert A\\rvert = 0$ if and only if $A = \\varnothing$.** Since $0 = \\varnothing$,\npart (a) gives $\\lvert\\varnothing\\rvert = 0$. Conversely, if $\\lvert A\\rvert = 0$\nthen there is a bijection $f : A \\to \\varnothing$; were some $a \\in A$, the value\n$f(a)$ would be an element of $\\varnothing$, and $\\varnothing$ has none, so\n$A = \\varnothing$.\n\n**(c) Transport along a bijection.** If $A$ is finite and $f : A \\to B$ is a\nbijection, then $B$ is finite and $\\lvert B\\rvert = \\lvert A\\rvert$. Indeed\n$B \\approx A$ through $f^{-1}$ and $A \\approx \\lvert A\\rvert$, so\n$B \\approx \\lvert A\\rvert$ by transitivity.\n\n**(d) Equality of cardinalities is equinumerosity.** For finite $A$ and $B$:\n$\\lvert A\\rvert = \\lvert B\\rvert$ if and only if $A \\approx B$. If the\ncardinalities agree then $A \\approx \\lvert A\\rvert = \\lvert B\\rvert \\approx B$;\nconversely $A \\approx B$ gives $\\lvert B\\rvert = \\lvert A\\rvert$ by (c).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-subset-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite set ([[def-countable]]) and let $B \\subseteq A$. Then:\n\n1. $B$ is finite;\n2. $\\lvert B\\rvert \\le \\lvert A\\rvert$ ([[def-finite-cardinality]]);\n3. $\\lvert B\\rvert = \\lvert A\\rvert$ if and only if $B = A$;\n4. every injection $f : A \\to A$ is a bijection, and every surjection\n   $f : A \\to A$ is a bijection.\n\nClause 3 is the finite form of the Dedekind statement: a finite set is not\nequinumerous with a proper subset of itself. Clause 4 is its working form, and\n**finiteness is exactly the hypothesis that fails in general**: the successor map\nis an injection of $\\mathbb{N}$ into itself that is not surjective, which is the\nfalse statement recorded on this page's companion.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The shift $j\\mapsto j-1$ is a bijection from $[n]$ to the von Neumann natural $n$. By [F10]–[F12], $[n]$ is finite with cardinality $n$. Let $\\Omega_n=\\{f:[n]\\to[n]\\}$, the set of index vectors. By [F4], $|\\Omega_n|=n^n$. Assign weight $n^{-n}$ to each $\\omega\\in\\Omega_n$. The weights are nonnegative and sum to $n^n n^{-n}=1$, so [F2] gives a finite probability space $(\\Omega_n,w)$ whose event sigma-algebra contains every subset. Each coordinate map $I_j(\\omega)=\\omega(j)$ and record map $Z_j^*(\\omega)=z_{\\omega(j)}$ is measurable, because every preimage is a subset of $\\Omega_n$; hence each $Z_j^*$ is a random element of $(\\mathcal Z,\\mathcal F)$ by [F6].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F10",
+            "F11",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $A_j\\in\\mathcal F$, put $B_j:=\\{i\\in[n]:z_i\\in A_j\\}$. Each $B_j$ is a subset of the finite set $[n]$, so [F13] makes it finite. The event $\\{Z_j^*\\in A_j\\text{ for every }j\\}$ consists of the functions $g:[n]\\to[n]$ with $g(j)\\in B_j$ for every $j$. The shift $\\tau:[n]\\to n$, $\\tau(j)=j-1$, from step 1.1 has inverse $\\rho:n\\to[n]$, $\\rho(k)=k+1$; thus $g\\mapsto g\\circ\\rho$ is a bijection from this event's index functions onto $\\prod_{k<n}B_{k+1}$. By [F5] this set has cardinality $\\prod_{k<n}|B_{k+1}|$, which is the same product as $\\prod_{j=1}^n|B_j|$ under that reindexing. Its probability under the uniform weights is therefore $\\prod_{k<n}(|B_{k+1}|/n)=\\prod_{j=1}^n(|B_j|/n)$. Taking all events except the $j$th to be $\\mathcal Z$ gives $\\mathbb P^*(Z_j^*\\in A_j)=|B_j|/n=P_n(A_j)$ by [F3] and [F7]. Hence the joint event probability is the product of its marginal probabilities.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F7",
+            "F13",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The one-coordinate case of step 2.1 gives each $Z_j^*$ law $P_n$. To check independence for any finite subfamily indexed by $J\\subseteq[n]$, take arbitrary $A_j\\in\\mathcal F$ for $j\\in J$ and set $A_j=\\mathcal Z$ for every omitted coordinate. Since $P_n(\\mathcal Z)=1$ and $\\mathbb P^*(Z_j^*\\in\\mathcal Z)=1$, step 2.1 then gives $\\mathbb P^*(\\bigcap_{j\\in J}\\{Z_j^*\\in A_j\\})=\\prod_{j\\in J}P_n(A_j)$. This is the finite-intersection factorization in [F8], so the coordinate random elements are independent. They have a common measurable target and the same law, hence they are IID by [F9].",
+          "step": "3.1",
+          "inputs": [
+            "F8",
+            "F9",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated input requires n>=1 or a nonempty sample, so no empty-sample convention is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: a measurable event containing no observed index has empirical and bootstrap probability zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 allow n=1; the index-vector space has one atom."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 counts indices, so repeated observed records retain their multiplicity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid when any A_j is empty or all of the unit space."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly constructs the finite index-vector space; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "ex-two-point-bootstrap-sample-mean": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-empirical-measure",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal F)$ be a measurable unit space ([[def-measurable-space]]), let $n\\ge1$, and fix an observed ordered tuple $z_1,\\ldots,z_n\\in\\mathcal Z$. Its **empirical measure** is the set function\n$$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{z_i},\\qquad P_n(A)=\\frac1n\\sum_{i=1}^n1\\{z_i\\in A\\}\\quad(A\\in\\mathcal F),$$\nwhere $\\delta_{z_i}$ is the Dirac set function from [[def-dirac-measure]]. Repeated observations contribute once for each index at which they occur. The statement that $P_n$ is a probability measure is established in [[lem-empirical-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-partial-sums-and-sample-means",
+          "source_section": "Definition",
+          "quote": "For real random variables $X_1,X_2,\\ldots$ on one probability space, define\n$$S_0=0,\\qquad S_n=\\sum_{k=1}^nX_k,\\qquad \\overline X_n=S_n/n\\quad(n\\ge1).$$\nFor a triangular array with finite row length $r_n\\ge0$, write $S_n=\\sum_{k=1}^{r_n}X_{n,k}$. An empty row has sum zero. These are finite sums in [[def-finite-sum]], with its index shifted by one. Each sum and each sample mean is a real random variable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]] and [[def-random-element-and-real-random-variable]]. No independence, common law, or integrability is implicit.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-n-out-of-n-bootstrap-from-empirical-law",
+          "source_section": "Definition",
+          "quote": "**Input.** Let $n\\ge1$, let $(\\mathcal Z,\\mathcal F)$ be the declared measurable space of sampling units, and fix the observed ordered tuple $z=(z_1,\\ldots,z_n)$. Let $P_n$ be its empirical probability measure from [[def-empirical-measure]] and [[lem-empirical-measure-is-a-probability-measure]]. Declare a sample sigma-algebra $\\mathcal F_n$ on the ordered tuple space $\\mathcal Z^n$ and provide a statistic $T_n:(\\mathcal Z^n,\\mathcal F_n)\\to(\\mathbb R^q,\\mathcal B_q)$, where $q\\ge1$ is finite and $\\mathcal B_q$ is the declared target sigma-algebra; \"statistic\" has the measurable-map meaning in [[def-statistic-and-estimator]].\n\nWrite $[n]:=\\{1,\\ldots,n\\}$ for the indexing set.\n\n**Procedure.** Draw indices $I_1,\\ldots,I_n$ independently and uniformly from $[n]$, so repeated indices are allowed. Set $Z_j^*:=z_{I_j}$ for $j=1,\\ldots,n$. Return the bootstrap tuple $(Z_1^*,\\ldots,Z_n^*)$ and the replicate $T_n(Z_1^*,\\ldots,Z_n^*)$. Generate further replicates by repeating the index draws with fresh randomness. These are resampling units only when the tuple entries satisfy the unit contract in [[def-resampling-sampling-unit-contract]].\n\nThe conditional IID law of the draws is proved in [[thm-bootstrap-draws-are-conditionally-iid-empirical-law]]. This algorithm does not claim that its conditional law consistently approximates any sampling law; such validity requires separate hypotheses and a separate theorem.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-bootstrap-draws-are-conditionally-iid-empirical-law",
+          "source_section": "Statement",
+          "quote": "Fix $n\\ge1$, write $[n]:=\\{1,\\ldots,n\\}$, let $(\\mathcal Z,\\mathcal F)$ be a measurable unit space, and fix an observed tuple $z=(z_1,\\ldots,z_n)$. Let $P_n=\\frac1n\\sum_{i=1}^n\\delta_{z_i}$ be its empirical probability measure. For the bootstrap algorithm [[alg-n-out-of-n-bootstrap-from-empirical-law]], equip the conditional index vector $(I_1,\\ldots,I_n)$ with the finite uniform law on $\\Omega_n:=\\{f:[n]\\to[n]\\}$ and set $Z_j^*=z_{I_j}$. For every $A_1,\\ldots,A_n\\in\\mathcal F$,\n$$\\mathbb P^*(Z_1^*\\in A_1,\\ldots,Z_n^*\\in A_n)=\\prod_{j=1}^nP_n(A_j).$$\nThus, conditional on the fixed observed tuple, $Z_1^*,\\ldots,Z_n^*$ are independent random elements with common law $P_n$ ([[def-identically-distributed-and-iid-random-variables]]).",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under the stated IID law the tuple $(0,2)$ has probability $(1/2)(1/2)=1/4$ by [F1], so it is an admissible observed realization. For this fixed tuple, [F2] gives $P_2(\\{0\\})=P_2(\\{2\\})=1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F4] and [F5], each of the four ordered bootstrap pairs $(0,0),(0,2),(2,0),(2,2)$ has conditional probability $1/4$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying the sample-mean formula [F3] to these four pairs gives values $0,1,1,2$, respectively. Thus the conditional bootstrap mean has probabilities $1/4,1/2,1/4$ at $0,1,2$. This is the exact conditional resampling law for this fixed sample and is not a claim of general bootstrap validity.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes an observed sample of size two."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: conditional mass outside the displayed three sample means is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes n=2 and makes no n=1 calculation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The observed values 0 and 2 are distinct; no degenerate-sample claim is made."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly enumerates all four ordered index pairs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "ex-delete-d-and-subsampling": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-delete-d-jackknife-replicates",
+          "source_section": "Definition",
+          "quote": "**Input.** Let $n\\ge2$, let $(\\mathcal Z,\\mathcal F)$ be the declared measurable space of unit records, and fix observed records $z_1,\\ldots,z_n\\in\\mathcal Z$ whose resampling unit satisfies [[def-resampling-sampling-unit-contract]]. For each tuple length $m$, declare a sample sigma-algebra $\\mathcal F_m$ on the ordered tuple space $\\mathcal Z^m$. Choose $1\\le d<n$ and provide a statistic $T_{n-d}:(\\mathcal Z^{n-d},\\mathcal F_{n-d})\\to(\\mathbb R^q,\\mathcal B_q)$, where $q\\ge1$ is finite and $\\mathcal B_q$ is the declared target sigma-algebra; \"statistic\" has the measurable-map meaning in [[def-statistic-and-estimator]].\n\nWrite $[n]:=\\{1,\\ldots,n\\}$ for the indexing set; the finite subset law on these indices is established in [[lem-uniform-law-on-finite-subset-families]].\n\n**Procedure.** Form $\\mathcal I_{n,d}:=\\{I\\subseteq[n]:|I|=d\\}$. For every $I\\in\\mathcal I_{n,d}$, list the indices in $[n]\\setminus I$ in increasing order and compute\n$$\\widehat\\theta_{(-I)}:=T_{n-d}((z_i)_{i\\in[n]\\setminus I}).$$\nLet $M_{n,d}:=|\\mathcal I_{n,d}|$ and return the full collection of replicates together with the uniform average\n$$\\overline\\theta_{(-d)}:=\\frac1{M_{n,d}}\\sum_{I\\in\\mathcal I_{n,d}}\\widehat\\theta_{(-I)}.$$\nThe finite, nonempty subset family and its uniform law are justified by [[lem-uniform-law-on-finite-subset-families]].\n\nThis algorithm defines the replicates and their average only. Any variance or bias scaling is a separate statistic with an explicitly stated target; no scaling is implicit in the term **delete-d jackknife**, and the algorithm asserts no validity theorem.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-uniform-subsampling-without-replacement",
+          "source_section": "Definition",
+          "quote": "**Input.** Let $n\\ge2$, let $(\\mathcal Z,\\mathcal F)$ be the declared measurable space of unit records, and fix observed records $z_1,\\ldots,z_n\\in\\mathcal Z$ whose resampling unit satisfies [[def-resampling-sampling-unit-contract]]. Declare a sample sigma-algebra $\\mathcal F_b$ on the ordered tuple space $\\mathcal Z^b$, choose $1\\le b<n$, and provide a statistic $T_b:(\\mathcal Z^b,\\mathcal F_b)\\to(\\mathbb R^q,\\mathcal B_q)$, where $q\\ge1$ is finite and $\\mathcal B_q$ is the declared target sigma-algebra; \"statistic\" has the measurable-map meaning in [[def-statistic-and-estimator]].\n\nWrite $[n]:=\\{1,\\ldots,n\\}$ for the indexing set; the finite subset law on these indices is established in [[lem-uniform-law-on-finite-subset-families]].\n\n**Procedure.** Draw $I$ uniformly from the finite family $\\mathcal I_{n,b}:=\\{J\\subseteq[n]:|J|=b\\}$, without replacement; list its indices in increasing order; and return the subsample $(z_i)_{i\\in I}$ and statistic value $T_b((z_i)_{i\\in I})$. The uniform law is well-defined by [[lem-uniform-law-on-finite-subset-families]].\n\nThis is subsampling without replacement. It is different from drawing $b$ indices independently with replacement. The procedure defines a finite law only; validity requires a separate theorem for the data-generating design and asymptotic regime.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-partial-sums-and-sample-means",
+          "source_section": "Definition",
+          "quote": "For real random variables $X_1,X_2,\\ldots$ on one probability space, define\n$$S_0=0,\\qquad S_n=\\sum_{k=1}^nX_k,\\qquad \\overline X_n=S_n/n\\quad(n\\ge1).$$\nFor a triangular array with finite row length $r_n\\ge0$, write $S_n=\\sum_{k=1}^{r_n}X_{n,k}$. An empty row has sum zero. These are finite sums in [[def-finite-sum]], with its index shifted by one. Each sum and each sample mean is a real random variable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]] and [[def-random-element-and-real-random-variable]]. No independence, common law, or integrability is implicit.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The six deleted pairs $\\{1,2\\},\\{1,3\\},\\{1,4\\},\\{2,3\\},\\{2,4\\},\\{3,4\\}$ leave complement means $11/2,9/2,3,4,5/2,3/2$, respectively.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Their uniform average is $(11/2+9/2+3+4+5/2+3/2)/6=7/2$, equal to the original sample mean; [F1] supplies no multiplier or variance interpretation for that average.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The six two-unit subsets have means $3/2,5/2,4,3,9/2,11/2$, each with probability $1/6$ by [F2]. The complement of every two-subset again has size two, and taking the complement twice returns the original subset; hence complementation bijects the deleted pairs with the sampled pairs. Therefore the size-two subsampling law has the same six equally weighted values as the delete-two replicate law in this example. The jackknife output in step 2.1 is their average, a single number, and is not a variance estimate.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a four-unit sample and subsets of size two."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All six subsets have positive probability 1/6."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example uses size-two deletion complements and size-two subsamples."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed values 1, 2, 4, 7 are distinct."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For n=4, d=2 and b=2 are interior choices in the stated ranges."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 enumerate all six two-subsets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "ex-cluster-resampling-unit": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-resampling-sampling-unit-contract",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be a statistical experiment ([[def-statistical-experiment]]) with a declared sampling or assignment mechanism. A **sampling unit** is one indexed unit that the declared mechanism treats as an indivisible draw or assignment object. Its **unit record** contains the complete observed data attached to that unit, including repeated measurements or labels that the analysis keeps together. Examples of sampling units are individuals, matched pairs, clusters, time blocks, and treatment-assignment units.\n\nThe declared mechanism also specifies a measurable unit-record space $(\\mathcal Z,\\mathcal F)$ and represents each unit record as an element of $\\mathcal Z$. The record space may be the whole data space or one record-valued component of it; the convention is part of the experiment's sampling or assignment contract.\n\nA **resampling unit** is the complete unit record or predeclared group of records that one draw of a resampling procedure selects. A procedure is **unit-compatible for a stated target** when it declares which records are sampled together and does not split a bundle whose joint sampling or assignment dependence is part of that target's data-generating design. Unit compatibility describes the procedure's input and dependence contract; it does not itself establish exact or asymptotic validity. A validity claim requires a separate theorem with hypotheses matched to the sampling or assignment law, target, and resample-size regime.\n\nThe conditional bootstrap law of observed units is a law on resampled data records given the fixed observations. When defined, a Bayesian posterior is instead a conditional law on parameter values under a specified prior and joint parameter-data model. They have different state spaces and are not identified by this definition. In particular, neither law determines the other.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-n-out-of-n-bootstrap-from-empirical-law",
+          "source_section": "Definition",
+          "quote": "**Input.** Let $n\\ge1$, let $(\\mathcal Z,\\mathcal F)$ be the declared measurable space of sampling units, and fix the observed ordered tuple $z=(z_1,\\ldots,z_n)$. Let $P_n$ be its empirical probability measure from [[def-empirical-measure]] and [[lem-empirical-measure-is-a-probability-measure]]. Declare a sample sigma-algebra $\\mathcal F_n$ on the ordered tuple space $\\mathcal Z^n$ and provide a statistic $T_n:(\\mathcal Z^n,\\mathcal F_n)\\to(\\mathbb R^q,\\mathcal B_q)$, where $q\\ge1$ is finite and $\\mathcal B_q$ is the declared target sigma-algebra; \"statistic\" has the measurable-map meaning in [[def-statistic-and-estimator]].\n\nWrite $[n]:=\\{1,\\ldots,n\\}$ for the indexing set.\n\n**Procedure.** Draw indices $I_1,\\ldots,I_n$ independently and uniformly from $[n]$, so repeated indices are allowed. Set $Z_j^*:=z_{I_j}$ for $j=1,\\ldots,n$. Return the bootstrap tuple $(Z_1^*,\\ldots,Z_n^*)$ and the replicate $T_n(Z_1^*,\\ldots,Z_n^*)$. Generate further replicates by repeating the index draws with fresh randomness. These are resampling units only when the tuple entries satisfy the unit contract in [[def-resampling-sampling-unit-contract]].\n\nThe conditional IID law of the draws is proved in [[thm-bootstrap-draws-are-conditionally-iid-empirical-law]]. This algorithm does not claim that its conditional law consistently approximates any sampling law; such validity requires separate hypotheses and a separate theorem.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bootstrap-draws-are-conditionally-iid-empirical-law",
+          "source_section": "Statement",
+          "quote": "Fix $n\\ge1$, write $[n]:=\\{1,\\ldots,n\\}$, let $(\\mathcal Z,\\mathcal F)$ be a measurable unit space, and fix an observed tuple $z=(z_1,\\ldots,z_n)$. Let $P_n=\\frac1n\\sum_{i=1}^n\\delta_{z_i}$ be its empirical probability measure. For the bootstrap algorithm [[alg-n-out-of-n-bootstrap-from-empirical-law]], equip the conditional index vector $(I_1,\\ldots,I_n)$ with the finite uniform law on $\\Omega_n:=\\{f:[n]\\to[n]\\}$ and set $Z_j^*=z_{I_j}$. For every $A_1,\\ldots,A_n\\in\\mathcal F$,\n$$\\mathbb P^*(Z_1^*\\in A_1,\\ldots,Z_n^*\\in A_n)=\\prod_{j=1}^nP_n(A_j).$$\nThus, conditional on the fixed observed tuple, $Z_1^*,\\ldots,Z_n^*$ are independent random elements with common law $P_n$ ([[def-identically-distributed-and-iid-random-variables]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-empirical-measure",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal F)$ be a measurable unit space ([[def-measurable-space]]), let $n\\ge1$, and fix an observed ordered tuple $z_1,\\ldots,z_n\\in\\mathcal Z$. Its **empirical measure** is the set function\n$$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{z_i},\\qquad P_n(A)=\\frac1n\\sum_{i=1}^n1\\{z_i\\in A\\}\\quad(A\\in\\mathcal F),$$\nwhere $\\delta_{z_i}$ is the Dirac set function from [[def-dirac-measure]]. Repeated observations contribute once for each index at which they occur. The statement that $P_n$ is a probability measure is established in [[lem-empirical-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The declared records are $C_1,C_2,C_3$, each a complete ordered pair of measurements, so [F1] makes the vector rather than either coordinate the resampling unit.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the index tuple $(2,2,1)$, [F2] returns $(C_2,C_2,C_1)=((1,1),(1,1),(1,0))$. By [F2], the three independent index draws each assign probability $1/3$ to their specified index, so this index tuple has conditional probability $3^{-3}=1/27$. The empirical record law assigns mass $1/3$ to each of these three distinct cluster records by [F4], and [F3] identifies the record draws as conditionally IID.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every bootstrap tuple is formed by selecting records from $\\{C_1,C_2,C_3\\}$, so every selected two-measurement vector remains intact. This verifies the unit contract in this finite example; it makes no claim that resampling clusters is valid for every target or design.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes three observed clusters."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All three empirical cluster records have positive mass 1/3."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes three clusters and a three-draw replicate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The three observed cluster vectors are not all equal."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 specifies one of the 27 finite index triples."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "cex-pointwise-bootstrap-does-not-preserve-dependent-pair-law": {
+      "risk": "medium",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-empirical-measure",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal F)$ be a measurable unit space ([[def-measurable-space]]), let $n\\ge1$, and fix an observed ordered tuple $z_1,\\ldots,z_n\\in\\mathcal Z$. Its **empirical measure** is the set function\n$$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{z_i},\\qquad P_n(A)=\\frac1n\\sum_{i=1}^n1\\{z_i\\in A\\}\\quad(A\\in\\mathcal F),$$\nwhere $\\delta_{z_i}$ is the Dirac set function from [[def-dirac-measure]]. Repeated observations contribute once for each index at which they occur. The statement that $P_n$ is a probability measure is established in [[lem-empirical-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-n-out-of-n-bootstrap-from-empirical-law",
+          "source_section": "Definition",
+          "quote": "**Input.** Let $n\\ge1$, let $(\\mathcal Z,\\mathcal F)$ be the declared measurable space of sampling units, and fix the observed ordered tuple $z=(z_1,\\ldots,z_n)$. Let $P_n$ be its empirical probability measure from [[def-empirical-measure]] and [[lem-empirical-measure-is-a-probability-measure]]. Declare a sample sigma-algebra $\\mathcal F_n$ on the ordered tuple space $\\mathcal Z^n$ and provide a statistic $T_n:(\\mathcal Z^n,\\mathcal F_n)\\to(\\mathbb R^q,\\mathcal B_q)$, where $q\\ge1$ is finite and $\\mathcal B_q$ is the declared target sigma-algebra; \"statistic\" has the measurable-map meaning in [[def-statistic-and-estimator]].\n\nWrite $[n]:=\\{1,\\ldots,n\\}$ for the indexing set.\n\n**Procedure.** Draw indices $I_1,\\ldots,I_n$ independently and uniformly from $[n]$, so repeated indices are allowed. Set $Z_j^*:=z_{I_j}$ for $j=1,\\ldots,n$. Return the bootstrap tuple $(Z_1^*,\\ldots,Z_n^*)$ and the replicate $T_n(Z_1^*,\\ldots,Z_n^*)$. Generate further replicates by repeating the index draws with fresh randomness. These are resampling units only when the tuple entries satisfy the unit contract in [[def-resampling-sampling-unit-contract]].\n\nThe conditional IID law of the draws is proved in [[thm-bootstrap-draws-are-conditionally-iid-empirical-law]]. This algorithm does not claim that its conditional law consistently approximates any sampling law; such validity requires separate hypotheses and a separate theorem.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bootstrap-draws-are-conditionally-iid-empirical-law",
+          "source_section": "Statement",
+          "quote": "Fix $n\\ge1$, write $[n]:=\\{1,\\ldots,n\\}$, let $(\\mathcal Z,\\mathcal F)$ be a measurable unit space, and fix an observed tuple $z=(z_1,\\ldots,z_n)$. Let $P_n=\\frac1n\\sum_{i=1}^n\\delta_{z_i}$ be its empirical probability measure. For the bootstrap algorithm [[alg-n-out-of-n-bootstrap-from-empirical-law]], equip the conditional index vector $(I_1,\\ldots,I_n)$ with the finite uniform law on $\\Omega_n:=\\{f:[n]\\to[n]\\}$ and set $Z_j^*=z_{I_j}$. For every $A_1,\\ldots,A_n\\in\\mathcal F$,\n$$\\mathbb P^*(Z_1^*\\in A_1,\\ldots,Z_n^*\\in A_n)=\\prod_{j=1}^nP_n(A_j).$$\nThus, conditional on the fixed observed tuple, $Z_1^*,\\ldots,Z_n^*$ are independent random elements with common law $P_n$ ([[def-identically-distributed-and-iid-random-variables]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The transition matrix is $\\begin{pmatrix}3/4&1/4\\\\1/4&3/4\\end{pmatrix}$, whose columns sum to one, so $(1/2,1/2)$ is invariant; multiplying this initial law by the transition probabilities gives the displayed four joint masses. Both marginals are Bernoulli with mean $1/2$, while $\\mathbb P(X_1=0,X_2=0)=3/8\\ne1/4=\\mathbb P(X_1=0)\\mathbb P(X_2=0)$, so the observations are dependent. Also $\\mathbb E[X_1X_2]=3/8$, and [F4] gives original covariance $3/8-(1/2)(1/2)=1/8$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix any realized pair $x=(x_1,x_2)$ and put $m=(x_1+x_2)/2$. By [F1]–[F3], each bootstrap coordinate has conditional mean $m$, and the two coordinates are conditionally independent; hence $\\mathbb E^*[X_1^*X_2^*]=m^2$ and [F4] gives $\\operatorname{Cov}^*(X_1^*,X_2^*)=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Both the original pair and the bootstrap pair are bounded, so equality of their joint laws would force equality of their covariances. The original covariance is $1/8$ but the conditional bootstrap covariance is $0$, so the laws differ and the statement is false. This finite counterexample concerns exact joint-law reproduction only; it does not decide asymptotic validity for any particular statistic.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes a pair of observations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 includes repeated observed values, for which unseen values have conditional probability zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample concerns two consecutive observations."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 holds for every fixed pair, including x1=x2, when the conditional bootstrap law is degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval parameter or endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 gives an explicit finite joint law and step 1.2 uses finite index draws."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    },
+    "ex-assignment-randomization-versus-bootstrap": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-randomized-treatment-assignment-model",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$, and let $\\mathcal I=\\{1,\\ldots,N\\}$ index the fixed\nexperimental units at the actual treatment-assignment level. Let\n$\\mathcal Z$ be a nonempty finite set of allowed assignments. If treatment\nis assigned to clusters, each cluster is one indexed unit; no separate\nprobability-sampling unit is present. The index $i$ identifies that unit,\nand no visit or repeated-measurement index is modeled here.\n\nA known assignment law is a function $p:\\mathcal Z\\to[0,1]$ satisfying\n$\\sum_{z\\in\\mathcal Z}p(z)=1$, so $(\\mathcal Z,p)$ is a finite probability\nspace ([[def-finite-probability-space-and-event]]); assignments of probability\nzero may remain in $\\mathcal Z$. A **potential-outcome schedule** is a function\n$\\theta:\\mathcal I\\times\\mathcal Z\\to\\mathbb R$, with\n$Y_i(z):=\\theta(i,z)$. The schedule and the units are fixed; the assignment\n$Z$ is the only randomness supplied by the design, and the observed response\nvector is $Y_\\theta(Z)=(Y_i(Z))_{i\\in\\mathcal I}$. The schedule is defined\nfor every allowed assignment, including zero-probability assignments, and\nmay depend on the full assignment vector, so no no-interference assumption is\nimplicit. The scientific statistical model contract\n[[def-scientific-statistical-model-contract]] requires the observation space,\nunits, quantity status, observation mechanism, support, conditioning\nconvention, and adequacy assumptions to be recorded; this model specifies\nthose fields as follows.\n\nTo express this as a statistical experiment, take the data space\n$\\mathcal X=\\mathcal Z\\times\\mathbb R^{\\mathcal I}$ with its full power-set\nsigma-algebra, which is a sigma-algebra by [[def-sigma-algebra]] and makes\n$\\mathcal X$ a measurable space ([[def-measurable-space]]), and parameter\nset $\\Theta=\\mathbb R^{\\mathcal I\\times\\mathcal Z}$. For each $\\theta\\in\\Theta$\nlet $P_\\theta$ be the law\n([[def-law-or-distribution-of-a-random-element]]) of the deterministic\nobservation map $O_\\theta(z)=(z,Y_\\theta(z))$ from $(\\mathcal Z,p)$. The map\nis measurable because its domain has the full power set, in the preimage\nsense of [[def-measurable-function-between-measurable-spaces]], and its law\nis a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]]. Thus\n$((\\mathcal X,2^{\\mathcal X}),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ is an\nexperiment in the sense of [[def-statistical-experiment]]. The assignment\nlaw asserts no response-error model, Gaussian law, superpopulation\nrandomization, or sampling representativeness beyond the stated finite\nassignment mechanism. Its finite full-measure support set is\n$$S_\\theta:=\\{(z,Y_\\theta(z)):z\\in\\mathcal Z,\\ p(z)>0\\},$$\nsince $P_\\theta(S_\\theta)=\\sum_{z:p(z)>0}p(z)=1$. The record contains the\nassigned vector and every unit's response; missing or censored outcomes and\nrepeated visits require a separately declared observation mechanism. The\ninferential target is the assignment-invariance hypothesis for these $N$\nunits, not an estimand for a wider population.\n\nInference in this page holds $\\mathcal I$ and $\\theta$ fixed and averages\nover the declared law $p$; it does not condition on the realized assignment.\nThe status of the quantities is explicit: $\\theta$ and all\n$Y_i(z)$ are fixed, $Z$ is random, $(Z,Y_\\theta(Z))$ is observed, and\npotential responses under unassigned vectors are fixed but latent. The\nassignment set, weights, and implemented randomization protocol are\ndesign-controlled and should be checked against protocol records. Assignment\nlogs and response records are empirically assessable, but those checks do not\nprove that the declared law generated the data. Potential outcomes under\nunassigned vectors are fixed and latent in the realized record. This does\nnot imply nonidentifiability from the observed-data law: for each $z$ with\n$p(z)>0$, the law assigns mass $p(z)$ to $(z,Y_\\theta(z))$, and therefore\ndetermines $Y_\\theta(z)$. Assignment invariance on this positive-probability\nset is **empirically assessable**, and the theorem tests the stronger\ninvariance hypothesis on all allowed assignments. Values at assignments\nwith $p(z)=0$, and restrictions on those values, are **substantively\nuntestable** from this law, since changing them leaves $P_\\theta$ unchanged.\nOne realized assignment does not reveal responses at other assignments.\nThese classifications do not make the design or scientific model\nempirically true.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fisher-sharp-null-and-predeclared-test-orderings",
+          "source_section": "Definition",
+          "quote": "In the finite randomized treatment-assignment model\n[[def-finite-randomized-treatment-assignment-model]], a schedule satisfies\nthe **Fisher sharp null** when for each unit $i$ there is a value $y_i$ such that\n$Y_i(z)=y_i$ for every allowed assignment $z$. The full vector\n$y=(y_i)_{i\\in\\mathcal I}$ is then imputable under every assignment.\n\nA **predeclared ordering score** is a real-valued statistic\n$T:\\mathcal Z\\times\\mathbb R^{\\mathcal I}\\to\\mathbb R$\n([[def-statistic-and-estimator]]) fixed before the\nassignment and outcomes are inspected. Its upper-tail ordering includes ties:\nassignment $z'$ is at least as extreme as $z$ when $T(z',y)\\ge T(z,y)$.\nFor a signed score $S$ and fixed null center $s_0$, the corresponding\ntwo-sided ordering is explicitly $T(z,y)=|S(z,y)-s_0|$. The center is part\nof the predeclared ordering; the sharp null alone does not force $s_0=0$\nfor an arbitrary signed score. A lower-tail ordering is represented by\nusing $-S$ as the score. A statistic in this setting is a measurable map in\nthe sense of [[def-statistic-and-estimator]]; the full power-set data\nsigma-algebra makes every such real-valued map measurable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fisher-sharp-null-randomization-pvalues-are-valid",
+          "source_section": "Statement",
+          "quote": "In a finite randomized treatment-assignment model, fix any real-valued\npredeclared ordering score $T(z,y)$. For observed data $(z,y)$ define\n$$p_{\\rm rand}(z,y):=\\sum_{z'\\in\\mathcal Z}p(z')1\\{T(z',y)\\ge T(z,y)\\}.$$\nLet $\\lambda$ be the uniform probability measure on the Borel subsets of\n$[0,1]$. For each $\\theta$, equip $\\mathcal X\\times[0,1]$ with the product\nsigma-algebra $2^{\\mathcal X}\\otimes\\mathcal B([0,1])$ and define\n$$\\widetilde P_\\theta(E):=\\sum_{z\\in\\mathcal Z}p(z)\\,\\lambda\\bigl(\\{u\\in[0,1]:((z,Y_\\theta(z)),u)\\in E\\}\\bigr).$$\nLet $U$ be the $[0,1]$ coordinate on this extension. Define\n$$p^+(z,y,U):=\\sum_{z'\\in\\mathcal Z}p(z')1\\{T(z',y)>T(z,y)\\}+U\\sum_{z'\\in\\mathcal Z}p(z')1\\{T(z',y)=T(z,y)\\}.$$\nFor every schedule satisfying the Fisher sharp null and every\n$u\\in[0,1]$,\n$$P_\\theta\\!\\left(p_{\\rm rand}(Z,Y_\\theta(Z))\\le u\\right)\\le u,$$\nwhereas the added randomization gives\n$$\\widetilde P_\\theta\\!\\left(p^+(Z,Y_\\theta(Z),U)\\le u\\right)=u.$$\nThus $p_{\\rm rand}$ is a valid finite-sample p-value for the sharp null,\nand randomized ties give an exactly uniform p-value when the additional\nindependent uniform randomizer is used. For a two-sided test, take\n$T(z,y)=|S(z,y)-s_0|$ with its center $s_0$ fixed in advance. The result\nuses the actual, possibly unequal assignment probabilities; random\nassignment supplies no Gaussian error law, and this theorem makes no\nvalidity claim under the weak zero-average-effect null from\n[[def-finite-population-average-treatment-effect-and-weak-null]] unless it\nis also Fisher-sharp.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-n-out-of-n-bootstrap-from-empirical-law",
+          "source_section": "Definition",
+          "quote": "**Input.** Let $n\\ge1$, let $(\\mathcal Z,\\mathcal F)$ be the declared measurable space of sampling units, and fix the observed ordered tuple $z=(z_1,\\ldots,z_n)$. Let $P_n$ be its empirical probability measure from [[def-empirical-measure]] and [[lem-empirical-measure-is-a-probability-measure]]. Declare a sample sigma-algebra $\\mathcal F_n$ on the ordered tuple space $\\mathcal Z^n$ and provide a statistic $T_n:(\\mathcal Z^n,\\mathcal F_n)\\to(\\mathbb R^q,\\mathcal B_q)$, where $q\\ge1$ is finite and $\\mathcal B_q$ is the declared target sigma-algebra; \"statistic\" has the measurable-map meaning in [[def-statistic-and-estimator]].\n\nWrite $[n]:=\\{1,\\ldots,n\\}$ for the indexing set.\n\n**Procedure.** Draw indices $I_1,\\ldots,I_n$ independently and uniformly from $[n]$, so repeated indices are allowed. Set $Z_j^*:=z_{I_j}$ for $j=1,\\ldots,n$. Return the bootstrap tuple $(Z_1^*,\\ldots,Z_n^*)$ and the replicate $T_n(Z_1^*,\\ldots,Z_n^*)$. Generate further replicates by repeating the index draws with fresh randomness. These are resampling units only when the tuple entries satisfy the unit contract in [[def-resampling-sampling-unit-contract]].\n\nThe conditional IID law of the draws is proved in [[thm-bootstrap-draws-are-conditionally-iid-empirical-law]]. This algorithm does not claim that its conditional law consistently approximates any sampling law; such validity requires separate hypotheses and a separate theorem.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-bootstrap-draws-are-conditionally-iid-empirical-law",
+          "source_section": "Statement",
+          "quote": "Fix $n\\ge1$, write $[n]:=\\{1,\\ldots,n\\}$, let $(\\mathcal Z,\\mathcal F)$ be a measurable unit space, and fix an observed tuple $z=(z_1,\\ldots,z_n)$. Let $P_n=\\frac1n\\sum_{i=1}^n\\delta_{z_i}$ be its empirical probability measure. For the bootstrap algorithm [[alg-n-out-of-n-bootstrap-from-empirical-law]], equip the conditional index vector $(I_1,\\ldots,I_n)$ with the finite uniform law on $\\Omega_n:=\\{f:[n]\\to[n]\\}$ and set $Z_j^*=z_{I_j}$. For every $A_1,\\ldots,A_n\\in\\mathcal F$,\n$$\\mathbb P^*(Z_1^*\\in A_1,\\ldots,Z_n^*\\in A_n)=\\prod_{j=1}^nP_n(A_j).$$\nThus, conditional on the fixed observed tuple, $Z_1^*,\\ldots,Z_n^*$ are independent random elements with common law $P_n$ ([[def-identically-distributed-and-iid-random-variables]]).",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-finite-population-average-treatment-effect-and-weak-null",
+          "source_section": "Definition",
+          "quote": "Consider the no-interference binary-treatment submodel of\n[[def-finite-randomized-treatment-assignment-model]] in which the allowed\nassignment set is $\\{0,1\\}^{\\mathcal I}$ and unit $i$'s response under\nassignment vector $z$ is $Y_i(z)=Y_i(z_i)$ for fixed real potential responses\n$Y_i(0)$ and $Y_i(1)$. For the fixed units, define the\n**finite-population average treatment effect** by\n$$\\tau_F:=\\frac1N\\sum_{i\\in\\mathcal I}\\bigl(Y_i(1)-Y_i(0)\\bigr).$$\nThe **weak zero-average-effect null** is the hypothesis $\\tau_F=0$; it\nconstrains the average of the unit-level effects, not each effect separately.\nThe Fisher sharp null in this submodel, defined in\n[[def-fisher-sharp-null-and-predeclared-test-orderings]], requires\n$Y_i(1)=Y_i(0)$ for every unit. No probability distribution on the fixed\npotential responses is part of either definition.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-resampling-sampling-unit-contract",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be a statistical experiment ([[def-statistical-experiment]]) with a declared sampling or assignment mechanism. A **sampling unit** is one indexed unit that the declared mechanism treats as an indivisible draw or assignment object. Its **unit record** contains the complete observed data attached to that unit, including repeated measurements or labels that the analysis keeps together. Examples of sampling units are individuals, matched pairs, clusters, time blocks, and treatment-assignment units.\n\nThe declared mechanism also specifies a measurable unit-record space $(\\mathcal Z,\\mathcal F)$ and represents each unit record as an element of $\\mathcal Z$. The record space may be the whole data space or one record-valued component of it; the convention is part of the experiment's sampling or assignment contract.\n\nA **resampling unit** is the complete unit record or predeclared group of records that one draw of a resampling procedure selects. A procedure is **unit-compatible for a stated target** when it declares which records are sampled together and does not split a bundle whose joint sampling or assignment dependence is part of that target's data-generating design. Unit compatibility describes the procedure's input and dependence contract; it does not itself establish exact or asymptotic validity. A validity claim requires a separate theorem with hypotheses matched to the sampling or assignment law, target, and resample-size regime.\n\nThe conditional bootstrap law of observed units is a law on resampled data records given the fixed observations. When defined, a Bayesian posterior is instead a conditional law on parameter values under a specified prior and joint parameter-data model. They have different state spaces and are not identified by this definition. In particular, neither law determines the other.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-p-value",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). A **p-value\nstatistic** is a statistic $p:\\mathcal X\\to[0,1]$, where $[0,1]$ carries the\ntrace of the Borel sigma-algebra, meaning\n$\\{B\\cap[0,1]:B\\in\\mathcal B(\\mathbb R)\\}$\n([[def-statistic-and-estimator]],\n[[def-measurable-function-between-measurable-spaces]]).\n\nFor a nonempty null hypothesis $\\Theta_0\\subseteq\\Theta$, the statistic is a\n**valid p-value for $\\Theta_0$** if it is superuniform under every null law:\n$$P_\\theta(\\{x:p(x)\\le u\\})\\le u\\qquad\\text{for every }\\theta\\in\\Theta_0\\text{ and }u\\in[0,1].$$\nThe variable $p(X)$ is the observed p-value when the data are $X$. The\nvalidity condition is distributional; measurability alone does not imply it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-empirical-measure",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal F)$ be a measurable unit space ([[def-measurable-space]]), let $n\\ge1$, and fix an observed ordered tuple $z_1,\\ldots,z_n\\in\\mathcal Z$. Its **empirical measure** is the set function\n$$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{z_i},\\qquad P_n(A)=\\frac1n\\sum_{i=1}^n1\\{z_i\\in A\\}\\quad(A\\in\\mathcal F),$$\nwhere $\\delta_{z_i}$ is the Dirac set function from [[def-dirac-measure]]. Repeated observations contribute once for each index at which they occur. The statement that $P_n$ is a probability measure is established in [[lem-empirical-measure-is-a-probability-measure]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $T(z,y)=\\sum_{i:z_i=1}y_i-\\sum_{i:z_i=0}y_i$. The sharp-null schedule fixes $y=(0,2)$, so $T(z^{(1)},y)=-2$ and $T(z^{(2)},y)=2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The design randomization law therefore assigns probability $1/2$ to each of $-2$ and $2$. Its inclusive upper-tail p-value is $1$ at $z^{(1)}$ and $1/2$ at $z^{(2)}$, a superuniform distribution under the assignment law, so [F8] identifies it as valid for this null; [F3] also gives the general validity statement.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The observed unit values are $(0,2)$, so [F9] gives empirical mass $1/2$ to each. By [F4] and [F5], an ordered size-two bootstrap pair takes $(0,0),(0,2),(2,0),(2,2)$ with probabilities $1/4$ each. The same difference score has bootstrap law with masses $1/2$ at $0$ and $1/4$ at each of $-2,2$, which differs from the design law in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F9",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The two laws have different state spaces and sampling mechanisms: one resamples assignments under a known design, the other resamples observed unit records conditional on those records. By [F7], a Bayesian posterior, when defined, is instead a conditional law on parameter values under a specified prior and joint model; this example supplies no such prior or posterior. By [F6], its sharp-null calculation also asserts no validity under the weaker average-effect null.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two experimental units and a nonempty two-assignment set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Both allowed assignments have positive probability 1/2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example uses two units and two allowed assignments."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed sharp-null outcomes are distinct, 0 and 2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, and 3.1 enumerate both assignments and all four bootstrap pairs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1774 @@
+{
+  "version": 1,
+  "scope": [
+    "def-control-variate-estimator",
+    "thm-control-variate-unbiasedness-and-optimal-coefficient",
+    "def-antithetic-randomized-sampling",
+    "lem-oppositely-monotone-functions-of-independent-coordinates-have-nonpositive-covariance",
+    "thm-antithetic-variance-and-monotone-sufficiency",
+    "def-stratified-monte-carlo-estimator",
+    "thm-stratified-unbiasedness-variance-and-proportional-allocation",
+    "thm-same-sample-control-coefficient-remainder-is-op-one-over-n",
+    "thm-independent-pilot-control-variate-is-conditionally-unbiased",
+    "ex-perfect-control-variate",
+    "ex-uncorrelated-control-variate",
+    "ex-monotone-antithetic-pair",
+    "ex-proportional-stratification-variance-reduction",
+    "ex-same-sample-control-regression-bias",
+    "ex-independent-pilot-control-variate"
+  ],
+  "contracts": {
+    "def-control-variate-estimator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires a nonempty sample, coordinate set, or finite partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition states the zero or known-mean boundary and assigns no undefined quotient."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows a singleton sample/coordinate when its stated lower bound permits it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition names the degenerate covariance, constant function, or singular fallback branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition specifies the domain and endpoint or partition convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition fixes finitely many functions and observations and makes no choice from an indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition states no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition states no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-control-variate-unbiasedness-and-optimal-coefficient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-control-variate-estimator",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,P)$ be a probability space, let $q\\ge1$ and $n\\ge1$, and let $f:\\mathsf X\\to\\mathbb R$ and $h=(h_1,\\ldots,h_q):\\mathsf X\\to\\mathbb R^q$ be measurable wit",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all ",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability space. 1. For scalars $a,b$, $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$ 2. If $X$ and $Y$ are",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let $g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ b",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a common probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel measurable for each $i<n$. 1. ",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let $\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or $g:(S,\\Sigma)\\to\\mathbb C$ be measurable",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space. - For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is integrable, and is then $$\\mathbb E[|X|^p].$$ - I",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real ",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-control-variate-unbiasedness-and-optimal-coefficient-d1",
+          "claim": "For $Z_i=f(X_i)-\\beta^{\\mathsf T}(h(X_i)-\\theta)$, the expectation convention [F6] and linearity [F3] give $E Z_i=Pf-\\beta^{\\mathsf T}(Ph-\\theta)=\\mu$. Thus $E\\widehat\\mu_\\beta=\\mu$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "thm-control-variate-unbiasedness-and-optimal-coefficient-d2",
+          "claim": "The $Z_i$ are the same measurable function of the IID variables $X_i$, so [F2] and [F4] make them IID.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "thm-control-variate-unbiasedness-and-optimal-coefficient-d3",
+          "claim": "By [F7]–[F8], the variance as a function of $\\beta$ is $\\operatorname{Var}_P(f)-2\\beta^{\\mathsf T}c+\\beta^{\\mathsf T}\\Sigma\\beta$.",
+          "step": "1.3",
+          "inputs": [
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "thm-control-variate-unbiasedness-and-optimal-coefficient-d4",
+          "claim": "Expanding the centered square of $n^{-1}\\sum_i Z_i$, the diagonal terms contribute $n^{-2}n\\operatorname{Var}(Z_1)$. For $i\\ne j$, $Z_i-EZ_i$ and $Z_j-EZ_j$ are independent integrable variables, so [F5] factors their product expectation into zero. Hence $\\operatorname{Var}(\\widehat\\mu_\\beta)=n^{-1}\\operatorname{Var}(Z_1)=n^{-1}\\operatorname{Var}_P(f-\\beta^{\\mathsf T}h)$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-control-variate-unbiasedness-and-optimal-coefficient-d5",
+          "claim": "If $\\Sigma$ is positive definite, substituting $c=\\Sigma\\beta^*$ and completing the square gives $\\operatorname{Var}_P(f)-c^{\\mathsf T}\\Sigma^{-1}c+(\\beta-\\beta^*)^{\\mathsf T}\\Sigma(\\beta-\\beta^*)$. The last term is nonnegative and vanishes only at $\\beta=\\beta^*$; for $q=1$ the displayed scalar formula follows.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires a nonempty sample, coordinate set, or finite partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement specifies the zero-covariance, zero-variance, or singular branch and its consequence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes the one-observation, one-coordinate, or one-control case within its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement identifies positive-definite covariance premises or the explicit degenerate fallback."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement gives the domain, partition, or uniform endpoint convention used by the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes finite samples and measurable functions and uses no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-antithetic-randomized-sampling": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires a nonempty sample, coordinate set, or finite partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition states the zero or known-mean boundary and assigns no undefined quotient."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows a singleton sample/coordinate when its stated lower bound permits it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition names the degenerate covariance, constant function, or singular fallback branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition specifies the domain and endpoint or partition convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition fixes finitely many functions and observations and makes no choice from an indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition states no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition states no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-oppositely-monotone-functions-of-independent-coordinates-have-nonpositive-covariance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a common probability space. For each $i$, write $$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent random elements. Define $$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$ Then $",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure spaces, and let $f : X \\times Y \\to \\mathbb C$ belong to $L^1(\\mu \\times \\nu)$. Then: 1. for $\\mu$-almost ",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then $$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$ Equality holds if and only if at leas",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space. Then $$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$ $$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that $f_n\\to f$ almost ",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-oppositely-monotone-functions-of-independent-coordinates-have-nonpositive-covariance-d1",
+          "claim": "In dimension one, let $\\mu$ be the law of $U_1$. Expanding the double integral and applying [F3] gives $2\\operatorname{Cov}(G(U_1),H(U_1))=\\int\\!\\int (G(x)-G(y))(H(x)-H(y))\\,\\mu(dx)\\mu(dy)$. The integrand is nonpositive for every $x,y$ because the two functions have opposite monotonicity, so the covariance is nonpositive. The products are integrable by square-integrability and [F4].",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-oppositely-monotone-functions-of-independent-coordinates-have-nonpositive-covariance-d2",
+          "claim": "Assume the claim holds for $d-1$ and first suppose $G,H$ are bounded. By [F2] the joint law is $\\mu\\times\\nu$, where $\\mu$ is the first $d-1$ coordinate laws and $\\nu$ is the law of $U_d$. Define $G_0(x)=\\int G(x,z)\\,\\nu(dz)$ and $H_0(x)=\\int H(x,z)\\,\\nu(dz)$. Fubini [F3] makes these measurable and bounded; they retain their respective coordinate monotonicities. For each fixed $x$, step 1.1 applied to the last coordinate gives $\\operatorname{Cov}_\\nu(G(x,U_d),H(x,U_d))\\le0$, and the induction hypothesis gives $\\operatorname{Cov}_\\mu(G_0,H_0)\\le0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "lem-oppositely-monotone-functions-of-independent-coordinates-have-nonpositive-covariance-d3",
+          "claim": "Expanding both sides by the covariance formula [F5] and integrating with [F3] yields $\\operatorname{Cov}(G(U),H(U))=\\int \\operatorname{Cov}_\\nu(G(x,U_d),H(x,U_d))\\,\\mu(dx)+\\operatorname{Cov}_\\mu(G_0,H_0)\\le0$. Thus the bounded case holds in dimension $d$, completing the induction.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-oppositely-monotone-functions-of-independent-coordinates-have-nonpositive-covariance-d4",
+          "claim": "For general square-integrable $G,H$, clamp each function to $[-m,m]$. The clamps remain coordinatewise monotone and bounded, and $|G_m-G|^2\\le G^2$, $|H_m-H|^2\\le H^2$. Applying [F6] to these squared differences gives $L^2$ convergence. Cauchy–Schwarz [F4] and the covariance identity [F5] then imply $\\operatorname{Cov}(G_m(U),H_m(U))\\to\\operatorname{Cov}(G(U),H(U))$. Each bounded covariance is nonpositive by step 3.1, so the limit is nonpositive.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires a nonempty sample, coordinate set, or finite partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement specifies the zero-covariance, zero-variance, or singular branch and its consequence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes the one-observation, one-coordinate, or one-control case within its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement identifies positive-definite covariance premises or the explicit degenerate fallback."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement gives the domain, partition, or uniform endpoint convention used by the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes finite samples and measurable functions and uses no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-antithetic-variance-and-monotone-sufficiency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-antithetic-randomized-sampling",
+          "source_section": "Definition",
+          "quote": "Let $d,n\\ge1$, let $\\mathsf X$ be a measurable space, let $P$ be a probability law on $\\mathsf X$, and let $f:\\mathsf X\\to\\mathbb R$ be measurable. Let $U_i=(U_{i1},\\ldots,U_{id})$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all ",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let $g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ b",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent random elements. Define $$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$ Then $",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space. - For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is integrable, and is then $$\\mathbb E[|X|^p].$$ - I",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real ",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a common probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel measurable for each $i<n$. 1. ",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-oppositely-monotone-functions-of-independent-coordinates-have-nonpositive-covariance",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $U_1,\\ldots,U_d$ be independent real random variables, and let $G,H:\\mathbb R^d\\to\\mathbb R$ be Borel functions with $E[G(U)^2]<\\infty$ and $E[H(U)^2]<\\infty$. A f",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability space. 1. For scalars $a,b$, $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$ 2. If $X$ and $Y$ are",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-antithetic-variance-and-monotone-sufficiency-d1",
+          "claim": "For a uniform coordinate, $P(U_{1j}=s)=0$ for every $s\\in[0,1]$, since $P(U_{1j}\\le s)=s$ and the left limit of this cdf at $s$ is also $s$. Thus for $0\\le t\\le1$, $P(1-U_{1j}\\le t)=P(U_{1j}\\ge1-t)=1-P(U_{1j}<1-t)=t$. By [F3], the reflected coordinates remain independent; [F4] then shows $1-U_1$ has the same product-uniform law as $U_1$. Since $T$ and $f$ are measurable, $Y$ and $\\widetilde Y$ have the same law, mean $\\mu$, and variance $\\sigma^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "thm-antithetic-variance-and-monotone-sufficiency-d2",
+          "claim": "The pair value $Z_i=[f(T(U_i))+f(T(1-U_i))]/2$ is a measurable function of $U_i$. Thus the $Z_i$ are IID by [F2]–[F3], each has mean $\\mu$ by [F9], and their average is unbiased.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F9"
+          ]
+        },
+        {
+          "id": "thm-antithetic-variance-and-monotone-sufficiency-d3",
+          "claim": "By [F5]–[F6], $\\operatorname{Var}(Z_i)=[\\operatorname{Var}(Y)+\\operatorname{Var}(\\widetilde Y)+2\\operatorname{Cov}(Y,\\widetilde Y)]/4=[\\sigma^2+\\operatorname{Cov}(Y,\\widetilde Y)]/2$. For distinct $i,j$, the centered $Z_i,Z_j$ are independent, so [F7] gives zero covariance; expanding the centered square of their average therefore gives the stated variance divided by $n$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-antithetic-variance-and-monotone-sufficiency-d4",
+          "claim": "The mean of $2n$ independent $P$-draws has variance $\\sigma^2/(2n)$ by the same centered-square expansion and [F7]. Comparing this with step 2.1 gives the iff conditions for weak and strict variance reduction.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-antithetic-variance-and-monotone-sufficiency-d5",
+          "claim": "If $g=f\\circ T$ is coordinatewise nondecreasing, then $g(1-u)$ is coordinatewise nonincreasing, so [F8] gives $\\operatorname{Cov}(Y,\\widetilde Y)\\le0$. More generally, if the monotonicity direction varies by coordinate, define $S_j(v)=v_j$ in increasing coordinates and $S_j(v)=1-v_j$ in decreasing coordinates. Then $V=S(U_1)$ is still product-uniform, $\\phi=g\\circ S$ is nondecreasing in all coordinates, and $S(1-v)=1-S(v)$ coordinatewise. Consequently $g(U_1)=\\phi(V)$ and $g(1-U_1)=\\phi(1-V)$, so [F8] applies. In the stated ordered-subset case, $u\\le v$ coordinatewise implies $T(u)\\le T(v)$ and then $f(T(u))\\le f(T(v))$, which proves the advertised monotonicity of $g$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F8",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires a nonempty sample, coordinate set, or finite partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement specifies the zero-covariance, zero-variance, or singular branch and its consequence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes the one-observation, one-coordinate, or one-control case within its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement identifies positive-definite covariance premises or the explicit degenerate fallback."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement gives the domain, partition, or uniform endpoint convention used by the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes finite samples and measurable functions and uses no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-stratified-monte-carlo-estimator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires a nonempty sample, coordinate set, or finite partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition states the zero or known-mean boundary and assigns no undefined quotient."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows a singleton sample/coordinate when its stated lower bound permits it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition names the degenerate covariance, constant function, or singular fallback branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition specifies the domain and endpoint or partition convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition fixes finitely many functions and observations and makes no choice from an indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition states no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition states no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-stratified-unbiasedness-variance-and-proportional-allocation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stratified-monte-carlo-estimator",
+          "source_section": "Definition",
+          "quote": "The **stratified Monte Carlo estimator** of $Pf$ is\n\n$$\n\\widehat\\mu_{\\rm strat}=\\sum_{h=1}^H p_h\\bar f_h.\n$$\n\nThe allocation $(n_1,\\ldots,n_H)$ is part of the design. A variance comparison must specify it and the comparator.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all ",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let $\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or $g:(S,\\Sigma)\\to\\mathbb C$ be measurable",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability space. 1. For scalars $a,b$, $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$ 2. If $X$ and $Y$ are",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a common probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel measurable for each $i<n$. 1. ",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space. - For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is integrable, and is then $$\\mathbb E[|X|^p].$$ - I",
+          "uses": [
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-event",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-grouping-independent-sigma-algebras",
+          "source_section": "Statement",
+          "quote": "Then the sigma-algebras $\\mathcal G_0,\\dots,\\mathcal G_{m-1}$ are independent.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinit",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-stratified-unbiasedness-variance-and-proportional-allocation-d1",
+          "claim": "For each $h$, [F1] gives $\\int_{\\mathsf X}f^2\\,dP_h=p_h^{-1}\\int_{A_h}f^2\\,dP<\\infty$. Since $|f|\\le1+f^2$, $f$ is integrable under $P$ and every $P_h$. Thus [F3] gives $\\mu_h=p_h^{-1}\\int_{A_h}f\\,dP$, and [F4] plus the finite partition identity yield $E\\widehat\\mu_{\\rm strat}=\\sum_h p_h\\mu_h=\\sum_h\\int_{A_h}f\\,dP=\\int f\\,dP=\\mu$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-stratified-unbiasedness-variance-and-proportional-allocation-d2",
+          "claim": "For fixed $h$, expand the centered square of $\\bar f_h$. The diagonal terms give $\\sigma_h^2/n_h$; for distinct draws the centered product expectation is zero by independence and [F5]. Thus $\\operatorname{Var}(\\bar f_h)=\\sigma_h^2/n_h$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-stratified-unbiasedness-variance-and-proportional-allocation-d3",
+          "claim": "Splitting $\\int(f-\\mu)^2dP$ over the partition and writing $f-\\mu=(f-\\mu_h)+(\\mu_h-\\mu)$ on $A_h$, the cross term integrates to zero since $\\int_{A_h}(f-\\mu_h)dP=p_hE_{P_h}(f-\\mu_h)=0$. Therefore $\\operatorname{Var}_P(f)=\\sum_h p_h\\sigma_h^2+\\sum_h p_h(\\mu_h-\\mu)^2$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-stratified-unbiasedness-variance-and-proportional-allocation-d4",
+          "claim": "By [F1] and [F7], the sigma-algebras generated by all individual draws are independent. Grouping them by stratum and applying [F8] shows that the sigma-algebras generated by the disjoint stratum blocks are independent. Each $\\bar f_h$ is measurable with respect to its block sigma-algebra because it is a finite sum of measurable values of $f$, using [F9]; hence the stratum averages are independent. Applying [F5] to their centered products and expanding the variance of $\\sum_h p_h\\bar f_h$ gives $\\sum_h p_h^2\\sigma_h^2/n_h$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-stratified-unbiasedness-variance-and-proportional-allocation-d5",
+          "claim": "Under $n_h=np_h$, step 3.1 becomes $n^{-1}\\sum_h p_h\\sigma_h^2$. The ordinary mean of $n$ IID $P$-draws has variance $\\operatorname{Var}_P(f)/n$, by the same centered-square expansion as step 2.1. Step 2.2 shows the difference is $n^{-1}\\sum_h p_h(\\mu_h-\\mu)^2\\ge0$, proving the comparison.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "step 2.1",
+            "step 3.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires a nonempty sample, coordinate set, or finite partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement specifies the zero-covariance, zero-variance, or singular branch and its consequence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes the one-observation, one-coordinate, or one-control case within its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement identifies positive-definite covariance premises or the explicit degenerate fallback."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement gives the domain, partition, or uniform endpoint convention used by the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes finite samples and measurable functions and uses no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-same-sample-control-coefficient-remainder-is-op-one-over-n": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-control-variate-estimator",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,P)$ be a probability space, let $q\\ge1$ and $n\\ge1$, and let $f:\\mathsf X\\to\\mathbb R$ and $h=(h_1,\\ldots,h_q):\\mathsf X\\to\\mathbb R^q$ be measurable wit",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all ",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space. - For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is integrable, and is then $$\\mathbb E[|X|^p].$$ - I",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-kolmogorov-iid-l1-strong-law",
+          "source_section": "Statement",
+          "quote": "For IID real $(X_n)_{n\\ge1}$ with $\\mathbb E|X_1|<\\infty$, $S_n/n\\to\\mu=\\mathbb EX_1$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-chebyshev-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X$ is a square-integrable real random variable and $a>0$, then $$\\mathbb P(|X-\\mathbb E[X]|\\ge a)\\le\\frac{\\operatorname{Var}(X)}{a^2}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a common probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel measurable for each $i<n$. 1. ",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability space. 1. For scalars $a,b$, $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$ 2. If $X$ and $Y$ are",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then $$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$ Equality holds if and only if at leas",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let $\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or $g:(S,\\Sigma)\\to\\mathbb C$ be measurable",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinit",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-same-sample-control-coefficient-remainder-is-op-one-over-n-d1",
+          "claim": "The entries $h_j(X_i)$, $f(X_i)$, $h_j(X_i)h_k(X_i)$, and $h_j(X_i)f(X_i)$ are measurable by [F11]. Since each $X_i$ has law $P$, applying the same measurable function to each gives a common law; [F10] preserves their mutual independence, so each resulting sequence is IID by [F2]. The fourth-moment hypothesis and [F8] make every product entry integrable, and [F9] identifies its expectation with the corresponding integral under $P$. Applying [F4] to these IID sequences gives $\\bar h_n\\to\\theta$, $\\bar f_n\\to Pf$, $n^{-1}\\sum_i h(X_i)h(X_i)^{\\mathsf T}\\to E_P[hh^{\\mathsf T}]$, and $n^{-1}\\sum_i h(X_i)f(X_i)\\to E_P[hf]$ almost surely. The centered formulas therefore give $\\widehat\\Sigma_n\\to\\Sigma$ and $\\widehat c_n\\to c$ almost surely; positive definiteness of $\\Sigma$ and continuity of determinant imply $\\widehat\\Sigma_n$ is eventually invertible almost surely. The fallback definition makes $\\widehat\\beta_n$ measurable: on the open nonsingular set the inverse entries are ratios of polynomial functions, and on its closed complement the value is constant.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-same-sample-control-coefficient-remainder-is-op-one-over-n-d2",
+          "claim": "Each scalar entry of $h$, $f$, $hh^{\\mathsf T}$, and $hf$ has finite variance: for products, [F8] gives $E[h_j^2h_k^2]\\le(Eh_j^4Eh_k^4)^{1/2}$ and $E[h_j^2f^2]\\le(Eh_j^4Ef^4)^{1/2}$. Independence and [F6] make distinct centered sample entries have zero covariance, so each raw sample average has variance its population variance divided by $n$. With $a=M/\\sqrt n$, [F5] bounds each entry's deviation probability by its variance divided by $M^2/n$; choosing $M$ large proves the $O_P(n^{-1/2})$ rates. Fixed $q$ makes the finite union of entrywise bounds joint. Centering changes the raw moments by products of sample-mean errors, which are $O_P(n^{-1})$; hence $\\widehat\\Sigma_n-\\Sigma$ and $\\widehat c_n-c$ are jointly $O_P(n^{-1/2})$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "thm-same-sample-control-coefficient-remainder-is-op-one-over-n-d3",
+          "claim": "On the event that $\\widehat\\Sigma_n$ is invertible, $\\widehat\\beta_n-\\beta^*=\\widehat\\Sigma_n^{-1}[(\\widehat c_n-c)-(\\widehat\\Sigma_n-\\Sigma)\\beta^*]$, since $c=\\Sigma\\beta^*$. Step 1.1 and the adjugate-over-determinant formula show that the inverse converges to $\\Sigma^{-1}$ almost surely on the eventually nonsingular set; extending it by zero on the singular event gives an $O_P(1)$ matrix sequence. Given $\\varepsilon>0$, choose bounds for this inverse norm and for the bracket in step 2.1 after scaling by $\\sqrt n$, with total failure probability less than $\\varepsilon/2$. On their intersection the product is bounded after scaling by $\\sqrt n$, so $\\widehat\\beta_n-\\beta^*=O_P(n^{-1/2})$ there. The singular-event probability tends to zero by step 1.1; the fallback value $0$ therefore does not change this order in probability.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-same-sample-control-coefficient-remainder-is-op-one-over-n-d4",
+          "claim": "By [F1], subtracting the two estimators cancels $\\bar f_n$ and leaves exactly $-(\\widehat\\beta_n-\\beta^*)^{\\mathsf T}(\\bar h_n-\\theta)$. Given $\\varepsilon>0$, choose finite bounds for each factor after scaling by $\\sqrt n$ so that the probability either bound fails is less than $\\varepsilon/2$; on their intersection, Cauchy--Schwarz in $\\mathbb R^q$ bounds $n$ times the absolute inner product by the product of those bounds. Thus the inner product is $O_P(n^{-1})$ by definition.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires a nonempty sample, coordinate set, or finite partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement specifies the zero-covariance, zero-variance, or singular branch and its consequence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes the one-observation, one-coordinate, or one-control case within its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement identifies positive-definite covariance premises or the explicit degenerate fallback."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement gives the domain, partition, or uniform endpoint convention used by the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes finite samples and measurable functions and uses no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-independent-pilot-control-variate-is-conditionally-unbiased": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-control-variate-estimator",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,P)$ be a probability space, let $q\\ge1$ and $n\\ge1$, and let $f:\\mathsf X\\to\\mathbb R$ and $h=(h_1,\\ldots,h_q):\\mathsf X\\to\\mathbb R^q$ be measurable wit",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all ",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version ",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a common probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel measurable for each $i<n$. 1. ",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability space. 1. For scalars $a,b$, $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$ 2. If $X$ and $Y$ are",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let $\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or $g:(S,\\Sigma)\\to\\mathbb C$ be measurable",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-independent-sigma-algebras-and-events",
+          "source_section": "Definition",
+          "quote": "For two events this reduces to the familiar identity\n$\\mathbb P(A\\cap B)=\\mathbb P(A)\\mathbb P(B)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-independent-pilot-control-variate-is-conditionally-unbiased-d1",
+          "claim": "The production sample means are $\\mathcal X_n$-measurable and satisfy $E\\bar f=E_Pf$ and $E(\\bar h-\\theta)=0$ by [F2], [F5], and [F6]. Each $\\widehat\\beta_j$ is $\\mathcal P$-measurable; for any Borel sets, its preimage event belongs to $\\mathcal P$ while the corresponding production-mean event belongs to $\\mathcal X_n$, so [F7] makes it independent of each production mean. Since $E\\|\\widehat\\beta\\|<\\infty$, [F4] applied to the absolute product makes every $\\widehat\\beta_j(\\bar h_j-\\theta_j)$ integrable; the full estimator is therefore integrable.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "thm-independent-pilot-control-variate-is-conditionally-unbiased-d2",
+          "claim": "Let $A\\in\\mathcal P$. The random variable $\\bar f$ is $\\mathcal X_n$-measurable, so its Borel preimage events are independent of $A$ by [F7]; factorization [F4] gives $E[1_A\\bar f]=P(A)E_Pf$. Also $1_A\\widehat\\beta_j$ is $\\mathcal P$-measurable and independent of $\\bar h_j-\\theta_j$, which is $\\mathcal X_n$-measurable, so [F4] gives $E[1_A\\widehat\\beta_j(\\bar h_j-\\theta_j)]=E[1_A\\widehat\\beta_j]E(\\bar h_j-\\theta_j)=0$. By [F1] and [F5], $E[1_A\\widehat\\mu_{\\widehat\\beta}]=P(A)E_Pf$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F7",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "thm-independent-pilot-control-variate-is-conditionally-unbiased-d3",
+          "claim": "The constant $E_Pf$ is $\\mathcal P$-measurable and its integral on every $A\\in\\mathcal P$ equals the integral of the estimator on $A$ by step 2.1. The defining characterization [F3] therefore gives $E[\\widehat\\mu_{\\widehat\\beta}\\mid\\mathcal P]=E_Pf$ almost surely.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires a nonempty sample, coordinate set, or finite partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement specifies the zero-covariance, zero-variance, or singular branch and its consequence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes the one-observation, one-coordinate, or one-control case within its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement identifies positive-definite covariance premises or the explicit degenerate fallback."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement gives the domain, partition, or uniform endpoint convention used by the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes finite samples and measurable functions and uses no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-perfect-control-variate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-control-variate-unbiasedness-and-optimal-coefficient",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, assume $P f^2<\\infty$ and $P h_j^2<\\infty$ for each component, and set $\\mu=Pf$, $\\theta=Ph$. Define the vector covariance matrix and cross-covariance vector by $\\Sigm",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-control-variate-estimator",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,P)$ be a probability space, let $q\\ge1$ and $n\\ge1$, and let $f:\\mathsf X\\to\\mathbb R$ and $h=(h_1,\\ldots,h_q):\\mathsf X\\to\\mathbb R^q$ be measurable wit",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-perfect-control-variate-d1",
+          "claim": "Direct integration gives $E X=1/2$ and $\\operatorname{Var}(X)=\\int_0^1(x-1/2)^2dx=1/12>0$, so [F1] gives $\\beta^*=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-perfect-control-variate-d2",
+          "claim": "For every sample value, $X_i-(X_i-1/2)=1/2$. By [F2], $\\widehat\\mu_1=1/2$ identically, hence its variance is zero and its expectation is the target $1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires a nonempty sample, coordinate set, or finite partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement specifies the zero-covariance, zero-variance, or singular branch and its consequence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes the one-observation, one-coordinate, or one-control case within its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement identifies positive-definite covariance premises or the explicit degenerate fallback."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement gives the domain, partition, or uniform endpoint convention used by the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes finite samples and measurable functions and uses no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-uncorrelated-control-variate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-control-variate-unbiasedness-and-optimal-coefficient",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, assume $P f^2<\\infty$ and $P h_j^2<\\infty$ for each component, and set $\\mu=Pf$, $\\theta=Ph$. Define the vector covariance matrix and cross-covariance vector by $\\Sigm",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-control-variate-estimator",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,P)$ be a probability space, let $q\\ge1$ and $n\\ge1$, and let $f:\\mathsf X\\to\\mathbb R$ and $h=(h_1,\\ldots,h_q):\\mathsf X\\to\\mathbb R^q$ be measurable wit",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-uncorrelated-control-variate-d1",
+          "claim": "Summing the four table values gives $Ef=Eh=0$, $\\operatorname{Var}(h)=1$, $\\operatorname{Var}(f)=1$, and $\\operatorname{Cov}(f,h)=E[AB]=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-uncorrelated-control-variate-d2",
+          "claim": "By [F1], $\\beta^*=0$ and the minimum variance of one corrected draw equals $\\operatorname{Var}(f)=1$. Thus [F2] reduces to the ordinary sample mean, with variance $1/n$; this control gives no reduction.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires a nonempty sample, coordinate set, or finite partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement specifies the zero-covariance, zero-variance, or singular branch and its consequence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes the one-observation, one-coordinate, or one-control case within its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement identifies positive-definite covariance premises or the explicit degenerate fallback."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement gives the domain, partition, or uniform endpoint convention used by the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes finite samples and measurable functions and uses no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-monotone-antithetic-pair": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-antithetic-randomized-sampling",
+          "source_section": "Definition",
+          "quote": "Let $d,n\\ge1$, let $\\mathsf X$ be a measurable space, let $P$ be a probability law on $\\mathsf X$, and let $f:\\mathsf X\\to\\mathbb R$ be measurable. Let $U_i=(U_{i1},\\ldots,U_{id})$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-antithetic-variance-and-monotone-sufficiency",
+          "source_section": "Statement",
+          "quote": "Use the setup of [[def-antithetic-randomized-sampling]], assume $E_P[f^2]<\\infty$, and put $Y=f(T(U_1))$, $\\widetilde Y=f(T(1-U_1))$, $\\mu=E_Pf$, and $\\sigma^2=\\operatorname{Var}_P(f)$. Then $Y$ and $\\widetilde Y$ have the same law and mean, and the antithetic estimator from $n$ independent input pairs is unbiased with\n\n$$\n\\operatorname{Var}(\\widehat\\mu_{\\rm anti})=\\frac{\\sigma^2+\\operatorname{Cov}(Y,\\widetilde Y)}{2n}.\n$$\n\nCompared with the ordinary mean of $2n$ independent draws from $P$, whos",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-monotone-antithetic-pair-d1",
+          "claim": "Direct integration gives $EU=E(1-U)=1/2$, $\\operatorname{Var}(U)=1/12$, and $E[U(1-U)]=1/6$, so $\\operatorname{Cov}(U,1-U)=1/6-1/4=-1/12$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-monotone-antithetic-pair-d2",
+          "claim": "For each pair, $(U+(1-U))/2=1/2$, so [F1] gives a constant estimator of variance zero. By [F2], the comparator variance for two independent uniform draws is $(1/12)/2=1/24$, hence the reduction is strict.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires a nonempty sample, coordinate set, or finite partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement specifies the zero-covariance, zero-variance, or singular branch and its consequence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes the one-observation, one-coordinate, or one-control case within its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement identifies positive-definite covariance premises or the explicit degenerate fallback."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement gives the domain, partition, or uniform endpoint convention used by the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes finite samples and measurable functions and uses no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-proportional-stratification-variance-reduction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stratified-monte-carlo-estimator",
+          "source_section": "Definition",
+          "quote": "The **stratified Monte Carlo estimator** of $Pf$ is\n\n$$\n\\widehat\\mu_{\\rm strat}=\\sum_{h=1}^H p_h\\bar f_h.\n$$\n\nThe allocation $(n_1,\\ldots,n_H)$ is part of the design. A variance comparison must specify it and the comparator.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-stratified-unbiasedness-variance-and-proportional-allocation",
+          "source_section": "Statement",
+          "quote": "Use the setup of [[def-stratified-monte-carlo-estimator]] and suppose $\\int_{\\mathsf X} f^2\\,dP<\\infty$. Write $\\mu=\\int_{\\mathsf X}f\\,dP$, $\\mu_h=E_{P_h}f$, and $\\sigma_h^2=\\operatorname{Var}_{P_h}(f)$. The estimator is unbiased and\n\n$$\n\\operatorname{Var}(\\widehat\\mu_{\\rm strat})=\\sum_{h=1}^H\\frac{p_h^2\\sigma_h^2}{n_h}.\n$$\n\nIf, additionally, each $np_h$ is a positive integer and the fixed allocation is proportional,",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-proportional-stratification-variance-reduction-d1",
+          "claim": "Each conditional uniform law has mean $1/4$ or $3/4$ and variance $(1/2)^2/12=1/48$. Substitution into the estimator definition [F1] and variance formula [F2] gives $\\operatorname{Var}(\\widehat\\mu_{\\rm strat})=2(1/4)(1/48)=1/96$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-proportional-stratification-variance-reduction-d2",
+          "claim": "The ordinary sample mean has variance $\\operatorname{Var}(U)/2=(1/12)/2=1/24$. Since $1/96<1/24$, this specified proportional allocation reduces variance by a factor of four.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires a nonempty sample, coordinate set, or finite partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement specifies the zero-covariance, zero-variance, or singular branch and its consequence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes the one-observation, one-coordinate, or one-control case within its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement identifies positive-definite covariance premises or the explicit degenerate fallback."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement gives the domain, partition, or uniform endpoint convention used by the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes finite samples and measurable functions and uses no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-same-sample-control-regression-bias": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-same-sample-control-coefficient-remainder-is-op-one-over-n",
+          "source_section": "Statement",
+          "quote": "and let $\\widehat\\beta_n=\\widehat\\Sigma_n^{-1}\\widehat c_n$ when $\\widehat\\Sigma_n$ is invertible and $0$ otherwise. For a scalar random sequence $R_n$, write $R_n=O_P(n^{-1})$ when $nR_n$ is bounded in probability: for each $\\varepsilon>0$ some finite $M$ and $N$ satisfy $P(|nR_n|>M)<\\varepsilon$ for all $n\\ge N$. For a fixed-d",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-control-variate-estimator",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,P)$ be a probability space, let $q\\ge1$ and $n\\ge1$, and let $f:\\mathsf X\\to\\mathbb R$ and $h=(h_1,\\ldots,h_q):\\mathsf X\\to\\mathbb R^q$ be measurable wit",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-same-sample-control-regression-bias-d1",
+          "claim": "On the three equal pairs, the fallback coefficient is zero and the estimates are $1,0,1$. On the two ordered pairs $(-1,1)$ and $(1,-1)$, the fitted slope is zero and each estimate is $1$. On each of the four ordered adjacent pairs $(-1,0),(0,-1),(0,1),(1,0)$, the fitted slope is respectively $-1,-1,1,1$, and direct substitution into [F2] gives estimate $0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-same-sample-control-regression-bias-d2",
+          "claim": "Exactly four of the nine equally likely pairs yield estimate $1$ and the other five yield $0$, so the expected estimate is $4/9$. The target is $Ef(X)=\\frac13(1+0+1)=2/3$, hence this same-sample fitted-coefficient estimator is biased.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires a nonempty sample, coordinate set, or finite partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement specifies the zero-covariance, zero-variance, or singular branch and its consequence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes the one-observation, one-coordinate, or one-control case within its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement identifies positive-definite covariance premises or the explicit degenerate fallback."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement gives the domain, partition, or uniform endpoint convention used by the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes finite samples and measurable functions and uses no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-independent-pilot-control-variate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-independent-pilot-control-variate-is-conditionally-unbiased",
+          "source_section": "Statement",
+          "quote": "Let $n,q\\ge1$, let $X_1,\\ldots,X_n$ be IID with law $P$, let $f,h_1,\\ldots,h_q$ be integrable, and let $\\theta=E_P h$ be known. Write $\\mathcal X_n$ for the sigma-algebra generated by the production sample, namely the smallest sigma-algebra containing each event $\\{X_i\\in B\\}$ for measurable $B$. Let $\\mathcal P$ be a sigma-algebra generated by pilot data and assume $\\mathcal P$ and $\\mathcal X_n$ are independent in the sense of [[def-independent-sigma-algebras-and-events]]. Let the $\\mathcal P$-measurable coeffici",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-control-variate-estimator",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,P)$ be a probability space, let $q\\ge1$ and $n\\ge1$, and let $f:\\mathsf X\\to\\mathbb R$ and $h=(h_1,\\ldots,h_q):\\mathsf X\\to\\mathbb R^q$ be measurable wit",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-independent-pilot-control-variate-d1",
+          "claim": "Production integration gives $E_P f=\\int_0^1x^2dx=1/3$ and $E_P h=\\int_0^1x\\,dx=1/2=\\theta$; also $E|\\widehat\\beta|=E[2V]=1<\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-independent-pilot-control-variate-d2",
+          "claim": "For each realized pilot value $\\widehat\\beta=b$, the production expectation in [F2] is $E_P f-b(E_Ph-\\theta)=1/3$. Therefore the conditional expectation given the pilot is $1/3$, as [F1] asserts.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires a nonempty sample, coordinate set, or finite partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement specifies the zero-covariance, zero-variance, or singular branch and its consequence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes the one-observation, one-coordinate, or one-control case within its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement identifies positive-definite covariance premises or the explicit degenerate fallback."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement gives the domain, partition, or uniform endpoint convention used by the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes finite samples and measurable functions and uses no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

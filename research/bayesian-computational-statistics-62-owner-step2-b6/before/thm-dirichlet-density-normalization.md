@@ -1,0 +1,66 @@
+---
+id: thm-dirichlet-density-normalization
+kind: theorem
+title: "Dirichlet density normalization by iterated Beta integrals"
+status: draft
+origin: pipeline
+pipeline_run: bayesian-computational-statistics-62
+dependency_level: 1
+deps:
+  - def-dirichlet-density-kernel
+  - def-countable-choice
+  - thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions
+  - thm-tonelli-theorem-for-sigma-finite-product-spaces
+  - lem-beta-density-normalization
+  - thm-real-beta-gamma-identity
+  - thm-real-gamma-euler-integral-convergence
+justified_by: []
+proof_strategy: direct
+axiom_use: "Countable Choice is inherited from the nonnegative Lebesgue change-of-variables supplier. No full Axiom of Choice is used."
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Gelman et al., Bayesian Data Analysis, 3rd ed., §3.4"
+      url: "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+    - title: "Gero Walter, A Technical Note on the Dirichlet-Multinomial Model, 2013"
+      url: "https://epub.ub.uni-muenchen.de/14068/1/tech-rep-131_gero-walter.pdf"
+---
+
+## Statement
+
+Assume Countable Choice. For $k\ge2$ and $\alpha_j>0$,
+$$\int_{\Delta_{k-1}}\prod_{j=1}^kp_j^{\alpha_j-1}\,dp_1\cdots dp_{k-1} =\frac{\prod_{j=1}^k\Gamma(\alpha_j)}{\Gamma(\alpha_+)}\in(0,\infty).$$
+Consequently the density kernel in [[def-dirichlet-density-kernel]] has
+integral one.
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, $k\ge2$, and $\alpha_1,\ldots,\alpha_k>0$.
+
+[A1] Countable Choice is required for the stated nonnegative Lebesgue change-of-variables theorem. [[def-countable-choice]].
+
+[F1] The simplex and its nonnegative density kernel are defined in coordinate Lebesgue measure by [[def-dirichlet-density-kernel]].
+
+[F2] A $C^1$ diffeomorphism between open sets changes variables in a nonnegative Lebesgue integral under Countable Choice. [[thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions]].
+
+[F3] Tonelli factors a nonnegative product integral over a finite sigma-finite product space into iterated integrals. [[thm-tonelli-theorem-for-sigma-finite-product-spaces]].
+
+[F4] For $u,v>0$, the one-dimensional Beta integrand has Lebesgue integral $B(u,v)=\Gamma(u)\Gamma(v)/\Gamma(u+v)$, finite and positive. [[lem-beta-density-normalization]].
+
+[F5] The Beta-Gamma identity holds for positive arguments. [[thm-real-beta-gamma-identity]].
+
+[F6] Gamma values at positive arguments are finite and positive. [[thm-real-gamma-euler-integral-convergence]].
+
+## Proof
+
+**Given:** Countable Choice, $k\ge2$, and positive $\alpha_1,\ldots,\alpha_k$.
+
+1.1 Define the stick-breaking map from $(0,1)^{k-1}$ to $\Delta_{k-1}$ by $p_i=z_i\prod_{j<i}(1-z_j)$ for $i<k$. Its inverse is $z_i=p_i/(1-\sum_{j<i}p_j)$, so it is a $C^1$ diffeomorphism. Its derivative matrix is lower triangular with diagonal entries $\prod_{j<i}(1-z_j)$; hence its Jacobian is $\prod_{i=1}^{k-2}(1-z_i)^{k-i-1}$. [A1, F1, F2, algebra]
+
+2.1 Under this change of variables, each factor $p_j^{\alpha_j-1}$ contributes $z_j^{\alpha_j-1}$ and a factor $(1-z_i)^{\alpha_j-1}$ for each $i<j$; the Jacobian adds exponent $k-i-1$ to $1-z_i$. Thus the transformed integrand is $\prod_{i=1}^{k-1}z_i^{\alpha_i-1} (1-z_i)^{\sum_{j>i}\alpha_j-1}.$ This factorization is valid because all coordinates and residuals are strictly positive on the open cube. [step 1.1, algebra]
+
+3.1 Tonelli [F3] and [F4] now give the integral as $\prod_{i=1}^{k-1}B\!\left(\alpha_i,\sum_{j>i}\alpha_j\right).$ Applying [F5] to each factor cancels the intermediate Gamma terms and leaves $\prod_{j=1}^k\Gamma(\alpha_j)/\Gamma(\alpha_+)$. [A1, F3, F4, F5, F6, step 2.1, algebra]
+
+4.1 By [F6] the displayed ratio is finite and positive. Multiplying the integrand by the reciprocal constant in [F1] therefore gives integral one, which proves normalization. [F1, F6, step 3.1, algebra] ∎

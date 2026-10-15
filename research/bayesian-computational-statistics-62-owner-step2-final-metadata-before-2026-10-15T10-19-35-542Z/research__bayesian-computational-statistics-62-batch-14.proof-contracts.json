@@ -1,0 +1,1049 @@
+{
+  "version": 1,
+  "level": 3,
+  "scope": [
+    "lem-real-line-is-standard-borel",
+    "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+    "thm-finite-gaussian-process-posterior-and-predictive-laws",
+    "ex-finite-gaussian-process-posterior-with-nonzero-mean-and-correlated-noise",
+    "ex-singular-gaussian-process-prior-and-predictive-covariances",
+    "ex-gaussian-process-extrapolation-retains-independent-index-uncertainty"
+  ],
+  "contracts": {
+    "lem-real-line-is-standard-borel": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-separable-space",
+          "source_section": "Definition",
+          "quote": "A topological space $X$ is **separable** if some at most countable subset $D\\subseteq X$ is dense in $X$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-euclidean-space-complete",
+          "source_section": "Statement",
+          "quote": "is a complete metric space",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "the rationals are countably infinite",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "Every real is approximated by rationals",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "real-line-polish",
+          "claim": "Countable rational density gives separability and the usual metric is complete, so the real line is Polish.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "borel-standard-presentation",
+          "claim": "The identity presentation of the real line satisfies the standard-Borel definition.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The real line is nonempty and this lemma concerns its usual topology."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim has no numeric covariance, measure mass, or zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim has no sample-size or cardinality-one branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim concerns the usual real metric and has no degenerate parameter case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma has no interval or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The rational dense set and identity presentation are explicit; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "there exists a unique non-negative operator $R:V\\to V$ such that",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Such a law exists, has mean m and covariance Sigma",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-consistent-family-of-finite-dimensional-distributions",
+          "source_section": "Definition",
+          "quote": "the pushforward of $\\mu_G$ under the restriction $p_{G,F}(x)=x|_F$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-real-line-is-standard-borel",
+          "source_section": "Statement",
+          "quote": "The measurable space $(\\mathbb R,\\mathcal B(\\mathbb R))$ with its usual topology is standard Borel.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces",
+          "source_section": "Statement",
+          "quote": "there is a unique probability measure $\\mu$ on $\\mathcal C_I$",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-coordinate-maps-and-cylinder-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "For finite $F\\subseteq I$, let $\\pi_F:E\\to\\prod_{i\\in F}E_i$ be restriction to $F$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-stochastic-process-and-finite-dimensional-distributions",
+          "source_section": "Definition",
+          "quote": "The family $X=(X_t)_{t\\in I}$ is a **stochastic process**.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-gaussian-process",
+          "source_section": "Definition",
+          "quote": "is a **Gaussian process** if, for every integer $n\\ge 1$,",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-coordinate-gaussian-laws",
+          "claim": "Each finite coordinate set receives a well-defined, possibly singular Gaussian law independent of its enumeration.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "restriction-consistency",
+          "claim": "The finite-coordinate laws agree under every coordinate restriction.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "cylinder-extension",
+          "claim": "The consistent laws extend uniquely to a probability measure on the cylinder sigma-algebra.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "canonical-gaussian-process",
+          "claim": "The measurable canonical coordinates form a Gaussian process with the prescribed mean and covariance.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "regularity-boundary",
+          "claim": "The conclusion remains a cylinder-space law and does not include path or Banach regularity.",
+          "step": "5.1",
+          "inputs": [
+            "F6",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 assign the singleton empty-coordinate law and extend the family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 retain zero-variance coordinates and singular covariance matrices."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 includes one-coordinate Gaussian marginals."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 allow positive-semidefinite covariance matrices with null directions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval parameter or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 explicitly use AC for arbitrary finite-set enumerations and Kolmogorov extension."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-finite-gaussian-process-posterior-and-predictive-laws": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gaussian-process",
+          "source_section": "Definition",
+          "quote": "has a normal law $N(m,\\sigma^2)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "source_section": "Statement",
+          "quote": "No covariance block needs to be invertible.",
+          "uses": [
+            "2.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$",
+          "uses": [
+            "3.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-multivariate-normal-conditional-law",
+          "source_section": "Statement",
+          "quote": "The covariance $A$ and the conditional covariance $S$ may be singular.",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "$A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and positive real diagonal",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-forward-and-back-substitution-for-triangular-systems",
+          "source_section": "Definition",
+          "quote": "the **forward substitution solve** of $Lx=b$ is the recursive construction",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "source_section": "Statement",
+          "quote": "produces the unique solution of $Lx=b$",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-latent-joint-law",
+          "claim": "The process values at the finite test and observation lists form a possibly singular Gaussian vector with the stated blocks.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "add-independent-observation-noise",
+          "claim": "The finite latent vector stacked with independent observation noise is jointly Gaussian.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "joint-observation-test-law",
+          "claim": "The affine observation pair is jointly Gaussian with observed covariance C and cross-covariance K_*X.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "posterior-kernel",
+          "claim": "The conditional-normal theorem gives the displayed posterior version and positive-semidefinite Schur complement.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "noisy-prediction-law",
+          "claim": "Independent Gaussian prediction noise leaves the conditional mean unchanged and adds its covariance.",
+          "step": "4.2",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "spd-solve-implementation",
+          "claim": "Cholesky and forward/back substitution evaluate the required observed-system solves without forming its inverse.",
+          "step": "5.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes positive finite observation and test list lengths n and p."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1, 5.1, and 4.2 allow singular prior and conditional covariance, including zero variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows n=p=1 and repeated test or observation indices."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.2 allow singular prior covariance while requiring only the observed block C to be positive definite."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no scalar interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement and steps 1.1, 2.1, 4.1, and 4.2 carry AC through the Gaussian and conditional-normal suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-finite-gaussian-process-posterior-with-nonzero-mean-and-correlated-noise": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+          "source_section": "Statement",
+          "quote": "There is a unique probability measure $\\mu$ on the cylinder sigma-algebra $\\mathcal C_T$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Such a law exists, has mean m and covariance Sigma",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rectangle-criterion-for-independent-random-elements",
+          "source_section": "Statement",
+          "quote": "for every natural number $n\\ge1$, every choice of distinct indices",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-coordinate-maps-and-cylinder-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "The **cylinder sigma-algebra** is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Their **product sigma-algebra** is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finite-gaussian-process-posterior-and-predictive-laws",
+          "source_section": "Statement",
+          "quote": "The displayed conditional covariance is positive semidefinite and may be singular",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "valid-noisy-process-model",
+          "claim": "The constant kernel and correlated noise law define a Gaussian-process model with independent noise on a product probability space.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "positive-observation-block",
+          "claim": "The exact observed covariance is positive definite and its inverse is the displayed matrix.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "posterior-mean-value",
+          "claim": "Substitution of the nonzero mean and observed vector gives posterior mean 16/7.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "posterior-variance-value",
+          "claim": "The Schur-complement calculation gives posterior variance 3/7 for the selected kernel version.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example fixes three process indices, two observations, and one test value."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the noise covariance and step 1.2 verifies that the observed block is positive definite."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes two observations and does not compare one-observation cases."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant prior kernel is rank one on the three-index set; steps 2.1–3.1 still give a proper scalar posterior."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses AC through the finite Gaussian-process and multivariate-normal construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is not an if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-singular-gaussian-process-prior-and-predictive-covariances": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+          "source_section": "Statement",
+          "quote": "There is a unique probability measure $\\mu$ on the cylinder sigma-algebra $\\mathcal C_T$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Such a law exists, has mean m and covariance Sigma",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rectangle-criterion-for-independent-random-elements",
+          "source_section": "Statement",
+          "quote": "for every natural number $n\\ge1$, every choice of distinct indices",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-coordinate-maps-and-cylinder-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "The **cylinder sigma-algebra** is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Their **product sigma-algebra** is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finite-gaussian-process-posterior-and-predictive-laws",
+          "source_section": "Statement",
+          "quote": "The displayed conditional covariance is positive semidefinite and may be singular",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "valid-singular-prior-model",
+          "claim": "The constant kernel defines a Gaussian process and independent identity-covariance noise on a product probability space.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "observed-block-invertibility",
+          "claim": "The rank-one prior observation covariance becomes positive definite after identity noise is added.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F6"
+          ]
+        },
+        {
+          "id": "singular-predictive-law",
+          "claim": "The repeated test vector has the stated rank-one posterior mean and covariance.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "singular-boundary",
+          "claim": "The prior and predictive singularities do not violate the positive-definite observed-block hypothesis.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two process indices, two observations, and a two-coordinate test list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 compute the positive-definite observed block and the singular predictive covariance."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes two observations and a repeated two-coordinate test list."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2–3.1 exhibit a rank-one prior observation block and a rank-one conditional block."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses AC through the finite Gaussian-process and multivariate-normal construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is not an if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-gaussian-process-extrapolation-retains-independent-index-uncertainty": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+          "source_section": "Statement",
+          "quote": "There is a unique probability measure $\\mu$ on the cylinder sigma-algebra $\\mathcal C_T$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Such a law exists, has mean m and covariance Sigma",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rectangle-criterion-for-independent-random-elements",
+          "source_section": "Statement",
+          "quote": "for every natural number $n\\ge1$, every choice of distinct indices",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-coordinate-maps-and-cylinder-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "The **cylinder sigma-algebra** is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Their **product sigma-algebra** is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finite-gaussian-process-posterior-and-predictive-laws",
+          "source_section": "Statement",
+          "quote": "The displayed conditional covariance is positive semidefinite and may be singular",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "valid-independent-index-model",
+          "claim": "The equality kernel defines a Gaussian process and independent observation noise on a product probability space.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "independent-observation-block",
+          "claim": "The observation and independent test variances give observed covariance C=2 and zero cross-covariance.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F6"
+          ]
+        },
+        {
+          "id": "unchanged-independent-coordinate-law",
+          "claim": "The posterior-kernel law at the unobserved independent index remains N(0,1) for every observation value.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two process indices and one observation/test pair."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 explicitly use the zero cross-covariance between the observed and test indices."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example has one observation and one test coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks positive semidefiniteness for repeated indices by grouping their coefficients."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses AC through the finite Gaussian-process and multivariate-normal construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is not an if-and-only-if claim."
+        }
+      ]
+    }
+  }
+}

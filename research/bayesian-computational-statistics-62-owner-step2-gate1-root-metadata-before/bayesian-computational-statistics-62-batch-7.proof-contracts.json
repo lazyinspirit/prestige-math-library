@@ -1,0 +1,2153 @@
+{
+  "version": 1,
+  "scope": [
+    "def-posterior-predictive-law",
+    "thm-posterior-predictive-mixture-is-a-kernel",
+    "thm-posterior-predictive-moment-decomposition",
+    "def-posterior-credible-set",
+    "lem-measurable-posterior-quantile-and-cdf-bracketing",
+    "thm-central-posterior-quantile-interval-is-credible",
+    "def-posterior-median",
+    "lem-lower-posterior-median-is-measurable",
+    "def-posterior-risk-and-bayes-action",
+    "thm-posterior-mean-is-squared-error-bayes-action",
+    "thm-posterior-median-minimizes-absolute-risk",
+    "thm-finite-class-maximal-mass-is-zero-one-bayes-action",
+    "ex-posterior-predictive-mixture-adds-parameter-uncertainty",
+    "ex-asymmetric-loss-changes-the-posterior-optimal-action",
+    "ex-posterior-median-can-be-nonunique",
+    "ex-continuous-density-mode-under-zero-one-loss",
+    "ex-posterior-credible-interval-need-not-have-nominal-frequency-coverage"
+  ],
+  "contracts": {
+    "def-posterior-predictive-law": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on supplied probability measures or kernels and makes no separate existence claim for empty spaces."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item makes no separate zero-valued parameter or measure boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate unit-valued parameter or measure boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no separate degenerate-model claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate interval-endpoint claim beyond its stated parameter domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an arbitrary family and asserts no choice-dependent existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "supplier_interfaces": [
+        {
+          "supplier": "thm-bayes-formula-for-dominated-kernels",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "Let $\\pi$ be a prior probability on $(E,\\mathcal S)$ and let $Q:E\\to T$ be a probability kernel dominated by a sigma-finite measure $\\nu$ on $(T,\\mathcal T)$, with specified nonnegative jointly measurable density $\\ell:E\\times T\\to[0,\\infty]$:\n$$Q(\\theta,B)=\\int_B\\ell(\\theta,y)\\,\\nu(dy)\\quad\\text{for every }\\theta\\in E,\\ B\\in\\mathcal T.$$\n\nDefine $m(y)=\\int_E\\ell(\\theta,y)\\,\\pi(d\\theta)$. Under the joint law with density $\\ell$ relative to $\\pi\\times\\nu$, a conditional law of the parameter given the observation is\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_A\\ell(\\theta,y)\\,\\pi(d\\theta)}{m(y)},&0<m(y)<\\infty,\\\\ \\pi(A),&m(y)=0\\text{ or }m(y)=\\infty.\\end{cases}$$\n\nThe observation marginal is $m\\,d\\nu$, and the filled fibres have marginal mass zero. This is a choice-free assertion about the explicit kernel and event identities.",
+          "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+        },
+        {
+          "supplier": "def-measure-kernel-and-probability-kernel",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+        },
+        {
+          "supplier": "thm-measurability-of-integration-against-a-kernel",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+        },
+        {
+          "supplier": "thm-posterior-predictive-mixture-is-a-kernel",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "Let $\\Pi$ be a probability kernel from $(\\mathsf Y,\\mathcal Y)$ to $(\\Theta,\\mathcal T)$ and let $Q$ be a probability kernel from $(\\Theta,\\mathcal T)$ to $(\\mathsf Z,\\mathcal Z)$. For\n$$\nQ_y^{\\mathrm{pred}}(B)=\\int_\\Theta Q_\\theta(B)\\,\\Pi_y(d\\theta),\n$$\neach $Q_y^{\\mathrm{pred}}$ is a probability measure, the evaluations $y\\mapsto Q_y^{\\mathrm{pred}}(B)$ are measurable, and, for every nonnegative measurable $g:\\mathsf Z\\to[0,\\infty]$,\n$$\n\\int_{\\mathsf Z} g(z)\\,Q_y^{\\mathrm{pred}}(dz)=\\int_\\Theta\\left(\\int_{\\mathsf Z}g(z)\\,Q_\\theta(dz)\\right)\\Pi_y(d\\theta).\n$$",
+          "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+        }
+      ],
+      "risk_review": {
+        "status": "open",
+        "notes": "Initial authoring contract. Independent mathematical review remains pending."
+      }
+    },
+    "thm-posterior-predictive-mixture-is-a-kernel": {
+      "risk": "low",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-posterior-predictive-law",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathsf Y,\\mathcal Y)$ be measurable spaces. Suppose $\\Pi$ is a supplied probability kernel from $\\mathsf Y$ to $\\Theta$; write its probability measure at $y$ as $\\Pi_y$. Let $Q$ be a probability kernel from $\\Theta$ to a measurable future-observation space $(\\mathsf Z,\\mathcal Z)$. Define the **posterior-predictive probability kernel** by\n$$Q_y^{\\mathrm{pred}}(B):=\\int_\\Theta Q_\\theta(B)\\,\\Pi_y(d\\theta),\\qquad y\\in\\mathsf Y,\\ B\\in\\mathcal Z.$$\nA probability kernel has pointwise probability-measure sections and measurable event evaluations, as in [[def-measure-kernel-and-probability-kernel]]. This definition takes the posterior kernel as supplied; it does not form a likelihood quotient.\n\nFor a proper-prior dominated model, [[thm-bayes-formula-for-dominated-kernels]] supplies one such data-indexed kernel when the sampling laws have a specified nonnegative jointly measurable density against a sigma-finite data measure. Its stated filler on zero or infinite normalizers is part of that kernel version.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-prior-and-model-kernel-define-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathcal X,\\mathcal A)$ be measurable spaces,\nlet $\\pi$ be a probability measure on $(\\Theta,\\mathcal T)$, and let\n$K:\\Theta\\times\\mathcal A\\to[0,1]$ be a probability kernel. For\n$C\\in\\mathcal T\\otimes\\mathcal A$, write\n$C_\\theta=\\{x\\in\\mathcal X:(\\theta,x)\\in C\\}$ and set\n$$J(C)=\\int_\\Theta K(\\theta,C_\\theta)\\,\\pi(d\\theta).$$\nThen $J$ is a probability measure on the product sigma-algebra, and for every\nnonnegative product-measurable $h$,\n$$\\int_{\\Theta\\times\\mathcal X}h(\\theta,x)\\,J(d\\theta,dx)=\\int_\\Theta\\left(\\int_\\mathcal Xh(\\theta,x)\\,K(\\theta,dx)\\right)\\pi(d\\theta).$$\nIn particular, $J(A\\times B)=\\int_AK(\\theta,B)\\,\\pi(d\\theta)$ for\n$A\\in\\mathcal T$ and $B\\in\\mathcal A$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix $y\\in\\mathsf Y$ and regard $\\Pi_y$ as a probability measure on $\\Theta$. By [F2], $Q$ is a probability kernel, so [F3] gives a joint probability measure $J_y$ on $\\Theta\\times\\mathsf Z$ satisfying $J_y(A\\times B)=\\int_A Q_\\theta(B)\\,\\Pi_y(d\\theta)$ and the iterated-integral identity for every nonnegative product-measurable function. Taking $A=\\Theta$ shows $Q_y^{\\mathrm{pred}}(B)=J_y(\\Theta\\times B)$; hence it is the second marginal of a probability measure and is itself a probability measure. The same identity applied to $(\\theta,z)\\mapsto g(z)$ gives the displayed integral formula.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix $B\\in\\mathcal Z$. The function $\\theta\\mapsto Q_\\theta(B)$ is $\\mathcal T$-measurable by [F2], so $(y,\\theta)\\mapsto Q_\\theta(B)$ is $\\mathcal Y\\otimes\\mathcal T$-measurable as the composition with the measurable coordinate projection. By [F4], $y\\mapsto\\int_\\Theta Q_\\theta(B)\\Pi_y(d\\theta)$ is measurable. By [F1] this is $Q_y^{\\mathrm{pred}}(B)$, proving kernel measurability.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on supplied probability measures or kernels and makes no separate existence claim for empty spaces."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item makes no separate zero-valued parameter or measure boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate unit-valued parameter or measure boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no separate degenerate-model claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate interval-endpoint claim beyond its stated parameter domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an arbitrary family and asserts no choice-dependent existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "supplier_interfaces": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Initial authoring contract. Independent mathematical review remains pending."
+      }
+    },
+    "thm-posterior-predictive-moment-decomposition": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-posterior-predictive-law",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathsf Y,\\mathcal Y)$ be measurable spaces. Suppose $\\Pi$ is a supplied probability kernel from $\\mathsf Y$ to $\\Theta$; write its probability measure at $y$ as $\\Pi_y$. Let $Q$ be a probability kernel from $\\Theta$ to a measurable future-observation space $(\\mathsf Z,\\mathcal Z)$. Define the **posterior-predictive probability kernel** by\n$$Q_y^{\\mathrm{pred}}(B):=\\int_\\Theta Q_\\theta(B)\\,\\Pi_y(d\\theta),\\qquad y\\in\\mathsf Y,\\ B\\in\\mathcal Z.$$\nA probability kernel has pointwise probability-measure sections and measurable event evaluations, as in [[def-measure-kernel-and-probability-kernel]]. This definition takes the posterior kernel as supplied; it does not form a likelihood quotient.\n\nFor a proper-prior dominated model, [[thm-bayes-formula-for-dominated-kernels]] supplies one such data-indexed kernel when the sampling laws have a specified nonnegative jointly measurable density against a sigma-finite data measure. Its stated filler on zero or infinite normalizers is part of that kernel version.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-posterior-predictive-mixture-is-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let $\\Pi$ be a probability kernel from $(\\mathsf Y,\\mathcal Y)$ to $(\\Theta,\\mathcal T)$ and let $Q$ be a probability kernel from $(\\Theta,\\mathcal T)$ to $(\\mathsf Z,\\mathcal Z)$. For\n$$\nQ_y^{\\mathrm{pred}}(B)=\\int_\\Theta Q_\\theta(B)\\,\\Pi_y(d\\theta),\n$$\neach $Q_y^{\\mathrm{pred}}$ is a probability measure, the evaluations $y\\mapsto Q_y^{\\mathrm{pred}}(B)$ are measurable, and, for every nonnegative measurable $g:\\mathsf Z\\to[0,\\infty]$,\n$$\n\\int_{\\mathsf Z} g(z)\\,Q_y^{\\mathrm{pred}}(dz)=\\int_\\Theta\\left(\\int_{\\mathsf Z}g(z)\\,Q_\\theta(dz)\\right)\\Pi_y(d\\theta).\n$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.2",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-conditional-integration-through-a-regular-conditional-law",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a specified regular conditional distribution of $X:(\\Omega,\\mathcal F,P)\\to(E,\\mathcal S)$ given $\\mathcal G$. For measurable $f:E\\to[0,\\infty]$, the measurable function $I_f(\\omega)=\\int f(x)K(\\omega,dx)$ satisfies\n\n$$\\int_H I_f\\,dP=\\int_H f(X)\\,dP\\qquad(H\\in\\mathcal G).$$\n\nThis assertion is choice-free. Under AC, it says $I_f=E[f(X)\\mid\\mathcal G]$ as nonnegative almost-sure classes. If $f:E\\to\\mathbb R$ is measurable and $E|f(X)|<\\infty$, put $D=\\{I_{|f|}<\\infty\\}$. Then $D\\in\\mathcal G$, $P(D)=1$, and the signed integral on $D$, extended by zero off $D$, is a real integrable conditional-expectation version of $f(X)$. Its identification with the AC-based conditional-expectation class uses AC only for that class convention.",
+          "uses": [
+            "2.2",
+            "4.1",
+            "4.2",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-regular-conditional-distribution",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,P)\\to(T,\\Tau)$ be a measurable random element and $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra. A **regular conditional distribution of X given $\\mathcal G$** is a probability kernel $K:(\\Omega,\\mathcal G)\\to(T,\\Tau)$ satisfying\n$$\\int_H K(\\omega,A)\\,P(d\\omega)=P(H\\cap\\{X\\in A\\})\\qquad(H\\in\\mathcal G,\\ A\\in\\Tau).$$\n\n“Probability kernel” has the pointwise meaning of [[def-measure-kernel-and-probability-kernel]]: every $K(\\omega,\\cdot)$ is a probability measure, and every evaluation is $\\mathcal G$-measurable. Its evaluations lie in $[0,1]$ and are integrable. Thus the testing identity says exactly that $K(\\cdot,A)$ is a conditional-expectation version of $1_{\\{X\\in A\\}}$ in [[def-conditional-expectation-given-a-sigma-algebra]]. Conversely, a probability kernel with these version identities satisfies the displayed definition.\n\nThe kernel requirement holds at every sample point. Separate eventwise choices of conditional-expectation versions do not imply it and do not by themselves provide one exceptional set valid for all A. When A is empty the testing identity is zero on both sides, and when A=T it is P(H) on both sides. This defines a property of a supplied kernel and makes no existence or AC assertion.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": []
+        },
+        {
+          "fact": "F8",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "4.1",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $s_2(\\theta)=\\int z^2Q_\\theta(dz)$. It is measurable by [F4]. Since $\\int s_2\\,d\\Pi_y<\\infty$, the set $E_y=\\{s_2<\\infty\\}$ is measurable and has $\\Pi_y(E_y)=1$. On $E_y$, $|z|\\le 1+z^2$ gives a finite first absolute moment, so $\\mu(\\theta)$ is finite and measurable by [F4]. Expanding the square in the variance definition [F3] gives $v(\\theta)=s_2(\\theta)-\\mu(\\theta)^2\\ge0$, hence $\\mu(\\theta)^2\\le s_2(\\theta)$; therefore $\\mu$ is square-integrable under $\\Pi_y$ and $v$ is integrable.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], $Q_y^{\\mathrm{pred}}$ is the mixture defined from $Q_\\theta$ and $\\Pi_y$. Apply [F2] to $g(z)=z^2$ to obtain $\\int z^2Q_y^{\\mathrm{pred}}(dz)=\\int s_2\\,d\\Pi_y<\\infty$. Apply [F2] to $|z|$ and use $|z|\\le1+z^2$ to see that $Q_y^{\\mathrm{pred}}$ has finite first absolute moment. Applying [F2] to the nonnegative positive and negative parts of $z$ and subtracting their finite integrals gives $\\int zQ_y^{\\mathrm{pred}}(dz)=\\int\\mu\\,d\\Pi_y$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For the joint-model hypotheses in the Statement, let $B$ be a measurable future event and $G\\in\\mathcal G$. The function $\\theta\\mapsto Q_\\theta(B)$ is measurable by [F9]. Apply [F5] to the posterior conditional law and this bounded function to obtain $\\int_G Q^{\\mathrm{pred}}_Y(B)\\,dP=\\int_G Q_X(B)\\,dP$. Since $G\\in\\mathcal G\\subseteq\\mathcal H$, apply [F5] again to the conditional law $Q_X$ to get $\\int_G Q_X(B)\\,dP=P(G\\cap\\{Z\\in B\\})$. By [F2], the mixture has probability-measure sections and measurable evaluations; these event identities therefore make $Q^{\\mathrm{pred}}_Y$ a regular conditional distribution of $Z$ given $\\mathcal G$ under [F6].",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F6",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On $E_y$, $s_2=v+\\mu^2$, and off $E_y$ the set is $\\Pi_y$-null. By [F3] and step 2.1, $\\operatorname{Var}_{Q_y^{\\mathrm{pred}}}(Z)=\\int s_2\\,d\\Pi_y-(\\int\\mu\\,d\\Pi_y)^2=\\int v\\,d\\Pi_y+\\int\\mu^2\\,d\\Pi_y-(\\int\\mu\\,d\\Pi_y)^2=\\int v\\,d\\Pi_y+\\operatorname{Var}_{\\Pi_y}(\\mu)$. This proves both displayed kernel identities without choosing conditional-expectation representatives.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply [F5] to $z$ and $z^2$ under $Q_X$. Writing $m:=\\mu(X)$ and $s:=s_2(X)$, their conditional-integration identities give $\\mathbb E[1_A Z]=\\mathbb E[1_A m]$ and $\\mathbb E[1_A Z^2]=\\mathbb E[1_A s]$ for every $A\\in\\mathcal H$, and $\\mathbb E[s]=\\mathbb E[Z^2]<\\infty$. Applying [F5] to $s_2$ under $\\Pi_Y$ gives a conditional version of $s$ with expectation $\\mathbb E[s]$; hence $D:=\\{y:\\int s_2(\\theta)\\Pi_y(d\\theta)<\\infty\\}$ has full probability. Take the zero-filled representative $\\bar s(Y):=\\int s_2(\\theta)\\Pi_y(d\\theta)$ on $D$ and zero elsewhere. Then $\\mathbb E[\\bar s(Y)]=\\mathbb E[s]=\\mathbb E[Z^2]<\\infty$ and $\\Pi_Y(E)=1$ almost surely for $E=\\{\\theta:s_2(\\theta)<\\infty\\}$. The conditioning identity for $X$ then gives $P(X\\in E)=1$. By step 1.1, $m^2\\le s$ and $0\\le v(X)\\le s$ almost surely; hence $m\\in L^2$ and $v(X)$ is integrable, with $v(X)=s-m^2$ almost surely. Because $X$ is $\\mathcal H$-measurable and these moment functions are measurable, $m,s,v(X)$ are $\\mathcal H$-measurable. The first event identity extends from bounded simple $\\mathcal H$-measurable multipliers to $1_A m$ by simple approximation and truncation; $2|mZ|\\le m^2+Z^2$ and $m^2\\in L^1$ justify the limits. Thus $\\mathbb E[1_A mZ]=\\mathbb E[1_A m^2]$, and expansion gives $\\mathbb E[1_A(Z-m)^2]=\\mathbb E[1_A(s-m^2)]=\\mathbb E[1_Av(X)]$ for every $A\\in\\mathcal H$. This proves eventwise that $m$ is the conditional-mean version of $Z$ and $v(X)$ is the conditional-variance version given $\\mathcal H$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "F8",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "On the full-measure data domain where $b(Y):=\\int s_2\\,d\\Pi_Y<\\infty$, set $c(Y):=\\int\\mu\\,d\\Pi_Y$, $d(Y):=\\int\\mu^2\\,d\\Pi_Y$, and $e(Y):=\\int v\\,d\\Pi_Y$, and extend $b,c,d,e$ by zero on its null complement, using the signed zero-filled extension for $c$. By [F5] and the kernel identities in steps 2.1 and 3.1, $c,b$ are conditional first- and second-moment versions of $Z$ given $\\mathcal G$, while $c,d,e$ are conditional moments of $m,m^2,v(X)$ given $\\mathcal G$. Since $Y$ is $\\mathcal G$-measurable, these functions of $Y$ are $\\mathcal G$-measurable. Also $\\mathbb E[b(Y)]=\\mathbb E[Z^2]<\\infty$, $c^2\\le b$ almost surely since $b-c^2=\\operatorname{Var}_{Q^{\\mathrm{pred}}_Y}(Z)\\ge0$, and $d\\le b<\\infty$ almost surely since $\\mu^2\\le s_2$.",
+          "step": "4.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4-3",
+          "claim": "For each $A\\in\\mathcal G$, the same simple-multiplier and truncation argument as in step 4.1, now applied to $m$ with center $c(Y)$ and to $Z$ with that same center, gives $\\mathbb E[1_A(m-c(Y))^2]=\\mathbb E[1_A(d-c(Y)^2)]$ and $\\mathbb E[1_A(Z-c(Y))^2]=\\mathbb E[1_A(b(Y)-c(Y)^2)]$; the bounds $2|c m|\\le c^2+m^2$ and $2|cZ|\\le c^2+Z^2$ justify the respective truncations. Thus $d-c^2$ and $b-c^2$ are the conditional-variance versions of $m$ and $Z$ given $\\mathcal G$. The kernel identity in step 3.1 gives $b-c^2=e+(d-c^2)$, so the conditional variance of $Z$ given $\\mathcal G$ is the expected conditional variance given $\\mathcal H$ plus the conditional variance of the conditional mean. These event-identity versions are choice-free; under [A1] they may also be read as conditional-expectation equivalence classes by [F5], while [F8] gives the eventwise version convention. No value on a null data fiber is thereby made canonical.",
+          "step": "4.3",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "F8",
+            "step 3.1",
+            "step 4.1",
+            "step 4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on supplied probability measures or kernels and makes no separate existence claim for empty spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 allow zero conditional variance and give the corresponding zero variance terms."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate unit-valued parameter or measure boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 apply to point-mass future kernels, for which both sides reduce to the variance of their posterior means."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate interval-endpoint claim beyond its stated parameter domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 4.1: kernel identities and conditional version identities are choice-free; AC is used only to identify equivalence-class notation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "supplier_interfaces": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Initial authoring contract. Independent mathematical review remains pending."
+      }
+    },
+    "def-posterior-credible-set": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on supplied probability measures or kernels and makes no separate existence claim for empty spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: alpha=1 requires mass at least zero, which every posterior probability satisfies."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: alpha=0 requires posterior mass one, exactly the stated endpoint condition."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no separate degenerate-model claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: alpha is allowed on the closed interval [0,1], with both endpoint meanings stated above."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an arbitrary family and asserts no choice-dependent existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "supplier_interfaces": [
+        {
+          "supplier": "thm-bayes-formula-for-dominated-kernels",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "Let $\\pi$ be a prior probability on $(E,\\mathcal S)$ and let $Q:E\\to T$ be a probability kernel dominated by a sigma-finite measure $\\nu$ on $(T,\\mathcal T)$, with specified nonnegative jointly measurable density $\\ell:E\\times T\\to[0,\\infty]$:\n$$Q(\\theta,B)=\\int_B\\ell(\\theta,y)\\,\\nu(dy)\\quad\\text{for every }\\theta\\in E,\\ B\\in\\mathcal T.$$\n\nDefine $m(y)=\\int_E\\ell(\\theta,y)\\,\\pi(d\\theta)$. Under the joint law with density $\\ell$ relative to $\\pi\\times\\nu$, a conditional law of the parameter given the observation is\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_A\\ell(\\theta,y)\\,\\pi(d\\theta)}{m(y)},&0<m(y)<\\infty,\\\\ \\pi(A),&m(y)=0\\text{ or }m(y)=\\infty.\\end{cases}$$\n\nThe observation marginal is $m\\,d\\nu$, and the filled fibres have marginal mass zero. This is a choice-free assertion about the explicit kernel and event identities.",
+          "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+        },
+        {
+          "supplier": "def-measure-kernel-and-probability-kernel",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+        },
+        {
+          "supplier": "thm-measurability-of-integration-against-a-kernel",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+        }
+      ],
+      "risk_review": {
+        "status": "open",
+        "notes": "Initial authoring contract. Independent mathematical review remains pending."
+      }
+    },
+    "lem-measurable-posterior-quantile-and-cdf-bracketing": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuity-from-below-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be an increasing sequence of measurable sets for a measure $\\mu$, so $E_n\\subseteq E_{n+1}$. Then\n\n$$\\mu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sup_{n\\in\\mathbb N}\\mu(E_n).$$\n\nNo finiteness hypothesis is required.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuity-from-above-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be a decreasing sequence of measurable sets for a measure $\\mu$. If $\\mu(E_{n_0})<+\\infty$ for some $n_0$, then\n\n$$\\mu\\left(\\bigcap_{n\\in\\mathbb N}E_n\\right)=\\inf_{n\\in\\mathbb N}\\mu(E_n).$$",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-q-and-irrationals-dense-r",
+          "source_section": "Statement",
+          "quote": "Write $\\mathbb{Q}_{\\mathbb{R}}$ for the image of $\\mathbb{Q}$ in $\\mathbb{R}$\nunder the canonical embedding $q \\mapsto \\hat q$ ([[lem-rat-embeds-dense]]), the\nset usually written $\\mathbb{Q}$ once the identification is made, and put\n$X := \\mathbb{R} \\setminus \\mathbb{Q}_{\\mathbb{R}}$ for the irrationals. Then:\n\n1. $\\mathbb{Q}_{\\mathbb{R}}$ is dense in $\\mathbb{R}$, that is,\n   $\\overline{\\mathbb{Q}_{\\mathbb{R}}} = \\mathbb{R}$ ([[def-limit-point-r]]);\n2. $X$ is dense in $\\mathbb{R}$;\n3. every nonempty open subset of $\\mathbb{R}$ is uncountable\n   ([[def-countable]]).\n\nClaim 2 is not a symmetry of claim 1: the rationals are dense because they are\n*constructed* to approximate, whereas the irrationals are dense because there are\ntoo many points in any interval for a countable set to exhaust it, which is why\nclaim 3 is proved alongside and used for it.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-infimum-property",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ be nonempty and bounded below. Then $S$ has a\ngreatest lower bound in $\\mathbb{R}$ ([[def-infimum]]), and it is given by\n\n$$\\inf S = -\\sup(-S), \\qquad \\text{where } -S = \\{-s : s \\in S\\}.$$\n\nIn particular the complete ordered field $\\mathbb{R}$ has the\ngreatest-lower-bound property, which is therefore not an extra axiom: it is a\nconsequence of the least-upper-bound property.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-infimum",
+          "source_section": "Definition",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ and $\\ell \\in \\mathbb{R}$. Then $\\ell$ is a\n**greatest lower bound**, or **infimum**, of $S$ if both of the following hold:\n\n- $\\ell$ is a lower bound of $S$ ([[def-bounded-set]]), that is, $\\ell \\le s$ for\n  every $s \\in S$;\n- $\\ell' \\le \\ell$ for every lower bound $\\ell'$ of $S$.\n\nWritten out in one line:\n\n$$\\ell \\text{ is an infimum of } S \\iff \\big[(\\forall s \\in S)\\, \\ell \\le s\\big] \\text{ and } \\big[(\\forall \\ell' \\in \\mathbb{R})\\, \\big((\\forall s \\in S)\\, \\ell' \\le s\\big) \\Rightarrow \\ell' \\le \\ell\\big].$$\n\nAn infimum, when it exists, is unique ([[lem-sup-unique]]), so we may write\n$\\inf S$ for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-measure-monotonicity",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure on $(X,\\mathcal A)$. If $A,B\\in\\mathcal A$ and $A\\subseteq B$, then $\\mu(A)\\le\\mu(B)$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in [[def-field]], and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-of-inverse-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$, and\nlet $a, b \\in F$.\n\n1. If $a > 0$ then $a^{-1} > 0$.\n2. If $0 < a < b$ then $0 < b^{-1} < a^{-1}$.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-cauchy-reals-lub-complete",
+          "source_section": "Statement",
+          "quote": "The Cauchy-sequence reals $\\mathbb{R}_C$ have the **least-upper-bound property**:\nevery nonempty $S \\subseteq \\mathbb{R}_C$ that is bounded above has a least upper\nbound $\\sup S \\in \\mathbb{R}_C$. Hence, together with [[thm-reals-ordered-field]],\n$\\mathbb{R}_C$ is a **complete ordered field** ([[def-complete-ordered-field]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix $y$. By [F8, F10], the sets $(-\\infty,n]$ increase to $\\mathbb R$, so [F2] gives $F_y(n)\\uparrow1$ and some natural $n$ satisfies $F_y(n)\\ge u$. By [F4] choose a rational $r>n$; then [F7] gives $F_y(r)\\ge u$, so $S_y=\\{r\\in\\mathbb Q:F_y(r)\\ge u\\}$ is nonempty. Again by [F8, F10], the sets $(-\\infty,-n]$ decrease to the empty set; [F3] gives some natural $m$ with $F_y(-m)<u$. Choose a rational $s<-m$ by [F4]. For any rational $r\\le s$, [F7] gives $F_y(r)\\le F_y(-m)<u$, so every member of $S_y$ exceeds $s$ and $S_y$ is bounded below. Hence [F6, F10] gives its real infimum $q_u(y)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "F10",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For each $c\\in\\mathbb R$, the infimum definition and nonemptiness give $\\{y:q_u(y)<c\\}=\\bigcup_{\\substack{r\\in\\mathbb Q\\\\r<c}}\\{y:F_y(r)\\ge u\\}.$ Each set on the right is measurable by [F1], and the union is countable by [F5], so $q_u$ is measurable.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F5",
+            "F6",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Suppose $\\Pi_y((-\\infty,q_u(y)])<u$. By [F9], the sets $(-\\infty,q_u(y)+1/n]$ decrease to $(-\\infty,q_u(y)]$; they have finite measure by [F1], so [F3] gives an $n$ with $F_y(q_u(y)+1/n)<u$. By [F4], choose rational $r$ with $q_u(y)<r<q_u(y)+1/n$. Then [F7] gives $F_y(r)\\le F_y(q_u(y)+1/n)<u$. Consequently no member of $S_y$ is at most $r$, so $r$ is a lower bound of $S_y$. Then $q_u(y)=\\inf S_y\\ge r>q_u(y)$, a contradiction; therefore $u\\le\\Pi_y((-\\infty,q_u(y)])$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "F9",
+            "algebra",
+            "choose",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Suppose $\\Pi_y((-\\infty,q_u(y)))>u$. By [F9], the sets $(-\\infty,q_u(y)-1/n]$ increase to $(-\\infty,q_u(y))$, so [F2] gives an $n$ with $F_y(q_u(y)-1/n)>u$. By [F4], choose rational $r$ with $q_u(y)-1/n<r<q_u(y)$. Then [F7] gives $F_y(r)\\ge F_y(q_u(y)-1/n)>u$, so $r\\in S_y$, contradicting that $q_u(y)$ is a lower bound of $S_y$. Thus $\\Pi_y((-\\infty,q_u(y)))\\le u$. Combining with step 2.2 proves the CDF bracket.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F7",
+            "F9",
+            "step 2.2",
+            "choose",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on supplied probability measures or kernels and makes no separate existence claim for empty spaces."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement assumes u>0, so the lower endpoint quantile u=0 is excluded."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement assumes u<1, so the upper endpoint quantile u=1 is excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no separate degenerate-model claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement uses only interior levels 0<u<1; endpoint quantiles are not asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.2, and 3.1 use individual rational witnesses from density; no family of witnesses or AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-posterior-credible-set",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "Let $(\\Theta,\\mathcal T)$ and $(\\mathsf Y,\\mathcal Y)$ be measurable spaces and let $y\\mapsto\\Pi_y$ be a supplied posterior probability kernel. For $\\alpha\\in[0,1]$, a set-valued rule $C$ is **graph-measurable** when\n$$\\{(y,\\theta)\\in\\mathsf Y\\times\\Theta:\\theta\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal T.$$\nIt is a **posterior credible set at level $1-\\alpha$** when it is graph-measurable and\n$$\\Pi_y(C(y))\\ge 1-\\alpha\\qquad\\text{for every }y\\text{ in its declared data domain}.$$\nThe posterior-mass function is measurable by integration of the indicator of the membership graph against the kernel. If a density is available relative to a specified dominating measure, a highest-posterior-density region selects parameter values with largest density; such regions need not be intervals and may be disconnected or nonunique.",
+          "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+        }
+      ],
+      "risk_review": {
+        "status": "open",
+        "notes": "Initial authoring contract. Independent mathematical review remains pending."
+      }
+    },
+    "thm-central-posterior-quantile-interval-is-credible": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-posterior-credible-set",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathsf Y,\\mathcal Y)$ be measurable spaces and let $y\\mapsto\\Pi_y$ be a supplied posterior probability kernel. For $\\alpha\\in[0,1]$, a set-valued rule $C$ is **graph-measurable** when\n$$\\{(y,\\theta)\\in\\mathsf Y\\times\\Theta:\\theta\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal T.$$\nIt is a **posterior credible set at level $1-\\alpha$** when it is graph-measurable and\n$$\\Pi_y(C(y))\\ge 1-\\alpha\\qquad\\text{for every }y\\text{ in its declared data domain}.$$\nThe posterior-mass function is measurable by integration of the indicator of the membership graph against the kernel. If a density is available relative to a specified dominating measure, a highest-posterior-density region selects parameter values with largest density; such regions need not be intervals and may be disconnected or nonunique.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-measurable-posterior-quantile-and-cdf-bracketing",
+          "source_section": "Statement",
+          "quote": "Write $\\mathbb Q$ for the canonical image of the rationals in $\\mathbb R$ under the embedding of [[lem-rat-embeds-dense]].\n\nLet $y\\mapsto\\Pi_y$ be a probability kernel on $\\mathbb R$. For $u\\in(0,1)$ put\n$$F_y(t)=\\Pi_y((-\\infty,t]),\\qquad q_u(y)=\\inf\\{r\\in\\mathbb Q:F_y(r)\\ge u\\}.$$The infimum is taken in $\\mathbb R$; [[thm-infimum-property]] supplies it once the defining set is shown nonempty and bounded below. Then $q_u:\\mathsf Y\\to\\mathbb R$ is measurable, and$$\\Pi_y((-\\infty,q_u(y)))\\le u\\le\\Pi_y((-\\infty,q_u(y)]).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-q-and-irrationals-dense-r",
+          "source_section": "Statement",
+          "quote": "Write $\\mathbb{Q}_{\\mathbb{R}}$ for the image of $\\mathbb{Q}$ in $\\mathbb{R}$\nunder the canonical embedding $q \\mapsto \\hat q$ ([[lem-rat-embeds-dense]]), the\nset usually written $\\mathbb{Q}$ once the identification is made, and put\n$X := \\mathbb{R} \\setminus \\mathbb{Q}_{\\mathbb{R}}$ for the irrationals. Then:\n\n1. $\\mathbb{Q}_{\\mathbb{R}}$ is dense in $\\mathbb{R}$, that is,\n   $\\overline{\\mathbb{Q}_{\\mathbb{R}}} = \\mathbb{R}$ ([[def-limit-point-r]]);\n2. $X$ is dense in $\\mathbb{R}$;\n3. every nonempty open subset of $\\mathbb{R}$ is uncountable\n   ([[def-countable]]).\n\nClaim 2 is not a symmetry of claim 1: the rationals are dense because they are\n*constructed* to approximate, whereas the irrationals are dense because there are\ntoo many points in any interval for a countable set to exhaust it, which is why\nclaim 3 is proved alongside and used for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-measure-of-a-set-difference",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $A\\subseteq B$ be measurable with $\\mu(A)<+\\infty$. Then\n\n$$\\mu(B)=\\mu(A)+\\mu(B\\setminus A).$$\n\nIf $\\mu(B)<+\\infty$, all terms are real and hence $\\mu(B\\setminus A)=\\mu(B)-\\mu(A)$. If $\\mu(B)=+\\infty$, then $\\mu(B\\setminus A)=+\\infty$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\alpha/2<1-\\alpha/2$, the defining rational sets for the two quantiles are nested in the direction that gives $q_{\\alpha/2}(y)\\le q_{1-\\alpha/2}(y)$. Both endpoint functions are measurable by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $l=q_{\\alpha/2}(y)$ and $u=q_{1-\\alpha/2}(y)$. The disjoint difference $(-\\infty,u]\\setminus(-\\infty,l)$ is $[l,u]$, so $\\Pi_y([l,u])=\\Pi_y((-\\infty,u])-\\Pi_y((-\\infty,l)).$ By [F2], the first term is at least $1-\\alpha/2$ and the second is at most $\\alpha/2$, giving posterior mass at least $1-\\alpha$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The complement of the interval membership graph consists of pairs with $x<q_{\\alpha/2}(y)$ or $x>q_{1-\\alpha/2}(y)$. By [F4], the first relation is the countable union over $r\\in\\mathbb Q$ of $\\{y:q_{\\alpha/2}(y)>r\\}\\times(-\\infty,r),$ and the second is the countable union over $r\\in\\mathbb Q$ of $\\{y:q_{1-\\alpha/2}(y)<r\\}\\times(r,\\infty).$ Each is a measurable rectangle by endpoint measurability, so [F3] makes the graph measurable.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The graph measurability from step 2.1 and the mass bound from step 1.2 satisfy [F1], so $C_\\alpha$ is a posterior credible set.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on supplied probability measures or kernels and makes no separate existence claim for empty spaces."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement assumes 0<alpha<1, so alpha=0 is excluded."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement assumes 0<alpha<1, so alpha=1 is excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no separate degenerate-model claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The interval-level endpoint cases alpha=0 and alpha=1 are outside the theorem hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an arbitrary family and asserts no choice-dependent existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "supplier_interfaces": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Initial authoring contract. Independent mathematical review remains pending."
+      }
+    },
+    "def-posterior-median": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on supplied probability measures or kernels and makes no separate existence claim for empty spaces."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item makes no separate zero-valued parameter or measure boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate unit-valued parameter or measure boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no separate degenerate-model claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate interval-endpoint claim beyond its stated parameter domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an arbitrary family and asserts no choice-dependent existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "supplier_interfaces": [
+        {
+          "supplier": "thm-bayes-formula-for-dominated-kernels",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "Let $\\pi$ be a prior probability on $(E,\\mathcal S)$ and let $Q:E\\to T$ be a probability kernel dominated by a sigma-finite measure $\\nu$ on $(T,\\mathcal T)$, with specified nonnegative jointly measurable density $\\ell:E\\times T\\to[0,\\infty]$:\n$$Q(\\theta,B)=\\int_B\\ell(\\theta,y)\\,\\nu(dy)\\quad\\text{for every }\\theta\\in E,\\ B\\in\\mathcal T.$$\n\nDefine $m(y)=\\int_E\\ell(\\theta,y)\\,\\pi(d\\theta)$. Under the joint law with density $\\ell$ relative to $\\pi\\times\\nu$, a conditional law of the parameter given the observation is\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_A\\ell(\\theta,y)\\,\\pi(d\\theta)}{m(y)},&0<m(y)<\\infty,\\\\ \\pi(A),&m(y)=0\\text{ or }m(y)=\\infty.\\end{cases}$$\n\nThe observation marginal is $m\\,d\\nu$, and the filled fibres have marginal mass zero. This is a choice-free assertion about the explicit kernel and event identities.",
+          "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+        },
+        {
+          "supplier": "def-measure-kernel-and-probability-kernel",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+        }
+      ],
+      "risk_review": {
+        "status": "open",
+        "notes": "Initial authoring contract. Independent mathematical review remains pending."
+      }
+    },
+    "lem-lower-posterior-median-is-measurable": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-posterior-median",
+          "source_section": "Definition",
+          "quote": "For a probability measure $\\Pi_y$ on $\\mathbb R$, a **posterior median** is any $m\\in\\mathbb R$ satisfying\n$$\\Pi_y((-\\infty,m])\\ge \\tfrac12\\quad\\text{and}\\quad\\Pi_y([m,\\infty))\\ge\\tfrac12.$$\nThe two inequalities, rather than a density-based definition, apply to discrete, continuous, and mixed posteriors and permit more than one median.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-measurable-posterior-quantile-and-cdf-bracketing",
+          "source_section": "Statement",
+          "quote": "Write $\\mathbb Q$ for the canonical image of the rationals in $\\mathbb R$ under the embedding of [[lem-rat-embeds-dense]].\n\nLet $y\\mapsto\\Pi_y$ be a probability kernel on $\\mathbb R$. For $u\\in(0,1)$ put\n$$F_y(t)=\\Pi_y((-\\infty,t]),\\qquad q_u(y)=\\inf\\{r\\in\\mathbb Q:F_y(r)\\ge u\\}.$$The infimum is taken in $\\mathbb R$; [[thm-infimum-property]] supplies it once the defining set is shown nonempty and bounded below. Then $q_u:\\mathsf Y\\to\\mathbb R$ is measurable, and$$\\Pi_y((-\\infty,q_u(y)))\\le u\\le\\Pi_y((-\\infty,q_u(y)]).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F2], $m(y)=q_{1/2}(y)$ is measurable and $\\Pi_y((-\\infty,m(y)])\\ge1/2$.",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $\\Pi_y$ is a probability measure, $\\Pi_y([m(y),\\infty))=1-\\Pi_y((-\\infty,m(y)))\\ge1/2$ by [F2]. Thus both inequalities in [F1] hold, so $m(y)$ is a median for every $y$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on supplied probability measures or kernels and makes no separate existence claim for empty spaces."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item makes no separate zero-valued parameter or measure boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate unit-valued parameter or measure boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no separate degenerate-model claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate interval-endpoint claim beyond its stated parameter domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an arbitrary family and asserts no choice-dependent existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "supplier_interfaces": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Initial authoring contract. Independent mathematical review remains pending."
+      }
+    },
+    "def-posterior-risk-and-bayes-action": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on supplied probability measures or kernels and makes no separate existence claim for empty spaces."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item makes no separate zero-valued parameter or measure boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate unit-valued parameter or measure boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no separate degenerate-model claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate interval-endpoint claim beyond its stated parameter domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an arbitrary family and asserts no choice-dependent existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "supplier_interfaces": [
+        {
+          "supplier": "thm-bayes-formula-for-dominated-kernels",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "Let $\\pi$ be a prior probability on $(E,\\mathcal S)$ and let $Q:E\\to T$ be a probability kernel dominated by a sigma-finite measure $\\nu$ on $(T,\\mathcal T)$, with specified nonnegative jointly measurable density $\\ell:E\\times T\\to[0,\\infty]$:\n$$Q(\\theta,B)=\\int_B\\ell(\\theta,y)\\,\\nu(dy)\\quad\\text{for every }\\theta\\in E,\\ B\\in\\mathcal T.$$\n\nDefine $m(y)=\\int_E\\ell(\\theta,y)\\,\\pi(d\\theta)$. Under the joint law with density $\\ell$ relative to $\\pi\\times\\nu$, a conditional law of the parameter given the observation is\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_A\\ell(\\theta,y)\\,\\pi(d\\theta)}{m(y)},&0<m(y)<\\infty,\\\\ \\pi(A),&m(y)=0\\text{ or }m(y)=\\infty.\\end{cases}$$\n\nThe observation marginal is $m\\,d\\nu$, and the filled fibres have marginal mass zero. This is a choice-free assertion about the explicit kernel and event identities.",
+          "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+        },
+        {
+          "supplier": "def-measure-kernel-and-probability-kernel",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+        },
+        {
+          "supplier": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+        },
+        {
+          "supplier": "thm-measurability-of-integration-against-a-kernel",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+        },
+        {
+          "supplier": "def-loss-function-and-risk",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra ([[def-measurable-space]]), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space ([[def-randomized-procedure-as-a-markov-kernel]]). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\n[[lem-procedure-action-law-is-measurable]], so the outer nonnegative integral\nis defined by [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+        },
+        {
+          "supplier": "def-measurable-function-between-measurable-spaces",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+        }
+      ],
+      "risk_review": {
+        "status": "open",
+        "notes": "Initial authoring contract. Independent mathematical review remains pending."
+      }
+    },
+    "thm-posterior-mean-is-squared-error-bayes-action": {
+      "risk": "low",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-conditional-expectation-is-the-l2-orthogonal-projection",
+          "source_section": "Statement",
+          "quote": "Assume AC. Real $L^2(\\Omega,\\mathcal G,P|_{\\mathcal G})$ embeds isometrically as a closed subspace of real $L^2(\\Omega,\\mathcal F,P)$. For $X\\in L^2(P)$, $U=E[X\\mid\\mathcal G]$ is its orthogonal projection onto this subspace. It uniquely minimizes $E[(X-Z)^2]$ over $Z\\in L^2(\\mathcal G)$ as an almost-sure class.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-posterior-risk-and-bayes-action",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ have a supplied posterior probability kernel $\\Pi_y$, let $(\\mathsf A,\\mathcal G)$ be a measurable action space, and let $L:\\Theta\\times\\mathsf A\\to[0,\\infty]$ be a measurable function on the product measurable space [[def-product-sigma-algebra-and-finite-product-sigma-algebras]], in the sense of [[def-measurable-function-between-measurable-spaces]]. This strengthens the section-measurability convention in [[def-loss-function-and-risk]] so that posterior integrals vary measurably with measurable action rules.\n\nFor a fixed data fiber $y$ and action $a$, define the **posterior risk** only when\n$$\\rho_y(a):=\\int_\\Theta L(\\theta,a)\\,\\Pi_y(d\\theta)<\\infty.$$\nA **pointwise Bayes action** at $y$ is a finite-risk action attaining the minimum among all finite-risk actions. On a declared measurable data domain $D$, a **Bayes action rule** is a measurable map $\\delta:D\\to\\mathsf A$ whose finite posterior risk attains that minimum at every $y\\in D$. This definition makes no assertion that finite-risk actions or measurable minimizing rules always exist. It therefore does not infer a Bayes action merely from the existence of an infimum. The sampling risk in [[def-loss-function-and-risk]] is a different integral, taken over the data law at a fixed parameter.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $s_2(y)=\\int\\theta^2\\Pi_y(d\\theta)$. The function $(y,\\theta)\\mapsto\\theta^2$ is product-measurable, so [F4] makes $s_2$ measurable and $D_2=\\{s_2<\\infty\\}$ measurable. On $D_2$, $2|\\theta|\\le1+\\theta^2$ gives a finite absolute first moment; [F4] therefore makes the signed mean $\\mu$ measurable on $D_2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $y\\in D_2$ and use $(\\mathbb R,\\mathcal B(\\mathbb R),\\Pi_y)$ as a probability space with trivial sub-sigma-algebra $\\mathcal G=\\{\\varnothing,\\mathbb R\\}$. The identity variable $\\theta$ is a real random variable by [F5] and is square-integrable. The constant function $\\mu(y)$ is $\\mathcal G$-measurable and satisfies $\\int_H\\theta\\,d\\Pi_y=\\int_H\\mu(y)\\,d\\Pi_y$ for both possible $H\\in\\mathcal G$; by [F2] it is a conditional-expectation version.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1] under [A1], this conditional expectation uniquely minimizes squared distance over $L^2(\\mathcal G)$. The real-valued $\\mathcal G$-measurable functions are exactly constants, and every finite constant is in $L^2(\\Pi_y)$; hence $\\mu(y)$ uniquely minimizes $\\int(\\theta-a)^2\\Pi_y(d\\theta)$ over all real actions. This risk is finite because both $\\theta$ and the constant action are square-integrable.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By step 1.1 the mean rule is measurable on $D_2$, and by step 2.1 it has finite risk and attains the minimum on every fiber. The definition [F3] therefore makes it a Bayes action rule on $D_2$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on supplied probability measures or kernels and makes no separate existence claim for empty spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers zero posterior variance: the mean remains the unique squared-loss minimizer."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate unit-valued parameter or measure boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 permit a point-mass posterior; its sole support point is the mean and unique minimizer."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate interval-endpoint claim beyond its stated parameter domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement, A1, and step 2.1: AC is inherited from the L2-projection supplier, not used to choose among actions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "supplier_interfaces": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Initial authoring contract. Independent mathematical review remains pending."
+      }
+    },
+    "thm-posterior-median-minimizes-absolute-risk": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-posterior-median",
+          "source_section": "Definition",
+          "quote": "For a probability measure $\\Pi_y$ on $\\mathbb R$, a **posterior median** is any $m\\in\\mathbb R$ satisfying\n$$\\Pi_y((-\\infty,m])\\ge \\tfrac12\\quad\\text{and}\\quad\\Pi_y([m,\\infty))\\ge\\tfrac12.$$\nThe two inequalities, rather than a density-based definition, apply to discrete, continuous, and mixed posteriors and permit more than one median.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-posterior-risk-and-bayes-action",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ have a supplied posterior probability kernel $\\Pi_y$, let $(\\mathsf A,\\mathcal G)$ be a measurable action space, and let $L:\\Theta\\times\\mathsf A\\to[0,\\infty]$ be a measurable function on the product measurable space [[def-product-sigma-algebra-and-finite-product-sigma-algebras]], in the sense of [[def-measurable-function-between-measurable-spaces]]. This strengthens the section-measurability convention in [[def-loss-function-and-risk]] so that posterior integrals vary measurably with measurable action rules.\n\nFor a fixed data fiber $y$ and action $a$, define the **posterior risk** only when\n$$\\rho_y(a):=\\int_\\Theta L(\\theta,a)\\,\\Pi_y(d\\theta)<\\infty.$$\nA **pointwise Bayes action** at $y$ is a finite-risk action attaining the minimum among all finite-risk actions. On a declared measurable data domain $D$, a **Bayes action rule** is a measurable map $\\delta:D\\to\\mathsf A$ whose finite posterior risk attains that minimum at every $y\\in D$. This definition makes no assertion that finite-risk actions or measurable minimizing rules always exist. It therefore does not infer a Bayes action merely from the existence of an infimum. The sampling risk in [[def-loss-function-and-risk]] is a different integral, taken over the data law at a fixed parameter.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-lower-posterior-median-is-measurable",
+          "source_section": "Statement",
+          "quote": "Let $\\Pi$ be a posterior probability kernel on $\\mathbb R$. The rule $m(y)=q_{1/2}(y)$ is measurable and is a posterior median on every data fiber.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The function $(y,\\theta)\\mapsto|\\theta|$ is product-measurable, so [F4] makes its posterior integral measurable and hence $D_1$ a measurable data domain. For $y\\in D_1$ and every finite $a$, $|\\theta-a|\\le|\\theta|+|a|$ makes the posterior risk finite.",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Fix $y\\in D_1$ and a median $m$. For any $a>m$, put $d=a-m$ and partition $\\mathbb R$ into $A=(-\\infty,m]$, $B=(m,a)$, and $C=[a,\\infty)$. On these three sets respectively, $|\\theta-a|-|\\theta-m|$ equals $d$, $a+m-2\\theta$, and $-d$. On $B$, $a+m-2\\theta\\ge-d$. Therefore $\\rho_y(a)-\\rho_y(m)\\ge d\\{\\Pi_y(A)-\\Pi_y(B)-\\Pi_y(C)\\}=d\\{2\\Pi_y(A)-1\\}\\ge0$, where the last inequality is the first median condition [F1].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If $a<m$, put $d=m-a$ and partition into $A=(-\\infty,a]$, $B=(a,m)$, and $C=[m,\\infty)$. On these sets the loss difference is respectively $-d$, $2\\theta-a-m$, and $d$; on $B$, $2\\theta-a-m\\ge-d$. Hence $\\rho_y(a)-\\rho_y(m)\\ge d\\{-\\Pi_y(A)-\\Pi_y(B)+\\Pi_y(C)\\}=d\\{2\\Pi_y(C)-1\\}\\ge0$ by the second median condition [F1]. Equality holds when $a=m$. Thus every median is a pointwise minimizer; [F3] supplies a measurable median rule, whose finite risk on $D_1$ and attained minimum satisfy [F2].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on supplied probability measures or kernels and makes no separate existence claim for empty spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include zero absolute risk when the posterior is a point mass."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate unit-valued parameter or measure boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.1 permit a degenerate posterior and show its point is a median minimizer."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate interval-endpoint claim beyond its stated parameter domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 provide a measurable lower-median selector without AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "supplier_interfaces": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Initial authoring contract. Independent mathematical review remains pending."
+      }
+    },
+    "thm-finite-class-maximal-mass-is-zero-one-bayes-action": {
+      "risk": "low",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-posterior-risk-and-bayes-action",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ have a supplied posterior probability kernel $\\Pi_y$, let $(\\mathsf A,\\mathcal G)$ be a measurable action space, and let $L:\\Theta\\times\\mathsf A\\to[0,\\infty]$ be a measurable function on the product measurable space [[def-product-sigma-algebra-and-finite-product-sigma-algebras]], in the sense of [[def-measurable-function-between-measurable-spaces]]. This strengthens the section-measurability convention in [[def-loss-function-and-risk]] so that posterior integrals vary measurably with measurable action rules.\n\nFor a fixed data fiber $y$ and action $a$, define the **posterior risk** only when\n$$\\rho_y(a):=\\int_\\Theta L(\\theta,a)\\,\\Pi_y(d\\theta)<\\infty.$$\nA **pointwise Bayes action** at $y$ is a finite-risk action attaining the minimum among all finite-risk actions. On a declared measurable data domain $D$, a **Bayes action rule** is a measurable map $\\delta:D\\to\\mathsf A$ whose finite posterior risk attains that minimum at every $y\\in D$. This definition makes no assertion that finite-risk actions or measurable minimizing rules always exist. It therefore does not infer a Bayes action merely from the existence of an infimum. The sampling risk in [[def-loss-function-and-risk]] is a different integral, taken over the data law at a fixed parameter.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $j=1,\\ldots,k$, put $p_j(y)=\\Pi_y(\\{j\\})$. By [F2], every $p_j$ is measurable. The zero–one posterior risk of action $j$ is $\\rho_y(j)=\\sum_{\\ell\\ne j}p_\\ell(y)=1-p_j(y).$ Thus the risk is minimized exactly by maximizing $p_j(y)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $k\\ge1$ is finite, the nonempty finite list $p_1(y),\\ldots,p_k(y)$ has a maximum. Define $j^*(y)$ to be the least index attaining it. For each $j$, $\\{y:j^*(y)=j\\}=\\bigcap_{\\ell>j}\\{y:p_j(y)\\ge p_\\ell(y)\\}\\ \\cap\\ \\bigcap_{\\ell<j}\\{y:p_j(y)>p_\\ell(y)\\}.$ Both intersections are finite, and each set is measurable because the $p_\\ell$ are measurable; hence $j^*$ is measurable. Its risk is finite and it attains the pointwise minimum from step 1.1, so [F1] makes it a Bayes action rule. Choosing the least maximizing index uses only the displayed finite order, not AC.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on supplied probability measures or kernels and makes no separate existence claim for empty spaces."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item makes no separate zero-valued parameter or measure boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes k=1; the sole class has posterior mass one and is the unique action."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 cover posterior mass one on a single class."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no separate interval-endpoint claim beyond its stated parameter domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the least index among finitely many maximizers, so no choice axiom is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 gives risk(j)=1-p_j, so a posterior-mass maximizer minimizes risk."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 gives risk(j)=1-p_j, so every risk minimizer maximizes posterior mass."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "supplier_interfaces": [
+        {
+          "supplier": "thm-measurability-of-integration-against-a-kernel",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+        }
+      ],
+      "risk_review": {
+        "status": "open",
+        "notes": "Initial authoring contract. Independent mathematical review remains pending."
+      }
+    },
+    "ex-posterior-predictive-mixture-adds-parameter-uncertainty": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-posterior-predictive-law",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathsf Y,\\mathcal Y)$ be measurable spaces. Suppose $\\Pi$ is a supplied probability kernel from $\\mathsf Y$ to $\\Theta$; write its probability measure at $y$ as $\\Pi_y$. Let $Q$ be a probability kernel from $\\Theta$ to a measurable future-observation space $(\\mathsf Z,\\mathcal Z)$. Define the **posterior-predictive probability kernel** by\n$$Q_y^{\\mathrm{pred}}(B):=\\int_\\Theta Q_\\theta(B)\\,\\Pi_y(d\\theta),\\qquad y\\in\\mathsf Y,\\ B\\in\\mathcal Z.$$\nA probability kernel has pointwise probability-measure sections and measurable event evaluations, as in [[def-measure-kernel-and-probability-kernel]]. This definition takes the posterior kernel as supplied; it does not form a likelihood quotient.\n\nFor a proper-prior dominated model, [[thm-bayes-formula-for-dominated-kernels]] supplies one such data-indexed kernel when the sampling laws have a specified nonnegative jointly measurable density against a sigma-finite data measure. Its stated filler on zero or infinite normalizers is part of that kernel version.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-posterior-predictive-moment-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $\\Pi_y$ be a supplied posterior probability measure on $\\Theta$ and $Q_\\theta$ a future probability kernel on $\\mathbb R$. Put\n$$s_2(\\theta)=\\int_{\\mathbb R}z^2\\,Q_\\theta(dz),$$and assume $\\int_\\Theta s_2(\\theta)\\,\\Pi_y(d\\theta)<\\infty$. On the full-measure set $E_y=\\{\\theta:s_2(\\theta)<\\infty\\}$, define$$\\mu(\\theta)=\\int z\\,Q_\\theta(dz),\\qquad v(\\theta)=\\operatorname{Var}_{Q_\\theta}(Z),$$and set $\\mu=v=0$ off $E_y$ when integrating them against $\\Pi_y$. Then$$\\int z\\,Q_y^{\\mathrm{pred}}(dz)=\\int\\mu(\\theta)\\,\\Pi_y(d\\theta),$$\n$$\\operatorname{Var}_{Q_y^{\\mathrm{pred}}}(Z)=\\int v(\\theta)\\,\\Pi_y(d\\theta)+\\operatorname{Var}_{\\Pi_y}(\\mu).$$\nThese kernel identities are choice-free. For the conditional interpretation, suppose a joint probability space $(\\Omega,\\mathcal F,P)$ carries measurable random elements $Y$ (data), $X$ (parameter), and $Z$ (future observation). Let $\\mathcal G\\subseteq\\mathcal H\\subseteq\\mathcal F$ be sub-sigma-algebras such that $Y$ is $\\mathcal G$-measurable and $X$ is $\\mathcal H$-measurable. Assume $\\Pi_{Y}$ is a regular conditional distribution of $X$ given $\\mathcal G$ and $Q_X$ is a regular conditional distribution of $Z$ given $\\mathcal H$. Thus the future law given the information in $\\mathcal H$ is assumed to depend on it through $X$ alone. If $\\mathbb E[Z^2]<\\infty$, then $Q^{\\mathrm{pred}}_Y$ is a regular conditional distribution of $Z$ given $\\mathcal G$, and the displayed identities give the corresponding conditional-mean and conditional-variance versions almost surely. Here conditional variance means a version of the conditional expectation of the squared deviation from the corresponding conditional-mean version, using [[def-conditional-expectation-given-a-sigma-algebra]]. Identifying those versions with conditional-expectation equivalence classes uses AC, as stated below. Values on null data fibers remain version-dependent.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], $Q^{\\mathrm{pred}}(\\{1\\})=\\frac12Q_0(\\{1\\})+\\frac12Q_1(\\{1\\})=\\frac12(0)+\\frac12(1)=\\frac12$. Since its support is $\\{0,1\\}$, this is $\\operatorname{Bernoulli}(1/2)$, with mean $1/2$ and variance $1/4$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The conditional means are $\\mu(0)=0$ and $\\mu(1)=1$, and both conditional variances are zero. Thus $\\mathbb E_\\Pi[\\operatorname{Var}(Z\\mid\\theta)]=0$ and $\\operatorname{Var}_\\Pi(\\mu)=1/4$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The predictive variance in step 1.1 equals the sum of those two terms in step 1.2, as asserted by [F2]. Here the entire predictive variance comes from posterior uncertainty about $\\theta$, while future sampling conditional on $\\theta$ contributes zero.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on supplied probability measures or kernels and makes no separate existence claim for empty spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1: both conditional variances are zero; the predictive variance is the positive posterior-mean variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the two predictive masses are one-half each and sum to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and step 1.1: each conditional Bernoulli law at parameter 0 or 1 is degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: Bernoulli parameters 0 and 1 are both included and give the two endpoint point masses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an arbitrary family and asserts no choice-dependent existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-point-predictive-law",
+          "claim": "With posterior weights 1/2 at Bernoulli parameters 0 and 1, the predictive mass at 1 is 1/2 and its variance is 1/4.",
+          "result": "The conditional variances are both 0 and the posterior variance of conditional means {0,1} is 1/4."
+        }
+      ],
+      "finite_smoke": [],
+      "supplier_interfaces": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Initial authoring contract. Independent mathematical review remains pending."
+      }
+    },
+    "ex-asymmetric-loss-changes-the-posterior-optimal-action": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-posterior-risk-and-bayes-action",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ have a supplied posterior probability kernel $\\Pi_y$, let $(\\mathsf A,\\mathcal G)$ be a measurable action space, and let $L:\\Theta\\times\\mathsf A\\to[0,\\infty]$ be a measurable function on the product measurable space [[def-product-sigma-algebra-and-finite-product-sigma-algebras]], in the sense of [[def-measurable-function-between-measurable-spaces]]. This strengthens the section-measurability convention in [[def-loss-function-and-risk]] so that posterior integrals vary measurably with measurable action rules.\n\nFor a fixed data fiber $y$ and action $a$, define the **posterior risk** only when\n$$\\rho_y(a):=\\int_\\Theta L(\\theta,a)\\,\\Pi_y(d\\theta)<\\infty.$$\nA **pointwise Bayes action** at $y$ is a finite-risk action attaining the minimum among all finite-risk actions. On a declared measurable data domain $D$, a **Bayes action rule** is a measurable map $\\delta:D\\to\\mathsf A$ whose finite posterior risk attains that minimum at every $y\\in D$. This definition makes no assertion that finite-risk actions or measurable minimizing rules always exist. It therefore does not infer a Bayes action merely from the existence of an infimum. The sampling risk in [[def-loss-function-and-risk]] is a different integral, taken over the data law at a fixed parameter.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-class-maximal-mass-is-zero-one-bayes-action",
+          "source_section": "Statement",
+          "quote": "Let $\\Pi$ be a posterior probability kernel on a nonempty finite class $\\Theta=\\{1,\\ldots,k\\}$ with the sigma-algebra of all its subsets; give the action class the same measurable structure and use zero–one loss $L(\\theta,a)=\\mathbf 1_{\\{\\theta\\ne a\\}}$. Every posterior-mass maximizer minimizes pointwise posterior risk. The least-indexed posterior-mass maximizer is a measurable, finite-risk Bayes action rule. This statement is choice-free.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under zero–one loss, the risks are $1-\\Pi(\\{0\\})=0.7$ for action $0$ and $1-\\Pi(\\{1\\})=0.3$ for action $1$. Thus action $1$ is the unique zero–one Bayes action, in agreement with [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Under the asymmetric loss, the risk of action $1$ is $3\\Pi(\\{0\\})=0.9$, while the risk of action $0$ is $\\Pi(\\{1\\})=0.7$. Both risks are finite and the lower one is attained uniquely by action $0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two loss functions therefore select different actions under the same posterior: zero–one loss selects $1$, while the stated asymmetric loss selects $0$. This demonstrates that posterior modes alone do not determine a Bayes action without a specified loss.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on supplied probability measures or kernels and makes no separate existence claim for empty spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2: all four listed risks are finite and strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: posterior masses 0.3 and 0.7 sum to one; step 1.2 compares both actions."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no separate degenerate-model claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: the finite action set is exactly {0,1}; both boundary actions are included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an arbitrary family and asserts no choice-dependent existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-action-risk-comparison",
+          "claim": "Zero-one risks are 0.7 for action 0 and 0.3 for action 1; asymmetric risks are 0.7 for action 0 and 0.9 for action 1.",
+          "result": "The unique zero-one action is 1, while the unique asymmetric-loss action is 0."
+        }
+      ],
+      "finite_smoke": [],
+      "supplier_interfaces": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Initial authoring contract. Independent mathematical review remains pending."
+      }
+    },
+    "ex-posterior-median-can-be-nonunique": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-posterior-median",
+          "source_section": "Definition",
+          "quote": "For a probability measure $\\Pi_y$ on $\\mathbb R$, a **posterior median** is any $m\\in\\mathbb R$ satisfying\n$$\\Pi_y((-\\infty,m])\\ge \\tfrac12\\quad\\text{and}\\quad\\Pi_y([m,\\infty))\\ge\\tfrac12.$$\nThe two inequalities, rather than a density-based definition, apply to discrete, continuous, and mixed posteriors and permit more than one median.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-posterior-median-minimizes-absolute-risk",
+          "source_section": "Statement",
+          "quote": "Let $\\Pi$ be a posterior probability kernel on $\\mathbb R$ and let\n$$D_1=\\left\\{y:\\int_{\\mathbb R}|\\theta|\\,\\Pi_y(d\\theta)<\\infty\\right\\}.$$\nThen $D_1$ is measurable. For every $y\\in D_1$, every posterior median minimizes the finite absolute posterior risk $a\\mapsto\\int|\\theta-a|\\,\\Pi_y(d\\theta)$. The measurable lower-median rule from [[lem-lower-posterior-median-is-measurable]] is therefore an attained Bayes action rule on $D_1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $m\\in[0,1]$, $\\Pi((-\\infty,m])\\ge1/2$ and $\\Pi([m,\\infty))\\ge1/2$, so [F1] makes every such $m$ a median.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For $m\\in[0,1]$, $\\rho(m)=\\frac12|m|+\\frac12|1-m|=\\frac12$. For $a<0$, $\\rho(a)=\\frac12(-a)+\\frac12(1-a)=\\frac12-a>\\frac12$; for $a>1$, $\\rho(a)=\\frac12a+\\frac12(a-1)=a-\\frac12>\\frac12$. Thus precisely the interval $[0,1]$ minimizes risk, in agreement with [F2].",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on supplied probability measures or kernels and makes no separate existence claim for empty spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: the minimum absolute risk is one-half, so no zero-risk action is asserted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the two posterior atom masses are one-half each, so their total is one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no separate degenerate-model claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1: the closed median interval includes both endpoints 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an arbitrary family and asserts no choice-dependent existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "equal-two-atom-absolute-risk",
+          "claim": "For Pi=(delta_0+delta_1)/2, every m in [0,1] has absolute risk 1/2; outside this interval the risk is strictly larger.",
+          "result": "Direct formulas give risk 1/2-a for a<0 and a-1/2 for a>1."
+        }
+      ],
+      "finite_smoke": [],
+      "supplier_interfaces": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Initial authoring contract. Independent mathematical review remains pending."
+      }
+    },
+    "ex-continuous-density-mode-under-zero-one-loss": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-posterior-risk-and-bayes-action",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ have a supplied posterior probability kernel $\\Pi_y$, let $(\\mathsf A,\\mathcal G)$ be a measurable action space, and let $L:\\Theta\\times\\mathsf A\\to[0,\\infty]$ be a measurable function on the product measurable space [[def-product-sigma-algebra-and-finite-product-sigma-algebras]], in the sense of [[def-measurable-function-between-measurable-spaces]]. This strengthens the section-measurability convention in [[def-loss-function-and-risk]] so that posterior integrals vary measurably with measurable action rules.\n\nFor a fixed data fiber $y$ and action $a$, define the **posterior risk** only when\n$$\\rho_y(a):=\\int_\\Theta L(\\theta,a)\\,\\Pi_y(d\\theta)<\\infty.$$\nA **pointwise Bayes action** at $y$ is a finite-risk action attaining the minimum among all finite-risk actions. On a declared measurable data domain $D$, a **Bayes action rule** is a measurable map $\\delta:D\\to\\mathsf A$ whose finite posterior risk attains that minimum at every $y\\in D$. This definition makes no assertion that finite-risk actions or measurable minimizing rules always exist. It therefore does not infer a Bayes action merely from the existence of an infimum. The sampling risk in [[def-loss-function-and-risk]] is a different integral, taken over the data law at a fixed parameter.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The density is normalized because $\\int_0^1 6\\theta(1-\\theta)d\\theta=6(1/2-1/3)=1$. Also $\\theta(1-\\theta)=1/4-(\\theta-1/2)^2$, so the density has its unique maximum at $1/2$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Absolute continuity gives $\\Pi(\\{a\\})=0$ for every point action $a$. Hence $\\rho(a)=\\int \\mathbf1_{\\{\\theta\\ne a\\}}\\Pi(d\\theta)=1-\\Pi(\\{a\\})=1$ for every $a$. All actions tie under this loss, even though the density has a unique mode.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on supplied probability measures or kernels and makes no separate existence claim for empty spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: every point-action singleton has posterior mass zero and risk one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the Beta(2,2) density integrates to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: the posterior is absolutely continuous, so it has no point atoms."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example uses action space (0,1), so endpoint actions 0 and 1 are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an arbitrary family and asserts no choice-dependent existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "beta22-density-and-point-risk",
+          "claim": "The density 6 theta(1-theta) integrates to one, has unique mode 1/2, and every point action has exact zero-one risk 1.",
+          "result": "The integral is 6(1/2-1/3)=1; the square form gives the unique mode; absolute continuity gives zero singleton mass."
+        }
+      ],
+      "finite_smoke": [],
+      "supplier_interfaces": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Initial authoring contract. Independent mathematical review remains pending."
+      }
+    },
+    "ex-posterior-credible-interval-need-not-have-nominal-frequency-coverage": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-posterior-credible-set",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathsf Y,\\mathcal Y)$ be measurable spaces and let $y\\mapsto\\Pi_y$ be a supplied posterior probability kernel. For $\\alpha\\in[0,1]$, a set-valued rule $C$ is **graph-measurable** when\n$$\\{(y,\\theta)\\in\\mathsf Y\\times\\Theta:\\theta\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal T.$$\nIt is a **posterior credible set at level $1-\\alpha$** when it is graph-measurable and\n$$\\Pi_y(C(y))\\ge 1-\\alpha\\qquad\\text{for every }y\\text{ in its declared data domain}.$$\nThe posterior-mass function is measurable by integration of the indicator of the membership graph against the kernel. If a density is available relative to a specified dominating measure, a highest-posterior-density region selects parameter values with largest density; such regions need not be intervals and may be disconnected or nonunique.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-central-posterior-quantile-interval-is-credible",
+          "source_section": "Statement",
+          "quote": "Let $\\Pi_y$ be a posterior probability kernel on $\\mathbb R$ and let $0<\\alpha<1$. Define $C_\\alpha(y)=[q_{\\alpha/2}(y),q_{1-\\alpha/2}(y)]$ using the quantiles from [[lem-measurable-posterior-quantile-and-cdf-bracketing]]. Then $C_\\alpha$ is graph-measurable and $\\Pi_y(C_\\alpha(y))\\ge1-\\alpha$ for every $y$. Thus equal-tailed posterior quantile intervals are one kind of credible set.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The joint density/mass is $1\\cdot\\theta$ at $Y=1$ and $1\\cdot(1-\\theta)$ at $Y=0$. Its marginal masses are $\\int_0^1\\theta d\\theta=1/2$ and $\\int_0^1(1-\\theta)d\\theta=1/2$. Therefore the posterior densities are $p(\\theta\\mid Y=1)=2\\theta$ and $p(\\theta\\mid Y=0)=2(1-\\theta)$; each conditional law integrates to one and satisfies the defining conditioning identity.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Their CDFs on $[0,1]$ are $F_1(x)=x^2$ and $F_0(x)=1-(1-x)^2$. Hence the central 95% intervals are $C(1)=[\\sqrt{0.025},\\sqrt{0.975}]$ and $C(0)=[1-\\sqrt{0.975},1-\\sqrt{0.025}]$. Each has posterior mass $0.975-0.025=0.95$, also in accordance with [F1, F2].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed true $\\theta_0=0.005$, $\\sqrt{0.025}>0.005$ because $0.025>0.005^2$. Also $1-\\sqrt{0.975}>0.005$ because $0.975<0.995^2$. Thus $\\theta_0$ lies below the lower endpoint of both possible intervals, so $P_{\\theta_0}\\{\\theta_0\\in C(Y)\\}=0$, not $0.95$. This verifies that posterior credibility is not a frequentist coverage guarantee.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on supplied probability measures or kernels and makes no separate existence claim for empty spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: both possible observed intervals miss theta=0.005, so coverage is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2: both posterior intervals have mass exactly 0.95."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no separate degenerate-model claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Step 2.1 uses the interior parameter theta=0.005; it makes no endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an arbitrary family and asserts no choice-dependent existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "bernoulli-posterior-intervals-miss",
+          "claim": "For both y=0 and y=1, the 95% central posterior interval has lower endpoint above 0.005.",
+          "result": "sqrt(0.025)>0.005 and 1-sqrt(0.975)>0.005, so the fixed parameter is missed for every possible observation."
+        }
+      ],
+      "finite_smoke": [],
+      "supplier_interfaces": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Initial authoring contract. Independent mathematical review remains pending."
+      }
+    }
+  }
+}

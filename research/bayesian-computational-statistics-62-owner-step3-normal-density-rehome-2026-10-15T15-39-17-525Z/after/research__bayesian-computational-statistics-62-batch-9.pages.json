@@ -1,0 +1,342 @@
+[
+  {
+    "order": 2058,
+    "id": "marginal-likelihoods-bayes-factors-and-empirical-bayes",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Marginal likelihoods, Bayes factors, and empirical Bayes",
+    "companion": "marginal-likelihoods-bayes-factors-and-empirical-bayes-examples",
+    "requires": [
+      "hierarchical-bayesian-models-and-partial-pooling",
+      "detection-and-quantification-limits",
+      "posterior-propriety-and-dominated-bayes-formula"
+    ],
+    "items": [
+      {
+        "id": "thm-balanced-one-way-random-effects-expected-mean-squares",
+        "kind": "theorem",
+        "title": "Expected mean squares in the balanced one-way normal random-effects model",
+        "statement": "For k,r>=2 and the independent balanced model Y_ij=mu+a_i+epsilon_ij with a_i~N(0,tau^2), epsilon_ij~N(0,sigma^2), tau^2>=0, sigma^2>0, the between and within mean squares have expectations sigma^2+r tau^2 and sigma^2. Equating these moments gives the raw method-of-moments estimate (MSB-MSW)/r.",
+        "deps": [
+          "cor-variance-adds-for-pairwise-independent-random-variables",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-axiom-of-choice",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-independent-random-elements",
+          "def-moments-variance-and-covariance",
+          "lem-measurable-functions-preserve-independence",
+          "lem-normal-location-scale-mean-and-variance"
+        ],
+        "justified_by": [],
+        "strategy": "direct",
+        "axiom_use": "AC is required by the library's normal-law definition and its normal-moment supplier. The expectation and variance algebra uses no additional choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman et al., Bayesian Data Analysis, 3rd ed., §5.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "NIST/SEMATECH e-Handbook of Statistical Methods, §7.4.4, What are variance components?",
+              "url": "https://itl.nist.gov/div898/handbook/prc/section4/prc44.htm"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-marginal-likelihood-and-bayes-factor",
+        "kind": "definition",
+        "title": "Marginal likelihoods, proper model evidence, and Bayes factors",
+        "statement": "For each of finitely many models with a proper parameter prior and a specified jointly measurable likelihood density f_i(theta,y) against one common sigma-finite data measure mu, define m_i(y)=integral f_i(theta,y) Pi_i(d theta). This is the prior-predictive density, or marginal likelihood/evidence. For two models i and j with positive finite evidences define BF_ji(y)=m_j(y)/m_i(y); arbitrary model prior weights w_i>0 summing to one define prior odds w_j/w_i.",
+        "deps": [
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-posterior-evidence-normalizer-and-fiberwise-update",
+          "def-probability-measure",
+          "def-statistical-experiment"
+        ],
+        "justified_by": [],
+        "strategy": "definition",
+        "axiom_use": "None beyond the axioms already declared by the cited measure and density interfaces.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman et al., Bayesian Data Analysis, 3rd ed., §7.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapter 8, §§8.2.1–8.2.2",
+              "url": "https://www.bayesrulesbook.com/chapter-8.html"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-finite-model-posterior-odds-from-marginal-evidence",
+        "kind": "theorem",
+        "title": "Finite-model posterior probabilities and Bayes-factor odds",
+        "statement": "Under the finite dominated model setup of def-marginal-likelihood-and-bayes-factor, if every model weight is positive and every model evidence at y is finite and positive, then the model-index posterior has version P(M=i|y)=w_i m_i(y)/sum_j w_j m_j(y). For any two models j,i its posterior odds are prior odds times BF_ji=m_j(y)/m_i(y).",
+        "deps": [
+          "def-likelihood-density",
+          "def-marginal-likelihood-and-bayes-factor",
+          "prop-fiberwise-posterior-propriety-iff-finite-positive-evidence",
+          "thm-bayes-formula-for-dominated-kernels",
+          "thm-finite-bayes-theorem"
+        ],
+        "justified_by": [],
+        "strategy": "direct",
+        "axiom_use": "None. The finite disjoint-union construction and the dominated-kernel Bayes formula are choice-free.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman et al., Bayesian Data Analysis, 3rd ed., §7.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapter 8, §8.2.1",
+              "url": "https://www.bayesrulesbook.com/chapter-8.html"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "def-type-ii-marginal-likelihood-and-empirical-bayes-posterior",
+        "kind": "definition",
+        "title": "Type-II maximum marginal likelihood and empirical-Bayes plug-in posterior",
+        "statement": "In a finite-group hierarchy with conditional parameter kernel G_eta and specified jointly measurable likelihood density, define m(y|eta) by integrating the conditional likelihood over G_eta^tensor m. Define a Type-II maximum-marginal-likelihood choice only at data y where eta->m(y|eta) is finite-valued and attains a positive finite maximum; a data-indexed rule requires a measurable maximizing selection. Its plug-in posterior is the normalized conditional update at that selected eta. Full Bayes retains the posterior distribution of eta and may induce group dependence after eta is integrated out; no generic empirical-Bayes risk, consistency, dominance, or coverage guarantee is asserted.",
+        "deps": [
+          "def-hierarchical-bayesian-model",
+          "def-measure-kernel-and-probability-kernel",
+          "def-marginal-likelihood-and-bayes-factor",
+          "def-posterior-evidence-normalizer-and-fiberwise-update",
+          "prop-fiberwise-posterior-propriety-iff-finite-positive-evidence",
+          "thm-hierarchical-posterior-normalization-on-positive-finite-evidence"
+        ],
+        "justified_by": [],
+        "strategy": "definition",
+        "axiom_use": "No new axiom is asserted. The referenced hierarchical posterior theorem carries only its stated hypotheses.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman et al., Bayesian Data Analysis, 3rd ed., §§5.1, 5.3–5.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapter 16, §§16.3–16.4",
+              "url": "https://www.bayesrulesbook.com/chapter-16.html"
+            }
+          ]
+        },
+        "dependency_level": 3
+      }
+    ]
+  },
+  {
+    "order": 2059,
+    "id": "marginal-likelihoods-bayes-factors-and-empirical-bayes-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Marginal likelihoods, Bayes factors, and empirical Bayes — Examples",
+    "companion": "marginal-likelihoods-bayes-factors-and-empirical-bayes",
+    "requires": [
+      "marginal-likelihoods-bayes-factors-and-empirical-bayes"
+    ],
+    "items": [
+      {
+        "id": "ex-negative-balanced-anova-moment-estimate",
+        "kind": "example",
+        "title": "A negative balanced-ANOVA moment estimate",
+        "statement": "With k=r=2 and observations (-1,1) in both groups, MSB=0, MSW=2, and the raw moment estimate of tau^2 is -1. Under positive tau^2 and sigma^2 this occurs on a positive-probability neighborhood, so truncating at zero changes the estimator and does not prove a structural zero.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-independent-random-elements",
+          "lem-normal-location-scale-density",
+          "thm-balanced-one-way-random-effects-expected-mean-squares"
+        ],
+        "justified_by": [],
+        "strategy": "direct",
+        "axiom_use": "AC is inherited from the library's normal-law and normal-density suppliers; no additional choice is used.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman et al., Bayesian Data Analysis, 3rd ed., §5.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "NIST/SEMATECH e-Handbook of Statistical Methods, §7.4.4",
+              "url": "https://itl.nist.gov/div898/handbook/prc/section4/prc44.htm"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-diffuse-normal-prior-changes-bayes-factor",
+        "kind": "example",
+        "title": "A diffuse normal prior changes the point-null Bayes factor",
+        "statement": "Compare a point-null model theta=0 with a normal alternative theta~N(0,tau^2), Y|theta~N(theta,sigma^2), sigma^2>0. At fixed y=0 the alternative-to-null Bayes factor is sqrt(sigma^2/(sigma^2+tau^2)), which tends to zero as the alternative prior variance grows.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-marginal-likelihood-and-bayes-factor",
+          "lem-normal-location-scale-density"
+        ],
+        "justified_by": [],
+        "strategy": "direct",
+        "axiom_use": "AC is inherited from the library normal-law and density suppliers; the Gaussian integral calculation uses no additional choice.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman et al., Bayesian Data Analysis, 3rd ed., §7.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapter 8, §8.2.2",
+              "url": "https://www.bayesrulesbook.com/chapter-8.html"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-improper-flat-prior-arbitrary-evidence-scale",
+        "kind": "example",
+        "title": "An improper flat-prior scale makes a formal evidence arbitrary",
+        "statement": "For one normal location observation with known positive variance, the likelihood integral against c times Lebesgue measure equals c. Two model-specific improper flat priors therefore give a formal evidence ratio c_2/c_1 that changes with arbitrary scales, so it is not a Bayes factor defined by the proper-prior model evidence.",
+        "deps": [
+          "def-countable-choice",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-marginal-likelihood-and-bayes-factor",
+          "def-posterior-evidence-normalizer-and-fiberwise-update",
+          "def-axiom-of-choice",
+          "lem-normal-location-scale-density",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-lebesgue-measure-of-a-box-of-every-kind"
+        ],
+        "justified_by": [],
+        "strategy": "direct",
+        "axiom_use": "AC is inherited from the normal-density supplier and implies Countable Choice for the Lebesgue sigma-finiteness and interval-volume facts. No additional choice is used.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman et al., Bayesian Data Analysis, 3rd ed., §7.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-hyperparameter-uncertainty-can-induce-group-dependence",
+        "kind": "example",
+        "title": "A shared hyperparameter can couple group parameters",
+        "statement": "Let eta be uniform on {0,1}, let theta_1,theta_2 be conditionally independent with theta_j=eta, and let the singleton observations carry no information. The full posterior leaves the shared eta uncertain and makes theta_1,theta_2 dependent; Type-II plug-in at eta=0 gives a different posterior.",
+        "deps": [
+          "def-hierarchical-bayesian-model",
+          "def-standard-borel-space",
+          "def-type-ii-marginal-likelihood-and-empirical-bayes-posterior",
+          "thm-hierarchical-posterior-normalization-on-positive-finite-evidence"
+        ],
+        "justified_by": [],
+        "strategy": "direct",
+        "axiom_use": "None. The finite hierarchy, posterior normalization, and calculations use no choice axiom.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman et al., Bayesian Data Analysis, 3rd ed., §§5.1, 5.3–5.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapter 16, §§16.3–16.4",
+              "url": "https://www.bayesrulesbook.com/chapter-16.html"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-point-null-needs-a-model-atom",
+        "kind": "example",
+        "title": "A point-null hypothesis needs a model atom",
+        "statement": "Compare M_0: theta=0 and M_1: theta distributed uniformly on [0,1], each with positive model weight, under Y|theta~Bernoulli(theta). At y=0 both model evidences are positive finite; M_0 has positive posterior probability because it has positive prior model mass, whereas the continuous parameter prior assigns theta=0 probability zero.",
+        "deps": [
+          "def-countable-choice",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-marginal-likelihood-and-bayes-factor",
+          "thm-finite-model-posterior-odds-from-marginal-evidence",
+          "thm-lebesgue-measure-of-a-box-of-every-kind"
+        ],
+        "justified_by": [],
+        "strategy": "direct",
+        "axiom_use": "Countable Choice is used only through the stated Lebesgue-volume supplier; the finite-model calculation is choice-free.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman et al., Bayesian Data Analysis, 3rd ed., §7.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapter 8, §8.2.2",
+              "url": "https://www.bayesrulesbook.com/chapter-8.html"
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ]
+  }
+]

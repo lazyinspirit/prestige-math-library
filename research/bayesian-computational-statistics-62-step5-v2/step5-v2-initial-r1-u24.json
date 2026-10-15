@@ -1,0 +1,98 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "24",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "ex-em-likelihood-has-two-local-maxima",
+      "model": "gpt-6-luna",
+      "context_sha256": "82f89dacbd68d31d6a05eb8ab11d11c246037eb10c391ab371262fbdd03a0f82",
+      "outcome": "false_positive",
+      "reason": "The remark lists this example only in forward_refs and its contextual Remarks section, not deps or its mathematical premise. Its Remark follows directly from the two ascent theorems. The example independently computes r in [1/4,1/2], uniform latent laws, Q=log r-log 2, identical-support KL=0, and the explicit alternating attained maximizers. There is no logical dependency cycle.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse",
+      "model": "gpt-6-luna",
+      "context_sha256": "f85dd4a6427c0cb0e2c0bca44c2ff156dd5b27a6891752b799c6e851cd431528",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 attributes a finite-mixture construction result to a definition that instead requires a supplied jointly measurable, fibre-normalized density. The original step 1.1 already checks normalization directly, so the likelihood claim has no mathematical gap. Corrected F2 to the actual definition, added the directly used Tonelli dependency and F5, and checked joint continuity on each label pair and sigma-finiteness before applying Tonelli.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-em-likelihood-has-two-local-maxima",
+      "disposition": "unaffected",
+      "post_sha256": "d37a5257f774221e8e705f1e360c27e1a8c6f028f1d3371b13ecb26cac7bfabe",
+      "review_context_sha256": "d616ed888ccca97c7ebec8ab99cbcdc44693dc848f7f6e8c25b5db2438daeb80",
+      "reason": "The complete verification is sound: the square term vanishes exactly at +/-1, giving strict local and tied global maxima. All parameters have positive finite marginals, uniform latent laws, finite absolute log integrals and KL=0. At either maximizer the explicit selector returns the other attained exact Q maximizer, so the sequence alternates and has no limit. The owning manifest incorrectly said strict global maxima; its summary now says strict local maxima, both tied global maximizers. The item and its Example are unchanged.",
+      "metadata_repair_only": true,
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse",
+      "disposition": "repaired",
+      "post_sha256": "4e618cb59352fb9b2b51da10376a080c9e834ce63d38f54d14760a532f74d1b4",
+      "review_context_sha256": "41fcf59f2d4073629987f4562902bfaff1db1382d20727205c8aa337588d8119",
+      "reason": "Checked the full normal-location-scale proof and AC hypothesis, positive scales, joint continuity for each finite label pair, sigma-finite product measures and Tonelli normalization. Corrected the misattribution in F2 and declared Tonelli as F5 and a dependency. Summing labels factors the likelihood; g_epsilon(0)>=1/(2 sqrt(2pi) epsilon) and g_epsilon(1)>=1/(2 sqrt(2pi)) imply L_epsilon>=1/(8pi epsilon), finite at every positive epsilon and divergent as epsilon approaches zero. No EM path or zero-variance density is claimed. The Example and all Statement/Definition interfaces are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "defect",
+      "id": "ex-em-likelihood-has-two-local-maxima",
+      "status": "false_positive",
+      "reason": "No dependency cycle: the remark has only a contextual forward reference, and the model is verified directly.",
+      "uncertain": false
+    },
+    {
+      "ledger": "defect",
+      "id": "ex-em-likelihood-has-two-local-maxima",
+      "status": "fixed",
+      "severity": "nonfatal",
+      "locus": "manifest-summary",
+      "reason": "Owning batch-24.pages.json summary incorrectly called two tied maximizers strict global maxima; changed to strict local maxima, both tied global maximizers. Item unchanged.",
+      "uncertain": false
+    },
+    {
+      "ledger": "defect",
+      "id": "ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse",
+      "status": "fixed",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "reason": "F2 incorrectly restated a definition as a mixture-construction theorem, while step 1.1 already proved the construction directly. Restated F2 faithfully, added direct Tonelli citation/dependency and explicitly checked its measurability and sigma-finiteness hypotheses.",
+      "uncertain": false
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Both assigned draft items are in frozen frontier batch 24 and were reviewed in the assigned order. Consulted the full repository instructions, generated round task, initial-1 assignment and rejection-blind batch-24 digest (no concerns or alerts). No external source consultation was necessary for these familiar elementary arguments; no independent review of this repair is claimed.",
+    "First item evidence: items/ex-em-likelihood-has-two-local-maxima.md, complete Example and Verification; items/rem-em-ascent-does-not-imply-global-optimality-or-convergence.md, deps, forward_refs, Remark and Remarks; items/alg-expectation-maximization.md, exact-mode admissibility and selector; items/def-latent-variable-joint-and-observed-data-factorization.md and items/thm-observed-density-is-latent-marginal-under-tonelli.md, definitions and marginal proof; items/thm-em-observed-log-likelihood-is-nondecreasing.md, identity and admissibility. Confirmed no logical cycle. Item guard unchanged; only the assigned manifest summary was corrected from strict global maxima to strict local maxima, both tied global maximizers.",
+    "Gaussian evidence: items/lem-normal-location-scale-density.md, Statement and full affine change-of-variables proof with AC; items/thm-tonelli-theorem-for-sigma-finite-product-spaces.md, Statement and complete nonnegative-product proof. Positive scales give proper normal components; joint continuity for each finite label pair gives joint measurability. Sigma-finite Tonelli gives product normalization. The two componentwise lower bounds multiply to 1/(8 pi epsilon), proving divergence with finite likelihood at each positive scale. F2 now states the actual input-density definition; F5 cites Tonelli directly. No zero-variance density, EM convergence, or EM trajectory approaching collapse is asserted.",
+    "Shared metadata changes used acquire/reread/edit/check/release through tools/step5-shared-write-lock.mjs. Gaussian manifest deps now declare Tonelli; its contract has exact new step 1.1 text and inputs, exact F5 supplier Statement, and a corrected unit-boundary explanation: normalization concerns integrals, not whether an observed likelihood equals one. Existing independent risk-review notes were preserved and the repair author check appended. Both A/B page summaries remain accurate and unchanged.",
+    "After metadata integration, re-examined both reviews: the Gaussian proof-only and dependency changes do not alter the first example, its remark supplier, or any mathematical interface. Captured both review-context hashes again immediately on that examined stable state; they equal the earlier captured values. No original Statement or Definition changed; both Examples also remain unchanged. No prerequisite items were created, no downstream propagation is triggered, and no published-consumer defect or maintenance obligation was discovered.",
+    "Validation: node tools/tsx-run.mjs tools/precheck.mts items/ex-em-likelihood-has-two-local-maxima.md items/ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse.md --json: exit 0, 2 checked, 0 failed.",
+    "Validation: node tools/rendercheck.mjs items/ex-em-likelihood-has-two-local-maxima.md items/ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse.md library/bayesian-computational-statistics/em-algorithm-and-latent-variable-likelihood-ascent.md library/bayesian-computational-statistics/em-algorithm-and-latent-variable-likelihood-ascent-examples.md --json: exit 0, 4 checked, no errors or warnings.",
+    "Validation: node tools/depcheck.mjs --items-file <(printf '%s\\n' '[\"ex-em-likelihood-has-two-local-maxima\",\"ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse\"]'): exit 0, both selected item/page checks and prerequisite cycle checks passed (998 prerequisite-context items, 291 pages).",
+    "Validation after final item edit: node tools/proof-layout.mjs items/ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse.md: exit 0, 1 changed item, 3 steps, 0 defects. No item edits or formatter ran afterward.",
+    "Validation after metadata integration: node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-24.proof-contracts.json --items ex-em-likelihood-has-two-local-maxima,ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse --strict --json: exit 0, both checked, no errors or warnings. No assigned gate diagnostics, unresolved mathematics or outstanding repairs remain. Native rejudgment, collection and certification remain controller duties."
+  ],
+  "supporting_evidence": {
+    "research/bayesian-computational-statistics-62-batch-24.pages.json": "702d2c5385e5007c36938542c21907a1003b7b4f92b6dabc0a8248e8460253f2",
+    "research/bayesian-computational-statistics-62-batch-24.proof-contracts.json": "4f7b92988a868a4ea27809c9abc5403781a5d60f967239a78f68a0e71aa45570"
+  }
+}

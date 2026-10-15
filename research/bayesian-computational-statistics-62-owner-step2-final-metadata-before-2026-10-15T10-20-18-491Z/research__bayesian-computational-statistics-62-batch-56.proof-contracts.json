@@ -1,0 +1,1049 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-cross-validation-risk-bias-at-training-size",
+    "lem-kfold-cv-variance-covariance-decomposition",
+    "thm-no-universal-unbiased-k-fold-cv-variance-estimator",
+    "ex-holdout-cv-training-size-bias",
+    "ex-paired-kfold-model-comparison-uncertainty",
+    "ex-random-row-split-leaks-group-information",
+    "ex-cross-validation-risk-minimization-does-not-identify-model"
+  ],
+  "contracts": {
+    "thm-cross-validation-risk-bias-at-training-size": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "its law is the finite product of the marginal laws",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cross-validation-split-and-risk-target",
+          "source_section": "Definition",
+          "quote": "The **risk at training size $k$** is $$R_k:=\\mathbb E_{P^{\\otimes(k+1)}}\\!\\left[L\\bigl(A_k(Z_1,\\ldots,Z_k),Z_{k+1}\\bigr)\\right],$$ where $Z_{k+1}$ is independent of the training sample.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+          "source_section": "Definition",
+          "quote": "**Input:** observations $z_1,\\ldots,z_n$, learning rules $A_k$, a loss $L$, and a finite split schedule $((T_r,V_r,w_r))_{r=1}^B$. Each $(T_r,V_r)$ is a split as in [[def-cross-validation-split-and-risk-target]], $w_r\\ge0$, and $\\sum_{r=1}^B w_r=1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+          "source_section": "Definition",
+          "quote": "A randomized schedule is admissible only when its law is specified and is independent of the observations.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-cross-validation-split-and-risk-target",
+          "source_section": "Definition",
+          "quote": "assume $L(A_k(Z_1,\\ldots,Z_k),Z_{k+1})$ is integrable under $P^{\\otimes(k+1)}$ for every size used.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+          "source_section": "Definition",
+          "quote": "- **$K$-fold:** for $2\\le K\\le n$ and a partition $I_1,\\ldots,I_K$ into nonempty folds, use $T_j=I_j^c$, $V_j=I_j$, and $w_j=|I_j|/n$; for equal folds this is $1/K$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each split and held-out observation, its disjoint training coordinates and test coordinate have product law P^{tensor(|T_r|+1)}, so the expected loss is R_{|T_r|}.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Linearity of expectation over each finite schedule gives the weighted average of its training-size risks.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Subtracting R_n gives the exact full-sample bias formula; its sign requires an additional monotonicity condition.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Conditioning on a finite schedule randomized independently of the data and averaging yields the randomized-schedule expectation formula.",
+          "step": "3.2",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The fixed K-fold formula, equal-fold target, and single-holdout identity follow by substituting their schedules in the general formula.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every schedule entry is a split into nonempty training and validation sets, so neither set can be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 retains zero risks and zero schedule weights in the finite weighted identity; no division by either value occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At the smallest allowed sample n=2, a split has one training and one validation observation; step 1.1 still applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 and the finite-sum argument remain valid when every loss is constant and all training-size risks coincide."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit endpoint, or open/closed boundary is part of this expectation identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20134.1 use only the given finite schedules and finite sums; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states an expectation identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states an expectation identity, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axiom_uses": []
+    },
+    "lem-kfold-cv-variance-covariance-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "its law is the finite product of the marginal laws",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\nIf $X$ and $Y$ are square-integrable real random variables on the same probability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cross-validation-split-and-risk-target",
+          "source_section": "Definition",
+          "quote": "For a fixed partition $I_1,\\ldots,I_K$ of $[n]$ into nonempty folds with $K\\ge2$, the equal-observation-weight cross-validation score is $$\\widehat R_{CV}:=\\frac1n\\sum_{j=1}^K\\sum_{i\\in I_j}L\\bigl(A_{n-|I_j|}(Z_{I_j^c}),Z_i\\bigr),$$ where each training tuple $Z_{I_j^c}$ is ordered by increasing index and $I_j^c=[n]\\setminus I_j$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+          "source_section": "Definition",
+          "quote": "To compare two or more candidate rules, apply the same schedule and subtract their validation losses within each split before averaging; this is the paired comparison.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The IID product law is invariant under coordinate permutations, verified first on generating rectangles and then by measure uniqueness.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Symmetry of each rule makes the error vector invariant under fold-preserving permutations, which act transitively on the three kinds of indices or index pairs.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Counting diagonal, within-fold ordered, and between-fold ordered pairs in the covariance sum yields the variance formula, including m=1.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes K>=2, m>=1, and n=Km, so there is a nonempty finite sample and partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 still gives zero variance when all errors are constant; every covariance term then vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1 no distinct within-fold pair exists, and step 3.1 sets its coefficient to zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 is an algebraic covariance expansion valid for singular or zero covariance matrices."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint is part of the covariance identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 use only finite coordinate permutations and finite pair counts; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves a formula, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves a formula, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axiom_uses": []
+    },
+    "thm-no-universal-unbiased-k-fold-cv-variance-estimator": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "its law is the finite product of the marginal laws",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cross-validation-split-and-risk-target",
+          "source_section": "Definition",
+          "quote": "For a fixed partition $I_1,\\ldots,I_K$ of $[n]$ into nonempty folds with $K\\ge2$, the equal-observation-weight cross-validation score is $$\\widehat R_{CV}:=\\frac1n\\sum_{j=1}^K\\sum_{i\\in I_j}L\\bigl(A_{n-|I_j|}(Z_{I_j^c}),Z_i\\bigr),$$ where each training tuple $Z_{I_j^c}$ is ordered by increasing index and $I_j^c=[n]\\setminus I_j$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+          "source_section": "Definition",
+          "quote": "- **$K$-fold:** for $2\\le K\\le n$ and a partition $I_1,\\ldots,I_K$ into nonempty folds, use $T_j=I_j^c$, $V_j=I_j$, and $w_j=|I_j|/n$; for equal folds this is $1/K$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-kfold-cv-variance-covariance-decomposition",
+          "source_section": "Statement",
+          "quote": "These values are well-defined, and $$\\operatorname{Var}\\!\\left(\\frac1n\\sum_{i=1}^n e_i\\right)=\\frac{\\sigma^2}{n}+\\frac{m-1}{n}\\omega+\\frac{n-m}{n}\\gamma.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The covariance decomposition separates the diagonal, within-fold, and between-fold contributions to the variance.",
+          "step": "1.1",
+          "inputs": [
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A symmetric product learner under Bernoulli(p) has fold errors that are products of r=n-m+1 distinct coordinates, so the mean score is p^r.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "construct",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The second moment of the score is a degree-at-most-n polynomial, but subtracting its squared mean p^(2r), with 2r>n, makes the target variance degree 2r.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Every sample-based estimator's expectation is a degree-at-most-n polynomial, so it cannot equal the target variance polynomial on the whole Bernoulli parameter interval.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra",
+            "F7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem fixes K>=2 and m>=1, hence n=Km>=2 and a nonempty data sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 uses only the open Bernoulli interval 0<p<1, where every binary sample has positive mass and the conditional estimator mean is finite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At the smallest case K=2,m=1, step 3.1 gives 2r-n=2>0, so the degree contradiction still applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 establishes a degree mismatch for the nondegenerate subfamily 0<p<1, so universal unbiasedness already fails before degenerate laws are considered."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof requires only the open Bernoulli interval; no limiting assertion at p=0 or p=1 is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the explicit finite binary sample space and no selection of witnesses or choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves nonexistence, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves nonexistence, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "axiom_uses": []
+    },
+    "ex-holdout-cv-training-size-bias": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-cross-validation-risk-bias-at-training-size",
+          "source_section": "Statement",
+          "quote": "Then $$\\mathbb E[\\widehat R]=\\sum_{r=1}^B w_rR_{|T_r|}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cross-validation-split-and-risk-target",
+          "source_section": "Definition",
+          "quote": "$$R_k:=\\mathbb E_{P^{\\otimes(k+1)}}\\!\\left[L\\bigl(A_k(Z_1,\\ldots,Z_k),Z_{k+1}\\bigr)\\right],$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+          "source_section": "Definition",
+          "quote": "- **Holdout:** one split, with $T$ the chosen training set, $V=T^c$, and weight $1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The sample mean of k independent Bernoulli observations has mean p and variance p(1-p)/k.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "algebra",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "An independent test Bernoulli variable gives squared prediction risk p(1-p)(1+1/k).",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The one-point holdout estimate has expectation R3=1/3, while full-sample risk is R4=5/16, giving bias 1/48.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes n=4, one held-out observation, and three training observations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The risk calculation in steps 1.1\u20132.1 permits p=0 or p=1, where both risks and the bias are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1's variance formula is valid for k=1; the example uses k=3 and compares it with k=4."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At Bernoulli endpoints p=0 or p=1, steps 1.1\u20132.1 give zero variance and zero bias without division by a variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint limit is part of this finite risk calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 use a fixed split and finite sums only; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes risks and a bias, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes risks and a bias, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axiom_uses": []
+    },
+    "ex-paired-kfold-model-comparison-uncertainty": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cross-validation-split-and-risk-target",
+          "source_section": "Definition",
+          "quote": "For a fixed partition $I_1,\\ldots,I_K$ of $[n]$ into nonempty folds with $K\\ge2$, the equal-observation-weight cross-validation score is $$\\widehat R_{CV}:=\\frac1n\\sum_{j=1}^K\\sum_{i\\in I_j}L\\bigl(A_{n-|I_j|}(Z_{I_j^c}),Z_i\\bigr),$$ where each training tuple $Z_{I_j^c}$ is ordered by increasing index and $I_j^c=[n]\\setminus I_j$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+          "source_section": "Definition",
+          "quote": "To compare two or more candidate rules, apply the same schedule and subtract their validation losses within each split before averaging; this is the paired comparison.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same probability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-kfold-cv-variance-covariance-decomposition",
+          "source_section": "Statement",
+          "quote": "These values are well-defined, and $$\\operatorname{Var}\\!\\left(\\frac1n\\sum_{i=1}^n e_i\\right)=\\frac{\\sigma^2}{n}+\\frac{m-1}{n}\\omega+\\frac{n-m}{n}\\gamma.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The paired fold differences are the four stated product errors because the comparison rule has zero loss.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each error is Bernoulli with mean 1/8 and variance 7/64, and every distinct error pair has covariance 3/64.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The covariance formula gives paired score variance 1/16, with positive within- and between-fold contributions.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Enumeration of all binary outcomes gives the same variance 1/16 as the covariance calculation.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "F3",
+            "F4",
+            "step 3.1",
+            "algebra",
+            "F7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes four observations in two nonempty folds."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 includes the all-zero outcome, whose paired score is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 includes the one-success outcomes among the cases with at most two ones; all have score zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The finite distribution in step 4.1 includes both constant outcome vectors and verifies their scores directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint is part of the finite binary example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 exhausts the 16 possible samples; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a variance value, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves a variance value, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "all-16-twofold-paired-score-enumeration",
+          "model": "All 16 vectors in {0,1}^4 have probability 1/16; e_i=Z_i times the product of the three training coordinates in its fold, and the paired score is (1/4) sum_i e_i.",
+          "result": "By number of ones, one vector with four ones has score 1, four vectors with three ones have score 1/4, and the other eleven vectors have score 0. Thus E[score]=1/8, E[score^2]=5/64, and Var(score)=1/16.",
+          "evidence": "Example Verification step 4.1; its variance agrees with the covariance calculation in step 3.1."
+        }
+      ],
+      "axiom_uses": []
+    },
+    "ex-random-row-split-leaks-group-information": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-holdout-loo-lpo-v-fold-and-repeated-cv",
+          "source_section": "Definition",
+          "quote": "- **$K$-fold:** for $2\\le K\\le n$ and a partition $I_1,\\ldots,I_K$ into nonempty folds, use $T_j=I_j^c$, $V_j=I_j$, and $w_j=|I_j|/n$; for equal folds this is $1/K$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "When group rows are split, each validation copy has a memorized counterpart in training; when together, both lose under the default-zero prediction. This yields the displayed score formula.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Uniform balanced-fold counting gives the probability that both copies of one group share a fold.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The independent fold randomization and Bernoulli group labels give expected row-split risk below the new-group deployment risk.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because the row records within each group share a label, the example violates the IID-row premise and illustrates sampling-unit mismatch.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes G>=2 groups and two balanced nonempty folds."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives zero row loss for a group with label zero whether its rows are split or kept together."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 is valid at G=2, the smallest allowed group count."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes nondegenerate Bernoulli half labels for each group."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint is part of the finite group split calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 counts a finite uniform set of balanced partitions; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves an expectation comparison, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves an expectation comparison, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axiom_uses": []
+    },
+    "ex-cross-validation-risk-minimization-does-not-identify-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-risk-estimation-versus-model-identification",
+          "source_section": "Definition",
+          "quote": "A **risk-minimizing selector** chooses a label minimizing the specified risk criterion, such as $R_{m,k}$ or its cross-validation estimate; a fixed ordering of $M$ may be used to resolve ties.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cross-validation-split-and-risk-target",
+          "source_section": "Definition",
+          "quote": "The **risk at training size $k$** is $$R_k:=\\mathbb E_{P^{\\otimes(k+1)}}\\!\\left[L\\bigl(A_k(Z_1,\\ldots,Z_k),Z_{k+1}\\bigr)\\right],$$ where $Z_{k+1}$ is independent of the training sample.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "its law is the finite product of the marginal laws",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both constant predictors have risk 1/2 under Bernoulli half labels, so predictive risk ties the labels.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two labels induce identical n-sample laws, so any data-based selector has identical output distributions and cannot recover both labels surely.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The equal-risk and equal-law calculations exhibit distinct objectives and show risk minimization alone does not identify the model label.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses two candidate labels and a nonempty finite sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly evaluates the zero predictor's risk and obtains 1/2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The argument applies for every sample size n>=1; step 2.1 uses equality of the product laws."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The common Bernoulli half law is nondegenerate; no degenerate data law is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint appears in this finite identification example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 use the explicit finite label set and the fixed candidate laws; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives a nonidentifiability witness, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives a nonidentifiability witness, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axiom_uses": []
+    }
+  }
+}

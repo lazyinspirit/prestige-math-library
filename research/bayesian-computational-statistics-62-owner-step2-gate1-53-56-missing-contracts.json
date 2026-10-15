@@ -1,0 +1,511 @@
+{
+  "version": 1,
+  "scope": [
+    "def-hadamard-differentiability-tangentially",
+    "alg-overlapping-block-resampling",
+    "alg-moving-block-bootstrap",
+    "alg-tapered-block-bootstrap",
+    "alg-k-sample-null-constrained-block-bootstrap",
+    "alg-studentized-two-sample-u-permutation-test",
+    "def-cross-validation-split-and-risk-target",
+    "def-risk-estimation-versus-model-identification",
+    "alg-holdout-loo-lpo-v-fold-and-repeated-cv"
+  ],
+  "contracts": {
+    "def-hadamard-differentiability-tangentially": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires theta in D, so D is nonempty; E_0 is a linear subspace and contains 0. A sequence family with no admissible perturbations imposes its universally quantified condition vacuously, rather than claiming existence of any such perturbations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition divides only by positive t_m, never by zero; h=0 and the zero derivative are permitted and the required limit is then the corresponding zero vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition works for one-dimensional normed spaces and a constant direction sequence h_m=h; it still requires the limit along every admissible positive t_m->0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition allows E_0={0} and a zero continuous linear derivative. It imposes only admissible perturbation limits and does not assert uniqueness of a derivative without suitable domain directions."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition approaches t=0 only through t_m>0; t_m=0 is excluded and no quotient is evaluated at the endpoint. Directions outside E_0 are explicitly excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition quantifies over already supplied sequences and a continuous linear map; it chooses no element from an arbitrary family of sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: existence of a continuous linear derivative satisfying every displayed tangential sequence limit is the criterion that assigns the term Hadamard differentiable; it is a defining condition rather than a separately proved implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: using the term Hadamard differentiable imports that continuous linear map and all the stated sequence limits; the definition supplies no separate converse theorem or domain-extension assertion."
+        }
+      ],
+      "definition_review": {
+        "verdict": "pass",
+        "evidence": "Read the full Definition: positive scales, admissible perturbations, continuous linear derivative and prescribed tangential subspace. No numbered proof or factual citation block is present.",
+        "source_section": "Definition",
+        "source_exact": "Let $E,F$ be normed spaces, let $D\\subseteq E$, let $\\theta\\in D$, and let $E_0\\subseteq E$ be a linear subspace. A map $\\Psi:D\\to F$ is **Hadamard differentiable at $\\theta$, tangentially to $E_0$** if there is a continuous linear map $\\Psi'_\\theta:E_0\\to F$ such that, for every sequence $t_m>0$ with $t_m\\to0$, and every sequence $h_m\\to h\\in E_0$ for which $\\theta+t_mh_m\\in D$,\n\n$$\\frac{\\Psi(\\theta+t_mh_m)-\\Psi(\\theta)}{t_m}\\longrightarrow \\Psi'_\\theta(h)\\quad\\hbox{in }F.$$\n\nThe subspace is part of the hypothesis: directions outside $E_0$ are not covered by this definition."
+      }
+    },
+    "alg-overlapping-block-resampling": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires n>=1 and 1<=b<=n, so N=n-b+1 and k=ceil(n/b) are positive; the complete input and candidate-index families cannot be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits zero-valued records in any ambient measurable space containing zero; indices and divisors remain positive, and r=0 means no truncated extra prefix is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition at n=b=1 gives N=k=1, J_1=1 with probability one, and returns the original single entry."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits identical observed records; every selected block then contains identical records and the output is deterministic even though the index law is still specified."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition at b=1 draws n IID empirical records; at b=n it has N=k=1 and returns the input in its original order. When b divides n, exactly k full blocks are retained."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition specifies a finite product of uniform laws on the finite set {1,...,N}; no arbitrary choice function or selection of block representatives is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The index sampler defines a finite randomized procedure with input/output instructions; it states no equivalence characterization of bootstrap validity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse validity implication occurs in the sampler: its given index law constructs outputs, and no converse inference from outputs to inputs is asserted."
+        }
+      ],
+      "definition_review": {
+        "verdict": "pass",
+        "evidence": "Read input bounds, exact ceil block count, independent uniform starts, ordered concatenation and final-prefix truncation. No mathematical validity claim is inferred from these operational instructions.",
+        "source_section": "Definition",
+        "source_exact": "**Input:** a finite sequence $x_1,\\ldots,x_n$ in a measurable space, with $n\\ge1$, and an integer block length $b$ satisfying $1\\le b\\le n$. Set $N=n-b+1$ and $k=\\lceil n/b\\rceil$.\n\n**Randomization:** draw $J_1,\\ldots,J_k$ independently and uniformly from $\\{1,\\ldots,N\\}$.\n\n**Output:** in order $s=1,\\ldots,k$, append the block $x_{J_s},x_{J_s+1},\\ldots,x_{J_s+b-1}$, then retain the first $n$ entries of the concatenation. Thus the final selected block is truncated to its first $r=n-b\\lfloor n/b\\rfloor$ entries when $r>0$. Conditional expectation given the input sequence means expectation over the indices $J_s$ alone."
+      }
+    },
+    "alg-moving-block-bootstrap": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition assumes 1<=b<=n; the called overlapping-index sampler therefore has at least one candidate and one selected block. A zero-length residual prefix occurs only when no partial final block is needed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition allows x_t=0 for all t: the selected pseudo-series, bootstrap sample mean and conditional center are all zero; its divisor n is positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition with n=b=1 returns X_1^*=x_1 and conditional center x_1, using the unique candidate block."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition with x_t=x for all t returns a constant pseudo-series of value x, making its conditional centered mean identically zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition with b=1 is pointwise empirical resampling, while b=n returns the single full original block; the procedure asserts no consistency at either fixed block-length endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition calls a finite independent uniform-index sampler and retains a deterministic block order; it makes no additional arbitrary family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The moving-block procedure describes resampling and its conditional mean; it explicitly makes no bootstrap-validity assertion to turn into an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from a valid bootstrap limit to this procedure is asserted; this Definition only specifies how selected intact blocks are concatenated."
+        }
+      ],
+      "definition_review": {
+        "verdict": "pass",
+        "evidence": "Read the entire moving procedure and sampling-unit paragraph; verified the call uses the earlier index sampler and does not promote an operational description to a validity proof.",
+        "source_section": "Definition",
+        "source_exact": "**Input:** observations $x_1,\\ldots,x_n$ in a real Hilbert space $H$, and $1\\le b\\le n$.\n\n**Output:** a pseudo-series $X_1^*,\\ldots,X_n^*$, generated by [[alg-overlapping-block-resampling]]: within each selected block retain the original order and concatenate blocks in their draw order, truncating only the last block when $b\\nmid n$. The conditional bootstrap sample mean is $\\bar X_n^*=n^{-1}\\sum_{t=1}^nX_t^*$. Its conditional center is $E^*\\bar X_n^*$, where $E^*$ averages over the independent uniform block starts while the observations remain fixed.\n\nThis algorithm specifies the resampling law only. It does not assert that the conditional law approximates the sampling law for any data-generating process or block-length regime.\n\nFor a dependent time series, each selected length-$b$ run is treated as a predeclared group of consecutive unit records under [[def-resampling-sampling-unit-contract]]; the group is resampled intact and its within-block order is preserved. This is the sampling-unit interface, not a bootstrap-validity result."
+      }
+    },
+    "alg-tapered-block-bootstrap": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires 1<=b<=n and W_b>0, hence at least one weight and candidate start. An empty final prefix when b divides n contributes nothing and is not appended as an extra block."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition excludes W_b=0 before normalizing. Zero observations are allowed: all residuals and tapered pseudo-observations are zero, with the positive a_b denominator still well-defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition at b=1 evaluates w(1/2)>0, so W_1=w(1/2) and a_1*w_1(1)=1; it pointwise resamples the sample-centered records. If n=1 also, that record is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits constant observations, whose residuals vanish. An identically zero window is inadmissible because it violates both midpoint-neighbourhood positivity and W_b>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition uses midpoint arguments strictly between 0 and 1, allowing windows vanishing at 0 and 1; b=n gives one deterministic tapered candidate with no random-start variation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition forms every candidate weight deterministically from supplied w and uses finitely many uniform starts; it selects no arbitrary representatives from an infinite family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The taper prescription provides inputs, centering, weights and resampling instructions and expressly withholds validity; it contains no necessary-and-sufficient theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition draws no inference from a covariance or sampling limit back to a taper choice, so there is no reverse direction of a validity characterization."
+        }
+      ],
+      "definition_review": {
+        "verdict": "pass",
+        "evidence": "Read support, symmetry, midpoint and monotonicity assumptions, strict norm admissibility, sample centering, scaling, final-prefix convention and sampling-unit interpretation.",
+        "source_section": "Definition",
+        "source_exact": "**Input:** observations $Y_1,\\ldots,Y_n$ in a real Hilbert space $H$, an integer $1\\le b\\le n$, and a window $w:\\mathbb R\\to[0,1]$ that vanishes off $[0,1]$, is positive on a neighbourhood of $1/2$, satisfies $w(1-u)=w(u)$, and is nondecreasing on $[0,1/2]$. Put $w_b(r)=w((r-\\tfrac12)/b)$ for $1\\le r\\le b$, $W_b=(\\sum_{r=1}^bw_b(r)^2)^{1/2}$, and $a_b=\\sqrt b/W_b$. The procedure is admissible only when $W_b>0$.\n\n**Center and taper:** set $\\bar Y_n=n^{-1}\\sum_{t=1}^nY_t$ and $R_t=Y_t-\\bar Y_n$. For each start $j\\in\\{1,\\ldots,n-b+1\\}$, form the block\n\n$$\\bigl(a_bw_b(1)R_j,\\ldots,a_bw_b(b)R_{j+b-1}\\bigr).$$\n\n**Resample:** use the independent uniform block starts from [[alg-overlapping-block-resampling]], multiply each selected centered observation by its within-block taper and the factor $a_b$, concatenate in draw order, and retain the first $n$ entries. The conditional bootstrap mean is centered by its own conditional expectation when used to approximate the sampling law of $\\sqrt n\\,\\bar Y_n$.\n\nThe factor $a_b$ compensates for the window's squared-weight sum in the block-sum variance calculation; this definition alone gives no bootstrap validity result.\n\nFor a dependent time series, the selected length-$b$ consecutive run is the resampling unit under [[def-resampling-sampling-unit-contract]]. The taper changes each unit record's within-block weight but the whole block is selected and resampled together; validity remains a separate theorem."
+      }
+    },
+    "alg-k-sample-null-constrained-block-bootstrap": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition has fixed K>=2, n_i>=1 and 1<=b_i<=n_i, so every N_i,k_i is positive. In the divisible case each retained block is complete; there is no appended empty block."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition allows pooled mean zero; candidate-position centering then returns A_i,J,r-c_i,r. A zero residual series returns zero when the pooled mean also vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits n_i=b_i=1 for a series: its residual is zero, its one candidate has c_i,1=0, and the single output is the pooled mean."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition allows every series to be constant, even at different levels; within-series residuals vanish and every output record equals the common pooled mean."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition permits b_i=1 or b_i=n_i in either admissible mode. At b_i=n_i the sole candidate is exactly removed by its position-specific c_i,r, giving a deterministic pooled-location series."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition draws a finite number of independent uniforms across a fixed finite number of series and blocks; all candidate arrays are explicitly indexed rather than chosen by a choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The null-constrained algorithm states its finite construction and pooled location, with validity left to additional hypotheses; it makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from equal conditional mean functions to this particular null-imposition construction is claimed by the output instructions."
+        }
+      ],
+      "definition_review": {
+        "verdict": "pass",
+        "evidence": "Read moving/tapered branches, per-position c_i,r centering, exact retained q_i,s lengths, and independence across both series and blocks. Definitions of both called bootstrap modes were also read.",
+        "source_section": "Definition",
+        "source_exact": "**Input:** a fixed number $K\\ge2$ of observed series $Y_{i,1},\\ldots,Y_{i,n_i}$ in a real Hilbert space $H$, positive integer sample sizes $n_i$, total size $M=\\sum_{i=1}^K n_i$, integer block lengths $1\\le b_i\\le n_i$, and a mode, moving or tapered. For tapered mode also supply an admissible window with positive block norm at each $b_i$. Put\n\n$$\\bar Y_i=\\frac1{n_i}\\sum_{t=1}^{n_i}Y_{i,t},\\qquad \\bar Y_P=\\frac1M\\sum_{i=1}^K n_i\\bar Y_i,\\qquad R_{i,t}=Y_{i,t}-\\bar Y_i.$$\n\nFor each series $i=1,\\ldots,K$, let $N_i=n_i-b_i+1$ and $k_i=\\lceil n_i/b_i\\rceil$. For every candidate start $j=1,\\ldots,N_i$ and position $r=1,\\ldots,b_i$, define the following arrays. In moving mode set $A_{i,j,r}=R_{i,j+r-1}$. In tapered mode set $A_{i,j,r}=a_{b_i}w_{b_i}(r)R_{i,j+r-1}$, with $a_{b_i}$ and $w_{b_i}$ as in [[alg-tapered-block-bootstrap]]. For each $i=1,\\ldots,K$ and $s=1,\\ldots,k_i$, draw independent uniform starts $J_{i,s}\\in\\{1,\\ldots,N_i\\}$, using the index law of [[alg-overlapping-block-resampling]]. For each within-block position define\n\n$$c_{i,r}=\\frac1{N_i}\\sum_{j=1}^{N_i}A_{i,j,r}.$$\n\n**Output:** for each $i$, a pseudo-series $Y^*_{i,1},\\ldots,Y^*_{i,n_i}$. In the order $s=1,\\ldots,k_i$, retain the positions $r=1,\\ldots,q_{i,s}$, where $q_{i,s}=\\min\\{b_i,n_i-(s-1)b_i\\}$, and set\n\n$$Y^*_{i,(s-1)b_i+r}=\\bar Y_P+A_{i,J_{i,s},r}-c_{i,r}.$$\n\nThus a divisible sample uses $k_i$ complete blocks; otherwise only the first $n_i-b_i\\lfloor n_i/b_i\\rfloor$ positions of the final block are retained. This centers each resampled residual position by its own conditional average, then gives every pseudo-series the same pooled location $\\bar Y_P$. All block starts are conditionally independent across blocks and across series."
+      }
+    },
+    "alg-studentized-two-sample-u-permutation-test": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires m,n>=r>=1, so the input groups and the N! enumerated permutations are nonempty; the strict-exceedance rank set may be empty and then contributes zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition imports S=0 when its estimated standard error vanishes, including recomputation on every permutation; a zero U-statistic or zero variance routine remains a measurable finite score."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits r=m=n=1 if supplied variance routines exist; N=2 gives two permutations counted with multiplicity, including identical observations."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits every recomputed score to tie: inclusive p=1 and randomized p=U. No nondegenerate projection assumption is imposed by the procedure itself."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition restricts alpha to (0,1) while allowing U in [0,1]; U=0 returns the strict rank and U=1 returns the inclusive rank at the ends of the tie interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition enumerates the finite symmetric group explicitly and uses two supplied routines; its frontmatter says this finite enumeration adds no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The finite testing algorithm defines one of three scores and its rank rule, with weak-null validity delegated to a theorem; there is no equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No inference from test validity back to estimator consistency or the algorithm inputs occurs; the Definition expressly requires a separate applicable theorem."
+        }
+      ],
+      "definition_review": {
+        "verdict": "pass",
+        "evidence": "Read all three operational steps, both rank formulas, required recomputation of both variances, multiplicity convention, zero-error branch and finite versus Monte Carlo distinction.",
+        "source_section": "Definition",
+        "source_exact": "**Inputs:** Two samples of sizes $m,n\\ge r$, a measurable order-$(r,r)$ kernel symmetric within each group, two supplied nonnegative measurable variance-estimation routines, and a significance level $\\alpha\\in(0,1)$. Use the U-statistic in [[def-two-sample-order-r-u-statistic-and-first-projections]] and the standard-error pivot $S$ in [[def-studentized-two-sample-u-statistic]], including its value zero when the estimated standard error is zero. Choose the upper alternative statistic $T=S$, lower alternative statistic $T=-S$, or two-sided statistic $T=|S|$. Optionally supply an independent uniform random variable $U\\in[0,1]$ for ties.\n\n1. Pool the observations into $z=(X_1,\\ldots,X_m,Y_1,\\ldots,Y_n)$ and compute $T(z)$.\n2. Enumerate all $N!$ coordinate permutations $\\pi$ of $N=m+n$. For each permutation, treat its first $m$ observations as the first group and its last $n$ as the second. Recompute the U-statistic **and both variance estimates** from those groups, apply the same zero-denominator rule, and compute $T(z^\\pi)$.\n3. Return the inclusive p-value $p_{\\rm inc}=N!^{-1}\\#\\{\\pi:T(z^\\pi)\\ge T(z)\\}$ and reject when $p_{\\rm inc}\\le\\alpha$. If tie randomization was requested, instead return $p_U=N!^{-1}\\{\\#\\{\\pi:T(z^\\pi)>T(z)\\}+U\\#\\{\\pi:T(z^\\pi)=T(z)\\}\\}$ and reject when $p_U\\le\\alpha$.\n\nThis is complete finite enumeration, with permutations counted with their multiplicities even when observations repeat. It does not define a Monte Carlo approximation using a subset of permutations. No generic weak-null validity is asserted by the procedure alone; that requires the applicable studentization and estimator-consistency theorem."
+      }
+    },
+    "def-cross-validation-split-and-risk-target": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition excludes empty T and V and requires K>=2 nonempty folds, so n>=2 for any split. Its probability law also rules out an empty observation space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits identically zero loss, giving R_k=0 and CV score zero; negative integrable real losses are permitted as well, so risk is not required to be positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits k=1, a singleton validation fold and training size one; a split at n=1 is impossible because T and V must both be nonempty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits a point-mass data law or constant learning rule: risks and fold losses may then be deterministic, and the same training-size target is defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition split sizes range from |T|=1 to n-1 and |V|=n-|T|; nonempty folds with K>=2 ensure n-|I_j|>=1 before applying A_k."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition supplies each measurable A_k as input and orders training tuples by increasing index; it requires no additional choice of data order or representative predictors."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The risk and split Definition prescribes expected-loss targets; it asserts no necessary-and-sufficient relation between unbiasedness and full-sample risk."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication from a risk value to a unique split or learning rule is stated; multiple training procedures may have the same expected loss."
+        }
+      ],
+      "definition_review": {
+        "verdict": "pass",
+        "evidence": "Read full measurable learning-rule and joint-loss hypotheses, integrability at every used size, independent test product law, nonempty split constraints, fixed-fold score and weighted training-size target.",
+        "source_section": "Definition",
+        "source_exact": "Let $(\\mathcal Z,\\mathcal F)$ be a measurable sample space with probability law $P$. For each training size $k\\ge1$, a learning rule is a measurable map $A_k:\\mathcal Z^k\\to(\\mathcal H,\\mathcal G)$, where $(\\mathcal H,\\mathcal G)$ is a measurable predictor space. This is a statistic in the sense of [[def-statistic-and-estimator]]. Let $L:\\mathcal H\\times\\mathcal Z\\to\\mathbb R$ be jointly measurable and assume $L(A_k(Z_1,\\ldots,Z_k),Z_{k+1})$ is integrable under $P^{\\otimes(k+1)}$ for every size used. The convention that risk is expected loss agrees with [[def-loss-function-and-risk]] for nonnegative losses; the integrable real-valued case is used here as well. The product law is the joint law of independent observations by [[thm-independent-random-elements-have-product-joint-law]].\n\nThe **risk at training size $k$** is\n\n$$R_k:=\\mathbb E_{P^{\\otimes(k+1)}}\\!\\left[L\\bigl(A_k(Z_1,\\ldots,Z_k),Z_{k+1}\\bigr)\\right],$$\n\nwhere $Z_{k+1}$ is independent of the training sample. A **split** of $[n]:=\\{1,\\ldots,n\\}$ is a pair $(T,V)$ of disjoint nonempty sets with $T\\cup V=[n]$; $T$ is the training index set and $V$ is the validation index set. For a fixed partition $I_1,\\ldots,I_K$ of $[n]$ into nonempty folds with $K\\ge2$, the equal-observation-weight cross-validation score is\n\n$$\\widehat R_{CV}:=\\frac1n\\sum_{j=1}^K\\sum_{i\\in I_j}L\\bigl(A_{n-|I_j|}(Z_{I_j^c}),Z_i\\bigr),$$\n\nwhere each training tuple $Z_{I_j^c}$ is ordered by increasing index and $I_j^c=[n]\\setminus I_j$. The risk corresponding to this design is the weighted training-size target $\\sum_{j=1}^K(|I_j|/n)R_{n-|I_j|}$. For equal folds of size $m$, this target is $R_{n-m}$; it is not automatically $R_n$, the risk after training on all $n$ observations."
+      }
+    },
+    "def-risk-estimation-versus-model-identification": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires a nonempty finite candidate set M and training sizes k>=1; a specified true label m_0 must belong to M, so an empty label set is inadmissible."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition allows minimum risk zero and ties at zero; a supplied fixed ordering can break ties. Model consistency refers instead to the selection probability tending to one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits |M|=1: the only selector always chooses that label, so its consistency at the specified true label is immediate, regardless of its predictive risk."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits equal candidate laws or identical risks; it expressly does not infer identifiability, truth or model consistency merely from risk minimization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition permits selection probabilities zero or one at finite n, but consistency requires their limit at m_0 to be one; no error-rate or risk-gap condition is silently imposed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition has a finite nonempty M with an optional fixed tie order, so minimizers of the finitely many finite risk values can be selected without an arbitrary-index choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition assigns model-consistent at m_0 precisely when the displayed correct-label probability tends to one; using the term imports that condition, rather than any predictive-risk guarantee."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: a measurable selector sequence satisfying the displayed probability limit qualifies as model-consistent at m_0. This does not imply that minimizing predictive risk identifies m_0."
+        }
+      ],
+      "definition_review": {
+        "verdict": "pass",
+        "evidence": "Read candidate-label family, common predictor space, independent-test risk, finite tie rule, measurable selectors, and the exact consistency probability. The distinction makes no identification theorem claim.",
+        "source_section": "Definition",
+        "source_exact": "Let $(\\mathcal Z,\\mathcal F)$ be an observation space, let $M$ be a nonempty finite set of candidate labels, and for each $m\\in M$ let $P_m$ be a probability law on $(\\mathcal Z,\\mathcal F)$. For each $m\\in M$ and training size $k\\ge1$, let $A_{m,k}:\\mathcal Z^k\\to(\\mathcal H,\\mathcal G)$ be a measurable learning rule into a common measurable predictor space. For a data law $P$ and loss $L$ satisfying the measurability and integrability hypotheses of [[def-cross-validation-split-and-risk-target]], write\n\n$$R_{m,k}(P):=\\mathbb E_{P^{\\otimes(k+1)}}\\!\\left[L\\bigl(A_{m,k}(Z_1,\\ldots,Z_k),Z_{k+1}\\bigr)\\right]$$\n\nfor its risk at training size $k$; when $P$ is fixed, write $R_{m,k}$. A **risk-minimizing selector** chooses a label minimizing the specified risk criterion, such as $R_{m,k}$ or its cross-validation estimate; a fixed ordering of $M$ may be used to resolve ties. This objective compares expected predictive loss.\n\nFor each $n\\ge1$, a data-based selector is a measurable map $\\widehat m_n:\\mathcal Z^n\\to M$, where $M$ has its discrete sigma-algebra. A **true model label** at sample size $n$ is a specified $m_0\\in M$ when the observations are IID with law $P_{m_0}$. The selector sequence $(\\widehat m_n)$ is **model-consistent at $m_0$** when $P_{m_0}^{\\otimes n}(\\widehat m_n=m_0)\\to1$ as $n\\to\\infty$. This identification objective is distinct from minimizing predictive risk: risk minimization alone does not assert that the family is identifiable, that one candidate is true, or that the minimum-risk label is the true label. The distinction between risk estimation/model selection for prediction and model identification follows [[def-cross-validation-split-and-risk-target]]'s risk target and the source treatments cited below."
+      }
+    },
+    "alg-holdout-loo-lpo-v-fold-and-repeated-cv": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires weights summing to one, so B=0 is impossible; every scheduled T_r and V_r is nonempty before dividing by |V_r|."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits w_r=0 for some splits and zero validation losses; zero weights contribute zero and all weights cannot be zero because their sum is one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition has one split with weight one in holdout, and permits one repetition R=1; leave-one-out also permits singleton validation sets but retains nonempty training sets."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits repeated identical partitions or identical candidate rules; repeated deterministic partitions give the same estimate, while paired identical-rule losses subtract to zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition requires 1<=p<n for leave-p-out and 2<=K<=n for K-fold; p=n-1 leaves one training observation, and K=n gives leave-one-out singleton folds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition consumes a declared finite split schedule and, if random, a specified data-independent law; it does not choose an unspecified family of partitions or predictors."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The CV procedure lists operational choices and their estimates, with target validity requiring additional matching conditions; it states no equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from an unbiased or useful risk estimate back to one of these schedules is claimed; the output is only a declared weighted validation average."
+        }
+      ],
+      "definition_review": {
+        "verdict": "pass",
+        "evidence": "Read all five schedule variants, exact weights, increasing training order, paired differences, finite repetitions and the data-independent randomization-law requirement.",
+        "source_section": "Definition",
+        "source_exact": "**Input:** observations $z_1,\\ldots,z_n$, learning rules $A_k$, a loss $L$, and a finite split schedule $((T_r,V_r,w_r))_{r=1}^B$. Each $(T_r,V_r)$ is a split as in [[def-cross-validation-split-and-risk-target]], $w_r\\ge0$, and $\\sum_{r=1}^B w_r=1$. A randomized schedule is admissible only when its law is specified and is independent of the observations.\n\n**Output:** the cross-validation estimate\n\n$$\\widehat R:=\\sum_{r=1}^B w_r\\frac1{|V_r|}\\sum_{i\\in V_r}L\\bigl(A_{|T_r|}(z_{T_r}),z_i\\bigr),$$\n\nwith each training tuple ordered by increasing index.\n\n**Instructions:** fit the rule on each training set, evaluate its loss on every observation in that split's validation set, average within that validation set, then combine the split averages using the declared weights. To compare two or more candidate rules, apply the same schedule and subtract their validation losses within each split before averaging; this is the paired comparison.\n\nThe following choices give standard procedures:\n\n- **Holdout:** one split, with $T$ the chosen training set, $V=T^c$, and weight $1$.\n- **Leave-one-out:** for $n\\ge2$, use $n$ splits $T_i=[n]\\setminus\\{i\\}$, $V_i=\\{i\\}$, with weights $1/n$.\n- **Leave-$p$-out:** for $n\\ge2$ and $1\\le p<n$, use one split for every $p$-element subset $J\\subseteq[n]$, with $T_J=J^c$, $V_J=J$, and weight $1/\\binom np$.\n- **$K$-fold:** for $2\\le K\\le n$ and a partition $I_1,\\ldots,I_K$ into nonempty folds, use $T_j=I_j^c$, $V_j=I_j$, and $w_j=|I_j|/n$; for equal folds this is $1/K$.\n- **Repeated $K$-fold:** for $n\\ge2$, $2\\le K\\le n$ and $R\\ge1$, apply the $K$-fold schedule to each of $R$ declared partitions and give fold $I_{rj}$ weight $|I_{rj}|/(Rn)$. If partitions are randomized, record their independent randomization law and average under that law or over the declared finite repetitions.\n\nThese instructions define estimates only. Their validity as estimates of a deployment target depends on matching the split, sampling unit, training size, and averaging law to that target."
+      }
+    }
+  }
+}

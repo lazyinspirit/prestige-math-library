@@ -1,0 +1,508 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-admissible-product-coordinate-normalizer-is-finite",
+    "ex-coordinate-update-normalizer-diverges-outside-admissibility",
+    "rem-high-elbo-alone-does-not-certify-posterior-calibration"
+  ],
+  "contracts": {
+    "lem-admissible-product-coordinate-normalizer-is-finite": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal A,\\mu)$ be a measure space. Let $\\gamma:\\Omega\\to[0,\\infty]$ be measurable and suppose\n$$Z:=\\int_\\Omega\\gamma\\,d\\mu\\in(0,\\infty).$$\nDefine the normalized target density $\\pi:=\\gamma/Z$. Then $\\int\\pi\\,d\\mu=1$. For a measurable probability density $q\\ge0$, write $q\\ll_\\mu\\pi$ to mean $q=0$ $\\mu$-almost everywhere on $\\{\\pi=0\\}$. This is a support condition on the two densities. It ensures that the induced probability measures $Q:=q\\,\\mu$ and $\\Pi:=\\pi\\,\\mu$ have $Q\\ll\\Pi$.\n\nCall $q$ **admissible** when $q\\ll_\\mu\\pi$ and\n$$\\int_\\Omega q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty.$$\nUse $0\\log0=0$, and set the products $q\\log\\gamma$ and $q\\log q$ equal to zero on $\\{q=0\\}$. On the set where $q>0$, admissibility implies $\\gamma>0$ $\\mu$-almost everywhere. Define the finite real number\n$$\\operatorname{ELBO}(q):=\\int_\\Omega q(\\log\\gamma-\\log q)\\,d\\mu.$$\nA **variational family** is a nonempty set of admissible densities. A maximizing member need not exist.\n\nFor a finite integer $m\\ge1$, let $\\Omega=\\prod_{j=1}^m\\Omega_j$, let each $(\\Omega_j,\\mathcal A_j,\\mu_j)$ be sigma-finite, and let $\\mu=\\bigotimes_{j=1}^m\\mu_j$. A **mean-field density** is a product $q(z)=\\prod_{j=1}^m q_j(z_j)$ of probability densities $q_j$; it belongs to the admissible mean-field family only when the product satisfies the support and integrability conditions above. Tonelli gives $\\int q\\,d\\mu=1$. The product form alone does not guarantee support or finite ELBO.\n\nIn a dominated Bayesian model, a posterior interpretation is available only with the model hypotheses and on fibers with finite positive evidence, as in [[thm-bayes-formula-for-dominated-kernels]] and [[thm-conditional-density-formula]]. In particular, [[def-likelihood-density]] supplies separate likelihood versions but does not assert joint measurability in parameter and data. Supply the single jointly measurable density $\\gamma$ explicitly before using Tonelli or a posterior-kernel formula. No quotient is formed at zero or infinite normalizer.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-jensens-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mathbb P)$ be a probability space, let $f\\in L^1(\\mathbb P)$\nbe real-valued, let $I\\subseteq\\mathbb R$ be an interval containing $f(x)$ for\nalmost every $x$, and let $\\varphi:I\\to\\mathbb R$ be convex with\n$\\varphi\\circ f\\in L^1(\\mathbb P)$. Then\n$$\\varphi\\!\\left(\\int f\\,d\\mathbb P\\right)\\le\\int\\varphi(f)\\,d\\mathbb P.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-two-point-convexity",
+          "source_section": "Statement",
+          "quote": "For all $x,y\\in\\mathbb R$ and $0\\le t\\le1$,\n$$\\exp((1-t)x+ty)\\le(1-t)\\exp x+t\\exp y.$$\nIf $0<t<1$, equality holds exactly when $x=y$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space and let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-admissible-product-coordinate-normalizer-is-finite-step-1.1",
+          "step": "1.1",
+          "claim": "Put $\\alpha=q_j\\mu_j$ and $\\nu=v\\mu_{-j}$. They are probabilities and the law with density $q$ is their product by [F1]–[F3]. A density is positive and finite almost surely under its own probability, since its zero set has mass zero and its infinite set has reference measure zero. Thus $A(x)=\\log q_j(x)$ and $B(y)=\\log v(y)$ are finite almost surely, and [F8] gives $\\log q=A+B$ almost surely. Choose a finite integer $K$ for which $p:=\\nu(|B|\\le K)>0$; such a $K$ exists because those events increase to a full-measure set. On that event $|A|\\le|A+B|+K$, so product integration [F2]–[F3] yields $p\\int|A|d\\alpha\\le\\int|A+B|d(\\alpha\\otimes\\nu)+Kp<\\infty$. Interchanging $A$ and $B$ and choosing an analogous positive-probability bounded event proves $\\int|B|d\\nu<\\infty$. Hence $H=\\int B d\\nu$ is finite, including $H=0$ for the unit complementary factor.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F8",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-admissible-product-coordinate-normalizer-is-finite-step-2.1",
+          "step": "2.1",
+          "claim": "By [F2] and $Z<\\infty$, the marginal $G(x):=\\int\\gamma(x,y)d\\mu_{-j}(y)$ is finite for $\\mu_j$-almost every $x$. Fix such an $x$. Under $\\nu$, define $g(y)=\\gamma(x,y)/v(y)$ on $\\{0<v<\\infty\\}$; arbitrary values on its $\\nu$-null complement do not matter. Then $\\int g d\\nu=\\int_{\\{0<v<\\infty\\}}\\gamma(x,y)d\\mu_{-j}(y)\\le G(x)$ by [F3]. In particular $g$ is finite almost surely. Write $L=\\log g$, allowing $L=-\\infty$ at $g=0$. Its positive part is integrable since $\\log^+g\\le g$, and the defined expected-log convention and integrability of $B$ give $\\int Ld\\nu=h_j(x)-H$ in the extended sense; in particular $h_j(x)$ cannot equal $+\\infty$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F8",
+            "step 1.1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-admissible-product-coordinate-normalizer-is-finite-step-2.2",
+          "step": "2.2",
+          "claim": "Let $L_n=\\max(L,-n)$. Its negative part is bounded and its positive part is integrable by step 2.1, so $L_n$ is integrable. Also $e^{L_n}=\\max(g,e^{-n})\\le g+1$ is integrable. Apply [F4] with the convex exponential [F5] to obtain $\\exp(\\int L_n d\\nu)\\le\\int e^{L_n}d\\nu$. The negative parts increase to $L^-$, so [F6] gives $\\int L_n d\\nu\\downarrow\\int Ld\\nu$, possibly $-\\infty$. By [F7], the right side tends to $\\int g d\\nu$, with domination $g+1$; continuity of the exponential and $e^{-\\infty}=0$ therefore give $\\exp(h_j(x)-H)\\le\\int g d\\nu\\le G(x)$.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-admissible-product-coordinate-normalizer-is-finite-step-3.1",
+          "step": "3.1",
+          "claim": "The inequality in step 2.2 holds for $\\mu_j$-almost every $x$. Multiply it by $e^H$ and integrate using [F2] to obtain $c_j\\le e^H\\int Gd\\mu_j=e^HZ<\\infty$. Since $h_j$ is finite $\\alpha$-almost surely, $e^{h_j}>0$ on an $\\alpha$-full measurable set. If $c_j=0$, [F9] would make this set $\\mu_j$-null, hence $\\alpha$-null by [F3], contradicting $\\alpha(\\Omega_j)=1$. Thus $c_j>0$. This does not prove admissibility of the normalized replacement, which remains a separate requirement.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F9",
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Finite product has m>=1; its complementary product for m=1 is a singleton probability, not an empty measure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Lemma uses Z>0 and proves c>0; example deliberately fails entropy integrability; remark never divides at zero evidence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Lemma covers m=1 with v=1 and H=0; example is an explicit two-factor construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero density sets are null under their own density laws; all explicit divisions ignore those density-null sets."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Lemma allows h=-infinity off current support using clipped logarithms; example uses all n,m>=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only a single positive-probability bounded event integer is chosen in the lemma; no arbitrary-index choice. AC is explicit only in the remark KL interpretation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No new equivalence claim is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No new equivalence claim is made."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-coordinate-update-normalizer-diverges-outside-admissibility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal A,\\mu)$ be a measure space. Let $\\gamma:\\Omega\\to[0,\\infty]$ be measurable and suppose\n$$Z:=\\int_\\Omega\\gamma\\,d\\mu\\in(0,\\infty).$$\nDefine the normalized target density $\\pi:=\\gamma/Z$. Then $\\int\\pi\\,d\\mu=1$. For a measurable probability density $q\\ge0$, write $q\\ll_\\mu\\pi$ to mean $q=0$ $\\mu$-almost everywhere on $\\{\\pi=0\\}$. This is a support condition on the two densities. It ensures that the induced probability measures $Q:=q\\,\\mu$ and $\\Pi:=\\pi\\,\\mu$ have $Q\\ll\\Pi$.\n\nCall $q$ **admissible** when $q\\ll_\\mu\\pi$ and\n$$\\int_\\Omega q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty.$$\nUse $0\\log0=0$, and set the products $q\\log\\gamma$ and $q\\log q$ equal to zero on $\\{q=0\\}$. On the set where $q>0$, admissibility implies $\\gamma>0$ $\\mu$-almost everywhere. Define the finite real number\n$$\\operatorname{ELBO}(q):=\\int_\\Omega q(\\log\\gamma-\\log q)\\,d\\mu.$$\nA **variational family** is a nonempty set of admissible densities. A maximizing member need not exist.\n\nFor a finite integer $m\\ge1$, let $\\Omega=\\prod_{j=1}^m\\Omega_j$, let each $(\\Omega_j,\\mathcal A_j,\\mu_j)$ be sigma-finite, and let $\\mu=\\bigotimes_{j=1}^m\\mu_j$. A **mean-field density** is a product $q(z)=\\prod_{j=1}^m q_j(z_j)$ of probability densities $q_j$; it belongs to the admissible mean-field family only when the product satisfies the support and integrability conditions above. Tonelli gives $\\int q\\,d\\mu=1$. The product form alone does not guarantee support or finite ELBO.\n\nIn a dominated Bayesian model, a posterior interpretation is available only with the model hypotheses and on fibers with finite positive evidence, as in [[thm-bayes-formula-for-dominated-kernels]] and [[thm-conditional-density-formula]]. In particular, [[def-likelihood-density]] supplies separate likelihood versions but does not assert joint measurability in parameter and data. Supply the single jointly measurable density $\\gamma$ explicitly before using Tonelli or a posterior-kernel formula. No quotient is formed at zero or infinite normalizer.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-coordinate-ascent-variational-inference",
+          "source_section": "Definition",
+          "quote": "**Inputs:** A finite number $m\\ge1$ of sigma-finite factor reference spaces $(\\Omega_j,\\mathcal A_j,\\mu_j)$, their product reference measure $\\mu$, a measurable target $\\gamma$ with finite positive normalizer, an admissible initial mean-field density $q=\\prod_{j=1}^m q_j$, and a finite sweep count $N\\ge0$.\n\n**Output:** The current admissible product density after at most $N$ full sweeps, together with a status indicating whether the requested sweeps completed or a coordinate update was unavailable.\n\nFor each sweep $t=1,\\ldots,N$, visit coordinates in the fixed order $j=1,\\ldots,m$. At coordinate $j$, keep $q_{-j}:=\\prod_{k\\ne j}q_k$ fixed; for $m=1$, the empty product reference space is a singleton with unit measure $\\mu_{-j}$ and its density is $1$. Form the conditional log expectation\n$$h_j(z_j):=\\int_{\\prod_{k\\ne j}\\Omega_k}\\log\\gamma(z_j,z_{-j})q_{-j}(z_{-j})\\,d\\mu_{-j}(z_{-j}).$$\nUse this signed integral only when it is defined without an $\\infty-\\infty$ ambiguity and has a measurable extended-real version; require it to be finite for current $q_j$-almost every $z_j$. Set\n$$c_j:=\\int_{\\Omega_j}e^{h_j(z_j)}\\,\\mu_j(dz_j).$$\nIf $0<c_j<\\infty$ and the normalized density $q_j^*(z_j):=e^{h_j(z_j)}/c_j$ makes $q_j^*q_{-j}$ an admissible member of the mean-field family, replace $q_j$ by $q_j^*$. Otherwise stop and return the current density with status “coordinate update unavailable.”\n\nThe algorithm performs only the requested finite sweeps. It makes no convergence, stationary-point, global-optimum, calibration, or approximation-error claim. A separate theorem on this page proves exact coordinate monotonicity under these conditions.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-integral-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define the **integral logarithm**\n\n$$L(x):=\\int_1^x\\frac{dt}{t},$$\n\nusing the oriented integral when $x<1$\n([[def-oriented-integral]]).\n\nThis is well defined. The function $t\\mapsto1/t$ is continuous wherever\n$t\\neq0$ by the quotient clause of\n[[thm-algebra-of-continuous-functions]]. For $x\\neq1$ it is therefore continuous on the nondegenerate compact interval\nwith endpoints $1$ and $x$, hence Riemann integrable there by\n[[thm-continuous-implies-integrable]], whose hypothesis is $a<b$. At $x=1$ the\ninterval is degenerate and that theorem does not apply; there\n[[def-oriented-integral]] stipulates $\\int_1^1f=0$, so $L(1)=0$ directly.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "source_section": "Statement",
+          "quote": "For every $x>0$,\n\n$$L(x)=\\log x.$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-coordinate-update-normalizer-diverges-outside-admissibility-step-1.1",
+          "step": "1.1",
+          "claim": "Put $r_n=2^{-n}$, $b_n=-2\\log(n+1)$, $a_n=-(1-r_n)b_n/r_n=2(2^n-1)\\log(n+1)>0$, and $w_m=e^{-2a_m}$. Define $\\gamma(n,m)=e^{a_n}$ when $m=n$ and $\\gamma(n,m)=e^{b_n}=(n+1)^{-2}$ otherwise. By [F3],\n$Z=\\sum_m e^{-2a_m}\\left(e^{a_m}+\\sum_{n\\ne m}(n+1)^{-2}\\right)$. For every $m$, $a_m\\ge2\\log(m+1)>0$, so $e^{-a_m}\\le(m+1)^{-2}$. Also $\\sum_n(n+1)^{-2}<\\infty$ because $(n+1)^{-2}\\le[n(n+1)]^{-1}=1/n-1/(n+1)$. Hence $0<Z\\le\\sum_m e^{-a_m}+\\left(\\sum_m e^{-2a_m}\\right)\\left(\\sum_n(n+1)^{-2}\\right)<\\infty$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-coordinate-update-normalizer-diverges-outside-admissibility-step-2.1",
+          "step": "2.1",
+          "claim": "Give the $X$-factor masses $q_X(n)=r_n$ and the $Y$-factor density $q_Y(m)=r_m/w_m$ relative to $\\mu_Y$. Each factor has total mass $\\sum_n r_n=1$, so $q(n,m)=r_nr_m/w_m$ is a product probability density by [F3]. It is positive wherever $\\gamma$ is positive, so it satisfies the support condition in [F1].",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "ex-coordinate-update-normalizer-diverges-outside-admissibility-step-3.1",
+          "step": "3.1",
+          "claim": "For fixed $n$, the expectation of $\\log\\gamma(n,Y)$ under $q_Y$ is $r_na_n+(1-r_n)b_n=0$. Its absolute expectation is $r_na_n+(1-r_n)|b_n|=2(1-r_n)|b_n|\\le4\\log(n+1)$. Therefore $\\int q|\\log\\gamma|d\\mu\\le4\\sum_n2^{-n}\\log(n+1)<\\infty$. For $n\\ge1$, [F4] and [F5] give $\\log(n+1)=\\int_1^{n+1}dt/t\\le n$, since $0<1/t\\le1$ on $[1,n+1]$. Also, for $n\\ge4$ one has $n\\le2^{n/2}$ by induction, so $n2^{-n}\\le2^{-n/2}$ and the tail is bounded by a convergent geometric series.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-coordinate-update-normalizer-diverges-outside-admissibility-step-4.1",
+          "step": "4.1",
+          "claim": "For $m\\ge1$, induction gives $2^m-1\\ge m$, and monotonicity of the logarithm gives $\\log(m+1)\\ge\\log2>0$. Hence $a_m=2(2^m-1)\\log(m+1)\\ge2m\\log2\\ge(m+1)\\log2$. On the row $n=1$, $\\log q(1,m)=-(m+1)\\log2+2a_m\\ge a_m$. Its contribution to the nonnegative entropy integral is therefore at least $r_1\\sum_m r_ma_m$. But $r_ma_m=2(1-2^{-m})\\log(m+1)\\ge\\log2$ for every $m\\ge1$, so that series diverges. By [F3], $\\int q|\\log q|d\\mu=\\infty$, and [F1] shows that $q$ is not admissible.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-coordinate-update-normalizer-diverges-outside-admissibility-step-5.1",
+          "step": "5.1",
+          "claim": "For the $X$-coordinate update with $q_Y$ fixed, step 3.1 gives $h(n)=E_{q_Y}\\log\\gamma(n,Y)=0$ for every $n$. Therefore the update normalizer in [F2] is $\\sum_{n=1}^\\infty e^{h(n)}=\\sum_{n=1}^\\infty1=\\infty$. Thus finite evidence, support and finite pointwise expected log do not suffice: no normalized coordinate factor exists, and step 4.1 identifies the failed admissibility hypothesis.",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Finite product has m>=1; its complementary product for m=1 is a singleton probability, not an empty measure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Lemma uses Z>0 and proves c>0; example deliberately fails entropy integrability; remark never divides at zero evidence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Lemma covers m=1 with v=1 and H=0; example is an explicit two-factor construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero density sets are null under their own density laws; all explicit divisions ignore those density-null sets."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Lemma allows h=-infinity off current support using clipped logarithms; example uses all n,m>=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only a single positive-probability bounded event integer is chosen in the lemma; no arbitrary-index choice. AC is explicit only in the remark KL interpretation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No new equivalence claim is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No new equivalence claim is made."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "rem-high-elbo-alone-does-not-certify-posterior-calibration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal A,\\mu)$ be a measure space. Let $\\gamma:\\Omega\\to[0,\\infty]$ be measurable and suppose\n$$Z:=\\int_\\Omega\\gamma\\,d\\mu\\in(0,\\infty).$$\nDefine the normalized target density $\\pi:=\\gamma/Z$. Then $\\int\\pi\\,d\\mu=1$. For a measurable probability density $q\\ge0$, write $q\\ll_\\mu\\pi$ to mean $q=0$ $\\mu$-almost everywhere on $\\{\\pi=0\\}$. This is a support condition on the two densities. It ensures that the induced probability measures $Q:=q\\,\\mu$ and $\\Pi:=\\pi\\,\\mu$ have $Q\\ll\\Pi$.\n\nCall $q$ **admissible** when $q\\ll_\\mu\\pi$ and\n$$\\int_\\Omega q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty.$$\nUse $0\\log0=0$, and set the products $q\\log\\gamma$ and $q\\log q$ equal to zero on $\\{q=0\\}$. On the set where $q>0$, admissibility implies $\\gamma>0$ $\\mu$-almost everywhere. Define the finite real number\n$$\\operatorname{ELBO}(q):=\\int_\\Omega q(\\log\\gamma-\\log q)\\,d\\mu.$$\nA **variational family** is a nonempty set of admissible densities. A maximizing member need not exist.\n\nFor a finite integer $m\\ge1$, let $\\Omega=\\prod_{j=1}^m\\Omega_j$, let each $(\\Omega_j,\\mathcal A_j,\\mu_j)$ be sigma-finite, and let $\\mu=\\bigotimes_{j=1}^m\\mu_j$. A **mean-field density** is a product $q(z)=\\prod_{j=1}^m q_j(z_j)$ of probability densities $q_j$; it belongs to the admissible mean-field family only when the product satisfies the support and integrability conditions above. Tonelli gives $\\int q\\,d\\mu=1$. The product form alone does not guarantee support or finite ELBO.\n\nIn a dominated Bayesian model, a posterior interpretation is available only with the model hypotheses and on fibers with finite positive evidence, as in [[thm-bayes-formula-for-dominated-kernels]] and [[thm-conditional-density-formula]]. In particular, [[def-likelihood-density]] supplies separate likelihood versions but does not assert joint measurability in parameter and data. Supply the single jointly measurable density $\\gamma$ explicitly before using Tonelli or a posterior-kernel formula. No quotient is formed at zero or infinite normalizer.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal A,\\mu)$ be a measure space. Let $\\gamma:\\Omega\\to[0,\\infty]$ be measurable and suppose\n$$Z:=\\int_\\Omega\\gamma\\,d\\mu\\in(0,\\infty).$$\nDefine the normalized target density $\\pi:=\\gamma/Z$. Then $\\int\\pi\\,d\\mu=1$. For a measurable probability density $q\\ge0$, write $q\\ll_\\mu\\pi$ to mean $q=0$ $\\mu$-almost everywhere on $\\{\\pi=0\\}$. This is a support condition on the two densities. It ensures that the induced probability measures $Q:=q\\,\\mu$ and $\\Pi:=\\pi\\,\\mu$ have $Q\\ll\\Pi$.\n\nCall $q$ **admissible** when $q\\ll_\\mu\\pi$ and\n$$\\int_\\Omega q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty.$$\nUse $0\\log0=0$, and set the products $q\\log\\gamma$ and $q\\log q$ equal to zero on $\\{q=0\\}$. On the set where $q>0$, admissibility implies $\\gamma>0$ $\\mu$-almost everywhere. Define the finite real number\n$$\\operatorname{ELBO}(q):=\\int_\\Omega q(\\log\\gamma-\\log q)\\,d\\mu.$$\nA **variational family** is a nonempty set of admissible densities. A maximizing member need not exist.\n\nFor a finite integer $m\\ge1$, let $\\Omega=\\prod_{j=1}^m\\Omega_j$, let each $(\\Omega_j,\\mathcal A_j,\\mu_j)$ be sigma-finite, and let $\\mu=\\bigotimes_{j=1}^m\\mu_j$. A **mean-field density** is a product $q(z)=\\prod_{j=1}^m q_j(z_j)$ of probability densities $q_j$; it belongs to the admissible mean-field family only when the product satisfies the support and integrability conditions above. Tonelli gives $\\int q\\,d\\mu=1$. The product form alone does not guarantee support or finite ELBO.\n\nIn a dominated Bayesian model, a posterior interpretation is available only with the model hypotheses and on fibers with finite positive evidence, as in [[thm-bayes-formula-for-dominated-kernels]] and [[thm-conditional-density-formula]]. In particular, [[def-likelihood-density]] supplies separate likelihood versions but does not assert joint measurability in parameter and data. Supply the single jointly measurable density $\\gamma$ explicitly before using Tonelli or a posterior-kernel formula. No quotient is formed at zero or infinite normalizer.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-elbo-kl-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $\\mu,\\gamma,Z,\\pi,q$ satisfy [[def-variational-family-and-elbo]], and put $Q=q\\,\\mu$ and $\\Pi=\\pi\\,\\mu$. The choice-free density-ratio identity\n$$\\log Z=\\operatorname{ELBO}(q)+\\int q\\log(q/\\pi)\\,d\\mu$$\nholds, with the ratio integrand set to zero where $q=0$. Under AC, the final integral is the library reverse divergence $D(Q\\|\\Pi)$ and is nonnegative. Consequently\n$$\\operatorname{ELBO}(q)\\le\\log Z.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "rem-high-elbo-alone-does-not-certify-posterior-calibration-step-1.1",
+          "step": "1.1",
+          "claim": "Fix any $c\\in\\mathbb R$. By the onto clause of [F5], choose $a>0$ with $\\log a=c$. Define $\\gamma_c=a\\gamma$. Homogeneity [F4] gives $Z_c=\\int\\gamma_c d\\mu=aZ$, so $\\pi_c=\\gamma_c/Z_c=\\pi$ and both $Q$ and $\\Pi$ remain unchanged. Since $\\pi_c=\\pi$, the support condition in [F1] is unchanged. On the q-support, $|\\log\\gamma_c|\\le|\\log\\gamma|+|c|$, so the logarithmic integrability condition remains finite.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "rem-high-elbo-alone-does-not-certify-posterior-calibration-step-2.1",
+          "step": "2.1",
+          "claim": "On the q-support the logarithm product law [F5] gives $\\log\\gamma_c=\\log\\gamma+c$. Using [F2], $\\operatorname{ELBO}_c(q)=\\int q(\\log\\gamma+c-\\log q)d\\mu=\\operatorname{ELBO}(q)+c$. Since $c$ is arbitrary, the absolute ELBO can be made arbitrarily large while $Q$, $\\Pi$, and any fixed discrepancy between them stay unchanged.",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "rem-high-elbo-alone-does-not-certify-posterior-calibration-step-3.1",
+          "step": "3.1",
+          "claim": "Under [A1], the decomposition [F3] gives $\\log Z-\\operatorname{ELBO}(q)=D(Q\\|\\Pi)$. Without control of $\\log Z$, a separate calibration theorem, or another posterior-discrepancy bound, the absolute ELBO alone supplies no calibration guarantee.",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Finite product has m>=1; its complementary product for m=1 is a singleton probability, not an empty measure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Lemma uses Z>0 and proves c>0; example deliberately fails entropy integrability; remark never divides at zero evidence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Lemma covers m=1 with v=1 and H=0; example is an explicit two-factor construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero density sets are null under their own density laws; all explicit divisions ignore those density-null sets."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Lemma allows h=-infinity off current support using clipped logarithms; example uses all n,m>=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only a single positive-probability bounded event integer is chosen in the lemma; no arbitrary-index choice. AC is explicit only in the remark KL interpretation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No new equivalence claim is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No new equivalence claim is made."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

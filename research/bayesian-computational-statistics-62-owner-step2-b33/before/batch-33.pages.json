@@ -1,0 +1,337 @@
+[
+  {
+    "order": 2106,
+    "id": "metropolis-hastings-algorithm-and-invariance",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Metropolis–Hastings kernels",
+    "companion": "metropolis-hastings-algorithm-and-invariance-examples",
+    "requires": [
+      "general-state-mcmc-kernels-and-reversibility",
+      "dominated-experiments-likelihood-and-sufficiency",
+      "conformal-prediction-and-exchangeable-ranks"
+    ],
+    "items": [
+      {
+        "id": "lem-common-submeasure-density-is-pointwise-minimum",
+        "kind": "lemma",
+        "title": "The common submeasure of two finite densities",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-measure",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-absolutely-continuous-with-respect-to-a-positive-measure",
+          "def-radon-nikodym-derivative",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "cor-integral-over-a-null-set-vanishes"
+        ],
+        "statement": "Assume AC. Let $\\lambda$ be a sigma-finite positive measure on $(E,\\mathcal F)$, and let $\\rho$ and $\\sigma$ be finite positive measures absolutely continuous with respect to $\\lambda$. Suppose finite-valued nonnegative measurable $f,g$ satisfy $\\rho(A)=\\int_A f\\,d\\lambda$ and $\\sigma(A)=\\int_A g\\,d\\lambda$ for every $A\\in\\mathcal F$. Then $\\eta(A):=\\int_A\\min\\{f,g\\}\\,d\\lambda$ is the greatest measure dominated by both $\\rho$ and $\\sigma$, where domination means inequality on every measurable set.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Measure Theory, Theorem 6.27 and proof, §6.8, printed pp. 75–77",
+              "url": "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-common-submeasure-and-bounded-radon-nikodym-density",
+        "kind": "lemma",
+        "title": "The common submeasure and its bounded density",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-measure",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-absolutely-continuous-with-respect-to-a-positive-measure",
+          "def-radon-nikodym-derivative",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative",
+          "thm-integration-against-a-radon-nikodym-derivative",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "thm-monotone-convergence-for-the-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "def-extended-real-valued-measurable-function"
+        ],
+        "statement": "Assume the Axiom of Choice (AC). Let $\\rho$ and $\\sigma$ be finite positive measures on a measurable space $(E,\\mathcal F)$. Put $\\lambda=\\rho+\\sigma$. Choose nonnegative measurable Radon–Nikodym density representatives $f=d\\rho/d\\lambda$ and $g=d\\sigma/d\\lambda$, modified on a $\\lambda$-null set so that $f+g=1$ everywhere. Then $$\\eta(A):=\\int_A\\min\\{f,g\\}\\,d\\lambda\\qquad(A\\in\\mathcal F)$$ is the greatest measure dominated by both $\\rho$ and $\\sigma$. The measurable function $$a:=\\begin{cases}\\min\\{1,g/f\\},&f>0,\\\\1,&f=0\\end{cases}$$ takes values in $[0,1]$ and is a version of $d\\eta/d\\rho$. Here $\\eta\\le\\rho$ means $\\eta(A)\\le\\rho(A)$ for every $A\\in\\mathcal F$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Measure Theory, Theorem 6.27 and proof, §6.8, printed pp. 75–77",
+              "url": "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-metropolis-hastings-kernel",
+        "kind": "algorithm",
+        "title": "Metropolis–Hastings kernel",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-measure",
+          "def-standard-borel-space",
+          "def-probability-measure",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-radon-nikodym-derivative",
+          "thm-measurability-of-integration-against-a-kernel",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "lem-common-submeasure-and-bounded-radon-nikodym-density"
+        ],
+        "justified_by": [
+          "thm-metropolis-hastings-kernel-is-reversible-and-invariant"
+        ],
+        "statement": "Assume AC. The **Metropolis–Hastings procedure** takes as input a standard-Borel space $(\\mathsf X,\\mathcal X)$ ([[def-standard-borel-space]]), a target probability measure $\\pi$ ([[def-probability-measure]]), and a probability kernel $Q$ from $(\\mathsf X,\\mathcal X)$ to itself ([[def-measure-kernel-and-probability-kernel]]). 1. On the product sigma-algebra ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]), form the proposal-flow measure $\\mu$ ([[def-measure]]) on $\\mathsf X\\times\\mathsf X$ by $$\\mu(C)=\\int_{\\mathsf X}Q(x,C_x)\\,\\pi(dx),\\qquad C_x=\\{y:(x,y)\\in C\\}.$$ This is a probability measure by [[lem-prior-and-model-kernel-define-joint-law]]. Let $\\tau(x,y)=(y,x)$ and set $\\mu^{\\mathsf T}(C)=\\mu(\\tau^{-1}C)$. 2. Set $\\eta=\\mu\\wedge\\mu^{\\mathsf T}$, the greatest measure dominated by both flows. Put $\\lambda_0=\\mu+\\mu^{\\mathsf T}$, which is a finite measure by [[thm-nonnegative-weighted-sums-of-measures]], and choose nonnegative measurable representatives $f=d\\mu/d\\lambda_0$ and $g=d\\mu^{\\mathsf T}/d\\lambda_0$ with $f+g=1$ everywhere after modification on a $\\lambda_0$-null set. Define $$\\alpha(x,y)=\\begin{cases}\\min\\{1,g(x,y)/f(x,y)\\},&f(x,y)>0,\\\\1,&f(x,y)=0.\\end{cases}$$ This is a jointly measurable version of $d\\eta/d\\mu$ taking values in $[0,1]$. 3. For $x\\in\\mathsf X$, compute the integrated acceptance probability $$a(x)=\\int_{\\mathsf X}\\alpha(x,y)\\,Q(x,dy)$$ and rejection probability $r(x)=1-a(x)$. 4. Return the transition rule $$P(x,A)=\\int_{\\mathsf X}\\mathbf1_A(y)\\alpha(x,y)\\,Q(x,dy)+\\mathbf1_A(x)r(x),\\qquad A\\in\\mathcal X.$$ The second term retains every rejected proposal as a self-transition. The item [[lem-common-submeasure-and-bounded-radon-nikodym-density]] proves the common-submeasure construction and density-version claims in step 2.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Ch. 11 §11.4, printed pp. 16–20",
+              "url": "https://artowen.su.domains/mc/Ch-MCMC.pdf"
+            },
+            {
+              "title": "Gareth O. Roberts and Jeffrey S. Rosenthal, General State Space Markov Chains and MCMC Algorithms, §2.1 and Proposition 2, printed pp. 4–6",
+              "url": "https://probability.ca/jeff/ftpdir/probsurv.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-metropolis-hastings-density-ratio",
+        "kind": "lemma",
+        "title": "The common-density Metropolis–Hastings ratio",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-measure",
+          "def-probability-measure",
+          "def-measure-kernel-and-probability-kernel",
+          "def-standard-borel-space",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-extended-real-valued-measurable-function",
+          "def-radon-nikodym-derivative",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "lem-coordinate-maps-and-permutations-are-measurable-on-finite-products",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-integration-against-a-radon-nikodym-derivative",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "lem-common-submeasure-and-bounded-radon-nikodym-density",
+          "lem-common-submeasure-density-is-pointwise-minimum",
+          "alg-metropolis-hastings-kernel"
+        ],
+        "statement": "Assume AC. Let $(\\mathsf X,\\mathcal X)$ be standard Borel and let $\\lambda$ be a sigma-finite positive measure. Let the target probability have a finite-valued nonnegative measurable density $p$, and suppose the proposal kernel has a finite-valued nonnegative jointly measurable density $q$, so $\\pi(A)=\\int_Ap\\,d\\lambda$ and $Q(x,A)=\\int_Aq(x,y)\\,d\\lambda(y)$. If $\\mu(dx,dy)=\\pi(dx)Q(x,dy)$ and $\\mu^{\\mathsf T}$ is its transpose, a jointly measurable common-density version of $d(\\mu\\wedge\\mu^{\\mathsf T})/d\\mu$ is $\\alpha_{\\rm cd}(x,y)=\\min\\{1,p(y)q(y,x)/(p(x)q(x,y))\\}$ when $p(x)q(x,y)>0$ and $1$ otherwise. The version selected by the general algorithm agrees with it $\\mu$-almost everywhere; values on a forward-flow null set do not change the accepted flow.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Ch. 11 §11.4, printed pp. 16–20",
+              "url": "https://artowen.su.domains/mc/Ch-MCMC.pdf"
+            },
+            {
+              "title": "Gareth O. Roberts and Jeffrey S. Rosenthal, General State Space Markov Chains and MCMC Algorithms, §2.1 and Proposition 2, printed pp. 4–6",
+              "url": "https://probability.ca/jeff/ftpdir/probsurv.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-metropolis-hastings-kernel-is-reversible-and-invariant",
+        "kind": "theorem",
+        "title": "Metropolis–Hastings flow is reversible and invariant",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-probability-measure",
+          "def-measure-kernel-and-probability-kernel",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-general-state-reversibility-by-symmetric-flow-measure",
+          "thm-general-state-reversibility-implies-invariance",
+          "thm-sections-of-product-measurable-functions-are-measurable",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "lem-common-submeasure-and-bounded-radon-nikodym-density",
+          "alg-metropolis-hastings-kernel"
+        ],
+        "statement": "Assume AC and the hypotheses of [[alg-metropolis-hastings-kernel]]. Its output $P$ is a probability kernel, the joint measure $J_P(dx,dy)=\\pi(dx)P(x,dy)$ is symmetric under $(x,y)\\mapsto(y,x)$, and $\\pi$ is invariant for $P$. Symmetry of this joint measure is reversibility. No irreducibility, uniqueness, convergence-rate, or central limit theorem conclusion is asserted.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Ch. 11 §§11.3–11.4, printed pp. 15–20",
+              "url": "https://artowen.su.domains/mc/Ch-MCMC.pdf"
+            },
+            {
+              "title": "Gareth O. Roberts and Jeffrey S. Rosenthal, General State Space Markov Chains and MCMC Algorithms, §2 and Proposition 2, printed pp. 4–6",
+              "url": "https://probability.ca/jeff/ftpdir/probsurv.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      }
+    ]
+  },
+  {
+    "order": 2107,
+    "id": "metropolis-hastings-algorithm-and-invariance-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Metropolis–Hastings kernels — Examples",
+    "companion": "metropolis-hastings-algorithm-and-invariance",
+    "requires": [
+      "metropolis-hastings-algorithm-and-invariance"
+    ],
+    "items": [
+      {
+        "id": "ex-random-walk-metropolis-hastings",
+        "kind": "example",
+        "title": "A three-state random-walk Metropolis kernel",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-probability-measure",
+          "def-measure-kernel-and-probability-kernel",
+          "def-standard-borel-space",
+          "def-polish-space",
+          "def-counting-measure",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "alg-metropolis-hastings-kernel",
+          "lem-metropolis-hastings-density-ratio",
+          "thm-metropolis-hastings-kernel-is-reversible-and-invariant"
+        ],
+        "statement": "Assume AC. Let $\\mathsf X=\\{0,1,2\\}$ with arithmetic modulo $3$, target masses $\\pi(0)=1/2$, $\\pi(1)=1/3$, $\\pi(2)=1/6$, and proposal probabilities $Q(x,x+1)=Q(x,x-1)=1/2$. This is a random walk on the three-cycle, and its proposal matrix is symmetric. The common-density Metropolis–Hastings rule gives $$P=\\begin{pmatrix}1/2&1/3&1/6\\\\1/2&1/4&1/4\\\\1/2&1/2&0\\end{pmatrix}.$$ Its detailed-balance flows are $\\pi(0)P(0,1)=\\pi(1)P(1,0)=1/6$, $\\pi(0)P(0,2)=\\pi(2)P(2,0)=1/12$, and $\\pi(1)P(1,2)=\\pi(2)P(2,1)=1/12$; hence $\\pi$ is invariant by [[thm-metropolis-hastings-kernel-is-reversible-and-invariant]].",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-independence-metropolis-hastings",
+        "kind": "example",
+        "title": "A two-state independence sampler",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-probability-measure",
+          "def-measure-kernel-and-probability-kernel",
+          "def-standard-borel-space",
+          "def-polish-space",
+          "def-counting-measure",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "alg-metropolis-hastings-kernel",
+          "lem-metropolis-hastings-density-ratio",
+          "thm-metropolis-hastings-kernel-is-reversible-and-invariant"
+        ],
+        "statement": "Assume AC. On the finite discrete space $\\mathsf X=\\{0,1\\}$, let $\\pi(0)=3/4$, $\\pi(1)=1/4$, and use the independence proposal $Q(x,\\{0\\})=Q(x,\\{1\\})=1/2$ for both current states $x$. Relative to counting measure, the common-density rule gives $\\alpha(0,1)=1/3$ and $\\alpha(1,0)=1$. The transition matrix is $$P=\\begin{pmatrix}5/6&1/6\\\\1/2&1/2\\end{pmatrix},$$ and the two off-diagonal target flows are both $1/8$.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-metropolis-hastings-proposal-support-failure",
+        "kind": "example",
+        "title": "A proposal with disconnected support",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-probability-measure",
+          "def-measure-kernel-and-probability-kernel",
+          "def-standard-borel-space",
+          "def-polish-space",
+          "def-counting-measure",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "alg-metropolis-hastings-kernel",
+          "lem-metropolis-hastings-density-ratio",
+          "thm-metropolis-hastings-kernel-is-reversible-and-invariant"
+        ],
+        "statement": "Assume AC. On the finite discrete space $\\mathsf X=\\{0,1,2\\}$, let $\\pi$ be uniform and propose deterministically $0\\mapsto1$, $1\\mapsto0$, and $2\\mapsto2$. The proposal has no transitions between $\\{0,1\\}$ and $\\{2\\}$. Every proposal with positive mass has a reverse proposal of the same mass, so the Metropolis acceptance probability is one and $P=Q$. The target $\\pi$ is invariant, but the distinct probability $\\delta_2$ is also invariant; the chain cannot move from $0$ or $1$ to $2$.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-metropolis-hastings-rejected-self-transition",
+        "kind": "example",
+        "title": "Rejection creates a self-transition",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-probability-measure",
+          "def-measure-kernel-and-probability-kernel",
+          "def-standard-borel-space",
+          "def-polish-space",
+          "def-counting-measure",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "alg-metropolis-hastings-kernel",
+          "lem-metropolis-hastings-density-ratio",
+          "thm-metropolis-hastings-kernel-is-reversible-and-invariant"
+        ],
+        "statement": "Assume AC. On the finite discrete space $\\mathsf X=\\{0,1\\}$, let $\\pi(0)=2/3$, $\\pi(1)=1/3$, and let the proposal deterministically switch to the other state. Then $\\alpha(0,1)=1/2$ and $\\alpha(1,0)=1$, so $$P=\\begin{pmatrix}1/2&1/2\\\\1&0\\end{pmatrix}.$$ The rejected proposal from state $0$ is recorded as a self-transition of probability $1/2$.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      }
+    ]
+  }
+]

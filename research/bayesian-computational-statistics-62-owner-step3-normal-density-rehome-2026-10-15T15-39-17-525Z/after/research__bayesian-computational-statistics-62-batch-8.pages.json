@@ -1,0 +1,389 @@
+[
+  {
+    "order": 2056,
+    "id": "hierarchical-bayesian-models-and-partial-pooling",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Hierarchical Bayes and partial pooling",
+    "companion": "hierarchical-bayesian-models-and-partial-pooling-examples",
+    "requires": [
+      "conjugate-families-and-posterior-prediction",
+      "markov-kernels-and-markov-chains",
+      "structural-causal-models-dags-and-adjustment"
+    ],
+    "items": [
+      {
+        "id": "lem-finite-products-of-dominated-kernels-have-product-density",
+        "kind": "lemma",
+        "title": "Finite products of dominated kernels have the product density",
+        "statement": "Let n be a positive integer and let S be a common source space. For each j<n, let K_j be a probability kernel from S to T_j with a specified jointly measurable density f_j with respect to a sigma-finite measure nu_j. The finite product kernel has density L(s,t)=product_j f_j(s,t_j) with respect to the finite product measure product_j nu_j.",
+        "deps": [
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-extended-real-valued-measurable-function",
+          "lem-q-and-irrationals-dense-r",
+          "lem-finite-products-of-probability-kernels",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure"
+        ],
+        "justified_by": [],
+        "strategy": "direct",
+        "axiom_use": "None. The product is finite; the product-kernel, sigma-finite product-measure, Tonelli, and finite-measure uniqueness arguments use no choice axiom.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman, John B. Carlin, Hal S. Stern, David B. Dunson, Aki Vehtari, and Donald B. Rubin, Bayesian Data Analysis, 3rd ed., §5.3",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapters 15–16",
+              "url": "https://www.bayesrulesbook.com/chapter-16.html"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-hierarchical-bayesian-model",
+        "kind": "definition",
+        "title": "Finite-group hierarchical Bayesian model",
+        "statement": "Fix a finite group count m>=1, standard Borel hyperparameter and parameter spaces H and Theta, a proper hyperprior Pi on H, and a jointly measurable probability kernel eta -> G_eta on Theta. For each group j, let K_j be a probability kernel from Theta to an observation space Y_j, dominated by a sigma-finite measure nu_j with specified jointly measurable density f_j. The model draws eta from Pi, draws theta_1,...,theta_m conditionally independently from G_eta, and draws the group observations conditionally independently from K_j(theta_j,·). Its latent prior is P0(deta,dtheta_1:m)=Pi(deta) product_j G_eta(dtheta_j); its observation density is L_y(eta,theta_1:m)=product_j f_j(theta_j,y_j); its evidence is Z(y)=integral L_y dP0. A normalized posterior is defined only when 0<Z(y)<infinity. The product-kernel structure is an explicit modeling assumption; an arbitrary finitely exchangeable law need not be a mixture of iid laws, and no finite de Finetti theorem is claimed.",
+        "deps": [
+          "lem-finite-products-of-dominated-kernels-have-product-density",
+          "def-parametric-statistical-model",
+          "def-parameter-measurable-statistical-model-as-markov-kernel",
+          "def-measure-kernel-and-probability-kernel",
+          "def-standard-borel-space",
+          "def-conditional-independence-given-a-sigma-algebra",
+          "def-axiom-of-choice",
+          "thm-independent-random-elements-have-product-joint-law",
+          "lem-finite-products-of-probability-kernels",
+          "lem-prior-and-model-kernel-define-joint-law"
+        ],
+        "justified_by": [],
+        "strategy": "definition",
+        "axiom_use": "The finite product-kernel construction is choice-free. AC is included only for the library's conditional-independence terminology, whose definition uses conditional-expectation classes; no de Finetti or infinite exchangeability result is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman, John B. Carlin, Hal S. Stern, David B. Dunson, Aki Vehtari, and Donald B. Rubin, Bayesian Data Analysis, 3rd ed., §§5.1–5.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapters 15–16",
+              "url": "https://www.bayesrulesbook.com/chapter-15.html"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-hierarchical-latent-tuple-has-rcd-given-data",
+        "kind": "theorem",
+        "title": "A finite-group hierarchical model has a conditional law of its latent tuple",
+        "statement": "Assume AC and the hypotheses of the finite-group hierarchical model definition. On the canonical joint probability space, the latent tuple (eta,theta_1,...,theta_m) has a regular conditional distribution given the sigma-algebra generated by the observed data. It is a probability kernel at every sample point, including exceptional points; this existence statement alone does not identify a normalized likelihood posterior on a fixed observation fiber where evidence is zero or infinite.",
+        "deps": [
+          "def-hierarchical-bayesian-model",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets",
+          "def-regular-conditional-distribution",
+          "def-axiom-of-choice",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras"
+        ],
+        "justified_by": [],
+        "strategy": "direct",
+        "axiom_use": "AC is used exactly when applying the standard-Borel regular-conditional-distribution existence theorem. Finite products of standard-Borel spaces and the joint-kernel construction are choice-free.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman, John B. Carlin, Hal S. Stern, David B. Dunson, Aki Vehtari, and Donald B. Rubin, Bayesian Data Analysis, 3rd ed., §§5.2–5.3",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapter 16",
+              "url": "https://www.bayesrulesbook.com/chapter-16.html"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-hierarchical-posterior-normalization-on-positive-finite-evidence",
+        "kind": "theorem",
+        "title": "Hierarchical posterior normalization on positive finite evidence",
+        "statement": "Assume the finite-group hierarchical model and write P0 for its proper latent prior, L_y for its product likelihood density, and Z(y)=integral L_y dP0. For every observation y with 0<Z(y)<infinity, the measure P_y(A)=integral_A L_y dP0 / Z(y) is the posterior law of the latent tuple. Setting P_y=P0 on fibers with Z(y)=0 or Z(y)=infinity gives a regular conditional distribution under the prior-predictive law; no quotient is formed on those exceptional fibers.",
+        "deps": [
+          "def-hierarchical-bayesian-model",
+          "lem-finite-products-of-dominated-kernels-have-product-density",
+          "thm-bayes-formula-for-dominated-kernels",
+          "lem-prior-and-model-kernel-define-joint-law"
+        ],
+        "justified_by": [],
+        "strategy": "direct",
+        "axiom_use": "The normalization and conditional-density calculation are choice-free. The model's conditional-independence terminology and the separately stated RCD-existence branch carry the AC assumption explicitly.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman, John B. Carlin, Hal S. Stern, David B. Dunson, Aki Vehtari, and Donald B. Rubin, Bayesian Data Analysis, 3rd ed., §§5.2–5.3",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapter 16",
+              "url": "https://www.bayesrulesbook.com/chapter-16.html"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-normal-normal-hierarchical-shrinkage",
+        "kind": "theorem",
+        "title": "Conditional normal shrinkage in a finite hierarchy",
+        "statement": "Assume the normal specialization of [[def-hierarchical-bayesian-model]] with\nparameter space $\\Theta=\\mathbb R$ and hyperparameter space\n$H=\\mathbb R\\times(0,\\infty)$. Fix $\\mu\\in\\mathbb R$ and $\\tau^2>0$.\nConditional on $(\\mu,\\tau^2)$, let the\ngroup parameters be independent with $\\theta_j\\sim N(\\mu,\\tau^2)$. Let the\nobserved group summaries be conditionally independent with\n$\\bar Y_j\\mid\\theta_j\\sim N(\\theta_j,s_j^2)$, where each known $s_j^2>0$. In this normal specialization, the supplied\nlikelihood-density version is the canonical normal density at every parameter\nand observation value:\n$$f_j(\\theta,y)=(2\\pi s_j^2)^{-1/2}\\exp\\!\\left(-\\frac{(y-\\theta)^2}{2s_j^2}\\right)\\qquad(\\theta,y\\in\\mathbb R).$$\nThen, conditional on $(\\mu,\\tau^2,\\bar Y_1=\\bar y_1,\\ldots,\\bar Y_m=\\bar y_m)$,\nthe $\\theta_j$ are independent and\n$$\\theta_j\\sim N(\\hat\\theta_j,V_j),\\qquad\\hat\\theta_j=\\frac{\\bar y_j/s_j^2+\\mu/\\tau^2}{1/s_j^2+1/\\tau^2},\\qquad V_j=\\left(1/s_j^2+1/\\tau^2\\right)^{-1}.$$\nIf $(\\mu,\\tau^2)$ is unknown with a proper hyperprior supported on\n$\\mathbb R\\times(0,\\infty)$, let $P_y$ be the full posterior kernel from\n[[thm-hierarchical-posterior-normalization-on-positive-finite-evidence]] and,\non each positive finite evidence fiber, define its hyperparameter marginal on\nBorel $C\\subseteq H$ by $\\Pi_y(C):=P_y(C\\times\\mathbb R^m)$. The posterior law of\n$\\theta_j$ is the mixture of these conditional normal laws over $\\Pi_y$;\nreplacing $\\mu,\\tau^2$ by point estimates need not give this posterior. No normalized\nhyperparameter posterior is asserted on a zero or infinite evidence fiber.",
+        "deps": [
+          "def-hierarchical-bayesian-model",
+          "lem-finite-products-of-dominated-kernels-have-product-density",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-hierarchical-posterior-normalization-on-positive-finite-evidence",
+          "thm-normal-normal-conjugate-update",
+          "def-axiom-of-choice",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-sections-of-product-measurable-functions-are-measurable",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "lem-finite-products-of-probability-kernels"
+        ],
+        "justified_by": [],
+        "strategy": "direct",
+        "axiom_use": "AC is used through the Gaussian-normalization hypothesis in the BCS-03 Normal–Normal update and through the hierarchy's conditional-independence terminology. The finite-product factorization and hyperparameter mixture use no additional choice principle.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman, John B. Carlin, Hal S. Stern, David B. Dunson, Aki Vehtari, and Donald B. Rubin, Bayesian Data Analysis, 3rd ed., §5.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapters 15–16",
+              "url": "https://www.bayesrulesbook.com/chapter-16.html"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "def-current-and-new-group-posterior-predictive-laws",
+        "kind": "definition",
+        "title": "Current-group and new-group posterior prediction",
+        "statement": "On a positive-finite evidence fiber with latent posterior Pi_y, define the current-group predictive law for group j by mixing its observation kernel K_j(theta_j,·) over Pi_y. Define the new-group predictive law by first mixing K_new(theta,·) over the population kernel G_eta and then mixing that resulting law over Pi_y. The current-group law uses the posterior of the already observed theta_j; the new-group law first draws a new latent parameter from G_eta. Both predictions retain uncertainty in eta and the group parameters.",
+        "deps": [
+          "def-hierarchical-bayesian-model",
+          "thm-hierarchical-posterior-normalization-on-positive-finite-evidence",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-conditional-integration-through-a-regular-conditional-law",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "strategy": "definition",
+        "axiom_use": "The kernel mixtures are choice-free. AC is inherited only through the conditional-expectation-class convention in the cited regular-conditional integration result.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman, John B. Carlin, Hal S. Stern, David B. Dunson, Aki Vehtari, and Donald B. Rubin, Bayesian Data Analysis, 3rd ed., §5.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapter 16, §16.5",
+              "url": "https://www.bayesrulesbook.com/chapter-16.html"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-current-and-new-group-posterior-predictive-laws-are-probability-kernels",
+        "kind": "theorem",
+        "title": "Current-group and new-group posterior predictions are probability kernels",
+        "statement": "Under the finite-group hierarchical model and on the measurable set of observations with positive finite evidence, the current-group and new-group posterior predictive assignments are probability kernels. Integrating over an existing group uses its latent posterior; integrating over a new group first uses G_eta and then the posterior of eta. The resulting kernels satisfy the conditional-integration identities for future observations.",
+        "deps": [
+          "def-current-and-new-group-posterior-predictive-laws",
+          "def-hierarchical-bayesian-model",
+          "thm-hierarchical-posterior-normalization-on-positive-finite-evidence",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-conditional-integration-through-a-regular-conditional-law",
+          "thm-monotone-convergence-for-the-integral",
+          "def-measure-kernel-and-probability-kernel",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "lem-finite-products-of-probability-kernels"
+        ],
+        "justified_by": [],
+        "strategy": "direct",
+        "axiom_use": "The sectionwise probability-kernel and measurability checks are choice-free. AC is used only for the inherited conditional-expectation-class interpretation in regular-conditional integration.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman, John B. Carlin, Hal S. Stern, David B. Dunson, Aki Vehtari, and Donald B. Rubin, Bayesian Data Analysis, 3rd ed., §5.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapter 16, §16.5",
+              "url": "https://www.bayesrulesbook.com/chapter-16.html"
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 2057,
+    "id": "hierarchical-bayesian-models-and-partial-pooling-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Hierarchical Bayes and partial pooling — Examples",
+    "companion": "hierarchical-bayesian-models-and-partial-pooling",
+    "requires": [
+      "hierarchical-bayesian-models-and-partial-pooling"
+    ],
+    "items": [
+      {
+        "id": "ex-improper-variance-hyperprior-can-make-posterior-improper",
+        "kind": "example",
+        "title": "An improper variance hyperprior can give an improper posterior",
+        "statement": "In the one-group normal hierarchy theta|t~N(0,t), Y|theta~N(theta,1), observe y=0 and replace the proper hyperprior by the improper density pi(t) proportional to 1/t on t>0. After integrating theta out, the evidence-weighted density for t is proportional to 1/(t sqrt(1+t)), whose integral diverges at zero. Therefore the joint posterior cannot be normalized; the example is outside the proper-hyperprior theorem's hypotheses.",
+        "deps": [
+          "def-hierarchical-bayesian-model",
+          "def-posterior-evidence-normalizer-and-fiberwise-update",
+          "prop-fiberwise-posterior-propriety-iff-finite-positive-evidence",
+          "lem-normal-location-scale-density",
+          "lem-normal-density-has-total-mass-one",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "strategy": "direct",
+        "axiom_use": "AC is inherited only through the library normal-law convention; the Gaussian integral and divergence calculation are choice-free.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman, John B. Carlin, Hal S. Stern, David B. Dunson, Aki Vehtari, and Donald B. Rubin, Bayesian Data Analysis, 3rd ed., §5.7",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapter 16",
+              "url": "https://www.bayesrulesbook.com/chapter-16.html"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-full-hyperposterior-versus-plug-in-normal-hierarchy",
+        "kind": "example",
+        "title": "Integrating hyperparameter uncertainty versus plugging in",
+        "statement": "Let the hyperparameter be $t=\\tau^2\\in\\{1,4\\}$ with prior probability\n$1/2$ at each value. There is one group, $\\theta\\mid t\\sim N(0,t)$, and\n$Y\\mid\\theta\\sim N(\\theta,1)$. Observe $y=0$. Specify the likelihood-density version pointwise by\n$$f(\\theta,y)=(2\\pi)^{-1/2}\\exp(-(y-\\theta)^2/2)\\qquad(\\theta,y\\in\\mathbb R).$$\nThe full posterior for $\\theta$\nis a mixture of the two conditional normal posteriors. Plugging in the\nposterior mode of $t$ instead yields just one component, which is not the full\nposterior.",
+        "deps": [
+          "def-hierarchical-bayesian-model",
+          "thm-hierarchical-posterior-normalization-on-positive-finite-evidence",
+          "thm-normal-normal-hierarchical-shrinkage",
+          "lem-normal-location-scale-density",
+          "lem-normal-density-has-total-mass-one",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "strategy": "direct",
+        "axiom_use": "AC is inherited through the library normal-law and conditional-expectation conventions; the finite mixture and Gaussian integral calculations are choice-free.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman, John B. Carlin, Hal S. Stern, David B. Dunson, Aki Vehtari, and Donald B. Rubin, Bayesian Data Analysis, 3rd ed., §§5.3–5.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapter 16",
+              "url": "https://www.bayesrulesbook.com/chapter-16.html"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-hierarchical-normal-pooling-extremes",
+        "kind": "example",
+        "title": "Complete, partial, and no-pooling limits in the normal hierarchy",
+        "statement": "In the known-variance normal hierarchy, fix $\\mu$, an observed group summary\n$\\bar y_j$, and $s_j^2>0$. Specify the likelihood-density version pointwise by\n$$f_j(\\theta,y)=(2\\pi s_j^2)^{-1/2}\\exp\\!\\left(-\\frac{(y-\\theta)^2}{2s_j^2}\\right)\\qquad(\\theta,y\\in\\mathbb R).$$\nFor finite $\\tau^2>0$, the posterior mean is a\nstrictly weighted average of $\\bar y_j$ and $\\mu$. As $\\tau^2\\downarrow0$ it\napproaches complete pooling at $\\mu$; at the boundary $\\tau^2=0$, the prior\nitself forces $\\theta_j=\\mu$. As $\\tau^2\\to\\infty$, the posterior mean and\nvariance approach the group-only values $\\bar y_j$ and $s_j^2$, the\nno-pooling limit. The value $\\tau^2=\\infty$ is not an admissible proper prior.",
+        "deps": [
+          "def-hierarchical-bayesian-model",
+          "thm-normal-normal-hierarchical-shrinkage",
+          "def-standard-normal-and-normal-laws",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "strategy": "direct",
+        "axiom_use": "AC is inherited only through the library normal-law definition used for the degenerate boundary; the weight and limit calculations are choice-free.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Gelman, John B. Carlin, Hal S. Stern, David B. Dunson, Aki Vehtari, and Donald B. Rubin, Bayesian Data Analysis, 3rd ed., §5.4",
+              "url": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+            },
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapters 15–16",
+              "url": "https://www.bayesrulesbook.com/chapter-16.html"
+            }
+          ]
+        },
+        "dependency_level": 5
+      }
+    ]
+  }
+]

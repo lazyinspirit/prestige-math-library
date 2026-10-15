@@ -1,0 +1,703 @@
+{
+  "version": 1,
+  "kind": "owner-kmt-fourier-local-proof-proposal",
+  "run": "bayesian-computational-statistics-62",
+  "scope": [
+    "lem-gaussian-anchored-sums-have-cumulant-and-fourier-bounds",
+    "lem-gaussian-anchored-sum-density-moderate-deviation-bound"
+  ],
+  "manifest_rows": [
+    {
+      "id": "lem-gaussian-anchored-sums-have-cumulant-and-fourier-bounds",
+      "kind": "lemma",
+      "title": "Gaussian anchored bounded sums have uniform cumulant and Fourier bounds",
+      "status": "draft",
+      "origin": "pipeline",
+      "pipeline_run": "bayesian-computational-statistics-62",
+      "deps": [
+        "def-axiom-of-choice",
+        "thm-dominated-convergence",
+        "thm-identity-theorem-holomorphic-functions",
+        "cor-locally-uniformly-convergent-holomorphic-series",
+        "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+        "thm-factorization-of-expectations-for-independent-variables",
+        "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+        "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+        "lem-characteristic-function-of-a-multivariate-normal-law",
+        "thm-nondegenerate-multivariate-normal-law-has-density",
+        "thm-cauchy-schwarz-and-the-euclidean-norm"
+      ],
+      "justified_by": [],
+      "statement": "Assume AC. Fix $0<\\gamma\\le1$. Let $1\\le d\\le4$, $s>0$, $B>0$, and let $X_1,\\ldots,X_m,Z$ be independent centered random vectors in $\\mathbb R^d$, where $m\\ge0$, $|X_j|\\le B$ almost surely, and $Z\\sim N_d(0,G)$. Suppose $S=Z+\\sum_jX_j$ has covariance $sI_d$ and $G\\ge\\gamma sI_d$ in quadratic form order. There is an absolute constant $C_0\\ge1$ such that, with $\\tau=C_0B$, the logarithmic moment generating function\n$$K(z)=\\log\\mathbb E e^{z\\cdot S},\\qquad K(0)=0,$$\nhas a single analytic branch on the complex Euclidean ball $\\tau|z|<1$, and\n$$|\\partial_u\\partial_v^2K(z)|\\le\\tau s|u||v|^2\\qquad(u,v\\in\\mathbb R^d,\\ \\tau|z|<1).$$\nHere $z\\cdot S$ uses the complex bilinear dot product and $|z|^2=\\sum_i|z_i|^2$. Every real exponential tilt $\\mathbb P_h(d\\omega)=e^{h\\cdot S-K(h)}\\mathbb P(d\\omega)$ is defined, and its characteristic function satisfies\n$$|\\varphi_h(t)|:=|\\mathbb E_h e^{it\\cdot S}|\\le e^{-\\gamma s|t|^2/2}\\qquad(t,h\\in\\mathbb R^d),$$\nwhere $K(h)=\\log\\mathbb E e^{h\\cdot S}$ for real $h$, also outside the analytic ball. Put $\\kappa=\\tau/\\sqrt s$. For every fixed $a>0$ and integer $N\\ge1$ there is a finite $C_{a,N,\\gamma}$, uniform in $1\\le d\\le4$, such that, if $0<\\kappa\\le1$,\n$$(2\\pi)^{-d}\\int_{|t|\\ge a/\\tau}|\\varphi_h(t)|\\,dt\\le C_{a,N,\\gamma}\\kappa^Ns^{-d/2},$$\n$$(2\\pi)^{-d}\\int_{|t|\\ge a/\\tau}|t\\cdot v||\\varphi_h(t)|\\,dt\\le C_{a,N,\\gamma}\\kappa^N|v|s^{-(d+1)/2}.$$\nAll assertions hold with the same $C_0$, $B$, $s$, and $\\gamma$ for $AS$, where $A$ is any real $k\\times d$ matrix with $1\\le k\\le d$ and $AA^T=I_k$. This includes every coordinate prefix, every orthogonal change of coordinates, and their compositions. In particular it covers the normalized joint sum and difference of two independent children by applying the assertion in their joint dimension, provided that dimension is at most four and the joint input satisfies the stated covariance assumptions.",
+      "strategy": "direct",
+      "provenance": {
+        "statement": "literature-derived",
+        "proof": "ai-altered"
+      },
+      "sources": [
+        {
+          "title": "A. Yu. Zaitsev, Estimates of quantiles of smooth conditional distributions and the multidimensional invariance principle (1996), §§1–4; local Gaussian convolution specialization",
+          "url": "https://www.mathnet.ru/links/e53bf45963ae71225e3a783f93f9e434/smj483.pdf"
+        }
+      ],
+      "axiom_use": "AC is assumed and inherited from the Gaussian construction, Gaussian density, Lebesgue integration, and change-of-variables suppliers.",
+      "file": "items/lem-gaussian-anchored-sums-have-cumulant-and-fourier-bounds.md"
+    },
+    {
+      "id": "lem-gaussian-anchored-sum-density-moderate-deviation-bound",
+      "kind": "lemma",
+      "title": "Moderate deviation density bounds for Gaussian anchored sums",
+      "status": "draft",
+      "origin": "pipeline",
+      "pipeline_run": "bayesian-computational-statistics-62",
+      "deps": [
+        "lem-gaussian-anchored-sums-have-cumulant-and-fourier-bounds",
+        "def-axiom-of-choice",
+        "thm-nondegenerate-multivariate-normal-law-has-density",
+        "lem-characteristic-function-of-a-multivariate-normal-law",
+        "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+        "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+        "thm-dominated-convergence",
+        "thm-cauchy-schwarz-and-the-euclidean-norm",
+        "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+        "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+        "cor-vector-valued-ftc-and-lipschitz-bound",
+        "thm-euclidean-space-complete"
+      ],
+      "justified_by": [],
+      "statement": "Assume AC and the hypotheses of [[lem-gaussian-anchored-sums-have-cumulant-and-fourier-bounds]], with $1\\le d\\le4$, fixed $\\gamma>0$, $\\tau=C_0B$, $\\kappa=\\tau/\\sqrt s$, and logarithmic moment generating function $K$. Let $p_h$ denote the density of $S$ under the real exponential tilt with parameter $h$. Every such density exists, is continuously differentiable and strictly positive, and\n$$\\sup_y p_h(y)\\le(2\\pi\\gamma s)^{-d/2}\\qquad(h\\in\\mathbb R^d).$$\nThere are constants $c_\\gamma>0$, $C_\\gamma<\\infty$, independent of $d,s,B,m$ and the summand laws, with the following property. If $\\kappa\\le c_\\gamma$ and $\\tau|h|\\le1/8$, put $\\mu_h=\\mathbb E_hS$ and $D_h=\\operatorname{cov}_h(S)$. Then\n$$\\tfrac78sI_d\\le D_h\\le\\tfrac98sI_d.$$\nFor $x\\in\\mathbb R^d$ put $r=|D_h^{-1/2}x|$ and let $q_{D_h}(x)=(2\\pi)^{-d/2}(\\det D_h)^{-1/2}e^{-r^2/2}$. Whenever $\\kappa r\\le c_\\gamma$,\n$$\\left|\\log\\frac{p_h(\\mu_h+x)}{q_{D_h}(x)}\\right|\\le C_\\gamma\\kappa(1+r^3).$$\nFor $r\\ge7$ in the same region,\n$$\\left.\\frac{d}{dt}\\log p_h(\\mu_h+x+tx)\\right|_{t=0}\\le-\\tfrac12r^2.$$\nThese assertions apply separately to every row isometry image in the supplier, including every required coordinate prefix and normalized joint child sum and difference. Their tilt parameter and covariance are taken in that image's own coordinates.",
+      "strategy": "direct",
+      "provenance": {
+        "statement": "literature-derived",
+        "proof": "ai-altered"
+      },
+      "sources": [
+        {
+          "title": "A. Yu. Zaitsev, Estimates of quantiles of smooth conditional distributions and the multidimensional invariance principle (1996), §§1–4; local Gaussian convolution specialization",
+          "url": "https://www.mathnet.ru/links/e53bf45963ae71225e3a783f93f9e434/smj483.pdf"
+        }
+      ],
+      "axiom_use": "AC is assumed and inherited from the Gaussian construction, Gaussian density, Lebesgue integration, and change-of-variables suppliers.",
+      "file": "items/lem-gaussian-anchored-sum-density-moderate-deviation-bound.md"
+    }
+  ],
+  "proof_contracts": {
+    "version": 1,
+    "level": "bayesian-computational-statistics-62-owner-mcmc-clt-kmt-fourier",
+    "scope": [
+      "lem-gaussian-anchored-sums-have-cumulant-and-fourier-bounds",
+      "lem-gaussian-anchored-sum-density-moderate-deviation-bound"
+    ],
+    "contracts": {
+      "lem-gaussian-anchored-sums-have-cumulant-and-fourier-bounds": {
+        "risk": "high",
+        "kind": "lemma",
+        "citations": [
+          {
+            "fact": "F1",
+            "source": "thm-factorization-of-expectations-for-independent-variables",
+            "source_section": "Statement",
+            "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+            "uses": [
+              "2.2",
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "thm-dominated-convergence",
+            "source_section": "Statement",
+            "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+            "uses": [
+              "1.1",
+              "2.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+            "source_section": "Statement",
+            "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+            "uses": [
+              "3.2"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+            "source_section": "Statement",
+            "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+            "uses": [
+              "3.2"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+            "source_section": "Statement",
+            "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+            "uses": [
+              "2.1",
+              "3.1",
+              "3.2",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+            "source_section": "Statement",
+            "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+            "uses": [
+              "2.1",
+              "3.1",
+              "3.2",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F6",
+            "source": "cor-locally-uniformly-convergent-holomorphic-series",
+            "source_section": "Statement",
+            "quote": "Let $\\Omega\\subseteq\\mathbb C$ be open and let $g_j:\\Omega\\to\\mathbb C$ be holomorphic. Suppose the sequence of partial sums of $\\sum_{j\\ge0}g_j$ converges locally uniformly to $g$. Then $g$ is holomorphic, and for every natural $k$,\n\n$$g^{(k)}=\\sum_{j\\ge0}g_j^{(k)},$$\n\nwhere the derivative series converges locally uniformly.",
+            "uses": [
+              "1.1",
+              "2.1",
+              "3.2"
+            ]
+          },
+          {
+            "fact": "F6",
+            "source": "thm-identity-theorem-holomorphic-functions",
+            "source_section": "Statement",
+            "quote": "If two holomorphic functions on a complex domain agree on a set with an accumulation point in the domain, then they agree everywhere on the domain.\n\nPrecisely, let $\\Omega\\subseteq\\mathbb C$ be a complex domain ([[def-complex-domain]]), let $f,g:\\Omega\\to\\mathbb C$ be holomorphic, and suppose that some $a\\in\\Omega$ is an accumulation point of $\\{z\\in\\Omega:f(z)=g(z)\\}$. Then $f=g$ on $\\Omega$. The requirement $a\\in\\Omega$ is essential.",
+            "uses": [
+              "1.1",
+              "2.1",
+              "3.2"
+            ]
+          },
+          {
+            "fact": "F6",
+            "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+            "source_section": "Statement",
+            "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+            "uses": [
+              "1.1",
+              "2.1",
+              "3.2"
+            ]
+          },
+          {
+            "fact": "F5",
+            "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+            "source_section": "Statement",
+            "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+            "uses": [
+              "1.1",
+              "1.2",
+              "3.2",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "A1",
+            "source": "def-axiom-of-choice",
+            "source_section": "Definition",
+            "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+            "uses": [
+              "1.1"
+            ]
+          }
+        ],
+        "derivations": [
+          {
+            "id": "step-1-1",
+            "claim": "Fix one centered bounded summand $X$ with covariance $D$, and put $M(z)=\\mathbb E e^{z\\cdot X}$. Its exponential series converges uniformly on every bounded complex set because $|X|\\le B$, and the expectation of its absolute series is bounded by $e^{B|z|}$; thus termwise integration defines an entire function and its derivatives are the expectations of the corresponding polynomial factors times the exponential. Fix an absolute $b>0$ with $e^b-1\\le1/2$. If $B|z|<b$, then $|M(z)-1|\\le e^{B|z|}-1\\le1/2$, so the convergent power series for $\\log(1+(M(z)-1))$ supplies a single analytic logarithm vanishing at zero.",
+            "step": "1.1",
+            "inputs": [
+              "given",
+              "F2",
+              "F5",
+              "F6"
+            ]
+          },
+          {
+            "id": "step-1-2",
+            "claim": "On this ball, writing subscripts for directional derivatives, the bounds $|e^{z\\cdot X}|\\le e^b$, $|u\\cdot X|\\le B|u|$, and $\\mathbb E(v\\cdot X)^2=v^TDv$ give $|M_u|\\le e^bB|u|$, $|M_v|\\le e^b\\sqrt{v^TDv}$, $|M_{vv}|\\le e^bv^TDv$, $|M_{uv}|\\le e^bB|u|\\sqrt{v^TDv}$, and $|M_{uvv}|\\le e^bB|u|v^TDv$. These inequalities also hold when $D$ is singular: a direction with zero second moment has $v\\cdot X=0$ almost surely.",
+            "step": "1.2",
+            "inputs": [
+              "step 1.1",
+              "F5"
+            ]
+          },
+          {
+            "id": "step-1-3",
+            "claim": "Direct differentiation gives $(\\log M)_{uvv}=M_{uvv}/M-(M_uM_{vv}+2M_vM_{uv})/M^2+2M_uM_v^2/M^3$. Since $|M|\\ge1/2$, step 1.2 bounds this by $CB|u|v^TDv$ for one absolute finite $C$. Choose $C_0$ so that $C_0\\ge C$ and $1/C_0<b$, and set $\\tau=C_0B$. Each bounded summand therefore has the asserted derivative bound on $\\tau|z|<1$, using its own covariance.",
+            "step": "1.3",
+            "inputs": [
+              "step 1.1",
+              "step 1.2",
+              "algebra",
+              "choose"
+            ]
+          },
+          {
+            "id": "step-2-1",
+            "claim": "Completing the square in the density in [F4] shows $\\mathbb E e^{h\\cdot Z}=e^{h^TGh/2}$ for real $h$ and that its real tilt is $N_d(Gh,G)$. The same integral for complex $z$ converges absolutely on bounded complex sets: $e^{\\operatorname{Re}(z)\\cdot x}$ times the Gaussian density is a constant times a translated Gaussian density, which dominates its polynomial derivatives on smaller bounded sets. Its exponential series or differentiated integral therefore gives an entire function, and the real identity extends to complex arguments. To justify that last extension without a several-variable identity theorem, fix all but the first coordinate real and apply the one-variable identity theorem, then successively free each remaining coordinate. Thus the Gaussian cumulant is $z^TGz/2$ and has zero third derivative.",
+            "step": "2.1",
+            "inputs": [
+              "F2",
+              "F4",
+              "F6",
+              "algebra"
+            ]
+          },
+          {
+            "id": "step-2-2",
+            "claim": "By independence [F1], the moment generating function of $S$ is the product of the factors in steps 1.1 and 2.1. On $\\tau|z|<1$, its logarithm is the sum of the analytic logarithms just constructed, with value zero at zero. Since the covariances add and $\\sum_j\\operatorname{cov}(X_j)\\le sI_d$, summing step 1.3 gives $|K_{uvv}(z)|\\le\\tau|u|\\sum_jv^T\\operatorname{cov}(X_j)v\\le\\tau s|u||v|^2$. This proves the analytic assertion, including the empty bounded sum.",
+            "step": "2.2",
+            "inputs": [
+              "step 1.3",
+              "step 2.1",
+              "F1",
+              "algebra"
+            ]
+          },
+          {
+            "id": "step-3-1",
+            "claim": "Every real tilt exists because all bounded-summand moment generating functions and the Gaussian one are finite and strictly positive. Its density with respect to the original independent joint law factors as the product of the separately normalized tilt densities. Hence those summands remain independent under the tilt. Step 2.1 shows that the Gaussian factor retains covariance $G$, while each other factor has a characteristic function of modulus at most one because $|e^{it\\cdot X_j}|=1$. Factorization and [F4] therefore give $|\\varphi_h(t)|\\le e^{-t^TGt/2}\\le e^{-\\gamma s|t|^2/2}$ for every real $h,t$.",
+            "step": "3.1",
+            "inputs": [
+              "step 2.1",
+              "F1",
+              "F4"
+            ]
+          },
+          {
+            "id": "step-3-2",
+            "claim": "Substitute $u=\\sqrt s\\,t$ in each requested tail integral, using the constant Jacobian $s^{-d/2}$. For $|u|\\ge a/\\kappa$, $e^{-\\gamma|u|^2/2}\\le e^{-\\gamma a^2/(4\\kappa^2)}e^{-\\gamma|u|^2/4}$. For every fixed $N$, the function $z\\mapsto z^Ne^{-\\gamma a^2z^2/4}$ is bounded on $z\\ge1$ by differentiation, so the extracted exponential is at most $C_{a,N,\\gamma}\\kappa^N$. The integral of $e^{-\\gamma|u|^2/4}$ is finite by the normal density normalization in [F4]; its product with $|u|$ is integrable as well, since $|u|e^{-\\gamma|u|^2/8}$ is bounded and the remaining Gaussian is integrable. Using $|u\\cdot v|\\le|u||v|$ gives the two tail bounds, with an additional $s^{-1/2}|v|$ in the weighted bound. Taking the maximum of these constants over $d=1,2,3,4$ makes them uniform.",
+            "step": "3.2",
+            "inputs": [
+              "step 3.1",
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "algebra"
+            ]
+          },
+          {
+            "id": "step-4-1",
+            "claim": "If $AA^T=I_k$, the operator norm of $A$ is one: $A^T$ is an isometry and $|Ax|=\\sup_{|v|=1}|v\\cdot Ax|\\le|x|$ by [F5]. Thus $AX_j$ remains bounded by $B$ and centered, its sum has covariance $sAA^T=sI_k$, and $AZ$ is Gaussian with covariance $AGA^T\\ge\\gamma sI_k$ by [F4]. Independence is preserved by applying measurable maps separately. All earlier steps therefore apply to $AS$ with the same $C_0$. The map $(x,y)\\mapsto((x+y)/\\sqrt2,(x-y)/\\sqrt2)$ is orthogonal because it preserves $|x|^2+|y|^2$ by expansion; consequently its coordinate prefixes have the required row isometry property. This proves all assertions.",
+            "step": "4.1",
+            "inputs": [
+              "step 2.2",
+              "step 3.1",
+              "step 3.2",
+              "F4",
+              "F5",
+              "algebra"
+            ]
+          }
+        ],
+        "routine_steps": [],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "checked",
+            "evidence": "The bounded sum may be empty; the independent positive definite Gaussian remains and every displayed estimate applies."
+          },
+          {
+            "case": "zero",
+            "status": "checked",
+            "evidence": "A bounded summand may be zero, a covariance contribution may vanish, and a tilt or target may be zero; no division by those quantities occurs. The scale s and bound B are explicitly positive."
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "Dimension one and a single bounded summand are included. Constants are uniform over dimensions one through four."
+          },
+          {
+            "case": "degenerate",
+            "status": "checked",
+            "evidence": "Individual bounded summands may have singular covariance. The Gaussian lower bound G>=gamma*s*I makes the total covariance and all row isometry images positive definite."
+          },
+          {
+            "case": "endpoints",
+            "status": "checked",
+            "evidence": "The analytic ball is open; each use of a shifted ball has a strict interior margin. The gamma=1 Gaussian case and the stated weak inequalities on moderate targets are covered."
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "checked",
+            "evidence": "AC is explicitly assumed and inherited from the existing Gaussian and integration suppliers; the argument makes no additional unrecorded choice assumption."
+          },
+          {
+            "case": "iff-forward",
+            "status": "not_applicable",
+            "reason": "The statement asserts bounds rather than a biconditional."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "not_applicable",
+            "reason": "The statement asserts bounds rather than a biconditional."
+          }
+        ]
+      },
+      "lem-gaussian-anchored-sum-density-moderate-deviation-bound": {
+        "risk": "high",
+        "kind": "lemma",
+        "citations": [
+          {
+            "fact": "F1",
+            "source": "lem-gaussian-anchored-sums-have-cumulant-and-fourier-bounds",
+            "source_section": "Statement",
+            "quote": "Assume AC. Fix $0<\\gamma\\le1$. Let $1\\le d\\le4$, $s>0$, $B>0$, and let $X_1,\\ldots,X_m,Z$ be independent centered random vectors in $\\mathbb R^d$, where $m\\ge0$, $|X_j|\\le B$ almost surely, and $Z\\sim N_d(0,G)$. Suppose $S=Z+\\sum_jX_j$ has covariance $sI_d$ and $G\\ge\\gamma sI_d$ in quadratic form order. There is an absolute constant $C_0\\ge1$ such that, with $\\tau=C_0B$, the logarithmic moment generating function\n$$K(z)=\\log\\mathbb E e^{z\\cdot S},\\qquad K(0)=0,$$\nhas a single analytic branch on the complex Euclidean ball $\\tau|z|<1$, and\n$$|\\partial_u\\partial_v^2K(z)|\\le\\tau s|u||v|^2\\qquad(u,v\\in\\mathbb R^d,\\ \\tau|z|<1).$$\nHere $z\\cdot S$ uses the complex bilinear dot product and $|z|^2=\\sum_i|z_i|^2$. Every real exponential tilt $\\mathbb P_h(d\\omega)=e^{h\\cdot S-K(h)}\\mathbb P(d\\omega)$ is defined, and its characteristic function satisfies\n$$|\\varphi_h(t)|:=|\\mathbb E_h e^{it\\cdot S}|\\le e^{-\\gamma s|t|^2/2}\\qquad(t,h\\in\\mathbb R^d),$$\nwhere $K(h)=\\log\\mathbb E e^{h\\cdot S}$ for real $h$, also outside the analytic ball. Put $\\kappa=\\tau/\\sqrt s$. For every fixed $a>0$ and integer $N\\ge1$ there is a finite $C_{a,N,\\gamma}$, uniform in $1\\le d\\le4$, such that, if $0<\\kappa\\le1$,\n$$(2\\pi)^{-d}\\int_{|t|\\ge a/\\tau}|\\varphi_h(t)|\\,dt\\le C_{a,N,\\gamma}\\kappa^Ns^{-d/2},$$\n$$(2\\pi)^{-d}\\int_{|t|\\ge a/\\tau}|t\\cdot v||\\varphi_h(t)|\\,dt\\le C_{a,N,\\gamma}\\kappa^N|v|s^{-(d+1)/2}.$$\nAll assertions hold with the same $C_0$, $B$, $s$, and $\\gamma$ for $AS$, where $A$ is any real $k\\times d$ matrix with $1\\le k\\le d$ and $AA^T=I_k$. This includes every coordinate prefix, every orthogonal change of coordinates, and their compositions. In particular it covers the normalized joint sum and difference of two independent children by applying the assertion in their joint dimension, provided that dimension is at most four and the joint input satisfies the stated covariance assumptions.",
+            "uses": [
+              "1.1",
+              "1.2",
+              "2.1",
+              "2.2",
+              "4.2",
+              "6.2"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+            "source_section": "Statement",
+            "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+            "uses": [
+              "1.1",
+              "1.2",
+              "4.1",
+              "4.2"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+            "source_section": "Statement",
+            "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+            "uses": [
+              "1.1",
+              "1.2",
+              "4.1",
+              "4.2"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+            "source_section": "Statement",
+            "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+            "uses": [
+              "1.1",
+              "1.2",
+              "2.1",
+              "4.2"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+            "source_section": "Statement",
+            "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+            "uses": [
+              "1.1",
+              "1.2",
+              "2.1",
+              "4.2"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "thm-dominated-convergence",
+            "source_section": "Statement",
+            "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+            "uses": [
+              "1.1",
+              "1.2",
+              "2.1",
+              "4.2"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+            "source_section": "Statement",
+            "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+            "uses": [
+              "1.1",
+              "1.2",
+              "2.2",
+              "4.2",
+              "5.1",
+              "5.2"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+            "source_section": "Statement",
+            "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+            "uses": [
+              "1.1",
+              "1.2",
+              "2.2",
+              "4.2",
+              "5.1",
+              "5.2"
+            ]
+          },
+          {
+            "fact": "F5",
+            "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+            "source_section": "Statement",
+            "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+            "uses": [
+              "2.1",
+              "3.1",
+              "3.2",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F5",
+            "source": "cor-vector-valued-ftc-and-lipschitz-bound",
+            "source_section": "Statement",
+            "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$ and let $a, b \\in \\mathbb{R}$ with $a < b$.\n\n1. **Fundamental theorem, second part, in $\\mathbb{R}^{m}$.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be differentiable at every point of $[a,b]$ as\n   a function on $[a,b]$ ([[def-vector-valued-derivative-and-integral]]), and\n   suppose $f' : [a,b] \\to \\mathbb{R}^{m}$ is integrable. Then\n   $$\\int_a^b f' \\;=\\; f(b) - f(a).$$\n2. **A bounded derivative gives a Lipschitz function.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and differentiable at\n   every point of $(a,b)$, and let $M \\ge 0$ satisfy\n   $\\lVert f'(t)\\rVert_2 \\le M$ for every $t \\in (a,b)$. Then\n   $$\\lVert f(t) - f(s)\\rVert_2 \\;\\le\\; M\\,|t-s| \\qquad \\text{for all } s,t \\in [a,b],$$\n   that is, $f$ is Lipschitz with constant $M$ as a map\n   $([a,b], d_{\\mathbb{R}}) \\to (\\mathbb{R}^{m}, d_2)$\n   ([[def-lipschitz-holder-contraction]], [[lem-real-line-is-a-metric-space]],\n   [[lem-metrics-on-rn]]).",
+            "uses": [
+              "2.1",
+              "3.1",
+              "3.2",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F6",
+            "source": "thm-euclidean-space-complete",
+            "source_section": "Statement",
+            "quote": "1. $(\\mathbb{R}, d_{\\mathbb{R}})$ with the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]) is a complete metric space\n   ([[def-complete-metric-space]]).\n2. Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $d_2$ be the Euclidean metric on\n   $\\mathbb{R}^n$ ([[lem-metrics-on-rn]]). Then $(\\mathbb{R}^n, d_2)$ is complete.\n\n**The hypothesis $n \\ge 1$ is inherited and is not decoration.**\n[[lem-metrics-on-rn]] defines $\\mathbb{R}^n$ and its three metrics only for\n$n \\ge 1$, because at $n = 0$ the metric $d_\\infty$ would be a maximum over the\nempty index set. Every statement about $\\mathbb{R}^n$ in this library carries the\nhypothesis, and this one does too.",
+            "uses": [
+              "3.2"
+            ]
+          },
+          {
+            "fact": "A1",
+            "source": "def-axiom-of-choice",
+            "source_section": "Definition",
+            "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+            "uses": [
+              "1.1"
+            ]
+          }
+        ],
+        "derivations": [
+          {
+            "id": "step-1-1",
+            "claim": "Under any real tilt, write $S=Y+Z_h$, where the two terms are independent and $Z_h$ is Gaussian of covariance $G$ by [F1]. Tonelli and translation of the Gaussian density show that $p_h(y)=\\mathbb E_hq_G(y-Y-\\mathbb E_hZ_h)$ is a probability density. It is strictly positive because its integrand is strictly positive, and is bounded by $(2\\pi)^{-d/2}(\\det G)^{-1/2}\\le(2\\pi\\gamma s)^{-d/2}$. The Gaussian density and each of its first derivatives are bounded and continuous, so dominated convergence gives continuous first derivatives of this convolution. This proves the global assertions without a general vector inversion theorem.",
+            "step": "1.1",
+            "inputs": [
+              "F1",
+              "F2",
+              "F3",
+              "F4"
+            ]
+          },
+          {
+            "id": "step-1-2",
+            "claim": "We will also need its Fourier formula. Integrating the density of $N_d(0,G^{-1})$ against the character $e^{-it\\cdot y}$ and using its characteristic function in [F2] gives $q_G(y)=(2\\pi)^{-d}\\int e^{-it\\cdot y}e^{-t^TGt/2}\\,dt$. The constants follow directly by inserting that density and multiplying by $(2\\pi)^{-d/2}(\\det G)^{-1/2}$. Insert this formula in step 1.1 and use absolute Fubini, dominated by the integrable Gaussian $e^{-t^TGt/2}$. Thus $p_h(y)=(2\\pi)^{-d}\\int e^{-it\\cdot y}\\varphi_h(t)\\,dt$, and its derivative in direction $v$ is the same integral with factor $-i(t\\cdot v)$. This differentiation is dominated because $|t\\cdot v|e^{-\\gamma s|t|^2/2}$ is integrable by [F1]. Centering or making an invertible linear change of coordinates gives the identical formulas for those transformed densities.",
+            "step": "1.2",
+            "inputs": [
+              "step 1.1",
+              "F1",
+              "F2",
+              "F3",
+              "F4"
+            ]
+          },
+          {
+            "id": "step-2-1",
+            "claim": "Exponential moment differentiation identifies $K'(h)$ and $K''(h)$ with the tilted mean and covariance, respectively. To justify the differentiation, the bounded summands permit every polynomial factor, and the Gaussian square completion in [F1] makes all its polynomial moments integrable even after a slightly stronger real exponential; dominated convergence applies. For real $u,v,w$, polarization of the symmetric complex valued form $Q(v,w)=K_{uvw}(z)$ gives $|Q(v,w)|\\le\\tau s|u||v||w|$: apply $4Q(v,w)=Q(v+w,v+w)-Q(v-w,v-w)$ after replacing $v,w$ by $av,a^{-1}w$, and minimize the resulting bound $\\tau s|u|(a^2|v|^2+a^{-2}|w|^2)/2$ over $a>0$. Integrating $K'''$ on the real segment from zero to $h$ therefore gives $\\|K''(h)-sI\\|\\le\\tau s|h|$. Hence $7sI/8\\le D_h\\le9sI/8$ for $\\tau|h|\\le1/8$.",
+            "step": "2.1",
+            "inputs": [
+              "F1",
+              "F3",
+              "F5",
+              "algebra"
+            ]
+          },
+          {
+            "id": "step-2-2",
+            "claim": "Fix this $h$ and center its law. Its cumulant is $K_h(z)=K(h+z)-K(h)-z\\cdot\\mu_h$. On $2\\tau|z|<1$ the original analytic ball still contains $h+z$, since $\\tau|h+z|<5/8$. Its third derivative is bounded by $\\tau s|u||v|^2\\le2\\tau|u|v^TD_hv$. Whiten by $D_h^{-1/2}$, writing $W=D_h^{-1/2}(S-\\mu_h)$ under this tilt and $L(a)=K_h(D_h^{-1/2}a)$. Then $L(0)=0$, $L'(0)=0$, $L''(0)=I$, and, with $\\lambda=2\\tau/\\sqrt{\\lambda_{\\min}(D_h)}\\le3\\kappa$, it is analytic on $\\lambda|a|<1$ and satisfies $|L_{uvv}(a)|\\le\\lambda|u||v|^2$. The centered Gaussian component of $W$ has covariance at least $(8\\gamma/9)I$. Its covariance remains unchanged under every further real tilt; consequently all such tilted characteristic functions have modulus at most $e^{-(4\\gamma/9)|t|^2}$.",
+            "step": "2.2",
+            "inputs": [
+              "step 2.1",
+              "F1",
+              "F4",
+              "algebra"
+            ]
+          },
+          {
+            "id": "step-3-1",
+            "claim": "Polarization as in step 2.1 and integration along $ta$, $0\\le t\\le1$, give $\\|L''(a)-I\\|\\le\\lambda|a|$, $|L'(a)-a|\\le\\lambda|a|^2/2$, and $|L(a)-|a|^2/2|\\le\\lambda|a|^3/6$ for real $a$ in the ball. For real $t$ the same last estimate along the complex segment $ist$ gives $L(it)=-|t|^2/2+R(t)$ with $|R(t)|\\le\\lambda|t|^3/6$: this uses only the real direction $t$ in each derivative and the factors $i^3$ from the segment parameter.",
+            "step": "3.1",
+            "inputs": [
+              "step 2.2",
+              "F5",
+              "algebra"
+            ]
+          },
+          {
+            "id": "step-3-2",
+            "claim": "Put $b=D_h^{-1/2}x$, $r=|b|$. If $\\lambda r\\le1/16$, the map $T(a)=b-(L'(a)-a)$ sends the closed ball $|a|\\le2r$ into itself by step 3.1, and its Lipschitz constant there is at most $2\\lambda r\\le1/8$. Starting at zero, its iterates are Cauchy since consecutive distances decrease geometrically; their limit exists by [F6], lies in the closed ball, and is a fixed point by continuity. Call it $a$. It satisfies $L'(a)=b$, $|a|\\le2r$, and $|a-b|\\le2\\lambda r^2$. For $r=0$ take $a=0$. Thus no unproved global inverse assertion is needed for the saddlepoint.",
+            "step": "3.2",
+            "inputs": [
+              "step 3.1",
+              "F5",
+              "F6",
+              "construct"
+            ]
+          },
+          {
+            "id": "step-3-3",
+            "claim": "Tilt $W$ further by the fixed parameter $a$. Its mean is $b$ and covariance $A=L''(a)$. Put $\\epsilon=\\lambda|a|\\le2\\lambda r$; step 3.1 gives $(1-\\epsilon)I\\le A\\le(1+\\epsilon)I$. Its cumulant centered at $b$ has third derivative bounded by a fixed multiple of $\\lambda|u||v|^2$ on a complex ball of radius $c/\\lambda$, because $a$ lies in the interior of the original analytic ball by step 3.2. Its characteristic modulus on all real frequencies is bounded by the same Gaussian $e^{-(4\\gamma/9)|t|^2}$ from step 2.2. In what follows reduce the final constant $c_\\gamma$ so that $\\epsilon\\le1/100$ and all these interior margins hold.",
+            "step": "3.3",
+            "inputs": [
+              "step 2.2",
+              "step 3.1",
+              "step 3.2",
+              "choose"
+            ]
+          },
+          {
+            "id": "step-4-1",
+            "claim": "Let $\\psi(t)$ be that last centered characteristic function and let $g_A=(2\\pi)^{-d/2}(\\det A)^{-1/2}$. For $|t|\\le a_0/\\lambda$, with a sufficiently small fixed $a_0>0$, the integrated third derivative estimate gives $\\log\\psi(t)=-t^TAt/2+E(t)$, $|E(t)|\\le C\\lambda|t|^3$, and $\\operatorname{Re}\\log\\psi(t)\\le-c|t|^2$. The elementary identity $e^z-e^w=(z-w)\\int_0^1e^{(1-u)w+uz}\\,du$ therefore gives $|\\psi(t)-e^{-t^TAt/2}|\\le C\\lambda|t|^3e^{-c|t|^2}$ there. Its integral, and its integral after multiplication by $|t\\cdot v|$, are bounded by $C\\lambda$ and $C\\lambda|v|$, respectively. To check the integrability explicitly, $|t|^je^{-c|t|^2/2}$ is bounded for each fixed $j$, by differentiation in $|t|$, and the remaining Gaussian is integrable by [F2]. Constants are uniform over $d\\le4$ and $A$ in the displayed neighborhood of $I$.",
+            "step": "4.1",
+            "inputs": [
+              "step 3.3",
+              "F2",
+              "F5",
+              "algebra"
+            ]
+          },
+          {
+            "id": "step-4-2",
+            "claim": "Outside the ball of step 4.1, both $\\psi$ and the Gaussian comparator have unweighted integral $O_\\gamma(\\lambda^2)$ and weighted integral $O_\\gamma(\\lambda^2|v|)$. Indeed their global bounds are $e^{-c_\\gamma|t|^2}$; extract $e^{-c_\\gamma a_0^2/(2\\lambda^2)}$ and integrate the remaining Gaussian, also with $|t\\cdot v|$. The extracted exponential is smaller than any prescribed fixed power of $\\lambda$ because $z^je^{-cz^2}$ is bounded. This is the same direct Gaussian tail argument as [F1], and uses no smoothness condition on a lattice law. Combining this with step 4.1 and the Fourier formula of step 1.2 gives, for the density $f_a$ of the further tilted $W$,\n$$|f_a(b)-g_A|\\le C_\\gamma\\lambda,\\qquad \\sup_y|\\partial_v f_a(y)|\\le\\left(\\sqrt{2/\\pi}\\,g_A\\sqrt{v^TA^{-1}v}+C_\\gamma\\lambda|v|\\right).$$\nThe Gaussian integral in the derivative bound is exact: transform by $A^{1/2}$ and rotate $A^{-1/2}v$ onto the first coordinate; the standard Gaussian first absolute moment is $\\sqrt{2/\\pi}$, from $\\int_0^\\infty t e^{-t^2/2}dt=1$.",
+            "step": "4.2",
+            "inputs": [
+              "step 1.2",
+              "step 4.1",
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "algebra"
+            ]
+          },
+          {
+            "id": "step-5-1",
+            "claim": "The eigenvalue bounds in step 3.3 give $|\\log\\det A|\\le C d\\epsilon$ because $|\\log(1+u)|\\le2|u|$ for $|u|\\le1/2$, by integrating $(1+u)^{-1}$. Thus $g_A$ is bounded above and away from zero, uniformly, and $\\log(g_A/(2\\pi)^{-d/2})=O(\\lambda r)$. Step 4.2 and $|\\log(1+u)|\\le2|u|$ imply $f_a(b)>0$ and\n$$\\log\\frac{f_a(b)}{(2\\pi)^{-d/2}}=O_\\gamma(\\lambda(1+r)).$$\nWe choose $c_\\gamma$ small enough that all relative errors used here are at most $1/100$.",
+            "step": "5.1",
+            "inputs": [
+              "step 3.3",
+              "step 4.2",
+              "F4",
+              "algebra",
+              "choose"
+            ]
+          },
+          {
+            "id": "step-5-2",
+            "claim": "The exact exponential tilt density identity is $f(y)=f_a(y)e^{L(a)-a\\cdot y}$, where $f$ is the original density of $W$. It initially follows almost everywhere from the definition of the tilt; both sides are continuous by step 1.1, so it holds everywhere, since a continuous nonzero difference would be nonzero on a ball of positive Lebesgue measure. Step 3.1 and $|a-b|\\le2\\lambda r^2$ give\n$$L(a)-a\\cdot b=-r^2/2+O(\\lambda r^3).$$\nIndeed $|a|^2/2-a\\cdot b=-|b|^2/2+|a-b|^2/2$, whose error is $O(\\lambda^2r^4)=O(\\lambda r^3)$ because $\\lambda r$ is small. Combining this identity with step 5.1 proves $|\\log(f(b)/q_I(b))|\\le C_\\gamma\\lambda(1+r^3)$. The constant Jacobian for whitening cancels in the density ratio, and $\\lambda\\le3\\kappa$ gives the stated moderate deviation bound.",
+            "step": "5.2",
+            "inputs": [
+              "step 3.1",
+              "step 3.2",
+              "step 5.1",
+              "F4",
+              "algebra"
+            ]
+          },
+          {
+            "id": "step-6-1",
+            "claim": "Differentiate the exact identity in step 5.2 in direction $b$ at $y=b$, keeping $a$ fixed. It gives $\\partial_b\\log f(b)=(\\partial_bf_a(b))/f_a(b)-a\\cdot b$. By step 4.2, step 5.1, and $A=I+O(\\lambda r)$, reduce $c_\\gamma$ further so that $|\\partial_bf_a(b)|/f_a(b)\\le1.4r$; this is possible because its limiting coefficient is $\\sqrt{2/\\pi}<1$, the error is $O_\\gamma(\\lambda)$, and $A$ tends uniformly to $I$ as $\\lambda r\\to0$. Also step 3.2 gives $a\\cdot b\\ge r^2-2\\lambda r^3\\ge.99r^2$ after the same reduction. Hence $\\partial_b\\log f(b)\\le1.4r-.99r^2\\le-r^2/2$ for $r\\ge7$. Whitening identifies this derivative with the derivative in direction $x$ in the Statement.",
+            "step": "6.1",
+            "inputs": [
+              "step 3.2",
+              "step 3.3",
+              "step 4.2",
+              "step 5.1",
+              "step 5.2",
+              "algebra",
+              "choose"
+            ]
+          },
+          {
+            "id": "step-6-2",
+            "claim": "There are only finitely many smallness requirements above: bounds on $\\kappa$, $\\lambda r$, $\\epsilon$, and fixed multiples depending only on $\\gamma$ of $\\lambda$. Since $\\lambda\\le3\\kappa$, one sufficiently small positive $c_\\gamma$ enforces all of them whenever $\\kappa\\le c_\\gamma$ and $\\kappa r\\le c_\\gamma$. All constants are uniform over dimensions one through four. Apply the same argument to a row isometry image using [F1]; its Gaussian component retains the same covariance lower bound, and every step applies in its own coordinates. This proves the remaining assertions.",
+            "step": "6.2",
+            "inputs": [
+              "step 2.2",
+              "step 5.2",
+              "step 6.1",
+              "F1",
+              "choose"
+            ]
+          }
+        ],
+        "routine_steps": [],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "checked",
+            "evidence": "The bounded sum may be empty; the independent positive definite Gaussian remains and every displayed estimate applies. At target zero the saddlepoint is explicitly zero and the radial assertion is only required for r>=7."
+          },
+          {
+            "case": "zero",
+            "status": "checked",
+            "evidence": "A bounded summand may be zero, a covariance contribution may vanish, and a tilt or target may be zero; no division by those quantities occurs. The scale s and bound B are explicitly positive."
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "Dimension one and a single bounded summand are included. Constants are uniform over dimensions one through four."
+          },
+          {
+            "case": "degenerate",
+            "status": "checked",
+            "evidence": "Individual bounded summands may have singular covariance. The Gaussian lower bound G>=gamma*s*I makes the total covariance and all row isometry images positive definite."
+          },
+          {
+            "case": "endpoints",
+            "status": "checked",
+            "evidence": "The analytic ball is open; each use of a shifted ball has a strict interior margin. The gamma=1 Gaussian case and the stated weak inequalities on moderate targets are covered."
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "checked",
+            "evidence": "AC is explicitly assumed and inherited from the existing Gaussian and integration suppliers; the argument makes no additional unrecorded choice assumption."
+          },
+          {
+            "case": "iff-forward",
+            "status": "not_applicable",
+            "reason": "The statement asserts bounds rather than a biconditional."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "not_applicable",
+            "reason": "The statement asserts bounds rather than a biconditional."
+          }
+        ]
+      }
+    }
+  },
+  "integration_note": "The rows and exact contracts are proposals for owner integration into the current run manifests; no live manifest, audit, hash, dependency level, or verification stamp is changed here. Only the two source drafts were authored.",
+  "layout_check": {
+    "command": "node tools/proof-layout.mjs items/lem-gaussian-anchored-sums-have-cumulant-and-fourier-bounds.md items/lem-gaussian-anchored-sum-density-moderate-deviation-bound.md",
+    "exit_code": 0,
+    "output": "proof-layout: 2 items, 21 steps, 0 defects"
+  }
+}

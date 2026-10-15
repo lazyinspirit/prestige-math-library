@@ -1,0 +1,250 @@
+[
+  {
+    "order": 2068,
+    "id": "gaussian-process-priors-and-posterior-laws",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Gaussian-process priors and finite posterior laws",
+    "companion": "gaussian-process-priors-and-posterior-laws-examples",
+    "requires": [
+      "conjugate-families-and-posterior-prediction",
+      "brownian-motion-construction-and-continuity",
+      "direct-matrix-factorisations-lu-cholesky-and-qr"
+    ],
+    "items": [
+      {
+        "id": "lem-real-line-is-standard-borel",
+        "kind": "lemma",
+        "title": "The real line with its Borel sigma-algebra is standard Borel",
+        "statement": "The measurable space (R,B(R)) with the usual topology is standard Borel.",
+        "strategy": "Use the countable dense rationals and completeness of the usual metric to make the real line Polish, then apply the standard-Borel definition to the identity presentation.",
+        "deps": [
+          "def-polish-space",
+          "def-separable-space",
+          "def-standard-borel-space",
+          "lem-rat-embeds-dense",
+          "thm-euclidean-space-complete",
+          "thm-rationals-countable"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "O. Biskup, MATH 275D notes, Chapter 2: Kolmogorov Extension Theorem",
+              "url": "https://math.ucla.edu/~biskup/275d.1.25f/PDFs/ch2.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+        "kind": "theorem",
+        "title": "A mean and positive-semidefinite kernel define a Gaussian process",
+        "statement": "Assuming AC, for any set T, mean function m:T→R, and symmetric positive-semidefinite kernel k:T×T→R, there is a unique probability law on the cylinder sigma-algebra of R^T whose finite-coordinate marginals are the Gaussian laws with means m and covariances k. Its coordinate process is Gaussian. The construction asserts no sample-path continuity, joint measurability in the index and sample point, or tight Banach-valued law.",
+        "strategy": "First prove the real coordinate space is standard Borel. For each finite index set, construct its possibly singular Gaussian law; the characteristic function gives enumeration invariance and consistency under restriction. Apply arbitrary-index Kolmogorov extension and identify the canonical coordinate process.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-consistent-family-of-finite-dimensional-distributions",
+          "def-coordinate-maps-and-cylinder-sigma-algebra",
+          "def-gaussian-process",
+          "def-multivariate-normal-law",
+          "def-stochastic-process-and-finite-dimensional-distributions",
+          "lem-real-line-is-standard-borel",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces",
+          "thm-non-negative-square-root-exists-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart and J. H. van Zanten, Reproducing kernel Hilbert spaces of Gaussian priors (2008)",
+              "url": "https://arxiv.org/pdf/0805.3252"
+            },
+            {
+              "title": "Carl Edward Rasmussen and Christopher K. I. Williams, Gaussian Processes for Machine Learning (MIT Press, 2006), Chapter 2",
+              "url": "https://gaussianprocess.org/gpml/chapters/RW2.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-finite-gaussian-process-posterior-and-predictive-laws",
+        "kind": "theorem",
+        "title": "Finite Gaussian-process posterior and predictive laws",
+        "statement": "Assume AC. For a Gaussian process f with mean m and covariance kernel k, finite observation and test lists, and independent Gaussian observation noise ε~N_n(0,R) with R positive semidefinite, let C=K_XX+R be positive definite. A version of the conditional law of f(X_*) given Y=f(X)+ε=y is Gaussian with mean m_*+K_*X C^{-1}(y-m_X) and covariance K_**-K_*X C^{-1}K_X*. These prior and conditional covariances may be singular. Independent Gaussian prediction noise adds its covariance. The displayed version is defined for every y but, as an RCD, is unique only almost surely. Cholesky triangular solves evaluate the SPD systems without forming C^{-1}.",
+        "strategy": "Stack the finite Gaussian process evaluation vector and independent Gaussian noise, then use the projection definition to show the affine pair (f(X_*),Y) is jointly Gaussian and compute its block mean and covariance. Apply the BCS-03 conditional-normal theorem with observed covariance C positive definite. Repeat with independent prediction noise, and use Cholesky plus forward/back substitution for the numerical solves.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-forward-and-back-substitution-for-triangular-systems",
+          "def-gaussian-process",
+          "def-independent-random-elements",
+          "def-multivariate-normal-law",
+          "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+          "thm-multivariate-normal-conditional-law",
+          "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart and J. H. van Zanten, Reproducing kernel Hilbert spaces of Gaussian priors (2008)",
+              "url": "https://arxiv.org/pdf/0805.3252"
+            },
+            {
+              "title": "Carl Edward Rasmussen and Christopher K. I. Williams, Gaussian Processes for Machine Learning (MIT Press, 2006), Chapter 2",
+              "url": "https://gaussianprocess.org/gpml/chapters/RW2.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2069,
+    "id": "gaussian-process-priors-and-posterior-laws-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Gaussian-process priors and finite posterior laws — Examples",
+    "companion": "gaussian-process-priors-and-posterior-laws",
+    "requires": [
+      "gaussian-process-priors-and-posterior-laws"
+    ],
+    "items": [
+      {
+        "id": "ex-finite-gaussian-process-posterior-with-nonzero-mean-and-correlated-noise",
+        "kind": "example",
+        "title": "A nonzero-mean Gaussian process with correlated observation noise",
+        "statement": "For the constant covariance kernel on three indices, a nonzero mean and a positive-definite correlated noise covariance give a posterior at the third index with mean 16/7 and variance 3/7 after the observations y=(0,1) at the first two indices.",
+        "strategy": "Verify the constant kernel and noise covariance are positive definite or positive semidefinite, construct the canonical Gaussian process and independent noise on a product space, and substitute the exact 2×2 matrices into the finite posterior formula.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-coordinate-maps-and-cylinder-sigma-algebra",
+          "def-independent-random-elements",
+          "def-multivariate-normal-law",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-finite-gaussian-process-posterior-and-predictive-laws",
+          "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+          "thm-rectangle-criterion-for-independent-random-elements",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart and J. H. van Zanten, Reproducing kernel Hilbert spaces of Gaussian priors (2008)",
+              "url": "https://arxiv.org/pdf/0805.3252"
+            },
+            {
+              "title": "Carl Edward Rasmussen and Christopher K. I. Williams, Gaussian Processes for Machine Learning (MIT Press, 2006), Chapter 2",
+              "url": "https://gaussianprocess.org/gpml/chapters/RW2.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-singular-gaussian-process-prior-and-predictive-covariances",
+        "kind": "example",
+        "title": "Singular prior and predictive covariances in Gaussian-process regression",
+        "statement": "A constant-kernel Gaussian process has a singular two-observation prior covariance, while independent identity-covariance observation noise makes the observed covariance positive definite; predicting the same index twice gives a singular conditional covariance.",
+        "strategy": "Use the constant-kernel process, form the observation and repeated-test covariance matrices, verify the observed block is positive definite, and calculate the posterior mean and rank-one conditional covariance.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-coordinate-maps-and-cylinder-sigma-algebra",
+          "def-independent-random-elements",
+          "def-multivariate-normal-law",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-finite-gaussian-process-posterior-and-predictive-laws",
+          "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+          "thm-rectangle-criterion-for-independent-random-elements",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart and J. H. van Zanten, Reproducing kernel Hilbert spaces of Gaussian priors (2008)",
+              "url": "https://arxiv.org/pdf/0805.3252"
+            },
+            {
+              "title": "Carl Edward Rasmussen and Christopher K. I. Williams, Gaussian Processes for Machine Learning (MIT Press, 2006), Chapter 2",
+              "url": "https://gaussianprocess.org/gpml/chapters/RW2.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-gaussian-process-extrapolation-retains-independent-index-uncertainty",
+        "kind": "example",
+        "title": "A Gaussian process retains uncertainty at an independent index",
+        "statement": "For the kernel k(s,t)=1 when s=t and 0 otherwise on two indices, observing one coordinate with independent unit-variance noise leaves the other coordinate's posterior law equal to its N(0,1) prior law.",
+        "strategy": "Verify positive semidefiniteness of the equality kernel, construct the Gaussian process and independent noise on a product space, and use the zero cross-covariance block in the finite posterior formula.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-coordinate-maps-and-cylinder-sigma-algebra",
+          "def-independent-random-elements",
+          "def-multivariate-normal-law",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-finite-gaussian-process-posterior-and-predictive-laws",
+          "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+          "thm-rectangle-criterion-for-independent-random-elements",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart and J. H. van Zanten, Reproducing kernel Hilbert spaces of Gaussian priors (2008)",
+              "url": "https://arxiv.org/pdf/0805.3252"
+            },
+            {
+              "title": "Carl Edward Rasmussen and Christopher K. I. Williams, Gaussian Processes for Machine Learning (MIT Press, 2006), Chapter 2",
+              "url": "https://gaussianprocess.org/gpml/chapters/RW2.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

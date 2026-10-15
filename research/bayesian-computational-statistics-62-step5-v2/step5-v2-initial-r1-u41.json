@@ -1,0 +1,97 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "41",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "ex-scalar-gaussian-state-space-filter",
+      "model": "gpt-6-luna",
+      "context_sha256": "6d80373eb756a54a93cf10f93c51c7d5102d9c82720580c042b2d8013a216294",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Step 3.1 identified a convolution as the predictive density without citing a theorem permitting reversal of the initial-state and Lebesgue integrals. F8 supplies only ordered iterated kernel integrals; F14 supplies measurability, not interchange. This is a missing dependency citation for a load-bearing inference. Added the existing published Tonelli theorem as F16 and a direct dependency, and proved the event-probability identity on every Borel B using its nonnegative product-measurable integrand and the sigma-finite restricted Lebesgue measures established in step 1.1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-scalar-gaussian-state-space-filter",
+      "disposition": "repaired",
+      "post_sha256": "fbfa353256c05d4c89bd77e7c77ec5ff3db425b02182c11a2ac7543a690b6bf5",
+      "review_context_sha256": "a38cc6b489ab3561413e0aabb3a3b0dc332dd383bc16eed1c7a5769b8d4a6ff2",
+      "reason": "Checked the exact supplier statements, the owning page interface, and all five verification steps. The repaired step 3.1 derives the predictive event probabilities by Tonelli before evaluating the convolution. Completing the squares gives prediction N(0,2), evidence exp(-2/3)/sqrt(6pi), and the selected posterior N(4/3,2/3). Translation/dilation and null-set integration justify P(Y1=2)=0, so the version caveat remains correct. AC already supplies all required Countable Choice. The Example is unchanged and there is no Statement or Definition change; no downstream propagation is triggered. Synchronized the manifest dependency and the contract F16 citation and step-3.1 derivation; corrected two pre-existing contract step locators. Preserved the original independent risk-review record and annotated the repair separately.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "id": "ex-scalar-gaussian-state-space-filter",
+      "locus": "proof-step",
+      "location": "Verification step 3.1",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "status": "fixed",
+      "reason": "Step 3.1 identified a convolution as the predictive density without citing a theorem permitting reversal of the initial-state and Lebesgue integrals. F8 supplies only ordered iterated kernel integrals; F14 supplies measurability, not interchange. This is a missing dependency citation for a load-bearing inference. Added the existing published Tonelli theorem as F16 and a direct dependency, and proved the event-probability identity on every Borel B using its nonnegative product-measurable integrand and the sigma-finite restricted Lebesgue measures established in step 1.1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "changed_items": [
+      "ex-scalar-gaussian-state-space-filter"
+    ],
+    "claim_unchanged": true,
+    "conventions": "Scalar Borel state spaces, Lebesgue measure restricted to Borel sets, AC with inherited Countable Choice, and density-selected conditional version at the null observation Y1=2.",
+    "local_evidence": [
+      "items/thm-tonelli-theorem-for-sigma-finite-product-spaces.md: Statement and complete Proof",
+      "items/ex-scalar-gaussian-state-space-filter.md: Verification steps 1.1-5.1",
+      "research/bayesian-computational-statistics-62-batch-41.proof-contracts.json: assigned item entry",
+      "library/bayesian-computational-statistics/state-space-filtering-and-predictive-laws-examples.md: Overview"
+    ],
+    "added_dependency": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+    "source_reading": "Familiar with the mathematics; consulted the local supplier statements and the complete Tonelli proof, and did not consult external source URLs.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-scalar-gaussian-state-space-filter.md --json",
+        "exit_code": 0,
+        "result": "1 file, 1 proof checked, 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-scalar-gaussian-state-space-filter.md --json",
+        "exit_code": 0,
+        "result": "1 file checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-scalar-gaussian-state-space-filter.md",
+        "exit_code": 0,
+        "result": "1 item, 5 steps, 0 defects."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-41.proof-contracts.json --strict --items ex-scalar-gaussian-state-space-filter --json",
+        "exit_code": 0,
+        "result": "Selected assigned item checked successfully; ok=true, no errors or warnings."
+      }
+    ],
+    "published_ledger": "No published defect or affected published consumer identified; no published-consumer ledger change proposed.",
+    "unresolved_mathematics": [],
+    "pending_operations": [],
+    "next_action": "Controller collects this repair evidence and schedules any required independent rejudgment; no independent review of this repair is claimed.",
+    "contract_corrections": "The endpoints worksheet now locates prediction at step 3.1; the finite-check explanation now locates evidence at step 4.1 and posterior normalization at step 5.1."
+  },
+  "supporting_evidence": {
+    "research/bayesian-computational-statistics-62-batch-41.pages.json": "6bde12b9f814a2e9aa7e689c268a4794ab2195f78ee23f70fda3cb1788b75e7a",
+    "research/bayesian-computational-statistics-62-batch-41.proof-contracts.json": "d81d2fb644b8c8d37a5df38913f920a129dbbcef90c8aea22e564290145ee8b6"
+  }
+}

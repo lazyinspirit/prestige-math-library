@@ -1,0 +1,362 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "id": "thm-overlapping-batch-means-strong-consistency",
+  "contract": {
+    "citations": [
+      {
+        "fact": "A1",
+        "source": "def-axiom-of-choice",
+        "source_section": "Definition",
+        "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "F1",
+        "source": "cor-canonical-markov-chain-on-path-space",
+        "source_section": "Statement",
+        "quote": "Assume Choice. For every probability measure $\\mu$ and probability kernel $K$\non an arbitrary measurable space $(E,\\mathcal E)$, the canonical path space\n$$ (E^{\\mathbb N_0},\\mathcal E^{\\otimes\\mathbb N_0}) $$\ncarries a unique probability $\\mathbb P_\\mu$ under which the coordinate maps\nform a Markov chain with initial law $\\mu$ and transition kernel $K$.",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "F1",
+        "source": "thm-invariant-initial-law-makes-the-chain-stationary",
+        "source_section": "Statement",
+        "quote": "Assume AC ([[def-axiom-of-choice]]). Let $K$ be a probability kernel on a\nmeasurable space $(E,\\mathcal E)$, let $\\pi$ be an invariant probability for $K$\n([[def-invariant-and-stationary-distribution-for-a-markov-kernel]]), and let\n$X$ be a $K$-chain with initial law $\\pi$\n([[def-initial-distribution-of-a-markov-chain]]). Then every finite-dimensional\nlaw of $X$ is invariant under every nonnegative integer time shift: for every\n$r\\ge1$, every $0\\le n_1<\\cdots<n_r$ and every $m\\ge0$,\n\n$$\\mathcal L(X_{m+n_1},\\ldots,X_{m+n_r})=\\mathcal L(X_{n_1},\\ldots,X_{n_r}).$$\n\nEquivalently, the canonical path law\n$\\mathbb P_X:=\\mathcal L\\bigl((X_n)_{n\\ge0}\\bigr)$ on\n$(E^{\\mathbb N_0},\\mathcal E^{\\otimes\\mathbb N_0})$ is invariant under the left\nshift $\\theta(z)_n=z_{n+1}$.",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "F2",
+        "source": "lem-harris-geometric-ergodicity-has-integrable-rate-envelope",
+        "source_section": "Statement",
+        "quote": "Assume the Axiom of Choice. Let $P$ be a probability kernel on a measurable space\n$(\\mathsf X,\\mathcal X)$ with invariant probability $\\pi$. Assume it is\n$\\phi$-irreducible\n([[def-phi-irreducible-chain]]), aperiodic\n([[def-general-state-aperiodic-markov-chain]]), and Harris recurrent relative\nto its nonzero $\\sigma$-finite irreducibility measure $\\phi$\n([[def-harris-recurrent-markov-chain]]). Suppose $P$ is geometrically\nergodic in the sense of\n[[def-geometric-and-uniform-ergodicity-for-mcmc-clt]]. Then there exist a\nmeasurable $M:\\mathsf X\\to[0,\\infty)$ with $\\pi(M)<\\infty$ and $r\\in(0,1)$ such\nthat\n$$\\|P^n(x,\\cdot)-\\pi\\|_{\\mathrm{TV}}\\le M(x)r^n\\quad(x\\in\\mathsf X,\\ n\\ge1).$$\n\nIn fact, the same conclusion holds assuming only AC, invariance of $\\pi$, and the everywhere finite measurable common geometric-rate bound in [[def-geometric-and-uniform-ergodicity-for-mcmc-clt]], on the original arbitrary measurable space. The construction below derives the needed irreducibility on a restricted sigma-field directly from that bound.",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "F3",
+        "source": "lem-geometric-total-variation-rate-controls-strong-mixing",
+        "source_section": "Statement",
+        "quote": "Assume AC. Let $(X_k)_{k\\ge0}$ be a stationary time-homogeneous Markov chain\nwith invariant probability $\\pi$. Suppose there are a measurable\n$M:\\mathsf X\\to[0,\\infty)$ with $\\pi(M)<\\infty$ and $r\\in(0,1)$ such that\n$$\\|P^n(x,\\cdot)-\\pi\\|_{\\mathrm{TV}}\\le M(x)r^n\\quad\\text{for every }x\\in\\mathsf X,\\ n\\ge1.$$\nThen the strong-mixing coefficient of the stationary process satisfies\n$$\\alpha_X(n)\\le\\pi(M)r^n\\quad(n\\ge1).$$",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "F3",
+        "source": "lem-measurable-observation-does-not-increase-mixing-coefficients",
+        "source_section": "Statement",
+        "quote": "Let $X=(X_k)_{k\\ge0}$ be a strictly stationary process on a measurable state\nspace and let $h$ be a measurable real-valued function. Put $Y_k=h(X_k)$.\nThen $Y$ is strictly stationary and, for every $n\\ge1$,\n$$\\alpha_Y(n)\\le\\alpha_X(n),\\qquad \\phi_Y(n)\\le\\phi_X(n),\\qquad \\rho_Y(n)\\le\\rho_X(n),$$\nwhere the coefficients are as in\n[[def-mixing-coefficients-for-stationary-markov-chain]].",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "F4",
+        "source": "thm-strong-mixing-clt-with-moment-conditions",
+        "source_section": "Statement",
+        "quote": "Assume AC. Let $(Y_k)_{k\\ge0}$ be a centered strictly stationary real sequence with $\\mathbb E[Y_0^2]<\\infty$, and define $S_n=\\sum_{k=1}^nY_k$. Each of the following is sufficient:\n\n1. There is $B<\\infty$ with $|Y_0|\\le B$ almost surely and $\\sum_{n\\ge1}\\alpha_Y(n)<\\infty$.\n2. For some $\\delta>0$, $\\mathbb E|Y_0|^{2+\\delta}<\\infty$ and $\\sum_{n\\ge1}\\alpha_Y(n)^{\\delta/(2+\\delta)}<\\infty$.\n3. For some $a\\in(0,1)$, $\\alpha_Y(n)=O(a^n)$ and $\\mathbb E[Y_0^2\\log^+|Y_0|]<\\infty$, where $\\log^+u=\\max(0,\\log u)$ for $u>0$ and $0\\log^+0:=0$.\n\nIn each case the covariance series\n$$\\sigma_Y^2:=\\mathbb E[Y_0^2]+2\\sum_{k=1}^{\\infty}\\operatorname{Cov}(Y_0,Y_k)$$\nconverges absolutely and is nonnegative, and\n$$n^{-1/2}S_n\\Rightarrow N(0,\\sigma_Y^2).$$\nThis includes the degenerate law $N(0,0)$ when $\\sigma_Y^2=0$, as in [[lem-zero-long-run-variance-gives-degenerate-clt]]. The coefficient $\\alpha_Y$ and strict stationarity have the meanings in [[def-mixing-coefficients-for-stationary-markov-chain]].",
+        "uses": [
+          "1.2"
+        ]
+      },
+      {
+        "fact": "F5",
+        "source": "def-long-run-variance-for-stationary-markov-chain",
+        "source_section": "Definition",
+        "quote": "Let $(X_k)_{k\\ge0}$ be a stationary time-homogeneous Markov chain with invariant probability $\\pi$, and let $f$ be real Borel with $\\pi(f)=0$ and $\\pi(f^2)<\\infty$. For $k\\ge0$, set $\\gamma_k:=\\operatorname{Cov}_{\\pi}(f(X_0),f(X_k))$. When the Markov-chain CLT $n^{-1/2}\\sum_{k=0}^{n-1}f(X_k)\\Rightarrow N(0,\\sigma_f^2)$ holds with finite variance parameter and $\\sum_{k\\ge1}|\\gamma_k|<\\infty$, the **covariance long-run variance** is\n$$\\sigma^2_{\\mathrm{LR}}(f):=\\gamma_0+2\\sum_{k=1}^{\\infty}\\gamma_k.$$\n\nThis definition does not infer a CLT from covariance summability, or infer that a weak-limit variance equals the covariance sum. Whenever $\\sigma^2_{\\mathrm{LR}}(f)$ is used as the variance parameter in a CLT or MCSE claim, that equality must be established by the theorem being applied. For example, the local Poisson-equation theorem proves the equality under its square-integrable solution hypotheses.",
+        "uses": [
+          "1.2"
+        ]
+      },
+      {
+        "fact": "F6",
+        "source": "thm-geometrically-ergodic-chain-strong-invariance-principle",
+        "source_section": "Statement",
+        "quote": "Let $P$ be a geometrically ergodic Markov chain with invariant probability\n$\\pi$, let $g$ be real Borel, and suppose there are $\\delta,\\varepsilon>0$\nwith $\\pi(|g|^{2+\\delta+\\varepsilon})<\\infty$. Suppose also that a\nstate-dependent one-step minorization\n[[def-state-dependent-one-step-minorization]] holds. For the Flegal\u2013Jones\nstrong invariance principle convention, assume its asymptotic standard\ndeviation satisfies $0<\\sigma_g<\\infty$. Then on a suitable extension of the\nchain's probability space there are a standard Brownian motion $B$, a finite\nrandom constant $C(\\omega)$, and a finite random index $N(\\omega)$ such that\nfor all $n\\ge N(\\omega)$,\n$$\\left|\\sum_{i=1}^n(g(X_i)-\\pi(g))-\\sigma_g B(n)\\right|\\le C(\\omega)n^{1/(2+\\delta)}\\log n$$\nalmost surely.",
+        "uses": [
+          "2.1"
+        ]
+      },
+      {
+        "fact": "F7",
+        "source": "lem-zero-variance-geometric-markov-sums-have-strong-rate",
+        "source_section": "Statement",
+        "quote": "Assume AC. Let $P$ be a probability kernel on an arbitrary measurable space $(\\mathsf X,\\mathcal X)$ with invariant probability $\\pi$. Suppose its stationary Markov chain has strong-mixing coefficients $\\alpha_X(n)\\le Cr^n$ for $n\\ge1$, with $0\\le C<\\infty$ and $0<r<1$. Let $f:\\mathsf X\\to\\mathbb R$ be finite measurable with $\\pi f=0$, $\\pi|f|^q<\\infty$ for a finite $q>2$, and suppose the absolutely convergent covariance sum is zero:\n$$v:=\\pi(f^2)+2\\sum_{n\\ge1}\\operatorname{Cov}_\\pi(f(X_0),f(X_n))=0.$$\nThen for every $2<p<q$, under the stationary law,\n$$\\max_{0\\le j\\le n}\\left|\\sum_{k=0}^{j-1}f(X_k)\\right|=o(n^{1/p})\\qquad\\text{almost surely}.$$\nThe empty sum at $j=0$ is zero. No ergodicity assumption is needed beyond the stated stationary mixing bound.\n\nIf additionally $\\|P^n(x,\\cdot)-\\pi\\|_{\\mathrm{TV}}\\to0$ for every $x\\in\\mathsf X$, the same assertion holds under every initial probability law, without a moment assumption on that law. In particular, it holds under every initial law whenever $P$ has an everywhere finite measurable common geometric total-variation envelope in the sense of [[def-geometric-and-uniform-ergodicity-for-mcmc-clt]] and $f$ has the stated moment, centering and zero covariance sum. No positive one-step minorization, irreducibility or Harris hypothesis is added to this last sufficient condition.",
+        "uses": [
+          "2.2",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F8",
+        "source": "lem-obm-consistency-from-strong-brownian-approximation",
+        "source_section": "Statement",
+        "quote": "Assume AC. Let $Y_1,Y_2,\\ldots$ be real random variables and $S_k=\\sum_{i=1}^kY_i$, with $S_0=0$. Suppose on a probability-space extension with the original process as marginal there are a standard Brownian motion $B$, constants $\\sigma\\ge0$ and $0<\\alpha<1/2$, and finite random constants $K,N$ such that almost surely\n$$|S_k-\\sigma B(k)|\\le K k^\\alpha\\log k\\qquad(k\\ge N).$$\nLet $(b_n)$ be deterministic positive integers with $b_n<n$ eventually and\n$$\\frac{b_n}{n}\\to0,\\qquad \\sum_{n=2}^\\infty(b_n/n)^c<\\infty\\quad\\text{for some real }c\\ge1,$$\n$$\\frac{b_n\\log n}{n}\\to0,\\qquad\\frac{n^{2\\alpha}(\\log n)^2}{b_n}\\to0.$$\nFor the exact estimator of [[alg-overlapping-batch-means-mcse]], applied to $Y_1,\\ldots,Y_n$,\n$$\\widehat\\sigma_{\\mathrm{OBM},n}^2=\\frac{nb_n}{(n-b_n)(n-b_n+1)}\\sum_{j=0}^{n-b_n}\\left(\\frac{S_{j+b_n}-S_j}{b_n}-\\frac{S_n}{n}\\right)^2\\longrightarrow\\sigma^2\\quad\\text{almost surely}.$$\nNo stationarity, independence of $B$ from $(Y_i)$, or monotonicity of $b_n$ or $n/b_n$ is required. The conclusion includes $\\sigma=0$.",
+        "uses": [
+          "3.1",
+          "3.2",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F9",
+        "source": "def-flegal-jones-obm-batch-size-conditions",
+        "source_section": "Definition",
+        "quote": "Let $\\delta>0$ and let $(b_n)_{n\\ge2}$ be positive integers. Say that the sequence satisfies the **Flegal\u2013Jones OBM batch-size conditions for exponent $\\delta$**, with the integer monotonicity correction described below, when $b_n<n$ for all sufficiently large $n$, $b_n\\to\\infty$, $n/b_n\\to\\infty$, and there is a constant $c\\ge1$ such that\n$$\\sum_{n=2}^{\\infty}(b_n/n)^c<\\infty,$$\nwhile\n$$\\frac{b_n}{n}\\log n\\to0,\\qquad \\frac{n^{2/(2+\\delta)}(\\log n)^3}{b_n}\\to0,$$\nthere are $n_0\\ge2$ and $c_1<\\infty$ with $\\log n/b_n\\le c_1$ for all $n\\ge n_0$, and\n$$b_n^2n^{-2}\\log\\log n\\to0,\\qquad b_n^4n^{-3}\\log\\log n\\to0.$$\n\nThese are all the numerical rate, summability and endpoint hypotheses of Flegal\u2013Jones Theorem 2. The source additionally asks that both $b_n$ and $n/b_n$ be nondecreasing. Those two requirements are omitted here: for an integer sequence with $b_n<n$ eventually they are incompatible with $b_n\\to\\infty$. Indeed, ratio monotonicity would imply $n(b_{n+1}-b_n)\\le b_n<n$, while integer monotonicity would force the nonnegative integer $b_{n+1}-b_n$ to be zero. Thus the literal source conditions would make $b_n$ eventually constant. The corrected interface preserves the intended floor-power batch sequences, and the Brownian quadratic-form proof of OBM consistency needs neither monotonicity assumption.\n\nThis is a sufficient-condition interface; failure of a condition does not imply inconsistency of the estimator.\n\nFor the floor-power sequence $b_n=\\lfloor n^\\nu\\rfloor$, the intended source range $\\delta>2/3$ and $2/(2+\\delta)<\\nu<3/4$ satisfies this corrected contract. Indeed, eventually $n^\\nu/2\\le b_n\\le n^\\nu$. Choose $c>\\max\\{1,1/(1-\\nu)\\}$ to bound the summability series by $\\sum_n n^{-c(1-\\nu)}<\\infty$. The other displayed quantities are bounded respectively by $n^{\\nu-1}\\log n$, $2n^{2/(2+\\delta)-\\nu}(\\log n)^3$, $2n^{-\\nu}\\log n$, $n^{2\\nu-2}\\log\\log n$ and $n^{4\\nu-3}\\log\\log n$, all tending to zero. Also $b_n\\to\\infty$, $n/b_n\\to\\infty$ and $b_n<n$ eventually. These checks establish the numerical contract without asserting the impossible simultaneous monotonicity.",
+        "uses": [
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F10",
+        "source": "cor-existence-and-scaling-of-d-dimensional-brownian-motion",
+        "source_section": "Statement",
+        "quote": "Assume the Axiom of Choice and let $d\\ge1$ be finite.\n\n1. A standard $d$-dimensional Brownian motion exists: one may take $d$\n   independent copies of the constructed one-dimensional Brownian path and\n   assemble them coordinatewise.\n2. If $B$ is any standard $d$-dimensional Brownian motion and $c>0$, then\n   $$Y_t=c^{-1/2}B_{ct},\\qquad t\\ge0,$$\n   is again standard $d$-dimensional Brownian motion. Moreover, the random\n   elements $B$ and $Y$ have the same law on $(\\mathbb R^d)^{[0,\\infty)}$\n   equipped with its cylinder sigma-algebra.",
+        "uses": [
+          "2.2"
+        ]
+      },
+      {
+        "fact": "F10",
+        "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+        "source_section": "Statement",
+        "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+        "uses": [
+          "2.2"
+        ]
+      }
+    ],
+    "derivations": [
+      {
+        "id": "thm-overlapping-batch-means-strong-consistency-step-1-1",
+        "step": "1.1",
+        "claim": "Put $q=2+\\delta+\\varepsilon$, $\\mu=\\pi(g)$ and $f=g-\\mu$. The moment hypothesis gives $\\pi|g|<\\infty$, since $|g|\\le1+|g|^q$, so $\\mu$ is finite. The elementary bound $|g-\\mu|^q\\le2^q(|g|^q+|\\mu|^q)$ gives $\\pi|f|^q<\\infty$, and $\\pi f=0$. For variance identification consider the canonical chain with initial law $\\pi$, which is stationary by [F1]. The given geometric bound has an everywhere finite measurable common envelope, so the stronger arbitrary-measurable-space clause of [F2] supplies an integrable such envelope. By [F3], this stationary chain and its observation $f$ have a strong-mixing bound $\\alpha_f(n)\\le Cr^n$ with $C<\\infty$ and $r\\in(0,1)$. This construction is only for identifying the stationary covariance parameter; the observed initial law remains arbitrary.",
+        "inputs": [
+          "A1",
+          "F1",
+          "F2",
+          "F3",
+          "given",
+          "construct",
+          "algebra"
+        ]
+      },
+      {
+        "id": "thm-overlapping-batch-means-strong-consistency-step-1-2",
+        "step": "1.2",
+        "claim": "Take $\\eta=q-2=\\delta+\\varepsilon>0$. The geometric bound in step 1.1 makes $\\sum_n\\alpha_f(n)^{\\eta/(2+\\eta)}$ finite. Apply [F4] to the stationary observed sequence. Its covariance series is absolutely convergent, its sum $v=\\pi(f^2)+2\\sum_{k\\ge1}\\operatorname{Cov}_\\pi(f(X_0),f(X_k))$ is finite and nonnegative, and its CLT has precisely variance $v$. Thus [F5] identifies $v=\\sigma_g^2$, without using the stationary Harris-only formulation of a separate MCMC regime theorem. Write $\\sigma=\\sqrt v\\ge0$ and $\\alpha=1/(2+\\delta)\\in(0,1/2)$.",
+        "inputs": [
+          "F4",
+          "F5",
+          "step 1.1",
+          "given",
+          "algebra"
+        ]
+      },
+      {
+        "id": "thm-overlapping-batch-means-strong-consistency-step-2-1",
+        "step": "2.1",
+        "claim": "If $v>0$, the original $g$, the given $\\delta,\\varepsilon$, geometric ergodicity and supplied minorization meet [F6] with the finite positive standard deviation from step 1.2. Hence, for the original arbitrary initial law, on an extension there are a standard Brownian motion $B$ and finite random constants for which $|\\sum_{i=1}^n f(X_i)-\\sigma B(n)|=O(n^\\alpha\\log n)$ almost surely. The same moment exponents and the same covariance variance are used; no stronger moment assumption is introduced.",
+        "inputs": [
+          "F6",
+          "step 1.1",
+          "step 1.2",
+          "given"
+        ]
+      },
+      {
+        "id": "thm-overlapping-batch-means-strong-consistency-step-2-2",
+        "step": "2.2",
+        "claim": "If $v=0$, choose a real $p$ with $2+\\delta<p<q$, possible because $\\varepsilon>0$. Apply the all-start geometric-envelope clause of [F7] to $f$; its moment and zero covariance hypotheses were established in steps 1.1\u20131.2. Use the chain indexed from $X_1$ as its time-zero chain, whose initial law is still arbitrary. Then $\\max_{j\\le n}|\\sum_{i=1}^j f(X_i)|=o(n^{1/p})$ almost surely. Since $1/p<\\alpha$, this implies $|\\sum_{i=1}^n f(X_i)|=O(n^\\alpha\\log n)$. Adjoin a standard Brownian motion on the product extension supplied by [F10] and set $\\sigma=0$. The same approximation as in step 2.1 now holds, with zero Brownian coefficient. No division by $\\sigma$ or implication from a degenerate CLT to an almost-sure rate is used.",
+        "inputs": [
+          "F7",
+          "F10",
+          "step 1.1",
+          "step 1.2",
+          "choose",
+          "construct",
+          "algebra"
+        ]
+      },
+      {
+        "id": "thm-overlapping-batch-means-strong-consistency-step-3-1",
+        "step": "3.1",
+        "claim": "In either variance branch the hypotheses of [F8] hold with this $\\sigma,\\alpha$. Indeed $n/b_n\\to\\infty$ gives $b_n/n\\to0$, while the summability and $(b_n/n)\\log n\\to0$ assumptions are displayed in the Statement. Moreover $n^{2\\alpha}(\\log n)^2/b_n=[n^{2/(2+\\delta)}(\\log n)^3/b_n]/\\log n\\to0$. The other stated numerical endpoint and growth conditions are retained and impose no additional requirement in this reduction. Thus [F8] gives convergence to $\\sigma^2=v$ for the exact OBM estimator applied to $Y_i=f(X_i)$.",
+        "inputs": [
+          "F8",
+          "step 1.2",
+          "step 2.1",
+          "step 2.2",
+          "given",
+          "algebra"
+        ]
+      },
+      {
+        "id": "thm-overlapping-batch-means-strong-consistency-step-3-2",
+        "step": "3.2",
+        "claim": "Centering the observations by the constant $\\mu$ does not change this finite estimator: $\\bar f_n=\\bar g_n-\\mu$ and $\\bar f_{n,j}(b_n)=\\bar g_{n,j}(b_n)-\\mu$, so their difference equals $\\bar g_{n,j}(b_n)-\\bar g_n$. The indexing $j=0,\\ldots,n-b_n$ in [F8] is exactly $j=1,\\ldots,n-b_n+1$ after adding one to the starting index, and its denominator is $(n-b_n)(n-b_n+1)$ as here. Therefore its estimator is the displayed $\\widehat\\sigma^2_{\\mathrm{OBM},n}$, and steps 1.2 and 3.1 prove its almost-sure convergence to $\\sigma_g^2$ under the original arbitrary initial law.",
+        "inputs": [
+          "F8",
+          "step 1.1",
+          "step 1.2",
+          "step 3.1",
+          "algebra"
+        ]
+      },
+      {
+        "id": "thm-overlapping-batch-means-strong-consistency-step-4-1",
+        "step": "4.1",
+        "claim": "Finally, the source-corollary range is $2/(2+\\delta)<\\nu<3/4$. By [F9], $b_n=\\lfloor n^\\nu\\rfloor$ satisfies every corrected numerical batch hypothesis, so steps 1.1\u20133.2 apply to it as well. This verifies the intended floor-power conclusion without asserting the incompatible ratio monotonicity. The proof includes $v=0$, finite early inadmissible batch indices, and arbitrary initial laws without additional moment hypotheses, as allowed by [F7]\u2013[F8].",
+        "inputs": [
+          "F7",
+          "F8",
+          "F9",
+          "step 1.1",
+          "step 1.2",
+          "step 2.2",
+          "step 3.2",
+          "given"
+        ]
+      }
+    ],
+    "routine_steps": [],
+    "boundaries": [
+      {
+        "case": "zero",
+        "status": "checked",
+        "evidence": "Steps 1.2 and 2.2 include zero covariance variance, apply the actual all-start Poisson rate and adjoin Brownian coefficient zero without division."
+      },
+      {
+        "case": "one",
+        "status": "checked",
+        "evidence": "The initial observation X_1 is treated as the time-zero state in step 2.2; the summation and batch-start index shift is checked in step 3.2."
+      },
+      {
+        "case": "degenerate",
+        "status": "checked",
+        "evidence": "Step 2.2 includes constant observables and zero variance. The proof never divides by sigma or by the estimated variance."
+      },
+      {
+        "case": "endpoints",
+        "status": "checked",
+        "evidence": "Step 1.2 uses strict delta>0 to put alpha in (0,1/2); epsilon>0 permits the intermediate zero-branch p. Step 3.1 uses eventual 1<=b_n<n and every needed numerical rate; step 4.1 preserves the intended floor range."
+      },
+      {
+        "case": "nonempty-choice",
+        "status": "checked",
+        "evidence": "A1 records AC inherited from the canonical chain, mixing, Brownian existence, product-space and SIP interfaces. Step 2.2 adjoins Brownian motion on an actual product extension preserving the chain."
+      },
+      {
+        "case": "empty",
+        "status": "not_applicable",
+        "reason": "An invariant probability exists, so the state space is nonempty; OBM windows are nonempty for all sufficiently large n."
+      },
+      {
+        "case": "iff-forward",
+        "status": "not_applicable",
+        "reason": "The claim is a one-way sufficient consistency theorem, not an equivalence."
+      },
+      {
+        "case": "iff-reverse",
+        "status": "not_applicable",
+        "reason": "The claim is a one-way sufficient consistency theorem, not an equivalence."
+      }
+    ],
+    "finite_checks": [],
+    "finite_smoke": [],
+    "risk_review": {
+      "status": "open",
+      "notes": "Complete local target proof authored after actual positive SIP body installation. Parent focused review accepted the full draft before installation. Root owns metadata, supplier integration, independent review currency and native evidence; no gate or acceptance stamp is claimed here."
+    }
+  },
+  "proposed_row": {
+    "id": "thm-overlapping-batch-means-strong-consistency",
+    "kind": "theorem",
+    "title": "Strong consistency of overlapping batch means",
+    "deps": [
+      "alg-overlapping-batch-means-mcse",
+      "cor-canonical-markov-chain-on-path-space",
+      "cor-existence-and-scaling-of-d-dimensional-brownian-motion",
+      "def-axiom-of-choice",
+      "def-flegal-jones-obm-batch-size-conditions",
+      "def-geometric-and-uniform-ergodicity-for-mcmc-clt",
+      "def-long-run-variance-for-stationary-markov-chain",
+      "def-measure-kernel-and-probability-kernel",
+      "def-state-dependent-one-step-minorization",
+      "lem-geometric-total-variation-rate-controls-strong-mixing",
+      "lem-harris-geometric-ergodicity-has-integrable-rate-envelope",
+      "lem-measurable-observation-does-not-increase-mixing-coefficients",
+      "lem-obm-consistency-from-strong-brownian-approximation",
+      "lem-zero-variance-geometric-markov-sums-have-strong-rate",
+      "thm-geometrically-ergodic-chain-strong-invariance-principle",
+      "thm-invariant-initial-law-makes-the-chain-stationary",
+      "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "thm-strong-mixing-clt-with-moment-conditions"
+    ]
+  },
+  "required_deps": [
+    "alg-overlapping-batch-means-mcse",
+    "cor-canonical-markov-chain-on-path-space",
+    "cor-existence-and-scaling-of-d-dimensional-brownian-motion",
+    "def-axiom-of-choice",
+    "def-flegal-jones-obm-batch-size-conditions",
+    "def-geometric-and-uniform-ergodicity-for-mcmc-clt",
+    "def-long-run-variance-for-stationary-markov-chain",
+    "def-measure-kernel-and-probability-kernel",
+    "def-state-dependent-one-step-minorization",
+    "lem-geometric-total-variation-rate-controls-strong-mixing",
+    "lem-harris-geometric-ergodicity-has-integrable-rate-envelope",
+    "lem-measurable-observation-does-not-increase-mixing-coefficients",
+    "lem-obm-consistency-from-strong-brownian-approximation",
+    "lem-zero-variance-geometric-markov-sums-have-strong-rate",
+    "thm-geometrically-ergodic-chain-strong-invariance-principle",
+    "thm-invariant-initial-law-makes-the-chain-stationary",
+    "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+    "thm-strong-mixing-clt-with-moment-conditions"
+  ],
+  "remove_unused_dep": [
+    "thm-mcmc-clt-sufficient-regimes"
+  ],
+  "frontmatter_proposal": {
+    "proof_strategy": "direct",
+    "provenance.statement": "ai-altered",
+    "provenance.proof": "ai-altered",
+    "axiom_use": "Assume AC through the canonical-chain, geometric-envelope, strong-mixing CLT, Brownian, product-extension and strong-invariance suppliers. No further choice principle is used by the finite OBM comparison."
+  },
+  "metadata_authority": "Live frontmatter, numeric dependency level and corrected rich Statement preserved byte-for-byte; root owns all metadata/dependency/provenance/verification updates.",
+  "before_file": "research/bayesian-computational-statistics-62-owner-mcmc-clt-obm-final-before/items/thm-overlapping-batch-means-strong-consistency.md",
+  "proof_route": {
+    "variance_identification": "Canonical stationary chain plus actual broadened integrable-envelope and TV/mixing suppliers feed the actual strong-mixing moment CLT; this proves absolute covariance summability and finite nonnegative covariance variance under exactly the target geometric envelope. No appeal to main six-regime stationary-Harris hypotheses.",
+    "positive_variance": "Actual thm-geometrically-ergodic-chain-strong-invariance-principle with the same delta and epsilon, all-start extension, covariance variance.",
+    "zero_variance": "Actual lem-zero-variance-geometric-markov-sums-have-strong-rate, with p strictly between 2+delta and 2+delta+epsilon, and independent Brownian product extension with coefficient0.",
+    "comparison": "Actual lem-obm-consistency-from-strong-brownian-approximation with alpha=1/(2+delta). Translation invariance, exact starting indices and denominator verified.",
+    "floor_corollary": "Current corrected batch Definition contains the complete floor-rate calculation and retains all numerical conditions."
+  },
+  "consumer_checks": [
+    {
+      "id": "alg-overlapping-batch-means-mcse",
+      "result": "Read finite procedure. Exact n*b/[(n-b)(n-b+1)] factor and j=1..n-b+1 index agree with target and helper after shift. Finite nonnegativity and arithmetic claims unchanged; no source edit."
+    },
+    {
+      "id": "ex-overlapping-batch-size-fails-a-source-condition",
+      "result": "Read example. Its delta=1, b=floor(sqrt n) lower-growth ratio diverges as n^(1/6)log^3 n, so the corrected sufficient condition still fails. It still does not claim inconsistency; no source edit."
+    },
+    {
+      "page": "mcmc-clt-and-monte-carlo-standard-error",
+      "result": "Replace only the stale OBM pending-proof sentence with the completed positive/zero all-start proof description, preserving other current page text."
+    }
+  ],
+  "proof_layout": {
+    "command": "node tools/proof-layout.mjs items/thm-overlapping-batch-means-strong-consistency.md",
+    "observed_output": "proof-layout: 1 items, 7 steps, 0 defects",
+    "exit_code": 0
+  }
+}

@@ -1,0 +1,291 @@
+{
+  "group": "r",
+  "batches": [
+    "57"
+  ],
+  "pages_read": [
+    "statistical-and-computational-error-accounting",
+    "statistical-and-computational-error-accounting-examples"
+  ],
+  "items_read": [
+    "def-statistical-and-computational-error-ledger",
+    "thm-pathwise-error-ledger-decomposition",
+    "thm-error-ledger-mse-covariance-identity",
+    "thm-independent-replicate-variance-estimator",
+    "cor-independent-replicate-mean-clt",
+    "ex-bootstrap-finite-b-versus-sampling-error",
+    "ex-permutation-pvalue-resolution",
+    "ex-euler-discretization-bias-and-path-variance",
+    "ex-rqmc-replicate-error-estimate",
+    "ex-dot-product-roundoff-and-conditioning",
+    "ex-correlated-error-components"
+  ],
+  "conventions": [
+    {
+      "convention": "The scalar references are real random variables on one probability space, r₀=θ is fixed, and signed errors are later reference minus earlier reference: eⱼ=rⱼ−rⱼ₋₁ and e_fp=returned value−rₘ. The finite chain may have m=0.",
+      "fixed_by": "def-statistical-and-computational-error-ledger",
+      "matters_for": [
+        "thm-pathwise-error-ledger-decomposition",
+        "ex-bootstrap-finite-b-versus-sampling-error",
+        "ex-permutation-pvalue-resolution",
+        "ex-euler-discretization-bias-and-path-variance",
+        "ex-rqmc-replicate-error-estimate",
+        "ex-dot-product-roundoff-and-conditioning",
+        "ex-correlated-error-components"
+      ]
+    },
+    {
+      "convention": "Stage labels assert neither independence nor centering. Probability statements require a declared joint law and conditioning convention; fixed-data computation variability excludes variation across new data samples.",
+      "fixed_by": "def-statistical-and-computational-error-ledger",
+      "matters_for": [
+        "thm-error-ledger-mse-covariance-identity",
+        "thm-independent-replicate-variance-estimator",
+        "cor-independent-replicate-mean-clt",
+        "ex-bootstrap-finite-b-versus-sampling-error",
+        "ex-rqmc-replicate-error-estimate"
+      ]
+    },
+    {
+      "convention": "The MSE identity concerns m≥1 square-integrable real components on one probability space. Equality with the variance sum requires the combined squared-total-bias and covariance correction to vanish; separate centering alone does not suffice.",
+      "fixed_by": "thm-error-ledger-mse-covariance-identity",
+      "matters_for": [
+        "ex-correlated-error-components"
+      ]
+    },
+    {
+      "convention": "The replicate variance estimator requires IID real outputs with finite variance and R≥2; its denominator is R(R−1), and its target is variance of the replicate mean.",
+      "fixed_by": "thm-independent-replicate-variance-estimator",
+      "matters_for": [
+        "ex-bootstrap-finite-b-versus-sampling-error",
+        "ex-euler-discretization-bias-and-path-variance",
+        "ex-rqmc-replicate-error-estimate"
+      ]
+    },
+    {
+      "convention": "The replicate CLT explicitly assumes AC, a given IID sequence indexed from 1, and strictly positive finite variance. It supplies neither a finite-R Student interval nor a data-sampling confidence statement.",
+      "fixed_by": "cor-independent-replicate-mean-clt",
+      "matters_for": [
+        "cor-independent-replicate-mean-clt"
+      ]
+    },
+    {
+      "convention": "The permutation example uses inclusive upper-tail ranks counted over group elements. Its separately defined plus-one finite-B calculation establishes resolution and a realized difference only, without importing validity or unbiasedness.",
+      "fixed_by": "ex-permutation-pvalue-resolution",
+      "matters_for": [
+        "ex-permutation-pvalue-resolution"
+      ]
+    },
+    {
+      "convention": "The dot product uses binary64 round-to-nearest, ties-to-even, and left-to-right accumulation. The bound requires 3u<1 and normal-range products and intermediate sums; the condition ratio divides by the nonzero exact result.",
+      "fixed_by": "ex-dot-product-roundoff-and-conditioning",
+      "matters_for": [
+        "ex-dot-product-roundoff-and-conditioning"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-statistical-and-computational-error-ledger",
+      "statement": "For a fixed real target θ=r₀ and a finite same-scale reference chain of real random variables, define eⱼ=rⱼ−rⱼ₋₁ and e_fp=returned value−rₘ. Labels alone assert no independence, centering, or unbiasedness; probability claims require the joint law and conditioning convention.",
+      "used_by": [
+        "thm-pathwise-error-ledger-decomposition",
+        "ex-bootstrap-finite-b-versus-sampling-error",
+        "ex-permutation-pvalue-resolution",
+        "ex-euler-discretization-bias-and-path-variance",
+        "ex-rqmc-replicate-error-estimate",
+        "ex-dot-product-roundoff-and-conditioning",
+        "ex-correlated-error-components",
+        "def-exact-inferential-target-and-approximation-chain",
+        "thm-metric-approximation-error-decomposition"
+      ]
+    },
+    {
+      "id": "thm-independent-replicate-variance-estimator",
+      "statement": "For IID real Z₁,…,Z_R with mean μ and finite variance τ², R≥2, [R(R−1)]⁻¹Σᵣ(Zᵣ−Z̄_R)² is unbiased for Var(Z̄_R)=τ²/R. Under a computation-randomization law conditional on fixed data, it concerns computation variability only.",
+      "used_by": [
+        "ex-bootstrap-finite-b-versus-sampling-error",
+        "ex-euler-discretization-bias-and-path-variance",
+        "ex-rqmc-replicate-error-estimate"
+      ]
+    },
+    {
+      "id": "thm-error-ledger-mse-covariance-identity",
+      "statement": "For square-integrable real E₁,…,Eₘ on one probability space, m≥1, with bⱼ=E[Eⱼ], E[(ΣⱼEⱼ)²]=(Σⱼbⱼ)²+ΣⱼVar(Eⱼ)+2Σⱼ<ₖCov(Eⱼ,Eₖ). Equality with the variance sum holds exactly when the combined correction vanishes. If total bias is zero, pairwise independence suffices.",
+      "used_by": [
+        "ex-correlated-error-components",
+        "lem-mlmc-estimator-moments-and-mse",
+        "thm-metric-approximation-error-decomposition"
+      ]
+    },
+    {
+      "id": "thm-pathwise-error-ledger-decomposition",
+      "statement": "For the finite scalar reference chain with m≥0, returned value−θ=Σⱼ₌₁ᵐ(rⱼ−rⱼ₋₁)+(returned value−rₘ), pointwise; its absolute value is bounded by the sum of absolute adjacent differences. The sum is empty when m=0. No independence, unbiasedness, or distributional assumption is needed.",
+      "used_by": [
+        "ex-bootstrap-finite-b-versus-sampling-error",
+        "ex-permutation-pvalue-resolution",
+        "ex-euler-discretization-bias-and-path-variance",
+        "ex-dot-product-roundoff-and-conditioning",
+        "thm-metric-approximation-error-decomposition"
+      ]
+    },
+    {
+      "id": "cor-independent-replicate-mean-clt",
+      "statement": "Assume AC. For IID real computation-replicate outputs (Zᵣ)ᵣ≥₁ with mean μ and variance 0<τ²<∞, √R(Z̄_R−μ)/τ converges in distribution to N(0,1) as R→∞. This fixed-target replicate-randomization limit does not itself justify a finite-R Student interval.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-probability-measure",
+      "used_for": "The probability-space interface underlying the scalar ledger.",
+      "opened": true
+    },
+    {
+      "id": "def-random-element-and-real-random-variable",
+      "used_for": "Real random variables are measurable maps into the Borel real line.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurability of signed ledger differences and polynomial transforms of simulated initial values.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "The precise square-integrability, variance, and covariance conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Finite expectation expansions in the MSE identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-factorization-of-expectations-for-independent-variables",
+      "used_for": "Zero covariance for independent centered components and cross moments of independent replicates.",
+      "opened": true
+    },
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Mutual independence and common laws, without implicit moment assumptions.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicit inherited axiom in the replicate CLT.",
+      "opened": true
+    },
+    {
+      "id": "thm-lindeberg-levy-iid-central-limit-theorem",
+      "used_for": "The normalized IID-sum limit, with AC and strictly positive finite variance retained.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-group-randomization-test",
+      "used_for": "The finite group action and invariant-null setup in the permutation example.",
+      "opened": true
+    },
+    {
+      "id": "def-orbit-rank-p-value",
+      "used_for": "Inclusive upper-tail ranks with group-element multiplicities.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-group-randomization-validity",
+      "used_for": "Superuniformity of the full-orbit rank under the uniform invariant null, without transferring that conclusion to the finite-B calculation.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Constancy of the integrating-factor product in the Euler example.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "The exponential series, exp(0)=1, and e=exp(1) in the Euler example.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Verification of the ODE solution and integrating factor.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Differentiating exp(−t).",
+      "opened": true
+    },
+    {
+      "id": "cor-differentiable-implies-continuous",
+      "used_for": "Endpoint continuity before applying the mean value theorem.",
+      "opened": true
+    },
+    {
+      "id": "lem-measurable-functions-preserve-independence",
+      "used_for": "Independence of the simulated squared Euler endpoints.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-relative-floating-point-model-and-unit-roundoff",
+      "used_for": "The normal-range relative model, exact-zero convention, and binary64 constants.",
+      "opened": true
+    },
+    {
+      "id": "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+      "used_for": "The left-to-right dot-product absolute bound with γₙ=nu/(1−nu), requiring nu<1 and normal-range operations.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-euler-discretization-bias-and-path-variance",
+      "concern": "Verification 1.1 concludes from u(1)=u(0), with u(t)=exp(−t)x(t), that x(1)=eX₀. This uses exp(−1)exp(1)=1, which is neither stated nor cited among its facts. The missing justification is immediate from the same displayed product-derivative argument applied to exp(−t)exp(t), followed by the mean value theorem and exp(0)=1. The endpoint and target claims remain sound.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "statistical-and-computational-error-accounting",
+      "to": "iid-monte-carlo-integration-and-error",
+      "faithful": true,
+      "note": "The mean and variance conventions agree. The ledger proves its finite-replicate identity locally; its separate CLT retains the published supplier's AC and positive-finite-variance hypotheses."
+    },
+    {
+      "from": "statistical-and-computational-error-accounting",
+      "to": "resampling-algorithms-and-sampling-units",
+      "faithful": true,
+      "note": "The bootstrap example satisfies the declared finite measurable unit-space and statistic requirements, uses with-replacement uniform indices and fresh repetitions, and imports only the fixed-data empirical conditional law."
+    },
+    {
+      "from": "statistical-and-computational-error-accounting",
+      "to": "finite-group-permutation-inference",
+      "faithful": true,
+      "note": "The repeated transformation list matches a with-replacement plus-one calculation. The example defines that calculation locally and claims no finite-B validity; full-orbit validity comes from the opened published finite-group theorem under the explicitly checked invariant null."
+    },
+    {
+      "from": "statistical-and-computational-error-accounting",
+      "to": "cross-validation-risk-and-model-comparison",
+      "faithful": true,
+      "note": "This is contextual. The ledger imports no CV risk or variance-estimation conclusion. Its locally proved covariance identity is compatible with the fixed-fold covariance decomposition and does not assume fold independence."
+    },
+    {
+      "from": "multilevel-monte-carlo",
+      "to": "statistical-and-computational-error-accounting",
+      "faithful": true,
+      "note": "The MLMC moment lemma quotes the MSE identity faithfully and applies it to square-integrable centered level errors with independent sample blocks, then uses its one-variable case for squared bias plus variance."
+    },
+    {
+      "from": "quasi-monte-carlo-discrepancy-and-rules",
+      "to": "statistical-and-computational-error-accounting",
+      "faithful": true,
+      "note": "The page's explicit citation repeats the ledger convention that deterministic quadrature has no replicate-based error estimate unless an actual randomization is added."
+    },
+    {
+      "from": "identifiability-and-approximation-bias-in-computational-inference",
+      "to": "statistical-and-computational-error-accounting",
+      "faithful": true,
+      "note": "The approximation-chain definition preserves same-scale signed scalar differences. The metric theorem and page distinguish exact scalar telescoping from a same-space, same-metric triangle bound and retain the bias/covariance caveat."
+    }
+  ]
+}

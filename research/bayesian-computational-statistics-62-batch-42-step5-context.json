@@ -1,0 +1,227 @@
+{
+  "group": "m",
+  "batches": [
+    "42"
+  ],
+  "pages_read": [
+    "kalman-filtering",
+    "kalman-filtering-examples"
+  ],
+  "items_read": [
+    "lem-independent-noise-extends-a-conditional-law",
+    "alg-kalman-filter",
+    "lem-one-step-kalman-gaussian-conditioning",
+    "thm-kalman-filter-is-exact-posterior",
+    "ex-scalar-kalman-filter-update",
+    "ex-kalman-filter-singular-prior-positive-innovation"
+  ],
+  "conventions": [
+    {
+      "convention": "The horizon T is finite and may be zero; state and observation dimensions are positive integers. The empty observation history is a singleton.",
+      "fixed_by": "alg-kalman-filter",
+      "matters_for": [
+        "thm-kalman-filter-is-exact-posterior"
+      ]
+    },
+    {
+      "convention": "Initial, process, measurement, predicted-state, and filtered-state covariances may be singular positive-semidefinite matrices; every innovation covariance solved must be positive definite.",
+      "fixed_by": "alg-kalman-filter",
+      "matters_for": [
+        "lem-one-step-kalman-gaussian-conditioning",
+        "thm-kalman-filter-is-exact-posterior",
+        "ex-scalar-kalman-filter-update",
+        "ex-kalman-filter-singular-prior-positive-innovation"
+      ]
+    },
+    {
+      "convention": "Conditional laws are everywhere-defined probability-kernel versions satisfying conditional event identities; no pointwise uniqueness on null observation histories is asserted.",
+      "fixed_by": "thm-kalman-filter-is-exact-posterior",
+      "matters_for": [
+        "ex-scalar-kalman-filter-update",
+        "ex-kalman-filter-singular-prior-positive-innovation"
+      ]
+    },
+    {
+      "convention": "The gain is computed by factoring S = LLᵀ and solving LU = HP followed by LᵀKᵀ = U, column by column.",
+      "fixed_by": "alg-kalman-filter",
+      "matters_for": [
+        "thm-kalman-filter-is-exact-posterior"
+      ]
+    },
+    {
+      "convention": "AC is assumed for the Gaussian-law and conditional-law suppliers. Initial state and all process and measurement noises are mutually independent.",
+      "fixed_by": "thm-kalman-filter-is-exact-posterior",
+      "matters_for": [
+        "ex-scalar-kalman-filter-update",
+        "ex-kalman-filter-singular-prior-positive-innovation"
+      ]
+    },
+    {
+      "convention": "Independent-noise extension requires the new noise Z to be independent of the pair (X,Y), and assumes a supplied conditional law of X given Y; arbitrary measurable target spaces are allowed.",
+      "fixed_by": "lem-independent-noise-extends-a-conditional-law",
+      "matters_for": [
+        "thm-kalman-filter-is-exact-posterior"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-kalman-filter-is-exact-posterior",
+      "statement": "Under AC, the finite-horizon independent-noise linear-Gaussian model with positive-semidefinite covariances and positive-definite innovation covariances has the everywhere-defined filtering-kernel version π_k(y₁:ₖ,·) = N(mₖ|ₖ(y₁:ₖ),Pₖ|ₖ) returned by alg-kalman-filter, for every 0 ≤ k ≤ T. Each updated covariance is positive semidefinite and admits the Joseph expression.",
+      "used_by": [
+        "ex-scalar-kalman-filter-update",
+        "ex-kalman-filter-singular-prior-positive-innovation",
+        "lem-backward-gaussian-kernel-is-valid-under-full-smoothing-data",
+        "thm-rauch-tung-striebel-fixed-interval-recursion",
+        "lem-kalman-filter-is-exact-conditional-on-nonlinear-path"
+      ]
+    },
+    {
+      "id": "lem-independent-noise-extends-a-conditional-law",
+      "statement": "If Z is independent of (X,Y) and κ is a supplied conditional law of X given Y, then Λ(h,·) = κ(h,·) ⊗ L(Z) is a conditional law of (X,Z) given Y. Its pushforward through any measurable Φ is a conditional law of Φ(X,Z) given Y.",
+      "used_by": [
+        "thm-kalman-filter-is-exact-posterior",
+        "lem-backward-gaussian-kernel-is-valid-under-full-smoothing-data"
+      ]
+    },
+    {
+      "id": "lem-one-step-kalman-gaussian-conditioning",
+      "statement": "Assume AC and positive dimensions. For mutually independent Gaussian U, q, r with positive-semidefinite covariances, X = FU + q and Y = HX + r have the displayed joint Gaussian block covariance. If S = H(FPFᵀ + Q)Hᵀ + R is positive definite, the conditional law of X given Y has the Kalman mean and covariance for every observation value; the covariance is positive semidefinite and equals the Joseph expression.",
+      "used_by": [
+        "thm-kalman-filter-is-exact-posterior",
+        "lem-kalman-filter-is-exact-conditional-on-nonlinear-path"
+      ]
+    },
+    {
+      "id": "alg-kalman-filter",
+      "statement": "For an admissible finite independent-noise linear-Gaussian model, initialize the supplied mean and covariance, then predict, form the innovation covariance, compute the gain using Cholesky triangular solves, and update the mean and covariance for k = 1,…,T. For T = 0 return the initial pair.",
+      "used_by": [
+        "thm-kalman-filter-is-exact-posterior",
+        "ex-scalar-kalman-filter-update",
+        "ex-kalman-filter-singular-prior-positive-innovation",
+        "alg-rauch-tung-striebel-smoother",
+        "lem-kalman-filter-is-exact-conditional-on-nonlinear-path"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-conditional-law-given-a-random-element",
+      "used_for": "Data-indexed conditional kernels and their event identities.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Independence through generated sigma-algebras.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-sigma-algebras-and-events",
+      "used_for": "Factorization of events in the independent-noise extension proof.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Pointwise probability sections and measurable evaluations.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Rectangle generators and finite-product conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-regular-conditional-distribution",
+      "used_for": "Conditional event identities and everywhere kernel requirements.",
+      "opened": true
+    },
+    {
+      "id": "thm-dynkin-pi-lambda",
+      "used_for": "Extending rectangle identities to all measurable target or history events.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Measurability of product-kernel evaluations and translated Gaussian sections.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Product probabilities, rectangle formulas, and iterated section integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-gaussian-state-space-model-with-independent-noises",
+      "used_for": "Finite positive dimensions, PSD covariance inputs, AC, and mutual independence of initial state and noises.",
+      "opened": true
+    },
+    {
+      "id": "def-forward-and-back-substitution-for-triangular-systems",
+      "used_for": "Operational meaning of the gain's triangular solves.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "Existence and uniqueness of the positive-diagonal Cholesky factor of each innovation covariance.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited choice assumption.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Singular-inclusive Gaussian laws and the scalar-projection characterization.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+      "used_for": "Joint Gaussianity of independent Gaussian stacks without invertibility assumptions.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-square-root-exists-and-is-unique",
+      "used_for": "Positive-semidefinite covariance square roots, including singular cases.",
+      "opened": true
+    },
+    {
+      "id": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+      "used_for": "Correctness and uniqueness of columnwise triangular gain solves; no complexity conclusion is imported.",
+      "opened": true
+    },
+    {
+      "id": "thm-linear-gaussian-state-space-path-law-is-jointly-gaussian",
+      "used_for": "Independent-noise realization, identification with the kernel-product model law, and singular-inclusive joint path Gaussianity.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "kalman-filtering",
+      "to": "state-space-filtering-and-predictive-laws",
+      "faithful": true,
+      "note": "The exactness theorem uses the filtering-kernel definition and finite-horizon existence result with AC, standard-Borel spaces, singleton empty history, and conditional-version qualifications intact. It proves the Gaussian recursion locally rather than importing the dominated recursion."
+    },
+    {
+      "from": "kalman-filtering",
+      "to": "conjugate-families-and-posterior-prediction",
+      "faithful": true,
+      "note": "The one-step lemma and exactness theorem apply Gaussian conditioning with PSD joint covariance, positive dimensions, AC, and SPD observed innovation block. Singular state and conditional covariances remain allowed; no singular-observed-block extension is inferred."
+    },
+    {
+      "from": "kalman-smoothing-and-rts-recursion",
+      "to": "kalman-filtering",
+      "faithful": true,
+      "note": "The backward-kernel lemma, RTS algorithm, and RTS theorem retain forward innovation admissibility and conditional-version semantics. They separately require SPD forecast covariance for backward solves and do not attribute that stronger assumption to the filter."
+    },
+    {
+      "from": "particle-smoothing-backward-simulation-and-rbpf",
+      "to": "kalman-filtering",
+      "faithful": true,
+      "note": "The conditional-path lemma fixes a nonlinear path, obtaining deterministic linear-Gaussian coefficients and independent Gaussian noises. Its SPD measurement covariance ensures SPD innovations. The RBPF uses exact Gaussian components while retaining a finite-particle approximation for the nonlinear path and finite-positive evidence conditions."
+    }
+  ]
+}

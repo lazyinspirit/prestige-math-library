@@ -1,0 +1,1194 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-49",
+  "run": "bayesian-computational-statistics-62",
+  "batch": 49,
+  "scope": [
+    "def-abc-augmented-tolerance-target",
+    "lem-abc-augmented-target-has-tolerance-posterior-marginal",
+    "alg-abc-metropolis-hastings",
+    "alg-abc-sequential-smc",
+    "thm-abc-metropolis-hastings-invariance",
+    "thm-abc-sequential-smc-rn-weight-update",
+    "ex-abc-vanishing-acceptance",
+    "ex-abc-positive-tolerance-stationary-law",
+    "ex-abc-sequential-tolerance-schedule-and-rn-weights",
+    "ex-abc-smc-finite-particle-collapse"
+  ],
+  "contracts": {
+    "def-abc-augmented-tolerance-target": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires an existing prior probability and simulator probability kernel, so it makes no claim on an empty parameter-data product without such inputs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The carrier defines the normalized augmented target only when Z_epsilon>0; if Z_epsilon=0 it assigns no target."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The summary dimension condition d>=1 includes d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If h_epsilon=1 H-almost surely then Z_epsilon=1 and the target is H; if h_epsilon=0 H-almost surely then Z_epsilon=0 and no normalized target is defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The item allows epsilon=0 only when its exact-summary event has positive prior-predictive probability."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition makes no selection from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "step5-v2-gate-r1-u1",
+            "reason": "The augmented ABC target is the prior-simulator joint probability restricted to a measurable tolerance event and normalized only if its mass is positive. It does not identify that target with a full-data posterior or assert a necessary-and-sufficient preservation criterion.",
+            "item_sha256": "67f16f4ae5d1dc39df9fcc9a8b3a6ecba6ac822901e895d853c75c2b34a2fd84",
+            "row_sha256": "05292a306184d48a28a4ef240507830e38a1e44012299d9742227957d956db16"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "step5-v2-gate-r1-u1",
+            "reason": "The augmented ABC target is the prior-simulator joint probability restricted to a measurable tolerance event and normalized only if its mass is positive. It does not identify that target with a full-data posterior or assert a necessary-and-sufficient preservation criterion.",
+            "item_sha256": "67f16f4ae5d1dc39df9fcc9a8b3a6ecba6ac822901e895d853c75c2b34a2fd84",
+            "row_sha256": "e61b6b416bb88922415a3c9ea1dc453aef9cf92b8891f75b6482c9e641deaea5"
+          }
+        }
+      ]
+    },
+    "lem-abc-augmented-target-has-tolerance-posterior-marginal": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-abc-augmented-tolerance-target",
+          "source_section": "Definition",
+          "quote": "Use the prior and simulator setup of [[def-approximate-bayesian-computation]]:\nstandard-Borel parameter and data spaces $(\\Theta,\\mathcal T)$ and\n$(\\mathsf Y,\\mathcal Y)$, a prior probability $\\Pi$, a probability kernel\n$K(\\theta,\\cdot)$, a measurable summary map $S:\\mathsf Y\\to\\mathbb R^d$ with\n$d\\ge1$, an observed summary $s_0\\in\\mathbb R^d$, and tolerance\n$\\epsilon\\ge0$. Let\n$$B_\\epsilon(s_0)=\\{s\\in\\mathbb R^d:\\|s-s_0\\|_2\\le\\epsilon\\},\\qquad A_\\epsilon=S^{-1}(B_\\epsilon(s_0)).$$\nThe **prior-simulator joint law** $H$ on the product sigma-algebra\n$(\\Theta\\times\\mathsf Y,\\mathcal T\\otimes\\mathcal Y)$ is\n$$H(C)=\\int_\\Theta K(\\theta,C_\\theta)\\,\\Pi(d\\theta),\\qquad C_\\theta=\\{y:(\\theta,y)\\in C\\},$$\nwhich is a probability measure by\n[[lem-prior-and-model-kernel-define-joint-law]]. The finite product is standard\nBorel by [[lem-finite-products-of-standard-borel-spaces-are-standard-borel]].\nPut\n$$h_\\epsilon(\\theta,y)=\\mathbf1_{A_\\epsilon}(y),\\qquad Z_\\epsilon=\\int_{\\Theta\\times\\mathsf Y}h_\\epsilon\\,dH =\\int_\\Theta K(\\theta,A_\\epsilon)\\,\\Pi(d\\theta).$$\nThus $0\\le Z_\\epsilon\\le1$, and $Z_\\epsilon$ is the prior-predictive probability\n$p_\\epsilon(s_0)$ in [[def-approximate-bayesian-computation]]. Only when\n$Z_\\epsilon>0$ define the **augmented ABC tolerance target**\n$$\\widetilde\\Pi_\\epsilon(C)=\\frac{1}{Z_\\epsilon}\\int_C h_\\epsilon\\,dH \\qquad(C\\in\\mathcal T\\otimes\\mathcal Y).$$\nIt is the prior-simulator joint law conditioned on the summary-tolerance event.\nIts parameter marginal is identified in\n[[lem-abc-augmented-target-has-tolerance-posterior-marginal]]. The definition\ndoes not assert that summary reduction or a positive tolerance preserves the\nfull-data posterior.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-approximate-bayesian-computation",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathsf Y,\\mathcal Y)$ be standard Borel spaces. Let $\\Pi$ be a prior probability measure on $(\\Theta,\\mathcal T)$ and let $K$ be a probability kernel from $(\\Theta,\\mathcal T)$ to $(\\mathsf Y,\\mathcal Y)$, as in [[def-bayesian-model-as-prior-and-sampling-kernel]]. Let $S:\\mathsf Y\\to\\mathbb R^d$ be a measurable statistic for a fixed integer $d\\ge1$, and fix an observed summary $s_0\\in\\mathbb R^d$. The Euclidean norm is $\\|x\\|_2=(\\sum_{j=1}^d x_j^2)^{1/2}$.\n\nUnder the prior-simulator joint law, first draw $\\theta\\sim\\Pi$ and then $Y\\sim K(\\theta,\\cdot)$. The summary-predictive probability measure $M$ on $\\Theta\\times\\mathbb R^d$ is the law of $(\\theta,S(Y))$; on measurable rectangles it is\n$$M(A\\times C)=\\int_A K(\\theta,S^{-1}(C))\\,\\Pi(d\\theta).$$\nThe prior and simulator define a joint law by [[lem-prior-and-model-kernel-define-joint-law]], and the change-of-variables formula identifies $M$ as the law after applying $S$ ([[thm-change-of-variables-for-expectation]]).\n\nFor $\\epsilon\\ge0$, define the closed tolerance ball\n$$B_\\epsilon(s_0)=\\{s\\in\\mathbb R^d:\\|s-s_0\\|_2\\le\\epsilon\\}.$$\nIts prior-predictive acceptance probability is\n$$p_\\epsilon(s_0):=M(\\Theta\\times B_\\epsilon(s_0))\\in[0,1].$$\nOnly when $p_\\epsilon(s_0)>0$ define the indicator ABC target by\n$$\\Pi_\\epsilon(A\\mid s_0):=\\frac{M(A\\times B_\\epsilon(s_0))}{p_\\epsilon(s_0)}\\qquad(A\\in\\mathcal T).$$\nThis is exactly the conditional law of $\\theta$ under the augmented event $S(Y)\\in B_\\epsilon(s_0)$. The denominator is finite because $M$ is a probability, and no quotient is assigned when the event has probability zero. This target is the posterior given a tolerance event, not in general the full-data posterior or the posterior given the exact summary.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-prior-and-model-kernel-define-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathcal X,\\mathcal A)$ be measurable spaces,\nlet $\\pi$ be a probability measure on $(\\Theta,\\mathcal T)$, and let\n$K:\\Theta\\times\\mathcal A\\to[0,1]$ be a probability kernel. For\n$C\\in\\mathcal T\\otimes\\mathcal A$, write\n$C_\\theta=\\{x\\in\\mathcal X:(\\theta,x)\\in C\\}$ and set\n$$J(C)=\\int_\\Theta K(\\theta,C_\\theta)\\,\\pi(d\\theta).$$\nThen $J$ is a probability measure on the product sigma-algebra, and for every\nnonnegative product-measurable $h$,\n$$\\int_{\\Theta\\times\\mathcal X}h(\\theta,x)\\,J(d\\theta,dx)=\\int_\\Theta\\left(\\int_\\mathcal Xh(\\theta,x)\\,K(\\theta,dx)\\right)\\pi(d\\theta).$$\nIn particular, $J(A\\times B)=\\int_AK(\\theta,B)\\,\\pi(d\\theta)$ for\n$A\\in\\mathcal T$ and $B\\in\\mathcal A$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $A\\in\\mathcal T$, [F1] and the rectangle formula [F3] give $\\widetilde\\Pi_\\epsilon(A\\times\\mathsf Y)=Z_\\epsilon^{-1}\\int_AK(\\theta,A_\\epsilon)\\Pi(d\\theta)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $A_\\epsilon=S^{-1}(B_\\epsilon(s_0))$, [F2] gives $M(A\\times B_\\epsilon(s_0))=\\int_AK(\\theta,A_\\epsilon)\\Pi(d\\theta)$ and $p_\\epsilon(s_0)=Z_\\epsilon$; substitution into [F2] makes step 1.1 exactly $\\Pi_\\epsilon(A\\mid s_0)$ for every measurable $A$, so the parameter marginal is the tolerance posterior.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes the prior and simulator setup of the target definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The hypothesis Z_epsilon>0 is used for both normalized laws; the assertion does not extend to a zero-probability tolerance event."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No sample-size parameter occurs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The rectangle calculation remains valid if the tolerance event is H-almost sure; the zero-probability case is excluded by the hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The formula includes epsilon=0 when its prior-predictive probability is positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the joint-law rectangle formula and equality of the normalizers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an identity, not an equivalence."
+        }
+      ]
+    },
+    "alg-abc-metropolis-hastings": {
+      "risk": "medium",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The procedure requires a probability target on the augmented state space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The admissible input requires Z_epsilon>0; at zero the target and MH kernel are not assigned."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The construction permits a single MH iteration from an admissible augmented state."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Every rejected proposal is retained as a self-transition by the general MH procedure."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The tolerance may be zero only when the positive-normalizer admissibility condition still holds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is explicitly assumed through the generic accepted-flow RN construction; no stronger choice principle is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm asserts no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-49",
+        "notes": "Reviewed the complete current Definition and actual suppliers alg-metropolis-hastings-kernel, def-abc-augmented-tolerance-target, the common-submeasure density proof, standard-Borel finite products, probability kernels, kernel integration, and AC. A positive normalizer makes the target a probability on the stated standard-Borel product; the proposal is explicitly required to be a probability kernel. The invoked accepted-flow procedure specifies measurable bounded acceptance and rejection self-transitions, including null-state version conventions. Zero tolerance is allowed only with positive normalizer; an empty target space cannot carry the input probability. No irreducibility, uniqueness, convergence, rate or full-posterior conclusion is inferred. Lintusaari PDF pp. 21–23, equations (8)–(11), supplies augmented-target/proposal context; the local general MH construction supplies the proof. Reader and refuter identify no remaining finding. Complete; no repair needed."
+      }
+    },
+    "alg-abc-sequential-smc": {
+      "risk": "medium",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The finite horizon T=0 is allowed and returns only the prior-simulator tolerance population."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Every target normalizer is required to be positive; a finite sample with zero total incremental weight stops and reports degeneracy."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: N=1 is allowed; multinomial ancestor selection and the weight normalization are defined when the sole weight is positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A zero total weight at initialization or any later stage is an explicit terminal degeneracy outcome."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The schedule is nonincreasing and every tolerance, including epsilon_T, must be strictly positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: [0,1] has its Borel sigma-algebra and is Polish, so the finite-product result applies to E_N. AC is used only to select RN derivative versions; ancestor indices are sampled from finite categorical laws. The proposal-mixture kernel’s variable products are checked by the displayed rational-superlevel identity and its finite sums by the cited measurable-function closure."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm asserts no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-49",
+        "notes": "Reviewed the complete current Definition, multinomial resampling procedure, augmented target, standard-Borel finite products, measurable-function closure, kernel integration and full jointly measurable kernel RN proof. Borel weight coordinates make E_N standard Borel. For fixed B, the rational-superlevel identity proves the finite nonnegative variable products measurable (also at threshold zero); finite sums make the normalization branch measurable, and both branches have mass one. The RN supplier applies to constant prior and mixture kernels under the stated stage-conditional almost-sure domination; its single population null set is independent of parameter sets. Removing infinite derivative values preserves each good section because its integral is one. Multinomial ancestors are returned in sampled order and child perturbation/simulation is conditional independent. Checked N=1, T=0, equal positive tolerances, unreachable stages, zero finite total weight and strict positive target normalizers. Zero weights stop before normalization; the ambient fallback is never an actual normalized-population branch. AC is inherited through the RN supplier; no finite-N accuracy or unbiased self-normalization is claimed. Lintusaari PDF pp. 23–24 equations (12)–(13) supports mixture/importance-weight context, while this local procedure deliberately uses one simulator draw per child rather than rejection-until-accepted. Mathlib kernel RN documentation introduction confirms the countable-generation/joint-measurability distinction. The reader correction accurately supplies a product argument absent from the closure proposition. Complete; accept reader repair."
+      }
+    },
+    "thm-abc-metropolis-hastings-invariance": {
+      "risk": "low",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-abc-augmented-tolerance-target",
+          "source_section": "Definition",
+          "quote": "Use the prior and simulator setup of [[def-approximate-bayesian-computation]]:\nstandard-Borel parameter and data spaces $(\\Theta,\\mathcal T)$ and\n$(\\mathsf Y,\\mathcal Y)$, a prior probability $\\Pi$, a probability kernel\n$K(\\theta,\\cdot)$, a measurable summary map $S:\\mathsf Y\\to\\mathbb R^d$ with\n$d\\ge1$, an observed summary $s_0\\in\\mathbb R^d$, and tolerance\n$\\epsilon\\ge0$. Let\n$$B_\\epsilon(s_0)=\\{s\\in\\mathbb R^d:\\|s-s_0\\|_2\\le\\epsilon\\},\\qquad A_\\epsilon=S^{-1}(B_\\epsilon(s_0)).$$\nThe **prior-simulator joint law** $H$ on the product sigma-algebra\n$(\\Theta\\times\\mathsf Y,\\mathcal T\\otimes\\mathcal Y)$ is\n$$H(C)=\\int_\\Theta K(\\theta,C_\\theta)\\,\\Pi(d\\theta),\\qquad C_\\theta=\\{y:(\\theta,y)\\in C\\},$$\nwhich is a probability measure by\n[[lem-prior-and-model-kernel-define-joint-law]]. The finite product is standard\nBorel by [[lem-finite-products-of-standard-borel-spaces-are-standard-borel]].\nPut\n$$h_\\epsilon(\\theta,y)=\\mathbf1_{A_\\epsilon}(y),\\qquad Z_\\epsilon=\\int_{\\Theta\\times\\mathsf Y}h_\\epsilon\\,dH =\\int_\\Theta K(\\theta,A_\\epsilon)\\,\\Pi(d\\theta).$$\nThus $0\\le Z_\\epsilon\\le1$, and $Z_\\epsilon$ is the prior-predictive probability\n$p_\\epsilon(s_0)$ in [[def-approximate-bayesian-computation]]. Only when\n$Z_\\epsilon>0$ define the **augmented ABC tolerance target**\n$$\\widetilde\\Pi_\\epsilon(C)=\\frac{1}{Z_\\epsilon}\\int_C h_\\epsilon\\,dH \\qquad(C\\in\\mathcal T\\otimes\\mathcal Y).$$\nIt is the prior-simulator joint law conditioned on the summary-tolerance event.\nIts parameter marginal is identified in\n[[lem-abc-augmented-target-has-tolerance-posterior-marginal]]. The definition\ndoes not assert that summary reduction or a positive tolerance preserves the\nfull-data posterior.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-abc-metropolis-hastings",
+          "source_section": "Definition",
+          "quote": "Fix $\\epsilon\\ge0$ with $Z_\\epsilon>0$ and let\n$\\widetilde\\Pi_\\epsilon$ be the target in\n[[def-abc-augmented-tolerance-target]]. The state is\n$x=(\\theta,y)\\in\\Theta\\times\\mathsf Y$, a standard-Borel product by\n[[lem-finite-products-of-standard-borel-spaces-are-standard-borel]], and\nadmissible initial states satisfy\n$y\\in A_\\epsilon$. As proposal inputs take a parameter probability kernel\n$q(\\theta,d\\theta')$ and the simulator kernel $K(\\theta',dy')$ from\n[[def-abc-augmented-tolerance-target]], such that\n$$Q((\\theta,y),d\\theta',dy')=q(\\theta,d\\theta')K(\\theta',dy')$$\nis a probability kernel on the augmented state space. Construct the transition\nkernel $P_\\epsilon$ by applying\n[[alg-metropolis-hastings-kernel]] with target\n$\\widetilde\\Pi_\\epsilon$ and proposal $Q$. Each iteration proposes a new\nparameter from $q$, simulates new data from $K$, applies the general\nMetropolis–Hastings accepted-flow rule, and retains the current augmented state\nafter rejection.\n\nThis definition uses one fixed tolerance and the augmented state\n$(\\theta,y)$. It does not claim irreducibility, uniqueness of a stationary law,\nconvergence, a mixing rate, or recovery of the full-data posterior.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-metropolis-hastings-kernel",
+          "source_section": "Definition",
+          "quote": "Assume AC. The **Metropolis–Hastings procedure** takes as input a standard-Borel\nspace $(\\mathsf X,\\mathcal X)$ ([[def-standard-borel-space]]), a target\nprobability measure $\\pi$ ([[def-probability-measure]]), and a probability\nkernel $Q$ from $(\\mathsf X,\\mathcal X)$ to itself\n([[def-measure-kernel-and-probability-kernel]]).\n\n1. On the product sigma-algebra ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]),\nform the proposal-flow measure $\\mu$ ([[def-measure]]) on\n$\\mathsf X\\times\\mathsf X$ by\n$$\\mu(C)=\\int_{\\mathsf X}Q(x,C_x)\\,\\pi(dx),\\qquad C_x=\\{y:(x,y)\\in C\\}.$$\nThis is a probability measure by [[lem-prior-and-model-kernel-define-joint-law]].\nLet $\\tau(x,y)=(y,x)$ and set $\\mu^{\\mathsf T}(C)=\\mu(\\tau^{-1}C)$.\n\n2. Set $\\eta=\\mu\\wedge\\mu^{\\mathsf T}$, the greatest measure dominated by both\nflows. Put $\\lambda_0=\\mu+\\mu^{\\mathsf T}$, which is a finite measure by\n[[thm-nonnegative-weighted-sums-of-measures]], and choose nonnegative measurable\nrepresentatives $f=d\\mu/d\\lambda_0$ and $g=d\\mu^{\\mathsf T}/d\\lambda_0$\nwith $f+g=1$ everywhere after modification on a $\\lambda_0$-null set. Define\n$$\\alpha(x,y)=\\begin{cases}\\min\\{1,g(x,y)/f(x,y)\\},&f(x,y)>0,\\\\1,&f(x,y)=0.\\end{cases}$$\nThis is a jointly measurable version of $d\\eta/d\\mu$ taking values in $[0,1]$.\n\n3. For $x\\in\\mathsf X$, compute the integrated acceptance probability\n$$a(x)=\\int_{\\mathsf X}\\alpha(x,y)\\,Q(x,dy)$$\nand rejection probability $r(x)=1-a(x)$.\n\n4. Return the transition rule\n$$P(x,A)=\\int_{\\mathsf X}\\mathbf1_A(y)\\alpha(x,y)\\,Q(x,dy)+\\mathbf1_A(x)r(x),\\qquad A\\in\\mathcal X.$$\nThe second term retains every rejected proposal as a self-transition.\n\nThe item [[lem-common-submeasure-and-bounded-radon-nikodym-density]] proves the\ncommon-submeasure construction and density-version claims in step 2.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-metropolis-hastings-kernel-is-reversible-and-invariant",
+          "source_section": "Statement",
+          "quote": "Assume AC and the hypotheses of [[alg-metropolis-hastings-kernel]]. Its output\n$P$ is a probability kernel, the joint measure\n$J_P(dx,dy)=\\pi(dx)P(x,dy)$ is symmetric under $(x,y)\\mapsto(y,x)$, and $\\pi$\nis invariant for $P$. Symmetry of this joint measure is reversibility. No\nirreducibility, uniqueness, convergence-rate, or central limit theorem\nconclusion is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $\\widetilde\\Pi_\\epsilon$ is a probability target on the product state space; by [F2], the proposal is a probability kernel and the returned kernel is exactly the general Metropolis–Hastings output for this target and proposal.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The state space is standard Borel and [A1] supplies AC, so [F3] applies to the target and proposal identified in step 1.1; it gives reversibility and invariance of $P_\\epsilon$ with respect to $\\widetilde\\Pi_\\epsilon$, with no irreducibility or convergence assertion.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a proper prior and simulator probability kernel."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The theorem requires Z_epsilon>0; a zero event probability has no normalized augmented target."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The cited general MH invariance result covers the procedure for every admissible probability target and proposal; no iteration-count premise is needed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The result is invariance/reversibility only and makes no irreducibility or convergence assertion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Any epsilon is allowed only when its tolerance-event normalizer is positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is an explicit hypothesis, inherited from the actual general MH construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: The Statement gives fixed-tolerance reversibility/invariance of the accepted-flow MH output under AC and positive normalizer; it explicitly disclaims convergence or full-data posterior recovery.",
+            "item_sha256": "a3fd407174b87d885dbe932028030fc5396ba8c7b104445e5ada1f6b996ca3ef",
+            "row_sha256": "2eb99266031cf0a6594d6e5afddcf9e5a1aceece9b193892bc914092810fe270"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: The Statement gives fixed-tolerance reversibility/invariance of the accepted-flow MH output under AC and positive normalizer; it explicitly disclaims convergence or full-data posterior recovery.",
+            "item_sha256": "a3fd407174b87d885dbe932028030fc5396ba8c7b104445e5ada1f6b996ca3ef",
+            "row_sha256": "fae499105cd9323eda39c1a710db4810203469f8249ccd9e07ca2abed4a639c7"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-49",
+        "notes": "Read both proof steps and all exact cited interfaces. Step 1.1 supplies the positive-normalizer augmented probability target, standard-Borel product and required probability proposal; step 2.1 applies the actual general MH reversibility/invariance theorem under AC. Independently checked that supplier proof: bounded acceptance and measurable rejection define a pointwise probability kernel, its joint flow decomposes into the symmetric greatest common submeasure plus the diagonal rejection measure, hence is reversible and invariant. Its section and kernel-integral uses have probability/finite kernels as required. Zero epsilon is harmless when its event has positive probability; a zero normalizer is excluded, and no empty probability space or convergence inference is used. Lintusaari PDF pp. 21–23 equations (8)–(11) documents the augmented proposal; local proofs supply validity. Reader/refuter have no findings. Complete; no defect or edit."
+      }
+    },
+    "thm-abc-sequential-smc-rn-weight-update": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-abc-augmented-tolerance-target",
+          "source_section": "Definition",
+          "quote": "Use the prior and simulator setup of [[def-approximate-bayesian-computation]]:\nstandard-Borel parameter and data spaces $(\\Theta,\\mathcal T)$ and\n$(\\mathsf Y,\\mathcal Y)$, a prior probability $\\Pi$, a probability kernel\n$K(\\theta,\\cdot)$, a measurable summary map $S:\\mathsf Y\\to\\mathbb R^d$ with\n$d\\ge1$, an observed summary $s_0\\in\\mathbb R^d$, and tolerance\n$\\epsilon\\ge0$. Let\n$$B_\\epsilon(s_0)=\\{s\\in\\mathbb R^d:\\|s-s_0\\|_2\\le\\epsilon\\},\\qquad A_\\epsilon=S^{-1}(B_\\epsilon(s_0)).$$\nThe **prior-simulator joint law** $H$ on the product sigma-algebra\n$(\\Theta\\times\\mathsf Y,\\mathcal T\\otimes\\mathcal Y)$ is\n$$H(C)=\\int_\\Theta K(\\theta,C_\\theta)\\,\\Pi(d\\theta),\\qquad C_\\theta=\\{y:(\\theta,y)\\in C\\},$$\nwhich is a probability measure by\n[[lem-prior-and-model-kernel-define-joint-law]]. The finite product is standard\nBorel by [[lem-finite-products-of-standard-borel-spaces-are-standard-borel]].\nPut\n$$h_\\epsilon(\\theta,y)=\\mathbf1_{A_\\epsilon}(y),\\qquad Z_\\epsilon=\\int_{\\Theta\\times\\mathsf Y}h_\\epsilon\\,dH =\\int_\\Theta K(\\theta,A_\\epsilon)\\,\\Pi(d\\theta).$$\nThus $0\\le Z_\\epsilon\\le1$, and $Z_\\epsilon$ is the prior-predictive probability\n$p_\\epsilon(s_0)$ in [[def-approximate-bayesian-computation]]. Only when\n$Z_\\epsilon>0$ define the **augmented ABC tolerance target**\n$$\\widetilde\\Pi_\\epsilon(C)=\\frac{1}{Z_\\epsilon}\\int_C h_\\epsilon\\,dH \\qquad(C\\in\\mathcal T\\otimes\\mathcal Y).$$\nIt is the prior-simulator joint law conditioned on the summary-tolerance event.\nIts parameter marginal is identified in\n[[lem-abc-augmented-target-has-tolerance-posterior-marginal]]. The definition\ndoes not assert that summary reduction or a positive tolerance preserves the\nfull-data posterior.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-abc-sequential-smc",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T\\ge0$, $N\\ge1$, a positive nonincreasing tolerance\nschedule $\\epsilon_0\\ge\\epsilon_1\\ge\\cdots\\ge\\epsilon_T>0$, and assume\n$Z_{\\epsilon_t}>0$ for every $t$. Let\n$\\widetilde\\Pi_{\\epsilon_t}$ be the normalized augmented target from\n[[def-abc-augmented-tolerance-target]]. The parameter proposal at stage $t$\nis a probability kernel $Q_t(\\theta,d\\theta')$ on $\\Theta$.\n\nFor each $t\\ge1$, write the previous weighted population as\n$$Z_{t-1}=((\\theta_{t-1}^i,y_{t-1}^i)_{i=1}^N,(W_{t-1}^i)_{i=1}^N)$$\nin the standard-Borel space\n$$E_N=(\\Theta\\times\\mathsf Y)^N\\times[0,1]^N,$$\nwhere $[0,1]$ has its Borel sigma-algebra and is standard Borel because the\nclosed interval with the Euclidean metric is Polish. Thus $E_N$ is standard\nBorel by [[lem-finite-products-of-standard-borel-spaces-are-standard-borel]].\nLet $\\lambda_{t-1}$ be the law of $Z_{t-1}$ conditional on the algorithm\nreaching stage $t$, when that event has positive probability. For\n$z=((\\theta_i,y_i)_{i=1}^N,(w_i)_{i=1}^N)\\in E_N$, define the probability\nkernel $\\phi_t^N$ by\n$$\\phi_t^N(z,B)=\\begin{cases} \\sum_{i=1}^Nw_iQ_t(\\theta_i,B),&\\sum_iw_i=1,\\\\[2pt] \\frac1N\\sum_{i=1}^NQ_t(\\theta_i,B),&\\sum_iw_i\\ne1. \\end{cases}$$\nFor each fixed measurable $B\\subseteq\\Theta$, $z\\mapsto Q_t(\\theta_i,B)$\nand $z\\mapsto w_i$ are measurable. For nonnegative measurable $u,v$ on\n$E_N$, the superlevel sets satisfy\n$$\\{uv>a\\}=E_N\\ (a<0),\\qquad \\{uv>a\\}=\\bigcup_{q\\in\\mathbb Q,\\ q>0}(\\{u>q\\}\\cap\\{v>a/q\\})\\ (a\\ge0),$$\nso each product $w_iQ_t(\\theta_i,B)$ is measurable. Finite sums and scalar\nmultiples are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]],\nmaking the branch condition and both branch evaluations measurable. Each\nbranch is a convex combination of probability measures, so\n[[def-measure-kernel-and-probability-kernel]] gives a probability kernel.\nThe second branch only extends the kernel to ambient states outside the\nalgorithm; every actual previous population has normalized weights and uses\nthe proposal mixture in the first branch. Require\n$\\Pi\\ll\\phi_t^N(z,\\cdot)$ for $\\lambda_{t-1}$-almost every $z$ at every\nstage that is reached with positive probability. Apply\n[[lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels]]\nto the constant kernel $z\\mapsto\\Pi$ and the kernel $\\phi_t^N$ to obtain a\nproduct-measurable derivative on $E_N\\times\\Theta$. Set its value to zero\nwhere it is infinite; since its integral is one for $\\lambda_{t-1}$-almost\nevery $z$, this gives a finite-valued product-measurable version\n$r_t^N(z,\\theta)=d\\Pi/d\\phi_t^N(z,\\cdot)(\\theta)$ for almost every\nprevious population.\n\nAt stage $0$, draw $(\\theta_i,y_i)$ independently from the prior-simulator\nlaw $H$, and set $a_0^i=\\mathbf1_{A_{\\epsilon_0}}(y_i)$. If\n$\\sum_i a_0^i=0$, stop and report finite-particle degeneracy; otherwise\nnormalize these weights to obtain $W_0^i$ and report the weighted empirical\nmeasure\n$$\\widehat\\Pi_0^N=\\sum_{i=1}^NW_0^i\\delta_{(\\theta_i,y_i)}.$$\n\nFor each $t=1,\\ldots,T$, form the proposal mixture\n$$\\phi_t^N(\\cdot)=\\sum_{i=1}^N W_{t-1}^iQ_t(\\theta_{t-1}^i,\\cdot).$$\nDraw $N$ ancestor indices from the previous weights using the multinomial\nbranch of [[alg-multinomial-and-residual-offspring-resampling]]. Conditional\non those ancestors, independently draw one perturbed parameter from its\n$Q_t$ kernel and one datum from $K$ for each child. For a candidate\n$(\\theta_t^j,y_t^j)$ set\n$$a_t^j=\\mathbf1_{A_{\\epsilon_t}}(y_t^j)r_t^N(Z_{t-1},\\theta_t^j).$$\nIf $\\sum_j a_t^j=0$, stop and report finite-particle degeneracy; do not report\na normalized target estimate. If the sum is positive, set\n$W_t^j=a_t^j/\\sum_k a_t^k$ and report the weighted empirical measure\n$\\widehat\\Pi_t^N=\\sum_jW_t^j\\delta_{(\\theta_t^j,y_t^j)}$.\n\nIf a stage degenerates, return that status and no normalized estimate for the\nstage or any later target. If every stage through $T$ succeeds, return\n$\\widehat\\Pi_T^N$; in particular, when $T=0$ the returned estimate is\n$\\widehat\\Pi_0^N$.\n\nThe mixture support condition is stage-specific and must hold almost surely\nunder the law of the actual previous population. The algorithm makes no\nfinite-$N$ accuracy, mixing, or posterior-recovery claim.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(E,\\mathcal E)$ and $(F,\\mathcal F)$ be standard Borel spaces, let $\\lambda$ be a probability measure on $E$, and let $M$ and $R$ be probability kernels from $E$ to $F$. Suppose $M(x,\\cdot)\\ll R(x,\\cdot)$ for $\\lambda$-almost every $x$. Then there is an $(\\mathcal E\\otimes\\mathcal F)$-measurable function $r:E\\times F\\to[0,\\infty]$ such that, for $\\lambda$-almost every $x$ and every $B\\in\\mathcal F$,\n$$M(x,B)=\\int_B r(x,y)\\,R(x,dy).$$\nThe exceptional set in $x$ is a single null set, independent of $B$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-integration-against-a-radon-nikodym-derivative",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a sigma-finite positive measure and let $\\nu$ be a signed measure or a finite complex measure with $\\nu\\ll\\mu$. If $h$ is a representative of $d\\nu/d\\mu$, then\n$$\\nu(E)=\\int_E h\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nMore generally, if\n$$g=\\sum_{j=1}^m c_j\\mathbf 1_{E_j}$$\nis the canonical disjoint representation of a simple measurable function and $|\\nu|(E_j)<+\\infty$ for every $j$, then\n$$\\int g\\,d\\nu=\\sum_{j=1}^m c_j\\int_{E_j} h\\,d\\mu.$$\nIn particular, whenever the Lebesgue integral of $gh$ is defined, one has\n$$\\int g\\,d\\nu=\\int gh\\,d\\mu.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then there is an increasing sequence of\nnonnegative simple measurable functions $(s_n)$ such that $s_n(x)\\uparrow f(x)$\nfor every $x\\in X$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-multinomial-and-residual-offspring-resampling",
+          "source_section": "Definition",
+          "quote": "Input a particle count $N\\ge1$, nonnegative finite weights $a_1,\\ldots,a_N$, and a scheme label, either multinomial or residual. Let $A=\\sum_{j=1}^Na_j$. If $A>0$, set $p_j=a_j/A$; if $A=0$, set $p_j=1/N$ for every $j$. Thus $p$ is always a probability vector.\n\n- **Multinomial scheme.** Draw an index vector $(J_1,\\ldots,J_N)\\in\\{1,\\ldots,N\\}^N$ with conditional mass $\\mathbb P(J_1=j_1,\\ldots,J_N=j_N\\mid a)=\\prod_{\\ell=1}^Np_{j_\\ell}$. Put $C_j=\\#\\{\\ell:J_\\ell=j\\}$.\n- **Residual scheme.** Put $q_j=\\lfloor Np_j\\rfloor$, $r_j=Np_j-q_j$, and $R=\\sum_{j=1}^Nr_j=N-\\sum_{j=1}^Nq_j$, an integer in $\\{0,\\ldots,N-1\\}$. If $R=0$, put $C_j=q_j$. If $R>0$, draw $(K_1,\\ldots,K_R)$ with conditional mass $\\mathbb P(K_1=k_1,\\ldots,K_R=k_R\\mid a)=\\prod_{\\ell=1}^R(r_{k_\\ell}/R)$ and put $C_j=q_j+\\#\\{\\ell:K_\\ell=j\\}$.\n\nFor multinomial resampling, return the sampled vector $(J_1,\\ldots,J_N)$ in its sampled order, together with its count vector $(C_1,\\ldots,C_N)$; do not sort the sampled indices. For residual resampling, return the ancestor list containing exactly $C_j$ copies of index $j$, ordered by increasing index, together with its count vector. Each output is a length-$N$ list and a count vector summing to $N$. When all input weights vanish, the uniform fallback defines the procedure; any downstream normalizer already multiplied by this zero average remains zero.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts",
+          "source_section": "Statement",
+          "quote": "Fix $N\\ge1$ and nonnegative input weights $a_1,\\ldots,a_N$. Let $p$ be the normalized probability vector, with the uniform fallback when all weights vanish, and let $C_j$ be the offspring count from [[alg-multinomial-and-residual-offspring-resampling]]. Conditional on the input weights, for either scheme and every $1\\le j\\le N$,\n$$\\mathbb E[C_j\\mid a_1,\\ldots,a_N]=Np_j.$$\nThis assertion concerns the counts only; it gives no variance comparison for arbitrary weights.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-prior-and-model-kernel-define-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathcal X,\\mathcal A)$ be measurable spaces,\nlet $\\pi$ be a probability measure on $(\\Theta,\\mathcal T)$, and let\n$K:\\Theta\\times\\mathcal A\\to[0,1]$ be a probability kernel. For\n$C\\in\\mathcal T\\otimes\\mathcal A$, write\n$C_\\theta=\\{x\\in\\mathcal X:(\\theta,x)\\in C\\}$ and set\n$$J(C)=\\int_\\Theta K(\\theta,C_\\theta)\\,\\pi(d\\theta).$$\nThen $J$ is a probability measure on the product sigma-algebra, and for every\nnonnegative product-measurable $h$,\n$$\\int_{\\Theta\\times\\mathcal X}h(\\theta,x)\\,J(d\\theta,dx)=\\int_\\Theta\\left(\\int_\\mathcal Xh(\\theta,x)\\,K(\\theta,dx)\\right)\\pi(d\\theta).$$\nIn particular, $J(A\\times B)=\\int_AK(\\theta,B)\\,\\pi(d\\theta)$ for\n$A\\in\\mathcal T$ and $B\\in\\mathcal A$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $f,g:X\\to\\overline{\\mathbb R}$ are measurable and $f+g$ is defined\n   pointwise, then $f+g$ is measurable.\n2. If $c\\in\\mathbb R$ and $f:X\\to\\mathbb R$ is measurable, then $cf$ is\n   measurable.\n3. If $f:X\\to\\mathbb R$ is measurable, then $f^+=\\max\\{f,0\\}$,\n   $f^-=\\max\\{-f,0\\}$, and $|f|=f^++f^-$ are measurable.\n4. If $E\\in\\mathcal A$ and $f:X\\to[0,+\\infty]$ is measurable, then\n   $f\\chi_E$ is measurable, where this function equals $f$ on $E$ and $0$\n   off $E$ (in particular, $0\\cdot(+\\infty)=0$ here).\n5. If $(f_n)$ is a sequence of measurable functions $X\\to\\overline{\\mathbb R}$,\n   then $\\inf_n f_n$ is measurable; if moreover $f_n\\uparrow f$ pointwise, then\n   $f$ is measurable.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each initial draw $X_0^j$ has law $H$ and weight $a_0^j=\\mathbf1_{A_{\\epsilon_0}}(Y_0^j)$, so definition of $\\gamma_0$ gives $\\mathbb E[a_0^jf(X_0^j)]=\\int f\\mathbf1_{A_{\\epsilon_0}}\\,dH=\\gamma_0(f)$; linearity of the finite average proves the identity.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $t$ with positive probability of reaching stage $t$, and let $\\lambda_{t-1}$ be the conditional law of the previous population. By [F3], the constant kernel $z\\mapsto\\Pi$ and the proposal-mixture kernel $\\phi_t^N$ have a product-measurable density $h(z,\\theta)$; by [F4], its finite version $r_t^N(z,\\theta)$ is a derivative for $\\lambda_{t-1}$-almost every $z$. By [F10], $g_f(\\theta)=\\int_{\\mathsf Y}\\mathbf1_{A_{\\epsilon_t}}(y)f(\\theta,y)K(\\theta,dy)$ is measurable and bounded. Choose simple functions $s_n\\uparrow g_f$ by [F6]; each $s_n$ is a finite sum of measurable indicators, so $s_n(\\theta)r_t^N(z,\\theta)$ is measurable by [F11]. For almost every $z$, applying the setwise RN identity [F5] to the level sets of $s_n$ gives $\\int s_n(\\theta)r_t^N(z,\\theta)\\,\\phi_t^N(z,d\\theta)=\\int s_n\\,d\\Pi.$ Since $r_t^N$ is finite and nonnegative, [F6] and monotone convergence give $\\int g_f(\\theta)r_t^N(z,\\theta)\\,\\phi_t^N(z,d\\theta)=\\int g_f\\,d\\Pi.$ The right side is $\\int f\\mathbf1_{A_{\\epsilon_t}}\\,dH=\\gamma_t(f)$ by the iterated-integral formula [F9] and target definition [F1]. Thus the one-candidate conditional proposal expectation equals $\\gamma_t(f)$ for $\\lambda_{t-1}$-almost every previous population.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "F10",
+            "F11",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Given parent $i$, each child has law $Q_t(\\theta_{t-1}^i,d\\theta)K(\\theta,dy)$; the multinomial expected count is $NW_{t-1}^i$ by [F8]. Conditional on the previous population $z$, summing contributions over parents and dividing by $N$ gives the one-candidate expectation under $\\phi_t^N(z,d\\theta)K(\\theta,dy)$ with weight $\\mathbf1_{A_{\\epsilon_t}}(y)r_t^N(z,\\theta)$. Step 1.2 makes this $\\gamma_t(f)$ for $\\lambda_{t-1}$-almost every $z$, proving the conditional identity.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F8",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For candidate weights $a_j=\\mathbf1_{A_{\\epsilon_t}}(y_j)r_t^N(Z_{t-1},\\theta_j)$ with $\\sum_ja_j>0$, [F8] gives conditional offspring-count means $Na_j/\\sum_ka_k$; hence for bounded measurable $f$, $\\mathbb E[\\frac1N\\sum_jC_jf(\\theta_t^j,y_t^j)\\mid(\\theta_t^i,y_t^i,a_i)_{i=1}^N]=\\sum_ja_jf(\\theta_t^j,y_t^j)/\\sum_ka_k$, the weighted empirical mean. If the total weight is zero, [F2] reports degeneracy and makes no normalized-target claim.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement inherits N>=1 and finite T>=0 from the algorithm. At T0 only the stage0 expectation is claimed and no later conditional-stage identity is required. Zero total particle weight is an allowed degeneracy outcome, explicitly excluding normalized estimates; positive target Z and nonempty particle count are distinct requirements."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Every tolerance normalizer is positive by hypothesis; a finite all-zero particle-weight event is explicitly reported as degeneracy and makes no normalized-target claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: N=1 is allowed by the resampling supplier and the finite-sum expectation identities remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The theorem states that finite candidates may miss positive target mass or have zero total weight; it asserts only unnormalized expectation and conditional resampling mean."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: All scheduled tolerances are strictly positive; no zero-tolerance target is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is explicitly used for RN derivative existence; the finite resampling calculations themselves require no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: The Statement gives unnormalized-weight conditional expectation identities and offspring unbiasedness under almost-sure mixture domination; it explicitly disclaims unbiased self-normalized finite-N estimates.",
+            "item_sha256": "1467fd5a462dcd20b5fa7c6032e5c6a833e3ee1cb3ef0259cfb4415543300b83",
+            "row_sha256": "2eb99266031cf0a6594d6e5afddcf9e5a1aceece9b193892bc914092810fe270"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: The Statement gives unnormalized-weight conditional expectation identities and offspring unbiasedness under almost-sure mixture domination; it explicitly disclaims unbiased self-normalized finite-N estimates.",
+            "item_sha256": "1467fd5a462dcd20b5fa7c6032e5c6a833e3ee1cb3ef0259cfb4415543300b83",
+            "row_sha256": "fae499105cd9323eda39c1a710db4810203469f8249ccd9e07ca2abed4a639c7"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-49",
+        "notes": "Read the entire Statement, all F/A facts and steps 1.1, 1.2, 2.1, 3.1 against their actual suppliers. Initial indicator-weighted draws integrate to gamma_0. At a reached stage, conditional population law lambda and the repaired probability mixture kernel meet the jointly measurable RN lemma hypotheses under AC. Its conull population set is uniform in parameter events; removal of infinite density values preserves sections of total integral one. Kernel integration makes g_f measurable and bounded; simple-function RN integration and monotone convergence justify the weighted change of measure without assuming an uncited general product-closure proposition. Multinomial expected counts and conditional child laws give gamma_t(f), with integrability bounded by ||f|| times Z_t. Final count resampling preserves the empirical weighted mean for signed bounded f by finite linearity, conditional on positive total candidate weight. Checked N=1, T=0, equal positive tolerances, unreachable stages, positive normalizers, zero finite sums, and missing realized support. The result concerns conditional unnormalized weights, not self-normalized unbiasedness. Exact refreshed algorithm quotation preserves the procedure. Lintusaari PDF pp. 23–24 equations (12)–(13) and Mathlib kernel RN introduction were checked as context; local RN and count proofs supply the exact hypotheses. Complete; current item source unchanged, contract-only audit enrichment accepted without a defect."
+      }
+    },
+    "ex-abc-vanishing-acceptance": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-abc-augmented-tolerance-target",
+          "source_section": "Definition",
+          "quote": "Use the prior and simulator setup of [[def-approximate-bayesian-computation]]:\nstandard-Borel parameter and data spaces $(\\Theta,\\mathcal T)$ and\n$(\\mathsf Y,\\mathcal Y)$, a prior probability $\\Pi$, a probability kernel\n$K(\\theta,\\cdot)$, a measurable summary map $S:\\mathsf Y\\to\\mathbb R^d$ with\n$d\\ge1$, an observed summary $s_0\\in\\mathbb R^d$, and tolerance\n$\\epsilon\\ge0$. Let\n$$B_\\epsilon(s_0)=\\{s\\in\\mathbb R^d:\\|s-s_0\\|_2\\le\\epsilon\\},\\qquad A_\\epsilon=S^{-1}(B_\\epsilon(s_0)).$$\nThe **prior-simulator joint law** $H$ on the product sigma-algebra\n$(\\Theta\\times\\mathsf Y,\\mathcal T\\otimes\\mathcal Y)$ is\n$$H(C)=\\int_\\Theta K(\\theta,C_\\theta)\\,\\Pi(d\\theta),\\qquad C_\\theta=\\{y:(\\theta,y)\\in C\\},$$\nwhich is a probability measure by\n[[lem-prior-and-model-kernel-define-joint-law]]. The finite product is standard\nBorel by [[lem-finite-products-of-standard-borel-spaces-are-standard-borel]].\nPut\n$$h_\\epsilon(\\theta,y)=\\mathbf1_{A_\\epsilon}(y),\\qquad Z_\\epsilon=\\int_{\\Theta\\times\\mathsf Y}h_\\epsilon\\,dH =\\int_\\Theta K(\\theta,A_\\epsilon)\\,\\Pi(d\\theta).$$\nThus $0\\le Z_\\epsilon\\le1$, and $Z_\\epsilon$ is the prior-predictive probability\n$p_\\epsilon(s_0)$ in [[def-approximate-bayesian-computation]]. Only when\n$Z_\\epsilon>0$ define the **augmented ABC tolerance target**\n$$\\widetilde\\Pi_\\epsilon(C)=\\frac{1}{Z_\\epsilon}\\int_C h_\\epsilon\\,dH \\qquad(C\\in\\mathcal T\\otimes\\mathcal Y).$$\nIt is the prior-simulator joint law conditioned on the summary-tolerance event.\nIts parameter marginal is identified in\n[[lem-abc-augmented-target-has-tolerance-posterior-marginal]]. The definition\ndoes not assert that summary reduction or a positive tolerance preserves the\nfull-data posterior.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-abc-metropolis-hastings",
+          "source_section": "Definition",
+          "quote": "Fix $\\epsilon\\ge0$ with $Z_\\epsilon>0$ and let\n$\\widetilde\\Pi_\\epsilon$ be the target in\n[[def-abc-augmented-tolerance-target]]. The state is\n$x=(\\theta,y)\\in\\Theta\\times\\mathsf Y$, a standard-Borel product by\n[[lem-finite-products-of-standard-borel-spaces-are-standard-borel]], and\nadmissible initial states satisfy\n$y\\in A_\\epsilon$. As proposal inputs take a parameter probability kernel\n$q(\\theta,d\\theta')$ and the simulator kernel $K(\\theta',dy')$ from\n[[def-abc-augmented-tolerance-target]], such that\n$$Q((\\theta,y),d\\theta',dy')=q(\\theta,d\\theta')K(\\theta',dy')$$\nis a probability kernel on the augmented state space. Construct the transition\nkernel $P_\\epsilon$ by applying\n[[alg-metropolis-hastings-kernel]] with target\n$\\widetilde\\Pi_\\epsilon$ and proposal $Q$. Each iteration proposes a new\nparameter from $q$, simulates new data from $K$, applies the general\nMetropolis–Hastings accepted-flow rule, and retains the current augmented state\nafter rejection.\n\nThis definition uses one fixed tolerance and the augmented state\n$(\\theta,y)$. It does not claim irreducibility, uniqueness of a stationary law,\nconvergence, a mixing rate, or recovery of the full-data posterior.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-metropolis-hastings-kernel",
+          "source_section": "Definition",
+          "quote": "Assume AC. The **Metropolis–Hastings procedure** takes as input a standard-Borel\nspace $(\\mathsf X,\\mathcal X)$ ([[def-standard-borel-space]]), a target\nprobability measure $\\pi$ ([[def-probability-measure]]), and a probability\nkernel $Q$ from $(\\mathsf X,\\mathcal X)$ to itself\n([[def-measure-kernel-and-probability-kernel]]).\n\n1. On the product sigma-algebra ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]),\nform the proposal-flow measure $\\mu$ ([[def-measure]]) on\n$\\mathsf X\\times\\mathsf X$ by\n$$\\mu(C)=\\int_{\\mathsf X}Q(x,C_x)\\,\\pi(dx),\\qquad C_x=\\{y:(x,y)\\in C\\}.$$\nThis is a probability measure by [[lem-prior-and-model-kernel-define-joint-law]].\nLet $\\tau(x,y)=(y,x)$ and set $\\mu^{\\mathsf T}(C)=\\mu(\\tau^{-1}C)$.\n\n2. Set $\\eta=\\mu\\wedge\\mu^{\\mathsf T}$, the greatest measure dominated by both\nflows. Put $\\lambda_0=\\mu+\\mu^{\\mathsf T}$, which is a finite measure by\n[[thm-nonnegative-weighted-sums-of-measures]], and choose nonnegative measurable\nrepresentatives $f=d\\mu/d\\lambda_0$ and $g=d\\mu^{\\mathsf T}/d\\lambda_0$\nwith $f+g=1$ everywhere after modification on a $\\lambda_0$-null set. Define\n$$\\alpha(x,y)=\\begin{cases}\\min\\{1,g(x,y)/f(x,y)\\},&f(x,y)>0,\\\\1,&f(x,y)=0.\\end{cases}$$\nThis is a jointly measurable version of $d\\eta/d\\mu$ taking values in $[0,1]$.\n\n3. For $x\\in\\mathsf X$, compute the integrated acceptance probability\n$$a(x)=\\int_{\\mathsf X}\\alpha(x,y)\\,Q(x,dy)$$\nand rejection probability $r(x)=1-a(x)$.\n\n4. Return the transition rule\n$$P(x,A)=\\int_{\\mathsf X}\\mathbf1_A(y)\\alpha(x,y)\\,Q(x,dy)+\\mathbf1_A(x)r(x),\\qquad A\\in\\mathcal X.$$\nThe second term retains every rejected proposal as a self-transition.\n\nThe item [[lem-common-submeasure-and-bounded-radon-nikodym-density]] proves the\ncommon-submeasure construction and density-version claims in step 2.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $0\\le\\epsilon\\le\\tfrac12$, the tolerance interval has length $2\\epsilon$, so the singleton prior gives $Z_\\epsilon=2\\epsilon$; for $\\epsilon>\\tfrac12$ it covers all of $[0,1]$, so $Z_\\epsilon=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $\\epsilon>0$ and write $h(x)$ for the tolerance indicator of the datum in the augmented state $x$. Relative to $H(dx)H(dy)$, the forward and transposed flows have densities $h(x)/Z_\\epsilon$ and $h(y)/Z_\\epsilon$. Choose $f(x,y)=h(x)/(h(x)+h(y))$ and $g(x,y)=h(y)/(h(x)+h(y))$ when $h(x)+h(y)>0$, and $f=g=1/2$ otherwise. These are measurable, sum to one everywhere, and multiplying them by the density $(h(x)+h(y))/Z_\\epsilon$ of $\\mu+\\mu^{\\mathsf T}$ recovers the two flow densities; hence they are valid representatives for [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At every admissible current state $x$, $h(x)=1$, so these representatives give $f(x,y)>0$, $g(x,y)/f(x,y)=h(y)$ and thus $\\alpha(x,y)=h(y)$. Consequently the acceptance probability is $\\int h(y)H(dy)=Z_\\epsilon$, equal to $2\\epsilon\\to0$ for $0<\\epsilon\\le\\tfrac12$ and to $1$ for $\\epsilon>\\tfrac12$. At $\\epsilon=0$, $Z_0=0$ and [F1] assigns no target. The pointwise acceptance calculation uses the specified representatives, rather than arbitrary modifications on flow-null sets.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The parameter space is a singleton and the data space is the nonempty interval [0,1]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: At epsilon=0 the event is the singleton {1/2}, whose uniform probability is zero, so no indicator target is defined."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example makes no sample-size claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The parameter is degenerate by construction; the example concerns the nondegenerate continuous simulator acceptance event."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: For epsilon=1/2 the interval is all of [0,1] and acceptance is one; as epsilon decreases to zero the probability is 2 epsilon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No family selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Forward direction: The selected flow-density representatives yield acceptance Z_epsilon=2 epsilon on the positive small-tolerance branch and one above 1/2; zero tolerance has no target. The calculation makes no necessary-and-sufficient claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: Verification1.1–2.1 computes acceptance2epsilon until the support is covered and no target at epsilon0; this is one uniform-simulator calculation rather than a universal testability equivalence.",
+            "item_sha256": "69ad53ac6633b7332453dd20c900c28661085aa9c19fc3927f40b8ef69ccf996",
+            "row_sha256": "f3ccb13f6deb1561b06c16ce8026229d341a3c777a1cb7e8ea7a6ce261a6cd20"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Reverse direction: The selected flow-density representatives yield acceptance Z_epsilon=2 epsilon on the positive small-tolerance branch and one above 1/2; zero tolerance has no target. The calculation makes no necessary-and-sufficient claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: Verification1.1–2.1 computes acceptance2epsilon until the support is covered and no target at epsilon0; this is one uniform-simulator calculation rather than a universal testability equivalence.",
+            "item_sha256": "69ad53ac6633b7332453dd20c900c28661085aa9c19fc3927f40b8ef69ccf996",
+            "row_sha256": "f1edf571c41044992b49e5ed93262bce5fc9adac2b342239b8c5ce914358759b"
+          }
+        }
+      ]
+    },
+    "ex-abc-positive-tolerance-stationary-law": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-abc-augmented-tolerance-target",
+          "source_section": "Definition",
+          "quote": "Use the prior and simulator setup of [[def-approximate-bayesian-computation]]:\nstandard-Borel parameter and data spaces $(\\Theta,\\mathcal T)$ and\n$(\\mathsf Y,\\mathcal Y)$, a prior probability $\\Pi$, a probability kernel\n$K(\\theta,\\cdot)$, a measurable summary map $S:\\mathsf Y\\to\\mathbb R^d$ with\n$d\\ge1$, an observed summary $s_0\\in\\mathbb R^d$, and tolerance\n$\\epsilon\\ge0$. Let\n$$B_\\epsilon(s_0)=\\{s\\in\\mathbb R^d:\\|s-s_0\\|_2\\le\\epsilon\\},\\qquad A_\\epsilon=S^{-1}(B_\\epsilon(s_0)).$$\nThe **prior-simulator joint law** $H$ on the product sigma-algebra\n$(\\Theta\\times\\mathsf Y,\\mathcal T\\otimes\\mathcal Y)$ is\n$$H(C)=\\int_\\Theta K(\\theta,C_\\theta)\\,\\Pi(d\\theta),\\qquad C_\\theta=\\{y:(\\theta,y)\\in C\\},$$\nwhich is a probability measure by\n[[lem-prior-and-model-kernel-define-joint-law]]. The finite product is standard\nBorel by [[lem-finite-products-of-standard-borel-spaces-are-standard-borel]].\nPut\n$$h_\\epsilon(\\theta,y)=\\mathbf1_{A_\\epsilon}(y),\\qquad Z_\\epsilon=\\int_{\\Theta\\times\\mathsf Y}h_\\epsilon\\,dH =\\int_\\Theta K(\\theta,A_\\epsilon)\\,\\Pi(d\\theta).$$\nThus $0\\le Z_\\epsilon\\le1$, and $Z_\\epsilon$ is the prior-predictive probability\n$p_\\epsilon(s_0)$ in [[def-approximate-bayesian-computation]]. Only when\n$Z_\\epsilon>0$ define the **augmented ABC tolerance target**\n$$\\widetilde\\Pi_\\epsilon(C)=\\frac{1}{Z_\\epsilon}\\int_C h_\\epsilon\\,dH \\qquad(C\\in\\mathcal T\\otimes\\mathcal Y).$$\nIt is the prior-simulator joint law conditioned on the summary-tolerance event.\nIts parameter marginal is identified in\n[[lem-abc-augmented-target-has-tolerance-posterior-marginal]]. The definition\ndoes not assert that summary reduction or a positive tolerance preserves the\nfull-data posterior.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-abc-augmented-target-has-tolerance-posterior-marginal",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[def-abc-augmented-tolerance-target]] with\n$Z_\\epsilon>0$, the $\\Theta$-marginal of\n$\\widetilde\\Pi_\\epsilon$ is the tolerance-conditioned law\n$\\Pi_\\epsilon(\\cdot\\mid s_0)$ defined in\n[[def-approximate-bayesian-computation]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-abc-metropolis-hastings",
+          "source_section": "Definition",
+          "quote": "Fix $\\epsilon\\ge0$ with $Z_\\epsilon>0$ and let\n$\\widetilde\\Pi_\\epsilon$ be the target in\n[[def-abc-augmented-tolerance-target]]. The state is\n$x=(\\theta,y)\\in\\Theta\\times\\mathsf Y$, a standard-Borel product by\n[[lem-finite-products-of-standard-borel-spaces-are-standard-borel]], and\nadmissible initial states satisfy\n$y\\in A_\\epsilon$. As proposal inputs take a parameter probability kernel\n$q(\\theta,d\\theta')$ and the simulator kernel $K(\\theta',dy')$ from\n[[def-abc-augmented-tolerance-target]], such that\n$$Q((\\theta,y),d\\theta',dy')=q(\\theta,d\\theta')K(\\theta',dy')$$\nis a probability kernel on the augmented state space. Construct the transition\nkernel $P_\\epsilon$ by applying\n[[alg-metropolis-hastings-kernel]] with target\n$\\widetilde\\Pi_\\epsilon$ and proposal $Q$. Each iteration proposes a new\nparameter from $q$, simulates new data from $K$, applies the general\nMetropolis–Hastings accepted-flow rule, and retains the current augmented state\nafter rejection.\n\nThis definition uses one fixed tolerance and the augmented state\n$(\\theta,y)$. It does not claim irreducibility, uniqueness of a stationary law,\nconvergence, a mixing rate, or recovery of the full-data posterior.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-abc-metropolis-hastings-invariance",
+          "source_section": "Statement",
+          "quote": "Assume AC and the hypotheses of\n[[alg-abc-metropolis-hastings]] with $Z_\\epsilon>0$. Its output\n$P_\\epsilon$ is reversible with respect to and leaves invariant the augmented\nABC tolerance target $\\widetilde\\Pi_\\epsilon$ on\n$\\Theta\\times\\mathsf Y$. This is invariance for the fixed tolerance target\nonly; it gives no convergence or full-data posterior conclusion.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-metropolis-hastings-kernel",
+          "source_section": "Definition",
+          "quote": "Assume AC. The **Metropolis–Hastings procedure** takes as input a standard-Borel\nspace $(\\mathsf X,\\mathcal X)$ ([[def-standard-borel-space]]), a target\nprobability measure $\\pi$ ([[def-probability-measure]]), and a probability\nkernel $Q$ from $(\\mathsf X,\\mathcal X)$ to itself\n([[def-measure-kernel-and-probability-kernel]]).\n\n1. On the product sigma-algebra ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]),\nform the proposal-flow measure $\\mu$ ([[def-measure]]) on\n$\\mathsf X\\times\\mathsf X$ by\n$$\\mu(C)=\\int_{\\mathsf X}Q(x,C_x)\\,\\pi(dx),\\qquad C_x=\\{y:(x,y)\\in C\\}.$$\nThis is a probability measure by [[lem-prior-and-model-kernel-define-joint-law]].\nLet $\\tau(x,y)=(y,x)$ and set $\\mu^{\\mathsf T}(C)=\\mu(\\tau^{-1}C)$.\n\n2. Set $\\eta=\\mu\\wedge\\mu^{\\mathsf T}$, the greatest measure dominated by both\nflows. Put $\\lambda_0=\\mu+\\mu^{\\mathsf T}$, which is a finite measure by\n[[thm-nonnegative-weighted-sums-of-measures]], and choose nonnegative measurable\nrepresentatives $f=d\\mu/d\\lambda_0$ and $g=d\\mu^{\\mathsf T}/d\\lambda_0$\nwith $f+g=1$ everywhere after modification on a $\\lambda_0$-null set. Define\n$$\\alpha(x,y)=\\begin{cases}\\min\\{1,g(x,y)/f(x,y)\\},&f(x,y)>0,\\\\1,&f(x,y)=0.\\end{cases}$$\nThis is a jointly measurable version of $d\\eta/d\\mu$ taking values in $[0,1]$.\n\n3. For $x\\in\\mathsf X$, compute the integrated acceptance probability\n$$a(x)=\\int_{\\mathsf X}\\alpha(x,y)\\,Q(x,dy)$$\nand rejection probability $r(x)=1-a(x)$.\n\n4. Return the transition rule\n$$P(x,A)=\\int_{\\mathsf X}\\mathbf1_A(y)\\alpha(x,y)\\,Q(x,dy)+\\mathbf1_A(x)r(x),\\qquad A\\in\\mathcal X.$$\nThe second term retains every rejected proposal as a self-transition.\n\nThe item [[lem-common-submeasure-and-bounded-radon-nikodym-density]] proves the\ncommon-submeasure construction and density-version claims in step 2.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The accepted prior-simulator masses are $H(0,0)=1/4$, $H(0,1)=1/4$, $H(1,0)=1/8$, and $H(1,1)=1/4$, while $(1,2)$ has mass $1/8$ outside the tolerance; hence $Z_\\epsilon=7/8$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Dividing those four accepted masses by $7/8$ gives augmented masses $(2/7,2/7,1/7,2/7)$ and, by [F2], parameter marginal $(4/7,3/7)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Given exact data $Y=0$, the prior-weighted likelihood masses are $1/4$ at $\\theta=0$ and $1/8$ at $\\theta=1$, so the exact posterior is $(2/3,1/3)$, different from $(4/7,3/7)$ because the tolerance summary merges $Y=0$ with $Y=1$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For accepted current and proposed states, the forward flow is $\\widetilde\\Pi_\\epsilon(dx)H(dy)=\\tfrac87H(dx)H(dy)$, symmetric under swap, so [F5] accepts; for proposal $(1,2)$ the transposed flow is zero and the proposal is rejected. Thus $P(x,B)=H(B\\cap A_\\epsilon)+\\tfrac18\\mathbf1_B(x)=\\tfrac78\\widetilde\\Pi_\\epsilon(B)+\\tfrac18\\mathbf1_B(x)$ for accepted $x$, and integration gives $\\widetilde\\Pi_\\epsilon P(B)=\\widetilde\\Pi_\\epsilon(B)$, verifying stationarity consistently with [F4].",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both finite state spaces and the prior/simulator are explicitly nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The state (1,2) lies outside the tolerance set and has zero target mass, while the total accepted mass is 7/8."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example makes no sample-size assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Both parameter values have positive augmented ABC marginal mass, so the target itself is nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The selected tolerance is epsilon=1/2>0 and the event has positive probability 7/8."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite state calculation uses no arbitrary family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Forward direction: Accepted prior-simulator mass is 7/8 and parameter marginal (4/7,3/7), differing from exact-data (2/3,1/3). The independence kernel preserves the augmented law; this finite calculation states no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: The finite accepted target has parameter masses4/7,3/7 while exact Y0 gives2/3,1/3; Verification4.1 verifies a lazy-independent stationary kernel, not an iff characterization.",
+            "item_sha256": "9a761ab3cb929ae385f7acf90f91bdd83174b4d915c617ec834a6099e589bdab",
+            "row_sha256": "f3ccb13f6deb1561b06c16ce8026229d341a3c777a1cb7e8ea7a6ce261a6cd20"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Reverse direction: Accepted prior-simulator mass is 7/8 and parameter marginal (4/7,3/7), differing from exact-data (2/3,1/3). The independence kernel preserves the augmented law; this finite calculation states no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: The finite accepted target has parameter masses4/7,3/7 while exact Y0 gives2/3,1/3; Verification4.1 verifies a lazy-independent stationary kernel, not an iff characterization.",
+            "item_sha256": "9a761ab3cb929ae385f7acf90f91bdd83174b4d915c617ec834a6099e589bdab",
+            "row_sha256": "f1edf571c41044992b49e5ed93262bce5fc9adac2b342239b8c5ce914358759b"
+          }
+        }
+      ]
+    },
+    "ex-abc-sequential-tolerance-schedule-and-rn-weights": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-abc-augmented-tolerance-target",
+          "source_section": "Definition",
+          "quote": "Use the prior and simulator setup of [[def-approximate-bayesian-computation]]:\nstandard-Borel parameter and data spaces $(\\Theta,\\mathcal T)$ and\n$(\\mathsf Y,\\mathcal Y)$, a prior probability $\\Pi$, a probability kernel\n$K(\\theta,\\cdot)$, a measurable summary map $S:\\mathsf Y\\to\\mathbb R^d$ with\n$d\\ge1$, an observed summary $s_0\\in\\mathbb R^d$, and tolerance\n$\\epsilon\\ge0$. Let\n$$B_\\epsilon(s_0)=\\{s\\in\\mathbb R^d:\\|s-s_0\\|_2\\le\\epsilon\\},\\qquad A_\\epsilon=S^{-1}(B_\\epsilon(s_0)).$$\nThe **prior-simulator joint law** $H$ on the product sigma-algebra\n$(\\Theta\\times\\mathsf Y,\\mathcal T\\otimes\\mathcal Y)$ is\n$$H(C)=\\int_\\Theta K(\\theta,C_\\theta)\\,\\Pi(d\\theta),\\qquad C_\\theta=\\{y:(\\theta,y)\\in C\\},$$\nwhich is a probability measure by\n[[lem-prior-and-model-kernel-define-joint-law]]. The finite product is standard\nBorel by [[lem-finite-products-of-standard-borel-spaces-are-standard-borel]].\nPut\n$$h_\\epsilon(\\theta,y)=\\mathbf1_{A_\\epsilon}(y),\\qquad Z_\\epsilon=\\int_{\\Theta\\times\\mathsf Y}h_\\epsilon\\,dH =\\int_\\Theta K(\\theta,A_\\epsilon)\\,\\Pi(d\\theta).$$\nThus $0\\le Z_\\epsilon\\le1$, and $Z_\\epsilon$ is the prior-predictive probability\n$p_\\epsilon(s_0)$ in [[def-approximate-bayesian-computation]]. Only when\n$Z_\\epsilon>0$ define the **augmented ABC tolerance target**\n$$\\widetilde\\Pi_\\epsilon(C)=\\frac{1}{Z_\\epsilon}\\int_C h_\\epsilon\\,dH \\qquad(C\\in\\mathcal T\\otimes\\mathcal Y).$$\nIt is the prior-simulator joint law conditioned on the summary-tolerance event.\nIts parameter marginal is identified in\n[[lem-abc-augmented-target-has-tolerance-posterior-marginal]]. The definition\ndoes not assert that summary reduction or a positive tolerance preserves the\nfull-data posterior.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-abc-sequential-smc",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T\\ge0$, $N\\ge1$, a positive nonincreasing tolerance\nschedule $\\epsilon_0\\ge\\epsilon_1\\ge\\cdots\\ge\\epsilon_T>0$, and assume\n$Z_{\\epsilon_t}>0$ for every $t$. Let\n$\\widetilde\\Pi_{\\epsilon_t}$ be the normalized augmented target from\n[[def-abc-augmented-tolerance-target]]. The parameter proposal at stage $t$\nis a probability kernel $Q_t(\\theta,d\\theta')$ on $\\Theta$.\n\nFor each $t\\ge1$, write the previous weighted population as\n$$Z_{t-1}=((\\theta_{t-1}^i,y_{t-1}^i)_{i=1}^N,(W_{t-1}^i)_{i=1}^N)$$\nin the standard-Borel space\n$$E_N=(\\Theta\\times\\mathsf Y)^N\\times[0,1]^N,$$\nwhere $[0,1]$ has its Borel sigma-algebra and is standard Borel because the\nclosed interval with the Euclidean metric is Polish. Thus $E_N$ is standard\nBorel by [[lem-finite-products-of-standard-borel-spaces-are-standard-borel]].\nLet $\\lambda_{t-1}$ be the law of $Z_{t-1}$ conditional on the algorithm\nreaching stage $t$, when that event has positive probability. For\n$z=((\\theta_i,y_i)_{i=1}^N,(w_i)_{i=1}^N)\\in E_N$, define the probability\nkernel $\\phi_t^N$ by\n$$\\phi_t^N(z,B)=\\begin{cases} \\sum_{i=1}^Nw_iQ_t(\\theta_i,B),&\\sum_iw_i=1,\\\\[2pt] \\frac1N\\sum_{i=1}^NQ_t(\\theta_i,B),&\\sum_iw_i\\ne1. \\end{cases}$$\nFor each fixed measurable $B\\subseteq\\Theta$, $z\\mapsto Q_t(\\theta_i,B)$\nand $z\\mapsto w_i$ are measurable. For nonnegative measurable $u,v$ on\n$E_N$, the superlevel sets satisfy\n$$\\{uv>a\\}=E_N\\ (a<0),\\qquad \\{uv>a\\}=\\bigcup_{q\\in\\mathbb Q,\\ q>0}(\\{u>q\\}\\cap\\{v>a/q\\})\\ (a\\ge0),$$\nso each product $w_iQ_t(\\theta_i,B)$ is measurable. Finite sums and scalar\nmultiples are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]],\nmaking the branch condition and both branch evaluations measurable. Each\nbranch is a convex combination of probability measures, so\n[[def-measure-kernel-and-probability-kernel]] gives a probability kernel.\nThe second branch only extends the kernel to ambient states outside the\nalgorithm; every actual previous population has normalized weights and uses\nthe proposal mixture in the first branch. Require\n$\\Pi\\ll\\phi_t^N(z,\\cdot)$ for $\\lambda_{t-1}$-almost every $z$ at every\nstage that is reached with positive probability. Apply\n[[lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels]]\nto the constant kernel $z\\mapsto\\Pi$ and the kernel $\\phi_t^N$ to obtain a\nproduct-measurable derivative on $E_N\\times\\Theta$. Set its value to zero\nwhere it is infinite; since its integral is one for $\\lambda_{t-1}$-almost\nevery $z$, this gives a finite-valued product-measurable version\n$r_t^N(z,\\theta)=d\\Pi/d\\phi_t^N(z,\\cdot)(\\theta)$ for almost every\nprevious population.\n\nAt stage $0$, draw $(\\theta_i,y_i)$ independently from the prior-simulator\nlaw $H$, and set $a_0^i=\\mathbf1_{A_{\\epsilon_0}}(y_i)$. If\n$\\sum_i a_0^i=0$, stop and report finite-particle degeneracy; otherwise\nnormalize these weights to obtain $W_0^i$ and report the weighted empirical\nmeasure\n$$\\widehat\\Pi_0^N=\\sum_{i=1}^NW_0^i\\delta_{(\\theta_i,y_i)}.$$\n\nFor each $t=1,\\ldots,T$, form the proposal mixture\n$$\\phi_t^N(\\cdot)=\\sum_{i=1}^N W_{t-1}^iQ_t(\\theta_{t-1}^i,\\cdot).$$\nDraw $N$ ancestor indices from the previous weights using the multinomial\nbranch of [[alg-multinomial-and-residual-offspring-resampling]]. Conditional\non those ancestors, independently draw one perturbed parameter from its\n$Q_t$ kernel and one datum from $K$ for each child. For a candidate\n$(\\theta_t^j,y_t^j)$ set\n$$a_t^j=\\mathbf1_{A_{\\epsilon_t}}(y_t^j)r_t^N(Z_{t-1},\\theta_t^j).$$\nIf $\\sum_j a_t^j=0$, stop and report finite-particle degeneracy; do not report\na normalized target estimate. If the sum is positive, set\n$W_t^j=a_t^j/\\sum_k a_t^k$ and report the weighted empirical measure\n$\\widehat\\Pi_t^N=\\sum_jW_t^j\\delta_{(\\theta_t^j,y_t^j)}$.\n\nIf a stage degenerates, return that status and no normalized estimate for the\nstage or any later target. If every stage through $T$ succeeds, return\n$\\widehat\\Pi_T^N$; in particular, when $T=0$ the returned estimate is\n$\\widehat\\Pi_0^N$.\n\nThe mixture support condition is stage-specific and must hold almost surely\nunder the law of the actual previous population. The algorithm makes no\nfinite-$N$ accuracy, mixing, or posterior-recovery claim.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-abc-sequential-smc-rn-weight-update",
+          "source_section": "Statement",
+          "quote": "Assume the setup of [[alg-abc-sequential-smc]] and put\n$$\\gamma_t(d\\theta,dy)=\\Pi(d\\theta)K(\\theta,dy)\\mathbf1_{A_{\\epsilon_t}}(y), \\qquad \\pi_t=\\gamma_t/Z_{\\epsilon_t}=\\widetilde\\Pi_{\\epsilon_t}.$$\nFor a measure $\\mu$, write $\\mu(f)=\\int f\\,d\\mu$ for bounded nonnegative\nmeasurable $f$. For every bounded nonnegative product-measurable\n$f:\\Theta\\times\\mathsf Y\\to[0,\\infty)$, let\n$X_0^j=(\\Theta_0^j,Y_0^j)$, $1\\le j\\le N$, be the initial $N$ independent\nprior-simulator draws with law $H$ and weights\n$a_0^j=\\mathbf1_{A_{\\epsilon_0}}(Y_0^j)$ satisfy\n$$\\mathbb E\\!\\left[\\frac1N\\sum_{j=1}^Na_0^jf(X_0^j)\\right]=\\gamma_0(f).$$\nFor each $1\\le t\\le T$ reached with positive probability, let\n$Z_{t-1}=((\\Theta_{t-1}^i,Y_{t-1}^i)_{i=1}^N,(W_{t-1}^i)_{i=1}^N)$ be the\nprevious population and let $\\lambda_{t-1}$ be its law conditional on reaching\nstage $t$. Use the standard-Borel population space and probability kernel\n$\\phi_t^N(z,\\cdot)$ from [[alg-abc-sequential-smc]], and assume\n$\\Pi\\ll\\phi_t^N(z,\\cdot)$ for $\\lambda_{t-1}$-almost every $z$. The kernel\nRadon–Nikodym lemma\n[[lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels]]\nthen supplies a product-measurable derivative; use the finite-valued version\nspecified in [[alg-abc-sequential-smc]] after changing infinite values to zero.\nWrite this version as\n$r_t^N(z,\\theta)=d\\Pi/d\\phi_t^N(z,\\cdot)(\\theta)$ for almost every $z$.\nPut $a_t^j=\\mathbf1_{A_{\\epsilon_t}}(Y_t^j)r_t^N(Z_{t-1},\\Theta_t^j)$ for\nthe candidates produced by multinomial ancestor resampling, perturbation, and\nsimulation. For every bounded nonnegative product-measurable\n$f:\\Theta\\times\\mathsf Y\\to[0,\\infty)$,\n$$\\mathbb E\\!\\left[\\frac1N\\sum_{j=1}^Na_t^jf(\\Theta_t^j,Y_t^j)\\,\\middle|\\,\\text{previous population}\\right] =\\gamma_t(f)\\quad\\text{almost surely on reaching stage }t.$$\nIn particular, the average weight is conditionally unbiased for\n$Z_{\\epsilon_t}$. If candidates with positive total weight are resampled by\nthe multinomial or residual scheme from normalized weights, then for every\nbounded measurable $f$ their conditional empirical mean equals the weighted\ncandidate empirical mean in expectation. No unbiasedness is asserted for the\nself-normalized finite-$N$ estimate, and a finite sample may have zero total\nweight or fail to represent positive target mass.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At $\\epsilon_0=3/2$, all simulated summaries are accepted, so $Z_{\\epsilon_0}=1$; at $\\epsilon_1=1/2$, acceptance probabilities are $1$ and $3/4$ at the two parameter values, giving $Z_{\\epsilon_1}=7/8$ and target parameter masses $(4/7,3/7)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the previous population $(0,0)$, $\\phi_1^N(\\{0\\})=99/100$ and $\\phi_1^N(\\{1\\})=1/100$, so it dominates the uniform prior and the RN ratios are $r_1^N(0)=(1/2)/(99/100)=50/99$ and $r_1^N(1)=(1/2)/(1/100)=50$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A proposal matches tolerance with probability $(99/100)\\cdot1+(1/100)\\cdot(3/4)=399/400$; its expected weight contributions at $\\theta=0,1$ are $(99/100)(1)(50/99)=1/2$ and $(1/100)(3/4)(50)=3/8$, totaling $7/8$. Their ratio is $(4/7,3/7)$, the population target marginal by [F3]; these are normalized expected unnormalized weights, not a realized self-normalized finite-particle estimate.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The parameter and data spaces are explicitly finite and nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: At epsilon_1=1/2 the y=2 outcome lies outside tolerance and gets zero weight; the mixture acceptance probability remains 399/400."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The worked population has N=2 and makes no N=1 comparison."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The conditioned previous population repeats theta=0, but the perturbation mixture still assigns positive mass to both target parameter values."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The schedule epsilon_0=3/2 >= epsilon_1=1/2 is positive and has finite positive normalizers."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite prior, mixture, and categorical ancestor law are explicitly normalized."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Forward direction: The dominating proposal (99/100,1/100) gives RN ratios (50/99,50), expected contributions (1/2,3/8), and total 7/8. Normalized expected weights are distinguished from finite self-normalized estimates; no converse is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: Verification1.2 computes prior-to-mixture ratios50/99 and50 and2.1 verifies expected unnormalized target weights1/2,3/8; no equivalence or finite-N exactness is asserted.",
+            "item_sha256": "4cc261c11dc29587f08343c91092c339de2c9ebefa5588e71604841eb934d681",
+            "row_sha256": "f3ccb13f6deb1561b06c16ce8026229d341a3c777a1cb7e8ea7a6ce261a6cd20"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Reverse direction: The dominating proposal (99/100,1/100) gives RN ratios (50/99,50), expected contributions (1/2,3/8), and total 7/8. Normalized expected weights are distinguished from finite self-normalized estimates; no converse is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: Verification1.2 computes prior-to-mixture ratios50/99 and50 and2.1 verifies expected unnormalized target weights1/2,3/8; no equivalence or finite-N exactness is asserted.",
+            "item_sha256": "4cc261c11dc29587f08343c91092c339de2c9ebefa5588e71604841eb934d681",
+            "row_sha256": "f1edf571c41044992b49e5ed93262bce5fc9adac2b342239b8c5ce914358759b"
+          }
+        }
+      ]
+    },
+    "ex-abc-smc-finite-particle-collapse": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-abc-sequential-smc",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T\\ge0$, $N\\ge1$, a positive nonincreasing tolerance\nschedule $\\epsilon_0\\ge\\epsilon_1\\ge\\cdots\\ge\\epsilon_T>0$, and assume\n$Z_{\\epsilon_t}>0$ for every $t$. Let\n$\\widetilde\\Pi_{\\epsilon_t}$ be the normalized augmented target from\n[[def-abc-augmented-tolerance-target]]. The parameter proposal at stage $t$\nis a probability kernel $Q_t(\\theta,d\\theta')$ on $\\Theta$.\n\nFor each $t\\ge1$, write the previous weighted population as\n$$Z_{t-1}=((\\theta_{t-1}^i,y_{t-1}^i)_{i=1}^N,(W_{t-1}^i)_{i=1}^N)$$\nin the standard-Borel space\n$$E_N=(\\Theta\\times\\mathsf Y)^N\\times[0,1]^N,$$\nwhere $[0,1]$ has its Borel sigma-algebra and is standard Borel because the\nclosed interval with the Euclidean metric is Polish. Thus $E_N$ is standard\nBorel by [[lem-finite-products-of-standard-borel-spaces-are-standard-borel]].\nLet $\\lambda_{t-1}$ be the law of $Z_{t-1}$ conditional on the algorithm\nreaching stage $t$, when that event has positive probability. For\n$z=((\\theta_i,y_i)_{i=1}^N,(w_i)_{i=1}^N)\\in E_N$, define the probability\nkernel $\\phi_t^N$ by\n$$\\phi_t^N(z,B)=\\begin{cases} \\sum_{i=1}^Nw_iQ_t(\\theta_i,B),&\\sum_iw_i=1,\\\\[2pt] \\frac1N\\sum_{i=1}^NQ_t(\\theta_i,B),&\\sum_iw_i\\ne1. \\end{cases}$$\nFor each fixed measurable $B\\subseteq\\Theta$, $z\\mapsto Q_t(\\theta_i,B)$\nand $z\\mapsto w_i$ are measurable. For nonnegative measurable $u,v$ on\n$E_N$, the superlevel sets satisfy\n$$\\{uv>a\\}=E_N\\ (a<0),\\qquad \\{uv>a\\}=\\bigcup_{q\\in\\mathbb Q,\\ q>0}(\\{u>q\\}\\cap\\{v>a/q\\})\\ (a\\ge0),$$\nso each product $w_iQ_t(\\theta_i,B)$ is measurable. Finite sums and scalar\nmultiples are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]],\nmaking the branch condition and both branch evaluations measurable. Each\nbranch is a convex combination of probability measures, so\n[[def-measure-kernel-and-probability-kernel]] gives a probability kernel.\nThe second branch only extends the kernel to ambient states outside the\nalgorithm; every actual previous population has normalized weights and uses\nthe proposal mixture in the first branch. Require\n$\\Pi\\ll\\phi_t^N(z,\\cdot)$ for $\\lambda_{t-1}$-almost every $z$ at every\nstage that is reached with positive probability. Apply\n[[lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels]]\nto the constant kernel $z\\mapsto\\Pi$ and the kernel $\\phi_t^N$ to obtain a\nproduct-measurable derivative on $E_N\\times\\Theta$. Set its value to zero\nwhere it is infinite; since its integral is one for $\\lambda_{t-1}$-almost\nevery $z$, this gives a finite-valued product-measurable version\n$r_t^N(z,\\theta)=d\\Pi/d\\phi_t^N(z,\\cdot)(\\theta)$ for almost every\nprevious population.\n\nAt stage $0$, draw $(\\theta_i,y_i)$ independently from the prior-simulator\nlaw $H$, and set $a_0^i=\\mathbf1_{A_{\\epsilon_0}}(y_i)$. If\n$\\sum_i a_0^i=0$, stop and report finite-particle degeneracy; otherwise\nnormalize these weights to obtain $W_0^i$ and report the weighted empirical\nmeasure\n$$\\widehat\\Pi_0^N=\\sum_{i=1}^NW_0^i\\delta_{(\\theta_i,y_i)}.$$\n\nFor each $t=1,\\ldots,T$, form the proposal mixture\n$$\\phi_t^N(\\cdot)=\\sum_{i=1}^N W_{t-1}^iQ_t(\\theta_{t-1}^i,\\cdot).$$\nDraw $N$ ancestor indices from the previous weights using the multinomial\nbranch of [[alg-multinomial-and-residual-offspring-resampling]]. Conditional\non those ancestors, independently draw one perturbed parameter from its\n$Q_t$ kernel and one datum from $K$ for each child. For a candidate\n$(\\theta_t^j,y_t^j)$ set\n$$a_t^j=\\mathbf1_{A_{\\epsilon_t}}(y_t^j)r_t^N(Z_{t-1},\\theta_t^j).$$\nIf $\\sum_j a_t^j=0$, stop and report finite-particle degeneracy; do not report\na normalized target estimate. If the sum is positive, set\n$W_t^j=a_t^j/\\sum_k a_t^k$ and report the weighted empirical measure\n$\\widehat\\Pi_t^N=\\sum_jW_t^j\\delta_{(\\theta_t^j,y_t^j)}$.\n\nIf a stage degenerates, return that status and no normalized estimate for the\nstage or any later target. If every stage through $T$ succeeds, return\n$\\widehat\\Pi_T^N$; in particular, when $T=0$ the returned estimate is\n$\\widehat\\Pi_0^N$.\n\nThe mixture support condition is stage-specific and must hold almost surely\nunder the law of the actual previous population. The algorithm makes no\nfinite-$N$ accuracy, mixing, or posterior-recovery claim.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-abc-sequential-smc-rn-weight-update",
+          "source_section": "Statement",
+          "quote": "Assume the setup of [[alg-abc-sequential-smc]] and put\n$$\\gamma_t(d\\theta,dy)=\\Pi(d\\theta)K(\\theta,dy)\\mathbf1_{A_{\\epsilon_t}}(y), \\qquad \\pi_t=\\gamma_t/Z_{\\epsilon_t}=\\widetilde\\Pi_{\\epsilon_t}.$$\nFor a measure $\\mu$, write $\\mu(f)=\\int f\\,d\\mu$ for bounded nonnegative\nmeasurable $f$. For every bounded nonnegative product-measurable\n$f:\\Theta\\times\\mathsf Y\\to[0,\\infty)$, let\n$X_0^j=(\\Theta_0^j,Y_0^j)$, $1\\le j\\le N$, be the initial $N$ independent\nprior-simulator draws with law $H$ and weights\n$a_0^j=\\mathbf1_{A_{\\epsilon_0}}(Y_0^j)$ satisfy\n$$\\mathbb E\\!\\left[\\frac1N\\sum_{j=1}^Na_0^jf(X_0^j)\\right]=\\gamma_0(f).$$\nFor each $1\\le t\\le T$ reached with positive probability, let\n$Z_{t-1}=((\\Theta_{t-1}^i,Y_{t-1}^i)_{i=1}^N,(W_{t-1}^i)_{i=1}^N)$ be the\nprevious population and let $\\lambda_{t-1}$ be its law conditional on reaching\nstage $t$. Use the standard-Borel population space and probability kernel\n$\\phi_t^N(z,\\cdot)$ from [[alg-abc-sequential-smc]], and assume\n$\\Pi\\ll\\phi_t^N(z,\\cdot)$ for $\\lambda_{t-1}$-almost every $z$. The kernel\nRadon–Nikodym lemma\n[[lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels]]\nthen supplies a product-measurable derivative; use the finite-valued version\nspecified in [[alg-abc-sequential-smc]] after changing infinite values to zero.\nWrite this version as\n$r_t^N(z,\\theta)=d\\Pi/d\\phi_t^N(z,\\cdot)(\\theta)$ for almost every $z$.\nPut $a_t^j=\\mathbf1_{A_{\\epsilon_t}}(Y_t^j)r_t^N(Z_{t-1},\\Theta_t^j)$ for\nthe candidates produced by multinomial ancestor resampling, perturbation, and\nsimulation. For every bounded nonnegative product-measurable\n$f:\\Theta\\times\\mathsf Y\\to[0,\\infty)$,\n$$\\mathbb E\\!\\left[\\frac1N\\sum_{j=1}^Na_t^jf(\\Theta_t^j,Y_t^j)\\,\\middle|\\,\\text{previous population}\\right] =\\gamma_t(f)\\quad\\text{almost surely on reaching stage }t.$$\nIn particular, the average weight is conditionally unbiased for\n$Z_{\\epsilon_t}$. If candidates with positive total weight are resampled by\nthe multinomial or residual scheme from normalized weights, then for every\nbounded measurable $f$ their conditional empirical mean equals the weighted\ncandidate empirical mean in expectation. No unbiasedness is asserted for the\nself-normalized finite-$N$ estimate, and a finite sample may have zero total\nweight or fail to represent positive target mass.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The proposal masses are $\\phi_1^N(\\{0\\})=99/100$ and $\\phi_1^N(\\{1\\})=1/100$, so the uniform prior is dominated and the finite RN weights are $r_1^N(0)=50/99$ and $r_1^N(1)=50$. Tolerance acceptance is certain at $\\theta=0$ and has probability $3/4$ at $\\theta=1$, so $Z_{\\epsilon_1}=1/2+(1/2)(3/4)=7/8$ and the unnormalized target mass at $\\theta=1$ is $3/8$, giving normalized mass $3/7$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each proposal has parameter $0$ with probability $99/100$, independently conditional on the previous population, so both have parameter $0$ with probability $(99/100)^2=9801/10000$; on this event both weights equal $50/99$ and the normalized empirical measure assigns zero mass to $\\theta=1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 gives true target mass $3/7$ at $\\theta=1$, whereas the positive-probability event in step 2.1 has no empirical mass there; any resampled offspring also stay at $\\theta=0$. This illustrates the finite-particle caveat in [F2] despite valid support and weights.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite parameter and data spaces are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The y=2 outcome is outside the tolerance and has zero incremental weight, but the displayed collapse event has positive weights."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness fixes N=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example explicitly computes a positive-probability collapse to repeated theta=0 particles while target mass at theta=1 is 3/7."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The tolerance epsilon_1=1/2 is positive and its target normalizer is 7/8."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The prior, mixture proposal, and ancestor probabilities are finite explicit laws; the RN derivative is explicitly given."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Forward direction: Two independent proposals both equal zero with probability 9801/10000 although target mass at one is 3/7. Valid RN support therefore does not ensure finite particle coverage; this is a witness, not an equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: The full-support finite proposal still misses target-positive parameter1 with probability9801/10000 for N2; Verification3.1 is a concrete limitation, not a support iff theorem.",
+            "item_sha256": "984aba7c93327fc3e0ca625978bcd935d7f73be71a923ad08306008df40a2892",
+            "row_sha256": "f3ccb13f6deb1561b06c16ce8026229d341a3c777a1cb7e8ea7a6ce261a6cd20"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Reverse direction: Two independent proposals both equal zero with probability 9801/10000 although target mass at one is 3/7. Valid RN support therefore does not ensure finite particle coverage; this is a witness, not an equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: The full-support finite proposal still misses target-positive parameter1 with probability9801/10000 for N2; Verification3.1 is a concrete limitation, not a support iff theorem.",
+            "item_sha256": "984aba7c93327fc3e0ca625978bcd935d7f73be71a923ad08306008df40a2892",
+            "row_sha256": "f1edf571c41044992b49e5ed93262bce5fc9adac2b342239b8c5ce914358759b"
+          }
+        }
+      ]
+    }
+  }
+}

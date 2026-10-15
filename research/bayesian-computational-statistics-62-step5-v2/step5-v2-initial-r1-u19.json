@@ -1,0 +1,153 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "19",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "ex-white-noise-is-not-l2-valued",
+      "model": "gpt-6-luna",
+      "context_sha256": "70907d0767af138a358f5ce2bc55fd447340b4f0c3b099220d1bd3600508b2e3",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F2 cites a lemma explicitly assuming countable choice for its density-normal interface, while the original example supplies no such assumption outside its full-AC tightness branch. Added countable choice explicitly to the Example, Facts, deps and steps; the dyadic trace calculation and independent-coordinate L2 obstruction are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-gaussian-product-prior-satisfies-weak-bvm",
+      "model": "gpt-6-luna",
+      "context_sha256": "61b0b256688c71a5902f25a3b66f6dea72ad4aafbd97c561cb4b0a97aeaf8fec",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F5 explicitly requires an S-regular wavelet basis, absent from the original example, so its invocation in step 2.1 was unlicensed. The example now selects that basis and carries the supplied-model premises explicitly. Consulted Castillo\u2013Nickl Definition 2(b), Condition 1 and the complete Theorem 9 proof; retained the claimed Gaussian-prior example.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.statslab.cam.ac.uk/~rn289/Site/__files/AOS1133.pdf"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-white-noise-is-not-l2-valued",
+      "disposition": "repaired",
+      "post_sha256": "5b5341773871640fc6db5c84cbbc20b6cb52279e9833376e9575e2457eb6e057",
+      "review_context_sha256": "bf6f52f6bd9d4c323d32c1ced72c3d4152992901c7a50dac0bc4fefcc39c296b",
+      "reason": "The Borel Gaussian supplier is now used under explicit countable choice; full AC remains confined to tightness. Verified the harmonic/geometric trace estimates, the independent-coordinate Pythagorean obstruction to L2 realization, and the singleton Prokhorov tightness argument. The contract and manifest dependency mirror are synchronized; focused precheck, rendering, proof-contract and proof-layout checks pass.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-gaussian-product-prior-satisfies-weak-bvm",
+      "disposition": "repaired",
+      "post_sha256": "e05a75e16e2cc8c377d8ffa8361c3af94fadbc59dccb0b6544b39303404182df",
+      "review_context_sha256": "146405315a6b8052dbff52a773d6a19ea9db38c322ff25e5b056c3f935313218",
+      "reason": "The selected S-regular basis now meets F5. Checked Gaussian variance one, the positive density lower bound on (-2,2), normalized truth 1<2, and the geometric L2 truth/prior square sum for alpha>0. Countable choice and the supplied posterior remain explicit. Contract synchronization and all focused checks pass; this repair is not an independent review of itself.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.statslab.cam.ac.uk/~rn289/Site/__files/AOS1133.pdf"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u19-noise-choice",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T16:58:40.674558+00:00",
+        "class": "accuracy",
+        "subclass": "missing-choice-scope",
+        "severity": "fatal",
+        "location": "facts-block",
+        "subject": "ex-white-noise-is-not-l2-valued",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "defect_type": "dependency_citation",
+        "finding": "F2 omitted the countable-choice premise of its Gaussian-law supplier while A1 restricted AC to tightness.",
+        "correction": "Added the countable-choice premise and dependency, carried it through the law construction, and synchronized the proof contract and manifest.",
+        "adjudication_ref": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u19.json",
+            "id": "ex-white-noise-is-not-l2-valued",
+            "model": "gpt-6-luna",
+            "context_sha256": "70907d0767af138a358f5ce2bc55fd447340b4f0c3b099220d1bd3600508b2e3"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u19.json"
+          },
+          {
+            "path": "items/ex-white-noise-is-not-l2-valued.md"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "bcs62-step5-initial-r1-u19-gaussian-basis",
+        "run": "bayesian-computational-statistics-62",
+        "at": "2026-10-15T16:58:40.674558+00:00",
+        "class": "accuracy",
+        "subclass": "missing-hypothesis",
+        "severity": "fatal",
+        "location": "proof-step",
+        "subject": "ex-gaussian-product-prior-satisfies-weak-bvm",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "defect_type": "dependency_citation",
+        "finding": "Step 2.1 invoked F5 without supplying its S-regular basis hypothesis.",
+        "correction": "Selected the required basis explicitly, exposed the model prerequisites, and synchronized the proof contract.",
+        "adjudication_ref": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u19.json",
+            "id": "ex-gaussian-product-prior-satisfies-weak-bvm",
+            "model": "gpt-6-luna",
+            "context_sha256": "61b0b256688c71a5902f25a3b66f6dea72ad4aafbd97c561cb4b0a97aeaf8fec"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "research/bayesian-computational-statistics-62-step5-v2/step5-v2-initial-r1-u19.json"
+          },
+          {
+            "path": "items/ex-gaussian-product-prior-satisfies-weak-bvm.md"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "none",
+      "reason": "Neither assigned draft repair changed a Statement or Definition, and no potentially defective published consumer was identified. No published carrier was edited or adjudicated."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Completed both assigned tuples in increasing dependency order. No new items, unresolved mathematics, or pending repairs. No judge, stamp, certificate, central ledger, or round-state write was performed.",
+    "The white-noise repair preserves the harmonic trace divergence, the finite trace for delta>1/2 and the independent-coordinate L2 obstruction. Countable choice licenses the cited scalar density-normal calculus; only the separate tightness branch assumes full AC.",
+    "The Gaussian example preserves the normal density, scales, truth coefficients and bounded-Lipschitz conclusion. Selecting the theorem's basis supplies its omitted premise; no new prerequisite is needed.",
+    "Read both owning page interfaces. Neither assigned item contains a Statement or Definition section; both frozen section hashes are the empty-section hash. Only Example, Facts, Verification and dependency metadata changed. Under the task's literal section-change rule, downstream is empty.",
+    "Shared metadata was reread and edited after acquiring step5-v2-initial-r1-u19, then checked and released. Only the two assigned contract entries and the first item's manifest deps were changed. Review-context hashes were captured immediately after the respective mathematical reviews, before later item edits; subsequent contract/manifest synchronization changes no item or supplier interface.",
+    "Validation: node tools/tsx-run.mjs tools/precheck.mts --json items/<id>.md was run separately for each assigned item: each checked 1, failed 0, exit 0. node tools/rendercheck.mjs --json items/<id>.md was run separately for each: checked 1, no errors/warnings, exit 0.",
+    "Validation: node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-19.proof-contracts.json --strict --items ex-white-noise-is-not-l2-valued,ex-gaussian-product-prior-satisfies-weak-bvm --json: ok true, no errors/warnings, exit 0. Focused parsed manifest dependency comparison: pass.",
+    "After the final item edits: node tools/proof-layout.mjs items/ex-white-noise-is-not-l2-valued.md items/ex-gaussian-product-prior-satisfies-weak-bvm.md: 2 items, 6 steps, 0 defects, exit 0."
+  ],
+  "supporting_evidence": {
+    "research/bayesian-computational-statistics-62-batch-19.proof-contracts.json": "5249138d5c348b49e79ed53fd0defeaaa9f9be13cb65a4a6cea5a181dfabc3f4",
+    "research/bayesian-computational-statistics-62-batch-19.pages.json": "58a30ecf37f3055e0d66150b8ced00b1891c86e5606d2efdcc7cf3bfdd8f9dbf"
+  }
+}

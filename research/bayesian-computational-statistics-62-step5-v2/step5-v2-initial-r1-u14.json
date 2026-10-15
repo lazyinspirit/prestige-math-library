@@ -1,0 +1,114 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "14",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "lem-real-line-is-standard-borel",
+      "model": "gpt-6-luna",
+      "context_sha256": "1798fd94b7fbbac69a4803a99014bcaeac3ece51666c23e95d60c5f11e525eaa",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 states only that Polish implies separable and completely metrizable, whereas step 1.1 needs the converse. This is an incomplete local restatement, not a missing mathematical prerequisite: the cited def-polish-space Definition explicitly defines Polish by these two properties, and the existing contract quotes that full definition. Made F1 an explicit equivalence. The rationals supply a countable dense subset, the usual real metric is complete and compatible, and the identity gives the required Borel isomorphism.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-real-line-is-standard-borel",
+      "disposition": "repaired",
+      "post_sha256": "436a900c03e39e2d559e3a9017bd687c2fd6f30b4d26ec5e069abf0c27be057f",
+      "review_context_sha256": "fc281913110f809bdba3f84d795e6eeb511711d356eab2e5eb52581a5cb92200",
+      "reason": "Reviewed both proof steps against all six actual supplier interfaces, the owning proof contract, and the Gaussian-process page. Countability and density of the embedded rationals establish separability; the usual compatible metric is complete; the Polish definition therefore applies. The identity preserves exactly the Borel sets, satisfying def-standard-borel-space. Corrected only F1 to state the definitional equivalence. No AC, new prerequisite, or Statement/Definition change is needed. The contract already quotes the full correct definition and needs no edit. This is a self-review of the repair, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "id": "lem-real-line-is-standard-borel",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "facts-block",
+      "reason": "F1 omitted the sufficient direction of the Polish-space definition used in step 1.1. The actual declared supplier and its contract quote already provide that direction. Replaced F1 with an explicit equivalence; the mathematical claim and proof steps are unchanged.",
+      "evidence": "items/lem-real-line-is-standard-borel.md, Facts & Assumptions [F1] and Proof 1.1; items/def-polish-space.md, Definition; research/bayesian-computational-statistics-62-batch-14.proof-contracts.json, citations F1.",
+      "post_sha256": "436a900c03e39e2d559e3a9017bd687c2fd6f30b4d26ec5e069abf0c27be057f",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "claim_and_conventions": "The measurable space (R, B(R)) for the usual real topology is standard Borel. The rational embedding is identified with its image. No choice is used.",
+    "repair": "Changed only [F1] from \"A Polish space is separable and has a compatible complete metric.\" to \"A topological space is Polish if and only if it is separable and has a compatible complete metric.\"",
+    "dependencies": [
+      "def-polish-space",
+      "def-separable-space",
+      "def-standard-borel-space",
+      "lem-rat-embeds-dense",
+      "thm-euclidean-space-complete",
+      "thm-rationals-countable"
+    ],
+    "source_evidence": [
+      "items/def-polish-space.md: Definition (separable and completely metrizable iff Polish)",
+      "items/def-separable-space.md: Definition (countable dense subset)",
+      "items/def-standard-borel-space.md: Definition (Borel isomorphism to a Polish space)",
+      "items/lem-rat-embeds-dense.md: Statement (ordered-field embedding, approximation and density)",
+      "items/thm-euclidean-space-complete.md: Statement, claim 1 (usual real metric complete)",
+      "items/thm-rationals-countable.md: Statement (Q countably infinite, no choice)"
+    ],
+    "source_reading": "Used the local supplier texts and familiarity with these elementary definitions. No external source was consulted; the existing bibliographic source note was preserved without claiming a new source audit.",
+    "interface_comparison": "Reconstructing the original carrier by reversing the single F1 replacement reproduces the frozen before guard. Direct comparison confirms that the entire Statement section is byte-for-byte unchanged. No Definition section exists. No downstream propagation is triggered.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-real-line-is-standard-borel.md --json",
+        "exit_code": 0,
+        "result": "1 file, 1 proof checked, 0 failures; pass"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-real-line-is-standard-borel.md --json",
+        "exit_code": 0,
+        "result": "1 file checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-14.proof-contracts.json --strict --items lem-real-line-is-standard-borel --json",
+        "exit_code": 0,
+        "result": "ok: true; assigned item checked, no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-real-line-is-standard-borel.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects"
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run bayesian-computational-statistics-62 --items lem-real-line-is-standard-borel",
+        "exit_code": 0,
+        "result": "Captured post and context hashes immediately after mathematical review and the F1 edit."
+      },
+      {
+        "command": "Read-only frozen-pack and carrier comparison using itemHashGuard",
+        "exit_code": 0,
+        "result": {
+          "normalized_input_hash": true,
+          "original_guard_reconstructed": true,
+          "current_guard_matches_review": true,
+          "statement_byte_identical": true,
+          "frozen_frontier": true,
+          "assigned_tuple_matches": true
+        }
+      }
+    ],
+    "published_ledger": "No published item was changed, and this review found no potentially defective published use requiring an update to research/published-consumer-supplier-ledger.md.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collects the report and routes any required current-guard rejudgment; no judgment or certification was written."
+  }
+}

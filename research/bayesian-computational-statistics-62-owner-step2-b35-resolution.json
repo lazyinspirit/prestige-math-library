@@ -1,0 +1,701 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "35",
+  "cycle": 1,
+  "at": "2026-10-15T10:28:21.713067+00:00",
+  "review": "research/bayesian-computational-statistics-62-scope-review/batch-35/review-1.json",
+  "drained_state": {
+    "1-scaffold:batch-35": {
+      "stage": "1-scaffold",
+      "role": "beta",
+      "label": "batch-35",
+      "covers": [
+        "35"
+      ],
+      "attempt": 1,
+      "attempts": 1,
+      "startedAt": "2026-10-15T04:58:15.204Z",
+      "endedAt": "2026-10-15T06:01:35.275Z",
+      "lastExitOk": true
+    },
+    "2-scope-review:scope-review-35-0": {
+      "stage": "2-scope-review",
+      "role": "scope-reviewer",
+      "label": "scope-review-35-0",
+      "covers": [
+        "35"
+      ],
+      "attempt": 1,
+      "attempts": 1,
+      "startedAt": "2026-10-15T09:25:23.158Z",
+      "endedAt": "2026-10-15T09:48:41.376Z",
+      "lastExitOk": true
+    },
+    "2-scope-review:scope-repair-35-1": {
+      "stage": "2-scope-review",
+      "role": "scope-repairer",
+      "label": "scope-repair-35-1",
+      "covers": [
+        "35"
+      ],
+      "attempt": 1,
+      "attempts": 1,
+      "startedAt": "2026-10-15T09:48:43.270Z",
+      "endedAt": "2026-10-15T10:08:36.767Z",
+      "lastExitOk": true
+    },
+    "2-scope-review:scope-review-35-1": {
+      "stage": "2-scope-review",
+      "role": "scope-reviewer",
+      "label": "scope-review-35-1",
+      "covers": [
+        "35"
+      ],
+      "attempt": 1,
+      "attempts": 1,
+      "startedAt": "2026-10-15T10:08:38.004Z",
+      "endedAt": "2026-10-15T10:20:03.926Z",
+      "lastExitOk": true
+    }
+  },
+  "findings": [
+    {
+      "id": "lem-invariant-law-positive-set-and-almost-sure-hitting",
+      "resolution": "Proof2.2 now compares the explicitly all-future-A-avoiding/no-later-B event as a subset and uses≥ throughout. The needed lower bound follows; Statement unchanged. Duplicate terminal display in2.1 removed."
+    },
+    {
+      "id": "lem-geometric-drift-minorization-reduces-to-bounded-small-set",
+      "resolution": "Statement exposes the C0 boundedness and improved drift already proved in1.1, so its sole theorem consumer can actually supply the invariant-drift premise."
+    },
+    {
+      "id": "thm-geometric-ergodicity-under-drift-and-minorization",
+      "resolution": "Finite branch explicitly applies the improved bounded-C0 drift to getπV<∞ before integrating the coupling bound. Added richest approved extended finiteπ-a.e. branch via full-measure absorbing trace space."
+    },
+    {
+      "id": "def-small-set-minorization-and-drift",
+      "resolution": "Original finite-valued convention retained verbatim; separate extended finiteπ-a.e. certificate added. No old finite-drift consumer silently receives an extended function."
+    }
+  ],
+  "extended_branch_evidence": {
+    "absorbing": "Finite V(x) makes PV(x) finite by pointwise drift; existing finite-integral corollary under P(x,.) implies P(x,V=∞)=0.",
+    "nonempty_restriction": "π(N)=0 and positiveφ⇒positiveπ implyφ(N)=0; explicit assumedφ(C)>0 thenφ(C∩E)>0, so choose x∈C∩E legitimately.",
+    "minorizer": "Absorption givesP^m(x,N)=0 at that x; originalminorization forcesν(N)=0, henceν|E is a probability.",
+    "aperiodicity": "Actual definition excludes any positiveπ cyclic part, with no full-space coverage requirement. A trace-space cyclic part consists of original measurable E-subsets and the same P transitions, so original aperiodicity excludes it.",
+    "tv": "All laws started fromE andπ are supported onE; event intersections show original-spaceTV=trace-spaceTV.",
+    "limits": "No finite all-start bound is inferred on π-null infinite-V starts. Globally finite branch still covers every state."
+  },
+  "source_changes": [
+    {
+      "path": "items/lem-invariant-law-positive-set-and-almost-sure-hitting.md",
+      "before_interface": "Let $P$ have invariant probability $\\pi$. If a measurable set $A$ has positive probability of being hit from every starting state, then $\\Pr_x(\\tau_A<\\infty)=1$ for $\\pi$-almost every $x$. In addition, if $P$ is $\\phi$-irreducible and $\\phi(A)>0$, then $\\pi(A)>0$ and the positive-hitting hypothesis holds.",
+      "current_interface": "Let $P$ have invariant probability $\\pi$. If a measurable set $A$ has positive probability of being hit from every starting state, then $\\Pr_x(\\tau_A<\\infty)=1$ for $\\pi$-almost every $x$. In addition, if $P$ is $\\phi$-irreducible and $\\phi(A)>0$, then $\\pi(A)>0$ and the positive-hitting hypothesis holds.",
+      "current_full_source": "---\nid: lem-invariant-law-positive-set-and-almost-sure-hitting\nkind: lemma\ntitle: \"Invariant mass and almost-sure hitting of accessible sets\"\nstatus: draft\norigin: pipeline\npipeline_run: bayesian-computational-statistics-62\ndependency_level: 1\ndeps:\n  - cor-canonical-markov-chain-on-path-space\n  - def-axiom-of-choice\n  - def-invariant-and-stationary-distribution-for-a-markov-kernel\n  - def-phi-irreducible-chain\n  - thm-measurability-of-integration-against-a-kernel\n  - thm-discrete-strong-markov-property\n  - thm-monotone-convergence-for-the-integral\n  - thm-tonelli-theorem-for-sigma-finite-product-spaces\nproof_strategy: direct\nprovenance:\n  statement: literature-derived\n  proof: ai-altered\nsources:\n  references:\n    - title: \"Gareth O. Roberts and Jeffrey S. Rosenthal, General State Space Markov Chains and MCMC Algorithms\"\n      url: \"https://www.probability.ca/jeff/ftpdir/probsurv.pdf\"\n    - title: \"Randal Douc, Eric Moulines, Pierre Priouret, and Philippe Soulier, Markov Chains\"\n      url: \"https://wiki.randaldouc.xyz/lib/exe/fetch.php?media=world:mainmc-tome1.pdf\"\naxiom_use: \"AC supplies the canonical path law and countable measurable selections in steps 1.2–2.2.\"\n---\n## Statement\n\nLet $P$ have invariant probability $\\pi$. If a measurable set $A$ has positive probability of being hit from every starting state, then $\\Pr_x(\\tau_A<\\infty)=1$ for $\\pi$-almost every $x$. In addition, if $P$ is $\\phi$-irreducible and $\\phi(A)>0$, then $\\pi(A)>0$ and the positive-hitting hypothesis holds.\n\n## Facts & Assumptions\n\n**Given:** A probability kernel with invariant probability; for the first conclusion, the positive-hitting premise; for the additional conclusion, a $\\phi$-irreducibility measure and $\\phi(A)>0$.\n\n[F1] [[def-phi-irreducible-chain]]: every $\\phi$-positive set is reached with positive probability from every state at some finite positive time.\n\n[F2] [[def-invariant-and-stationary-distribution-for-a-markov-kernel]]: $\\pi P^n=\\pi$ for every $n\\ge0$.\n\n[F3] [[cor-canonical-markov-chain-on-path-space]]: under its stated AC convention, iterated kernels define the canonical path law.\n\n[F4] [[thm-discrete-strong-markov-property]]: the canonical chain has the strong Markov property at discrete stopping times.\n\n[F5] [[thm-monotone-convergence-for-the-integral]]: increasing countable sums and limits pass through integration.\n\n[F6] [[thm-tonelli-theorem-for-sigma-finite-product-spaces]]: nonnegative sums and kernel integrals may be interchanged.\n\n[F7] [[thm-measurability-of-integration-against-a-kernel]]: integrating a bounded measurable function against a probability kernel gives a measurable function of the starting state.\n\n[A1] [[def-axiom-of-choice]]: the path-law and measurable section choices use AC as stated in the suppliers.\n\n## Proof\n\n**Given:** The invariant law and applicable hypotheses, with [F1]–[F7] and [A1].\n\n1.1 For the additional conclusion, let $f(x)=\\sum_{n\\ge1}P^n(x,A)$. By [F1], $f(x)>0$ everywhere. Tonelli and stationarity give $\\int f\\,d\\pi=\\sum_{n\\ge1}\\pi(A)$. If $\\pi(A)=0$, this integral is zero, contradicting positivity of $f$ under a probability measure. Hence $\\pi(A)>0$; [F1] also supplies the positive-hitting premise for the first assertion. [F1, F2, F5, F6, given]\n\n1.2 It remains to prove the first assertion under its positive-hitting premise. Set $q_0=1_A$ and recursively $q_{n+1}=1_A+1_{A^c}Pq_n$, where $Pq_n(x)=\\int q_n(y)P(x,dy)$. Then $q_n(x)=\\Pr_x(\\tau_A\\le n)$; induction and [F7] show each $q_n$ is measurable, and $q_n\\uparrow q:=\\Pr_x(\\tau_A<\\infty)$, so $q$ is measurable. If the bad set $\\{q<1\\}$ has positive mass, a countable level-set union gives some $\\delta_1>0$ for which $B_1=\\{x:q(x)\\le1-\\delta_1\\}$ has positive $\\pi$-measure. For each $x\\in B_1$, $q(x)>0$ and $x\\notin A$, so some $\\ell_0\\ge1$ has $P^{\\ell_0}(x,A)>0$. Countable unions over times and rational thresholds then give a common $\\ell_0\\ge1$, $\\delta_2>0$, and $B_2\\subseteq B_1$ with $\\pi(B_2)>0$ and $P^{\\ell_0}(x,A)\\ge\\delta_2$ on $B_2$. [F2, F3, F5, F7, A1, given]\n\n2.1 Let $\\eta=\\#\\{k\\ge1:X_{k\\ell_0}\\in B_2\\}$. At each such visit, the conditional probability of avoiding $A$ at the next $\\ell_0$-step time is at most $1-\\delta_2$. Induction using [F4] gives $\\Pr_x(\\tau_A=\\infty,\\eta\\ge r)\\le(1-\\delta_2)^r$ for each finite $r$, and hence $\\Pr_x(\\tau_A=\\infty,\\eta=\\infty)=0$. Thus for $x\\in B_2$, $\\Pr_x(\\tau_A=\\infty,\\eta<\\infty)\\ge\\delta_1$. To select a measurable positive-mass set with a common finite last-visit bound, for each $\\ell\\ge1$ forbid $A$ at every time and also forbid $B_2$ at times $k\\ell_0$ with $k\\ge\\ell$. For a finite horizon $N$, let $F_n^{(\\ell)}=A\\cup B_2$ if $n=k\\ell_0$ for some $k\\ge\\ell$, and $F_n^{(\\ell)}=A$ otherwise. Set $g_{N,N}=1_{(F_N^{(\\ell)})^c}$ and recursively set $g_{N,n}=1_{(F_n^{(\\ell)})^c}Pg_{N,n+1}$ for $n=N-1,\\ldots,0$. Then $g_{\\ell,N}=g_{N,0}$ is the finite-horizon event probability and is measurable by [F7]. As $N\\to\\infty$, these events decrease to $\\{\\tau_A=\\infty,\\sup\\{k\\ge1:X_{k\\ell_0}\\in B_2\\}<\\ell\\}$, so continuity from above makes their limit $g_\\ell(x)$ measurable. The events increase with $\\ell$ and their union is $\\{\\tau_A=\\infty,\\eta<\\infty\\}$, so $g_\\ell(x)\\uparrow$ a value at least $\\delta_1$ on $B_2$. A countable rational threshold selection therefore gives $\\ell\\ge1$, $\\delta>0$, and $B\\subseteq B_2$ with $\\pi(B)>0$ and $\\Pr_x\\!\\left(\\tau_A=\\infty,\\ \\sup\\{k\\ge1:X_{k\\ell_0}\\in B_2\\}<\\ell\\right)\\ge\\delta\\quad(x\\in B).$ [F2, F4, F5, F7, step 1.2]\n\n2.2 Put $L=\\ell\\ell_0$ and $S=\\sup\\{k\\ge1:X_{kL}\\in B\\}$, with $S=-\\infty$ if no such visit occurs. For $1\\le r\\le j$, consider the event that $X_{rL}\\in B$, there is no later $B$-visit at a positive multiple of $L$, and no hit of $A$ at or after $rL$. It is a subset of $\\{S=r,\\ X_{jL}\\notin A\\}$. Stationarity and the Markov property at time $rL$ therefore give $\\Pr_\\pi(S=r,\\ X_{jL}\\notin A)\\ge\\int_B\\pi(dy)\\Pr_y(\\tau_A=\\infty,\\ S=-\\infty)\\ge\\pi(B)\\delta.$ Indeed the event in step 2.1 rules out every $B_2$-visit at skeleton indices $k\\ge\\ell$, hence every later $B$-visit at a positive multiple of $L=\\ell\\ell_0$, as well as every future hit of $A$. The events $S=r$ are disjoint, so stationarity yields $\\pi(A^c)\\ge j\\pi(B)\\delta$. Taking $j>1/(\\pi(B)\\delta)$ contradicts $\\pi(A^c)\\le1$. Therefore the bad set is $\\pi$-null. [F2, F3, F4, step 2.1, algebra] ∎\n",
+      "before_archive": "research/bayesian-computational-statistics-62-owner-step2-b35-before/items/lem-invariant-law-positive-set-and-almost-sure-hitting.md",
+      "after_archive": "research/bayesian-computational-statistics-62-owner-step2-b35-after/items/lem-invariant-law-positive-set-and-almost-sure-hitting.md"
+    },
+    {
+      "path": "items/lem-geometric-drift-minorization-reduces-to-bounded-small-set.md",
+      "before_interface": "Let $P$ be countably generated, $\\phi$-irreducible and aperiodic with invariant probability $\\pi$. Suppose $C$ is $(m,\\epsilon,\\nu)$-small with $\\phi(C)>0$ and $PV\\le\\lambda V+b1_C$ for finite $V\\ge1$, $0<\\lambda<1$. Then there are a bounded-$V$ small set $D$, a time $L$, a minorizing probability $\\nu'$, and $a<1$ such that for $Q=P^L$ and $h(x,y)=(V(x)+V(y))/2$,\n$$Q\\otimes Q\\,h\\le ah\\quad\\text{off }D^2.$$\nIf $Q(x,\\cdot)\\ge\\epsilon_D\\nu'$ on $D$, the residual laws $R_x=(Q(x,\\cdot)-\\epsilon_D\\nu')/(1-\\epsilon_D)$ have $\\sup_{x,y\\in D}R_x\\otimes R_y(h)<\\infty$ when $\\epsilon_D<1$; for $\\epsilon_D=1$ no residual branch is needed.",
+      "current_interface": "Let $P$ be countably generated, $\\phi$-irreducible and aperiodic with invariant probability $\\pi$. Suppose $C$ is $(m,\\epsilon,\\nu)$-small with $\\phi(C)>0$ and $PV\\le\\lambda V+b1_C$ for finite $V\\ge1$, $0<\\lambda<1$. Then there are $\\lambda'\\in(\\lambda,1)$ and a $\\phi$-positive small set $C_0\\subseteq C$ with $\\sup_{C_0}V<\\infty$ and $PV\\le\\lambda'V+b1_{C_0}$ pointwise. Moreover there are a bounded-$V$ small set $D$, a time $L$, a minorizing probability $\\nu'$, and $a<1$ such that for $Q=P^L$ and $h(x,y)=(V(x)+V(y))/2$,\n$$Q\\otimes Q\\,h\\le ah\\quad\\text{off }D^2.$$\nIf $Q(x,\\cdot)\\ge\\epsilon_D\\nu'$ on $D$, the residual laws $R_x=(Q(x,\\cdot)-\\epsilon_D\\nu')/(1-\\epsilon_D)$ have $\\sup_{x,y\\in D}R_x\\otimes R_y(h)<\\infty$ when $\\epsilon_D<1$; for $\\epsilon_D=1$ no residual branch is needed.",
+      "current_full_source": "---\nid: lem-geometric-drift-minorization-reduces-to-bounded-small-set\nkind: lemma\ntitle: \"Geometric drift yields a bounded small set and bivariate drift\"\nstatus: draft\norigin: pipeline\npipeline_run: bayesian-computational-statistics-62\ndependency_level: 4\ndeps:\n  - def-axiom-of-choice\n  - def-general-state-aperiodic-markov-chain\n  - def-invariant-and-stationary-distribution-for-a-markov-kernel\n  - def-measure-kernel-and-probability-kernel\n  - def-petite-set-for-markov-kernel\n  - def-phi-irreducible-chain\n  - def-small-set-minorization-and-drift\n  - lem-aperiodic-minorization-times-are-cofinite\n  - lem-aperiodic-petite-set-with-accessible-small-set-is-small\n  - lem-bivariate-drift-minorization-coupling-rate\n  - lem-drift-sublevel-union-is-petite\n  - lem-invariant-law-positive-set-and-almost-sure-hitting\nproof_strategy: direct\nprovenance:\n  statement: literature-derived\n  proof: ai-altered\nsources:\n  references:\n    - title: \"Gareth O. Roberts and Jeffrey S. Rosenthal, General State Space Markov Chains and MCMC Algorithms\"\n      url: \"https://www.probability.ca/jeff/ftpdir/probsurv.pdf\"\n    - title: \"Randal Douc, Eric Moulines, Pierre Priouret, and Philippe Soulier, Markov Chains\"\n      url: \"https://wiki.randaldouc.xyz/lib/exe/fetch.php?media=world:mainmc-tome1.pdf\"\naxiom_use: \"AC is carried through the stopped-chain petite argument and split-kernel minorization.\"\n---\n## Statement\n\nLet $P$ be countably generated, $\\phi$-irreducible and aperiodic with invariant probability $\\pi$. Suppose $C$ is $(m,\\epsilon,\\nu)$-small with $\\phi(C)>0$ and $PV\\le\\lambda V+b1_C$ for finite $V\\ge1$, $0<\\lambda<1$. Then there are $\\lambda'\\in(\\lambda,1)$ and a $\\phi$-positive small set $C_0\\subseteq C$ with $\\sup_{C_0}V<\\infty$ and $PV\\le\\lambda'V+b1_{C_0}$ pointwise. Moreover there are a bounded-$V$ small set $D$, a time $L$, a minorizing probability $\\nu'$, and $a<1$ such that for $Q=P^L$ and $h(x,y)=(V(x)+V(y))/2$,\n$$Q\\otimes Q\\,h\\le ah\\quad\\text{off }D^2.$$\nIf $Q(x,\\cdot)\\ge\\epsilon_D\\nu'$ on $D$, the residual laws $R_x=(Q(x,\\cdot)-\\epsilon_D\\nu')/(1-\\epsilon_D)$ have $\\sup_{x,y\\in D}R_x\\otimes R_y(h)<\\infty$ when $\\epsilon_D<1$; for $\\epsilon_D=1$ no residual branch is needed.\n\n## Facts & Assumptions\n\n**Given:** The irreducibility, aperiodicity, invariant probability, small-set and drift assumptions.\n\n[F1] [[def-phi-irreducible-chain]]: every positive-$\\phi$ set is reachable from every state.\n\n[F2] [[def-small-set-minorization-and-drift]]: the fixed-time minorization and pointwise drift inequality hold.\n\n[F3] [[lem-invariant-law-positive-set-and-almost-sure-hitting]]: $\\pi$ charges each positive-$\\phi$ set.\n\n[F4] [[lem-drift-sublevel-union-is-petite]]: a drift sublevel enlargement of a small set is petite with the same minorizer.\n\n[F5] [[lem-aperiodic-petite-set-with-accessible-small-set-is-small]]: the petite enlargement is small with that same minorizer.\n\n[F6] [[lem-aperiodic-minorization-times-are-cofinite]]: once $\\nu'\\ll\\pi$ and every state reaches a minorization into $\\nu'$, $\\nu'P^t\\ge c_t\\nu'$ for all sufficiently large $t$.\n\n[F7] [[def-general-state-aperiodic-markov-chain]]: aperiodicity excludes cyclic decompositions.\n\n[F8] [[def-invariant-and-stationary-distribution-for-a-markov-kernel]]: $\\pi$ is invariant.\n\n[F9] [[def-measure-kernel-and-probability-kernel]]: iterated kernel expectations obey the drift bounds.\n\n[A1] [[def-axiom-of-choice]]: the petite enlargement and small-set coupling suppliers use the declared path/splitting construction.\n\n## Proof\n\n**Given:** The hypotheses and facts [F1]–[F9], with [A1].\n\n1.1 Choose $\\lambda'\\in(\\lambda,1)$ and then $d_0>b/(\\lambda'-\\lambda)$ large enough that $C_0=C\\cap\\{V\\le d_0\\}$ has positive $\\phi$-measure; such a choice exists since $V$ is finite and $C$ is positive. The set $C_0$ remains $(m,\\epsilon,\\nu)$-small and is bounded in $V$. For $x\\in C\\setminus C_0$, $b\\le(\\lambda'-\\lambda)V(x)$, while outside $C$ the original drift has no $b$ term. Hence $PV\\le\\lambda'V+b1_{C_0}$. [F1, F2, A1, given]\n\n1.2 By [F3], $\\pi(C_0)>0$. Integrating the minorization over $C_0$ gives $\\nu\\ll\\pi$. Iteration of the original drift yields $P^mV(x)\\le\\lambda^mV(x)+b/(1-\\lambda)$; for $x\\in C_0$ the right side is finite and uniformly bounded. Since $P^m(x,\\cdot)\\ge\\epsilon\\nu$, it follows that $\\nu V\\le\\epsilon^{-1}P^mV(x)<\\infty$. Irreducibility and $\\phi(C_0)>0$ give some $k\\ge0$ with $\\nu P^k(C_0)>0$. Put $\\nu'=\\nu P^k$. For any $A$ with $\\pi(A)=0$, invariance gives $\\int P^k(x,A)\\pi(dx)=\\pi(A)=0$, so $P^k(x,A)=0$ for $\\pi$-almost every $x$; since $\\nu\\ll\\pi$, this implies $\\nu'(A)=\\int P^k(x,A)\\nu(dx)=0$. Thus $\\nu'\\ll\\pi$. Also $\\nu'V<\\infty$, and $C_0$ is small at time $m+k$ with minorizer $\\nu'$. [F1, F2, F3, F8, F9, step 1.1]\n\n2.1 Choose any finite $d_1$ large enough that $2b/((1-\\lambda')(d_1+1))<1$. Put $D=C_0\\cup\\{V\\le d_1\\}$, which is bounded in $V$. The drift-petite lemma [F4] makes $D$ petite with minorizer $\\nu'$, and $\\nu'(C_0)>0$ by construction. The petite-to-small lemma [F5] makes $D$ small with the same $\\nu'$ at some time $L_0$. For every sufficiently large $t$, [F6] gives $\\nu'P^t\\ge c_t\\nu'$; hence $P^{L_0+t}(x,\\cdot)\\ge\\epsilon_Dc_t\\nu'$ for $x\\in D$. [F4, F5, F6, A1, step 1.2]\n\n2.2 Iterating the improved drift gives $P^LV\\le\\lambda'^LV+B_0$ with $B_0=b/(1-\\lambda')$. Choose $t$ in step 2.1 large enough that $L=L_0+t$ also satisfies $a:=\\lambda'^L+\\frac{2B_0}{d_1+1}<1.$ If $(x,y)\\notin D^2$, at least one coordinate has $V>d_1$, so $h\\ge(d_1+1)/2$. Therefore $Q\\otimes Q\\,h\\le\\lambda'^Lh+B_0\\le ah.$ The set $D$ is bounded in $V$, and $QV$ is uniformly bounded on $D$ by the drift bound. The minorizer $\\nu'$ has finite $V$-moment by step 1.2, so the residual laws have uniformly finite $V$-moment and their product expectation of $h$ is bounded. [F2, F7, F9, step 1.2, step 2.1, algebra] ∎\n",
+      "before_archive": "research/bayesian-computational-statistics-62-owner-step2-b35-before/items/lem-geometric-drift-minorization-reduces-to-bounded-small-set.md",
+      "after_archive": "research/bayesian-computational-statistics-62-owner-step2-b35-after/items/lem-geometric-drift-minorization-reduces-to-bounded-small-set.md"
+    },
+    {
+      "path": "items/thm-geometric-ergodicity-under-drift-and-minorization.md",
+      "before_interface": "Let $P$ be countably generated, $\\phi$-irreducible and aperiodic with invariant probability $\\pi$. Suppose a $\\phi$-positive small set $C$ and finite-valued $V\\ge1$ satisfy $PV\\le\\lambda V+b1_C$ for $0<\\lambda<1$. Then there are $M<\\infty$ and $0<r<1$ such that\n$$\\|P^n(x,\\cdot)-\\pi\\|_{\\rm TV}\\le M V(x)r^n\\quad(x\\in\\mathsf X,\\ n\\ge0).$$\nThis is geometric ergodicity with a $V$-weighted bound.",
+      "current_interface": "Let $P$ be countably generated, $\\phi$-irreducible and aperiodic with invariant probability $\\pi$. Suppose a $\\phi$-positive small set $C$ and finite-valued $V\\ge1$ satisfy $PV\\le\\lambda V+b1_C$ for $0<\\lambda<1$. Then there are $M<\\infty$ and $0<r<1$ such that\n$$\\|P^n(x,\\cdot)-\\pi\\|_{\\rm TV}\\le M V(x)r^n\\quad(x\\in\\mathsf X,\\ n\\ge0).$$\nThis is geometric ergodicity with a $V$-weighted bound.\n\nUnder the same kernel, $\\phi$-positive small-set and drift-constant hypotheses, the result also holds if $V:\\mathsf X\\to[1,+\\infty]$ is measurable and finite $\\pi$-almost everywhere, with the drift inequality holding pointwise in the extended sense. Then $E=\\{V<\\infty\\}$ is measurable, absorbing and of full $\\pi$-measure, and the displayed bound holds for every $x\\in E$. Thus extended certificates give the common geometric rate for $\\pi$-almost every start, while globally finite certificates give it for every start.",
+      "current_full_source": "---\nid: thm-geometric-ergodicity-under-drift-and-minorization\nkind: theorem\ntitle: \"Geometric ergodicity under drift and small-set minorization\"\nstatus: draft\norigin: pipeline\npipeline_run: bayesian-computational-statistics-62\ndependency_level: 5\ndeps:\n  - def-axiom-of-choice\n  - def-general-state-aperiodic-markov-chain\n  - def-invariant-and-stationary-distribution-for-a-markov-kernel\n  - def-phi-irreducible-chain\n  - def-small-set-minorization-and-drift\n  - def-total-variation-distance-for-probability-laws\n  - def-measure-kernel-and-probability-kernel\n  - cor-finite-nonnegative-integral-implies-finite-almost-everywhere\n  - lem-invariant-law-positive-set-and-almost-sure-hitting\n  - lem-total-variation-coupling-and-kernel-contraction\n  - lem-bivariate-drift-minorization-coupling-rate\n  - lem-geometric-drift-minorization-reduces-to-bounded-small-set\n  - lem-invariant-law-integrates-bounded-set-drift\nproof_strategy: direct\nprovenance:\n  statement: literature-derived\n  proof: ai-altered\nsources:\n  references:\n    - title: \"Gareth O. Roberts and Jeffrey S. Rosenthal, General State Space Markov Chains and MCMC Algorithms\"\n      url: \"https://www.probability.ca/jeff/ftpdir/probsurv.pdf\"\n    - title: \"Randal Douc, Eric Moulines, Pierre Priouret, and Philippe Soulier, Markov Chains\"\n      url: \"https://wiki.randaldouc.xyz/lib/exe/fetch.php?media=world:mainmc-tome1.pdf\"\naxiom_use: \"AC is carried through the split-chain coupling used in steps 1.1–1.2.\"\n---\n## Statement\n\nLet $P$ be countably generated, $\\phi$-irreducible and aperiodic with invariant probability $\\pi$. Suppose a $\\phi$-positive small set $C$ and finite-valued $V\\ge1$ satisfy $PV\\le\\lambda V+b1_C$ for $0<\\lambda<1$. Then there are $M<\\infty$ and $0<r<1$ such that\n$$\\|P^n(x,\\cdot)-\\pi\\|_{\\rm TV}\\le M V(x)r^n\\quad(x\\in\\mathsf X,\\ n\\ge0).$$\nThis is geometric ergodicity with a $V$-weighted bound.\n\nUnder the same kernel, $\\phi$-positive small-set and drift-constant hypotheses, the result also holds if $V:\\mathsf X\\to[1,+\\infty]$ is measurable and finite $\\pi$-almost everywhere, with the drift inequality holding pointwise in the extended sense. Then $E=\\{V<\\infty\\}$ is measurable, absorbing and of full $\\pi$-measure, and the displayed bound holds for every $x\\in E$. Thus extended certificates give the common geometric rate for $\\pi$-almost every start, while globally finite certificates give it for every start.\n\n## Facts & Assumptions\n\n**Given:** The kernel, irreducibility, aperiodicity, invariant probability, small set and drift inequality in the Statement.\n\n[F1] [[def-phi-irreducible-chain]]: positive-$\\phi$ sets are reachable from every state.\n\n[F2] [[def-general-state-aperiodic-markov-chain]]: no cyclic decomposition exists.\n\n[F3] [[def-small-set-minorization-and-drift]]: the common minorization and drift inequalities hold.\n\n[F4] [[def-invariant-and-stationary-distribution-for-a-markov-kernel]]: $\\pi$ is invariant.\n\n[F5] [[def-total-variation-distance-for-probability-laws]] gives the event-supremum definition of total variation. [[lem-total-variation-coupling-and-kernel-contraction]] bounds it by coupling disagreement and contracts it under a probability kernel.\n\n[F6] [[lem-geometric-drift-minorization-reduces-to-bounded-small-set]]: there is a bounded-$V$, $\\phi$-positive small subset $C_0$ with improved pointwise drift $PV\\le\\lambda'V+b1_{C_0}$ for some $\\lambda'<1$; a skeleton and bounded small set also satisfy the bivariate drift/minorization hypotheses.\n\n[F7] [[lem-bivariate-drift-minorization-coupling-rate]]: those hypotheses yield a geometric coupling bound.\n\n[F8] [[lem-invariant-law-integrates-bounded-set-drift]]: an invariant probability integrates a finite-valued drift function when its drift set is bounded in that function.\n\n[F9] [[cor-finite-nonnegative-integral-implies-finite-almost-everywhere]]: finite nonnegative integral implies the integrand is finite almost everywhere under the integrating measure. [[def-measure-kernel-and-probability-kernel]] gives pointwise probability sections and measurable evaluations for the restricted kernel construction.\n\n[F10] [[lem-invariant-law-positive-set-and-almost-sure-hitting]]: each positive-$\\phi$ set has positive invariant probability.\n\n[A1] [[def-axiom-of-choice]]: the path-space coupling in [F7] uses AC as stated by its supplier.\n\n## Proof\n\n**Given:** The hypotheses and facts [F1]–[F10].\n\n1.1 First assume $V$ is finite-valued. By [F6], choose the bounded-$V$ small subset $C_0$ and $\\lambda'\\in(\\lambda,1)$ with $PV\\le\\lambda'V+b1_{C_0}$. Its boundedness is exactly the hypothesis needed for [F8], which now gives $\\pi V<\\infty$. Apply the remaining conclusions of [F6] to obtain a skeleton $Q=P^L$, bounded small set $D$, function $h(x,y)=(V(x)+V(y))/2$, and constants satisfying the hypotheses of [F7]. Since $D$ is bounded in $V$, the residual split expectation is uniformly finite. [F1, F2, F3, F4, F6, F7, F8, A1]\n\n1.2 By [F7], for the initial pair $(x,Y_0)$ with $Y_0\\sim\\pi$, the coupling disagreement at skeleton time $k$ is at most $M_0h(x,Y_0)r_0^k$. The finite invariant moment from step 1.1 gives $\\mathbb E h(x,Y_0)=\\tfrac12(V(x)+\\pi V)\\le\\tfrac12(1+\\pi V)V(x).$ The coupling inequality [F5] yields a $V(x)$-weighted geometric bound along skeleton times. [F4, F5, F6, F7, F8, A1, step 1.1]\n\n2.1 Write $n=Lk+s$, $0\\le s<L$. The finite set of residual powers $P^s$ contracts total variation and the stationary law remains $\\pi$. Absorb the finite factor and $r_0^{-s/L}$ over $s=0,\\ldots,L-1$ into a single $M$, and put $r=r_0^{1/L}$. Then the asserted bound holds for every $n$. [F4, F5, step 1.2, algebra]\n\n3.1 Now allow the extended certificate and put $N=\\{V=+\\infty\\}$ and $E=N^c$. These sets are measurable and $\\pi(N)=0$. If $x\\in E$, the pointwise drift bound has finite right side, so $PV(x)<\\infty$. Apply [F9] to $V$ under the probability measure $P(x,\\cdot)$ to obtain $P(x,N)=0$. Thus $E$ is absorbing, including for every iterate. Also $\\phi(N)=0$: otherwise [F10] would give $\\pi(N)>0$. Hence $\\phi(C\\cap E)=\\phi(C)>0$, in particular $C\\cap E$ is nonempty, and $\\phi|_E$ remains a nonzero sigma-finite irreducibility measure. [F1, F3, F4, F9, F10, given, construct]\n\n3.2 Restrict the state space to $E$ with its trace sigma-algebra and set $P_E(x,A)=P(x,A)$ for trace-measurable $A\\subseteq E$. Absorption makes this a probability kernel, with invariant probability $\\pi|_E$; a countable generator of $\\mathcal X$ restricts to a countable generator on $E$. Original irreducibility supplies positive finite-time access to every positive-$\\phi|_E$ set from each $x\\in E$. For the original $(m,\\epsilon,\\nu)$-minorization on $C$, choose $x\\in C\\cap E$. Since $P^m(x,N)=0$, minorization gives $\\nu(N)=0$, so $C\\cap E$ is small for $P_E$ with probability $\\nu|_E$. Any positive-$\\pi|_E$ cyclic part for $P_E$ would consist of original measurable subsets of $E$ with the same pointwise transitions under $P$, contradicting the actual aperiodicity definition [F2], which excludes such a part without requiring it to cover the state space. Finally $V|_E$ is finite-valued and satisfies the original drift inequality with drift set $C\\cap E$. [F1, F2, F3, F4, F9, step 3.1, construct]\n\n3.3 Apply the finite-valued result proved in steps 1.1–2.1 to $(E,P_E,\\phi|_E,\\pi|_E,V|_E,C\\cap E)$. It gives constants $M<\\infty$ and $0<r<1$ and the weighted bound for every $x\\in E$. Both $P^n(x,\\cdot)$ and $\\pi$ are supported on $E$, so their total variation on the original space equals their total variation on the trace space: every event is replaced by its intersection with $E$. Thus precisely the displayed original-space bound holds on $E$, a full-$\\pi$ absorbing set. If $V$ is globally finite, $E=\\mathsf X$ and the first branch is recovered. [F5, step 2.1, step 3.1, step 3.2] ∎\n",
+      "before_archive": "research/bayesian-computational-statistics-62-owner-step2-b35-before/items/thm-geometric-ergodicity-under-drift-and-minorization.md",
+      "after_archive": "research/bayesian-computational-statistics-62-owner-step2-b35-after/items/thm-geometric-ergodicity-under-drift-and-minorization.md"
+    },
+    {
+      "path": "items/def-small-set-minorization-and-drift.md",
+      "before_interface": "For a probability kernel $P$ on $(\\mathsf X,\\mathcal X)$ ([[def-measure-kernel-and-probability-kernel]]), a measurable set $C$ is **$(m,\\epsilon,\\nu)$-small** if $m\\ge1$ is an integer, $0<\\epsilon\\le1$, $\\nu$ is a probability measure ([[def-probability-measure]]), and\n$$P^m(x,A)\\ge\\epsilon\\nu(A)\\quad(x\\in C,\\ A\\in\\mathcal X).$$\nThe inequality is pointwise in $x$ and holds for every measurable $A$.\n\nA **geometric drift inequality outside $C$** consists of a finite-valued measurable $V:\\mathsf X\\to[1,\\infty)$, constants $0<\\lambda<1$ and $0\\le b<\\infty$, and\n$$PV(x):=\\int V(y)P(x,dy)\\le\\lambda V(x)+b\\,1_C(x)\\quad(x\\in\\mathsf X).$$\nThe terms small set and drift are separate hypotheses; neither definition asserts the existence of the other.",
+      "current_interface": "For a probability kernel $P$ on $(\\mathsf X,\\mathcal X)$ ([[def-measure-kernel-and-probability-kernel]]), a measurable set $C$ is **$(m,\\epsilon,\\nu)$-small** if $m\\ge1$ is an integer, $0<\\epsilon\\le1$, $\\nu$ is a probability measure ([[def-probability-measure]]), and\n$$P^m(x,A)\\ge\\epsilon\\nu(A)\\quad(x\\in C,\\ A\\in\\mathcal X).$$\nThe inequality is pointwise in $x$ and holds for every measurable $A$.\n\nA **geometric drift inequality outside $C$** consists of a finite-valued measurable $V:\\mathsf X\\to[1,\\infty)$, constants $0<\\lambda<1$ and $0\\le b<\\infty$, and\n$$PV(x):=\\int V(y)P(x,dy)\\le\\lambda V(x)+b\\,1_C(x)\\quad(x\\in\\mathsf X).$$\nThe terms small set and drift are separate hypotheses; neither definition asserts the existence of the other.\n\nWhen an invariant probability $\\pi$ is specified ([[def-invariant-and-stationary-distribution-for-a-markov-kernel]]), an **extended geometric drift certificate finite $\\pi$-almost everywhere** allows measurable $V:\\mathsf X\\to[1,+\\infty]$ with $\\pi(V<\\infty)=1$ and the same pointwise inequality, interpreted in the nonnegative extended reals. This is a separate convention from the finite-valued drift function above. The geometric theorem treats this certificate on $E=\\{V<\\infty\\}$; the original finite-valued convention gives the corresponding bound on the whole state space.",
+      "current_full_source": "---\nid: def-small-set-minorization-and-drift\nkind: definition\ntitle: \"Small-set minorization and geometric drift\"\nstatus: draft\norigin: pipeline\npipeline_run: bayesian-computational-statistics-62\ndependency_level: 0\ndeps:\n  - def-measure-kernel-and-probability-kernel\n  - def-iterated-transition-kernels\n  - def-invariant-and-stationary-distribution-for-a-markov-kernel\n  - def-probability-measure\nprovenance:\n  statement: literature-derived\n  proof: not-applicable\nsources:\n  references:\n    - title: \"Gareth O. Roberts and Jeffrey S. Rosenthal, General State Space Markov Chains and MCMC Algorithms\"\n      url: \"https://www.probability.ca/jeff/ftpdir/probsurv.pdf\"\naxiom_use: \"AC is used only where stated in Facts & Assumptions; otherwise the proof is choice-free.\"\n---\n## Definition\n\nFor a probability kernel $P$ on $(\\mathsf X,\\mathcal X)$ ([[def-measure-kernel-and-probability-kernel]]), a measurable set $C$ is **$(m,\\epsilon,\\nu)$-small** if $m\\ge1$ is an integer, $0<\\epsilon\\le1$, $\\nu$ is a probability measure ([[def-probability-measure]]), and\n$$P^m(x,A)\\ge\\epsilon\\nu(A)\\quad(x\\in C,\\ A\\in\\mathcal X).$$\nThe inequality is pointwise in $x$ and holds for every measurable $A$.\n\nA **geometric drift inequality outside $C$** consists of a finite-valued measurable $V:\\mathsf X\\to[1,\\infty)$, constants $0<\\lambda<1$ and $0\\le b<\\infty$, and\n$$PV(x):=\\int V(y)P(x,dy)\\le\\lambda V(x)+b\\,1_C(x)\\quad(x\\in\\mathsf X).$$\nThe terms small set and drift are separate hypotheses; neither definition asserts the existence of the other.\n\nWhen an invariant probability $\\pi$ is specified ([[def-invariant-and-stationary-distribution-for-a-markov-kernel]]), an **extended geometric drift certificate finite $\\pi$-almost everywhere** allows measurable $V:\\mathsf X\\to[1,+\\infty]$ with $\\pi(V<\\infty)=1$ and the same pointwise inequality, interpreted in the nonnegative extended reals. This is a separate convention from the finite-valued drift function above. The geometric theorem treats this certificate on $E=\\{V<\\infty\\}$; the original finite-valued convention gives the corresponding bound on the whole state space.\n",
+      "before_archive": "research/bayesian-computational-statistics-62-owner-step2-b35-before/items/def-small-set-minorization-and-drift.md",
+      "after_archive": "research/bayesian-computational-statistics-62-owner-step2-b35-after/items/def-small-set-minorization-and-drift.md"
+    }
+  ],
+  "consumer_graph": {
+    "roots": [
+      "def-small-set-minorization-and-drift",
+      "lem-geometric-drift-minorization-reduces-to-bounded-small-set",
+      "thm-geometric-ergodicity-under-drift-and-minorization",
+      "lem-invariant-law-positive-set-and-almost-sure-hitting"
+    ],
+    "direct": {
+      "def-small-set-minorization-and-drift": [
+        "thm-uniform-ergodicity-from-whole-space-minorization",
+        "lem-small-set-coupling-converges-from-almost-every-start",
+        "lem-drift-sublevel-union-is-petite",
+        "lem-invariant-law-integrates-bounded-set-drift",
+        "lem-geometric-split-renewal-gives-integrable-hitting-time",
+        "lem-aperiodic-petite-set-with-accessible-small-set-is-small",
+        "lem-adaptive-mcmc-uniform-drift-minorization-bound",
+        "lem-phi-irreducible-chain-has-small-set",
+        "cor-adaptive-mcmc-containment-from-uniform-drift-minorization",
+        "thm-geometric-ergodicity-under-drift-and-minorization",
+        "ex-drift-minorization-geometric-ergodicity-on-a-birth-death-chain",
+        "lem-bivariate-drift-minorization-coupling-rate",
+        "lem-geometric-drift-minorization-reduces-to-bounded-small-set"
+      ],
+      "lem-geometric-drift-minorization-reduces-to-bounded-small-set": [
+        "thm-geometric-ergodicity-under-drift-and-minorization"
+      ],
+      "thm-geometric-ergodicity-under-drift-and-minorization": [
+        "ex-drift-minorization-geometric-ergodicity-on-a-birth-death-chain"
+      ],
+      "lem-invariant-law-positive-set-and-almost-sure-hitting": [
+        "lem-small-set-coupling-converges-from-almost-every-start",
+        "lem-aperiodic-petite-set-with-accessible-small-set-is-small",
+        "thm-general-state-markov-chain-convergence-under-recurrence-conditions",
+        "lem-geometric-drift-minorization-reduces-to-bounded-small-set"
+      ]
+    },
+    "items": [
+      "cor-adaptive-mcmc-containment-from-uniform-drift-minorization",
+      "def-small-set-minorization-and-drift",
+      "ex-drift-minorization-geometric-ergodicity-on-a-birth-death-chain",
+      "ex-sticky-general-state-chain-is-not-geometrically-ergodic",
+      "ex-uniformly-ergodic-chains-can-mix-arbitrarily-slowly",
+      "lem-adaptive-mcmc-uniform-drift-minorization-bound",
+      "lem-aperiodic-petite-set-with-accessible-small-set-is-small",
+      "lem-bivariate-drift-minorization-coupling-rate",
+      "lem-drift-sublevel-union-is-petite",
+      "lem-geometric-drift-minorization-reduces-to-bounded-small-set",
+      "lem-geometric-markov-chain-has-adjacent-iid-split-tours",
+      "lem-geometric-split-renewal-gives-integrable-hitting-time",
+      "lem-harris-geometric-ergodicity-has-integrable-rate-envelope",
+      "lem-invariant-law-integrates-bounded-set-drift",
+      "lem-invariant-law-positive-set-and-almost-sure-hitting",
+      "lem-phi-irreducible-chain-has-small-set",
+      "lem-small-set-coupling-converges-from-almost-every-start",
+      "lem-zero-variance-geometric-markov-sums-have-strong-rate",
+      "thm-general-state-markov-chain-convergence-under-recurrence-conditions",
+      "thm-geometric-ergodicity-under-drift-and-minorization",
+      "thm-geometrically-ergodic-chain-strong-invariance-principle",
+      "thm-mcmc-clt-sufficient-regimes",
+      "thm-overlapping-batch-means-strong-consistency",
+      "thm-uniform-ergodicity-from-whole-space-minorization"
+    ],
+    "edges": [
+      [
+        "def-small-set-minorization-and-drift",
+        "thm-uniform-ergodicity-from-whole-space-minorization"
+      ],
+      [
+        "def-small-set-minorization-and-drift",
+        "lem-small-set-coupling-converges-from-almost-every-start"
+      ],
+      [
+        "def-small-set-minorization-and-drift",
+        "lem-drift-sublevel-union-is-petite"
+      ],
+      [
+        "def-small-set-minorization-and-drift",
+        "lem-invariant-law-integrates-bounded-set-drift"
+      ],
+      [
+        "def-small-set-minorization-and-drift",
+        "lem-geometric-split-renewal-gives-integrable-hitting-time"
+      ],
+      [
+        "def-small-set-minorization-and-drift",
+        "lem-aperiodic-petite-set-with-accessible-small-set-is-small"
+      ],
+      [
+        "def-small-set-minorization-and-drift",
+        "lem-adaptive-mcmc-uniform-drift-minorization-bound"
+      ],
+      [
+        "def-small-set-minorization-and-drift",
+        "lem-phi-irreducible-chain-has-small-set"
+      ],
+      [
+        "def-small-set-minorization-and-drift",
+        "cor-adaptive-mcmc-containment-from-uniform-drift-minorization"
+      ],
+      [
+        "def-small-set-minorization-and-drift",
+        "thm-geometric-ergodicity-under-drift-and-minorization"
+      ],
+      [
+        "def-small-set-minorization-and-drift",
+        "ex-drift-minorization-geometric-ergodicity-on-a-birth-death-chain"
+      ],
+      [
+        "def-small-set-minorization-and-drift",
+        "lem-bivariate-drift-minorization-coupling-rate"
+      ],
+      [
+        "def-small-set-minorization-and-drift",
+        "lem-geometric-drift-minorization-reduces-to-bounded-small-set"
+      ],
+      [
+        "lem-geometric-drift-minorization-reduces-to-bounded-small-set",
+        "thm-geometric-ergodicity-under-drift-and-minorization"
+      ],
+      [
+        "thm-geometric-ergodicity-under-drift-and-minorization",
+        "ex-drift-minorization-geometric-ergodicity-on-a-birth-death-chain"
+      ],
+      [
+        "lem-invariant-law-positive-set-and-almost-sure-hitting",
+        "lem-small-set-coupling-converges-from-almost-every-start"
+      ],
+      [
+        "lem-invariant-law-positive-set-and-almost-sure-hitting",
+        "lem-aperiodic-petite-set-with-accessible-small-set-is-small"
+      ],
+      [
+        "lem-invariant-law-positive-set-and-almost-sure-hitting",
+        "thm-general-state-markov-chain-convergence-under-recurrence-conditions"
+      ],
+      [
+        "lem-invariant-law-positive-set-and-almost-sure-hitting",
+        "lem-geometric-drift-minorization-reduces-to-bounded-small-set"
+      ],
+      [
+        "thm-uniform-ergodicity-from-whole-space-minorization",
+        "ex-uniformly-ergodic-chains-can-mix-arbitrarily-slowly"
+      ],
+      [
+        "lem-small-set-coupling-converges-from-almost-every-start",
+        "thm-general-state-markov-chain-convergence-under-recurrence-conditions"
+      ],
+      [
+        "lem-drift-sublevel-union-is-petite",
+        "lem-geometric-drift-minorization-reduces-to-bounded-small-set"
+      ],
+      [
+        "lem-invariant-law-integrates-bounded-set-drift",
+        "thm-geometric-ergodicity-under-drift-and-minorization"
+      ],
+      [
+        "lem-geometric-split-renewal-gives-integrable-hitting-time",
+        "lem-harris-geometric-ergodicity-has-integrable-rate-envelope"
+      ],
+      [
+        "lem-geometric-split-renewal-gives-integrable-hitting-time",
+        "lem-geometric-markov-chain-has-adjacent-iid-split-tours"
+      ],
+      [
+        "lem-aperiodic-petite-set-with-accessible-small-set-is-small",
+        "lem-geometric-drift-minorization-reduces-to-bounded-small-set"
+      ],
+      [
+        "lem-adaptive-mcmc-uniform-drift-minorization-bound",
+        "cor-adaptive-mcmc-containment-from-uniform-drift-minorization"
+      ],
+      [
+        "lem-phi-irreducible-chain-has-small-set",
+        "lem-harris-geometric-ergodicity-has-integrable-rate-envelope"
+      ],
+      [
+        "lem-phi-irreducible-chain-has-small-set",
+        "lem-geometric-markov-chain-has-adjacent-iid-split-tours"
+      ],
+      [
+        "lem-phi-irreducible-chain-has-small-set",
+        "thm-general-state-markov-chain-convergence-under-recurrence-conditions"
+      ],
+      [
+        "lem-bivariate-drift-minorization-coupling-rate",
+        "thm-geometric-ergodicity-under-drift-and-minorization"
+      ],
+      [
+        "lem-bivariate-drift-minorization-coupling-rate",
+        "lem-geometric-drift-minorization-reduces-to-bounded-small-set"
+      ],
+      [
+        "thm-general-state-markov-chain-convergence-under-recurrence-conditions",
+        "ex-sticky-general-state-chain-is-not-geometrically-ergodic"
+      ],
+      [
+        "lem-harris-geometric-ergodicity-has-integrable-rate-envelope",
+        "lem-zero-variance-geometric-markov-sums-have-strong-rate"
+      ],
+      [
+        "lem-harris-geometric-ergodicity-has-integrable-rate-envelope",
+        "thm-geometrically-ergodic-chain-strong-invariance-principle"
+      ],
+      [
+        "lem-harris-geometric-ergodicity-has-integrable-rate-envelope",
+        "thm-overlapping-batch-means-strong-consistency"
+      ],
+      [
+        "lem-harris-geometric-ergodicity-has-integrable-rate-envelope",
+        "thm-mcmc-clt-sufficient-regimes"
+      ],
+      [
+        "lem-geometric-markov-chain-has-adjacent-iid-split-tours",
+        "thm-geometrically-ergodic-chain-strong-invariance-principle"
+      ],
+      [
+        "lem-zero-variance-geometric-markov-sums-have-strong-rate",
+        "thm-geometrically-ergodic-chain-strong-invariance-principle"
+      ],
+      [
+        "lem-zero-variance-geometric-markov-sums-have-strong-rate",
+        "thm-overlapping-batch-means-strong-consistency"
+      ],
+      [
+        "thm-geometrically-ergodic-chain-strong-invariance-principle",
+        "thm-overlapping-batch-means-strong-consistency"
+      ]
+    ]
+  },
+  "consumer_dispositions": [
+    {
+      "id": "cor-adaptive-mcmc-containment-from-uniform-drift-minorization",
+      "path": "items/cor-adaptive-mcmc-containment-from-uniform-drift-minorization.md",
+      "interface_section": "Statement",
+      "current_interface": "Assume the adaptive MCMC setup and diminishing adaptation of\n[[def-diminishing-adaptation]]. Suppose the common target, set $C$, drift\nfunction $V$, and constants satisfy the hypotheses of\n[[lem-adaptive-mcmc-uniform-drift-minorization-bound]], including the\nstrong-aperiodicity condition $\\nu_\\gamma(C)=1$ for every $\\gamma$. If\n$\\mathbb E[V(X_0)]<\\infty$, then containment holds for the initial law of\n$(X_0,\\Gamma_0)$, and the marginal laws converge to $\\pi$ in total variation.",
+      "affected_supplier_import_excerpts": [
+        "[[lem-adaptive-mcmc-uniform-drift-minorization-bound]], including the",
+        "[F3] [[def-small-set-minorization-and-drift]]: the pointwise common drift",
+        "[F4] [[lem-adaptive-mcmc-uniform-drift-minorization-bound]]: there are common"
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "Actual adaptive hypotheses explicitly retain finite measurable V, a common bounded set and νγ(C)=1. Only original small-set/finite-drift clauses are imported; no π-a.e. certificate is upgraded to an all-start or uniform adaptive assertion."
+    },
+    {
+      "id": "def-small-set-minorization-and-drift",
+      "path": "items/def-small-set-minorization-and-drift.md",
+      "interface_section": "Definition",
+      "current_interface": "For a probability kernel $P$ on $(\\mathsf X,\\mathcal X)$ ([[def-measure-kernel-and-probability-kernel]]), a measurable set $C$ is **$(m,\\epsilon,\\nu)$-small** if $m\\ge1$ is an integer, $0<\\epsilon\\le1$, $\\nu$ is a probability measure ([[def-probability-measure]]), and\n$$P^m(x,A)\\ge\\epsilon\\nu(A)\\quad(x\\in C,\\ A\\in\\mathcal X).$$\nThe inequality is pointwise in $x$ and holds for every measurable $A$.\n\nA **geometric drift inequality outside $C$** consists of a finite-valued measurable $V:\\mathsf X\\to[1,\\infty)$, constants $0<\\lambda<1$ and $0\\le b<\\infty$, and\n$$PV(x):=\\int V(y)P(x,dy)\\le\\lambda V(x)+b\\,1_C(x)\\quad(x\\in\\mathsf X).$$\nThe terms small set and drift are separate hypotheses; neither definition asserts the existence of the other.\n\nWhen an invariant probability $\\pi$ is specified ([[def-invariant-and-stationary-distribution-for-a-markov-kernel]]), an **extended geometric drift certificate finite $\\pi$-almost everywhere** allows measurable $V:\\mathsf X\\to[1,+\\infty]$ with $\\pi(V<\\infty)=1$ and the same pointwise inequality, interpreted in the nonnegative extended reals. This is a separate convention from the finite-valued drift function above. The geometric theorem treats this certificate on $E=\\{V<\\infty\\}$; the original finite-valued convention gives the corresponding bound on the whole state space.",
+      "affected_supplier_import_excerpts": [],
+      "disposition": "repaired source",
+      "reason": "Owner repaired/extended source; exact proof and interface supplied in current source guards."
+    },
+    {
+      "id": "ex-drift-minorization-geometric-ergodicity-on-a-birth-death-chain",
+      "path": "items/ex-drift-minorization-geometric-ergodicity-on-a-birth-death-chain.md",
+      "interface_section": "Statement",
+      "current_interface": "On $\\mathbb N_0$, define a birth-death kernel by $P(0,1)=1/4$, $P(0,0)=3/4$, and for $n\\ge1$,\n$$P(n,n+1)=1/4,\\quad P(n,n-1)=1/2,\\quad P(n,n)=1/4.$$\nIt has invariant probability $\\pi_n=2^{-n-1}$ and satisfies a geometric drift and small-set minorization, so it is geometrically ergodic.",
+      "affected_supplier_import_excerpts": [
+        "[F3] [[def-small-set-minorization-and-drift]]: a drift inequality and a fixed-time small-set minorization are the hypotheses used by the geometric theorem.",
+        "[F5] [[thm-geometric-ergodicity-under-drift-and-minorization]]: irreducibility, aperiodicity, invariant probability, small set and drift imply a $V$-weighted geometric total-variation bound."
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "Its explicit V(n)=(sqrt(2))^n is finite at every n and its drift/minorization check still uses the original all-start finite branch. The improved C0 moment justification now supports that branch."
+    },
+    {
+      "id": "ex-sticky-general-state-chain-is-not-geometrically-ergodic",
+      "path": "items/ex-sticky-general-state-chain-is-not-geometrically-ergodic.md",
+      "interface_section": "Statement",
+      "current_interface": "On $\\mathsf X=(0,1]$, let $\\lambda$ be Lebesgue probability and\n$$P(x,A)=(1-\\sqrt{x})1_A(x)+\\sqrt{x}\\lambda(A).$$\nThen $P$ is Lebesgue-irreducible, aperiodic and Harris recurrent, with invariant law $\\pi(dx)=dx/(2\\sqrt{x})$. It converges from every state, but it is not geometrically ergodic with any common rate $r<1$ and finite statewise multiplier $M V(x)$.",
+      "affected_supplier_import_excerpts": [
+        "[F6] [[thm-general-state-markov-chain-convergence-under-recurrence-conditions]]: an irreducible aperiodic Harris chain with invariant probability converges from every state."
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "The hitting Statement and stationary a.e./Harris all-start interface are unchanged; the explicit subset lower bound proves the same almost-sure hitting result used by the original coupling/convergence branch."
+    },
+    {
+      "id": "ex-uniformly-ergodic-chains-can-mix-arbitrarily-slowly",
+      "path": "items/ex-uniformly-ergodic-chains-can-mix-arbitrarily-slowly.md",
+      "interface_section": "Statement",
+      "current_interface": "For every $0<\\eta<1/2$, the two-state kernel\n$$P_\\eta=\\begin{pmatrix}1-\\eta&\\eta\\\\ \\eta&1-\\eta\\end{pmatrix}$$\nis uniformly geometrically ergodic, yet the family has no common finite practical mixing time as $\\eta\\downarrow0$.",
+      "affected_supplier_import_excerpts": [
+        "[F3] [[thm-uniform-ergodicity-from-whole-space-minorization]]: a whole-space minorization yields a uniform geometric bound."
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "The original finite-valued drift and/or small-set interfaces remain intact; the added extended certificate is separate and is not substituted into any old finite-valued premise."
+    },
+    {
+      "id": "lem-adaptive-mcmc-uniform-drift-minorization-bound",
+      "path": "items/lem-adaptive-mcmc-uniform-drift-minorization-bound.md",
+      "interface_section": "Statement",
+      "current_interface": "Let $(P_\\gamma)_{\\gamma\\in\\Gamma}$ be probability kernels on a measurable\nspace $(\\mathsf X,\\mathcal X)$ with a common invariant probability $\\pi$\n([[def-invariant-and-stationary-distribution-for-a-markov-kernel]]). Suppose\nthere are a measurable set $C$, a finite measurable $V:\\mathsf X\\to[1,\\infty)$,\nand constants $v\\ge1$, $0<\\delta\\le1$, $0<\\lambda<1$, and $0\\le b<\\infty$\nsuch that $\\sup_{x\\in C}V(x)\\le v$ and, for every $\\gamma$, there is a\nprobability measure $\\nu_\\gamma$ with $\\nu_\\gamma(C)=1$ satisfying\n$$P_\\gamma(x,A)\\ge\\delta\\nu_\\gamma(A)\\quad(x\\in C,\\ A\\in\\mathcal X),\\qquad P_\\gamma V(x):=\\int V(y)P_\\gamma(x,dy)\\le\\lambda V(x)+b1_C(x)\\quad(x\\in\\mathsf X).$$\nThen there are constants $M<\\infty$ and $0<\\rho<1$, depending only on\n$v,\\delta,\\lambda,b$, such that\n$$\\lVert P_\\gamma^n(x,\\cdot)-\\pi\\rVert_{\\rm TV}\\le M V(x)\\rho^n\\quad(x\\in\\mathsf X,\\ n\\ge0,\\ \\gamma\\in\\Gamma).$$\nThe support condition $\\nu_\\gamma(C)=1$ is the strong-aperiodicity\nhypothesis in the cited drift/minorization route.",
+      "affected_supplier_import_excerpts": [
+        "[F1] [[def-small-set-minorization-and-drift]]: a one-step minorization means"
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "Actual adaptive hypotheses explicitly retain finite measurable V, a common bounded set and νγ(C)=1. Only original small-set/finite-drift clauses are imported; no π-a.e. certificate is upgraded to an all-start or uniform adaptive assertion."
+    },
+    {
+      "id": "lem-aperiodic-petite-set-with-accessible-small-set-is-small",
+      "path": "items/lem-aperiodic-petite-set-with-accessible-small-set-is-small.md",
+      "interface_section": "Statement",
+      "current_interface": "Let $P$ be countably generated, $\\phi$-irreducible and aperiodic with invariant probability $\\pi$. Suppose $D$ is petite with probability $\\nu$ and multiplier $\\alpha>0$, and $C\\subseteq D$ is $(m,\\epsilon,\\nu)$-small for this same $\\nu$, with $\\nu(C)>0$ and $\\nu\\ll\\pi$. Then $D$ is small at some common time.",
+      "affected_supplier_import_excerpts": [
+        "[F2] [[def-small-set-minorization-and-drift]]: $P^m(y,\\cdot)\\ge\\epsilon\\nu$ on $C$."
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "The original finite-valued drift and/or small-set interfaces remain intact; the added extended certificate is separate and is not substituted into any old finite-valued premise."
+    },
+    {
+      "id": "lem-bivariate-drift-minorization-coupling-rate",
+      "path": "items/lem-bivariate-drift-minorization-coupling-rate.md",
+      "interface_section": "Statement",
+      "current_interface": "Let $Q$ be a probability kernel, $D$ be $(1,\\epsilon,\\nu)$-small for $Q$, and let $0<a<1$. If $0<\\epsilon<1$, define residual probabilities $R_x=(Q(x,\\cdot)-\\epsilon\\nu)/(1-\\epsilon)$ on $D$ and assume\n$$B\\ge\\max\\{1,(1-\\epsilon)\\sup_{(x,y)\\in D^2}R_x\\otimes R_y(h)/a\\}<\\infty.$$\nIf $\\epsilon=1$, set $B=1$ and impose no residual condition. Suppose $h:\\mathsf X^2\\to[1,\\infty)$ is finite-valued and measurable and $Q\\otimes Q\\,h\\le ah$ off $D^2$. Then there are $M<\\infty$ and $0<r<1$ such that a coupling of two $Q$-chains satisfies\n$$\\Pr_{x,y}(X_n\\ne Y_n)\\le M h(x,y)r^n.$$\nFor $\\epsilon=1$, the first visit to $D^2$ couples the chains immediately.",
+      "affected_supplier_import_excerpts": [
+        "[F1] [[def-small-set-minorization-and-drift]]: on $D$, $Q(x,\\cdot)\\ge\\epsilon\\nu$."
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "The original finite-valued drift and/or small-set interfaces remain intact; the added extended certificate is separate and is not substituted into any old finite-valued premise."
+    },
+    {
+      "id": "lem-drift-sublevel-union-is-petite",
+      "path": "items/lem-drift-sublevel-union-is-petite.md",
+      "interface_section": "Statement",
+      "current_interface": "Suppose $C$ is $(m,\\epsilon,\\nu)$-small and $PV\\le\\lambda V+b1_C$ with finite $V\\ge1$, $0<\\lambda<1$. For every finite $d\\ge1$, $D=C\\cup\\{V\\le d\\}$ is petite.",
+      "affected_supplier_import_excerpts": [
+        "[F1] [[def-small-set-minorization-and-drift]]: $P^m(x,\\cdot)\\ge\\epsilon\\nu$ on $C$, and outside $C$, $PV\\le\\lambda V$."
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "The original finite-valued drift and/or small-set interfaces remain intact; the added extended certificate is separate and is not substituted into any old finite-valued premise."
+    },
+    {
+      "id": "lem-geometric-drift-minorization-reduces-to-bounded-small-set",
+      "path": "items/lem-geometric-drift-minorization-reduces-to-bounded-small-set.md",
+      "interface_section": "Statement",
+      "current_interface": "Let $P$ be countably generated, $\\phi$-irreducible and aperiodic with invariant probability $\\pi$. Suppose $C$ is $(m,\\epsilon,\\nu)$-small with $\\phi(C)>0$ and $PV\\le\\lambda V+b1_C$ for finite $V\\ge1$, $0<\\lambda<1$. Then there are $\\lambda'\\in(\\lambda,1)$ and a $\\phi$-positive small set $C_0\\subseteq C$ with $\\sup_{C_0}V<\\infty$ and $PV\\le\\lambda'V+b1_{C_0}$ pointwise. Moreover there are a bounded-$V$ small set $D$, a time $L$, a minorizing probability $\\nu'$, and $a<1$ such that for $Q=P^L$ and $h(x,y)=(V(x)+V(y))/2$,\n$$Q\\otimes Q\\,h\\le ah\\quad\\text{off }D^2.$$\nIf $Q(x,\\cdot)\\ge\\epsilon_D\\nu'$ on $D$, the residual laws $R_x=(Q(x,\\cdot)-\\epsilon_D\\nu')/(1-\\epsilon_D)$ have $\\sup_{x,y\\in D}R_x\\otimes R_y(h)<\\infty$ when $\\epsilon_D<1$; for $\\epsilon_D=1$ no residual branch is needed.",
+      "affected_supplier_import_excerpts": [
+        "[F2] [[def-small-set-minorization-and-drift]]: the fixed-time minorization and pointwise drift inequality hold.",
+        "[F3] [[lem-invariant-law-positive-set-and-almost-sure-hitting]]: $\\pi$ charges each positive-$\\phi$ set.",
+        "[F4] [[lem-drift-sublevel-union-is-petite]]: a drift sublevel enlargement of a small set is petite with the same minorizer.",
+        "[F5] [[lem-aperiodic-petite-set-with-accessible-small-set-is-small]]: the petite enlargement is small with that same minorizer."
+      ],
+      "disposition": "repaired source",
+      "reason": "Owner repaired/extended source; exact proof and interface supplied in current source guards."
+    },
+    {
+      "id": "lem-geometric-markov-chain-has-adjacent-iid-split-tours",
+      "path": "items/lem-geometric-markov-chain-has-adjacent-iid-split-tours.md",
+      "interface_section": "Statement",
+      "current_interface": "Assume AC. Let $P$ be a probability kernel on a nonempty standard-Borel space $(S,\\mathcal S)$, with invariant probability $\\pi$, finite measurable $M:S\\to[0,\\infty)$ and $0<r<1$ such that\n$$\\|P^n(x,\\cdot)-\\pi\\|_{\\mathrm{TV}}\\le M(x)r^n\\quad(x\\in S,\\ n\\ge1).$$\nLet $f:S\\to\\mathbb R$ be finite measurable, with $\\pi(f)=0$ and $\\pi(|f|^v)<\\infty$ for some $v>1$. For every initial law, on an extension preserving the given chain there are an integer $m\\ge1$, an almost surely finite delay $D\\in m\\mathbb N$, a standard-Borel seed space $E$, iid seeds $(U_j)_{j\\ge0}$, and measurable finite-word and length functions $W:E^2\\to\\bigsqcup_{k\\ge1}S^k$ and $L:E\\to m\\mathbb N$ with the following properties.\n\nPut $T_0=D$ and $T_{j+1}=T_j+L(U_j)$. Almost surely, simultaneously for all $j\\ge0$,\n$$\\bigl(X_{T_j},\\ldots,X_{T_{j+1}-1}\\bigr)=W(U_j,U_{j+1}).$$\nWrite $L_j=L(U_j)$, $Z_j=\\sum_{t=T_j}^{T_{j+1}-1}f(X_t)$, and $H_j=\\sum_{t=T_j}^{T_{j+1}-1}|f(X_t)|$. Then $Z_j=z(U_j,U_{j+1})$ and $H_j=h(U_j,U_{j+1})$ for measurable functions $z,h$, and\n$$\\mathbb E e^{aL_0}<\\infty\\text{ for some }a>0,\\qquad 0<\\mu_L:=\\mathbb EL_0<\\infty,$$\n$$\\mathbb EZ_0=0,\\qquad \\mathbb EH_0^q<\\infty\\quad(1\\le q<v).$$\nFor every nonnegative measurable $b:S\\to[0,\\infty]$ the full-tour occupation identity is\n$$\\mathbb E\\sum_{t=T_0}^{T_1-1}b(X_t)=\\mu_L\\pi(b).$$\nFor each specified initial law, the same $m$, iid seed law, $W,L$ and post-delay tour law can be used also for the invariant initial law $\\pi$; only the finite initial segment and coupling change.\n\nIn particular $(L_j-\\mu_L,Z_j)$ is an adjacent-iid centered vector sequence, while the lengths themselves are iid. Full tour words or rewards are not asserted to be iid. No moment of $D$ or of the initial finite prefix is required, and the construction uses a useful multistep split chosen from $P$ rather than requiring any supplied one-step minorization to have positive stationary mass.",
+      "affected_supplier_import_excerpts": [
+        "[F1] [[def-phi-irreducible-chain]] and [[lem-phi-irreducible-chain-has-small-set]]: on a countably generated irreducible state space there is a positive-measure $m$-small set, with a minorizing probability giving that set positive mass.",
+        "[F2] [[lem-geometric-split-renewal-gives-integrable-hitting-time]]: under its scalar geometric-return-probability hypothesis the explicitly specified split atom has an exponential positive return moment and finite mean."
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "Existing36 closure retained: this path uses the original useful-small-set, integrable-envelope/tour and strong-rate interfaces, not the new extended drift certificate. Their original hypotheses and all-start conclusions remain unchanged. No repeated full SIP/OBM proof audit."
+    },
+    {
+      "id": "lem-geometric-split-renewal-gives-integrable-hitting-time",
+      "path": "items/lem-geometric-split-renewal-gives-integrable-hitting-time.md",
+      "interface_section": "Statement",
+      "current_interface": "Assume the Axiom of Choice. Let $Q$ be a probability kernel on any measurable space $(X,\\mathcal G)$, with invariant probability $\\pi$. Let $C\\in\\mathcal G$ satisfy $\\pi(C)>0$, and suppose\n$$Q(x,\\cdot)\\ge\\epsilon\\nu(\\cdot)\\quad(x\\in C),\\qquad 0<\\epsilon<1,$$\nwhere $\\nu$ is a probability measure. Suppose some $A<\\infty$ and $0<\\theta<1$ satisfy\n$$|\\nu Q^n(C)-\\pi(C)|\\le A\\theta^n\\quad(n\\ge0).$$\nFor a $Q$-chain started at $x$, put $\\sigma_C=\\inf\\{n\\ge0:X_n\\in C\\}$. Then some $s>1$ makes\n$$H(x)=\\mathbb E_x[s^{\\sigma_C}]\\quad\\text{measurable},\\qquad \\pi(H)<\\infty,$$\nwhere $s^\\infty=\\infty$. In particular $H$ is finite $\\pi$-almost everywhere; finiteness at every state is not asserted.\n\nFor the same hypotheses, the split construction also has the following return and occupation properties. Put $w_1(x)=\\epsilon1_C(x)$ and $w_0(x)=1-w_1(x)$. Define $K_{x,1}=\\nu$, $K_{x,0}=(Q(x,\\cdot)-\\epsilon\\nu)/(1-\\epsilon)$ on $C$, and $K_{x,0}=Q(x,\\cdot)$ off $C$. On $X\\times\\{0,1\\}$ use the kernel\n$$\\widetilde Q((x,i),dy\\times\\{j\\})=K_{x,i}(dy)w_j(y)$$\nand invariant law $\\widetilde\\pi(dx,i)=w_i(x)\\pi(dx)$. Its atom $\\alpha=C\\times\\{1\\}$ has mass $p=\\epsilon\\pi(C)>0$. If $Z_0$ has law $\\kappa=\\widetilde\\pi(\\cdot\\mid\\alpha)$ and $\\tau=\\inf\\{n\\ge1:Z_n\\in\\alpha\\}$, then some $b>1$ satisfies\n$$\\mathbb E_\\kappa b^\\tau<\\infty,$$\nand for every nonnegative measurable $g$ on the split space,\n$$\\widetilde\\pi(g)=p\\,\\mathbb E_\\kappa\\sum_{k=0}^{\\tau-1}g(Z_k).$$\nIn particular $\\tau<\\infty$ almost surely and $\\mathbb E_\\kappa\\tau=1/p$. These additional assertions use exactly the construction and hypotheses above; they do not assert an exponential entrance-time moment from every state.",
+      "affected_supplier_import_excerpts": [
+        "[F1] [[def-small-set-minorization-and-drift]]: the displayed minorization permits the probability residual $(Q(x,\\cdot)-\\epsilon\\nu)/(1-\\epsilon)$ on $C$."
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "The original finite-valued drift and/or small-set interfaces remain intact; the added extended certificate is separate and is not substituted into any old finite-valued premise."
+    },
+    {
+      "id": "lem-harris-geometric-ergodicity-has-integrable-rate-envelope",
+      "path": "items/lem-harris-geometric-ergodicity-has-integrable-rate-envelope.md",
+      "interface_section": "Statement",
+      "current_interface": "Assume the Axiom of Choice. Let $P$ be a probability kernel on a measurable space\n$(\\mathsf X,\\mathcal X)$ with invariant probability $\\pi$. Assume it is\n$\\phi$-irreducible\n([[def-phi-irreducible-chain]]), aperiodic\n([[def-general-state-aperiodic-markov-chain]]), and Harris recurrent relative\nto its nonzero $\\sigma$-finite irreducibility measure $\\phi$\n([[def-harris-recurrent-markov-chain]]). Suppose $P$ is geometrically\nergodic in the sense of\n[[def-geometric-and-uniform-ergodicity-for-mcmc-clt]]. Then there exist a\nmeasurable $M:\\mathsf X\\to[0,\\infty)$ with $\\pi(M)<\\infty$ and $r\\in(0,1)$ such\nthat\n$$\\|P^n(x,\\cdot)-\\pi\\|_{\\mathrm{TV}}\\le M(x)r^n\\quad(x\\in\\mathsf X,\\ n\\ge1).$$\n\nIn fact, the same conclusion holds assuming only AC, invariance of $\\pi$, and the everywhere finite measurable common geometric-rate bound in [[def-geometric-and-uniform-ergodicity-for-mcmc-clt]], on the original arbitrary measurable space. The construction below derives the needed irreducibility on a restricted sigma-field directly from that bound.",
+      "affected_supplier_import_excerpts": [
+        "[F3] [[lem-phi-irreducible-chain-has-small-set]]: a countably generated irreducible chain has a positive-irreducibility-measure small set $D$, with a minorizing probability $\\nu_0$ satisfying $\\nu_0(D)>0$.",
+        "[F4] [[lem-geometric-split-renewal-gives-integrable-hitting-time]]: a one-step small set of positive invariant mass, whose minorizing-law return probabilities converge geometrically, has a stationary-integrable exponential entrance-time moment."
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "Existing36 closure retained: this path uses the original useful-small-set, integrable-envelope/tour and strong-rate interfaces, not the new extended drift certificate. Their original hypotheses and all-start conclusions remain unchanged. No repeated full SIP/OBM proof audit."
+    },
+    {
+      "id": "lem-invariant-law-integrates-bounded-set-drift",
+      "path": "items/lem-invariant-law-integrates-bounded-set-drift.md",
+      "interface_section": "Statement",
+      "current_interface": "Let $\\pi$ be invariant for $P$, and suppose $PV\\le\\lambda V+b1_C$ with $V\\ge1$, $0<\\lambda<1$, and $\\sup_CV<\\infty$. Then $\\pi V<\\infty$.",
+      "affected_supplier_import_excerpts": [
+        "[F1] [[def-small-set-minorization-and-drift]]: $V$ is finite-valued and $PV\\le\\lambda V+b1_C$ pointwise."
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "The original finite-valued drift and/or small-set interfaces remain intact; the added extended certificate is separate and is not substituted into any old finite-valued premise."
+    },
+    {
+      "id": "lem-invariant-law-positive-set-and-almost-sure-hitting",
+      "path": "items/lem-invariant-law-positive-set-and-almost-sure-hitting.md",
+      "interface_section": "Statement",
+      "current_interface": "Let $P$ have invariant probability $\\pi$. If a measurable set $A$ has positive probability of being hit from every starting state, then $\\Pr_x(\\tau_A<\\infty)=1$ for $\\pi$-almost every $x$. In addition, if $P$ is $\\phi$-irreducible and $\\phi(A)>0$, then $\\pi(A)>0$ and the positive-hitting hypothesis holds.",
+      "affected_supplier_import_excerpts": [],
+      "disposition": "repaired source",
+      "reason": "Owner repaired/extended source; exact proof and interface supplied in current source guards."
+    },
+    {
+      "id": "lem-phi-irreducible-chain-has-small-set",
+      "path": "items/lem-phi-irreducible-chain-has-small-set.md",
+      "interface_section": "Statement",
+      "current_interface": "Let $(\\mathsf X,\\mathcal X)$ be countably generated, let $P$ be a probability kernel, and let $\\phi$ be a nonzero $\\sigma$-finite irreducibility measure. Then there are an integer $m\\ge1$, a measurable $C$ with $\\phi(C)>0$, a probability $\\nu$ with $\\nu(C)>0$, and $\\epsilon>0$ such that $P^m(x,\\cdot)\\ge\\epsilon\\nu(\\cdot)$ for every $x\\in C$.",
+      "affected_supplier_import_excerpts": [
+        "[F2] [[def-small-set-minorization-and-drift]]: a small set is a common fixed-time minorization by a probability measure."
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "The original finite-valued drift and/or small-set interfaces remain intact; the added extended certificate is separate and is not substituted into any old finite-valued premise."
+    },
+    {
+      "id": "lem-small-set-coupling-converges-from-almost-every-start",
+      "path": "items/lem-small-set-coupling-converges-from-almost-every-start.md",
+      "interface_section": "Statement",
+      "current_interface": "Let $P$ be countably generated, $\\phi$-irreducible and aperiodic with invariant probability $\\pi$. If $C$ is $(m,\\epsilon,\\nu)$-small, $\\phi(C)>0$, and $\\nu(C)>0$, then $\\|P^n(x,\\cdot)-\\pi\\|_{\\rm TV}\\to0$ for $\\pi$-almost every $x$.",
+      "affected_supplier_import_excerpts": [
+        "[F4] [[def-small-set-minorization-and-drift]]: $P^m(x,\\cdot)\\ge\\epsilon\\nu$ on $C$.",
+        "[F5] [[lem-invariant-law-positive-set-and-almost-sure-hitting]]: for any stationary kernel, if every start has positive chance to hit a target, stationary almost every start hits it almost surely."
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "The hitting Statement and stationary a.e./Harris all-start interface are unchanged; the explicit subset lower bound proves the same almost-sure hitting result used by the original coupling/convergence branch."
+    },
+    {
+      "id": "lem-zero-variance-geometric-markov-sums-have-strong-rate",
+      "path": "items/lem-zero-variance-geometric-markov-sums-have-strong-rate.md",
+      "interface_section": "Statement",
+      "current_interface": "Assume AC. Let $P$ be a probability kernel on an arbitrary measurable space $(\\mathsf X,\\mathcal X)$ with invariant probability $\\pi$. Suppose its stationary Markov chain has strong-mixing coefficients $\\alpha_X(n)\\le Cr^n$ for $n\\ge1$, with $0\\le C<\\infty$ and $0<r<1$. Let $f:\\mathsf X\\to\\mathbb R$ be finite measurable with $\\pi f=0$, $\\pi|f|^q<\\infty$ for a finite $q>2$, and suppose the absolutely convergent covariance sum is zero:\n$$v:=\\pi(f^2)+2\\sum_{n\\ge1}\\operatorname{Cov}_\\pi(f(X_0),f(X_n))=0.$$\nThen for every $2<p<q$, under the stationary law,\n$$\\max_{0\\le j\\le n}\\left|\\sum_{k=0}^{j-1}f(X_k)\\right|=o(n^{1/p})\\qquad\\text{almost surely}.$$\nThe empty sum at $j=0$ is zero. No ergodicity assumption is needed beyond the stated stationary mixing bound.\n\nIf additionally $\\|P^n(x,\\cdot)-\\pi\\|_{\\mathrm{TV}}\\to0$ for every $x\\in\\mathsf X$, the same assertion holds under every initial probability law, without a moment assumption on that law. In particular, it holds under every initial law whenever $P$ has an everywhere finite measurable common geometric total-variation envelope in the sense of [[def-geometric-and-uniform-ergodicity-for-mcmc-clt]] and $f$ has the stated moment, centering and zero covariance sum. No positive one-step minorization, irreducibility or Harris hypothesis is added to this last sufficient condition.",
+      "affected_supplier_import_excerpts": [
+        "[F7] An invariant kernel with an everywhere finite measurable common geometric total-variation envelope admits such an envelope integrable under $\\pi$, possibly at a slower geometric rate. That integrable bound implies $\\alpha_X(n)\\le\\pi(M)r^n$ for the stationary chain. [[lem-harris-geometric-ergodicity-has-integrable-rate-envelope]], [[lem-geometric-total-variation-rate-controls-strong-mixing]], [[def-geometric-and-uniform-ergodicity-for-mcmc-clt]]"
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "Existing36 closure retained: this path uses the original useful-small-set, integrable-envelope/tour and strong-rate interfaces, not the new extended drift certificate. Their original hypotheses and all-start conclusions remain unchanged. No repeated full SIP/OBM proof audit."
+    },
+    {
+      "id": "thm-general-state-markov-chain-convergence-under-recurrence-conditions",
+      "path": "items/thm-general-state-markov-chain-convergence-under-recurrence-conditions.md",
+      "interface_section": "Statement",
+      "current_interface": "Let $P$ be countably generated, $\\phi$-irreducible ([[def-phi-irreducible-chain]]) and aperiodic ([[def-general-state-aperiodic-markov-chain]]) with invariant probability $\\pi$. Then $\\|P^n(x,\\cdot)-\\pi\\|_{\\rm TV}\\to0$ for $\\pi$-almost every $x$. If $P$ is Harris recurrent relative to $\\phi$ ([[def-harris-recurrent-markov-chain]]), convergence holds for every starting state.",
+      "affected_supplier_import_excerpts": [
+        "[F5] [[lem-phi-irreducible-chain-has-small-set]]: a countably generated irreducible chain has a small set $C$ with $\\phi(C)>0$ and $\\nu(C)>0$.",
+        "[F6] [[lem-small-set-coupling-converges-from-almost-every-start]]: aperiodicity and such a small set imply $\\pi$-almost-everywhere convergence."
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "The hitting Statement and stationary a.e./Harris all-start interface are unchanged; the explicit subset lower bound proves the same almost-sure hitting result used by the original coupling/convergence branch."
+    },
+    {
+      "id": "thm-geometric-ergodicity-under-drift-and-minorization",
+      "path": "items/thm-geometric-ergodicity-under-drift-and-minorization.md",
+      "interface_section": "Statement",
+      "current_interface": "Let $P$ be countably generated, $\\phi$-irreducible and aperiodic with invariant probability $\\pi$. Suppose a $\\phi$-positive small set $C$ and finite-valued $V\\ge1$ satisfy $PV\\le\\lambda V+b1_C$ for $0<\\lambda<1$. Then there are $M<\\infty$ and $0<r<1$ such that\n$$\\|P^n(x,\\cdot)-\\pi\\|_{\\rm TV}\\le M V(x)r^n\\quad(x\\in\\mathsf X,\\ n\\ge0).$$\nThis is geometric ergodicity with a $V$-weighted bound.\n\nUnder the same kernel, $\\phi$-positive small-set and drift-constant hypotheses, the result also holds if $V:\\mathsf X\\to[1,+\\infty]$ is measurable and finite $\\pi$-almost everywhere, with the drift inequality holding pointwise in the extended sense. Then $E=\\{V<\\infty\\}$ is measurable, absorbing and of full $\\pi$-measure, and the displayed bound holds for every $x\\in E$. Thus extended certificates give the common geometric rate for $\\pi$-almost every start, while globally finite certificates give it for every start.",
+      "affected_supplier_import_excerpts": [
+        "[F3] [[def-small-set-minorization-and-drift]]: the common minorization and drift inequalities hold.",
+        "[F6] [[lem-geometric-drift-minorization-reduces-to-bounded-small-set]]: there is a bounded-$V$, $\\phi$-positive small subset $C_0$ with improved pointwise drift $PV\\le\\lambda'V+b1_{C_0}$ for some $\\lambda'<1$; a skeleton and bounded small set also satisfy the bivariate drift/minorization hypotheses.",
+        "[F7] [[lem-bivariate-drift-minorization-coupling-rate]]: those hypotheses yield a geometric coupling bound.",
+        "[F8] [[lem-invariant-law-integrates-bounded-set-drift]]: an invariant probability integrates a finite-valued drift function when its drift set is bounded in that function."
+      ],
+      "disposition": "repaired source",
+      "reason": "Owner repaired/extended source; exact proof and interface supplied in current source guards."
+    },
+    {
+      "id": "thm-geometrically-ergodic-chain-strong-invariance-principle",
+      "path": "items/thm-geometrically-ergodic-chain-strong-invariance-principle.md",
+      "interface_section": "Statement",
+      "current_interface": "Let $P$ be a geometrically ergodic Markov chain with invariant probability\n$\\pi$, let $g$ be real Borel, and suppose there are $\\delta,\\varepsilon>0$\nwith $\\pi(|g|^{2+\\delta+\\varepsilon})<\\infty$. Suppose also that a\nstate-dependent one-step minorization\n[[def-state-dependent-one-step-minorization]] holds. For the Flegal–Jones\nstrong invariance principle convention, assume its asymptotic standard\ndeviation satisfies $0<\\sigma_g<\\infty$. Then on a suitable extension of the\nchain's probability space there are a standard Brownian motion $B$, a finite\nrandom constant $C(\\omega)$, and a finite random index $N(\\omega)$ such that\nfor all $n\\ge N(\\omega)$,\n$$\\left|\\sum_{i=1}^n(g(X_i)-\\pi(g))-\\sigma_g B(n)\\right|\\le C(\\omega)n^{1/(2+\\delta)}\\log n$$\nalmost surely.",
+      "affected_supplier_import_excerpts": [
+        "[F2] On a standard-Borel geometrically ergodic chain, a finite centered observable with stationary $v$th moment has, after an almost surely finite integer delay, actual adjacent-iid full calendar tours: lengths $L_j=L(U_j)\\ge1$ are iid with exponential moment, rewards $Z_j=z(U_j,U_{j+1})$ are centered, and absolute tour envelopes $H_j=h(U_j,U_{j+1})$ have every moment $1\\le q<v$. The full-tour occupation identity is $\\mathbb E\\sum b(X_t)=\\mu_L\\pi(b)$, where $\\mu_L=\\mathbb EL_0$. The same fixed post-delay tour law can be used for the specified and invariant initial laws. [[lem-geometric-markov-chain-has-adjacent-iid-split-tours]]",
+        "[F11] An everywhere finite common geometric total-variation envelope admits an integrable geometric envelope, which implies exponential stationary strong mixing. A measurable observation does not increase those coefficients. [[lem-harris-geometric-ergodicity-has-integrable-rate-envelope]], [[lem-geometric-total-variation-rate-controls-strong-mixing]], [[lem-measurable-observation-does-not-increase-mixing-coefficients]]",
+        "Flegal–Jones Lemma 3 supplies the stated rate. Its cited older scalar regenerative route does not itself provide the unrestricted moment-range proof. The argument above instead uses the fully local joint adjacent-iid approximation, delayed multistep tour construction and independent Brownian/Poisson composition. The latter's source manuscript statement and roadmap, and the complete almost-sure proof of Theorem 1 in Bashtova–Shashkin's heavy-tail paper motivating the calendar-time decomposition, were retrieved and inspected as recorded in the owner research notes; no external theorem replaces a proof premise here. The zero-variance rate is proved separately in [[lem-zero-variance-geometric-markov-sums-have-strong-rate]]; the Statement here retains its explicit positive-variance hypothesis."
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "Existing36 closure retained: this path uses the original useful-small-set, integrable-envelope/tour and strong-rate interfaces, not the new extended drift certificate. Their original hypotheses and all-start conclusions remain unchanged. No repeated full SIP/OBM proof audit."
+    },
+    {
+      "id": "thm-mcmc-clt-sufficient-regimes",
+      "path": "items/thm-mcmc-clt-sufficient-regimes.md",
+      "interface_section": "Statement",
+      "current_interface": "Assume AC. Let $(\\mathsf X,\\mathcal X)$ be countably generated, let $P$ be a\n$\\phi$-irreducible probability kernel ([[def-phi-irreducible-chain]], [[def-measure-kernel-and-probability-kernel]]), aperiodic\n([[def-general-state-aperiodic-markov-chain]]), and Harris recurrent relative\nto $\\phi$ ([[def-harris-recurrent-markov-chain]]) with invariant probability\n$\\pi$, and let $(X_k)_{k\\ge0}$ be a stationary\n$P$-chain whose canonical left shift preserves its path law and whose\nshift-invariant measurable events have probability zero or one. We take the\ninitial law to be $\\pi$, which implies stationarity by\n[[thm-invariant-initial-law-makes-the-chain-stationary]]. Let\n$f:\\mathsf X\\to\\mathbb R$\nbe Borel with $\\pi(f)=0$. Define\n$\\sigma_f^2=\\pi(f^2)+2\\sum_{k\\ge1}\\operatorname{Cov}_{\\pi}(f(X_0),f(X_k))$\nonly when the covariance series is absolutely convergent and the CLT is\nestablished, as in\n[[def-long-run-variance-for-stationary-markov-chain]].\n\nEach of the following six conditions is sufficient for absolute convergence\nof the covariance series and\n$$\\frac1{\\sqrt n}\\sum_{k=0}^{n-1}f(X_k)\\Rightarrow N(0,\\sigma_f^2):$$\n\n1. $P$ has polynomial total-variation rate of order $m>1$ with an integrable\n   envelope ([[def-polynomial-ergodicity-with-integrable-rate-envelope]]),\n   and $f$ is essentially bounded under $\\pi$ (there is $B<\\infty$ with\n   $|f|\\le B$ $\\pi$-almost everywhere).\n2. $P$ has polynomial total-variation rate of order $m>0$ with an integrable\n   envelope ([[def-polynomial-ergodicity-with-integrable-rate-envelope]]),\n   $f\\in L^{2+\\delta}(\\pi)$ for some $\\delta>0$\n   ([[def-l-p-space-as-a-quotient-by-null-functions]]), and\n   $m\\delta>2+\\delta$.\n3. $P$ is geometrically ergodic ([[def-geometric-and-uniform-ergodicity-for-mcmc-clt]]) and $f\\in L^{2+\\delta}(\\pi)$ for some\n   $\\delta>0$ ([[def-l-p-space-as-a-quotient-by-null-functions]]).\n4. $P$ is geometrically ergodic ([[def-geometric-and-uniform-ergodicity-for-mcmc-clt]]) and\n   $\\pi\\bigl(f^2\\log^+|f|\\bigr)<\\infty$, with\n   $0\\log^+0:=0$.\n5. $P$ is geometrically ergodic ([[def-geometric-and-uniform-ergodicity-for-mcmc-clt]]), reversible with respect to $\\pi$ in the symmetric-flow sense ([[def-general-state-reversibility-by-symmetric-flow-measure]]), and $f\\in L^2(\\pi)$ ([[def-l-p-space-as-a-quotient-by-null-functions]]).\n6. $P$ is uniformly ergodic ([[def-geometric-and-uniform-ergodicity-for-mcmc-clt]]) and $f\\in L^2(\\pi)$ ([[def-l-p-space-as-a-quotient-by-null-functions]]).\n\nIn case 4, the displayed logarithmic moment implies $f\\in L^2(\\pi)$: on $\\{|f|\\le e\\}$ one has $f^2\\le e^2$, and on $\\{|f|>e\\}$ one has $f^2\\le f^2\\log|f|$.\n\nWhen $\\sigma_f^2=0$, the zero-variance lemma\n[[lem-zero-long-run-variance-gives-degenerate-clt]] gives the degenerate\nnormal limit from absolute covariance summability. Finite variance of $f$\nalone is not one of the sufficient conditions.",
+      "affected_supplier_import_excerpts": [
+        "[F5] [[lem-harris-geometric-ergodicity-has-integrable-rate-envelope]] supplies an integrable geometric envelope under the stated Harris, irreducibility and aperiodicity hypotheses. [[lem-geometric-total-variation-rate-controls-strong-mixing]] then bounds alpha by that geometric rate."
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "Existing36 closure retained: this path uses the original useful-small-set, integrable-envelope/tour and strong-rate interfaces, not the new extended drift certificate. Their original hypotheses and all-start conclusions remain unchanged. No repeated full SIP/OBM proof audit."
+    },
+    {
+      "id": "thm-overlapping-batch-means-strong-consistency",
+      "path": "items/thm-overlapping-batch-means-strong-consistency.md",
+      "interface_section": "Statement",
+      "current_interface": "Let $P$ be a geometrically ergodic Markov chain with invariant probability $\\pi$, and let the initial distribution be arbitrary. Let $g$ be real Borel and suppose $\\pi(|g|^{2+\\delta+\\varepsilon})<\\infty$ for some $\\delta,\\varepsilon>0$. Assume the state-dependent one-step minorization [[def-state-dependent-one-step-minorization]]: there are measurable $s:\\mathsf X\\to[0,1]$ and a probability measure $Q$ such that $P(x,A)\\ge s(x)Q(A)$ for all $x,A$.\n\nLet $(b_n)$ be positive integer batch sizes with $1\\le b_n<n$ for all sufficiently large $n$, $b_n\\to\\infty$, and $n/b_n\\to\\infty$. Suppose there is $c\\ge1$ such that\n$$\\sum_{n=1}^{\\infty}(b_n/n)^c<\\infty,$$\nand suppose\n$$\\frac{b_n}{n}\\log n\\to0,\\qquad \\frac{n^{2/(2+\\delta)}(\\log n)^3}{b_n}\\to0,$$\nthere are $n_0$ and $c_1<\\infty$ with $\\log n/b_n\\le c_1$ for every $n\\ge n_0$, and\n$$b_n^2n^{-2}\\log\\log n\\to0,\\qquad b_n^4n^{-3}\\log\\log n\\to0.$$\n\nFor $\\bar g_n=n^{-1}\\sum_{i=1}^ng(X_i)$ and $\\bar g_{n,j}(b_n)=b_n^{-1}\\sum_{i=j}^{j+b_n-1}g(X_i)$, define\n$$\\widehat\\sigma^2_{\\mathrm{OBM},n}=\\frac{nb_n}{(n-b_n)(n-b_n+1)}\\sum_{j=1}^{n-b_n+1}\\bigl(\\bar g_{n,j}(b_n)-\\bar g_n\\bigr)^2.$$\nThe strong-consistency conclusion is\n$$\\widehat\\sigma^2_{\\mathrm{OBM},n}\\longrightarrow\\sigma_g^2\\quad\\text{almost surely},$$\nwhere $\\sigma_g^2$ is the covariance long-run variance defined by [[def-long-run-variance-for-stationary-markov-chain]]. The batch sequence satisfies [[def-flegal-jones-obm-batch-size-conditions]] for the displayed exponent $\\delta$; these conditions are written out above. This corrects the source's incompatible requirement that both integer $b_n$ and $n/b_n$ be nondecreasing, retaining every numerical batch-size hypothesis.\n\nAs in the intended source corollary, if $\\delta>2/3$ and $(1+\\delta/2)^{-1}<\\nu<3/4$, then $b_n=\\lfloor n^\\nu\\rfloor$ satisfies these corrected batch-size hypotheses and has the same strong-consistency conclusion. No monotonicity of $n/\\lfloor n^\\nu\\rfloor$ is asserted.",
+      "affected_supplier_import_excerpts": [
+        "[F2] An invariant kernel with an everywhere finite measurable common geometric total-variation bound admits a geometric envelope integrable under $\\pi$, on the original arbitrary measurable space. [[lem-harris-geometric-ergodicity-has-integrable-rate-envelope]]",
+        "[F6] Under the stated geometric-ergodicity, minorization and $(2+\\delta+\\varepsilon)$th moment hypotheses, with positive finite asymptotic standard deviation, the strong invariance principle supplies a Brownian approximation with error $O(n^{1/(2+\\delta)}\\log n)$ on an extension of the original chain. [[thm-geometrically-ergodic-chain-strong-invariance-principle]]",
+        "[F7] Under the everywhere common geometric total-variation bound, a finite centered $f\\in L^q(\\pi)$ with zero covariance sum has, for every $2<p<q$, the maximal partial-sum rate $o(n^{1/p})$ under every initial law, without a moment condition on that law. [[lem-zero-variance-geometric-markov-sums-have-strong-rate]]"
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "Existing36 closure retained: this path uses the original useful-small-set, integrable-envelope/tour and strong-rate interfaces, not the new extended drift certificate. Their original hypotheses and all-start conclusions remain unchanged. No repeated full SIP/OBM proof audit."
+    },
+    {
+      "id": "thm-uniform-ergodicity-from-whole-space-minorization",
+      "path": "items/thm-uniform-ergodicity-from-whole-space-minorization.md",
+      "interface_section": "Statement",
+      "current_interface": "Let $P$ have invariant probability $\\pi$. If for some $m\\ge1$, $0<\\epsilon\\le1$, and probability $\\nu$,\n$$P^m(x,\\cdot)\\ge\\epsilon\\nu(\\cdot)\\quad\\text{for every }x,$$\nthen for every $n\\ge0$,\n$$\\sup_x\\|P^n(x,\\cdot)-\\pi\\|_{\\rm TV}\\le(1-\\epsilon)^{\\lfloor n/m\\rfloor}.$$\nThus this chain is uniformly geometrically ergodic: there are common $M<\\infty$ and $r<1$ with $\\sup_x\\|P^n(x,\\cdot)-\\pi\\|_{\\rm TV}\\le Mr^n$. No converse is asserted. When $\\epsilon=1$, the floor bound means $1$ for $n<m$ and $0$ for $n\\ge m$.",
+      "affected_supplier_import_excerpts": [
+        "[F1] [[def-small-set-minorization-and-drift]]: the stated lower bound is a probability-kernel minorization."
+      ],
+      "disposition": "compatible after focused supplier repair; no consumer source rewrite",
+      "reason": "The original finite-valued drift and/or small-set interfaces remain intact; the added extended certificate is separate and is not substituted into any old finite-valued premise."
+    }
+  ],
+  "contextual_consumers": [
+    {
+      "path": "library/bayesian-computational-statistics/mcmc-ergodicity-and-mixing-examples.md",
+      "items": [
+        "ex-drift-minorization-geometric-ergodicity-on-a-birth-death-chain",
+        "ex-sticky-general-state-chain-is-not-geometrically-ergodic",
+        "ex-uniformly-ergodic-chains-can-mix-arbitrarily-slowly"
+      ],
+      "body": "## Summary\n\nThese examples isolate the hypotheses behind general-state MCMC convergence. An invariant Gibbs target may have reducible dynamics; a periodic chain oscillates in total variation; a non-Harris chain can fail from a pi-null start; a Harris chain may converge without a geometric rate; and drift plus minorization gives a geometric certificate. A two-state near-lazy family shows that a qualitative uniform rate need not give a useful common mixing time across a family."
+    },
+    {
+      "path": "library/bayesian-computational-statistics/mcmc-clt-and-monte-carlo-standard-error.md",
+      "items": [
+        "lem-geometric-markov-chain-has-adjacent-iid-split-tours",
+        "lem-geometric-split-renewal-gives-integrable-hitting-time",
+        "lem-harris-geometric-ergodicity-has-integrable-rate-envelope",
+        "lem-zero-variance-geometric-markov-sums-have-strong-rate",
+        "thm-geometrically-ergodic-chain-strong-invariance-principle",
+        "thm-mcmc-clt-sufficient-regimes",
+        "thm-overlapping-batch-means-strong-consistency"
+      ],
+      "body": "## Summary\n\nThis page defines covariance long-run variance, three stationary mixing coefficients, geometric and polynomial total-variation rates, one-step minorization, and the overlapping-batch-means estimator. It proves the kernel conditional-moment lemma, rate-to-mixing bounds, measurable-factor bounds, the degenerate zero-variance reduction, and the Poisson-equation martingale CLT with its covariance identity.\n\nThe six MCMC CLT regimes from Jones (2004) are proved locally with their moment, reversibility and rate-envelope hypotheses. Their suppliers prove the bounded and unbounded strong-mixing limits, the rho and uniform-mixing limits, the reversible geometric correlation bound and the integrable geometric envelope. The Flegal–Jones OBM contract retains every numerical batch-size condition and corrects the source's incompatible simultaneous monotonicity requirements for integer batches. Local Gaussian quadratic-form bounds and a pathwise Brownian-approximation comparison prove the OBM reduction, including zero approximation variance and the exact floor-power batch calculation. The full Markov-chain OBM theorem combines the positive-variance strong approximation with the separate zero-variance strong rate, applies under arbitrary initial laws, and identifies its covariance long-run variance through the stationary mixing CLT. A finite second moment alone is not presented as a CLT criterion, and covariance summability is not used to identify a CLT variance without a theorem."
+    },
+    {
+      "path": "library/bayesian-computational-statistics/mcmc-ergodicity-and-mixing.md",
+      "items": [
+        "def-small-set-minorization-and-drift",
+        "lem-aperiodic-petite-set-with-accessible-small-set-is-small",
+        "lem-bivariate-drift-minorization-coupling-rate",
+        "lem-drift-sublevel-union-is-petite",
+        "lem-geometric-drift-minorization-reduces-to-bounded-small-set",
+        "lem-invariant-law-integrates-bounded-set-drift",
+        "lem-invariant-law-positive-set-and-almost-sure-hitting",
+        "lem-phi-irreducible-chain-has-small-set",
+        "lem-small-set-coupling-converges-from-almost-every-start",
+        "thm-general-state-markov-chain-convergence-under-recurrence-conditions",
+        "thm-geometric-ergodicity-under-drift-and-minorization",
+        "thm-uniform-ergodicity-from-whole-space-minorization"
+      ],
+      "body": "## Summary\n\nThis page separates invariance from convergence for a general-state Markov kernel. It defines irreducibility, aperiodicity, small and petite sets, drift, and Harris recurrence; proves the measurable-density and small-set results needed on countably generated spaces; and establishes stationary almost-everywhere convergence, the Harris all-start upgrade, uniform ergodicity from whole-space minorization, and a V(x)-weighted geometric rate.\n\nWithout Harris recurrence the convergence conclusion is only for pi-almost every start. The drift theorem gives a common geometric rate weighted by V(x): globally finite drift functions yield the bound from every state, while extended drift certificates finite pi-almost everywhere yield it on the full-measure absorbing set {V<infinity}. The bounded-set reduction explicitly supplies the improved drift needed to integrate V under the invariant law. Invariance alone gives neither irreducibility nor convergence. The companion page records periodicity, null-set starts, reducible Gibbs dynamics, sticky chains, and mixing-rate limitations."
+    },
+    {
+      "path": "library/bayesian-computational-statistics/adaptive-mcmc-convergence-and-limitations.md",
+      "items": [
+        "cor-adaptive-mcmc-containment-from-uniform-drift-minorization",
+        "lem-adaptive-mcmc-uniform-drift-minorization-bound"
+      ],
+      "body": "## Summary\n\nFor a jointly measurable family of fixed Markov kernels with a common invariant\ntarget, diminishing adaptation controls the change between adjacent kernels in\nuniform total variation. The page defines this condition and containment,\nproves a finite-block comparison with a frozen kernel, and derives marginal\nconvergence under either simultaneous uniform ergodicity or containment. A\nseparate local coupling proof shows how a common geometric drift and a\nstrongly aperiodic small-set minorization produce the uniform convergence\nrate needed for containment, then verifies the adaptive moment bound.\n\nThe conclusion concerns one-time marginal laws. It gives no general adaptive\nstrong law or central limit theorem. The companion page supplies an exactly\nsolvable uniformly ergodic family, a diminishing-adaptation schedule that\nloses containment and convergence, and a strong-law counterexample."
+    }
+  ],
+  "scope_limits": "Focused changed-interface/import closure only. Four original source roots +20 actual direct/indirect item consumers and4 actual context pages. Unchanged finite-valued core preserves all adaptive and36 interfaces; no broad new theorem audit. All changed items are draft, so no new published claim is required.",
+  "proposals": {
+    "selected_rows_fm": "research/bayesian-computational-statistics-62-owner-step2-b35-selected-manifest-and-fm-proposal.json",
+    "selected_contracts": "research/bayesian-computational-statistics-62-owner-step2-b35-selected-contract-proposal.json",
+    "other_consumer_citation_updates": "research/bayesian-computational-statistics-62-owner-step2-b35-consumer-citation-proposal.json",
+    "page": "research/bayesian-computational-statistics-62-owner-step2-b35-page-proposal.json",
+    "design": "research/bayesian-computational-statistics-62-owner-step2-b35-design-proposal.json"
+  },
+  "proof_layout": {
+    "command": "node tools/proof-layout.mjs items/lem-invariant-law-positive-set-and-almost-sure-hitting.md items/lem-geometric-drift-minorization-reduces-to-bounded-small-set.md items/thm-geometric-ergodicity-under-drift-and-minorization.md items/def-small-set-minorization-and-drift.md",
+    "exit_code": 0,
+    "output": "proof-layout: 4 items, 14 steps, 0 defects"
+  },
+  "formatting": "Final proof steps are single physical lines ending in evidence tags. Existing native72-item formatting and both repaired page YAML delimiters preserved.",
+  "frozen": true,
+  "root_actions": [
+    "Read exact final arguments and source guards, then integrate selected4 rows/FM/contracts and concrete quote-only consumer patches.",
+    "Apply explicit page/design scope proposal as desired; controlling plan was not edited.",
+    "Root owns all numeric labels, hashes/readiness/current bindings/recertification/native owner resolution."
+  ],
+  "no_tests_or_gates": true
+}

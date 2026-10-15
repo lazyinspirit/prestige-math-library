@@ -1,0 +1,72 @@
+# Step 3a adjudication — batch 44
+
+Run: `bayesian-computational-statistics-62`. Group: `batch-44`. Scope: six touched obligations; no reader/refuter findings or page obligations. Review follows the generated dependency order.
+
+## Completed review
+
+- Level 0, `lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels`: Independently checked steps 1.1–4.1 and all twelve cited prerequisite statements. Joint P and Q are probabilities; zero section integrals plus lambda-a.e. domination prove P << Q. Scalar RN applies to finite positive P and Q; positive-part modification is legitimate. Rectangle identities give equality of measurable section masses a.e. for each member of a countable determining algebra; including F ensures finite mass before applying uniqueness. Countable intersection gives one exceptional null set, independent of B. Empty F is excluded by a probability kernel from a lambda-probability source. AC is explicitly carried. No defect found. Current source is unchanged between pre/post snapshots; no decision owed. Risk review completed in the owning contract. Dependencies were read in `items/<id>.md`, exact Statement/Definition sections.
+
+
+
+- `def-feynman-kac-path-targets-and-normalizers`: Checked the full Definition and added Remarks against coordinate/product measurability, arithmetic measurability, indefinite-integral measure and state-space conditional-law definitions. Finite nonnegative potentials give a measurable path product; gamma is a measure even if Z is infinite. Normalization is restricted to 0 < Z < infinity; T=0 uses the initial probability alone. The observation-null-history caveat is preserved. Accept the reader clarification without further item edits. Verdict: `reviewed_no_defect`, `change_kind: audit_enrichment`; no independently identified mathematical defect.
+
+- `lem-feynman-kac-path-measures-satisfy-forward-recursion`: Checked both proof steps and all six exact cited statements. The pullback last-state kernel is a probability kernel on histories; nonnegative product measurability gives measurable H. Density integration against V_(k-1) dP_(k-1) gives the ordered time-k integral, including zero and infinite integrals with the conventional zero-times-infinity product. No positivity or finiteness of Z is required. Accept the reader measurability and change-of-density clarification without further edits. Verdict: `reviewed_no_defect`, `change_kind: audit_enrichment`; no independently identified mathematical defect.
+
+- `thm-feynman-kac-path-radon-nikodym-weight`: Reviewed all five proof steps and eleven dependency interfaces. Initial finite scalar RN gives a real nonnegative density. The kernel-density lemma supplies jointly measurable real nonnegative representatives via its scalar proof. Simple approximation and monotone convergence extend finite-measure density identities to all nonnegative tests; each induction step uses transition identities only on a Q-prefix-conull set, also conull under the dominated target prefix. Multiplication by finite nonnegative potentials gives gamma << Q, even if gamma has infinite mass; normalization is stated only for positive finite Z. Checked s=0, zero potentials, and exceptional parent sets. No defect found.
+
+- `alg-sequential-importance-resampling`: Reviewed the complete procedure and both resampling branches against their definitions and the path-density proof. Inputs specify t in 0..T, N a positive integer, proposal probabilities/kernels and the Q-marginal domination convention. The scalar joint-law construction provides finite-valued nonnegative versions everywhere, so every finite sampled weight sum and normalization is defined. Scheme choice is supplied per transition. Both all-zero branches return a probability vector; zero Z remains zero. The finite loop returns the path empirical measure and product normalizer, including t=0. Repeated resampling calls have a supplier edge and no self-edge. No accuracy or convergence claim is asserted. Accept the reader input clarification.
+
+- `thm-sequential-particle-estimator-is-unbiased`: Reviewed all six steps, every cited interface and the reader preimage delta. Finite resampling probabilities, Borel floor/normalization branches, finite product proposal kernels and finite mixtures define the particle law. Null-history avoidance is proved for each fixed Q-null set before using marginal-a.e. derivative identities. Conditional expected offspring counts suffice for both schemes; child independence across ancestors is not assumed. The identity Zhat_k wbar_k^i = Zhat_(k-1) a_k^i/N handles the zero-sum branch exactly, and zero accumulated Zhat kills all subsequent mass. Nonnegative conditional-kernel integration precedes L1 conditional expectation, avoiding circular integrability. The induction applies to g_k because its gamma integral equals the finite gamma_k(phi); t=0 and phi=1 are valid. Infinite test values on target-null sets use zero-times-infinity and a.e. finite representatives before L1/tower. The N-in-N and 0<=t clarification agrees with the existing finite algorithm. No defect found; accept reader explicitization.
+
+- `cex-particle-filter-proposal-misses-target-support`: Read all three steps. The proposal is concentrated on a while gamma gives b mass 1/2; no density can represent that mass on a proposal-null singleton. The finite particle empirical measure therefore misses b. No claim of universal normalizer bias is made. Item bytes are unchanged pre/post; contract-only audit enrichment is `reviewed_no_defect`.
+
+- `ex-bootstrap-and-informed-proposal-particle-filter`: Independently recomputed all four verification steps. Target masses are 1/10 and 2/5, so Z=1/2 and pi=(1/5,4/5). Bootstrap proposal gives weights 1/5 and 4/5 with equal probabilities. Informed proposal gives derivative ratios 5/2 and 5/8 and constant incremental weight 1/2. Both proposals are positive on the finite target support. Read the ordinary IS algorithm and complete unbiasedness proof: it estimates normalized expectations with known Z, so multiplying its f=1 identity by Z gives precisely the unnormalized weight expectation used here. N=1 makes resampling deterministic. No general optimality or availability claim is made. Item bytes unchanged pre/post; accept contract-only audit enrichment without a defect.
+
+## Historical comparison and verdicts
+
+All eleven current item raw SHA256 values equal their entries in `research/bayesian-computational-statistics-62-step3-hash-44-post.json`. The four source-changing preimages in `research/bayesian-computational-statistics-62-owner-step2-gate1-41-44-frozen-sources/` exactly match the raw item hashes in `research/bayesian-computational-statistics-62-step3-hash-44-pre.json`; their complete diffs were inspected. Historical deltas are known.
+
+The reader called the four changes repairs. Independent inspection of those preimages finds elementary omitted explanations and implicit finite-count/horizon conventions, rather than a false mathematical assertion or an unmet substantial prerequisite. The definition adds only a measurable-weight well-definedness remark; the recursion makes density integration explicit; SIR spells out the existing finite-horizon input convention and finite representatives; unbiasedness spells out finite-kernel measurability and zero-weight algebra and makes the already implied count/horizon types explicit. These are retained as audit enrichment under the task's explicit `reviewed_no_defect` rule. This classification does not clear any reader/refuter finding or open mathematical defect: both routed finding arrays are empty. No defect-ledger row is fabricated for these sound enrichments or for manifest maintenance.
+
+| Touched carrier | Verdict | Change kind |
+|---|---|---|
+| `def-feynman-kac-path-targets-and-normalizers` | `reviewed_no_defect` | `audit_enrichment` |
+| `lem-feynman-kac-path-measures-satisfy-forward-recursion` | `reviewed_no_defect` | `audit_enrichment` |
+| `alg-sequential-importance-resampling` | `reviewed_no_defect` | `audit_enrichment` |
+| `thm-sequential-particle-estimator-is-unbiased` | `reviewed_no_defect` | `audit_enrichment` |
+| `cex-particle-filter-proposal-misses-target-support` | `reviewed_no_defect` | `audit_enrichment` |
+| `ex-bootstrap-and-informed-proposal-particle-filter` | `reviewed_no_defect` | `audit_enrichment` |
+
+The last two have identical item hashes before and after the reader. Their changed contracts carry the clarified SIR citation, which is an exact current Definition excerpt; the example also retains the correct normalized-IS supplier statement. The current boundary worksheets accurately distinguish the finite witness/calculation from an iff claim. No unnecessary source edits were made.
+
+## Consumer and manifest maintenance
+
+Reconciled only the four reader-affected rows in `research/bayesian-computational-statistics-62-batch-44.pages.json`: added the current dependency mirrors for the target definition, recursion and unbiasedness theorem; transcribed the full current SIR Definition and the unbiasedness Statement. Page identities, inventory, order and dependency levels are preserved. This closes the reader's stated manifest-maintenance handoff. No source, provenance or judge record was changed by this adjudicator.
+
+Checked direct dependency/reference consumers of the SIR input clarification and the unbiasedness count/horizon clarification against current source uses. Batch 45: `def-smc-clt-function-classes-and-variance-recursions`, `lem-smc-finite-horizon-empirical-law`, `lem-smc-mutation-and-weighted-correction-clt`; batch 46: `alg-particle-backward-simulator`, `alg-rao-blackwellized-particle-filter`, `lem-bootstrap-particle-filter-weak-consistency`, `alg-fixed-lag-particle-smoother`; batch 47: `alg-pmmh`, `thm-pmmh-exact-invariance`, `def-particle-gibbs-extended-target`, `alg-conditional-particle-gibbs`, `thm-particle-gibbs-selected-path-marginal`, `thm-particle-gibbs-conditional-sweep-is-gibbs`, `def-particle-gibbs-backward-simulation-extended-target`, `alg-particle-gibbs-backward-simulation`. Also checked the three relevant local consumers (unbiasedness, finite example and support counterexample). Uses concern finite particle arrays and finite horizons, specified proposal kernels/weights, normalized fallback, and/or the finite-positive-normalizer unbiasedness identity; none relies on a noninteger count, negative horizon, or nonfinite derivative choice. Backward/conditional algorithms impose their own admissibility and version restrictions. No necessary consumer correction or second-hop propagation results. These are focused interface checks, not independent audits of other batches.
+
+The owned `def-feynman-kac-path-targets-and-normalizers` → `def-state-space-filtering-laws` declaration-only open record in `research/bayesian-computational-statistics-62-batch-44.cross-batch-dependencies.json` is now verified with the exact current version-convention evidence. Other records remain present. The shared frontier ledger receives an append-only batch-44 entry. No withdrawal is proposed or removed.
+
+## Source evidence and review limits
+
+All cited item prerequisites were opened at their exact `Statement` or `Definition` sections; the local ordinary-IS supplier proof was also read completely. The count expectation supplier was checked directly from its finite categorical-indicator proof. The twelve dependencies of the measurable-density lemma were checked before its consumers; the additional density-integration, product/arithmetic measurability, simple approximation, monotone convergence, finite-product-kernel, conditional-expectation, expectation and linearity interfaces were checked when first used. The report's completed-item paragraphs and the seven contract risk reviews record the relevant hypotheses and uses.
+
+External corroboration: [Mathlib kernel Radon–Nikodym documentation](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Probability/Kernel/RadonNikodym.html), introductory construction and main statements, lines 141–166: finite kernels with countably generated target admit jointly measurable densities, and domination eliminates the singular part. Standard Borel targets meet that countability hypothesis. This is corroboration; the local proof independently constructs the needed almost-everywhere version from finite joint laws.
+
+[Doucet–Johansen tutorial](https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF2011.pdf), §3.3 equations (28)–(30), PDF pages 12–13; §3.4 expected-count identity (32), PDF page 15; §3.5 algorithm and average-increment formula, PDF pages 16–17: proposal factorization, incremental density ratios, unbiased offspring counts and the full-resampling normalizer convention agree with the reviewed local setup. The local proof supplies its own measure-theoretic and zero-weight details. No claim is made to have read the other cited books in this dispatch.
+
+No defective published prerequisite, substantial missing result, unresolved mathematical uncertainty, or required owner repair was identified. Published sources were read-only. No judgment, stamp, certification, dispatch, gate battery or state transition was performed.
+
+## Local checks
+
+- Initial `node tools/risk-report.mjs research/bayesian-computational-statistics-62-batch-44.proof-contracts.json`: 11 items routed, seven HIGH/CRITICAL; no tool errors. All seven now have specific complete Alpha risk reviews.
+- `node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-44.proof-contracts.json --strict`: 11/11 checked, 0 errors, 0 warnings.
+- Risk report rerun with `--require-reviewed`: 11 items routed, 0 errors.
+- `node tools/tsx-run.mjs tools/precheck.mts` on the four reader-source-changed paths: two proof-bearing items passed, 0 failures; definition and algorithm have no phase proof.
+
+Final proof-layout and obligation/mirror checks are recorded below after execution. No item was edited by this adjudicator; proof-layout nevertheless checks all six routed source paths at handoff.
+
+- Final `node tools/proof-layout.mjs` on all six routed paths: 6 items, 15 steps, 0 defects.
+- Final focused JSON/source checks: exactly 6/6 owed decisions, no extras; all eleven manifest dependency mirrors equal current source; all eleven raw item hashes still equal the frozen reader-post values; exactly seven complete risk reviews.
+
+Handoff: all routed obligations complete; no blockers. The engine owns decision hashing and subsequent native gates.

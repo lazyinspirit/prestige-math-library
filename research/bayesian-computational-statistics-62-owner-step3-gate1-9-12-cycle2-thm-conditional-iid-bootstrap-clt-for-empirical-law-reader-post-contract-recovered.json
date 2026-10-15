@@ -1,0 +1,333 @@
+{
+  "risk": "high",
+  "kind": "theorem",
+  "citations": [
+    {
+      "fact": "A1",
+      "source": "def-axiom-of-choice",
+      "source_section": "Definition",
+      "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+      "uses": [
+        "4.1"
+      ]
+    },
+    {
+      "fact": "F1",
+      "source": "def-iid-empirical-bootstrap-sample",
+      "source_section": "Definition",
+      "quote": "Fix integers $d,n\\ge1$ and observed vectors $x_1,\\ldots,x_n\\in\\mathbb R^d$, with the Borel sigma-algebra $\\mathcal B(\\mathbb R^d)$ ([[def-borel-sigma-algebra]]). Their empirical law is the set function\n$$P_n(A)=\\frac1n\\sum_{i=1}^n 1\\{x_i\\in A\\},\\qquad A\\in\\mathcal B(\\mathbb R^d).$$\n\nLet $\\mathsf I_n=\\{\\omega:[n]\\to[n]\\}$ be the finite set of index vectors. By [[thm-cardinality-of-a-set-of-functions]], it has $n^n$ elements. Give each index vector mass $n^{-n}$; the weights sum to one, so this is a finite probability space in the sense of [[def-finite-probability-space-and-event]]. For $j=1,\\ldots,n$, let $I_j(\\omega)=\\omega(j)$ and put $X_j^*(\\omega)=x_{I_j(\\omega)}$. The **ideal size-$n$ empirical bootstrap law conditional on the data** is the pushforward of this finite uniform law under\n$\\omega\\longmapsto (x_{\\omega(1)},\\ldots,x_{\\omega(n)}).$\nThus conditional probabilities are finite averages over the $n^n$ index tuples. The empirical law is a probability measure, and the bootstrap coordinates are conditionally IID with that law, by the well-definedness results listed in justified_by.\n\nFor random observations $X_1,\\ldots,X_n$, write $\\bar X_n=n^{-1}\\sum_iX_i$ coordinatewise, so each coordinate is the scalar sample mean in [[def-partial-sums-and-sample-means]]. Write $P_n=n^{-1}\\sum_i\\delta_{X_i}$, using the Dirac measure [[def-dirac-measure]], and let $\\bar X_n^*$ be the bootstrap mean. If $g:\\mathbb R^d\\to\\mathbb R$ is Borel ([[def-measurable-function-between-measurable-spaces]]), then\n$$\\hat\\theta_n=g(\\bar X_n),\\qquad \\hat\\theta_n^*=g(\\bar X_n^*).$$\nWhen $X_i$ are IID ([[def-identically-distributed-and-iid-random-variables]]) with finite second moment, write $\\mu_j=\\mathbb E X_{1j}$ and $\\Sigma_{jk}=\\mathbb E[(X_{1j}-\\mu_j)(X_{1k}-\\mu_k)]$ ([[def-moments-variance-and-covariance]]), and set $\\theta=g(\\mu)$. The functions of the data above are Borel statistics and estimators in the sense of [[def-statistic-and-estimator]]; coordinatewise arithmetic preserves measurability ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]). No bootstrap validity or interval coverage is part of this definition. For $n\\ge2$, the delete-one mean and plug-in statistic are\n$$\\bar X_{n,(-i)}=\\frac1{n-1}\\sum_{j\\ne i}X_j,\\qquad \\hat\\theta_{n,(-i)}=g(\\bar X_{n,(-i)}).$$",
+      "uses": [
+        "2.1"
+      ]
+    },
+    {
+      "fact": "F1",
+      "source": "lem-finite-index-bootstrap-sample-is-conditionally-iid",
+      "source_section": "Statement",
+      "quote": "For fixed data $x_1,\\ldots,x_n\\in\\mathbb R^d$, the coordinates of the finite-index bootstrap sample in [[def-iid-empirical-bootstrap-sample]] are independent and each has law $P_n$.",
+      "uses": [
+        "2.1"
+      ]
+    },
+    {
+      "fact": "F2",
+      "source": "lem-iid-sample-covariance-converges",
+      "source_section": "Statement",
+      "quote": "Let $d\\ge1$ be finite and let $X_1,X_2,\\ldots$ be IID $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$. Put $\\mu_j=\\mathbb E X_{1j}$ and $\\Sigma_{jk}=\\mathbb E[(X_{1j}-\\mu_j)(X_{1k}-\\mu_k)]$, the coordinate covariance entries from [[def-moments-variance-and-covariance]]. Define\n$$\\bar X_n=\\frac1n\\sum_{i=1}^nX_i,\\qquad \\widehat\\Sigma_n=\\frac1n\\sum_{i=1}^n(X_i-\\bar X_n)(X_i-\\bar X_n)^T.$$\nThen $\\bar X_n\\to\\mu$ in probability and every entry of $\\widehat\\Sigma_n$ converges in probability to the corresponding entry of $\\Sigma$.",
+      "uses": [
+        "1.1",
+        "1.2",
+        "2.1",
+        "2.2"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "def-row-wise-independent-centered-triangular-array",
+      "source_section": "Definition",
+      "quote": "For each integer $n\\ge1$, let $k_n\\ge1$ be a finite integer and let $X_{n,1},\\ldots,X_{n,k_n}$ be integrable real random variables on a probability space $(\\Omega_n,\\mathcal F_n,\\mathbb P_n)$. The family is a **centered triangular array** when $\\mathbb E_nX_{n,k}=0$ for every admissible pair $(n,k)$. It is **row-wise independent** when, for each fixed n and all Borel sets $B_1,\\ldots,B_{k_n}$, $$\\mathbb P_n\\!\\left(\\bigcap_{k=1}^{k_n}\\{X_{n,k}\\in B_k\\}\\right)=\\prod_{k=1}^{k_n}\\mathbb P_n(X_{n,k}\\in B_k).$$ Taking unused $B_k$ equal to the real line gives the same factorization for each subfamily; by [[thm-rectangle-criterion-for-independent-random-elements]], this is exactly independence in [[def-independent-random-elements]]. Random variables and integrability have the meanings in [[def-random-element-and-real-random-variable]] and [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. There is no independence requirement between different rows. The spaces may differ with n; assertions about row sums compare their laws. A single-entry row is independent automatically, and deterministic zero entries are allowed. Empty rows are excluded by $k_n\\ge1$. This definition makes no existence or choice assumption.",
+      "uses": [
+        "2.1",
+        "4.1"
+      ]
+    },
+    {
+      "fact": "F4",
+      "source": "def-total-row-variance-and-lindeberg-condition",
+      "source_section": "Definition",
+      "quote": "For a centered triangular array as in [[def-row-wise-independent-centered-triangular-array]], suppose every entry has finite second moment. Write $$v_{n,k}=\\mathbb E_nX_{n,k}^2=\\operatorname{Var}_n(X_{n,k}),\\qquad s_n^2=\\sum_{k=1}^{k_n}v_{n,k}.$$ Variance is defined in [[def-moments-variance-and-covariance]]. Every term is finite and nonnegative, so the finite sum and its nonnegative square root s_n exist. Whenever $s_n>0$, define $$L_n(\\varepsilon)=s_n^{-2}\\sum_{k=1}^{k_n}\\mathbb E_n\\!\\left[X_{n,k}^2\\mathbf1_{\\{|X_{n,k}|>\\varepsilon s_n\\}}\\right]\\quad(\\varepsilon>0).$$ The **Lindeberg condition** is $L_n(\\varepsilon)\\to0$ for every fixed $\\varepsilon>0$, with $s_n>0$ for all n under consideration. The event is measurable because absolute value is continuous and the entries are measurable; products are measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]]. Its nonnegative integrand is bounded by $X_{n,k}^2$, so its expectation exists and is finite by [[prop-order-and-scalar-rules-for-the-nonnegative-integral]] and [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. In particular $0\\le L_n(\\varepsilon)\\le1$.\n\nFor $Y_{n,k}=X_{n,k}/s_n$, scalar homogeneity gives $\\sum_k\\mathbb E_nY_{n,k}^2=1$. The equality $|Y_{n,k}|>\\varepsilon\\Longleftrightarrow |X_{n,k}|>\\varepsilon s_n$ gives $$L_n(\\varepsilon)=\\sum_k\\mathbb E_n[Y_{n,k}^2\\mathbf1_{\\{|Y_{n,k}|>\\varepsilon\\}}].$$ Thus the normalized and unnormalized conditions are exactly equivalent, not merely asymptotic. The cutoff uses strict inequality; equality at the threshold is excluded. A zero-variance row is allowed in the initial variance definition, but its normalization and Lindeberg expression above are undefined. No independence or choice is needed to define these quantities.",
+      "uses": [
+        "2.1",
+        "4.1"
+      ]
+    },
+    {
+      "fact": "F5",
+      "source": "thm-lindeberg-feller-central-limit-theorem-sufficiency",
+      "source_section": "Statement",
+      "quote": "Assume AC. If a centered row-wise independent triangular array has finite second moments, $s_n>0$ and the Lindeberg condition, then $$s_n^{-1}\\sum_{k=1}^{k_n}X_{n,k}\\Rightarrow N(0,1).$$",
+      "uses": [
+        "4.1"
+      ]
+    },
+    {
+      "fact": "F6",
+      "source": "thm-slutsky-for-real-random-variables",
+      "source_section": "Statement",
+      "quote": "Let $(X_n)$ and $(Y_n)$ be real random variables on one probability space, and let $X$ be a real random variable (possibly on another space). If $X_n\\Rightarrow X$ and $Y_n\\to c$ in probability for $c\\in\\mathbb R$, then $X_n+Y_n\\Rightarrow X+c$ and $X_nY_n\\Rightarrow cX$. If $c\\ne0$, define $Q_n=X_n/Y_n$ on $\\{Y_n\\ne0\\}$ and give $Q_n$ any fixed value on $\\{Y_n=0\\}$. Then $Q_n\\Rightarrow X/c$.",
+      "uses": [
+        "5.1"
+      ]
+    },
+    {
+      "fact": "F7",
+      "source": "thm-dominated-convergence",
+      "source_section": "Statement",
+      "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+      "uses": [
+        "1.2"
+      ]
+    },
+    {
+      "fact": "F8",
+      "source": "cor-markov-inequality-for-random-variables",
+      "source_section": "Statement",
+      "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+      "uses": [
+        "1.2"
+      ]
+    },
+    {
+      "fact": "F9",
+      "source": "thm-finite-and-countable-subadditivity-of-measures",
+      "source_section": "Statement",
+      "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+      "uses": [
+        "3.1"
+      ]
+    },
+    {
+      "fact": "F10",
+      "source": "def-standard-normal-and-normal-laws",
+      "source_section": "Definition",
+      "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+      "uses": [
+        "5.1"
+      ]
+    },
+    {
+      "fact": "F10",
+      "source": "lem-standard-normal-cdf-is-continuous-and-strictly-increasing",
+      "source_section": "Statement",
+      "quote": "Assume the Axiom of Choice. Let $\\Phi(x)=P(Z\\le x)$ for $Z\\sim N(0,1)$. Then $\\Phi$ is continuous and strictly increasing on $\\mathbb R$, with $\\lim_{x\\to-\\infty}\\Phi(x)=0$ and $\\lim_{x\\to+\\infty}\\Phi(x)=1$.",
+      "uses": [
+        "5.1"
+      ]
+    },
+    {
+      "fact": "F11",
+      "source": "thm-heine-cantor-metric",
+      "source_section": "Statement",
+      "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
+      "uses": [
+        "5.1"
+      ]
+    },
+    {
+      "fact": "F12",
+      "source": "thm-well-ordering-principle",
+      "source_section": "Statement",
+      "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+      "uses": [
+        "2.2"
+      ]
+    },
+    {
+      "fact": "F13",
+      "source": "cor-archimedean-reciprocal",
+      "source_section": "Statement",
+      "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+      "uses": [
+        "3.1"
+      ]
+    },
+    {
+      "fact": "F14",
+      "source": "lem-finite-bootstrap-cdf-supremum-is-measurable",
+      "source_section": "Statement",
+      "quote": "Let $n,d\\ge1$, let $(X_1,\\ldots,X_n)$ be a measurable $(\\mathbb R^d)^n$-valued random vector, and fix $a\\in\\mathbb R^d$. For each finite index tuple $\\omega=(i_1,\\ldots,i_n)\\in\\mathsf I_n=\\{1,\\ldots,n\\}^n$, define the projected centered bootstrap-mean value\n$$R_{n,\\omega}=\\sqrt n\\,a^T\\!\\left(\\frac1n\\sum_{\\ell=1}^n X_{i_\\ell}-\\bar X_n\\right),\\qquad \\bar X_n=\\frac1n\\sum_{i=1}^nX_i.$$\nThe finite-index conditional bootstrap CDF is\n$$F_n^*(t)=n^{-n}\\sum_{\\omega\\in\\mathsf I_n}1\\{R_{n,\\omega}\\le t\\}.$$\nFor every fixed continuous cumulative distribution function $G:\\mathbb R\\to[0,1]$, the supremum\n$$D_n=\\sup_{t\\in\\mathbb R}|F_n^*(t)-G(t)|$$\nis a measurable real random variable.",
+      "uses": [
+        "5.1",
+        "6.1"
+      ]
+    },
+    {
+      "fact": "F15",
+      "source": "thm-almost-sure-convergence-implies-convergence-in-probability",
+      "source_section": "Statement",
+      "quote": "If $X_n\\to X$ almost surely, then $X_n\\to X$ in probability.",
+      "uses": [
+        "6.1"
+      ]
+    }
+  ],
+  "derivations": [
+    {
+      "id": "step-1-1",
+      "claim": "Put $Y_i=a^T(X_i-\\mu)$ and $\\bar Y_n=n^{-1}\\sum_iY_i$. Its variance is $\\sigma^2$. By [F2], the empirical variance $s_n^2=\\frac1n\\sum_{i=1}^n(Y_i-\\bar Y_n)^2=a^T\\widehat\\Sigma_n a$ converges in probability to $\\sigma^2>0$, while $\\bar Y_n\\to0$ in probability and $n^{-1}\\sum_iY_i^2\\to\\sigma^2$ in probability.",
+      "step": "1.1",
+      "inputs": [
+        "F2",
+        "given",
+        "algebra"
+      ]
+    },
+    {
+      "id": "step-1-2",
+      "claim": "For $t>0$, define the unnormalized empirical tail quantity $T_n(t)=\\frac1n\\sum_{i=1}^n(Y_i-\\bar Y_n)^2\\,1\\{|Y_i-\\bar Y_n|>t\\sqrt n\\}.$ On $|\\bar Y_n|\\le t\\sqrt n/2$, the indicator implies $|Y_i|>t\\sqrt n/2$, and $T_n(t)\\le 2\\,\\frac1n\\sum_iY_i^2\\,1\\{|Y_i|>t\\sqrt n/2\\} +2\\bar Y_n^2\\,\\frac1n\\sum_i1\\{|Y_i|>t\\sqrt n/2\\}.$ The expectation of the first term tends to zero by [F7], so [F8] makes it converge to zero in probability. The second empirical tail fraction is at most $4(t^2n)^{-1}(n^{-1}\\sum_iY_i^2)$; hence its product with $2\\bar Y_n^2$ tends to zero in probability by [F2]. The complement event has probability tending to zero by [F2], so $T_n(t)\\to0$ in probability for every $t>0$.",
+      "step": "1.2",
+      "inputs": [
+        "F2",
+        "F7",
+        "F8",
+        "given",
+        "algebra"
+      ]
+    },
+    {
+      "id": "step-2-1",
+      "claim": "Conditionally on the data, the row variables $Z_{n\\ell}^*=n^{-1/2}a^T(X_\\ell^*-\\bar X_n)$, $1\\le\\ell\\le n$, are independent and centered by [F1]. They are finite conditional rows of the type in [F3], with total variance $s_n^2$. By [F4], when $s_n>0$ their normalized Lindeberg quantity at threshold $\\varepsilon>0$ is $s_n^{-2}T_n(\\varepsilon s_n)$. On $s_n\\ge\\sigma/2$, this is at most $4\\sigma^{-2}T_n(\\varepsilon\\sigma/2)$, which tends to zero in probability by step 1.2; also $s_n^2\\to\\sigma^2$ in probability by [F2].",
+      "step": "2.1",
+      "inputs": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "given",
+        "step 1.2"
+      ]
+    },
+    {
+      "id": "step-2-2",
+      "claim": "Take any subsequence, indexed $(n_k)_{k\\ge1}$. Recursively, after $k_0=0$, let $k_j$ be the least integer $k>k_{j-1}$ for which $\\mathbb P(|s_{n_k}^2-\\sigma^2|>1/j)+\\sum_{r=1}^j\\mathbb P(T_{n_k}(1/r)>1/j)<2^{-j}$. For fixed $j$, each of these finitely many probabilities tends to zero as $k\\to\\infty$ by [F2] and step 1.2, so the qualifying set is nonempty; [F12] gives its least index.",
+      "step": "2.2",
+      "inputs": [
+        "F2",
+        "F12",
+        "given",
+        "step 1.2",
+        "choose"
+      ]
+    },
+    {
+      "id": "step-3-1",
+      "claim": "Let $E_j$ be the union of the variance-deviation event and the $j$ tail events at index $k_j$. By [F9], $\\mathbb P(E_j)<2^{-j}$ and $\\mathbb P(\\bigcup_{j\\ge m}E_j)\\le\\sum_{j\\ge m}2^{-j}=2^{1-m}$. The event that infinitely many $E_j$ occur is contained in every such tail union, so its probability is zero. Off this null event, $s_{n_{k_j}}^2\\to\\sigma^2$ and, for every fixed $r\\ge1$, $T_{n_{k_j}}(1/r)\\to0$. For any $t>0$, choose $r$ with $1/r<t$ by [F13]; since $T_n$ is nonincreasing, $0\\le T_{n_{k_j}}(t)\\le T_{n_{k_j}}(1/r)\\to0$.",
+      "step": "3.1",
+      "inputs": [
+        "F9",
+        "F13",
+        "step 2.2",
+        "algebra"
+      ]
+    },
+    {
+      "id": "step-4-1",
+      "claim": "Along almost every selected data path, $s_{n_{k_j}}\\to\\sigma>0$, and for every $\\varepsilon>0$ the Lindeberg quantity is eventually bounded by $4\\sigma^{-2}T_{n_{k_j}}(\\varepsilon\\sigma/2)\\to0$. Thus the deterministic conditional rows satisfy [F5], giving $\\sum_{\\ell=1}^{n_{k_j}}Z_{n_{k_j},\\ell}^*/s_{n_{k_j}}\\Rightarrow N(0,1)$. Every starting subsequence has a further subsequence with this almost-sure conditional convergence.",
+      "step": "4.1",
+      "inputs": [
+        "A1",
+        "F3",
+        "F4",
+        "F5",
+        "given",
+        "step 2.1",
+        "step 3.1"
+      ]
+    },
+    {
+      "id": "step-5-1",
+      "claim": "Along each such data sequence, $s_{n_{k_j}}\\to\\sigma$ and Slutsky's theorem [F6] gives $\\sum_{\\ell=1}^{n_{k_j}}Z_{n_{k_j},\\ell}^*\\Rightarrow N(0,\\sigma^2)$. By the definition of real convergence in distribution, the conditional CDFs converge at every $x$ because of [F10]. To make this uniform, fix $\\eta>0$, choose $R$ with $\\Phi_\\sigma(-R)<\\eta$ and $1-\\Phi_\\sigma(R)<\\eta$, and partition $[-R,R]$ into finitely many intervals on which $\\Phi_\\sigma$ varies by less than $\\eta$, using [F11]. Monotonicity of each conditional CDF bounds its error between grid points by the endpoint errors plus $\\eta$; outside $[-R,R]$ the two tail probabilities add at most $2\\eta$ plus endpoint errors. The maximum grid error tends to zero, and then $\\eta\\downarrow0$ proves almost-sure uniform CDF convergence along the selected subsequence. Since $D_n$ is measurable by [F14], this is almost-sure convergence of real random variables.",
+      "step": "5.1",
+      "inputs": [
+        "F6",
+        "F10",
+        "F11",
+        "F14",
+        "step 2.1",
+        "step 4.1",
+        "given"
+      ]
+    },
+    {
+      "id": "step-6-1",
+      "claim": "If $D_n$ did not converge to zero in probability, there would be $\\delta,\\varepsilon>0$ and a subsequence on which $\\mathbb P(D_n>\\delta)\\ge\\varepsilon$. Applying the subsequence construction in step 2.2 and its consequences in steps 3.1–5.1 gives a further subsequence with $D_n\\to0$ almost surely by step 5.1. By [F15], this is convergence in probability, contradicting the lower bound.",
+      "step": "6.1",
+      "inputs": [
+        "F14",
+        "F15",
+        "step 2.2",
+        "step 3.1",
+        "step 4.1",
+        "step 5.1",
+        "given"
+      ]
+    }
+  ],
+  "routine_steps": [],
+  "boundaries": [
+    {
+      "case": "empty",
+      "status": "not_applicable",
+      "reason": "Statement: the CLT concerns rows n tending to infinity, with n>=1."
+    },
+    {
+      "case": "zero",
+      "status": "not_applicable",
+      "reason": "Statement: the projected variance sigma^2 is required to be positive."
+    },
+    {
+      "case": "one",
+      "status": "checked",
+      "evidence": "Statement: a finite initial row such as n=1 is permitted but does not affect the asymptotic assertion."
+    },
+    {
+      "case": "degenerate",
+      "status": "not_applicable",
+      "reason": "Statement: zero projected variance is excluded, although the full covariance matrix may be singular."
+    },
+    {
+      "case": "endpoints",
+      "status": "checked",
+      "evidence": "Statement takes the supremum over every real CDF argumentx. Proof5.1 explicitly controls both infinite tails outside[-R,R] and finite partition endpoints, so no extra CDF endpoint regime is missing."
+    },
+    {
+      "case": "nonempty-choice",
+      "status": "checked",
+      "evidence": "Statement: Assumption A1: AC is explicit and is used through the Lindeberg-Feller theorem; the bootstrap index space itself is finite."
+    },
+    {
+      "case": "iff-forward",
+      "status": "not_applicable",
+      "reason": "Statement: no equivalence is asserted.",
+      "template_review": {
+        "upheld": true,
+        "by": "bcs_misspecified_consistency_resolution",
+        "reason": "Forward-implication worksheet upheld: The positive projected variance and finite second moment suffice for conditional Gaussian CDF approximation; Proof4.1 invokes conditional triangular-array CLT and does not prove moment necessity.",
+        "item_sha256": "a421c2e9993315e28bddd73b477acf20170bf0c14b25d55308316eb10651a436",
+        "row_sha256": "dc8746857c34b0647a58f969d89d6d62d6a6584299d5971204517118ef51cf6b"
+      }
+    },
+    {
+      "case": "iff-reverse",
+      "status": "not_applicable",
+      "reason": "Statement: no equivalence is asserted.",
+      "template_review": {
+        "upheld": true,
+        "by": "bcs_misspecified_consistency_resolution",
+        "reason": "Reverse-implication worksheet upheld: The positive projected variance and finite second moment suffice for conditional Gaussian CDF approximation; Proof4.1 invokes conditional triangular-array CLT and does not prove moment necessity.",
+        "item_sha256": "a421c2e9993315e28bddd73b477acf20170bf0c14b25d55308316eb10651a436",
+        "row_sha256": "f30bb621bc529eee96d362432f05f38cce4c5707efadaca898a0dd0147fa02ad"
+      }
+    }
+  ]
+}

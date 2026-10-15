@@ -1,0 +1,62 @@
+--- a/tools/judge-currency.mjs
++++ b/tools/judge-currency.mjs
+@@ -34,9 +34,17 @@
+  *        a verdict row from the judge ledger
+  * @param {{context: string, item: string|null}} current
+  *        the item's current context hash and current judge-form item hash
++ * @param {'context-or-item'|'exact-context'} [currency='context-or-item']
++ *        Step5 certified waves require both the exact item and frozen context.
+  * @returns {boolean}
+  */
+-export function verdictIsCurrent(row, current) {
++export function verdictIsCurrent(row, current, currency = 'context-or-item') {
++  if (!['context-or-item', 'exact-context'].includes(currency))
++    throw new Error(`unknown judge currency policy: ${currency}`);
++  if (currency === 'exact-context') {
++    return Boolean(row && current && current.context && current.item
++      && row.context_sha256 === current.context && row.item_sha256 === current.item);
++  }
+   if (!row || !current) return false;
+   if (row.context_sha256 && row.context_sha256 === current.context) return true;
+   // A ledger written before `item_sha256` existed carries none, and `null`
+--- a/tools/judge-sweep.mjs
++++ b/tools/judge-sweep.mjs
+@@ -28,6 +28,9 @@
+ const lineupArg = option('--lineup');
+ const effortArg = option('--effort');
+ const limitArg = option('--limit');
++const currency = option('--currency') || 'context-or-item';
++if (!['context-or-item', 'exact-context'].includes(currency))
++  throw new Error('--currency must be context-or-item or exact-context');
+ // Kept as run metadata for callers and logs. Stateless judging deliberately
+ // does not use it as a session namespace.
+ const run = option('--run');
+@@ -40,7 +43,7 @@
+ if (!ledger || !cost || (!pagesArg && !itemsArg && !manifestsArg)) {
+   console.error('usage: node tools/judge-sweep.mjs --ledger FILE --cost FILE '
+     + '(--pages PAGE,... | --items ID,... | --manifests FILE,...) '
+-    + '[--lineup sol|sol61|luna] [--effort low|medium|high|xhigh|max] [--models MODEL,...] [--limit N] [--run RUN]');
++    + '[--lineup sol|sol61|luna] [--effort low|medium|high|xhigh|max] [--models MODEL,...] [--limit N] [--currency context-or-item|exact-context] [--run RUN]');
+   process.exit(2);
+ }
+ if (manifestsArg && (pagesArg || itemsArg)) {
+@@ -136,7 +139,7 @@
+     const current = currentHashes.get(id);
+     if (!current) throw new Error(`${id}: missing current context hash`);
+     return !(history.get(`${id}\0${model}`) ?? []).some((row) =>
+-      typeof row.keep === 'boolean' && verdictIsCurrent(row, current));
++      typeof row.keep === 'boolean' && verdictIsCurrent(row, current, currency));
+   }).slice(0, limit);
+   console.log(`[judge-sweep] ${model}: pending ${owed.length}/${ids.length}, cap ${caps[model]}`);
+   pending.push(...owed.map((id) => ({ id, model })));
+--- a/tools/step5-workflow.mjs
++++ b/tools/step5-workflow.mjs
+@@ -1554,7 +1554,7 @@
+   const ids=[...new Set([...cert.changed,...migrationIds])].filter(id=>frontier.has(id)).filter(id=>{const now=beforeContexts.get(id);requireValue(now,`missing judge context ${id}`);return prev[id]?.item_sha256!==now.item_sha256||prev[id]?.context_sha256!==now.context_sha256;});
+   const ledger=join(root,'research',`${run}-judge.jsonl`);
+   if(ids.length) {
+-    const out=runSweep?runSweep({root,run,ids,ledger}):spawnSync(process.execPath,['tools/judge-sweep.mjs','--run',run,'--ledger',ledger,'--cost',`research/${run}-judge-cost.jsonl`,'--items',ids.join(','),'--lineup',judgeLineup,'--effort',judgeEffort],{cwd:root,stdio:'inherit',timeout:43200000});
++    const out=runSweep?runSweep({root,run,ids,ledger}):spawnSync(process.execPath,['tools/judge-sweep.mjs','--run',run,'--ledger',ledger,'--cost',`research/${run}-judge-cost.jsonl`,'--items',ids.join(','),'--lineup',judgeLineup,'--effort',judgeEffort,'--currency','exact-context'],{cwd:root,stdio:'inherit',timeout:43200000});
+     if(out.status!==0)throw Error(`Sol sweep failed (${out.status}); resume preserves completed verdicts`);
+   }
+   const currentContexts=contextHasher(root,ids), verdicts=[];

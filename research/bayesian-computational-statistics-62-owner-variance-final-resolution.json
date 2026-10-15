@@ -1,0 +1,543 @@
+{
+  "version": 1,
+  "kind": "focused-owner-prerequisite-resolution",
+  "run": "bayesian-computational-statistics-62",
+  "batch": 29,
+  "supplier_batch": 28,
+  "cycle": 2,
+  "prior_evidence": "research/bayesian-computational-statistics-62-owner-variance-intake.json",
+  "observed_at": "2026-10-15T05:00:54.625774+00:00",
+  "scope": "Final focused current missing-IID-Monte-Carlo-supplier boundary only; not full proof review or audit.",
+  "status": "boundary-resolved-root-metadata-and-readiness-reconciliation-pending",
+  "native_dispatches": {
+    "28": {
+      "stage": "1-scaffold",
+      "role": "beta",
+      "label": "batch-28",
+      "covers": [
+        "28"
+      ],
+      "attempt": 2,
+      "attempts": 2,
+      "startedAt": "2026-10-15T04:33:55.793Z",
+      "endedAt": "2026-10-15T04:45:35.956Z",
+      "lastExitOk": true
+    },
+    "29": {
+      "stage": "1-scaffold",
+      "role": "beta",
+      "label": "batch-29",
+      "covers": [
+        "29"
+      ],
+      "attempt": 2,
+      "attempts": 2,
+      "startedAt": "2026-10-15T04:33:56.112Z",
+      "endedAt": "2026-10-15T04:57:53.903Z",
+      "lastExitOk": true
+    }
+  },
+  "consumer_count": 15,
+  "consumer_dispositions": [
+    {
+      "id": "def-control-variate-estimator",
+      "source": {
+        "path": "items/def-control-variate-estimator.md",
+        "byte_length": 1917,
+        "mtime_ns": 1792037286252291802,
+        "note": "Observation only; exact final cryptographic binding reserved to root."
+      },
+      "disposition": "missing-supplier-boundary-resolved",
+      "premise_limit": "Definition specifies its own estimator and uses existing published IID/moment interfaces; no missing batch28-specific definition is required.",
+      "manifest_deps": [
+        "def-identically-distributed-and-iid-random-variables",
+        "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+        "def-moments-variance-and-covariance"
+      ],
+      "batch28_logical_deps": [],
+      "batch28_contract_imports": [],
+      "current_statement_or_definition": "Let $(\\mathsf X,\\mathcal X,P)$ be a probability space, let $q\\ge1$ and $n\\ge1$, and let $f:\\mathsf X\\to\\mathbb R$ and $h=(h_1,\\ldots,h_q):\\mathsf X\\to\\mathbb R^q$ be measurable with $\\int|f|\\,dP<\\infty$ and $\\int|h_j|\\,dP<\\infty$ for every $j$; these are integrals in [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. For any integrable $g$ write $Pg:=\\int_{\\mathsf X}g\\,dP$. Write $\\mu=Pf$ and $\\theta=Ph\\in\\mathbb R^q$, where $\\theta$ is known, and use [[def-moments-variance-and-covariance]] for variance and covariance. Given an IID sample $X_1,\\ldots,X_n\\sim P$ as in [[def-identically-distributed-and-iid-random-variables]] and a fixed coefficient $\\beta\\in\\mathbb R^q$, the **control-variate estimator** is\n\n$$\n\\widehat\\mu_\\beta=\\frac1n\\sum_{i=1}^n\\bigl[f(X_i)-\\beta^{\\mathsf T}(h(X_i)-\\theta)\\bigr].\n$$\n\nFor one scalar control this is $n^{-1}\\sum_i[f(X_i)-\\beta(h(X_i)-\\theta)]$. The coefficient is fixed independently of the production sample in this definition; a coefficient fitted from that same sample is treated separately.",
+      "current_argument": null,
+      "contract_present": true,
+      "contract_sources": [],
+      "source_repair_required_for_escalated_boundary": false
+    },
+    {
+      "id": "thm-control-variate-unbiasedness-and-optimal-coefficient",
+      "source": {
+        "path": "items/thm-control-variate-unbiasedness-and-optimal-coefficient.md",
+        "byte_length": 5252,
+        "mtime_ns": 1792037306799746352,
+        "note": "Observation only; exact final cryptographic binding reserved to root."
+      },
+      "disposition": "missing-supplier-boundary-resolved",
+      "premise_limit": "Z_i=f(X_i)-beta^T(h(X_i)-theta) are IID by common measurable transformation and have finite second moment from finite component second moments and fixed finite-dimensional beta. E Z_i=Pf; independent centered cross terms vanish. Supplier L1 unbiasedness/L2 variance agrees exactly. Current proof gives the calculation locally; supplier edge is optional refactoring, not missing support.",
+      "manifest_deps": [
+        "def-control-variate-estimator",
+        "def-identically-distributed-and-iid-random-variables",
+        "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+        "def-moments-variance-and-covariance",
+        "cor-expectation-linearity-monotonicity-and-modulus-bound",
+        "lem-measurable-functions-preserve-independence",
+        "thm-factorization-of-expectations-for-independent-variables",
+        "thm-change-of-variables-for-expectation",
+        "thm-covariance-bilinearity-and-symmetry"
+      ],
+      "batch28_logical_deps": [],
+      "batch28_contract_imports": [],
+      "current_statement_or_definition": "Let $n\\ge1$, assume $P f^2<\\infty$ and $P h_j^2<\\infty$ for each component, and set $\\mu=Pf$, $\\theta=Ph$. Define the vector covariance matrix and cross-covariance vector by $\\Sigma_{jk}=E_P[(h_j-\\theta_j)(h_k-\\theta_k)]$ and $c_j=E_P[(h_j-\\theta_j)(f-\\mu)]$. A matrix $\\Sigma$ is positive definite when $v^{\\mathsf T}\\Sigma v>0$ for every nonzero $v$. For an IID sample $X_1,\\ldots,X_n\\sim P$ and a fixed $\\beta\\in\\mathbb R^q$, the estimator in [[def-control-variate-estimator]] is unbiased and\n\n$$\n\\operatorname{Var}(\\widehat\\mu_\\beta)=\\frac1n\\operatorname{Var}_P\\bigl(f-\\beta^{\\mathsf T}h\\bigr).\n$$\n\nIf $\\Sigma$ is positive definite, the unique variance-minimizing vector coefficient and the minimum variance are\n\n$$\n\\beta^*=\\Sigma^{-1}c,\\qquad \\operatorname{Var}(\\widehat\\mu_{\\beta^*})=\\frac1n\\left(\\operatorname{Var}_P(f)-c^{\\mathsf T}\\Sigma^{-1}c\\right).\n$$\n\nFor a scalar control with $\\operatorname{Var}_P(h)>0$, this reads $\\beta^*=\\operatorname{Cov}_P(f,h)/\\operatorname{Var}_P(h)$. If controls are redundant, delete redundant directions or use the theorem only on a positive-definite covariance subspace; no inverse is asserted for a singular $\\Sigma$.",
+      "current_argument": "**Given:** The objects and hypotheses in the Statement.\n\n1.1 For $Z_i=f(X_i)-\\beta^{\\mathsf T}(h(X_i)-\\theta)$, the expectation convention [F6] and linearity [F3] give $E Z_i=Pf-\\beta^{\\mathsf T}(Ph-\\theta)=\\mu$. Thus $E\\widehat\\mu_\\beta=\\mu$. [F1, F3, F6]\n\n1.2 The $Z_i$ are the same measurable function of the IID variables $X_i$, so [F2] and [F4] make them IID. [F2, F4]\n\n1.3 By [F7]–[F8], the variance as a function of $\\beta$ is $\\operatorname{Var}_P(f)-2\\beta^{\\mathsf T}c+\\beta^{\\mathsf T}\\Sigma\\beta$. [F7, F8]\n\n2.1 Expanding the centered square of $n^{-1}\\sum_i Z_i$, the diagonal terms contribute $n^{-2}n\\operatorname{Var}(Z_1)$. For $i\\ne j$, $Z_i-EZ_i$ and $Z_j-EZ_j$ are independent integrable variables, so [F5] factors their product expectation into zero. Hence $\\operatorname{Var}(\\widehat\\mu_\\beta)=n^{-1}\\operatorname{Var}(Z_1)=n^{-1}\\operatorname{Var}_P(f-\\beta^{\\mathsf T}h)$. [F5, F7, step 1.2, algebra]\n\n3.1 If $\\Sigma$ is positive definite, substituting $c=\\Sigma\\beta^*$ and completing the square gives $\\operatorname{Var}_P(f)-c^{\\mathsf T}\\Sigma^{-1}c+(\\beta-\\beta^*)^{\\mathsf T}\\Sigma(\\beta-\\beta^*)$. The last term is nonnegative and vanishes only at $\\beta=\\beta^*$; for $q=1$ the displayed scalar formula follows. [step 1.3, algebra] ∎",
+      "contract_present": true,
+      "contract_sources": [
+        "def-control-variate-estimator",
+        "def-identically-distributed-and-iid-random-variables",
+        "cor-expectation-linearity-monotonicity-and-modulus-bound",
+        "lem-measurable-functions-preserve-independence",
+        "thm-factorization-of-expectations-for-independent-variables",
+        "thm-change-of-variables-for-expectation",
+        "def-moments-variance-and-covariance",
+        "thm-covariance-bilinearity-and-symmetry"
+      ],
+      "source_repair_required_for_escalated_boundary": false
+    },
+    {
+      "id": "def-antithetic-randomized-sampling",
+      "source": {
+        "path": "items/def-antithetic-randomized-sampling.md",
+        "byte_length": 1882,
+        "mtime_ns": 1792039275099138393,
+        "note": "Observation only; exact final cryptographic binding reserved to root."
+      },
+      "disposition": "missing-supplier-boundary-resolved",
+      "premise_limit": "Definition specifies its own estimator and uses existing published IID/moment interfaces; no missing batch28-specific definition is required.",
+      "manifest_deps": [
+        "def-identically-distributed-and-iid-random-variables",
+        "def-moments-variance-and-covariance",
+        "lem-measurable-functions-preserve-independence"
+      ],
+      "batch28_logical_deps": [],
+      "batch28_contract_imports": [],
+      "current_statement_or_definition": "Let $d,n\\ge1$, let $\\mathsf X$ be a measurable space, let $P$ be a probability law on $\\mathsf X$, and let $f:\\mathsf X\\to\\mathbb R$ be measurable. Let $U_i=(U_{i1},\\ldots,U_{id})$, $i=1,\\ldots,n$, be IID random vectors whose coordinates are mutually independent and each have the uniform law on $[0,1]$, meaning $P(U_{ij}\\le t)=t$ for $0\\le t\\le1$. Let $T:[0,1]^d\\to\\mathsf X$ be measurable and satisfy $T(U_1)\\sim P$. Define the reflected input $1-U_i=(1-U_{i1},\\ldots,1-U_{id})$ and the antithetic estimator by\n\n$$\n\\widehat\\mu_{\\rm anti}=\\frac1n\\sum_{i=1}^n\\frac{f(T(U_i))+f(T(1-U_i))}{2}.\n$$\n\nThe two outputs in each pair may be dependent; pairs with different indices are independent. The variance comparison in the theorem uses $2n$ function evaluations and compares with an ordinary mean of $2n$ independent $P$-draws. IID and mutual independence have the meanings of [[def-identically-distributed-and-iid-random-variables]], and variance/covariance use [[def-moments-variance-and-covariance]].",
+      "current_argument": null,
+      "contract_present": true,
+      "contract_sources": [],
+      "source_repair_required_for_escalated_boundary": false
+    },
+    {
+      "id": "lem-oppositely-monotone-functions-of-independent-coordinates-have-nonpositive-covariance",
+      "source": {
+        "path": "items/lem-oppositely-monotone-functions-of-independent-coordinates-have-nonpositive-covariance.md",
+        "byte_length": 4599,
+        "mtime_ns": 1792037306843745187,
+        "note": "Observation only; exact final cryptographic binding reserved to root."
+      },
+      "disposition": "missing-supplier-boundary-resolved",
+      "premise_limit": "Local covariance lemma concerns independent coordinates and proves its inequality locally, independently of IID Monte Carlo estimation.",
+      "manifest_deps": [
+        "def-independent-random-elements",
+        "def-moments-variance-and-covariance",
+        "thm-independent-random-elements-have-product-joint-law",
+        "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+        "cor-cauchy-schwarz-for-random-variables",
+        "lem-variance-and-covariance-identities-for-random-variables",
+        "cor-expectation-linearity-monotonicity-and-modulus-bound",
+        "thm-dominated-convergence"
+      ],
+      "batch28_logical_deps": [],
+      "batch28_contract_imports": [],
+      "current_statement_or_definition": "Let $d\\ge1$, let $U_1,\\ldots,U_d$ be independent real random variables, and let $G,H:\\mathbb R^d\\to\\mathbb R$ be Borel functions with $E[G(U)^2]<\\infty$ and $E[H(U)^2]<\\infty$. A function is nondecreasing in coordinate $j$ when increasing only its $j$th input cannot decrease its value; nonincreasing is defined with the reverse inequality. Suppose $G$ is nondecreasing in each coordinate and $H$ is nonincreasing in each coordinate. Then $\\operatorname{Cov}(G(U),H(U))\\le0$.",
+      "current_argument": "**Given:** The objects and hypotheses in the Statement.\n\n1.1 In dimension one, let $\\mu$ be the law of $U_1$. Expanding the double integral and applying [F3] gives $2\\operatorname{Cov}(G(U_1),H(U_1))=\\int\\!\\int (G(x)-G(y))(H(x)-H(y))\\,\\mu(dx)\\mu(dy)$. The integrand is nonpositive for every $x,y$ because the two functions have opposite monotonicity, so the covariance is nonpositive. The products are integrable by square-integrability and [F4]. [F3, F4, F5, algebra]\n\n2.1 Assume the claim holds for $d-1$ and first suppose $G,H$ are bounded. By [F2] the joint law is $\\mu\\times\\nu$, where $\\mu$ is the first $d-1$ coordinate laws and $\\nu$ is the law of $U_d$. Define $G_0(x)=\\int G(x,z)\\,\\nu(dz)$ and $H_0(x)=\\int H(x,z)\\,\\nu(dz)$. Fubini [F3] makes these measurable and bounded; they retain their respective coordinate monotonicities. For each fixed $x$, step 1.1 applied to the last coordinate gives $\\operatorname{Cov}_\\nu(G(x,U_d),H(x,U_d))\\le0$, and the induction hypothesis gives $\\operatorname{Cov}_\\mu(G_0,H_0)\\le0$. [F1, F2, F3, step 1.1, induction]\n\n3.1 Expanding both sides by the covariance formula [F5] and integrating with [F3] yields $\\operatorname{Cov}(G(U),H(U))=\\int \\operatorname{Cov}_\\nu(G(x,U_d),H(x,U_d))\\,\\mu(dx)+\\operatorname{Cov}_\\mu(G_0,H_0)\\le0$. Thus the bounded case holds in dimension $d$, completing the induction. [F3, F5, step 2.1, algebra]\n\n4.1 For general square-integrable $G,H$, clamp each function to $[-m,m]$. The clamps remain coordinatewise monotone and bounded, and $|G_m-G|^2\\le G^2$, $|H_m-H|^2\\le H^2$. Applying [F6] to these squared differences gives $L^2$ convergence. Cauchy–Schwarz [F4] and the covariance identity [F5] then imply $\\operatorname{Cov}(G_m(U),H_m(U))\\to\\operatorname{Cov}(G(U),H(U))$. Each bounded covariance is nonpositive by step 3.1, so the limit is nonpositive. [F4, F5, F6, step 3.1] ∎",
+      "contract_present": true,
+      "contract_sources": [
+        "def-independent-random-elements",
+        "thm-independent-random-elements-have-product-joint-law",
+        "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+        "cor-cauchy-schwarz-for-random-variables",
+        "lem-variance-and-covariance-identities-for-random-variables",
+        "thm-dominated-convergence"
+      ],
+      "source_repair_required_for_escalated_boundary": false
+    },
+    {
+      "id": "thm-antithetic-variance-and-monotone-sufficiency",
+      "source": {
+        "path": "items/thm-antithetic-variance-and-monotone-sufficiency.md",
+        "byte_length": 6015,
+        "mtime_ns": 1792039751727807975,
+        "note": "Observation only; exact final cryptographic binding reserved to root."
+      },
+      "disposition": "missing-supplier-boundary-resolved",
+      "premise_limit": "Independent pair outputs Z_i=(Y_i+Ytilde_i)/2 are IID L2; dependence inside a pair is retained in Cov(Y,Ytilde). Exact pair variance is derived locally, then divided by n. Comparator is 2n independent P draws with finite f second moment; supplier permits sigma²=0 and requires no AC/CLT. Local centered-square proof already supports all uses.",
+      "manifest_deps": [
+        "def-antithetic-randomized-sampling",
+        "lem-oppositely-monotone-functions-of-independent-coordinates-have-nonpositive-covariance",
+        "def-identically-distributed-and-iid-random-variables",
+        "def-moments-variance-and-covariance",
+        "cor-expectation-linearity-monotonicity-and-modulus-bound",
+        "lem-measurable-functions-preserve-independence",
+        "thm-independent-random-elements-have-product-joint-law",
+        "thm-factorization-of-expectations-for-independent-variables",
+        "thm-covariance-bilinearity-and-symmetry"
+      ],
+      "batch28_logical_deps": [],
+      "batch28_contract_imports": [],
+      "current_statement_or_definition": "Use the setup of [[def-antithetic-randomized-sampling]], assume $E_P[f^2]<\\infty$, and put $Y=f(T(U_1))$, $\\widetilde Y=f(T(1-U_1))$, $\\mu=E_Pf$, and $\\sigma^2=\\operatorname{Var}_P(f)$. Then $Y$ and $\\widetilde Y$ have the same law and mean, and the antithetic estimator from $n$ independent input pairs is unbiased with\n\n$$\n\\operatorname{Var}(\\widehat\\mu_{\\rm anti})=\\frac{\\sigma^2+\\operatorname{Cov}(Y,\\widetilde Y)}{2n}.\n$$\n\nCompared with the ordinary mean of $2n$ independent draws from $P$, whose variance is $\\sigma^2/(2n)$, antithetic sampling has no larger variance exactly when $\\operatorname{Cov}(Y,\\widetilde Y)\\le0$, and has strictly smaller variance exactly when this covariance is negative. A sufficient condition is that $g=f\\circ T$ is coordinatewise monotone on $[0,1]^d$ (each coordinate may have either monotonicity direction). In particular, when $\\mathsf X$ is a subset of $\\mathbb R^m$ with the order $x\\le y$ defined by $x_j\\le y_j$ for every coordinate, if $T$ is coordinatewise nondecreasing as a map into $\\mathsf X$ and $f$ is nondecreasing for that order, then $g$ is coordinatewise nondecreasing.",
+      "current_argument": "**Given:** The objects and hypotheses in the Statement.\n\n1.1 For a uniform coordinate, $P(U_{1j}=s)=0$ for every $s\\in[0,1]$, since $P(U_{1j}\\le s)=s$ and the left limit of this cdf at $s$ is also $s$. Thus for $0\\le t\\le1$, $P(1-U_{1j}\\le t)=P(U_{1j}\\ge1-t)=1-P(U_{1j}<1-t)=t$. By [F3], the reflected coordinates remain independent; [F4] then shows $1-U_1$ has the same product-uniform law as $U_1$. Since $T$ and $f$ are measurable, $Y$ and $\\widetilde Y$ have the same law, mean $\\mu$, and variance $\\sigma^2$. [F1, F3, F4]\n\n1.2 The pair value $Z_i=[f(T(U_i))+f(T(1-U_i))]/2$ is a measurable function of $U_i$. Thus the $Z_i$ are IID by [F2]–[F3], each has mean $\\mu$ by [F9], and their average is unbiased. [F1, F2, F3, F9]\n\n2.1 By [F5]–[F6], $\\operatorname{Var}(Z_i)=[\\operatorname{Var}(Y)+\\operatorname{Var}(\\widetilde Y)+2\\operatorname{Cov}(Y,\\widetilde Y)]/4=[\\sigma^2+\\operatorname{Cov}(Y,\\widetilde Y)]/2$. For distinct $i,j$, the centered $Z_i,Z_j$ are independent, so [F7] gives zero covariance; expanding the centered square of their average therefore gives the stated variance divided by $n$. [F5, F6, F7, step 1.2, algebra]\n\n3.1 The mean of $2n$ independent $P$-draws has variance $\\sigma^2/(2n)$ by the same centered-square expansion and [F7]. Comparing this with step 2.1 gives the iff conditions for weak and strict variance reduction. [F5, F7, step 2.1, algebra]\n\n4.1 If $g=f\\circ T$ is coordinatewise nondecreasing, then $g(1-u)$ is coordinatewise nonincreasing, so [F8] gives $\\operatorname{Cov}(Y,\\widetilde Y)\\le0$. More generally, if the monotonicity direction varies by coordinate, define $S_j(v)=v_j$ in increasing coordinates and $S_j(v)=1-v_j$ in decreasing coordinates. Then $V=S(U_1)$ is still product-uniform, $\\phi=g\\circ S$ is nondecreasing in all coordinates, and $S(1-v)=1-S(v)$ coordinatewise. Consequently $g(U_1)=\\phi(V)$ and $g(1-U_1)=\\phi(1-V)$, so [F8] applies. In the stated ordered-subset case, $u\\le v$ coordinatewise implies $T(u)\\le T(v)$ and then $f(T(u))\\le f(T(v))$, which proves the advertised monotonicity of $g$. [F1, F3, F4, F8, step 1.1, given] ∎",
+      "contract_present": true,
+      "contract_sources": [
+        "def-antithetic-randomized-sampling",
+        "def-identically-distributed-and-iid-random-variables",
+        "lem-measurable-functions-preserve-independence",
+        "thm-independent-random-elements-have-product-joint-law",
+        "def-moments-variance-and-covariance",
+        "thm-covariance-bilinearity-and-symmetry",
+        "thm-factorization-of-expectations-for-independent-variables",
+        "lem-oppositely-monotone-functions-of-independent-coordinates-have-nonpositive-covariance",
+        "cor-expectation-linearity-monotonicity-and-modulus-bound"
+      ],
+      "source_repair_required_for_escalated_boundary": false
+    },
+    {
+      "id": "def-stratified-monte-carlo-estimator",
+      "source": {
+        "path": "items/def-stratified-monte-carlo-estimator.md",
+        "byte_length": 1837,
+        "mtime_ns": 1792039751727710622,
+        "note": "Observation only; exact final cryptographic binding reserved to root."
+      },
+      "disposition": "missing-supplier-boundary-resolved",
+      "premise_limit": "Definition specifies its own estimator and uses existing published IID/moment interfaces; no missing batch28-specific definition is required.",
+      "manifest_deps": [
+        "def-identically-distributed-and-iid-random-variables",
+        "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+        "def-moments-variance-and-covariance"
+      ],
+      "batch28_logical_deps": [],
+      "batch28_contract_imports": [],
+      "current_statement_or_definition": "Let $(\\mathsf X,\\mathcal X,P)$ be a probability space, let $f:\\mathsf X\\to\\mathbb R$ be measurable, and let $H\\ge1$ and $A_1,\\ldots,A_H$ be a finite measurable partition of $\\mathsf X$ with $p_h=P(A_h)>0$. Define the conditional stratum law by $P_h(B)=P(B\\cap A_h)/p_h$ for $B\\in\\mathcal X$. Choose fixed integers $n_h\\ge1$ and put $n=\\sum_{h=1}^H n_h$. Draw mutually independent variables $X_{hj}$, with $X_{h1},\\ldots,X_{hn_h}$ IID under $P_h$ as in [[def-identically-distributed-and-iid-random-variables]], and define $\\bar f_h=n_h^{-1}\\sum_{j=1}^{n_h}f(X_{hj})$. Expectations and variances use [[def-expectation-of-a-nonnegative-or-integrable-random-variable]] and [[def-moments-variance-and-covariance]]. The **stratified Monte Carlo estimator** of $Pf$ is\n\n$$\n\\widehat\\mu_{\\rm strat}=\\sum_{h=1}^H p_h\\bar f_h.\n$$\n\nThe allocation $(n_1,\\ldots,n_H)$ is part of the design. A variance comparison must specify it and the comparator.",
+      "current_argument": null,
+      "contract_present": true,
+      "contract_sources": [],
+      "source_repair_required_for_escalated_boundary": false
+    },
+    {
+      "id": "thm-stratified-unbiasedness-variance-and-proportional-allocation",
+      "source": {
+        "path": "items/thm-stratified-unbiasedness-variance-and-proportional-allocation.md",
+        "byte_length": 5552,
+        "mtime_ns": 1792040052431661418,
+        "note": "Observation only; exact final cryptographic binding reserved to root."
+      },
+      "disposition": "missing-supplier-boundary-resolved",
+      "premise_limit": "p_h>0 and Pf² finite imply E_Ph f² <= Pf²/p_h finite. Each within-stratum sample is IID with its own law, so its mean has variance sigma_h²/n_h. Across-stratum independence is separately required; no global IID assertion across strata. Ordinary same-size n comparator has Var_P(f)/n. All these identities are proved locally; proportional n_h=np_h integer conditions remain explicit.",
+      "manifest_deps": [
+        "def-stratified-monte-carlo-estimator",
+        "def-identically-distributed-and-iid-random-variables",
+        "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+        "def-moments-variance-and-covariance",
+        "cor-expectation-linearity-monotonicity-and-modulus-bound",
+        "thm-factorization-of-expectations-for-independent-variables",
+        "thm-change-of-variables-for-expectation",
+        "def-independent-random-elements",
+        "thm-grouping-independent-sigma-algebras",
+        "thm-arithmetic-and-lattice-operations-preserve-measurability"
+      ],
+      "batch28_logical_deps": [],
+      "batch28_contract_imports": [],
+      "current_statement_or_definition": "Use the setup of [[def-stratified-monte-carlo-estimator]] and suppose $\\int_{\\mathsf X} f^2\\,dP<\\infty$. Write $\\mu=\\int_{\\mathsf X}f\\,dP$, $\\mu_h=E_{P_h}f$, and $\\sigma_h^2=\\operatorname{Var}_{P_h}(f)$. The estimator is unbiased and\n\n$$\n\\operatorname{Var}(\\widehat\\mu_{\\rm strat})=\\sum_{h=1}^H\\frac{p_h^2\\sigma_h^2}{n_h}.\n$$\n\nIf, additionally, each $np_h$ is a positive integer and the fixed allocation is proportional, $n_h=np_h$, then the variance is no larger than that of the ordinary IID sample mean of the same total size $n$:\n\n$$\n\\operatorname{Var}(\\widehat\\mu_{\\rm strat})=\\frac1n\\sum_h p_h\\sigma_h^2\\le\\frac{\\operatorname{Var}_P(f)}n.\n$$\n\nThe comparison is only asserted for this proportional allocation; a general fixed allocation has the variance in the first display and need not beat the IID comparator.",
+      "current_argument": "**Given:** The objects and hypotheses in the Statement.\n\n1.1 For each $h$, [F1] gives $\\int_{\\mathsf X}f^2\\,dP_h=p_h^{-1}\\int_{A_h}f^2\\,dP<\\infty$. Since $|f|\\le1+f^2$, $f$ is integrable under $P$ and every $P_h$. Thus [F3] gives $\\mu_h=p_h^{-1}\\int_{A_h}f\\,dP$, and [F4] plus the finite partition identity yield $E\\widehat\\mu_{\\rm strat}=\\sum_h p_h\\mu_h=\\sum_h\\int_{A_h}f\\,dP=\\int f\\,dP=\\mu$. [F1, F3, F4, given, algebra]\n\n2.1 For fixed $h$, expand the centered square of $\\bar f_h$. The diagonal terms give $\\sigma_h^2/n_h$; for distinct draws the centered product expectation is zero by independence and [F5]. Thus $\\operatorname{Var}(\\bar f_h)=\\sigma_h^2/n_h$. [F2, F5, F6, step 1.1, algebra]\n\n2.2 Splitting $\\int(f-\\mu)^2dP$ over the partition and writing $f-\\mu=(f-\\mu_h)+(\\mu_h-\\mu)$ on $A_h$, the cross term integrates to zero since $\\int_{A_h}(f-\\mu_h)dP=p_hE_{P_h}(f-\\mu_h)=0$. Therefore $\\operatorname{Var}_P(f)=\\sum_h p_h\\sigma_h^2+\\sum_h p_h(\\mu_h-\\mu)^2$. [F1, F3, F4, F6, step 1.1, algebra]\n\n3.1 By [F1] and [F7], the sigma-algebras generated by all individual draws are independent. Grouping them by stratum and applying [F8] shows that the sigma-algebras generated by the disjoint stratum blocks are independent. Each $\\bar f_h$ is measurable with respect to its block sigma-algebra because it is a finite sum of measurable values of $f$, using [F9]; hence the stratum averages are independent. Applying [F5] to their centered products and expanding the variance of $\\sum_h p_h\\bar f_h$ gives $\\sum_h p_h^2\\sigma_h^2/n_h$. [F1, F5, F7, F8, F9, step 2.1, algebra]\n\n4.1 Under $n_h=np_h$, step 3.1 becomes $n^{-1}\\sum_h p_h\\sigma_h^2$. The ordinary mean of $n$ IID $P$-draws has variance $\\operatorname{Var}_P(f)/n$, by the same centered-square expansion as step 2.1. Step 2.2 shows the difference is $n^{-1}\\sum_h p_h(\\mu_h-\\mu)^2\\ge0$, proving the comparison. [F2, F5, F6, step 2.1, step 3.1, step 2.2, algebra] ∎",
+      "contract_present": true,
+      "contract_sources": [
+        "def-stratified-monte-carlo-estimator",
+        "def-identically-distributed-and-iid-random-variables",
+        "thm-change-of-variables-for-expectation",
+        "cor-expectation-linearity-monotonicity-and-modulus-bound",
+        "thm-factorization-of-expectations-for-independent-variables",
+        "def-moments-variance-and-covariance",
+        "def-independent-random-elements",
+        "thm-grouping-independent-sigma-algebras",
+        "thm-arithmetic-and-lattice-operations-preserve-measurability"
+      ],
+      "source_repair_required_for_escalated_boundary": false
+    },
+    {
+      "id": "thm-same-sample-control-coefficient-remainder-is-op-one-over-n",
+      "source": {
+        "path": "items/thm-same-sample-control-coefficient-remainder-is-op-one-over-n.md",
+        "byte_length": 7847,
+        "mtime_ns": 1792039606607922237,
+        "note": "Observation only; exact final cryptographic binding reserved to root."
+      },
+      "disposition": "missing-supplier-boundary-resolved",
+      "premise_limit": "Finite fourth moments ensure each h_j h_k and h_j f has finite second moment by Cauchy-Schwarz. Current proof explicitly derives raw sample-average variance divided by n and applies Chebyshev. No CLT or sample-variance consistency is used; no batch28 edge needed for the locally proved rate.",
+      "manifest_deps": [
+        "def-control-variate-estimator",
+        "def-identically-distributed-and-iid-random-variables",
+        "def-moments-variance-and-covariance",
+        "cor-expectation-linearity-monotonicity-and-modulus-bound",
+        "thm-factorization-of-expectations-for-independent-variables",
+        "thm-change-of-variables-for-expectation",
+        "thm-kolmogorov-iid-l1-strong-law",
+        "cor-chebyshev-inequality-for-random-variables",
+        "cor-cauchy-schwarz-for-random-variables",
+        "lem-measurable-functions-preserve-independence",
+        "thm-arithmetic-and-lattice-operations-preserve-measurability"
+      ],
+      "batch28_logical_deps": [],
+      "batch28_contract_imports": [],
+      "current_statement_or_definition": "Use the notation $Pg=\\int g\\,dP$ from [[def-control-variate-estimator]]. Let $n\\ge1$, let $q\\ge1$ be fixed, let $X_1,\\ldots,X_n$ be IID with law $P$, and assume $P|f|^4<\\infty$ and $P|h_j|^4<\\infty$ for each $j$. Set $\\theta=Ph$, define $\\Sigma_{jk}=E_P[(h_j-\\theta_j)(h_k-\\theta_k)]$ and $c_j=E_P[(h_j-\\theta_j)(f-Pf)]$, and suppose $\\Sigma$ is positive definite, meaning $v^{\\mathsf T}\\Sigma v>0$ for every nonzero vector $v$. Put $\\beta^*=\\Sigma^{-1}c$. Define $\\bar f_n=n^{-1}\\sum_i f(X_i)$, $\\bar h_n=n^{-1}\\sum_i h(X_i)$,\n\n$$\\widehat\\Sigma_n=\\frac1n\\sum_i(h(X_i)-\\bar h_n)(h(X_i)-\\bar h_n)^{\\mathsf T},\\qquad \\widehat c_n=\\frac1n\\sum_i(h(X_i)-\\bar h_n)(f(X_i)-\\bar f_n).$$\n\nand let $\\widehat\\beta_n=\\widehat\\Sigma_n^{-1}\\widehat c_n$ when $\\widehat\\Sigma_n$ is invertible and $0$ otherwise. For a scalar random sequence $R_n$, write $R_n=O_P(n^{-1})$ when $nR_n$ is bounded in probability: for each $\\varepsilon>0$ some finite $M$ and $N$ satisfy $P(|nR_n|>M)<\\varepsilon$ for all $n\\ge N$. For a fixed-dimensional vector or matrix, $O_P(a_n)$ means its Euclidean or Frobenius norm divided by $a_n$ is bounded in probability. Then\n\n$$\\widehat\\mu_{\\widehat\\beta_n}-\\widehat\\mu_{\\beta^*}=-(\\widehat\\beta_n-\\beta^*)^{\\mathsf T}(\\bar h_n-\\theta)=O_P(n^{-1}).$$\n\nThis result bounds only the same-sample coefficient-times-control-mean remainder; it does not assert that $\\widehat\\mu_{\\widehat\\beta_n}$ is unbiased.",
+      "current_argument": "**Given:** The objects and hypotheses in the Statement.\n\n1.1 The entries $h_j(X_i)$, $f(X_i)$, $h_j(X_i)h_k(X_i)$, and $h_j(X_i)f(X_i)$ are measurable by [F11]. Since each $X_i$ has law $P$, applying the same measurable function to each gives a common law; [F10] preserves their mutual independence, so each resulting sequence is IID by [F2]. The fourth-moment hypothesis and [F8] make every product entry integrable, and [F9] identifies its expectation with the corresponding integral under $P$. Applying [F4] to these IID sequences gives $\\bar h_n\\to\\theta$, $\\bar f_n\\to Pf$, $n^{-1}\\sum_i h(X_i)h(X_i)^{\\mathsf T}\\to E_P[hh^{\\mathsf T}]$, and $n^{-1}\\sum_i h(X_i)f(X_i)\\to E_P[hf]$ almost surely. The centered formulas therefore give $\\widehat\\Sigma_n\\to\\Sigma$ and $\\widehat c_n\\to c$ almost surely; positive definiteness of $\\Sigma$ and continuity of determinant imply $\\widehat\\Sigma_n$ is eventually invertible almost surely. The fallback definition makes $\\widehat\\beta_n$ measurable: on the open nonsingular set the inverse entries are ratios of polynomial functions, and on its closed complement the value is constant. [F2, F3, F4, F8, F9, F10, F11, given, algebra]\n\n2.1 Each scalar entry of $h$, $f$, $hh^{\\mathsf T}$, and $hf$ has finite variance: for products, [F8] gives $E[h_j^2h_k^2]\\le(Eh_j^4Eh_k^4)^{1/2}$ and $E[h_j^2f^2]\\le(Eh_j^4Ef^4)^{1/2}$. Independence and [F6] make distinct centered sample entries have zero covariance, so each raw sample average has variance its population variance divided by $n$. With $a=M/\\sqrt n$, [F5] bounds each entry's deviation probability by its variance divided by $M^2/n$; choosing $M$ large proves the $O_P(n^{-1/2})$ rates. Fixed $q$ makes the finite union of entrywise bounds joint. Centering changes the raw moments by products of sample-mean errors, which are $O_P(n^{-1})$; hence $\\widehat\\Sigma_n-\\Sigma$ and $\\widehat c_n-c$ are jointly $O_P(n^{-1/2})$. [F2, F3, F5, F6, F7, F8, step 1.1]\n\n3.1 On the event that $\\widehat\\Sigma_n$ is invertible, $\\widehat\\beta_n-\\beta^*=\\widehat\\Sigma_n^{-1}[(\\widehat c_n-c)-(\\widehat\\Sigma_n-\\Sigma)\\beta^*]$, since $c=\\Sigma\\beta^*$. Step 1.1 and the adjugate-over-determinant formula show that the inverse converges to $\\Sigma^{-1}$ almost surely on the eventually nonsingular set; extending it by zero on the singular event gives an $O_P(1)$ matrix sequence. Given $\\varepsilon>0$, choose bounds for this inverse norm and for the bracket in step 2.1 after scaling by $\\sqrt n$, with total failure probability less than $\\varepsilon/2$. On their intersection the product is bounded after scaling by $\\sqrt n$, so $\\widehat\\beta_n-\\beta^*=O_P(n^{-1/2})$ there. The singular-event probability tends to zero by step 1.1; the fallback value $0$ therefore does not change this order in probability. [step 1.1, step 2.1, algebra]\n\n4.1 By [F1], subtracting the two estimators cancels $\\bar f_n$ and leaves exactly $-(\\widehat\\beta_n-\\beta^*)^{\\mathsf T}(\\bar h_n-\\theta)$. Given $\\varepsilon>0$, choose finite bounds for each factor after scaling by $\\sqrt n$ so that the probability either bound fails is less than $\\varepsilon/2$; on their intersection, Cauchy--Schwarz in $\\mathbb R^q$ bounds $n$ times the absolute inner product by the product of those bounds. Thus the inner product is $O_P(n^{-1})$ by definition. [F1, step 2.1, step 3.1, algebra] ∎",
+      "contract_present": true,
+      "contract_sources": [
+        "def-control-variate-estimator",
+        "def-identically-distributed-and-iid-random-variables",
+        "def-moments-variance-and-covariance",
+        "thm-kolmogorov-iid-l1-strong-law",
+        "cor-chebyshev-inequality-for-random-variables",
+        "thm-factorization-of-expectations-for-independent-variables",
+        "cor-expectation-linearity-monotonicity-and-modulus-bound",
+        "cor-cauchy-schwarz-for-random-variables",
+        "thm-change-of-variables-for-expectation",
+        "lem-measurable-functions-preserve-independence",
+        "thm-arithmetic-and-lattice-operations-preserve-measurability"
+      ],
+      "source_repair_required_for_escalated_boundary": false
+    },
+    {
+      "id": "thm-independent-pilot-control-variate-is-conditionally-unbiased",
+      "source": {
+        "path": "items/thm-independent-pilot-control-variate-is-conditionally-unbiased.md",
+        "byte_length": 4789,
+        "mtime_ns": 1792039606607802718,
+        "note": "Observation only; exact final cryptographic binding reserved to root."
+      },
+      "disposition": "missing-supplier-boundary-resolved",
+      "premise_limit": "Only first moments of f and h and first norm moment of independent pilot beta are needed. Production sample means have expectations Pf/Ph by direct linearity and law integration. Pilot product integrability/conditional event identity are independently shown. No fixed-beta IID variance theorem is improperly applied to same-pilot dependent corrected outputs.",
+      "manifest_deps": [
+        "def-control-variate-estimator",
+        "def-identically-distributed-and-iid-random-variables",
+        "def-conditional-expectation-given-a-sigma-algebra",
+        "cor-expectation-linearity-monotonicity-and-modulus-bound",
+        "thm-factorization-of-expectations-for-independent-variables",
+        "thm-change-of-variables-for-expectation",
+        "def-independent-sigma-algebras-and-events"
+      ],
+      "batch28_logical_deps": [],
+      "batch28_contract_imports": [],
+      "current_statement_or_definition": "Let $n,q\\ge1$, let $X_1,\\ldots,X_n$ be IID with law $P$, let $f,h_1,\\ldots,h_q$ be integrable, and let $\\theta=E_P h$ be known. Write $\\mathcal X_n$ for the sigma-algebra generated by the production sample, namely the smallest sigma-algebra containing each event $\\{X_i\\in B\\}$ for measurable $B$. Let $\\mathcal P$ be a sigma-algebra generated by pilot data and assume $\\mathcal P$ and $\\mathcal X_n$ are independent in the sense of [[def-independent-sigma-algebras-and-events]]. Let the $\\mathcal P$-measurable coefficient $\\widehat\\beta\\in\\mathbb R^q$ satisfy $E\\|\\widehat\\beta\\|<\\infty$. Then the random-coefficient control estimator\n\n$$\n\\widehat\\mu_{\\widehat\\beta}=\\frac1n\\sum_i\\left[f(X_i)-\\widehat\\beta^{\\mathsf T}(h(X_i)-\\theta)\\right]\n$$\n\nis integrable and $E[\\widehat\\mu_{\\widehat\\beta}\\mid\\mathcal P]=E_Pf$ almost surely. The first-moment condition on $\\widehat\\beta$ ensures the displayed estimator is integrable; no claim is made for an arbitrary nonintegrable pilot coefficient.",
+      "current_argument": "**Given:** The objects and hypotheses in the Statement.\n\n1.1 The production sample means are $\\mathcal X_n$-measurable and satisfy $E\\bar f=E_Pf$ and $E(\\bar h-\\theta)=0$ by [F2], [F5], and [F6]. Each $\\widehat\\beta_j$ is $\\mathcal P$-measurable; for any Borel sets, its preimage event belongs to $\\mathcal P$ while the corresponding production-mean event belongs to $\\mathcal X_n$, so [F7] makes it independent of each production mean. Since $E\\|\\widehat\\beta\\|<\\infty$, [F4] applied to the absolute product makes every $\\widehat\\beta_j(\\bar h_j-\\theta_j)$ integrable; the full estimator is therefore integrable. [F1, F2, F4, F5, F6, F7]\n\n2.1 Let $A\\in\\mathcal P$. The random variable $\\bar f$ is $\\mathcal X_n$-measurable, so its Borel preimage events are independent of $A$ by [F7]; factorization [F4] gives $E[1_A\\bar f]=P(A)E_Pf$. Also $1_A\\widehat\\beta_j$ is $\\mathcal P$-measurable and independent of $\\bar h_j-\\theta_j$, which is $\\mathcal X_n$-measurable, so [F4] gives $E[1_A\\widehat\\beta_j(\\bar h_j-\\theta_j)]=E[1_A\\widehat\\beta_j]E(\\bar h_j-\\theta_j)=0$. By [F1] and [F5], $E[1_A\\widehat\\mu_{\\widehat\\beta}]=P(A)E_Pf$. [F1, F4, F5, F7, step 1.1]\n\n3.1 The constant $E_Pf$ is $\\mathcal P$-measurable and its integral on every $A\\in\\mathcal P$ equals the integral of the estimator on $A$ by step 2.1. The defining characterization [F3] therefore gives $E[\\widehat\\mu_{\\widehat\\beta}\\mid\\mathcal P]=E_Pf$ almost surely. [F3, step 1.1, step 2.1] ∎",
+      "contract_present": true,
+      "contract_sources": [
+        "def-control-variate-estimator",
+        "def-identically-distributed-and-iid-random-variables",
+        "def-conditional-expectation-given-a-sigma-algebra",
+        "thm-factorization-of-expectations-for-independent-variables",
+        "cor-expectation-linearity-monotonicity-and-modulus-bound",
+        "thm-change-of-variables-for-expectation",
+        "def-independent-sigma-algebras-and-events"
+      ],
+      "source_repair_required_for_escalated_boundary": false
+    },
+    {
+      "id": "ex-perfect-control-variate",
+      "source": {
+        "path": "items/ex-perfect-control-variate.md",
+        "byte_length": 1497,
+        "mtime_ns": 1792037150091910641,
+        "note": "Observation only; exact final cryptographic binding reserved to root."
+      },
+      "disposition": "missing-supplier-boundary-resolved",
+      "premise_limit": "Local A result supplies this example; no new direct batch28 premise is needed.",
+      "manifest_deps": [
+        "def-control-variate-estimator",
+        "thm-control-variate-unbiasedness-and-optimal-coefficient"
+      ],
+      "batch28_logical_deps": [],
+      "batch28_contract_imports": [],
+      "current_statement_or_definition": "Let $X_i$ be IID uniform on $[0,1]$, take $f(x)=h(x)=x$, and use the known control mean $\\theta=1/2$. The fixed coefficient $\\beta=1$ gives an exact estimate with no Monte Carlo variance.",
+      "current_argument": "**Given:** The specified $f,h,\\theta$ and IID $X_i\\sim\\operatorname{Unif}[0,1]$.\n\n1.1 Direct integration gives $E X=1/2$ and $\\operatorname{Var}(X)=\\int_0^1(x-1/2)^2dx=1/12>0$, so [F1] gives $\\beta^*=1$. [F1, algebra]\n\n2.1 For every sample value, $X_i-(X_i-1/2)=1/2$. By [F2], $\\widehat\\mu_1=1/2$ identically, hence its variance is zero and its expectation is the target $1/2$. [F2, step 1.1, given] ∎",
+      "contract_present": true,
+      "contract_sources": [
+        "thm-control-variate-unbiasedness-and-optimal-coefficient",
+        "def-control-variate-estimator"
+      ],
+      "source_repair_required_for_escalated_boundary": false
+    },
+    {
+      "id": "ex-uncorrelated-control-variate",
+      "source": {
+        "path": "items/ex-uncorrelated-control-variate.md",
+        "byte_length": 1529,
+        "mtime_ns": 1792037150135909473,
+        "note": "Observation only; exact final cryptographic binding reserved to root."
+      },
+      "disposition": "missing-supplier-boundary-resolved",
+      "premise_limit": "Fair-sign target output has mean0 variance1. Beta*=0 gives ordinary mean variance1/n; already covered by local control-variate theorem.",
+      "manifest_deps": [
+        "def-control-variate-estimator",
+        "thm-control-variate-unbiasedness-and-optimal-coefficient"
+      ],
+      "batch28_logical_deps": [],
+      "batch28_contract_imports": [],
+      "current_statement_or_definition": "Let $A$ and $B$ be independent fair signs, let $X=(A,B)$, and set $f(A,B)=A$, $h(A,B)=B$, and $\\theta=0$. The optimal fixed control coefficient is zero, so this control does not reduce variance.",
+      "current_argument": "**Given:** $f=A$, $h=B$, $EA=EB=0$, and the four outcomes each have probability $1/4$.\n\n1.1 Summing the four table values gives $Ef=Eh=0$, $\\operatorname{Var}(h)=1$, $\\operatorname{Var}(f)=1$, and $\\operatorname{Cov}(f,h)=E[AB]=0$. [given, algebra]\n\n2.1 By [F1], $\\beta^*=0$ and the minimum variance of one corrected draw equals $\\operatorname{Var}(f)=1$. Thus [F2] reduces to the ordinary sample mean, with variance $1/n$; this control gives no reduction. [F1, F2, step 1.1] ∎",
+      "contract_present": true,
+      "contract_sources": [
+        "thm-control-variate-unbiasedness-and-optimal-coefficient",
+        "def-control-variate-estimator"
+      ],
+      "source_repair_required_for_escalated_boundary": false
+    },
+    {
+      "id": "ex-monotone-antithetic-pair",
+      "source": {
+        "path": "items/ex-monotone-antithetic-pair.md",
+        "byte_length": 1527,
+        "mtime_ns": 1792037150179908304,
+        "note": "Observation only; exact final cryptographic binding reserved to root."
+      },
+      "disposition": "missing-supplier-boundary-resolved",
+      "premise_limit": "Uniform finite-second-moment ordinary two-draw comparator has variance1/24; current local antithetic theorem supplies same comparator formula.",
+      "manifest_deps": [
+        "def-antithetic-randomized-sampling",
+        "thm-antithetic-variance-and-monotone-sufficiency"
+      ],
+      "batch28_logical_deps": [],
+      "batch28_contract_imports": [],
+      "current_statement_or_definition": "Take $d=1$, $T(u)=u$, $f(x)=x$, and $U\\sim\\operatorname{Unif}[0,1]$. The antithetic pair average is constant, while the ordinary mean of two independent draws has positive variance.",
+      "current_argument": "**Given:** The one-dimensional uniform input and identity sampler/integrand.\n\n1.1 Direct integration gives $EU=E(1-U)=1/2$, $\\operatorname{Var}(U)=1/12$, and $E[U(1-U)]=1/6$, so $\\operatorname{Cov}(U,1-U)=1/6-1/4=-1/12$. [given, algebra]\n\n2.1 For each pair, $(U+(1-U))/2=1/2$, so [F1] gives a constant estimator of variance zero. By [F2], the comparator variance for two independent uniform draws is $(1/12)/2=1/24$, hence the reduction is strict. [F1, F2, step 1.1, algebra] ∎",
+      "contract_present": true,
+      "contract_sources": [
+        "def-antithetic-randomized-sampling",
+        "thm-antithetic-variance-and-monotone-sufficiency"
+      ],
+      "source_repair_required_for_escalated_boundary": false
+    },
+    {
+      "id": "ex-proportional-stratification-variance-reduction",
+      "source": {
+        "path": "items/ex-proportional-stratification-variance-reduction.md",
+        "byte_length": 1800,
+        "mtime_ns": 1792037150219907241,
+        "note": "Observation only; exact final cryptographic binding reserved to root."
+      },
+      "disposition": "missing-supplier-boundary-resolved",
+      "premise_limit": "Ordinary IID uniform comparator has variance (1/12)/2=1/24, versus 1/96 for independent half-stratum draws. The finite calculation matches supplier contract and existing local stratification theorem.",
+      "manifest_deps": [
+        "def-stratified-monte-carlo-estimator",
+        "thm-stratified-unbiasedness-variance-and-proportional-allocation"
+      ],
+      "batch28_logical_deps": [],
+      "batch28_contract_imports": [],
+      "current_statement_or_definition": "For $P=\\operatorname{Unif}[0,1]$ and $f(x)=x$, split into the two half-intervals and draw one point independently from each. This is proportional allocation with total sample size two and gives variance $1/96$, compared with $1/24$ for two ordinary IID draws.",
+      "current_argument": "**Given:** Independent uniform draws from each half-interval and one ordinary IID comparator sample of size two.\n\n1.1 Each conditional uniform law has mean $1/4$ or $3/4$ and variance $(1/2)^2/12=1/48$. Substitution into the estimator definition [F1] and variance formula [F2] gives $\\operatorname{Var}(\\widehat\\mu_{\\rm strat})=2(1/4)(1/48)=1/96$. [F1, F2, given, algebra]\n\n2.1 The ordinary sample mean has variance $\\operatorname{Var}(U)/2=(1/12)/2=1/24$. Since $1/96<1/24$, this specified proportional allocation reduces variance by a factor of four. [given, step 1.1, algebra] ∎",
+      "contract_present": true,
+      "contract_sources": [
+        "def-stratified-monte-carlo-estimator",
+        "thm-stratified-unbiasedness-variance-and-proportional-allocation"
+      ],
+      "source_repair_required_for_escalated_boundary": false
+    },
+    {
+      "id": "ex-same-sample-control-regression-bias",
+      "source": {
+        "path": "items/ex-same-sample-control-regression-bias.md",
+        "byte_length": 2135,
+        "mtime_ns": 1792037150263906073,
+        "note": "Observation only; exact final cryptographic binding reserved to root."
+      },
+      "disposition": "missing-supplier-boundary-resolved",
+      "premise_limit": "Local A result supplies this example; no new direct batch28 premise is needed.",
+      "manifest_deps": [
+        "def-control-variate-estimator",
+        "thm-same-sample-control-coefficient-remainder-is-op-one-over-n"
+      ],
+      "batch28_logical_deps": [],
+      "batch28_contract_imports": [],
+      "current_statement_or_definition": "Let $X_i$ be IID uniform on $\\{-1,0,1\\}$, let $f(x)=x^2$, $h(x)=x$, and use $\\theta=Eh(X)=0$. For $n=2$, fit the scalar coefficient on the same two observations by $\\widehat\\beta=\\widehat{\\operatorname{Cov}}(h,f)/\\widehat{\\operatorname{Var}}(h)$ when the sample variance is positive, and set it to $0$ when the sample variance is zero. The resulting control estimator is biased.",
+      "current_argument": "**Given:** Each of the nine ordered pairs $(X_1,X_2)\\in\\{-1,0,1\\}^2$ has probability $1/9$.\n\n1.1 On the three equal pairs, the fallback coefficient is zero and the estimates are $1,0,1$. On the two ordered pairs $(-1,1)$ and $(1,-1)$, the fitted slope is zero and each estimate is $1$. On each of the four ordered adjacent pairs $(-1,0),(0,-1),(0,1),(1,0)$, the fitted slope is respectively $-1,-1,1,1$, and direct substitution into [F2] gives estimate $0$. [F1, F2, given, algebra]\n\n2.1 Exactly four of the nine equally likely pairs yield estimate $1$ and the other five yield $0$, so the expected estimate is $4/9$. The target is $Ef(X)=\\frac13(1+0+1)=2/3$, hence this same-sample fitted-coefficient estimator is biased. [given, step 1.1, algebra] ∎",
+      "contract_present": true,
+      "contract_sources": [
+        "thm-same-sample-control-coefficient-remainder-is-op-one-over-n",
+        "def-control-variate-estimator"
+      ],
+      "source_repair_required_for_escalated_boundary": false
+    },
+    {
+      "id": "ex-independent-pilot-control-variate",
+      "source": {
+        "path": "items/ex-independent-pilot-control-variate.md",
+        "byte_length": 1657,
+        "mtime_ns": 1792037150307904904,
+        "note": "Observation only; exact final cryptographic binding reserved to root."
+      },
+      "disposition": "missing-supplier-boundary-resolved",
+      "premise_limit": "Local A result supplies this example; no new direct batch28 premise is needed.",
+      "manifest_deps": [
+        "def-control-variate-estimator",
+        "thm-independent-pilot-control-variate-is-conditionally-unbiased"
+      ],
+      "batch28_logical_deps": [],
+      "batch28_contract_imports": [],
+      "current_statement_or_definition": "Let the production draws be IID uniform on $[0,1]$, take $f(x)=x^2$, $h(x)=x$, and $\\theta=1/2$. From an independent pilot draw $V\\sim\\operatorname{Unif}[0,1]$, set the random coefficient $\\widehat\\beta=2V$. The control estimator remains conditionally unbiased given the pilot.",
+      "current_argument": "**Given:** The stated production and pilot laws.\n\n1.1 Production integration gives $E_P f=\\int_0^1x^2dx=1/3$ and $E_P h=\\int_0^1x\\,dx=1/2=\\theta$; also $E|\\widehat\\beta|=E[2V]=1<\\infty$. [given, algebra]\n\n2.1 For each realized pilot value $\\widehat\\beta=b$, the production expectation in [F2] is $E_P f-b(E_Ph-\\theta)=1/3$. Therefore the conditional expectation given the pilot is $1/3$, as [F1] asserts. [F1, F2, step 1.1, algebra] ∎",
+      "contract_present": true,
+      "contract_sources": [
+        "thm-independent-pilot-control-variate-is-conditionally-unbiased",
+        "def-control-variate-estimator"
+      ],
+      "source_repair_required_for_escalated_boundary": false
+    }
+  ],
+  "supplier_observations": [
+    {
+      "source": {
+        "path": "items/def-iid-monte-carlo-estimators.md",
+        "byte_length": 2279,
+        "mtime_ns": 1792037456707766890,
+        "note": "Observation only; exact final cryptographic binding reserved to root."
+      },
+      "excerpts": {
+        "Definition": "Let $(Y_i)_{i\\ge1}$ be real IID random variables on one probability space, where IID means that the variables have a common law and are mutually independent ([[def-identically-distributed-and-iid-random-variables]]). When $\\mathbb E|Y_1|<\\infty$, write $\\mu:=\\mathbb E[Y_1]$ and define the Monte Carlo estimate of this expectation by the sample mean $\\bar Y_n:=n^{-1}\\sum_{i=1}^nY_i$; this is the partial-sum convention of [[def-partial-sums-and-sample-means]]. For each $n\\ge2$ and any realized finite real sample, define its sample variance and nonnegative square root by\n$$s_n^2:=\\frac1{n-1}\\sum_{i=1}^n(Y_i-\\bar Y_n)^2,\\qquad s_n:=\\sqrt{s_n^2}.$$\nWhen $\\mathbb E[Y_1^2]<\\infty$, write $\\sigma^2:=\\operatorname{Var}(Y_1)$, using [[def-moments-variance-and-covariance]]. The population standard error of $\\bar Y_n$ is $\\sigma/\\sqrt n$, and its plug-in estimate is $\\widehat{se}_n:=s_n/\\sqrt n$. Although the finite-sample quantity $s_n$ is defined for any finite real sample, its interpretation as an estimate of a finite population standard error is used here only under the finite-second-moment condition.",
+        "Remarks": "The formula above defines the mathematical sample variance. Computing it as the difference between the sample second moment and the squared sample mean can suffer catastrophic cancellation in floating-point arithmetic; no stable-update or floating-point error bound is asserted on this page."
+      }
+    },
+    {
+      "source": {
+        "path": "items/thm-iid-monte-carlo-mean-moments.md",
+        "byte_length": 3257,
+        "mtime_ns": 1792037423264657048,
+        "note": "Observation only; exact final cryptographic binding reserved to root."
+      },
+      "excerpts": {
+        "Statement": "Let $(Y_i)_{i\\ge1}$ be a real IID sequence. If $\\mathbb E|Y_1|<\\infty$ and $\\mu=\\mathbb E[Y_1]$, then $\\mathbb E[\\bar Y_n]=\\mu$ for every $n\\ge1$. If also $\\mathbb E[Y_1^2]<\\infty$ and $\\sigma^2=\\operatorname{Var}(Y_1)$, then $\\operatorname{Var}(\\bar Y_n)=\\sigma^2/n$ for every $n\\ge1$.",
+        "Facts & Assumptions": "**Given:** A real IID sequence $(Y_i)_{i\\ge1}$ on one probability space; in the first claim $\\mathbb E|Y_1|<\\infty$, and in the second claim $\\mathbb E[Y_1^2]<\\infty$.\n\n[F1] [[def-identically-distributed-and-iid-random-variables]]: IID means that all variables have the same law and the whole family is mutually independent.\n\n[F2] [[thm-change-of-variables-for-expectation]]: For a measurable $g$, if $g(X)$ is integrable, then its expectation is the integral of $g$ against the law of $X$.\n\n[F3] [[cor-expectation-linearity-monotonicity-and-modulus-bound]]: Expectation is linear on integrable real random variables.\n\n[F4] [[def-moments-variance-and-covariance]]: For square-integrable real $X$, $\\operatorname{Var}(X)=\\mathbb E[(X-\\mathbb E[X])^2]$.\n\n[F5] [[cor-variance-adds-for-pairwise-independent-random-variables]]: For a finite pairwise-independent family of square-integrable real random variables, the variance of the sum is the sum of the variances.\n\n[F6] [[def-iid-monte-carlo-estimators]]: $\\bar Y_n=n^{-1}\\sum_{i=1}^nY_i$.",
+        "Proof": "1.1 Every $Y_i$ has the law of $Y_1$ by [F1]. Applying [F2] to the identity map gives $\\mathbb E[Y_i]=\\mu$ when $\\mathbb E|Y_1|<\\infty$. If $\\mathbb E[Y_1^2]<\\infty$, applying [F2] to $y\\mapsto(y-\\mu)^2$ also gives $\\operatorname{Var}(Y_i)=\\sigma^2$ by [F4]. [F1, F2, F4, given]\n\n2.1 By [F6], $\\bar Y_n=n^{-1}\\sum_{i=1}^nY_i$. Linearity [F3] and step 1.1 therefore give $\\mathbb E[\\bar Y_n]=n^{-1}\\sum_{i=1}^n\\mathbb E[Y_i]=\\mu$. [F3, F6, step 1.1, algebra]\n\n3.1 Assume $\\mathbb E[Y_1^2]<\\infty$. Since $|y|\\le1+y^2$ for every real $y$, each $Y_i$ is integrable as well as square-integrable. The first $n$ terms are pairwise independent by [F1], so [F5] and step 1.1 give $\\operatorname{Var}(\\sum_{i=1}^nY_i)=n\\sigma^2$. From [F4], scaling the centered sum by $1/n$ multiplies its variance by $1/n^2$; hence $\\operatorname{Var}(\\bar Y_n)=n^{-2}(n\\sigma^2)=\\sigma^2/n$. [F1, F4, F5, step 1.1, given, algebra] ∎"
+      }
+    }
+  ],
+  "contract_observation": {
+    "path": "research/bayesian-computational-statistics-62-batch-29.proof-contracts.json",
+    "byte_length": 76227,
+    "mtime_ns": 1792040062308684326,
+    "note": "Observation only; exact final cryptographic binding reserved to root."
+  },
+  "finding": "Current completed supplier28 supplies real IID mean convention and exact L1 unbiasedness/L2 variance theorem. Current consumer29 directly proves finite-sample identities; none of its15 manifests or contracts imports a batch28 logical item. No missing lemma or added item edge is required for this boundary.",
+  "premise_limits": [
+    "Fixed coefficients; L2 target/controls; inverse only on positive-definite covariance subspace.",
+    "Independent antithetic pairs, product-uniform inputs, L2 output; retain dependence inside pair and same-cost 2n IID comparator.",
+    "Positive stratum masses, fixed positive integer sizes, mutually independent samples; variance reduction only for proportional integer allocation.",
+    "Fixed q, fourth moments and positive-definite covariance for fitted-coefficient remainder; no same-sample unbiasedness assertion.",
+    "Integrable independent pilot coefficient and L1 production integrands; independence from full production sigma-algebra."
+  ],
+  "minimal_actions": [
+    "Root retains page28→29 prerequisite and own A→B edge.",
+    "Root replaces stale unresolved cross-batch status using supported schema and records current supplier compatibility.",
+    "Root binds exact current sources cryptographically and updates15 old escalated readiness decisions by native owner mechanism, preserving native historical evidence."
+  ],
+  "new_item_edges": [],
+  "source_edits": false,
+  "hashes_or_readiness_written": false,
+  "audit_stamp": false,
+  "tests_run": false
+}

@@ -1,0 +1,2407 @@
+{
+  "version": 1,
+  "level": "bayesian-computational-statistics-62-batch-51",
+  "scope": [
+    "alg-lower-empirical-bootstrap-quantile",
+    "def-iid-empirical-bootstrap-sample",
+    "lem-iid-sample-covariance-converges",
+    "alg-basic-bootstrap-interval",
+    "alg-bias-corrected-bootstrap-interval",
+    "alg-bootstrap-t-interval",
+    "alg-percentile-bootstrap-interval",
+    "lem-empirical-bootstrap-law-is-a-probability-measure",
+    "thm-delete-one-jackknife-linearization-for-smooth-statistics",
+    "lem-finite-bootstrap-cdf-supremum-is-measurable",
+    "alg-delete-one-jackknife-acceleration",
+    "lem-finite-index-bootstrap-sample-is-conditionally-iid",
+    "alg-bca-bootstrap-interval",
+    "thm-conditional-iid-bootstrap-clt-for-empirical-law",
+    "thm-iid-bootstrap-validity-for-smooth-statistics",
+    "ex-delete-one-jackknife-for-sample-mean",
+    "ex-discrete-median-bootstrap-ties",
+    "cex-iid-bootstrap-inconsistency-at-absolute-mean-kink",
+    "ex-iid-bootstrap-smooth-mean"
+  ],
+  "contracts": {
+    "alg-lower-empirical-bootstrap-quantile": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the input requires a nonempty finite list of bootstrap values."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: if all listed values are zero, the lower quantile returns zero, including at p=0 and p=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for B=1 the only order statistic is returned for every p in [0,1]."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: repeated values are retained with multiplicity; a constant list returns that constant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: p=0 returns the minimum and p=1 returns the maximum by the explicit convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: sorting one finite list and selecting a finite order statistic uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: The Definition sorts a nonempty finite list and selects the declared lower order statistic, with explicit p0/p1 conventions; it is a quantile procedure, not a logical equivalence.",
+            "item_sha256": "5358d0c2a50330442e53f1fb20ae517460f413eae85301c860314352d1331fb0",
+            "row_sha256": "a6e5fdbb314d0b7742a67da2ed4af0b3b379f81db9aa8b45a1a336b01a0f3387"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: The Definition sorts a nonempty finite list and selects the declared lower order statistic, with explicit p0/p1 conventions; it is a quantile procedure, not a logical equivalence.",
+            "item_sha256": "5358d0c2a50330442e53f1fb20ae517460f413eae85301c860314352d1331fb0",
+            "row_sha256": "34c3bec829f5eba833fae89a21c904d134aa11034ab42069820a29a63ebdc7f5"
+          }
+        }
+      ]
+    },
+    "def-iid-empirical-bootstrap-sample": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition fixes n,d>=1, giving n^n>=1 finite index vectors and normalization n^-n. Its sample mean1/n excludes n0; the later delete-one formula separately requires n>=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: observations may be zero; the finite empirical law and resampling map remain defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for n=1 the index set has one tuple, of mass one, and the empirical law is a point mass."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: repeated or identical observations are allowed; their atoms retain their index multiplicities."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: no interval endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the index space is finite and its law uses explicit equal weights; no arbitrary choice function is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: The Definition gives the pushforward of the n^n equally weighted index tuples and plug-in roots; it explicitly makes no bootstrap-validity or interval-coverage claim.",
+            "item_sha256": "05c1b408d854f48eddb26a1d196080b64daaa87be3a8f0030a24e6e8ab3b2299",
+            "row_sha256": "a6e5fdbb314d0b7742a67da2ed4af0b3b379f81db9aa8b45a1a336b01a0f3387"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: The Definition gives the pushforward of the n^n equally weighted index tuples and plug-in roots; it explicitly makes no bootstrap-validity or interval-coverage claim.",
+            "item_sha256": "05c1b408d854f48eddb26a1d196080b64daaa87be3a8f0030a24e6e8ab3b2299",
+            "row_sha256": "34c3bec829f5eba833fae89a21c904d134aa11034ab42069820a29a63ebdc7f5"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-51",
+        "notes": "Reviewed the complete Definition and all eleven prerequisite statements. n,d>=1 exclude empty index sets; n^n equal weights total one, repeated data values retain index multiplicity. Arithmetic and Borel composition make all statistics measurable; n>=2 is explicit for deletion. justified_by supplies probability and conditional independence without circular logical premises. No AC or validity assertion is hidden in this definition."
+      }
+    },
+    "lem-iid-sample-covariance-converges": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-khinchin-weak-law-for-iid-integrable-variables",
+          "source_section": "Statement",
+          "quote": "If $(X_k)_{k\\ge1}$ are IID real random variables and $\\mathbb E|X_1|<\\infty$, then, with $S_n=\\sum_{k=1}^nX_k$ and $\\mu=\\mathbb EX_1$,\n$$\\mathbb E|S_n/n-\\mu|\\longrightarrow0.$$\nConsequently $S_n/n\\to\\mu$ in probability.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each coordinate $j$, the sequence $(X_{ij})_i$ is IID by [F1] and [F4], and is integrable since $\\mathbb E|X_{1j}|\\le 1+\\mathbb E|X_{1j}|^2<\\infty$. For each pair $j,k$, $(X_{ij}X_{ik})_i$ is also IID by [F1] and [F4], and is integrable because $2|X_{1j}X_{1k}|\\le X_{1j}^2+X_{1k}^2$. Apply [F3] to each of these finitely many sequences. This gives $\\bar X_{n,j}\\to\\mu_j$ and $n^{-1}\\sum_iX_{ij}X_{ik}\\to\\mathbb E[X_{1j}X_{1k}]$ in probability.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $j,k$, expand $\\widehat\\Sigma_{n,jk}=\\frac1n\\sum_iX_{ij}X_{ik}-\\bar X_{n,j}\\bar X_{n,k}.$ Step 1.1 makes the right side converge in probability to $\\mathbb E[X_{1j}X_{1k}]-\\mu_j\\mu_k=\\Sigma_{jk}$; the same step gives the claimed mean convergence. Since $d$ is finite, entrywise convergence holds simultaneously in probability.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement uses the positive initial segment n=1,2,... for the sequence of empirical means; at n0 its1/n covariance/mean formulas are undefined. The finite sums therefore do not license an empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero covariance entries and constant coordinates are allowed; the covariance limit is then zero in those entries."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the n=1 sample covariance is defined with denominator n; the claim concerns its asymptotic limit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: degenerate coordinates satisfy the moment hypotheses and the same weak-law proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: no interval endpoints occur."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Proof: only finitely many coordinates and coordinate pairs are considered at each d; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: Finite-second-moment IID vectors yield entrywise empirical covariance convergence; the expansion in Proof2.1 uses coordinate sample products, without characterizing all laws permitting convergence.",
+            "item_sha256": "a30e268c77c95f6e4afd54762123c757a83fa28a6642ba4b273cdad5e2c7d613",
+            "row_sha256": "dc8746857c34b0647a58f969d89d6d62d6a6584299d5971204517118ef51cf6b"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: Finite-second-moment IID vectors yield entrywise empirical covariance convergence; the expansion in Proof2.1 uses coordinate sample products, without characterizing all laws permitting convergence.",
+            "item_sha256": "a30e268c77c95f6e4afd54762123c757a83fa28a6642ba4b273cdad5e2c7d613",
+            "row_sha256": "f30bb621bc529eee96d362432f05f38cce4c5707efadaca898a0dd0147fa02ad"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-51",
+        "notes": "Reviewed both proof steps and all five cited supplier statements. Finite second moments imply integrability of coordinates and coordinate products by 2|xy|<=x^2+y^2; measurable maps preserve IID, so the integrable WLLN applies to finitely many sequences. Expansion of covariance and finite-dimensional convergence prove the exact conclusion, including singular or zero covariance. No positivity or AC hypothesis is needed."
+      }
+    },
+    "alg-basic-bootstrap-interval": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires a nonempty bootstrap-estimate list, B>=1, so both lower empirical quantiles exist; no endpoints or interval are returned from B0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: equal zero bootstrap estimates yield the singleton interval [hat-theta,hat-theta]."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: B=1 is allowed; both endpoints use the sole bootstrap value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a constant bootstrap list yields coincident reflected quantile endpoints."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: alpha is restricted to (0,1); the lower-quantile supplier explicitly handles p=0 and p=1 if reached."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the finite bootstrap list and declared quantile algorithm require no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: The Definition reflects two lower empirical quantiles around the observed estimate and expressly makes no coverage claim; it provides interval endpoints only.",
+            "item_sha256": "d648fe2df721e595c2e5e40a565b5bde7472a3597d444d130d46c15cdfa5eced",
+            "row_sha256": "a6e5fdbb314d0b7742a67da2ed4af0b3b379f81db9aa8b45a1a336b01a0f3387"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: The Definition reflects two lower empirical quantiles around the observed estimate and expressly makes no coverage claim; it provides interval endpoints only.",
+            "item_sha256": "d648fe2df721e595c2e5e40a565b5bde7472a3597d444d130d46c15cdfa5eced",
+            "row_sha256": "34c3bec829f5eba833fae89a21c904d134aa11034ab42069820a29a63ebdc7f5"
+          }
+        }
+      ]
+    },
+    "alg-bias-corrected-bootstrap-interval": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition inputs B>=1 through its nonempty list, so the midrank fraction has positive denominatorB; B0 has neither a defined bias fraction nor empirical quantiles."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: if all bootstrap estimates equal the observed estimate, the midrank is 1/2 and the returned endpoints are that value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: B=1 is allowed; the midrank tie rule and extended inverse convention still define the procedure."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a constant bootstrap distribution is handled by the midrank convention; no accuracy claim is made."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: alpha lies in (0,1); p0=0 or 1 is handled by the extended inverse-CDF convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the algorithm uses a finite count and deterministic real functions; AC is stated only for the normal-law supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: The Definition transforms midrank bias scores through the extended normal CDF before selecting empirical quantiles; it asserts a finite-B endpoint procedure, not higher-order accuracy.",
+            "item_sha256": "0cfbe8be63b178d83a6b5863cd7238c949f9ffc6b764330ce760e13ab21a052d",
+            "row_sha256": "a6e5fdbb314d0b7742a67da2ed4af0b3b379f81db9aa8b45a1a336b01a0f3387"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: The Definition transforms midrank bias scores through the extended normal CDF before selecting empirical quantiles; it asserts a finite-B endpoint procedure, not higher-order accuracy.",
+            "item_sha256": "0cfbe8be63b178d83a6b5863cd7238c949f9ffc6b764330ce760e13ab21a052d",
+            "row_sha256": "34c3bec829f5eba833fae89a21c904d134aa11034ab42069820a29a63ebdc7f5"
+          }
+        }
+      ]
+    },
+    "alg-bootstrap-t-interval": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: B must be at least one and the supplied list of bootstrap pairs is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: a zero or nonfinite observed or bootstrap standard error returns undefined by the stated branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: B=1 is allowed when all supplied standard errors are positive and finite."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a degenerate bootstrap fit with zero standard error returns undefined; no studentized limit is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: alpha lies in (0,1), so both tail probabilities are interior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: only finite arithmetic and the deterministic quantile algorithm are used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: The Definition requires positive finite observed/bootstrap standard errors and inverts the empirical t quantiles; its undefined branch and output do not supply a studentized limit theorem.",
+            "item_sha256": "856baa25a5ced5f22d0e4b316b36c2cf74885cbf5cfe2778205ec40af6ec46fd",
+            "row_sha256": "a6e5fdbb314d0b7742a67da2ed4af0b3b379f81db9aa8b45a1a336b01a0f3387"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: The Definition requires positive finite observed/bootstrap standard errors and inverts the empirical t quantiles; its undefined branch and output do not supply a studentized limit theorem.",
+            "item_sha256": "856baa25a5ced5f22d0e4b316b36c2cf74885cbf5cfe2778205ec40af6ec46fd",
+            "row_sha256": "34c3bec829f5eba833fae89a21c904d134aa11034ab42069820a29a63ebdc7f5"
+          }
+        }
+      ]
+    },
+    "alg-percentile-bootstrap-interval": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition excludes the empty list. With B1 both quantiles are its sole value, giving a singleton interval; B0 provides no order statistic and is inadmissible."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: a constant zero bootstrap list yields the singleton interval [0,0]."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: B=1 is allowed and the sole order statistic supplies both endpoints."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a constant bootstrap list yields coincident endpoints."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: alpha lies in (0,1); the lower-quantile procedure separately defines its p=0 and p=1 cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the finite quantile procedure requires no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: The Definition returns the empirical alpha/2 and1-alpha/2 quantiles under the declared lower-quantile convention and explicitly denies automatic coverage.",
+            "item_sha256": "fc4fe2b4b007cf495d0770f88bdc7b1ad332eccc4eb48050410da055a085ca64",
+            "row_sha256": "a6e5fdbb314d0b7742a67da2ed4af0b3b379f81db9aa8b45a1a336b01a0f3387"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: The Definition returns the empirical alpha/2 and1-alpha/2 quantiles under the declared lower-quantile convention and explicitly denies automatic coverage.",
+            "item_sha256": "fc4fe2b4b007cf495d0770f88bdc7b1ad332eccc4eb48050410da055a085ca64",
+            "row_sha256": "34c3bec829f5eba833fae89a21c904d134aa11034ab42069820a29a63ebdc7f5"
+          }
+        }
+      ]
+    },
+    "lem-empirical-bootstrap-law-is-a-probability-measure": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-iid-empirical-bootstrap-sample",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,n\\ge1$ and observed vectors $x_1,\\ldots,x_n\\in\\mathbb R^d$, with the Borel sigma-algebra $\\mathcal B(\\mathbb R^d)$ ([[def-borel-sigma-algebra]]). Their empirical law is the set function\n$$P_n(A)=\\frac1n\\sum_{i=1}^n 1\\{x_i\\in A\\},\\qquad A\\in\\mathcal B(\\mathbb R^d).$$\n\nLet $\\mathsf I_n=\\{\\omega:[n]\\to[n]\\}$ be the finite set of index vectors. By [[thm-cardinality-of-a-set-of-functions]], it has $n^n$ elements. Give each index vector mass $n^{-n}$; the weights sum to one, so this is a finite probability space in the sense of [[def-finite-probability-space-and-event]]. For $j=1,\\ldots,n$, let $I_j(\\omega)=\\omega(j)$ and put $X_j^*(\\omega)=x_{I_j(\\omega)}$. The **ideal size-$n$ empirical bootstrap law conditional on the data** is the pushforward of this finite uniform law under\n$\\omega\\longmapsto (x_{\\omega(1)},\\ldots,x_{\\omega(n)}).$\nThus conditional probabilities are finite averages over the $n^n$ index tuples. The empirical law is a probability measure, and the bootstrap coordinates are conditionally IID with that law, by the well-definedness results listed in justified_by.\n\nFor random observations $X_1,\\ldots,X_n$, write $\\bar X_n=n^{-1}\\sum_iX_i$ coordinatewise, so each coordinate is the scalar sample mean in [[def-partial-sums-and-sample-means]]. Write $P_n=n^{-1}\\sum_i\\delta_{X_i}$, using the Dirac measure [[def-dirac-measure]], and let $\\bar X_n^*$ be the bootstrap mean. If $g:\\mathbb R^d\\to\\mathbb R$ is Borel ([[def-measurable-function-between-measurable-spaces]]), then\n$$\\hat\\theta_n=g(\\bar X_n),\\qquad \\hat\\theta_n^*=g(\\bar X_n^*).$$\nWhen $X_i$ are IID ([[def-identically-distributed-and-iid-random-variables]]) with finite second moment, write $\\mu_j=\\mathbb E X_{1j}$ and $\\Sigma_{jk}=\\mathbb E[(X_{1j}-\\mu_j)(X_{1k}-\\mu_k)]$ ([[def-moments-variance-and-covariance]]), and set $\\theta=g(\\mu)$. The functions of the data above are Borel statistics and estimators in the sense of [[def-statistic-and-estimator]]; coordinatewise arithmetic preserves measurability ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]). No bootstrap validity or interval coverage is part of this definition. For $n\\ge2$, the delete-one mean and plug-in statistic are\n$$\\bar X_{n,(-i)}=\\frac1{n-1}\\sum_{j\\ne i}X_j,\\qquad \\hat\\theta_{n,(-i)}=g(\\bar X_{n,(-i)}).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-nonnegative-extended-series",
+          "source_section": "Definition",
+          "quote": "Let $a=(a_k)_{k\\in\\mathbb N}$ take values in $[0,+\\infty]\\subseteq\\overline{\\mathbb R}$ ([[def-extended-reals]]). Its **partial sums** are the unique sequence $(s_n)$ in $[0,+\\infty]$ satisfying\n\n$$s_0=0,\\qquad s_{n+1}=s_n+a_n.$$\n\nTo apply [[thm-recursion]] with a fixed successor function, use the state space $\\mathbb N\\times[0,+\\infty]$ and the self-map $T(n,s)=(n+1,s+a_n)$, starting from $(0,0)$. Recursion gives a unique state sequence; induction makes its first coordinate $n$, and its second coordinates are exactly the unique $(s_n)$ satisfying the displayed recurrence. Addition of two nonnegative extended reals is always defined, including when either is $+\\infty$. The sequence $(s_n)$ is nondecreasing, and its **nonnegative extended sum** is\n\n$$\\sum_{k=0}^{\\infty}a_k:=\\sup_{n\\in\\mathbb N}s_n\\in[0,+\\infty],$$\n\nwhose existence follows from completeness of the extended real line ([[lem-extended-reals-complete]]). More generally, for $m\\in\\mathbb N$,\n\n$$\\sum_{k\\ge m}a_k:=\\sum_{j=0}^{\\infty}a_{m+j}.$$\n\nFinite sums use the same recursion: $\\sum_{k<n}a_k=s_n$, so the empty sum at $n=0$ is $0$. A double sum such as $\\sum_i\\sum_j a_{ij}$ means that the inner nonnegative extended sum is formed first and the resulting nonnegative extended sequence is then summed.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Formula [F1] gives $P_n(\\varnothing)=0$ and $P_n(\\mathbb R^d)=n^{-1}\\sum_{i=1}^n1=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $(A_k)_{k\\ge1}$ be pairwise disjoint Borel sets. For each fixed $i$, at most one indicator $1\\{x_i\\in A_k\\}$ is nonzero. Therefore $P_n\\!\\left(\\bigcup_{k\\ge1}A_k\\right)=\\frac1n\\sum_{i=1}^n\\sum_{k\\ge1}1\\{x_i\\in A_k\\} =\\sum_{k\\ge1}\\frac1n\\sum_{i=1}^n1\\{x_i\\in A_k\\} =\\sum_{k\\ge1}P_n(A_k).$ The interchange is between a finite sum and a nonnegative series; by [F4] both are the supremum of the corresponding finite partial sums, so finite distributivity gives the equality.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 verify the empty-set and countable-additivity clauses in [F2], and step 1.1 gives total mass one. Thus [F3] makes $P_n$ a probability measure.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement explicitly requires n>=1. At n1 the law is a single point mass; at n0 the coefficient1/n is undefined, so no empty empirical probability law is asserted. Proof1.1 separately verifies P_n(emptyset)=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the data points may equal zero; all finite point masses still sum to one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: n=1 gives the Dirac probability measure at the sole observation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: repeated or identical observations produce a probability measure with the corresponding combined atom mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement varies finite data points and positive integer n, not an interval probability level. Repeated or coincident points, including n1, simply produce point-mass multiplicities; there is no omitted lower/upper tuning endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Proof: only finite sums and nonnegative series are used; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: The finite average of point masses has total mass1 and is countably additive in Proof1.1–2.1; arbitrary probability measures are not claimed to have this empirical representation.",
+            "item_sha256": "bd800fff533e0bac51467323e555fdeab6f9e979372b27ac54b19f4a17553afe",
+            "row_sha256": "dc8746857c34b0647a58f969d89d6d62d6a6584299d5971204517118ef51cf6b"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: The finite average of point masses has total mass1 and is countably additive in Proof1.1–2.1; arbitrary probability measures are not claimed to have this empirical representation.",
+            "item_sha256": "bd800fff533e0bac51467323e555fdeab6f9e979372b27ac54b19f4a17553afe",
+            "row_sha256": "f30bb621bc529eee96d362432f05f38cce4c5707efadaca898a0dd0147fa02ad"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-51",
+        "notes": "Reviewed all three steps and all four supplier statements. Nonnegativity is immediate from the indicator formula; empty set and total mass are explicit. Finite interchange with a nonnegative series follows from monotone finite partial sums. Repeated points and n=1 preserve mass, disjoint additivity and normalization; n=0 is excluded. No arbitrary selection is used."
+      }
+    },
+    "thm-delete-one-jackknife-linearization-for-smooth-statistics": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-iid-sample-covariance-converges",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ be finite and let $X_1,X_2,\\ldots$ be IID $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$. Put $\\mu_j=\\mathbb E X_{1j}$ and $\\Sigma_{jk}=\\mathbb E[(X_{1j}-\\mu_j)(X_{1k}-\\mu_k)]$, the coordinate covariance entries from [[def-moments-variance-and-covariance]]. Define\n$$\\bar X_n=\\frac1n\\sum_{i=1}^nX_i,\\qquad \\widehat\\Sigma_n=\\frac1n\\sum_{i=1}^n(X_i-\\bar X_n)(X_i-\\bar X_n)^T.$$\nThen $\\bar X_n\\to\\mu$ in probability and every entry of $\\widehat\\Sigma_n$ converges in probability to the corresponding entry of $\\Sigma$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-iid-empirical-bootstrap-sample",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,n\\ge1$ and observed vectors $x_1,\\ldots,x_n\\in\\mathbb R^d$, with the Borel sigma-algebra $\\mathcal B(\\mathbb R^d)$ ([[def-borel-sigma-algebra]]). Their empirical law is the set function\n$$P_n(A)=\\frac1n\\sum_{i=1}^n 1\\{x_i\\in A\\},\\qquad A\\in\\mathcal B(\\mathbb R^d).$$\n\nLet $\\mathsf I_n=\\{\\omega:[n]\\to[n]\\}$ be the finite set of index vectors. By [[thm-cardinality-of-a-set-of-functions]], it has $n^n$ elements. Give each index vector mass $n^{-n}$; the weights sum to one, so this is a finite probability space in the sense of [[def-finite-probability-space-and-event]]. For $j=1,\\ldots,n$, let $I_j(\\omega)=\\omega(j)$ and put $X_j^*(\\omega)=x_{I_j(\\omega)}$. The **ideal size-$n$ empirical bootstrap law conditional on the data** is the pushforward of this finite uniform law under\n$\\omega\\longmapsto (x_{\\omega(1)},\\ldots,x_{\\omega(n)}).$\nThus conditional probabilities are finite averages over the $n^n$ index tuples. The empirical law is a probability measure, and the bootstrap coordinates are conditionally IID with that law, by the well-definedness results listed in justified_by.\n\nFor random observations $X_1,\\ldots,X_n$, write $\\bar X_n=n^{-1}\\sum_iX_i$ coordinatewise, so each coordinate is the scalar sample mean in [[def-partial-sums-and-sample-means]]. Write $P_n=n^{-1}\\sum_i\\delta_{X_i}$, using the Dirac measure [[def-dirac-measure]], and let $\\bar X_n^*$ be the bootstrap mean. If $g:\\mathbb R^d\\to\\mathbb R$ is Borel ([[def-measurable-function-between-measurable-spaces]]), then\n$$\\hat\\theta_n=g(\\bar X_n),\\qquad \\hat\\theta_n^*=g(\\bar X_n^*).$$\nWhen $X_i$ are IID ([[def-identically-distributed-and-iid-random-variables]]) with finite second moment, write $\\mu_j=\\mathbb E X_{1j}$ and $\\Sigma_{jk}=\\mathbb E[(X_{1j}-\\mu_j)(X_{1k}-\\mu_k)]$ ([[def-moments-variance-and-covariance]]), and set $\\theta=g(\\mu)$. The functions of the data above are Borel statistics and estimators in the sense of [[def-statistic-and-estimator]]; coordinatewise arithmetic preserves measurability ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]). No bootstrap validity or interval coverage is part of this definition. For $n\\ge2$, the delete-one mean and plug-in statistic are\n$$\\bar X_{n,(-i)}=\\frac1{n-1}\\sum_{j\\ne i}X_j,\\qquad \\hat\\theta_{n,(-i)}=g(\\bar X_{n,(-i)}).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U \\subseteq X$ be open in a real Banach space $X$, and let $Y$, $Z$, $W$ be\nreal Banach spaces. Then:\n\n1. **Sum rule.** If $f_1, f_2 : U \\to Y$ are Fréchet differentiable at $x \\in U$\n   and $a, b \\in \\mathbb R$, then $af_1+bf_2$ is Fréchet differentiable at $x$\n   with $D(af_1+bf_2)(x) = a\\,Df_1(x) + b\\,Df_2(x)$.\n2. **Bounded-bilinear product rule.** If $f : U \\to Y$ and $g : U \\to Z$ are\n   Fréchet differentiable at $x$, and $B : Y \\times Z \\to W$ is bounded\n   bilinear, then $U \\ni u \\mapsto B(f(u),g(u))$ is Fréchet differentiable at\n   $x$ and\n\n$$D\\bigl(B(f,g)\\bigr)(x)h = B\\bigl(Df(x)h,\\ g(x)\\bigr) + B\\bigl(f(x),\\ Dg(x)h\\bigr) \\qquad (h \\in X).$$\n\n3. **Chain rule.** If $f : U \\to Y$ is Fréchet differentiable at $x$, if\n   $W_0 \\subseteq Y$ is an open set with $f[U] \\subseteq W_0$, and if\n   $g : W_0 \\to Z$ is Fréchet differentiable at $f(x)$, then\n   $g \\circ f$ is Fréchet differentiable at $x$ and\n   $$D(g \\circ f)(x) = Dg\\bigl(f(x)\\bigr)\\,Df(x).$$\n\nNo continuity of any derivative map is assumed; these are pointwise statements\nabout one $x$ at a time.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $\\bar X_n\\to\\mu$ and $n^{-1}\\sum_i\\|X_i-\\bar X_n\\|^2=\\operatorname{tr}(\\widehat\\Sigma_n)$ is bounded in probability. For each $\\varepsilon>0$, [F2] and the finite second moment give $\\mathbb P\\!\\left(\\max_{i\\le n}\\|X_i\\|>\\varepsilon n\\right)\\le n\\,\\mathbb P(\\|X_1\\|>\\varepsilon n)\\le\\frac{\\mathbb E\\|X_1\\|^2}{\\varepsilon^2 n}\\longrightarrow0.$ Therefore $\\max_i\\|X_i-\\bar X_n\\|/(n-1)\\to0$ in probability. Choose $\\delta>0$ so the closed Euclidean ball $\\overline B(\\mu,2\\delta)$ is contained in $U$, and let $E_n=\\{\\|\\bar X_n-\\mu\\|\\le\\delta,\\ \\max_i\\|X_i-\\bar X_n\\|/(n-1)\\le\\delta\\}$. This is measurable and has probability tending to one by the preceding bounds. Extend $\\nabla g$ by zero outside $U$ to a Borel map $\\widetilde{\\nabla g}:\\mathbb R^d\\to\\mathbb R^d$, and define $\\omega_n=\\max_{i\\le n}\\sup_{t\\in\\mathbb Q\\cap[0,1]}1_{E_n}\\left\\|\\widetilde{\\nabla g}\\!\\left(\\bar X_n-t\\frac{X_i-\\bar X_n}{n-1}\\right)-a\\right\\|.$ Each rational-indexed term is measurable, and the countable supremum is measurable because its strict superlevel sets are countable unions; the finite maximum is measurable as well. On $E_n$, every segment lies in $\\overline B(\\mu,2\\delta)\\subset U$, where $\\nabla g$ is bounded by continuity on this compact ball, and continuity along the segment makes the rational supremum equal the supremum over $[0,1]$. On $E_n^c$ every term inside the supremum is zero. The greatest distance of any segment point from $\\mu$ on $E_n$ is at most $\\|\\bar X_n-\\mu\\|+\\max_i\\|X_i-\\bar X_n\\|/(n-1)$, which tends to zero in probability. Continuity of $\\nabla g$ at $\\mu$ and $\\mathbb P(E_n)\\to1$ therefore imply $\\omega_n\\to0$ in probability.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On $E_n$, define $\\varphi_i(t)=g(\\bar X_n-t(X_i-\\bar X_n)/(n-1))$ for $0\\le t\\le1$. It is continuous on $[0,1]$ and differentiable on $(0,1)$ by [F5], with derivative $-(n-1)^{-1}\\nabla g(\\bar X_n-t(X_i-\\bar X_n)/(n-1))^T(X_i-\\bar X_n)$. By [F4] there is $\\tau_i\\in(0,1)$ at which this derivative equals $\\varphi_i(1)-\\varphi_i(0)$. On every outcome define the measurable algebraic remainder $e_{n,i}:=\\hat\\theta_{n,(-i)}-\\hat\\theta_n+a^T(X_i-\\bar X_n)/(n-1)$. On $E_n$ the mean-value identity expresses this remainder as $-\\frac{(\\nabla g(\\bar X_n-\\tau_i(X_i-\\bar X_n)/(n-1))-a)^T(X_i-\\bar X_n)}{n-1}$, so $|e_{n,i}|\\le\\omega_n\\|X_i-\\bar X_n\\|/(n-1)$. The points $\\tau_i$ are used only for this pointwise identity and bound; no measurable selection is needed. Since $\\mathbb P(E_n)\\to1$, the expansion with the stated bound holds with probability tending to one.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The algebraic definition of $e_{n,i}$ gives $p_{n,i}=\\hat\\theta_n+a^T(X_i-\\bar X_n)-(n-1)e_{n,i}$. On $E_n$, the bound in step 2.1 makes the average squared error in the statement at most $\\omega_n^2\\,\\frac1n\\sum_i\\|X_i-\\bar X_n\\|^2,$ which tends to zero in probability by step 1.1. Since $\\mathbb P(E_n^c)\\to0$, the stated convergence in probability follows.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The algebraic definition of $e_{n,i}$ gives, after averaging over $i$ and using $\\sum_i(X_i-\\bar X_n)=0$, $$nV_{J,n}=\\frac1{n-1}\\sum_i\\left(a^T(X_i-\\bar X_n)-(n-1)(e_{n,i}-\\bar e_n)\\right)^2,$$ where $\\bar e_n=n^{-1}\\sum_ie_{n,i}$. The leading quadratic term is $\\frac1{n-1}\\sum_i\\{a^T(X_i-\\bar X_n)\\}^2=\\frac n{n-1}a^T\\widehat\\Sigma_n a\\longrightarrow a^T\\Sigma a$ by [F1]. On $E_n$, the normalized squared error term is bounded by $(n-1)\\sum_i(e_{n,i}-\\bar e_n)^2\\le(n-1)\\sum_i e_{n,i}^2\\le\\omega_n^2\\frac1{n-1}\\sum_i\\|X_i-\\bar X_n\\|^2\\longrightarrow0.$ If $\\psi_i=a^T(X_i-\\bar X_n)$ and $r_i=(n-1)(e_{n,i}-\\bar e_n)$, then on $E_n$ the absolute cross term is at most $2\\sqrt{\\left(\\frac1{n-1}\\sum_i\\psi_i^2\\right)\\left(\\frac1{n-1}\\sum_i r_i^2\\right)},$ which tends to zero because the first factor converges to the finite $a^T\\Sigma a$ and the second to zero. Since $\\mathbb P(E_n^c)\\to0$, these bounds prove the jackknife variance limit in probability.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires n>=2: each deletion retains n-1>=1 observations and both n and n-1 denominators are positive. The n0/n1 deletion formulas are outside the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement excludes a^T Sigma a=0 by strict positivity. Proof1.1 uses any epsilon>0 for the tail bound, so epsilon²n>0 with n>=2; deletion denominators n-1>=1 are also nonzero. Zero secant remainders or zero finite sample variance may occur and their bounds in Proof3.1–4.1 remain valid without dividing by those quantities."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement: n=1 is outside the delete-one domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement: a zero projected variance is excluded by the strict positivity hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement has integer n>=2 and an open neighborhood ofmu, with no interval-valued tuning parameter. Proof2.1 handles deletion secants on the closed segment[0,1] by the mean-value theorem; its endpoints are the full and deleted means."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Proof: the mean-value theorem is applied for the finitely many i=1,...,n; finite choice suffices and no arbitrary-index choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: Neighborhood C1 regularity and positive projected variance imply pseudovalue linearization and nVJ convergence; Proof2.1 uses deletion secants and does not prove necessity of C1.",
+            "item_sha256": "8b9b2ab8c8b48b884497e4964574e231761514e80821d8377edf170af6a1cd0c",
+            "row_sha256": "dc8746857c34b0647a58f969d89d6d62d6a6584299d5971204517118ef51cf6b"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: Neighborhood C1 regularity and positive projected variance imply pseudovalue linearization and nVJ convergence; Proof2.1 uses deletion secants and does not prove necessity of C1.",
+            "item_sha256": "8b9b2ab8c8b48b884497e4964574e231761514e80821d8377edf170af6a1cd0c",
+            "row_sha256": "f30bb621bc529eee96d362432f05f38cce4c5707efadaca898a0dd0147fa02ad"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-51",
+        "notes": "Reviewed all four steps and all seven prerequisite statements. Finite second moment bounds max_i ||X_i||/n in probability and empirical second moments. On E_n all deletion segments stay in a compact ball inside U; rational supremum defines a measurable modulus tending to zero. The scalar MVT and chain rule give the secant remainder without a measurable selection of tau_i. Averaged squared pseudovalue error is bounded by modulus squared times empirical second moment; centering reduces the quadratic error, and Cauchy-Schwarz removes the cross term. n>=2 and local C1 (stronger than differentiability at mu) are explicit. No AC use or claim of BCa coverage is present."
+      }
+    },
+    "alg-delete-one-jackknife-acceleration": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires n>=2 delete-one estimates, so the mean1/n exists. Even at n2, equal estimates give S2=0 and the algorithm explicitly returns undefined rather than dividing byzero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: when S2=0 the acceleration is explicitly undefined."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition: n=1 is outside the delete-one domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: equal delete-one estimates give S2=0 and the procedure returns undefined."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: no interval-tail parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: finite sums over the n delete-one estimates use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: The Definition returns cubic centered deletion sums divided by6S2^(3/2), or undefined when S2=0; its reference to a separate first-order theorem does not create a BCa coverage equivalence.",
+            "item_sha256": "92329d05cc70c0ead219d51a02ffe420207c298d8ebc6ddd64d1f073979c3c06",
+            "row_sha256": "a6e5fdbb314d0b7742a67da2ed4af0b3b379f81db9aa8b45a1a336b01a0f3387"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: The Definition returns cubic centered deletion sums divided by6S2^(3/2), or undefined when S2=0; its reference to a separate first-order theorem does not create a BCa coverage equivalence.",
+            "item_sha256": "92329d05cc70c0ead219d51a02ffe420207c298d8ebc6ddd64d1f073979c3c06",
+            "row_sha256": "34c3bec829f5eba833fae89a21c904d134aa11034ab42069820a29a63ebdc7f5"
+          }
+        }
+      ]
+    },
+    "lem-finite-index-bootstrap-sample-is-conditionally-iid": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-iid-empirical-bootstrap-sample",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,n\\ge1$ and observed vectors $x_1,\\ldots,x_n\\in\\mathbb R^d$, with the Borel sigma-algebra $\\mathcal B(\\mathbb R^d)$ ([[def-borel-sigma-algebra]]). Their empirical law is the set function\n$$P_n(A)=\\frac1n\\sum_{i=1}^n 1\\{x_i\\in A\\},\\qquad A\\in\\mathcal B(\\mathbb R^d).$$\n\nLet $\\mathsf I_n=\\{\\omega:[n]\\to[n]\\}$ be the finite set of index vectors. By [[thm-cardinality-of-a-set-of-functions]], it has $n^n$ elements. Give each index vector mass $n^{-n}$; the weights sum to one, so this is a finite probability space in the sense of [[def-finite-probability-space-and-event]]. For $j=1,\\ldots,n$, let $I_j(\\omega)=\\omega(j)$ and put $X_j^*(\\omega)=x_{I_j(\\omega)}$. The **ideal size-$n$ empirical bootstrap law conditional on the data** is the pushforward of this finite uniform law under\n$\\omega\\longmapsto (x_{\\omega(1)},\\ldots,x_{\\omega(n)}).$\nThus conditional probabilities are finite averages over the $n^n$ index tuples. The empirical law is a probability measure, and the bootstrap coordinates are conditionally IID with that law, by the well-definedness results listed in justified_by.\n\nFor random observations $X_1,\\ldots,X_n$, write $\\bar X_n=n^{-1}\\sum_iX_i$ coordinatewise, so each coordinate is the scalar sample mean in [[def-partial-sums-and-sample-means]]. Write $P_n=n^{-1}\\sum_i\\delta_{X_i}$, using the Dirac measure [[def-dirac-measure]], and let $\\bar X_n^*$ be the bootstrap mean. If $g:\\mathbb R^d\\to\\mathbb R$ is Borel ([[def-measurable-function-between-measurable-spaces]]), then\n$$\\hat\\theta_n=g(\\bar X_n),\\qquad \\hat\\theta_n^*=g(\\bar X_n^*).$$\nWhen $X_i$ are IID ([[def-identically-distributed-and-iid-random-variables]]) with finite second moment, write $\\mu_j=\\mathbb E X_{1j}$ and $\\Sigma_{jk}=\\mathbb E[(X_{1j}-\\mu_j)(X_{1k}-\\mu_k)]$ ([[def-moments-variance-and-covariance]]), and set $\\theta=g(\\mu)$. The functions of the data above are Borel statistics and estimators in the sense of [[def-statistic-and-estimator]]; coordinatewise arithmetic preserves measurability ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]). No bootstrap validity or interval coverage is part of this definition. For $n\\ge2$, the delete-one mean and plug-in statistic are\n$$\\bar X_{n,(-i)}=\\frac1{n-1}\\sum_{j\\ne i}X_j,\\qquad \\hat\\theta_{n,(-i)}=g(\\bar X_{n,(-i)}).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-empirical-bootstrap-law-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For any $n\\ge1$ and $x_1,\\ldots,x_n\\in\\mathbb R^d$, the set function\n$$P_n(A)=\\frac1n\\sum_{i=1}^n1\\{x_i\\in A\\},\\qquad A\\in\\mathcal B(\\mathbb R^d),$$\nis a probability measure.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For subsets $C_1,\\ldots,C_n\\subseteq\\{1,\\ldots,n\\}$, the product-uniform index law gives $\\mathbb P^*(I_1\\in C_1,\\ldots,I_n\\in C_n)=\\frac{\\prod_{j=1}^n|C_j|}{n^n} =\\prod_{j=1}^n\\frac{|C_j|}{n}.$ Thus the coordinate indices are independent and each is uniform on $\\{1,\\ldots,n\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $j$, the map $i\\mapsto x_i$ from the finite discrete index set to $\\mathbb R^d$ is measurable, and its pushforward of the uniform law assigns $A\\in\\mathcal B(\\mathbb R^d)$ mass $n^{-1}\\sum_i1\\{x_i\\in A\\}=P_n(A)$. Applying [F3] to the independent indices shows the values $X_j^*=x_{I_j}$ are independent; their common law is $P_n$, which is a probability law by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: n>=1 is required for the index set and empirical law."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: all observations may be zero; the common conditional law is then a point mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: n=1 gives a one-point index space and one bootstrap coordinate with law P1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: identical data are allowed; independence and identical distribution still hold for point-mass coordinates."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement uses the finite-index bootstrap definition. Step 1.1 counts uniform labels from 1 through n, including both extreme labels, and step 2.1 pushes this law to the data; there is no continuous interval endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Proof: the index vector space and all event counts are finite; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: Counting independent uniform index tuples and pushing their coordinates forward yields IID empirical-law draws in Proof1.1–2.1, not a converse representation of arbitrary IID laws.",
+            "item_sha256": "962e4f8971bb1ce5ee55f95c18de33c4b1a138dd73c7bae2569305f027c627e5",
+            "row_sha256": "dc8746857c34b0647a58f969d89d6d62d6a6584299d5971204517118ef51cf6b"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: Counting independent uniform index tuples and pushing their coordinates forward yields IID empirical-law draws in Proof1.1–2.1, not a converse representation of arbitrary IID laws.",
+            "item_sha256": "962e4f8971bb1ce5ee55f95c18de33c4b1a138dd73c7bae2569305f027c627e5",
+            "row_sha256": "f30bb621bc529eee96d362432f05f38cce4c5707efadaca898a0dd0147fa02ad"
+          }
+        }
+      ]
+    },
+    "alg-bca-bootstrap-interval": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the bootstrap-estimate list is nonempty and n>=2 delete-one estimates are required."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: S2=0 makes jackknife acceleration undefined, and the procedure returns undefined."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition: n=1 is outside the delete-one input domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a constant bootstrap list gives an endpoint midrank and returns undefined; no coverage claim is made."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: p0 in {0,1}, a zero denominator, or reversed adjusted probabilities returns undefined; alpha lies in (0,1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: finite counts are deterministic; the stated AC assumption enters only through the standard normal law."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: The Definition rejects boundary bias scores, undefined acceleration, zero adjustment denominators and reversed quantile levels before returning endpoints; it asserts no BCa coverage theorem.",
+            "item_sha256": "a1da3bc5b7fb0d6552e57d2a41cbe3cb306201d016279b22e0b2f571c21d36ea",
+            "row_sha256": "a6e5fdbb314d0b7742a67da2ed4af0b3b379f81db9aa8b45a1a336b01a0f3387"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: The Definition rejects boundary bias scores, undefined acceleration, zero adjustment denominators and reversed quantile levels before returning endpoints; it asserts no BCa coverage theorem.",
+            "item_sha256": "a1da3bc5b7fb0d6552e57d2a41cbe3cb306201d016279b22e0b2f571c21d36ea",
+            "row_sha256": "34c3bec829f5eba833fae89a21c904d134aa11034ab42069820a29a63ebdc7f5"
+          }
+        }
+      ]
+    },
+    "thm-conditional-iid-bootstrap-clt-for-empirical-law": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-iid-empirical-bootstrap-sample",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,n\\ge1$ and observed vectors $x_1,\\ldots,x_n\\in\\mathbb R^d$, with the Borel sigma-algebra $\\mathcal B(\\mathbb R^d)$ ([[def-borel-sigma-algebra]]). Their empirical law is the set function\n$$P_n(A)=\\frac1n\\sum_{i=1}^n 1\\{x_i\\in A\\},\\qquad A\\in\\mathcal B(\\mathbb R^d).$$\n\nLet $\\mathsf I_n=\\{\\omega:[n]\\to[n]\\}$ be the finite set of index vectors. By [[thm-cardinality-of-a-set-of-functions]], it has $n^n$ elements. Give each index vector mass $n^{-n}$; the weights sum to one, so this is a finite probability space in the sense of [[def-finite-probability-space-and-event]]. For $j=1,\\ldots,n$, let $I_j(\\omega)=\\omega(j)$ and put $X_j^*(\\omega)=x_{I_j(\\omega)}$. The **ideal size-$n$ empirical bootstrap law conditional on the data** is the pushforward of this finite uniform law under\n$\\omega\\longmapsto (x_{\\omega(1)},\\ldots,x_{\\omega(n)}).$\nThus conditional probabilities are finite averages over the $n^n$ index tuples. The empirical law is a probability measure, and the bootstrap coordinates are conditionally IID with that law, by the well-definedness results listed in justified_by.\n\nFor random observations $X_1,\\ldots,X_n$, write $\\bar X_n=n^{-1}\\sum_iX_i$ coordinatewise, so each coordinate is the scalar sample mean in [[def-partial-sums-and-sample-means]]. Write $P_n=n^{-1}\\sum_i\\delta_{X_i}$, using the Dirac measure [[def-dirac-measure]], and let $\\bar X_n^*$ be the bootstrap mean. If $g:\\mathbb R^d\\to\\mathbb R$ is Borel ([[def-measurable-function-between-measurable-spaces]]), then\n$$\\hat\\theta_n=g(\\bar X_n),\\qquad \\hat\\theta_n^*=g(\\bar X_n^*).$$\nWhen $X_i$ are IID ([[def-identically-distributed-and-iid-random-variables]]) with finite second moment, write $\\mu_j=\\mathbb E X_{1j}$ and $\\Sigma_{jk}=\\mathbb E[(X_{1j}-\\mu_j)(X_{1k}-\\mu_k)]$ ([[def-moments-variance-and-covariance]]), and set $\\theta=g(\\mu)$. The functions of the data above are Borel statistics and estimators in the sense of [[def-statistic-and-estimator]]; coordinatewise arithmetic preserves measurability ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]). No bootstrap validity or interval coverage is part of this definition. For $n\\ge2$, the delete-one mean and plug-in statistic are\n$$\\bar X_{n,(-i)}=\\frac1{n-1}\\sum_{j\\ne i}X_j,\\qquad \\hat\\theta_{n,(-i)}=g(\\bar X_{n,(-i)}).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-finite-index-bootstrap-sample-is-conditionally-iid",
+          "source_section": "Statement",
+          "quote": "For fixed data $x_1,\\ldots,x_n\\in\\mathbb R^d$, the coordinates of the finite-index bootstrap sample in [[def-iid-empirical-bootstrap-sample]] are independent and each has law $P_n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-iid-sample-covariance-converges",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ be finite and let $X_1,X_2,\\ldots$ be IID $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$. Put $\\mu_j=\\mathbb E X_{1j}$ and $\\Sigma_{jk}=\\mathbb E[(X_{1j}-\\mu_j)(X_{1k}-\\mu_k)]$, the coordinate covariance entries from [[def-moments-variance-and-covariance]]. Define\n$$\\bar X_n=\\frac1n\\sum_{i=1}^nX_i,\\qquad \\widehat\\Sigma_n=\\frac1n\\sum_{i=1}^n(X_i-\\bar X_n)(X_i-\\bar X_n)^T.$$\nThen $\\bar X_n\\to\\mu$ in probability and every entry of $\\widehat\\Sigma_n$ converges in probability to the corresponding entry of $\\Sigma$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-row-wise-independent-centered-triangular-array",
+          "source_section": "Definition",
+          "quote": "For each integer $n\\ge1$, let $k_n\\ge1$ be a finite integer and let $X_{n,1},\\ldots,X_{n,k_n}$ be integrable real random variables on a probability space $(\\Omega_n,\\mathcal F_n,\\mathbb P_n)$. The family is a **centered triangular array** when $\\mathbb E_nX_{n,k}=0$ for every admissible pair $(n,k)$. It is **row-wise independent** when, for each fixed n and all Borel sets $B_1,\\ldots,B_{k_n}$, $$\\mathbb P_n\\!\\left(\\bigcap_{k=1}^{k_n}\\{X_{n,k}\\in B_k\\}\\right)=\\prod_{k=1}^{k_n}\\mathbb P_n(X_{n,k}\\in B_k).$$ Taking unused $B_k$ equal to the real line gives the same factorization for each subfamily; by [[thm-rectangle-criterion-for-independent-random-elements]], this is exactly independence in [[def-independent-random-elements]]. Random variables and integrability have the meanings in [[def-random-element-and-real-random-variable]] and [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. There is no independence requirement between different rows. The spaces may differ with n; assertions about row sums compare their laws. A single-entry row is independent automatically, and deterministic zero entries are allowed. Empty rows are excluded by $k_n\\ge1$. This definition makes no existence or choice assumption.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-total-row-variance-and-lindeberg-condition",
+          "source_section": "Definition",
+          "quote": "For a centered triangular array as in [[def-row-wise-independent-centered-triangular-array]], suppose every entry has finite second moment. Write $$v_{n,k}=\\mathbb E_nX_{n,k}^2=\\operatorname{Var}_n(X_{n,k}),\\qquad s_n^2=\\sum_{k=1}^{k_n}v_{n,k}.$$ Variance is defined in [[def-moments-variance-and-covariance]]. Every term is finite and nonnegative, so the finite sum and its nonnegative square root s_n exist. Whenever $s_n>0$, define $$L_n(\\varepsilon)=s_n^{-2}\\sum_{k=1}^{k_n}\\mathbb E_n\\!\\left[X_{n,k}^2\\mathbf1_{\\{|X_{n,k}|>\\varepsilon s_n\\}}\\right]\\quad(\\varepsilon>0).$$ The **Lindeberg condition** is $L_n(\\varepsilon)\\to0$ for every fixed $\\varepsilon>0$, with $s_n>0$ for all n under consideration. The event is measurable because absolute value is continuous and the entries are measurable; products are measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]]. Its nonnegative integrand is bounded by $X_{n,k}^2$, so its expectation exists and is finite by [[prop-order-and-scalar-rules-for-the-nonnegative-integral]] and [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. In particular $0\\le L_n(\\varepsilon)\\le1$.\n\nFor $Y_{n,k}=X_{n,k}/s_n$, scalar homogeneity gives $\\sum_k\\mathbb E_nY_{n,k}^2=1$. The equality $|Y_{n,k}|>\\varepsilon\\Longleftrightarrow |X_{n,k}|>\\varepsilon s_n$ gives $$L_n(\\varepsilon)=\\sum_k\\mathbb E_n[Y_{n,k}^2\\mathbf1_{\\{|Y_{n,k}|>\\varepsilon\\}}].$$ Thus the normalized and unnormalized conditions are exactly equivalent, not merely asymptotic. The cutoff uses strict inequality; equality at the threshold is excluded. A zero-variance row is allowed in the initial variance definition, but its normalization and Lindeberg expression above are undefined. No independence or choice is needed to define these quantities.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-lindeberg-feller-central-limit-theorem-sufficiency",
+          "source_section": "Statement",
+          "quote": "Assume AC. If a centered row-wise independent triangular array has finite second moments, $s_n>0$ and the Lindeberg condition, then $$s_n^{-1}\\sum_{k=1}^{k_n}X_{n,k}\\Rightarrow N(0,1).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-slutsky-for-real-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $(X_n)$ and $(Y_n)$ be real random variables on one probability space, and let $X$ be a real random variable (possibly on another space). If $X_n\\Rightarrow X$ and $Y_n\\to c$ in probability for $c\\in\\mathbb R$, then $X_n+Y_n\\Rightarrow X+c$ and $X_nY_n\\Rightarrow cX$. If $c\\ne0$, define $Q_n=X_n/Y_n$ on $\\{Y_n\\ne0\\}$ and give $Q_n$ any fixed value on $\\{Y_n=0\\}$. Then $Q_n\\Rightarrow X/c$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-standard-normal-cdf-is-continuous-and-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Phi(x)=P(Z\\le x)$ for $Z\\sim N(0,1)$. Then $\\Phi$ is continuous and strictly increasing on $\\mathbb R$, with $\\lim_{x\\to-\\infty}\\Phi(x)=0$ and $\\lim_{x\\to+\\infty}\\Phi(x)=1$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "lem-finite-bootstrap-cdf-supremum-is-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n,d\\ge1$, let $(X_1,\\ldots,X_n)$ be a measurable $(\\mathbb R^d)^n$-valued random vector, and fix $a\\in\\mathbb R^d$. For each finite index tuple $\\omega=(i_1,\\ldots,i_n)\\in\\mathsf I_n=\\{1,\\ldots,n\\}^n$, define the projected centered bootstrap-mean value\n$$R_{n,\\omega}=\\sqrt n\\,a^T\\!\\left(\\frac1n\\sum_{\\ell=1}^n X_{i_\\ell}-\\bar X_n\\right),\\qquad \\bar X_n=\\frac1n\\sum_{i=1}^nX_i.$$\nThe finite-index conditional bootstrap CDF is\n$$F_n^*(t)=n^{-n}\\sum_{\\omega\\in\\mathsf I_n}1\\{R_{n,\\omega}\\le t\\}.$$\nFor every fixed continuous cumulative distribution function $G:\\mathbb R\\to[0,1]$, the supremum\n$$D_n=\\sup_{t\\in\\mathbb R}|F_n^*(t)-G(t)|$$\nis a measurable real random variable.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-almost-sure-convergence-implies-convergence-in-probability",
+          "source_section": "Statement",
+          "quote": "If $X_n\\to X$ almost surely, then $X_n\\to X$ in probability.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $Y_i=a^T(X_i-\\mu)$ and $\\bar Y_n=n^{-1}\\sum_iY_i$. Its variance is $\\sigma^2$. By [F2], the empirical variance $s_n^2=\\frac1n\\sum_{i=1}^n(Y_i-\\bar Y_n)^2=a^T\\widehat\\Sigma_n a$ converges in probability to $\\sigma^2>0$, while $\\bar Y_n\\to0$ in probability and $n^{-1}\\sum_iY_i^2\\to\\sigma^2$ in probability.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $t>0$, define the unnormalized empirical tail quantity $T_n(t)=\\frac1n\\sum_{i=1}^n(Y_i-\\bar Y_n)^2\\,1\\{|Y_i-\\bar Y_n|>t\\sqrt n\\}.$ On $|\\bar Y_n|\\le t\\sqrt n/2$, the indicator implies $|Y_i|>t\\sqrt n/2$, and $T_n(t)\\le 2\\,\\frac1n\\sum_iY_i^2\\,1\\{|Y_i|>t\\sqrt n/2\\} +2\\bar Y_n^2\\,\\frac1n\\sum_i1\\{|Y_i|>t\\sqrt n/2\\}.$ The expectation of the first term tends to zero by [F7], so [F8] makes it converge to zero in probability. The second empirical tail fraction is at most $4(t^2n)^{-1}(n^{-1}\\sum_iY_i^2)$; hence its product with $2\\bar Y_n^2$ tends to zero in probability by [F2]. The complement event has probability tending to zero by [F2], so $T_n(t)\\to0$ in probability for every $t>0$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F7",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conditionally on the data, the row variables $Z_{n\\ell}^*=n^{-1/2}a^T(X_\\ell^*-\\bar X_n)$, $1\\le\\ell\\le n$, are independent and centered by [F1]. They are finite conditional rows of the type in [F3], with total variance $s_n^2$. By [F4], when $s_n>0$ their normalized Lindeberg quantity at threshold $\\varepsilon>0$ is $s_n^{-2}T_n(\\varepsilon s_n)$. On $s_n\\ge\\sigma/2$, this is at most $4\\sigma^{-2}T_n(\\varepsilon\\sigma/2)$, which tends to zero in probability by step 1.2; also $s_n^2\\to\\sigma^2$ in probability by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Take any subsequence, indexed $(n_k)_{k\\ge1}$. Recursively, after $k_0=0$, let $k_j$ be the least integer $k>k_{j-1}$ for which $\\mathbb P(|s_{n_k}^2-\\sigma^2|>1/j)+\\sum_{r=1}^j\\mathbb P(T_{n_k}(1/r)>1/j)<2^{-j}$. For fixed $j$, each of these finitely many probabilities tends to zero as $k\\to\\infty$ by [F2] and step 1.2, so the qualifying set is nonempty; [F12] gives its least index.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F12",
+            "given",
+            "step 1.2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $E_j$ be the union of the variance-deviation event and the $j$ tail events at index $k_j$. By [F9], $\\mathbb P(E_j)<2^{-j}$ and $\\mathbb P(\\bigcup_{j\\ge m}E_j)\\le\\sum_{j\\ge m}2^{-j}=2^{1-m}$. The event that infinitely many $E_j$ occur is contained in every such tail union, so its probability is zero. Off this null event, $s_{n_{k_j}}^2\\to\\sigma^2$ and, for every fixed $r\\ge1$, $T_{n_{k_j}}(1/r)\\to0$. For any $t>0$, choose $r$ with $1/r<t$ by [F13]; since $T_n$ is nonincreasing, $0\\le T_{n_{k_j}}(t)\\le T_{n_{k_j}}(1/r)\\to0$.",
+          "step": "3.1",
+          "inputs": [
+            "F9",
+            "F13",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Along almost every selected data path, $s_{n_{k_j}}\\to\\sigma>0$, and for every $\\varepsilon>0$ the Lindeberg quantity is eventually bounded by $4\\sigma^{-2}T_{n_{k_j}}(\\varepsilon\\sigma/2)\\to0$. Thus the deterministic conditional rows satisfy [F5], giving $\\sum_{\\ell=1}^{n_{k_j}}Z_{n_{k_j},\\ell}^*/s_{n_{k_j}}\\Rightarrow N(0,1)$. Every starting subsequence has a further subsequence with this almost-sure conditional convergence.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Along each such data sequence, $s_{n_{k_j}}\\to\\sigma$ and Slutsky's theorem [F6] gives $\\sum_{\\ell=1}^{n_{k_j}}Z_{n_{k_j},\\ell}^*\\Rightarrow N(0,\\sigma^2)$. By the definition of real convergence in distribution, the conditional CDFs converge at every $x$ because of [F10]. To make this uniform, fix $\\eta>0$, choose $R$ with $\\Phi_\\sigma(-R)<\\eta$ and $1-\\Phi_\\sigma(R)<\\eta$, and partition $[-R,R]$ into finitely many intervals on which $\\Phi_\\sigma$ varies by less than $\\eta$, using [F11]. Monotonicity of each conditional CDF bounds its error between grid points by the endpoint errors plus $\\eta$; outside $[-R,R]$ the two tail probabilities add at most $2\\eta$ plus endpoint errors. The maximum grid error tends to zero, and then $\\eta\\downarrow0$ proves almost-sure uniform CDF convergence along the selected subsequence. Since $D_n$ is measurable by [F14], this is almost-sure convergence of real random variables.",
+          "step": "5.1",
+          "inputs": [
+            "F6",
+            "F10",
+            "F11",
+            "F14",
+            "step 2.1",
+            "step 4.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "If $D_n$ did not converge to zero in probability, there would be $\\delta,\\varepsilon>0$ and a subsequence on which $\\mathbb P(D_n>\\delta)\\ge\\varepsilon$. Applying the subsequence construction in step 2.2 and its consequences in steps 3.1–5.1 gives a further subsequence with $D_n\\to0$ almost surely by step 5.1. By [F15], this is convergence in probability, contradicting the lower bound.",
+          "step": "6.1",
+          "inputs": [
+            "F14",
+            "F15",
+            "step 2.2",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the CLT concerns rows n tending to infinity, with n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement: the projected variance sigma^2 is required to be positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: a finite initial row such as n=1 is permitted but does not affect the asymptotic assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement: zero projected variance is excluded, although the full covariance matrix may be singular."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement takes the supremum over every real CDF argumentx. Proof5.1 explicitly controls both infinite tails outside[-R,R] and finite partition endpoints, so no extra CDF endpoint regime is missing."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Assumption A1: AC is explicit and is used through the Lindeberg-Feller theorem; the bootstrap index space itself is finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: The positive projected variance and finite second moment suffice for conditional Gaussian CDF approximation; Proof4.1 invokes conditional triangular-array CLT and does not prove moment necessity.",
+            "item_sha256": "a421c2e9993315e28bddd73b477acf20170bf0c14b25d55308316eb10651a436",
+            "row_sha256": "dc8746857c34b0647a58f969d89d6d62d6a6584299d5971204517118ef51cf6b"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: The positive projected variance and finite second moment suffice for conditional Gaussian CDF approximation; Proof4.1 invokes conditional triangular-array CLT and does not prove moment necessity.",
+            "item_sha256": "a421c2e9993315e28bddd73b477acf20170bf0c14b25d55308316eb10651a436",
+            "row_sha256": "f30bb621bc529eee96d362432f05f38cce4c5707efadaca898a0dd0147fa02ad"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-51",
+        "notes": "Independently read all eight proof steps and all twenty direct prerequisite statements, including the full finite-index IID proof. Finite second moment controls empirical projected tails by dominated convergence and Markov. The least-index recursion simultaneously selects variance and cutoffs 1/r; summable bad-event bounds give pathwise convergence for every threshold by monotonicity. Positive limiting variance makes normalization legal after finitely many rows, and Lindeberg-Feller allows varying finite row spaces. Deterministic scaling gives the unnormalized normal limit; continuity, tail truncation and a finite grid give uniform CDF convergence. The finite-supremum lemma supplies measurable D_n. Step 6.1 correctly uses 2.2 and 3.1-5.1, and the subsequence contradiction proves convergence in probability. AC is explicitly inherited from LF and normal suppliers; the least-index selection itself uses no AC. Washington ch8b §4 Theorem 4.1 and full proof, PDF p14, were independently read as source context. Degenerate data rows can occur for small n; sigma^2>0 ensures eventual positivity on each selected path."
+      }
+    },
+    "thm-iid-bootstrap-validity-for-smooth-statistics": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-iid-empirical-bootstrap-sample",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,n\\ge1$ and observed vectors $x_1,\\ldots,x_n\\in\\mathbb R^d$, with the Borel sigma-algebra $\\mathcal B(\\mathbb R^d)$ ([[def-borel-sigma-algebra]]). Their empirical law is the set function\n$$P_n(A)=\\frac1n\\sum_{i=1}^n 1\\{x_i\\in A\\},\\qquad A\\in\\mathcal B(\\mathbb R^d).$$\n\nLet $\\mathsf I_n=\\{\\omega:[n]\\to[n]\\}$ be the finite set of index vectors. By [[thm-cardinality-of-a-set-of-functions]], it has $n^n$ elements. Give each index vector mass $n^{-n}$; the weights sum to one, so this is a finite probability space in the sense of [[def-finite-probability-space-and-event]]. For $j=1,\\ldots,n$, let $I_j(\\omega)=\\omega(j)$ and put $X_j^*(\\omega)=x_{I_j(\\omega)}$. The **ideal size-$n$ empirical bootstrap law conditional on the data** is the pushforward of this finite uniform law under\n$\\omega\\longmapsto (x_{\\omega(1)},\\ldots,x_{\\omega(n)}).$\nThus conditional probabilities are finite averages over the $n^n$ index tuples. The empirical law is a probability measure, and the bootstrap coordinates are conditionally IID with that law, by the well-definedness results listed in justified_by.\n\nFor random observations $X_1,\\ldots,X_n$, write $\\bar X_n=n^{-1}\\sum_iX_i$ coordinatewise, so each coordinate is the scalar sample mean in [[def-partial-sums-and-sample-means]]. Write $P_n=n^{-1}\\sum_i\\delta_{X_i}$, using the Dirac measure [[def-dirac-measure]], and let $\\bar X_n^*$ be the bootstrap mean. If $g:\\mathbb R^d\\to\\mathbb R$ is Borel ([[def-measurable-function-between-measurable-spaces]]), then\n$$\\hat\\theta_n=g(\\bar X_n),\\qquad \\hat\\theta_n^*=g(\\bar X_n^*).$$\nWhen $X_i$ are IID ([[def-identically-distributed-and-iid-random-variables]]) with finite second moment, write $\\mu_j=\\mathbb E X_{1j}$ and $\\Sigma_{jk}=\\mathbb E[(X_{1j}-\\mu_j)(X_{1k}-\\mu_k)]$ ([[def-moments-variance-and-covariance]]), and set $\\theta=g(\\mu)$. The functions of the data above are Borel statistics and estimators in the sense of [[def-statistic-and-estimator]]; coordinatewise arithmetic preserves measurability ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]). No bootstrap validity or interval coverage is part of this definition. For $n\\ge2$, the delete-one mean and plug-in statistic are\n$$\\bar X_{n,(-i)}=\\frac1{n-1}\\sum_{j\\ne i}X_j,\\qquad \\hat\\theta_{n,(-i)}=g(\\bar X_{n,(-i)}).$$",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-multivariate-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $d\\ge1$ be a finite integer. Let $(X_k)_{k\\ge1}$ be iid $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean m and covariance Sigma. Then $$n^{-1/2}\\sum_{k=1}^n(X_k-m)\\Rightarrow N_d(0,\\Sigma).$$ The covariance may be singular.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-first-and-second-order-delta-method-for-random-vectors",
+          "source_section": "Statement",
+          "quote": "Let $d,k\\ge1$, let $r_n>0$ be deterministic with $r_n\\to\\infty$, and let $T_n$ be $\\mathbb R^d$-valued random vectors with target $\\theta\\in\\mathbb R^d$. Suppose $Z_n=r_n(T_n-\\theta)\\Rightarrow Z$ for an $\\mathbb R^d$-valued random vector $Z$. All vector norms below are Euclidean.\n\nIf $g:\\mathbb R^d\\to\\mathbb R^k$ is Borel and there is a linear map $A:\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=Ah+\\rho_1(h),\\qquad \\frac{\\|\\rho_1(h)\\|}{\\|h\\|}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n\\{g(T_n)-g(\\theta)\\}\\Rightarrow AZ.$$\n\nIf, in addition, $A=0$ and there is a continuous symmetric bilinear map $H:\\mathbb R^d\\times\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=\\frac12H[h,h]+\\rho_2(h),\\qquad \\frac{\\|\\rho_2(h)\\|}{\\|h\\|^2}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n^2\\{g(T_n)-g(\\theta)\\}\\Rightarrow \\frac12H[Z,Z].$$\nFor scalar-valued $g$, $H$ is the usual Hessian bilinear form. The second-order premise is a pointwise Peano expansion; continuous second derivatives on a neighborhood are not required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-conditional-iid-bootstrap-clt-for-empirical-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X_1,X_2,\\ldots$ be IID $\\mathbb R^d$-valued vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean $\\mu$, and covariance $\\Sigma$. Fix $a\\in\\mathbb R^d$ such that $\\sigma^2=a^T\\Sigma a>0$. For the finite-index empirical bootstrap in [[def-iid-empirical-bootstrap-sample]], let $\\bar X_n^*$ be the bootstrap mean and define the conditional CDF\n$$F_n^*(x)=\\mathbb P^*\\!\\left(\\sqrt n\\,a^T(\\bar X_n^*-\\bar X_n)\\le x\\mid X_1,\\ldots,X_n\\right).$$\nThen\n$$D_n:=\\sup_{x\\in\\mathbb R}\\left|F_n^*(x)-\\Phi_\\sigma(x)\\right|\\longrightarrow0\\quad\\text{in probability},$$\nwhere $\\Phi_\\sigma$ is the CDF of $N(0,\\sigma^2)$. The assumption $\\sigma^2>0$ is needed for the normalized Lindeberg–Feller step.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-iid-sample-covariance-converges",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ be finite and let $X_1,X_2,\\ldots$ be IID $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$. Put $\\mu_j=\\mathbb E X_{1j}$ and $\\Sigma_{jk}=\\mathbb E[(X_{1j}-\\mu_j)(X_{1k}-\\mu_k)]$, the coordinate covariance entries from [[def-moments-variance-and-covariance]]. Define\n$$\\bar X_n=\\frac1n\\sum_{i=1}^nX_i,\\qquad \\widehat\\Sigma_n=\\frac1n\\sum_{i=1}^n(X_i-\\bar X_n)(X_i-\\bar X_n)^T.$$\nThen $\\bar X_n\\to\\mu$ in probability and every entry of $\\widehat\\Sigma_n$ converges in probability to the corresponding entry of $\\Sigma$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-vector-stochastic-order-calculus",
+          "source_section": "Statement",
+          "quote": "Let all random vectors with index $n$ be defined on a common probability space for that $n$; the spaces may vary with $n$. In any fixed finite-dimensional Euclidean space, the following rules hold:\n\n1. If $U_n=o_P(1)$ and $V_n=o_P(1)$, then $U_n+V_n=o_P(1)$. If $U_n=O_P(1)$ and $V_n=O_P(1)$, then $U_n+V_n=O_P(1)$.\n2. For positive integers $p,q,r$, let $B:\\mathbb R^p\\times\\mathbb R^q\\to\\mathbb R^r$ be a fixed map for which there is a constant $C\\ge0$ with $\\|B(u,v)\\|_2\\le C\\|u\\|_2\\|v\\|_2$ for all $u,v$. Assume in each application that $B(U_n,V_n)$ is a random vector on the same probability space as $U_n,V_n$, for every $n$. If $U_n=o_P(1)$ and $V_n=O_P(1)$, or conversely, then $B(U_n,V_n)=o_P(1)$. If both are $O_P(1)$, then $B(U_n,V_n)=O_P(1)$.\n3. If $X_n\\Rightarrow X$ in $\\mathbb R^d$, then $X_n=O_P(1)$.\n\nThe last conclusion is finite-dimensional boundedness in probability. No independence or Axiom of Choice is assumed.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-convergence-in-distribution-for-real-random-variables",
+          "source_section": "Definition",
+          "quote": "For real random variables $(X_n)$ and $X$, write $X_n\\Rightarrow X$, or\n$X_n\\to X$ **in distribution**, when\n$$F_{X_n}(x)\\longrightarrow F_X(x)$$\nat every continuity point $x$ of $F_X$. Here $F_X$ is the CDF from\n[[def-cumulative-distribution-function-of-a-random-variable]] and continuity\npoints are those of [[def-atom-and-continuity-point-of-a-law]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-standard-normal-cdf-is-continuous-and-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Phi(x)=P(Z\\le x)$ for $Z\\sim N(0,1)$. Then $\\Phi$ is continuous and strictly increasing on $\\mathbb R$, with $\\lim_{x\\to-\\infty}\\Phi(x)=0$ and $\\lim_{x\\to+\\infty}\\Phi(x)=1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "source_section": "Definition",
+          "quote": "Let $U$ be an open subset of a real matrix space $\\mathbb R^{m\\times n}$ or of\na complex matrix space $\\mathbb C^{m\\times n}$ viewed as a real vector space,\nand let $F:U\\to W$ take values in a finite-dimensional real normed vector\nspace $(W,\\|\\,\\cdot\\,\\|_W)$.\nWe say that $F$ is **real Fr\\'echet differentiable** at $A\\in U$ if there is a\nreal-linear map $L$ such that\n\n$$\\frac{\\|F(A+H)-F(A)-L[H]\\|_W}{\\|H\\|_F}\\longrightarrow0\\qquad(H\\to0,\\ H\\ne0).$$\n\nThat map $L$ is the **real Fr\\'echet derivative** of $F$ at $A$ and is denoted\n$DF(A)$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $Z_n:=\\sqrt n(\\bar X_n-\\mu)\\Rightarrow Z$ for $Z\\sim N_d(0,\\Sigma)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $H_n^*=\\sqrt n(\\bar X_n^*-\\bar X_n)$ and $V_n^*=a^TH_n^*$. By [F4], the conditional CDF of $V_n^*$ converges uniformly in probability to $\\Phi_\\sigma$. Also $\\mathbb E^*(\\|H_n^*\\|^2\\mid X_1,\\ldots,X_n)=\\operatorname{tr}(\\widehat\\Sigma_n).$ By [F5], this trace converges in probability to $\\operatorname{tr}(\\Sigma)$. For any $M>0$, $\\mathbb P^*(\\|H_n^*\\|>M\\mid X_1,\\ldots,X_n)\\le \\frac{\\operatorname{tr}(\\widehat\\Sigma_n)}{M^2}$ by [F9]. Given $\\eta>0$, choose $K>\\operatorname{tr}(\\Sigma)$; with probability tending to one the trace is at most $K$, and then choosing $M^2>K/\\eta$ makes this conditional tail at most $\\eta$. Thus $H_n^*$ is bounded in conditional probability, in probability. By [F2] and [F6], $Z_n$ is bounded in probability, so $Z_n+H_n^*=\\sqrt n(\\bar X_n^*-\\mu)$ is also bounded in conditional probability, in probability.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "given",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F3] with $r_n=\\sqrt n$ and derivative $a^T$. Then $\\sqrt n\\{g(\\bar X_n)-g(\\mu)\\}\\Rightarrow a^TZ$, and [F7] identifies this law as $N(0,\\sigma^2)$. This proves the sampling limit.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F7",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F11], $g(\\mu+h)=g(\\mu)+a^Th+r(h)$ with $|r(h)|/\\|h\\|\\to0$. Fix $\\varepsilon,\\eta>0$. By [F6], choose $R_0$ so that $\\limsup_n\\mathbb P(\\|Z_n\\|>R_0)<\\eta$. The conditional tightness established in step 1.2 gives $R_1$ such that, for all sufficiently large $n$, the data probability that $\\mathbb P^*(\\|H_n^*\\|>R_1\\mid X_1,\\ldots,X_n)>\\eta$ is below $\\eta$. On the complementary data event and $\\|Z_n\\|\\le R_0$, the conditional probability that $\\|\\sqrt n(\\bar X_n^*-\\mu)\\|>R_0+R_1$ is at most $\\eta$. Put $R=R_0+R_1$ and choose $\\delta>0$ so $|r(h)|\\le \\varepsilon\\|h\\|/(4R)$ for $0<\\|h\\|<\\delta$. For $n$ large enough that $R/\\sqrt n<\\delta$, the true remainder $\\sqrt n|r(\\bar X_n-\\mu)|$ is at most $\\varepsilon/4$ on $\\|Z_n\\|\\le R_0$ (enlarge $R$ to at least $R_0$), and the bootstrap remainder $\\sqrt n|r(\\bar X_n^*-\\mu)|$ is at most $\\varepsilon/4$ whenever its root norm is at most $R$. The exceptional data probability has limiting upper bound at most $2\\eta$, and the exceptional conditional probability is at most $\\eta$ on the remaining data event. Letting $\\eta\\downarrow0$ proves that the difference of these two remainders is $o_{P^*}(1)$ in probability. Consequently $\\sqrt n(\\hat\\theta_n^*-\\hat\\theta_n)=V_n^*+\\Delta_n^*,$ where $\\mathbb P^*(|\\Delta_n^*|>\\eta\\mid X_1,\\ldots,X_n)\\to0$ in probability for every $\\eta>0$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F6",
+            "F11",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $x\\in\\mathbb R$ and $h>0$. With $G_n^*$ the conditional CDF of the left side in step 2.2 and $F_n^*$ that of $V_n^*$, the event inclusion gives $F_n^*(x-h)-q_n(h)\\le G_n^*(x)\\le F_n^*(x+h)+q_n(h),$ where $q_n(h)=\\mathbb P^*(|\\Delta_n^*|>h\\mid X_1,\\ldots,X_n)$. By [F4] and step 2.2, for each fixed $h$ these bounds converge in probability to $\\Phi_\\sigma(x-h)$ and $\\Phi_\\sigma(x+h)$. Given any tolerance, [F10] lets us choose $h$ so both constants differ from $\\Phi_\\sigma(x)$ by less than that tolerance; convergence of the bounds then gives $G_n^*(x)\\to\\Phi_\\sigma(x)$ in probability. By [F8], this is conditional weak convergence in probability to the same first-order law as the sampling limit in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F8",
+            "F10",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the theorem concerns a nonempty IID sequence with sample sizes n tending to infinity."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement: the projected asymptotic variance is required to be strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: n=1 is permitted as a finite initial sample and does not affect the limit."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement: zero projected variance is excluded by 0<sigma^2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: no interval endpoint parameter occurs; interval coverage is expressly not concluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Assumption A1: AC is declared and its uses pass through the multivariate CLT, normal-law supplier and conditional Lindeberg-Feller result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: Frechet differentiability and finite-second-moment IID data give the two matching first-order Gaussian limits; Proof2.2 controls remainders, without asserting that validity forces differentiability.",
+            "item_sha256": "110e50bfe3f8a52611b6d9ebb7d8308df871c1c7f0b8bf393690ea1b33cc9c43",
+            "row_sha256": "dc8746857c34b0647a58f969d89d6d62d6a6584299d5971204517118ef51cf6b"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: Frechet differentiability and finite-second-moment IID data give the two matching first-order Gaussian limits; Proof2.2 controls remainders, without asserting that validity forces differentiability.",
+            "item_sha256": "110e50bfe3f8a52611b6d9ebb7d8308df871c1c7f0b8bf393690ea1b33cc9c43",
+            "row_sha256": "f30bb621bc529eee96d362432f05f38cce4c5707efadaca898a0dd0147fa02ad"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-51",
+        "notes": "Reviewed all five steps and thirteen cited prerequisite statements, including the first-order delta theorem proof clauses and the complete current conditional-bootstrap CLT. Sampling root uses multivariate CLT plus pointwise Frechet derivative, not neighborhood C1. Conditional vector tightness follows from trace empirical covariance and Markov, including singular covariance in directions orthogonal to a. The two remainders expanded at mu vanish using data and conditional tail truncations; the final shifted-CDF sandwich and continuous positive-variance Gaussian limit give convergence at every fixed x. Borel g makes each finite conditional event measurable. R0,R1 may be chosen positive, so the remainder denominator is harmless. AC and sigma^2>0 are explicit; no algorithm coverage follows. Washington ch8b §5 Theorem 5.1/full proof (PDF pp25-26) is functional-delta context, not an imported replacement for this local finite-dimensional proof."
+      }
+    },
+    "ex-delete-one-jackknife-for-sample-mean": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F2",
+          "source": "def-iid-empirical-bootstrap-sample",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,n\\ge1$ and observed vectors $x_1,\\ldots,x_n\\in\\mathbb R^d$, with the Borel sigma-algebra $\\mathcal B(\\mathbb R^d)$ ([[def-borel-sigma-algebra]]). Their empirical law is the set function\n$$P_n(A)=\\frac1n\\sum_{i=1}^n 1\\{x_i\\in A\\},\\qquad A\\in\\mathcal B(\\mathbb R^d).$$\n\nLet $\\mathsf I_n=\\{\\omega:[n]\\to[n]\\}$ be the finite set of index vectors. By [[thm-cardinality-of-a-set-of-functions]], it has $n^n$ elements. Give each index vector mass $n^{-n}$; the weights sum to one, so this is a finite probability space in the sense of [[def-finite-probability-space-and-event]]. For $j=1,\\ldots,n$, let $I_j(\\omega)=\\omega(j)$ and put $X_j^*(\\omega)=x_{I_j(\\omega)}$. The **ideal size-$n$ empirical bootstrap law conditional on the data** is the pushforward of this finite uniform law under\n$\\omega\\longmapsto (x_{\\omega(1)},\\ldots,x_{\\omega(n)}).$\nThus conditional probabilities are finite averages over the $n^n$ index tuples. The empirical law is a probability measure, and the bootstrap coordinates are conditionally IID with that law, by the well-definedness results listed in justified_by.\n\nFor random observations $X_1,\\ldots,X_n$, write $\\bar X_n=n^{-1}\\sum_iX_i$ coordinatewise, so each coordinate is the scalar sample mean in [[def-partial-sums-and-sample-means]]. Write $P_n=n^{-1}\\sum_i\\delta_{X_i}$, using the Dirac measure [[def-dirac-measure]], and let $\\bar X_n^*$ be the bootstrap mean. If $g:\\mathbb R^d\\to\\mathbb R$ is Borel ([[def-measurable-function-between-measurable-spaces]]), then\n$$\\hat\\theta_n=g(\\bar X_n),\\qquad \\hat\\theta_n^*=g(\\bar X_n^*).$$\nWhen $X_i$ are IID ([[def-identically-distributed-and-iid-random-variables]]) with finite second moment, write $\\mu_j=\\mathbb E X_{1j}$ and $\\Sigma_{jk}=\\mathbb E[(X_{1j}-\\mu_j)(X_{1k}-\\mu_k)]$ ([[def-moments-variance-and-covariance]]), and set $\\theta=g(\\mu)$. The functions of the data above are Borel statistics and estimators in the sense of [[def-statistic-and-estimator]]; coordinatewise arithmetic preserves measurability ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]). No bootstrap validity or interval coverage is part of this definition. For $n\\ge2$, the delete-one mean and plug-in statistic are\n$$\\bar X_{n,(-i)}=\\frac1{n-1}\\sum_{j\\ne i}X_j,\\qquad \\hat\\theta_{n,(-i)}=g(\\bar X_{n,(-i)}).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $\\bar X_{n,(-i)}=\\bar X_n-(X_i-\\bar X_n)/(n-1)$. Averaging over $i$ gives $\\bar\\theta_{n,(-)}=\\bar X_n$, since $\\sum_i(X_i-\\bar X_n)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitution into [F1] gives $p_{n,i}=X_i$ and $V_{J,n}=\\frac{n-1}{n}\\sum_i\\left(\\frac{\\bar X_n-X_i}{n-1}\\right)^2 =\\frac1{n(n-1)}\\sum_i(X_i-\\bar X_n)^2.$ Thus $V_{J,n}=s_n^2/n$, where $s_n^2=(n-1)^{-1}\\sum_i(X_i-\\bar X_n)^2$ is the unbiased sample variance.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: n>=2 is required to form each delete-one sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: constant data give identical pseudovalues and jackknife variance zero, consistent with the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: n=2 is allowed and both delete-one means are defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: repeated observations are permitted; the pseudovalue and sample-variance identities remain valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example: no interval endpoints occur."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: Verification: the identities use finite sums only and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: Verification1.1–2.1 derives exact pseudovalues Xi and VJ=s_n²/n for the identity statistic; these algebraic equalities do not characterize all statistics satisfying them.",
+            "item_sha256": "c82cb249ab71f108d29bfc4c7deb23a8256bfad8a595282dcf9221b9ac9f4c95",
+            "row_sha256": "8b3b05d4ba23d7a088e848e2d98d1147aa535892a21c059e0db12a90b7676ee7"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: Verification1.1–2.1 derives exact pseudovalues Xi and VJ=s_n²/n for the identity statistic; these algebraic equalities do not characterize all statistics satisfying them.",
+            "item_sha256": "c82cb249ab71f108d29bfc4c7deb23a8256bfad8a595282dcf9221b9ac9f4c95",
+            "row_sha256": "88bfc730f6c9ca64768203b845bd51cd52f88d1cd51a7fc058fa9b6d3e50e98b"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "n=3 sample mean jackknife identity",
+          "method": "exact finite calculation",
+          "input": {
+            "observations": [
+              1,
+              2,
+              3
+            ]
+          },
+          "calculation": "The mean is 2; delete-one means are 5/2, 2, 3/2; their mean is 2. Pseudovalues are 1, 2, 3. V_J=(2/3)((1/2)^2+0^2+(-1/2)^2)=1/3, while the unbiased sample variance divided by n is 1/3.",
+          "expected": {
+            "pseudovalues": [
+              1,
+              2,
+              3
+            ],
+            "jackknife_variance": "1/3",
+            "sample_variance_over_n": "1/3"
+          }
+        }
+      ]
+    },
+    "ex-discrete-median-bootstrap-ties": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-finite-index-bootstrap-sample-is-conditionally-iid",
+          "source_section": "Statement",
+          "quote": "For fixed data $x_1,\\ldots,x_n\\in\\mathbb R^d$, the coordinates of the finite-index bootstrap sample in [[def-iid-empirical-bootstrap-sample]] are independent and each has law $P_n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-lower-empirical-bootstrap-quantile",
+          "source_section": "Definition",
+          "quote": "Input a nonempty finite list $y_1,\\ldots,y_B\\in\\mathbb R$ and $p\\in[0,1]$. Sort the values with multiplicity as $y_{(1)}\\le\\cdots\\le y_{(B)}$. If $p=0$, set $k=1$; if $p>0$, let $k$ be the least integer in $\\{1,\\ldots,B\\}$ with $k\\ge Bp$. Return\n$$Q_B(p)=y_{(k)}.$$\nThis is the lower inverse empirical-CDF quantile, with the explicit endpoint convention $Q_B(0)=y_{(1)}$ and $Q_B(1)=y_{(B)}$. Repeated values remain repeated; no interpolation is performed. An empty list or a value of $p$ outside $[0,1]$ is inadmissible.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-percentile-bootstrap-interval",
+          "source_section": "Definition",
+          "quote": "Input a nonempty list of $B$ bootstrap estimates $\\hat\\theta_1^*,\\ldots,\\hat\\theta_B^*$ generated under the empirical bootstrap law in [[def-iid-empirical-bootstrap-sample]], and $0<\\alpha<1$. Let $Q_B$ be [[alg-lower-empirical-bootstrap-quantile]] and set $p=\\alpha/2$. Return\n$$[Q_B(p),\\,Q_B(1-p)].$$\nThis finite-$B$ procedure uses the declared lower empirical-quantile convention. It defines endpoints only; it asserts no coverage guarantee.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-basic-bootstrap-interval",
+          "source_section": "Definition",
+          "quote": "Input the observed estimate $\\hat\\theta$, a nonempty list of $B$ bootstrap estimates $\\hat\\theta_1^*,\\ldots,\\hat\\theta_B^*$ generated under [[def-iid-empirical-bootstrap-sample]], and $0<\\alpha<1$. Let $Q_B$ be [[alg-lower-empirical-bootstrap-quantile]] and set $p=\\alpha/2$. Return\n$$[2\\hat\\theta-Q_B(1-p),\\,2\\hat\\theta-Q_B(p)].$$\nThis is the reflected bootstrap-quantile interval under the declared finite-sample quantile convention. It makes no coverage claim.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the number $K$ of ones in a size-three bootstrap sample has the binomial law with parameters $3$ and $1/3$. The lower median is $1$ exactly when $K\\ge2$, so $\\mathbb P^*(\\text{bootstrap median}=1\\mid 0,0,1)=\\binom32(1/3)^2(2/3)+(1/3)^3=7/27.$ The other $20$ of the $27$ equally likely index tuples give median $0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "List the $27$ conditional median values with multiplicity: twenty zeros and seven ones. With $\\alpha=1/3$, [F2] gives $Q_{27}(1/6)=0$ and $Q_{27}(5/6)=1$. Thus [F3] returns $[0,1]$, while [F4] with observed median $0$ returns $[-1,0]$. These are the outputs under the specified tie and quantile conventions.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the observed sample and every bootstrap sample have size three."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: the observed value zero is repeated; the verification explicitly counts tied lower medians."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example: the resample size is fixed at three."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: bootstrap replicates have tied values 0 and 1; the lower order-statistic convention handles ties."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: alpha=1/3 gives p=1/6 and 5/6, so both finite-sample quantiles are interior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: Verification: all 27 index tuples are counted in a finite sample space."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: The observed(0,0,1) median yields20zero and7one bootstrap values; Verification2.1 computes percentile[0,1] and basic[-1,0] endpoints, without an equivalence or coverage claim.",
+            "item_sha256": "35d71b28572b7c5b0c032d24d5e6c7e09ccb114bdedc2fed3f4aea480a5232dc",
+            "row_sha256": "8b3b05d4ba23d7a088e848e2d98d1147aa535892a21c059e0db12a90b7676ee7"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: The observed(0,0,1) median yields20zero and7one bootstrap values; Verification2.1 computes percentile[0,1] and basic[-1,0] endpoints, without an equivalence or coverage claim.",
+            "item_sha256": "35d71b28572b7c5b0c032d24d5e6c7e09ccb114bdedc2fed3f4aea480a5232dc",
+            "row_sha256": "88bfc730f6c9ca64768203b845bd51cd52f88d1cd51a7fc058fa9b6d3e50e98b"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "27 index-tuple median enumeration",
+          "method": "exhaustive finite enumeration",
+          "input": {
+            "observations": [
+              0,
+              0,
+              1
+            ],
+            "resample_size": 3,
+            "index_tuple_count": 27,
+            "alpha": "1/3"
+          },
+          "calculation": "Enumerate all index functions [3]->[3], map each coordinate through [0,0,1], and take the second order statistic. Seven tuples have median 1 and twenty have median 0. The lower quantiles at 1/6 and 5/6 are 0 and 1.",
+          "expected": {
+            "median_zero_count": 20,
+            "median_one_count": 7,
+            "conditional_probability_median_one": "7/27",
+            "percentile_interval": [
+              0,
+              1
+            ],
+            "basic_interval": [
+              -1,
+              0
+            ]
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-51",
+        "notes": "Independently read both verification steps and all five direct prerequisites. Exact enumeration of 27 index tuples retains the two zero indices: seven tuples have at least two ones, twenty have median zero. Quantile indices at 1/6 and 5/6 are 5 and 23; outputs are [0,1] and [-1,0]. Neither an asymptotic median theorem nor coverage is asserted. Strictly finite calculations use no AC; ties and the declared lower quantile convention are fully accounted for."
+      }
+    },
+    "cex-iid-bootstrap-inconsistency-at-absolute-mean-kink": {
+      "risk": "high",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-conditional-iid-bootstrap-clt-for-empirical-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X_1,X_2,\\ldots$ be IID $\\mathbb R^d$-valued vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean $\\mu$, and covariance $\\Sigma$. Fix $a\\in\\mathbb R^d$ such that $\\sigma^2=a^T\\Sigma a>0$. For the finite-index empirical bootstrap in [[def-iid-empirical-bootstrap-sample]], let $\\bar X_n^*$ be the bootstrap mean and define the conditional CDF\n$$F_n^*(x)=\\mathbb P^*\\!\\left(\\sqrt n\\,a^T(\\bar X_n^*-\\bar X_n)\\le x\\mid X_1,\\ldots,X_n\\right).$$\nThen\n$$D_n:=\\sup_{x\\in\\mathbb R}\\left|F_n^*(x)-\\Phi_\\sigma(x)\\right|\\longrightarrow0\\quad\\text{in probability},$$\nwhere $\\Phi_\\sigma$ is the CDF of $N(0,\\sigma^2)$. The assumption $\\sigma^2>0$ is needed for the normalized Lindeberg–Feller step.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-lindeberg-levy-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X_k)_{k\\ge1}$ be iid real random variables with mean $m$ and variance $0<\\sigma^2<\\infty$. Then $$\\frac{\\sum_{k=1}^nX_k-nm}{\\sigma\\sqrt n}\\ \\Rightarrow\\ N(0,1).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-mapping-theorem",
+          "source_section": "Statement",
+          "quote": "Let S,T be metric spaces, $g:S\\to T$ measurable, and $\\mu_n\\Rightarrow\\mu$. If the discontinuity set $D_g$ is $\\mu$-null, then $g_*\\mu_n\\Rightarrow g_*\\mu$. Consequently $X_n\\Rightarrow X$ implies $g(X_n)\\Rightarrow g(X)$ whenever $P_X(D_g)=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-slutsky-for-real-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $(X_n)$ and $(Y_n)$ be real random variables on one probability space, and let $X$ be a real random variable (possibly on another space). If $X_n\\Rightarrow X$ and $Y_n\\to c$ in probability for $c\\in\\mathbb R$, then $X_n+Y_n\\Rightarrow X+c$ and $X_nY_n\\Rightarrow cX$. If $c\\ne0$, define $Q_n=X_n/Y_n$ on $\\{Y_n\\ne0\\}$ and give $Q_n$ any fixed value on $\\{Y_n=0\\}$. Then $Q_n\\Rightarrow X/c$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-standard-normal-cdf-is-continuous-and-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Phi(x)=P(Z\\le x)$ for $Z\\sim N(0,1)$. Then $\\Phi$ is continuous and strictly increasing on $\\mathbb R$, with $\\lim_{x\\to-\\infty}\\Phi(x)=0$ and $\\lim_{x\\to+\\infty}\\Phi(x)=1$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $Z_n=\\sqrt n\\,\\bar X_n\\Rightarrow Z$ with $Z\\sim N(0,1)$. Since absolute value is continuous, [F3] gives $\\sqrt n|\\bar X_n|\\Rightarrow |Z|$. The limiting CDF of $|Z|$ is continuous at $0$ and equals $\\mathbb P(|Z|\\le0)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $V_n^*=\\sqrt n(\\bar X_n^*-\\bar X_n)$. Its conditional CDF $F_n^*$ satisfies $D_n:=\\sup_t|F_n^*(t)-\\Phi(t)|\\to0$ in probability by [F1]. The bootstrap root for $g(x)=|x|$ is $R_n^*=\\sqrt n(|\\bar X_n^*|-|\\bar X_n|)=|Z_n+V_n^*|-|Z_n|.$ For fixed data value $Z_n=z\\ge0$, the event $R_n^*\\le0$ is $-2z\\le V_n^*\\le0$; for $z<0$, it is $0\\le V_n^*\\le-2z$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any interval $[u,v]$, the difference between its conditional bootstrap probability and its standard normal probability is at most $2D_n$: use $F_n^*(v)-F_n^*(u-)$ and take left limits in the uniform CDF bound, using continuity of $\\Phi$. Therefore $Q_n:=\\mathbb P^*(R_n^*\\le0\\mid X_1,\\ldots,X_n)=\\Phi(2|Z_n|)-\\frac12+o_{\\mathbb P}(1).$ Indeed, the normal mass of either interval in step 1.2 is $\\Phi(2|z|)-1/2$. By [F3] and [F4], $Q_n\\Rightarrow \\Phi(2|Z|)-1/2$. This limit is positive with positive probability because $\\mathbb P(|Z|\\ge1)>0$ and [F5] gives $\\Phi(2)-1/2>0$. Thus $Q_n$ does not converge in probability to zero.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the conditional bootstrap law consistently estimated the sampling law of $\\sqrt n|\\bar X_n|$, its conditional CDF at the continuity point $0$ would converge in probability to the sampling limit CDF there, namely zero by step 1.1 and [F5]. Step 2.1 contradicts this. The failure occurs because $g(x)=|x|$ is not differentiable at the true mean $0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Counterexample: the Rademacher IID sequence has sample size n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Counterexample: the witness has variance one, not zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Counterexample: the asymptotic claim concerns all n and the finite n=1 case is well-defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Counterexample: the witness law is nondegenerate with variance one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Counterexample: the contradiction is at the continuity point x=0 of the sampling-limit CDF."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Counterexample: Assumption A1: AC is declared for the CLTs; the Rademacher event calculation is finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement refuted: the universal implication is disproved by one explicit witness."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement refuted: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: The g(x)=abs(x) counterexample has a continuous half-normal sampling limit but a nonvanishing conditional CDF at0; Counterexample3.1 refutes a universal implication rather than proving a reverse equivalence.",
+            "item_sha256": "47a5dd684dc8407fabc27bc516b75747d1af45bee93c9ef3770dff9d45bb3ef8",
+            "row_sha256": "361ecfb82b72622c02d40de165c477d5ccb82e2d8be3f640df2f70b562e76212"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-51",
+        "notes": "Reviewed all four steps and eight prerequisite statements. Rademacher data have mean zero and variance one and Borel g=absolute value; CLT and continuous mapping give continuous half-normal sampling limit with CDF zero at zero. Conditional bootstrap event at z>=0 is [-2z,0], at z<0 is [0,-2z]. Uniform CDF distance bounds interval masses including left endpoint atoms by 2D_n, also at z=0. Therefore Q_n=Phi(2|Z_n|)-1/2+o_P(1), with a nonzero distributional limit, contradicting consistency at zero. AC is inherited and explicit. Bickel-Goetze-van Zwet §2.3 Example6, journal p7, was read; its random conditional kink limit agrees with this fully local Rademacher specialization."
+      }
+    },
+    "ex-iid-bootstrap-smooth-mean": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-iid-empirical-bootstrap-sample",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,n\\ge1$ and observed vectors $x_1,\\ldots,x_n\\in\\mathbb R^d$, with the Borel sigma-algebra $\\mathcal B(\\mathbb R^d)$ ([[def-borel-sigma-algebra]]). Their empirical law is the set function\n$$P_n(A)=\\frac1n\\sum_{i=1}^n 1\\{x_i\\in A\\},\\qquad A\\in\\mathcal B(\\mathbb R^d).$$\n\nLet $\\mathsf I_n=\\{\\omega:[n]\\to[n]\\}$ be the finite set of index vectors. By [[thm-cardinality-of-a-set-of-functions]], it has $n^n$ elements. Give each index vector mass $n^{-n}$; the weights sum to one, so this is a finite probability space in the sense of [[def-finite-probability-space-and-event]]. For $j=1,\\ldots,n$, let $I_j(\\omega)=\\omega(j)$ and put $X_j^*(\\omega)=x_{I_j(\\omega)}$. The **ideal size-$n$ empirical bootstrap law conditional on the data** is the pushforward of this finite uniform law under\n$\\omega\\longmapsto (x_{\\omega(1)},\\ldots,x_{\\omega(n)}).$\nThus conditional probabilities are finite averages over the $n^n$ index tuples. The empirical law is a probability measure, and the bootstrap coordinates are conditionally IID with that law, by the well-definedness results listed in justified_by.\n\nFor random observations $X_1,\\ldots,X_n$, write $\\bar X_n=n^{-1}\\sum_iX_i$ coordinatewise, so each coordinate is the scalar sample mean in [[def-partial-sums-and-sample-means]]. Write $P_n=n^{-1}\\sum_i\\delta_{X_i}$, using the Dirac measure [[def-dirac-measure]], and let $\\bar X_n^*$ be the bootstrap mean. If $g:\\mathbb R^d\\to\\mathbb R$ is Borel ([[def-measurable-function-between-measurable-spaces]]), then\n$$\\hat\\theta_n=g(\\bar X_n),\\qquad \\hat\\theta_n^*=g(\\bar X_n^*).$$\nWhen $X_i$ are IID ([[def-identically-distributed-and-iid-random-variables]]) with finite second moment, write $\\mu_j=\\mathbb E X_{1j}$ and $\\Sigma_{jk}=\\mathbb E[(X_{1j}-\\mu_j)(X_{1k}-\\mu_k)]$ ([[def-moments-variance-and-covariance]]), and set $\\theta=g(\\mu)$. The functions of the data above are Borel statistics and estimators in the sense of [[def-statistic-and-estimator]]; coordinatewise arithmetic preserves measurability ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]). No bootstrap validity or interval coverage is part of this definition. For $n\\ge2$, the delete-one mean and plug-in statistic are\n$$\\bar X_{n,(-i)}=\\frac1{n-1}\\sum_{j\\ne i}X_j,\\qquad \\hat\\theta_{n,(-i)}=g(\\bar X_{n,(-i)}).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-iid-bootstrap-validity-for-smooth-statistics",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X_i$ be IID $\\mathbb R^d$-valued vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean $\\mu$, and covariance $\\Sigma$. Let $g:\\mathbb R^d\\to\\mathbb R$ be Borel and Fréchet differentiable at $\\mu$, with derivative $a^T$, and assume\n$$0<\\sigma^2:=a^T\\Sigma a<\\infty.$$\nSet $\\theta=g(\\mu)$, $\\hat\\theta_n=g(\\bar X_n)$, and $\\hat\\theta_n^*=g(\\bar X_n^*)$ for the finite-index empirical bootstrap in [[def-iid-empirical-bootstrap-sample]]. Then\n$$\\sqrt n(\\hat\\theta_n-\\theta)\\Rightarrow N(0,\\sigma^2),$$\nand, for every fixed $x\\in\\mathbb R$,\n$$\\mathbb P^*\\!\\left(\\sqrt n(\\hat\\theta_n^*-\\hat\\theta_n)\\le x\\mid X_1,\\ldots,X_n\\right)\\longrightarrow\\Phi_\\sigma(x)\\quad\\text{in probability},$$\nwhere $\\Phi_\\sigma$ is the CDF of $N(0,\\sigma^2)$. Thus the ideal conditional bootstrap law and the sampling law have the same first-order limit with the stated centering and $\\sqrt n$ scaling. This theorem does not imply coverage of any interval algorithm.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $g(x)=x$ is Borel and differentiable everywhere with derivative $a=1$. Thus $a^T\\Sigma a=\\operatorname{Var}(X_1)=\\sigma^2\\in(0,\\infty)$, so all assumptions of [F2] hold.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\hat\\theta_n=\\bar X_n$ and $\\hat\\theta_n^*=\\bar X_n^*$ by [F1], [F2] gives $\\sqrt n(\\bar X_n-\\mu)\\Rightarrow N(0,\\sigma^2)$ and the conditional law of $\\sqrt n(\\bar X_n^*-\\bar X_n)$ converges weakly in probability to the same normal law. This is first-order distributional validity only.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: an IID sequence with n>=1 is specified."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Example: the variance is assumed strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: n=1 is a valid finite initial sample and the conclusion is asymptotic."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Example: zero variance is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example: no interval or tail endpoint is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: Assumption A1: AC is explicitly assumed for the CLT suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: For g(x)=x, Verification1.1 checks derivative1 and positive variance and2.1 applies the smooth-statistic first-order theorem; it does not claim those hypotheses are necessary for every bootstrap law.",
+            "item_sha256": "5e8c18c16b4130a05270c9a3de654b31257f45aa645073c1a214bf368479908a",
+            "row_sha256": "8b3b05d4ba23d7a088e848e2d98d1147aa535892a21c059e0db12a90b7676ee7"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: For g(x)=x, Verification1.1 checks derivative1 and positive variance and2.1 applies the smooth-statistic first-order theorem; it does not claim those hypotheses are necessary for every bootstrap law.",
+            "item_sha256": "5e8c18c16b4130a05270c9a3de654b31257f45aa645073c1a214bf368479908a",
+            "row_sha256": "88bfc730f6c9ca64768203b845bd51cd52f88d1cd51a7fc058fa9b6d3e50e98b"
+          }
+        }
+      ]
+    },
+    "lem-finite-bootstrap-cdf-supremum-is-measurable": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-iid-empirical-bootstrap-sample",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,n\\ge1$ and observed vectors $x_1,\\ldots,x_n\\in\\mathbb R^d$, with the Borel sigma-algebra $\\mathcal B(\\mathbb R^d)$ ([[def-borel-sigma-algebra]]). Their empirical law is the set function\n$$P_n(A)=\\frac1n\\sum_{i=1}^n 1\\{x_i\\in A\\},\\qquad A\\in\\mathcal B(\\mathbb R^d).$$\n\nLet $\\mathsf I_n=\\{\\omega:[n]\\to[n]\\}$ be the finite set of index vectors. By [[thm-cardinality-of-a-set-of-functions]], it has $n^n$ elements. Give each index vector mass $n^{-n}$; the weights sum to one, so this is a finite probability space in the sense of [[def-finite-probability-space-and-event]]. For $j=1,\\ldots,n$, let $I_j(\\omega)=\\omega(j)$ and put $X_j^*(\\omega)=x_{I_j(\\omega)}$. The **ideal size-$n$ empirical bootstrap law conditional on the data** is the pushforward of this finite uniform law under\n$\\omega\\longmapsto (x_{\\omega(1)},\\ldots,x_{\\omega(n)}).$\nThus conditional probabilities are finite averages over the $n^n$ index tuples. The empirical law is a probability measure, and the bootstrap coordinates are conditionally IID with that law, by the well-definedness results listed in justified_by.\n\nFor random observations $X_1,\\ldots,X_n$, write $\\bar X_n=n^{-1}\\sum_iX_i$ coordinatewise, so each coordinate is the scalar sample mean in [[def-partial-sums-and-sample-means]]. Write $P_n=n^{-1}\\sum_i\\delta_{X_i}$, using the Dirac measure [[def-dirac-measure]], and let $\\bar X_n^*$ be the bootstrap mean. If $g:\\mathbb R^d\\to\\mathbb R$ is Borel ([[def-measurable-function-between-measurable-spaces]]), then\n$$\\hat\\theta_n=g(\\bar X_n),\\qquad \\hat\\theta_n^*=g(\\bar X_n^*).$$\nWhen $X_i$ are IID ([[def-identically-distributed-and-iid-random-variables]]) with finite second moment, write $\\mu_j=\\mathbb E X_{1j}$ and $\\Sigma_{jk}=\\mathbb E[(X_{1j}-\\mu_j)(X_{1k}-\\mu_k)]$ ([[def-moments-variance-and-covariance]]), and set $\\theta=g(\\mu)$. The functions of the data above are Borel statistics and estimators in the sense of [[def-statistic-and-estimator]]; coordinatewise arithmetic preserves measurability ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]). No bootstrap validity or interval coverage is part of this definition. For $n\\ge2$, the delete-one mean and plug-in statistic are\n$$\\bar X_{n,(-i)}=\\frac1{n-1}\\sum_{j\\ne i}X_j,\\qquad \\hat\\theta_{n,(-i)}=g(\\bar X_{n,(-i)}).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-cardinality-of-a-set-of-functions",
+          "source_section": "Statement",
+          "quote": "Let $A$ and $B$ be finite sets and write\n\n$$A^{B} := \\{\\, f : f \\text{ is a function } B \\to A \\,\\}.$$\n\nThen $A^{B}$ is finite and $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$,\nthe power being the $\\mathbb{N}$-valued exponentiation of [[def-nat-power]].\n\nBoth degenerate cases are covered and neither is a stipulation. If\n$B = \\varnothing$ there is exactly one function $B \\to A$, the empty function, so\n$\\lvert A^{\\varnothing}\\rvert = 1 = \\lvert A\\rvert^{0}$ **even when\n$A = \\varnothing$**. If $A = \\varnothing$ and $B \\ne \\varnothing$ there is no\nfunction at all, so $\\lvert A^{B}\\rvert = 0 = 0^{\\lvert B\\rvert}$ with\n$\\lvert B\\rvert \\ge 1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-indicator-function-is-measurable-iff-its-set-is-measurable",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let $E \\subseteq X$. The\nindicator function\n\n$$\\mathbf{1}_E(x) := \\begin{cases} 1, & x \\in E,\\\\ 0, & x \\notin E \\end{cases}$$\n\nis measurable as a map $X \\to \\mathbb{R}$ if and only if $E \\in \\mathcal{A}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cumulative-distribution-function-of-a-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable. Its **cumulative distribution function** is\nthe function\n$$F_X:\\mathbb R\\to[0,1],\\qquad F_X(x):=\\mathbb P(X\\le x)=\\mathbb P_X((-\\infty,x]).$$\n\nThe second expression is the same quantity written in terms of the law\n[[def-law-or-distribution-of-a-random-element]] of $X$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix an outcome and let $u_1<\\cdots<u_m$ be the distinct values among the finite list $(R_{n,\\omega})_{\\omega\\in\\mathsf I_n}$. Write $F_n^*(u_j^-)=n^{-n}\\#\\{\\eta:R_{n,\\eta}<u_j\\}$. On $[u_j,u_{j+1})$, $F_n^*$ is constant at $F_n^*(u_j)$ and $G$ is nondecreasing, so the absolute difference is bounded by the larger of its two endpoint errors, $|F_n^*(u_j)-G(u_j)|$ and $|F_n^*(u_{j+1}^-)-G(u_{j+1})|$. For $t<u_1$, the error is at most $|F_n^*(u_1^-)-G(u_1)|$; for $t\\ge u_m$, it is at most $|F_n^*(u_m)-G(u_m)|$. Each left-limit error is approached as $t\\uparrow u_j$, and each right-value error occurs at $u_j$. Therefore $D_n=\\max_{\\omega\\in\\mathsf I_n}\\max\\{|F_n^*(R_{n,\\omega})-G(R_{n,\\omega})|,\\ |F_n^*(R_{n,\\omega}^-)-G(R_{n,\\omega})|\\}$, where $F_n^*(r^-)=n^{-n}\\#\\{\\eta:R_{n,\\eta}<r\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each fixed tuple $\\omega$, $R_{n,\\omega}$ is a finite linear combination of measurable coordinates, hence measurable by [F2]. Thus each comparison event $\\{R_{n,\\eta}\\le R_{n,\\omega}\\}$ or $\\{R_{n,\\eta}<R_{n,\\omega}\\}$ is measurable by applying [F2] to the measurable difference and its Borel half-line. Consequently $F_n^*(R_{n,\\omega})$ and $F_n^*(R_{n,\\omega}^-)$ are measurable finite sums; $G(R_{n,\\omega})$ is measurable by [F4]. The finite maximum in step 1.1 is measurable by [F2], so $D_n$ is measurable.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires n,d>=1, so the tuple index set{1,...,n}^n has n^n>=1 elements. At n0 the sample mean1/n is undefined and no maximum over an empty tuple family is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero projected values give a constant zero-step CDF and the same finite-max measurability formula."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: n=1 has a one-tuple bootstrap space; both CDF error values are measurable."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: duplicate tuple values are handled by the strict and non-strict finite counts at each support value."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: no interval or quantile endpoints occur."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1–2.1: only the finite tuple set and finite maxima are used; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Forward-implication worksheet upheld: Proof1.1 reduces the bootstrap-CDF discrepancy to finitely many left/right values and2.1 proves measurability; it gives no characterization of all measurable CDF discrepancies.",
+            "item_sha256": "dfa6898a422513f4e890eca787ab1a3d18aba9d7759d28bf013ff4debdf2fb67",
+            "row_sha256": "dc8746857c34b0647a58f969d89d6d62d6a6584299d5971204517118ef51cf6b"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no equivalence is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "bcs_misspecified_consistency_resolution",
+            "reason": "Reverse-implication worksheet upheld: Proof1.1 reduces the bootstrap-CDF discrepancy to finitely many left/right values and2.1 proves measurability; it gives no characterization of all measurable CDF discrepancies.",
+            "item_sha256": "dfa6898a422513f4e890eca787ab1a3d18aba9d7759d28bf013ff4debdf2fb67",
+            "row_sha256": "f30bb621bc529eee96d362432f05f38cce4c5707efadaca898a0dd0147fa02ad"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-51",
+        "notes": "Reviewed both proof steps and all eight prerequisite statements. The maximum includes both strict left counts and non-strict right counts, so ties are counted correctly. Monotonicity bounds each gap and both tails; continuity of G makes each left error approachable. Thus the displayed finite maximum equals the full supremum, not merely an upper bound. All comparisons and G compositions are measurable. n=1, a=0 and constant data remain covered."
+      }
+    }
+  }
+}

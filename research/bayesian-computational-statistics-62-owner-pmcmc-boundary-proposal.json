@@ -1,0 +1,372 @@
+{
+  "version": 1,
+  "kind": "focused-boundary-array-replacement-proposal",
+  "run": "bayesian-computational-statistics-62",
+  "scope": [
+    "alg-multinomial-and-residual-offspring-resampling",
+    "def-particle-gibbs-extended-target",
+    "alg-conditional-particle-gibbs",
+    "thm-particle-gibbs-selected-path-marginal",
+    "thm-particle-gibbs-conditional-sweep-is-gibbs",
+    "def-particle-gibbs-backward-simulation-extended-target",
+    "alg-particle-gibbs-backward-simulation",
+    "thm-particle-gibbs-backward-simulation-sweep-is-gibbs"
+  ],
+  "contracts": {
+    "alg-multinomial-and-residual-offspring-resampling": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input stipulates N≥1 and excludes an empty particle list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: when A=0, p_j=1/N in both branches; the returned multinomial indices keep their sampled order and any downstream zero normalizer stays zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: N>=1 includes N=1; the sole ancestor is index1, and residual R=0 returns its deterministic count."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: residual R=0 assigns C_j=floor(Np_j) without random draws; multinomial returns the sampled J vector without sorting, preserving its displayed product mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This case is not a separate parameter or boundary in the stated definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no choice-axiom claim; finite definitions and calculations are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a one-way assertion or calculation, not an equivalence."
+        }
+      ]
+    },
+    "def-particle-gibbs-extended-target": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition assigns zero mass to an all-zero likelihood-estimate configuration."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition requires N≥2 for the particle Gibbs update."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: 0<L_theta<infinity prior-almost everywhere and 0<C<infinity ensure a probability posterior; multinomial ancestors are retained in sampled order, so the displayed forward product is the declared labeled law."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or probability endpoint calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition and Conditional-version convention: AC supplies path RN versions and standard-Borel disintegration; a common measurable full-measure D specifies the conditional formulas, and its complement uses the identity sweep."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "alg-conditional-particle-gibbs": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: reference values outside D or undefined/zero/nonfinite conditional normalizing sums return unavailable and retain the old state; on D these sampled failures have conditional probability zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition requires N≥2; N=1 is outside the stated particle Gibbs update."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: target-path domination is required, but arbitrary points of topological support are insufficient; the retained parameter-path-lineage must belong to the specified measurable full-measure D."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or probability endpoint calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the imported D and conditional formulas use the AC-based RN and standard-Borel conditional versions from the extended-target convention; the finite multinomial draws add no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "thm-particle-gibbs-selected-path-marginal": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats zero average weights as zero extended-target mass; on the positive-weight branch it cancels the sampled-order multinomial ancestor probabilities."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement is for N≥2; N=1 is outside this particle Gibbs claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement excludes C=0 and C=infinity, where no normalized posterior is defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or probability endpoint calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the AC-based path RN supplier under the explicitly selected multinomial forward law; step 2.1 sums the finite N^(T+1) lineages."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "thm-particle-gibbs-conditional-sweep-is-gibbs": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 assigns zero extended-target mass to zero-average configurations; step 3.2 constructs D by removing marginal-null reference exceptions and supplies the measurable identity fallback."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement requires N≥2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 3.2 assert conditional formulas for posterior-almost every retained reference value, not all support points; the normalized factorization on D and its target-null identity fallback preserve the invariant probability."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or probability endpoint calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 3.1 and3.2 use the AC-based path RN identity and standard-Borel disintegration, respectively; finitely many exceptional events are combined before conditioning onto retained variables."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "def-particle-gibbs-backward-simulation-extended-target": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition requires positive finite backward denominators on extended-target support; Conditional-version convention sets ratio densities to zero off their common valid denominator sets and uses identity sweeps off D_BS."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition is for the N≥2 particle Gibbs regime."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition and Conditional-version convention require the density-based multinomial construction, positive finite denominators and evidence, and a measurable full-posterior-measure D_BS; topological support alone supplies no pointwise ratio version."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or probability endpoint calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition and Conditional-version convention use AC through path RN versions and standard-Borel disintegration; backward indices range over a finite set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "alg-particle-gibbs-backward-simulation": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: outside D_BS, or if a required ratio/normalizing sum is undefined, zero or nonfinite, the sweep returns the old retained state; these events are conditionally null on the good set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition requires N≥2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degenerate-model boundary claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: step3 initializes J_T from final weights and recursively samples J_t for t=T-1 down to0 from the finite normalized backward probabilities; for T=0 the recursion is empty."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: D_BS and the exact full conditional use the imported AC-based path and conditional versions; all particle-index draws are finite categorical operations."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    },
+    "thm-particle-gibbs-backward-simulation-sweep-is-gibbs": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-set boundary claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.3 restrict the explicit conditional formulas to their normalized good versions; denominator exceptions receive a measurable unchanged-state fallback rather than a pointwise support-based ratio."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement requires N≥2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement imports positive finite evidence and backward denominators; step 2.3 proves measurable posterior-a.e. conditional versions and excludes only marginal-null retained exceptions."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 normalizes each finite categorical backward distribution."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses AC-based path RN weights; step 2.3 also uses standard-Borel disintegration and pulls exceptional events back to the common extended probability space."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no iff claim."
+        }
+      ]
+    }
+  },
+  "basis": "research/bayesian-computational-statistics-62-owner-pmcmc-metadata-before",
+  "unchanged_contract_boundaries": "Root restores original arrays for the other17; this proposal changes only the eight repaired carriers.",
+  "no_source_edits": true
+}

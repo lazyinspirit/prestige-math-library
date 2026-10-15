@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "46",
+  "round": 0,
+  "reviewed_items": [
+    "lem-nonlinear-path-extension-is-a-probability-kernel",
+    "def-conditionally-linear-gaussian-state-space-model",
+    "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+    "lem-smoothing-backward-kernel-bayes-factorization",
+    "alg-particle-backward-simulator",
+    "alg-rao-blackwellized-particle-filter",
+    "lem-bootstrap-particle-filter-weak-consistency",
+    "alg-fixed-lag-particle-smoother",
+    "thm-particle-backward-simulator-normalization-and-cost",
+    "thm-particle-smoothing-consistency-under-stated-conditions",
+    "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+    "ex-switching-linear-gaussian-rbpf",
+    "ex-zero-backward-simulation-denominator",
+    "ex-fixed-lag-smoothing-bias-from-delayed-information"
+  ],
+  "reviewed_pages": [
+    "particle-smoothing-backward-simulation-and-rbpf",
+    "particle-smoothing-backward-simulation-and-rbpf-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete substantive review of both assigned pages, all items, approved BCS-43 scope, and relevant supplier claims and proofs. The defects can be resolved within this assigned source scope; no owner escalation is required.",
+  "findings": [
+    {
+      "id": "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+      "type": "prerequisite",
+      "reason": "Proof step 4.1 identifies the conditional nonlinear path law as a Feynman–Kac law using path-extension transitions, but this item neither depends on nor cites lem-nonlinear-path-extension-is-a-probability-kernel, which establishes those transitions are probability kernels on standard-Borel path spaces. Add that supplier dependency and make its use explicit without changing the claim."
+    },
+    {
+      "id": "alg-rao-blackwellized-particle-filter",
+      "type": "prerequisite",
+      "reason": "The procedure maintains Gaussian components for each sampled prefix Z_{0:t}, while its Kalman supplier establishes the law conditional on the full path Z_{0:T}. Explicitly show that future Z transitions, independent of U and depending only on Z_t, integrate out so the same Gaussian is the conditional law given Z_{0:t}, Y_{1:t}."
+    },
+    {
+      "id": "alg-particle-backward-simulator",
+      "type": "local",
+      "reason": "The particle branch samples separate indices at each time but says to return the stored particle paths, which can mean forward ancestor histories. Specify the returned tuple (x_0^{I_0},…,x_T^{I_T}). In all-marginals mode, define how zero smoothing-weight terms are skipped or otherwise ensure the update never evaluates 0·f/0; state the denominator condition accordingly and align the normalization proof."
+    },
+    {
+      "id": "alg-fixed-lag-particle-smoother",
+      "type": "local",
+      "reason": "The definition uses a requested number of paths but does not identify the path count as an input. Specify S≥1 and the per-time empirical output."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-fixed-lag-particle-smoother",
+      "decision": "repair",
+      "reason": "Direct consumer of the backward simulator; clarify the sample-count input and coordinate projection with its output."
+    },
+    {
+      "id": "thm-particle-backward-simulator-normalization-and-cost",
+      "decision": "repair",
+      "reason": "Its all-marginals normalization proof must match the repaired zero-weight denominator handling."
+    },
+    {
+      "id": "thm-particle-smoothing-consistency-under-stated-conditions",
+      "decision": "accept",
+      "reason": "Its continuity and uniform density bounds give finite-positive denominators on the filter support; its product-kernel argument matches the explicitly assembled backward path."
+    },
+    {
+      "id": "ex-zero-backward-simulation-denominator",
+      "decision": "accept",
+      "reason": "The example's positive-weight terminal particle has zero denominator and remains inadmissible under the repaired condition."
+    },
+    {
+      "id": "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+      "decision": "accept",
+      "reason": "The exact-kernel branch and coordinate-projection argument remain valid."
+    },
+    {
+      "id": "ex-fixed-lag-smoothing-bias-from-delayed-information",
+      "decision": "accept",
+      "reason": "The example uses the exact-kernel fixed-lag target, which is unaffected by the particle-mode clarifications."
+    },
+    {
+      "id": "ex-switching-linear-gaussian-rbpf",
+      "decision": "accept",
+      "reason": "For this one-step model the full nonlinear path equals each relevant prefix; the stated component calculations and mixture weights are correct."
+    }
+  ]
+}

@@ -1,0 +1,275 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "46",
+  "purpose": "Focused owner disposition for omitted consumer coverage, not fabricated native report coverage",
+  "native_state": "research/bayesian-computational-statistics-62-scope-review/batch-46/state.json",
+  "native_review": "research/bayesian-computational-statistics-62-scope-review/batch-46/review-0.json",
+  "native_repair_report": "research/bayesian-computational-statistics-62-scope-review/batch-46/repair-1.json",
+  "native_phase_observed": "held",
+  "native_hold_reason": "Worker report requires owner resolution: Repair omitted affected consumers",
+  "expected_item_count": 10,
+  "original_checked_subject_count": 11,
+  "missing_original_consumer_ids": [
+    "alg-particle-backward-simulator"
+  ],
+  "changed_interface_comparisons": [
+    {
+      "id": "alg-particle-backward-simulator",
+      "native_before_interfaces": [
+        "## Definition\n\nFix a finite horizon $T\\ge0$. In the **particle mode**, the inputs are\nnormalized filtering clouds\n$$\\{(x_t^i,w_t^i):1\\le i\\le N\\},\\qquad w_t^i\\ge0,\\quad\\sum_{i=1}^Nw_t^i=1,$$\nfor $0\\le t\\le T$, produced, for example, by\n[[alg-sequential-importance-resampling]]. Each $x_t^i$ is the time-$t$\ncoordinate of its stored particle path. Write $M_{t+1}$ for the model\ntransition kernel and require a product-measurable density\n$f_{t+1}(x'\\mid x)$ relative to a declared sigma-finite measure\n$\\lambda_{t+1}$, meaning\n$$M_{t+1}(x,A)=\\int_A f_{t+1}(x'\\mid x)\\,\\lambda_{t+1}(dx')$$\nfor each measurable $A$. For every terminal particle value used in the\nbackward pass, require the finite positive denominator\n$$q_{t+1}^N(x')=\\sum_{j=1}^Nw_t^j f_{t+1}(x'\\mid x_t^j)\\in(0,\\infty).$$\nGiven a requested number $S\\ge1$ of paths, repeat independently for\n$s=1,\\ldots,S$:\n\n1. Draw $I_T^s$ from $\\{1,\\ldots,N\\}$ with probabilities $w_T^i$ and set\n   $\\widetilde X_T^s=x_T^{I_T^s}$.\n2. For $t=T-1,T-2,\\ldots,0$, form\n   $$b_t^i(\\widetilde X_{t+1}^s)=\\frac{w_t^i f_{t+1}(\\widetilde X_{t+1}^s\\mid x_t^i)}{\\sum_{j=1}^Nw_t^j f_{t+1}(\\widetilde X_{t+1}^s\\mid x_t^j)},\\qquad 1\\le i\\le N,$$\n   draw $I_t^s$ from this probability vector, and set\n   $\\widetilde X_t^s=x_t^{I_t^s}$.\n3. Return the stored particle paths indexed by\n   $(I_0^s,\\ldots,I_T^s)$. The output is a draw from the particle backward\n   approximation to the smoothing path law. This index draw is not the same\n   operation as tracing the forward filter's recorded ancestor indices.\n\nIf an exact filtering kernel $\\eta_T$ and supplied backward conditional\nkernels $B_t$ from\n[[lem-smoothing-backward-kernel-bayes-factorization]] are available for\ngeneral transition kernels, there is a separate exact-kernel mode: draw\n$X_T\\sim\\eta_T$ and then draw $X_t\\sim B_t(X_{t+1},\\cdot)$ successively\nbackward. This mode uses the actual kernels; it does not evaluate a\ntransition density or a kernel on particle singletons. It returns an exact\nsmoothing path under the supplied conditional versions.\n\nAn optional all-marginals mode computes particle smoothing weights instead\nof drawing paths. Initialize $\\bar w_{T|T}^j=w_T^j$. For\n$t=T-1,\\ldots,0$, set\n$$\\bar w_{t|T}^i=w_t^i\\sum_{j=1}^N\\bar w_{t+1|T}^j\\frac{f_{t+1}(x_{t+1}^j\\mid x_t^i)}{\\sum_{\\ell=1}^Nw_t^\\ell f_{t+1}(x_{t+1}^j\\mid x_t^\\ell)}.$$\nUnder the same finite-positive denominator condition, normalize the computed\nnonnegative values $\\bar w_{t|T}^i$ to sum one and return\n$\\sum_i\\bar w_{t|T}^i\\delta_{x_t^i}$ as the approximate smoothed marginal at\ntime $t$. The algorithm makes no finite-particle accuracy, consistency, or\nlong-time stability claim."
+      ],
+      "current_interfaces": [
+        "## Definition\n\nFix a finite horizon $T\\ge0$ and a requested path count $S\\ge1$, used in\neither mode below. In the **particle mode**, the inputs include a particle\ncount $N\\ge1$ and normalized filtering clouds\n$$\\{(x_t^i,w_t^i):1\\le i\\le N\\},\\qquad w_t^i\\ge0,\\quad\\sum_{i=1}^Nw_t^i=1,$$\nfor $0\\le t\\le T$, produced, for example, by\n[[alg-sequential-importance-resampling]]. Each $x_t^i$ is the time-$t$\ncoordinate of its stored particle path. Write $M_{t+1}$ for the model\ntransition kernel and require a product-measurable density\n$f_{t+1}(x'\\mid x)$ relative to a declared sigma-finite measure\n$\\lambda_{t+1}$, meaning\n$$M_{t+1}(x,A)=\\int_A f_{t+1}(x'\\mid x)\\,\\lambda_{t+1}(dx')$$\nfor each measurable $A$. For each $t<T$, define the predictive score with\nzero-weight terms omitted:\n$$q_{t+1}^N(x')=\\sum_{i:w_t^i>0}w_t^i f_{t+1}(x'\\mid x_t^i).$$\nFor particle-mode path sampling, define the set of reachable indices\nrecursively by $R_T=\\{j:w_T^j>0\\}$. Descending from $t=T-1$ to $0$, require\n$q_{t+1}^N(x_{t+1}^j)\\in(0,\\infty)$ for every $j\\in R_{t+1}$, and put\n$$R_t=\\bigcup_{j\\in R_{t+1}}\\{i:w_t^i>0,\\ f_{t+1}(x_{t+1}^j\\mid x_t^i)>0\\}.$$\nThese are exactly the indices that can be drawn with positive probability at\nthe corresponding backward step. For the all-marginals mode below, require\ninstead that $q_{t+1}^N(x_{t+1}^j)\\in(0,\\infty)$ whenever the current\nsmoothing weight $\\bar w_{t+1|T}^j$ is positive. Thus no denominator is\nrequired for an omitted zero-weight term. At $T=0$ there are no denominator\nconditions.\n\nIn particle mode, repeat independently for $s=1,\\ldots,S$:\n\n1. Draw $I_T^s$ from $\\{1,\\ldots,N\\}$ with probabilities $w_T^i$ and set\n   $\\widetilde X_T^s=x_T^{I_T^s}$.\n2. For $t=T-1,T-2,\\ldots,0$, set $b_t^i=0$ without evaluating the density\n   whenever $w_t^i=0$. For $w_t^i>0$, set\n   $$b_t^i(\\widetilde X_{t+1}^s)=\\frac{w_t^i f_{t+1}(\\widetilde X_{t+1}^s\\mid x_t^i)}{q_{t+1}^N(\\widetilde X_{t+1}^s)}.$$\n   Draw $I_t^s$ from this probability vector, and set\n   $\\widetilde X_t^s=x_t^{I_t^s}$.\n3. Return the tuple\n   $$\\widetilde X_{0:T}^s=(x_0^{I_0^s},\\ldots,x_T^{I_T^s}).$$\n   This is a draw from the particle backward approximation to the smoothing\n   path law. The coordinates are selected by separate backward indices and\n   need not be the stored forward ancestor history of any one particle.\nThe particle path-sampling output is the list\n$\\widetilde X_{0:T}^1,\\ldots,\\widetilde X_{0:T}^S$.\n\nIf an exact filtering kernel $\\eta_T$ and supplied backward conditional\nkernels $B_t$ from\n[[lem-smoothing-backward-kernel-bayes-factorization]] are available for\ngeneral transition kernels, there is a separate exact-kernel mode: draw\n$S$ conditionally independent paths, each by drawing $X_T\\sim\\eta_T$ and then\ndrawing $X_t\\sim B_t(X_{t+1},\\cdot)$ successively backward. This mode uses\nthe actual kernels; it does not evaluate a transition density or a kernel on\nparticle singletons. It returns exact smoothing paths under the supplied\nconditional versions wherever their factorization holds.\n\nAn optional all-marginals mode computes particle smoothing weights instead\nof drawing paths. Initialize $\\bar w_{T|T}^j=w_T^j$. For\n$t=T-1,\\ldots,0$, let $J_{t+1}=\\{j:\\bar w_{t+1|T}^j>0\\}$. For each\n$j\\in J_{t+1}$ and $i$ with $w_t^i>0$, set\n$$b_{t}^{i,j}=\\frac{w_t^i f_{t+1}(x_{t+1}^j\\mid x_t^i)}{q_{t+1}^N(x_{t+1}^j)};$$\nset $b_t^{i,j}=0$ without evaluating the density if $j\\notin J_{t+1}$ or\n$w_t^i=0$. Update\n$$\\bar w_{t|T}^i=\\sum_{j\\in J_{t+1}}\\bar w_{t+1|T}^j b_t^{i,j}.$$\nFor every active $j$, $(b_t^{i,j})_{i=1}^N$ is a probability vector, so the\nraw updated values are nonnegative and already sum to one; explicit\nnormalization leaves them unchanged. Return\n$\\sum_i\\bar w_{t|T}^i\\delta_{x_t^i}$ as the approximate smoothed marginal at\ntime $t$. The algorithm makes no finite-particle accuracy, consistency, or\nlong-time stability claim."
+      ]
+    },
+    {
+      "id": "alg-rao-blackwellized-particle-filter",
+      "native_before_interfaces": [
+        "## Definition\n\nUse the conditionally linear-Gaussian model of\n[[def-conditionally-linear-gaussian-state-space-model]] and a fixed\nobservation path $y_{1:T}$. The particle state at time $t$ is the full\nnonlinear history $z_{0:t}$; finite products of the standard-Borel state\nspaces are standard Borel. Its transition appends a draw\n$z_t\\sim M_t(z_{t-1},\\cdot)$; the resulting path-extension probability\nkernel and standard-Borel path space are supplied by\n[[lem-nonlinear-path-extension-is-a-probability-kernel]]. Set the initial Feynman\u2013Kac potential to\n$G_0\\equiv1$ and the time-$t$ potential to the conditional observation\ndensity\n$$G_t(z_{0:t})=\\ell_t(z_{0:t};y_{1:t})$$\nfrom [[lem-kalman-filter-is-exact-conditional-on-nonlinear-path]]. Use the\nsame path-extension kernel as target and proposal, so the initial and\ntransition Radon\u2013Nikodym weights are identically one. Run\n[[alg-sequential-importance-resampling]] with multinomial resampling to\napproximate the filtering law of the nonlinear path. Each particle stores\nalongside its path the conditional Gaussian moments of $U_t$.\n\nInitialize $N\\ge1$ particles by drawing $z_0^i\\sim\\mu_0$ independently,\nsetting $w_0^i=1/N$, $m_{0|0}^i=m_0(z_0^i)$, and\n$P_{0|0}^i=P_0(z_0^i)$. For each $t=1,\\ldots,T$:\n\n1. Draw ancestor indices $J_t^1,\\ldots,J_t^N$ independently with\n   probabilities $(w_{t-1}^1,\\ldots,w_{t-1}^N)$ and append independent\n   transitions $z_t^i\\sim M_t(z_{t-1}^{J_t^i},\\cdot)$.\n2. For each particle, abbreviate its appended path by $z_{0:t}^i$ and compute\n   $$m_{t|t-1}^i=A_t(z_{0:t}^i)m_{t-1|t-1}^{J_t^i},\\qquad P_{t|t-1}^i=A_t(z_{0:t}^i)P_{t-1|t-1}^{J_t^i}A_t(z_{0:t}^i)^T+Q_t(z_{0:t}^i).$$\n   Form $v_t^i=y_t-C_t(z_{0:t}^i)m_{t|t-1}^i$ and\n   $S_t^i=C_t(z_{0:t}^i)P_{t|t-1}^iC_t(z_{0:t}^i)^T+R_t(z_{0:t}^i)$.\n3. Set the incremental weight to the finite positive Gaussian density\n   $$a_t^i=(2\\pi)^{-p_t/2}\\det(S_t^i)^{-1/2}\\exp\\!\\left(-\\tfrac12(v_t^i)^T(S_t^i)^{-1}v_t^i\\right),$$\n   and normalize $w_t^i=a_t^i/\\sum_j a_t^j$.\n4. Update the conditional Gaussian moments by\n   $$K_t^i=P_{t|t-1}^iC_t(z_{0:t}^i)^T(S_t^i)^{-1},\\qquad m_{t|t}^i=m_{t|t-1}^i+K_t^iv_t^i,\\qquad P_{t|t}^i=P_{t|t-1}^i-K_t^iS_t^i(K_t^i)^T.$$\n\nThe procedure returns the weighted nonlinear particle paths and the Gaussian\nmixture\n$$\\widehat\\pi_t^N(du_t,dz_{0:t})=\\sum_{i=1}^Nw_t^iN(du_t;m_{t|t}^i,P_{t|t}^i)\\,\\delta_{z_{0:t}^i}(dz_{0:t}).$$\nIts conditional mean is $\\sum_iw_t^im_{t|t}^i$ and its conditional covariance\nis $\\sum_iw_t^i[P_{t|t}^i+(m_{t|t}^i-\\bar m_t)(m_{t|t}^i-\\bar m_t)^T]$,\nwhere $\\bar m_t=\\sum_iw_t^im_{t|t}^i$. These are moments of the finite\nmixture approximation; for finite $N$ the algorithm remains an approximation\nto the full nonlinear filter. It makes no general variance-reduction,\nconvergence-rate, or long-time accuracy claim."
+      ],
+      "current_interfaces": [
+        "## Definition\n\nUse the conditionally linear-Gaussian model of\n[[def-conditionally-linear-gaussian-state-space-model]] and a fixed\nobservation path $y_{1:T}$. For each $0\\le t\\le T$, let $\\bar P_t$ be the\nnonlinear path law generated by $\\mu_0$ and the path-extension kernels from\n[[lem-nonlinear-path-extension-is-a-probability-kernel]], and\nput\n$$c_t(y_{1:t})=\\int_{\\mathsf Z_{0:t}}\\prod_{s=1}^t\\ell_s(z_{0:s};y_{1:s})\\,\\bar P_t(dz_{0:t}),\\qquad c_0=1.$$\nHere $\\ell_s$ is the conditional observation density supplied by\n[[lem-kalman-filter-is-exact-conditional-on-nonlinear-path]].\nFor the claim that the procedure targets the nonlinear filtering law at every\nprefix, assume $0<c_t(y_{1:t})<\\infty$ for every $t$; this is the finite-positive\nnormalizer condition for the normalized Feynman\u2013Kac target. The Kalman\nlikelihood factorization identifies $c_t$ with the observation\nevidence density and the normalized path target with the exact conditional\nlaw of $Z_{0:t}$ given $Y_{1:t}=y_{1:t}$. The particle procedure itself uses\nfinite positive per-particle likelihoods, so each of\nits empirical weight normalizers is finite positive. The particle state at\ntime $t$ is the full\nnonlinear history $z_{0:t}$; finite products of the standard-Borel state\nspaces are standard Borel. Its transition appends a draw\n$z_t\\sim M_t(z_{t-1},\\cdot)$; the resulting path-extension probability\nkernel and standard-Borel path space are supplied by\n[[lem-nonlinear-path-extension-is-a-probability-kernel]]. Set the initial Feynman\u2013Kac potential to\n$G_0\\equiv1$ and the time-$t$ potential to the conditional observation\ndensity\n$$G_t(z_{0:t})=\\ell_t(z_{0:t};y_{1:t})$$\nfrom [[lem-kalman-filter-is-exact-conditional-on-nonlinear-path]]. Use the\nsame path-extension kernel as target and proposal, so the initial and\ntransition Radon\u2013Nikodym weights are identically one. Run\n[[alg-sequential-importance-resampling]] with multinomial resampling to\napproximate the filtering law of the nonlinear path. Each particle stores\nalongside its path the conditional Gaussian moments of $U_t$.\n\nInitialize $N\\ge1$ particles by drawing $z_0^i\\sim\\mu_0$ independently,\nsetting $w_0^i=1/N$, $m_{0|0}^i=m_0(z_0^i)$, and\n$P_{0|0}^i=P_0(z_0^i)$. For each $t=1,\\ldots,T$:\n\n1. Draw ancestor indices $J_t^1,\\ldots,J_t^N$ independently with\n   probabilities $(w_{t-1}^1,\\ldots,w_{t-1}^N)$ and append independent\n   transitions $z_t^i\\sim M_t(z_{t-1}^{J_t^i},\\cdot)$.\n2. For each particle, abbreviate its appended path by $z_{0:t}^i$ and compute\n   $$m_{t|t-1}^i=A_t(z_{0:t}^i)m_{t-1|t-1}^{J_t^i},\\qquad P_{t|t-1}^i=A_t(z_{0:t}^i)P_{t-1|t-1}^{J_t^i}A_t(z_{0:t}^i)^T+Q_t(z_{0:t}^i).$$\n   Form $v_t^i=y_t-C_t(z_{0:t}^i)m_{t|t-1}^i$ and\n   $S_t^i=C_t(z_{0:t}^i)P_{t|t-1}^iC_t(z_{0:t}^i)^T+R_t(z_{0:t}^i)$.\n3. Set the incremental weight to the finite positive Gaussian density\n   $$a_t^i=(2\\pi)^{-p_t/2}\\det(S_t^i)^{-1/2}\\exp\\!\\left(-\\tfrac12(v_t^i)^T(S_t^i)^{-1}v_t^i\\right),$$\n   and normalize $w_t^i=a_t^i/\\sum_j a_t^j$.\n4. Update the conditional Gaussian moments by\n   $$K_t^i=P_{t|t-1}^iC_t(z_{0:t}^i)^T(S_t^i)^{-1},\\qquad m_{t|t}^i=m_{t|t-1}^i+K_t^iv_t^i,\\qquad P_{t|t}^i=P_{t|t-1}^i-K_t^iS_t^i(K_t^i)^T.$$\n\nThe procedure returns the weighted nonlinear particle paths and the Gaussian\nmixture\n$$\\widehat\\pi_t^N(du_t,dz_{0:t})=\\sum_{i=1}^Nw_t^iN(du_t;m_{t|t}^i,P_{t|t}^i)\\,\\delta_{z_{0:t}^i}(dz_{0:t}).$$\nIts conditional mean is $\\sum_iw_t^im_{t|t}^i$ and its conditional covariance\nis $\\sum_iw_t^i[P_{t|t}^i+(m_{t|t}^i-\\bar m_t)(m_{t|t}^i-\\bar m_t)^T]$,\nwhere $\\bar m_t=\\sum_iw_t^im_{t|t}^i$. These are moments of the finite\nmixture approximation; for finite $N$ the algorithm remains an approximation\nto the full nonlinear filter. It makes no general variance-reduction,\nconvergence-rate, or long-time accuracy claim."
+      ]
+    },
+    {
+      "id": "alg-fixed-lag-particle-smoother",
+      "native_before_interfaces": [
+        "## Definition\n\nFix an integer lag $L\\ge0$ and the normalized filtering particle clouds and\ntransition inputs required by\n[[alg-particle-backward-simulator]]. For each time $t\\in\\{0,\\ldots,T\\}$,\nput $s_t=\\min(t+L,T)$. Run the particle backward simulator using only the\nfiltering clouds at times $0,\\ldots,s_t$, draw the requested number of paths,\nand retain only their time-$t$ coordinates. The resulting empirical law\napproximates\n$$\\mathcal L(X_t\\mid Y_{1:s_t}),$$\nnot the full smoothing law $\\mathcal L(X_t\\mid Y_{1:T})$ unless $s_t=T$ or\nthe two conditional laws happen to agree. The same procedure can use supplied\nexact backward kernels when the model has no transition density; for each\n$s_t$ it uses the supplied filtering kernel at $y_{1:s_t}$ and the backward\nkernels for the corresponding prefix histories. On histories where these\nkernels factor the truncated smoother, it samples that exact conditional law.\n\nThe procedure returns one truncated smoothing marginal per $t$. It does not\nassert a bound on the lag bias, a forgetting rate, or convergence to the\nfull-data smoother for fixed $L$. Those conclusions require separate\nconditions on the model."
+      ],
+      "current_interfaces": [
+        "## Definition\n\nFor a finite horizon $T\\ge0$, fix an integer lag $L\\ge0$, a path count\n$S\\ge1$, and the normalized\nfiltering particle clouds and transition inputs required by\n[[alg-particle-backward-simulator]]. For each time $t\\in\\{0,\\ldots,T\\}$,\nput $s_t=\\min(t+L,T)$. Independently for each $t$, run the particle backward\nsimulator using only the filtering clouds at times $0,\\ldots,s_t$ and request\n$S$ paths. Retain their time-$t$ coordinates $\\widetilde X_t^{t,1},\\ldots,\n\\widetilde X_t^{t,S}$ and return the empirical measure\n$$\\widehat\\eta_{t|s_t}^{S}=\\frac1S\\sum_{r=1}^S\\delta_{\\widetilde X_t^{t,r}}.$$\nIn particle mode this empirical law approximates\n$$\\mathcal L(X_t\\mid Y_{1:s_t}),$$\nnot the full smoothing law $\\mathcal L(X_t\\mid Y_{1:T})$ unless $s_t=T$ or\nthe two conditional laws happen to agree. The same procedure can use supplied\nexact backward kernels when the model has no transition density; for each\n$s_t$ it uses the supplied filtering kernel at $y_{1:s_t}$ and the backward\nkernels for the corresponding prefix histories. On histories where these\nkernels factor the truncated smoother, it samples that exact conditional law.\n\nThe procedure returns one truncated smoothing marginal per $t$. It does not\nassert a bound on the lag bias, a forgetting rate, or convergence to the\nfull-data smoother for fixed $L$. Those conclusions require separate\nconditions on the model."
+      ]
+    },
+    {
+      "id": "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+      "native_before_interfaces": [
+        "## Statement\n\nAssume AC and a finite-horizon Markov state-space model with standard-Borel\nstate and observation spaces. Supply the exact filtering and backward\nconditional kernels of\n[[lem-smoothing-backward-kernel-bayes-factorization]]. Fix an observation\nhistory in the full-measure set on which their factorization holds for every\nprefix horizon $s\\le T$. In the exact-kernel mode of\n[[alg-fixed-lag-particle-smoother]], fix $t$ and set\n$s=\\min(t+L,T)$. Each returned path's time-$t$ coordinate has conditional\nlaw $\\mathcal L(X_t\\mid Y_{1:s})$ (for the supplied conditional versions),\nso the empirical measure of finitely many paths is a Monte Carlo estimate of\nthat marginal. The target equals the full smoothing marginal only when later\nobservations do not change the conditional law; increasing the particle count\ncannot remove a difference caused by truncating the observation history."
+      ],
+      "current_interfaces": [
+        "## Statement\n\nAssume AC and a finite-horizon Markov state-space model with standard-Borel\nstate and observation spaces. Supply the exact filtering and backward\nconditional kernels of\n[[lem-smoothing-backward-kernel-bayes-factorization]]. Fix an observation\nhistory in the full-measure set on which their factorization holds for every\nprefix horizon $s\\le T$. In the exact-kernel mode of\n[[alg-fixed-lag-particle-smoother]], fix $t$ and set\n$s=\\min(t+L,T)$. Each returned path's time-$t$ coordinate has conditional\nlaw $\\mathcal L(X_t\\mid Y_{1:s})$ (for the supplied conditional versions),\nso, for any requested $S\\ge1$, the empirical measure of its $S$ returned\ntime-$t$ coordinates is a Monte Carlo estimate of that marginal. The target\nequals the full smoothing marginal only when later\nobservations do not change the conditional law; increasing the particle count\ncannot remove a difference caused by truncating the observation history."
+      ]
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-fixed-lag-particle-smoother",
+      "decision": "accept",
+      "native_consumer_scope_paths": [
+        [
+          "lem-smoothing-backward-kernel-bayes-factorization",
+          "alg-particle-backward-simulator",
+          "alg-fixed-lag-particle-smoother"
+        ],
+        [
+          "alg-particle-backward-simulator",
+          "alg-fixed-lag-particle-smoother"
+        ]
+      ],
+      "reason": "Uses the backward simulator's path count and coordinate output; its per-time empirical law is specified.",
+      "basis": "Genuine native repair-1 consumer disposition retained; not invented new native coverage."
+    },
+    {
+      "id": "alg-particle-backward-simulator",
+      "decision": "accept",
+      "native_consumer_scope_paths": [
+        [
+          "lem-smoothing-backward-kernel-bayes-factorization",
+          "alg-particle-backward-simulator"
+        ],
+        [
+          "alg-fixed-lag-particle-smoother",
+          "alg-particle-backward-simulator"
+        ]
+      ],
+      "reason": "Independently checked both current algorithms and the backward factorization supplier. The only reverse use of the changed fixed-lag algorithm is the backward simulator Remarks link stating that fixed lag remains a truncated-observation target; it does not invoke fixed lag as a computational or proof supplier. The repaired fixed-lag Definition explicitly requests S paths on prefix horizon s_t and projects their time-t coordinates, which agrees with that caveat. The backward simulator itself uses the unchanged supplied conditional-factorization interface for exact mode; the active-weight reachable-index conditions and returned tuple are internally compatible. No consumer repair is required, and no logical cycle is introduced.",
+      "basis": "Focused independent owner-delegated current-source consumer check supplying the omitted disposition; not an amendment to native repair-1."
+    },
+    {
+      "id": "alg-rao-blackwellized-particle-filter",
+      "decision": "accept",
+      "native_consumer_scope_paths": [
+        [
+          "lem-nonlinear-path-extension-is-a-probability-kernel",
+          "alg-rao-blackwellized-particle-filter"
+        ],
+        [
+          "def-conditionally-linear-gaussian-state-space-model",
+          "alg-rao-blackwellized-particle-filter"
+        ],
+        [
+          "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+          "alg-rao-blackwellized-particle-filter"
+        ]
+      ],
+      "reason": "Prefix conditional Gaussian components and finite-evidence target conditions are explicit.",
+      "basis": "Genuine native repair-1 consumer disposition retained; not invented new native coverage."
+    },
+    {
+      "id": "ex-fixed-lag-smoothing-bias-from-delayed-information",
+      "decision": "accept",
+      "native_consumer_scope_paths": [
+        [
+          "lem-smoothing-backward-kernel-bayes-factorization",
+          "ex-fixed-lag-smoothing-bias-from-delayed-information"
+        ],
+        [
+          "alg-particle-backward-simulator",
+          "alg-fixed-lag-particle-smoother",
+          "ex-fixed-lag-smoothing-bias-from-delayed-information"
+        ],
+        [
+          "alg-fixed-lag-particle-smoother",
+          "ex-fixed-lag-smoothing-bias-from-delayed-information"
+        ],
+        [
+          "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+          "ex-fixed-lag-smoothing-bias-from-delayed-information"
+        ]
+      ],
+      "reason": "Its exact-kernel draws retain the stated truncated-history target and bias calculation.",
+      "basis": "Genuine native repair-1 consumer disposition retained; not invented new native coverage."
+    },
+    {
+      "id": "ex-switching-linear-gaussian-rbpf",
+      "decision": "accept",
+      "native_consumer_scope_paths": [
+        [
+          "lem-nonlinear-path-extension-is-a-probability-kernel",
+          "alg-rao-blackwellized-particle-filter",
+          "ex-switching-linear-gaussian-rbpf"
+        ],
+        [
+          "def-conditionally-linear-gaussian-state-space-model",
+          "ex-switching-linear-gaussian-rbpf"
+        ],
+        [
+          "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+          "ex-switching-linear-gaussian-rbpf"
+        ],
+        [
+          "alg-rao-blackwellized-particle-filter",
+          "ex-switching-linear-gaussian-rbpf"
+        ]
+      ],
+      "reason": "Its finite Gaussian mixture has finite positive evidence, and the component calculations remain valid.",
+      "basis": "Genuine native repair-1 consumer disposition retained; not invented new native coverage."
+    },
+    {
+      "id": "ex-zero-backward-simulation-denominator",
+      "decision": "accept",
+      "native_consumer_scope_paths": [
+        [
+          "lem-smoothing-backward-kernel-bayes-factorization",
+          "ex-zero-backward-simulation-denominator"
+        ],
+        [
+          "alg-particle-backward-simulator",
+          "ex-zero-backward-simulation-denominator"
+        ],
+        [
+          "alg-fixed-lag-particle-smoother",
+          "alg-particle-backward-simulator",
+          "ex-zero-backward-simulation-denominator"
+        ]
+      ],
+      "reason": "Its positive-weight terminal particle still has zero predictive denominator and is inadmissible.",
+      "basis": "Genuine native repair-1 consumer disposition retained; not invented new native coverage."
+    },
+    {
+      "id": "lem-kalman-filter-is-exact-conditional-on-nonlinear-path",
+      "decision": "accept",
+      "native_consumer_scope_paths": [
+        [
+          "def-conditionally-linear-gaussian-state-space-model",
+          "lem-kalman-filter-is-exact-conditional-on-nonlinear-path"
+        ]
+      ],
+      "reason": "The path-extension prerequisite is now explicit and used in the proof.",
+      "basis": "Genuine native repair-1 consumer disposition retained; not invented new native coverage."
+    },
+    {
+      "id": "thm-fixed-lag-smoother-targets-truncated-conditional-law",
+      "decision": "accept",
+      "native_consumer_scope_paths": [
+        [
+          "lem-smoothing-backward-kernel-bayes-factorization",
+          "thm-fixed-lag-smoother-targets-truncated-conditional-law"
+        ],
+        [
+          "alg-particle-backward-simulator",
+          "alg-fixed-lag-particle-smoother",
+          "thm-fixed-lag-smoother-targets-truncated-conditional-law"
+        ],
+        [
+          "alg-fixed-lag-particle-smoother",
+          "thm-fixed-lag-smoother-targets-truncated-conditional-law"
+        ]
+      ],
+      "reason": "Statement and proof cover the empirical measure of the requested S exact-kernel draws.",
+      "basis": "Genuine native repair-1 consumer disposition retained; not invented new native coverage."
+    },
+    {
+      "id": "thm-particle-backward-simulator-normalization-and-cost",
+      "decision": "accept",
+      "native_consumer_scope_paths": [
+        [
+          "lem-smoothing-backward-kernel-bayes-factorization",
+          "alg-particle-backward-simulator",
+          "thm-particle-backward-simulator-normalization-and-cost"
+        ],
+        [
+          "alg-particle-backward-simulator",
+          "thm-particle-backward-simulator-normalization-and-cost"
+        ],
+        [
+          "alg-fixed-lag-particle-smoother",
+          "alg-particle-backward-simulator",
+          "thm-particle-backward-simulator-normalization-and-cost"
+        ]
+      ],
+      "reason": "Proof now matches the active-weight denominator and zero-term conventions.",
+      "basis": "Genuine native repair-1 consumer disposition retained; not invented new native coverage."
+    },
+    {
+      "id": "thm-particle-smoothing-consistency-under-stated-conditions",
+      "decision": "accept",
+      "native_consumer_scope_paths": [
+        [
+          "lem-smoothing-backward-kernel-bayes-factorization",
+          "thm-particle-smoothing-consistency-under-stated-conditions"
+        ],
+        [
+          "alg-particle-backward-simulator",
+          "thm-particle-smoothing-consistency-under-stated-conditions"
+        ],
+        [
+          "lem-bootstrap-particle-filter-weak-consistency",
+          "thm-particle-smoothing-consistency-under-stated-conditions"
+        ],
+        [
+          "alg-fixed-lag-particle-smoother",
+          "alg-particle-backward-simulator",
+          "thm-particle-smoothing-consistency-under-stated-conditions"
+        ]
+      ],
+      "reason": "The uniform positive bounded density ensures every required denominator is finite and positive; the returned tuple matches the path-law argument.",
+      "basis": "Genuine native repair-1 consumer disposition retained; not invented new native coverage."
+    },
+    {
+      "id": "particle-smoothing-backward-simulation-and-rbpf",
+      "decision": "accept",
+      "reason": "Updated the summary for required denominators and the finite-evidence condition.",
+      "basis": "Additional genuine native page consumer disposition retained."
+    },
+    {
+      "id": "particle-smoothing-backward-simulation-and-rbpf-examples",
+      "decision": "accept",
+      "reason": "The example summary remains accurate for the checked consumer claims.",
+      "basis": "Additional genuine native page consumer disposition retained."
+    }
+  ],
+  "source_edits": [],
+  "unresolved_findings": [],
+  "no_new_native_execution_or_review_coverage": true
+}

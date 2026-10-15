@@ -1,0 +1,107 @@
+{
+  "risk": "low",
+  "kind": "theorem",
+  "citations": [
+    {
+      "fact": "F1",
+      "source": "def-posterior-risk-and-bayes-action",
+      "source_section": "Definition",
+      "quote": "Let $(\\Theta,\\mathcal T)$ have a supplied posterior probability kernel $\\Pi_y$, let $(\\mathsf A,\\mathcal G)$ be a measurable action space, and let $L:\\Theta\\times\\mathsf A\\to[0,\\infty]$ be a measurable function on the product measurable space [[def-product-sigma-algebra-and-finite-product-sigma-algebras]], in the sense of [[def-measurable-function-between-measurable-spaces]]. This strengthens the section-measurability convention in [[def-loss-function-and-risk]] so that posterior integrals vary measurably with measurable action rules.\n\nFor a fixed data fiber $y$ and action $a$, define the **posterior risk** only when\n$$\\rho_y(a):=\\int_\\Theta L(\\theta,a)\\,\\Pi_y(d\\theta)<\\infty.$$\nA **pointwise Bayes action** at $y$ is a finite-risk action attaining the minimum among all finite-risk actions. On a declared measurable data domain $D$, a **Bayes action rule** is a measurable map $\\delta:D\\to\\mathsf A$ whose finite posterior risk attains that minimum at every $y\\in D$. This definition makes no assertion that finite-risk actions or measurable minimizing rules always exist. It therefore does not infer a Bayes action merely from the existence of an infimum. The sampling risk in [[def-loss-function-and-risk]] is a different integral, taken over the data law at a fixed parameter.",
+      "uses": [
+        "1.1",
+        "2.1"
+      ]
+    },
+    {
+      "fact": "F2",
+      "source": "def-measure-kernel-and-probability-kernel",
+      "source_section": "Definition",
+      "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+      "uses": [
+        "1.1"
+      ]
+    }
+  ],
+  "derivations": [
+    {
+      "id": "step-1-1",
+      "step": "1.1",
+      "claim": "For $j=1,\\ldots,k$, put $p_j(y)=\\Pi_y(\\{j\\})$. By [F2], every $p_j$ is measurable. The zero\u2013one posterior risk of action $j$ is $\\rho_y(j)=\\sum_{\\ell\\ne j}p_\\ell(y)=1-p_j(y).$ Thus the risk is minimized exactly by maximizing $p_j(y)$.",
+      "inputs": [
+        "given",
+        "F1",
+        "F2",
+        "algebra"
+      ]
+    },
+    {
+      "id": "step-2-1",
+      "step": "2.1",
+      "claim": "Since $k\\ge1$ is finite, the nonempty finite list $p_1(y),\\ldots,p_k(y)$ has a maximum. Define $j^*(y)$ to be the least index attaining it. For each $j$, $\\{y:j^*(y)=j\\}=\\bigcap_{\\ell>j}\\{y:p_j(y)\\ge p_\\ell(y)\\}\\ \\cap\\ \\bigcap_{\\ell<j}\\{y:p_j(y)>p_\\ell(y)\\}.$ Both intersections are finite, and each set is measurable because the $p_\\ell$ are measurable; hence $j^*$ is measurable. Its risk is finite and it attains the pointwise minimum from step 1.1, so [F1] makes it a Bayes action rule. Choosing the least maximizing index uses only the displayed finite order, not AC.",
+      "inputs": [
+        "given",
+        "F1",
+        "step 1.1",
+        "algebra"
+      ]
+    }
+  ],
+  "routine_steps": [],
+  "boundaries": [
+    {
+      "case": "empty",
+      "status": "checked",
+      "evidence": "Statement requires k>=1; proof step 2.1 uses a nonempty finite list to ensure a maximum. For its least-index formula, either finite comparison intersection may be empty and then equals the whole data space."
+    },
+    {
+      "case": "zero",
+      "status": "checked",
+      "evidence": "Proof step 1.1 gives zero risk when p_j=1. A class of posterior mass zero has risk one and cannot be maximal because the nonempty class masses sum to one."
+    },
+    {
+      "case": "one",
+      "status": "checked",
+      "evidence": "Step 2.1 includes k=1; the sole class has posterior mass one and is the unique action."
+    },
+    {
+      "case": "degenerate",
+      "status": "checked",
+      "evidence": "Steps 1.1\u20132.1 cover posterior mass one on a single class."
+    },
+    {
+      "case": "endpoints",
+      "status": "checked",
+      "evidence": "Proof step 1.1 permits p_j=0 or p_j=1 and yields risk 1 or 0, respectively; step 2.1 handles tied maximal masses through strict comparisons only against earlier indices."
+    },
+    {
+      "case": "nonempty-choice",
+      "status": "checked",
+      "evidence": "Step 2.1 uses the least index among finitely many maximizers, so no choice axiom is needed."
+    },
+    {
+      "case": "iff-forward",
+      "status": "checked",
+      "evidence": "Step 1.1 gives risk(j)=1-p_j, so a posterior-mass maximizer minimizes risk."
+    },
+    {
+      "case": "iff-reverse",
+      "status": "checked",
+      "evidence": "Step 1.1 gives risk(j)=1-p_j, so every risk minimizer maximizes posterior mass."
+    }
+  ],
+  "finite_checks": [],
+  "finite_smoke": [],
+  "supplier_interfaces": [
+    {
+      "supplier": "thm-measurability-of-integration-against-a-kernel",
+      "status": "verified",
+      "source_section": "Statement",
+      "excerpt": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+      "evidence": "Current supplier section read for its interface and hypotheses; this records no independent acceptance."
+    }
+  ],
+  "risk_review": {
+    "status": "open",
+    "notes": "Initial authoring contract. Independent mathematical review remains pending."
+  }
+}

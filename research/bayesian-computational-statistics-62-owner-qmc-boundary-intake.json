@@ -1,0 +1,370 @@
+{
+  "version": 1,
+  "kind": "focused-owner-prerequisite-intake",
+  "run": "bayesian-computational-statistics-62",
+  "batch": 59,
+  "supplier_batch": 57,
+  "cycle": 1,
+  "observed_at": "2026-10-15T05:24:52.304921+00:00",
+  "scope": "Exact missing four supplier57 carriers/page-context boundary and14 QMC logical-import inventory; no broad QMC proof audit or recursive upstream-page review.",
+  "native_dispatches": {
+    "57": {
+      "stage": "1-scaffold",
+      "role": "beta",
+      "label": "batch-57",
+      "covers": [
+        "57"
+      ],
+      "attempt": 2,
+      "attempts": 2,
+      "startedAt": "2026-10-15T04:33:56.513Z",
+      "endedAt": "2026-10-15T05:13:37.522Z",
+      "lastExitOk": true
+    },
+    "59": {
+      "stage": "1-scaffold",
+      "role": "beta",
+      "label": "batch-59",
+      "covers": [
+        "59"
+      ],
+      "attempt": 2,
+      "attempts": 2,
+      "startedAt": "2026-10-15T04:33:57.050Z",
+      "endedAt": "2026-10-15T05:23:42.033Z",
+      "lastExitOk": true
+    }
+  },
+  "status": "reported-missing-carriers-superseded-current-page-context-compatible-root-final-binding-pending",
+  "final_acceptance": false,
+  "supplier_page_path": "library/bayesian-computational-statistics/statistical-and-computational-error-accounting.md",
+  "supplier_page_excerpt": "---\npage: statistical-and-computational-error-accounting\ntitle: \"Statistical, resampling, simulation, and numerical error ledger\"\nstatus: draft\nitems:\n  - def-statistical-and-computational-error-ledger\n  - thm-pathwise-error-ledger-decomposition\n  - thm-error-ledger-mse-covariance-identity\n  - thm-independent-replicate-variance-estimator\n  - cor-independent-replicate-mean-clt\nexamples: []\n---\n\n## Summary\n\nFor a scalar analysis, name the exact target and every successive reference target before assigning error labels. The pathwise error is the sum of the signed differences between adjacent targets, including the final floating-point difference. The mean square of a sum equals the sum of component variances plus a squared-total-bias and covariance correction; equality with the variance sum depends on this combined correction. When total bias is zero, pairwise independence is sufficient for adding variances. The companion correlated-error example shows that centering alone does not remove covariance terms. Independent replicate variance estimates computation-randomization variability for the fixed data and rule. It does not estimate data-sampling uncertainty. A replicate CLT is stated as a separate AC-dependent corollary. Floating-point bounds require their operationwise normal-range and conditioning hypotheses.\n\nThe companion examples calculate bootstrap finite-B error, permutation p-value resolution, Euler discretization bias versus path-to-path variance, randomized-QMC replicate variability, and dot-product roundoff.\n",
+  "supplier_definition_excerpt": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space as in [[def-probability-measure]], let $\\theta\\in\\mathbb R$ be a fixed target, and let $m\\in\\mathbb N\\cup\\{0\\}$. Take $r_1,\\ldots,r_m$ and $\\widetilde r$ to be real random variables on this space, meaning measurable maps $(\\Omega,\\mathcal F)\\to(\\mathbb R,\\mathcal B(\\mathbb R))$ as in [[def-random-element-and-real-random-variable]]. Set $r_0(\\omega):=\\theta$ for every $\\omega\\in\\Omega$. Deterministic values are included by using a one-point probability space. The reference chain $r_0,r_1,\\ldots,r_m$ must put every quantity on the same scale and state which ideal analysis stage each transition represents. Define the signed stage errors pointwise by\n$$e_j:=r_j-r_{j-1}\\qquad(1\\le j\\le m)$$\nand the final numerical error\n$$e_{\\mathrm{fp}}:=\\widetilde r-r_m.$$\n\nEach error is measurable because finite sums and differences of measurable real-valued functions are measurable ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\nWhen the stages are present, $e_1$ may record data-sampling error, a later transition may record a bootstrap or permutation approximation, a discretized target may record numerical-model bias, and a finite simulation may record computation-randomization error. The labels describe the declared adjacent references; they do not by themselves assert that errors are independent, centered, unbiased, or even random. If a stage is absent, omit it or set its two adjacent references equal. If no floating-point computation is involved, set $\\widetilde r=r_m$.\n\nFor a probability statement about these errors, the required joint probability law and any conditioning convention must also be specified. For example, fixing the observed data and varying independent randomizations concerns computation error conditional on those data; it does not include variation across new data samples. A deterministic quadrature rule has no replicate-based error estimate unless an actual randomization is added. Any numerical roundoff bound must state its arithmetic and normal-range hypotheses.",
+  "formerly_missing_suppliers": [
+    {
+      "id": "thm-pathwise-error-ledger-decomposition",
+      "path": "items/thm-pathwise-error-ledger-decomposition.md",
+      "exists": true,
+      "exact_statement": "Let $\\theta=r_0,r_1,\\ldots,r_m,\\widetilde r$ be the finite scalar reference chain and returned value of [[def-statistical-and-computational-error-ledger]], with $m\\ge0$. Then, pointwise,\n$$\\widetilde r-\\theta=\\sum_{j=1}^{m}(r_j-r_{j-1})+(\\widetilde r-r_m),$$\nand consequently\n$$|\\widetilde r-\\theta|\\le\\sum_{j=1}^{m}|r_j-r_{j-1}|+|\\widetilde r-r_m|.$$\nThe sum is empty when $m=0$. No independence, unbiasedness, or distributional assumption is needed.",
+      "exact_proof": "1.1 By [F1], the finite sum telescopes: $\\sum_{j=1}^{m}(r_j-r_{j-1})=r_m-r_0$; for $m=0$ both sides are $0$. [given, F1, algebra]\n\n2.1 Adding $\\widetilde r-r_m$ to the equality in step 1.1 and using $r_0=\\theta$ gives $\\widetilde r-\\theta=\\sum_{j=1}^{m}(r_j-r_{j-1})+(\\widetilde r-r_m)$. [step 1.1, F1, algebra]\n\n3.1 Apply the triangle inequality to the finite sum in step 2.1 to obtain the absolute-error bound. [step 2.1, algebra] ∎"
+    },
+    {
+      "id": "thm-error-ledger-mse-covariance-identity",
+      "path": "items/thm-error-ledger-mse-covariance-identity.md",
+      "exists": true,
+      "exact_statement": "Let $E_1,\\ldots,E_m$ be square-integrable real random variables on one probability space, where $m\\ge1$. Write $b_j=\\mathbb E E_j$. Then\n$$\\mathbb E\\left[\\left(\\sum_{j=1}^{m}E_j\\right)^2\\right]=\\left(\\sum_{j=1}^{m}b_j\\right)^2+\\sum_{j=1}^{m}\\operatorname{Var}(E_j)+2\\sum_{1\\le j<k\\le m}\\operatorname{Cov}(E_j,E_k).$$\nThe correction to the sum of component variances is exactly $(\\sum_j b_j)^2+2\\sum_{j<k}\\operatorname{Cov}(E_j,E_k)$. Thus the mean square equals the sum of component variances exactly when this combined correction is zero. In particular, if the total bias is zero, pairwise independence suffices.",
+      "exact_proof": "1.1 Since $|E_j|\\le 1+E_j^2$ and $\\mathbb E E_j^2<\\infty$, each $E_j$ is integrable. For $S=\\sum_{j=1}^{m}E_j$, [F2] gives $\\mathbb E S=\\sum_{j=1}^{m}b_j$. [given, F2, algebra]\n\n2.1 Put $C_j=E_j-b_j$. By step 1.1, $S-\\mathbb E S=\\sum_{j=1}^{m}C_j$. [step 1.1, algebra]\n\n3.1 Expanding the finite square gives $(S-\\mathbb E S)^2=\\sum_j C_j^2+2\\sum_{j<k}C_jC_k$. Each cross product is integrable because $2|C_jC_k|\\le C_j^2+C_k^2$. [step 2.1, algebra]\n\n4.1 Taking expectations in step 3.1, using [F2] and [F1], yields $\\operatorname{Var}(S)=\\sum_j\\operatorname{Var}(E_j)+2\\sum_{j<k}\\operatorname{Cov}(E_j,E_k)$. [step 3.1, F1, F2]\n\n5.1 Since $\\mathbb E(S-\\mathbb E S)=0$, expansion of $S^2=((S-\\mathbb E S)+\\mathbb E S)^2$ gives $\\mathbb E S^2=\\operatorname{Var}(S)+(\\mathbb E S)^2$; substitute step 4.1 and step 1.1 to obtain the stated formula. Subtracting $\\sum_j\\operatorname{Var}(E_j)$ shows that equality with the variance sum holds exactly when $(\\sum_j b_j)^2+2\\sum_{j<k}\\operatorname{Cov}(E_j,E_k)=0$. [step 1.1, step 4.1, F1, algebra]\n\n6.1 In the pairwise-independent case, apply [F3] to the coordinate functions $x\\mapsto x-b_j$ and $y\\mapsto y-b_k$; their means are zero, so every covariance in step 5.1 is zero. If all components are also centered, the squared-total-bias term is zero as well. [given, F3, step 5.1, algebra] ∎"
+    },
+    {
+      "id": "thm-independent-replicate-variance-estimator",
+      "path": "items/thm-independent-replicate-variance-estimator.md",
+      "exists": true,
+      "exact_statement": "Let $Z_1,\\ldots,Z_R$ be IID real random variables with mean $\\mu$ and finite variance $\\tau^2$, where $R\\ge2$, and let $\\overline Z_R=R^{-1}\\sum_{r=1}^{R}Z_r$. Then\n$$\n\\widehat V_R:=\\frac{1}{R(R-1)}\\sum_{r=1}^{R}(Z_r-\\overline Z_R)^2\n$$\nis unbiased for $\\operatorname{Var}(\\overline Z_R)=\\tau^2/R$. The probability law may be the computation-randomization law conditional on fixed observed data; in that use, this estimate concerns computation variability only.",
+      "exact_proof": "1.1 By [F3] and the given moment assumptions, every $Z_r$ has $\\mathbb E Z_r=\\mu$ and $\\mathbb E Z_r^2=\\mu^2+\\tau^2$. [given, F1, F3, algebra]\n\n1.2 For $r\\ne s$, independence and [F2] give $\\mathbb E[Z_rZ_s]=\\mathbb E Z_r\\,\\mathbb E Z_s=\\mu^2$. [given, F2, F3]\n\n1.3 Expanding the finite square gives $\\sum_r(Z_r-\\overline Z_R)^2=\\sum_r Z_r^2-R\\overline Z_R^2$, since $\\sum_r Z_r=R\\overline Z_R$. [given, algebra]\n\n2.1 Expanding $\\overline Z_R^2$ and using steps 1.1–1.2 gives $\\mathbb E[\\overline Z_R^2]=R^{-2}\\{R(\\mu^2+\\tau^2)+R(R-1)\\mu^2\\}=\\mu^2+\\tau^2/R$; hence $\\operatorname{Var}(\\overline Z_R)=\\tau^2/R$. [step 1.1, step 1.2, F1, algebra]\n\n3.1 Taking expectations in step 1.3 and using steps 1.1 and 2.1 gives $\\mathbb E\\sum_r(Z_r-\\overline Z_R)^2=R(\\mu^2+\\tau^2)-R(\\mu^2+\\tau^2/R)=(R-1)\\tau^2$. [step 1.1, step 1.3, step 2.1, algebra]\n\n4.1 Divide step 3.1 by $R(R-1)$ to obtain $\\mathbb E\\widehat V_R=\\tau^2/R=\\operatorname{Var}(\\overline Z_R)$, as required. [step 3.1, step 2.1, algebra] ∎"
+    },
+    {
+      "id": "cor-independent-replicate-mean-clt",
+      "path": "items/cor-independent-replicate-mean-clt.md",
+      "exists": true,
+      "exact_statement": "Assume AC. Let $(Z_r)_{r\\ge1}$ be IID real computation-replicate outputs with mean $\\mu$ and variance $0<\\tau^2<\\infty$. Then, as $R\\to\\infty$,\n$$\\frac{\\sqrt R(\\overline Z_R-\\mu)}{\\tau}\\Rightarrow N(0,1),\\qquad\\overline Z_R:=\\frac1R\\sum_{r=1}^{R}Z_r.$$\nThis is a limit for the replicate-randomization law under the stated fixed-target setup; it is not a data-sampling confidence statement and does not by itself justify a finite-$R$ Student interval.",
+      "exact_proof": "1.1 The normalized replicate average is $\\sqrt R(\\overline Z_R-\\mu)/\\tau=(\\sum_{r=1}^{R}Z_r-R\\mu)/(\\tau\\sqrt R)$, the normalized sum in the Lindeberg–Levy theorem. [given, F1, F2, algebra]\n\n2.1 Under [A1], apply [F3] to the IID sequence in step 1.1 to obtain the asserted convergence in distribution. [given, A1, F3, step 1.1] ∎"
+    }
+  ],
+  "consumer_count": 14,
+  "consumer_dispositions": [
+    {
+      "id": "def-star-discrepancy-and-digital-net",
+      "path": "items/def-star-discrepancy-and-digital-net.md",
+      "page": "quasi-monte-carlo-discrepancy-and-rules",
+      "disposition": "no-logical-supplier57-import-observed",
+      "manifest_supplier57_imports": [],
+      "source_supplier57_wikilinks": [],
+      "contract_supplier57_imports": [],
+      "contract_present": true,
+      "exact_interface_excerpt": "Fix an integer dimension $d\\ge1$. A point multiset is a finite ordered list $P=(x_0,\\ldots,x_{N-1})$ with $N\\ge1$ and $x_i=(x_{i1},\\ldots,x_{id})\\in[0,1)^d$; repeated points are counted with their multiplicities. For $u=(u_1,\\ldots,u_d)\\in[0,1]^d$, its anchored half-open box and its volume are\n$$B(u):=\\prod_{j=1}^d[0,u_j),\\qquad \\operatorname{vol}(B(u)):=\\prod_{j=1}^d u_j.$$\nThe **star discrepancy** of $P$ is\n$$D_N^*(P):=\\sup_{u\\in[0,1]^d}\\left|\\frac1N\\sum_{i=0}^{N-1}\\mathbf 1_{B(u)}(x_i)-\\prod_{j=1}^d u_j\\right|.$$\nAn infinite sequence $(x_n)_{n\\ge0}$ in $[0,1)^d$ is **uniformly distributed** if $D_N^*(x_0,\\ldots,x_{N-1})\\to0$ as $N\\to\\infty$.\nFor a bounded Riemann-integrable $f:[0,1]^d\\to\\mathbb R$, the **cube integral** and the point-set **cube quadrature** are\n$$I_d(f):=\\int_{[0,1]^d}f(x)\\,dx,\\qquad Q_P(f):=\\frac1N\\sum_{i=0}^{N-1}f(x_i),$$\nwhere $I_d$ is the Riemann integral of [[def-multidimensional-darboux-integral]]. No randomness is part of $Q_P$.\n\nLet $b\\ge2$ be an integer. A **base-$b$ elementary interval** in dimension $d$ is\n$$E=\\prod_{j=1}^d[a_jb^{-k_j},(a_j+1)b^{-k_j}),$$\nwhere each $k_j\\ge0$ and each $a_j$ is an integer with $0\\le a_j<b^{k_j}$. For integers $m\\ge0$ and $0\\le t\\le m$, a point multiset $P$ is a **$(t,m,d)$-net in base $b$** if it has $b^m$ entries and every base-$b$ elementary interval with $\\sum_{j=1}^d k_j=m-t$ contains exactly $b^t$ entries, counted with multiplicity. A sequence $(x_n)_{n\\ge0}$ in $[0,1)^d$ is a **$(t,d)$-sequence in base $b$** if for every $m\\ge t$ and $k\\ge0$, the aligned block $(x_{kb^m},\\ldots,x_{(k+1)b^m-1})$ is a $(t,m,d)$-net.\n\nFor a prime $p$, a **digital point set** in base $p$ is generated from matrices $C_1,\\ldots,C_d\\in\\mathbb F_p^{m\\times m}$ as follows. For each $n\\in\\{0,\\ldots,p^m-1\\}$, write $n=\\sum_{r=1}^m n_{r-1}p^{r-1}$ with digits $n_{r-1}\\in\\{0,\\ldots,p-1\\}$, let $v(n)=(n_0,\\ldots,n_{m-1})^T\\in\\mathbb F_p^m$, and compute $y^{(j)}=C_jv(n)$ in $\\mathbb F_p^m$. Taking the representatives $y^{(j)}_r\\in\\{0,\\ldots,p-1\\}$, set\n$$x_{n,j}:=\\sum_{r=1}^m y^{(j)}_r p^{-r}.$$\nIt is a **digital $(t,m,d)$-net** only if this generated point multiset also satisfies the stated $(t,m,d)$-net counting condition; arbitrary generator matrices need not do so. A **digital sequence** is generated by infinite matrices $C_j=(c^{(j)}_{r,k})_{r,k\\ge1}$ over $\\mathbb F_p$ by applying the same digit rule to the finite base-$p$ expansion of each $n\\ge0$ and summing the resulting output digits as $\\sum_{r\\ge1}y_{r,j}(n)p^{-r}$; the resulting points are required to lie in $[0,1)^d$. It is a digital $(t,d)$-sequence when it also satisfies the aligned-block net condition above. No discrepancy rate follows from these definitions alone.",
+      "proof_interface_sources": [],
+      "reason": "Current manifest, source links and contract citations use only local QMC and existing mathematical interfaces; no supplier57 result is logical input."
+    },
+    {
+      "id": "def-hardykrause-variation",
+      "path": "items/def-hardykrause-variation.md",
+      "page": "quasi-monte-carlo-discrepancy-and-rules",
+      "disposition": "no-logical-supplier57-import-observed",
+      "manifest_supplier57_imports": [],
+      "source_supplier57_wikilinks": [],
+      "contract_supplier57_imports": [],
+      "contract_present": true,
+      "exact_interface_excerpt": "Fix $d\\ge1$ and a real function $f:[0,1]^d\\to\\mathbb R$. For each nonempty coordinate subset $u\\subseteq\\{1,\\ldots,d\\}$, restrict $f$ to the face adjacent to the all-ones corner by setting\n$$f_u(x_u):=f(z),\\qquad z_j=\\begin{cases}x_j,&j\\in u,\\\\1,&j\\notin u.\\end{cases}$$\nFor a finite coordinate grid on $[0,1]^{|u|}$, write its cells as $R_k=\\prod_{j\\in u}[t_{j,k_j},t_{j,k_j+1}]$. For a cell with lower and upper vertices $a,b$, define its alternating increment\n$$\\Delta(f_u;R_k):=\\sum_{\\epsilon\\in\\{0,1\\}^{|u|}}(-1)^{|u|-|\\epsilon|}f_u(z_\\epsilon),$$\nwhere $(z_\\epsilon)_j=a_j$ if $\\epsilon_j=0$ and $(z_\\epsilon)_j=b_j$ if $\\epsilon_j=1$. The **Vitali variation** of $f_u$ is\n$$V_V(f_u):=\\sup_{\\text{finite coordinate grids on }[0,1]^{|u|}}\\ \\sum_k|\\Delta(f_u;R_k)|.$$\nThe **Hardy–Krause variation anchored at the upper corner** is\n$$V_{HK,1}(f):=\\sum_{\\emptyset\\ne u\\subseteq\\{1,\\ldots,d\\}}V_V(f_u),$$\nwith value $+infty$ if any summand is infinite. For $d=1$ this is the ordinary total variation on $[0,1]$. The anchor is part of the convention: every coordinate outside $u$ is fixed at $1$. The smooth mixed-derivative formula for this convention is proved separately for $C^d$ functions.\n\nThe same Vitali-variation definition applies on a nondegenerate rectangle\n$R=\\prod_{j=1}^q[a_j,b_j]$: each coordinate grid starts at $a_j$ and ends at\n$b_j$. For a subrectangle $R\\subseteq[0,1]^d$, write $V_{HK,1}(f;R)$ for the\nsum of the Vitali variations of its face restrictions with complementary\ncoordinates fixed at the upper endpoints of $R$. If a varied side has length\nzero, that face's Vitali variation is defined to be zero. For $R=[0,1]^d$ this\nnotation is exactly $V_{HK,1}(f)$.",
+      "proof_interface_sources": [],
+      "reason": "Current manifest, source links and contract citations use only local QMC and existing mathematical interfaces; no supplier57 result is logical input."
+    },
+    {
+      "id": "lem-bounded-coordinatewise-monotone-is-riemann-integrable",
+      "path": "items/lem-bounded-coordinatewise-monotone-is-riemann-integrable.md",
+      "page": "quasi-monte-carlo-discrepancy-and-rules",
+      "disposition": "no-logical-supplier57-import-observed",
+      "manifest_supplier57_imports": [],
+      "source_supplier57_wikilinks": [],
+      "contract_supplier57_imports": [],
+      "contract_present": true,
+      "exact_interface_excerpt": "Let $d\\ge1$ and let $h:[0,1]^d\\to\\mathbb R$ be bounded and nondecreasing in\neach coordinate while the other coordinates are fixed. Then $h$ is Riemann\nintegrable on $[0,1]^d$.",
+      "proof_interface_sources": [
+        "def-multidimensional-grid-partition",
+        "def-multidimensional-rectangle-and-volume",
+        "def-multidimensional-darboux-sums",
+        "thm-multidimensional-riemann-criterion",
+        "cor-archimedean-reciprocal"
+      ],
+      "reason": "Current manifest, source links and contract citations use only local QMC and existing mathematical interfaces; no supplier57 result is logical input."
+    },
+    {
+      "id": "def-hardykrause-variation-lower-anchor",
+      "path": "items/def-hardykrause-variation-lower-anchor.md",
+      "page": "quasi-monte-carlo-discrepancy-and-rules",
+      "disposition": "no-logical-supplier57-import-observed",
+      "manifest_supplier57_imports": [],
+      "source_supplier57_wikilinks": [],
+      "contract_supplier57_imports": [],
+      "contract_present": true,
+      "exact_interface_excerpt": "Let $f:[0,1]^d\\to\\mathbb R$ and let $R=\\prod_{j=1}^d[a_j,b_j]\\subseteq[0,1]^d$\nbe a closed axis-parallel rectangle, allowing zero side lengths. For each\nnonempty subset $u\\subseteq\\{1,\\ldots,d\\}$, define the lower-face restriction\n$$f_{u,0,R}(x_u):=f(z),\\qquad z_j=\\begin{cases}x_j,&j\\in u,\\\\a_j,&j\\notin u.\\end{cases}$$\nIf every side indexed by $u$ is nondegenerate, its Vitali variation on\n$\\prod_{j\\in u}[a_j,b_j]$ is the supremum of the sums of absolute alternating\nincrements over finite product grids on that rectangle, using the convention\nof [[def-hardykrause-variation]]. If any side indexed by $u$ has length zero,\nthat term is defined to be zero. The **Hardy–Krause variation on $R$ anchored\nat its lower corner** is\n$$V_{HK,0}(f;R):=\\sum_{\\emptyset\\ne u\\subseteq\\{1,\\ldots,d\\}}V_V(f_{u,0,R};\\prod_{j\\in u}[a_j,b_j]),$$\nwith value $+\\infty$ if any summand is infinite. Write\n$V_{HK,0}(f):=V_{HK,0}(f;[0,1]^d)$. The lower anchor fixes every complementary\ncoordinate at the lower endpoint of $R$; this auxiliary convention is distinct\nfrom the upper anchor used in [[def-hardykrause-variation]].",
+      "proof_interface_sources": [],
+      "reason": "Current manifest, source links and contract citations use only local QMC and existing mathematical interfaces; no supplier57 result is logical input."
+    },
+    {
+      "id": "alg-digital-net-and-lattice-rule",
+      "path": "items/alg-digital-net-and-lattice-rule.md",
+      "page": "quasi-monte-carlo-discrepancy-and-rules",
+      "disposition": "no-logical-supplier57-import-observed",
+      "manifest_supplier57_imports": [],
+      "source_supplier57_wikilinks": [],
+      "contract_supplier57_imports": [],
+      "contract_present": true,
+      "exact_interface_excerpt": "**Inputs:** a dimension $d\\ge1$, a real-valued integrand $f$ that is finite at each generated node, and exactly one of the following point-set specifications:\n\n1. **Digital branch:** a prime $p$, an integer $m\\ge1$, and matrices $C_1,\\ldots,C_d\\in\\mathbb F_p^{m\\times m}$. Optionally supply an integer $t$ with $0\\le t\\le m$ when the caller also wants the exact $(t,m,d)$-net property checked.\n2. **General lattice-rule branch:** a full-rank discrete additive subgroup $L\\subset\\mathbb R^d$ containing $\\mathbb Z^d$, with finite quotient $L/\\mathbb Z^d$, and a supplied complete list $P$ of the distinct coset representatives in $[0,1)^d$.\n3. **Rank-one lattice branch:** an integer $N\\ge1$ and $z=(z_1,\\ldots,z_d)\\in\\mathbb Z^d$ with $\\gcd(z_1,N)=1$.\n\nA lattice rule means the equal-weight rule on the representatives of an integration lattice $L$ as in branch 2; its node count is $N=|L/\\mathbb Z^d|$. Branch 3 is the rank-one specialization with $L=\\mathbb Z^d+\\mathbb Z(z/N)$ and $N$ distinct nodes.\n\n**Instructions:**\n\n1. In the digital branch, for each $n=0,\\ldots,p^m-1$, write $n=\\sum_{r=1}^m n_{r-1}p^{r-1}$, form $v(n)=(n_0,\\ldots,n_{m-1})^T\\in\\mathbb F_p^m$, and compute $y^{(j)}=C_jv(n)$ in $\\mathbb F_p^m$. Replace each coordinate $y^{(j)}_r$ by its representative in $\\{0,\\ldots,p-1\\}$ and set $x_{n,j}=\\sum_{r=1}^m y^{(j)}_r p^{-r}$. The output point list is $P=(x_0,\\ldots,x_{p^m-1})$. If $t$ was supplied, enumerate every integer tuple $k_1,\\ldots,k_d\\ge0$ with $\\sum_jk_j=m-t$ and every tuple $a_j\\in\\{0,\\ldots,p^{k_j}-1\\}$; count the output nodes in each corresponding elementary interval. Return “net check passed” exactly when every count equals $p^t$, and otherwise return “not a $(t,m,d)$-net.”\n2. In the general lattice-rule branch, take the supplied complete list $P$ of representatives; do not add further points or repeat any coset representative.\n3. In the rank-one lattice branch, for each $n=0,\\ldots,N-1$, set $x_{n,j}=\\{nz_j/N\\}$ for $j=1,\\ldots,d$, where $\\{a\\}:=a-\\lfloor a\\rfloor\\in[0,1)$. The output point list is $P=(x_0,\\ldots,x_{N-1})$. If two first coordinates agree, then $N\\mid z_1(n-n')$; since $\\gcd(z_1,N)=1$, $N\\mid(n-n')$, and the index range forces $n=n'$. Equivalently, the coset of $z/N$ has order exactly $N$ in $(\\mathbb R^d/\\mathbb Z^d)$, so these are the $N$ distinct nodes of the rank-one lattice rule.\n4. In each branch, let $N$ be the output list length and return the deterministic cube quadrature $Q_P(f)=N^{-1}\\sum_{n=0}^{N-1}f(x_n)$. In the digital branch $N=p^m$; in the general lattice branch $N=|L/\\mathbb Z^d|$. If $f$ is bounded and Riemann integrable, its target is the cube integral $I_d(f)$ of [[def-star-discrepancy-and-digital-net]]. The algorithm does not estimate a discrepancy, a variation, or a sampling variance, and a generated digital point set has no claimed net quality unless the optional count check passes.",
+      "proof_interface_sources": [],
+      "reason": "Current manifest, source links and contract citations use only local QMC and existing mathematical interfaces; no supplier57 result is logical input."
+    },
+    {
+      "id": "lem-hk-smooth-mixed-derivative-formula",
+      "path": "items/lem-hk-smooth-mixed-derivative-formula.md",
+      "page": "quasi-monte-carlo-discrepancy-and-rules",
+      "disposition": "no-logical-supplier57-import-observed",
+      "manifest_supplier57_imports": [],
+      "source_supplier57_wikilinks": [],
+      "contract_supplier57_imports": [],
+      "contract_present": true,
+      "exact_interface_excerpt": "Let $d\\ge1$ and let $f:[0,1]^d\\to\\mathbb R$ be the continuous extension to the closed cube of a function on $(0,1)^d$ whose mixed partial derivatives of every order at most $d$ exist and extend continuously to $[0,1]^d$. This is the $C^d$ hypothesis here, including agreement of the boundary values of $f$ with its order-zero extension. For $u=\\{j_1<\\cdots<j_q\\}$, write $\\partial_u f$ for the iterated derivative $\\partial_{j_q}\\cdots\\partial_{j_1}f$, interpreted on the closed cube by its continuous extension. For each nonempty $u$, let $f_u(x_u)=f(x_u;1_{-u})$ be the restriction to the face adjacent to the upper corner. Then\n$$V_{HK,1}(f)=\\sum_{\\emptyset\\ne u\\subseteq\\{1,\\ldots,d\\}}\\int_{[0,1]^{|u|}}\\left|\\partial_u f(x_u;1_{-u})\\right|\\,dx_u,$$\nwhere $V_{HK,1}$ is the upper-anchor variation of [[def-hardykrause-variation]], and $\\partial_u$ differentiates once in each coordinate in $u$.",
+      "proof_interface_sources": [
+        "def-hardykrause-variation",
+        "thm-newton-leibniz-with-interior-derivative",
+        "thm-heine-borel-rn",
+        "thm-heine-cantor-metric",
+        "lem-p-norms-are-norms-and-induce-the-published-metrics",
+        "thm-continuous-on-a-rectangle-is-riemann-integrable",
+        "thm-riemann-fubini-on-product-rectangles",
+        "thm-multidimensional-integral-properties",
+        "def-multidimensional-darboux-integral",
+        "def-multidimensional-rectangle-and-volume",
+        "thm-multidimensional-darboux-equals-riemann",
+        "cor-archimedean-reciprocal",
+        "thm-reals-ordered-field",
+        "cor-of-reverse-triangle"
+      ],
+      "reason": "Current manifest, source links and contract citations use only local QMC and existing mathematical interfaces; no supplier57 result is logical input."
+    },
+    {
+      "id": "lem-anchored-box-summation-by-parts-hk-variation",
+      "path": "items/lem-anchored-box-summation-by-parts-hk-variation.md",
+      "page": "quasi-monte-carlo-discrepancy-and-rules",
+      "disposition": "no-logical-supplier57-import-observed",
+      "manifest_supplier57_imports": [],
+      "source_supplier57_wikilinks": [],
+      "contract_supplier57_imports": [],
+      "contract_present": true,
+      "exact_interface_excerpt": "Let $P=(x_0,\\ldots,x_{N-1})$ be any point multiset in $[0,1)^d$, and let $f:[0,1]^d\\to\\mathbb R$ have finite upper-anchor Hardy–Krause variation. Let $G$ be a finite coordinate grid containing every coordinate of every point of $P$, with knots $0=t_{j,0}<\\cdots<t_{j,m_j}=1$. Its lower-corner Riemann sum is\n$$C_k:=\\prod_{j=1}^d[t_{j,k_j},t_{j,k_j+1}],\\qquad S_G(f):=\\sum_{0\\le k_j<m_j} f(t_{1,k_1},\\ldots,t_{d,k_d})\\operatorname{vol}(C_k),$$\nwhere the cells and volume convention are those of [[def-multidimensional-grid-partition]] and [[def-multidimensional-rectangle-and-volume]], and $S_G$ is the lower-corner tagged Riemann sum of [[def-multidimensional-tagged-partition-and-riemann-sum]].\nThen $\\left|Q_P(f)-S_G(f)\\right|\\le D_N^*(P)V_{HK,1}(f)$, with the quadrature and star discrepancy of [[def-star-discrepancy-and-digital-net]] and the variation of [[def-hardykrause-variation]].",
+      "proof_interface_sources": [
+        "def-star-discrepancy-and-digital-net",
+        "def-hardykrause-variation",
+        "def-multidimensional-grid-partition",
+        "def-multidimensional-rectangle-and-volume",
+        "def-multidimensional-tagged-partition-and-riemann-sum"
+      ],
+      "reason": "Current manifest, source links and contract citations use only local QMC and existing mathematical interfaces; no supplier57 result is logical input."
+    },
+    {
+      "id": "thm-uniform-distribution-integrates-riemann-functions",
+      "path": "items/thm-uniform-distribution-integrates-riemann-functions.md",
+      "page": "quasi-monte-carlo-discrepancy-and-rules",
+      "disposition": "no-logical-supplier57-import-observed",
+      "manifest_supplier57_imports": [],
+      "source_supplier57_wikilinks": [],
+      "contract_supplier57_imports": [],
+      "contract_present": true,
+      "exact_interface_excerpt": "Let $(x_n)_{n\\ge0}$ be any sequence in $[0,1)^d$ such that\n$$D_N^*(x_0,\\ldots,x_{N-1})\\longrightarrow0\\qquad(N\\to\\infty).$$\nThen for every bounded Riemann-integrable $f:[0,1]^d\\to\\mathbb R$,\n$$\\frac1N\\sum_{n=0}^{N-1}f(x_n)\\longrightarrow I_d(f).$$\nHere $D_N^*$ and $I_d$ have the conventions of [[def-star-discrepancy-and-digital-net]].",
+      "proof_interface_sources": [
+        "def-star-discrepancy-and-digital-net",
+        "def-multidimensional-grid-partition",
+        "def-multidimensional-darboux-sums",
+        "thm-multidimensional-riemann-criterion"
+      ],
+      "reason": "Current manifest, source links and contract citations use only local QMC and existing mathematical interfaces; no supplier57 result is logical input."
+    },
+    {
+      "id": "lem-finite-hardykrause-variation-implies-riemann-integrability",
+      "path": "items/lem-finite-hardykrause-variation-implies-riemann-integrability.md",
+      "page": "quasi-monte-carlo-discrepancy-and-rules",
+      "disposition": "no-logical-supplier57-import-observed",
+      "manifest_supplier57_imports": [],
+      "source_supplier57_wikilinks": [],
+      "contract_supplier57_imports": [],
+      "contract_present": true,
+      "exact_interface_excerpt": "Let $d\\ge1$ and let $f:[0,1]^d\\to\\mathbb R$ have finite upper-anchor\nHardy–Krause variation $V_{HK,1}(f)$ as defined in\n[[def-hardykrause-variation]]. Then $f$ is bounded and Riemann integrable on\n$[0,1]^d$.",
+      "proof_interface_sources": [
+        "def-hardykrause-variation",
+        "def-hardykrause-variation-lower-anchor",
+        "lem-bounded-coordinatewise-monotone-is-riemann-integrable",
+        "thm-multidimensional-integral-properties",
+        "thm-multidimensional-riemann-criterion"
+      ],
+      "reason": "Current manifest, source links and contract citations use only local QMC and existing mathematical interfaces; no supplier57 result is logical input."
+    },
+    {
+      "id": "thm-koksma-hlawka-integration-bound",
+      "path": "items/thm-koksma-hlawka-integration-bound.md",
+      "page": "quasi-monte-carlo-discrepancy-and-rules",
+      "disposition": "no-logical-supplier57-import-observed",
+      "manifest_supplier57_imports": [],
+      "source_supplier57_wikilinks": [],
+      "contract_supplier57_imports": [],
+      "contract_present": true,
+      "exact_interface_excerpt": "Let $P=(x_0,\\ldots,x_{N-1})$ be any finite point multiset in $[0,1)^d$. If $f:[0,1]^d\\to\\mathbb R$ has finite Hardy–Krause variation anchored at $1$, then\n$$\\left|Q_P(f)-I_d(f)\\right|\\le D_N^*(P)V_{HK,1}(f),$$\nwhere $Q_P$, $I_d$, and $D_N^*$ use the conventions of [[def-star-discrepancy-and-digital-net]], and $V_{HK,1}$ uses the face convention of [[def-hardykrause-variation]]. The point set and integrand are otherwise arbitrary; no construction-specific rate or computability of the two factors is asserted.",
+      "proof_interface_sources": [
+        "lem-anchored-box-summation-by-parts-hk-variation",
+        "thm-multidimensional-darboux-equals-riemann",
+        "def-multidimensional-grid-partition",
+        "cor-archimedean-reciprocal",
+        "lem-finite-hardykrause-variation-implies-riemann-integrability"
+      ],
+      "reason": "Current manifest, source links and contract citations use only local QMC and existing mathematical interfaces; no supplier57 result is logical input."
+    },
+    {
+      "id": "ex-diagonal-lattice-poor-joint-projection",
+      "path": "items/ex-diagonal-lattice-poor-joint-projection.md",
+      "page": "quasi-monte-carlo-discrepancy-and-rules-examples",
+      "disposition": "no-logical-supplier57-import-observed",
+      "manifest_supplier57_imports": [],
+      "source_supplier57_wikilinks": [],
+      "contract_supplier57_imports": [],
+      "contract_present": true,
+      "exact_interface_excerpt": "Use the four-node rank-one lattice rule in dimension two with $N=4$ and $z=(1,1)$. Both one-coordinate projections are the equally spaced set $\\{0,1/4,1/2,3/4\\}$, but the two-coordinate set lies on the diagonal. It is not a $(0,2,2)$-net in base $2$, and its star discrepancy is at least $1/4$.",
+      "proof_interface_sources": [
+        "alg-digital-net-and-lattice-rule",
+        "def-star-discrepancy-and-digital-net"
+      ],
+      "reason": "Current manifest, source links and contract citations use only local QMC and existing mathematical interfaces; no supplier57 result is logical input."
+    },
+    {
+      "id": "ex-digital-net-power-of-base-size-restriction",
+      "path": "items/ex-digital-net-power-of-base-size-restriction.md",
+      "page": "quasi-monte-carlo-discrepancy-and-rules-examples",
+      "disposition": "no-logical-supplier57-import-observed",
+      "manifest_supplier57_imports": [],
+      "source_supplier57_wikilinks": [],
+      "contract_supplier57_imports": [],
+      "contract_present": true,
+      "exact_interface_excerpt": "In base $2$, a digital $(t,m,d)$-net has exactly $2^m$ nodes, so six nodes cannot form one. A six-node rank-one lattice rule is still a valid deterministic quadrature rule, and the Koksma–Hlawka inequality is stated for arbitrary finite point sets rather than only digital-net sizes.",
+      "proof_interface_sources": [
+        "def-star-discrepancy-and-digital-net",
+        "alg-digital-net-and-lattice-rule",
+        "thm-koksma-hlawka-integration-bound"
+      ],
+      "reason": "Current manifest, source links and contract citations use only local QMC and existing mathematical interfaces; no supplier57 result is logical input."
+    },
+    {
+      "id": "ex-smooth-finite-hk-integrand-koksma-hlawka",
+      "path": "items/ex-smooth-finite-hk-integrand-koksma-hlawka.md",
+      "page": "quasi-monte-carlo-discrepancy-and-rules-examples",
+      "disposition": "no-logical-supplier57-import-observed",
+      "manifest_supplier57_imports": [],
+      "source_supplier57_wikilinks": [],
+      "contract_supplier57_imports": [],
+      "contract_present": true,
+      "exact_interface_excerpt": "On $[0,1]^2$, take $f(x,y)=xy$ and the one-point set $P=((1/4,1/2))$. Then\n$$V_{HK,1}(f)=3,\\qquad D_1^*(P)=\\frac78,\\qquad \\left|Q_P(f)-I_2(f)\\right|=\\frac18,$$\nso the Koksma–Hlawka bound is valid for this smooth integrand.",
+      "proof_interface_sources": [
+        "lem-hk-smooth-mixed-derivative-formula",
+        "def-multidimensional-rectangle-and-volume",
+        "def-multidimensional-grid-partition",
+        "def-multidimensional-darboux-sums",
+        "def-multidimensional-darboux-integral",
+        "thm-continuous-on-a-rectangle-is-riemann-integrable",
+        "thm-riemann-fubini-on-product-rectangles",
+        "def-star-discrepancy-and-digital-net",
+        "thm-newton-leibniz-with-interior-derivative",
+        "thm-koksma-hlawka-integration-bound"
+      ],
+      "reason": "Current manifest, source links and contract citations use only local QMC and existing mathematical interfaces; no supplier57 result is logical input."
+    },
+    {
+      "id": "ex-inverse-cdf-integrable-singularity-infinite-variation",
+      "path": "items/ex-inverse-cdf-integrable-singularity-infinite-variation.md",
+      "page": "quasi-monte-carlo-discrepancy-and-rules-examples",
+      "disposition": "no-logical-supplier57-import-observed",
+      "manifest_supplier57_imports": [],
+      "source_supplier57_wikilinks": [],
+      "contract_supplier57_imports": [],
+      "contract_present": true,
+      "exact_interface_excerpt": "Let $U$ have the uniform law on $[0,1)$ and define $g(u)=(1-u)^{-1/2}$ for $0\\le u<1$. Extend $g$ to the closed cube by setting $g(1)=0$; this endpoint convention does not change $g(U)$. The map $g$ has distribution function $F_X(x)=0$ for $x<1$ and $F_X(x)=1-x^{-2}$ for $x\\ge1$, and satisfies $F_X(g(u))=u$ for all $0\\le u<1$ (the inverse-CDF property in this example). Its expectation is finite, but $V_{HK,1}(g)=\\infty$, so the Koksma–Hlawka bound gives no finite error guarantee for this integrand.",
+      "proof_interface_sources": [
+        "def-random-element-and-real-random-variable",
+        "def-borel-sigma-algebra",
+        "def-measurable-function-between-measurable-spaces",
+        "thm-seven-generators-of-the-borel-sigma-algebra-on-r",
+        "thm-composition-with-borel-functions-preserves-measurability",
+        "def-cumulative-distribution-function-of-a-random-variable",
+        "def-rational-power",
+        "lem-rational-power-laws",
+        "thm-of-square-roots",
+        "lem-of-square-monotone",
+        "lem-of-inverse-positive",
+        "def-ordered-field",
+        "lem-power-monotone",
+        "lem-geometric-sequence-null",
+        "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+        "thm-change-of-variables-for-expectation",
+        "cor-layer-cake-formulas-for-random-variables",
+        "thm-improper-p-test-rational",
+        "def-hardykrause-variation",
+        "thm-koksma-hlawka-integration-bound"
+      ],
+      "reason": "Deterministic QMC definition/local real-analysis or same-pair supplier; no error-ledger, replicate variance or replicate CLT premise is imported. The inverse-CDF example uses an explicit probability expectation interface, not a randomized-quadrature replicate theorem."
+    }
+  ],
+  "premise_limits": [
+    "Ledger reference targets are finite real values on the same scalar scale; pathwise telescoping needs no distributional assumption.",
+    "MSE identity assumes finitely many L2 errors on one space and retains squared total bias plus all cross covariances; independence alone without zero total bias does not remove the full correction.",
+    "Replicate variance estimator requires R>=2 IID finite-variance real outputs and concerns computation randomization at fixed data/rule.",
+    "Replicate CLT requires AC and IID positive finite variance; no finite-R Student interval or data-sampling confidence claim follows.",
+    "Deterministic quadrature has no replicate error estimate without actual randomization. QMC deterministic discrepancy/variation guarantees do not import these replicate conclusions."
+  ],
+  "minimal_new_item_edges": [],
+  "retain_page_requirement": {
+    "consumer": "quasi-monte-carlo-discrepancy-and-rules",
+    "supplier": "statistical-and-computational-error-accounting"
+  },
+  "retain_companion_requirement": {
+    "consumer": "quasi-monte-carlo-discrepancy-and-rules-examples",
+    "supplier": "quasi-monte-carlo-discrepancy-and-rules"
+  },
+  "finding": "All four carriers previously reported absent now exist. The14 current QMC manifest dependency sets, source wikilink inventories and contract citation sets contain no supplier57 logical item import. Their page prerequisite remains required context. No missing result or source rewrite is established by this escalation.",
+  "final_after_drain_steps": [
+    "Both authors are observed successfully drained now; root should recheck terminal/current state before final acceptance.",
+    "Root binds actual completed supplier/consumer and native coverage/check evidence to current hashes.",
+    "Root reconciles stale batch59 partial page-dependency metadata and14 escalated readiness records through native owner mechanism, preserving original missing-carrier observations.",
+    "Retain page requirement/companion edge, actual claims and all strict native reviews/gates. Add no unused item edges.",
+    "If intervening source changes create an actual supplier57 logical import, the second and final focused cycle must check that exact use and its premises; otherwise no broad QMC audit is triggered by this page-context hold."
+  ],
+  "source_edits": false,
+  "metadata_or_readiness_edits": false,
+  "hashes_written": false,
+  "tests_run": false,
+  "new_external_source_reading_claim": false
+}

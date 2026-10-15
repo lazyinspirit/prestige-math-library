@@ -1,0 +1,426 @@
+[
+  {
+    "order": 2084,
+    "id": "generalized-bayes-loss-updates-and-temperature",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Generalized Bayes loss updates and temperature calibration",
+    "companion": "generalized-bayes-loss-updates-and-temperature-examples",
+    "requires": [
+      "bayesian-models-priors-and-posterior-laws",
+        "posterior-propriety-and-dominated-bayes-formula"
+    ],
+    "items": [
+      {
+        "id": "def-generalized-bayes-loss-update-and-temperature",
+        "kind": "definition",
+        "title": "Generalized Bayes loss update and temperature",
+        "deps": [
+          "def-standard-borel-space",
+          "def-probability-measure",
+          "def-measure-with-density",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-exponential-is-strictly-increasing"
+        ],
+        "justified_by": [],
+        "statement": "Defines the fixed-observation loss update G_{w,pi,x}(A)=Z^{-1} int_A exp(-w ell_x) d pi for positive finite Z and fixed w>0.",
+        "strategy": "Define the loss section, temperature, normalizer, and normalized density measure without assuming a data-generating model.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "P. G. Bissiri, C. C. Holmes, and S. G. Walker, A general framework for updating belief distributions, JRSS B 78(5), 2016",
+              "url": "https://arxiv.org/pdf/1306.6430",
+              "locator": "Sections 1.1–1.2, 2.3, and 3.1–3.4; the complete relevant argument is inspected in the 32-page full-text preprint and compared with the final publisher PDF."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-countable-discrete-space-is-standard-borel",
+        "kind": "lemma",
+        "title": "A countable discrete measurable space is standard Borel",
+        "deps": [
+          "def-countable",
+          "def-sigma-algebra",
+          "def-metric-space",
+          "def-metric-ball",
+          "def-metric-topology",
+          "def-cauchy-in-metric",
+          "def-complete-metric-space",
+          "def-separable-space",
+          "def-polish-space",
+          "def-borel-sigma-algebra",
+          "def-standard-borel-space"
+        ],
+        "justified_by": [],
+        "statement": "If S is nonempty and at most countable, then (S,P(S)) is standard Borel.",
+        "strategy": "Use the discrete metric: it is complete and induces the power-set Borel sigma-algebra, while S itself is an at most countable dense subset.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "David Marker, Descriptive Set Theory, Example 1.2, course notes (Fall 2002)",
+              "url": "https://homepages.math.uic.edu/~marker/math512/dst.pdf",
+              "locator": "§1, Example 1.2, PDF p. 2: the discrete metric on a countable set is complete and induces the discrete topology."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-generalized-bayes-loss-update-normalizes-to-a-probability-measure",
+        "kind": "lemma",
+        "title": "A finite-normalizer loss update is a probability measure",
+        "deps": [
+          "def-generalized-bayes-loss-update-and-temperature",
+          "def-probability-measure",
+          "def-measure-with-density",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "thm-integration-against-a-density"
+        ],
+        "justified_by": [],
+        "statement": "For every admissible prior, observation, and positive finite normalizer, the generalized Bayes loss update has total mass one and is countably additive.",
+        "strategy": "Construct the measure with density exp(-w ell_x), scale by the positive normalizer, and check its total mass.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "P. G. Bissiri, C. C. Holmes, and S. G. Walker, A general framework for updating belief distributions, JRSS B 78(5), 2016",
+              "url": "https://arxiv.org/pdf/1306.6430",
+              "locator": "Sections 1.1–1.2, 2.3, and 3.1–3.4; the complete relevant argument is inspected in the 32-page full-text preprint and compared with the final publisher PDF."
+            },
+            {
+              "title": "J. Knoblauch, J. Jewson, and T. Damoulas, An Optimization-centric View on Bayes’ Rule: Reviewing and Generalizing Variational Inference, JMLR 23(132), 2022",
+              "url": "https://www.jmlr.org/papers/volume23/19-1047/19-1047.pdf",
+              "locator": "Section 2.2 and Theorem 1 with its proof, PDF pp. 5–6 of the complete 109-page paper."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-generalized-bayes-loss-update-is-the-unique-kl-minimizer",
+        "kind": "theorem",
+        "title": "The generalized Bayes loss update uniquely minimizes loss plus KL",
+        "deps": [
+          "cor-exponential-reciprocal-and-positivity",
+          "cor-mean-value-theorem",
+          "def-absolutely-continuous-with-respect-to-a-positive-measure",
+          "def-axiom-of-choice",
+          "def-generalized-bayes-loss-update-and-temperature",
+          "def-kullback-leibler-divergence",
+          "def-measure",
+          "def-natural-logarithm",
+          "def-probability-measure",
+          "def-radon-nikodym-derivative",
+          "lem-generalized-bayes-loss-update-normalizes-to-a-probability-measure",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-chain-rule-for-radon-nikodym-derivatives",
+          "thm-change-of-variables-for-expectation",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+        ],
+        "justified_by": [],
+        "statement": "If w>0, 0<Z_w<infinity, and the Gibbs update has finite absolute loss expectation, it uniquely minimizes w E_nu[ell_x]+D(nu||pi) over probabilities nu absolutely continuous with respect to pi with finite objective terms.",
+        "strategy": "Identify the objective gap with D(nu||G), prove its nonnegativity and equality case directly, and verify the Gibbs law is admissible.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "P. G. Bissiri, C. C. Holmes, and S. G. Walker, A general framework for updating belief distributions, JRSS B 78(5), 2016",
+              "url": "https://arxiv.org/pdf/1306.6430",
+              "locator": "Sections 1.1–1.2, 2.3, and 3.1–3.4; the complete relevant argument is inspected in the 32-page full-text preprint and compared with the final publisher PDF."
+            },
+            {
+              "title": "J. Knoblauch, J. Jewson, and T. Damoulas, An Optimization-centric View on Bayes’ Rule: Reviewing and Generalizing Variational Inference, JMLR 23(132), 2022",
+              "url": "https://www.jmlr.org/papers/volume23/19-1047/19-1047.pdf",
+              "locator": "Section 2.2 and Theorem 1 with its proof, PDF pp. 5–6 of the complete 109-page paper."
+            },
+            {
+              "title": "M. J. Wainwright and M. I. Jordan, Graphical Models, Exponential Families, and Variational Inference, Foundations and Trends in Machine Learning 1(1–2), 2008",
+              "url": "https://people.eecs.berkeley.edu/~jordan/sail/readings/wainwright-jordan-fnt.pdf",
+              "locator": "Section 3.6.1, Theorem 2, and Appendix B.2, PDF pp. 65–67 and 259–261; used only as an exponential-family variational analogue."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-sequential-generalized-bayes-updates-are-coherent",
+        "kind": "theorem",
+        "title": "Fixed-temperature generalized Bayes updates are sequentially coherent",
+        "deps": [
+          "def-generalized-bayes-loss-update-and-temperature",
+          "def-measure-with-density",
+          "def-probability-measure",
+          "lem-generalized-bayes-loss-update-normalizes-to-a-probability-measure",
+          "thm-induction-principle",
+        "thm-integration-against-a-density",
+        "thm-arithmetic-and-lattice-operations-preserve-measurability",
+        "thm-exponential-addition-formula",
+        "def-real-exponential-function-and-e"
+        ],
+        "justified_by": [],
+        "statement": "For a finite sequence of losses at one fixed positive temperature, if each sequential normalizer is finite positive, repeated updates equal one update using the sum of losses.",
+        "strategy": "Use induction on the number of observations and multiply the successive density factors while tracking the normalizer product.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "P. G. Bissiri, C. C. Holmes, and S. G. Walker, A general framework for updating belief distributions, JRSS B 78(5), 2016",
+              "url": "https://arxiv.org/pdf/1306.6430",
+              "locator": "Sections 1.1–1.2, 2.3, and 3.1–3.4; the complete relevant argument is inspected in the 32-page full-text preprint and compared with the final publisher PDF."
+            },
+            {
+              "title": "J. Knoblauch, J. Jewson, and T. Damoulas, An Optimization-centric View on Bayes’ Rule: Reviewing and Generalizing Variational Inference, JMLR 23(132), 2022",
+              "url": "https://www.jmlr.org/papers/volume23/19-1047/19-1047.pdf",
+              "locator": "Section 2.2 and Theorem 1 with its proof, PDF pp. 5–6 of the complete 109-page paper."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "rem-generalized-bayes-temperature-calibration",
+        "kind": "remark",
+        "title": "Calibrating generalized Bayes temperature",
+        "deps": [
+          "def-generalized-bayes-loss-update-and-temperature",
+          "thm-generalized-bayes-loss-update-is-the-unique-kl-minimizer"
+        ],
+        "justified_by": [],
+        "statement": "Records source-proposed temperature elicitation and calibration methods, and states that the update theorem alone proves neither robust-risk guarantees nor frequentist coverage.",
+        "strategy": "Summarize the source's unit-information, hierarchical, cross-validation, subjective, and confidence-interval matching proposals with their limits.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "P. G. Bissiri, C. C. Holmes, and S. G. Walker, A general framework for updating belief distributions, JRSS B 78(5), 2016",
+              "url": "https://arxiv.org/pdf/1306.6430",
+              "locator": "Sections 1.1–1.2, 2.3, and 3.1–3.4; the complete relevant argument is inspected in the 32-page full-text preprint and compared with the final publisher PDF."
+            },
+            {
+              "title": "L. Perrotta, Practical Calibration of the Temperature Parameter in Gibbs Posteriors, arXiv:2004.10522, 2020",
+              "url": "https://arxiv.org/pdf/2004.10522",
+              "locator": "Sections 1.1–1.3 and 2.1–2.2, full 37-page PDF; its model-specific sample-splitting and bootstrap proposals are recorded as deferred."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2085,
+    "id": "generalized-bayes-loss-updates-and-temperature-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Generalized Bayes loss updates and temperature calibration — Examples",
+    "companion": "generalized-bayes-loss-updates-and-temperature",
+    "requires": [
+      "generalized-bayes-loss-updates-and-temperature"
+    ],
+    "items": [
+      {
+        "id": "ex-loss-update-can-have-infinite-normalizer",
+        "kind": "example",
+        "title": "A measurable loss can have an infinite normalizer",
+        "deps": [
+          "cor-exponential-reciprocal-and-positivity",
+          "cor-cauchy-reals-lub-complete",
+          "def-dirac-measure",
+          "def-countable",
+          "def-generalized-bayes-loss-update-and-temperature",
+          "def-integer-power",
+          "def-ordered-field",
+          "def-abs-value",
+          "def-finite-sum",
+          "def-series",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-natural-logarithm",
+          "def-natural-numbers",
+          "def-nonnegative-lebesgue-integral",
+          "def-nonnegative-extended-series",
+          "def-nonnegative-simple-measurable-function",
+          "def-nonnegative-weighted-sum-of-measures",
+          "def-probability-measure",
+          "lem-countable-discrete-space-is-standard-borel",
+          "lem-finite-sum-laws",
+          "cor-of-one-positive",
+          "prop-dirac-measure-is-a-probability-measure",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-geometric-series",
+          "thm-algebra-of-limits",
+          "thm-nonnegative-series-bounded-partial-sums",
+          "thm-induction-principle",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "thm-of-archimedean"
+        ],
+        "justified_by": [],
+        "statement": "On a dyadic prior on the nonnegative integers, the finite loss ell(k)=log(pi({k})) makes every unnormalized posterior atom equal to one, so Z=+infinity and no update is defined.",
+        "strategy": "Construct the proper prior from a geometric series, then compute each unnormalized atom exactly.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "P. G. Bissiri, C. C. Holmes, and S. G. Walker, A general framework for updating belief distributions, JRSS B 78(5), 2016",
+              "url": "https://arxiv.org/pdf/1306.6430",
+              "locator": "Sections 1.1–1.2, 2.3, and 3.1–3.4; the complete relevant argument is inspected in the 32-page full-text preprint and compared with the final publisher PDF."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-temperature-generalized-bayes-credible-set-zero-coverage",
+        "kind": "counterexample",
+        "title": "A generalized Bayes credible set can have zero coverage",
+        "deps": [
+          "cor-exponential-reciprocal-and-positivity",
+          "def-statistical-experiment",
+          "def-confidence-set-and-coverage",
+          "def-dirac-measure",
+          "def-generalized-bayes-loss-update-and-temperature",
+          "def-probability-measure",
+          "lem-countable-discrete-space-is-standard-borel",
+          "lem-generalized-bayes-loss-update-normalizes-to-a-probability-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-exponential-is-strictly-increasing"
+        ],
+        "justified_by": [],
+        "statement": "A fixed positive temperature and a proper loss update do not by themselves guarantee nominal frequentist coverage for posterior credible sets.",
+        "strategy": "Use a two-state experiment whose loss favors the wrong state: the update gives that state posterior mass above 0.95 while its confidence-set coverage at the true state is zero.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "P. G. Bissiri, C. C. Holmes, and S. G. Walker, A general framework for updating belief distributions, JRSS B 78(5), 2016",
+              "url": "https://arxiv.org/pdf/1306.6430",
+              "locator": "Sections 1.1–1.2, 2.3, and 3.1–3.4; the complete relevant argument is inspected in the 32-page full-text preprint and compared with the final publisher PDF."
+            },
+            {
+              "title": "L. Perrotta, Practical Calibration of the Temperature Parameter in Gibbs Posteriors, arXiv:2004.10522, 2020",
+              "url": "https://arxiv.org/pdf/2004.10522",
+              "locator": "Sections 1.1–1.3 and 2.1–2.2, full 37-page PDF; its model-specific sample-splitting and bootstrap proposals are recorded as deferred."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-rescaling-loss-changes-effective-temperature",
+        "kind": "example",
+        "title": "Rescaling loss changes the effective temperature",
+        "deps": [
+          "cor-exponential-reciprocal-and-positivity",
+          "def-generalized-bayes-loss-update-and-temperature",
+          "def-probability-measure",
+          "lem-countable-discrete-space-is-standard-borel",
+          "lem-generalized-bayes-loss-update-normalizes-to-a-probability-measure",
+          "thm-exponential-is-strictly-increasing"
+        ],
+        "justified_by": [],
+        "statement": "For a two-point prior, multiplying the loss by c>0 at temperature w gives the same update as retaining the loss and using temperature cw; distinct effective temperatures yield distinct updates for a nonconstant loss.",
+        "strategy": "Compute the two normalized weights and compare their posterior odds.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "P. G. Bissiri, C. C. Holmes, and S. G. Walker, A general framework for updating belief distributions, JRSS B 78(5), 2016",
+              "url": "https://arxiv.org/pdf/1306.6430",
+              "locator": "Sections 1.1–1.2, 2.3, and 3.1–3.4; the complete relevant argument is inspected in the 32-page full-text preprint and compared with the final publisher PDF."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-unit-temperature-likelihood-update",
+        "kind": "example",
+        "title": "The unit-temperature likelihood update is ordinary Bayes in a finite model",
+        "deps": [
+          "def-conditional-probability",
+          "def-generalized-bayes-loss-update-and-temperature",
+          "def-natural-logarithm",
+          "def-probability-measure",
+          "lem-countable-discrete-space-is-standard-borel",
+          "lem-generalized-bayes-loss-update-normalizes-to-a-probability-measure",
+          "def-statistical-experiment"
+        ],
+        "justified_by": [],
+        "statement": "For a two-state finite model with positive likelihood section, unit-temperature negative log-likelihood loss gives the ordinary posterior, computed directly from the joint probabilities.",
+        "strategy": "Compute the two unnormalized prior-likelihood weights, their finite-positive normalizer, and the conditional probabilities.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "P. G. Bissiri, C. C. Holmes, and S. G. Walker, A general framework for updating belief distributions, JRSS B 78(5), 2016",
+              "url": "https://arxiv.org/pdf/1306.6430",
+              "locator": "Sections 1.1–1.2, 2.3, and 3.1–3.4; the complete relevant argument is inspected in the 32-page full-text preprint and compared with the final publisher PDF."
+            },
+            {
+              "title": "J. Knoblauch, J. Jewson, and T. Damoulas, An Optimization-centric View on Bayes’ Rule: Reviewing and Generalizing Variational Inference, JMLR 23(132), 2022",
+              "url": "https://www.jmlr.org/papers/volume23/19-1047/19-1047.pdf",
+              "locator": "Section 2.2 and Theorem 1 with its proof, PDF pp. 5–6 of the complete 109-page paper."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,1523 @@
+{
+  "version": 1,
+  "scope": [
+    "def-m-out-of-n-bootstrap-and-subsampling",
+    "lem-uniform-cdf-order-and-quantile-coverage",
+    "lem-pointwise-cdf-convergence-to-a-continuous-law-is-uniform",
+    "lem-bernoulli-root-laws-are-uniformly-weak-close",
+    "thm-ordinary-bootstrap-fails-for-uniform-endpoint",
+    "thm-m-out-of-n-resampling-valid-for-uniform-endpoint",
+    "thm-uniform-subsampling-coverage-under-root-law-control",
+    "thm-bootstrap-fails-at-nonsmooth-boundary-and-degenerate-mean-functionals",
+    "ex-uniform-endpoint-bootstrap-failure-and-m-out-of-n-remedy",
+    "ex-weak-metric-does-not-guarantee-uniform-bootstrap-coverage",
+    "ex-nonsmooth-boundary-bootstrap-failure"
+  ],
+  "contracts": {
+    "lem-uniform-cdf-order-and-quantile-coverage": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cumulative-distribution-function-of-a-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable. Its **cumulative distribution function** is\nthe function\n$$F_X:\\mathbb R\\to[0,1],\\qquad F_X(x):=\\mathbb P(X\\le x)=\\mathbb P_X((-\\infty,x]).$$\n\nThe second expression is the same quantity written in terms of the law\n[[def-law-or-distribution-of-a-random-element]] of $X$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuity-from-above-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be a decreasing sequence of measurable sets for a measure $\\mu$. If $\\mu(E_{n_0})<+\\infty$ for some $n_0$, then\n\n$$\\mu\\left(\\bigcap_{n\\in\\mathbb N}E_n\\right)=\\inf_{n\\in\\mathbb N}\\mu(E_n).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuity-from-below-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be an increasing sequence of measurable sets for a measure $\\mu$, so $E_n\\subseteq E_{n+1}$. Then\n\n$$\\mu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sup_{n\\in\\mathbb N}\\mu(E_n).$$\n\nNo finiteness hypothesis is required.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $u\\in(0,1)$ the quantile set $\\{x:F(x)\\ge u\\}$ is nonempty and bounded below because the events $\\{X\\le k\\}$ increase to the whole space and $\\{X\\le-k\\}$ decrease to the empty set; [F2]–[F3] give the CDF limits $1$ and $0$ at the two tails. If $q=q_F(u)$, then for every $r>0$ there is $x<q+r$ with $F(x)\\ge u$, so $F(q+r)\\ge u$. The events $\\{X\\le q+1/k\\}$ decrease to $\\{X\\le q\\}$; by [F2], $F(q)=\\lim_kF(q+1/k)\\ge u$. Also, for every $x<q$, $F(x)<u$ by the definition of infimum.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\alpha_2=0$, the event is vacuous because $q_G(1)=+\\infty$. Otherwise, if $1-\\alpha_2-\\varepsilon\\le0$, the lower bound is nonpositive and is trivial. In the remaining case, every $x$ with $G(x)\\ge1-\\alpha_2$ satisfies $F(x)\\ge1-\\alpha_2-\\varepsilon$, so $q_F(1-\\alpha_2-\\varepsilon)\\le q_G(1-\\alpha_2)$. Step 1.1 gives $F(q_F(1-\\alpha_2-\\varepsilon))\\ge1-\\alpha_2-\\varepsilon$, and monotonicity of $F$ proves the first probability bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $\\alpha_1=0$, the event is vacuous because $q_G(0)=-\\infty$. If $\\alpha_1+\\varepsilon\\ge1$, the lower bound is nonpositive and is trivial. Otherwise, each $x$ with $F(x)\\ge\\alpha_1+\\varepsilon$ has $G(x)\\ge\\alpha_1$, whence $q_G(\\alpha_1)\\le q_F(\\alpha_1+\\varepsilon)$. For every $y<q_F(\\alpha_1+\\varepsilon)$, step 1.1 gives $F(y)<\\alpha_1+\\varepsilon$. The events $\\{X\\le q_F(\\alpha_1+\\varepsilon)-1/k\\}$ increase to $\\{X<q_F(\\alpha_1+\\varepsilon)\\}$; [F3] therefore gives $\\mathbb P\\{X<q_F(\\alpha_1+\\varepsilon)\\}\\le\\alpha_1+\\varepsilon$. This proves the second bound.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $\\alpha_1+\\alpha_2+\\varepsilon+\\delta\\ge1$, part 3 is the trivial nonnegative lower bound. For $u\\in(0,1)$, $q_{\\widehat G}(u)$ is measurable because $\\{q_{\\widehat G}(u)<a\\}=\\bigcup_{r\\in\\mathbb Q,\\,r<a}\\{\\widehat G(r)\\ge u\\}$; the endpoint quantiles are constant. Also $E:=\\{\\sup_x|\\widehat G(x)-F(x)|\\le\\varepsilon/2\\}$ is measurable because the difference is right-continuous and its supremum over $\\mathbb R$ equals its supremum over $\\mathbb Q$. Otherwise, on $E$, when $\\alpha_1>0$ the pointwise order implies $q_{\\widehat G}(\\alpha_1)\\le q_F(\\alpha_1+\\varepsilon/2)$; hence the lower-tail failure on $E$ is contained in $\\{X<q_F(\\alpha_1+\\varepsilon/2)\\}$ and has probability at most $\\alpha_1+\\varepsilon/2$ by step 2.2. If $\\alpha_1=0$, this tail is empty. Similarly, when $\\alpha_2>0$, $q_F(1-\\alpha_2-\\varepsilon/2)\\le q_{\\widehat G}(1-\\alpha_2)$; hence the upper-tail failure on $E$ is contained in $\\{X>q_F(1-\\alpha_2-\\varepsilon/2)\\}$, whose probability is at most $\\alpha_2+\\varepsilon/2$ by step 1.1. If $\\alpha_2=0$, that tail is empty. A union bound and $\\mathbb P(E^c)\\le\\delta$ give the claimed coverage bound; no independence between $E$ and $X$ is needed because each intersection with $E$ is bounded by the corresponding unconditional tail event.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 proves interior generalized quantiles are attained; the statement sets the two extended endpoint quantiles."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 explicitly handle alpha_i=0 as a vacuous tail."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 defines q(1), and step 2.1 treats probability bounds at or beyond one as trivial."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement permits atoms; steps 2.2–3.1 use strict and non-strict events without assuming continuity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 cover alpha_i=0 and probability bounds reaching one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 1.1 approximates one quantile at a time and then uses measure continuity; it never selects from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Parts 1–3 derive coverage lower bounds from the stated CDF order or error; the lemma does not characterize those premises as necessary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma does not infer CDF order from coverage, so no reverse implication is claimed."
+        }
+      ]
+    },
+    "lem-pointwise-cdf-convergence-to-a-continuous-law-is-uniform": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cumulative-distribution-function-of-a-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable. Its **cumulative distribution function** is\nthe function\n$$F_X:\\mathbb R\\to[0,1],\\qquad F_X(x):=\\mathbb P(X\\le x)=\\mathbb P_X((-\\infty,x]).$$\n\nThe second expression is the same quantity written in terms of the law\n[[def-law-or-distribution-of-a-random-element]] of $X$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-heine-cantor-r",
+          "source_section": "Statement",
+          "quote": "Let $K \\subseteq \\mathbb{R}$ be compact ([[def-open-cover-r]]) and let\n$f : K \\to \\mathbb{R}$ be continuous on $K$ ([[def-continuity-real]]). Then $f$\nis uniformly continuous on $K$ ([[def-uniform-continuity-real]]).\n\n**This theorem is stated twice in this library, on purpose.** Its metric-space\ntwin is [[thm-heine-cantor-metric]], proved there from the cover machinery of\nmetric spaces; the proof below uses the open-cover definition of compactness\nin $\\mathbb{R}$ directly. That the two\nstatements are the same statement in two vocabularies is\n[[lem-real-and-metric-notions-agree]], clauses 1, 2 and 5, immediately above.\n\n**Choice-free proof.** The argument below uses the open-cover definition of compactness directly. It considers every continuity neighbourhood at once and extracts only a finite subcover, so no countable or global choice function is selected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuity-from-above-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be a decreasing sequence of measurable sets for a measure $\\mu$. If $\\mu(E_{n_0})<+\\infty$ for some $n_0$, then\n\n$$\\mu\\left(\\bigcap_{n\\in\\mathbb N}E_n\\right)=\\inf_{n\\in\\mathbb N}\\mu(E_n).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuity-from-below-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be an increasing sequence of measurable sets for a measure $\\mu$, so $E_n\\subseteq E_{n+1}$. Then\n\n$$\\mu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sup_{n\\in\\mathbb N}\\mu(E_n).$$\n\nNo finiteness hypothesis is required.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The supremum $\\sup_x|G_n(x)-F(x)|$ is measurable: right-continuity makes it equal to the supremum over rational $x$, a countable supremum of measurable variables. Fix $0<\\eta<1/2$. The events defining a CDF increase to the whole space as $x\\to+\\infty$ and decrease to the empty set as $x\\to-\\infty$; [F3]–[F4] therefore give its tail limits. Choose $L<R$ with $F(L)<\\eta$ and $1-F(R)<\\eta$. By [F2], $F$ is uniformly continuous on $[L,R]$, so choose a finite partition $L=x_0<\\cdots<x_k=R$ for which every increment $F(x_{j+1})-F(x_j)<\\eta$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Pointwise convergence at the finitely many grid points implies that, with probability tending to one, $|G_n(x_j)-F(x_j)|\\le\\eta$ for every $j$. On this event, monotonicity of both CDFs bounds their difference on each $[x_j,x_{j+1}]$ by $3\\eta$. For $x<L$, both CDF values lie between $0$ and their values at $L$, so their difference is at most $2\\eta$; for $x>R$, apply the same argument to the complementary tails using their values at $R$. Hence $\\sup_x|G_n(x)-F(x)|\\le3\\eta$ with probability tending to one. Since $\\eta>0$ was arbitrary, the supremum converges to zero in probability.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The inputs are probability CDFs and a real-valued domain; no empty sample or empty law is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 controls the left CDF tail at zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 controls the right CDF tail at one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 permits each random CDF to have jumps; only the limit CDF is required continuous."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 handles both tails of the real line."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 1.1 uses one finite partition obtained from uniform continuity on a compact interval; it makes no arbitrary-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives pointwise convergence to a continuous CDF as a sufficient condition for uniform convergence; it does not claim necessity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is not used to infer pointwise convergence as a converse, so no reverse implication is asserted."
+        }
+      ]
+    },
+    "lem-bernoulli-root-laws-are-uniformly-weak-close": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.\n\nFor $n\\in\\mathbb N$, a **binomial$(n,p)$ random variable** is a sum $X=\\sum_{i<n}X_i$ of $n$ mutually independent Bernoulli$(p)$ variables. When $n=0$, this is the constant zero random variable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bernoulli-and-binomial-mean-and-variance",
+          "source_section": "Statement",
+          "quote": "Work on a common probability space; the independent Bernoulli variables used to represent a binomial sum are independent in the sense of [[def-independent-random-elements]]. The original finite-space atom-independence convention is included.\n\nIf $X$ is Bernoulli$(p)$, then $\\mathbb E[X]=p$ and $\\operatorname{Var}(X)=p(1-p)$. If $S$ is binomial$(n,p)$, then\n$$\\mathbb E[S]=np,\\qquad \\operatorname{Var}(S)=np(1-p).$$\nThese formulas include $p=0$, $p=1$, and $n=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-chebyshev-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X$ is a square-integrable real random variable and $a>0$, then\n$$\\mathbb P(|X-\\mathbb E[X]|\\ge a)\\le\\frac{\\operatorname{Var}(X)}{a^2}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-levy-prokhorov-metric",
+          "source_section": "Definition",
+          "quote": "For Borel probabilities $\\mu$,$\\nu$ on a metric space S, put $F^{[\\varepsilon]}=\\{x:d(x,F)\\le\\varepsilon\\}$ for nonempty closed F, and $\\varnothing^{[\\varepsilon]}=\\varnothing$. Define $\\pi(\\mu,\\nu)$ as the infimum of $\\varepsilon$>0 such that, for every closed F, both $\\mu(F)\\le\\nu(F^{[\\varepsilon]})+\\varepsilon$ and $\\nu(F)\\le\\mu(F^{[\\varepsilon]})+\\varepsilon$. The admissible set contains every $\\varepsilon$>=1 and is bounded below by zero, so its real infimum exists by [[thm-infimum-property]]. Enlargements are closed because distance to a nonempty set is continuous. [[lem-distance-to-set-is-lipschitz]] The metric assertion is proved in the following lemma.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $p=q$, the laws coincide. Suppose $p\\le q$. For each $i$, give $(B_i,C_i)\\in\\{0,1\\}^2$ probabilities $p$ at $(1,1)$, $q-p$ at $(0,1)$, $1-q$ at $(0,0)$, and zero at $(1,0)$, and take $n$ independent copies of this finite pair. Then $B_i\\sim\\operatorname{Bernoulli}(p)$, $C_i\\sim\\operatorname{Bernoulli}(q)$, and $D_i:=C_i-B_i\\sim\\operatorname{Bernoulli}(q-p)$; the pairs are independent across $i$. Thus $S_{n,q}-S_{n,p}=n^{-1/2}\\sum_i(D_i-(q-p))$, whose mean is zero and whose variance, by [F2], is $(q-p)(1-q+p)\\le q-p$. If $q<p$, interchange the two parameters and change the sign of the difference; its variance is $|p-q|(1-|p-q|)\\le|p-q|$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $r=|p-q|$ and $\\varepsilon=r^{1/3}$ for $r>0$. By [F3] and step 1.1, the coupling just constructed satisfies $\\mathbb P(|S_{n,p}-S_{n,q}|>\\varepsilon)\\le r/\\varepsilon^2=\\varepsilon$. For any closed set $A$, the event $\\{S_{n,p}\\in A,\\ |S_{n,p}-S_{n,q}|\\le\\varepsilon\\}$ is contained in $\\{S_{n,q}\\in A^{[\\varepsilon]}\\}$, so $\\mu_{n,p}(A)\\le\\mu_{n,q}(A^{[\\varepsilon]})+\\varepsilon$. Interchanging $p$ and $q$ gives the reverse inequality. Hence $\\varepsilon$ is admissible in [F4], so the infimum defining $\\pi$ is at most $\\varepsilon$. For $r=0$ the laws coincide and their distance is zero by [F4]. This proves the bound for every endpoint case as well.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement restricts n to n≥1, so the empty sum is outside its domain; step 1.1 handles the p=q degenerate case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 handle p=q, giving identical laws and distance zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include p,q at zero or one; the finite coupling probabilities remain nonnegative."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 covers degenerate endpoint Bernoulli laws and step 2.1 handles maximal parameter difference."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 cover the closed parameter interval [0,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 1.1 defines the finite four-atom coupling and its n independent copies explicitly; no arbitrary family of sets is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement proves the displayed upper bound on Levy–Prokhorov distance; it asserts no matching lower bound."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No lower bound on the parameter difference from the metric distance is claimed; the coupling estimate is one-directional."
+        }
+      ]
+    },
+    "thm-ordinary-bootstrap-fails-for-uniform-endpoint": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-m-out-of-n-bootstrap-and-subsampling",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ be an integer, let $(\\mathcal Z,\\mathcal C)$ be a measurable observation space, let $P$ be a probability law on it, and let $Z_1,\\ldots,Z_n$ be IID $P$-distributed sampling units ([[def-identically-distributed-and-iid-random-variables]]). For each $1\\le k\\le n$, let $T_k$ be a measurable real-valued statistic and write $\\widehat\\theta_k=T_k(Z_1,\\ldots,Z_k)$; the target is a scalar $\\theta(P)$ and $a_k>0$ is its declared normalization at sample size $k$. The empirical law\n$$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{Z_i}$$\nis a probability law by [[lem-finite-empirical-measure-is-a-probability-law]].\n\nFor an integer $1\\le m\\le n$, the **m-out-of-n bootstrap** draws $Z_1^*,\\ldots,Z_m^*$ conditionally IID from $P_n$ and computes\n$$R_{m,n}^{*}:=a_m\\bigl(T_m(Z_1^*,\\ldots,Z_m^*)-\\widehat\\theta_n\\bigr).$$\nThe conditional distribution of this root given the observed sample is the bootstrap approximation. The ordinary n-out-of-n bootstrap is the case $m=n$ and uses $a_n$.\n\nFor $1\\le m<n$, **subsampling without replacement** chooses a subset $I=\\{i_1<\\cdots<i_m\\}$ uniformly from the $\\binom{n}{m}$ subsets of $\\{1,\\ldots,n\\}$ and computes\n$$R_{m,n}^{\\mathrm{sub}}:=a_m\\bigl(T_m(Z_{i_1},\\ldots,Z_{i_m})-\\widehat\\theta_n\\bigr).$$\nIts conditional law is the uniform distribution over those subsets. With replacement and without replacement are distinct conditional laws, even though both use the same declared statistic $T_m$.\n\nThe asymptotic regime considered on this page has integer $m=m_n\\to\\infty$ and $m_n/n\\to0$. The resampled root uses the actual size-$m$ scale $a_m$; validity does not follow merely from this regime. For inference based on a centered root, the scale ratio $a_m/a_n\\to0$ is an additional root-specific centering condition when it is used. A design with dependent sampling units requires a separate design-matched resampling procedure. This definition does not identify a bootstrap law with a Bayesian posterior or a design-randomization law. Extrapolation from several resample sizes is not asserted here; it requires a separate proof of the source-specific regular expansion and remainder regime.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cumulative-distribution-function-of-a-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable. Its **cumulative distribution function** is\nthe function\n$$F_X:\\mathbb R\\to[0,1],\\qquad F_X(x):=\\mathbb P(X\\le x)=\\mathbb P_X((-\\infty,x]).$$\n\nThe second expression is the same quantity written in terms of the law\n[[def-law-or-distribution-of-a-random-element]] of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is [[def-metric-continuity]]. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in [[def-integrable-real-and-complex-functions-and-their-integrals]]. No completeness or coupling is required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Almost surely $M_n\\le1$, so $R_n\\le0$ and $0\\le h\\le1$ with support in $[-1/2,1/2]$. The uniform CDF gives $\\mathbb E[h(R_n)]\\le\\mathbb P(|R_n|\\le1/2)=\\mathbb P(M_n\\ge1-1/(2n))=1-(1-1/(2n))^n$. By [F5], $\\log(1-u)/u\\to-1$ as $u\\downarrow0$: the integral formula gives $-\\log(1-u)/u=u^{-1}\\int_{1-u}^1dt/t$, an average of $1/t$ over an interval shrinking to $1$. Thus $n\\log(1-c/n)\\to-c$ for each fixed $c>0$, and $\\limsup_n\\mathbb E[h(R_n)]\\le1-e^{-1/2}$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The maximum observation is unique almost surely because the uniform law has no atoms. Conditional on the data, each bootstrap draw selects that maximal observation with probability $1/n$, independently across draws, so $\\mathbb P^*(R_n^*=0)=1-(1-1/n)^n$. Since $h(0)=1$ and $h\\ge0$, $\\mathbb E^*[h(R_n^*)]\\ge1-(1-1/n)^n\\to1-e^{-1}$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $e^{-1/2}>e^{-1}$, the lower limit in step 1.2 is strictly greater than the upper limit in step 1.1. Therefore the conditional test integral cannot converge in probability to the sampling test integral. By [F4], weak consistency would require that convergence for this particular bounded continuous $h$, so weak bootstrap consistency fails.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement uses n>=1 observations; no empty sample is in the model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 computes the conditional root atom exactly at zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses support endpoint theta=1 and step 1.2 treats the bootstrap maximum attaining it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 handles the conditional degeneracy of bootstrap roots at their zero atom."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 use the endpoint theta=1 and the exact threshold at zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses the explicit test function h and the almost surely unique sample maximum; no arbitrary family selection occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem establishes inconsistency for the specified uniform endpoint model and does not state an if-and-only-if criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result does not characterize every model in which ordinary bootstrap consistency fails or holds."
+        }
+      ]
+    },
+    "thm-m-out-of-n-resampling-valid-for-uniform-endpoint": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-m-out-of-n-bootstrap-and-subsampling",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ be an integer, let $(\\mathcal Z,\\mathcal C)$ be a measurable observation space, let $P$ be a probability law on it, and let $Z_1,\\ldots,Z_n$ be IID $P$-distributed sampling units ([[def-identically-distributed-and-iid-random-variables]]). For each $1\\le k\\le n$, let $T_k$ be a measurable real-valued statistic and write $\\widehat\\theta_k=T_k(Z_1,\\ldots,Z_k)$; the target is a scalar $\\theta(P)$ and $a_k>0$ is its declared normalization at sample size $k$. The empirical law\n$$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{Z_i}$$\nis a probability law by [[lem-finite-empirical-measure-is-a-probability-law]].\n\nFor an integer $1\\le m\\le n$, the **m-out-of-n bootstrap** draws $Z_1^*,\\ldots,Z_m^*$ conditionally IID from $P_n$ and computes\n$$R_{m,n}^{*}:=a_m\\bigl(T_m(Z_1^*,\\ldots,Z_m^*)-\\widehat\\theta_n\\bigr).$$\nThe conditional distribution of this root given the observed sample is the bootstrap approximation. The ordinary n-out-of-n bootstrap is the case $m=n$ and uses $a_n$.\n\nFor $1\\le m<n$, **subsampling without replacement** chooses a subset $I=\\{i_1<\\cdots<i_m\\}$ uniformly from the $\\binom{n}{m}$ subsets of $\\{1,\\ldots,n\\}$ and computes\n$$R_{m,n}^{\\mathrm{sub}}:=a_m\\bigl(T_m(Z_{i_1},\\ldots,Z_{i_m})-\\widehat\\theta_n\\bigr).$$\nIts conditional law is the uniform distribution over those subsets. With replacement and without replacement are distinct conditional laws, even though both use the same declared statistic $T_m$.\n\nThe asymptotic regime considered on this page has integer $m=m_n\\to\\infty$ and $m_n/n\\to0$. The resampled root uses the actual size-$m$ scale $a_m$; validity does not follow merely from this regime. For inference based on a centered root, the scale ratio $a_m/a_n\\to0$ is an additional root-specific centering condition when it is used. A design with dependent sampling units requires a separate design-matched resampling procedure. This definition does not identify a bootstrap law with a Bayesian posterior or a design-randomization law. Extrapolation from several resample sizes is not asserted here; it requires a separate proof of the source-specific regular expansion and remainder regime.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cumulative-distribution-function-of-a-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable. Its **cumulative distribution function** is\nthe function\n$$F_X:\\mathbb R\\to[0,1],\\qquad F_X(x):=\\mathbb P(X\\le x)=\\mathbb P_X((-\\infty,x]).$$\n\nThe second expression is the same quantity written in terms of the law\n[[def-law-or-distribution-of-a-random-element]] of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.\n\nFor $n\\in\\mathbb N$, a **binomial$(n,p)$ random variable** is a sum $X=\\sum_{i<n}X_i$ of $n$ mutually independent Bernoulli$(p)$ variables. When $n=0$, this is the constant zero random variable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-bernoulli-and-binomial-mean-and-variance",
+          "source_section": "Statement",
+          "quote": "Work on a common probability space; the independent Bernoulli variables used to represent a binomial sum are independent in the sense of [[def-independent-random-elements]]. The original finite-space atom-independence convention is included.\n\nIf $X$ is Bernoulli$(p)$, then $\\mathbb E[X]=p$ and $\\operatorname{Var}(X)=p(1-p)$. If $S$ is binomial$(n,p)$, then\n$$\\mathbb E[S]=np,\\qquad \\operatorname{Var}(S)=np(1-p).$$\nThese formulas include $p=0$, $p=1$, and $n=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-chebyshev-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X$ is a square-integrable real random variable and $a>0$, then\n$$\\mathbb P(|X-\\mathbb E[X]|\\ge a)\\le\\frac{\\operatorname{Var}(X)}{a^2}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-pointwise-cdf-convergence-to-a-continuous-law-is-uniform",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a continuous CDF and $(G_n)$ random CDFs, meaning that each $G_n(x)$ is a measurable real random variable and, almost surely, $x\\mapsto G_n(x)$ is a right-continuous CDF. Suppose that for each fixed $x\\in\\mathbb R$, $G_n(x)\\to F(x)$ in probability. Then\n$$\\sup_{x\\in\\mathbb R}|G_n(x)-F(x)|\\longrightarrow0$$\nin probability.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is [[def-metric-continuity]]. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in [[def-integrable-real-and-complex-functions-and-their-integrals]]. No completeness or coupling is required.",
+          "uses": []
+        },
+        {
+          "fact": "F9",
+          "source": "thm-portmanteau-theorem",
+          "source_section": "Statement",
+          "quote": "For Borel probabilities $\\mu_n,\\mu$ on a metric space S, the following are equivalent: (i) $\\mu_n\\Rightarrow\\mu$; (ii) integrals converge for all bounded uniformly continuous real tests; (iii) $\\limsup_n\\mu_n(F)\\le\\mu(F)$ for every closed F; (iv) $\\liminf_n\\mu_n(G)\\ge\\mu(G)$ for every open G; (v) $\\mu_n(A)\\to\\mu(A)$ for every Borel A with $\\mu(\\partial A)=0$.",
+          "uses": []
+        },
+        {
+          "fact": "F10",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a size-$k$ IID uniform sample, $\\mathbb P\\{k(M_k-1)\\le x\\}=0$ for $x<-k$, equals $(1+x/k)^k$ for $-k\\le x<0$, and is $1$ for $x\\ge0$. For fixed $x<0$, [F10] gives $k\\log(1+x/k)\\to x$, so these CDFs converge to $F(x)=e^x$; for $x\\ge0$ they equal $1$. The limiting CDF is continuous, including at zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $x<0$ and put $c=-x>0$, $D_n=1-M_n$, and $K_n(c)=\\#\\{i:X_i>M_n-c/m\\}$. For fixed $t>0$ and all sufficiently large $m$, each indicator $1\\{X_i>1-t/m\\}$ is Bernoulli$(t/m)$, and the indicators are independent by [F2]; hence $N_n(t):=\\#\\{i:X_i>1-t/m\\}$ is binomial by [F4]. By [F5]–[F6], $mN_n(t)/n\\to t$ in probability, since its mean is $t$ and its variance is $t(m/n)(1-t/m)\\to0$. Also $mD_n\\to0$ in probability, since for each $\\eta>0$ and large $m$, $\\mathbb P(mD_n>\\eta)=(1-\\eta/m)^n$. By [F10], $\\log(1-u)=-\\int_{1-u}^1dt/t\\le-u$ for $0<u<1$, so this probability is at most $e^{-\\eta n/m}\\to0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any $0<\\eta<c$, on $mD_n\\le\\eta$ the interval from $1$ down to $M_n-c/m$ has width between $c/m$ and $(c+\\eta)/m$, so $N_n(c)\\le K_n(c)\\le N_n(c+\\eta)$. Fix $\\rho>0$ and choose $0<\\eta<\\min(c,\\rho/3)$. Step 1.2 gives $mN_n(c)/n\\to c$ and $mN_n(c+\\eta)/n\\to c+\\eta$, while $P(mD_n>\\eta)\\to0$; the sandwich therefore gives $mK_n(c)/n\\to c$ and $K_n(c)/n\\to0$ in probability. For $u_n=K_n(c)/n$, the integral identity in [F10] gives $|\\log(1-u_n)+u_n|\\le u_n^2/(1-u_n)$ when $u_n<1$. Since $mu_n\\to c$ and $u_n\\to0$, $m u_n^2/(1-u_n)\\to0$, hence $(1-u_n)^m\\to e^{-c}$. By [F1], the conditional with-replacement CDF is $P^*(R_{m,n}^{*}\\le x)=(1-K_n(c)/n)^m\\to e^{-c}=e^x$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For subsampling, the conditional probability that every selected observation is at most $M_n-c/m$ is $P^*(R_{m,n}^{\\mathrm{sub}}\\le x)=\\binom{n-K_n(c)}m/\\binom nm=\\prod_{j=0}^{m-1}(1-u_{n,j})$, where $u_{n,j}=K_n(c)/(n-j)$; this formula holds on $n-K_n(c)\\ge m$, an event whose probability tends to one by step 2.1 and $m/n\\to0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "We have $\\max_{j<m}u_{n,j}\\le(K_n(c)/n)/(1-m/n)\\to0$ in probability, and $\\sum_{j=0}^{m-1}u_{n,j}=(mK_n(c)/n)\\cdot m^{-1}\\sum_{j=0}^{m-1}n/(n-j)\\to c$, because the average factor lies between $1$ and $(1-m/n)^{-1}\\to1$. Therefore $\\sum_j u_{n,j}^2\\le(\\max_j u_{n,j})\\sum_j u_{n,j}\\to0$.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "With probability tending to one, all $u_{n,j}<1$; [F10] and $|\\log(1-u)+u|\\le u^2/(1-u)$ then show $\\sum_j\\log(1-u_{n,j})\\to-c$, so the product in step 3.1 tends to $e^{-c}=e^x$.",
+          "step": "4.1",
+          "inputs": [
+            "F10",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For $x\\ge0$, both resampled maxima are at most $M_n$, so both conditional CDFs equal $1$. Step 1.1 gives the continuous sampling-root limit $F$, while steps 2.1 and 4.1 prove pointwise convergence for negative $x$; [F7] upgrades each method's conditional CDF convergence to uniform convergence in probability. Step 1.1 also identifies $F$ as the limiting CDF of the actual size-$m$ sampling root, which is the first-order target specified in the statement. The use of the actual size-$m$ scale is essential in steps 2.1–4.1. [F1, F7, step 1.1, step 2.1, step 3.1, step 3.2, step 4.1] ∎\n\n**The m-regime alone is insufficient.** Take the singleton class $\\mathcal P=\\{P\\}$ with $P=\\delta_0$, target $\\theta(P)=0$, statistic $T_k(z_1,\\ldots,z_k)=1/k$, and normalization $a_k=k$. Let $m_n=\\lfloor\\sqrt n\\rfloor$. For all $n\\ge4$, $1\\le m_n<n$, and $m_n\\to\\infty$, $m_n/n\\to0$, and $a_{m_n}/a_n=m_n/n\\to0$. The actual size-$n$ and size-$m_n$ roots are both identically $1$, so $J_{n,P}=H_{m_n,P}$ and both root-law comparisons in the statement hold exactly. For either resampling method, every resampled statistic is $1/m_n$, so $\\widehat H_{m,n}$ is the point-mass CDF at $1-m_n/n$. With $\\alpha_1=\\alpha_2=1/4$, both quantiles equal $1-m_n/n$ and $I_n=\\{m_n/n^2\\}$. Since $m_n/n^2>0$, the coverage of $\\theta(P)=0$ is zero for every $n\\ge4$. Thus the feasible-root condition, and hence the theorem's coverage conclusion, does not follow from the m-regime even when the two root-law comparisons hold exactly.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 4.1",
+            "F7",
+            "F1",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The asymptotic regime has positive integer sample sizes and m>=1 eventually."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 gives the conditional CDF value at x=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 proves both conditional CDFs equal one for every x>=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1–4.1 cover finite-support conditional laws, including zero atoms and without-replacement subsets."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 5.1 handle the root-law CDF at zero and on the nonnegative half-line."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes individual real thresholds and uses explicit finite counts and sums; it invokes no arbitrary choice function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves convergence for the displayed uniform model and m-regime; it gives no necessary-and-sufficient characterization of valid regimes."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not assert that every sequence yielding validity must satisfy the displayed m-regime."
+        }
+      ]
+    },
+    "thm-uniform-subsampling-coverage-under-root-law-control": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-m-out-of-n-bootstrap-and-subsampling",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ be an integer, let $(\\mathcal Z,\\mathcal C)$ be a measurable observation space, let $P$ be a probability law on it, and let $Z_1,\\ldots,Z_n$ be IID $P$-distributed sampling units ([[def-identically-distributed-and-iid-random-variables]]). For each $1\\le k\\le n$, let $T_k$ be a measurable real-valued statistic and write $\\widehat\\theta_k=T_k(Z_1,\\ldots,Z_k)$; the target is a scalar $\\theta(P)$ and $a_k>0$ is its declared normalization at sample size $k$. The empirical law\n$$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{Z_i}$$\nis a probability law by [[lem-finite-empirical-measure-is-a-probability-law]].\n\nFor an integer $1\\le m\\le n$, the **m-out-of-n bootstrap** draws $Z_1^*,\\ldots,Z_m^*$ conditionally IID from $P_n$ and computes\n$$R_{m,n}^{*}:=a_m\\bigl(T_m(Z_1^*,\\ldots,Z_m^*)-\\widehat\\theta_n\\bigr).$$\nThe conditional distribution of this root given the observed sample is the bootstrap approximation. The ordinary n-out-of-n bootstrap is the case $m=n$ and uses $a_n$.\n\nFor $1\\le m<n$, **subsampling without replacement** chooses a subset $I=\\{i_1<\\cdots<i_m\\}$ uniformly from the $\\binom{n}{m}$ subsets of $\\{1,\\ldots,n\\}$ and computes\n$$R_{m,n}^{\\mathrm{sub}}:=a_m\\bigl(T_m(Z_{i_1},\\ldots,Z_{i_m})-\\widehat\\theta_n\\bigr).$$\nIts conditional law is the uniform distribution over those subsets. With replacement and without replacement are distinct conditional laws, even though both use the same declared statistic $T_m$.\n\nThe asymptotic regime considered on this page has integer $m=m_n\\to\\infty$ and $m_n/n\\to0$. The resampled root uses the actual size-$m$ scale $a_m$; validity does not follow merely from this regime. For inference based on a centered root, the scale ratio $a_m/a_n\\to0$ is an additional root-specific centering condition when it is used. A design with dependent sampling units requires a separate design-matched resampling procedure. This definition does not identify a bootstrap law with a Bayesian posterior or a design-randomization law. Extrapolation from several resample sizes is not asserted here; it requires a separate proof of the source-specific regular expansion and remainder regime.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-confidence-set-and-coverage",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment as in [[def-statistical-experiment]], and assume\n$\\Theta\\ne\\varnothing$. A **confidence-set procedure** is a map\n$C:\\mathcal X\\to\\mathcal P(\\Theta)$, where\n$\\mathcal P(\\Theta):=\\{A:A\\subseteq\\Theta\\}$, such that, for every\n$\\eta\\in\\Theta$, its\nmembership section\n$$C_\\eta:=\\{x\\in\\mathcal X:\\eta\\in C(x)\\}$$\nbelongs to $\\mathcal A$. Its **coverage at $\\theta$** is\n$c_C(\\theta):=P_\\theta(C_\\theta)$, and its **confidence level** is\n$\\inf_{\\theta\\in\\Theta}c_C(\\theta)$, the greatest lower bound of those\ncoverage values. For $0\\le\\alpha\\le1$, it has coverage\nat least $1-\\alpha$ if $P_\\theta(C_\\theta)\\ge1-\\alpha$ for every\n$\\theta\\in\\Theta$.\n\nOnly membership sections need to be measurable; no sigma-algebra on the\nparameter set is assumed. The parameter is fixed in the repeated-sampling\ncoverage probability.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-uniform-cdf-order-and-quantile-coverage",
+          "source_section": "Statement",
+          "quote": "For a cumulative distribution function $F$ and $u\\in(0,1)$, define the generalized quantile $q_F(u):=\\inf\\{x\\in\\mathbb R:F(x)\\ge u\\}$, and put $q_F(0):=-\\infty$ and $q_F(1):=+\\infty$. Let $X$ be a real random variable with CDF $F$. In part 3, a **random CDF** $\\widehat G$ means that each $\\widehat G(x)$ is measurable and, almost surely, $x\\mapsto\\widehat G(x)$ is a right-continuous CDF. For $\\varepsilon,\\delta\\ge0$ and $0\\le\\alpha_1,\\alpha_2<1$ with $\\alpha_1+\\alpha_2<1$, the following hold.\n\n1. If $G$ is a CDF and $\\sup_x(G(x)-F(x))\\le\\varepsilon$, then $\\mathbb P\\{X\\le q_G(1-\\alpha_2)\\}\\ge1-\\alpha_2-\\varepsilon$.\n2. If $G$ is a CDF and $\\sup_x(F(x)-G(x))\\le\\varepsilon$, then $\\mathbb P\\{X\\ge q_G(\\alpha_1)\\}\\ge1-\\alpha_1-\\varepsilon$.\n3. If $\\widehat G$ is a random CDF and $\\mathbb P\\{\\sup_x|\\widehat G(x)-F(x)|\\le\\varepsilon/2\\}\\ge1-\\delta$, then\n$$\\mathbb P\\{q_{\\widehat G}(\\alpha_1)\\le X\\le q_{\\widehat G}(1-\\alpha_2)\\}\\ge1-\\alpha_1-\\alpha_2-\\varepsilon-\\delta.$$\n\nThe endpoints $\\alpha_i=0$ use the extended quantiles and make the corresponding tail event vacuous. No continuity of $F$ or absence of atoms at the target quantiles is required.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-cumulative-distribution-function-of-a-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable. Its **cumulative distribution function** is\nthe function\n$$F_X:\\mathbb R\\to[0,1],\\qquad F_X(x):=\\mathbb P(X\\le x)=\\mathbb P_X((-\\infty,x]).$$\n\nThe second expression is the same quantity written in terms of the law\n[[def-law-or-distribution-of-a-random-element]] of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], under each fixed $P$ the IID observations have joint sampling law $P^{\\otimes n}$. By [F5], $J_{n,P}$ is the CDF of the actual root $R_{n,P}$ under that law. Fix $\\eta>0$. The two root-law limsup conditions imply that, for all sufficiently large $n$ and every $P\\in\\mathcal P$, both one-sided differences between $H_{m,P}$ and $J_{n,P}$ are at most $\\eta/2$. The feasible-root condition gives numbers $\\delta_n\\to0$ such that, uniformly in $P$, the event $E_{n,P}:=\\{\\sup_x|\\widehat H_{m,n}(x)-H_{m,P}(x)|\\le\\eta/2\\}$ has probability at least $1-\\delta_n$. On this event, the triangle inequality gives $\\sup_x|\\widehat H_{m,n}(x)-J_{n,P}(x)|\\le\\eta$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F4], part 3, with $F=J_{n,P}$, $\\widehat G=\\widehat H_{m,n}$, CDF error $2\\eta$, and exceptional-event probability $\\delta_n$. Step 1.1 supplies the event on which the CDF error is at most $\\eta$, so the lemma's pointwise tail inclusions bound the joint miss event without assuming independence of $R_{n,P}$ and that event. The root interval $[q_{\\widehat H_{m,n}}(\\alpha_1),q_{\\widehat H_{m,n}}(1-\\alpha_2)]$ therefore misses $R_{n,P}$ with probability at most $\\alpha_1+\\alpha_2+2\\eta+\\delta_n$, uniformly in $P$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By the definition of $\\mathcal C_n$, $P\\in\\mathcal C_n$ exactly when $\\theta(P)\\in I_n$. Since $a_n>0$, this is algebraically equivalent to $q_{\\widehat H}(\\alpha_1)\\le a_n(\\widehat\\theta_n-\\theta(P))\\le q_{\\widehat H}(1-\\alpha_2)$. It is the coverage event in [F3]. Thus its uniform lower bound is $1-\\alpha_1-\\alpha_2-2\\eta-\\delta_n$. Take the liminf in $n$, then let $\\eta\\downarrow0$, to obtain the stated inequality. The proof uses no independence between the two tail events.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Suppose only the first root-law limsup condition and the feasible-root condition hold. For any $\\eta>0$, all sufficiently large $n$ satisfy $H_{m,P}(x)-J_{n,P}(x)\\le\\eta/2$ uniformly in $P,x$, and on an event $E_{n,P}$ of probability at least $1-\\delta_n$ we have $\\widehat H_{m,n}(x)-H_{m,P}(x)\\le\\eta/2$ for all $x$. Hence on $E_{n,P}$, $\\widehat H_{m,n}-J_{n,P}\\le\\eta$. If $\\alpha_2+\\eta<1$, quantile ordering in [F4] gives $q_{J_{n,P}}(1-\\alpha_2-\\eta)\\le q_{\\widehat H_{m,n}}(1-\\alpha_2)$. Thus the joint failure event $\\{R_{n,P}>q_{\\widehat H_{m,n}}(1-\\alpha_2)\\}\\cap E_{n,P}$ is contained in $\\{R_{n,P}>q_{J_{n,P}}(1-\\alpha_2-\\eta)\\}$, whose probability is at most $\\alpha_2+\\eta$ by [F4]; adding $P(E_{n,P}^c)\\le\\delta_n$ bounds total failure. Letting $n\\to\\infty$ and then $\\eta\\downarrow0$ proves uniform asymptotic coverage at least $1-\\alpha_2$ for the lower confidence bound; if $\\alpha_2+\\eta\\ge1$, the intermediate lower bound is trivial. For the second assertion, if only the second root-law condition holds, then on the same event $J_{n,P}-\\widehat H_{m,n}\\le\\eta$. When $\\alpha_1+\\eta<1$, [F4] gives $q_{\\widehat H_{m,n}}(\\alpha_1)\\le q_{J_{n,P}}(\\alpha_1+\\eta)$. The joint failure event $\\{R_{n,P}<q_{\\widehat H_{m,n}}(\\alpha_1)\\}\\cap E_{n,P}$ is contained in $\\{R_{n,P}<q_{J_{n,P}}(\\alpha_1+\\eta)\\}$, whose probability is at most $\\alpha_1+\\eta$ by [F4]; adding the complement probability and letting $\\eta\\downarrow0$ proves uniform asymptotic coverage at least $1-\\alpha_1$ for the upper confidence bound. If $\\alpha_1+\\eta\\ge1$, the intermediate lower bound is trivial. [F4, step 1.1, given, algebra] ∎\n\n**The m-regime alone is insufficient.** Take the singleton class $\\mathcal P=\\{P\\}$ with $P=\\delta_0$, target $\\theta(P)=0$, statistic $T_k(z_1,\\ldots,z_k)=1/k$ (a measurable constant map), and normalization $a_k=k$. Let $m_n=\\lfloor\\sqrt n\\rfloor$. For all $n\\ge4$, $1\\le m_n<n$, and $m_n\\to\\infty$, $m_n/n\\to0$, and $a_{m_n}/a_n=m_n/n\\to0$. The actual size-$n$ and size-$m_n$ roots are both identically $1$, so $J_{n,P}=H_{m_n,P}$ and both root-law comparisons in the statement hold exactly. For either resampling method, every resampled statistic is $1/m_n$, so $\\widehat H_{m,n}$ is the point-mass CDF at $1-m_n/n$. Since $m_n<n$, its sup-CDF distance from $H_{m_n,P}$ is $1$, so feasible-root control fails. With $\\alpha_1=\\alpha_2=1/4$, both quantiles equal $1-m_n/n$ and $I_n=\\{m_n/n^2\\}$. Since $m_n/n^2>0$, the coverage of $\\theta(P)=0$ is zero for every $n\\ge4$. Thus the feasible-root condition, and hence the theorem's coverage conclusion, does not follow from the m-regime even when the two root-law comparisons hold exactly.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement explicitly assumes the law class P is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 allow alpha_i=0 through the extended quantile conventions in the cited lemma."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The condition alpha_1+alpha_2<1 excludes a confidence error level equal to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 uses a union bound and explicitly requires no independence between the two tail events."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 cover the two-sided and one-sided endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses uniform suprema over the stated class and does not select a law or an element from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The displayed root-law and feasible-root conditions are sufficient for the coverage conclusion; necessity is not claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem does not infer its root-law conditions from coverage, so no reverse implication is asserted."
+        }
+      ]
+    },
+    "thm-bootstrap-fails-at-nonsmooth-boundary-and-degenerate-mean-functionals": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-m-out-of-n-bootstrap-and-subsampling",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ be an integer, let $(\\mathcal Z,\\mathcal C)$ be a measurable observation space, let $P$ be a probability law on it, and let $Z_1,\\ldots,Z_n$ be IID $P$-distributed sampling units ([[def-identically-distributed-and-iid-random-variables]]). For each $1\\le k\\le n$, let $T_k$ be a measurable real-valued statistic and write $\\widehat\\theta_k=T_k(Z_1,\\ldots,Z_k)$; the target is a scalar $\\theta(P)$ and $a_k>0$ is its declared normalization at sample size $k$. The empirical law\n$$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{Z_i}$$\nis a probability law by [[lem-finite-empirical-measure-is-a-probability-law]].\n\nFor an integer $1\\le m\\le n$, the **m-out-of-n bootstrap** draws $Z_1^*,\\ldots,Z_m^*$ conditionally IID from $P_n$ and computes\n$$R_{m,n}^{*}:=a_m\\bigl(T_m(Z_1^*,\\ldots,Z_m^*)-\\widehat\\theta_n\\bigr).$$\nThe conditional distribution of this root given the observed sample is the bootstrap approximation. The ordinary n-out-of-n bootstrap is the case $m=n$ and uses $a_n$.\n\nFor $1\\le m<n$, **subsampling without replacement** chooses a subset $I=\\{i_1<\\cdots<i_m\\}$ uniformly from the $\\binom{n}{m}$ subsets of $\\{1,\\ldots,n\\}$ and computes\n$$R_{m,n}^{\\mathrm{sub}}:=a_m\\bigl(T_m(Z_{i_1},\\ldots,Z_{i_m})-\\widehat\\theta_n\\bigr).$$\nIts conditional law is the uniform distribution over those subsets. With replacement and without replacement are distinct conditional laws, even though both use the same declared statistic $T_m$.\n\nThe asymptotic regime considered on this page has integer $m=m_n\\to\\infty$ and $m_n/n\\to0$. The resampled root uses the actual size-$m$ scale $a_m$; validity does not follow merely from this regime. For inference based on a centered root, the scale ratio $a_m/a_n\\to0$ is an additional root-specific centering condition when it is used. A design with dependent sampling units requires a separate design-matched resampling procedure. This definition does not identify a bootstrap law with a Bayesian posterior or a design-randomization law. Extrapolation from several resample sizes is not asserted here; it requires a separate proof of the source-specific regular expansion and remainder regime.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-partial-sums-and-sample-means",
+          "source_section": "Definition",
+          "quote": "For real random variables $X_1,X_2,\\ldots$ on one probability space, define\n$$S_0=0,\\qquad S_n=\\sum_{k=1}^nX_k,\\qquad \\overline X_n=S_n/n\\quad(n\\ge1).$$\nFor a triangular array with finite row length $r_n\\ge0$, write $S_n=\\sum_{k=1}^{r_n}X_{n,k}$. An empty row has sum zero. These are finite sums in [[def-finite-sum]], with its index shifted by one. Each sum and each sample mean is a real random variable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]] and [[def-random-element-and-real-random-variable]]. No independence, common law, or integrability is implicit.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-normal-location-scale-mean-and-variance",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$, $\\sigma\\ge0$, and a real random variable\n$X$ with law $N(m,\\sigma^2)$,\n$$E[X]=m,\\qquad \\operatorname{Var}(X)=\\sigma^2.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-iid-normal-sample-mean-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $n\\ge1$, and let $X_1,\\ldots,X_n$ be mutually independent real random variables on one probability space, each with law $N(\\mu,\\sigma^2)$ for a fixed $\\mu\\in\\mathbb R$ and $\\sigma\\ge0$. Then $\\bar X_n=n^{-1}\\sum_{i=1}^nX_i$ has law $N(\\mu,\\sigma^2/n)$. If $\\sigma>0$, then for every $\\mu_0\\in\\mathbb R$,\n$$\\frac{\\sqrt n(\\bar X_n-\\mu_0)}{\\sigma}\\sim N\\!\\left(\\frac{\\sqrt n(\\mu-\\mu_0)}{\\sigma},1\\right).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-first-and-second-order-delta-method-for-random-vectors",
+          "source_section": "Statement",
+          "quote": "Let $d,k\\ge1$, let $r_n>0$ be deterministic with $r_n\\to\\infty$, and let $T_n$ be $\\mathbb R^d$-valued random vectors with target $\\theta\\in\\mathbb R^d$. Suppose $Z_n=r_n(T_n-\\theta)\\Rightarrow Z$ for an $\\mathbb R^d$-valued random vector $Z$. All vector norms below are Euclidean.\n\nIf $g:\\mathbb R^d\\to\\mathbb R^k$ is Borel and there is a linear map $A:\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=Ah+\\rho_1(h),\\qquad \\frac{\\|\\rho_1(h)\\|}{\\|h\\|}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n\\{g(T_n)-g(\\theta)\\}\\Rightarrow AZ.$$\n\nIf, in addition, $A=0$ and there is a continuous symmetric bilinear map $H:\\mathbb R^d\\times\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=\\frac12H[h,h]+\\rho_2(h),\\qquad \\frac{\\|\\rho_2(h)\\|}{\\|h\\|^2}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n^2\\{g(T_n)-g(\\theta)\\}\\Rightarrow \\frac12H[Z,Z].$$\nFor scalar-valued $g$, $H$ is the usual Hessian bilinear form. The second-order premise is a pointwise Peano expansion; continuous second derivatives on a neighborhood are not required.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-conditional-iid-bootstrap-clt-for-empirical-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X_1,X_2,\\ldots$ be IID $\\mathbb R^d$-valued vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean $\\mu$, and covariance $\\Sigma$. Fix $a\\in\\mathbb R^d$ such that $\\sigma^2=a^T\\Sigma a>0$. For the finite-index empirical bootstrap in [[def-iid-empirical-bootstrap-sample]], let $\\bar X_n^*$ be the bootstrap mean and define the conditional CDF\n$$F_n^*(x)=\\mathbb P^*\\!\\left(\\sqrt n\\,a^T(\\bar X_n^*-\\bar X_n)\\le x\\mid X_1,\\ldots,X_n\\right).$$\nThen\n$$D_n:=\\sup_{x\\in\\mathbb R}\\left|F_n^*(x)-\\Phi_\\sigma(x)\\right|\\longrightarrow0\\quad\\text{in probability},$$\nwhere $\\Phi_\\sigma$ is the CDF of $N(0,\\sigma^2)$. The assumption $\\sigma^2>0$ is needed for the normalized Lindeberg–Feller step.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-pointwise-cdf-convergence-to-a-continuous-law-is-uniform",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a continuous CDF and $(G_n)$ random CDFs, meaning that each $G_n(x)$ is a measurable real random variable and, almost surely, $x\\mapsto G_n(x)$ is a right-continuous CDF. Suppose that for each fixed $x\\in\\mathbb R$, $G_n(x)\\to F(x)$ in probability. Then\n$$\\sup_{x\\in\\mathbb R}|G_n(x)-F(x)|\\longrightarrow0$$\nin probability.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is [[def-metric-continuity]]. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in [[def-integrable-real-and-complex-functions-and-their-integrals]]. No completeness or coupling is required.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-portmanteau-theorem",
+          "source_section": "Statement",
+          "quote": "For Borel probabilities $\\mu_n,\\mu$ on a metric space S, the following are equivalent: (i) $\\mu_n\\Rightarrow\\mu$; (ii) integrals converge for all bounded uniformly continuous real tests; (iii) $\\limsup_n\\mu_n(F)\\le\\mu(F)$ for every closed F; (iv) $\\liminf_n\\mu_n(G)\\ge\\mu(G)$ for every open G; (v) $\\mu_n(A)\\to\\mu(A)$ for every Borel A with $\\mu(\\partial A)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-cumulative-distribution-function-of-a-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable. Its **cumulative distribution function** is\nthe function\n$$F_X:\\mathbb R\\to[0,1],\\qquad F_X(x):=\\mathbb P(X\\le x)=\\mathbb P_X((-\\infty,x]).$$\n\nThe second expression is the same quantity written in terms of the law\n[[def-law-or-distribution-of-a-random-element]] of $X$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], the data form an IID sequence, and [F3] identifies $\\bar X_n$ as its arithmetic sample mean. By [F4], $Z_n=\\sqrt n\\bar X_n$ is standard normal for every $n$. For $g_2(\\mu)=\\mu^2$, the derivative at zero vanishes and the second derivative is $2$, so [F5] gives the second-order scale $R_{n,2}=Z_n^2\\Rightarrow Z^2$; directly, its law is exactly that of $Z^2$ for every $n$. For $g_1(\\mu)=|\\mu|$, the first-order delta premise fails at zero, and directly $R_{n,1}=|Z_n|$ has the law of $|Z|$ for every $n$. For $t>0$, the density bound in [F4] gives $P(|Z|\\le t)\\le2t/\\sqrt{2\\pi}$ and $P(Z^2\\le t)\\le2\\sqrt t/\\sqrt{2\\pi}$; for $t<0$ both probabilities are zero. Therefore both true-root CDFs are continuous at zero and equal zero there. Their constant-law sequences converge weakly by [F8], and [F9] gives the same CDF limit at this continuity point.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F1], the bootstrap draws are conditionally IID from the empirical law and $W_n^*$ is the centered, $\\sqrt n$-scaled empirical-bootstrap mean. By [F10], $G_n^*$ is the CDF of this conditional root law. The specialized supplier fact [F6] and the local CDF lemma [F7] give $\\Delta_n:=\\sup_x|G_n^*(x)-\\Phi(x)|\\to0$ in probability. For a realized value $z=Z_n$, the event $R_{n,1}^*\\le0$ is $|z+W_n^*|\\le|z|$, and the event $R_{n,2}^*\\le0$ is $(z+W_n^*)^2\\le z^2$; both are the same interval event, with $W_n^*\\in[-2z,0]$ if $z\\ge0$ and $W_n^*\\in[0,-2z]$ if $z<0$. A uniform CDF error $\\Delta_n$ also bounds the error at left limits, since $\\Phi$ is continuous. Thus each conditional probability differs by at most $2\\Delta_n$ from its standard-normal value $\\Phi(2|Z_n|)-\\frac12$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F6",
+            "F7",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $b:=\\Phi(2)-\\frac12>0$ and $c=b/2$. On $A_n:=\\{|Z_n|\\ge1\\}$, whose probability is the fixed positive number $P(|Z|\\ge1)$ by [F4], the normal interval probability in step 1.2 is at least $b$. On the additional event $\\Delta_n\\le b/4$, both conditional root CDFs at zero are therefore at least $c$. The true roots have the laws of $|Z|$ and $Z^2$ for every $n$ by [F4]. Their atom at zero is zero, and the standard-normal density is bounded by $(2\\pi)^{-1/2}$, so for every $d>0$, $\\mathbb E[h_d(|Z|)]\\le P(|Z|<d)\\le2d/\\sqrt{2\\pi}$ and $\\mathbb E[h_d(Z^2)]\\le P(|Z|<\\sqrt d)\\le2\\sqrt d/\\sqrt{2\\pi}$, where $h_d(t)=1$ for $t\\le0$, $h_d(t)=1-t/d$ for $0<t<d$, and $h_d(t)=0$ for $t\\ge d$. Choose $d$ so both expectations are below $c/2$. For either bootstrap root, $\\mathbb E^*[h_d(R_{n,j}^*)]\\ge P^*(R_{n,j}^*\\le0)\\ge c$ on that event, while its true test integral is below $c/2$. The event has probability at least $P(|Z|\\ge1)-P(\\Delta_n>b/4)$, whose limit is positive. Thus the conditional integral of a bounded continuous test function fails to converge in probability to the true integral, contradicting conditional weak consistency.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "F8",
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement fixes each sample size n≥1, and step 1.1 computes both root laws for every such n; n=0 is outside the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 compute true and conditional root behavior at zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The result contains no confidence level or upper probability endpoint equal to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the zero first derivative of mu^2 and its nondegenerate second-order root; step 2.1 gives the random conditional interval law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 compare both root laws at the boundary zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement explicitly assumes AC; step 1.2 invokes the conditional bootstrap CLT with its AC premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves inconsistency for the two specified functionals under the stated normal model; it is not an equivalence criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterizing all inconsistent bootstrap problems by these two functional properties is claimed."
+        }
+      ]
+    },
+    "ex-uniform-endpoint-bootstrap-failure-and-m-out-of-n-remedy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ordinary-bootstrap-fails-for-uniform-endpoint",
+          "source_section": "Statement",
+          "quote": "For each integer $n\\ge1$, let $X_1,\\ldots,X_n$ be IID with the uniform law on $[0,1]$, let $M_n=\\max_{i\\le n}X_i$, and set the support endpoint $\\theta=1$. The sampling root is $R_n=n(M_n-1)$. For the ordinary n-out-of-n bootstrap, draw $n$ observations IID from the empirical law $P_n$ and set $R_n^*=n(M_n^*-M_n)$. Here weak conditional consistency means that for every bounded continuous real function $f$, the conditional expectation $\\mathbb E^*[f(R_n^*)]$ converges in probability to $\\mathbb E[f(R_n)]$. With $h(x)=(1-2|x|)_+$, a bounded continuous function, the conditional bootstrap expectation $\\mathbb E^*[h(R_n^*)]$ stays asymptotically separated from $\\mathbb E[h(R_n)]$. Therefore the ordinary bootstrap is not weakly conditionally consistent at this support endpoint.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-m-out-of-n-resampling-valid-for-uniform-endpoint",
+          "source_section": "Statement",
+          "quote": "For each $n\\ge1$, let $X_1,\\ldots,X_n$ be IID uniform on $[0,1]$, $M_n=\\max_{i\\le n}X_i$, and $R_n=n(M_n-1)$. Let $m=m_n$ be integers with $1\\le m_n<n$ for all sufficiently large $n$, $m_n\\to\\infty$, and $m_n/n\\to0$. Form the conditional m-out-of-n bootstrap and subsampling roots\n$$R_{m,n}^{*}=m(M_{m,n}^{*}-M_n),\\qquad R_{m,n}^{\\mathrm{sub}}=m(M_{I}-M_n),$$\nwhere $M_{m,n}^{*}$ is the maximum of $m$ draws with replacement from $P_n$, and $M_I$ is the maximum over a uniformly selected m-subset. For each method, its conditional CDF converges uniformly in probability to\n$$F(x)=\\begin{cases}e^x,&x<0,\\\\1,&x\\ge0.\\end{cases}$$\nThis is also the limiting CDF of the actual m-root $m(M_m-1)$. Here first-order validity means that the conditional CDF converges in probability to this actual-root limit; the theorem asserts no uniform validity over other distribution classes.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-m-out-of-n-bootstrap-and-subsampling",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ be an integer, let $(\\mathcal Z,\\mathcal C)$ be a measurable observation space, let $P$ be a probability law on it, and let $Z_1,\\ldots,Z_n$ be IID $P$-distributed sampling units ([[def-identically-distributed-and-iid-random-variables]]). For each $1\\le k\\le n$, let $T_k$ be a measurable real-valued statistic and write $\\widehat\\theta_k=T_k(Z_1,\\ldots,Z_k)$; the target is a scalar $\\theta(P)$ and $a_k>0$ is its declared normalization at sample size $k$. The empirical law\n$$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{Z_i}$$\nis a probability law by [[lem-finite-empirical-measure-is-a-probability-law]].\n\nFor an integer $1\\le m\\le n$, the **m-out-of-n bootstrap** draws $Z_1^*,\\ldots,Z_m^*$ conditionally IID from $P_n$ and computes\n$$R_{m,n}^{*}:=a_m\\bigl(T_m(Z_1^*,\\ldots,Z_m^*)-\\widehat\\theta_n\\bigr).$$\nThe conditional distribution of this root given the observed sample is the bootstrap approximation. The ordinary n-out-of-n bootstrap is the case $m=n$ and uses $a_n$.\n\nFor $1\\le m<n$, **subsampling without replacement** chooses a subset $I=\\{i_1<\\cdots<i_m\\}$ uniformly from the $\\binom{n}{m}$ subsets of $\\{1,\\ldots,n\\}$ and computes\n$$R_{m,n}^{\\mathrm{sub}}:=a_m\\bigl(T_m(Z_{i_1},\\ldots,Z_{i_m})-\\widehat\\theta_n\\bigr).$$\nIts conditional law is the uniform distribution over those subsets. With replacement and without replacement are distinct conditional laws, even though both use the same declared statistic $T_m$.\n\nThe asymptotic regime considered on this page has integer $m=m_n\\to\\infty$ and $m_n/n\\to0$. The resampled root uses the actual size-$m$ scale $a_m$; validity does not follow merely from this regime. For inference based on a centered root, the scale ratio $a_m/a_n\\to0$ is an additional root-specific centering condition when it is used. A design with dependent sampling units requires a separate design-matched resampling procedure. This definition does not identify a bootstrap law with a Bayesian posterior or a design-randomization law. Extrapolation from several resample sizes is not asserted here; it requires a separate proof of the source-specific regular expansion and remainder regime.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The sample maximum has endpoint rate $n$, so the ordinary root is $n(M_n-1)$ and the ordinary bootstrap root is centered at $M_n$ with the same $n$-scale. By [F1], its conditional atom at zero has positive limiting mass while the sampling limit is continuous.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the smaller-resample methods the corresponding endpoint root is $m(M_m-1)$, and the conditional roots are centered at the full-sample maximum but scaled by $m$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], for either replacement design the conditional CDF converges to the CDF of the actual size-$m$ sampling-root limit, so the smaller-resample approximation is first-order valid in this model. This conclusion is specific to the displayed uniform endpoint model and does not give uniform coverage over other laws.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a positive sample size and no empty resample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 compare the ordinary and smaller-resample roots at zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes the endpoint theta=1 and step 1.2 treats the size-m endpoint root."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 records the ordinary-bootstrap atom at zero; step 2.1 compares the conditional smaller-resample laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use the exact endpoint and zero-root boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example fixes one uniform law and computes its roots directly; it makes no arbitrary-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The calculation exhibits failure and a model-specific smaller-resample remedy; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example does not characterize all models where either resampling method is valid."
+        }
+      ]
+    },
+    "ex-weak-metric-does-not-guarantee-uniform-bootstrap-coverage": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-m-out-of-n-bootstrap-and-subsampling",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ be an integer, let $(\\mathcal Z,\\mathcal C)$ be a measurable observation space, let $P$ be a probability law on it, and let $Z_1,\\ldots,Z_n$ be IID $P$-distributed sampling units ([[def-identically-distributed-and-iid-random-variables]]). For each $1\\le k\\le n$, let $T_k$ be a measurable real-valued statistic and write $\\widehat\\theta_k=T_k(Z_1,\\ldots,Z_k)$; the target is a scalar $\\theta(P)$ and $a_k>0$ is its declared normalization at sample size $k$. The empirical law\n$$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{Z_i}$$\nis a probability law by [[lem-finite-empirical-measure-is-a-probability-law]].\n\nFor an integer $1\\le m\\le n$, the **m-out-of-n bootstrap** draws $Z_1^*,\\ldots,Z_m^*$ conditionally IID from $P_n$ and computes\n$$R_{m,n}^{*}:=a_m\\bigl(T_m(Z_1^*,\\ldots,Z_m^*)-\\widehat\\theta_n\\bigr).$$\nThe conditional distribution of this root given the observed sample is the bootstrap approximation. The ordinary n-out-of-n bootstrap is the case $m=n$ and uses $a_n$.\n\nFor $1\\le m<n$, **subsampling without replacement** chooses a subset $I=\\{i_1<\\cdots<i_m\\}$ uniformly from the $\\binom{n}{m}$ subsets of $\\{1,\\ldots,n\\}$ and computes\n$$R_{m,n}^{\\mathrm{sub}}:=a_m\\bigl(T_m(Z_{i_1},\\ldots,Z_{i_m})-\\widehat\\theta_n\\bigr).$$\nIts conditional law is the uniform distribution over those subsets. With replacement and without replacement are distinct conditional laws, even though both use the same declared statistic $T_m$.\n\nThe asymptotic regime considered on this page has integer $m=m_n\\to\\infty$ and $m_n/n\\to0$. The resampled root uses the actual size-$m$ scale $a_m$; validity does not follow merely from this regime. For inference based on a centered root, the scale ratio $a_m/a_n\\to0$ is an additional root-specific centering condition when it is used. A design with dependent sampling units requires a separate design-matched resampling procedure. This definition does not identify a bootstrap law with a Bayesian posterior or a design-randomization law. Extrapolation from several resample sizes is not asserted here; it requires a separate proof of the source-specific regular expansion and remainder regime.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-partial-sums-and-sample-means",
+          "source_section": "Definition",
+          "quote": "For real random variables $X_1,X_2,\\ldots$ on one probability space, define\n$$S_0=0,\\qquad S_n=\\sum_{k=1}^nX_k,\\qquad \\overline X_n=S_n/n\\quad(n\\ge1).$$\nFor a triangular array with finite row length $r_n\\ge0$, write $S_n=\\sum_{k=1}^{r_n}X_{n,k}$. An empty row has sum zero. These are finite sums in [[def-finite-sum]], with its index shifted by one. Each sum and each sample mean is a real random variable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]] and [[def-random-element-and-real-random-variable]]. No independence, common law, or integrability is implicit.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.\n\nFor $n\\in\\mathbb N$, a **binomial$(n,p)$ random variable** is a sum $X=\\sum_{i<n}X_i$ of $n$ mutually independent Bernoulli$(p)$ variables. When $n=0$, this is the constant zero random variable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-bernoulli-and-binomial-mean-and-variance",
+          "source_section": "Statement",
+          "quote": "Work on a common probability space; the independent Bernoulli variables used to represent a binomial sum are independent in the sense of [[def-independent-random-elements]]. The original finite-space atom-independence convention is included.\n\nIf $X$ is Bernoulli$(p)$, then $\\mathbb E[X]=p$ and $\\operatorname{Var}(X)=p(1-p)$. If $S$ is binomial$(n,p)$, then\n$$\\mathbb E[S]=np,\\qquad \\operatorname{Var}(S)=np(1-p).$$\nThese formulas include $p=0$, $p=1$, and $n=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-chebyshev-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X$ is a square-integrable real random variable and $a>0$, then\n$$\\mathbb P(|X-\\mathbb E[X]|\\ge a)\\le\\frac{\\operatorname{Var}(X)}{a^2}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-bernoulli-root-laws-are-uniformly-weak-close",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $p\\in[0,1]$, let $\\mu_{n,p}$ be the law of\n$$S_{n,p}:=\\frac1{\\sqrt n}\\sum_{i=1}^n(B_i(p)-p),$$\nwhere $B_1(p),\\ldots,B_n(p)$ are IID Bernoulli$(p)$. For every $p,q\\in[0,1]$,\n$$\\pi(\\mu_{n,p},\\mu_{n,q})\\le |p-q|^{1/3},$$\nwhere $\\pi$ is the Levy–Prokhorov metric. The bound is uniform in the sample size and choice-free.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-confidence-set-and-coverage",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment as in [[def-statistical-experiment]], and assume\n$\\Theta\\ne\\varnothing$. A **confidence-set procedure** is a map\n$C:\\mathcal X\\to\\mathcal P(\\Theta)$, where\n$\\mathcal P(\\Theta):=\\{A:A\\subseteq\\Theta\\}$, such that, for every\n$\\eta\\in\\Theta$, its\nmembership section\n$$C_\\eta:=\\{x\\in\\mathcal X:\\eta\\in C(x)\\}$$\nbelongs to $\\mathcal A$. Its **coverage at $\\theta$** is\n$c_C(\\theta):=P_\\theta(C_\\theta)$, and its **confidence level** is\n$\\inf_{\\theta\\in\\Theta}c_C(\\theta)$, the greatest lower bound of those\ncoverage values. For $0\\le\\alpha\\le1$, it has coverage\nat least $1-\\alpha$ if $P_\\theta(C_\\theta)\\ge1-\\alpha$ for every\n$\\theta\\in\\Theta$.\n\nOnly membership sections need to be measurable; no sigma-algebra on the\nparameter set is assumed. The parameter is fixed in the repeated-sampling\ncoverage probability.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-levy-prokhorov-metric",
+          "source_section": "Definition",
+          "quote": "For Borel probabilities $\\mu$,$\\nu$ on a metric space S, put $F^{[\\varepsilon]}=\\{x:d(x,F)\\le\\varepsilon\\}$ for nonempty closed F, and $\\varnothing^{[\\varepsilon]}=\\varnothing$. Define $\\pi(\\mu,\\nu)$ as the infimum of $\\varepsilon$>0 such that, for every closed F, both $\\mu(F)\\le\\nu(F^{[\\varepsilon]})+\\varepsilon$ and $\\nu(F)\\le\\mu(F^{[\\varepsilon]})+\\varepsilon$. The admissible set contains every $\\varepsilon$>=1 and is bounded below by zero, so its real infimum exists by [[thm-infimum-property]]. Enlargements are closed because distance to a nonempty set is continuous. [[lem-distance-to-set-is-lipschitz]] The metric assertion is proved in the following lemma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is [[def-metric-continuity]]. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in [[def-integrable-real-and-complex-functions-and-their-integrals]]. No completeness or coupling is required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-levy-prokhorov-metric-metrizes-weak-convergence",
+          "source_section": "Statement",
+          "quote": "Assume AC. For Borel probabilities on a separable metric space, $\\pi(\\mu_n,\\mu)\\to0$ if and only if $\\mu_n\\Rightarrow\\mu$. Completeness is not required.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-uniform-subsampling-coverage-under-root-law-control",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a nonempty class of IID laws on a measurable observation space. For $P\\in\\mathcal P$, let $\\theta(P)\\in\\mathbb R$ be a target, let $\\widehat\\theta_k$ be a measurable estimator at every sample size $k$, and let $a_k>0$ be deterministic. Put\n$$R_{n,P}=a_n(\\widehat\\theta_n-\\theta(P)),\\qquad J_{n,P}(x)=P^{\\otimes n}(R_{n,P}\\le x),$$\nand define $H_{m,P}$ as the CDF of the actual size-$m$ root $a_m(\\widehat\\theta_m-\\theta(P))$. Let $m=m_n$ be integers with $1\\le m_n<n$ for all sufficiently large $n$, $m_n\\to\\infty$, and $m_n/n\\to0$; for centered resampling roots, assume $a_m/a_n\\to0$. Let $\\widehat H_{m,n}$ be the conditional CDF of either $a_m(\\widehat\\theta^*_{m,n}-\\widehat\\theta_n)$ for the m-out-of-n bootstrap or $a_m(\\widehat\\theta_{I,m}-\\widehat\\theta_n)$ for uniform subsampling without replacement, as defined in [[def-m-out-of-n-bootstrap-and-subsampling]], with each evaluation measurable and almost surely right-continuous sample paths.\n\nSuppose the following exact root-law and feasible-root conditions hold:\n$$\\limsup_{n\\to\\infty}\\sup_{P\\in\\mathcal P}\\sup_x\\{H_{m,P}(x)-J_{n,P}(x)\\}\\le0,\\qquad \\limsup_{n\\to\\infty}\\sup_{P\\in\\mathcal P}\\sup_x\\{J_{n,P}(x)-H_{m,P}(x)\\}\\le0,$$\nand for every $\\eta>0$,\n$$\\sup_{P\\in\\mathcal P}P^{\\otimes n}\\!\\left(\\sup_x|\\widehat H_{m,n}(x)-H_{m,P}(x)|>\\eta\\right)\\longrightarrow0.$$\nFor $0\\le\\alpha_1,\\alpha_2$ with $\\alpha_1+\\alpha_2<1$, define\n$$I_n=\\left[\\widehat\\theta_n-\\frac{q_{\\widehat H_{m,n}}(1-\\alpha_2)}{a_n},\\ \\widehat\\theta_n-\\frac{q_{\\widehat H_{m,n}}(\\alpha_1)}{a_n}\\right].$$\nAssume the interval endpoints are measurable functions of the data and set $\\mathcal C_n=\\{Q\\in\\mathcal P:\\theta(Q)\\in I_n\\}$. Then\n$$\\liminf_{n\\to\\infty}\\inf_{P\\in\\mathcal P}P^{\\otimes n}\\{P\\in\\mathcal C_n\\}\\ge1-\\alpha_1-\\alpha_2.$$\nIf only the first one-sided CDF comparison holds, the upper root quantile gives the corresponding one-sided lower confidence bound; if only the second holds, the lower root quantile gives the one-sided upper confidence bound. The m-regime alone does not imply any of these CDF conditions. Weak convergence of root laws alone is not a substitute for the stated uniform comparisons and feasible-root control.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "lem-uniform-cdf-order-and-quantile-coverage",
+          "source_section": "Statement",
+          "quote": "For a cumulative distribution function $F$ and $u\\in(0,1)$, define the generalized quantile $q_F(u):=\\inf\\{x\\in\\mathbb R:F(x)\\ge u\\}$, and put $q_F(0):=-\\infty$ and $q_F(1):=+\\infty$. Let $X$ be a real random variable with CDF $F$. In part 3, a **random CDF** $\\widehat G$ means that each $\\widehat G(x)$ is measurable and, almost surely, $x\\mapsto\\widehat G(x)$ is a right-continuous CDF. For $\\varepsilon,\\delta\\ge0$ and $0\\le\\alpha_1,\\alpha_2<1$ with $\\alpha_1+\\alpha_2<1$, the following hold.\n\n1. If $G$ is a CDF and $\\sup_x(G(x)-F(x))\\le\\varepsilon$, then $\\mathbb P\\{X\\le q_G(1-\\alpha_2)\\}\\ge1-\\alpha_2-\\varepsilon$.\n2. If $G$ is a CDF and $\\sup_x(F(x)-G(x))\\le\\varepsilon$, then $\\mathbb P\\{X\\ge q_G(\\alpha_1)\\}\\ge1-\\alpha_1-\\varepsilon$.\n3. If $\\widehat G$ is a random CDF and $\\mathbb P\\{\\sup_x|\\widehat G(x)-F(x)|\\le\\varepsilon/2\\}\\ge1-\\delta$, then\n$$\\mathbb P\\{q_{\\widehat G}(\\alpha_1)\\le X\\le q_{\\widehat G}(1-\\alpha_2)\\}\\ge1-\\alpha_1-\\alpha_2-\\varepsilon-\\delta.$$\n\nThe endpoints $\\alpha_i=0$ use the extended quantiles and make the corresponding tail event vacuous. No continuity of $F$ or absence of atoms at the target quantiles is required.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under $P_p$, $\\bar X_n$ has law $\\operatorname{Binomial}(n,p)/n$. Conditional on the sample, the bootstrap observations are IID Bernoulli$(\\bar X_n)$, so their centered root law is $\\mu_{n,\\bar X_n}$, while the true root law is $\\mu_{n,p}$. By [F7], $\\pi(\\mathcal L^*(R_{n,p}^*),\\mathcal L(R_{n,p}))\\le|\\bar X_n-p|^{1/3}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $\\lambda>0$, take $p_n=1-\\lambda/n$ for $n>\\lambda$, and let $q_n$ be the conditional $(1-\\alpha)$-quantile of $R_{n,p_n}^*$. Define the lower interval $I_n=[\\bar X_n-q_n/\\sqrt n,1]\\cap[0,1]$. It is measurable because the data take only finitely many values, and $p_n\\in I_n$ is exactly the coverage event for root threshold $q_n$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "From [F5], $\\operatorname{Var}_p(\\bar X_n)=p(1-p)/n\\le1/(4n)$. For each $\\epsilon>0$, Chebyshev's inequality [F6] and step 1.1 give $\\sup_{p\\in[0,1]}P_p\\{\\pi(\\mathcal L^*(R_{n,p}^*),\\mathcal L(R_{n,p}))>\\epsilon\\}\\le\\sup_pP_p\\{|\\bar X_n-p|>\\epsilon^3\\}\\le1/(4n\\epsilon^6)\\to0$. This is uniform closeness in a metric that induces weak convergence by [A1, F9, F10, F11].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "F9",
+            "F10",
+            "F11",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "On the event $X_1=\\cdots=X_n=1$, the empirical law is $\\delta_1$, every bootstrap root is zero, and [F14] gives $q_n=0$ because $1-\\alpha\\in(0,1)$; then $I_n=\\{1\\}$ and $p_n\\notin I_n$. This event has probability $p_n^n=(1-\\lambda/n)^n$. By the integral formula in [F13], $n\\log(1-\\lambda/n)=-n\\int_{1-\\lambda/n}^1dt/t\\to-\\lambda$, since the integrand converges uniformly to $1$ on that shrinking interval; exponentiating gives $p_n^n\\to e^{-\\lambda}$. Hence $\\limsup_nP_{p_n}(p_n\\in I_n)\\le1-e^{-\\lambda}<1-\\alpha$, so $\\liminf_n\\inf_{p\\in[0,1]}P_p(p\\in I_n)<1-\\alpha$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F13",
+            "F14",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 establish uniform weak-metric closeness, while steps 1.2 and 2.2 show the coverage failure. Thus weak-metric closeness alone does not imply uniform quantile coverage or the stronger root-CDF and feasible-root conditions in [F12]. The coupling and coverage calculation use no choice; AC enters only through the metric-to-weak-topology equivalence [F11].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F7",
+            "F11",
+            "F12",
+            "step 1.1",
+            "step 2.1",
+            "step 1.2",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes n>=1 and a nonempty Bernoulli model class."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes p=0 in the uniform weak-metric bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 uses the all-ones event and approaches endpoint p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.2 include degenerate Bernoulli endpoints and their exact conditional roots."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement uses p in [0,1], while alpha is restricted to its stated open interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement assumes AC, and step 2.1 uses it only for the Levy–Prokhorov metric/weak-topology equivalence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Bernoulli sequence is a counterexample to weak-metric sufficiency; no if-and-only-if relation is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example does not say that every weakly close sequence must exhibit this coverage failure."
+        }
+      ]
+    },
+    "ex-nonsmooth-boundary-bootstrap-failure": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-bootstrap-fails-at-nonsmooth-boundary-and-degenerate-mean-functionals",
+          "source_section": "Statement",
+          "quote": "Assume AC. For each integer $n\\ge1$, let $X_1,\\ldots,X_n$ be IID $N(0,1)$ and let $\\bar X_n=n^{-1}\\sum_{i=1}^nX_i$. At $\\mu=0$, which is the boundary value of the nonnegative ranges of $g_1(\\mu)=|\\mu|$ and $g_2(\\mu)=\\mu^2$, consider these two functionals. For the ordinary bootstrap, draw $X_1^*,\\ldots,X_n^*$ conditionally IID from the empirical law and write $W_n^*=\\sqrt n(\\bar X_n^* -\\bar X_n)$ with conditional CDF $G_n^*$. The conditional empirical-bootstrap CLT [[thm-conditional-iid-bootstrap-clt-for-empirical-law]], specialized to $d=1$, $a=1$, and $\\sigma^2=1$, gives $G_n^*(x)\\to\\Phi(x)$ in probability for every fixed $x$, where $\\Phi$ is the standard normal CDF. Here conditional weak consistency means that the conditional integral of every bounded continuous test function converges in probability to its sampling-law integral.\n\nThen the ordinary bootstrap is inconsistent for both correctly centered roots\n$$R_{n,1}=\\sqrt n\\,|\\bar X_n|,\\qquad R_{n,1}^*=\\sqrt n\\,(|\\bar X_n^*|-|\\bar X_n|),$$\nand\n$$R_{n,2}=n\\bar X_n^2,\\qquad R_{n,2}^*=n\\bigl((\\bar X_n^*)^2-\\bar X_n^2\\bigr).$$\nIn both cases the true root CDF is continuous at zero with value zero, whereas the conditional bootstrap root CDF at zero stays away from zero with positive probability. The first functional is nonsmooth at the boundary; the second has zero first derivative there, so its nondegenerate sampling root is on the second-order scale.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-m-out-of-n-bootstrap-and-subsampling",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ be an integer, let $(\\mathcal Z,\\mathcal C)$ be a measurable observation space, let $P$ be a probability law on it, and let $Z_1,\\ldots,Z_n$ be IID $P$-distributed sampling units ([[def-identically-distributed-and-iid-random-variables]]). For each $1\\le k\\le n$, let $T_k$ be a measurable real-valued statistic and write $\\widehat\\theta_k=T_k(Z_1,\\ldots,Z_k)$; the target is a scalar $\\theta(P)$ and $a_k>0$ is its declared normalization at sample size $k$. The empirical law\n$$P_n:=\\frac1n\\sum_{i=1}^n\\delta_{Z_i}$$\nis a probability law by [[lem-finite-empirical-measure-is-a-probability-law]].\n\nFor an integer $1\\le m\\le n$, the **m-out-of-n bootstrap** draws $Z_1^*,\\ldots,Z_m^*$ conditionally IID from $P_n$ and computes\n$$R_{m,n}^{*}:=a_m\\bigl(T_m(Z_1^*,\\ldots,Z_m^*)-\\widehat\\theta_n\\bigr).$$\nThe conditional distribution of this root given the observed sample is the bootstrap approximation. The ordinary n-out-of-n bootstrap is the case $m=n$ and uses $a_n$.\n\nFor $1\\le m<n$, **subsampling without replacement** chooses a subset $I=\\{i_1<\\cdots<i_m\\}$ uniformly from the $\\binom{n}{m}$ subsets of $\\{1,\\ldots,n\\}$ and computes\n$$R_{m,n}^{\\mathrm{sub}}:=a_m\\bigl(T_m(Z_{i_1},\\ldots,Z_{i_m})-\\widehat\\theta_n\\bigr).$$\nIts conditional law is the uniform distribution over those subsets. With replacement and without replacement are distinct conditional laws, even though both use the same declared statistic $T_m$.\n\nThe asymptotic regime considered on this page has integer $m=m_n\\to\\infty$ and $m_n/n\\to0$. The resampled root uses the actual size-$m$ scale $a_m$; validity does not follow merely from this regime. For inference based on a centered root, the scale ratio $a_m/a_n\\to0$ is an additional root-specific centering condition when it is used. A design with dependent sampling units requires a separate design-matched resampling procedure. This definition does not identify a bootstrap law with a Bayesian posterior or a design-randomization law. Extrapolation from several resample sizes is not asserted here; it requires a separate proof of the source-specific regular expansion and remainder regime.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under AC and the IID standard-normal model in [F1], the boundary mean is zero. The target for $|\\mu|$ is zero and $|\\cdot|$ is not differentiable there; the target for $\\mu^2$ is also zero and its first derivative vanishes. The root normalizations are respectively $\\sqrt n$ and $n$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The ordinary bootstrap roots therefore are $\\sqrt n(|\\bar X_n^*|-|\\bar X_n|)$ and $n((\\bar X_n^*)^2-\\bar X_n^2)$, as follows from the centering and size-$n$ scale in [F2]. Theorem [F1] proves that each conditional CDF fails at the continuity point zero, despite the nondegenerate true limits $|Z|$ and $Z^2$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses n>=1 IID observations; no empty sample is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 evaluate both true and conditional root CDFs at zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has no confidence level or upper probability endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 distinguishes the nonsmooth kink from the zero first derivative and nondegenerate second-order square root."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 compare both root laws at boundary zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example states AC and consumes the boundary theorem whose AC use is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The calculations demonstrate two specified bootstrap failures; they do not characterize all nonsmooth or degenerate functionals."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse about all functionals or all bootstrap failures is part of this worked example."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,325 @@
+{
+  "group": "g",
+  "batches": [
+    "25"
+  ],
+  "pages_read": [
+    "variational-inference-and-evidence-lower-bound",
+    "variational-inference-and-evidence-lower-bound-examples"
+  ],
+  "items_read": [
+    "def-variational-family-and-elbo",
+    "thm-elbo-kl-decomposition",
+    "alg-coordinate-ascent-variational-inference",
+    "cex-mean-field-variational-inference-underestimates-correlated-gaussian-variance",
+    "lem-admissible-product-coordinate-normalizer-is-finite",
+    "thm-exact-coordinate-ascent-does-not-decrease-elbo",
+    "rem-high-elbo-alone-does-not-certify-posterior-calibration",
+    "ex-discrete-elbo-equality-at-exact-posterior",
+    "ex-variational-candidate-outside-posterior-support",
+    "ex-coordinate-update-normalizer-diverges-outside-admissibility"
+  ],
+  "conventions": [
+    {
+      "convention": "The target is a supplied measurable nonnegative density γ with 0<Z=∫γ dμ<∞; π=γ/Z. Admissibility requires q=0 μ-almost everywhere on {π=0} and ∫q(|log γ|+|log q|) dμ<∞. Weighted logarithmic terms are zero where q=0 and on the specified exceptional null sets.",
+      "fixed_by": "def-variational-family-and-elbo",
+      "matters_for": [
+        "thm-elbo-kl-decomposition",
+        "alg-coordinate-ascent-variational-inference",
+        "lem-admissible-product-coordinate-normalizer-is-finite",
+        "thm-exact-coordinate-ascent-does-not-decrease-elbo",
+        "cex-mean-field-variational-inference-underestimates-correlated-gaussian-variance",
+        "rem-high-elbo-alone-does-not-certify-posterior-calibration",
+        "ex-discrete-elbo-equality-at-exact-posterior",
+        "ex-variational-candidate-outside-posterior-support",
+        "ex-coordinate-update-normalizer-diverges-outside-admissibility"
+      ]
+    },
+    {
+      "convention": "Mean-field densities use a finite product of sigma-finite reference spaces with m≥1; factorization alone does not imply admissibility.",
+      "fixed_by": "def-variational-family-and-elbo",
+      "matters_for": [
+        "alg-coordinate-ascent-variational-inference",
+        "lem-admissible-product-coordinate-normalizer-is-finite",
+        "thm-exact-coordinate-ascent-does-not-decrease-elbo"
+      ]
+    },
+    {
+      "convention": "The reverse divergence is D(Q||Π), with Q=qμ as its first argument. The explicit density-ratio identity is choice-free; identification with the library KL and use of its nonnegativity assume AC.",
+      "fixed_by": "thm-elbo-kl-decomposition",
+      "matters_for": [
+        "thm-exact-coordinate-ascent-does-not-decrease-elbo",
+        "rem-high-elbo-alone-does-not-certify-posterior-calibration"
+      ]
+    },
+    {
+      "convention": "Coordinate sweeps visit j=1,…,m in order, for N≥0 finite sweeps. The complementary space when m=1 is a singleton with unit measure and density 1. An update requires a defined measurable expected log, finite positive normalizer, and admissibility of the resulting product.",
+      "fixed_by": "alg-coordinate-ascent-variational-inference",
+      "matters_for": [
+        "lem-admissible-product-coordinate-normalizer-is-finite",
+        "thm-exact-coordinate-ascent-does-not-decrease-elbo",
+        "ex-coordinate-update-normalizer-diverges-outside-admissibility"
+      ]
+    },
+    {
+      "convention": "One entered coordinate-update block is one call. The Nm bound assumes every entered call returns and does not bound integral evaluation or admissibility-decision work.",
+      "fixed_by": "thm-exact-coordinate-ascent-does-not-decrease-elbo",
+      "matters_for": [
+        "thm-exact-coordinate-ascent-does-not-decrease-elbo"
+      ]
+    },
+    {
+      "convention": "The Gaussian counterexample assumes AC, 0<|ρ|<1, β=1−ρ², product one-dimensional Lebesgue reference measure, and strictly positive variational variances.",
+      "fixed_by": "cex-mean-field-variational-inference-underestimates-correlated-gaussian-variance",
+      "matters_for": [
+        "cex-mean-field-variational-inference-underestimates-correlated-gaussian-variance"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-variational-family-and-elbo",
+      "statement": "Call q admissible when q≪μπ and ∫q(|log γ|+|log q|) dμ<∞. Define ELBO(q)=∫q(log γ−log q) dμ. A variational family is a nonempty set of admissible densities. A maximizing member need not exist.",
+      "used_by": [
+        "thm-elbo-kl-decomposition",
+        "alg-coordinate-ascent-variational-inference",
+        "cex-mean-field-variational-inference-underestimates-correlated-gaussian-variance",
+        "lem-admissible-product-coordinate-normalizer-is-finite",
+        "thm-exact-coordinate-ascent-does-not-decrease-elbo",
+        "rem-high-elbo-alone-does-not-certify-posterior-calibration",
+        "ex-discrete-elbo-equality-at-exact-posterior",
+        "ex-variational-candidate-outside-posterior-support",
+        "ex-coordinate-update-normalizer-diverges-outside-admissibility"
+      ]
+    },
+    {
+      "id": "thm-elbo-kl-decomposition",
+      "statement": "For an admissible q, log Z=ELBO(q)+∫q log(q/π) dμ. Under AC, the final integral is D(Q||Π) and is nonnegative; consequently ELBO(q)≤log Z.",
+      "used_by": [
+        "rem-high-elbo-alone-does-not-certify-posterior-calibration"
+      ]
+    },
+    {
+      "id": "alg-coordinate-ascent-variational-inference",
+      "statement": "Starting from an admissible mean-field density, perform up to N ordered sweeps, replacing q_j by exp(h_j)/c_j only when the expected-log, normalization, and resulting-admissibility checks pass; otherwise return the current density with unavailable status.",
+      "used_by": [
+        "thm-exact-coordinate-ascent-does-not-decrease-elbo",
+        "ex-coordinate-update-normalizer-diverges-outside-admissibility"
+      ]
+    },
+    {
+      "id": "lem-admissible-product-coordinate-normalizer-is-finite",
+      "statement": "For the stated admissible product and measurable, unambiguous expected-log version finite q_jμ_j-almost everywhere, H=∫q_{−j}log q_{−j} dμ_{−j} is finite and 0<c_j=∫exp(h_j) dμ_j≤exp(H)Z<∞. This establishes normalization only.",
+      "used_by": [
+        "variational-inference-and-evidence-lower-bound",
+        "ex-coordinate-update-normalizer-diverges-outside-admissibility"
+      ]
+    },
+    {
+      "id": "thm-exact-coordinate-ascent-does-not-decrease-elbo",
+      "statement": "Under AC and the stated expected-log, finite-normalizer, and updated-product admissibility hypotheses, q_j*=exp(h_j)/c_j maximizes ELBO over all admissible coordinate replacements. The finite procedure returns after at most Nm calls if every entered call returns.",
+      "used_by": [
+        "variational-inference-and-evidence-lower-bound"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-finite-sigma-finite-and-semifinite-measures",
+      "used_for": "Sigma-finiteness of factor reference spaces and the atomic example.",
+      "opened": true
+    },
+    {
+      "id": "def-likelihood-density",
+      "used_for": "Separate likelihood versions do not supply joint measurability or a canonical pointwise posterior.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-space",
+      "used_for": "Underlying measurable-space convention.",
+      "opened": true
+    },
+    {
+      "id": "def-measure",
+      "used_for": "Measure and countable-additivity conventions, including the atomic reference construction.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Natural logarithm on positive finite inputs.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Density-induced measures of total mass one.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Finite product measurable spaces and the empty complementary product.",
+      "opened": true
+    },
+    {
+      "id": "thm-bayes-formula-for-dominated-kernels",
+      "used_for": "Posterior interpretation requires a supplied jointly measurable density and finite positive evidence.",
+      "opened": true
+    },
+    {
+      "id": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+      "used_for": "Constructing Q and Π from densities.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Normalization, scalar rescaling, and nonnegative integral bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+      "used_for": "Support implies absolute continuity; positivity of the coordinate normalizer.",
+      "opened": true
+    },
+    {
+      "id": "thm-conditional-density-formula",
+      "used_for": "Conditional-density event identities and treatment of zero or infinite evidence fibres.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Product reference measures and identification of product probability laws.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Product normalization, entropy bounds, Gaussian integration, and nonnegative atomic sums.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited assumptions for library KL and normal-law suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-kullback-leibler-divergence",
+      "used_for": "Directional KL definition, absolute-continuity requirement, and logarithmic integral convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Exchanging absolutely integrable log and Gaussian moment integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "AC implies the countable-choice hypothesis of the Lebesgue measure suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+      "used_for": "Gaussian reference measure convention.",
+      "opened": true
+    },
+    {
+      "id": "lem-normal-density-has-total-mass-one",
+      "used_for": "Standard Gaussian normalization under AC.",
+      "opened": true
+    },
+    {
+      "id": "lem-normal-location-scale-mean-and-variance",
+      "used_for": "Gaussian means and second moments under AC.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-is-a-complete-measure",
+      "used_for": "Lebesgue measure existence under countable choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "used_for": "Finite interval masses establishing Lebesgue sigma-finiteness.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-against-a-density",
+      "used_for": "Transferring integrals between reference and density probability measures.",
+      "opened": true
+    },
+    {
+      "id": "thm-jensens-integral-inequality",
+      "used_for": "Jensen applied to truncated integrable logarithms with integrable exponential.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-two-point-convexity",
+      "used_for": "Convexity required by the coordinate-normalizer Jensen argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Passing to the limit in truncated negative logarithmic parts.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Passing to the limit in exponentials dominated by g+1.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Logarithmic algebra, discrete strict inequality, and arbitrary ELBO rescaling.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotonicity-of-the-integral",
+      "used_for": "Proper Riemann integral bounds on log(n+1) in the atomic example.",
+      "opened": true
+    },
+    {
+      "id": "def-integral-logarithm",
+      "used_for": "Integral representation of logarithms in the atomic example.",
+      "opened": true
+    },
+    {
+      "id": "cor-integral-logarithm-agrees-with-natural-logarithm",
+      "used_for": "Identifying the integral logarithm with the ELBO logarithm.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-elbo-kl-decomposition",
+      "concern": "The Blei reference locator says “§2.2, equations (11)–(14), PDF pp. 3–4”. In the linked 20-page PDF, these equations are on PDF page 5 (printed p. 862). The section and mathematical attribution are correct, but the PDF locator is incorrect. Checked directly in [Blei et al.](https://www.cs.columbia.edu/~blei/papers/BleiKucukelbirMcAuliffe2017.pdf).",
+      "severity": "presentation"
+    },
+    {
+      "id": "alg-coordinate-ascent-variational-inference",
+      "concern": "The Blei reference locates equations (17)–(18) and Algorithm 1 at “PDF pp. 5–6”. The linked PDF places the equations on page 6 and Algorithm 1 on page 7; the stated range omits the algorithm. The same coordinate-update reference in thm-exact-coordinate-ascent-does-not-decrease-elbo omits the page-7 derivation. Source: https://www.cs.columbia.edu/~blei/papers/BleiKucukelbirMcAuliffe2017.pdf.",
+      "severity": "presentation"
+    },
+    {
+      "id": "cex-mean-field-variational-inference-underestimates-correlated-gaussian-variance",
+      "concern": "The Blei reference says “§2.3, Figure 1 and discussion, PDF pp. 2–3”. Figure 1 and its Gaussian marginal-variance discussion are on PDF page 6, printed p. 863, in the linked PDF. The local Gaussian calculation is sound; the locator points to different material. Source: https://www.cs.columbia.edu/~blei/papers/BleiKucukelbirMcAuliffe2017.pdf.",
+      "severity": "presentation"
+    },
+    {
+      "id": "rem-high-elbo-alone-does-not-certify-posterior-calibration",
+      "concern": "The Blei locator assigns §2.2 and §§5.1–5.4 to “PDF pp. 3–4 and 10–13”. In the linked PDF, the ELBO equations are on page 5, and §5.4 is on page 16, outside the stated ranges. The local scale argument remains valid. Source: https://www.cs.columbia.edu/~blei/papers/BleiKucukelbirMcAuliffe2017.pdf.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "variational-inference-and-evidence-lower-bound",
+      "to": "numerical-optimization-for-statistical-computation",
+      "faithful": true,
+      "note": "Read both page summaries and the prerequisite KL theorem, including its proof. ELBO and coordinate consumers use its general probability-measure nonnegativity clause under explicit AC. They prove their density identities locally and do not import the narrower sigma-finite normalized-density clause or optimization convergence guarantees."
+    },
+    {
+      "from": "identifiability-and-approximation-bias-in-computational-inference",
+      "to": "variational-inference-and-evidence-lower-bound",
+      "faithful": true,
+      "note": "Read both summaries and the downstream Gaussian mean-field counterexample. Its F2 faithfully imports support and absolute-log-integrability requirements, verifies them using positive Gaussian densities and finite second moments, and independently derives the ρ=1/2 optimizer with variance 3/4 and covariance zero. Its supplied-measure argument does not invoke the AC-dependent KL or normal-law clauses."
+    }
+  ]
+}

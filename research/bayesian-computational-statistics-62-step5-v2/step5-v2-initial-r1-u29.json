@@ -1,0 +1,278 @@
+{
+  "run": "bayesian-computational-statistics-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "29",
+  "input_sha256": "4d5c183c713ad11edc9a59026b00de3757557c78741e0adfc236cd5236e91cc8",
+  "decisions": [
+    {
+      "id": "def-antithetic-randomized-sampling",
+      "model": "gpt-6-luna",
+      "context_sha256": "9c8f4ee68c2f8f9df8fa0b05b5890e2c6c73b2e371ad6a14488154d0acf75e6f",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal notation/type defect: P is the output law on X, whereas {U_ij<=t} is an event on the sampling space. Independent product-uniform inputs and the reflected-pair estimator were already specified correctly. Introduced (Omega,F,mathbb P) and used mathbb P for the input cdf; output law P, sampler, pair independence, cost and comparator are unchanged. No AC or additional prerequisite is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-stratified-monte-carlo-estimator",
+      "model": "gpt-6-luna",
+      "context_sha256": "aab412421ea59e40151d98b2f40ab2165b2baa213adcac3c56e0c8c4ddf02941",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed fatal missing target hypothesis: for uniform P on [0,1], f(x)=1/(x-1/2), with f(1/2)=0, has infinite positive and negative integrals, so Pf is undefined. Added integral |f| dP<infinity and explicitly defined Pf. Because p_h>0, integral |f| dP_h=(1/p_h) integral over A_h |f| dP is finite for every stratum. The partition, allocation and estimator formula are preserved; no AC is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-same-sample-control-coefficient-remainder-is-op-one-over-n",
+      "model": "gpt-6-luna",
+      "context_sha256": "d42d3a8a57a454a20031d768d73c78bef1945d285980b4beca169da227d82215",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal missing notation extension: the supplied definition restricts beta to a fixed coefficient, while the original proof uses the plug-in beta_hat_n. Defined mu_hat_beta_hat_n pointwise as fbar_n-beta_hat_n^T(hbar_n-theta), and step 3.1 now invokes that definition plus F1 only for fixed beta*. Also distinguished sampling mathbb P from law P in the O_P definition and Chebyshev fact. The original fourth-moment/root-n/inverse perturbation proof is sound, including the zero fallback on a vanishing singular event; the product bound does not require independence or assert unbiasedness. Owning step-3.1 derivation and manifest Statement were synchronized under the shared lock; strict focused contract checks and precheck passed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-independent-pilot-control-variate",
+      "model": "gpt-6-luna",
+      "context_sha256": "a222387cec76aa1106eda1a030378b3d66b1bc6ad7a9cab6dcb535c284d2e958",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal citation overstatement: F2 attributed a random-coefficient formula to a definition restricted to fixed coefficients. F2 now accurately states the fixed-b formula; Verification 2.1 takes the random-coefficient estimator and conditional unbiasedness from F1, the independent-pilot theorem. Bounded f=x^2 and h=x are integrable, theta=1/2 is correct, E|2V|=1, and sigma(V) is independent of the entire production sample sigma-algebra. Hence the conditional mean is 1/3 almost surely without conditioning on a null singleton. The Example and dependencies are unchanged; owning derivation was synchronized under the lock.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-antithetic-randomized-sampling",
+      "disposition": "repaired",
+      "post_sha256": "1b0ffc5851fa35355d018b4082a3ea89fbda28731be8bf6aa9eac3679faa43f2",
+      "review_context_sha256": "e6666e81b542b6cfccfa2e2ee0e2fb8961296f7a71154d2b3365bbb8e7535b8d",
+      "reason": "Introduced the sampling probability space and used mathbb P for input events, retaining output law P. The measurable reflected-pair construction and independence across pairs are preserved; no choice assumption is added.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-stratified-monte-carlo-estimator",
+      "disposition": "repaired",
+      "post_sha256": "05b72dd3dc6419fdaf77df1d0ab19924f957aaee793cc374074ee3dca780cc31",
+      "review_context_sha256": "471bc8e65d7096f74f1e73e3171a7397791f7ec2dad375ece26c229dadcd1701",
+      "reason": "Required integral |f| dP<infinity and defined Pf. Positive stratum masses imply integral |f| dP_h<=integral |f| dP/p_h<infinity. The partition, allocation and estimator formula are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-same-sample-control-coefficient-remainder-is-op-one-over-n",
+      "disposition": "repaired",
+      "post_sha256": "b44fe3d144fce961b7864c9383a62d856f3a0ac3e9633a4e66b56f6b4e57896d",
+      "review_context_sha256": "f1f8ce2d4b8624da55adf3ec3ff9e807f799328668794266fc5eb64ce8763fdc",
+      "reason": "Defined the plug-in estimator pointwise, restricted F1 use to fixed beta*, and disambiguated sampling probabilities. Fourth moments, fixed dimension, eventual nonsingularity and the product tail bound establish the unchanged O_P(n^-1) conclusion, including the singular fallback. Updated owning contract and manifest mirror.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-independent-pilot-control-variate",
+      "disposition": "repaired",
+      "post_sha256": "92924c8baafe53696c086f482482e7331364e9f32de5554ca85cf9c551afec3a",
+      "review_context_sha256": "523f4188f2fd83751958fd592316e95b7cb73798689d05532e48e0e2f50fff16",
+      "reason": "F2 now states only the fixed-coefficient formula; the random coefficient and conditional assertion use F1. Bounded f,h, E|2V|=1 and independence of sigma(V) from the whole production sigma-algebra verify every pilot-theorem hypothesis. Updated the owning proof contract.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-antithetic-variance-and-monotone-sufficiency",
+    "ex-monotone-antithetic-pair",
+    "thm-stratified-unbiasedness-variance-and-proportional-allocation",
+    "ex-proportional-stratification-variance-reduction",
+    "ex-same-sample-control-regression-bias"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "def-antithetic-randomized-sampling",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "finding": "Introduced the sampling probability space and used mathbb P for input events, retaining output law P. The measurable reflected-pair construction and independence across pairs are preserved; no choice assumption is added."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "thm-antithetic-variance-and-monotone-sufficiency",
+      "severity": "nonfatal",
+      "status": "open",
+      "finding": {
+        "supplier": "def-antithetic-randomized-sampling",
+        "consumer": "thm-antithetic-variance-and-monotone-sufficiency",
+        "path": "items/thm-antithetic-variance-and-monotone-sufficiency.md",
+        "affected_use": "Statement imports the antithetic setup; F1 imports independent uniform coordinates, T(U_1)~P and pair average. Proof 1.1 writes P(U_1j=s), P(U_1j<=s), P(1-U_1j<=t), P(U_1j>=1-t) and P(U_1j<1-t).",
+        "disposition": "frontier_owner_followup",
+        "invalidated_claim": "No probabilistic identity changes. The input-event occurrences of P in proof 1.1 retain the same nonfatal type ambiguity and should use the now explicit underlying mathbb P.",
+        "minimality": "Replace only input-event P by mathbb P in step 1.1. Keep output law P and the Statement unchanged. Outside assigned write scope; proposed to controller, not edited."
+      },
+      "route": "frontier owner; outside unit 29 assigned items"
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "def-stratified-monte-carlo-estimator",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "finding": "Required integral |f| dP<infinity and defined Pf. Positive stratum masses imply integral |f| dP_h<=integral |f| dP/p_h<infinity. The partition, allocation and estimator formula are unchanged."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "thm-same-sample-control-coefficient-remainder-is-op-one-over-n",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "finding": "Defined the plug-in estimator pointwise, restricted F1 use to fixed beta*, and disambiguated sampling probabilities. Fourth moments, fixed dimension, eventual nonsingularity and the product tail bound establish the unchanged O_P(n^-1) conclusion, including the singular fallback. Updated owning contract and manifest mirror."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "ex-same-sample-control-regression-bias",
+      "severity": "nonfatal",
+      "status": "open",
+      "finding": {
+        "supplier": "thm-same-sample-control-coefficient-remainder-is-op-one-over-n",
+        "consumer": "ex-same-sample-control-regression-bias",
+        "path": "items/ex-same-sample-control-regression-bias.md",
+        "affected_use": "F1 imports the fitted covariance ratio and zero fallback; F2 attributes the random-coefficient scalar estimator to def-control-variate-estimator; Verification 1.1 substitutes that estimator on the nine ordered pairs.",
+        "disposition": "frontier_owner_followup",
+        "invalidated_claim": "The finite calculation remains correct: four estimates are 1 and five are 0, giving 4/9 versus target 2/3. However F2 has the same nonfatal fixed-versus-random coefficient misattribution as the assigned pilot example.",
+        "minimality": "Retarget F2 to the newly explicit plug-in formula in the same-sample theorem, or state that formula locally and keep the definition citation restricted to fixed coefficients. No Example/Statement change is needed; outside assigned write scope, so controller routes owner repair."
+      },
+      "route": "frontier owner; outside unit 29 assigned items"
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update",
+      "reason": "Direct dependency/reference search in current items/ and library/ found only five draft frontier consumer items for the three changed interfaces. No potentially defective published consumer was found in those examined uses, and no published item or published ledger was edited. The two nonfatal draft findings route to frontier owner work rather than published maintenance."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "ex-independent-pilot-control-variate",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "finding": "F2 now states only the fixed-coefficient formula; the random coefficient and conditional assertion use F1. Bounded f,h, E|2V|=1 and independence of sigma(V) from the whole production sigma-algebra verify every pilot-theorem hypothesis. Updated the owning proof contract."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "supplier": "def-antithetic-randomized-sampling",
+      "consumer": "ex-monotone-antithetic-pair",
+      "path": "items/ex-monotone-antithetic-pair.md",
+      "affected_use": "F1 and Verification 2.1 use the reflected pair average for d=1, T(u)=u and f(x)=x.",
+      "disposition": "unchanged_sound",
+      "reason": "Input law is uniform on [0,1]; explicit mathbb P distinguishes it from P without changing (U+1-U)/2=1/2 or the comparator variance 1/24."
+    },
+    {
+      "supplier": "def-antithetic-randomized-sampling",
+      "page": "library/bayesian-computational-statistics/variance-reduction-and-randomized-integration.md",
+      "affected_use": "Page lists the definition and describes paired antithetic estimators and covariance condition.",
+      "disposition": "unchanged_sound",
+      "reason": "Summary asserts no identification of sampling-space and target-space measures."
+    },
+    {
+      "supplier": "def-stratified-monte-carlo-estimator",
+      "consumer": "thm-stratified-unbiasedness-variance-and-proportional-allocation",
+      "path": "items/thm-stratified-unbiasedness-variance-and-proportional-allocation.md",
+      "affected_use": "Statement imports the stratified setup; F1 supplies P_h and weighted estimator; proof 1.1 integrates f and f^2 under each P_h.",
+      "disposition": "unchanged_sound",
+      "reason": "The additional finite second moment in its Statement already implies integral |f| dP<infinity via |f|<=1+f^2. Step 1.1 explicitly establishes this. Variance and proportional allocation identities are unchanged."
+    },
+    {
+      "supplier": "def-stratified-monte-carlo-estimator",
+      "consumer": "ex-proportional-stratification-variance-reduction",
+      "path": "items/ex-proportional-stratification-variance-reduction.md",
+      "affected_use": "F1 and Verification 1.1 use the weighted estimator for f(x)=x under uniform P on [0,1] and the two half-intervals.",
+      "disposition": "unchanged_sound",
+      "reason": "The bounded integrand satisfies integral |f| dP=1/2, meeting the added hypothesis. Allocation, stratum variances 1/48 and estimator variance 1/96 are unchanged."
+    },
+    {
+      "supplier": "def-stratified-monte-carlo-estimator",
+      "page": "library/bayesian-computational-statistics/variance-reduction-and-randomized-integration.md",
+      "affected_use": "Page lists the stratified definition and describes finite strata and proportional allocation at fixed total sample size.",
+      "disposition": "unchanged_sound",
+      "reason": "Page makes no assertion for nonintegrable targets and its variance discussion uses the square-integrable theorem."
+    },
+    {
+      "supplier": "thm-same-sample-control-coefficient-remainder-is-op-one-over-n",
+      "page": "library/bayesian-computational-statistics/variance-reduction-and-randomized-integration.md",
+      "affected_use": "Page states that finite fourth moments and positive-definite control covariance imply a same-sample remainder of order O_P(n^-1), without unbiasedness.",
+      "disposition": "unchanged_sound",
+      "reason": "Pointwise plug-in notation and sampling-measure disambiguation preserve all hypotheses, the rate and the caveat; manifest Statement mirror updated to the new exact Statement."
+    },
+    {
+      "check": "final_changed_item_layout",
+      "command": "node tools/proof-layout.mjs items/def-antithetic-randomized-sampling.md items/def-stratified-monte-carlo-estimator.md items/thm-same-sample-control-coefficient-remainder-is-op-one-over-n.md items/ex-independent-pilot-control-variate.md",
+      "exit_code": 0,
+      "result": "4 items, 6 steps, 0 defects; executed after every final item edit."
+    },
+    {
+      "check": "final_changed_item_precheck",
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-antithetic-randomized-sampling.md items/def-stratified-monte-carlo-estimator.md items/thm-same-sample-control-coefficient-remainder-is-op-one-over-n.md items/ex-independent-pilot-control-variate.md --json",
+      "exit_code": 0,
+      "result": "4 files; 2 proofs checked and passed; 2 definitions not-applicable; 0 failures."
+    },
+    {
+      "check": "final_changed_item_render",
+      "command": "node tools/rendercheck.mjs items/def-antithetic-randomized-sampling.md items/def-stratified-monte-carlo-estimator.md items/thm-same-sample-control-coefficient-remainder-is-op-one-over-n.md items/ex-independent-pilot-control-variate.md --json",
+      "exit_code": 0,
+      "result": "4 files checked; errors=[], warnings=[]."
+    },
+    {
+      "check": "final_assigned_contracts",
+      "command": "node tools/proof-contract.mjs research/bayesian-computational-statistics-62-batch-29.proof-contracts.json --strict --items def-antithetic-randomized-sampling,def-stratified-monte-carlo-estimator,thm-same-sample-control-coefficient-remainder-is-op-one-over-n,ex-independent-pilot-control-variate --json",
+      "exit_code": 0,
+      "result": "ok=true; all four assigned contracts checked; errors=[], warnings=[]. Shared lock acquired/reread/edited/checked/released for each metadata mutation. Final pilot review hashes captured immediately afterward."
+    },
+    {
+      "consumer_contract_updates": [
+        {
+          "consumer": "thm-antithetic-variance-and-monotone-sufficiency",
+          "fact": "F1",
+          "supplier": "def-antithetic-randomized-sampling"
+        },
+        {
+          "consumer": "ex-monotone-antithetic-pair",
+          "fact": "F1",
+          "supplier": "def-antithetic-randomized-sampling"
+        },
+        {
+          "consumer": "thm-stratified-unbiasedness-variance-and-proportional-allocation",
+          "fact": "F1",
+          "supplier": "def-stratified-monte-carlo-estimator"
+        },
+        {
+          "consumer": "ex-proportional-stratification-variance-reduction",
+          "fact": "F1",
+          "supplier": "def-stratified-monte-carlo-estimator"
+        },
+        {
+          "consumer": "ex-same-sample-control-regression-bias",
+          "fact": "F1",
+          "supplier": "thm-same-sample-control-coefficient-remainder-is-op-one-over-n"
+        }
+      ],
+      "path": "research/bayesian-computational-statistics-62-batch-29.proof-contracts.json",
+      "affected_use": "Each listed F1 citation quotes the old complete supplier Statement/Definition. Mathematical effects were examined above and in ledger_updates.",
+      "minimality": "Owner refreshes only each source quote under the shared lock after the recorded consumer examination; no unassigned contract row was edited here."
+    },
+    "Read the generated task and rejection-blind Step-4 digest. All four draft carriers matched exact rejected raw hashes and belong to the frozen frontier. Same-sample supplier sections were checked against all eleven complete current contract quotes; the pilot supplier Statement and complete event-integral proof were read. Expectation Definition requires integrability for finite signed targets. These are familiar finite-moment probability arguments; no external source consultation is claimed.",
+    "All assigned repairs are complete, with no unresolved assigned mathematics. Exactly both assigned Definitions and the same-sample Statement changed; pilot Example text is unchanged. Five direct item consumers and the owning page were examined. Two nonfatal unassigned consumer defects in ledger_updates and five source-quote bindings require frontier-owner follow-up. No published consumer was found among these direct uses. No new item, worker, judge, stamp, certificate or central-ledger edit was made. Review hashes were captured immediately after each completed review and checked for currency without refreshing them. Controller rejudgment and certification remain separate; no independent acceptance of these repairs is claimed."
+  ],
+  "supporting_evidence": {
+    "research/bayesian-computational-statistics-62-batch-29.proof-contracts.json": "f5bec61a9b435fa114993720d56f9d49506d1e83f716e1f0f7e4c6684128e8ee",
+    "research/bayesian-computational-statistics-62-batch-29.pages.json": "e3ad2c193a333f697a2267be16889852f10e5a83686771fdf7bd902269d4c664"
+  }
+}

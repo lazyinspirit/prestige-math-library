@@ -1,0 +1,162 @@
+[
+  {
+    "order": 2118,
+    "id": "adaptive-mcmc-convergence-and-limitations",
+    "kind": "A",
+    "category": "bayesian-computational-statistics",
+    "title": "Adaptive MCMC convergence limits",
+    "companion": "adaptive-mcmc-convergence-and-limitations-examples",
+    "requires": [
+      "mcmc-ergodicity-and-mixing"
+    ],
+    "items": [
+      {
+        "id": "def-diminishing-adaptation",
+        "kind": "definition",
+        "title": "Diminishing adaptation",
+        "deps": [
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-measurable-space",
+          "def-measure-kernel-and-probability-kernel",
+          "def-total-variation-distance-for-probability-laws",
+          "thm-measurability-of-integration-against-a-kernel"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-adaptive-mcmc-containment",
+        "kind": "definition",
+        "title": "Containment for adaptive MCMC",
+        "deps": [
+          "def-diminishing-adaptation",
+          "def-total-variation-distance-for-probability-laws"
+        ],
+        "dependency_level": 1,
+        "statement": "Use the adaptive MCMC setup of [[def-diminishing-adaptation]]. For\n$\\epsilon>0$, a state $x\\in\\mathsf X$, and a fixed parameter $\\gamma\\in\\Gamma$,\ndefine the convergence time\n$$M_\\epsilon(x,\\gamma):=\\inf\\{m\\in\\mathbb N:m\\ge1,\\ \\lVert P_\\gamma^m(x,\\cdot)-\\pi\\rVert_{\\rm TV}\\le\\epsilon\\},$$\nwith $\\inf\\varnothing=+\\infty$. The power $P_\\gamma^m$ is the $m$-fold\ncomposition of the fixed kernel $P_\\gamma$; it is not the adaptive transition\nlaw. Assume $M_\\epsilon(X_n,\\Gamma_n)$ is measurable for each $n$ and\n$\\epsilon>0$.\n\nFor a specified initial probability law $\\mu_0$ of $(X_0,\\Gamma_0)$, the\nadaptive process has **containment** if for every $\\epsilon,\\delta>0$ there is\nan integer $N=N(\\epsilon,\\delta)$ such that\n$$\\mathbb P_{\\mu_0}\\!\\left(M_\\epsilon(X_n,\\Gamma_n)\\le N\\right)\\ge1-\\delta\\quad\\text{for every }n\\ge0.$$\nA process initialized at the fixed pair $(x_*,\\gamma_*)$ is the special case\n$\\mu_0=\\delta_{(x_*,\\gamma_*)}$. Thus containment says that\nthe fixed-kernel convergence times, evaluated at the current state and\nparameter, form a sequence bounded in probability under the specified initial\nlaw. It does not assert a uniform deterministic bound for every possible\nstate and parameter."
+      },
+      {
+        "id": "lem-adaptive-mcmc-block-perturbation-bound",
+        "kind": "lemma",
+        "title": "Finite-block perturbation bound for adaptive MCMC",
+        "deps": [
+          "def-diminishing-adaptation",
+          "def-measure-kernel-and-probability-kernel",
+          "lem-total-variation-coupling-and-kernel-contraction",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-adaptive-mcmc-uniform-drift-minorization-bound",
+        "kind": "lemma",
+        "title": "Common drift and strongly aperiodic minorization give a uniform geometric bound",
+        "deps": [
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-measure-kernel-and-probability-kernel",
+          "def-small-set-minorization-and-drift",
+          "def-total-variation-distance-for-probability-laws",
+          "cor-markov-inequality-for-random-variables",
+          "lem-total-variation-coupling-and-kernel-contraction",
+          "lem-finite-products-of-probability-kernels",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-adaptive-mcmc-converges-under-uniform-ergodicity-or-containment",
+        "kind": "theorem",
+        "title": "Adaptive MCMC marginal convergence under diminishing adaptation with uniform ergodicity or containment",
+        "deps": [
+          "def-adaptive-mcmc-containment",
+          "def-diminishing-adaptation",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-measure-kernel-and-probability-kernel",
+          "def-total-variation-distance-for-probability-laws",
+          "lem-adaptive-mcmc-block-perturbation-bound",
+          "lem-total-variation-coupling-and-kernel-contraction"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $(\\mathsf X,\\mathcal X)$ and $(\\Gamma,\\mathcal G)$, the jointly\nmeasurable probability-kernel family $(P_\\gamma)_{\\gamma\\in\\Gamma}$, common\ninvariant probability $\\pi$, and adaptive process $(X_n,\\Gamma_n)$ satisfy\n[[def-diminishing-adaptation]]. Fix an initial law $\\mu_0$ for\n$(X_0,\\Gamma_0)$; a fixed initial pair is the Dirac-law special case. If\ndiminishing adaptation holds under this law and either of the following\nconditions holds, then\n$$\\lVert\\mathcal L_{\\mu_0}(X_n)-\\pi\\rVert_{\\rm TV}\\longrightarrow0.$$\n\n1. **Simultaneous uniform ergodicity:** for every $\\epsilon>0$ there is an\n   integer $N(\\epsilon)\\ge1$ such that\n   $$\\sup_{x\\in\\mathsf X,\\,\\gamma\\in\\Gamma}\\lVert P_\\gamma^{N(\\epsilon)}(x,\\cdot)-\\pi\\rVert_{\\rm TV}\\le\\epsilon.$$\n\n2. **Containment:** for every $\\epsilon,\\delta>0$ there is an integer $N$\n   such that\n   $$\\mathbb P_{\\mu_0}\\!\\left(M_\\epsilon(X_n,\\Gamma_n)\\le N\\right)\\ge1-\\delta\\quad\\text{for every }n\\ge0,$$\n   where $M_\\epsilon$ is the fixed-kernel convergence time from\n   [[def-adaptive-mcmc-containment]].\n\nThe conclusion is convergence of the one-time marginal distributions. It does\nnot itself assert a strong law, a central limit theorem, or convergence of\nsample averages."
+      },
+      {
+        "id": "cor-adaptive-mcmc-containment-from-uniform-drift-minorization",
+        "kind": "corollary",
+        "title": "Common drift and minorization give containment under diminishing adaptation, strong aperiodicity, and a finite initial V-moment",
+        "deps": [
+          "cor-markov-inequality-for-random-variables",
+          "def-adaptive-mcmc-containment",
+          "def-diminishing-adaptation",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-small-set-minorization-and-drift",
+          "lem-adaptive-mcmc-uniform-drift-minorization-bound",
+          "thm-adaptive-mcmc-converges-under-uniform-ergodicity-or-containment",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "dependency_level": 3
+      }
+    ]
+  },
+  {
+    "order": 2119,
+    "id": "adaptive-mcmc-convergence-and-limitations-examples",
+    "kind": "B",
+    "category": "bayesian-computational-statistics",
+    "title": "Adaptive MCMC convergence limits — Examples",
+    "companion": "adaptive-mcmc-convergence-and-limitations",
+    "requires": [
+      "adaptive-mcmc-convergence-and-limitations"
+    ],
+    "items": [
+      {
+        "id": "cex-diminishing-adaptation-alone-does-not-imply-strong-law",
+        "kind": "counterexample",
+        "title": "Diminishing adaptation and uniform ergodicity need not give a strong law",
+        "deps": [
+          "cor-markov-inequality-for-random-variables",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-diminishing-adaptation",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-measure-kernel-and-probability-kernel",
+          "def-probability-measure",
+          "def-total-variation-distance-for-probability-laws",
+          "thm-countable-product-of-probability-spaces",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-adaptive-mcmc-loss-of-containment",
+        "kind": "example",
+        "title": "Diminishing adaptation with loss of containment",
+        "deps": [
+          "def-adaptive-mcmc-containment",
+          "def-diminishing-adaptation",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-measure-kernel-and-probability-kernel",
+          "def-total-variation-distance-for-probability-laws"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-uniformly-ergodic-adaptive-mcmc-family",
+        "kind": "example",
+        "title": "A uniformly ergodic adaptive refresh family",
+        "deps": [
+          "def-diminishing-adaptation",
+          "def-general-state-reversibility-by-symmetric-flow-measure",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-measure-kernel-and-probability-kernel",
+          "def-total-variation-distance-for-probability-laws",
+          "thm-adaptive-mcmc-converges-under-uniform-ergodicity-or-containment",
+          "thm-general-state-reversibility-implies-invariance"
+        ],
+        "dependency_level": 3
+      }
+    ]
+  }
+]

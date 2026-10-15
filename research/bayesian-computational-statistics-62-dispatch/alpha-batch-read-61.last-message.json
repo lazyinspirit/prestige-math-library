@@ -1,0 +1,239 @@
+{
+  "group": "s",
+  "batches": ["61"],
+  "pages_read": [
+    "synthetic-likelihood-and-indirect-inference",
+    "synthetic-likelihood-and-indirect-inference-examples"
+  ],
+  "items_read": [
+    "def-synthetic-likelihood",
+    "def-binding-function-and-indirect-inference-target",
+    "lem-two-simulation-summary-covariance-is-singular-in-two-dimensions",
+    "thm-indirect-inference-target-exists-with-lexicographic-tie-break",
+    "alg-synthetic-likelihood-monte-carlo-estimation",
+    "rem-finite-simulation-synthetic-likelihood-is-a-random-approximation",
+    "ex-gaussian-synthetic-likelihood-for-bernoulli-summary-law",
+    "ex-nonunique-binding-function-target",
+    "ex-two-simulation-covariance-is-random-and-singular"
+  ],
+  "conventions": [
+    {
+      "convention": "The summary is Borel measurable, has finite second moment under every parameter law, and has finite-dimensional real coordinates. Binding means and covariances are defined pointwise; parameter-indexed measurability and continuity are not inferred.",
+      "fixed_by": "def-synthetic-likelihood",
+      "matters_for": [
+        "alg-synthetic-likelihood-monte-carlo-estimation",
+        "ex-gaussian-synthetic-likelihood-for-bernoulli-summary-law",
+        "ex-two-simulation-covariance-is-random-and-singular"
+      ]
+    },
+    {
+      "convention": "Under AC, the ideal synthetic likelihood is the positive-definite Gaussian summary density evaluated at the observed summary. It is undefined here for singular population covariance and is not asserted to equal the exact likelihood.",
+      "fixed_by": "def-synthetic-likelihood",
+      "matters_for": [
+        "alg-synthetic-likelihood-monte-carlo-estimation",
+        "rem-finite-simulation-synthetic-likelihood-is-a-random-approximation",
+        "ex-gaussian-synthetic-likelihood-for-bernoulli-summary-law",
+        "ex-two-simulation-covariance-is-random-and-singular"
+      ]
+    },
+    {
+      "convention": "Simulated summaries are mutually independent with a common law; m ≥ 2. Sample covariance uses denominator m−1. The finite plug-in is unavailable unless this covariance is positive definite; no unbiasedness is asserted.",
+      "fixed_by": "def-synthetic-likelihood",
+      "matters_for": [
+        "alg-synthetic-likelihood-monte-carlo-estimation",
+        "rem-finite-simulation-synthetic-likelihood-is-a-random-approximation",
+        "ex-two-simulation-covariance-is-random-and-singular"
+      ]
+    },
+    {
+      "convention": "The moment binding function is the summary mean, distinct from the full summary-law map. The target uses a nonempty compact Euclidean parameter set, continuous binding map and continuous squared-distance objective, and minimizes coordinates successively from the first through the pth.",
+      "fixed_by": "def-binding-function-and-indirect-inference-target",
+      "matters_for": [
+        "thm-indirect-inference-target-exists-with-lexicographic-tie-break",
+        "ex-nonunique-binding-function-target"
+      ]
+    },
+    {
+      "convention": "The evaluation procedure returns unavailable for a covariance that is not positive definite and does not add a ridge or otherwise modify it.",
+      "fixed_by": "alg-synthetic-likelihood-monte-carlo-estimation",
+      "matters_for": [
+        "rem-finite-simulation-synthetic-likelihood-is-a-random-approximation",
+        "ex-two-simulation-covariance-is-random-and-singular"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-synthetic-likelihood",
+      "statement": "The ideal Gaussian synthetic likelihood evaluates the Gaussian density at S(y) using the exact binding mean and positive-definite summary covariance. For m ≥ 2 IID simulated summaries, its finite-simulation plug-in uses their sample mean and Bessel-corrected covariance and is unavailable unless that covariance is positive definite.",
+      "used_by": [
+        "alg-synthetic-likelihood-monte-carlo-estimation",
+        "rem-finite-simulation-synthetic-likelihood-is-a-random-approximation",
+        "ex-gaussian-synthetic-likelihood-for-bernoulli-summary-law",
+        "ex-two-simulation-covariance-is-random-and-singular",
+        "cex-synthetic-likelihood-changes-inferential-target"
+      ]
+    },
+    {
+      "id": "def-binding-function-and-indirect-inference-target",
+      "statement": "The moment binding function is b(θ) = Eθ[S]. On the stated nonempty compact Euclidean parameter set, with the stated continuity contract, the indirect-inference target is the lexicographically least minimizer of q_s(θ) = ‖b(θ)−s‖₂².",
+      "used_by": [
+        "thm-indirect-inference-target-exists-with-lexicographic-tie-break",
+        "ex-nonunique-binding-function-target"
+      ]
+    },
+    {
+      "id": "thm-indirect-inference-target-exists-with-lexicographic-tie-break",
+      "statement": "Let Θ ⊆ R^p be the nonempty compact parameter set of the binding-target definition, and fix an admissible s for which its objective q_s: Θ → R is continuous. Then its minimizer set is nonempty compact and has a unique lexicographically least element.",
+      "used_by": [
+        "def-binding-function-and-indirect-inference-target",
+        "ex-nonunique-binding-function-target"
+      ]
+    },
+    {
+      "id": "lem-two-simulation-summary-covariance-is-singular-in-two-dimensions",
+      "statement": "For any two simulated vectors z₁,z₂ ∈ R², put z̄ = (z₁+z₂)/2 and define the Bessel-corrected sample covariance as the sum of their centered outer products. Then this covariance is not positive definite.",
+      "used_by": [
+        "rem-finite-simulation-synthetic-likelihood-is-a-random-approximation",
+        "ex-two-simulation-covariance-is-random-and-singular"
+      ]
+    },
+    {
+      "id": "alg-synthetic-likelihood-monte-carlo-estimation",
+      "statement": "Given the stated summary contract, m ≥ 2 and a simulator returning m mutually independent observations with law Pθ, compute the summary sample mean and covariance; return unavailable if the covariance is not positive definite, otherwise return its plug-in Gaussian density at S(y).",
+      "used_by": [
+        "rem-finite-simulation-synthetic-likelihood-is-a-random-approximation",
+        "ex-two-simulation-covariance-is-random-and-singular"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-statistic-and-estimator",
+      "used_for": "The measurable-statistic interface and declared summary target.",
+      "opened": true
+    },
+    {
+      "id": "def-law-or-distribution-of-a-random-element",
+      "used_for": "The summary pushforward law and comparisons of summary distributions.",
+      "opened": true
+    },
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Common simulation law and mutual, rather than merely pairwise, independence.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Binding means and the interpretation of moment assumptions as integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Centered population second moments and finite example calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-dominated-statistical-experiment",
+      "used_for": "The separately qualified exact-likelihood comparison.",
+      "opened": true
+    },
+    {
+      "id": "def-likelihood-density",
+      "used_for": "Pointwise density selection under AC, without parameter measurability or a common exceptional null set.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicitly inherited Gaussian-density and likelihood-density assumptions.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Gaussian laws with specified means and covariances, including the distinction between singular laws and nondegenerate densities.",
+      "opened": true
+    },
+    {
+      "id": "thm-nondegenerate-multivariate-normal-law-has-density",
+      "used_for": "The Gaussian density formula under AC and positive-definite covariance.",
+      "opened": true
+    },
+    {
+      "id": "def-cholesky-factorisation-with-positive-diagonal",
+      "used_for": "The strict quadratic-form definition of positive definiteness in the two-simulation lemma.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "Existence and uniqueness of the real positive-diagonal Cholesky factor in the admissible evaluation branch.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-differential-and-jacobis-formula",
+      "used_for": "The qualified determinant-direction derivative in the synthetic-likelihood remarks.",
+      "opened": true
+    },
+    {
+      "id": "def-parametric-statistical-model",
+      "used_for": "The summary-law map as a parameter-indexed family of laws without automatic parameter measurability.",
+      "opened": true
+    },
+    {
+      "id": "def-identifiability-of-an-estimand",
+      "used_for": "Parameter identifiability as injectivity of the relevant sampling-law map.",
+      "opened": true
+    },
+    {
+      "id": "thm-identifiability-iff-constant-on-equivalence-classes",
+      "used_for": "The law-map identification interface and the finite sign-loss example.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-space",
+      "used_for": "The metric-domain formulation of the compact target.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-compactness",
+      "used_for": "Open-cover compactness with the induced subspace metric.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-continuity",
+      "used_for": "Continuity of the objective and coordinate maps, and the local closedness arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Attainment of the objective minimum and each successive coordinate minimum on nonempty compact metric spaces.",
+      "opened": true
+    },
+    {
+      "id": "lem-closed-subset-of-a-compact-space-is-compact",
+      "used_for": "Compactness of the objective minimizer set and successive coordinate-minimizer subsets.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "synthetic-likelihood-and-indirect-inference",
+      "to": "numerical-optimization-for-statistical-computation",
+      "faithful": true,
+      "note": "Checked the prerequisite page and gradient-descent and damped-Newton procedures against the consumer's exact-target definition and page prose. Optimization supplies computational context only; the consumer imports no convergence or global-minimization guarantee."
+    },
+    {
+      "from": "synthetic-likelihood-and-indirect-inference",
+      "to": "iid-monte-carlo-integration-and-error",
+      "faithful": true,
+      "note": "Checked the prerequisite page and IID-estimator definition against the finite vector formulas. Mutual independence, the sample-mean convention and denominator m−1 agree. The consumer imports no consistency, CLT or standard-error conclusion."
+    },
+    {
+      "from": "identifiability-and-approximation-bias-in-computational-inference",
+      "to": "synthetic-likelihood-and-indirect-inference",
+      "faithful": true,
+      "note": "Checked the downstream page and cex-synthetic-likelihood-changes-inferential-target against the supplier definition. The finite model has equal exact means and positive variances but different likelihoods at the observation; its Gaussian values therefore coincide while its posteriors differ. The consumer preserves AC, uses the ideal rather than simulated likelihood, and asserts no exactness or calibration guarantee."
+    }
+  ]
+}

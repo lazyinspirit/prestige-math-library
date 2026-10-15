@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "run": "bayesian-computational-statistics-62",
+  "batch": "23",
+  "round": 0,
+  "reviewed_items": [
+    "def-latent-variable-joint-and-observed-data-factorization",
+    "thm-kullback-leibler-is-nonnegative",
+    "alg-gradient-descent",
+    "alg-damped-newton",
+    "thm-observed-density-is-latent-marginal-under-tonelli",
+    "lem-armijo-backtracking-terminates-for-strict-descent-directions",
+    "thm-gradient-descent-rate-under-strong-convexity-and-smoothness",
+    "thm-newton-local-quadratic-convergence-under-lipschitz-hessian",
+    "ex-gaussian-location-kl",
+    "ex-multimodal-nonconvex-objective",
+    "ex-finite-mixture-latent-factorization",
+    "ex-zero-normalizer-latent-fiber",
+    "ex-strongly-convex-quadratic-gradient-descent"
+  ],
+  "reviewed_pages": [
+    "numerical-optimization-for-statistical-computation",
+    "numerical-optimization-for-statistical-computation-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch and its supplier claims were reviewed. One local repair pass can resolve the proof gaps, complete the algorithm instructions, and clarify claims about iterates after stopping.",
+  "findings": [
+    {
+      "id": "thm-kullback-leibler-is-nonnegative",
+      "type": "prerequisite",
+      "reason": "Proof step 3.2 applies the zero-integral criterion to g(r) and asserts ∫g(r)=D without establishing measurability, integrability, or the integral identity. From step 2.1, φ(r), r∈L¹; Q is a probability measure, so 1∈L¹. Use the published L¹ linearity result and the available measurability result to establish g(r)∈L¹ and ∫g(r)=D before applying [F12]."
+    },
+    {
+      "id": "thm-observed-density-is-latent-marginal-under-tonelli",
+      "type": "prerequisite",
+      "reason": "Proof steps 1.2–1.3 apply Tonelli/Fubini to fixed-θ slices, but joint measurability on Θ×X×Z alone is not shown to make those slices product-measurable. Supply the section argument (reduce complex h to its real and imaginary parts) and define hp on the possible p=∞ null set before treating it as a complex L¹ function."
+    },
+    {
+      "id": "alg-gradient-descent",
+      "type": "local",
+      "reason": "The Definition accepts a caller stopping rule but never tests it. Specify when the rule is checked and what the procedure returns when it fires, as required by the approved design."
+    },
+    {
+      "id": "alg-damped-newton",
+      "type": "scope",
+      "reason": "The approved design requires Newton-decrement stopping. The Definition provides only unspecified stopping rules and a generic post-update callback. State the decrement criterion, threshold and check point, and specify the output/status when a positive-definite solve is unavailable."
+    },
+    {
+      "id": "thm-gradient-descent-rate-under-strong-convexity-and-smoothness",
+      "type": "local",
+      "reason": "The statement gives the bound for every k≥1, although gradient descent may stop at zero gradient or at the caller's rule; for μ=L it can stop after one update. State the bound for every generated iterate or explicitly define the continued fixed-step recursion."
+    },
+    {
+      "id": "thm-newton-local-quadratic-convergence-under-lipschitz-hessian",
+      "type": "local",
+      "reason": "With the approved decrement stopping rule, a nonstationary iterate may terminate before a line search. Qualify full-step acceptance and the rate for updates the algorithm attempts, or state the result for the continued Newton iteration."
+    },
+    {
+      "id": "ex-strongly-convex-quadratic-gradient-descent",
+      "type": "local",
+      "reason": "The all-k formula uses a continued fixed-step sequence, while the algorithm can stop at zero gradient or at the caller's rule. Make explicit whether the example concerns the continued update sequence or only generated iterates."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-armijo-backtracking-terminates-for-strict-descent-directions",
+      "decision": "accept",
+      "reason": "Its result is conditional on a line search being run; stopping checks do not alter the finite-backtracking argument."
+    },
+    {
+      "id": "thm-gradient-descent-rate-under-strong-convexity-and-smoothness",
+      "decision": "repair",
+      "reason": "Its all-k claim needs an explicit convention for algorithm termination."
+    },
+    {
+      "id": "thm-newton-local-quadratic-convergence-under-lipschitz-hessian",
+      "decision": "repair",
+      "reason": "Its full-step claim must account for a decrement-based stop at a nonstationary point."
+    },
+    {
+      "id": "ex-multimodal-nonconvex-objective",
+      "decision": "accept",
+      "reason": "It establishes the objective's landscape and makes no claim about which updates either algorithm completes."
+    },
+    {
+      "id": "ex-strongly-convex-quadratic-gradient-descent",
+      "decision": "repair",
+      "reason": "Its displayed sequence needs a continued-iteration or generated-prefix convention."
+    },
+    {
+      "id": "alg-unadjusted-langevin-algorithm",
+      "decision": "accept",
+      "reason": "It specifies its own repeated fixed-step map and adds noise; it does not rely on gradient descent's stopping behavior."
+    },
+    {
+      "id": "def-hamiltonian-monte-carlo",
+      "decision": "accept",
+      "reason": "It uses the gradient input convention, not gradient descent's iteration or stopping rule."
+    },
+    {
+      "id": "alg-four-dimensional-variational-assimilation",
+      "decision": "accept",
+      "reason": "Its independent finite update cap and last-iterate output remain compatible with a caller stopping rule."
+    },
+    {
+      "id": "numerical-optimization-for-statistical-computation",
+      "decision": "accept",
+      "reason": "Its summary of local updates and absence of a global-minimization claim remain sound."
+    },
+    {
+      "id": "numerical-optimization-for-statistical-computation-examples",
+      "decision": "accept",
+      "reason": "The companion page adds no separate algorithmic stopping claim."
+    }
+  ]
+}

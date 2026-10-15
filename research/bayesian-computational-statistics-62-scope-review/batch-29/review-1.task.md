@@ -1,0 +1,14 @@
+# Batch 29: review 1
+
+Run: bayesian-computational-statistics-62
+Batch: 29
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: variance-reduction-and-randomized-integration, variance-reduction-and-randomized-integration-examples
+Items: def-control-variate-estimator, thm-control-variate-unbiasedness-and-optimal-coefficient, def-antithetic-randomized-sampling, lem-oppositely-monotone-functions-of-independent-coordinates-have-nonpositive-covariance, thm-antithetic-variance-and-monotone-sufficiency, def-stratified-monte-carlo-estimator, thm-stratified-unbiasedness-variance-and-proportional-allocation, thm-same-sample-control-coefficient-remainder-is-op-one-over-n, thm-independent-pilot-control-variate-is-conditionally-unbiased, ex-perfect-control-variate, ex-uncorrelated-control-variate, ex-monotone-antithetic-pair, ex-proportional-stratification-variance-reduction, ex-same-sample-control-regression-bias, ex-independent-pilot-control-variate
+Consolidated findings: [{"id":"lem-oppositely-monotone-functions-of-independent-coordinates-have-nonpositive-covariance","type":"prerequisite","reason":"Steps 1.1–3.1 identify expectations with integrals against coordinate laws without citing thm-change-of-variables-for-expectation. The expansions in steps 1.1, 3.1, and the convergence argument in 4.1 also use expectation linearity, but cor-expectation-linearity-monotonicity-and-modulus-bound is absent from Facts and those step tags. Add the law-integration supplier and state and cite both uses explicitly."},{"id":"thm-antithetic-variance-and-monotone-sufficiency","type":"local","reason":"Step 4.1 applies the covariance lemma, whose functions are Borel maps on R^d, to g and φ defined only on [0,1]^d. Supply a Borel extension, for example by coordinatewise clamping to the cube, and verify it preserves the required monotonicity before applying the lemma."}]
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].
