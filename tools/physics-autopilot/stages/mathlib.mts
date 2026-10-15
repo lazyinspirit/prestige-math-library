@@ -885,6 +885,13 @@ export const authoredContentGates = (ctx: any) => [
  *  receipt (two blockers once lived only in markdown). */
 const ledgerGate = (ctx, { terminal = false } = {}) => {
   const frontier = `research/${ctx.run}-step5-v2/frontier.json`;
+  const transition = `research/${ctx.run}-step3-historical-context-transition.json`;
+  const contextInputs: string[] = [];
+  if (existsSync(R(ctx, transition))) {
+    const pointer = JSON.parse(readFileSync(R(ctx, transition), 'utf8'));
+    const receipt = JSON.parse(readFileSync(R(ctx, pointer.receipt.path), 'utf8'));
+    contextInputs.push(transition, pointer.receipt.path, ...Object.keys(receipt.evidence ?? {}));
+  }
   // Imported/original maintenance remains open outside the owned frontier.
   // Legacy runs without a frozen frontier retain the strict all-run check.
   const scoped = terminal && existsSync(R(ctx, frontier));
@@ -896,7 +903,7 @@ const ledgerGate = (ctx, { terminal = false } = {}) => {
   // No owned open row, including nonfatal ones, may survive closeout.
   ...(terminal ? ['--no-open'] : []),
   ...(scoped ? ['--frontier', frontier] : [])], {
-  ...(scoped ? { ownerReviewInputs: [frontier] } : {}),
+    ...((scoped || contextInputs.length) ? { ownerReviewInputs: [...(scoped ? [frontier] : []), ...contextInputs] } : {}),
   liveness: { pattern: /(\d+) defect row\(s\) checked/.source, min: 1, unit: 'defect rows' },
 });
 };
