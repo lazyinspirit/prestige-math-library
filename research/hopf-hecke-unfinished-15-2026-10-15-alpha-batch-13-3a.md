@@ -1,0 +1,31 @@
+# Batch 13 Step 3a adjudication
+
+Run: hopf-hecke-unfinished-15-2026-10-15. Group: batch-13.
+
+The scope owes exactly reader:13:1; no touched, page, or refuter decisions. Pre/post snapshots have identical item, contract, manifest and page hashes: the reader made no repairs. Reader and refuter artifacts were read as evidence.
+
+Completed level 0 review: lem-hh-rank-one-cyclotomic-quotient-monic-basis. Reviewed Statement and Proof 1.1–3.1 and the full defining multiplicative presentation. Its unit constant term supplies the signed polynomial inverse; mutually inverse maps identify Laurent and polynomial quotients. Monic division gives the basis including r=1; translation gives a nonzero nilpotent for r>=2 over every field. No choice is used. The contract risk_review is complete. Sources used: these local proofs, whose claims are elementary polynomial algebra; no external source reading claimed.
+
+Next: level-one type-A example, reader:13:1, then the two level-1 risk reviews. No item edits so far; no blocker identified.
+
+Completed level 0 review: ex-hh-ariki-koike-level-one-is-finite-type-a, Verification 1.1–2.1 and F1–F6. The finite-generator map is surjective by recursion and inverse formulas, and is injective because its tensor-extended source basis maps bijectively to the r=1 PBW basis. Exact dependencies read: def-generic-type-a-hecke-algebra (Definition, generator-free n<=1 and empty reduced words); thm-standard-basis-of-the-generic-type-a-hecke-algebra (Statement and complete local operator proof); thm-hh-ariki-koike-basis-and-generic-splitness (Statement and complete spanning/density/descent proof); multiplicative Definition already reviewed. No flatness or Q-1 inversion is required. Reader:13:1 is confirmed_nonfatal: the contract singleton evidence used generator notation T_1 where T_id is intended, despite the source definition explicitly distinguishing the notations. Corrected only boundaries[2].evidence to the identity empty-word basis; the routed location says reason but the actual key is evidence. repair_confidence: 1. The item and all source interfaces remain unchanged, so there is no consumer repair. Its risk_review is complete. Next: close the defect row, then finish the level-1 reviews.
+
+Closed reader:13:1 with defect hh15-b13-3a-level-one-singleton-contract (fixed, nonfatal, caught_at_stage 3a-adjudicate), through the serialized native ledger append. The decisions file has exactly that one obligation.
+
+Completed level 1 review: ex-hh-ariki-koike-colliding-content-specialization. Read the entire Example/Verification, the entire def-hh-multipartitions-standard-tableaux-and-generic-contents (Definition and verification), and the already reviewed monic-quotient supplier. For the two one-box shapes, contents are exactly u_1,u_2. The Laurent-ring specialization sends units to units; it is not asserted to define a map from the rational function field. At the collision, epsilon is nonzero and square-zero; the interpolation numerator becomes epsilon and denominator zero, so the generic fraction cannot be evaluated. No semisimplicity or specialized projector claim is needed. Risk review complete; no defect or item edit. Next: rank-one level-two review and final focused checks.
+
+Completed level 1 review: ex-hh-ariki-koike-rank-one-level-two-quotient, Verification 1.1–2.1 with the previously reviewed Definition and monic-basis supplier. Expansion and multiplication by X inverse give the quadratic and inverse exactly; ab is a unit. Monic degree two proves independence even for coincident roots, a+b=0, and characteristic two. Risk review complete; no defect or item edit.
+
+The untouched ordinary-risk ex-hh-ariki-koike-rank-two-level-two-pbw was also opened: its three reduction identities and eight-word enumeration agree with the defining relations and exact universal PBW statement. It owes no decision. All direct cited dependencies of the five batch carriers were read. Transitive suppliers of the established basis theorem were not recursively re-audited. No external source consultation was needed for these elementary calculations and exact local basis applications; no claim of having read the cited external papers is made.
+
+The existing batch-13 cross-batch input was read and preserved. The sole row concerns the A-page affine prerequisite, with no routed page obligation here; no item supplier is a different current-run batch and this contract-only correction changes no edge or page use. No published defect was identified and no published carrier was edited. No proposed withdrawal was removed. No uncertainty or prerequisite blocker remains for the routed obligation.
+
+Final local checks (all exit 0):
+
+- `node tools/risk-report.mjs research/hopf-hecke-unfinished-15-2026-10-15-batch-13.proof-contracts.json` identified the four required reviews before editing; the final `--require-reviewed` run reports 0 errors, five items routed.
+- `node tools/proof-contract.mjs research/hopf-hecke-unfinished-15-2026-10-15-batch-13.proof-contracts.json --strict`: 0 errors, 0 warnings, 5/5 checked.
+- `node tools/finite-smoke.mjs research/hopf-hecke-unfinished-15-2026-10-15-batch-13.proof-contracts.json`: both selected checks pass (16 unit pairs in F5 for inverses; rational and four finite-field repeated-root collision fixtures). These are bounded sanity checks, not general proof certificates.
+- Native defect-ledger append accepted the single row and refreshed its generated Markdown view.
+- Independent JSON check confirms exact one-obligation coverage and a unique fixed defect row at stage 3a-adjudicate. All five current raw item hashes equal their frozen post-reader hashes; pre/post projections agree.
+
+Only the assigned proof contract, this report, the decisions file, and the append-only defect ledger/generated view were changed. Manifest, provenance, dependency ledgers, and item verification fields need no change because every mathematical carrier and interface is unchanged. No item formatting, precheck or proof-layout was run: there are no changed item paths. No judging, stamping, certification, dispatching, engine transition or gate battery was performed. Engine-owned closure remains pending; local work is complete with no blockers.

@@ -1,8 +1,8 @@
 ---
 page: hecke-symmetries-and-generic-quantum-schur-weyl-duality
 title: "Hecke Symmetries and Generic Quantum Schur–Weyl Duality"
-status: published
-items: [def-hh-hecke-symmetry-and-ordered-basis-operator, lem-hh-type-a-tensor-operator-is-a-hecke-symmetry, thm-hh-hecke-symmetry-tensor-power-action, lem-hh-quantum-and-hecke-tensor-actions-commute, lem-hh-classical-tensor-centralizer-by-polarization, lem-hh-finite-semisimple-matrix-double-commutant, lem-hh-finite-matrix-rank-under-specialization, lem-hh-classical-and-generic-tensor-double-centralizer-suppliers, thm-hh-generic-quantum-schur-weyl-mutual-centralizers]
+status: draft
+items: [def-hh-hecke-symmetry-and-ordered-basis-operator, lem-hh-type-a-tensor-operator-is-a-hecke-symmetry, thm-hh-hecke-symmetry-tensor-power-action, def-hh-type-a-quantum-antipode-formula, lem-hh-type-a-quantum-antipode-descends, lem-hh-quantum-and-hecke-tensor-actions-commute, lem-hh-classical-tensor-centralizer-by-polarization, lem-hh-finite-semisimple-matrix-double-commutant, lem-hh-finite-matrix-rank-under-specialization, lem-hh-classical-and-generic-tensor-double-centralizer-suppliers, thm-hh-generic-quantum-schur-weyl-mutual-centralizers]
 examples: []
 ---
 
@@ -19,6 +19,8 @@ The local operators on adjacent tensor positions therefore satisfy the normalize
 ## Quantum tensor action and commuting inclusion
 
 [[def-hh-type-a-quantum-tensor-action-for-centralizers]] gives the type-A quantum algebra presentation over $\mathbb Q(q)$, its vector matrices, and the coproduct convention. The relation-descent proof in [[lem-hh-quantum-presentation-and-tensor-action-descent]] checks every vector relation, then checks the Cartan, mixed commutator, distant, and quantum Serre relations under the coproduct. It also proves coassociativity and both counit identities, so all tensor-power actions are defined from the same presentation.
+
+Those published carriers establish the bialgebra structure but do not check an antipode on the quotient presentation. [[def-hh-type-a-quantum-antipode-formula]] records the word-reversing candidate, and [[lem-hh-type-a-quantum-antipode-descends]] proves that it preserves every defining relation and satisfies both antipode identities. This completes the Hopf-algebra structure used in the page's quantum-group terminology without changing the published suppliers.
 
 [[lem-hh-quantum-and-hecke-tensor-actions-commute]] verifies the local commutation on two tensor positions. For each $E_i$ and $F_i$, it checks the repeated labels, the two labels $i,i+1$, and both orientations of every outside label below or above them. The iterated coproduct formula groups the two terms meeting a Hecke generator into that checked two-site action; the remaining terms are identities or matching Cartan weights. Thus the two images commute before any commutant equality is asserted.
 

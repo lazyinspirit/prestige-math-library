@@ -1,11 +1,15 @@
 ---
 page: hopf-ideals-finite-duals-and-basic-constructions-examples
 title: "Hopf Ideals, Finite Duals, and Basic Constructions — Examples"
-status: published
+status: draft
 items: []
-examples: []
+examples:
+  - ex-hh-finite-group-dual-hopf-algebra
+  - ex-hh-coideals-ring-ideals-hopf-ideals-and-subbialgebras
+  - ex-hh-sweedler-four-dimensional-hopf-algebra
+  - ex-hh-finite-dual-of-a-polynomial-hopf-algebra
+  - ex-hh-tensor-product-hopf-algebra
+requires: [hopf-ideals-finite-duals-and-basic-constructions, eigenvalues-eigenvectors-and-the-characteristic-polynomial, artinian-rings-and-length]
 ---
 
-Compute finite duals of polynomial algebras through finite quotient coefficients, finite-group duality, tensor Hopf structure, and Sweedler H4 with char(k)≠2. Contrast a coalgebra coideal, a ring ideal, and a Hopf ideal.
-
-These are planned worked examples and counterexamples for [[hopf-ideals-finite-duals-and-basic-constructions]], with empty item lists pending normal authoring and proof review. Each example must calculate from the stated hypotheses, and each counterexample must verify both its premises and the failed conclusion. This companion is a dependency leaf and supplies no theorem to another page.
+These examples calculate the finite dual of the primitive polynomial Hopf algebra by its finite quotient coefficients, identify the dual of a finite group algebra, and work out a tensor-product Hopf algebra and Sweedler's $H_4$. A final comparison separates a ring ideal, a coalgebra coideal, and a Hopf ideal, and shows why a subbialgebra need not be a Hopf subalgebra.

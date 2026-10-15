@@ -1,7 +1,7 @@
 ---
 page: cyclotomic-hecke-quotients-and-ariki-koike-pbw
 title: "Cyclotomic Hecke Quotients and Ariki–Koike PBW"
-status: published
+status: draft
 items:
   - def-hh-multiplicative-cyclotomic-hecke-algebra
   - lem-hh-cyclotomic-commuting-jucys-murphy-generators
@@ -10,6 +10,7 @@ items:
   - thm-hh-generic-cyclotomic-seminormal-models
   - lem-hh-colored-permutation-rsk-and-tableau-square-count
   - thm-hh-ariki-koike-basis-and-generic-splitness
+  - lem-hh-rank-one-cyclotomic-quotient-monic-basis
 examples: []
 ---
 
@@ -79,4 +80,8 @@ $$H_{r,n}\otimes_RK\longrightarrow\prod_{\lambda\in\mathcal P_r(n)}\operatorname
 
 The target dimension is $r^n n!$, while the integral spanning family has that same cardinality. The surjection and the spanning bound force equality; the proposed family is independent over $K$, hence over the domain $R$. [[thm-hh-ariki-koike-basis-and-generic-splitness]] proves the resulting $R$-basis and the displayed generic split decomposition. Tensoring that free basis proves that for every commutative $R$-algebra $S$, including nonfields and nonsemisimple specializations, the same images form an $S$-basis. Generic splitness is asserted only over $K$; specializations need not be semisimple.
 
-The construction uses the traditional multiplicative parameters and does not identify this presentation with the additive degenerate cyclotomic algebra at a singular parameter value. All seven linked items remain drafts until the page receives publication authorization.
+The construction uses the traditional multiplicative parameters and does not identify this presentation with the additive degenerate cyclotomic algebra at a singular parameter value. The seven earlier linked results are existing published prerequisite context and retain their original carriers. The new rank-one quotient lemma is draft content in this run. The page remains draft pending its ordinary review and publication authorization.
+
+## Rank-one specialization
+
+For arbitrary unit parameters, the rank-one cyclotomic quotient has the monic basis $1,X,\ldots,X^{r-1}$. When all parameters coincide, the quotient is a truncated polynomial algebra with a nonzero nilpotent. The proof is local in [[lem-hh-rank-one-cyclotomic-quotient-monic-basis]] and supplies the repeated-content boundary used in the companion examples.

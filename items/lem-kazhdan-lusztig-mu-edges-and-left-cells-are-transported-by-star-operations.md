@@ -1,11 +1,13 @@
 ---
+verification:
+  repair: research/hopf-hecke-unfinished-15-2026-10-15-owner/published-repairs/lem-kazhdan-lusztig-mu-edges-and-left-cells-are-transported-by-star-operations.json
 id: lem-kazhdan-lusztig-mu-edges-and-left-cells-are-transported-by-star-operations
 kind: lemma
 title: "$\\mu$-edges and left equivalence are transported by star operations"
 status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
-deps: [lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges, def-star-operations-on-the-symmetric-group, def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells, thm-kazhdan-lusztig-basis-multiplication-formula, thm-kazhdan-lusztig-polynomial-recursion, thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-bruhat-order-basic-properties-for-permutations]
+deps: [lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges, def-star-operations-on-the-symmetric-group, def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells, thm-kazhdan-lusztig-basis-multiplication-formula, thm-kazhdan-lusztig-polynomial-recursion, lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-bruhat-order-basic-properties-for-permutations]
 dependency_level: 9
 justified_by: []
 aliases: []
@@ -21,9 +23,6 @@ sources:
     - title: "Susumu Ariki, Robinson–Schensted correspondence and left cells, arXiv:math/9910117 — star operations, nonvanishing transport, and cell transport."
       url: "https://arxiv.org/pdf/math/9910117"
       locator: "§3.2, Definition 3.2 and Lemma 3.4, printed pp. 7–8; §3.3, Propositions 3.6–3.7, printed p. 9."
-verification:
-  audited: "2026-10-08"
-  precheck: pass
 ---
 
 ## Facts & Assumptions
@@ -32,13 +31,13 @@ verification:
 
 [F1] The rank-two right cosets have six elements with relative lengths $0,1,1,2,2,3$. The domain $D_i$ consists of the four middle elements, and the star involution exchanges the two adjacent pairs; its restriction $K_{ij}:D_{ij}\to D_{ji}$ is a bijection with inverse $K_{ji}$ ([[lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges]], [[def-star-operations-on-the-symmetric-group]]).
 
-[F2] Write $C_w=\underline H_w=\sum_{a\le w}p_{a,w}H_a$. For $a<w$, $p_{a,w}\in v\mathbb Z[v]$ has fixed parity $\ell(w)-\ell(a)$, and $\mu(a,w)$ is its coefficient of $v$; $\mu(a|w)\ne0$ means that one of the two comparable orientations has nonzero coefficient ([[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]], [[def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization]]).
+[F2] Write $C_w=\underline H_w=\sum_{a\le w}p_{a,w}H_a$. For $a<w$, $p_{a,w}\in v\mathbb Z[v]$ has fixed parity $\ell(w)-\ell(a)$, and $\mu(a,w)$ is its coefficient of $v$; $\mu(a|w)\ne0$ means that one of the two comparable orientations has nonzero coefficient ([[lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties]], [[def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization]]).
 
 [F3] If $b s<b$, the right-descent polynomial recursion in [[thm-kazhdan-lusztig-polynomial-recursion]] applies to every $a\le b$, with coefficients $p_{a,b}=v^{\ell(b)-\ell(a)}P_{a,b}(v^{-2})$ and $\mu$ as in [F2].
 
 [F4] If $bs<b$, the multiplication formula gives $C_bC_s=(v+v^{-1})C_b$; since [F2, F5] give $C_s=H_s+v$, this yields $C_bH_s=v^{-1}C_b$. The same multiplication formula gives every simple-generator coefficient in $C_sC_b$, and for an off-diagonal left step $a\leftarrow_L b$ the cell supplier gives $R(b)\subseteq R(a)$ ([[thm-kazhdan-lusztig-basis-multiplication-formula]], [[def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells]]).
 
-[F5] Every Bruhat cover $a\lessdot b$ has $p_{a,b}=v$ and hence $\mu(a,b)=1$; Bruhat order is graded, has the simple-reflection lifting properties, and is inversion invariant ([[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]], [[def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization]], [[lem-bruhat-order-basic-properties-for-permutations]]).
+[F5] Every Bruhat cover $a\lessdot b$ has $p_{a,b}=v$ and hence $\mu(a,b)=1$; Bruhat order is graded, has the simple-reflection lifting properties, and is inversion invariant ([[lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties]], [[def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization]], [[lem-bruhat-order-basic-properties-for-permutations]]).
 
 [F6] The $H_s$ generate the algebra, and the standard basis satisfies $H_wH_s=H_{ws}$ when $ws>w$ and $H_wH_s=H_{ws}+(v^{-1}-v)H_w$ when $ws<w$ ([[def-normalized-type-a-hecke-algebra-and-its-bar-involution]]).
 
@@ -70,4 +69,4 @@ Fix $i$, let $D_{ij},D_{ji},K_{ij}$ be as in [[lem-dual-knuth-star-operations-gi
 
 The coefficient calculation in (a) follows Casselman, Theorem 6.2; its complete proof is at Proposition 4.4 and Corollary 4.5, printed p. 7; §§5.2–5.3, printed pp. 8–9; and Theorem 6.2, printed pp. 11–13. The right-recursion equations and mixed-descent vanishing were checked against the current normalized suppliers. Ariki, Proposition 3.6, supplies nonvanishing transport but not by itself the coefficient-equality proof.
 
-This proof uses only the locally proved basis, parity, and Bruhat-cover coefficient clauses of [[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]]. The positivity clause and its authorized original-source fallback are unused. The quotient-module transport argument uses coefficient supports and nonzero edges, without $p$-canonical bases or a sign assumption. No Choice is used.
+This proof uses only the locally proved basis, parity, and Bruhat-cover coefficient clauses of [[lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties]]. Coefficientwise positivity is unused. The quotient-module transport argument uses coefficient supports and nonzero edges, without $p$-canonical bases or a sign assumption. No Choice is used.

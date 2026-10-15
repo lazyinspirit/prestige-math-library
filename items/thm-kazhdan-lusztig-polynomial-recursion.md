@@ -1,11 +1,13 @@
 ---
+verification:
+  repair: research/hopf-hecke-unfinished-15-2026-10-15-owner/published-repairs/thm-kazhdan-lusztig-polynomial-recursion.json
 id: thm-kazhdan-lusztig-polynomial-recursion
 kind: theorem
 title: The Kazhdan–Lusztig polynomial descent recursion
 status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
-deps: [thm-kazhdan-lusztig-basis-multiplication-formula, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-bruhat-order-basic-properties-for-permutations]
+deps: [thm-kazhdan-lusztig-basis-multiplication-formula, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties, def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-bruhat-order-basic-properties-for-permutations]
 dependency_level: 7
 justified_by: []
 aliases: []
@@ -21,9 +23,6 @@ sources:
     - title: "G. Lusztig, Hecke Algebras with Unequal Parameters, revised version arXiv:math/0208154v2 — §§6.1–6.7: equal-parameter Kazhdan–Lusztig basis multiplication and coefficient symmetry, translated to v_L=v^{-1}."
       url: "https://arxiv.org/pdf/math/0208154"
       locator: "§§6.1–6.7, printed pp. 30–31; the multiplication formulas and inverse-index coefficient symmetry were read in full."
-verification:
-  audited: "2026-10-08"
-  precheck: pass
 ---
 
 ## Facts & Assumptions
@@ -36,7 +35,7 @@ verification:
 
 [F3] $p_{x,z}=v^{\ell(z)-\ell(x)}P_{x,z}(v^{-2})$ when $x\le z$, and $\mu(x,z)$ is the coefficient of $v$ in $p_{x,z}$; it is zero unless $\ell(z)-\ell(x)$ is odd ([[def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization]]).
 
-[F4] Writing $\underline H_t=\sum_{x\le t}p_{x,t}H_x$, the basis coefficients vanish outside Bruhat order and satisfy $p_{y^{-1},w^{-1}}=p_{y,w}$ ([[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]]).
+[F4] Writing $\underline H_t=\sum_{x\le t}p_{x,t}H_x$, the basis coefficients vanish outside Bruhat order and satisfy $p_{y^{-1},w^{-1}}=p_{y,w}$ ([[lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties]]).
 
 [F5] Bruhat order is graded by $\ell$, simple reflections change length by one, inversion preserves Bruhat order and length, and Bruhat comparison is characterized by reduced subwords; in particular $[\mathrm{id},s]=\{\mathrm{id},s\}$ for a simple reflection ([[lem-bruhat-order-basic-properties-for-permutations]]).
 

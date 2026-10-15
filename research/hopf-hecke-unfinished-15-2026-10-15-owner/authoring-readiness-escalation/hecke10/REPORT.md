@@ -1,0 +1,22 @@
+# Batch10 missing-readiness recommendations
+
+Recommend **ready for all seven current batch10 items**, through owner-supported `recordStep1 --owner` calls after guard validation. The original seven record paths are still absent. This resolves missing author-readiness artifacts only: no independent proof approval, acceptance, gate or native author receipt is supplied here.
+
+Read the complete seven actual source bodies, the two actual page bodies, complete current manifest, genuine successful beta batch10 attempt2 result and its author notes/check evidence. Inspected the actual contracts and relevant uses of all eleven external direct suppliers. Eighteen exact item/supplier source guards and twelve artifact guards bind this evidence; source copies are retained under current-inputs/. No unrelated corpus traversal or audit was performed.
+
+The substantive checks preserve the richest authored scope:
+
+- Parabolic candidate and induction definitions use the published tensor construction for a right module and a left module over an arbitrary unital ring. The induced left H-action respects balancing explicitly; its algebra/submodule well-definedness is supplied by the local justifier.
+- Parabolic freeness uses the actual intrinsic parabolic presentation and both unique length-additive factorizations. Distinct coefficient pairs give standard-basis independence. Inherited odd-component parameters specialize the restricted universal ring to ambient R, including when components merge. Both coset-side decompositions, induced R-basis, adjunction and arbitrary possibly infinite W are retained. Empty J and J=S require no extra hypothesis.
+- Trace definition has a unique coefficient functional. In the trace proof, actual normalized length operators have symmetric blocks with off-diagonal entries1. Reversing reduced words gives the transpose indexed by the group inverse. The standard-basis representation evaluates at e1 to give the Kronecker pairing. Explicit finite coordinate functionals prove perfectness over the integral ring and every commutative base change. No field-only tensor-duality supplier is required or claimed.
+- The S3 induced module uses the right H_J-basis with D_L and keeps the opposite coset decomposition separately. The six tensor images, quadratic matrices and braid identity agree.
+- The type-A2 trace example has the stated inverse-index permutation Gram matrix; its inverse-indexed basis differs from algebra inverses by the nonzero Laurent element v-v^-1.
+- The v=i specialization yields nonzero ε with ε²=0, an identity trace Gram matrix, and exactly one simple submodule Cε of the regular module. Its proper sum proves nonsemisimplicity while keeping the perfect trace.
+
+The local finite-free coordinate-dual argument already closes the scaffold's suggested field-only-duality dependency mismatch; no missing prerequisite remains. The old published prerequisite-page prose saying its six items are draft is an author-noted editorial discrepancy; actual supplying items are published and supply the necessary interfaces. It does not block these readiness recommendations and no outside page was edited.
+
+Genuine native author evidence is preserved by path/hash. Beta attempt2 completed successfully with exit0. Its existing author-check receipt reports successful precheck/render/content-policy/strict-contract checks for the seven items; these are historical author checks, not newly run gates. All active item source-reference URLs map to original fetch-verified coverage records; the two inaccessible duplicate dissertation records remain documented drops with substitute sources. This reviewer did not refetch or claim fresh reading of full external books. The current batch11 manifest parses, removing the original unrelated JSON obstruction to the supported record tool.
+
+`readiness-recommendations.json` gives each exact item/direct-supplier guard, examined dependency list, proof/use loci and source-grounded reason. `patch-manifest.json` supplies proposed owner calls without a fabricated readiness hash or timestamp. The two definitions include their actually examined same-batch justifiers in the dependency lists. Root should validate guards immediately before supported recording; later independent reviews and native gates retain their normal duties.
+
+One focused pass; zero substantive gaps. No sources, metadata, live readiness records, native state, shared ledgers, plan, publication or commits were changed. No checks were rerun as gates and no recertification was attempted.

@@ -1,11 +1,13 @@
 ---
 page: coalgebras-counits-and-the-fundamental-coalgebra-theorem-examples
 title: "Coalgebras, Counits, and the Fundamental Coalgebra Theorem — Examples"
-status: published
+status: draft
 items: []
-examples: []
+examples:
+  - ex-hh-group-like-elements-in-finite-set-coalgebra
+  - ex-hh-relative-primitive-elements-in-two-dimensional-coalgebra
+  - ex-hh-counital-coideal-quotient-of-comatrix-coalgebra
+  - cex-hh-coideal-with-nonzero-counit-does-not-give-quotient-map
 ---
 
-Compute group-like and primitive elements in finite-dimensional small coalgebras, quotient a comatrix coalgebra by a counital coideal, and show why ε(I)=0 is indispensable. The fundamental theorem is over fields, not arbitrary rings.
-
-These are planned worked examples and counterexamples for [[coalgebras-counits-and-the-fundamental-coalgebra-theorem]], with empty item lists pending normal authoring and proof review. Each example must calculate from the stated hypotheses, and each counterexample must verify both its premises and the failed conclusion. This companion is a dependency leaf and supplies no theorem to another page.
+These worked examples calculate group-like elements in a finite set coalgebra and group-like and relative primitive elements in a two-dimensional coalgebra. A second calculation forms a one-dimensional quotient of the two-by-two comatrix coalgebra by a counital coideal. The counterexample uses a nonzero quotient and proves that a subspace satisfying only the coproduct condition cannot make the canonical projection a coalgebra map when its counit is nonzero.

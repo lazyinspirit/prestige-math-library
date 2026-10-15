@@ -1,0 +1,516 @@
+--- a/WORKFLOW.md
++++ b/WORKFLOW.md
+@@ -347,6 +347,49 @@
+ table and applies the owner hold before progress bookkeeping, so paused work
+ cannot cache derived collections before an authorized reconciliation.
+ 
++An owner may admit an individually confirmed Step-4 reader concern about an
++unchanged draft original-frontier item whose genuine original Luna verdict is
++`keep:true`, before the first `impact-initial-1` owner pack freezes. The optional
++`research/RUN-step5-reader-concern-admissions.json` is version 1, kind
++`owner-confirmed-step4-reader-concerns`, authorized by `owner` with
++`owner_identity: /root`, `native_coverage_adopted: false`, a dated record,
++`original_count`, nonempty bounded `entries` and raw-SHA256 `bindings`.
++Each entry names `id`, owning string `batch`, zero-based `concern_index`, the
++exact original `concern` object, `before_guard_sha256`, and `owner_review`.
++The review records `reviewed_by: root`, `confirmed_defect: true`, `reviewed_at`,
++a concrete `reason`, and a bound focused `evidence_file`; exact proposed edits
++use `proposed_edits: [{source_excerpt, proposed_replacement}]` with unique current
++literal excerpts, or a bound `candidate_patch_file`. A single edit may place
++`source_excerpt` and `proposed_replacement` directly on `owner_review`.
++These are focused repair instructions, never preapplied source edits.
++
++Bindings cover the immutable original frontier, baseline and verdict inventory;
++the frozen initial pack and every genuine successful native per-unit initial
++report/result (including unchanged mechanical zero-work reports); each current
++owning batch manifest; the unchanged native Step-4 digest, successful Sol 6.1
++medium reader result and exact attempt result and original structured output;
++and focused root review evidence or candidate patches. Native preparation also
++requires and binds the actual successful initial collection, once produced.
++`node tools/step5-workflow.mjs check-reader-concerns --run RUN` validates the
++admission read-only at the drained paused 5.1 boundary without claiming that
++collection already exists. Preparation accepts only that boundary or drained 5.2
++before owner dispatch; stale guards, missing individual confirmation, malformed or
++foreign subjects, duplicate entries, or a late admission fail closed.
++
++The first ordinary 5.2 pack unions these explicit concern subjects with real
++consumer impacts and records their distinct origin. Mutable manifest preimages
++are archived by the existing supporting-evidence mechanism. The admission grants
++no worker execution, mathematical acceptance, judgment, or fatal-threshold credit,
++and changes no frozen pack, native report or original verdict. Genuine 5.2
++workers review and repair, 5.3 certifies, and 5.4 obtains current Sol judgments for
++changed guards. Only actual Statement/Definition changes propagate consumers.
++Concern-owning 5.2 lanes use persistent runtime homes under
++`.autopilot/RUN/step5-reader-owner-sessions/uN`; necessary subsequent consumer
++passes retain the supplier's owner and resume its authenticated successful native
++session. Missing session continuity or conflicting reviewer ownership holds for
++the root. Unrelated lanes retain their existing dispatch behavior, and all later
++rounds, closure checks and complete gate batteries remain mandatory.
++
+ The additional
+ `proof-contract-coverage` mechanical check still requires a contract for each
+ actual proof-bearing carrier. No new substantive review gate is added. Step 6
+--- a/tools/step5-reader-concerns.mjs
++++ b/tools/step5-reader-concerns.mjs
+@@ -0,0 +1,143 @@
++// Owner confirmation admits work; only genuine native workers and judges supply coverage.
++import {existsSync,readFileSync,readdirSync,lstatSync} from 'node:fs';
++import {join,resolve} from 'node:path';
++import {createHash} from 'node:crypto';
++import {validateFrontier} from './step5-rounds.mjs';
++import {itemHashGuard} from './item-hash.mjs';
++import {MODELS} from './models.mjs';
++const hash=value=>createHash('sha256').update(typeof value==='string'?value:JSON.stringify(value)).digest('hex');
++const read=path=>JSON.parse(readFileSync(path,'utf8'));
++const need=(yes,message)=>{if(!yes)throw Error(`Step 5 reader concern: ${message}`);};
++const date=value=>typeof value==='string'&&Number.isFinite(Date.parse(value));
++export const readerConcernPath=(root,run)=>join(root,'research',`${run}-step5-reader-concern-admissions.json`);
++
++/** Existing frozen packs cannot acquire an admission after dispatch. */
++export function checkFrozenReaderConcernInput(root,run,pack) {
++  const path=readerConcernPath(root,run),bound=pack.input_evidence?.[path];
++  need(existsSync(path)?bound===hash(readFileSync(path,'utf8')):!bound,
++    'admission added, removed or changed after impact pack freeze');
++}
++
++/** Read-only, fail-closed admission validation. No source, verdict or state writes.
++ * Initial native collection is required only when preparing the future 5.2 pack.
++ */
++export function loadReaderConcerns(root,run,{requireCollection=true}={}) {
++  const path=readerConcernPath(root,run);if(!existsSync(path))return null;
++  const row=read(path),dir=join(root,'research',`${run}-step5-v2`),dispatchDir=join(root,'research',`${run}-dispatch`);
++  need(!existsSync(join(dir,'impact-initial-1.json')),'first impact pack is already frozen');
++  need(!readdirSync(dispatchDir).some(name=>/^alpha-repair-step5-v2-impact-initial(?:-pass-\d+)?-r1-u/.test(name)),
++    'impact owner execution has already started');
++  need(row.version===1&&row.kind==='owner-confirmed-step4-reader-concerns'&&row.run===run
++    &&row.authorized_by==='owner'&&row.owner_identity==='/root'&&row.native_coverage_adopted===false
++    &&date(row.recorded_at)&&row.bindings&&typeof row.bindings==='object'&&!Array.isArray(row.bindings),
++    'invalid owner authority or admission envelope');
++  const evidence={[path]:hash(readFileSync(path,'utf8'))};
++  for(const [file,expected]of Object.entries(row.bindings)){
++    const p=resolve(root,file);
++    need(p.startsWith(resolve(root,'research')+'/')&&/^[a-f0-9]{64}$/.test(expected)
++      &&existsSync(p)&&lstatSync(p).isFile()&&!lstatSync(p).isSymbolicLink()
++      &&hash(readFileSync(p,'utf8'))===expected,`stale or invalid binding: ${file}`);
++    evidence[p]=expected;
++  }
++  const bound=file=>{need(Object.hasOwn(evidence,resolve(file)),`missing binding: ${file}`);return read(file);};
++  const frontier=bound(join(dir,'frontier.json'));validateFrontier(frontier);
++  const baseline=bound(join(dir,'baseline.json')),verdicts=bound(join(dir,'step4-verdicts.json'));
++  const initialPath=join(dir,'initial-1.json'),initial=bound(initialPath);
++  need(frontier.run===run&&row.original_count===frontier.ids.length&&initial.run===run&&initial.phase==='initial'
++    &&initial.round===1&&initial.adjudicationSchemaVersion===1&&Array.isArray(initial.rejected)
++    &&Array.isArray(row.entries)&&row.entries.length>0&&row.entries.length<=frontier.ids.length,
++    'wrong frozen inventory or initial pack');
++  // Bind all genuine initial handoffs, including unchanged mechanical zero-work units.
++  for(const unit of initial.units){
++    const label=`step5-v2-initial-r1-u${unit}`,reportPath=join(dir,`${label}.json`),report=bound(reportPath);
++    need(report.run===run&&report.phase==='initial'&&report.round===1&&String(report.unit)===unit
++      &&report.input_sha256===hash(initial),'initial native report mismatch');
++    const mechanical=report.completion==='mechanical-zero-work';
++    const dispatch=bound(join(dispatchDir,`${mechanical?'tool-step5-v2-empty-initial-r1-u'+unit:'alpha-adjudicate-'+label}.result.json`));
++    need(dispatch.run===run&&dispatch.ok===true&&JSON.stringify(dispatch.covers)===JSON.stringify([unit])
++      &&dispatch.label===(mechanical?`step5-v2-empty-initial-r1-u${unit}`:label)
++      &&(mechanical?dispatch.role==='tool'&&dispatch.written_by==='autopilot'&&report.mathematical_review===false
++        &&initial.assignments[unit]?.length===0&&['reviews','decisions','created_items','downstream'].every(key=>Array.isArray(report[key])&&report[key].length===0)
++        :dispatch.role==='alpha-adjudicate'&&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort==='high'),
++      'initial native completion is missing or invalid');
++  }
++  if(requireCollection){
++    const collectedPath=join(dir,'initial-1-collected.json'),collected=read(collectedPath);
++    need(collected.run===run&&collected.phase==='initial'&&collected.round===1&&collected.errors?.length===0
++      &&collected.evidence?.[initialPath]===hash(readFileSync(initialPath,'utf8')),'missing exact initial native collection');
++    for(const [file,expected]of Object.entries(collected.evidence??{})){
++      need(existsSync(file)&&hash(readFileSync(file,'utf8'))===expected,`stale initial collection evidence: ${file}`);
++      evidence[file]=expected;
++    }
++    evidence[collectedPath]=hash(readFileSync(collectedPath,'utf8'));
++  }
++  const state=read(join(root,'.autopilot',run,'state.json'));
++  need(state.run===run&&((state.stage==='5.1-adjudicate'&&state.paused===true)||state.stage==='5.2-impact')
++    &&Object.values(state.dispatches??{}).every(value=>!value.startedAt||Boolean(value.endedAt)),
++    'requires drained initial workers before first impact dispatch');
++  const ids=new Set(),entries=[];
++  for(const entry of row.entries){
++    const {id,batch,concern_index,owner_review:review}=entry;
++    need(typeof id==='string'&&typeof batch==='string'&&!ids.has(id)&&frontier.ids.includes(id)
++      &&frontier.batches.filter(value=>value.items.includes(id)).length===1
++      &&frontier.batches.find(value=>value.id===batch)?.items.includes(id), 'duplicate, outside or wrong owning batch');
++    ids.add(id);
++    const manifest=bound(join(root,'research',`${run}-batch-${batch}.pages.json`));
++    need(Array.isArray(manifest)&&manifest.flatMap(page=>page.items??[]).filter(value=>value.id===id).length===1,
++      'current owning manifest mismatch');
++    const digestPath=join(root,'research',`${run}-batch-${batch}-step5-context.json`),document=bound(digestPath);
++    const readerPath=join(dispatchDir,`alpha-batch-read-${batch}.result.json`),reader=bound(readerPath);
++    need(reader.run===run&&reader.role==='alpha-batch-read'&&reader.label===batch&&reader.ok===true
++      &&reader.model===MODELS.sol61.id&&reader.provider_effort==='medium'&&Number.isSafeInteger(reader.attempt)&&reader.attempt>0
++      &&reader.evidence_tag===`.attempt-${reader.attempt}`&&JSON.stringify(reader.covers)===JSON.stringify([batch]),
++      'not a genuine successful Step-4 reader');
++    const stem=join(dispatchDir,`alpha-batch-read-${batch}.attempt-${reader.attempt}`);
++    const attempt=bound(`${stem}.result.json`),output=bound(`${stem}.last-message.json`);
++    need(hash(reader)===hash(attempt)&&hash(document)===hash(output)&&document.batches?.includes(batch)
++      &&document.items_read?.includes(id)&&Number.isSafeInteger(concern_index)&&concern_index>=0
++      &&document.concerns?.[concern_index]?.id===id&&hash(document.concerns[concern_index])===hash(entry.concern),
++      'original structured reader concern mismatch');
++    const text=readFileSync(join(root,'items',`${id}.md`),'utf8');
++    need(/^status:\s*draft\s*$/m.test(text)&&entry.before_guard_sha256===baseline[id]
++      &&initial.before[id]===baseline[id]&&itemHashGuard(text)===baseline[id]
++      &&!initial.rejected.some(value=>value.id===id)
++      &&verdicts.some(value=>value.id===id&&value.model===MODELS.luna.id&&value.keep===true),
++      'requires unchanged draft original accepted Luna item');
++    need(review?.reviewed_by==='root'&&review.confirmed_defect===true&&date(review.reviewed_at)
++      &&Date.parse(review.reviewed_at)>=Date.parse(reader.ended_at)
++      &&typeof review.reason==='string'&&review.reason.trim().length>=40
++      &&typeof review.evidence_file==='string','missing actual individual root confirmation');
++    const edits=review.proposed_edits??(review.source_excerpt?[review]:[]);
++    need(Array.isArray(edits)&&edits.length<=1000,'invalid proposed edit instructions');
++    for(const edit of edits)need(typeof edit.source_excerpt==='string'&&edit.source_excerpt.length>0
++      &&text.split(edit.source_excerpt).length===2&&typeof edit.proposed_replacement==='string'
++      &&edit.proposed_replacement!==edit.source_excerpt,'stale or ambiguous proposed source excerpt');
++    const patch=review.candidate_patch_file?resolve(root,review.candidate_patch_file):null;
++    need(edits.length>0||(patch&&Object.hasOwn(evidence,patch)&&readFileSync(patch,'utf8').trim().length>=40),
++      'missing exact proposed edits or bound candidate patch');
++    const ownerEvidence=resolve(root,review.evidence_file);
++    need(Object.hasOwn(evidence,ownerEvidence)&&readFileSync(ownerEvidence,'utf8').trim().length>=80,
++      'missing bound root review evidence');
++    entries.push({...entry,digest_path:digestPath});
++  }
++  return {path,entries,evidence};
++}
++
++/** Native plan options for the actual same reviewer, never just a lane label. */
++export function readerConcernSession(root,run,phase,round,unit) {
++  const packPath=join(root,'research',`${run}-step5-v2`,`${phase}-${round}.json`);
++  if(!existsSync(packPath))return {};
++  const pack=read(packPath),owners=pack.reader_concern_owners??{};
++  if(!(pack.assignments?.[unit]??[]).some(id=>owners[id]===unit))return {};
++  const sessionHome=join(root,'.autopilot',run,'step5-reader-owner-sessions',`u${unit}`);
++  if(phase==='impact-initial'&&round===1)return {sessionHome};
++  const binding=pack.reader_owner_sessions?.[unit];
++  need(binding&&pack.input_evidence?.[binding.result]===binding.sha256
++    &&hash(readFileSync(binding.result,'utf8'))===binding.sha256,'missing exact prior owner session result');
++  const result=read(binding.result);
++  need(result.run===run&&result.role==='alpha-repair'&&result.ok===true&&result.model===MODELS.sol61.id
++    &&result.provider_effort==='high'&&result.session_home===sessionHome
++    &&typeof result.session_id==='string'&&result.session_id.length>0&&result.session_id===binding.session_id,
++    'cannot resume the genuine prior owner reviewer');
++  return {sessionHome,resumeSession:result.session_id};
++}
+--- a/tools/step5-workflow.mjs
++++ b/tools/step5-workflow.mjs
+@@ -17,6 +17,8 @@
+ import { restatedIds, statementHash } from './step5-statement.mjs';
+ import { syncMaintenance, maintenanceStatus, prepareMaintenance, collectMaintenance } from './consumer-maintenance.mjs';
+ import { orderedItems, runPages } from './item-dependency-levels.mjs';
++import { loadReaderConcerns, checkFrozenReaderConcernInput, readerConcernSession } from './step5-reader-concerns.mjs';
++export { readerConcernSession };
+ 
+ export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
+ const read = path => JSON.parse(readFileSync(path, 'utf8'));
+@@ -581,6 +583,8 @@
+       `Frozen inputs: ${packPath(root,pack.run,pack.phase,pack.round)}.`,
+       mode==='adjudicate'&&existsSync(batchDigest)
+         ? `Read this batch's rejection-blind Step-4 review digest first: ${batchDigest}. Its findings are evidence, not authority; verify relevant concerns against the current item files and the assigned judge tuples.` : '',
++      pack.reader_concerns?.some(row=>assigned.includes(row.id))
++        ? `Owner-confirmed Step-4 reader concerns assigned for genuine current review and smallest necessary repair (these are not judge rejections or downstream claims):\n${JSON.stringify(pack.reader_concerns.filter(row=>assigned.includes(row.id)),null,2)}. Review the bound original digest and individual owner evidence; repair confirmed presentation defects as well as mathematical defects. Return ordinary reviews, with no adjudication decision for these concerns. Only actual Statement/Definition changes propagate consumer examinations.` : '',
+       `Write only your assigned frontier item files, their necessary owning contracts/metadata, and ${report}.`,
+       'Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.',
+       'SCOPE: repair only assigned draft frontier items. Published repairs have no item gate, rejudge or adjudication obligation; record their findings separately. Outside consumers are handled by consumer maintenance. Record affected uses without turning them into frontier blockers.',
+@@ -1270,9 +1274,37 @@
+     const nextPhase=nextImpactPhase(phase,progress);
+     const assignments={'1':[],'2':[],'3':[]};
+     const {order,cycles}=orderImpacts(items,pending);
+-    order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
++    // Admitted supplier restatements retain their actual native reviewer.
++    const concernOwners=Object.assign({},...progress.passes.map(pass=>readPack(root,run,pass,round).reader_concern_owners??{}));
++    const propagated={...concernOwners};
++    for(const impact of impacts){
++      const owners=new Set(impact.suppliers.map(id=>concernOwners[id]).filter(Boolean));
++      if(propagated[impact.id])owners.add(propagated[impact.id]);
++      requireValue(owners.size<=1,`reader concern consumer has conflicting reviewer owners: ${impact.id}`);
++      if(owners.size)propagated[impact.id]=[...owners][0];
++    }
++    order.forEach((id,index)=>assignments[propagated[id]??String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
+     const identity=libraryIdentity(root);
+     const pack={version:2,run,phase:nextPhase,basePhase:phase,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,round,units:['1','2','3'],assignments,before:current,before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),seeds,impacts,cycles,failures:null,gateAssignments:{},ledger_updates:completed.flatMap(receipt=>receipt.ledger_updates??[])};
++    if(Object.keys(propagated).length){
++      pack.reader_concern_owners=propagated;
++      pack.reader_owner_sessions={};pack.input_evidence={};
++      for(const unit of pack.units){
++        if(!assignments[unit].some(id=>propagated[id]===unit))continue;
++        const origin=join(root,'research',`${run}-dispatch`,`alpha-repair-${workerLabel('impact-initial',1,unit)}.result.json`);
++        const result=read(origin);
++        pack.reader_owner_sessions[unit]={result:origin,sha256:digest(readFileSync(origin,'utf8')),session_id:result.session_id};
++        pack.input_evidence[origin]=pack.reader_owner_sessions[unit].sha256;
++      }
++      // Validate real session continuity before freezing or dispatching work.
++      for(const unit of pack.units){
++        const binding=pack.reader_owner_sessions[unit];if(!binding)continue;
++        const result=read(binding.result),home=join(root,'.autopilot',run,'step5-reader-owner-sessions',`u${unit}`);
++        requireValue(result.run===run&&result.role==='alpha-repair'&&result.ok===true&&result.model===MODELS.sol61.id
++          &&result.provider_effort==='high'&&result.session_home===home&&typeof result.session_id==='string'&&result.session_id.length>0,
++          `reader concern continuation lacks genuine persistent reviewer: ${unit}`);
++      }
++    }
+     frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
+     progress.passes.push(nextPhase);progress.work_order.push({kind:'frontier',phase:nextPhase});progress.activePhase=nextPhase;atomic(path,progress);
+     return {complete:false,pack,passes:progress.passes};
+@@ -1345,13 +1377,20 @@
+ 
+ export function prepareImpact(root,run,phase,round,{failures=null}={}) {
+   requireValue(['impact-initial','impact-repeat','gate'].includes(phase),'invalid impact phase');
+-  const path=packPath(root,run,phase,round); if(existsSync(path))return read(path);
++  const path=packPath(root,run,phase,round);
++  if(existsSync(path)){
++    const saved=read(path);
++    if(phase==='impact-initial'&&round===1)checkFrozenReaderConcernInput(root,run,saved);
++    return saved;
++  }
+   if(phase==='gate')return prepareGateRepairPack(root,run,phase,round,failures);
+   const source=phase==='impact-initial'?'initial':'repeat';
+   const result=collect(root,run,source,round);
+   const items=readLibraryItems(root);
+   const scope=impactTargets(root,run,phase,items,result.restated??result.changed,result.downstream??[]);
+-  const {seeds,impacts,targets}=scope;
++  const {seeds,impacts}=scope;
++  const concerns=phase==='impact-initial'&&round===1?loadReaderConcerns(root,run):null;
++  const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id)])];
+   // Deterministic disjoint lanes run concurrently; shared metadata edits lock.
+   // Closure requeues reviews invalidated by a concurrent supplier repair.
+   const assignments={'1':[],'2':[],'3':[]};
+@@ -1360,6 +1399,11 @@
+   order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
+   const identity=libraryIdentity(root);
+   const pack={version:2,run,phase,round,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,units:['1','2','3'],assignments,before:hashes(root),before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),impacts,seeds,failures:null,gateAssignments:{},cycles:[...new Set(cycles)],ledger_updates:result.ledger_updates??[]};
++  if(concerns){
++    pack.reader_concerns=concerns.entries;
++    pack.reader_concern_owners=Object.fromEntries(concerns.entries.map(row=>[row.id,pack.units.find(unit=>assignments[unit].includes(row.id))]));
++    pack.input_evidence=frozenSupportingEvidence(root,run,concerns.evidence);
++  }
+   frozen(path,pack);writeTasks(root,pack,'repair');return pack;
+ }
+ 
+@@ -1548,6 +1592,11 @@
+   switch(args[0]) {
+     case 'recover-operational-derived':result=recoverOperationalDerived(root,run,round,opt('--authorization'));break;
+     case 'record-operational-supplement':result=recordOperationalSupplement(root,run,phase,round,opt('--authorization'));break;
++    case 'check-reader-concerns':{
++      const admission=loadReaderConcerns(root,run,{requireCollection:false});
++      requireValue(admission,'reader concern admission missing');
++      console.log(JSON.stringify({run,ids:admission.entries.map(row=>row.id),mathematical_review:false,native_coverage_adopted:false}));return;
++    }
+     case 'init':result=initialize(root,run);break;
+     case 'prepare':result=['initial','repeat'].includes(phase)?prepareAdjudication(root,run,phase,round):prepareImpact(root,run,phase,round,{failures:opt('--failures')?read(opt('--failures')):null});break;
+     case 'collect':result=collect(root,run,phase,round);break;
+--- a/tools/autopilot/stages/mathlib.step5.mts
++++ b/tools/autopilot/stages/mathlib.step5.mts
+@@ -16,7 +16,7 @@
+ // Version this composed dependency as the root stage loader does for Step 5.
+ // Collection runs the workflow CLI in a fresh subprocess and sees the same code.
+ const WORKFLOW_URL=new URL('../../step5-workflow.mjs',import.meta.url),WORKFLOW_STAT=statSync(WORKFLOW_URL);
+-const { prepareAdjudication, prepareImpact, advanceImpact, impactWork, maintenanceLabel, maintenancePack, workerLabel, workerReport, workflowDir, digest, emptyAdjudicationAssignment, emptyAdjudicationLabel, hasAdjudicatorArtifacts } = await import(
++const { prepareAdjudication, prepareImpact, advanceImpact, impactWork, maintenanceLabel, maintenancePack, workerLabel, workerReport, workflowDir, digest, emptyAdjudicationAssignment, emptyAdjudicationLabel, hasAdjudicatorArtifacts, readerConcernSession } = await import(
+   `${WORKFLOW_URL.href}?v=${WORKFLOW_STAT.mtimeMs}:${WORKFLOW_STAT.size}`
+ );
+ 
+@@ -71,6 +71,7 @@
+         }
+         return {role:adjudication?'alpha-adjudicate':'alpha-repair',label:workerLabel(pass,n,unit),
+         job:adjudication?'adjudication':'authoring',covers:[u],profile:SOL61_HIGH,
++        ...(!adjudication?(readerConcernSession?.(ctx.repo,ctx.run,pass,n,unit)??{}):{}),
+         brief:`briefs/step5-${adjudication?'adjudicator':'owner-repair'}.md`,
+         task:relative(ctx.repo,report(ctx,pass,n,unit).replace(/\.json$/,'.task.md')),timeout:21600};});
+     },
+--- a/tools/autopilot/test/step5-reader-concerns.test.mts
++++ b/tools/autopilot/test/step5-reader-concerns.test.mts
+@@ -0,0 +1,190 @@
++import {test} from 'node:test';
++import assert from 'node:assert/strict';
++import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync,existsSync,appendFileSync} from 'node:fs';
++import {tmpdir} from 'node:os';
++import {join} from 'node:path';
++import {prepareAdjudication,closeEmptyAdjudication,collect,prepareImpact,advanceImpact,certify,judge,
++  workerLabel,workerReport,workflowDir,reviewContextHashes,digest,readerConcernSession} from '../../step5-workflow.mjs';
++import {loadReaderConcerns,readerConcernPath} from '../../step5-reader-concerns.mjs';
++import {itemHashGuard,itemHashJudge} from '../../item-hash.mjs';
++import {MODELS} from '../../models.mjs';
++import {step5Stages} from '../stages/mathlib.step5.mts';
++const run='reader-fixture',reason='The current item has a concrete rank/level naming defect in its Given, while its claim and derivation remain correct.';
++const json=(p:string,value:any)=>writeFileSync(p,JSON.stringify(value,null,2)+'\n');
++const read=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
++const contextHasher=(root:string,ids:string[])=>new Map(ids.map(id=>[id,{item_sha256:itemHashJudge(readFileSync(join(root,'items',`${id}.md`),'utf8')),context_sha256:'a'.repeat(64)}]));
++function fixture(){
++  const root=mkdtempSync(join(tmpdir(),'reader-concern-'));
++  const dir=workflowDir(root,run),dispatch=join(root,'research',`${run}-dispatch`),stateDir=join(root,'.autopilot',run);
++  for(const path of [join(root,'items'),dir,dispatch,stateDir])mkdirSync(path,{recursive:true});
++  const ids=['thm-reviewed-a','thm-reviewed-b','thm-consumer'];
++  for(const id of ids)writeFileSync(join(root,'items',`${id}.md`),`---\nid: ${id}\nkind: theorem\nstatus: draft\ndeps: [${id==='thm-consumer'?'thm-reviewed-a':''}]\n---\n\n## Statement\nA correct claim.\n\n## Proof\n**Given:** The rank-two, one-box content sequences.\n\n1.1 Correct derivation. [given]\n\n2.1 Correct conclusion. [step 1.1] ∎\n`);
++  const manifest=join(root,'research',`${run}-batch-1.pages.json`);
++  json(manifest,[{id:'page',items:ids.map(id=>({id,deps:id==='thm-consumer'?['thm-reviewed-a']:[]}))}]);
++  const ledger=join(root,'research',`${run}-judge.jsonl`);
++  writeFileSync(ledger,ids.map(id=>JSON.stringify({id,model:MODELS.luna.id,...contextHasher(root,[id]).get(id),keep:true})).join('\n')+'\n');
++  const initial=prepareAdjudication(root,run,'initial',1),initialPath=join(dir,'initial-1.json');
++  const zero=closeEmptyAdjudication(root,run,'initial',1,'1',digest(initial));
++  const zeroPath=workerReport(root,run,'initial',1,'1');
++  const zeroResult=join(dispatch,'tool-step5-v2-empty-initial-r1-u1.result.json');
++  json(zeroResult,{run,role:'tool',label:'step5-v2-empty-initial-r1-u1',covers:['1'],ok:true,written_by:'autopilot',ended_at:'2026-10-15T10:00:00Z'});
++  json(join(stateDir,'state.json'),{run,stage:'5.1-adjudicate',paused:true,dispatches:{}});
++  const document={batches:['1'],items_read:ids,concerns:ids.slice(0,2).map(id=>({id,concern:reason,severity:'presentation'}))};
++  const digestPath=join(root,'research',`${run}-batch-1-step5-context.json`),readerPath=join(dispatch,'alpha-batch-read-1.result.json');
++  json(digestPath,document);
++  const reader={run,role:'alpha-batch-read',label:'1',covers:['1'],model:MODELS.sol61.id,provider_effort:'medium',attempt:1,evidence_tag:'.attempt-1',ok:true,ended_at:'2026-10-15T09:00:00Z'};
++  json(readerPath,reader);json(join(dispatch,'alpha-batch-read-1.attempt-1.result.json'),reader);
++  json(join(dispatch,'alpha-batch-read-1.attempt-1.last-message.json'),document);
++  const ownerFile=join(root,'research','root-review.md');writeFileSync(ownerFile,reason+' The Example has r=2,n=1 and both proof steps use these parameters; no statement change is needed.');
++  const entries=ids.slice(0,2).map((id,index)=>({id,batch:'1',concern_index:index,concern:document.concerns[index],before_guard_sha256:initial.before[id],owner_review:{reviewed_by:'root',confirmed_defect:true,reviewed_at:'2026-10-15T10:01:00Z',reason,source_excerpt:'The rank-two, one-box content sequences',proposed_replacement:'The level-two, rank-one, one-box content sequences',evidence_file:ownerFile}}));
++  const bindings=Object.fromEntries([manifest,initialPath,zeroPath,zeroResult,digestPath,readerPath,join(dispatch,'alpha-batch-read-1.attempt-1.result.json'),join(dispatch,'alpha-batch-read-1.attempt-1.last-message.json'),ownerFile,...['frontier.json','baseline.json','step4-verdicts.json'].map(name=>join(dir,name))].map(path=>[path,digest(readFileSync(path,'utf8'))]));
++  const admission={version:1,kind:'owner-confirmed-step4-reader-concerns',run,authorized_by:'owner',owner_identity:'/root',original_count:3,recorded_at:'2026-10-15T10:02:00Z',native_coverage_adopted:false,entries,bindings};
++  json(readerConcernPath(root,run),admission);
++  return {root,dir,dispatch,ids,initial,initialPath,zero,zeroPath,admission,close:()=>rmSync(root,{recursive:true,force:true})};
++}
++function report(f:any,pack:any){
++  for(const unit of pack.units){
++    const ids=pack.assignments[unit];
++    json(workerReport(f.root,run,pack.phase,1,unit),{run,phase:pack.phase,round:1,unit,input_sha256:digest(pack),decisions:[],reviews:ids.map((id:string)=>({id,disposition:itemHashGuard(readFileSync(join(f.root,'items',`${id}.md`),'utf8'))===pack.before[id]?'unaffected':'repaired',...reviewContextHashes(f.root,[id])[id],reason,uncertain:false,source_urls:[],familiar:true})),created_items:[],downstream:[]});
++    const session=readerConcernSession(f.root,run,pack.phase,1,unit);
++    json(join(f.dispatch,`alpha-repair-${workerLabel(pack.phase,1,unit)}.result.json`),{run,role:'alpha-repair',label:workerLabel(pack.phase,1,unit),covers:[unit],ok:true,model:MODELS.sol61.id,provider_effort:'high',...(session.sessionHome?{session_home:session.sessionHome,session_id:session.resumeSession??`genuine-fixture-session-u${unit}`}:{})});
++  }
++}
++test('accepted reader concerns pass genuine initial zero-work, owner review, certification and current Sol judging',()=>{
++  const f=fixture();try{
++    const initialBytes=readFileSync(f.initialPath,'utf8'),zeroBytes=readFileSync(f.zeroPath,'utf8');
++    assert.equal(loadReaderConcerns(f.root,run,{requireCollection:false})?.entries.length,2);
++    assert.ok(!existsSync(join(f.dir,'certification.json')));
++    assert.throws(()=>loadReaderConcerns(f.root,run),/ENOENT/);
++    const first=collect(f.root,run,'initial',1);
++    assert.deepEqual(first.reviews,[]);assert.deepEqual(first.decisions,[]);
++    const pack=prepareImpact(f.root,run,'impact-initial',1);
++    assert.deepEqual(Object.values(pack.assignments).flat().sort(),f.ids.slice(0,2));
++    assert.deepEqual(pack.seeds,[]);assert.deepEqual(pack.impacts,[]);assert.equal(pack.reader_concerns.length,2);
++    assert.ok(readFileSync(workerReport(f.root,run,pack.phase,1,'1').replace(/\.json$/,'.task.md'),'utf8').includes('not judge rejections'));
++    assert.throws(()=>certify(f.root,run,'impact-initial',1,{contextHasher}),/ENOENT|finish before certification/);
++    for(const id of f.ids.slice(0,2)){
++      const path=join(f.root,'items',`${id}.md`);writeFileSync(path,readFileSync(path,'utf8').replace('rank-two','level-two, rank-one'));
++    }
++    report(f,pack);
++    const result=collect(f.root,run,'impact-initial',1);
++    assert.deepEqual(result.restated,[]);assert.deepEqual(result.downstream,[]);
++    assert.deepEqual(result.decisions,[]);assert.equal(result.reviews.length,2);
++    assert.equal(advanceImpact(f.root,run,'impact-initial',1).complete,true);
++    const certificate=certify(f.root,run,'impact-initial',1,{contextHasher});
++    assert.deepEqual(certificate.changed,f.ids.slice(0,2));
++    let judged:string[]=[];
++    const judgedRound=judge(f.root,run,1,{contextHasher,runSweep:({ids,ledger}:any)=>{
++      judged=ids;
++      for(const id of ids)appendFileSync(ledger,JSON.stringify({id,model:MODELS.sol61.id,...contextHasher(f.root,[id]).get(id),keep:true})+'\n');
++      return {status:0};
++    }});
++    assert.deepEqual(judged,f.ids.slice(0,2));assert.equal(judgedRound.verdicts.length,2);
++    assert.equal(readFileSync(f.initialPath,'utf8'),initialBytes);assert.equal(readFileSync(f.zeroPath,'utf8'),zeroBytes);
++    assert.deepEqual(read(join(f.dir,'frontier.json')).ids,f.ids.slice().sort());
++    assert.ok(read(join(f.dir,'step4-verdicts.json')).every((row:any)=>row.model===MODELS.luna.id&&row.keep));
++    assert.equal(prepareImpact(f.root,run,'impact-initial',1).input_evidence[readerConcernPath(f.root,run)],digest(readFileSync(readerConcernPath(f.root,run),'utf8')));
++  }finally{f.close();}
++});
++test('a real owner statement repair alone schedules the actual direct consumer',()=>{
++  const f=fixture();try{
++    collect(f.root,run,'initial',1);const pack=prepareImpact(f.root,run,'impact-initial',1);
++    const path=join(f.root,'items','thm-reviewed-a.md');writeFileSync(path,readFileSync(path,'utf8').replace('A correct claim.','A corrected claim.'));
++    report(f,pack);
++    const next=advanceImpact(f.root,run,'impact-initial',1);
++    assert.equal(next.complete,false);assert.deepEqual(Object.values(next.pack.assignments).flat(),['thm-consumer']);
++    const sourceUnit=pack.units.find((unit:string)=>pack.assignments[unit].includes('thm-reviewed-a'));
++    assert.ok(next.pack.assignments[sourceUnit].includes('thm-consumer'));
++    const gate=(id:string,argv:string[])=>({id,argv});
++    const stage=step5Stages({gate,repoWide:()=>[],contractGates:()=>[],ledgerGate:()=>({}),closureGate:()=>({})}).find((row:any)=>row.id==='5.2-impact');
++    const ctx={repo:f.root,run,stageRounds:{'5.2-impact':1}};
++    const job=stage.plan(ctx,[`${next.pack.phase}:${sourceUnit}`])[0];
++    assert.equal(job.sessionHome,join(f.root,'.autopilot',run,'step5-reader-owner-sessions',`u${sourceUnit}`));
++    assert.equal(job.resumeSession,`genuine-fixture-session-u${sourceUnit}`);
++    assert.equal(job.profile,'gpt-6.1-sol-high');
++    report(f,next.pack);assert.equal(advanceImpact(f.root,run,'impact-initial',1).complete,true);
++  }finally{f.close();}
++});
++test('owner admission fails closed for authority, stale native originals, foreign subjects and individual review omissions',()=>{
++  const cases=[
++    (f:any)=>{f.admission.authorized_by='worker';},
++    (f:any)=>{f.admission.owner_identity='/other';},
++    (f:any)=>{f.admission.native_coverage_adopted=true;},
++    (f:any)=>{f.admission.entries.push(f.admission.entries[0]);},
++    (f:any)=>{f.admission.entries[0].id='thm-foreign';},
++    (f:any)=>{f.admission.entries[0].batch='2';},
++    (f:any)=>{f.admission.entries[0].concern_index=1;},
++    (f:any)=>{f.admission.entries[0].concern.concern='Invented finding';},
++    (f:any)=>{f.admission.entries[0].owner_review.confirmed_defect=false;},
++    (f:any)=>{f.admission.entries[1].owner_review.reviewed_by='worker';},
++    (f:any)=>{f.admission.entries[0].owner_review.source_excerpt='Not present';},
++    (f:any)=>{f.admission.entries[0].owner_review.evidence_file='research/missing.md';},
++    (f:any)=>{f.admission.entries[0].before_guard_sha256='b'.repeat(64);},
++    (f:any)=>{f.admission.original_count=2;},
++    (f:any)=>{delete f.admission.bindings[f.zeroPath];},
++    (f:any)=>{appendFileSync(join(f.dispatch,'alpha-batch-read-1.attempt-1.last-message.json'),' ');},
++    (f:any)=>{const p=join(f.root,'items','thm-reviewed-a.md');appendFileSync(p,'Changed');},
++    (f:any)=>{const p=join(f.root,'items','thm-reviewed-a.md');writeFileSync(p,readFileSync(p,'utf8').replace('draft','published'));},
++    (f:any)=>{json(join(f.root,'.autopilot',run,'state.json'),{run,stage:'5.1-adjudicate',paused:true,dispatches:{active:{startedAt:'now'}}});},
++    (f:any)=>{writeFileSync(join(f.dispatch,'alpha-repair-step5-v2-impact-initial-r1-u1.attempt-1.prompt.md'),'already executing');},
++  ];
++  for(const change of cases){const f=fixture();try{change(f);json(readerConcernPath(f.root,run),f.admission);assert.throws(()=>loadReaderConcerns(f.root,run,{requireCollection:false}));assert.ok(!existsSync(join(f.dir,'impact-initial-1.json')));}finally{f.close();}}
++});
++test('admission cannot be inserted or replaced after the first owner pack freezes',()=>{
++  const f=fixture();try{
++    collect(f.root,run,'initial',1);prepareImpact(f.root,run,'impact-initial',1);
++    assert.throws(()=>loadReaderConcerns(f.root,run,{requireCollection:false}),/already frozen/);
++    f.admission.entries.pop();json(readerConcernPath(f.root,run),f.admission);
++    assert.throws(()=>prepareImpact(f.root,run,'impact-initial',1),/after impact pack freeze/);
++  }finally{f.close();}
++  const g=fixture();try{
++    const admission=readFileSync(readerConcernPath(g.root,run),'utf8');rmSync(readerConcernPath(g.root,run));
++    collect(g.root,run,'initial',1);const pack=prepareImpact(g.root,run,'impact-initial',1);assert.deepEqual(Object.values(pack.assignments).flat(),[]);
++    writeFileSync(readerConcernPath(g.root,run),admission);
++    assert.throws(()=>prepareImpact(g.root,run,'impact-initial',1),/after impact pack freeze/);
++  }finally{g.close();}
++});
++
++test('multi-edit and bound patch instructions admit only reviewed originals',()=>{
++  for(const mode of ['array','patch']){
++    const f=fixture();try{
++      const review:any=f.admission.entries[0].owner_review;
++      if(mode==='array')review.proposed_edits=[{source_excerpt:review.source_excerpt,proposed_replacement:review.proposed_replacement},{source_excerpt:'Correct conclusion.',proposed_replacement:'Precisely the same correct conclusion.'}];
++      else{
++        const patch=join(f.root,'research','candidate.diff');writeFileSync(patch,'--- source\n+++ candidate\n@@\n-A correct claim.\n+A corrected claim.\n');
++        review.candidate_patch_file=patch;f.admission.bindings[patch]=digest(readFileSync(patch,'utf8'));
++      }
++      delete review.source_excerpt;delete review.proposed_replacement;json(readerConcernPath(f.root,run),f.admission);
++      assert.doesNotThrow(()=>loadReaderConcerns(f.root,run,{requireCollection:false}));
++    }finally{f.close();}
++  }
++});
++test('changed mutable manifest keeps an exact archived admission preimage for legitimate owner reconciliation',()=>{
++  const f=fixture();try{
++    collect(f.root,run,'initial',1);const pack=prepareImpact(f.root,run,'impact-initial',1);
++    const manifest=join(f.root,'research',`${run}-batch-1.pages.json`);
++    assert.equal(pack.input_evidence[manifest],undefined);
++    assert.ok(Object.keys(pack.input_evidence).some(path=>path.includes('supporting-metadata')));
++    const data=read(manifest);data[0].note='Owner metadata reconciliation';json(manifest,data);
++    report(f,pack);assert.doesNotThrow(()=>collect(f.root,run,'impact-initial',1));
++  }finally{f.close();}
++});
++test('missing persistent reviewer or conflicting reviewer suppliers blocks continuation',()=>{
++  for(const conflict of [false,true]){
++    const f=fixture();try{
++      collect(f.root,run,'initial',1);const pack=prepareImpact(f.root,run,'impact-initial',1);
++      for(const id of conflict?f.ids.slice(0,2):f.ids.slice(0,1)){
++        const path=join(f.root,'items',`${id}.md`);let text=readFileSync(path,'utf8').replace('A correct claim.','A corrected claim.');
++        if(conflict&&id==='thm-reviewed-b')text=text.replace('deps: []','deps: [thm-reviewed-a]');
++        writeFileSync(path,text);
++      }
++      report(f,pack);
++      if(!conflict){
++        const unit=pack.units.find((unit:string)=>pack.assignments[unit].includes('thm-reviewed-a'));
++        const path=join(f.dispatch,`alpha-repair-${workerLabel(pack.phase,1,unit)}.result.json`),receipt=read(path);delete receipt.session_home;json(path,receipt);
++      }
++      assert.throws(()=>advanceImpact(f.root,run,'impact-initial',1),conflict?/conflicting reviewer/:/persistent reviewer/);
++      assert.ok(!existsSync(join(f.dir,'impact-initial-pass-2-1.json')));
++    }finally{f.close();}
++  }
++});

@@ -1,11 +1,11 @@
 ---
 page: hecke-parabolic-induction-and-symmetrizing-traces-examples
 title: "Hecke Parabolic Induction and Symmetrizing Traces — Examples"
-status: published
+status: draft
 items: []
-examples: []
+examples: [ex-hh-parabolic-induction-from-rank-one-into-s3, ex-hh-dual-trace-basis-in-type-a2-hecke-algebra, cex-hh-perfect-symmetrizing-trace-does-not-imply-semisimple]
 ---
 
-Calculate parabolic induction from rank one into S3, its two-sided conventions, and dual trace bases. A perfect symmetrizing form alone does not imply semisimplicity; supply a nonsemisimple specialization illustrating this.
+The examples compute induction of the rank-one $S_2$ Hecke module into the type-A2 Hecke algebra, with both left and right coset conventions, and display the inverse-indexed trace-dual basis in type A2. The counterexample specializes the rank-one parameter to $v=i$, obtaining the dual numbers with a perfect symmetrizing trace and a nonsemisimple regular module. It shows why the trace theorem makes no semisimplicity claim.
 
-These are planned worked examples and counterexamples for [[hecke-parabolic-induction-and-symmetrizing-traces]], with empty item lists pending normal authoring and proof review. Each example must calculate from the stated hypotheses, and each counterexample must verify both its premises and the failed conclusion. This companion is a dependency leaf and supplies no theorem to another page.
+These items use the constructions and results on [[hecke-parabolic-induction-and-symmetrizing-traces]].

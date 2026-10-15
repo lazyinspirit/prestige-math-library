@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/hopf-hecke-unfinished-15-2026-10-15-owner/published-repairs/lem-hh-cyclotomic-commuting-jucys-murphy-generators.json
 id: lem-hh-cyclotomic-commuting-jucys-murphy-generators
 kind: lemma
 title: "Cyclotomic Jucys–Murphy generators and their transport relations"
@@ -6,7 +8,7 @@ status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 1
-deps: [def-hh-multiplicative-cyclotomic-hecke-algebra, thm-hh-generic-coxeter-hecke-standard-basis]
+deps: [def-hh-multiplicative-cyclotomic-hecke-algebra, lem-hh-type-a-finite-hecke-basis-in-multiplicative-normalization]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -41,13 +43,13 @@ When $p(L_i)=0$, this gives $p(L_{i+1})T_i=(Q-1)L_{i+1}(p(L_i)-p(L_{i+1}))/(L_i-
 
 ## Facts & Assumptions
 
-**Given:** The algebra and affine relations of [[def-hh-multiplicative-cyclotomic-hecke-algebra]], its level polynomial $p$, and the finite type-A Hecke standard basis of [[thm-hh-generic-coxeter-hecke-standard-basis]].
+**Given:** The algebra and affine relations of [[def-hh-multiplicative-cyclotomic-hecke-algebra]], its level polynomial $p$, and the finite type-A Hecke standard basis of [[lem-hh-type-a-finite-hecke-basis-in-multiplicative-normalization]].
 
 [F1] $X_1,\ldots,X_n$ commute, $T_iX_iT_i=QX_{i+1}$, and $T_iX_j=X_jT_i$ for $j\notin\{i,i+1\}$. ([[def-hh-multiplicative-cyclotomic-hecke-algebra]])
 
 [F2] $T_i^2=(Q-1)T_i+Q$, $Q$ is a unit, and therefore $T_i^{-1}=Q^{-1}(T_i-(Q-1))$. ([[def-hh-multiplicative-cyclotomic-hecke-algebra]])
 
-[F3] For a generic type-A Hecke algebra, the finite Hecke words $T_w$ indexed by $w\in S_n$ are linearly independent over its universal coefficient ring. ([[thm-hh-generic-coxeter-hecke-standard-basis]])
+[F3] For $n\ge2$, the finite type-A algebra over $R_0=\mathbb Z[Q,Q^{-1}]$ with $(T_i-Q)(T_i+1)=0$ has basis $(T_w)_{w\in S_n}$, and the images remain a basis after every commutative coefficient extension. In particular the rank-two target over $K=\mathbb Q(Q,u_1)$ has basis $1,T_1$. ([[lem-hh-type-a-finite-hecke-basis-in-multiplicative-normalization]])
 
 ## Proof
 
@@ -57,7 +59,7 @@ When $p(L_i)=0$, this gives $p(L_{i+1})T_i=(Q-1)L_{i+1}(p(L_i)-p(L_{i+1}))/(L_i-
 
 1.2 The equality $T_iL_iT_i=QL_{i+1}$ is [F1]. Right-multiplying it by $T_i^{-1}$ and using [F2] gives $T_iL_i=QL_{i+1}T_i^{-1}=L_{i+1}(T_i-(Q-1))$. Left-multiplying by $T_i^{-1}$ gives $L_iT_i=(T_i-(Q-1))L_{i+1}$, which is equivalent to the displayed relation for $T_iL_{i+1}$. The distant relation is [F1]. [F1, F2, algebra]
 
-1.3 The failure of a common cyclotomic polynomial already occurs at level $r=1$, rank $n=2$. Here $X_1=u_1$ and $L_2=Q^{-1}T_1X_1T_1=u_1Q^{-1}T_1^2=u_1+(Q-1)u_1Q^{-1}T_1$. There is an algebra map from this presented quotient to the finite type-A Hecke algebra sending $T_1$ to its generator, $X_1$ to $u_1$, and $X_2$ to $Q^{-1}u_1T_1^2$: the affine relation holds by construction, the $X_j$ commute because $X_1$ maps to a scalar, and all inverse generators map to units. Under this map, $p(L_2)=L_2-u_1$ becomes $(Q-1)u_1Q^{-1}T_1$, which is nonzero by the finite Hecke basis [F3] and the nonzero coefficient in the rational function field. Thus $p(L_2)$ was already nonzero in the cyclotomic quotient. The initial cyclotomic relation gives a transport identity, not the same polynomial relation on every $L_i$. [F2, F3, algebra]
+1.3 The failure of a common cyclotomic polynomial already occurs at level $r=1$, rank $n=2$. Here $X_1=u_1$ and $L_2=Q^{-1}T_1X_1T_1=u_1Q^{-1}T_1^2=u_1+(Q-1)u_1Q^{-1}T_1$. Put $K=\mathbb Q(Q,u_1)$ and take the multiplicative finite type-A algebra over $K$, which has basis $1,T_1$ by [F3]. Regard it as an $R$-algebra through the coefficient injection $R=\mathbb Z[Q^{\pm1},u_1^{\pm1}]\hookrightarrow K$. There is an algebra map from this presented quotient to that finite type-A target sending $T_1$ to its generator, $X_1$ to $u_1$, and $X_2$ to $Q^{-1}u_1T_1^2$: the affine relation holds by construction, the $X_j$ commute because $X_1$ maps to a scalar, and all inverse generators map to units. Under this map, $p(L_2)=L_2-u_1$ becomes $(Q-1)u_1Q^{-1}T_1$, which is nonzero because $T_1$ is a basis vector by [F3] and $(Q-1)u_1Q^{-1}$ is nonzero in $K$. Thus $p(L_2)$ was already nonzero in the cyclotomic quotient. The initial cyclotomic relation gives a transport identity, not the same polynomial relation on every $L_i$. [F2, F3, algebra]
 
 2.1 Put $\delta_i(f)=(f-s_if)/(X_i-X_{i+1})$. For a monomial $X_i^aX_{i+1}^b$ with $a,b\ge0$, the numerator is divisible by $X_i-X_{i+1}$: if $a\ge b$ it equals $X_i^bX_{i+1}^b(X_i^{a-b}-X_{i+1}^{a-b})$, and if $b>a$ interchange the two variables. Thus $\delta_i(f)$ is a polynomial for every polynomial $f$. The generator cases of step 1.2 give $T_if=s_i(f)T_i-(Q-1)X_{i+1}\delta_i(f)$ for $f=X_i,X_{i+1}$; it is immediate for every other variable and for coefficients in $R$. The identity $\delta_i(fg)=\delta_i(f)g+s_i(f)\delta_i(g)$ then extends the same formula from $f,g$ to $fg$, and linearity proves it for every polynomial. Replacing $X_j$ by $L_j$ using step 1.1 yields the stated transport rule. [step 1.1, step 1.2, algebra]
 

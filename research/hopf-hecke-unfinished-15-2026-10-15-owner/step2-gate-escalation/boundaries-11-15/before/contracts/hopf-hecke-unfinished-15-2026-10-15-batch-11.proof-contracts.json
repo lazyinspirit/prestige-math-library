@@ -1,0 +1,1592 @@
+{
+  "version": 1,
+  "level": 1,
+  "scope": [
+    "def-hh-specialization-and-regular-trace-determinant",
+    "lem-hh-one-parameter-formal-series-local-ring",
+    "lem-hh-finite-direct-summands-over-khh-are-free",
+    "lem-hh-idempotents-lift-over-formal-power-series-rings",
+    "lem-hh-regular-trace-criterion-in-characteristic-zero",
+    "lem-hh-formal-deformation-matrix-unit-lifting",
+    "thm-hh-generic-finite-hecke-semisimplicity",
+    "thm-hh-split-deformation-labels-and-exceptional-parameters",
+    "cex-hh-nondegenerate-symmetrizing-trace-does-not-imply-semisimplicity",
+    "ex-hh-two-dimensional-formal-split-deformation"
+  ],
+  "contracts": {
+    "def-hh-specialization-and-regular-trace-determinant": {
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition uses the identity basis vector T_1 of the Coxeter group. Definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The determinant D_phi is defined even when its value is zero. Definition."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one-dimensional fiber claim is made."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Degenerate regular-trace forms are included; no semisimplicity conclusion is built into this definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite standard basis is supplied; no choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a definition, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a definition, not an equivalence."
+        }
+      ]
+    },
+    "lem-hh-one-parameter-formal-series-local-ring": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-formal-power-series-and-coefficient-extraction",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring. A **formal power series over $R$** is a coefficient function $a:\\mathbb N\\to R$, written\n\n$$f=\\sum_{n\\ge 0}a_nx^n,$$\n\nand $R\\llbracket x\\rrbracket$ is the set of all such functions. The symbol $x$ is an indeterminate. The notation asserts no analytic convergence and no value of $x$ is being chosen.\n\nFor $n\\in\\mathbb N$, the **coefficient-extraction functional** is evaluation at $n$:\n\n$$[x^n]f:=a_n.$$\n\nDefine zero and one coefficientwise, put $[x^n](f+g)=[x^n]f+[x^n]g$, and define the Cauchy product by\n\n$$[x^n](fg)=\\sum_{i+j=n}[x^i]f\\,[x^j]g=\\sum_{i=0}^{n}[x^i]f\\,[x^{n-i}]g.$$\n\nThe last sum is finite, including when $n=0$. The constant $r\\in R$ denotes the series with coefficient $r$ at $0$ and $0$ elsewhere. The series $x$ has coefficient $1$ at $1$ and $0$ elsewhere. Thus $x^0=1$, and $x^n$ is supported at $n$.\n\nThe finitely supported coefficient functions form the polynomial part of $R\\llbracket x\\rrbracket$. Under the coefficient-function definition of [[def-polynomial-ring-over-a-commutative-ring]], a polynomial is therefore the same data as a finitely supported formal series; the next theorem verifies that this identification respects the ring operations.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-formal-power-series-ring-and-polynomial-embedding",
+          "source_section": "Statement",
+          "quote": "For every commutative ring $R$, the coefficientwise sum and Cauchy product make $R\\llbracket x\\rrbracket$ a commutative ring. The coefficientwise inclusion\n\n$$j:R[x]\\longrightarrow R\\llbracket x\\rrbracket$$\n\nis an injective unital ring homomorphism, and its image is exactly the finitely supported formal series.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication) and two distinguished elements $0 \\ne 1$ of $F$,\nsatisfying:\n\n- **(A)** $(F, +)$ is an abelian group with identity $0$: addition is\n  associative and commutative, $x + 0 = x$ for all $x$, and every $x$ has an\n  additive inverse $-x$ with $x + (-x) = 0$.\n- **(M)** Multiplication is associative and commutative **on all of $F$**, and\n  $x \\cdot 1 = x$ for every $x \\in F$; moreover $(F \\setminus \\{0\\}, \\cdot)$ is an\n  abelian group with identity $1$, so every $x \\ne 0$ has a multiplicative inverse\n  $x^{-1}$ with $x \\cdot x^{-1} = 1$.\n- **(D)** Multiplication distributes over addition: $x \\cdot (y + z) = x\\cdot y + x\\cdot z$.\n\nWe write $x - y := x + (-y)$ and $x/y := x \\cdot y^{-1}$ (for $y \\ne 0$), and\nabbreviate $x \\cdot y$ as $xy$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-zero-divisor-and-integral-domain",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a ring ([[def-ring]]). An element $a \\in R$ is a **zero divisor**\nwhen\n\n$$a \\ne 0 \\quad\\text{and}\\quad ab = 0 \\ \\text{ or }\\ ba = 0 \\ \\text{ for some } b \\in R \\text{ with } b \\ne 0 .$$\n\nThe ring $R$ **has no zero divisors** when no element of $R$ is a zero divisor;\nequivalently, when $ab = 0$ implies $a = 0$ or $b = 0$, for all $a, b \\in R$.\n\nAn **integral domain**, or simply a **domain**, is a commutative ring\n([[def-commutative-ring]]) $R$ such that\n\n- **(D1)** $1 \\ne 0$ in $R$;\n- **(D2)** $R$ has no zero divisors.\n\nIn a commutative ring the two clauses $ab = 0$ and $ba = 0$ of the definition of\na zero divisor say the same thing, so there the notion is one-sided without\nambiguity.\n\n**Two conventions fixed here, and kept.** First, $0$ is **not** a zero divisor,\nbecause the clause $a \\ne 0$ is part of the definition. This matters: $0 \\cdot b = 0$\nholds for every $b$ in every ring ([[lem-ring-elementary-consequences]]), so\nwithout that clause $0$ would be a zero divisor in every ring with more than one\nelement and the phrase \"no zero divisors\" would name the empty class. Second,\n(D1) is a **hypothesis and not a consequence** of (D2). The one-element ring, in\nwhich $1 = 0$, has no zero divisors at all — vacuously, since it has no nonzero\nelement — so (D2) alone would admit it. It is excluded by (D1), and by nothing\nelse; the companion page records that ring explicitly.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-field-of-fractions",
+          "source_section": "Definition",
+          "quote": "If $D$ is an integral domain, then $D\\setminus\\{0\\}$ is multiplicative. Its localisation\n$$ \\operatorname{Frac}(D)=(D\\setminus\\{0\\})^{-1}D $$\nis the **field of fractions** of $D$. Thus its elements are fractions $a/b$ with $a,b\\in D$ and $b\\ne0$, modulo the localisation equivalence relation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-field-of-fractions-is-a-field-and-the-domain-embeds",
+          "source_section": "Statement",
+          "quote": "For every integral domain $D$, the localisation $\\operatorname{Frac}(D)$ is a field. Its canonical map\n$$ D\\longrightarrow\\operatorname{Frac}(D),\\qquad d\\longmapsto d/1, $$\nis an injective unital ring homomorphism.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-free-module-on-a-set-and-standard-basis",
+          "source_section": "Definition",
+          "quote": "For a unital ring $R$ and a set $X$, the **free left $R$-module on $X$** is\n$$R^{(X)}:=\\bigoplus_{x\\in X}R.$$\nFor $x\\in X$, the **standard basis vector** $e_x$ has coordinate $1_R$ at $x$ and zero elsewhere. Every element is represented by a unique finitely supported coefficient family $(r_x)_{x\\in X}$, and is written\n$$\\sum_{x\\in X}r_xe_x.$$\nThe **standard basis map** $X\\to R^{(X)}$ sends $x$ to $e_x$. It is injective exactly when $1_R\\ne0$ or $X$ has at most one element; in these cases it is the standard basis inclusion. Indeed, for distinct $x,y$ the $x$-coordinates of $e_x$ and $e_y$ are $1_R$ and $0$. For the zero ring every $e_x$ is zero, but the indexed family $(e_x)_{x\\in X}$ still has unique finitely supported coefficients.\n\nMore generally, a family $(b_x)_{x\\in X}$ is a **basis** of a module $M$ when every element of $M$ is uniquely a finite $R$-linear combination of the $b_x$ ([[def-generated-cyclic-finitely-generated-and-free-modules]]). For $X=\\varnothing$, $R^{(X)}=0$ and its empty family is a basis.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Define $c_0(f)$ to be the coefficient of $h^0$. By [F1], $c_0(fg)=c_0(f)c_0(g)$, while coefficientwise addition preserves sums; the constant-series map $k\\to R$ is a right inverse, so $c_0$ is a surjective ring homomorphism. If $c_0(f)=0$, define $g_n=f_{n+1}$; then $f=hg$, so $\\ker c_0\\subseteq hR$. Conversely every multiple of $h$ has zero constant coefficient by the product formula. Hence $\\ker c_0=hR$, and the induced map $R/hR\\to k$ is a bijective ring homomorphism.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "If $f,g\\in R$ are nonzero, let $r$ and $s$ be their least indices with nonzero coefficients. In the convolution for the coefficient of $h^{r+s}$ in $fg$, every summand except the pair $(r,s)$ vanishes: a nonzero summand would require $i\\ge r$, $j\\ge s$, and $i+j=r+s$. The remaining coefficient is $f_rg_s\\ne0$ by [F3]. Also $1_R\\ne0_R$ because their constant coefficients are $1_k$ and $0_k$. Thus [F2] and [F4] show that $R$ is an integral domain.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F2",
+            "F4",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1.3",
+          "claim": "A series lies in $h^nR$ exactly when its coefficients of degrees $0,\\ldots,n-1$ vanish: one direction follows from multiplication by $h^n$, and the converse follows by shifting coefficients down by $n$. Therefore an $h$-adically Cauchy sequence $(f_j)$ has, for each $r\\ge0$, an eventually constant coefficient of $h^r$; define $f_r$ to be that unique eventual value and let $f=\\sum_{r\\ge0}f_rh^r$. For any $n$, the Cauchy condition makes the first $n$ coefficients of $f_j$ agree with those of $f$ for all sufficiently large $j$, so $f_j-f\\in h^nR$ eventually. This proves completeness. If $f\\in\\bigcap_{n\\ge0}h^nR$, every coefficient of $f$ vanishes, so $f=0$; this proves separatedness. Applying the same construction to each of the finitely many standard coordinates of [F6] proves the assertion for every finite free $R$-module.",
+          "step": "1.3",
+          "inputs": [
+            "F6",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "By step 1.2, $R$ is an integral domain, so [F5] applies: $K=\\operatorname{Frac}(R)$ is a field and the canonical map $R\\to K$ is injective.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The coefficient ring is built over a field, so the zero coefficient ring is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero series has zero constant coefficient and lies in hR; separatedness gives no nonzero series in every h^nR (steps 1.1 and 1.3)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 verifies 1_R is nonzero for the domain conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate coefficient ring is allowed because k is a field."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Each limiting coefficient is the unique eventual value of a Cauchy sequence; step 1.3 uses no arbitrary family of choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states direct identifications, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states direct identifications, not an equivalence."
+        }
+      ]
+    },
+    "lem-hh-finite-direct-summands-over-khh-are-free": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication) and two distinguished elements $0 \\ne 1$ of $F$,\nsatisfying:\n\n- **(A)** $(F, +)$ is an abelian group with identity $0$: addition is\n  associative and commutative, $x + 0 = x$ for all $x$, and every $x$ has an\n  additive inverse $-x$ with $x + (-x) = 0$.\n- **(M)** Multiplication is associative and commutative **on all of $F$**, and\n  $x \\cdot 1 = x$ for every $x \\in F$; moreover $(F \\setminus \\{0\\}, \\cdot)$ is an\n  abelian group with identity $1$, so every $x \\ne 0$ has a multiplicative inverse\n  $x^{-1}$ with $x \\cdot x^{-1} = 1$.\n- **(D)** Multiplication distributes over addition: $x \\cdot (y + z) = x\\cdot y + x\\cdot z$.\n\nWe write $x - y := x + (-y)$ and $x/y := x \\cdot y^{-1}$ (for $y \\ne 0$), and\nabbreviate $x \\cdot y$ as $xy$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-free-module-on-a-set-and-standard-basis",
+          "source_section": "Definition",
+          "quote": "For a unital ring $R$ and a set $X$, the **free left $R$-module on $X$** is\n$$R^{(X)}:=\\bigoplus_{x\\in X}R.$$\nFor $x\\in X$, the **standard basis vector** $e_x$ has coordinate $1_R$ at $x$ and zero elsewhere. Every element is represented by a unique finitely supported coefficient family $(r_x)_{x\\in X}$, and is written\n$$\\sum_{x\\in X}r_xe_x.$$\nThe **standard basis map** $X\\to R^{(X)}$ sends $x$ to $e_x$. It is injective exactly when $1_R\\ne0$ or $X$ has at most one element; in these cases it is the standard basis inclusion. Indeed, for distinct $x,y$ the $x$-coordinates of $e_x$ and $e_y$ are $1_R$ and $0$. For the zero ring every $e_x$ is zero, but the indexed family $(e_x)_{x\\in X}$ still has unique finitely supported coefficients.\n\nMore generally, a family $(b_x)_{x\\in X}$ is a **basis** of a module $M$ when every element of $M$ is uniquely a finite $R$-linear combination of the $b_x$ ([[def-generated-cyclic-finitely-generated-and-free-modules]]). For $X=\\varnothing$, $R^{(X)}=0$ and its empty family is a basis.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-formal-power-series-and-coefficient-extraction",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring. A **formal power series over $R$** is a coefficient function $a:\\mathbb N\\to R$, written\n\n$$f=\\sum_{n\\ge 0}a_nx^n,$$\n\nand $R\\llbracket x\\rrbracket$ is the set of all such functions. The symbol $x$ is an indeterminate. The notation asserts no analytic convergence and no value of $x$ is being chosen.\n\nFor $n\\in\\mathbb N$, the **coefficient-extraction functional** is evaluation at $n$:\n\n$$[x^n]f:=a_n.$$\n\nDefine zero and one coefficientwise, put $[x^n](f+g)=[x^n]f+[x^n]g$, and define the Cauchy product by\n\n$$[x^n](fg)=\\sum_{i+j=n}[x^i]f\\,[x^j]g=\\sum_{i=0}^{n}[x^i]f\\,[x^{n-i}]g.$$\n\nThe last sum is finite, including when $n=0$. The constant $r\\in R$ denotes the series with coefficient $r$ at $0$ and $0$ elsewhere. The series $x$ has coefficient $1$ at $1$ and $0$ elsewhere. Thus $x^0=1$, and $x^n$ is supported at $n$.\n\nThe finitely supported coefficient functions form the polynomial part of $R\\llbracket x\\rrbracket$. Under the coefficient-function definition of [[def-polynomial-ring-over-a-commutative-ring]], a polynomial is therefore the same data as a finitely supported formal series; the next theorem verifies that this identification respects the ring operations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-hh-one-parameter-formal-series-local-ring",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field and $R:=k\\llbracket h\\rrbracket$, with formal series understood as coefficient functions and multiplication given by finite Cauchy convolution. The constant-coefficient map $c_0:R\\to k$ is a surjective ring homomorphism with kernel $hR$, so it induces $R/hR\\cong k$. The ring $R$ is an integral domain. For the $h$-adic topology, whose neighborhoods of zero are $h^nR$ for $n\\ge0$, $R$ is complete and separated; every finite free module $R^m$ is complete and separated coefficientwise. Finally, $K:=\\operatorname{Frac}(R)$ is a field, and the canonical map $R\\to K$ is injective.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Every nonzero power series has a least degree with nonzero coefficient. By [F3], the coefficient of the least-degree term in a product of two nonzero series is the product of their two leading coefficients, which is nonzero by [F1]; hence [F4] confirms that $R$ is a domain. The module $M\\subseteq R^n$ is therefore torsion-free: if $c\\ne0$ and $cm=0$, every coordinate of $m$ is zero. The elements $p(e_1),\\dots,p(e_n)$ from the standard basis of [F2] generate $M$, so $M/hM$ is a finite-dimensional vector space over $k\\cong R/hR$ by [F4].",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F1",
+            "F4",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Choose a basis $\\bar m_1,\\dots,\\bar m_r$ of $M/hM$ and lifts $m_i\\in M$. Let $N:=\\sum_{i=1}^r Rm_i$ and $Q:=M/N$. The quotient $Q$ is finitely generated, and the spanning property modulo $h$ gives $M=N+hM$, hence $Q=hQ$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Choose finite generators $q_1,\\dots,q_s$ of $Q$. From $Q=hQ$, write $q_i=h\\sum_{j=1}^s c_{ij}q_j$ with $c_{ij}\\in R$. For the column $q=(q_i)$ this is $(I-hC)q=0$. The matrix series $\\sum_{t\\ge0}(hC)^t$ converges entrywise by [F4] and is a two-sided inverse of $I-hC$, since the finite partial products leave remainder $(hC)^{t+1}\\in h^{t+1}M_s(R)$, which tends to zero; separatedness in [F4] makes the limiting products exactly the identity. Therefore every $q_i=0$, so $Q=0$ and the lifts $m_i$ span $M$. This also proves $M=0$ when $r=0$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "If $\\sum_i a_im_i=0$ for $a_i\\in R$, reducing modulo $h$ and using that the $\\bar m_i$ are a basis gives $a_i\\in hR$ for every $i$. Write $a_i=hb_i$ and cancel $h$ in $R^n$, which is torsion-free by step 1.1, to get $\\sum_i b_im_i=0$. Repeating shows each $a_i\\in h^tR$ for every $t\\ge1$. A nonzero power series has a finite least degree, so $\\bigcap_{t\\ge1}h^tR=0$ by separatedness [F4], and every $a_i=0$. Thus the spanning family is linearly independent.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "Steps 3.1 and 4.1 show that $(m_1,\\dots,m_r)$ spans $M$ and is linearly independent, hence is an $R$-basis in the sense of [F2]. Its cardinality is $r=\\dim_k(M/hM)$ by construction, proving the statement, including the empty basis when $r=0$.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty basis is obtained when r=0, and step 3.1 proves M=0 (steps 3.1 and 5.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The rank-zero case is explicitly included and yields M=0 (steps 3.1 and 5.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-dimensional reduction uses the same spanning and independence argument (steps 2.1–5.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-rank case requires no nonempty basis or quotient generator set (steps 3.1 and 5.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only a basis of the finite-dimensional quotient and finitely many lifts are selected (step 2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is not an equivalence."
+        }
+      ]
+    },
+    "lem-hh-idempotents-lift-over-formal-power-series-rings": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-hh-one-parameter-formal-series-local-ring",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field and $R:=k\\llbracket h\\rrbracket$, with formal series understood as coefficient functions and multiplication given by finite Cauchy convolution. The constant-coefficient map $c_0:R\\to k$ is a surjective ring homomorphism with kernel $hR$, so it induces $R/hR\\cong k$. The ring $R$ is an integral domain. For the $h$-adic topology, whose neighborhoods of zero are $h^nR$ for $n\\ge0$, $R$ is complete and separated; every finite free module $R^m$ is complete and separated coefficientwise. Finally, $K:=\\operatorname{Frac}(R)$ is a field, and the canonical map $R\\to K$ is injective.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-free-module-on-a-set-and-standard-basis",
+          "source_section": "Definition",
+          "quote": "For a unital ring $R$ and a set $X$, the **free left $R$-module on $X$** is\n$$R^{(X)}:=\\bigoplus_{x\\in X}R.$$\nFor $x\\in X$, the **standard basis vector** $e_x$ has coordinate $1_R$ at $x$ and zero elsewhere. Every element is represented by a unique finitely supported coefficient family $(r_x)_{x\\in X}$, and is written\n$$\\sum_{x\\in X}r_xe_x.$$\nThe **standard basis map** $X\\to R^{(X)}$ sends $x$ to $e_x$. It is injective exactly when $1_R\\ne0$ or $X$ has at most one element; in these cases it is the standard basis inclusion. Indeed, for distinct $x,y$ the $x$-coordinates of $e_x$ and $e_y$ are $1_R$ and $0$. For the zero ring every $e_x$ is zero, but the indexed family $(e_x)_{x\\in X}$ still has unique finitely supported coefficients.\n\nMore generally, a family $(b_x)_{x\\in X}$ is a **basis** of a module $M$ when every element of $M$ is uniquely a finite $R$-linear combination of the $b_x$ ([[def-generated-cyclic-finitely-generated-and-free-modules]]). For $X=\\varnothing$, $R^{(X)}=0$ and its empty family is a basis.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-algebra-over-a-commutative-ring",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring ([[def-commutative-ring]]). An **$R$-algebra** is a unital ring $A$ together with a unital ring homomorphism\n\n$$\\eta_A:R\\longrightarrow A$$\n\n([[def-ring-homomorphism]]) whose image is central: $\\eta_A(r)a=a\\eta_A(r)$ for every $r\\in R$ and $a\\in A$. The induced scalar action is $ra:=\\eta_A(r)a$, making $A$ an $R$-module and multiplication $A\\times A\\to A$ bilinear.\n\nAn **$R$-algebra homomorphism** $f:A\\to B$ is a unital ring homomorphism satisfying $f\\circ\\eta_A=\\eta_B$. Such a map is automatically $R$-linear. An $R$-algebra is **commutative** when its underlying ring is commutative.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By [F2], a finite $R$-basis identifies $A$ with $R^n$, so [F1] makes $A$ complete and separated. Multiplication is continuous: when $x'-x,y'-y\\in h^rA$, expansion gives $x'y'-xy=(x'-x)y+x(y'-y)+(x'-x)(y'-y)\\in h^rA$. For any idempotent $q$, the map $x\\mapsto qxq$ is continuous and idempotent; its image is the kernel of the continuous map $1-(x\\mapsto qxq)$, hence is closed in the separated module $A$ and is therefore complete.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "In any such complete algebra $B$ with identity $q$, start with $a\\in B$ satisfying $\\delta:=a^2-a\\in hB$. The element $u:=2a-q$ commutes with $\\delta$ and satisfies $u^2=q+4\\delta$. The partial sums $S_N:=\\sum_{r=0}^N(-4\\delta)^r$ are Cauchy because $\\delta^r\\in h^rB$; let $S$ be their limit. The finite geometric identity $(q+4\\delta)S_N=q-(-4\\delta)^{N+1}=S_N(q+4\\delta)$ and separatedness give $(q+4\\delta)S=S(q+4\\delta)=q$, so $u^{-1}=uS=Su$. Set $a':=a-u^{-1}\\delta$. The terms commute, and expansion gives $(a')^2-a'=\\delta-u(u^{-1}\\delta)+(u^{-1}\\delta)^2=(u^{-1}\\delta)^2$. Thus one correction squares the error and leaves the reduction of $a$ unchanged.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Starting with any lift $a_0$ of an idempotent in $B/hB$, apply step 2.1 repeatedly. If $a_n^2-a_n\\in h^{r_n}B$, then $a_{n+1}-a_n\\in h^{r_n}B$ and $a_{n+1}^2-a_{n+1}\\in h^{2r_n}B$. Starting with $r_0=1$, we have $r_n=2^n$, so the sequence is Cauchy. Its limit $e$ exists by step 1.1; continuity of multiplication and the error tending to zero give $e^2=e$, and every correction lies in $hB$, so $e$ has the prescribed reduction.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Lift a complete orthogonal family by induction on $m$. If $m=0$, completeness means $1=0$ in $A/hA$; since $A$ is free of finite rank and $R/hR\\cong k$ is a field, its reduction is $k^n$, so $A/hA=0$ forces its rank $n$ to be zero and hence $A=0$. The empty family then lifts. For $m=1$, the only member is $1$, which already lifts the family. For $m\\ge2$, lift $\\bar e_1$ by step 3.1 to an idempotent $e_1$ and set $q:=1-e_1$. The remaining reductions lie in the corner $\\bar q(A/hA)\\bar q$ and form a complete orthogonal family there. The reduction map $qAq\\to\\bar q(A/hA)\\bar q$ is onto because any lift $x$ of a corner element can be replaced by $qxq$. Its kernel is $h(qAq)$: if $y\\in qAq$ lies in $hA$, write $y=ha$; then $y=qyq=hqaq$ since $h$ is central by [F3], and the reverse inclusion is immediate. Thus the reduction identifies $qAq/h(qAq)$ with the indicated corner. The corner is complete by step 1.1, so induction lifts the remaining family in $qAq$; its members are orthogonal to $e_1$ since $qe_1=e_1q=0$, and their sum is $q$. This proves the claim for $m$.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F1",
+            "F2",
+            "step 3.1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "The construction makes only finitely many initial lift choices, one for each member of the input finite family, and then applies the deterministic Newton recurrence in step 2.1. It uses no maximality principle or arbitrary family of choices. Steps 3.1 and 4.1 produce the required exact idempotents and preserve every prescribed reduction.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty family is treated when m=0 in step 4.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When A/hA=0, finite freeness and R/hR=k force A=0 (step 4.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1 the unique complete idempotent is 1 and already lifts (step 4.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Newton correction uses no inverse of 2, so it also applies in characteristic 2 (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finitely many initial lifts are selected; the recurrence is deterministic (step 5.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is not an equivalence."
+        }
+      ]
+    },
+    "lem-hh-regular-trace-criterion-in-characteristic-zero": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hh-specialization-and-regular-trace-determinant",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field of characteristic zero, let $S$ be a finite Coxeter generator set, and assume that the presented Coxeter group $W$ is finite. Let $\\mathcal C$ be the set of odd-edge connected classes of $S$ from [[def-hh-universal-coxeter-hecke-parameters-and-presentation]]: one class joins generators connected by a chain of finite odd braid labels. Introduce one invertible parameter $v_C$ for each $C\\in\\mathcal C$ and put $R_k:=k[v_C^{\\pm1}:C\\in\\mathcal C]$. Let $H_{R_k}(W)$ be the scalar extension of the universal Hecke algebra to $R_k$; its relations are $(T_s-v_{[s]})(T_s+v_{[s]}^{-1})=0$ and the Coxeter braid relations. By [[thm-hh-generic-coxeter-hecke-standard-basis]], $H_{R_k}(W)$ is a free $R_k$-module with basis $(T_w)_{w\\in W}$.\n\nFor a homomorphism of commutative rings $\\phi:R_k\\to K$ to a field $K$, define the specialized algebra $H_\\phi:=K\\otimes_{R_k}H_{R_k}(W)$ and use the same symbol $T_w$ for the specialized basis element $1\\otimes T_w$. For $z\\in H_\\phi$, let $L_z:H_\\phi\\to H_\\phi$ be left multiplication, $L_z(x)=zx$. The **regular-trace pairing** on $H_\\phi$ is\n\n$$B_\\phi(x,y):=\\operatorname{Tr}_K(L_{xy}).$$\n\nIts Gram matrix in the standard basis is $G_\\phi=(\\operatorname{Tr}_K(L_{T_xT_y}))_{x,y\\in W}$, and its **regular-trace determinant** is $D_\\phi:=\\det(G_\\phi)$. The same construction over $R_k$ gives a Laurent polynomial $D_W\\in R_k$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hh-finite-matrix-and-module-preliminaries",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field.\n\n1. Let $R$ be a commutative ring, $M$ a free $R$-module of finite rank $n$ with basis $(e_0,\\dots,e_{n-1})$, and let $v_0,\\dots,v_{n-1}\\in M$ span $M$. Then the coordinate matrix $A$ of $(v_0,\\dots,v_{n-1})$ in the basis $(e_i)$ has a right inverse, $\\det(A)$ is a unit of $R$, and $(v_0,\\dots,v_{n-1})$ is a basis of $M$. The determinant is formed for $n\\ge1$; for $n=0$ the module is the zero module and the empty family is its basis, with no determinant clause.\n2. If $F\\subseteq E$ is a field extension and $A\\in M_{m\\times n}(F)$, then the rank of $A$ over $F$ equals its rank over $E$.\n3. Let $B$ be a finite-dimensional $k$-algebra and $N$ a finite-dimensional left $B$-module. A proper submodule has strictly smaller $k$-dimension, a maximal proper submodule of a nonzero finite-dimensional module exists by maximal dimension (no arbitrary Choice), and iterating produces a finite composition series of $N$ ([[def-composition-series-and-length-of-a-module]]); in particular $N$ has finite length.\n4. If $S_1,\\dots,S_m$ are simple $B$-modules and $N\\subseteq S_1\\oplus\\cdots\\oplus S_m$ is a submodule, then $N$ is isomorphic to a direct sum of a subfamily of the $S_i$, and $N$ has a complement in $S_1\\oplus\\cdots\\oplus S_m$.\n5. If $T:N\\to N$ is $k$-linear with $T^r=0$ for some $r\\ge1$, then $\\operatorname{tr}(T)=0$ ([[def-trace-of-an-endomorphism]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-hh-finite-matrix-and-module-preliminaries",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field.\n\n1. Let $R$ be a commutative ring, $M$ a free $R$-module of finite rank $n$ with basis $(e_0,\\dots,e_{n-1})$, and let $v_0,\\dots,v_{n-1}\\in M$ span $M$. Then the coordinate matrix $A$ of $(v_0,\\dots,v_{n-1})$ in the basis $(e_i)$ has a right inverse, $\\det(A)$ is a unit of $R$, and $(v_0,\\dots,v_{n-1})$ is a basis of $M$. The determinant is formed for $n\\ge1$; for $n=0$ the module is the zero module and the empty family is its basis, with no determinant clause.\n2. If $F\\subseteq E$ is a field extension and $A\\in M_{m\\times n}(F)$, then the rank of $A$ over $F$ equals its rank over $E$.\n3. Let $B$ be a finite-dimensional $k$-algebra and $N$ a finite-dimensional left $B$-module. A proper submodule has strictly smaller $k$-dimension, a maximal proper submodule of a nonzero finite-dimensional module exists by maximal dimension (no arbitrary Choice), and iterating produces a finite composition series of $N$ ([[def-composition-series-and-length-of-a-module]]); in particular $N$ has finite length.\n4. If $S_1,\\dots,S_m$ are simple $B$-modules and $N\\subseteq S_1\\oplus\\cdots\\oplus S_m$ is a submodule, then $N$ is isomorphic to a direct sum of a subfamily of the $S_i$, and $N$ has a complement in $S_1\\oplus\\cdots\\oplus S_m$.\n5. If $T:N\\to N$ is $k$-linear with $T^r=0$ for some $r\\ge1$, then $\\operatorname{tr}(T)=0$ ([[def-trace-of-an-endomorphism]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-hh-finite-matrix-and-module-preliminaries",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field.\n\n1. Let $R$ be a commutative ring, $M$ a free $R$-module of finite rank $n$ with basis $(e_0,\\dots,e_{n-1})$, and let $v_0,\\dots,v_{n-1}\\in M$ span $M$. Then the coordinate matrix $A$ of $(v_0,\\dots,v_{n-1})$ in the basis $(e_i)$ has a right inverse, $\\det(A)$ is a unit of $R$, and $(v_0,\\dots,v_{n-1})$ is a basis of $M$. The determinant is formed for $n\\ge1$; for $n=0$ the module is the zero module and the empty family is its basis, with no determinant clause.\n2. If $F\\subseteq E$ is a field extension and $A\\in M_{m\\times n}(F)$, then the rank of $A$ over $F$ equals its rank over $E$.\n3. Let $B$ be a finite-dimensional $k$-algebra and $N$ a finite-dimensional left $B$-module. A proper submodule has strictly smaller $k$-dimension, a maximal proper submodule of a nonzero finite-dimensional module exists by maximal dimension (no arbitrary Choice), and iterating produces a finite composition series of $N$ ([[def-composition-series-and-length-of-a-module]]); in particular $N$ has finite length.\n4. If $S_1,\\dots,S_m$ are simple $B$-modules and $N\\subseteq S_1\\oplus\\cdots\\oplus S_m$ is a submodule, then $N$ is isomorphic to a direct sum of a subfamily of the $S_i$, and $N$ has a complement in $S_1\\oplus\\cdots\\oplus S_m$.\n5. If $T:N\\to N$ is $k$-linear with $T^r=0$ for some $r\\ge1$, then $\\operatorname{tr}(T)=0$ ([[def-trace-of-an-endomorphism]]).",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-semisimple-module",
+          "source_section": "Definition",
+          "quote": "A left $R$-module is **semisimple** when it is an internal direct sum of simple submodules, allowing the empty direct sum. Hence the zero module is semisimple.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-simple-module",
+          "source_section": "Definition",
+          "quote": "A left $R$-module $M$ is **simple** if $M\\ne0$ and its only submodules are\n$0$ and $M$. Equivalently, $M\\ne0$ and $M$ has no proper nonzero submodule.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By [F1], $H$ is finite-dimensional and $B$ is its regular-trace pairing. Define $J:=\\bigcap_S\\operatorname{Ann}_H(S)$, intersecting over all simple left $H$-modules as in [F6]. This equals the intersection of all maximal left ideals: if $a$ lies in every maximal left ideal and $s\\ne0$ lies in a simple module $S$, the map $H\\to S$, $x\\mapsto xs$, is onto and its kernel is maximal, so $as=0$; conversely, if $a$ annihilates every simple module then it kills $1+M$ in each simple quotient $H/M$, so $a\\in M$ for every maximal left ideal $M$. In particular $J$ is a two-sided ideal.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "By [F2], choose a finite composition series $0=M_0\\subsetneq M_1\\subsetneq\\cdots\\subsetneq M_r=H$ of the left regular module. Since $J$ annihilates each simple factor $M_i/M_{i-1}$, $JM_i\\subseteq M_{i-1}$ for every $i$. Repeating this inclusion gives $J^rH=0$, and then $J^r=0$ because $1\\in H$.",
+          "step": "1.2",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Starting with $K_0=H$, if $K_i\\ne J$ choose $x_i\\in K_i\\setminus J$. The equality in step 1.1 gives a maximal left ideal $N_i$ not containing $x_i$; then $K_{i+1}:=K_i\\cap N_i$ strictly contains $J$ and has strictly smaller $K$-dimension than $K_i$. Thus after at most $\\dim_K H$ steps the intersection is $J$. This finite descent selects finitely many maximal left ideals and uses no arbitrary Choice.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "claim": "For $j\\in J$ and $b\\in H$, the two-sided-ideal property gives $jb\\in J$; by step 1.2, $(jb)^r=0$. Hence $L_{jb}^r=L_{(jb)^r}=0$, so [F4] gives $B(j,b)=\\operatorname{Tr}_K(L_{jb})=0$ for every $b\\in H$.",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "F1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "The map $H/J\\to\\bigoplus_i H/N_i$ sending $x+J$ to $(x+N_i)_i$ is an injective $H$-module homomorphism: its kernel is $(\\bigcap_iN_i)/J=0$, and each quotient $H/N_i$ is simple by [F6]. By [F3] its image is semisimple, so $H/J$ is semisimple.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Nondegeneracy of $B$ and step 2.2 imply $j=0$ for every $j\\in J$, hence $J=0$. Therefore $H\\cong H/J$ is semisimple by step 3.1 and [F5]. No separable-division-algebra trace converse is used.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 2.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A finite Coxeter group contains its identity, and the standard Hecke basis is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The nondegeneracy hypothesis is used in step 4.1 to force every radical element to be zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The composition-series and descent arguments allow dimension one (steps 1.2 and 2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Only the implication from nondegenerate regular trace is asserted; no converse is claimed (Statement and step 4.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The maximal-left-ideal descent makes at most dim_K(H) witness selections (step 2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way implication."
+        }
+      ]
+    },
+    "lem-hh-formal-deformation-matrix-unit-lifting": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-hh-idempotents-lift-over-formal-power-series-rings",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field, $R:=k\\llbracket h\\rrbracket$ the ring of formal power series with its $h$-adic topology, and $A$ a unital $R$-algebra whose underlying $R$-module is free of finite rank. An **idempotent** is an element $e$ with $e^2=e$; idempotents $e_i$ are **orthogonal** if $e_ie_j=0$ whenever $i\\ne j$, and a finite orthogonal family is **complete** if its sum is $1$. Every finite complete orthogonal family $(\\bar e_1,\\dots,\\bar e_m)$ in $A/hA$ has a lift to a finite complete orthogonal family $(e_1,\\dots,e_m)$ in $A$, with $e_i+hA=\\bar e_i$ for each $i$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hh-finite-direct-summands-over-khh-are-free",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field and $R:=k\\llbracket h\\rrbracket$. For $n\\ge0$, let $p:R^n\\to R^n$ be an $R$-linear map with $p^2=p$, and put $M:=p(R^n)$. Then $M$ is free of finite rank equal to $r:=\\dim_k(M/hM)$. This includes $M=0$ and $r=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-hh-one-parameter-formal-series-local-ring",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field and $R:=k\\llbracket h\\rrbracket$, with formal series understood as coefficient functions and multiplication given by finite Cauchy convolution. The constant-coefficient map $c_0:R\\to k$ is a surjective ring homomorphism with kernel $hR$, so it induces $R/hR\\cong k$. The ring $R$ is an integral domain. For the $h$-adic topology, whose neighborhoods of zero are $h^nR$ for $n\\ge0$, $R$ is complete and separated; every finite free module $R^m$ is complete and separated coefficientwise. Finally, $K:=\\operatorname{Frac}(R)$ is a field, and the canonical map $R\\to K$ is injective.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-free-module-on-a-set-and-standard-basis",
+          "source_section": "Definition",
+          "quote": "For a unital ring $R$ and a set $X$, the **free left $R$-module on $X$** is\n$$R^{(X)}:=\\bigoplus_{x\\in X}R.$$\nFor $x\\in X$, the **standard basis vector** $e_x$ has coordinate $1_R$ at $x$ and zero elsewhere. Every element is represented by a unique finitely supported coefficient family $(r_x)_{x\\in X}$, and is written\n$$\\sum_{x\\in X}r_xe_x.$$\nThe **standard basis map** $X\\to R^{(X)}$ sends $x$ to $e_x$. It is injective exactly when $1_R\\ne0$ or $X$ has at most one element; in these cases it is the standard basis inclusion. Indeed, for distinct $x,y$ the $x$-coordinates of $e_x$ and $e_y$ are $1_R$ and $0$. For the zero ring every $e_x$ is zero, but the indexed family $(e_x)_{x\\in X}$ still has unique finitely supported coefficients.\n\nMore generally, a family $(b_x)_{x\\in X}$ is a **basis** of a module $M$ when every element of $M$ is uniquely a finite $R$-linear combination of the $b_x$ ([[def-generated-cyclic-finitely-generated-and-free-modules]]). For $X=\\varnothing$, $R^{(X)}=0$ and its empty family is a basis.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-formal-power-series-unit-criterion",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and $f=\\sum_{n\\ge0}a_nx^n\\in R\\llbracket x\\rrbracket$. Then $f$ is a unit in $R\\llbracket x\\rrbracket$ if and only if $a_0$ is a unit in $R$.\n\nWhen $a_0$ is a unit, the inverse $g=\\sum_{n\\ge0}b_nx^n$ is unique and is determined by\n\n$$b_0=a_0^{-1},\\qquad b_n=-a_0^{-1}\\sum_{i=1}^{n}a_i b_{n-i}\\quad(n\\ge1).$$\n\nThe criterion also holds in the zero ring.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "If $\\Lambda$ is empty, then $A/hA=0$; since a finite free module of rank $n$ reduces to $k^n$ and $k\\ne0$ by [F3, F4], this forces $n=0$ and hence $A=0$, so the empty product conclusion holds. Otherwise, for each standard diagonal matrix idempotent $\\bar e_{\\lambda,a}$ in the given reduction choose the finite complete orthogonal family of all such idempotents. By [F1] it lifts to pairwise orthogonal idempotents $e_{\\lambda,a}\\in A$ whose sum is $1$.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "For any two lifted diagonal idempotents $e_i,e_j$, the map $p_{ij}:A\\to A$, $x\\mapsto e_i x e_j$, is an idempotent $R$-linear projection with image $e_iAe_j$. The decomposition $A=\\operatorname{im}(p_{ij})\\oplus\\ker(p_{ij})$ reduces modulo $h$ to the corresponding image/kernel decomposition of $\\bar p_{ij}$; hence $(e_iAe_j)/h(e_iAe_j)\\cong\\bar e_i(A/hA)\\bar e_j$. In the specified product of matrix algebras this corner has dimension $1$ when $i,j$ belong to the same block and dimension $0$ when they belong to different blocks. Applying [F2] after identifying the finite free module $A$ with $R^n$ shows that same-block corners are free of rank $1$ and cross-block corners are zero.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Fix one block $\\lambda$ and its first diagonal idempotent $e_{\\lambda,1}$. For each $a$ choose lifts $x_{\\lambda,a}\\in e_{\\lambda,a}Ae_{\\lambda,1}$ and $y_{\\lambda,a}\\in e_{\\lambda,1}Ae_{\\lambda,a}$ of the standard matrix units $E_{a1}$ and $E_{1a}$. Each corner is free of rank $1$ by step 2.1; an element whose reduction is nonzero is a basis, because its coefficient relative to any basis has nonzero constant term and is therefore a unit by [F5]. Thus $y_{\\lambda,a}x_{\\lambda,a}=c_a e_{\\lambda,1}$ with $c_a\\equiv1\\pmod h$; replacing $y_{\\lambda,a}$ by $c_a^{-1}y_{\\lambda,a}$ gives $y_{\\lambda,a}x_{\\lambda,a}=e_{\\lambda,1}$. Also $x_{\\lambda,a}y_{\\lambda,a}=d_a e_{\\lambda,a}$ with $d_a\\equiv1\\pmod h$. This product is idempotent because $y_{\\lambda,a}x_{\\lambda,a}=e_{\\lambda,1}$, so $d_a^2=d_a$; since $d_a\\equiv1\\pmod h$ is a unit by [F5], $d_a=1$. Hence $x_{\\lambda,a}y_{\\lambda,a}=e_{\\lambda,a}$.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Define $E_{\\lambda,ab}:=x_{\\lambda,a}y_{\\lambda,b}$. If $b=c$ then $y_{\\lambda,b}x_{\\lambda,c}=e_{\\lambda,1}$, and if $b\\ne c$ then this product is zero by orthogonality of $e_{\\lambda,b},e_{\\lambda,c}$. Therefore $E_{\\lambda,ab}E_{\\lambda,cd}=\\delta_{bc}E_{\\lambda,ad}$. Products between distinct blocks vanish by the zero cross-block corners of step 2.1, and $\\sum_{\\lambda,a}E_{\\lambda,aa}=\\sum_{\\lambda,a}e_{\\lambda,a}=1$. Their reductions are exactly all standard matrix units.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "The total number of elements $E_{\\lambda,ab}$ is $\\dim_k(A/hA)=\\operatorname{rank}_R(A)$ by [F3, F4]. Relative to an $R$-basis of $A$, their coordinate matrix $C$ reduces to an invertible matrix $C_0$ over $k$, so $C=C_0+hC_1$ for some matrix $C_1$. The factorization $C=C_0(I+hC_0^{-1}C_1)$ is invertible: the partial sums of $\\sum_{m\\ge0}(-hC_0^{-1}C_1)^m$ converge entrywise by completeness in [F3], and the finite geometric identity plus separatedness in [F3] makes the limit the two-sided inverse of the second factor. Thus the lifted matrix units form an $R$-basis by [F4]. The linear map from the product of matrix algebras sending standard matrix units to $E_{\\lambda,ab}$ is multiplicative by step 4.1, is unital, and maps a basis to a basis; it is the claimed algebra isomorphism.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For empty Lambda, finite freeness forces A=0 and the empty product isomorphism holds (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-algebra case is handled by the empty product (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A block of size d=1 is included by the same construction (steps 3.1–5.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Corners from distinct blocks have dimension zero and vanish (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finitely many lifts and coordinates are chosen (steps 1.1 and 3.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is not an equivalence."
+        }
+      ]
+    },
+    "thm-hh-generic-finite-hecke-semisimplicity": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hh-coxeter-matrix-word-group-and-length",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set and let $m:S\\times S\\to\\{1,2,3,\\dots\\}\\cup\\{\\infty\\}$ satisfy $m(s,s)=1$ for all $s\\in S$ and $m(s,t)=m(t,s)\\in\\{2,3,\\dots\\}\\cup\\{\\infty\\}$ for all $s\\ne t$. Such an $m$ is a **Coxeter matrix** on $S$.\n\n**The presented group.** Let $R\\subseteq F(S)$ be the set of relators\n$$R:=\\{s^2:s\\in S\\}\\cup\\{(st)^{m(s,t)}:s,t\\in S,\\ m(s,t)<\\infty\\},$$\nwhere $F(S)$ is the free group on $S$ ([[def-free-group]], [[thm-reduced-words-form-the-free-group]]) and $(st)^k$ is the $k$-fold product ([[def-group-power]]), and let $N:=\\langle\\!\\langle R\\rangle\\!\\rangle_{F(S)}$ be the normal closure of $R$ in $F(S)$ ([[def-normal-closure]], [[prop-normal-closure-is-products-of-conjugates]]). Define\n$$W:=F(S)/N,$$\nand write $s$ (as well as $sN$) for the image of $s\\in S$ in $W$ ([[def-quotient-group]], [[def-group]]).\n\n**Universal property.** For every group $G$ and every map $f:S\\to G$ with $f(s)^2=1$ for all $s\\in S$ and $(f(s)f(t))^{m(s,t)}=1$ in $G$ for all $s\\ne t$ with $m(s,t)<\\infty$, there is a unique group homomorphism $\\varphi:W\\to G$ with $\\varphi(s)=f(s)$ for all $s\\in S$ ([[def-group-homomorphism]], [[thm-quotient-group-universal-property]], [[thm-von-dyck]], [[def-group-presentation]], [[def-relators-relations-and-finite-presentations]], [[prop-equality-of-words-in-a-presentation]]).\n\n**Length and reduced words.** For $w\\in W$ put\n$$\\ell(w):=\\min\\{k\\in\\mathbb{N}:\\ \\text{there exist }s_1,\\dots,s_k\\in S\\text{ with }w=s_1\\cdots s_k\\}.$$\nThe minimum exists: every element of the free group $F(S)$ is represented by a finite word in $S\\cup S^{-1}$ ([[def-alphabet-words-and-reduction]]), and $s^{-1}=s$ in $W$ because $s^2\\in R$, so every element of $W$ is the value of a finite word in $S$; the set of admissible $k\\in\\mathbb{N}$ is therefore nonempty and has a least element by the well-ordering principle ([[thm-well-ordering-principle]], [[def-natural-numbers]]). A word $(s_1,\\dots,s_k)$ in $S$ is a **reduced expression** of $w$ when $w=s_1\\cdots s_k$ and $k=\\ell(w)$, and **nonreduced** otherwise. The empty word $(\\;)$ is a word in $S$ of length $0$, and $\\ell(1)=0$; it is the reduced expression of $1$.\n\n**Terminology.** The pair $(W,S)$ is the **Coxeter system** presented by the Coxeter matrix $(S,m)$; when $s\\mapsto s$ is understood, we also say that $W$ is the Coxeter group presented by $(S,m)$.\n\n**Standard parabolic subgroups.** For $J\\subseteq S$ put $W_J:=\\langle\\{s:s\\in J\\}\\rangle\\le W$ ([[def-generated-subgroup]]).\n\n**Conventions.** $m(s,t)$ is declared to be the order of $st$ in $W$; a value $m(s,t)=\\infty$ imposes no relator on $s,t$. This definition asserts no finiteness, faithfulness, or completeness property of the presentation: the statements that the elements $s\\in S$ are pairwise distinct in $W$ (so that $S$ may be viewed as a labelled subset of $W$), that $\\ell(s)=1$, that a word is reduced exactly when it admits no two-letter deletion, and that $(W_J,J)$ is the Coxeter system presented by the restricted matrix $m|_J$ with intrinsic length equal to the ambient length are recorded with their justifiers below and are not used before those results.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hh-universal-coxeter-hecke-parameters-and-presentation",
+          "source_section": "Definition",
+          "quote": "Let $(S,m)$ be a finite Coxeter matrix, $W$ the presented group and $\\ell$ its length function ([[def-hh-coxeter-matrix-word-group-and-length]]). Write $s\\sim t$ when there exist $s=s_0,s_1,\\dots,s_k=t$ in $S$ with $m(s_i,s_{i+1})$ odd for every $i<k$; this is the connected-component relation of the graph on $S$ whose edges are the pairs with odd $m$, and it is an equivalence relation (1.1). Let $[s]$ denote the class of $s$ and let $c$ be the number of classes.\n\n**Coefficient ring.** Put $R:=\\mathbb Z[v_1^{\\pm1},\\dots,v_c^{\\pm1}]=\\Lambda_{\\mathbb Z,c}$, the Laurent polynomial ring in $c$ variables ([[lem-hh-finite-polynomial-and-localization-constructions]], part 2): a commutative ring in which every $v_i$ is a unit. Identify the classes with $\\{1,\\dots,c\\}$ and put $v_s:=v_{[s]}\\in R^\\times$ for $s\\in S$.\n\n**The generic Hecke algebra.** Let $F:=R\\langle T_s:s\\in S\\rangle$ be the free associative $R$-algebra on $S$ and let $I\\subseteq F$ be the two-sided ideal generated ([[lem-hh-free-associative-ring-and-relations-descent]], part 2) by the **quadratic relations**\n$$(T_s-v_s)(T_s+v_s^{-1})\\qquad(s\\in S)$$\nand the **braid relations**\n$$T_sT_tT_s\\cdots=T_tT_sT_t\\cdots\\qquad(s\\ne t,\\ m(s,t)<\\infty),$$\nboth alternating products having $m(s,t)$ factors. Define $H:=H(W):=F/I$ and write $T_s$ for the image of the generator $T_s$. Then $H$ is a unital associative $R$-algebra ([[def-algebra-over-a-commutative-ring]]) with the following **universal property**: for every unital associative $R$-algebra $A$ and every family $(t_s)_{s\\in S}$ in $A$ satisfying the same two families of relations, there is a unique unital $R$-algebra homomorphism $H\\to A$ with $T_s\\mapsto t_s$.\n\n**Universal parameters.** For every commutative ring $A$ and units $u_1,\\dots,u_c\\in A^\\times$ the assignment $v_i\\mapsto u_i$ extends uniquely to a ring homomorphism $R\\to A$ ([[lem-hh-finite-polynomial-and-localization-constructions]], part 2); via the universal property of $H$ this makes $R$ the universal coefficient ring for a unit-valued parameter that is constant on each class $[s]$.\n\n**Generator conjugacy.** Two simple generators $s,t\\in S$ are conjugate in $W$ if and only if $s\\sim t$.\n\n**Conventions and scope.** (i) $m(s,t)=\\infty$ imposes no relation between $T_s$ and $T_t$; if $c=1$ we write $v$ for $v_1$. (ii) The quadratic relation is equivalent to $T_s^2-(v_s-v_s^{-1})T_s-1=0$, equivalently $(T_s+v_s^{-1})(T_s-v_s)=0$, and it depends on $v_s$ only through the difference $v_s-v_s^{-1}$ (1.6). (iii) No freeness, torsion-freeness, specialisation or basis property of $H$ is asserted here: the elements $T_w$ are introduced in [[lem-hh-reduced-word-independence-and-length-multiplication]], their independence is proved in [[thm-hh-generic-coxeter-hecke-standard-basis]], and the invertibility and bar properties are recorded in [[lem-hh-hecke-anti-involution-bar-and-normalization]]; consumers may not use those features before those items.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-hh-universal-presentations-and-base-change",
+          "source_section": "Statement",
+          "quote": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings, let $X$ be a set and let $R\\langle X\\rangle$ be the free $R$-algebra on $X$ ([[lem-hh-free-associative-ring-and-relations-descent]]).\n\n1. There is a unique $S$-algebra isomorphism $S\\otimes_RR\\langle X\\rangle\\to S\\langle X\\rangle$ with $s\\otimes x_{i_1}\\cdots x_{i_n}\\mapsto s\\,x_{i_1}\\cdots x_{i_n}$ on words; its inverse sends a word to $1\\otimes$ that word.\n2. If $I\\subseteq R\\langle X\\rangle$ is a two-sided ideal, then there is a unique $S$-algebra isomorphism $S\\otimes_R\\bigl(R\\langle X\\rangle/I\\bigr)\\cong(S\\otimes_RR\\langle X\\rangle)/\\operatorname{im}(S\\otimes_RI)$, sending $s\\otimes(y+I)$ to $(s\\otimes y)+\\operatorname{im}(S\\otimes_RI)$, the image ideal being generated by the images of the relations. No flatness or freeness of $S$ over $R$ is assumed.\n3. If an $R$-algebra $A$ is free as an $R$-module with basis $(a_i)$, then $S\\otimes_RA$ is a free $S$-module with basis $(1\\otimes a_i)$. Consequently an explicitly constructed basis isomorphism of a presentation may be tensored with $S$ to give a basis in every commutative specialization.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-hh-generic-coxeter-hecke-standard-basis",
+          "source_section": "Statement",
+          "quote": "Let $(S,m)$, $W$, $\\ell$ be as in [[def-hh-coxeter-matrix-word-group-and-length]]; let $R$, $v_s$, $H$, $T_s$ be as in [[def-hh-universal-coxeter-hecke-parameters-and-presentation]]; let $T_w$ for $w\\in W$ and the spanning statement be as in [[lem-hh-reduced-word-independence-and-length-multiplication]]; and let $E$, $P_s$, $Q_s$ and $P_w$ be as in [[lem-hh-commuting-left-right-hecke-length-operators]].\n\n1. **The length-operator representation.** There is a unique unital $R$-algebra homomorphism $\\rho:H\\to\\operatorname{End}_R(E)$ with $\\rho(T_s)=P_s$ for all $s\\in S$; it satisfies $\\rho(T_w)=P_w$ and $\\rho(T_w)(e_1)=e_w$ for all $w\\in W$.\n2. **Standard basis.** $\\{T_w:w\\in W\\}$ is an $R$-basis of $H$: it spans by [[lem-hh-reduced-word-independence-and-length-multiplication]] and is $R$-linearly independent. Hence $H$ is free as an $R$-module and every element of $H$ has a unique expansion $\\sum_wa_wT_w$ with $a_w\\in R$ and all but finitely many $a_w$ zero.\n3. **Faithfulness.** $\\rho$ is injective.\n4. **Base change.** For every commutative ring $R'$ and every ring homomorphism $\\varphi:R\\to R'$, the scalar extension $R'\\otimes_RH$ is, as an $R'$-algebra, canonically isomorphic to the quotient of the free associative $R'$-algebra on $(T_s)_{s\\in S}$ by the two-sided ideal generated by the images under $\\varphi$ of the relations (Q) and (B) of [[def-hh-universal-coxeter-hecke-parameters-and-presentation]], and it is free as an $R'$-module with basis $(1\\otimes T_w)_{w\\in W}$. No flatness or freeness of $R'$ over $R$ is assumed, and no torsion-freeness or semisimplicity of $H$ or of its specialisations is claimed.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-hh-finite-polynomial-and-localization-constructions",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and $n\\ge0$.\n\n1. **Multivariate polynomial ring.** The ring $R[x_1,\\dots,x_n]$ of [[def-multivariate-polynomial-ring-by-iteration]] is a commutative $R$-algebra, free as an $R$-module on the monomials $x^\\alpha=x_1^{\\alpha_1}\\cdots x_n^{\\alpha_n}$ ($\\alpha\\in\\mathbb N^n$), and for every commutative $R$-algebra $A$ and elements $a_1,\\dots,a_n\\in A$ there is a unique $R$-algebra homomorphism $R[x_1,\\dots,x_n]\\to A$ with $x_i\\mapsto a_i$. If $R$ is an integral domain, so is $R[x_1,\\dots,x_n]$.\n2. **Laurent polynomial ring.** The set $\\Lambda_{R,n}$ of finitely supported functions $\\mathbb Z^n\\to R$ with coefficientwise addition and convolution $(ab)_\\gamma=\\sum_{\\alpha+\\beta=\\gamma}a_\\alpha b_\\beta$ (summed only over the finite supports of $a$ and $b$) is a commutative $R$-algebra, free as an $R$-module on the monomials $x^\\alpha$ ($\\alpha\\in\\mathbb Z^n$); each $x_i$ is a unit. For every commutative $R$-algebra $A$ and units $u_1,\\dots,u_n\\in A$ there is a unique $R$-algebra homomorphism $\\Lambda_{R,n}\\to A$ with $x_i\\mapsto u_i$. If $R$ is an integral domain, so is $\\Lambda_{R,n}$; no domain assertion is made over a ring with zero divisors. Only finitely many variables are used; in applications to Coxeter systems with a finite generator set, $W$ may nevertheless be infinite.\n3. **Fraction field.** If $R$ is an integral domain, then on pairs $(f,g)$ with $f,g\\in\\Lambda_{R,n}$ and $g\\ne0$, the relation $(f,g)\\sim(f',g')$ iff $fg'=f'g$ is an equivalence relation compatible with $(f,g)+(f',g'):=(fg'+f'g,gg')$ and $(f,g)(f',g'):=(ff',gg')$, and the quotient $K(\\Lambda_{R,n})$ is a field containing $\\Lambda_{R,n}$ through $f\\mapsto[(f,1)]$. The same construction gives the fraction field of $R[x_1,\\dots,x_n]$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-hh-regular-trace-criterion-in-characteristic-zero",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a field and $H=H_\\phi$ a finite-dimensional field specialization from [[def-hh-specialization-and-regular-trace-determinant]]. For $x\\in H$, let $L_x:H\\to H$ be left multiplication and define $B(x,y):=\\operatorname{Tr}_K(L_{xy})$. The pairing $B$ is **nondegenerate** if $B(x,y)=0$ for every $y\\in H$ implies $x=0$. If $B$ is nondegenerate, then the left regular $H$-module is semisimple, meaning an internal direct sum of simple left submodules ([[def-semisimple-module]]). This implication holds over every field; no converse is asserted.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-hh-specialization-and-regular-trace-determinant",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field of characteristic zero, let $S$ be a finite Coxeter generator set, and assume that the presented Coxeter group $W$ is finite. Let $\\mathcal C$ be the set of odd-edge connected classes of $S$ from [[def-hh-universal-coxeter-hecke-parameters-and-presentation]]: one class joins generators connected by a chain of finite odd braid labels. Introduce one invertible parameter $v_C$ for each $C\\in\\mathcal C$ and put $R_k:=k[v_C^{\\pm1}:C\\in\\mathcal C]$. Let $H_{R_k}(W)$ be the scalar extension of the universal Hecke algebra to $R_k$; its relations are $(T_s-v_{[s]})(T_s+v_{[s]}^{-1})=0$ and the Coxeter braid relations. By [[thm-hh-generic-coxeter-hecke-standard-basis]], $H_{R_k}(W)$ is a free $R_k$-module with basis $(T_w)_{w\\in W}$.\n\nFor a homomorphism of commutative rings $\\phi:R_k\\to K$ to a field $K$, define the specialized algebra $H_\\phi:=K\\otimes_{R_k}H_{R_k}(W)$ and use the same symbol $T_w$ for the specialized basis element $1\\otimes T_w$. For $z\\in H_\\phi$, let $L_z:H_\\phi\\to H_\\phi$ be left multiplication, $L_z(x)=zx$. The **regular-trace pairing** on $H_\\phi$ is\n\n$$B_\\phi(x,y):=\\operatorname{Tr}_K(L_{xy}).$$\n\nIts Gram matrix in the standard basis is $G_\\phi=(\\operatorname{Tr}_K(L_{T_xT_y}))_{x,y\\in W}$, and its **regular-trace determinant** is $D_\\phi:=\\det(G_\\phi)$. The same construction over $R_k$ gives a Laurent polynomial $D_W\\in R_k$.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Specialize every parameter $v_C$ to $1$ and call the resulting algebra $H_1$. By [F2], each specialized generator $T_s$ is an involution and the alternating braid relations hold. For involutions $a,b$, put $g:=ab$, so $ba=g^{-1}$. If $m=2r$, the braid relation is $g^r=g^{-r}$, equivalent to $g^{2r}=1$. If $m=2r+1$, its two sides are $g^ra$ and $(ba)^rb$; right multiplication by $a$ makes equality equivalent to $g^r=(ba)^{r+1}=g^{-(r+1)}$, which is equivalent to $g^{2r+1}=1$. Thus, for every finite braid label, braid and Coxeter relator are equivalent in the presence of the involution relations. The specialized generators satisfy exactly [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "If $\\phi:R_k\\to K$ is a field homomorphism with $\\phi(D_W)\\ne0$, [F7] says that the regular-trace Gram matrix of $H_\\phi$ has nonzero determinant and is therefore nondegenerate. Applying [F6] shows that $H_\\phi$ is semisimple. This criterion does not infer splitness and makes no claim when $\\phi(D_W)=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F7",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "By the group universal property in [F1], $s\\mapsto T_s$ extends to $W\\to H_1^\\times$, and linear extension gives a $k$-algebra map $kW\\to H_1$. Conversely, the group generators in $kW$ satisfy the specialized quadratic and braid relations, so the quotient presentation in [F3] gives a $k$-algebra map $H_1\\to kW$. The composites are identity on their algebra generators, hence $H_1\\cong kW$ and $T_w$ corresponds to $w$. By [F4], $(T_w)_{w\\in W}$ is a basis of $H_1$, so $\\dim_kH_1=|W|$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "For $g\\in W$, $L_g$ permutes the group basis by $w\\mapsto gw$. If $g=1$, all $|W|$ basis vectors are fixed; if $g\\ne1$, $gw=w$ would imply $g=1$ by right cancellation, so none is fixed. Thus $\\operatorname{Tr}_k(L_g)=|W|$ for $g=1$ and $0$ otherwise. The regular-trace Gram matrix at $v_C=1$ therefore has entries $|W|\\delta_{y,x^{-1}}$; it is $|W|$ times a permutation matrix and has determinant $\\pm|W|^{|W|}\\ne0$ in characteristic zero.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "By [F7], this determinant is $D_W$ evaluated at $v_C=1$, so $D_W$ is not the zero Laurent polynomial. Since $k$ is a field, [F5] makes $R_k$ an integral domain and embeds it into its fraction field $F$; therefore $D_W$ remains nonzero in $F$. The regular-trace Gram matrix over $F$ is invertible, and [F6] proves that $F\\otimes_{R_k}H_{R_k}(W)$ is semisimple.",
+          "step": "4.1",
+          "inputs": [
+            "F7",
+            "F5",
+            "F6",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "When $|W|=1$, the matrix in step 3.1 is $[1]$, so the argument includes the trivial Coxeter group. All bases are finite and specified; no form of Choice is used.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "name": "Trivial Coxeter group boundary",
+          "model": "W={1}, with empty generator set and parameter set.",
+          "result": "The group-algebra specialization has basis {1}, regular-trace Gram matrix [1], and determinant 1.",
+          "evidence": "Proof steps 2.1, 3.1 and 5.1 include |W|=1."
+        }
+      ],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A Coxeter group contains its identity, so W is never empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At v_C=1 the trivial group gives determinant [1]; in general |W| is nonzero in characteristic zero (steps 3.1 and 5.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial Coxeter group, with |W|=1, is explicitly checked (step 5.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When a specialized determinant vanishes, the theorem states no conclusion (step 1.2)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All bases are supplied standard bases or finite group bases; no arbitrary choice is used (Statement and step 5.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The determinant condition is sufficient only."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The determinant condition is sufficient only."
+        }
+      ]
+    },
+    "thm-hh-split-deformation-labels-and-exceptional-parameters": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-hh-formal-deformation-matrix-unit-lifting",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field, $R:=k\\llbracket h\\rrbracket$, and $A$ a unital $R$-algebra free of finite rank as an $R$-module. Suppose that\n\n$$A/hA\\cong\\prod_{\\lambda\\in\\Lambda}\\operatorname{Mat}_{d_\\lambda}(k)$$\n\nfor a finite set $\\Lambda$ and positive integers $d_\\lambda$. Then there is an $R$-algebra isomorphism\n\n$$A\\cong\\prod_{\\lambda\\in\\Lambda}\\operatorname{Mat}_{d_\\lambda}(R)$$\n\nwhose reduction modulo $h$ is the given block decomposition. In particular, the diagonal matrix idempotents and all matrix units can be lifted exactly; centrality of the lifted block sums follows from the resulting matrix-unit basis and is not assumed during idempotent lifting.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hh-generic-finite-hecke-semisimplicity",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a finite Coxeter group with finite generator set $S$, let $k$ be a field of characteristic zero, and form $R_k=k[v_C^{\\pm1}:C\\in\\mathcal C]$ and $H_{R_k}(W)$ as in [[def-hh-specialization-and-regular-trace-determinant]]. Let $F:=\\operatorname{Frac}(R_k)$ be the fraction field and let $D_W\\in R_k$ be the regular-trace determinant. Then $D_W\\ne0$ and the generic algebra $F\\otimes_{R_k}H_{R_k}(W)$ is semisimple as a left regular module. More generally, for any field homomorphism $\\phi:R_k\\to K$, if $\\phi(D_W)\\ne0$, then $H_\\phi$ is semisimple. No splitness claim is made.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hh-specialization-and-regular-trace-determinant",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field of characteristic zero, let $S$ be a finite Coxeter generator set, and assume that the presented Coxeter group $W$ is finite. Let $\\mathcal C$ be the set of odd-edge connected classes of $S$ from [[def-hh-universal-coxeter-hecke-parameters-and-presentation]]: one class joins generators connected by a chain of finite odd braid labels. Introduce one invertible parameter $v_C$ for each $C\\in\\mathcal C$ and put $R_k:=k[v_C^{\\pm1}:C\\in\\mathcal C]$. Let $H_{R_k}(W)$ be the scalar extension of the universal Hecke algebra to $R_k$; its relations are $(T_s-v_{[s]})(T_s+v_{[s]}^{-1})=0$ and the Coxeter braid relations. By [[thm-hh-generic-coxeter-hecke-standard-basis]], $H_{R_k}(W)$ is a free $R_k$-module with basis $(T_w)_{w\\in W}$.\n\nFor a homomorphism of commutative rings $\\phi:R_k\\to K$ to a field $K$, define the specialized algebra $H_\\phi:=K\\otimes_{R_k}H_{R_k}(W)$ and use the same symbol $T_w$ for the specialized basis element $1\\otimes T_w$. For $z\\in H_\\phi$, let $L_z:H_\\phi\\to H_\\phi$ be left multiplication, $L_z(x)=zx$. The **regular-trace pairing** on $H_\\phi$ is\n\n$$B_\\phi(x,y):=\\operatorname{Tr}_K(L_{xy}).$$\n\nIts Gram matrix in the standard basis is $G_\\phi=(\\operatorname{Tr}_K(L_{T_xT_y}))_{x,y\\in W}$, and its **regular-trace determinant** is $D_\\phi:=\\det(G_\\phi)$. The same construction over $R_k$ gives a Laurent polynomial $D_W\\in R_k$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-hh-one-parameter-formal-series-local-ring",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field and $R:=k\\llbracket h\\rrbracket$, with formal series understood as coefficient functions and multiplication given by finite Cauchy convolution. The constant-coefficient map $c_0:R\\to k$ is a surjective ring homomorphism with kernel $hR$, so it induces $R/hR\\cong k$. The ring $R$ is an integral domain. For the $h$-adic topology, whose neighborhoods of zero are $h^nR$ for $n\\ge0$, $R$ is complete and separated; every finite free module $R^m$ is complete and separated coefficientwise. Finally, $K:=\\operatorname{Frac}(R)$ is a field, and the canonical map $R\\to K$ is injective.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-simple-module",
+          "source_section": "Definition",
+          "quote": "A left $R$-module $M$ is **simple** if $M\\ne0$ and its only submodules are\n$0$ and $M$. Equivalently, $M\\ne0$ and $M$ has no proper nonzero submodule.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-left-and-right-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a ring. A **left $R$-module** is an abelian group $(M,+,0_M)$ with a\nscalar action $R\\times M\\to M$, $(r,m)\\mapsto rm$, satisfying\n\n$$r(m+n)=rm+rn,\\quad (r+s)m=rm+sm,\\quad (rs)m=r(sm),\\quad 1_Rm=m.$$\n\nA **right $R$-module** has an action $M\\times R\\to M$, $(m,r)\\mapsto mr$, with\nthe analogous right-handed axioms. Unless “right” is stated, **module** means a\nunital left module.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-free-module-on-a-set-and-standard-basis",
+          "source_section": "Definition",
+          "quote": "For a unital ring $R$ and a set $X$, the **free left $R$-module on $X$** is\n$$R^{(X)}:=\\bigoplus_{x\\in X}R.$$\nFor $x\\in X$, the **standard basis vector** $e_x$ has coordinate $1_R$ at $x$ and zero elsewhere. Every element is represented by a unique finitely supported coefficient family $(r_x)_{x\\in X}$, and is written\n$$\\sum_{x\\in X}r_xe_x.$$\nThe **standard basis map** $X\\to R^{(X)}$ sends $x$ to $e_x$. It is injective exactly when $1_R\\ne0$ or $X$ has at most one element; in these cases it is the standard basis inclusion. Indeed, for distinct $x,y$ the $x$-coordinates of $e_x$ and $e_y$ are $1_R$ and $0$. For the zero ring every $e_x$ is zero, but the indexed family $(e_x)_{x\\in X}$ still has unique finitely supported coefficients.\n\nMore generally, a family $(b_x)_{x\\in X}$ is a **basis** of a module $M$ when every element of $M$ is uniquely a finite $R$-linear combination of the $b_x$ ([[def-generated-cyclic-finitely-generated-and-free-modules]]). For $X=\\varnothing$, $R^{(X)}=0$ and its empty family is a basis.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By [F1], $A\\cong\\prod_{\\lambda\\in\\Lambda}\\operatorname{Mat}_{d_\\lambda}(R)$. Reducing this isomorphism modulo $h$ and using $R/hR\\cong k$ from [F4] gives the stated product for the special fiber. Tensoring the matrix-unit basis with the field $K$ gives $K\\otimes_R A\\cong\\prod_{\\lambda\\in\\Lambda}\\operatorname{Mat}_{d_\\lambda}(K)$. The lifted block identities $p_\\lambda=\\sum_{a=1}^{d_\\lambda}E_{\\lambda,aa}$ reduce to the specified block identities and extend to the generic fiber.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Let $L$ be any field and $d\\ge1$. If $v\\in L^d$ is nonzero, choose a nonzero coordinate $v_j$; for each $i$, the matrix unit $E_{ij}$ sends $v$ to $v_je_i$, and scalar multiplication by $v_j^{-1}$ produces $e_i$. Thus the natural left module $L^d$ is simple. Conversely, let $S$ be a simple left $\\operatorname{Mat}_d(L)$-module. Since $1=\\sum_iE_{ii}$ and $S\\ne0$, choose $i$ and $s\\in S$ with $E_{ii}s\\ne0$. Define the $L$-linear map $L^d\\to S$ by $e_j\\mapsto E_{ji}s$. It intertwines the action of each matrix unit because $E_{pq}E_{ji}=\\delta_{qj}E_{pi}$; since matrix units form an $L$-basis of the algebra, it is a module homomorphism. It is nonzero, so its image is all of $S$ by simplicity; its kernel is a submodule of the simple natural module and is not the whole module, so it is zero. Hence every simple module for one matrix factor is its natural module and is unique up to isomorphism.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "In a finite product of matrix algebras, the central block identities are pairwise orthogonal and sum to $1$. On a nonzero simple module their images are submodules whose sum is direct and equals the module. At least one image is nonzero; if two were nonzero, each would be a proper nonzero submodule, contradicting simplicity. Therefore exactly one block identity has nonzero image, that identity acts as the identity, and all others act as zero. Step 1.2 classifies the simple module for the unique acting factor. The same lifted $p_\\lambda$ labels the corresponding factors in the special and generic fibers, and each natural module has dimension $d_\\lambda$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "For any finite Hecke specialization with $D_W\\ne0$, [F3] says its regular-trace Gram determinant is nonzero, so its regular-trace pairing is nondegenerate; [F2] then gives semisimplicity. If $D_W=0$, [F2] gives no conclusion. This proves the stated scope of the exceptional parameter set and does not infer labels or splitness for these general fibers.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For empty Lambda the zero algebra has no simple labels; the matrix-unit theorem covers the empty product (steps 1.1 and 2.1)."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All matrix sizes d_lambda are positive by hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A size-one matrix block is covered by the natural-module argument (steps 1.2 and 2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If D_W vanishes, the generic Hecke branch draws no conclusion; formal split labels have separate hypotheses (step 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The module classification selects only a finite matrix-unit index and a nonzero vector (step 1.2)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The exceptional set is not claimed to equal the nonsemisimple locus."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The exceptional set is not claimed to equal the nonsemisimple locus."
+        }
+      ]
+    },
+    "cex-hh-nondegenerate-symmetrizing-trace-does-not-imply-semisimplicity": {
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hh-universal-coxeter-hecke-parameters-and-presentation",
+          "source_section": "Definition",
+          "quote": "Let $(S,m)$ be a finite Coxeter matrix, $W$ the presented group and $\\ell$ its length function ([[def-hh-coxeter-matrix-word-group-and-length]]). Write $s\\sim t$ when there exist $s=s_0,s_1,\\dots,s_k=t$ in $S$ with $m(s_i,s_{i+1})$ odd for every $i<k$; this is the connected-component relation of the graph on $S$ whose edges are the pairs with odd $m$, and it is an equivalence relation (1.1). Let $[s]$ denote the class of $s$ and let $c$ be the number of classes.\n\n**Coefficient ring.** Put $R:=\\mathbb Z[v_1^{\\pm1},\\dots,v_c^{\\pm1}]=\\Lambda_{\\mathbb Z,c}$, the Laurent polynomial ring in $c$ variables ([[lem-hh-finite-polynomial-and-localization-constructions]], part 2): a commutative ring in which every $v_i$ is a unit. Identify the classes with $\\{1,\\dots,c\\}$ and put $v_s:=v_{[s]}\\in R^\\times$ for $s\\in S$.\n\n**The generic Hecke algebra.** Let $F:=R\\langle T_s:s\\in S\\rangle$ be the free associative $R$-algebra on $S$ and let $I\\subseteq F$ be the two-sided ideal generated ([[lem-hh-free-associative-ring-and-relations-descent]], part 2) by the **quadratic relations**\n$$(T_s-v_s)(T_s+v_s^{-1})\\qquad(s\\in S)$$\nand the **braid relations**\n$$T_sT_tT_s\\cdots=T_tT_sT_t\\cdots\\qquad(s\\ne t,\\ m(s,t)<\\infty),$$\nboth alternating products having $m(s,t)$ factors. Define $H:=H(W):=F/I$ and write $T_s$ for the image of the generator $T_s$. Then $H$ is a unital associative $R$-algebra ([[def-algebra-over-a-commutative-ring]]) with the following **universal property**: for every unital associative $R$-algebra $A$ and every family $(t_s)_{s\\in S}$ in $A$ satisfying the same two families of relations, there is a unique unital $R$-algebra homomorphism $H\\to A$ with $T_s\\mapsto t_s$.\n\n**Universal parameters.** For every commutative ring $A$ and units $u_1,\\dots,u_c\\in A^\\times$ the assignment $v_i\\mapsto u_i$ extends uniquely to a ring homomorphism $R\\to A$ ([[lem-hh-finite-polynomial-and-localization-constructions]], part 2); via the universal property of $H$ this makes $R$ the universal coefficient ring for a unit-valued parameter that is constant on each class $[s]$.\n\n**Generator conjugacy.** Two simple generators $s,t\\in S$ are conjugate in $W$ if and only if $s\\sim t$.\n\n**Conventions and scope.** (i) $m(s,t)=\\infty$ imposes no relation between $T_s$ and $T_t$; if $c=1$ we write $v$ for $v_1$. (ii) The quadratic relation is equivalent to $T_s^2-(v_s-v_s^{-1})T_s-1=0$, equivalently $(T_s+v_s^{-1})(T_s-v_s)=0$, and it depends on $v_s$ only through the difference $v_s-v_s^{-1}$ (1.6). (iii) No freeness, torsion-freeness, specialisation or basis property of $H$ is asserted here: the elements $T_w$ are introduced in [[lem-hh-reduced-word-independence-and-length-multiplication]], their independence is proved in [[thm-hh-generic-coxeter-hecke-standard-basis]], and the invertibility and bar properties are recorded in [[lem-hh-hecke-anti-involution-bar-and-normalization]]; consumers may not use those features before those items.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hh-generic-coxeter-hecke-standard-basis",
+          "source_section": "Statement",
+          "quote": "Let $(S,m)$, $W$, $\\ell$ be as in [[def-hh-coxeter-matrix-word-group-and-length]]; let $R$, $v_s$, $H$, $T_s$ be as in [[def-hh-universal-coxeter-hecke-parameters-and-presentation]]; let $T_w$ for $w\\in W$ and the spanning statement be as in [[lem-hh-reduced-word-independence-and-length-multiplication]]; and let $E$, $P_s$, $Q_s$ and $P_w$ be as in [[lem-hh-commuting-left-right-hecke-length-operators]].\n\n1. **The length-operator representation.** There is a unique unital $R$-algebra homomorphism $\\rho:H\\to\\operatorname{End}_R(E)$ with $\\rho(T_s)=P_s$ for all $s\\in S$; it satisfies $\\rho(T_w)=P_w$ and $\\rho(T_w)(e_1)=e_w$ for all $w\\in W$.\n2. **Standard basis.** $\\{T_w:w\\in W\\}$ is an $R$-basis of $H$: it spans by [[lem-hh-reduced-word-independence-and-length-multiplication]] and is $R$-linearly independent. Hence $H$ is free as an $R$-module and every element of $H$ has a unique expansion $\\sum_wa_wT_w$ with $a_w\\in R$ and all but finitely many $a_w$ zero.\n3. **Faithfulness.** $\\rho$ is injective.\n4. **Base change.** For every commutative ring $R'$ and every ring homomorphism $\\varphi:R\\to R'$, the scalar extension $R'\\otimes_RH$ is, as an $R'$-algebra, canonically isomorphic to the quotient of the free associative $R'$-algebra on $(T_s)_{s\\in S}$ by the two-sided ideal generated by the images under $\\varphi$ of the relations (Q) and (B) of [[def-hh-universal-coxeter-hecke-parameters-and-presentation]], and it is free as an $R'$-module with basis $(1\\otimes T_w)_{w\\in W}$. No flatness or freeness of $R'$ over $R$ is assumed, and no torsion-freeness or semisimplicity of $H$ or of its specialisations is claimed.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hh-specialization-and-regular-trace-determinant",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field of characteristic zero, let $S$ be a finite Coxeter generator set, and assume that the presented Coxeter group $W$ is finite. Let $\\mathcal C$ be the set of odd-edge connected classes of $S$ from [[def-hh-universal-coxeter-hecke-parameters-and-presentation]]: one class joins generators connected by a chain of finite odd braid labels. Introduce one invertible parameter $v_C$ for each $C\\in\\mathcal C$ and put $R_k:=k[v_C^{\\pm1}:C\\in\\mathcal C]$. Let $H_{R_k}(W)$ be the scalar extension of the universal Hecke algebra to $R_k$; its relations are $(T_s-v_{[s]})(T_s+v_{[s]}^{-1})=0$ and the Coxeter braid relations. By [[thm-hh-generic-coxeter-hecke-standard-basis]], $H_{R_k}(W)$ is a free $R_k$-module with basis $(T_w)_{w\\in W}$.\n\nFor a homomorphism of commutative rings $\\phi:R_k\\to K$ to a field $K$, define the specialized algebra $H_\\phi:=K\\otimes_{R_k}H_{R_k}(W)$ and use the same symbol $T_w$ for the specialized basis element $1\\otimes T_w$. For $z\\in H_\\phi$, let $L_z:H_\\phi\\to H_\\phi$ be left multiplication, $L_z(x)=zx$. The **regular-trace pairing** on $H_\\phi$ is\n\n$$B_\\phi(x,y):=\\operatorname{Tr}_K(L_{xy}).$$\n\nIts Gram matrix in the standard basis is $G_\\phi=(\\operatorname{Tr}_K(L_{T_xT_y}))_{x,y\\in W}$, and its **regular-trace determinant** is $D_\\phi:=\\det(G_\\phi)$. The same construction over $R_k$ gives a Laurent polynomial $D_W\\in R_k$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-simple-module",
+          "source_section": "Definition",
+          "quote": "A left $R$-module $M$ is **simple** if $M\\ne0$ and its only submodules are\n$0$ and $M$. Equivalently, $M\\ne0$ and $M$ has no proper nonzero submodule.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-semisimple-module",
+          "source_section": "Definition",
+          "quote": "A left $R$-module is **semisimple** when it is an internal direct sum of simple submodules, allowing the empty direct sum. Hence the zero module is semisimple.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Since $i^{-1}=-i$, the defining polynomial is $(T-i)^2$, and the standard basis is $(1,T)$ by [F2]. Expanding the relation gives $T^2=1+2iT$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Let $\\epsilon:=T-i$. The basis $(1,T)$ implies $\\epsilon\\ne0$, while the defining polynomial gives $\\epsilon^2=0$. For any simple left $H$-module $S$, $\\epsilon S$ is a submodule because $H$ is commutative. If $\\epsilon S\\ne0$, simplicity [F4] gives $\\epsilon S=S$, and applying $\\epsilon$ again yields $0=\\epsilon^2S=\\epsilon S=S$, a contradiction. Thus $\\epsilon$ annihilates every simple module.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "In the basis $(1,T)$, the columns of $L_T$ are $(0,1)^{\\mathsf T}$ and $(1,2i)^{\\mathsf T}$, so $[L_T]=\\begin{pmatrix}0&1\\\\1&2i\\end{pmatrix}$. Hence the regular-trace Gram matrix is $G=\\begin{pmatrix}\\operatorname{Tr}(L_1)&\\operatorname{Tr}(L_T)\\\\\\operatorname{Tr}(L_T)&\\operatorname{Tr}(L_{T^2})\\end{pmatrix}=\\begin{pmatrix}2&2i\\\\2i&-2\\end{pmatrix}$. Its determinant is $-4-(2i)^2=0$, so the regular-trace pairing is degenerate and the regular-trace determinant vanishes.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "claim": "Define $\\tau(1)=1$ and $\\tau(T)=0$. From $T^2=1+2iT$, for $x=a+bT$ and $y=c+dT$ one obtains $\\tau(xy)=ac+bd=\\tau(yx)$. Its Gram matrix in $(1,T)$ is $\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$, so the pairing $\\tau(xy)$ is nondegenerate and perfect.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "If the regular module $H$ were semisimple, it would be a direct sum of simple submodules by [F5], each annihilated by $\\epsilon$ by step 1.2; then $\\epsilon$ would annihilate all of $H$. But $\\epsilon\\cdot1=\\epsilon\\ne0$. Therefore $H$ is not semisimple, despite the perfect symmetrizing pairing in step 2.2. This refutes the statement.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 1.2",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "name": "Rank-one repeated-root specialization",
+          "model": "A=C[T]/((T-i)^2) with basis (1,T) and epsilon=T-i.",
+          "result": "The symmetrizing-trace Gram matrix is the identity while the regular-trace Gram matrix [[2,2i],[2i,-2]] has determinant zero; epsilon is nonzero, square-zero, and annihilates every simple module.",
+          "evidence": "Counterexample steps 1.1, 1.2, 2.1 and 3.1 compute both forms and the obstruction to semisimplicity."
+        }
+      ],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The rank-one Coxeter group has the identity and one generator."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The nilpotent epsilon is nonzero by the two-element standard basis (step 1.2)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has a two-element basis and makes no one-dimensional claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The regular-trace form is degenerate while the symmetrizing form is perfect (steps 2.1 and 2.2)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For every simple module S, epsilon annihilates S; no preferred simple module is selected (step 1.2)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a counterexample, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a counterexample, not an equivalence."
+        }
+      ]
+    },
+    "ex-hh-two-dimensional-formal-split-deformation": {
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-hh-split-deformation-labels-and-exceptional-parameters",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field, $R:=k\\llbracket h\\rrbracket$, and $A$ a finite free unital $R$-algebra with\n\n$$A/hA\\cong\\prod_{\\lambda\\in\\Lambda}\\operatorname{Mat}_{d_\\lambda}(k)$$\n\nfor a finite set $\\Lambda$ and positive integers $d_\\lambda$. Put $K:=\\operatorname{Frac}(R)$; the local-series lemma below verifies that this is a field and that $R$ embeds in it. Then the simple modules of the special fiber $A/hA$ and the generic fiber $K\\otimes_R A$ are both indexed by $\\Lambda$, and the $\\lambda$-label has dimension $d_\\lambda$ in each fiber.\n\nSeparately, for a finite Coxeter Hecke algebra in characteristic zero with regular-trace determinant $D_W$ from [[def-hh-specialization-and-regular-trace-determinant]], every field specialization with $D_W\\ne0$ is semisimple. The zero set $D_W=0$ is the exceptional set for this trace certificate; it is not asserted to be exactly the nonsemisimple locus. No splitness or simple-label claim is made for an arbitrary Hecke specialization from determinant nonvanishing alone.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hh-formal-deformation-matrix-unit-lifting",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field, $R:=k\\llbracket h\\rrbracket$, and $A$ a unital $R$-algebra free of finite rank as an $R$-module. Suppose that\n\n$$A/hA\\cong\\prod_{\\lambda\\in\\Lambda}\\operatorname{Mat}_{d_\\lambda}(k)$$\n\nfor a finite set $\\Lambda$ and positive integers $d_\\lambda$. Then there is an $R$-algebra isomorphism\n\n$$A\\cong\\prod_{\\lambda\\in\\Lambda}\\operatorname{Mat}_{d_\\lambda}(R)$$\n\nwhose reduction modulo $h$ is the given block decomposition. In particular, the diagonal matrix idempotents and all matrix units can be lifted exactly; centrality of the lifted block sums follows from the resulting matrix-unit basis and is not assumed during idempotent lifting.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-hh-one-parameter-formal-series-local-ring",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field and $R:=k\\llbracket h\\rrbracket$, with formal series understood as coefficient functions and multiplication given by finite Cauchy convolution. The constant-coefficient map $c_0:R\\to k$ is a surjective ring homomorphism with kernel $hR$, so it induces $R/hR\\cong k$. The ring $R$ is an integral domain. For the $h$-adic topology, whose neighborhoods of zero are $h^nR$ for $n\\ge0$, $R$ is complete and separated; every finite free module $R^m$ is complete and separated coefficientwise. Finally, $K:=\\operatorname{Frac}(R)$ is a field, and the canonical map $R\\to K$ is injective.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-polynomial-ring-over-a-commutative-ring",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring ([[def-commutative-ring]]). A function $a\\colon\\mathbb N\\to R$ has **finite support** when there is $N\\in\\mathbb N$ such that $a_i=0$ for every $i>N$. The **polynomial ring** $R[x]$ is the set of all finitely supported functions $a\\colon\\mathbb N\\to R$.\n\nFor $a,b\\in R[x]$ and $n\\in\\mathbb N$, define\n\n$$ (a+b)_n:=a_n+b_n,\\qquad (ab)_n:=\\sum_{i+j=n}a_i b_j. $$\n\nThe convolution sum is a finite sum in the additive commutative monoid of $R$ ([[def-finite-sum-in-a-commutative-monoid]]). Write $0$ for the zero sequence, $1$ for the sequence with coefficient $1_R$ at index $0$ and zero elsewhere, and $x$ for the sequence with coefficient $1_R$ at index $1$ and zero elsewhere. The coefficient sequence supported at $0$ with value $r$ is denoted again by $r$, and a polynomial $a$ is written formally as $\\sum_i a_i x^i$.\n\nThe closure of these operations and the commutative-ring axioms are established by [[lem-polynomial-operations-preserve-finite-support]] and [[thm-polynomial-ring-is-a-commutative-ring]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-polynomial-ring-is-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "For every commutative ring $R$, the coefficientwise addition and convolution multiplication of [[def-polynomial-ring-over-a-commutative-ring]] make $R[x]$ a commutative ring. The constant-polynomial map $c\\colon R\\to R[x]$ is an injective unital ring homomorphism ([[def-ring-homomorphism]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-generated-and-principal-ideals",
+          "source_section": "Definition",
+          "quote": "The ideal generated by a subset and principal ideals.\n\nFor $S\\subseteq R$, define $(S)$ to be the intersection of all two-sided ideals\nof $R$ containing $S$.  This family is nonempty because it contains $R$, and\n[[lem-ideal-criterion-and-intersections]] shows that $(S)$ is an ideal.  For\n$a\\in R$, the ideal $(\\{a\\})$ is written $(a)$ and is called **principal**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-generated-ideal-description-in-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "In a commutative ring, $(S)$ consists of finite sums $\\sum r_i s_i$, and $(a)=Ra$.\n\nThe empty sum is included and equals $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-quotient-ring",
+          "source_section": "Definition",
+          "quote": "The quotient ring $R/I$ with $(r+I)(s+I)=rs+I$.\n\nLet $I\\mathrel{\\trianglelefteq}R$.  Since $I$ is an additive subgroup of the\nabelian group $(R,+)$, its additive cosets form the quotient group $R/I$\n([[def-quotient-group]], [[cor-subgroups-of-abelian-groups-are-normal]]).  Define\n\n$$(r+I)(s+I):=rs+I.$$\n\nThe well-definedness and ring laws are established by\n[[thm-quotient-ring-multiplication-well-defined-iff-ideal]] and\n[[thm-quotient-ring-laws]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-quotient-ring-laws",
+          "source_section": "Statement",
+          "quote": "For a two-sided ideal $I$, the additive cosets form a ring $R/I$ with identity $1+I$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-formal-power-series-and-coefficient-extraction",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring. A **formal power series over $R$** is a coefficient function $a:\\mathbb N\\to R$, written\n\n$$f=\\sum_{n\\ge 0}a_nx^n,$$\n\nand $R\\llbracket x\\rrbracket$ is the set of all such functions. The symbol $x$ is an indeterminate. The notation asserts no analytic convergence and no value of $x$ is being chosen.\n\nFor $n\\in\\mathbb N$, the **coefficient-extraction functional** is evaluation at $n$:\n\n$$[x^n]f:=a_n.$$\n\nDefine zero and one coefficientwise, put $[x^n](f+g)=[x^n]f+[x^n]g$, and define the Cauchy product by\n\n$$[x^n](fg)=\\sum_{i+j=n}[x^i]f\\,[x^j]g=\\sum_{i=0}^{n}[x^i]f\\,[x^{n-i}]g.$$\n\nThe last sum is finite, including when $n=0$. The constant $r\\in R$ denotes the series with coefficient $r$ at $0$ and $0$ elsewhere. The series $x$ has coefficient $1$ at $1$ and $0$ elsewhere. Thus $x^0=1$, and $x^n$ is supported at $n$.\n\nThe finitely supported coefficient functions form the polynomial part of $R\\llbracket x\\rrbracket$. Under the coefficient-function definition of [[def-polynomial-ring-over-a-commutative-ring]], a polynomial is therefore the same data as a finitely supported formal series; the next theorem verifies that this identification respects the ring operations.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-formal-power-series-unit-criterion",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and $f=\\sum_{n\\ge0}a_nx^n\\in R\\llbracket x\\rrbracket$. Then $f$ is a unit in $R\\llbracket x\\rrbracket$ if and only if $a_0$ is a unit in $R$.\n\nWhen $a_0$ is a unit, the inverse $g=\\sum_{n\\ge0}b_nx^n$ is unique and is determined by\n\n$$b_0=a_0^{-1},\\qquad b_n=-a_0^{-1}\\sum_{i=1}^{n}a_i b_{n-i}\\quad(n\\ge1).$$\n\nThe criterion also holds in the zero ring.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-simple-module",
+          "source_section": "Definition",
+          "quote": "A left $R$-module $M$ is **simple** if $M\\ne0$ and its only submodules are\n$0$ and $M$. Equivalently, $M\\ne0$ and $M$ has no proper nonzero submodule.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-left-and-right-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a ring. A **left $R$-module** is an abelian group $(M,+,0_M)$ with a\nscalar action $R\\times M\\to M$, $(r,m)\\mapsto rm$, satisfying\n\n$$r(m+n)=rm+rn,\\quad (r+s)m=rm+sm,\\quad (rs)m=r(sm),\\quad 1_Rm=m.$$\n\nA **right $R$-module** has an action $M\\times R\\to M$, $(m,r)\\mapsto mr$, with\nthe analogous right-handed axioms. Unless “right” is stated, **module** means a\nunital left module.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-free-module-on-a-set-and-standard-basis",
+          "source_section": "Definition",
+          "quote": "For a unital ring $R$ and a set $X$, the **free left $R$-module on $X$** is\n$$R^{(X)}:=\\bigoplus_{x\\in X}R.$$\nFor $x\\in X$, the **standard basis vector** $e_x$ has coordinate $1_R$ at $x$ and zero elsewhere. Every element is represented by a unique finitely supported coefficient family $(r_x)_{x\\in X}$, and is written\n$$\\sum_{x\\in X}r_xe_x.$$\nThe **standard basis map** $X\\to R^{(X)}$ sends $x$ to $e_x$. It is injective exactly when $1_R\\ne0$ or $X$ has at most one element; in these cases it is the standard basis inclusion. Indeed, for distinct $x,y$ the $x$-coordinates of $e_x$ and $e_y$ are $1_R$ and $0$. For the zero ring every $e_x$ is zero, but the indexed family $(e_x)_{x\\in X}$ still has unique finitely supported coefficients.\n\nMore generally, a family $(b_x)_{x\\in X}$ is a **basis** of a module $M$ when every element of $M$ is uniquely a finite $R$-linear combination of the $b_x$ ([[def-generated-cyclic-finitely-generated-and-free-modules]]). For $X=\\varnothing$, $R^{(X)}=0$ and its empty family is a basis.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-algebra-over-a-commutative-ring",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring ([[def-commutative-ring]]). An **$R$-algebra** is a unital ring $A$ together with a unital ring homomorphism\n\n$$\\eta_A:R\\longrightarrow A$$\n\n([[def-ring-homomorphism]]) whose image is central: $\\eta_A(r)a=a\\eta_A(r)$ for every $r\\in R$ and $a\\in A$. The induced scalar action is $ra:=\\eta_A(r)a$, making $A$ an $R$-module and multiplication $A\\times A\\to A$ bilinear.\n\nAn **$R$-algebra homomorphism** $f:A\\to B$ is a unital ring homomorphism satisfying $f\\circ\\eta_A=\\eta_B$. Such a map is automatically $R$-linear. An $R$-algebra is **commutative** when its underlying ring is commutative.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-rat-field",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]]\nis a field: a commutative ring with $1 \\ne 0$ in which every nonzero element\nhas a multiplicative inverse.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication) and two distinguished elements $0 \\ne 1$ of $F$,\nsatisfying:\n\n- **(A)** $(F, +)$ is an abelian group with identity $0$: addition is\n  associative and commutative, $x + 0 = x$ for all $x$, and every $x$ has an\n  additive inverse $-x$ with $x + (-x) = 0$.\n- **(M)** Multiplication is associative and commutative **on all of $F$**, and\n  $x \\cdot 1 = x$ for every $x \\in F$; moreover $(F \\setminus \\{0\\}, \\cdot)$ is an\n  abelian group with identity $1$, so every $x \\ne 0$ has a multiplicative inverse\n  $x^{-1}$ with $x \\cdot x^{-1} = 1$.\n- **(D)** Multiplication distributes over addition: $x \\cdot (y + z) = x\\cdot y + x\\cdot z$.\n\nWe write $x - y := x + (-y)$ and $x/y := x \\cdot y^{-1}$ (for $y \\ne 0$), and\nabbreviate $x \\cdot y$ as $xy$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-hh-one-parameter-formal-series-local-ring",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field and $R:=k\\llbracket h\\rrbracket$, with formal series understood as coefficient functions and multiplication given by finite Cauchy convolution. The constant-coefficient map $c_0:R\\to k$ is a surjective ring homomorphism with kernel $hR$, so it induces $R/hR\\cong k$. The ring $R$ is an integral domain. For the $h$-adic topology, whose neighborhoods of zero are $h^nR$ for $n\\ge0$, $R$ is complete and separated; every finite free module $R^m$ is complete and separated coefficientwise. Finally, $K:=\\operatorname{Frac}(R)$ is a field, and the canonical map $R\\to K$ is injective.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Put $p(X):=X^2-S^2$. If a polynomial has degree $m\\ge2$ and leading coefficient $a_m$, subtracting $a_mX^{m-2}p(X)$ cancels its degree-$m$ term and lowers its degree; finitely many repetitions give a representative $a+bX$. If $g\\ne0$ has degree $n$ and leading coefficient $b_n\\ne0$, then the leading term of $p(X)g(X)$ is $b_nX^{n+2}$ because $p$ is monic, so no nonzero multiple of $p$ has degree at most one. Thus every quotient class has a unique representative $a+bX$, and $(1,x)$ is an $R$-basis. The principal ideal is $Rp$ by [F5], and the quotient ring operations are well defined by [F6]. Reducing coefficients modulo $h$ using [F3] gives $\\bar A=\\mathbb Q[X]/(X^2-1)$. The elements $\\bar e_\\pm:=(1\\pm\\bar x)/2$ satisfy $\\bar e_\\pm^2=\\bar e_\\pm$, $\\bar e_+\\bar e_-=0$, and $\\bar e_++\\bar e_-=1$ by $\\bar x^2=1$; their coefficient matrix in $(1,\\bar x)$ has determinant $-1/2\\ne0$ by [F11]. Hence the map $\\mathbb Q\\times\\mathbb Q\\to\\bar A$, $(a,b)\\mapsto a\\bar e_++b\\bar e_-$, is a unital algebra isomorphism. The quotient map $R[X]\\to A$ is unital, and $A$ is commutative, so the coefficient map $R\\to A$ is central; thus $A$ is an $R$-algebra as in [F10].",
+          "step": "1.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F3",
+            "F11",
+            "F10",
+            "F4",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Define $S^{-1}$ by coefficients $[h^n]S^{-1}=(-1)^n$. By [F7], the constant coefficient of $(1+h)S^{-1}$ is $1$, and its coefficient at every $n\\ge1$ is $(-1)^n+(-1)^{n-1}=0$; hence $(1+h)S^{-1}=1$. Put $u:=S^{-1}x$; the relation $x^2=S^2$ gives $u^2=1$. Direct expansion now gives $e_\\pm:=(1\\pm u)/2$ with $e_\\pm^2=e_\\pm$, $e_+e_-=e_-e_+=0$, and $e_++e_-=1$. Their reductions are $\\bar e_\\pm$.",
+          "step": "2.1",
+          "inputs": [
+            "F7",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "The identities $e_++e_-=1$ and $e_+-e_-=S^{-1}x$ give $1=e_++e_-$ and $x=S(e_+-e_-)$. The definitions express each $e_\\pm$ as an $R$-linear combination of $1,x$, while these identities express $1,x$ as combinations of $e_+,e_-$. Since $2$ is a unit by [F11] and $S$ is a unit by [F7], the changes of coordinates are inverse, so $(e_+,e_-)$ is an $R$-basis by step 1.1 and [F9]. The map $R\\times R\\to A$, $(a,b)\\mapsto ae_++be_-$, is multiplicative because the idempotents are orthogonal and idempotent, is unital because they sum to $1$, and is bijective because they form a basis.",
+          "step": "3.1",
+          "inputs": [
+            "F11",
+            "F7",
+            "F9",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Reducing the isomorphism from step 3.1 gives $\\bar A\\cong\\mathbb Q\\times\\mathbb Q$; extending scalars to $K$ gives $K\\otimes_R A\\cong K\\times K$ by [F3]. For a product of two fields, the central coordinate idempotents split any module into their two images; a simple nonzero module has exactly one nonzero image, on which that coordinate field acts. For any field $L$, if $M$ is a simple nonzero left $L$-module and $0\\ne m\\in M$, then $L\\to M$, $a\\mapsto am$, is injective because nonzero $a$ is invertible by [F11], and its nonzero image is all of $M$ by [F8]. Thus each coordinate field has exactly one simple module up to isomorphism, namely itself. The labels $+$ and $-$ are the reductions of $e_+$ and $e_-$, in agreement with the split-label theorem [F1] and the matrix decomposition [F2].",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F11",
+            "F8",
+            "F1",
+            "F2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "name": "Two formal idempotent labels",
+          "model": "A=Q\\llbracket h\\rrbracket[X]/(X^2-(1+h)^2) with basis (1,x).",
+          "result": "The explicit idempotents are orthogonal, sum to one, and identify both fibers as Q×Q and K×K.",
+          "evidence": "Verification steps 1.1–4.1 compute the basis, idempotents, product decomposition, and both simple labels."
+        }
+      ],
+      "axiom_uses": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has two explicitly displayed coordinate factors."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The h=0 special fiber and its two idempotents are computed (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Both fibers have two simple labels; no one-label case is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The roots remain separated because 2 and S are units; no repeated-root degeneration is part of this example (steps 2.1 and 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint convention occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All idempotents and labels are explicit; no family selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is not an equivalence."
+        }
+      ]
+    }
+  }
+}

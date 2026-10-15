@@ -1,11 +1,13 @@
 ---
 page: cyclotomic-murphy-bases-and-cellular-module-constructions-examples
 title: "Cyclotomic Murphy Bases and Cellular Module Constructions — Examples"
-status: published
+status: draft
 items: []
-examples: []
+examples:
+  - ex-hh-rank-one-cyclotomic-cell-modules-and-forms
+  - ex-hh-type-a-rank-two-cell-module-specialization
 ---
 
-Calculate cell modules and their forms for the rank-one cyclotomic algebra and a small type-A specialization, including a vanishing form. Recover ordinary Hecke Specht construction as r=1 and cross-link its existing home instead of duplicating its item IDs.
+These calculations specialize the cell forms without using generic diagonalization. The rank-one level-two algebra exhibits a vanishing form when its two cyclotomic parameters coincide. The ordinary type-A rank-two algebra has a vanishing row-Murphy cell form at $Q=-1$ while the other cell form remains nonzero.
 
-These are planned worked examples and counterexamples for [[cyclotomic-murphy-bases-and-cellular-module-constructions]], with empty item lists pending normal authoring and proof review. Each example must calculate from the stated hypotheses, and each counterexample must verify both its premises and the failed conclusion. This companion is a dependency leaf and supplies no theorem to another page.
+The ordinary type-A example uses the row-symmetrizer Murphy cell convention. The existing Specht module page uses the signed-conjugate comparison: the Specht label is conjugated and the module is sign-twisted. The examples keep that distinction explicit and do not duplicate the existing Specht item IDs.

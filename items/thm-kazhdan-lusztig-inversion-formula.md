@@ -1,11 +1,13 @@
 ---
+verification:
+  repair: research/hopf-hecke-unfinished-15-2026-10-15-owner/published-repairs/thm-kazhdan-lusztig-inversion-formula.json
 id: thm-kazhdan-lusztig-inversion-formula
 kind: theorem
 title: The Kazhdan–Lusztig inversion formula
 status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
-deps: [def-inverse-kazhdan-lusztig-polynomials, thm-r-polynomial-recursion-and-degree-bounds, thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, lem-bruhat-order-basic-properties-for-permutations]
+deps: [def-inverse-kazhdan-lusztig-polynomials, thm-r-polynomial-recursion-and-degree-bounds, lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties, lem-bruhat-order-basic-properties-for-permutations]
 dependency_level: 7
 justified_by: []
 aliases: []
@@ -18,16 +20,13 @@ sources:
     - title: "G. Lusztig, Hecke Algebras with Unequal Parameters, revised version arXiv:math/0208154v2 — §10.1–10.2: the inverse chain formula, inverse-matrix identities, and signed convention; §10.7: the dual-basis interpretation."
       url: "https://arxiv.org/pdf/math/0208154"
       locator: "§10.1–10.2, printed pp. 46–47, and §10.7, printed p. 48; the chain definition, matrix argument, sign convention, and dual-basis calculation were read in full, including a visual check of printed p. 47."
-verification:
-  audited: "2026-10-08"
-  precheck: pass
 ---
 
 ## Facts & Assumptions
 
 **Given:** $n\ge1$ and the finite standard and Kazhdan–Lusztig bases of $H_v(n)$.
 
-[F1] Bar-duality gives $P=R\bar P$, and $R\bar R=\bar R R=I$ ([[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]], [[thm-r-polynomial-recursion-and-degree-bounds]]).
+[F1] Bar-duality gives $P=R\bar P$, and $R\bar R=\bar R R=I$ ([[lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties]], [[thm-r-polynomial-recursion-and-degree-bounds]]).
 
 [F2] The chain-defined matrix $Q'$ is the two-sided inverse of $P$, and the classical sign matrix $S$ gives $Q=S Q'S$ ([[def-inverse-kazhdan-lusztig-polynomials]]).
 
@@ -35,7 +34,7 @@ verification:
 
 ## Statement
 
-Let $P=(p_{x,w})$, $Q'=(q'_{x,w})$ and $R=(r_{x,y})$ be the triangular matrices of [[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]], [[def-inverse-kazhdan-lusztig-polynomials]] and [[thm-r-polynomial-recursion-and-degree-bounds]]. Then (a) $P=R\bar P$, $\bar P=\bar RP$, and $R\bar R=\bar RR=1$; (b) $Q'P=PQ'=1$, and the inversion formulas $$\overline{q'_{x,w}}=\sum_{x\le z\le w}q'_{x,z}r_{z,w},\qquad \overline{q_{x,w}}=\sum_{x\le z\le w}q_{x,z}\overline{r_{z,w}}$$ hold, i.e. $\bar Q'=Q'R$ and $\bar Q=Q\bar R$; (c) for the dual basis $D_x(\underline H_w)=\delta_{x,w}$ from [[def-inverse-kazhdan-lusztig-polynomials]], $D_x(H_w)=q'_{x,w}$. The inversion is proved from the bar-duality relations alone (no finite case check).
+Let $P=(p_{x,w})$, $Q'=(q'_{x,w})$ and $R=(r_{x,y})$ be the triangular matrices of [[lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties]], [[def-inverse-kazhdan-lusztig-polynomials]] and [[thm-r-polynomial-recursion-and-degree-bounds]]. Then (a) $P=R\bar P$, $\bar P=\bar RP$, and $R\bar R=\bar RR=1$; (b) $Q'P=PQ'=1$, and the inversion formulas $$\overline{q'_{x,w}}=\sum_{x\le z\le w}q'_{x,z}r_{z,w},\qquad \overline{q_{x,w}}=\sum_{x\le z\le w}q_{x,z}\overline{r_{z,w}}$$ hold, i.e. $\bar Q'=Q'R$ and $\bar Q=Q\bar R$; (c) for the dual basis $D_x(\underline H_w)=\delta_{x,w}$ from [[def-inverse-kazhdan-lusztig-polynomials]], $D_x(H_w)=q'_{x,w}$. The inversion is proved from the bar-duality relations alone (no finite case check).
 
 ## Proof
 

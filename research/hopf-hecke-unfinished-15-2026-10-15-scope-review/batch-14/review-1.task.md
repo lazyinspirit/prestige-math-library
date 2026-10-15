@@ -1,0 +1,14 @@
+# Batch 14: review 1
+
+Run: hopf-hecke-unfinished-15-2026-10-15
+Batch: 14
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: cyclotomic-murphy-bases-and-cellular-module-constructions, cyclotomic-murphy-bases-and-cellular-module-constructions-examples
+Items: def-hh-cell-datum-dominance-and-cell-ideals, lem-hh-cyclotomic-anti-involution-fixes-generators, def-hh-cyclotomic-murphy-elements, lem-hh-type-a-garnir-straightening-and-murphy-cell-law, lem-hh-type-a-murphy-strong-tableau-straightening, lem-hh-componentwise-initial-row-straightening, lem-hh-cyclotomic-component-shift-and-dominance-ideals, thm-hh-cyclotomic-murphy-basis-and-cellularity, thm-hh-cell-modules-forms-and-radicals, thm-hh-cellular-simple-module-classification-over-a-field, ex-hh-rank-one-cyclotomic-cell-modules-and-forms, ex-hh-type-a-rank-two-cell-module-specialization
+Consolidated findings: [{"id":"lem-hh-type-a-garnir-straightening-and-murphy-cell-law","type":"local","reason":"The straightening arguments use d(t) for row-standard composition or multicomposition tableaux, and Step 4.1 also uses d(g) for a nonstandard Garnir tableau. The cited Murphy definition defines d only for standard multipartition tableaux. Define the row-filled composition tableau and the unique permutation d_alpha(t) for any bijective filling under the stated right action; standardness is needed only for the minimal-representative property. This convention is also needed in lem-hh-type-a-murphy-strong-tableau-straightening, lem-hh-componentwise-initial-row-straightening and Step 3.1 of lem-hh-cyclotomic-component-shift-and-dominance-ideals. Keep the helper local to these assigned sources; the published Murphy definition need not change."}]
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

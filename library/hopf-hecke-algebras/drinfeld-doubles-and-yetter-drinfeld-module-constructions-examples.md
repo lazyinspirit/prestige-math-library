@@ -1,11 +1,14 @@
 ---
 page: drinfeld-doubles-and-yetter-drinfeld-module-constructions-examples
 title: "Drinfeld Doubles and Yetter–Drinfeld Module Constructions — Examples"
-status: published
+status: draft
 items: []
-examples: []
+examples:
+  - cex-full-dual-of-infinite-group-algebra-has-no-algebraic-coproduct
+  - ex-drinfeld-double-of-a-finite-group
+  - ex-a-nonabelian-double-has-noncommutative-cross-relations
 ---
 
-Construct D(kG) on basis δ_g⊗h for a finite group, compute its multiplication, canonical R and braided modules. Use a nonabelian finite group to distinguish genuinely noncommutative data. Infinite doubles require a restricted pairing and remain outside this finite construction.
+The infinite-group-algebra boundary case first shows why transposing multiplication on the full linear dual can leave the algebraic tensor product; the finite dual is a separate construction. For a finite group $G$, the examples then compute the basis multiplication, coalgebra, antipode, canonical $R$-matrix and the resulting braiding in $D(kG)$. The $S_3$ calculation exhibits noncommuting cross-relations and a braiding different from the flip.
 
-These are planned worked examples and counterexamples for [[drinfeld-doubles-and-yetter-drinfeld-module-constructions]], with empty item lists pending normal authoring and proof review. Each example must calculate from the stated hypotheses, and each counterexample must verify both its premises and the failed conclusion. This companion is a dependency leaf and supplies no theorem to another page.
+These checks accompany [[drinfeld-doubles-and-yetter-drinfeld-module-constructions]]. They use the finite-dimensional formulas there and keep the infinite-dimensional limitation explicit.

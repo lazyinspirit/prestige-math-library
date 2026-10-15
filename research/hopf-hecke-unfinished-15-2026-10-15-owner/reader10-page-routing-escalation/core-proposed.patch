@@ -1,0 +1,460 @@
+--- a/tools/step3-scope.mjs
++++ b/tools/step3-scope.mjs
+@@ -31,6 +31,7 @@
+ import { partialReaderFindings } from './step3-owner-partial-reader-repairs.mjs';
+ import { unboundReaderObservations } from './step3-owner-unbound-reader-observations.mjs';
+ import { loadOwnerPageRepairs, ownerPageFindingRepair } from './step3-owner-post-reader-page-repairs.mjs';
++import { loadRequiredPageRoutes, requiredPageCarrier } from './step3-owner-required-page-routes.mjs';
+ import { sourceIdenticalAcceptanceContinuity } from './step3-owner-source-identical-continuity.mjs';
+ 
+ const argv = process.argv.slice(2);
+@@ -256,6 +257,8 @@
+ }
+ 
+ function currentDecisionCarrier(decision, target, live) {
++  if (target?.owner_required_page_route) return requiredPageCarrier(ROOT, run,
++    String(target.obligation).split(':')[1], target);
+   if (target?.subject_type === 'in-run-dependency') {
+     return producerCarrier(target.id, target.producer_batch);
+   }
+@@ -642,6 +645,7 @@
+     producer_batch: _producer, dependency_path: _path,
+     producer_carrier_at_split: _current, producer_pre_snapshot: _historical,
+     observation_basis: _basis, owner_page_repair: _ownerPageRepair,
++    owner_required_page_route: _requiredPageRoute,
+     owner_partial_reader_repair: _ownerPartialReaderRepair,
+     owner_unbound_reader_observation: _ownerUnboundReaderObservation, ...row } = finding;
+   if (refuter && finding.subject_type === 'in-run-dependency') {
+@@ -706,6 +710,10 @@
+       || hashValue(sealed.hashes) !== hashValue(live.items)
+       || hashValue(sealed.page_hashes) !== hashValue(live.pages))
+       fail(`step3-scope: batch ${batch} changed after the passed Step-3a gate`);
++    const scope = readJson(scopePath(batch), `batch ${batch} scope`);
++    const routes = loadRequiredPageRoutes(ROOT, run, batch);
++    for (const finding of scope.reader_findings ?? []) if (finding.owner_required_page_route
++      || routes.has(finding.obligation)) requiredPageCarrier(ROOT, run, batch, finding);
+     count += Object.keys(live.items).length;
+   }
+   console.log(`step3-scope: verified ${count} item carrier(s) in ${batches.length} sealed post-3a batch(es)`);
+@@ -842,13 +850,23 @@
+   const allRunIds = new Set(Object.values(manifestItems()).flat());
+   const published = publishedDependencies(derived.manifestPost, allRunIds);
+   const inRun = findingDependencies(batch, derived.manifestPost, Array.isArray(readerReport.findings) ? readerReport.findings : []);
+-  const readerAllowed = new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys()]);
++  const requiredPages = loadRequiredPageRoutes(ROOT, run, batch);
++  const readerAllowed = new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys(),
++    ...[...requiredPages.values()].map(r => r.entry.page)]);
+   const readerFindings = normalizeFindings(Array.isArray(readerReport.findings) ? readerReport.findings : [],
+     batch, readerAllowed, readerError, 'reader');
+   const live = liveFingerprints(batch);
+   const ownerPages = loadOwnerPageRepairs(ROOT, run, batch);
+   const partialFindings = partialReaderFindings(ROOT, run, batch);
+   for (const finding of readerFindings) {
++    const requiredPage = requiredPages.get(finding.obligation);
++    if (requiredPage) {
++      // Retain the native subject label and finding; only the carrier route changes.
++      finding.owner_required_page_route = requiredPage.binding;
++      finding.observed_sha256 = null; finding.observation_basis = 'unbound';
++      requiredPageCarrier(ROOT, run, batch, finding);
++      continue;
++    }
+     const expectedType = derived.manifestPost.includes(finding.id) ? 'in-flight-item'
+       : derived.pageManifestPost.includes(finding.id) ? 'page'
+         : inRun.has(finding.id) ? 'in-run-dependency' : 'published-dependency';
+@@ -937,6 +955,9 @@
+ 
+   const openedSet = new Set(opened);
+   const live = liveFingerprints(batch);
++  const requiredPages = loadRequiredPageRoutes(ROOT, run, batch);
++  for (const finding of scope.reader_findings ?? []) if (finding.owner_required_page_route
++    || requiredPages.has(finding.obligation)) requiredPageCarrier(ROOT, run, batch, finding);
+   const inRun = findingDependencies(batch, scope.manifest_post ?? [], scope.reader_findings ?? []);
+   for (const finding of scope.reader_findings ?? []) if (finding.subject_type === 'in-run-dependency') {
+     validateInRunFinding(finding, batch, inRun, error);
+@@ -1105,7 +1126,14 @@
+     let ownerPages = [];
+     try { ownerPages = loadOwnerPageRepairs(ROOT, run, batch, { requireCurrent: false }); }
+     catch (cause) { error('owner-page-authority-invalid', `batch ${batch}: ${cause.message}`); }
++    let requiredPages = new Map();
++    try { requiredPages = loadRequiredPageRoutes(ROOT, run, batch); }
++    catch (cause) { error('required-page-authority-invalid', `batch ${batch}: ${cause.message}`); }
+     for (const finding of scope.reader_findings ?? []) {
++      if (finding.owner_required_page_route || requiredPages.has(finding.obligation)) {
++        try { requiredPageCarrier(ROOT, run, batch, finding); }
++        catch (cause) { error('required-page-authority-invalid', `${finding.obligation}: ${cause.message}`); }
++      }
+       const ownerPage = ownerPageFindingRepair(ownerPages, batch, finding);
+       if (!ownerPage && finding.owner_page_repair) error('owner-page-authority-invalid', `${finding.obligation} has no matching frozen page authority`);
+       if (ownerPage) {
+@@ -1137,11 +1165,16 @@
+           const inRun = findingDependencies(batch, derived.manifestPost,
+             [...(Array.isArray(report.findings) ? report.findings : []), ...(scope.reader_findings ?? [])], manifests);
+           const normalized = normalizeFindings(Array.isArray(report.findings) ? report.findings : [], batch,
+-            new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys()]), reportError, 'reader');
++            new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys(),
++              ...[...requiredPages.values()].map(r => r.entry.page)]), reportError, 'reader');
+           const stored = (scope.reader_findings ?? []).map(finding => reportOnlyFinding(finding));
+           if (JSON.stringify(normalized) !== JSON.stringify(stored)) reportError('findings no longer match the routed obligations');
+           const partialFindings = partialReaderFindings(ROOT, run, batch);
+           for (const finding of scope.reader_findings ?? []) {
++            if (finding.owner_required_page_route || requiredPages.has(finding.obligation)) {
++              try { requiredPageCarrier(ROOT, run, batch, finding); } catch (cause) { reportError(cause.message); }
++              continue;
++            }
+             if (finding.owner_partial_reader_repair
+               && hashValue(finding.owner_partial_reader_repair) !== hashValue(partialFindings.get(finding.obligation)))
+               reportError(`${finding.obligation} lost its exact partial-reader routing authority`);
+@@ -1409,9 +1442,15 @@
+         }
+         if (!allowed.includes(decision.verdict)) error('decision-verdict', `${decision.obligation} has invalid verdict ${decision.verdict}`);
+         if (typeof decision.evidence !== 'string' || !decision.evidence.trim()) error('decision-evidence', `${decision.obligation} has no evidence`);
+-        if (target?.owner_page_repair && (decision.historical_delta_unknown !== true
++        if ((target?.owner_page_repair || target?.owner_required_page_route) && (decision.historical_delta_unknown !== true
+           || typeof decision.owner_resolution !== 'string' || decision.owner_resolution.trim().length < 40)) {
+           error('owner-page-observation-unbound', `${decision.obligation} needs explicit owner resolution of the unbound original reader observation`);
++        }
++        if (target?.owner_required_page_route) {
++          try {
++            if (decision.subject_sha256 !== hashValue(currentDecisionCarrier(decision, target, null)))
++              error('required-page-decision-stale', `${decision.obligation} must seal its actual current published page`);
++          } catch (cause) { error('required-page-authority-invalid', cause.message); }
+         }
+         const accepted = target?.direct && decision.verdict === 'accepted';
+         const cleanChange = decision.verdict === 'reviewed_no_defect';
+--- a/tools/step3-close.mjs
++++ b/tools/step3-close.mjs
+@@ -7,6 +7,7 @@
+ import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+ import { join, resolve } from 'node:path';
+ import { itemHashGuard } from './item-hash.mjs';
++import { requiredPageClosureEvidence } from './step3-owner-required-page-routes.mjs';
+ import { isPublishedItem } from './published-repair-policy.mjs';
+ 
+ const argv = process.argv.slice(2);
+@@ -37,9 +38,12 @@
+   || (name.startsWith(`${run}-alpha-`) && name.endsWith('-3a-decisions.json'))
+   || version === 2 && [ `${run}-alpha-3b.md`, `${run}-cross-group-edges.json`,
+     `${run}-3b-verdicts.jsonl` ].includes(name)).sort();
+-const artifactHashes = (version = 3) => Object.fromEntries(artifactNames(version).map((name) => [
+-  `research/${name}`, sha256(readFileSync(R('research', name))),
+-]));
++const artifactHashes = (version = 3) => ({
++  ...Object.fromEntries(artifactNames(version).map((name) => [
++    `research/${name}`, sha256(readFileSync(R('research', name))),
++  ])),
++  ...(version === 3 ? requiredPageClosureEvidence(root, run) : {}),
++});
+ const jsonl = (path) => existsSync(path)
+   ? readFileSync(path, 'utf8').split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line)) : [];
+ const canonicalRows = (rows, key) => [...rows].sort((left, right) =>
+@@ -76,7 +80,7 @@
+     errors.push('wrong version, run, or status');
+   }
+   const currentArtifacts = artifactHashes(receipt.version);
+-  if (JSON.stringify(Object.keys(currentArtifacts)) !== JSON.stringify(Object.keys(receipt.artifacts ?? {}).sort())) {
++  if (JSON.stringify(Object.keys(currentArtifacts).sort()) !== JSON.stringify(Object.keys(receipt.artifacts ?? {}).sort())) {
+     errors.push('the exact Step-3 artifact set changed');
+   }
+   for (const [relative, expected] of Object.entries(receipt.artifacts ?? {})) {
+--- /dev/null
++++ b/tools/step3-owner-required-page-routes.mjs
+@@ -0,0 +1,122 @@
++// Exact owner routing of a native finding about a published required page.
++// The original finding's subject label remains historical; this grants no
++// frontier ownership, edit permission, reader observation or acceptance.
++import { createHash } from 'node:crypto';
++import { readFileSync, readdirSync, lstatSync, existsSync } from 'node:fs';
++import { resolve, relative, isAbsolute } from 'node:path';
++import { split, yaml } from './pathway-lib.mjs';
++import { itemHashGuard } from './item-hash.mjs';
++const sha = x => createHash('sha256').update(x).digest('hex');
++const canonical = x => Array.isArray(x) ? x.map(canonical) : x && typeof x === 'object'
++  ? Object.fromEntries(Object.keys(x).sort().map(k => [k,canonical(x[k])])) : x;
++export const requiredPageHash = x => sha(JSON.stringify(canonical(x)));
++const assert = (x,m) => { if (!x) throw Error(`required page route: ${m}`); };
++const safe = x => /^[a-zA-Z0-9_-]+$/.test(String(x ?? ''));
++const id = x => /^[a-z][a-z0-9-]*$/.test(String(x ?? ''));
++const policy = 'owner-step3-required-published-page-route-v1';
++function file(root,p) {
++  assert(typeof p === 'string' && !isAbsolute(p) && !p.includes('\\'), 'invalid relative path');
++  const full=resolve(root,p),rel=relative(resolve(root),full);
++  assert(rel && !rel.startsWith('..') && !isAbsolute(rel), 'escaping path');
++  let cursor=resolve(root); for(const part of rel.split('/')) {cursor=resolve(cursor,part);assert(!lstatSync(cursor).isSymbolicLink(),'symlink path');}
++  assert(lstatSync(full).isFile(),'nonregular carrier');return full;
++}
++const bytes=(root,p)=>readFileSync(file(root,p));
++const json=(root,p)=>JSON.parse(bytes(root,p));
++function ref(root,r) {assert(r && /^[a-f0-9]{64}$/.test(r.sha256 ?? ''),'missing reference');const b=bytes(root,r.path);assert(sha(b)===r.sha256,`changed ${r.path}`);return b;}
++const front = b => yaml().parse(split(String(b)).fm);
++export function validateRequiredPageRoute(root,run,e,receipt) {
++  assert(safe(run) && e.version===1 && e.policy===policy && e.run===run && e.owner_identity==='/root'
++    && e.mathematical_acceptance===false && e.historical_page_observation_bound===false,'invalid authority');
++  assert(/^[1-9]\d*$/.test(e.batch ?? '') && Number.isSafeInteger(e.index) && e.index>0 && id(e.page)
++    && id(e.origin_page) && id(e.consumer_id),'invalid subject');
++  assert(e.observation_basis==='unbound-native-reader; owner-current-before capture only','invented observation');
++  assert(e.reviewed===true && typeof e.reason==='string' && e.reason.trim().length>=80,'missing focused owner review');
++  const reportPath=`research/${run}-reader-findings-${e.batch}.json`, nativePrefix=`research/${run}-dispatch/reader-reader-${e.batch}`;
++  assert(e.findings.path===reportPath && e.report.path===`research/${run}-reader-${e.batch}.md`,'wrong native report');
++  const findings=JSON.parse(ref(root,e.findings)),report=ref(root,e.report).toString();
++  assert([e.batch,`${run}-batch-${e.batch}`].includes(String(findings.batch)) && Array.isArray(findings.findings),'wrong findings batch');
++  const finding=findings.findings[e.index-1];
++  assert(finding && finding.id===e.page && finding.consumer_id===e.consumer_id && finding.subject_type==='published-dependency'
++    && finding.observed_source==null && requiredPageHash(finding)===e.finding_sha256,'changed original finding');
++  assert(report.includes(e.page) && report.includes(e.consumer_id),'report lacks original page/consumer');
++  assert(new RegExp(`^${nativePrefix}\\.attempt-[1-9]\\d*\\.result\\.json$`).test(e.native_result.path),'wrong native attempt');
++  const result=JSON.parse(ref(root,e.native_result));
++  assert(result.run===run && result.role==='reader' && result.label===`reader-${e.batch}` && result.ok===true
++    && result.exit_code===0 && result.process_exit_code===0 && result.timed_out!==true
++    && result.covers?.map(String).includes(e.batch) && Number.isFinite(Date.parse(result.ended_at))
++    && Date.parse(e.at)>=Date.parse(result.ended_at),'reader did not genuinely succeed');
++  assert(e.prompt.path===e.native_result.path.replace(/\.result\.json$/,'.prompt.md')
++    && String(result.prompt).endsWith('/'+e.prompt.path),'wrong native prompt'); ref(root,e.prompt);
++  // Require the genuine structured native completion, not an owner-created finding.
++  const nativeDoc=JSON.parse(result.tail);assert(requiredPageHash(nativeDoc)===requiredPageHash(findings),'native completion differs');
++  for(const label of ['pre','post']) {
++    const r=e[`${label}_snapshot`];assert(r.path===`research/${run}-step3-hash-${e.batch}-${label}.json`,'wrong snapshot path');
++    const s=JSON.parse(ref(root,r));assert(s.version===2 && s.run===run && String(s.batch)===e.batch && s.label===label
++      && !s.page_manifest?.includes(e.page),'invalid foreign page snapshot');
++  }
++  assert(e.manifest.path===`research/${run}-batch-${e.batch}.pages.json`,'wrong manifest');
++  const manifest=JSON.parse(ref(root,e.manifest));const rows=Array.isArray(manifest)?manifest:manifest.pages;
++  const origin=rows.filter(p=>p.id===e.origin_page);assert(origin.length===1 && origin[0].requires?.includes(e.page)
++    && origin[0].items?.some(x=>(typeof x==='string'?x:x.id)===e.consumer_id),'page not required by assigned consumer home');
++  for(const n of readdirSync(resolve(root,'research')).filter(n=>n.startsWith(`${run}-batch-`) && /-batch-\d+\.pages\.json$/.test(n))) {
++    const raw=json(root,`research/${n}`);assert(!(Array.isArray(raw)?raw:raw.pages).some(p=>p.id===e.page),'foreign page acquired run ownership');
++  }
++  assert(/^library\/[a-z0-9-]+\/[a-z0-9-]+\.md$/.test(e.current_path)
++    && e.current_path.endsWith('/'+e.page+'.md'),'wrong published page path');
++  const homes=readdirSync(resolve(root,'library'),{withFileTypes:true}).filter(d=>d.isDirectory()
++    && existsSync(resolve(root,'library',d.name,e.page+'.md')));
++  assert(homes.length===1 && e.current_path===`library/${homes[0].name}/${e.page}.md`,'ambiguous physical page home');
++  const before=ref(root,e.before),after=ref(root,e.after),beforeFm=front(before),afterFm=front(after);
++  assert(beforeFm.page===e.page && beforeFm.status==='published' && requiredPageHash(beforeFm)===requiredPageHash(afterFm),'changed page metadata');
++  assert(Array.isArray(e.edits) && e.edits.length && e.edits.length<=2,'exact small prose edits required');
++  let reconstructed=before.toString(); const bodyStart=reconstructed.indexOf('\n---',4)+4;
++  for(const edit of e.edits) {assert(typeof edit.before==='string' && edit.before && typeof edit.after==='string' && edit.after
++    && edit.before!==edit.after && reconstructed.split(edit.before).length===2
++    && reconstructed.indexOf(edit.before)>bodyStart,'ambiguous or nonprose edit');reconstructed=reconstructed.replace(edit.before,edit.after);}
++  assert(sha(reconstructed)===sha(after) && sha(before)!==sha(after),'unaccounted source change');
++  assert(bytes(root,e.current_path).equals(after),'current page changed');
++  const pageItems=[...(afterFm.items ?? []),...(afterFm.examples ?? [])];assert(pageItems.length && new Set(pageItems).size===pageItems.length,'invalid page inventory');
++  for(const item of pageItems) {assert(id(item),'invalid page item');const meta=front(bytes(root,`items/${item}.md`));
++    assert(meta.id===item && meta.status==='published','page contains unpublished or misidentified item');}
++  const path=e.dependency_path;assert(Array.isArray(path) && path.length>=2 && path[0]?.id===e.consumer_id
++    && pageItems.includes(path.at(-1)?.id) && new Set(path.map(x=>x.id)).size===path.length,'invalid dependency path');
++  for(let i=0;i<path.length;i++) {const node=path[i];assert(id(node.id),'invalid path item');const source=bytes(root,`items/${node.id}.md`).toString();
++    assert(front(source).id===node.id && itemHashGuard(source)===node.guard_sha256,'changed logical supplier context');
++    if(i+1<path.length)assert(front(source).deps?.includes(path[i+1].id),'missing actual dependency edge');
++    else assert(front(source).status==='published','terminal page item not published');}
++  const review=ref(root,e.review).toString();assert(review.includes(run) && review.includes(e.page) && review.includes(e.consumer_id)
++    && review.includes(e.before.sha256) && review.includes(e.after.sha256),'owner review lacks exact guards');
++  return {entry:e, binding:receipt, original:finding, obligation:`reader:${e.batch}:${e.index}`};
++}
++export function loadRequiredPageRoutes(root,run,batch) {
++  assert(safe(run) && /^[1-9]\d*$/.test(String(batch)),'invalid routing identity');
++  const p=`research/${run}-step3-owner-required-page-routes.json`;if(!existsSync(resolve(root,p)))return new Map();
++  const raw=bytes(root,p),doc=JSON.parse(raw);assert(doc.version===1 && doc.run===run && doc.policy===policy && Array.isArray(doc.routes),'wrong route registry');
++  const all=new Set(),out=new Map();for(const e of doc.routes) {const key=`reader:${e.batch}:${e.index}`;assert(!all.has(key),'duplicate obligation');all.add(key);
++    if(e.batch!==String(batch))continue;const route=validateRequiredPageRoute(root,run,e,{path:p,entry_sha256:requiredPageHash(e)});out.set(key,route);}
++  return out;
++}
++export function requiredPageCarrier(root,run,batch,finding) {
++  const route=loadRequiredPageRoutes(root,run,batch).get(finding.obligation);
++  assert(route && finding.id===route.entry.page && finding.consumer_id===route.entry.consumer_id
++    && finding.subject_type==='published-dependency' && requiredPageHash(finding.owner_required_page_route)===requiredPageHash(route.binding)
++    && finding.observed_sha256===null && finding.observation_basis==='unbound' && finding.pre_sha256===undefined,'lost exact foreign-page route');
++  return {file_sha256:sha(bytes(root,route.entry.current_path)),owner_required_page_route:route.binding};
++}
++
++// Freeze only this route's authenticated historical inputs. Current mathematical
++// sources retain ordinary later-stage currency rules; the after archive is the
++// immutable corrected page carrier. Existing owner registries are unaffected.
++export function requiredPageClosureEvidence(root,run) {
++  assert(safe(run),'invalid run');const p=`research/${run}-step3-owner-required-page-routes.json`;
++  if(!existsSync(resolve(root,p)))return {};
++  const raw=bytes(root,p),doc=JSON.parse(raw);
++  assert(doc.version===1 && doc.run===run && doc.policy===policy && Array.isArray(doc.routes),'wrong closure registry');
++  const out={[p]:sha(raw)};
++  for(const e of doc.routes) for(const key of ['findings','report','native_result','prompt','pre_snapshot','post_snapshot','manifest','before','after','review']) {
++    const r=e[key];assert(typeof r?.path==='string' && r.path.startsWith('research/'),'invalid historical closure path');
++    ref(root,r);assert(out[r.path]===undefined || out[r.path]===r.sha256,'ambiguous closure reference');out[r.path]=r.sha256;
++  }
++  return out;
++}
+--- /dev/null
++++ b/tools/step3-owner-required-page-routes.test.mjs
+@@ -0,0 +1,144 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, copyFileSync, symlinkSync, readdirSync } from 'node:fs';
++import { tmpdir } from 'node:os';
++import { join, resolve } from 'node:path';
++import { createHash } from 'node:crypto';
++import { pathToFileURL, fileURLToPath } from 'node:url';
++const repo=resolve(process.env.HH_PROPOSAL_REPO ?? process.cwd());
++const proposal=resolve(process.env.HH_PROPOSAL_DIR ?? fileURLToPath(new URL('..', import.meta.url)));
++const toolRoot=mkdtempSync(join(tmpdir(),'required-page-code-'));
++for(const name of ['pathway-lib.mjs','item-hash.mjs','paths.mjs'])copyFileSync(join(repo,'tools',name),join(toolRoot,name));
++copyFileSync(join(proposal,'tools/step3-owner-required-page-routes.mjs'),join(toolRoot,'step3-owner-required-page-routes.mjs'));
++process.env.PRESTIGE_MATH_REPO=repo;
++const {loadRequiredPageRoutes,requiredPageCarrier,requiredPageHash,requiredPageClosureEvidence}=await import(pathToFileURL(join(toolRoot,'step3-owner-required-page-routes.mjs')));
++const {itemHashGuard}=await import(pathToFileURL(join(toolRoot,'item-hash.mjs')));
++const sha=x=>createHash('sha256').update(x).digest('hex');
++function fixture() {
++ const root=mkdtempSync(join(tmpdir(),'required-page-fixture-'));const put=(p,v)=>{mkdirSync(join(root,p,'..'),{recursive:true});writeFileSync(join(root,p),typeof v==='string'?v:JSON.stringify(v,null,2)+'\n');};
++ const link=p=>({path:p,sha256:sha(readFileSync(join(root,p)))});
++ const before='---\npage: outside\nstatus: published\nitems: [lem-supplier]\nexamples: []\n---\n\nDraft status claim.\n';const after=before.replace('Draft status claim.','Published status claim.');
++ put('library/test/outside.md',after);put('research/before.md',before);put('research/after.md',after);
++ const consumer='---\nid: thm-consumer\nstatus: draft\ndeps: [lem-supplier]\n---\n\n## Statement\nConsumer.\n';const supplier='---\nid: lem-supplier\nstatus: published\ndeps: []\n---\n\n## Statement\nSupplier.\n';
++ put('items/thm-consumer.md',consumer);put('items/lem-supplier.md',supplier);
++ put('research/r-batch-1.pages.json',[{id:'owned',category:'test',requires:['outside'],items:[{id:'thm-consumer'}]}]);
++ const finding={id:'outside',subject_type:'published-dependency',consumer_id:'thm-consumer',observed_source:null,location:'Page prose',defect:'false-claim',severity:'fatal',evidence:'The page incorrectly says draft.'};const doc={batch:'1',findings:[finding],coverage_note:'Fixture native reader opened actual assigned files.'};
++ put('research/r-reader-findings-1.json',doc);put('research/r-reader-1.md','Fixture reader r outside thm-consumer observes stale page prose.');
++ put('research/r-dispatch/reader-reader-1.attempt-1.prompt.md','Fixture reader assignment, outside required by owned page.');
++ put('research/r-dispatch/reader-reader-1.attempt-1.result.json',{run:'r',role:'reader',label:'reader-1',covers:['1'],ok:true,exit_code:0,process_exit_code:0,ended_at:'2020-01-01T00:00:00Z',prompt:join(root,'research/r-dispatch/reader-reader-1.attempt-1.prompt.md'),tail:JSON.stringify(doc)});
++ for(const label of ['pre','post'])put(`research/r-step3-hash-1-${label}.json`,{version:2,run:'r',batch:'1',label,page_manifest:['owned']});
++ put('research/review.md',`Fixture focused owner review r outside thm-consumer ${sha(before)} ${sha(after)}; status-only correction; no mathematics changes; original full-byte observation unknown.`);
++ const entry={version:1,policy:'owner-step3-required-published-page-route-v1',run:'r',owner_identity:'/root',mathematical_acceptance:false,historical_page_observation_bound:false,observation_basis:'unbound-native-reader; owner-current-before capture only',batch:'1',index:1,page:'outside',origin_page:'owned',consumer_id:'thm-consumer',reviewed:true,reason:'Fixture owner checked exact status prose against the actual published page inventory and current direct supplier dependency; no historical reader page bytes exist.',at:'2020-01-02T00:00:00Z',findings:link('research/r-reader-findings-1.json'),report:link('research/r-reader-1.md'),native_result:link('research/r-dispatch/reader-reader-1.attempt-1.result.json'),prompt:link('research/r-dispatch/reader-reader-1.attempt-1.prompt.md'),pre_snapshot:link('research/r-step3-hash-1-pre.json'),post_snapshot:link('research/r-step3-hash-1-post.json'),manifest:link('research/r-batch-1.pages.json'),finding_sha256:requiredPageHash(finding),current_path:'library/test/outside.md',before:link('research/before.md'),after:link('research/after.md'),edits:[{before:'Draft status claim.',after:'Published status claim.'}],dependency_path:[{id:'thm-consumer',guard_sha256:itemHashGuard(consumer)},{id:'lem-supplier',guard_sha256:itemHashGuard(supplier)}],review:link('research/review.md')};
++ const save=()=>put('research/r-step3-owner-required-page-routes.json',{version:1,run:'r',policy:entry.policy,routes:[entry]});save();
++ const normalized=()=>{const route=loadRequiredPageRoutes(root,'r','1').get('reader:1:1');const {observed_source,...original}=finding;return {...original,obligation:'reader:1:1',owner_required_page_route:route.binding,observed_sha256:null,observation_basis:'unbound'};};
++ return {root,put,link,entry,save,finding,normalized,close:()=>rmSync(root,{recursive:true,force:true})};
++}
++test('genuine foreign page route preserves original finding and has actual page carrier, no item carrier',()=>{const f=fixture();try{const original=readFileSync(join(f.root,'research/r-reader-findings-1.json'));const routes=loadRequiredPageRoutes(f.root,'r','1');assert.equal(routes.size,1);assert.equal(routes.get('reader:1:1').original.subject_type,'published-dependency');const carrier=requiredPageCarrier(f.root,'r','1',f.normalized());assert.ok(carrier.file_sha256);assert.equal(carrier.item_sha256,undefined);assert.deepEqual(readFileSync(join(f.root,'research/r-reader-findings-1.json')),original);assert.deepEqual(loadRequiredPageRoutes(f.root,'r','2'),new Map());}finally{f.close();}});
++for(const [name,change] of [
++ ['nonowner',f=>f.entry.owner_identity='/root/worker'],['invented review coverage',f=>f.entry.mathematical_acceptance=true],['invented observation',f=>f.entry.historical_page_observation_bound=true],['no review',f=>f.entry.reviewed=false],['wrong page',f=>f.entry.page='other'],['wrong consumer',f=>f.entry.consumer_id='other'],['wrong batch evidence',f=>f.entry.manifest.path='research/r-batch-2.pages.json'],['wrong finding hash',f=>f.entry.finding_sha256='a'.repeat(64)],['unknown original index',f=>f.entry.index=2],['ambiguous edit',f=>f.entry.edits=[{before:'status',after:'condition'}]],['unsupported extra edit',f=>f.entry.edits=[]],['unbound prompt',f=>f.put(f.entry.prompt.path,'changed prompt')],['unbound native report',f=>f.put(f.entry.report.path,'changed report')],['rewritten original finding',f=>f.put(f.entry.findings.path,{batch:'1',findings:[]})],['changed pre snapshot',f=>f.put(f.entry.pre_snapshot.path,{})],['changed actual page',f=>f.put(f.entry.current_path,'Changed current source')],['unpublished page item',f=>f.put('items/lem-supplier.md','---\nid: lem-supplier\nstatus: draft\ndeps: []\n---\n')],['consumer changed',f=>f.put('items/thm-consumer.md','---\nid: thm-consumer\nstatus: draft\ndeps: []\n---\n')],['duplicate physical page',f=>f.put('library/other/outside.md',readFileSync(join(f.root,'library/test/outside.md'),'utf8'))],['misidentified supplier',f=>f.put('items/lem-supplier.md','---\nid: lem-other\nstatus: published\ndeps: []\n---\n')],['wrong dependency path',f=>f.entry.dependency_path.pop()],['page added to run scope',f=>f.put('research/r-batch-2.pages.json',[{id:'outside',items:[]}])],['changed manifest requires',f=>{f.put(f.entry.manifest.path,[{id:'owned',requires:[],items:[{id:'thm-consumer'}]}]);f.entry.manifest=f.link(f.entry.manifest.path);}],['malformed native attempt',f=>{f.put(f.entry.native_result.path,{run:'r',ok:true});f.entry.native_result=f.link(f.entry.native_result.path);}],['forged native completion',f=>{const x=JSON.parse(readFileSync(join(f.root,f.entry.native_result.path)));x.tail=JSON.stringify({batch:'1',findings:[]});f.put(f.entry.native_result.path,x);f.entry.native_result=f.link(f.entry.native_result.path);}]
++])test(`fails closed: ${name}`,()=>{const f=fixture();try{change(f);f.save();assert.throws(()=>loadRequiredPageRoutes(f.root,'r','1'));}finally{f.close();}});
++test('no registry cannot fabricate outside authority',()=>{const f=fixture();try{rmSync(join(f.root,'research/r-step3-owner-required-page-routes.json'));assert.equal(loadRequiredPageRoutes(f.root,'r','1').size,0);assert.throws(()=>requiredPageCarrier(f.root,'r','1',{...f.finding,obligation:'reader:1:1'}));}finally{f.close();}});
++test('current route rejects fictitious observation and missing authority annotation',()=>{const f=fixture();try{const n=f.normalized();assert.throws(()=>requiredPageCarrier(f.root,'r','1',{...n,observed_sha256:'a'.repeat(64)}));assert.throws(()=>requiredPageCarrier(f.root,'r','1',{...n,owner_required_page_route:undefined}));assert.throws(()=>requiredPageCarrier(f.root,'r','1',{...n,pre_sha256:'a'.repeat(64)}));}finally{f.close();}});
++test('duplicate entries fail closed',()=>{const f=fixture();try{f.put('research/r-step3-owner-required-page-routes.json',{version:1,run:'r',policy:f.entry.policy,routes:[f.entry,f.entry]});assert.throws(()=>loadRequiredPageRoutes(f.root,'r','1'),/duplicate/);}finally{f.close();}});
++test.after(()=>rmSync(toolRoot,{recursive:true,force:true}));
++
++test('native scope lifecycle retains exact foreign-page reader obligation, independently adjudicates ledger, and seals real page',async()=>{
++ const {spawnSync}=await import('node:child_process');const f=fixture();
++ try {
++  // Copy only Git-tracked tool source, never private state, environment files or logs.
++  const tracked=spawnSync('git',['ls-files','-z','tools'],{cwd:repo,encoding:'utf8'});assert.equal(tracked.status,0);
++  for(const path of tracked.stdout.split('\0').filter(p=>/\.(?:mjs|mts|json)$/.test(p))) {
++    mkdirSync(join(f.root,path,'..'),{recursive:true});copyFileSync(join(repo,path),join(f.root,path));
++  }
++  for(const name of ['step3-owner-required-page-routes.mjs','step3-scope.mjs','step3-close.mjs'])copyFileSync(join(proposal,'tools',name),join(f.root,'tools',name));
++  const run=(...args)=>spawnSync(process.execPath,[join(f.root,'tools/step3-scope.mjs'),...args,'--root',f.root,'--run','r'],{cwd:f.root,encoding:'utf8',env:{...process.env,PRESTIGE_MATH_REPO:repo}});
++  const ok=(...args)=>{const r=run(...args);assert.equal(r.status,0,r.stdout+r.stderr);return r;};
++  f.put('library/test/owned.md','---\npage: owned\nstatus: draft\nitems: [thm-consumer]\nexamples: []\n---\n\nAssigned page.\n');
++  f.put('research/r-alpha-groups.json',[{label:'g',covers:['1']}]);
++  f.put('research/r-batch-1.proof-contracts.json',{version:1,scope:['thm-consumer'],contracts:{'thm-consumer':{}}});
++  ok('hash','--batch','1','--label','pre');ok('hash','--batch','1','--label','post');
++  f.entry.pre_snapshot=f.link(f.entry.pre_snapshot.path);f.entry.post_snapshot=f.link(f.entry.post_snapshot.path);f.save();
++  // A missing authority still produces the original out-of-scope diagnostic.
++  const authority=readFileSync(join(f.root,'research/r-step3-owner-required-page-routes.json'));
++  rmSync(join(f.root,'research/r-step3-owner-required-page-routes.json'));
++  const rejected=run('split','--batch','1');assert.notEqual(rejected.status,0);assert.match(rejected.stderr,/unopened or out-of-scope item outside/);
++  writeFileSync(join(f.root,'research/r-step3-owner-required-page-routes.json'),authority);
++  const original=readFileSync(join(f.root,'research/r-reader-findings-1.json'));
++  ok('post-reader','--batch','1');
++  const frozenPost=readFileSync(join(f.root,'research/r-step3-hash-1-post.json'));
++  ok('post-reader','--batch','1');
++  assert.deepEqual(readFileSync(join(f.root,'research/r-step3-hash-1-post.json')),frozenPost);
++  const scope=JSON.parse(readFileSync(join(f.root,'research/r-step3-scope-1.json')));
++  assert.equal(scope.reader_findings.length,1);assert.equal(scope.reader_findings[0].obligation,'reader:1:1');assert.equal(scope.reader_findings[0].subject_type,'published-dependency');assert.equal(scope.reader_findings[0].observed_sha256,null);
++  assert.ok(!scope.refuter_scope.includes('outside'));assert.ok(!scope.page_manifest_post.includes('outside'));assert.deepEqual(scope.manifest_post,['thm-consumer']);
++  f.put('research/r-refute-1.json',{batch:'1',opened:scope.refuter_scope,not_opened:[],flagged:[],coverage_note:'Fixture independent refuter opens exactly the assigned scope.'});
++  ok('collect','--batch','1');ok('check','--batch','1','--phase','split');
++  f.put('research/defect-ledger.jsonl',JSON.stringify({run:'r',defect_id:'fixture-page-status',subject:'outside',caught_at_stage:'3a-adjudicate',severity:'fatal',disposition:'fixed'})+'\n');
++  const decision={obligation:'reader:1:1',id:'outside',route:'reader',verdict:'confirmed_fatal',defect_ids:['fixture-page-status'],evidence:'Fixture independent Alpha confirms original stale page status and verifies exact owner correction against actual published inventory.',historical_delta_unknown:true,owner_resolution:'Exact current before/after archive binds owner repair; original full-byte native observation remains unknown.'};
++  f.put('research/r-alpha-batch-1-3a-decisions.json',{version:1,run:'r',group:'batch-1',decisions:[decision]});
++  ok('stamp');ok('check','--batch','1','--phase','adjudicate');
++  const stamped=JSON.parse(readFileSync(join(f.root,'research/r-alpha-batch-1-3a-decisions.json')));assert.equal(stamped.decisions[0].subject_sha256,requiredPageHash(requiredPageCarrier(f.root,'r','1',scope.reader_findings[0])));
++  // Routing grants neither ledger closure nor a fabricated independent decision.
++  const ledger=readFileSync(join(f.root,'research/defect-ledger.jsonl'));
++  rmSync(join(f.root,'research/defect-ledger.jsonl'));
++  assert.notEqual(run('check','--batch','1','--phase','adjudicate').status,0);
++  writeFileSync(join(f.root,'research/defect-ledger.jsonl'),ledger);
++  const open=JSON.parse(ledger);open.disposition='open';f.put('research/defect-ledger.jsonl',JSON.stringify(open)+'\n');
++  assert.notEqual(run('check','--batch','1','--phase','adjudicate').status,0);
++  writeFileSync(join(f.root,'research/defect-ledger.jsonl'),ledger);
++  const withoutResolution=JSON.parse(JSON.stringify(stamped));delete withoutResolution.decisions[0].owner_resolution;
++  f.put('research/r-alpha-batch-1-3a-decisions.json',withoutResolution);
++  assert.notEqual(run('check','--batch','1','--phase','adjudicate').status,0);
++  const withoutSeal=JSON.parse(JSON.stringify(stamped));delete withoutSeal.decisions[0].subject_sha256;
++  f.put('research/r-alpha-batch-1-3a-decisions.json',withoutSeal);
++  assert.notEqual(run('check','--batch','1','--phase','adjudicate').status,0);
++  // A fabricated null item carrier cannot pass, even at final closure.
++  stamped.decisions[0].subject_sha256=requiredPageHash({item_sha256:null});f.put('research/r-alpha-batch-1-3a-decisions.json',stamped);
++  assert.notEqual(run('check','--batch','1','--phase','adjudicate').status,0);
++  assert.notEqual(run('check','--batch','1','--phase','final').status,0);
++  ok('stamp');ok('check','--batch','1','--phase','final');
++  ok('hash','--batch','1','--label','post-3a');ok('verify-post-3a');
++  // Construct a fixture closure from the authentic artifact projection without
++  // running unrelated plan gates. Native verify must protect route history.
++  const frozen={};for(const n of readdirSync(join(f.root,'research'))) {
++    if(n.startsWith('r-step3-hash-') || n.startsWith('r-step3-scope-') || n.startsWith('r-reader-findings-')
++      || /^r-reader-\d+\.md$/.test(n) || n.startsWith('r-refute-') || n.endsWith('-3a-decisions.json'))
++      frozen['research/'+n]=sha(readFileSync(join(f.root,'research',n)));
++  }
++  Object.assign(frozen,requiredPageClosureEvidence(f.root,'r'));
++  f.put('research/r-step3-closure.json',{version:3,basis:'dependency-ordered-step3a',run:'r',status:'closed',artifacts:Object.fromEntries(Object.entries(frozen).sort(([a],[b])=>a.localeCompare(b))),step3_ledger_rows_count:1,step3_ledger_rows_sha256:sha(JSON.stringify([JSON.parse(ledger)]))});
++  const closeVerify=()=>spawnSync(process.execPath,[join(f.root,'tools/step3-close.mjs'),'verify','--run','r','--root',f.root],{cwd:f.root,encoding:'utf8',env:{...process.env,PRESTIGE_MATH_REPO:repo}});
++  assert.equal(closeVerify().status,0);
++  const registryPath='research/r-step3-owner-required-page-routes.json';const registry=readFileSync(join(f.root,registryPath));
++  writeFileSync(join(f.root,registryPath),Buffer.concat([registry,Buffer.from(' ')]));assert.notEqual(closeVerify().status,0);
++  writeFileSync(join(f.root,registryPath),registry);assert.equal(closeVerify().status,0);
++  f.put('research/review.md','Changed historical review');assert.notEqual(closeVerify().status,0);
++  f.put('library/test/outside.md','Changed foreign source after approval');assert.notEqual(run('verify-post-3a').status,0);
++  assert.deepEqual(readFileSync(join(f.root,'research/r-reader-findings-1.json')),original);
++ }finally{f.close();}
++});
++
++test('without the new registry closure artifact mapping preserves historical insertion order for versions 2 and 3',()=>{
++ // Pin the historical expression so this remains a regression after the
++ // proposed implementation becomes the live tools file.
++ const original='const artifactHashes = (version = 3) => Object.fromEntries(artifactNames(version).map((name) => [\n  `research/${name}`, sha256(readFileSync(R(\'research\', name))),\n]));\nconst jsonl =';
++ const proposed=readFileSync(join(proposal,'tools/step3-close.mjs'),'utf8');
++ const extract=source=>source.slice(source.indexOf('const artifactHashes ='),source.indexOf('const jsonl ='));
++ // The real native artifact projection is evaluated with deterministic read
++ // inputs. Include punctuation/case keys whose locale ordering differs from
++ // the historical artifactNames().sort() ordering.
++ const names=['r-step3-hash-Z.json','r-step3-hash-a.json','r-step3-hash-_context.json'].sort();
++ const evaluate=(source,version)=>{
++  let calls=0;
++  const fn=Function('artifactNames','sha256','readFileSync','R','requiredPageClosureEvidence','root','run',extract(source)+'\nreturn artifactHashes;')(
++   ()=>names,sha,path=>'fixture bytes for '+path,(...parts)=>parts.join('/'),()=>{calls++;return {};},'/fixture','r');
++  const value=fn(version);return {value,calls};
++ };
++ for(const version of [2,3]) {
++  const before=evaluate(original,version),after=evaluate(proposed,version);
++  assert.deepEqual(after.value,before.value);
++  assert.deepEqual(Object.keys(after.value),Object.keys(before.value));
++  assert.equal(JSON.stringify(after.value),JSON.stringify(before.value));
++  assert.equal(after.calls,version===3?1:0,'version 2 must never consult the new registry');
++ }
++});
+--- a/WORKFLOW.md
++++ b/WORKFLOW.md
+@@ -239,6 +239,27 @@
+ the immutable post-reader raw hash and the actual current mathematical source
+ to match the authenticated before/after rehome archives. Invalid receipts,
+ changed proof bodies and unsupported current contract inputs fail closed.
++
++An owner may preserve a genuine native reader finding about an outside published
++page through `RUN-step3-owner-required-page-routes.json` (version 1,
++`owner-step3-required-published-page-route-v1`). This narrow routing receipt
++binds the original unchanged finding, report, successful native attempt and
++structured completion, prompt, immutable pre/post snapshots, current assigned
++page manifest and its explicit `requires` edge. The assigned consumer must
++reach an actual published item listed on that page through hash-bound current
++logical dependency edges. The page must remain outside all run manifests.
++Owner-current before and after archives, identical frontmatter, at most two
++unique literal prose edits, and focused owner review bind the exact correction.
++These archives establish no historical full-byte reader observation. The native
++subject label and reader obligation remain unchanged; an explicit page carrier
++route uses the actual published page bytes and never a fabricated item carrier.
++The route grants no scope, edit authority, acceptance or review coverage. Normal
++independent adjudication, explicit historical uncertainty, current page sealing,
++defect-ledger closure and every gate remain mandatory. Unregistered foreign
++findings retain the ordinary rejection; this receipt does not enlarge refuter
++or owned-page inventories. The Step-3 closure freezes this exact optional registry
++and its hash-bound native and owner historical evidence; later verification rejects
++registry or referenced-evidence mutation.
+ 
+ When a reader repairs some defects but cannot resolve another in the same
+ draft, the owner may retain its original open finding through

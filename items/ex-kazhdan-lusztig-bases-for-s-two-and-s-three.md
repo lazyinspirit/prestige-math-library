@@ -1,11 +1,13 @@
 ---
+verification:
+  repair: research/hopf-hecke-unfinished-15-2026-10-15-owner/published-repairs/ex-kazhdan-lusztig-bases-for-s-two-and-s-three.json
 id: ex-kazhdan-lusztig-bases-for-s-two-and-s-three
 kind: example
 title: The Kazhdan–Lusztig bases of $S_2$ and $S_3$
 status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
-deps: [def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-the-hecke-bar-involution-is-well-defined, def-bruhat-interval-and-r-polynomials, thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, thm-kazhdan-lusztig-basis-multiplication-formula, lem-bruhat-order-basic-properties-for-permutations]
+deps: [def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-the-hecke-bar-involution-is-well-defined, def-bruhat-interval-and-r-polynomials, lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, thm-kazhdan-lusztig-basis-multiplication-formula, lem-bruhat-order-basic-properties-for-permutations]
 dependency_level: 7
 justified_by: []
 aliases: []
@@ -18,9 +20,6 @@ sources:
   - title: "Ben Elias and Geordie Williamson, The Hodge theory of Soergel bimodules, arXiv:1212.0791 — §3.2 (printed pp. 15–16): the normalized Hecke algebra, bar involution, triangular Kazhdan–Lusztig basis, rank-one element, and the dictionary $\\underline H_x=C'_x$ and $h_{y,x}=v^{\\ell(x)-\\ell(y)}P_{y,x}(v^{-2})$."
     url: https://arxiv.org/pdf/1212.0791
     locator: "§3.2, printed pp. 15–16; the complete section and displayed formulas were reread."
-verification:
-  audited: "2026-10-08"
-  precheck: pass
 ---
 
 ## Facts & Assumptions
@@ -31,7 +30,7 @@ verification:
 
 [F2] The bar assignment descends to a multiplicative semilinear involution of the quotient Hecke algebra ([[lem-the-hecke-bar-involution-is-well-defined]]).
 
-[F3] A bar-fixed element in $H_w+\sum_{y<w}v\mathbb Z[v]H_y$ is uniquely $C_w=\underline H_w$, and these elements form a basis ([[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]]).
+[F3] A bar-fixed element in $H_w+\sum_{y<w}v\mathbb Z[v]H_y$ is uniquely $C_w=\underline H_w$, and these elements form a basis ([[lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties]]).
 
 [F4] The coefficients satisfy $p_{y,w}=v^{\ell(w)-\ell(y)}P_{y,w}(v^{-2})$ and $\mu(y,w)=[v]p_{y,w}$ ([[def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization]]).
 

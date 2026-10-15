@@ -1,11 +1,15 @@
 ---
 page: hopf-modules-coinvariants-and-the-fundamental-theorem-examples
 title: "Hopf Modules, Coinvariants, and the Fundamental Theorem — Examples"
-status: published
+status: draft
 items: []
-examples: []
+examples:
+  - ex-hh-regular-hopf-module-projection
+  - ex-hh-free-hopf-module-over-group-algebra
+  - ex-hh-free-hopf-module-over-polynomial-hopf-algebra
+  - cex-hh-separate-action-and-coaction-fail-hopf-compatibility
 ---
 
-Compute the projection and inverse decomposition for V⊗kG and V⊗k[x]. Include a compatible module/comodule and a pair failing compatibility; the theorem cannot be invoked for arbitrary simultaneous structures.
+These examples calculate the coinvariant projection and decomposition on the regular Hopf module and on $V\otimes kG$ and $V\otimes k[x]$. The counterexample uses a trivial action and a nontrivial group-like coaction on the same one-dimensional space; each structure is valid on its own, but their compatibility equation fails.
 
-These are planned worked examples and counterexamples for [[hopf-modules-coinvariants-and-the-fundamental-theorem]], with empty item lists pending normal authoring and proof review. Each example must calculate from the stated hypotheses, and each counterexample must verify both its premises and the failed conclusion. This companion is a dependency leaf and supplies no theorem to another page.
+The companion [[hopf-modules-coinvariants-and-the-fundamental-theorem]] contains the general theorem. These examples check its formulas and mark the hypothesis that must be verified before applying it.

@@ -1,11 +1,16 @@
 ---
 page: cyclotomic-hecke-quotients-and-ariki-koike-pbw-examples
 title: "Cyclotomic Hecke Quotients and Ariki–Koike PBW — Examples"
-status: published
+status: draft
 items: []
-examples: []
+examples:
+  - ex-hh-ariki-koike-level-one-is-finite-type-a
+  - ex-hh-ariki-koike-rank-two-level-two-pbw
+  - ex-hh-ariki-koike-rank-one-level-two-quotient
+  - ex-hh-ariki-koike-colliding-content-specialization
+requires: [cyclotomic-hecke-quotients-and-ariki-koike-pbw, principal-series-representations-of-gl-n-over-a-finite-field]
 ---
 
-Compute r=1 finite type A, n=1 the cyclotomic polynomial quotient, r=2,n=2 the rank-eight basis, and separated versus colliding generic content spectra. Do not apply the formulas of additive generators at v²=1 without an invertible normalization conversion.
+These examples calculate the level-one finite type-A reduction, the rank-one quadratic cyclotomic quotient, and the eight PBW words for level two and rank two. The final example compares distinct generic one-box contents with a repeated-root specialization and shows why the generic interpolation projector does not specialize.
 
-These are planned worked examples and counterexamples for [[cyclotomic-hecke-quotients-and-ariki-koike-pbw]], with empty item lists pending normal authoring and proof review. Each example must calculate from the stated hypotheses, and each counterexample must verify both its premises and the failed conclusion. This companion is a dependency leaf and supplies no theorem to another page.
+The examples use the multiplicative parameters and normalizations of [[cyclotomic-hecke-quotients-and-ariki-koike-pbw]]. The rank-two basis is taken from the proved PBW theorem after explicitly enumerating its eight words. The repeated-root example makes no semisimplicity claim and does not identify the algebra with the additive degenerate presentation at a singular normalization.

@@ -4,11 +4,25 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 5, U-C 1, A-R 1282, A-P 55. The
+Current classifications: U-P 5, U-C 1, A-R 1282, A-P 60. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
 
+
+
+## HH batch 14 separated-residue faithfulness — 2026-10-15
+
+Historical finding below; now superseded for current bytes by the recorded local repair research/hopf-hecke-unfinished-15-2026-10-15-owner/published-repairs/thm-separated-hecke-residues-give-seminormal-idempotents-and-bases.json. The original published and consumer observations remain separately retained.
+
+`thm-separated-hecke-residues-give-seminormal-idempotents-and-bases` — A-P, confirmed nonfatal Proof 6.1 prerequisite gap. Current raw SHA-256 `a27858c9dc7e9eef4781c76af460b77fbbdbfaae70b93784fe190a2f5e99a48a`. The proof infers dim(H/J(H)) = sum of squared simple-cell dimensions without declaring/applying the semisimple-quotient and Wedderburn decomposition. Actual missing suppliers are `thm-jacobson-radical-is-nilpotent-and-the-quotient-is-semisimple` and `thm-wedderburn-artin-theorem`; nonsingular cellular rank-one actions make each commuting endomorphism scalar, identifying division factors with the coefficient field. Those current statements and proofs, the full affected supplier, cell classification and cell-form lemma were independently reviewed. Strategy: owner supplies the explicit finite-dimensional decomposition argument and declared dependencies, or the direct block triangular cell-action argument, then follows ordinary published repair controls. Published carrier remains read-only; this exact prerequisite repair is pending, not certified. Owned consumer `lem-hh-type-a-murphy-strong-tableau-straightening` F2/Proof 1.1 now proves faithfulness independently using upward-cell ideal intersections and nonsingular diagonal action blocks. Its added exact supplier is `lem-cell-form-is-associative-and-its-radical-is-a-submodule`; no Statement/Definition change. Closed nonfatal disposition row `hh15-3a-b14-published-faithfulness` records reader:14:1 and refuter:14:1 together; it does not claim the published bytes were fixed. Evidence: `research/hopf-hecke-unfinished-15-2026-10-15-alpha-batch-14-3a.md`, `research/hopf-hecke-unfinished-15-2026-10-15-alpha-batch-14-3a-decisions.json`. No whole-closure audit claimed.
+
+
+## Batch 12 affine Hecke published prerequisite — 2026-10-15
+
+<!-- hopf-hecke-unfinished-15-2026-10-15-alpha-batch-12-published -->
+
+`lem-hh-commuting-left-right-hecke-length-operators` — A-P, nonfatal case-exhaustion polish recorded at `reader:12:1`. Proof 1.4/2.1 lists six length cases without spelling out the immediate mixed-sign restriction. With q=ell(x), F1 puts ell(sxt) in both {q,q+2} and {q-2,q}, hence q. Equal signs permit exactly the remaining four cases; all six operator expansions, the two-length lemma, conjugacy parameter rule and braid/evaluation argument independently check. Raw current SHA-256: 741c3e66d8bdeb4a23356ed19814a62810b13ef2dfa2df3f6adfb335fb7b98ec. Actual suppliers: thm-hh-coxeter-exchange-deletion-and-faithfulness, def-hh-universal-coxeter-hecke-parameters-and-presentation, lem-hh-dihedral-root-recurrence-and-root-sign, thm-hh-matsumoto-reduced-word-theorem, def-hh-coxeter-matrix-word-group-and-length, def-free-module-on-a-set-and-standard-basis, def-module-homomorphism-kernel-image-and-cokernel, def-endomorphism-ring-of-a-module. Consumer chain: thm-hh-generic-coxeter-hecke-standard-basis → owned lem-hh-type-a-finite-hecke-basis-in-multiplicative-normalization → thm-hh-affine-type-a-bernstein-pbw. No claim or prerequisite is invalid; no consumer correction is needed. Owner strategy: optionally insert the one-line intersection calculation before the cases and perform ordinary published repair maintenance. Status: closed nonfatal finding disposition, published editorial repair pending. Source remains read-only; no publication audit or repair stamp is claimed. Defect: hh15-b12-3a-length-case-exhaustion. Evidence: research/hopf-hecke-unfinished-15-2026-10-15-alpha-batch-12-3a.md; Lusztig, arXiv:math/0108172, Proposition 3.3, PDF pp. 8–9.
 
 ## Batch 62 published conditioning finding — 2026-10-15
 
@@ -31509,17 +31523,17 @@ Required supplier: a proved compact-Hausdorff countable direct-limit product the
 
 ## Item classification index — 2026-09-08
 
-This index retains the initial 2,185-ID classification reference pool and subsequent reconciliations. Its current literal rows contain **3,584 unique item IDs**, of which **3,516 currently published** (2026-10-15 batch-60 literal index refresh). These are index counts, not a whole-corpus audit or a publication decision. Supplier mappings and item-specific findings remain in their dated evidence.
+This index retains the initial 2,185-ID classification reference pool and subsequent reconciliations. Its current literal rows contain **3,585 unique item IDs**, of which **3,517 currently published** (2026-10-15 batch-60 literal index refresh). These are index counts, not a whole-corpus audit or a publication decision. Supplier mappings and item-specific findings remain in their dated evidence.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
 | U-P | Unaudited and potentially defective items | 5 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 1 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 1282 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 57 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 59 | Recorded direct review and an unresolved item-specific repair. |
 
 Bounded no-repair-needed dispositions appear below, outside these four active
-defect classes. The four queues currently contain 1,345 distinct items.
+defect classes. The four queues currently contain 1,346 distinct items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -33932,6 +33946,12 @@ owner's scan policy.
 | `lem-r-one-s-two-integral-element-membership` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent Astra U-P review: `research/up-229-astra-review/agent-03-receipts.jsonl` (`lem-r-one-s-two-integral-element-membership`). No independent judge. |
 
 ### A-P — Audited items pending Phase 3 repair
+
+| `thm-separated-hecke-residues-give-seminormal-idempotents-and-bases` | A-P: recorded local Proof 6.1 repair under hopf-hecke-unfinished-15-2026-10-15; explicit block triangular cell action proves faithfulness and split semisimplicity. Statement unchanged; current canonical hash 9069977588b9b8085ee32b555bba6744151f24fc20ab7cb026e2f0c884838688. Focused repair receipt research/hopf-hecke-unfinished-15-2026-10-15-owner/published-repairs/thm-separated-hecke-residues-give-seminormal-idempotents-and-bases.json; no new whole-item audit. |
+| `lem-hh-cyclotomic-straightening-spanning` | A-P: cumulative recorded local published repair, including Step1.3 right-Y reductions; current hash 272e3226f8acad10c9da6b27ae5c5abb563e7c88d0738b5be501067797179e59. Statement unchanged. research/hopf-hecke-unfinished-15-2026-10-15-owner/published-repairs/lem-hh-cyclotomic-straightening-spanning.json; no new whole-item audit. |
+| `lem-hh-quantum-and-hecke-tensor-actions-commute` | A-P: recorded local published Proof2.1 E/F coproduct-factor correction; current hash b3de912ee50121134d5a03aa573c22e1acb37e2ce0e31699213dde40a337dbb9. Statement unchanged. research/hopf-hecke-unfinished-15-2026-10-15-owner/published-repairs/lem-hh-quantum-and-hecke-tensor-actions-commute.json; no new whole-item audit. |
+
+| `lem-hh-commuting-left-right-hecke-length-operators` | A-P; batch-12 confirms nonfatal six-case exhaustion omission, closed by the immediate F1 length-set intersection. Published source read-only; owner may insert that sentence. Actual suppliers, consumer chain, raw hash and repair strategy in research/hopf-hecke-unfinished-15-2026-10-15-alpha-batch-12-3a.md and the dated batch-12 entry. |
 
 | `cor-expectation-linearity-monotonicity-and-modulus-bound` | A-P; batch-60 independently confirms historical nonfatal a.e.-order omission is mathematically repaired by D-plus and event-integral invariance. New current L2 combines three IDs into one malformed wikilink; owner should restore [[thm-integral-triangle-inequality]] alone there, retaining separate L3/L4. Exact three suppliers, owned Ville-chain consumer, hashes and strategy in batch-60 report. Rows sme62-b60-3a-expectation-ae (fixed historical proof) and sme62-b60-3a-expectation-citation (nonfatal-recorded pending citation repair). Prior bounded review retained in dated addendum. |
 
@@ -38607,8 +38627,42 @@ Actual local precheck, renderer and proof-layout checks passed; this is a record
 <!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:lem-hh-cyclotomic-commuting-jucys-murphy-generators:end -->
 
 <!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:lem-hh-cyclotomic-straightening-spanning:begin -->
-lem-hh-cyclotomic-straightening-spanning: Supply the exact multiplicative finite Hecke basis by a declared dependence on the native-batch12-accepted bridge. Handle n=1 directly and n>=2,r=1 as a finite multiplicative quotient span. Keep normalized F3 for the r>=2 scaled generators and preserve all r>=2 reductions. Correct the inaccurate final short step-range summary. Focused current supplier and consumer evidence: research/hopf-hecke-unfinished-15-2026-10-15-owner/scope13-normalization-escalation/repair-manifest.json; no new whole-item audit.
-Current canonical content hash: 1c08ce1906bc99cec0fa674cb644187dd1485fcf9948a7526469e45ab198fdaf.
-Delegated proposed source: research/hopf-hecke-unfinished-15-2026-10-15-owner/scope13-normalization-escalation/proposed-source/items/lem-hh-cyclotomic-straightening-spanning.md.
-Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+Published local repair for lem-hh-cyclotomic-straightening-spanning in hopf-hecke-unfinished-15-2026-10-15; current canonical content SHA-256 272e3226f8acad10c9da6b27ae5c5abb563e7c88d0738b5be501067797179e59. Cumulative finite multiplicative normalization repair and focused Step 1.3 right-Y reduction correction. Statement and consumer spanning interface preserved. Focused evidence: research/hopf-hecke-unfinished-15-2026-10-15-owner/step4-published-alerts/cyclotomic/focused-review.md.
 <!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:lem-hh-cyclotomic-straightening-spanning:end -->
+
+<!-- local-published-repair:bayesian-computational-statistics-62:step2-b17:thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions:begin -->
+thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions: Include the empty set explicitly in the rational rectangle pi-system; Statement and hypotheses unchanged.
+Current guard: f3241f547beb3d2a4e804b385f0ec6846c74218a84c47c7725457ffc9d5a7f76. Beforeimage: research/bayesian-computational-statistics-62-owner-step2-b17/before/items/thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions.md. Local precheck/rendercheck passed; no whole-item audit or independent judge claimed.
+<!-- local-published-repair:bayesian-computational-statistics-62:step2-b17:thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions:end -->
+
+<!-- local-published-repair:bayesian-computational-statistics-62:step2-b30:thm-monotone-convergence-for-the-integral:begin -->
+thm-monotone-convergence-for-the-integral: Make routine extended-real/Archimedean order argument explicit and bind its existing real-order suppliers; Statement unchanged.
+Current guard: 087f52ad7f84eb4c05a3d0dce2d7a5e31654feb4be70d7f38753187376067b77. Beforeimage: research/bayesian-computational-statistics-62-owner-step2-b30-before/items/thm-monotone-convergence-for-the-integral.md. Local precheck/rendercheck passed; no whole-item audit or independent judge claimed.
+<!-- local-published-repair:bayesian-computational-statistics-62:step2-b30:thm-monotone-convergence-for-the-integral:end -->
+
+<!-- local-published-repair:bayesian-computational-statistics-62:step2-b30:cor-finite-nonnegative-integral-implies-finite-almost-everywhere:begin -->
+cor-finite-nonnegative-integral-implies-finite-almost-everywhere: Make routine extended-real/Archimedean order argument explicit and bind its existing real-order suppliers; Statement unchanged.
+Current guard: fa47301fdaa1003b1a0cc16a1b562a4052608c2089260a352b71ce92476b8a8d. Beforeimage: research/bayesian-computational-statistics-62-owner-step2-b30-before/items/cor-finite-nonnegative-integral-implies-finite-almost-everywhere.md. Local precheck/rendercheck passed; no whole-item audit or independent judge claimed.
+<!-- local-published-repair:bayesian-computational-statistics-62:step2-b30:cor-finite-nonnegative-integral-implies-finite-almost-everywhere:end -->
+
+<!-- local-published-repair:bayesian-computational-statistics-62:step2-b41:lem-normal-density-has-total-mass-one:begin -->
+lem-normal-density-has-total-mass-one: Explicitly pass Borel cutoff measurability to Lebesgue measurability under the already-assumed Countable Choice before invoking Lebesgue monotone convergence; Statement unchanged.
+Current guard: 3d43acbb4166f69674c0a4e2b51e40afead032bd418a1ec422325aa0156f27fe. Beforeimage: research/bayesian-computational-statistics-62-owner-step2-b41-before/items/lem-normal-density-has-total-mass-one.md. Local precheck/rendercheck passed; no whole-item audit or independent judge claimed.
+<!-- local-published-repair:bayesian-computational-statistics-62:step2-b41:lem-normal-density-has-total-mass-one:end -->
+
+## HH batch 10 published Coxeter page status — 2026-10-15
+
+Published page `coxeter-presentations-exchange-and-reduced-word-theorems` historically called its six published items draft in two prose sentences. Exact consumer: `thm-hh-parabolic-hecke-freeness-and-induced-bases`; direct supplier: `thm-hh-parabolic-minimal-representatives-and-length-additivity`. Independent current page and six actual status checks confirm the owner correction; current page raw SHA-256 `81e6a5d0a7a1c0aa25e75d74a75edd2e1fde94e68ff55921af9add7f69cd4926` equals the exact two-sentence owner after archive. Status: **fixed by owner; independently adjudicated**, no mathematical supplier/consumer change. Strategy applied: replace only the two stale draft-status clauses. Original native reader page bytes remain unbound; the owner-current before capture does not resolve historical full-byte uncertainty. Explicit historical disposition: `research/hopf-hecke-unfinished-15-2026-10-15-step3-owner-required-page-routes.json`; evidence and closed defect `hh15-3a-b10-published-page-status`: `research/hopf-hecke-unfinished-15-2026-10-15-alpha-batch-10-3a.md`, `research/hopf-hecke-unfinished-15-2026-10-15-alpha-batch-10-3a-decisions.json`, reader:10:1. Page remains read-only to this adjudicator. Pages are outside the item classification index, so deduplicated item classifications/counts are unchanged.
+
+<!-- local-published-repair:bayesian-computational-statistics-62:step2-b25:ex-one-dimensional-gaussian-integral-from-tonelli-and-polar-coordinates:begin -->
+ex-one-dimensional-gaussian-integral-from-tonelli-and-polar-coordinates: Restore original unqualified Gaussian integral display using original supplied length measure. Generic sigmafinite product supplies plane measure; new local finiteDarboux/explicitcutoff helper bridges compact Riemann and suppliedmeasure integrals without AC/CC. Tonelli/polar proof retained. Sameowner checked actual contexts and no itemconsumers.
+Current guard: f8e6e452032a02d6f188b8003e4f77efd58b8b57e722a3ccd7c52e664d3cb368. Beforeimage: research/bayesian-computational-statistics-62-owner-step2-b25-before/items/ex-one-dimensional-gaussian-integral-from-tonelli-and-polar-coordinates.md. Local precheck/rendercheck passed; no whole-item audit or independent judge claimed.
+<!-- local-published-repair:bayesian-computational-statistics-62:step2-b25:ex-one-dimensional-gaussian-integral-from-tonelli-and-polar-coordinates:end -->
+
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:thm-separated-hecke-residues-give-seminormal-idempotents-and-bases:begin -->
+`thm-separated-hecke-residues-give-seminormal-idempotents-and-bases` — recorded local published repair (A-P): original reader:14:1 and defect hh15-3a-b14-published-faithfulness retained. Current canonical hash `9069977588b9b8085ee32b555bba6744151f24fc20ab7cb026e2f0c884838688`. Proof 6.1 now proves the all-cell action map is block triangular with invertible rank-one diagonal blocks from nonsingular cell forms. This supplies faithfulness and split semisimplicity directly, then transfers the cellwise Lagrange identities to H. Statement unchanged. Existing proved supplier added explicitly: lem-cell-form-is-associative-and-its-radical-is-a-submodule. Focused source and direct/indirect affected-use review: research/hopf-hecke-unfinished-15-2026-10-15-owner/step3-routing-reconciliation/published14/review.md. Consumer refuter:14:1 has distinct fixed row hh15-3a-b14-consumer-faithfulness for its independently repaired F2/1.1. No new whole-item audit, historical reading or native execution coverage is claimed.
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:thm-separated-hecke-residues-give-seminormal-idempotents-and-bases:end -->
+
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:lem-hh-quantum-and-hecke-tensor-actions-commute:begin -->
+Recorded local published repair for lem-hh-quantum-and-hecke-tensor-actions-commute in hopf-hecke-unfinished-15-2026-10-15; canonical content SHA-256 b3de912ee50121134d5a03aa573c22e1acb37e2ce0e31699213dde40a337dbb9. Correct E_i/F_i off-pair coproduct classifications and shared outside factors in Proof2.1. Statement and consumer interfaces unchanged. Focused review research/hopf-hecke-unfinished-15-2026-10-15-owner/step4-published-alerts/tensor-commutation/focused-evidence.md; no whole-item audit or new execution coverage.
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:lem-hh-quantum-and-hecke-tensor-actions-commute:end -->

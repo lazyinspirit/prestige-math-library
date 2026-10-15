@@ -1,0 +1,29 @@
+from pathlib import Path
+import json,hashlib,datetime,difflib,re
+run='hopf-hecke-unfinished-15-2026-10-15'
+base=Path('research')/(run+'-owner/authoring-readiness-escalation')
+out=base/'quasitriangular8'
+x=json.loads((out/'recommendations.json').read_text()); guards=[];deltas=[]
+extra=[Path('items/thm-hh-antipode-uniqueness-anti-multiplication-and-anti-comultiplication.md'),Path('items/thm-hh-finite-dimensional-dual-hopf-algebra.md'),Path('research',run+'-dispatch/beta-batch-9.attempt-2.result.json'),base/'hopf-chain/owner-proof-clarification-integration.json',base/'hopf-chain/proof-clarification.json',out/'owner-editorial-integration.json']
+old={g['path']:g for g in x['guards']}
+for p in [Path(g['path']) for g in x['guards']]+extra:
+ b=p.read_bytes();q=out/'final-observed-inputs'/p;q.parent.mkdir(parents=True,exist_ok=True);q.write_bytes(b)
+ g={'path':str(p),'raw_sha256':hashlib.sha256(b).hexdigest(),'archive':str(q)}
+ if str(p).startswith('items/'):
+  body=b.split(b'---',2)[2];g['body_sha256']=hashlib.sha256(body).hexdigest()
+  t=b.decode();sections=re.split(r'^## ',t,flags=re.M)
+  surface=''.join(s for s in sections[1:] if s.startswith(('Statement\n','Definition\n')))
+  g['public_section_sha256']=hashlib.sha256(surface.encode()).hexdigest()
+ guards.append(g)
+ if str(p) in old and g['raw_sha256']!=old[str(p)]['raw_sha256']:
+  deltas.append({'path':str(p),'before_raw_sha256':old[str(p)]['raw_sha256'],'after_raw_sha256':g['raw_sha256'],'diff':''.join(difflib.unified_diff(Path(old[str(p)]['archive']).read_text().splitlines(True),b.decode().splitlines(True)))})
+for name in ['thm-hh-antipode-uniqueness-anti-multiplication-and-anti-comultiplication','thm-hh-finite-dimensional-dual-hopf-algebra']:
+ p=Path('items',name+'.md');before=base/'hopf-chain/archive/items'/(name+'.md');b=before.read_bytes();current=p.read_bytes()
+ q=out/'supplementary-before-inputs'/p;q.parent.mkdir(parents=True,exist_ok=True);q.write_bytes(b)
+ deltas.append({'path':str(p),'baseline':'Exact chain-reviewer archive, not falsely claimed as this reviewer cycle1 archive','before_archive':str(q),'before_raw_sha256':hashlib.sha256(b).hexdigest(),'after_raw_sha256':hashlib.sha256(current).hexdigest(),'diff':''.join(difflib.unified_diff(b.decode().splitlines(True),current.decode().splitlines(True)))})
+for r in x['recommendations']:
+ r['recommendation']='ready-on-final-observed-carriers';r['reason']+=' Final cycle2: batch9 completed successfully; its observed final supplier differences are metadata/editorial only and preserve exact public contracts. Source3 proof-only Psi clarification preserves Statement and supplies the explicitly named map already used by the contractions. Source4 dual-Hopf theorem has only paragraph/step-number formatting changes relative to chain archive; finite-dimensional transpose, convolution, antipode interface is unchanged.'
+ r['remaining_condition']='Root final rehash/recertification after all writers drain; only transitive source4 dual-Hopf context remains live and requires unchanged public interface/current mathematical content, or owner-classified mechanical deltas. No continuing batch9-drain condition.'
+y={'version':1,'run':run,'kind':'proposal-only-final-focused-readiness-reconciliation','cycle':2,'max_cycles':2,'recorded_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'scope':x['scope'],'recommendations':x['recommendations'],'final_guards':guards,'reviewed_deltas':deltas,'dispositions':{'batch8':'All eight item raw bodies unchanged from cycle1. Original ready records remain archived unchanged.','batch9':'Native attempt2 ok:true ended2026-10-15T05:38:23.168Z. Only observed source change before final pass: candidate double definition adds justified_by crossing-associativity and coalgebra-antipode suppliers already present and read; body unchanged. Manifest mirrors justified_by and corrects proof provenance to ai-altered. Crossing-associativity final Remarks replacement exactly matches prior editorial proposal and owner receipt. These preserve mathematical claims and dependencies.','source3':'Exact before/after comparison against chain archive shows only insertion of Psi:=(S tensor S) flip Delta at start Proof1.4. Statement/Definition unchanged. This is the map whose two convolution contractions were already displayed; consumer use is unchanged anti-multiplicativity/anti-comultiplicativity. Raw/body hashes changed honestly and are freshly archived.','source7':'Raw/body hashes unchanged from cycle1; focused proof/supplier reconciliation owned by chain reviewer, no independent transitive audit invented.','source4':'Current finite-dimensional-dual-Hopf proof read as relevant prerequisite context. Against exact chain archive, all changes are phase-step renumbering, paragraph/display layout and matching step citations. Statement unchanged; multiplication convolution, coproduct dual to multiplication, counit evaluation at1, antipode precomposition with S; both antipode contractions remain proved without S inverse. Exact consumer use by double candidate/coalgebra and source7 remains valid. Source4 writer still live; this exact item alone requires final guard recheck.','metadata':'Root owns final level/contract/hash maintenance. Later metadata changes cannot be called raw-hash-unchanged; classify against archived complete source and rehash.'},'substantive_gaps':[],'missing_prerequisites':[],'audit_or_gate_acceptance_claimed':False,'live_mutations_by_reviewer':False,'final_action':'Root may record all eight ready on current final bodies, with ordinary final source4 guard reconciliation and native subsequent independent review. No third escalation cycle requested.'}
+(out/'final-recommendations.json').write_text(json.dumps(y,indent=2)+'\n')
+print(json.dumps({'final_evidence':str(out/'final-recommendations.json'),'guards':len(guards),'reviewed_delta_rows':len(deltas),'ready_recommendations':len(y['recommendations'])}))

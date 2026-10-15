@@ -1,11 +1,11 @@
 ---
 page: bialgebras-convolution-and-antipode-identities-examples
 title: "Bialgebras, Convolution, and Antipode Identities — Examples"
-status: published
+status: draft
 items: []
-examples: []
+examples: [ex-hh-group-and-function-algebras-for-s3,
+           ex-hh-convolution-is-not-composition,
+           ex-hh-polynomial-primitives-characteristic]
 ---
 
-Compare group algebra and function algebra for a finite nonabelian group; compute convolution of linear maps; show why treating S as an ordinary inverse of id is meaningless. Polynomial examples work in every characteristic, with characteristic-dependent primitive elements.
-
-These are planned worked examples and counterexamples for [[bialgebras-convolution-and-antipode-identities]], with empty item lists pending normal authoring and proof review. Each example must calculate from the stated hypotheses, and each counterexample must verify both its premises and the failed conclusion. This companion is a dependency leaf and supplies no theorem to another page.
+Compare the group and function Hopf algebras of $S_3$, calculate a convolution product that differs from composition, and distinguish the antipode from a compositional inverse of the identity. The polynomial example verifies primitive elements in characteristic zero and positive characteristic. Each verification uses explicit calculations and the proved A-page structures.

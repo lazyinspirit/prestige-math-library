@@ -1,0 +1,55 @@
+# Batch 3 Step 3a adjudication
+
+Run: `hopf-hecke-unfinished-15-2026-10-15`; group: `batch-3`.
+
+## Completed level 1 review
+
+`lem-hh-convolution-algebra-associativity-and-unit`: every step and actual supplier interface checked. Composition defines a bilinear product; a common finite threefold coproduct proves associativity, and the two counit identities prove both unit laws. Zero spaces and arbitrary dimension cause no exception; no AC. Risk review complete in the contract. No decision is owed for this unchanged unflagged carrier. Sources: Schneider Proposition 1.4, printed p.14; Rüd §2.3.1 (the convolution argument on printed p.9/PDF p.10); Etingof–Semenyakin §2.1.3–2.2.1, PDF p.4. No source is used as a substitute for a local proof.
+
+`lem-hh-tensor-product-coalgebra`, refuter:3:1: confirmed fatal under the source-accuracy taxonomy. Etingof–Semenyakin §2.1.3 is on PDF p.4, not p.3. Corrected only that locator; repair confidence 1. The proof is sound: the composite interleaves factors C,D,C,D, coassociativity interleaves the equal threefold coproducts, both counit contractions give c tensor d, and spanning extends the identities. Zero C or D is allowed. Schneider printed p.6 gives the exact structure maps. No Statement, dependency or consumer interface changed.
+
+## Completed level 2 review
+
+`lem-hh-bialgebra-compatibility-equivalence`: independently verified all five steps and F1–F8. Each formulation is equivalent to the same two product and two unit equations; scalar 1 gives the reverse unit implication. For H=0 both formulations fail the counit/unit scalar equation, so the iff remains correct. No finite-dimensionality or choice assumption. Schneider printed p.6 and Rüd Proposition 2 §2.4 support this translation. Risk review complete; no decision owed.
+
+## Completed level 3 construction review
+
+`lem-hh-group-and-polynomial-hopf-algebras-exist`: retained the reader binomial/Pascal and characteristic-prime expansions as sound explicit elementary calculations. The final touched verdict is amended_repair because the contract zero/finite-function boundary records had inaccurate step references, now corrected. The current carrier equals the post-reader raw hash `5fb85ba59c9595bc3857a064b3057cdb84e576412aec7a06f064e7d6666a9e9d`; its pre/post hashes differ. All eleven steps and twelve suppliers reviewed: free and tensor bases are explicit, quotient maps invert on generators, pointwise function identities require finite G, and polynomial identities extend from the generator or monomial basis. For n=0 the antipode sum is 1; for n>0 it is 0, including characteristic 2. The prime/divisibility calculation proves the extra primitive with counit zero. The trivial group and arbitrary infinite group algebra are included, but an infinite full function-space tensor identification is expressly excluded. Risk review complete, no AC or missing lemma. Relevant supplier statements and proofs used: free-module and tensor universal properties, tensor product bases/algebras, free associative algebra universal/descent clauses, polynomial construction clause 1 and proof 1.1, bialgebra/Hopf/group-like definitions. Sources: Schneider §1; Etingof–Semenyakin §§2.1.2–2.2.2; Rüd §2.4. No Statement changed.
+
+`thm-hh-antipode-uniqueness-anti-multiplication-and-anti-comultiplication`: reader explicit definition of the reverse-product map is sound audit enrichment of a bilinear elementary-tensor prescription. The final touched verdict is amended_repair because the boundary record assigned S(1)=1 to step 1.3 instead of actual step 2.1; this contract reference is now corrected. Current bytes equal the post-reader raw hash `7ccfbb47a0f890a02ec80e192f250b4209d0517318873d83420458473f450d4a`; pre/post differ. Checked all seven steps and every actual supplier. The two Hom spaces have the claimed coalgebra/algebra structures; both multiplication inverses contract factors in the correct noncommutative order. For the coproduct inverses, the middle two factors contract first, leaving respectively 1 tensor S(h1)h2 and h1 S(h2) tensor 1. No anti-comultiplication premise is assumed. Convolution uniqueness then proves both identities; the unit and counit equations yield S(1)=1 and epsilon S=epsilon. No bijectivity, duality, AC or dimension hypothesis is needed. Risk review complete. Sources: Schneider Theorem 1.5(a)–(b), printed pp.15–16, full relevant argument; Etingof Proposition 2.2(iii)–(iv), PDF p.4. No Statement changed.
+
+## Completed level 4 reviews
+
+`ex-hh-convolution-is-not-composition`: amended_repair. The reader correction of final step 3.1 is retained. Checked all specified values on the explicit three-element basis: the convolution is zero, composition at 1 is the nonzero basis element 1, and S(g)=g² differs from g in every characteristic. The proof does not assume compositional invertibility of the antipode. Corrected the remaining boundary record to actual identity evaluation step 2.1; no nonexistent step 1.3 remains in the owned contract entry. All three suppliers were independently reviewed.
+
+`ex-hh-group-and-function-algebras-for-s3`: reader:3:1 confirmed_nonfatal; refuter:3:2 confirmed_fatal. Corrected the contract final derivation to actual steps 2.1–2.2 and its related nonexistent choice-boundary step reference. Corrected Etingof Example 2.3(i)–(ii) to PDF p.5. Recomputed the rightmost-first products ab=(123) and ba=(132). The group basis distinguishes the two products over every field, and the point mass delta_ab distinguishes the coproduct from its flip by 1 versus 0, including characteristics 2 and 3. The current construction supplier provides both Hopf structures. The authored mathematics is sound.
+
+`ex-hh-polynomial-primitives-characteristic`: touched amended_repair and refuter:3:3 confirmed_fatal. Retained the reader’s explicit F3/F4 proof locators and independently checked the current supplier proofs. Corrected Etingof Example 2.3(iii) to PDF p.5. Both primitive equations hold for x and x^p; p=2 is included. In characteristic zero the nonzero coefficient 2 and product-basis vector x tensor x obstruct primitiveness of x². No complete classification of primitives is claimed. Risk review complete. The contract checker permits statement/definition/example/remark sections but not Proof: preserved the exact supplier proof excerpts in `proof_evidence` with `proof_locator`, and used the supplier’s exact characteristic-dependent primitive assertion as the supported Statement quote. This is schema normalization, not a new mathematical defect or proof change.
+
+## Carrier comparison and defect accounting
+
+Before Alpha edits, every item matched its recorded post-reader raw hash. Pre/post snapshots differ exactly on the four routed touched items. Alpha item edits are only the three refuter-routed Etingof page corrections; all Statements, Definitions, deps, provenance and page manifests remain unchanged. Prior reader proof changes remain intact. No material rewrite or judge record was introduced. Contract derivations, boundary locators and the five risk reviews were updated as described. All completed repairs have repair_confidence 1.
+
+The decisions file has exactly eight owed decisions: four touched, one reader and three flagged. Seven distinct closed rows were appended through the ledger tool, with caught_at_stage 3a-adjudicate. Their IDs have prefix `hopf-hecke-unfinished-15-2026-10-15-batch-3-3a-` and suffixes `tensor-source`, `construction-contract`, `antipode-contract`, `convolution-step-references`, `s3-contract`, `s3-source`, `polynomial-source`. The polynomial source row is shared by its touched and flagged obligations. Every finding references exactly one row; no mechanical-check failure was recorded as a defect.
+
+## Owner source-maintenance alert outside the owed decision set
+
+The risk-only carrier `lem-hh-bialgebra-compatibility-equivalence` has no touched/reader/refuter obligation in this dispatch. Its Rüd locator says “Proposition 2, §2.4, PDF p.11”; the linked PDF places the proposition on PDF p.12 (printed p.11). The complete relevant argument is present and the independently reviewed local proof is sound. The mathematical risk review is complete; it explicitly preserves this source alert. Request an owner supplemental source-locator obligation and change only PDF p.11 to PDF p.12. The source carrier is left unchanged at handoff to preserve the exact routed decision scope; no unowed decision or closed defect disposition is invented. No substantial mathematical prerequisite is missing. This alert remains open for the engine/owner.
+
+## Dependencies, sources and scope limits
+
+The owned cross-batch records were read and retained, including the batch-1 coalgebra and group-like/primitive interfaces. Current definitions were opened directly rather than relying on the older interface-review claims in those records. All actual direct suppliers of routed mathematical carriers were read; published prerequisites remain read-only. No defective published item, required outside-batch mathematical repair, proposed withdrawal or new item/page was identified. Stable IDs and all prior withdrawal dispositions are preserved. No transitive whole-library audit is claimed. No page-only obligation was owed.
+
+Online source evidence independently opened and read: [Schneider, Lectures on Hopf algebras](https://www.famaf.unc.edu.ar/~andrus/papers/Schn1.pdf), §1 and Proposition 1.4/Theorem 1.5; [Etingof–Semenyakin](https://arxiv.org/pdf/2106.05252), §§2.1.2–2.2.2, especially PDF pp.4–5; [Rüd](https://math.mit.edu/~rud/TeXthings/HopfAlgebras-1.1.pdf), §2.3.1 and §2.4, including Proposition 2. Exact locator corrections are recorded above; the locally authored derivations supply the mathematics in every case.
+
+## Local checks
+
+- Initial `risk-report` without `--require-reviewed`: five HIGH/CRITICAL items identified, no tool errors. Final same batch contract with `--require-reviewed`: 11 routed items, 0 errors; all five reviews complete.
+- `node tools/proof-contract.mjs research/hopf-hecke-unfinished-15-2026-10-15-batch-3.proof-contracts.json --strict`: 11/11 checked, 0 errors, 0 warnings after the citation-section normalization described above. The initial two unsupported Proof-section diagnostics were mechanical and produced no defect rows.
+- Scoped precheck on all six repaired/routed proof carriers: 6 checked, 0 failing.
+- Scoped rendercheck on the three Alpha-edited items: 3 files, no errors; real KaTeX and renderer YAML parsing succeeded.
+- Reflow on the three Alpha-edited items: all unchanged. One final batched `proof-layout` invocation on exactly those three paths, after final item edits and reflow: 3 items, 12 steps, 0 defects.
+- Exact decision coverage and ledger-reference check: 8 owed obligations, 7 distinct closed rows, no duplicate/extra decision.
+
+No judge, stamp, certification, dispatch, transition or full gate battery was run. No mathematical blocker remains in the routed obligations. The separate owner source-maintenance alert above remains open; no closure or repair is claimed for it.
+

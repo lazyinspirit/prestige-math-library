@@ -1,11 +1,13 @@
 ---
+verification:
+  repair: research/hopf-hecke-unfinished-15-2026-10-15-owner/published-repairs/lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges.json
 id: lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges
 kind: lemma
 title: Star operations are Knuth moves and preserve the relevant cells
 status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
-deps: [def-star-operations-on-the-symmetric-group, thm-kazhdan-lusztig-basis-multiplication-formula, def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells, thm-knuth-equivalence-classes-are-insertion-tableau-fibers, thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-bruhat-order-basic-properties-for-permutations]
+deps: [def-star-operations-on-the-symmetric-group, thm-kazhdan-lusztig-basis-multiplication-formula, def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells, thm-knuth-equivalence-classes-are-insertion-tableau-fibers, lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-bruhat-order-basic-properties-for-permutations]
 dependency_level: 8
 justified_by: []
 aliases: []
@@ -24,9 +26,6 @@ sources:
     - title: "Donald E. Knuth, Permutations, Matrices, and Generalized Young Tableaux, Pacific J. Math. 34 (1970), 709–727 — Theorem 6 and the two local transformations."
       url: "https://msp.org/pjm/1970/34-3/pjm-v34-n3-p09-s.pdf"
       locator: "§6, equations (6.6)–(6.7), Theorem 6 and its canonical-row-word proof, printed pp. 722–724."
-verification:
-  audited: "2026-10-08"
-  precheck: pass
 ---
 
 ## Facts & Assumptions
@@ -41,7 +40,7 @@ verification:
 
 [F4] A right coefficient step is a right preorder step, and $x\sim_Ry$ iff $x^{-1}\sim_Ly^{-1}$ ([[def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells]]).
 
-[F5] In $C_w=\sum_{x\le w}p_{x,w}H_x$, the coefficients are supported on $x\le w$ and $p_{w,w}=1$; if $x\lessdot w$ is a Bruhat cover, then $p_{x,w}=v$ ([[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]]). The latter follows from the degree-one leading term and parity clauses.
+[F5] In $C_w=\sum_{x\le w}p_{x,w}H_x$, the coefficients are supported on $x\le w$ and $p_{w,w}=1$; if $x\lessdot w$ is a Bruhat cover, then $p_{x,w}=v$ ([[lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties]]). The latter follows from the degree-one leading term and parity clauses.
 
 [F6] For $x\le y$, $p_{x,y}=v^{\ell(y)-\ell(x)}P_{x,y}(v^{-2})$, and for $x<y$, $\mu(x,y)$ is the coefficient of $v$ in $p_{x,y}$ ([[def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization]]).
 

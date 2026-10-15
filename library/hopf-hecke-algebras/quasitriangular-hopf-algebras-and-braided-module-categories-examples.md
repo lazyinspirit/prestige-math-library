@@ -1,11 +1,12 @@
 ---
 page: quasitriangular-hopf-algebras-and-braided-module-categories-examples
 title: "Quasitriangular Hopf Algebras and Braided Module Categories — Examples"
-status: published
+status: draft
 items: []
-examples: []
+examples:
+  - ex-hh-trivial-r-matrix-for-cocommutative-hopf-algebra
+  - ex-hh-yang-baxter-alone-does-not-give-quasitriangularity
+  - ex-hh-canonical-r-matrix-for-the-double-of-cyclic-two-group
 ---
 
-Check R=1 in cocommutative examples and a finite-dimensional double R after HH-10. Contrast a QYBE solution with an R-matrix, and mark completed generic quantum universal R as a separate construction requiring topology.
-
-These are planned worked examples and counterexamples for [[quasitriangular-hopf-algebras-and-braided-module-categories]], with empty item lists pending normal authoring and proof review. Each example must calculate from the stated hypotheses, and each counterexample must verify both its premises and the failed conclusion. This companion is a dependency leaf and supplies no theorem to another page.
+These examples verify the trivial R-matrix for a cocommutative Hopf algebra, show that an invertible Yang–Baxter solution can fail a hexagon, and compute the canonical R-matrix of the four-dimensional double for the group of order two. The last calculation is self-contained for this finite case; the general double construction belongs to the following HH-10 pair. The generic $U_q(\mathfrak{sl}_2)$ series requires a completed tensor product, as noted on the A page.

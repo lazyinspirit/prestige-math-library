@@ -1,0 +1,26 @@
+// Coefficients are in ascending degree. modulus=0 is exact integer arithmetic
+// for the bounded monic rational fixture; otherwise all arithmetic is in F5.
+function cyclotomicQuadraticModel(modulus, a, b) {
+  const reduceNumber = x => modulus ? ((x % modulus) + modulus) % modulus : x;
+  const multiply = (left, right) => {
+    const out = Array(left.length + right.length - 1).fill(0);
+    left.forEach((x, i) => right.forEach((y, j) => { out[i + j] += x * y; }));
+    return out.map(reduceNumber);
+  };
+  const polynomial = multiply([-a, 1], [-b, 1]);
+  const remainder = input => {
+    const out = input.map(reduceNumber);
+    for (let degree = out.length - 1; degree >= 2; degree--) {
+      const leading = out[degree];
+      for (let j = 0; j <= 2; j++)
+        out[degree - 2 + j] = reduceNumber(out[degree - 2 + j] - leading * polynomial[j]);
+    }
+    return [out[0] ?? 0, out[1] ?? 0];
+  };
+  const equal = (left, right) => {
+    const x = remainder(left), y = remainder(right);
+    return x.every((v, i) => v === y[i]);
+  };
+  return { reduceNumber, remainder, equal, product: (left, right) => remainder(multiply(left, right)) };
+}
+

@@ -1,11 +1,13 @@
 ---
 page: hecke-base-change-semisimplicity-and-deformation-examples
 title: "Hecke Base Change, Semisimplicity, and Deformation — Examples"
-status: published
+status: draft
 items: []
-examples: []
+examples:
+  - cex-hh-nondegenerate-symmetrizing-trace-does-not-imply-semisimplicity
+  - ex-hh-two-dimensional-formal-split-deformation
 ---
 
-Compute the rank-one regular-trace determinant and repeated-root nonsemisimple case; compare symmetrizing and regular trace forms. Illustrate the formal lifting theorem on a two-dimensional algebra and locate the exact exceptional parameter.
+The companion computes both trace forms in the rank-one Hecke algebra at the repeated-root parameter and verifies that a perfect symmetrizing pairing can coexist with a degenerate regular-trace pairing and a nonsimple regular module. A second example writes down the lifted orthogonal idempotents in a two-dimensional formal deformation and identifies the same two simple labels in its closed and generic fibers.
 
-These are planned worked examples and counterexamples for [[hecke-base-change-semisimplicity-and-deformation]], with empty item lists pending normal authoring and proof review. Each example must calculate from the stated hypotheses, and each counterexample must verify both its premises and the failed conclusion. This companion is a dependency leaf and supplies no theorem to another page.
+These calculations test the scope of [[hecke-base-change-semisimplicity-and-deformation]]; neither example supplies a general semisimplicity or splitness theorem.

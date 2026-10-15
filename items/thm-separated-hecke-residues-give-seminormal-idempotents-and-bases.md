@@ -7,13 +7,14 @@ origin: pipeline
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-quantum-characteristic-of-an-invertible-hecke-parameter, def-type-a-hecke-specht-module-and-cell-form, thm-hecke-jucys-murphy-action-is-dominance-triangular, thm-murphy-tableau-elements-form-a-cellular-basis, thm-nonzero-cell-heads-classify-the-simple-modules-of-a-cellular-algebra]
+deps: [def-quantum-characteristic-of-an-invertible-hecke-parameter, def-type-a-hecke-specht-module-and-cell-form, thm-hecke-jucys-murphy-action-is-dominance-triangular, thm-murphy-tableau-elements-form-a-cellular-basis, thm-nonzero-cell-heads-classify-the-simple-modules-of-a-cellular-algebra, lem-cell-form-is-associative-and-its-radical-is-a-submodule]
 justified_by: []
 aliases: []
 landmark: false
 dependency_level: 11
 proof_strategy: direct
 verification:
+  repair: research/hopf-hecke-unfinished-15-2026-10-15-owner/published-repairs/thm-separated-hecke-residues-give-seminormal-idempotents-and-bases.json
   precheck: pass
 sources:
   scraped: []
@@ -47,9 +48,7 @@ Let $F$ be a field, $q\in F^{\times}$, let $e=e(F,q)$ and assume $e>n$ (with $e=
 
 [F4] Source results: separation of q-content sequences for $e>n$ and the seminormal spectral construction are Mathas, Lemma 3.32, Proposition 3.33 and Theorem 3.34 (printed pp. 30-34); the coefficient system of part 4 as displayed is that of Hu-Mathas, Example 3.11 with the axial distance (3.8), Lemma 3.12 and Proposition 3.17, the 1998 manuscript's $t\rhd s$ branch being inconsistent with the Hecke relations. The abstract form of the spectral construction under the separation condition is Mathas, Proposition 4.13 with the appendix.
 
-
-
-
+[F5] The Murphy elements $m^\lambda_{ab}$ form a cellular basis; the upward dominance spans $H^{\unrhd\lambda}$ and $H^{\rhd\lambda}$ are two-sided ideals ([[thm-murphy-tableau-elements-form-a-cellular-basis]]). Their own-cell action is $w m^\lambda_{ab}=\langle w,m_a\rangle_\lambda m_b$ ([[lem-cell-form-is-associative-and-its-radical-is-a-submodule]]).
 
 ## Proof
 
@@ -71,6 +70,6 @@ Let $F$ be a field, $q\in F^{\times}$, let $e=e(F,q)$ and assume $e>n$ (with $e=
 
 5.1 Prove nondegeneracy in the separated range locally. The canonical Murphy basis vector has form value $[\lambda]!_q=\prod_a[\lambda_a]!_q$, because $x_\lambda^2=[\lambda]!_qx_\lambda$; its seminormal image has the same value since the canonical tableau is dominance-maximal. This scalar is nonzero when $e>n$. If $s\rhd t=s(i,i+1)$ is a standard swap, put $a=1/[\rho]_q$. Step 4.1 gives $f_t=f_s(T_i+a)$. Associativity, orthogonality and the quadratic relation give $\langle f_t,f_t\rangle=(q+a)(1-a)\langle f_s,f_s\rangle=q[\rho+1]_q[\rho-1]_q[\rho]_q^{-2}\langle f_s,f_s\rangle$. Indeed expansion of $(T_i+a)^2$ and its $f_s$ coefficient $-a$ gives $q-a(q-1)-a^2=(q+a)(1-a)$. The swapped incomparable boxes have $2\le|\rho|\le n-1$: their row and column separations plus one are at most the size of the diagram. Thus all three quantum integers here are nonzero. Every standard tableau is connected to the canonical one by length-increasing swaps of adjacent incomparable entries: bubble-sort its linear extension of the box-order poset into the canonical row-order extension, then reverse the swaps. Induction gives nonzero diagonal norm at every $f_t$, so each cell form is nonsingular. [F2, F3, step 3.2, step 4.1, algebra]
 
-6.1 Each cell is now its nonzero simple form quotient, absolutely simple, and all these cells are pairwise distinct and exhaust the simple modules by [[thm-nonzero-cell-heads-classify-the-simple-modules-of-a-cellular-algebra]]. Thus the split semisimple quotient $H/J(H)$ has dimension $\sum_\lambda |\operatorname{Std}(\lambda)|^2$. This equals $\dim H$ because the Murphy cellular basis has exactly one element for each pair of standard tableaux of the same shape ([[thm-murphy-tableau-elements-form-a-cellular-basis]]). Hence $J(H)=0$, $H$ is split semisimple, and the direct sum of all its simple cell modules is faithful. On that faithful module the global Lagrange products of the Statement are the orthogonal projectors from step 2.1, with different shapes having disjoint tuples by step 1.1. Therefore $F_sF_t=\delta_{st}F_t$ holds in $H$ itself, proving the global idempotents. This argument proves only the separated range and does not assert a finite-$e$ nonzero-label criterion when $e\le n$. [step 5.1, step 2.1, step 1.1, algebra]
+6.1 Prove faithfulness directly from the cell action. Write $W_\mu=S^\mu_{\mathrm M}$. If $\mu\not\unrhd\lambda$, then $H^{\unrhd\mu}\cap H^{\unrhd\lambda}\subseteq H^{\rhd\mu}$: the common Murphy basis shapes dominate both labels and none can equal $\mu$. For a shape-$\lambda$ element $b$, the product $m^\mu_{tt}b$ lies in this intersection, so $b$ acts as zero on $W_\mu$. Order the finite shape set by a linear extension of dominance. The linear right-action map $\Phi:H\to\bigoplus_\mu\operatorname{End}_F(W_\mu)$ is therefore block triangular, with columns grouped by Murphy shape and rows by cell module. In its shape-$\lambda$ diagonal block, [F5] sends $m^\lambda_{ab}$ to $w\mapsto\langle w,m_a\rangle_\lambda m_b$. The nonsingularity proved in step 5.1 means that the functionals $\langle -,m_a\rangle_\lambda$ form a dual-space basis. These rank-one operators consequently form a basis of $\operatorname{End}_F(W_\lambda)$, so every diagonal block is invertible. Block triangular elimination makes $\Phi$ a linear isomorphism. In particular the sum of the cells is faithful. With ordinary endomorphism composition, right action gives an algebra isomorphism $H^{\mathrm{op}}\cong\prod_\mu\operatorname{End}_F(W_\mu)$; transposition identifies each matrix algebra's opposite with itself, so $H$ is split semisimple. This establishes the claimed conclusion without a radical-quotient dimension inference. On the faithful sum, the global Lagrange products of the Statement act as the projectors of step 2.1; tableaux of different shapes have disjoint residue tuples by step 1.1. Hence $F_sF_t=\delta_{st}F_t$ in $H$. This proves the global idempotents only for $e>n$ and asserts no finite-$e$ nonzero-label criterion for $e\le n$. [F5, step 5.1, step 2.1, step 1.1, algebra]
 
-7.1 Steps 1.1-6.1 prove all four claims. No semisimplicity was imposed as a hypothesis: it was derived locally from nondegenerate cells and their complete finite-cell classification. The calculation concerns the intrinsic Murphy cell and keeps the signed ordinary-module dictionary separate. All products and basis changes are finite, and no choice principle is used. [step 1.1, step 3.2, step 4.1, step 6.1] ∎
+7.1 Steps 1.1-6.1 prove all four claims. No semisimplicity was imposed as a hypothesis: it was derived locally from nondegenerate cells and their block triangular cell action. The calculation concerns the intrinsic Murphy cell and keeps the signed ordinary-module dictionary separate. All products and basis changes are finite, and no choice principle is used. [step 1.1, step 3.2, step 4.1, step 6.1] ∎

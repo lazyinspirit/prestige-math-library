@@ -1,11 +1,13 @@
 ---
+verification:
+  repair: research/hopf-hecke-unfinished-15-2026-10-15-owner/published-repairs/def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells.json
 id: def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells
 kind: definition
 title: "$L$-, $R$- and two-sided Kazhdan–Lusztig preorders and cells"
 status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
-deps: [thm-kazhdan-lusztig-basis-multiplication-formula, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, lem-reversal-anti-involution-commutes-with-hecke-bar, def-normalized-type-a-hecke-algebra-and-its-bar-involution]
+deps: [thm-kazhdan-lusztig-basis-multiplication-formula, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties, lem-reversal-anti-involution-commutes-with-hecke-bar, def-normalized-type-a-hecke-algebra-and-its-bar-involution]
 dependency_level: 7
 justified_by: []
 aliases: []
@@ -24,18 +26,11 @@ sources:
     - title: "Lars Thorge Jensen, p-Kazhdan–Lusztig Theory (Bonn dissertation 2017/18) — Kazhdan–Lusztig cell and star-operation conventions."
       url: "https://d-nb.info/1162953020/34"
       locator: "§§5.0–5.1, pp. 44–56; §5.3, pp. 58–62."
-verification:
-  audited: "2026-10-08"
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
 ---
 
 ## Definition
 
-Let $n\ge1$, let $C_w:=\underline H_w$ be the Kazhdan–Lusztig basis from [[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]], and let $S=\{s_1,\ldots,s_{n-1}\}$ be the simple reflections of $S_n$. For $x,y\in S_n$, write $x\leftarrow_L y$ if the coefficient of $C_x$ in $C_sC_y$ is nonzero for some $s\in S$, and write $x\leftarrow_R y$ if the coefficient of $C_x$ in $C_yC_s$ is nonzero for some $s\in S$. Define $x\le_L y$ if there is a finite chain $x=w_0,\ldots,w_m=y$ with $w_i\leftarrow_Lw_{i+1}$ for every $i<m$; define $\le_R$ using $\leftarrow_R$, and define $\le_{LR}$ by allowing either kind of step at each place. The length-zero chain makes each relation reflexive. Define $x\sim_Ly$ by $x\le_Ly$ and $y\le_Lx$, and similarly $\sim_R$ and $\sim_{LR}$. Their equivalence classes are the **left cells**, **right cells**, and **two-sided cells**.
+Let $n\ge1$, let $C_w:=\underline H_w$ be the Kazhdan–Lusztig basis from [[lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties]], and let $S=\{s_1,\ldots,s_{n-1}\}$ be the simple reflections of $S_n$. For $x,y\in S_n$, write $x\leftarrow_L y$ if the coefficient of $C_x$ in $C_sC_y$ is nonzero for some $s\in S$, and write $x\leftarrow_R y$ if the coefficient of $C_x$ in $C_yC_s$ is nonzero for some $s\in S$. Define $x\le_L y$ if there is a finite chain $x=w_0,\ldots,w_m=y$ with $w_i\leftarrow_Lw_{i+1}$ for every $i<m$; define $\le_R$ using $\leftarrow_R$, and define $\le_{LR}$ by allowing either kind of step at each place. The length-zero chain makes each relation reflexive. Define $x\sim_Ly$ by $x\le_Ly$ and $y\le_Lx$, and similarly $\sim_R$ and $\sim_{LR}$. Their equivalence classes are the **left cells**, **right cells**, and **two-sided cells**.
 
 For $w\in S_n$, set $L(w):=\{s\in S:sw<w\}$ and $R(w):=\{s\in S:ws<w\}$. The recorded properties are: $\le_L,\le_R,\le_{LR}$ are preorders; $x\le_Ly$ iff $x^{-1}\le_Ry^{-1}$; $x\le_Ly$ implies $R(y)\subseteq R(x)$ and $x\le_Ry$ implies $L(y)\subseteq L(x)$; consequently, elements of one left cell have equal right descent sets and elements of one right cell have equal left descent sets.
 
@@ -45,7 +40,7 @@ The multiplication formula [[thm-kazhdan-lusztig-basis-multiplication-formula]] 
 
 **Given:** $n\ge1$, the normalized Hecke algebra $H_v(n)$ over $A=\mathbb Z[v^{\pm1}]$, and its Kazhdan–Lusztig basis.
 
-[F1] The elements $C_w$ form an $A$-basis, and in $C_w=\sum_zp_{z,w}H_z$ the inverse-index symmetry $p_{z^{-1},w^{-1}}=p_{z,w}$ holds ([[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]]). The theorem's separate coefficientwise-nonnegativity clause is not used here.
+[F1] The elements $C_w$ form an $A$-basis, and in $C_w=\sum_zp_{z,w}H_z$ the inverse-index symmetry $p_{z^{-1},w^{-1}}=p_{z,w}$ holds ([[lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties]]). Coefficientwise nonnegativity is not used here.
 
 [F2] Left and right multiplication by a simple generator satisfy the ascent and descent formulas in [[thm-kazhdan-lusztig-basis-multiplication-formula]]. In particular, with $\lambda:=v+v^{-1}$, the descent products are $C_sC_w=\lambda C_w$ when $sw<w$ and $C_wC_s=\lambda C_w$ when $ws<w$.
 

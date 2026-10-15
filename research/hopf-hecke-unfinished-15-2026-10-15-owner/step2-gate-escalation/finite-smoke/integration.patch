@@ -1,0 +1,163 @@
+--- a/tools/finite-smoke.mjs
++++ b/tools/finite-smoke.mjs
+@@ -85,6 +85,54 @@
+ }
+ 
+ function makeChecks() { return {
++  // Bounded rank-one models; no claim about general rank or all fields.
++  'cyclotomic-rank-one-f5-inverse': ({ modulus = 5, inverse_x_coefficient = -1 } = {}) => {
++    if (modulus !== 5 || !Number.isInteger(inverse_x_coefficient) || Math.abs(inverse_x_coefficient) > 2)
++      return smokeResult(false, 'expected the field F5 and a small integer inverse X coefficient');
++    let cases = 0;
++    for (let a = 1; a < 5; a++) for (let b = 1; b < 5; b++) {
++      const model = cyclotomicQuadraticModel(5, a, b);
++      const inverseAB = [1, 2, 3, 4].find(t => model.reduceNumber(a * b * t) === 1);
++      const claimed = model.remainder([(a + b) * inverseAB, inverse_x_coefficient * inverseAB]);
++      const solutions = [];
++      // Independently find X^{-1} among all 25 degree-below-two residues.
++      for (let c = 0; c < 5; c++) for (let d = 0; d < 5; d++) {
++        if (model.equal(model.product([0, 1], [c, d]), [1, 0])) solutions.push([c, d]);
++      }
++      if (solutions.length !== 1 || !model.equal(claimed, solutions[0])
++        || !model.equal(model.product(claimed, [0, 1]), [1, 0]))
++        return smokeResult(false, `inverse formula fails for a=${a}, b=${b} in F5`);
++      if (!model.equal(model.remainder([0, 0, 1]), [-a * b, a + b]))
++        return smokeResult(false, `quadratic reduction fails for a=${a}, b=${b} in F5`);
++      cases++;
++    }
++    return smokeResult(true, `all ${cases} unit pairs in F5, including four repeated roots: monic polynomial division and exhaustive 25-residue inverse search verify X^2=(a+b)X-ab and X^{-1}=(a+b-X)/(ab)`);
++  },
++  'cyclotomic-rank-one-content-collision': ({ epsilon_scale = 1, epsilon_shift_sign = -1 } = {}) => {
++    if (!Number.isInteger(epsilon_scale) || Math.abs(epsilon_scale) > 2
++      || !Number.isInteger(epsilon_shift_sign) || Math.abs(epsilon_shift_sign) > 2)
++      return smokeResult(false, 'expected small integer coefficients for epsilon');
++    // The first fixture is the source's actual Q-specialization Q=2,u1=u2=1.
++    // Its monic integer reductions are exact also in Q; four finite-field
++    // fixtures additionally exercise every allowed nonzero repeated root in F5.
++    const fixtures = [{ modulus: 0, root: 1 }, ...[1, 2, 3, 4].map(root => ({ modulus: 5, root }))];
++    for (const { modulus, root } of fixtures) {
++      const model = cyclotomicQuadraticModel(modulus, root, root);
++      const epsilon = model.remainder([epsilon_scale * epsilon_shift_sign * root, epsilon_scale]);
++      if (model.equal(epsilon, [0, 0]))
++        return smokeResult(false, `epsilon is zero for root ${root} over ${modulus ? 'F5' : 'Q'}`);
++      if (!model.equal(model.product(epsilon, epsilon), [0, 0]))
++        return smokeResult(false, `epsilon is not square-zero for root ${root} over ${modulus ? 'F5' : 'Q'}`);
++      // Both one-box exponents are zero, so the specialized contents are the
++      // two chosen roots themselves and the interpolation denominator is zero.
++      const contents = [root, root];
++      if (contents[0] - contents[1] !== 0)
++        return smokeResult(false, 'the specialized interpolation denominator is nonzero');
++    }
++    if (epsilon_scale !== 1 || epsilon_shift_sign !== -1)
++      return smokeResult(false, 'source normalization is epsilon=X-c');
++    return smokeResult(true, 'actual Q specialization Q=2,u1=u2=1 has nonzero epsilon=X-1 with epsilon^2=0 and zero interpolation denominator; same exact identities hold at all four unit repeated roots in F5 (five bounded fixtures only)');
++  },
+   // Exact source witness: this checks the counterexample, not all real norm axioms.
+   'anisotropic-real-norm-complex-homogeneity-witness': ({
+     weights = [1, 2], vector = [1, 0], scalar = [0, 1], expected_values = [1, 2, 1],
+@@ -1441,6 +1489,32 @@
+   return count;
+ }
+ 
++// Coefficients are in ascending degree. modulus=0 is exact integer arithmetic
++// for the bounded monic rational fixture; otherwise all arithmetic is in F5.
++function cyclotomicQuadraticModel(modulus, a, b) {
++  const reduceNumber = x => modulus ? ((x % modulus) + modulus) % modulus : x;
++  const multiply = (left, right) => {
++    const out = Array(left.length + right.length - 1).fill(0);
++    left.forEach((x, i) => right.forEach((y, j) => { out[i + j] += x * y; }));
++    return out.map(reduceNumber);
++  };
++  const polynomial = multiply([-a, 1], [-b, 1]);
++  const remainder = input => {
++    const out = input.map(reduceNumber);
++    for (let degree = out.length - 1; degree >= 2; degree--) {
++      const leading = out[degree];
++      for (let j = 0; j <= 2; j++)
++        out[degree - 2 + j] = reduceNumber(out[degree - 2 + j] - leading * polynomial[j]);
++    }
++    return [out[0] ?? 0, out[1] ?? 0];
++  };
++  const equal = (left, right) => {
++    const x = remainder(left), y = remainder(right);
++    return x.every((v, i) => v === y[i]);
++  };
++  return { reduceNumber, remainder, equal, product: (left, right) => remainder(multiply(left, right)) };
++}
++
+ function smokeResult(ok, summary) { return { ok, summary }; }
+ function smokeCovariances(sample) {
+   const n = sample.length, d = sample[0].length;
+--- a/WORKFLOW.md
++++ b/WORKFLOW.md
+@@ -172,6 +172,8 @@
+ Finite-smoke obligations use named deterministic computations in `tools/finite-smoke.mjs` and exact source assertion excerpts in proof contracts. The registry includes finite covariance/rank, scalar Lasso and collinear-design witnesses, robust-estimator partition/rank/zero-data boundaries, deterministic replacement counterexamples, log-space binomial witnesses, bounded log-series checks for numerical constants, exact Rademacher and four-row regression witnesses, and finite Poisson-window and Strauss likelihood comparisons. Parameter values describe the finite model and must satisfy the check's domain. A finite-smoke pass checks only that model, not the general proof; a counterexample obligation passes when its stated false-claim witness is verified. Unknown names and stale assertion excerpts fail explicitly. Registry changes are validated by the authorized full gate battery; do not substitute an empty selection or fabricate success for an unsupported name.
+ 
+ The `anisotropic-real-norm-complex-homogeneity-witness` check uses exact Gaussian-integer pairs `[real, imaginary]`, positive integer weights `[1,2]`, vector `[1,0]` and scalar `[0,1]` to recompute `N(1)=1`, `N(i)=2` and `|i|=1`. It rejects a witness satisfying complex homogeneity, a different source normalization, or incorrect claimed values. This is finite counterexample sanity evidence; it does not verify the real norm axioms for all real coordinates.
++
++The `cyclotomic-rank-one-f5-inverse` check exhausts all 16 unit parameter pairs in F5 and independently searches all 25 quadratic residues for the inverse of X. The `cyclotomic-rank-one-content-collision` check reduces the actual rational specialization Q=2, u1=u2=1 using exact monic integer polynomial division, then checks every unit repeated root in F5. It verifies a nonzero square-zero element and vanishing interpolation denominator. These are bounded sanity checks for rank-one examples, not proofs for arbitrary fields or ranks.
+ 
+ ## Independent review through closeout
+ 
+--- /dev/null
++++ b/tools/finite-smoke-cyclotomic.test.mjs
+@@ -0,0 +1,59 @@
++import assert from 'node:assert/strict';
++import { spawnSync } from 'node:child_process';
++import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
++import { tmpdir } from 'node:os';
++import { join } from 'node:path';
++import { fileURLToPath } from 'node:url';
++import test from 'node:test';
++const root = fileURLToPath(new URL('../', import.meta.url));
++const inverseId = 'ex-hh-ariki-koike-rank-one-level-two-quotient';
++const collisionId = 'ex-hh-ariki-koike-colliding-content-specialization';
++const inverse = { check: 'cyclotomic-rank-one-f5-inverse',
++  asserts: 'X^2=(a+b)X-ab,\\qquad X^{-1}=\\frac{a+b-X}{ab}.', modulus: 5, inverse_x_coefficient: -1 };
++const collision = { check: 'cyclotomic-rank-one-content-collision',
++  asserts: 'Under the specialization $Q\\mapsto2$ and $u_1,u_2\\mapsto1$ into $\\mathbb Q$, the contents coincide and the algebra becomes $\\mathbb Q[\\varepsilon]/(\\varepsilon^2)$ with $\\varepsilon=X-1\\ne0$.',
++  epsilon_scale: 1, epsilon_shift_sign: -1 };
++test('cyclotomic source witnesses and mathematical negative controls', () => {
++  const directory = mkdtempSync(join(tmpdir(), 'finite-smoke-cyclotomic-'));
++  const contract = join(directory, 'contract.json');
++  const run = (id, smoke) => {
++    writeFileSync(contract, JSON.stringify({ version: 1, scope: [id], contracts: { [id]: { finite_smoke: [smoke] } } }));
++    const result = spawnSync(process.execPath, ['tools/finite-smoke.mjs', contract, '--json'], { cwd: root, encoding: 'utf8' });
++    assert.equal(result.error, undefined);
++    return { status: result.status, body: JSON.parse(result.stdout) };
++  };
++  const rejects = (id, smoke, message) => {
++    const result = run(id, smoke);
++    assert.equal(result.status, 1);
++    assert.equal(result.body.outcomes.length, 1);
++    assert.equal(result.body.outcomes[0].ok, false);
++    assert.match(result.body.outcomes[0].summary, message);
++  };
++  try {
++    const goodInverse = run(inverseId, inverse);
++    assert.equal(goodInverse.status, 0);
++    assert.equal(goodInverse.body.outcomes.length, 1);
++    assert.match(goodInverse.body.outcomes[0].summary, /all 16 unit pairs/);
++    const goodCollision = run(collisionId, collision);
++    assert.equal(goodCollision.status, 0);
++    assert.equal(goodCollision.body.outcomes.length, 1);
++    assert.match(goodCollision.body.outcomes[0].summary, /actual Q specialization/);
++    // Replacing -X by +X or dropping X is mathematically wrong in these models.
++    rejects(inverseId, { ...inverse, inverse_x_coefficient: 1 }, /inverse formula fails/);
++    rejects(inverseId, { ...inverse, inverse_x_coefficient: 0 }, /inverse formula fails/);
++    rejects(inverseId, { ...inverse, modulus: 4 }, /expected the field F5/);
++    // X+1 is not square-zero in Q[X]/((X-1)^2); zero is not a nonzero witness.
++    rejects(collisionId, { ...collision, epsilon_shift_sign: 1 }, /not square-zero.*Q/);
++    rejects(collisionId, { ...collision, epsilon_scale: 0 }, /epsilon is zero/);
++    // Twice epsilon is nonzero and square-zero, but is not the source's epsilon.
++    rejects(collisionId, { ...collision, epsilon_scale: 2 }, /source normalization/);
++    const stale = run(collisionId, { ...collision, asserts: 'Invented epsilon assertion.' });
++    assert.equal(stale.status, 1);
++    assert.equal(stale.body.outcomes.length, 0);
++    assert.equal(stale.body.errors[0].code, 'smoke-assertion-mismatch');
++    const unknown = run(inverseId, { ...inverse, check: 'cyclotomic-unregistered' });
++    assert.equal(unknown.status, 1);
++    assert.equal(unknown.body.outcomes.length, 0);
++    assert.equal(unknown.body.errors[0].code, 'smoke-check');
++  } finally { rmSync(directory, { recursive: true, force: true }); }
++});
