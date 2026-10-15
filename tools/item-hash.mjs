@@ -59,6 +59,9 @@ export const stripJudgeStamp = (text) =>
     // Flow-style verification maps are valid corpus frontmatter too. The
     // stamp writer appends its judge mapping last, so remove that exact suffix
     // and recover the byte-for-byte pre-stamp map for verdict currency.
+    // Empty flow maps have no comma before their first/only judge field.
+    // Recover the exact pre-stamp empty-map bytes, including inner spacing.
+    .replace(/^(verification:[ \t]*\{[ \t]*)judge:[ \t]*\{[^{}\n]*\}([ \t]*\}[ \t]*)$/m, "$1$2")
     .replace(/^(verification:\s*\{[^{}\n]*?),\s*judge:\s*\{[^{}\n]*\}(\s*\}\s*)$/m, "$1$2")
     .replace(/^ {2}judge:\n(?: {4}.*\n)*/m, "")
     .replace(/^verification:\n(?=^(?:---|[A-Za-z_][A-Za-z0-9_-]*:))/m, "");

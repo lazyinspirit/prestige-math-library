@@ -218,14 +218,23 @@ const writeBlock = (text, block, stampModels) => {
   const inlineJudge = `judge: {model: "${stampModels.join(' + ')}", verdict: pass, date: ${today}}`;
   // Flow-style YAML is common in older authored items. Keep its original
   // bytes and append the stamp inside the same mapping; a second top-level
-  // `verification` key makes the renderer drop the item. The second pattern
-  // also heals duplicate keys written by the former fallback on re-apply.
-  const duplicatedInline = /^(verification:\s*\{[^{}\n]*)(\})\nverification:\n {2}judge:\n(?: {4}.*\n)*/m;
-  if (duplicatedInline.test(text)) {
-    return text.replace(duplicatedInline, `$1, ${inlineJudge}$2\n`);
-  }
-  const inline = /^(verification:\s*\{[^{}\n]*)(\})\s*$/m;
-  if (inline.test(text)) return text.replace(inline, `$1, ${inlineJudge}$2`);
+  // `verification` key makes the renderer drop the item. The explicit duplicate
+  // pattern also heals keys written by the former fallback on re-apply.
+  // Replace an existing flow judge before the shallow un-stamped map path.
+  // Re-applying a valid nested stamp must not create another verification key.
+  const stampedInline = /^(verification:[ \t]*\{[^{}\n]*?)(judge:[ \t]*\{[^{}\n]*\})([ \t]*\}[ \t]*)$/m;
+  if (stampedInline.test(text)) return text.replace(stampedInline, (_all, prefix, _old, suffix) => `${prefix}${inlineJudge}${suffix}`);
+  const appendInline = (_all, prefix, suffix) => {
+    const content = prefix.slice(prefix.indexOf('{') + 1);
+    return `${prefix}${content.trim() ? ', ' : ''}${inlineJudge}${suffix}`;
+  };
+  const duplicatedInline = /^(verification:[ \t]*\{[^{}\n]*)(\})\nverification:\n {2}judge:\n(?: {4}.*\n)*/m;
+  if (duplicatedInline.test(text)) return text.replace(duplicatedInline, (...args) => appendInline(...args) + '\n');
+  const inline = /^(verification:[ \t]*\{[^{}\n]*)(\}[ \t]*)$/m;
+  if (inline.test(text)) return text.replace(inline, appendInline);
+  // A complex flow map needs a lossless explicit metadata repair. Never fall
+  // through to adding a second top-level key or discard other audit fields.
+  if (/^verification:[ \t]*\{/m.test(text)) throw Error('judge stamps: unsupported verification flow mapping; explicit metadata repair required');
   const existing = /^ {2}judge:\n(?: {4}.*\n)*/m;
   if (existing.test(text)) return text.replace(existing, block);
   const precheck = /^( {2}precheck: .*\n)/m;
@@ -437,6 +446,12 @@ for (const id of ids) {
   const block = `  judge:\n    model: "${itemModels.join(' + ')}"\n    verdict: pass\n    date: ${today}\n${auditEvidence}`;
   const next = writeBlock(text, block, itemModels);
   if (next === null) { result.skipped.push({ id, reason: 'no-verification-anchor' }); continue; }
+  // A formatting tool must not write malformed or duplicate-key frontmatter.
+  // Currency/ledger authorization above remains mandatory and unchanged.
+  const nextFrontmatter = next.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1];
+  if (nextFrontmatter === undefined) throw Error(`judge stamps: missing output frontmatter for ${id}`);
+  try { parseFrontmatter(nextFrontmatter); }
+  catch (cause) { throw Error(`judge stamps: refusing invalid output for ${id}: ${cause.message}`); }
   if (next !== text && apply) writeFileSync(file, next);
   result.stamped.push({ id, models: itemModels, changed: next !== text });
 }

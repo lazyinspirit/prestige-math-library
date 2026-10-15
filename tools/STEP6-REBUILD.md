@@ -89,3 +89,12 @@ recorded historical entries and never recreates a whole-workspace baseline.
 
 The owner prohibited tests and execution for this rebuild. No tests, syntax
 checks, gates, renderers or rebuilt engine run were used to validate it.
+
+Judge-stamp preparation preserves flow-style verification mappings. A first
+judge field in an empty mapping has no leading comma; reapplication replaces
+the existing flow judge instead of creating a duplicate top-level verification
+key. The judge content hash strips that judge-only flow field back to the exact
+original empty map, retaining genuine non-judge audit evidence. The stamper
+parses proposed frontmatter before writing and refuses unsupported complex flow
+updates rather than discarding audit fields or writing duplicate keys. These
+formatting protections grant no verdict or currency beyond the native ledger.
