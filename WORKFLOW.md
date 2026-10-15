@@ -240,6 +240,27 @@ the immutable post-reader raw hash and the actual current mathematical source
 to match the authenticated before/after rehome archives. Invalid receipts,
 changed proof bodies and unsupported current contract inputs fail closed.
 
+An owner may preserve a genuine native reader finding about an outside published
+page through `RUN-step3-owner-required-page-routes.json` (version 1,
+`owner-step3-required-published-page-route-v1`). This narrow routing receipt
+binds the original unchanged finding, report, successful native attempt and
+structured completion, prompt, immutable pre/post snapshots, current assigned
+page manifest and its explicit `requires` edge. The assigned consumer must
+reach an actual published item listed on that page through hash-bound current
+logical dependency edges. The page must remain outside all run manifests.
+Owner-current before and after archives, identical frontmatter, at most two
+unique literal prose edits, and focused owner review bind the exact correction.
+These archives establish no historical full-byte reader observation. The native
+subject label and reader obligation remain unchanged; an explicit page carrier
+route uses the actual published page bytes and never a fabricated item carrier.
+The route grants no scope, edit authority, acceptance or review coverage. Normal
+independent adjudication, explicit historical uncertainty, current page sealing,
+defect-ledger closure and every gate remain mandatory. Unregistered foreign
+findings retain the ordinary rejection; this receipt does not enlarge refuter
+or owned-page inventories. The Step-3 closure freezes this exact optional registry
+and its hash-bound native and owner historical evidence; later verification rejects
+registry or referenced-evidence mutation.
+
 When a reader repairs some defects but cannot resolve another in the same
 draft, the owner may retain its original open finding through
 `RUN-step3-owner-partial-reader-repairs.json`. This routing-only record binds

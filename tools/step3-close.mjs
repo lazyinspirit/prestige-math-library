@@ -7,6 +7,7 @@ import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { itemHashGuard } from './item-hash.mjs';
+import { requiredPageClosureEvidence } from './step3-owner-required-page-routes.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
 
 const argv = process.argv.slice(2);
@@ -37,9 +38,12 @@ const artifactNames = (version = 3) => researchNames().filter((name) =>
   || (name.startsWith(`${run}-alpha-`) && name.endsWith('-3a-decisions.json'))
   || version === 2 && [ `${run}-alpha-3b.md`, `${run}-cross-group-edges.json`,
     `${run}-3b-verdicts.jsonl` ].includes(name)).sort();
-const artifactHashes = (version = 3) => Object.fromEntries(artifactNames(version).map((name) => [
-  `research/${name}`, sha256(readFileSync(R('research', name))),
-]));
+const artifactHashes = (version = 3) => ({
+  ...Object.fromEntries(artifactNames(version).map((name) => [
+    `research/${name}`, sha256(readFileSync(R('research', name))),
+  ])),
+  ...(version === 3 ? requiredPageClosureEvidence(root, run) : {}),
+});
 const jsonl = (path) => existsSync(path)
   ? readFileSync(path, 'utf8').split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line)) : [];
 const canonicalRows = (rows, key) => [...rows].sort((left, right) =>
@@ -76,7 +80,7 @@ if (mode === 'verify') {
     errors.push('wrong version, run, or status');
   }
   const currentArtifacts = artifactHashes(receipt.version);
-  if (JSON.stringify(Object.keys(currentArtifacts)) !== JSON.stringify(Object.keys(receipt.artifacts ?? {}).sort())) {
+  if (JSON.stringify(Object.keys(currentArtifacts).sort()) !== JSON.stringify(Object.keys(receipt.artifacts ?? {}).sort())) {
     errors.push('the exact Step-3 artifact set changed');
   }
   for (const [relative, expected] of Object.entries(receipt.artifacts ?? {})) {

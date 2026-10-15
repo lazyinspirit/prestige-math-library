@@ -31,6 +31,7 @@ import { draftOwnerMatcher } from './run-draft-ownership.mjs';
 import { partialReaderFindings } from './step3-owner-partial-reader-repairs.mjs';
 import { unboundReaderObservations } from './step3-owner-unbound-reader-observations.mjs';
 import { loadOwnerPageRepairs, ownerPageFindingRepair } from './step3-owner-post-reader-page-repairs.mjs';
+import { loadRequiredPageRoutes, requiredPageCarrier } from './step3-owner-required-page-routes.mjs';
 import { sourceIdenticalAcceptanceContinuity } from './step3-owner-source-identical-continuity.mjs';
 
 const argv = process.argv.slice(2);
@@ -256,6 +257,8 @@ function currentItemId(id, batch = null) {
 }
 
 function currentDecisionCarrier(decision, target, live) {
+  if (target?.owner_required_page_route) return requiredPageCarrier(ROOT, run,
+    String(target.obligation).split(':')[1], target);
   if (target?.subject_type === 'in-run-dependency') {
     return producerCarrier(target.id, target.producer_batch);
   }
@@ -642,6 +645,7 @@ function reportOnlyFinding(finding, refuter = false) {
     producer_batch: _producer, dependency_path: _path,
     producer_carrier_at_split: _current, producer_pre_snapshot: _historical,
     observation_basis: _basis, owner_page_repair: _ownerPageRepair,
+    owner_required_page_route: _requiredPageRoute,
     owner_partial_reader_repair: _ownerPartialReaderRepair,
     owner_unbound_reader_observation: _ownerUnboundReaderObservation, ...row } = finding;
   if (refuter && finding.subject_type === 'in-run-dependency') {
@@ -706,6 +710,10 @@ if (command === 'verify-post-3a') {
       || hashValue(sealed.hashes) !== hashValue(live.items)
       || hashValue(sealed.page_hashes) !== hashValue(live.pages))
       fail(`step3-scope: batch ${batch} changed after the passed Step-3a gate`);
+    const scope = readJson(scopePath(batch), `batch ${batch} scope`);
+    const routes = loadRequiredPageRoutes(ROOT, run, batch);
+    for (const finding of scope.reader_findings ?? []) if (finding.owner_required_page_route
+      || routes.has(finding.obligation)) requiredPageCarrier(ROOT, run, batch, finding);
     count += Object.keys(live.items).length;
   }
   console.log(`step3-scope: verified ${count} item carrier(s) in ${batches.length} sealed post-3a batch(es)`);
@@ -842,13 +850,23 @@ if (command === 'split') {
   const allRunIds = new Set(Object.values(manifestItems()).flat());
   const published = publishedDependencies(derived.manifestPost, allRunIds);
   const inRun = findingDependencies(batch, derived.manifestPost, Array.isArray(readerReport.findings) ? readerReport.findings : []);
-  const readerAllowed = new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys()]);
+  const requiredPages = loadRequiredPageRoutes(ROOT, run, batch);
+  const readerAllowed = new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys(),
+    ...[...requiredPages.values()].map(r => r.entry.page)]);
   const readerFindings = normalizeFindings(Array.isArray(readerReport.findings) ? readerReport.findings : [],
     batch, readerAllowed, readerError, 'reader');
   const live = liveFingerprints(batch);
   const ownerPages = loadOwnerPageRepairs(ROOT, run, batch);
   const partialFindings = partialReaderFindings(ROOT, run, batch);
   for (const finding of readerFindings) {
+    const requiredPage = requiredPages.get(finding.obligation);
+    if (requiredPage) {
+      // Retain the native subject label and finding; only the carrier route changes.
+      finding.owner_required_page_route = requiredPage.binding;
+      finding.observed_sha256 = null; finding.observation_basis = 'unbound';
+      requiredPageCarrier(ROOT, run, batch, finding);
+      continue;
+    }
     const expectedType = derived.manifestPost.includes(finding.id) ? 'in-flight-item'
       : derived.pageManifestPost.includes(finding.id) ? 'page'
         : inRun.has(finding.id) ? 'in-run-dependency' : 'published-dependency';
@@ -937,6 +955,9 @@ if (command === 'collect') {
 
   const openedSet = new Set(opened);
   const live = liveFingerprints(batch);
+  const requiredPages = loadRequiredPageRoutes(ROOT, run, batch);
+  for (const finding of scope.reader_findings ?? []) if (finding.owner_required_page_route
+    || requiredPages.has(finding.obligation)) requiredPageCarrier(ROOT, run, batch, finding);
   const inRun = findingDependencies(batch, scope.manifest_post ?? [], scope.reader_findings ?? []);
   for (const finding of scope.reader_findings ?? []) if (finding.subject_type === 'in-run-dependency') {
     validateInRunFinding(finding, batch, inRun, error);
@@ -1105,7 +1126,14 @@ if (command === 'check') {
     let ownerPages = [];
     try { ownerPages = loadOwnerPageRepairs(ROOT, run, batch, { requireCurrent: false }); }
     catch (cause) { error('owner-page-authority-invalid', `batch ${batch}: ${cause.message}`); }
+    let requiredPages = new Map();
+    try { requiredPages = loadRequiredPageRoutes(ROOT, run, batch); }
+    catch (cause) { error('required-page-authority-invalid', `batch ${batch}: ${cause.message}`); }
     for (const finding of scope.reader_findings ?? []) {
+      if (finding.owner_required_page_route || requiredPages.has(finding.obligation)) {
+        try { requiredPageCarrier(ROOT, run, batch, finding); }
+        catch (cause) { error('required-page-authority-invalid', `${finding.obligation}: ${cause.message}`); }
+      }
       const ownerPage = ownerPageFindingRepair(ownerPages, batch, finding);
       if (!ownerPage && finding.owner_page_repair) error('owner-page-authority-invalid', `${finding.obligation} has no matching frozen page authority`);
       if (ownerPage) {
@@ -1137,11 +1165,16 @@ if (command === 'check') {
           const inRun = findingDependencies(batch, derived.manifestPost,
             [...(Array.isArray(report.findings) ? report.findings : []), ...(scope.reader_findings ?? [])], manifests);
           const normalized = normalizeFindings(Array.isArray(report.findings) ? report.findings : [], batch,
-            new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys()]), reportError, 'reader');
+            new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys(),
+              ...[...requiredPages.values()].map(r => r.entry.page)]), reportError, 'reader');
           const stored = (scope.reader_findings ?? []).map(finding => reportOnlyFinding(finding));
           if (JSON.stringify(normalized) !== JSON.stringify(stored)) reportError('findings no longer match the routed obligations');
           const partialFindings = partialReaderFindings(ROOT, run, batch);
           for (const finding of scope.reader_findings ?? []) {
+            if (finding.owner_required_page_route || requiredPages.has(finding.obligation)) {
+              try { requiredPageCarrier(ROOT, run, batch, finding); } catch (cause) { reportError(cause.message); }
+              continue;
+            }
             if (finding.owner_partial_reader_repair
               && hashValue(finding.owner_partial_reader_repair) !== hashValue(partialFindings.get(finding.obligation)))
               reportError(`${finding.obligation} lost its exact partial-reader routing authority`);
@@ -1409,9 +1442,15 @@ if (command === 'check') {
         }
         if (!allowed.includes(decision.verdict)) error('decision-verdict', `${decision.obligation} has invalid verdict ${decision.verdict}`);
         if (typeof decision.evidence !== 'string' || !decision.evidence.trim()) error('decision-evidence', `${decision.obligation} has no evidence`);
-        if (target?.owner_page_repair && (decision.historical_delta_unknown !== true
+        if ((target?.owner_page_repair || target?.owner_required_page_route) && (decision.historical_delta_unknown !== true
           || typeof decision.owner_resolution !== 'string' || decision.owner_resolution.trim().length < 40)) {
           error('owner-page-observation-unbound', `${decision.obligation} needs explicit owner resolution of the unbound original reader observation`);
+        }
+        if (target?.owner_required_page_route) {
+          try {
+            if (decision.subject_sha256 !== hashValue(currentDecisionCarrier(decision, target, null)))
+              error('required-page-decision-stale', `${decision.obligation} must seal its actual current published page`);
+          } catch (cause) { error('required-page-authority-invalid', cause.message); }
         }
         const accepted = target?.direct && decision.verdict === 'accepted';
         const cleanChange = decision.verdict === 'reviewed_no_defect';
