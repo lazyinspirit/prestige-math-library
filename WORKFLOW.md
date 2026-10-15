@@ -347,6 +347,13 @@ performs mechanical contract closure and emits `step6-` owner-report artifacts;
 its readiness and closeout commit remain evidence-bound. Publishing/pushing are
 owner actions, separate from this build.
 
+The native Step-6 closeout tool has a 1,800-second dispatch budget (1,920
+seconds including the executor cleanup margin). Scoped closeout performs several
+complete outside-preservation scans and report checks; the finite budget allows
+these checks to finish before owned index integration. Every preservation guard
+and terminal gate remains required. The terminal gate runner has no dispatch
+timeout; it waits for each gate to finish unless the controller is aborted.
+
 Readiness and closeout treat both `ENOENT` and `ENOTDIR` as an absent path:
 a regular file cannot contain child evidence files. Readiness follows existing
 local references; required owned carriers still fail when absent or nonregular,

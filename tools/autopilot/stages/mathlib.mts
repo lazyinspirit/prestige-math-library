@@ -1654,7 +1654,8 @@ export const stages = [
       label: 'close-step6-v2',
       job: 'bookkeeping-mechanical',
       covers: ['all'],
-      timeout: 300,
+      // Scoped preservation scans and report checks share this finite budget.
+      timeout: 1800,
       // run-commit writes this final receipt before staging, so the one close
       // commit contains its own coverage evidence and the engine must not add
       // a second, post-commit receipt.
