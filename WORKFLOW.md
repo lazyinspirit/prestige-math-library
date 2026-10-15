@@ -297,6 +297,11 @@ alert inventory and never acquire a fabricated in-run owner or new review covera
 Original Step-3 closure and judge verdicts remain immutable. Existing judge
 currency rules continue to govern unchanged consumer carriers.
 
+Step-4 alerts about another batch's in-run page route to its actual page-owning
+group, just as item alerts route to their item-owning group. Same-batch findings
+belong in concerns. Page findings retain ordinary owning-group disposition and
+page currency guards; they cannot license an item repair or supply judge coverage.
+
 Step 4's read-only
 batch digests use `RUN-batch-N-step5-context.json`; a digest from another batch
 cannot cover the inventory, and retries target only failing batches.

@@ -245,14 +245,15 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
       alerts.push(alert);
     }
     for (const [alertIndex, raw] of (digest.alerts ?? []).entries()) {
-      if (!index.itemOwner.has(raw.item) && isPublishedItem(REPO, raw.item)) {
+      const ownerRecord = index.itemOwner.get(raw.item) ?? index.pageOwner.get(raw.item);
+      if (!ownerRecord && isPublishedItem(REPO, raw.item)) {
         const routed = publishedAlertRoute({ root: REPO, run, batch: fromBatch, group: from,
           digestPath: rel(digestPath(fromBatch)), digest, alertIndex, frontierIds: new Set(index.itemOwner.keys()) });
         if (!routed.ok) problems.push(`batch ${fromBatch}: published alert ${raw.item}: ${routed.reason}`);
         else publishedAlerts.push(routed.route);
         continue;
       }
-      const owner = index.itemOwner.get(raw.item)?.group;
+      const owner = ownerRecord?.group;
       const alert = {
         version: 1,
         source: 'step4-read',
@@ -267,7 +268,7 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
       alert.alert_id = step5AlertId(alert);
       if (!groupLabels.has(from)) problems.push(`${alert.alert_id}: unknown source group ${from}`);
       if (!owner) problems.push(`${alert.alert_id}: item ${alert.item} belongs to no run group`);
-      if (index.itemOwner.get(raw.item)?.batch === fromBatch) problems.push(`${alert.alert_id}: source batch owns ${alert.item}; this belongs in concerns`);
+      if (ownerRecord?.batch === fromBatch) problems.push(`${alert.alert_id}: source batch owns ${alert.item}; this belongs in concerns`);
       if (!alert.finding.trim()) problems.push(`${alert.alert_id}: finding is empty`);
       alerts.push(alert);
     }
@@ -664,7 +665,7 @@ if (mode === 'digests') {
     // defect it should have kept in `concerns` and adjudicated itself, and
     // delivering it would send the batch its own finding back.
     for (const [alertIndex, a] of (d.alerts ?? []).entries()) {
-      const owner = index.itemOwner.get(a.item);
+      const owner = index.itemOwner.get(a.item) ?? index.pageOwner.get(a.item);
       if (!owner && isPublishedItem(REPO, a.item)) {
         const routed = publishedAlertRoute({ root: REPO, run, batch: g.label, group: g.group,
           digestPath: rel(p), digest: d, alertIndex, frontierIds: new Set(index.itemOwner.keys()) });
