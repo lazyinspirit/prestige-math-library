@@ -2,7 +2,7 @@
 id: def-dirichlet-distribution
 kind: definition
 title: "Dirichlet distribution, including the one-category case"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

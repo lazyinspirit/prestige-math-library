@@ -2,7 +2,7 @@
 id: lem-smc-mutation-and-weighted-correction-clt
 kind: lemma
 title: "Conditional mutation and weighted correction CLT"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: lem-invariant-law-integrates-bounded-set-drift
 kind: lemma
 title: An invariant law integrates a drift function bounded on its small set
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

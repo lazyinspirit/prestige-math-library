@@ -2,7 +2,7 @@
 id: lem-taper-window-l2-normalization
 kind: lemma
 title: Asymptotic squared-norm normalization of a tapered window
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

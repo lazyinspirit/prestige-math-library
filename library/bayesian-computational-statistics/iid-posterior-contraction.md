@@ -1,7 +1,7 @@
 ---
 page: iid-posterior-contraction
 title: "IID posterior contraction by entropy and prior mass"
-status: draft
+status: published
 items:
   - def-hellinger-distance-between-density-laws
   - lem-iid-bounded-variance-bernstein-tail

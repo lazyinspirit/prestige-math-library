@@ -2,7 +2,7 @@
 id: lem-k-sample-null-centering
 kind: lemma
 title: Exact null centering of the K-sample block bootstrap
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

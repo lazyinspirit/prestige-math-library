@@ -2,7 +2,7 @@
 id: ex-paired-kfold-model-comparison-uncertainty
 kind: example
 title: "Paired K-fold comparison retains correlated fold errors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

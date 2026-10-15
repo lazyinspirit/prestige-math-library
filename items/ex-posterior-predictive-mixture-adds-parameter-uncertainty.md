@@ -2,7 +2,7 @@
 id: ex-posterior-predictive-mixture-adds-parameter-uncertainty
 kind: example
 title: Posterior prediction adds parameter uncertainty to future sampling variation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

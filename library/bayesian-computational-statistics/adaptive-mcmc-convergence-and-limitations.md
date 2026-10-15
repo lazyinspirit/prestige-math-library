@@ -1,7 +1,7 @@
 ---
 page: adaptive-mcmc-convergence-and-limitations
 title: Adaptive MCMC convergence limits
-status: draft
+status: published
 items:
   - def-diminishing-adaptation
   - def-adaptive-mcmc-containment

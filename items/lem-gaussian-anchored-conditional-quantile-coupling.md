@@ -3,7 +3,7 @@ dependency_level: 2
 id: lem-gaussian-anchored-conditional-quantile-coupling
 kind: lemma
 title: Conditional quantile couplings for Gaussian anchored sums
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

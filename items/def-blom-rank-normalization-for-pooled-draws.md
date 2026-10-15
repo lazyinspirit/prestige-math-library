@@ -2,7 +2,7 @@
 id: def-blom-rank-normalization-for-pooled-draws
 kind: definition
 title: Blom rank-normal scores for pooled draws
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

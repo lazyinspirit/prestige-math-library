@@ -3,7 +3,7 @@ dependency_level: 3
 id: lem-harris-geometric-ergodicity-has-integrable-rate-envelope
 kind: lemma
 title: Harris geometric ergodicity admits an integrable total-variation envelope
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

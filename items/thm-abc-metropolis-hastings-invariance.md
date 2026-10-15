@@ -2,7 +2,7 @@
 id: thm-abc-metropolis-hastings-invariance
 kind: theorem
 title: ABC Metropolis–Hastings preserves its augmented tolerance target
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

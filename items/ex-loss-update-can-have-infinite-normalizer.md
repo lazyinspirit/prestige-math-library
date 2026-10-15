@@ -2,7 +2,7 @@
 id: ex-loss-update-can-have-infinite-normalizer
 kind: example
 title: "A measurable loss can have an infinite normalizer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

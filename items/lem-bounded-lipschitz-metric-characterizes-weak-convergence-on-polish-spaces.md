@@ -2,7 +2,7 @@
 id: lem-bounded-lipschitz-metric-characterizes-weak-convergence-on-polish-spaces
 kind: lemma
 title: The bounded-Lipschitz metric characterizes weak convergence on Polish spaces
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

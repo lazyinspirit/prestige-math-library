@@ -2,7 +2,7 @@
 id: lem-zero-long-run-variance-gives-degenerate-clt
 kind: lemma
 title: Zero covariance long-run variance gives a degenerate CLT under absolute summability
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

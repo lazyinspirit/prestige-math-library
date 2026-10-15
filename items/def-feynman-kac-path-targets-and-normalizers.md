@@ -2,7 +2,7 @@
 id: def-feynman-kac-path-targets-and-normalizers
 kind: definition
 title: "Feynman–Kac path targets and normalizers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

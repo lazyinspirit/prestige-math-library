@@ -2,7 +2,7 @@
 id: alg-particle-gibbs-backward-simulation
 kind: algorithm
 title: Particle Gibbs with backward simulation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

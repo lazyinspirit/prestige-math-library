@@ -2,7 +2,7 @@
 id: cex-ordinary-importance-sampling-infinite-variance-under-light-tailed-proposal
 kind: counterexample
 title: A light-tailed proposal can give ordinary importance sampling infinite variance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

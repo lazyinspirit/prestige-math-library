@@ -2,7 +2,7 @@
 id: lem-fixed-design-gaussian-regression-controls-local-likelihood-distances
 kind: lemma
 title: "Empirical mean and scale distance control Gaussian-regression likelihoods"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

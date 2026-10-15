@@ -2,7 +2,7 @@
 id: alg-pmmh
 kind: algorithm
 title: Particle marginal Metropolis–Hastings
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

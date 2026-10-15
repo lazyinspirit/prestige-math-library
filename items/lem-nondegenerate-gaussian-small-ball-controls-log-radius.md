@@ -3,7 +3,7 @@ dependency_level: 0
 id: lem-nondegenerate-gaussian-small-ball-controls-log-radius
 kind: lemma
 title: A nonzero Gaussian direction forces logarithmic small-ball cost
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

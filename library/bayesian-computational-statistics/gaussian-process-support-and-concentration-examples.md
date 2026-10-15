@@ -1,7 +1,7 @@
 ---
 page: gaussian-process-support-and-concentration-examples
 title: Banach Gaussian priors, RKHS support, and concentration — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-cylinder-gaussian-process-is-not-banach-valued

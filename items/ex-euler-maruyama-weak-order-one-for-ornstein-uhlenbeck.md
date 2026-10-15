@@ -7,7 +7,7 @@ verification:
 id: ex-euler-maruyama-weak-order-one-for-ornstein-uhlenbeck
 kind: example
 title: "A verified weak-order contract for the Ornstein–Uhlenbeck process"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

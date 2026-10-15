@@ -2,7 +2,7 @@
 id: lem-lipschitz-sde-local-solution-has-finite-path-moment
 kind: lemma
 title: A Lipschitz SDE solution has a finite path-sup second moment
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

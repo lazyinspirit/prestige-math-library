@@ -2,7 +2,7 @@
 id: ex-delete-one-jackknife-for-sample-mean
 kind: example
 title: The delete-one jackknife variance for a sample mean
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

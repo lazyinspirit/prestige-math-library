@@ -2,7 +2,7 @@
 id: lem-random-posterior-quantiles-stabilize-under-bvm
 kind: lemma
 title: Posterior quantiles stabilize under scalar weak convergence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-local-lipschitz-class-empirical-process-bound
 kind: lemma
 title: A square-integrable Lipschitz envelope controls a local empirical process
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

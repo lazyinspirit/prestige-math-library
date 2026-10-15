@@ -2,7 +2,7 @@
 id: lem-real-line-is-standard-borel
 kind: lemma
 title: The real line with its Borel sigma-algebra is standard Borel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

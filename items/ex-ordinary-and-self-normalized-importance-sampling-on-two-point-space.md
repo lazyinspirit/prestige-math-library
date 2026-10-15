@@ -2,7 +2,7 @@
 id: ex-ordinary-and-self-normalized-importance-sampling-on-two-point-space
 kind: example
 title: Ordinary and self-normalized importance sampling on a two-point space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

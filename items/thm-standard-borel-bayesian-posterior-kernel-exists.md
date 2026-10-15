@@ -2,7 +2,7 @@
 id: thm-standard-borel-bayesian-posterior-kernel-exists
 kind: theorem
 title: Standard-Borel Bayesian posterior kernel exists
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

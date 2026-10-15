@@ -3,7 +3,7 @@ dependency_level: 8
 id: thm-gaussian-concentration-sieve-bounds
 kind: theorem
 title: Gaussian concentration-function sieve bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

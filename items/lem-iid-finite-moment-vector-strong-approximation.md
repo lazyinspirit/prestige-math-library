@@ -3,7 +3,7 @@ dependency_level: 4
 id: lem-iid-finite-moment-vector-strong-approximation
 kind: lemma
 title: Finite-moment iid vectors admit a strong Gaussian approximation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

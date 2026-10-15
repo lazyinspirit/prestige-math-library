@@ -2,7 +2,7 @@
 id: ex-uniformly-ergodic-chains-can-mix-arbitrarily-slowly
 kind: example
 title: "Uniform ergodicity gives no uniform practical mixing time"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

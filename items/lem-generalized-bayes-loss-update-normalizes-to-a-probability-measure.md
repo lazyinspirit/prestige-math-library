@@ -2,7 +2,7 @@
 id: lem-generalized-bayes-loss-update-normalizes-to-a-probability-measure
 kind: lemma
 title: "A finite-normalizer loss update is a probability measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: def-cross-validation-split-and-risk-target
 kind: definition
 title: "Cross-validation splits and training-size risk targets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

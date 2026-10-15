@@ -3,7 +3,7 @@ dependency_level: 4
 id: lem-zero-variance-geometric-markov-sums-have-strong-rate
 kind: lemma
 title: Zero-variance geometric Markov sums have a uniform strong rate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

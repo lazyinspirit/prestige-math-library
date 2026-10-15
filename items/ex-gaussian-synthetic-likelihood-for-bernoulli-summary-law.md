@@ -2,7 +2,7 @@
 id: ex-gaussian-synthetic-likelihood-for-bernoulli-summary-law
 kind: example
 title: "A Gaussian synthetic likelihood for a Bernoulli summary is not exact"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

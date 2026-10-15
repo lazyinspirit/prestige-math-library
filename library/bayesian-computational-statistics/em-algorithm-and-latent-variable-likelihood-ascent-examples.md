@@ -1,7 +1,7 @@
 ---
 page: em-algorithm-and-latent-variable-likelihood-ascent-examples
 title: "Latent-variable EM and likelihood ascent — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-em-finite-mixture-responsibilities

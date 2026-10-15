@@ -2,7 +2,7 @@
 id: lem-near-iid-exchangeable-arrays-have-convergent-means
 kind: lemma
 title: A weak law for exchangeable arrays close to uncorrelated reference rows
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

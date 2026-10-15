@@ -2,7 +2,7 @@
 id: thm-pathwise-error-ledger-decomposition
 kind: theorem
 title: "Pathwise error decomposition along a reference chain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

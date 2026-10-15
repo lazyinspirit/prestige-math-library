@@ -2,7 +2,7 @@
 id: thm-three-dimensional-variational-assimilation-tracking-under-contraction
 kind: theorem
 title: 3DVAR tracking error under a global contraction and bounded observation error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

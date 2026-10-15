@@ -2,7 +2,7 @@
 id: ex-em-support-losing-candidate-violates-finite-kl-condition
 kind: example
 title: "A support-losing candidate has infinite directional KL"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

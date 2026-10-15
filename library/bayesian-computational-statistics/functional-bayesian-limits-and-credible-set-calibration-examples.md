@@ -1,7 +1,7 @@
 ---
 page: functional-bayesian-limits-and-credible-set-calibration-examples
 title: Functional BvM limits and credible-set calibration — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-credible-posterior-set-with-zero-frequency-coverage

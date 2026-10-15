@@ -1,7 +1,7 @@
 ---
 page: iid-monte-carlo-integration-and-error
 title: IID Monte Carlo integration and error
-status: draft
+status: published
 items:
   - def-iid-monte-carlo-estimators
   - thm-iid-monte-carlo-mean-moments

@@ -2,7 +2,7 @@
 id: thm-self-normalized-importance-sampling-is-consistent-under-finite-moments
 kind: theorem
 title: Self-normalized importance sampling is strongly consistent under finite first moments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

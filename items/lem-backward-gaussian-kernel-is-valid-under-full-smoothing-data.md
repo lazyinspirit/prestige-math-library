@@ -2,7 +2,7 @@
 id: lem-backward-gaussian-kernel-is-valid-under-full-smoothing-data
 kind: lemma
 title: The backward Gaussian kernel remains valid after future observations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

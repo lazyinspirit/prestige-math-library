@@ -1,7 +1,7 @@
 ---
 page: euler-maruyama-scheme-and-conditions
 title: "Euler–Maruyama Scheme and Coefficient Conditions"
-status: draft
+status: published
 items:
   - alg-euler-maruyama
   - lem-square-integrable-predictable-step-ito-integral-is-finite-sum

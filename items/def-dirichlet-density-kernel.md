@@ -2,7 +2,7 @@
 id: def-dirichlet-density-kernel
 kind: definition
 title: "Dirichlet simplex density kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

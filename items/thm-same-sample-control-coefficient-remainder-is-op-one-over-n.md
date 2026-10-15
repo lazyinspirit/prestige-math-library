@@ -2,7 +2,7 @@
 id: thm-same-sample-control-coefficient-remainder-is-op-one-over-n
 kind: theorem
 title: Same-sample coefficient remainder is of order $O_P(n^{-1})$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

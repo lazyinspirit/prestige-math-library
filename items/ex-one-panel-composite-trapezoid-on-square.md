@@ -2,7 +2,7 @@
 id: ex-one-panel-composite-trapezoid-on-square
 kind: example
 title: The one-panel trapezoidal bound is attained by x squared
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-euler-maruyama-weak-order-one-under-backward-regularity
 kind: theorem
 title: "Euler–Maruyama weak order one under backward regularity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

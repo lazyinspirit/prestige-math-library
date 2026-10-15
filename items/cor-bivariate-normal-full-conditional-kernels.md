@@ -2,7 +2,7 @@
 id: cor-bivariate-normal-full-conditional-kernels
 kind: corollary
 title: Proper full conditionals of a nondegenerate bivariate normal law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

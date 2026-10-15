@@ -2,7 +2,7 @@
 id: ex-finite-hidden-markov-filtering-and-smoothing
 kind: example
 title: A two-state hidden Markov filter and smoother
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

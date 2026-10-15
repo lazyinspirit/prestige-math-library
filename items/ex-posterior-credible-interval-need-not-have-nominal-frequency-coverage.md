@@ -2,7 +2,7 @@
 id: ex-posterior-credible-interval-need-not-have-nominal-frequency-coverage
 kind: example
 title: Posterior credibility does not ensure nominal frequentist coverage
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

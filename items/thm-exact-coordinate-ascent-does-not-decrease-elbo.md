@@ -2,7 +2,7 @@
 id: thm-exact-coordinate-ascent-does-not-decrease-elbo
 kind: theorem
 title: "Exact coordinate updates are monotone and finite sweeps have a call bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-normal-location-scale-density
 kind: lemma
 title: "A positive-variance normal law has its location-scale density"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

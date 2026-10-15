@@ -2,7 +2,7 @@
 id: lem-probability-convergence-plus-higher-moments-gives-lp-convergence
 kind: lemma
 title: Convergence in probability plus a higher-moment bound implies Lp convergence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

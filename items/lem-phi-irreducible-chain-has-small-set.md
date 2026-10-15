@@ -2,7 +2,7 @@
 id: lem-phi-irreducible-chain-has-small-set
 kind: lemma
 title: "A countably generated phi-irreducible chain has a positive-measure small set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

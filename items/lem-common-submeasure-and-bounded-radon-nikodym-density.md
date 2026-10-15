@@ -2,7 +2,7 @@
 id: lem-common-submeasure-and-bounded-radon-nikodym-density
 kind: lemma
 title: The common submeasure and its bounded density
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

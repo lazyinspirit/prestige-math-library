@@ -2,7 +2,7 @@
 id: alg-coordinate-ascent-variational-inference
 kind: algorithm
 title: "Coordinate-ascent variational inference"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

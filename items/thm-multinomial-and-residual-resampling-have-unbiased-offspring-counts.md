@@ -2,7 +2,7 @@
 id: thm-multinomial-and-residual-resampling-have-unbiased-offspring-counts
 kind: theorem
 title: "Multinomial and residual resampling have unbiased offspring counts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

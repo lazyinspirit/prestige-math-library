@@ -2,7 +2,7 @@
 id: thm-m-out-of-n-resampling-valid-for-uniform-endpoint
 kind: theorem
 title: m-out-of-n bootstrap and subsampling recover the uniform endpoint root
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

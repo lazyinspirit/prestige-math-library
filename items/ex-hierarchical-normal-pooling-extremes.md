@@ -2,7 +2,7 @@
 id: ex-hierarchical-normal-pooling-extremes
 kind: example
 title: "Complete, partial, and no-pooling limits in the normal hierarchy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

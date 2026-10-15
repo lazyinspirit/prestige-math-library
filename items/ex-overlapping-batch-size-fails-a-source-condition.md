@@ -3,7 +3,7 @@ dependency_level: 2
 id: ex-overlapping-batch-size-fails-a-source-condition
 kind: example
 title: A batch-size sequence fails the OBM consistency conditions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

@@ -2,7 +2,7 @@
 id: lem-multiscale-primitive-map-to-continuous-cdfs
 kind: lemma
 title: The multiscale primitive map is continuous into C[0,1]
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

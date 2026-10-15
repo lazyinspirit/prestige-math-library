@@ -2,7 +2,7 @@
 id: thm-existence-of-dirichlet-process-by-normalized-gamma-poisson-random-measure
 kind: theorem
 title: "Existence of a Dirichlet process by normalized gamma Poisson random measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

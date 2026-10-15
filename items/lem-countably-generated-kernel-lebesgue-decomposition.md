@@ -2,7 +2,7 @@
 id: lem-countably-generated-kernel-lebesgue-decomposition
 kind: lemma
 title: "Measurable Lebesgue decomposition of a kernel on a countably generated space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

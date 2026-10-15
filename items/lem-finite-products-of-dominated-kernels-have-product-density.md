@@ -2,7 +2,7 @@
 id: lem-finite-products-of-dominated-kernels-have-product-density
 kind: lemma
 title: "Finite products of dominated kernels have the product density"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

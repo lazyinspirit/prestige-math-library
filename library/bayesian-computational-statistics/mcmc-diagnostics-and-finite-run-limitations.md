@@ -1,7 +1,7 @@
 ---
 page: mcmc-diagnostics-and-finite-run-limitations
 title: MCMC diagnostics and finite-run limitations
-status: draft
+status: published
 items:
   - def-blom-rank-normalization-for-pooled-draws
   - def-empirical-left-quantile-for-finite-draws

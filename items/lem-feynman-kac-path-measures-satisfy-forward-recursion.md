@@ -2,7 +2,7 @@
 id: lem-feynman-kac-path-measures-satisfy-forward-recursion
 kind: lemma
 title: "Feynman–Kac path measures satisfy the forward recursion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

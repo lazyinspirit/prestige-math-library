@@ -2,7 +2,7 @@
 id: ex-delete-d-and-subsampling
 kind: example
 title: "Delete-d replicates and subsampling on four units"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

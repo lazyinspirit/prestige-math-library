@@ -2,7 +2,7 @@
 id: ex-nonunique-kl-projection-set
 kind: example
 title: "A nonunique KL projection set need not select one parameter"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

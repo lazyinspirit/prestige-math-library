@@ -2,7 +2,7 @@
 id: ex-abc-positive-tolerance-stationary-law
 kind: example
 title: A positive-tolerance ABC-MH stationary law can differ from the exact-data posterior
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

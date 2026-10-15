@@ -2,7 +2,7 @@
 id: ex-unit-temperature-likelihood-update
 kind: example
 title: "The unit-temperature likelihood update is ordinary Bayes in a finite model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

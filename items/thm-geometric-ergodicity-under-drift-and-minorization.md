@@ -2,7 +2,7 @@
 id: thm-geometric-ergodicity-under-drift-and-minorization
 kind: theorem
 title: Geometric ergodicity under drift and small-set minorization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

@@ -1,7 +1,7 @@
 ---
 page: adaptive-mcmc-convergence-and-limitations-examples
 title: Adaptive MCMC convergence limits — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-diminishing-adaptation-alone-does-not-imply-strong-law

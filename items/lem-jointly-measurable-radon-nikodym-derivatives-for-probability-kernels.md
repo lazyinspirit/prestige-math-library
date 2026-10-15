@@ -2,7 +2,7 @@
 id: lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels
 kind: lemma
 title: "Jointly measurable Radon–Nikodym derivatives for probability kernels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

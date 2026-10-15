@@ -3,7 +3,7 @@ dependency_level: 0
 id: lem-random-permutation-variance-by-transpositions
 kind: lemma
 title: A successive-revelation variance bound for a uniform permutation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

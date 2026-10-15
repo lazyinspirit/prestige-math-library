@@ -2,7 +2,7 @@
 id: ex-proportional-stratification-variance-reduction
 kind: example
 title: Proportional stratification reduces variance for a uniform mean
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

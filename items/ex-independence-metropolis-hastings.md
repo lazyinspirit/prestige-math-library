@@ -7,7 +7,7 @@ verification:
 id: ex-independence-metropolis-hastings
 kind: example
 title: A two-state independence sampler
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

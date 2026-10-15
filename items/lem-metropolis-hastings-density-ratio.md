@@ -2,7 +2,7 @@
 id: lem-metropolis-hastings-density-ratio
 kind: lemma
 title: The common-density Metropolis–Hastings ratio
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

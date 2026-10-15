@@ -2,7 +2,7 @@
 id: def-statistical-and-computational-error-ledger
 kind: definition
 title: "Successive statistical and computational error targets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

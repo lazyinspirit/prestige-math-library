@@ -1,7 +1,7 @@
 ---
 page: posterior-prediction-and-bayesian-decision-examples
 title: "Posterior Prediction, Credible Sets, and Bayes Actions — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-posterior-predictive-mixture-adds-parameter-uncertainty

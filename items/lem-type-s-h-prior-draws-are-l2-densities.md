@@ -2,7 +2,7 @@
 id: lem-type-s-h-prior-draws-are-l2-densities
 kind: lemma
 title: Finite type-S and type-H prior draws are L2 probability densities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

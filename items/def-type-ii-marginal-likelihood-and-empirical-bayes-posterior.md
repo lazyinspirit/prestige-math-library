@@ -2,7 +2,7 @@
 id: def-type-ii-marginal-likelihood-and-empirical-bayes-posterior
 kind: definition
 title: "Type-II maximum marginal likelihood and empirical-Bayes plug-in posterior"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

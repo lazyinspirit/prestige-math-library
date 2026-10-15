@@ -2,7 +2,7 @@
 id: cor-mlmc-euler-finite-l2-and-weak-cost-rate
 kind: corollary
 title: "Finite-L2 strong and conditional weak Euler MLMC cost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

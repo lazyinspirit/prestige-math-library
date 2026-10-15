@@ -1,7 +1,7 @@
 ---
 page: synthetic-likelihood-and-indirect-inference-examples
 title: "Synthetic likelihood and indirect inference — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-gaussian-synthetic-likelihood-for-bernoulli-summary-law

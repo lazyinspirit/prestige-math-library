@@ -2,7 +2,7 @@
 id: lem-kalman-filter-is-exact-conditional-on-nonlinear-path
 kind: lemma
 title: The Kalman filter is exact conditional on a nonlinear path
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

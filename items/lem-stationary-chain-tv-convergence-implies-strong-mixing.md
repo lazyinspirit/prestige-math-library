@@ -2,7 +2,7 @@
 id: lem-stationary-chain-tv-convergence-implies-strong-mixing
 kind: lemma
 title: Stationary Markov-chain total-variation convergence implies strong mixing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

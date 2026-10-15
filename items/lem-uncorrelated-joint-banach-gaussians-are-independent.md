@@ -2,7 +2,7 @@
 id: lem-uncorrelated-joint-banach-gaussians-are-independent
 kind: lemma
 title: "Uncorrelated jointly Gaussian Banach random elements are independent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

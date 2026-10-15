@@ -7,7 +7,7 @@ verification:
 id: ex-euler-maruyama-additive-noise-strong-error
 kind: example
 title: "Additive-noise Ornstein–Uhlenbeck Euler strong error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

@@ -3,7 +3,7 @@ dependency_level: 0
 id: lem-countably-generated-kernel-stable-sub-sigma-field
 kind: lemma
 title: A kernel has a countably generated stable sub-sigma-field containing a given observable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

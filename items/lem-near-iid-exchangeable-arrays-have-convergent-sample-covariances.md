@@ -2,7 +2,7 @@
 id: lem-near-iid-exchangeable-arrays-have-convergent-sample-covariances
 kind: lemma
 title: Sample covariance converges for exchangeable arrays close in L4 to iid rows
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

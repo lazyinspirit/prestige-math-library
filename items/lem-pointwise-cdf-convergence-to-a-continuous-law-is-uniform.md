@@ -2,7 +2,7 @@
 id: lem-pointwise-cdf-convergence-to-a-continuous-law-is-uniform
 kind: lemma
 title: Pointwise CDF convergence to a continuous law is uniform
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-linear-gaussian-three-dimensional-variational-analysis
 kind: example
 title: Scalar Gaussian 3DVAR returns the exact analysis mean
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

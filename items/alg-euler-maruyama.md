@@ -2,7 +2,7 @@
 id: alg-euler-maruyama
 kind: algorithm
 title: "Euler–Maruyama recursion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

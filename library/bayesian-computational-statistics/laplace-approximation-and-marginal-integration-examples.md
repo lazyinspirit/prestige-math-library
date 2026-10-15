@@ -1,7 +1,7 @@
 ---
 page: laplace-approximation-and-marginal-integration-examples
 title: Laplace approximation and deterministic quadrature — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-exact-gaussian-laplace-integral

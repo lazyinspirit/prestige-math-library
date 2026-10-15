@@ -1,7 +1,7 @@
 ---
 page: misspecified-posterior-consistency
 title: Posterior consistency at a KL projection
-status: draft
+status: published
 items:
   - def-kl-projection-set-and-relative-kl-neighborhoods
   - lem-centered-integrable-iid-random-walk-is-unbounded-above

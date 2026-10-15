@@ -1,7 +1,7 @@
 ---
 page: mcmc-diagnostics-and-finite-run-limitations-examples
 title: MCMC diagnostics and finite-run limitations — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-thinning-can-mask-sticky-mcmc-output

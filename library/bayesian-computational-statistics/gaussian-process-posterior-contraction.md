@@ -1,7 +1,7 @@
 ---
 page: gaussian-process-posterior-contraction
 title: Gaussian-process posterior contraction
-status: draft
+status: published
 items:
   - lem-tight-borel-gaussian-law-has-separable-support
   - lem-binary-regression-l2-controls-local-likelihood-distances

@@ -2,7 +2,7 @@
 id: lem-hk-smooth-mixed-derivative-formula
 kind: lemma
 title: "Mixed-derivative formula for smooth Hardy–Krause variation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: alg-three-dimensional-variational-assimilation
 kind: algorithm
 title: Finite-dimensional 3DVAR analysis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

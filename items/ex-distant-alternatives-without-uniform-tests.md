@@ -2,7 +2,7 @@
 id: ex-distant-alternatives-without-uniform-tests
 kind: example
 title: "Distant alternatives can prevent uniform testability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

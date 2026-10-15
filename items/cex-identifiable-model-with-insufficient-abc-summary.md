@@ -2,7 +2,7 @@
 id: cex-identifiable-model-with-insufficient-abc-summary
 kind: counterexample
 title: An identifiable model can have persistent ABC summary distortion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

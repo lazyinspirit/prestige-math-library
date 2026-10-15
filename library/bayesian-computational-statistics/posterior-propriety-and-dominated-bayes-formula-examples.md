@@ -1,7 +1,7 @@
 ---
 page: posterior-propriety-and-dominated-bayes-formula-examples
 title: Posterior propriety and dominated Bayes formula — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-valid-finite-evidence-and-normalized-update

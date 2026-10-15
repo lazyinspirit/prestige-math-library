@@ -2,7 +2,7 @@
 id: thm-nonlinear-functional-bvm-and-credible-coverage
 kind: theorem
 title: Nonlinear-functional BvM limit under fast L2 contraction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

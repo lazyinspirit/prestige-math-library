@@ -3,7 +3,7 @@ dependency_level: 7
 id: thm-studentized-wilcoxon-validity-under-heterogeneous-laws
 kind: theorem
 title: Studentized Wilcoxon validity under heterogeneous laws
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

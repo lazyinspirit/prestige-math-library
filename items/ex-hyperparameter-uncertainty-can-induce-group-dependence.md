@@ -2,7 +2,7 @@
 id: ex-hyperparameter-uncertainty-can-induce-group-dependence
 kind: example
 title: "A shared hyperparameter can couple group parameters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

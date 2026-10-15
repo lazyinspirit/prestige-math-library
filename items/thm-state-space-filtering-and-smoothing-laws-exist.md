@@ -2,7 +2,7 @@
 id: thm-state-space-filtering-and-smoothing-laws-exist
 kind: theorem
 title: Filtering and finite-horizon smoothing laws exist
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

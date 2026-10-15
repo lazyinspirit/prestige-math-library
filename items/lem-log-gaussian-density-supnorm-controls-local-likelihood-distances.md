@@ -2,7 +2,7 @@
 id: lem-log-gaussian-density-supnorm-controls-local-likelihood-distances
 kind: lemma
 title: "Supremum distance controls local log-Gaussian density distances"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

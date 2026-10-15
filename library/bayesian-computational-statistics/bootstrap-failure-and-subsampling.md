@@ -1,7 +1,7 @@
 ---
 page: bootstrap-failure-and-subsampling
 title: Bootstrap failure, m-out-of-n methods, and subsampling
-status: draft
+status: published
 items:
   - def-m-out-of-n-bootstrap-and-subsampling
   - lem-uniform-cdf-order-and-quantile-coverage

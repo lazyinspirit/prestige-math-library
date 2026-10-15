@@ -2,7 +2,7 @@
 id: ex-one-rqmc-scramble-vs-independent-replicates
 kind: example
 title: "One scrambled rule versus independent full-set replicates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

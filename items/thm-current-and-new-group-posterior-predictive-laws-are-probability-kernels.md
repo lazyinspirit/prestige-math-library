@@ -2,7 +2,7 @@
 id: thm-current-and-new-group-posterior-predictive-laws-are-probability-kernels
 kind: theorem
 title: "Current-group and new-group posterior predictions are probability kernels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

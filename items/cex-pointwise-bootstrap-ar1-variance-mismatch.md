@@ -2,7 +2,7 @@
 id: cex-pointwise-bootstrap-ar1-variance-mismatch
 kind: counterexample
 title: Pointwise resampling misses the long-run variance of an AR(1) mean
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

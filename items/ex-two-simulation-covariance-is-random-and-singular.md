@@ -2,7 +2,7 @@
 id: ex-two-simulation-covariance-is-random-and-singular
 kind: example
 title: "Two simulated square summaries give a random singular covariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

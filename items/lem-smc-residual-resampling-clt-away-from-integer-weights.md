@@ -2,7 +2,7 @@
 id: lem-smc-residual-resampling-clt-away-from-integer-weights
 kind: lemma
 title: "Conditional residual resampling central limit theorem away from integer weights"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: lem-digital-shift-marginals-and-net-preservation
 kind: lemma
 title: "Digital shifts preserve net counts and uniform marginals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-observed-density-is-latent-marginal-under-tonelli
 kind: theorem
 title: "The observed density is the latent marginal under Tonelli"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-rqmc-zero-net-sharp-gain-bound
 kind: lemma
 title: "Sharp gain bound for scrambled $(0,m,d)$-nets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

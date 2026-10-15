@@ -2,7 +2,7 @@
 id: ex-diagonal-lattice-poor-joint-projection
 kind: example
 title: "Uniform coordinate projections can hide a poor joint projection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

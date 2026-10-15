@@ -2,7 +2,7 @@
 id: ex-improper-variance-hyperprior-can-make-posterior-improper
 kind: example
 title: "An improper variance hyperprior can give an improper posterior"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

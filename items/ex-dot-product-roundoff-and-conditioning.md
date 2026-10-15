@@ -2,7 +2,7 @@
 id: ex-dot-product-roundoff-and-conditioning
 kind: example
 title: "Dot-product cancellation under normal-range rounding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

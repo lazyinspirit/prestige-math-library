@@ -2,7 +2,7 @@
 id: def-functional-specific-effective-sample-size
 kind: definition
 title: Functional-specific effective sample size
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-b-adic-anova-components
 kind: definition
 title: "Base-$b$ Haar contrasts and multiresolution ANOVA components"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

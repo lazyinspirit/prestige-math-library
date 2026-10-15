@@ -2,7 +2,7 @@
 id: lem-wavelet-product-prior-is-l2-valued
 kind: lemma
 title: The wavelet product prior is L2-valued
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:

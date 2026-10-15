@@ -2,7 +2,7 @@
 id: def-ito-sde-and-strong-solution
 kind: definition
 title: Itô SDE data and strong solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

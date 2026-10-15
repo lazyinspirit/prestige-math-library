@@ -2,7 +2,7 @@
 id: ex-same-mean-unequal-variance-studentized-permutation-test
 kind: example
 title: Studentized difference of means with equal means and unequal variances
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: lem-dirichlet-normal-mixture-posterior-sieve-tail
 kind: lemma
 title: "The posterior excludes large scales and mixing mass far from compact data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 8

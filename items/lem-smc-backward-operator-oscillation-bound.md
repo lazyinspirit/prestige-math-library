@@ -2,7 +2,7 @@
 id: lem-smc-backward-operator-oscillation-bound
 kind: lemma
 title: "Uniform SMC backward-operator contraction controls oscillation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

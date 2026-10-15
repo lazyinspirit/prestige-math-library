@@ -2,7 +2,7 @@
 id: lem-gaussian-sequence-empirical-bayes-posterior-formula
 kind: lemma
 title: "Posterior and marginal-likelihood formulas for the Gaussian sequence prior"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

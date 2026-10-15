@@ -2,7 +2,7 @@
 id: thm-abc-rejection-target-is-tolerance-conditioned-posterior
 kind: theorem
 title: ABC rejection returns the tolerance-conditioned posterior
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

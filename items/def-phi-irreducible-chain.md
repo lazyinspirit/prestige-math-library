@@ -2,7 +2,7 @@
 id: def-phi-irreducible-chain
 kind: definition
 title: "Phi-irreducibility for a general-state Markov kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

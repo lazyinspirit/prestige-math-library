@@ -3,7 +3,7 @@ dependency_level: 5
 id: lem-smc-centered-filtering-feynman-kac-contraction
 kind: lemma
 title: "Centered filtering Feynman–Kac operators contract terminal tests"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

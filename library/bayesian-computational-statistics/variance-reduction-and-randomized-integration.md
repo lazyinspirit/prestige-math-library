@@ -1,7 +1,7 @@
 ---
 page: variance-reduction-and-randomized-integration
 title: Control variates, antithetics, and stratification
-status: draft
+status: published
 items:
   - def-control-variate-estimator
   - thm-control-variate-unbiasedness-and-optimal-coefficient

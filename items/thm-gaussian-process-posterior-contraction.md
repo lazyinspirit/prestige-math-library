@@ -3,7 +3,7 @@ dependency_level: 9
 id: thm-gaussian-process-posterior-contraction
 kind: theorem
 title: Gaussian-process posterior contraction in density and regression models
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

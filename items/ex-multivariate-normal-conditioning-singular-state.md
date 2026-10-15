@@ -2,7 +2,7 @@
 id: ex-multivariate-normal-conditioning-singular-state
 kind: example
 title: "Gaussian conditioning with singular state covariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-square-integrable-markov-transition-conditional-expectation
 kind: lemma
 title: Kernel conditional expectations for square-integrable Markov observables
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

@@ -3,7 +3,7 @@ dependency_level: 2
 id: thm-rho-mixing-clt-for-square-integrable-sequences
 kind: theorem
 title: A rho-mixing CLT for square-integrable stationary sequences
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

@@ -2,7 +2,7 @@
 id: def-dobrushin-coefficient-for-probability-kernels
 kind: definition
 title: "Dobrushin contraction coefficient for a probability kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

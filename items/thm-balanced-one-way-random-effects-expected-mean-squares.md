@@ -2,7 +2,7 @@
 id: thm-balanced-one-way-random-effects-expected-mean-squares
 kind: theorem
 title: "Expected mean squares in the balanced one-way normal random-effects model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

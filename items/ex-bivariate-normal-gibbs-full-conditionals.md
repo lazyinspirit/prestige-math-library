@@ -2,7 +2,7 @@
 id: ex-bivariate-normal-gibbs-full-conditionals
 kind: example
 title: Full conditionals for a bivariate normal target
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

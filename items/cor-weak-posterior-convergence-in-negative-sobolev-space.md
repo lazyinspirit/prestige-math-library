@@ -2,7 +2,7 @@
 id: cor-weak-posterior-convergence-in-negative-sobolev-space
 kind: corollary
 title: The scaled posterior converges weakly on the negative Sobolev space
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

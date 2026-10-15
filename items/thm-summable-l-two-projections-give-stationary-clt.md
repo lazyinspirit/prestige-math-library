@@ -3,7 +3,7 @@ dependency_level: 0
 id: thm-summable-l-two-projections-give-stationary-clt
 kind: theorem
 title: Summable conditional projections give a stationary martingale CLT
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

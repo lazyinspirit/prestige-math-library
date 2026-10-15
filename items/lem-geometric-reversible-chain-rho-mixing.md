@@ -3,7 +3,7 @@ dependency_level: 2
 id: lem-geometric-reversible-chain-rho-mixing
 kind: lemma
 title: Geometric ergodicity and reversibility give exponential rho-mixing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

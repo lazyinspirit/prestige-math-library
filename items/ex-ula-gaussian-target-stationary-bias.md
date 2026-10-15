@@ -2,7 +2,7 @@
 id: ex-ula-gaussian-target-stationary-bias
 kind: example
 title: ULA has a biased invariant variance for a standard Gaussian target
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

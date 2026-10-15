@@ -2,7 +2,7 @@
 id: thm-misspecified-mle-sandwich-expansion
 kind: theorem
 title: A consistent approximate MLE has the misspecified sandwich limit under local LAN conditions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

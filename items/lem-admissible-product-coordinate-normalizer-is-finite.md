@@ -3,7 +3,7 @@ dependency_level: 1
 id: lem-admissible-product-coordinate-normalizer-is-finite
 kind: lemma
 title: "An admissible product has a finite coordinate normalizer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

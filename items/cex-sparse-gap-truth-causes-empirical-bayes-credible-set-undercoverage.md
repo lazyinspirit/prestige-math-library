@@ -2,7 +2,7 @@
 id: cex-sparse-gap-truth-causes-empirical-bayes-credible-set-undercoverage
 kind: counterexample
 title: "Sparse-gap truth causes empirical-Bayes credible-set undercoverage"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

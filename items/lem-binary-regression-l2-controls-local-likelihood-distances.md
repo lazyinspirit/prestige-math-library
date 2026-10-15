@@ -2,7 +2,7 @@
 id: lem-binary-regression-l2-controls-local-likelihood-distances
 kind: lemma
 title: "The L² link norm controls binary-regression likelihood distances"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

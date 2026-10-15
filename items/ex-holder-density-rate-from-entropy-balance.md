@@ -2,7 +2,7 @@
 id: ex-holder-density-rate-from-entropy-balance
 kind: example
 title: "A Hölder-density entropy bound gives the source-covered rate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

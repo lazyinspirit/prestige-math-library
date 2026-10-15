@@ -3,7 +3,7 @@ dependency_level: 1
 id: lem-two-sided-stationary-extension-preserves-rho-mixing
 kind: lemma
 title: Two-sided stationary extension preserves maximal-correlation bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

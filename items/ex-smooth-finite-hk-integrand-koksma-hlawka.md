@@ -2,7 +2,7 @@
 id: ex-smooth-finite-hk-integrand-koksma-hlawka
 kind: example
 title: "A smooth finite-variation integrand and its deterministic error bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

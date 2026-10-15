@@ -3,7 +3,7 @@ dependency_level: 1
 id: lem-weighted-drift-minorization-gives-contraction-and-invariant-law
 kind: lemma
 title: Global drift and one-step minorization give weighted contraction and a unique invariant law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

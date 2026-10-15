@@ -2,7 +2,7 @@
 id: thm-iid-exponential-family-statistic-is-sufficient
 kind: theorem
 title: "The sum of exponential-family statistics is sufficient for an IID sample"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: cex-mean-field-variational-posterior-misses-correlation
 kind: counterexample
 title: "An optimized mean-field law can lose posterior correlation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

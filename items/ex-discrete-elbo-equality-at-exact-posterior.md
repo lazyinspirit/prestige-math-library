@@ -2,7 +2,7 @@
 id: ex-discrete-elbo-equality-at-exact-posterior
 kind: example
 title: "Exact discrete variational family attains log evidence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

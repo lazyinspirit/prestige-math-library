@@ -1,7 +1,7 @@
 ---
 page: hamiltonian-monte-carlo-and-leapfrog-examples
 title: Hamiltonian Monte Carlo and leapfrog correction — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-hmc-globally-lipschitz-force

@@ -2,7 +2,7 @@
 id: alg-uniform-subsampling-without-replacement
 kind: algorithm
 title: "Uniform subsampling without replacement"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

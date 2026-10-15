@@ -2,7 +2,7 @@
 id: thm-independent-pilot-control-variate-is-conditionally-unbiased
 kind: theorem
 title: An independent pilot coefficient preserves conditional unbiasedness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

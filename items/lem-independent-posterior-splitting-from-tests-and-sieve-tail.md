@@ -2,7 +2,7 @@
 id: lem-independent-posterior-splitting-from-tests-and-sieve-tail
 kind: lemma
 title: "Tests and a sieve tail imply posterior contraction from a denominator bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

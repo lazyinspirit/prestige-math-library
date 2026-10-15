@@ -1,7 +1,7 @@
 ---
 page: data-assimilation-variational-and-ensemble-methods-examples
 title: "Data assimilation: 3DVAR, 4DVAR, and ensemble filters — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-finite-ensemble-covariance-fluctuation

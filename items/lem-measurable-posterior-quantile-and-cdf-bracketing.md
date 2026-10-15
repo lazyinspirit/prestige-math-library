@@ -2,7 +2,7 @@
 id: lem-measurable-posterior-quantile-and-cdf-bracketing
 kind: lemma
 title: Posterior quantiles are measurable and bracket their probability level
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

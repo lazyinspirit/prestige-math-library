@@ -2,7 +2,7 @@
 id: lem-finite-population-permutation-clt
 kind: lemma
 title: Conditional CLT for a random subset of an IID finite population
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

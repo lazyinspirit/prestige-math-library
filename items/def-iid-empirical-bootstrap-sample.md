@@ -2,7 +2,7 @@
 id: def-iid-empirical-bootstrap-sample
 kind: definition
 title: IID empirical bootstrap sample and mean statistic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-mlmc-finite-level-telescoping-and-bias
 kind: example
 title: "A three-level telescoping estimator and its remaining bias"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

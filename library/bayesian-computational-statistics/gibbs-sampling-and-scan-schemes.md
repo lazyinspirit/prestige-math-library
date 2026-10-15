@@ -1,7 +1,7 @@
 ---
 page: gibbs-sampling-and-scan-schemes
 title: Gibbs sampling and scan schemes
-status: draft
+status: published
 items:
   - def-gibbs-full-conditional-kernel
   - def-gibbs-reversibility-for-a-markov-kernel

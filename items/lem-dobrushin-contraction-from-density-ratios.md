@@ -2,7 +2,7 @@
 id: lem-dobrushin-contraction-from-density-ratios
 kind: lemma
 title: "Uniform density ratios bound the Dobrushin coefficient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

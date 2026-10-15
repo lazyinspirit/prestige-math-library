@@ -1,7 +1,7 @@
 ---
 page: iid-monte-carlo-integration-and-error-examples
 title: IID Monte Carlo integration and error — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-gaussian-monte-carlo-integrand

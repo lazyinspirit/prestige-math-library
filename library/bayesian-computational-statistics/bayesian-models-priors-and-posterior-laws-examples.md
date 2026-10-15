@@ -1,7 +1,7 @@
 ---
 page: bayesian-models-priors-and-posterior-laws-examples
 title: "Bayesian models, priors, and posterior laws — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-finite-bayesian-posterior-and-null-version

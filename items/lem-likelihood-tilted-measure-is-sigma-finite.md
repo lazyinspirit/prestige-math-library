@@ -2,7 +2,7 @@
 id: lem-likelihood-tilted-measure-is-sigma-finite
 kind: lemma
 title: "Likelihood tilts are sigma-finite measures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

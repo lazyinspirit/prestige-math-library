@@ -1,7 +1,7 @@
 ---
 page: weak-nonparametric-bernstein-von-mises
 title: Weak nonparametric Bernstein–von Mises limits
-status: draft
+status: published
 items:
   - def-negative-sobolev-space-for-white-noise
   - lem-wavelet-product-prior-is-l2-valued

@@ -1,7 +1,7 @@
 ---
 page: randomized-quasi-monte-carlo-and-replicates
 title: "Randomized quasi-Monte Carlo and replicate error"
-status: draft
+status: published
 items:
   - def-b-adic-anova-components
   - lem-countable-iid-baseb-digits-from-one-uniform

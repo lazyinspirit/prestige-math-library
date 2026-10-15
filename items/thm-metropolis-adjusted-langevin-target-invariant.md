@@ -2,7 +2,7 @@
 id: thm-metropolis-adjusted-langevin-target-invariant
 kind: theorem
 title: MALA preserves its target probability exactly
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

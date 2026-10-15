@@ -2,7 +2,7 @@
 id: ex-random-row-split-leaks-group-information
 kind: example
 title: "Random row splits leak repeated-group information"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

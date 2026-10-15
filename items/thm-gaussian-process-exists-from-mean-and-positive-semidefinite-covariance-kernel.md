@@ -2,7 +2,7 @@
 id: thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel
 kind: theorem
 title: A mean and positive-semidefinite kernel define a Gaussian process
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

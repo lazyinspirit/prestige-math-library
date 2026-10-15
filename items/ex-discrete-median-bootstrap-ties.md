@@ -2,7 +2,7 @@
 id: ex-discrete-median-bootstrap-ties
 kind: example
 title: Discrete median bootstrap with ties
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

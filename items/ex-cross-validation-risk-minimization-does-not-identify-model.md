@@ -2,7 +2,7 @@
 id: ex-cross-validation-risk-minimization-does-not-identify-model
 kind: example
 title: "Equal predictive risks do not identify a model label"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

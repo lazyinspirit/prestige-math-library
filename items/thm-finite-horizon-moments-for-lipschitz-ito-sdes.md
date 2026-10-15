@@ -2,7 +2,7 @@
 id: thm-finite-horizon-moments-for-lipschitz-ito-sdes
 kind: theorem
 title: Finite-horizon moments for Lipschitz Itô SDEs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

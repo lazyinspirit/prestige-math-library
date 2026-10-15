@@ -2,7 +2,7 @@
 id: lem-adaptive-mcmc-uniform-drift-minorization-bound
 kind: lemma
 title: Common drift and strongly aperiodic minorization give a uniform geometric bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

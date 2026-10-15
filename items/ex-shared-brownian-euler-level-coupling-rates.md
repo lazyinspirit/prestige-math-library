@@ -2,7 +2,7 @@
 id: ex-shared-brownian-euler-level-coupling-rates
 kind: example
 title: "Shared-increment Euler coupling and payoff rates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

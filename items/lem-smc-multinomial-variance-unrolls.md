@@ -2,7 +2,7 @@
 id: lem-smc-multinomial-variance-unrolls
 kind: lemma
 title: "Multinomial SMC variance unrolls into local contributions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

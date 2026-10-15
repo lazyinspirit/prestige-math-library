@@ -2,7 +2,7 @@
 id: thm-newton-local-quadratic-convergence-under-lipschitz-hessian
 kind: theorem
 title: "Newton's method has local quadratic convergence under a Lipschitz Hessian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

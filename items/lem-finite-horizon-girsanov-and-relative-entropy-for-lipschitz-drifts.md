@@ -3,7 +3,7 @@ dependency_level: 3
 id: lem-finite-horizon-girsanov-and-relative-entropy-for-lipschitz-drifts
 kind: lemma
 title: Finite-horizon Brownian change of drift and relative entropy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 axiom_base: Full AC

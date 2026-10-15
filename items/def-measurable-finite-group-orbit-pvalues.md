@@ -2,7 +2,7 @@
 id: def-measurable-finite-group-orbit-pvalues
 kind: definition
 title: "Full-orbit and tie-randomized permutation p-values"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

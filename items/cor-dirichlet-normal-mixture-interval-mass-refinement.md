@@ -2,7 +2,7 @@
 id: cor-dirichlet-normal-mixture-interval-mass-refinement
 kind: corollary
 title: "An interval-mass condition removes the Gaussian-bias logarithm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 10

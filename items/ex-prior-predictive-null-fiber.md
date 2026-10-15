@@ -2,7 +2,7 @@
 id: ex-prior-predictive-null-fiber
 kind: example
 title: A prior-predictive null fiber has no quotient posterior
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

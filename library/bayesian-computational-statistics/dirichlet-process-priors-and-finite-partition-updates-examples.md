@@ -1,7 +1,7 @@
 ---
 page: dirichlet-process-priors-and-finite-partition-updates-examples
 title: "Dirichlet-process priors and finite-partition updates — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-dirichlet-process-finite-partition-posterior-and-polya-urn

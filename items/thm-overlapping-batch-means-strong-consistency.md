@@ -3,7 +3,7 @@ dependency_level: 6
 id: thm-overlapping-batch-means-strong-consistency
 kind: theorem
 title: Strong consistency of overlapping batch means
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

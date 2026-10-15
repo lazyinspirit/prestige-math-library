@@ -2,7 +2,7 @@
 id: ex-continuous-symmetric-random-walk-on-the-circle
 kind: example
 title: A symmetric random walk on the circle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

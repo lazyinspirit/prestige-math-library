@@ -2,7 +2,7 @@
 id: thm-uniform-ergodicity-from-whole-space-minorization
 kind: theorem
 title: "Whole-space minorization gives uniform geometric ergodicity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-indirect-inference-target-exists-with-lexicographic-tie-break
 kind: theorem
 title: "The compact binding target exists and has a unique lexicographic tie-break"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

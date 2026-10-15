@@ -2,7 +2,7 @@
 id: lem-exponential-test-posterior-splitting-at-kl-projection
 kind: lemma
 title: Exponential tests and KL mass force posterior exclusion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

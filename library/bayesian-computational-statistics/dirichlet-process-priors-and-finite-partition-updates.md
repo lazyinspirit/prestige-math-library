@@ -1,7 +1,7 @@
 ---
 page: dirichlet-process-priors-and-finite-partition-updates
 title: "Dirichlet-process priors and finite-partition updates"
-status: draft
+status: published
 items:
   - lem-countable-discrete-space-is-standard-borel
   - def-poisson-random-measure

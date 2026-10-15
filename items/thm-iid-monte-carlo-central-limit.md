@@ -2,7 +2,7 @@
 id: thm-iid-monte-carlo-central-limit
 title: "Lindeberg–Lévy limit for the IID Monte Carlo mean"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

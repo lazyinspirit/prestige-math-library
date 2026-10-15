@@ -2,7 +2,7 @@
 id: ex-null-set-start-fails-total-variation-convergence
 kind: example
 title: "A phi-irreducible chain can fail to converge from a pi-null start"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: alg-expectation-maximization
 kind: algorithm
 title: "Expectation-maximization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

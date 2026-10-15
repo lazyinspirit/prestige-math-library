@@ -2,7 +2,7 @@
 id: ex-rqmc-replicate-error-estimate
 kind: example
 title: "Replicate variance for randomized quadrature"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

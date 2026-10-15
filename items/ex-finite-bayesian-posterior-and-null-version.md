@@ -2,7 +2,7 @@
 id: ex-finite-bayesian-posterior-and-null-version
 kind: example
 title: A finite Bayesian update and a null-data posterior version
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

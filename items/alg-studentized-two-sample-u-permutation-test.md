@@ -3,7 +3,7 @@ dependency_level: 5
 id: alg-studentized-two-sample-u-permutation-test
 kind: algorithm
 title: Studentized two-sample U-statistic permutation test
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

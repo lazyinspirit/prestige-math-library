@@ -3,7 +3,7 @@ dependency_level: 5
 id: thm-langevin-diffusion-weighted-geometric-ergodicity-under-radial-drift
 kind: theorem
 title: Radial drift gives weighted geometric contraction of Langevin diffusion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

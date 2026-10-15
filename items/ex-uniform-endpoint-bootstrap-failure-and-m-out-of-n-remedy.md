@@ -2,7 +2,7 @@
 id: ex-uniform-endpoint-bootstrap-failure-and-m-out-of-n-remedy
 kind: example
 title: 'Uniform endpoint: ordinary bootstrap failure and the m-out-of-n remedy'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

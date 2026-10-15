@@ -2,7 +2,7 @@
 id: ex-two-time-scalar-rauch-tung-striebel-smoother
 kind: example
 title: Exact two-time scalar Rauch–Tung–Striebel smoothing calculation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

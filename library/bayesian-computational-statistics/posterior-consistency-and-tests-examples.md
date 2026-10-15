@@ -1,7 +1,7 @@
 ---
 page: posterior-consistency-and-tests-examples
 title: "Hellinger geometry and posterior consistency — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-identifiable-finite-model

@@ -2,7 +2,7 @@
 id: cor-rqmc-replicate-variance-estimator
 kind: corollary
 title: "Independent RQMC replicates estimate randomization variance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-rqmc-smooth-anova-component-bound
 kind: lemma
 title: "Smoothness bounds the high-frequency ANOVA components"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

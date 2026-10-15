@@ -2,7 +2,7 @@
 id: ex-dominated-posterior-on-nonstandard-observation-space
 kind: example
 title: A dominated posterior on a nonstandard-Borel observation space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

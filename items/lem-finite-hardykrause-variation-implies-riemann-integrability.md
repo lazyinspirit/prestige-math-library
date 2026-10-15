@@ -2,7 +2,7 @@
 id: lem-finite-hardykrause-variation-implies-riemann-integrability
 kind: lemma
 title: "Finite Hardy–Krause variation implies bounded Riemann integrability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

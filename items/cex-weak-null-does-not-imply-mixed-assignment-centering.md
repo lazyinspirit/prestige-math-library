@@ -2,7 +2,7 @@
 id: cex-weak-null-does-not-imply-mixed-assignment-centering
 kind: counterexample
 title: The weak null does not center every mixed kernel assignment
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

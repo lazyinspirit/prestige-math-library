@@ -2,7 +2,7 @@
 id: lem-tapered-block-bootstrap-conditional-covariance
 kind: lemma
 title: Exact conditional covariance of a tapered block bootstrap mean
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

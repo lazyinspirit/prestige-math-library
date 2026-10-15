@@ -2,7 +2,7 @@
 id: cor-rqmc-studentized-replicate-clt
 kind: corollary
 title: "Studentized RQMC replicate means are asymptotically normal as $R\\to\\infty$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

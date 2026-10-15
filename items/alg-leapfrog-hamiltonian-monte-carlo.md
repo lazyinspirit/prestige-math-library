@@ -2,7 +2,7 @@
 id: alg-leapfrog-hamiltonian-monte-carlo
 kind: algorithm
 title: Leapfrog Hamiltonian Monte Carlo
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

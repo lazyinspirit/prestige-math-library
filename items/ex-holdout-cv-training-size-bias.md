@@ -2,7 +2,7 @@
 id: ex-holdout-cv-training-size-bias
 kind: example
 title: "A holdout estimate targets a smaller training sample"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-adaptive-empirical-bayes-credible-ball-conservative-coverage-on-polished-tails
 kind: theorem
 title: "Conservative coverage of adaptive empirical-Bayes credible balls on polished tails"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

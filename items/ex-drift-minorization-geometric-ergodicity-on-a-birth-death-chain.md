@@ -2,7 +2,7 @@
 id: ex-drift-minorization-geometric-ergodicity-on-a-birth-death-chain
 kind: example
 title: "Drift and minorization certify geometric ergodicity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

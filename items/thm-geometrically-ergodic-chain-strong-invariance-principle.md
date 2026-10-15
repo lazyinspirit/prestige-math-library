@@ -3,7 +3,7 @@ dependency_level: 5
 id: thm-geometrically-ergodic-chain-strong-invariance-principle
 kind: theorem
 title: Strong invariance principle for geometrically ergodic chains
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

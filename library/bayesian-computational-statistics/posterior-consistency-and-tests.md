@@ -1,7 +1,7 @@
 ---
 page: posterior-consistency-and-tests
 title: "Hellinger geometry and posterior consistency"
-status: draft
+status: published
 items:
   - def-hellinger-distance-for-dominated-laws
   - thm-hellinger-tv-comparison-under-library-convention

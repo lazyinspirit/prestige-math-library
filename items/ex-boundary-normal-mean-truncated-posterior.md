@@ -2,7 +2,7 @@
 id: ex-boundary-normal-mean-truncated-posterior
 kind: example
 title: At a boundary, the normal posterior limit is truncated
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: misspecified-posterior-consistency-examples
 title: Posterior consistency at a KL projection — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-distant-alternatives-without-uniform-tests

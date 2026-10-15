@@ -2,7 +2,7 @@
 id: rem-finite-simulation-synthetic-likelihood-is-a-random-approximation
 kind: remark
 title: "Finite-simulation synthetic likelihood is a random approximation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

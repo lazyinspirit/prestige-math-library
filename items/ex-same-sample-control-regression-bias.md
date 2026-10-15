@@ -2,7 +2,7 @@
 id: ex-same-sample-control-regression-bias
 kind: example
 title: A same-sample fitted coefficient can bias the estimator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

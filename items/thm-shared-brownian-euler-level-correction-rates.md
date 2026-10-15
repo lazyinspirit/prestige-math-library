@@ -2,7 +2,7 @@
 id: thm-shared-brownian-euler-level-correction-rates
 kind: theorem
 title: "Shared-Brownian Euler level correction rates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

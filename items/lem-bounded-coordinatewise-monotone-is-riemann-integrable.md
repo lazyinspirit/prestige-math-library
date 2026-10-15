@@ -2,7 +2,7 @@
 id: lem-bounded-coordinatewise-monotone-is-riemann-integrable
 kind: lemma
 title: "A bounded coordinatewise nondecreasing function on a cube is Riemann integrable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

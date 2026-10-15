@@ -2,7 +2,7 @@
 id: thm-gamma-poisson-exposure-adjusted-update
 kind: theorem
 title: "Exposure-adjusted Gamma-Poisson conjugate update"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: cex-abc-zero-tolerance-limit-fails-without-integrable-envelope
 kind: counterexample
 title: Pointwise continuity alone does not guarantee the zero-tolerance limit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

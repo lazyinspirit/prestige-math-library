@@ -2,7 +2,7 @@
 id: ex-unequal-assignment-sharp-null-randomization
 kind: example
 title: "Unequal assignment weights under the Fisher sharp null"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

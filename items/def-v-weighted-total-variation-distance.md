@@ -2,7 +2,7 @@
 id: def-v-weighted-total-variation-distance
 kind: definition
 title: Weighted total variation for probability measures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

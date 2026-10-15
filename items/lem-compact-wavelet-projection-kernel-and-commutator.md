@@ -3,7 +3,7 @@ dependency_level: 1
 id: lem-compact-wavelet-projection-kernel-and-commutator
 kind: lemma
 title: Compact wavelet projections approximate smooth functions and commute asymptotically with multiplication
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

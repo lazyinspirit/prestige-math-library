@@ -2,7 +2,7 @@
 id: alg-gibbs-scan-schemes
 kind: algorithm
 title: Random and systematic Gibbs scan schemes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

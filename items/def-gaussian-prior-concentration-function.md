@@ -2,7 +2,7 @@
 id: def-gaussian-prior-concentration-function
 kind: definition
 title: "Concentration function of a Banach Gaussian prior"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 7

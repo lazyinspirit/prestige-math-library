@@ -2,7 +2,7 @@
 id: ex-finite-mixture-latent-factorization
 kind: example
 title: "A finite mixture latent factorization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

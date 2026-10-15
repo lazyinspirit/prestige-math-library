@@ -1,7 +1,7 @@
 ---
 page: marginal-likelihoods-bayes-factors-and-empirical-bayes-examples
 title: "Marginal likelihoods, Bayes factors, and empirical Bayes — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-negative-balanced-anova-moment-estimate

@@ -2,7 +2,7 @@
 id: lem-smoothing-backward-kernel-bayes-factorization
 kind: lemma
 title: Bayes factorization of the smoothing backward kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

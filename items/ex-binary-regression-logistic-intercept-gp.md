@@ -3,7 +3,7 @@ dependency_level: 10
 id: ex-binary-regression-logistic-intercept-gp
 kind: example
 title: A one-point logistic GP regression satisfies the L² link branch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

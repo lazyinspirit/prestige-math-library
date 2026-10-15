@@ -3,7 +3,7 @@ dependency_level: 4
 id: lem-langevin-diffusion-density-reversibility-and-compact-minorization
 kind: lemma
 title: Langevin diffusion has a reversible density and compact minorization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

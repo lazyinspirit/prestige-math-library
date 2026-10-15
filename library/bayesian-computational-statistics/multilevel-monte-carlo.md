@@ -1,7 +1,7 @@
 ---
 page: multilevel-monte-carlo
 title: "Multilevel Monte Carlo and cost theorem"
-status: draft
+status: published
 items:
   - def-mlmc-hierarchy-and-coupled-corrections
   - lem-mlmc-estimator-moments-and-mse

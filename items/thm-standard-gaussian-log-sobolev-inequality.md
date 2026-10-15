@@ -2,7 +2,7 @@
 id: thm-standard-gaussian-log-sobolev-inequality
 kind: theorem
 title: "Gross logarithmic Sobolev inequality for standard Gaussian measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

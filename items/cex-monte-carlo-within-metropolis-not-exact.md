@@ -2,7 +2,7 @@
 id: cex-monte-carlo-within-metropolis-not-exact
 kind: counterexample
 title: Refreshing the current estimate can destroy exactness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 7

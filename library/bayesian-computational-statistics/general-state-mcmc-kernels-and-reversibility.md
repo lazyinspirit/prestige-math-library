@@ -1,7 +1,7 @@
 ---
 page: general-state-mcmc-kernels-and-reversibility
 title: "General-state Markov kernels, invariance, and reversibility"
-status: draft
+status: published
 items:
   - def-general-state-reversibility-by-symmetric-flow-measure
   - thm-general-state-reversibility-implies-invariance

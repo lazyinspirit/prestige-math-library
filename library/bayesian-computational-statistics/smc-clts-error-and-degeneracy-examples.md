@@ -1,7 +1,7 @@
 ---
 page: smc-clts-error-and-degeneracy-examples
 title: Finite-horizon SMC error, CLTs, and degeneracy — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-smc-multinomial-ancestry-collapse

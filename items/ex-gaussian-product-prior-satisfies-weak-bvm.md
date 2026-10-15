@@ -2,7 +2,7 @@
 id: ex-gaussian-product-prior-satisfies-weak-bvm
 kind: example
 title: A Gaussian wavelet product prior covered by the weak BvM theorem
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps:

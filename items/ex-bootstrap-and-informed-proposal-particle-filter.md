@@ -2,7 +2,7 @@
 id: ex-bootstrap-and-informed-proposal-particle-filter
 kind: example
 title: "Bootstrap and informed proposals on a two-state particle filter"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

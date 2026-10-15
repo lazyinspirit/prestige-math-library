@@ -2,7 +2,7 @@
 id: lem-small-set-coupling-converges-from-almost-every-start
 kind: lemma
 title: "Small-set coupling yields almost-everywhere total-variation convergence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

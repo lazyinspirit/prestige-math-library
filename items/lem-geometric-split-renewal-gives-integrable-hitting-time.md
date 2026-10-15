@@ -3,7 +3,7 @@ dependency_level: 1
 id: lem-geometric-split-renewal-gives-integrable-hitting-time
 kind: lemma
 title: Geometric small-set renewal convergence gives an integrable exponential hitting moment
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

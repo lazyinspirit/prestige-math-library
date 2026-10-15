@@ -2,7 +2,7 @@
 id: prop-compact-kl-projection-tests-under-fractional-moment-continuity
 kind: proposition
 title: "Compact models admit tests at a unique KL projection under fractional-moment continuity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

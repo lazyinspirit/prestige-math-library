@@ -2,7 +2,7 @@
 id: def-borel-gaussian-random-element-on-a-separable-banach-space
 kind: definition
 title: "Centered Borel Gaussian random element on a separable Banach space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-geometric-drift-minorization-reduces-to-bounded-small-set
 kind: lemma
 title: Geometric drift yields a bounded small set and bivariate drift
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

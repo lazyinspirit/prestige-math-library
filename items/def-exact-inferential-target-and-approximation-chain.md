@@ -2,7 +2,7 @@
 id: def-exact-inferential-target-and-approximation-chain
 kind: definition
 title: "Exact inferential targets and approximation chains"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

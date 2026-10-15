@@ -3,7 +3,7 @@ dependency_level: 0
 id: ex-degenerate-gp-phi-does-not-bound-unknown-scale-local-mass
 kind: example
 title: A degenerate GP concentration function does not bound unknown-scale prior mass
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

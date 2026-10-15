@@ -2,7 +2,7 @@
 id: ex-nonlinear-observation-ensemble-kalman-does-not-recover-posterior
 kind: example
 title: A nonlinear observation makes a symmetric two-member EnKF miss posterior spread
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

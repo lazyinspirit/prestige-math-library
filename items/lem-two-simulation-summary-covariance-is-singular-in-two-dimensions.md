@@ -2,7 +2,7 @@
 id: lem-two-simulation-summary-covariance-is-singular-in-two-dimensions
 kind: lemma
 title: "A two-simulation covariance in two dimensions is singular"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

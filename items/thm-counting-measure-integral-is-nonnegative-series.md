@@ -2,7 +2,7 @@
 id: thm-counting-measure-integral-is-nonnegative-series
 kind: theorem
 title: "Counting-measure integration is a nonnegative series"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

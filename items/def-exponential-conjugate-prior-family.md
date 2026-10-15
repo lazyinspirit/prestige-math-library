@@ -2,7 +2,7 @@
 id: def-exponential-conjugate-prior-family
 kind: definition
 title: "Conjugate-form prior for an exponential family"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

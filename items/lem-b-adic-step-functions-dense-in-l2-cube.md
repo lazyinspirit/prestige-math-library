@@ -2,7 +2,7 @@
 id: lem-b-adic-step-functions-dense-in-l2-cube
 kind: lemma
 title: "Base-$b$ box step functions are dense in $L^2$ of the cube"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

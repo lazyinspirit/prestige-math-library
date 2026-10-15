@@ -2,7 +2,7 @@
 id: alg-tail-effective-sample-size
 kind: algorithm
 title: Tail effective sample size
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

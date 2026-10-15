@@ -2,7 +2,7 @@
 id: ex-rejection-sampling-tail-mismatch-no-finite-envelope
 kind: example
 title: A lighter-tailed proposal has no finite rejection envelope
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

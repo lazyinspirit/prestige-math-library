@@ -2,7 +2,7 @@
 id: ex-nonsmooth-boundary-bootstrap-failure
 kind: example
 title: Absolute-value boundary and squared-mean degeneracy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

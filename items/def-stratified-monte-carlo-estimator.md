@@ -2,7 +2,7 @@
 id: def-stratified-monte-carlo-estimator
 kind: definition
 title: Stratified Monte Carlo estimator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-ula-gaussian-target-invariant-law-and-stationary-variance
 kind: theorem
 title: The Gaussian ULA invariant law has variance $2/(2-\gamma)$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

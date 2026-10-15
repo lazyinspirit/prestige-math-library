@@ -2,7 +2,7 @@
 id: thm-abc-sequential-smc-rn-weight-update
 kind: theorem
 title: Sequential ABC Radon–Nikodym weights target each tolerance law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

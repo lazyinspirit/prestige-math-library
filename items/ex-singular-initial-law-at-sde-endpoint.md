@@ -2,7 +2,7 @@
 id: ex-singular-initial-law-at-sde-endpoint
 kind: example
 title: A deterministic initial law is singular although the SDE is well-posed
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

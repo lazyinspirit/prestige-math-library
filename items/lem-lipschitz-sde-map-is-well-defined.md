@@ -2,7 +2,7 @@
 id: lem-lipschitz-sde-map-is-well-defined
 kind: lemma
 title: Well-definedness and estimates for the Lipschitz SDE map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

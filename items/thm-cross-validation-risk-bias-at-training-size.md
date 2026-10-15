@@ -2,7 +2,7 @@
 id: thm-cross-validation-risk-bias-at-training-size
 kind: theorem
 title: "Cross-validation estimates risk at its training sizes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

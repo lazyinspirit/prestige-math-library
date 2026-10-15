@@ -2,7 +2,7 @@
 id: thm-hellinger-tv-comparison-under-library-convention
 kind: theorem
 title: "Hellinger invariance and comparison with library total variation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

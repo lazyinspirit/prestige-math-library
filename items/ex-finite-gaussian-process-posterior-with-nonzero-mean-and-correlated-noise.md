@@ -2,7 +2,7 @@
 id: ex-finite-gaussian-process-posterior-with-nonzero-mean-and-correlated-noise
 kind: example
 title: A nonzero-mean Gaussian process with correlated observation noise
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

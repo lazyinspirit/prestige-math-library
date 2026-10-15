@@ -2,7 +2,7 @@
 id: ex-weak-metric-does-not-guarantee-uniform-bootstrap-coverage
 kind: example
 title: Weakly close root laws can still give failed uniform coverage
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

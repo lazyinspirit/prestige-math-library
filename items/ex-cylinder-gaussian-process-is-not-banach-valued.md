@@ -2,7 +2,7 @@
 id: ex-cylinder-gaussian-process-is-not-banach-valued
 kind: example
 title: "An iid Gaussian cylinder process is not an ℓ²-valued prior"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

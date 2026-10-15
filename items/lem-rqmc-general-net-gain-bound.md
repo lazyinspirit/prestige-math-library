@@ -2,7 +2,7 @@
 id: lem-rqmc-general-net-gain-bound
 kind: lemma
 title: "Fixed-quality net gain coefficients are uniformly bounded"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

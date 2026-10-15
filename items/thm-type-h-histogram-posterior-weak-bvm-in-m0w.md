@@ -3,7 +3,7 @@ dependency_level: 4
 id: thm-type-h-histogram-posterior-weak-bvm-in-m0w
 kind: theorem
 title: Type-H histogram posterior weak Bernstein–von Mises theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

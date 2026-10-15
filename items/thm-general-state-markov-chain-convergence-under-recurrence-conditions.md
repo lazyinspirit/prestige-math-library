@@ -2,7 +2,7 @@
 id: thm-general-state-markov-chain-convergence-under-recurrence-conditions
 kind: theorem
 title: "General-state Markov-chain convergence under recurrence conditions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

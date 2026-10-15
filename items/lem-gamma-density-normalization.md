@@ -2,7 +2,7 @@
 id: lem-gamma-density-normalization
 kind: lemma
 title: "The shape-rate Gamma density is normalized"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

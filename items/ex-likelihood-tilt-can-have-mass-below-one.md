@@ -2,7 +2,7 @@
 id: ex-likelihood-tilt-can-have-mass-below-one
 kind: example
 title: "A likelihood tilt can be a finite measure of mass below one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

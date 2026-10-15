@@ -2,7 +2,7 @@
 id: def-m-out-of-n-bootstrap-and-subsampling
 kind: definition
 title: m-out-of-n bootstrap and subsampling
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-bootstrap-particle-filter-weak-consistency
 kind: lemma
 title: Finite-horizon bootstrap particle filters are weakly consistent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

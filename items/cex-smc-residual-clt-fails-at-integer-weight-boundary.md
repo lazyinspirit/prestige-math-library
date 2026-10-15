@@ -2,7 +2,7 @@
 id: cex-smc-residual-clt-fails-at-integer-weight-boundary
 kind: counterexample
 title: "Residual resampling is discontinuous at positive integer weights"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

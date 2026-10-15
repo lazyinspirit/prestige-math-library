@@ -2,7 +2,7 @@
 id: def-studentized-two-sample-u-statistic
 kind: definition
 title: Studentized two-sample U-statistic and permutation distribution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

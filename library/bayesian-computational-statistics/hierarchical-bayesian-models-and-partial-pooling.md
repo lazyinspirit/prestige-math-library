@@ -1,7 +1,7 @@
 ---
 page: hierarchical-bayesian-models-and-partial-pooling
 title: "Hierarchical Bayes and partial pooling"
-status: draft
+status: published
 items:
   - lem-finite-products-of-dominated-kernels-have-product-density
   - def-hierarchical-bayesian-model

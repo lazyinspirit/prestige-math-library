@@ -2,7 +2,7 @@
 id: def-multiscale-coefficient-space-m0w
 kind: definition
 title: Little-o multiscale coefficient space M0(w)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

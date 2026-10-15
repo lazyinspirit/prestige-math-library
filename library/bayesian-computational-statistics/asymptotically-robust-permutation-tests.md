@@ -1,7 +1,7 @@
 ---
 page: asymptotically-robust-permutation-tests
 title: Studentized permutation tests under weak parameter nulls
-status: draft
+status: published
 items:
   - def-two-sample-u-statistic-parameter
   - lem-finite-population-permutation-clt

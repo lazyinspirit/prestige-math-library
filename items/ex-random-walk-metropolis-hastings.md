@@ -7,7 +7,7 @@ verification:
 id: ex-random-walk-metropolis-hastings
 kind: example
 title: A three-state random-walk Metropolis kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: mcmc-ergodicity-and-mixing-examples
 title: General-state MCMC ergodicity and mixing — Examples
-status: draft
+status: published
 items:
   []
 examples:

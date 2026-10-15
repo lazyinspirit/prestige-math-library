@@ -2,7 +2,7 @@
 id: ex-finite-ensemble-covariance-fluctuation
 kind: example
 title: A two-member Gaussian ensemble has a fluctuating covariance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

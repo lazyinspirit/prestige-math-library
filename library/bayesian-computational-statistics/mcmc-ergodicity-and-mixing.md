@@ -1,7 +1,7 @@
 ---
 page: mcmc-ergodicity-and-mixing
 title: General-state MCMC ergodicity and mixing
-status: draft
+status: published
 items:
   - lem-total-variation-coupling-and-kernel-contraction
   - def-petite-set-for-markov-kernel

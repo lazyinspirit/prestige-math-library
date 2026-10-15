@@ -2,7 +2,7 @@
 id: lem-empirical-bootstrap-law-is-a-probability-measure
 kind: lemma
 title: A finite empirical law is a probability measure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

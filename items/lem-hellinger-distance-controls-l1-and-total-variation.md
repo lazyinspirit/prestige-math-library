@@ -2,7 +2,7 @@
 id: lem-hellinger-distance-controls-l1-and-total-variation
 kind: lemma
 title: "Hellinger distance is a metric and controls L1 and total variation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

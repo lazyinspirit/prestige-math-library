@@ -2,7 +2,7 @@
 id: thm-sequential-particle-estimator-is-unbiased
 kind: theorem
 title: "The sequential particle estimator is unbiased for Feynman–Kac path integrals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: ex-gibbs-chain-invariant-but-reducible
 kind: example
 title: "An invariant Gibbs target can still give reducible dynamics"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

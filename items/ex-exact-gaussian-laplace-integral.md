@@ -2,7 +2,7 @@
 id: ex-exact-gaussian-laplace-integral
 kind: example
 title: An exact Gaussian Laplace integral on the noncompact line
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

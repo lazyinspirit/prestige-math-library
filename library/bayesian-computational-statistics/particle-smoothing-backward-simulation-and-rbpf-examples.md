@@ -1,7 +1,7 @@
 ---
 page: particle-smoothing-backward-simulation-and-rbpf-examples
 title: Particle smoothing, backward simulation, and Rao–Blackwellized filters — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-switching-linear-gaussian-rbpf

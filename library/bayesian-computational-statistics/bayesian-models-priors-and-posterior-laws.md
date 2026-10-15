@@ -1,7 +1,7 @@
 ---
 page: bayesian-models-priors-and-posterior-laws
 title: "Bayesian models, priors, and posterior laws"
-status: draft
+status: published
 items:
   - def-bayesian-model-as-prior-and-sampling-kernel
   - def-bayesian-posterior-as-regular-conditional-law

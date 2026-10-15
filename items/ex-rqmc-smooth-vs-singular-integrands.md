@@ -2,7 +2,7 @@
 id: ex-rqmc-smooth-vs-singular-integrands
 kind: example
 title: "A smooth integrand satisfies the bound while an integrable singularity does not"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 8

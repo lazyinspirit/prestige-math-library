@@ -2,7 +2,7 @@
 id: thm-metric-approximation-error-decomposition
 kind: theorem
 title: "Metric approximation error decomposes along a finite reference chain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

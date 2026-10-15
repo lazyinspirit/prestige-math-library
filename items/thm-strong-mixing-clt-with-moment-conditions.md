@@ -3,7 +3,7 @@ dependency_level: 3
 id: thm-strong-mixing-clt-with-moment-conditions
 kind: theorem
 title: Strong-mixing CLTs under bounded, moment, and logarithmic-moment conditions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

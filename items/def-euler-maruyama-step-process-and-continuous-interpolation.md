@@ -2,7 +2,7 @@
 id: def-euler-maruyama-step-process-and-continuous-interpolation
 kind: definition
 title: "Euler–Maruyama step process and continuous interpolation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

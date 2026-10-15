@@ -2,7 +2,7 @@
 id: cex-smc-time-bound-fails-with-varying-proposals
 kind: counterexample
 title: "Proposal mixing ratios alone do not bound SMC asymptotic variance over time"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: ex-mlmc-euler-strong-and-weak-cost-regimes
 kind: example
 title: "Euler strong, weak, and autonomous MLMC rate contracts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 7

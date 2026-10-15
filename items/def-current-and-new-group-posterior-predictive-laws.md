@@ -2,7 +2,7 @@
 id: def-current-and-new-group-posterior-predictive-laws
 kind: definition
 title: "Current-group and new-group posterior prediction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

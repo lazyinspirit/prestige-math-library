@@ -2,7 +2,7 @@
 id: ex-l2-small-log-density-far-in-hellinger
 kind: example
 title: "Small L² log-density perturbations can remain far in Hellinger distance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

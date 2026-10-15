@@ -2,7 +2,7 @@
 id: def-empirical-measure
 kind: definition
 title: "Empirical measure of observed units"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

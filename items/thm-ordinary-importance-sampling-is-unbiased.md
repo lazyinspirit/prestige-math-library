@@ -2,7 +2,7 @@
 id: thm-ordinary-importance-sampling-is-unbiased
 kind: theorem
 title: Ordinary importance sampling is unbiased
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: parametric-bernstein-von-mises-and-misspecification-examples
 title: "Parametric Bernstein–von Mises limits and misspecification — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-regular-normal-model-bvm

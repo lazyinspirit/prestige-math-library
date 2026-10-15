@@ -2,7 +2,7 @@
 id: ex-exposure-gamma-poisson-update
 kind: example
 title: "Gamma-Poisson updating with a zero exposure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

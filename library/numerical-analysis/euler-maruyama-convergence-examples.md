@@ -1,7 +1,7 @@
 ---
 page: euler-maruyama-convergence-examples
 title: "Euler–Maruyama Strong and Weak Convergence — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-euler-maruyama-additive-noise-strong-error

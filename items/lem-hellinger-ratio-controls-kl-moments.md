@@ -2,7 +2,7 @@
 id: lem-hellinger-ratio-controls-kl-moments
 kind: lemma
 title: "A bounded likelihood ratio controls KL and log-square moments by Hellinger distance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: alg-abc-sequential-smc
 kind: algorithm
 title: Sequential ABC importance-resampling with tolerance populations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

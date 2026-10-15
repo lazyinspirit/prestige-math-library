@@ -1,7 +1,7 @@
 ---
 page: quasi-monte-carlo-discrepancy-and-rules-examples
 title: "Deterministic quasi-Monte Carlo and discrepancy — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-diagonal-lattice-poor-joint-projection

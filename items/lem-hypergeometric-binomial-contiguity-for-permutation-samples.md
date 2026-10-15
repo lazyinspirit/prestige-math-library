@@ -2,7 +2,7 @@
 id: lem-hypergeometric-binomial-contiguity-for-permutation-samples
 kind: lemma
 title: Hypergeometric and binomial composition counts are contiguous
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

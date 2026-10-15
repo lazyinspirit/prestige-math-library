@@ -2,7 +2,7 @@
 id: ex-multinomial-versus-residual-resampling
 kind: example
 title: "Multinomial and residual resampling on three weights"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

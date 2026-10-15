@@ -2,7 +2,7 @@
 id: ex-periodic-finite-chain-fails-time-convergence
 kind: example
 title: "A finite periodic chain need not converge in total variation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

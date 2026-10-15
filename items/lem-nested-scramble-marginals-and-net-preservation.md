@@ -2,7 +2,7 @@
 id: lem-nested-scramble-marginals-and-net-preservation
 kind: lemma
 title: "Nested uniform scrambles preserve net counts and uniform marginals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

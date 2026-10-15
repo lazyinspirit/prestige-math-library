@@ -2,7 +2,7 @@
 id: lem-product-likelihood-tilt-has-product-density
 kind: lemma
 title: "Product likelihood tilts have the product density"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: alg-quantile-monte-carlo-standard-error
 kind: algorithm
 title: Quantile Monte Carlo standard error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-leapfrog-is-reversible-and-volume-preserving
 kind: theorem
 title: Leapfrog is reversible and volume-preserving
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

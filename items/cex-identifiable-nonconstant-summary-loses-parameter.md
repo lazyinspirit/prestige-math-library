@@ -2,7 +2,7 @@
 id: cex-identifiable-nonconstant-summary-loses-parameter
 kind: counterexample
 title: "A nonconstant summary can lose an identifiable parameter"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

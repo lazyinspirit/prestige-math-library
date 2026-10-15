@@ -1,7 +1,7 @@
 ---
 page: euler-maruyama-scheme-and-conditions-examples
 title: "Euler–Maruyama Scheme and Coefficient Conditions — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-euler-maruyama-additive-noise-constant-coefficients

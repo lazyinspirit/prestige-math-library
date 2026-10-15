@@ -3,7 +3,7 @@ dependency_level: 3
 id: lem-density-gaussian-bridge-is-borel-on-m0w
 kind: lemma
 title: A bounded-density Gaussian bridge has a Borel multiscale law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

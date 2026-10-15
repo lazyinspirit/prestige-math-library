@@ -2,7 +2,7 @@
 id: lem-kfold-cv-variance-covariance-decomposition
 kind: lemma
 title: "The covariance decomposition of a fixed K-fold score"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

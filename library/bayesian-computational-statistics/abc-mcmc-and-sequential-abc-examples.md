@@ -1,7 +1,7 @@
 ---
 page: abc-mcmc-and-sequential-abc-examples
 title: ABC-MCMC and ABC-sequential Monte Carlo — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-abc-vanishing-acceptance

@@ -2,7 +2,7 @@
 id: cor-misspecified-iid-bvm-under-kv-regularity
 kind: corollary
 title: Misspecified iid LAN gives a BvM limit when the posterior has the required parameter rate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

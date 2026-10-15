@@ -2,7 +2,7 @@
 id: def-measurable-finite-group-permutation-setup
 kind: definition
 title: "Measurable finite-group permutation setups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-bootstrap-finite-b-versus-sampling-error
 kind: example
 title: "Sampling and finite-bootstrap errors for a Bernoulli mean"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

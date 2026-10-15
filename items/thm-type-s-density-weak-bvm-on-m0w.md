@@ -3,7 +3,7 @@ dependency_level: 4
 id: thm-type-s-density-weak-bvm-on-m0w
 kind: theorem
 title: Type-S density posteriors satisfy the weak multiscale Bernstein–von Mises theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

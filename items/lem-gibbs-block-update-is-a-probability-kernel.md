@@ -2,7 +2,7 @@
 id: lem-gibbs-block-update-is-a-probability-kernel
 kind: lemma
 title: The Gibbs block update is a probability kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

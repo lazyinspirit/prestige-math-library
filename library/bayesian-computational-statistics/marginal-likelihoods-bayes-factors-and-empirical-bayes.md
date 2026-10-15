@@ -1,7 +1,7 @@
 ---
 page: marginal-likelihoods-bayes-factors-and-empirical-bayes
 title: "Marginal likelihoods, Bayes factors, and empirical Bayes"
-status: draft
+status: published
 items:
   - thm-balanced-one-way-random-effects-expected-mean-squares
   - def-marginal-likelihood-and-bayes-factor

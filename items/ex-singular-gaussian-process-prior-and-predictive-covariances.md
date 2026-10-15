@@ -2,7 +2,7 @@
 id: ex-singular-gaussian-process-prior-and-predictive-covariances
 kind: example
 title: Singular prior and predictive covariances in Gaussian-process regression
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

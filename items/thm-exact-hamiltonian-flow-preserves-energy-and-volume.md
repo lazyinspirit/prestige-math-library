@@ -2,7 +2,7 @@
 id: thm-exact-hamiltonian-flow-preserves-energy-and-volume
 kind: theorem
 title: A complete Hamiltonian flow for a C2 potential preserves energy and phase volume
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-euler-maruyama-uniform-moment-and-increment-bounds
 kind: theorem
 title: "Euler–Maruyama uniform moments and interpolation increments"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

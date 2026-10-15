@@ -3,7 +3,7 @@ dependency_level: 0
 id: lem-density-normal-laws-and-square-summable-gaussian-series
 kind: lemma
 title: Density normal laws and square-summable Gaussian series under countable choice
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

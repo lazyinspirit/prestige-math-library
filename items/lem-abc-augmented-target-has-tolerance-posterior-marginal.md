@@ -2,7 +2,7 @@
 id: lem-abc-augmented-target-has-tolerance-posterior-marginal
 kind: lemma
 title: The augmented ABC target has the tolerance posterior as its parameter marginal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

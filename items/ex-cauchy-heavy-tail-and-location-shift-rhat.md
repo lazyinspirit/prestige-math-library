@@ -2,7 +2,7 @@
 id: ex-cauchy-heavy-tail-and-location-shift-rhat
 kind: example
 title: Heavy tails and a location shift in split R-hat
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

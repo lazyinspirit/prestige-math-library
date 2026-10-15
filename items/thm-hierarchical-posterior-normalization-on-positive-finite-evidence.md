@@ -2,7 +2,7 @@
 id: thm-hierarchical-posterior-normalization-on-positive-finite-evidence
 kind: theorem
 title: "Hierarchical posterior normalization on positive finite evidence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

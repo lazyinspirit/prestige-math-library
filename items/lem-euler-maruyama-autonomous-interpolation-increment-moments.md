@@ -2,7 +2,7 @@
 id: lem-euler-maruyama-autonomous-interpolation-increment-moments
 kind: lemma
 title: "All-moment Euler interpolation increment bound under autonomous hypotheses"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

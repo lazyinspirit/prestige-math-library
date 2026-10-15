@@ -1,7 +1,7 @@
 ---
 page: posterior-propriety-and-dominated-bayes-formula
 title: Posterior propriety and dominated Bayes formula
-status: draft
+status: published
 items:
   - def-posterior-evidence-normalizer-and-fiberwise-update
   - prop-fiberwise-posterior-propriety-iff-finite-positive-evidence

@@ -2,7 +2,7 @@
 id: ex-strongly-convex-quadratic-gradient-descent
 kind: example
 title: "Gradient descent on a strongly convex quadratic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

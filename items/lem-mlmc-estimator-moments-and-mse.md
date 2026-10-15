@@ -2,7 +2,7 @@
 id: lem-mlmc-estimator-moments-and-mse
 kind: lemma
 title: "Expectation, variance, and MSE of a finite MLMC estimator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

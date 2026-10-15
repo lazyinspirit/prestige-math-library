@@ -1,7 +1,7 @@
 ---
 page: iid-posterior-contraction-examples
 title: "IID posterior contraction by entropy and prior mass — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-bernoulli-density-logarithmic-contraction-rate

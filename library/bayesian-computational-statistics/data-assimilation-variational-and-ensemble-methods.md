@@ -1,7 +1,7 @@
 ---
 page: data-assimilation-variational-and-ensemble-methods
 title: "Data assimilation: 3DVAR, 4DVAR, and ensemble filters"
-status: draft
+status: published
 items:
   - lem-near-iid-exchangeable-arrays-have-convergent-means
   - lem-probability-convergence-plus-higher-moments-gives-lp-convergence

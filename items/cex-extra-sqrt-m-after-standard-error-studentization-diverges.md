@@ -2,7 +2,7 @@
 id: cex-extra-sqrt-m-after-standard-error-studentization-diverges
 kind: counterexample
 title: An extra square-root sample-size factor destroys standard-error studentization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 8

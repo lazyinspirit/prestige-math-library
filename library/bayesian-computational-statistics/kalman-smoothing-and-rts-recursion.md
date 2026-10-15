@@ -1,7 +1,7 @@
 ---
 page: kalman-smoothing-and-rts-recursion
 title: Fixed-interval Gaussian smoothing and RTS recursion
-status: draft
+status: published
 items:
   - def-fixed-interval-gaussian-smoothing-law
   - lem-backward-gaussian-kernel-is-valid-under-full-smoothing-data

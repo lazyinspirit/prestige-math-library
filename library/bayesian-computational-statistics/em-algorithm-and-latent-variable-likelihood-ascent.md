@@ -1,7 +1,7 @@
 ---
 page: em-algorithm-and-latent-variable-likelihood-ascent
 title: "Latent-variable EM and likelihood ascent"
-status: draft
+status: published
 items:
   - alg-expectation-maximization
   - thm-em-observed-log-likelihood-is-nondecreasing

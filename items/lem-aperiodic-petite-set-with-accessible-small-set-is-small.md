@@ -2,7 +2,7 @@
 id: lem-aperiodic-petite-set-with-accessible-small-set-is-small
 kind: lemma
 title: A petite drift enlargement is small under aperiodicity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

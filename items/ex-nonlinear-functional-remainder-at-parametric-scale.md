@@ -2,7 +2,7 @@
 id: ex-nonlinear-functional-remainder-at-parametric-scale
 kind: example
 title: A quadratic remainder at L2 radius n^(-1/4)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

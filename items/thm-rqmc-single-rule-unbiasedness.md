@@ -2,7 +2,7 @@
 id: thm-rqmc-single-rule-unbiasedness
 kind: theorem
 title: "Marginal uniformity makes an RQMC rule unbiased"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

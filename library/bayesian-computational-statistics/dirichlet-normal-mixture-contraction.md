@@ -1,7 +1,7 @@
 ---
 page: dirichlet-normal-mixture-contraction
 title: "Dirichlet normal-mixture posterior contraction"
-status: draft
+status: published
 items:
   - lem-dirichlet-normal-mixture-density-well-defined
   - lem-hellinger-ratio-controls-kl-moments

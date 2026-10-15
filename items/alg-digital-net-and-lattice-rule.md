@@ -2,7 +2,7 @@
 id: alg-digital-net-and-lattice-rule
 kind: algorithm
 title: "Digital point-set and rank-one lattice cube quadrature"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

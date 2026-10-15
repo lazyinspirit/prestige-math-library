@@ -2,7 +2,7 @@
 id: thm-em-observed-log-likelihood-is-nondecreasing
 kind: theorem
 title: "EM does not decrease the observed log likelihood"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-polynomial-ergodicity-with-integrable-rate-envelope
 kind: definition
 title: Polynomial ergodicity with an integrable rate envelope
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

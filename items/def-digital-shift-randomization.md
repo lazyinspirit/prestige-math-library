@@ -2,7 +2,7 @@
 id: def-digital-shift-randomization
 kind: definition
 title: "Digital shift randomization in base $b$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

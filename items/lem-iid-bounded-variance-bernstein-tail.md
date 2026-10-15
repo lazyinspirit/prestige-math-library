@@ -2,7 +2,7 @@
 id: lem-iid-bounded-variance-bernstein-tail
 kind: lemma
 title: "Bernstein tail bound for independent bounded sums"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

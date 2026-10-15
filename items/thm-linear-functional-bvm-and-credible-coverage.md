@@ -2,7 +2,7 @@
 id: thm-linear-functional-bvm-and-credible-coverage
 kind: theorem
 title: Linear-functional BvM limit and credible-interval calibration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

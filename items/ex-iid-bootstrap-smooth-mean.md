@@ -2,7 +2,7 @@
 id: ex-iid-bootstrap-smooth-mean
 kind: example
 title: The IID bootstrap for a smooth mean functional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

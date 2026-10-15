@@ -2,7 +2,7 @@
 id: alg-damped-newton
 kind: algorithm
 title: "Damped Newton method"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

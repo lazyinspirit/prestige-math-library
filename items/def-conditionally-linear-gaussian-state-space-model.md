@@ -2,7 +2,7 @@
 id: def-conditionally-linear-gaussian-state-space-model
 kind: definition
 title: Conditionally linear-Gaussian state-space model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

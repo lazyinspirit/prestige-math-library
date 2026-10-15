@@ -2,7 +2,7 @@
 id: ex-smc-dominant-weight-and-ess
 kind: example
 title: "A dominant particle weight and the effective sample size"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

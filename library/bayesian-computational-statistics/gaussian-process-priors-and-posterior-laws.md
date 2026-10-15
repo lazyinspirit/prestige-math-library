@@ -1,7 +1,7 @@
 ---
 page: gaussian-process-priors-and-posterior-laws
 title: "Gaussian-process priors and finite posterior laws"
-status: draft
+status: published
 items:
   - lem-real-line-is-standard-borel
   - thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel

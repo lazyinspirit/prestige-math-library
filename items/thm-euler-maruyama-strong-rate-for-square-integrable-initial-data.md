@@ -2,7 +2,7 @@
 id: thm-euler-maruyama-strong-rate-for-square-integrable-initial-data
 kind: theorem
 title: "Euler–Maruyama strong rate for square-integrable initial data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

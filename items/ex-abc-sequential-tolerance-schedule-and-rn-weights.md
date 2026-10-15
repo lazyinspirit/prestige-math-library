@@ -2,7 +2,7 @@
 id: ex-abc-sequential-tolerance-schedule-and-rn-weights
 kind: example
 title: A finite ABC-SMC tolerance schedule and its mixture weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

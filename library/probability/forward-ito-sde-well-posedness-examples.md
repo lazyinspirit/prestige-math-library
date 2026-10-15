@@ -1,7 +1,7 @@
 ---
 page: forward-ito-sde-well-posedness-examples
 title: Forward Itô SDE Well-Posedness — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-global-lipschitz-scalar-ornstein-uhlenbeck-well-posedness

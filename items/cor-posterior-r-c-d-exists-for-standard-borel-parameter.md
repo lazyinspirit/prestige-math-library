@@ -2,7 +2,7 @@
 id: cor-posterior-r-c-d-exists-for-standard-borel-parameter
 kind: corollary
 title: Posterior RCD exists for a standard-Borel parameter
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

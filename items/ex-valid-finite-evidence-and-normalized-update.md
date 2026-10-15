@@ -2,7 +2,7 @@
 id: ex-valid-finite-evidence-and-normalized-update
 kind: example
 title: A finite model with positive finite evidence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-gibbs-reversibility-for-a-markov-kernel
 kind: definition
 title: Reversibility for a probability kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

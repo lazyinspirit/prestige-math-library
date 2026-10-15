@@ -1,7 +1,7 @@
 ---
 page: langevin-monte-carlo-mala-and-ula
 title: "Langevin algorithms: ULA bias and MALA exactness"
-status: draft
+status: published
 items:
   - def-v-weighted-total-variation-distance
   - lem-ula-potential-coercivity-from-radial-drift

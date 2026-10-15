@@ -2,7 +2,7 @@
 id: thm-global-strong-well-posedness-for-lipschitz-ito-sdes
 kind: theorem
 title: Global strong well-posedness for Lipschitz Itô SDEs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

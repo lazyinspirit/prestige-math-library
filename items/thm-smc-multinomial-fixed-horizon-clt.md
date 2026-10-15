@@ -2,7 +2,7 @@
 id: thm-smc-multinomial-fixed-horizon-clt
 kind: theorem
 title: "Fixed-horizon SMC central limit theorem with multinomial resampling"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 7

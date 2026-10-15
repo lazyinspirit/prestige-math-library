@@ -2,7 +2,7 @@
 id: lem-permutation-mixture-coupling-for-two-sample-u-statistics
 kind: lemma
 title: Mixture coupling for permuted two-sample U-statistics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

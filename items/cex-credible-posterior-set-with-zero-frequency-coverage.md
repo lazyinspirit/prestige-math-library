@@ -7,7 +7,7 @@ verification:
 id: cex-credible-posterior-set-with-zero-frequency-coverage
 kind: counterexample
 title: A boundary truth can give an equal-tailed credible interval zero coverage
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

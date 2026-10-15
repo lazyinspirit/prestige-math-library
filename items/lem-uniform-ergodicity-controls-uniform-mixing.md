@@ -2,7 +2,7 @@
 id: lem-uniform-ergodicity-controls-uniform-mixing
 kind: lemma
 title: Uniform ergodicity bounds the uniform-mixing coefficient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

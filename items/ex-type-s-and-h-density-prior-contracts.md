@@ -2,7 +2,7 @@
 id: ex-type-s-and-h-density-prior-contracts
 kind: example
 title: Uniform truth under type-S and type-H density priors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

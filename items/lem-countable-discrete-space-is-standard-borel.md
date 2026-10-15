@@ -2,7 +2,7 @@
 id: lem-countable-discrete-space-is-standard-borel
 kind: lemma
 title: "A countable discrete measurable space is standard Borel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

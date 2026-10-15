@@ -2,7 +2,7 @@
 id: def-poisson-random-measure
 kind: definition
 title: "Poisson random measure on a standard Borel space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: def-generalized-bayes-loss-update-and-temperature
 kind: definition
 title: "Generalized Bayes loss update and temperature"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

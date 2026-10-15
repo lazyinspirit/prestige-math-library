@@ -2,7 +2,7 @@
 id: def-harris-recurrent-markov-chain
 kind: definition
 title: "Harris recurrence relative to an irreducibility measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: identifiability-and-approximation-bias-in-computational-inference-examples
 title: "Identifiability and approximation bias in computational inference — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-local-hessian-does-not-capture-multiple-modes

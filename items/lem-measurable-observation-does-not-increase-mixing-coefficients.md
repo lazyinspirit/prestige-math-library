@@ -2,7 +2,7 @@
 id: lem-measurable-observation-does-not-increase-mixing-coefficients
 kind: lemma
 title: A measurable observation does not increase stationary mixing coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

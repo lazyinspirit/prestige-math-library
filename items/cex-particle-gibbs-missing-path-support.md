@@ -2,7 +2,7 @@
 id: cex-particle-gibbs-missing-path-support
 kind: counterexample
 title: A particle Gibbs proposal that misses posterior path support
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

@@ -1,7 +1,7 @@
 ---
 page: iid-bootstrap-and-jackknife-validity
 title: IID bootstrap and jackknife for smooth statistics
-status: draft
+status: published
 items:
   - alg-lower-empirical-bootstrap-quantile
   - def-iid-empirical-bootstrap-sample

@@ -2,7 +2,7 @@
 id: ex-hmc-leapfrog-harmonic-resonance
 kind: example
 title: A Gaussian harmonic leapfrog resonance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

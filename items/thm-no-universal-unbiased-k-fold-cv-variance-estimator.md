@@ -2,7 +2,7 @@
 id: thm-no-universal-unbiased-k-fold-cv-variance-estimator
 kind: theorem
 title: "No universal unbiased estimator of K-fold cross-validation variance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

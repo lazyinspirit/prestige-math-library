@@ -2,7 +2,7 @@
 id: lem-perturbed-observation-ensemble-kalman-moment-bounds
 kind: lemma
 title: Uniform finite-horizon moment bounds for perturbed-observation EnKF ensembles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

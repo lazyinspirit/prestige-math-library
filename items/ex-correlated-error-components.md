@@ -2,7 +2,7 @@
 id: ex-correlated-error-components
 kind: example
 title: "Perfectly correlated error components"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

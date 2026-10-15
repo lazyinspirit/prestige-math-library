@@ -2,7 +2,7 @@
 id: lem-separable-banach-has-countable-norming-family
 kind: lemma
 title: "A separable Banach space has a countable norming family"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

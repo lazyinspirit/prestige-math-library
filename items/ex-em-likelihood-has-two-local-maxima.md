@@ -2,7 +2,7 @@
 id: ex-em-likelihood-has-two-local-maxima
 kind: example
 title: "An EM likelihood with two strict local maxima"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

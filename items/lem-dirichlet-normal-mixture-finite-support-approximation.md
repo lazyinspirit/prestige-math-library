@@ -2,7 +2,7 @@
 id: lem-dirichlet-normal-mixture-finite-support-approximation
 kind: lemma
 title: "Compactly supported Gaussian mixtures admit logarithmic-size finite approximations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

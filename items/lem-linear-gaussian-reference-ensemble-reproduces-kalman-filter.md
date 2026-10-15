@@ -2,7 +2,7 @@
 id: lem-linear-gaussian-reference-ensemble-reproduces-kalman-filter
 kind: lemma
 title: Independent perturbed-observation reference members follow the Kalman filter
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-lambda-t-net
 kind: definition
 title: "$(\\lambda,t,m,d)$-nets in base $b$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

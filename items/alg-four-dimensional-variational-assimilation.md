@@ -2,7 +2,7 @@
 id: alg-four-dimensional-variational-assimilation
 kind: algorithm
 title: Strong- and weak-constraint 4DVAR with a finite gradient run
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

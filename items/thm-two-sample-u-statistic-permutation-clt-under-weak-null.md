@@ -3,7 +3,7 @@ dependency_level: 5
 id: thm-two-sample-u-statistic-permutation-clt-under-weak-null
 kind: theorem
 title: Permutation CLT for a two-sample U-statistic under a weak null
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

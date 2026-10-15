@@ -2,7 +2,7 @@
 id: thm-bootstrap-draws-are-conditionally-iid-empirical-law
 kind: theorem
 title: "Empirical-law bootstrap draws are conditionally IID"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

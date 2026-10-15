@@ -1,7 +1,7 @@
 ---
 page: cross-validation-risk-and-model-comparison-examples
 title: "Cross-validation risk, model selection, and comparison uncertainty — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-holdout-cv-training-size-bias

@@ -2,7 +2,7 @@
 id: lem-iid-posterior-contraction-under-countable-sieves
 kind: lemma
 title: "Countably partitioned sieves yield posterior contraction by weighted entropy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

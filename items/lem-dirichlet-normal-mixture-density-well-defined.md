@@ -2,7 +2,7 @@
 id: lem-dirichlet-normal-mixture-density-well-defined
 kind: lemma
 title: "The Dirichlet normal-mixture density is jointly measurable and normalized"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

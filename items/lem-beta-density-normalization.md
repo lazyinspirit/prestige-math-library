@@ -2,7 +2,7 @@
 id: lem-beta-density-normalization
 kind: lemma
 title: "The Beta density has finite positive Lebesgue integral"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

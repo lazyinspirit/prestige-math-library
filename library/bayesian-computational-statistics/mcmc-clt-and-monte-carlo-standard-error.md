@@ -1,7 +1,7 @@
 ---
 page: mcmc-clt-and-monte-carlo-standard-error
 title: MCMC central limit theorems, MCSE, and long-run variance
-status: draft
+status: published
 items:
   - def-flegal-jones-obm-batch-size-conditions
   - def-geometric-and-uniform-ergodicity-for-mcmc-clt

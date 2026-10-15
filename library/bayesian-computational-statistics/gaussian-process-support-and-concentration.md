@@ -1,7 +1,7 @@
 ---
 page: gaussian-process-support-and-concentration
 title: Banach Gaussian priors, RKHS support, and concentration
-status: draft
+status: published
 items:
   - def-borel-gaussian-random-element-on-a-separable-banach-space
   - lem-borel-map-into-separable-banach-is-strongly-measurable

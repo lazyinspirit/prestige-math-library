@@ -2,7 +2,7 @@
 id: lem-banach-gaussian-rkhs-unit-ball-is-compact
 kind: lemma
 title: "The Cameron–Martin unit ball is compact in the Banach norm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

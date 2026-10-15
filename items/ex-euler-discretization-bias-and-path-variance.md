@@ -2,7 +2,7 @@
 id: ex-euler-discretization-bias-and-path-variance
 kind: example
 title: "Euler discretization bias and path-to-path variance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

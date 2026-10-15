@@ -1,7 +1,7 @@
 ---
 page: adaptive-empirical-bayes-credible-set-calibration-examples
 title: "Adaptive empirical-Bayes credible-set calibration and failure — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-polynomial-tail-truth-has-conservative-empirical-bayes-coverage

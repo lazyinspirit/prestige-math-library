@@ -2,7 +2,7 @@
 id: def-abc-augmented-tolerance-target
 kind: definition
 title: Augmented ABC tolerance target
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

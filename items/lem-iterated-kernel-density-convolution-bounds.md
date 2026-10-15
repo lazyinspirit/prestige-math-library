@@ -2,7 +2,7 @@
 id: lem-iterated-kernel-density-convolution-bounds
 kind: lemma
 title: "Iterated kernel densities retain convolution lower bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

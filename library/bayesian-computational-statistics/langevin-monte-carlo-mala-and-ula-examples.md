@@ -1,7 +1,7 @@
 ---
 page: langevin-monte-carlo-mala-and-ula-examples
 title: "Langevin algorithms: ULA bias and MALA exactness — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-ula-critical-step-has-no-invariant-law

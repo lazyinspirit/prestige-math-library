@@ -2,7 +2,7 @@
 id: def-adaptive-empirical-bayes-gaussian-sequence-procedure
 kind: definition
 title: "Empirical-Bayes credible-ball procedure in the inverse Gaussian sequence model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

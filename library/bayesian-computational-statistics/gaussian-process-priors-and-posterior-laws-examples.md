@@ -1,7 +1,7 @@
 ---
 page: gaussian-process-priors-and-posterior-laws-examples
 title: "Gaussian-process priors and finite posterior laws — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-finite-gaussian-process-posterior-with-nonzero-mean-and-correlated-noise

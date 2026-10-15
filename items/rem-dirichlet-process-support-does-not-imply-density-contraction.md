@@ -2,7 +2,7 @@
 id: rem-dirichlet-process-support-does-not-imply-density-contraction
 kind: remark
 title: "Finite-partition conjugacy gives no density-contraction theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 7

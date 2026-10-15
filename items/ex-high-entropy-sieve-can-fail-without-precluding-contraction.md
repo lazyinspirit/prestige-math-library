@@ -2,7 +2,7 @@
 id: ex-high-entropy-sieve-can-fail-without-precluding-contraction
 kind: example
 title: "A sieve can miss the entropy bound while the posterior contracts exactly"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

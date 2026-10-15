@@ -3,7 +3,7 @@ dependency_level: 3
 id: lem-finite-dirichlet-gamma-representation-and-bernstein-bound
 kind: lemma
 title: Finite Dirichlet gamma representation and weighted Bernstein bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

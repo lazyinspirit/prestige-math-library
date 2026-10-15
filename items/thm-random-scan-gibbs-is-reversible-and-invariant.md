@@ -2,7 +2,7 @@
 id: thm-random-scan-gibbs-is-reversible-and-invariant
 kind: theorem
 title: Random-scan Gibbs is reversible and invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

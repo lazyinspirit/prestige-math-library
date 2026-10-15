@@ -1,7 +1,7 @@
 ---
 page: resampling-algorithms-and-sampling-units
 title: "Resampling schemes and the sampling-unit contract"
-status: draft
+status: published
 items:
   - def-resampling-sampling-unit-contract
   - def-empirical-measure

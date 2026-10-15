@@ -2,7 +2,7 @@
 id: ex-systematic-gibbs-sweep-is-not-reversible
 kind: example
 title: A systematic Gaussian Gibbs sweep need not be reversible
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

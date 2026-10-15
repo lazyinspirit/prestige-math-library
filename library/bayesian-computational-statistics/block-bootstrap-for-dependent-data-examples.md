@@ -1,7 +1,7 @@
 ---
 page: block-bootstrap-for-dependent-data-examples
 title: Moving and tapered block bootstrap for dependent data — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-moving-block-bootstrap-small-sample

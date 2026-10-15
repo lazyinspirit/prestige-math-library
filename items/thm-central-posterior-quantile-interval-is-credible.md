@@ -2,7 +2,7 @@
 id: thm-central-posterior-quantile-interval-is-credible
 kind: theorem
 title: Equal-tailed posterior quantile intervals are credible
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

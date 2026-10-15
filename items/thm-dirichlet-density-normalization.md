@@ -2,7 +2,7 @@
 id: thm-dirichlet-density-normalization
 kind: theorem
 title: "Dirichlet density normalization by iterated Beta integrals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

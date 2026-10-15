@@ -2,7 +2,7 @@
 id: thm-multivariate-normal-conditional-law
 kind: theorem
 title: "Conditional law of a jointly Gaussian block with positive-definite observed covariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

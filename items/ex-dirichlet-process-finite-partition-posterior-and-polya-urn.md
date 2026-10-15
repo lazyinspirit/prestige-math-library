@@ -2,7 +2,7 @@
 id: ex-dirichlet-process-finite-partition-posterior-and-polya-urn
 kind: example
 title: "Finite-partition posterior and Pólya-urn draws"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 8

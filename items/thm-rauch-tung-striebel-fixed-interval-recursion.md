@@ -2,7 +2,7 @@
 id: thm-rauch-tung-striebel-fixed-interval-recursion
 kind: theorem
 title: The Rauch–Tung–Striebel recursion gives fixed-interval Gaussian smoothing laws
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

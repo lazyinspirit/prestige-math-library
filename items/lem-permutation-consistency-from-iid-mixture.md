@@ -2,7 +2,7 @@
 id: lem-permutation-consistency-from-iid-mixture
 kind: lemma
 title: Consistency transfers from IID mixture samples to permuted groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

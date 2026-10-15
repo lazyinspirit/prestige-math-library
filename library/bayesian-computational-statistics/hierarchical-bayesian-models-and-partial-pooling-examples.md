@@ -1,7 +1,7 @@
 ---
 page: hierarchical-bayesian-models-and-partial-pooling-examples
 title: "Hierarchical Bayes and partial pooling — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-improper-variance-hyperprior-can-make-posterior-improper

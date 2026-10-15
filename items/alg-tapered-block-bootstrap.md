@@ -2,7 +2,7 @@
 id: alg-tapered-block-bootstrap
 kind: algorithm
 title: Tapered block bootstrap
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

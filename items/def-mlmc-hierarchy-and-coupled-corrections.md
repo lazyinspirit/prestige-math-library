@@ -2,7 +2,7 @@
 id: def-mlmc-hierarchy-and-coupled-corrections
 kind: definition
 title: "Geometric MLMC hierarchy and coupled corrections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: importance-sampling-and-weight-diagnostics
 title: Ordinary and self-normalized importance sampling
-status: draft
+status: published
 items:
   - alg-importance-sampling
   - thm-ordinary-importance-sampling-is-unbiased

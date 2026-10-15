@@ -3,7 +3,7 @@ dependency_level: 0
 id: lem-finite-moment-moving-window-increments
 kind: lemma
 title: Finite moments control increments over short moving windows
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

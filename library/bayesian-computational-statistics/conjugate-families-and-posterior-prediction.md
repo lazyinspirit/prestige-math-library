@@ -1,7 +1,7 @@
 ---
 page: conjugate-families-and-posterior-prediction
 title: "Conjugate families and Gaussian conditioning"
-status: draft
+status: published
 items:
   - lem-beta-density-normalization
   - lem-binomial-count-law

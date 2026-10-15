@@ -1,7 +1,7 @@
 ---
 page: bootstrap-failure-and-subsampling-examples
 title: Bootstrap failure, m-out-of-n methods, and subsampling — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-uniform-endpoint-bootstrap-failure-and-m-out-of-n-remedy

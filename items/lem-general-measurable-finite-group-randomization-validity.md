@@ -2,7 +2,7 @@
 id: lem-general-measurable-finite-group-randomization-validity
 kind: lemma
 title: Finite-group rank validity on a measurable sample space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

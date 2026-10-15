@@ -2,7 +2,7 @@
 id: lem-langevin-gaussian-proposal-kernel
 kind: lemma
 title: The ULA Gaussian proposal is a probability kernel with a positive density
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

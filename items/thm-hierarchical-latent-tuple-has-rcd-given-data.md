@@ -2,7 +2,7 @@
 id: thm-hierarchical-latent-tuple-has-rcd-given-data
 kind: theorem
 title: "A finite-group hierarchical model has a conditional law of its latent tuple"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

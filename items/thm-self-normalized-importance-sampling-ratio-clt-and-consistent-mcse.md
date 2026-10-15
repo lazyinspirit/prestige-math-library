@@ -2,7 +2,7 @@
 id: thm-self-normalized-importance-sampling-ratio-clt-and-consistent-mcse
 kind: theorem
 title: Self-normalized importance sampling ratio CLT and consistent Monte Carlo standard error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

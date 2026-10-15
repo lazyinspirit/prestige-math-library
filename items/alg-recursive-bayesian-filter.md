@@ -2,7 +2,7 @@
 id: alg-recursive-bayesian-filter
 kind: algorithm
 title: Recursive Bayesian filtering under dominated observations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

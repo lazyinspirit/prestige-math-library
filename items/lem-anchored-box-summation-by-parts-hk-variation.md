@@ -2,7 +2,7 @@
 id: lem-anchored-box-summation-by-parts-hk-variation
 kind: lemma
 title: "Anchored-box summation by parts for finite Hardy–Krause variation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

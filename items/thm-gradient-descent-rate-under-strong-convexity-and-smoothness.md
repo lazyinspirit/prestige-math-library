@@ -2,7 +2,7 @@
 id: thm-gradient-descent-rate-under-strong-convexity-and-smoothness
 kind: theorem
 title: "Gradient descent rate under strong convexity and smoothness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

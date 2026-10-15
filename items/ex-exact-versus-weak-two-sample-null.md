@@ -2,7 +2,7 @@
 id: ex-exact-versus-weak-two-sample-null
 kind: example
 title: Exact equality null versus weak parameter null
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 8

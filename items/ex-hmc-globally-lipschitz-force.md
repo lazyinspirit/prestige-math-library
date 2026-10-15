@@ -2,7 +2,7 @@
 id: ex-hmc-globally-lipschitz-force
 kind: example
 title: A globally Lipschitz Hamiltonian force
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

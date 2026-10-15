@@ -2,7 +2,7 @@
 id: thm-misspecified-iid-lan-under-kv-smoothness
 kind: theorem
 title: A local KL expansion and square-integrable log-Lipschitz envelope give misspecified iid LAN
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

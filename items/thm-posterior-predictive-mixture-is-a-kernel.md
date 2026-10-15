@@ -2,7 +2,7 @@
 id: thm-posterior-predictive-mixture-is-a-kernel
 kind: theorem
 title: A posterior mixture of future kernels is a probability kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

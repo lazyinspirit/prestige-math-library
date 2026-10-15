@@ -2,7 +2,7 @@
 id: lem-dirichlet-aggregation-under-coarsening
 kind: lemma
 title: "Dirichlet parameters add under coarsening"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

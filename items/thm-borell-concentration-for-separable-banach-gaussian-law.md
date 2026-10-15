@@ -2,7 +2,7 @@
 id: thm-borell-concentration-for-separable-banach-gaussian-law
 kind: theorem
 title: "Borell concentration for the norm of a separable Banach Gaussian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: smc-clts-error-and-degeneracy
 title: Finite-horizon SMC error, CLTs, and degeneracy
-status: draft
+status: published
 items:
   - def-dobrushin-coefficient-for-probability-kernels
   - lem-dobrushin-contraction-from-density-ratios

@@ -2,7 +2,7 @@
 id: thm-kalman-filter-is-exact-posterior
 kind: theorem
 title: The finite-horizon linear-Gaussian Kalman filter is exact
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

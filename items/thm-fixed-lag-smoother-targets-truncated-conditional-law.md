@@ -2,7 +2,7 @@
 id: thm-fixed-lag-smoother-targets-truncated-conditional-law
 kind: theorem
 title: Exact-kernel fixed-lag smoothing targets the truncated conditional law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

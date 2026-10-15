@@ -2,7 +2,7 @@
 id: ex-dirichlet-multinomial-update
 kind: example
 title: "A three-category Dirichlet-Multinomial update"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

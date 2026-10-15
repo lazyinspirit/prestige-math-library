@@ -2,7 +2,7 @@
 id: thm-sufficient-summary-recovers-full-posterior
 kind: theorem
 title: A sufficient summary preserves the Bayesian posterior
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

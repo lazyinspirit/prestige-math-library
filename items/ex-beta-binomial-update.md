@@ -2,7 +2,7 @@
 id: ex-beta-binomial-update
 kind: example
 title: "A Beta(2,3) prior updated by five Bernoulli trials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

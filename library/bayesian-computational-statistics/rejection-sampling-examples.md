@@ -1,7 +1,7 @@
 ---
 page: rejection-sampling-examples
 title: Rejection sampling — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-rejection-sampling-tail-mismatch-no-finite-envelope

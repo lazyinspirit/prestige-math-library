@@ -2,7 +2,7 @@
 id: ex-unique-kl-projection-finite-model
 kind: example
 title: "A finite misspecified model with a unique KL projection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

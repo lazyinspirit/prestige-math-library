@@ -1,7 +1,7 @@
 ---
 page: finite-group-permutation-inference
 title: "Exact permutation tests and random-permutation Monte Carlo"
-status: draft
+status: published
 items:
   - def-measurable-finite-group-permutation-setup
   - def-measurable-finite-group-orbit-pvalues

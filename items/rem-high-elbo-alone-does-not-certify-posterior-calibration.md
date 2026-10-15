@@ -2,7 +2,7 @@
 id: rem-high-elbo-alone-does-not-certify-posterior-calibration
 kind: remark
 title: "A high ELBO alone does not certify posterior calibration"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

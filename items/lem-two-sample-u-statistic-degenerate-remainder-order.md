@@ -2,7 +2,7 @@
 id: lem-two-sample-u-statistic-degenerate-remainder-order
 kind: lemma
 title: Second-moment order of the degenerate remainder
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: def-geometric-and-uniform-ergodicity-for-mcmc-clt
 kind: definition
 title: Geometric and uniform ergodicity for MCMC CLTs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

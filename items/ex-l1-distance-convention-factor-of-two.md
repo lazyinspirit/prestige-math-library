@@ -7,7 +7,7 @@ verification:
 id: ex-l1-distance-convention-factor-of-two
 kind: example
 title: "The factor of two between density L1 and library total variation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

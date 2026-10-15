@@ -2,7 +2,7 @@
 id: thm-error-ledger-mse-covariance-identity
 kind: theorem
 title: "MSE of a sum of error components includes covariance terms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

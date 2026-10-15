@@ -2,7 +2,7 @@
 id: thm-studentized-permutation-validity-under-mixed-assignment-centering
 kind: theorem
 title: Studentized permutation validity under mixed-assignment centering
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 7

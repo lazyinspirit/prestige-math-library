@@ -1,7 +1,7 @@
 ---
 page: particle-mcmc-pmmh-and-particle-gibbs-examples
 title: "Particle MCMC: PMMH and particle Gibbs — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-pseudo-marginal-rejection

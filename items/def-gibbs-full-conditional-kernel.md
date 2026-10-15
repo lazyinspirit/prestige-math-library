@@ -2,7 +2,7 @@
 id: def-gibbs-full-conditional-kernel
 kind: definition
 title: Proper full conditional kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

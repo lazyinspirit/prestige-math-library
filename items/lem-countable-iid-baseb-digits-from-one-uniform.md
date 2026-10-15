@@ -2,7 +2,7 @@
 id: lem-countable-iid-baseb-digits-from-one-uniform
 kind: lemma
 title: "A single uniform variable supplies countably many independent base-$b$ digits"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-two-sample-u-statistic-permutation-clt-under-mixed-centering
 kind: theorem
 title: Permutation CLT for a two-sample U-statistic under mixed-assignment centering
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

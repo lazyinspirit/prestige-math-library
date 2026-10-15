@@ -1,7 +1,7 @@
 ---
 page: statistical-and-computational-error-accounting
 title: "Statistical, resampling, simulation, and numerical error ledger"
-status: draft
+status: published
 items:
   - def-statistical-and-computational-error-ledger
   - thm-pathwise-error-ledger-decomposition

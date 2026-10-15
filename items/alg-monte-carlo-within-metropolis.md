@@ -2,7 +2,7 @@
 id: alg-monte-carlo-within-metropolis
 kind: algorithm
 title: Monte Carlo within Metropolis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

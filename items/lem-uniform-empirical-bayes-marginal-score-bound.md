@@ -3,7 +3,7 @@ dependency_level: 1
 id: lem-uniform-empirical-bayes-marginal-score-bound
 kind: lemma
 title: "Uniform marginal-score bounds by derivative integration"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

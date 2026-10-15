@@ -2,7 +2,7 @@
 id: lem-independent-observation-posterior-denominator-lower-bound
 kind: lemma
 title: "Local KL and log-square mass bounds a non-IID posterior denominator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

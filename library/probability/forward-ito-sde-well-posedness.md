@@ -1,7 +1,7 @@
 ---
 page: forward-ito-sde-well-posedness
 title: Forward Itô SDE Well-Posedness
-status: draft
+status: published
 items:
   - def-ito-sde-and-strong-solution
   - lem-lipschitz-sde-map-is-well-defined

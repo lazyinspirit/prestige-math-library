@@ -2,7 +2,7 @@
 id: def-two-sample-order-r-u-statistic-and-first-projections
 kind: definition
 title: Two-sample order-r U-statistic and first projections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

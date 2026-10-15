@@ -1,7 +1,7 @@
 ---
 page: importance-sampling-and-weight-diagnostics-examples
 title: Ordinary and self-normalized importance sampling — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-ordinary-and-self-normalized-importance-sampling-on-two-point-space

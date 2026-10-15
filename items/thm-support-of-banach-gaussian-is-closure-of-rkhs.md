@@ -2,7 +2,7 @@
 id: thm-support-of-banach-gaussian-is-closure-of-rkhs
 kind: theorem
 title: "The support of a Banach Gaussian is the closure of its RKHS"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

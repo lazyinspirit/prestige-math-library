@@ -2,7 +2,7 @@
 id: def-particle-gibbs-backward-simulation-extended-target
 kind: definition
 title: Backward-simulation particle Gibbs extended target
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

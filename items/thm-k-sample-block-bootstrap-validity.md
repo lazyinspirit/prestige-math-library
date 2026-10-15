@@ -2,7 +2,7 @@
 id: thm-k-sample-block-bootstrap-validity
 kind: theorem
 title: Conditional K-sample block-bootstrap validity under a joint CLT
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

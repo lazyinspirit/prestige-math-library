@@ -2,7 +2,7 @@
 id: ex-gaussian-process-extrapolation-retains-independent-index-uncertainty
 kind: example
 title: A Gaussian process retains uncertainty at an independent index
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

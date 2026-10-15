@@ -2,7 +2,7 @@
 id: lem-finite-index-bootstrap-sample-is-conditionally-iid
 kind: lemma
 title: Finite-index bootstrap draws are conditionally IID from the empirical law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

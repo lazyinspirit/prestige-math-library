@@ -1,7 +1,7 @@
 ---
 page: kalman-filtering-examples
 title: Exact linear-Gaussian Kalman filtering — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-scalar-kalman-filter-update

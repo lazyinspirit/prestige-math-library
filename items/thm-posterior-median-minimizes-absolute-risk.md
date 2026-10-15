@@ -2,7 +2,7 @@
 id: thm-posterior-median-minimizes-absolute-risk
 kind: theorem
 title: Every posterior median minimizes absolute risk when the first absolute moment is finite
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

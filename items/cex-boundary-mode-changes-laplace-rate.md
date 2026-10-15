@@ -2,7 +2,7 @@
 id: cex-boundary-mode-changes-laplace-rate
 kind: counterexample
 title: A boundary mode has a different concentration rate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-finite-group-permutation-validity
 kind: theorem
 title: "Exact finite-group permutation p-values and tests"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-langevin-potential-exponential-generator-drift
 kind: lemma
 title: Exponential Lyapunov drift for the formal Langevin generator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

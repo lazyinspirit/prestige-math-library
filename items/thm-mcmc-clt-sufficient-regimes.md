@@ -3,7 +3,7 @@ dependency_level: 4
 id: thm-mcmc-clt-sufficient-regimes
 kind: theorem
 title: Sufficient MCMC CLT regimes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

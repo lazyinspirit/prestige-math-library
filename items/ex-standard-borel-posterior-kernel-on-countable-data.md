@@ -2,7 +2,7 @@
 id: ex-standard-borel-posterior-kernel-on-countable-data
 kind: example
 title: A standard-Borel posterior kernel for countable data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

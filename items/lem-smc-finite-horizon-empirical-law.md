@@ -2,7 +2,7 @@
 id: lem-smc-finite-horizon-empirical-law
 kind: lemma
 title: "Finite-horizon SMC empirical laws converge for integrable tests"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

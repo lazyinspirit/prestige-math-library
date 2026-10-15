@@ -2,7 +2,7 @@
 id: lem-dirichlet-normal-mixture-local-prior-mass
 kind: lemma
 title: "The mixture prior places local KL and log-square mass near a compact smooth truth"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: ex-em-finite-mixture-responsibilities
 kind: example
 title: "Responsibilities in a two-component mixture"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

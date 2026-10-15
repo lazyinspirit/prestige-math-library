@@ -2,7 +2,7 @@
 id: thm-systematic-gibbs-sweep-preserves-target
 kind: theorem
 title: A systematic Gibbs sweep preserves the target
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

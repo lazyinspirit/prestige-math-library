@@ -2,7 +2,7 @@
 id: cor-two-sample-permutation-exact-under-equal-distributions
 kind: corollary
 title: Finite-sample exactness under equal distributions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

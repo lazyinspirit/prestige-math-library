@@ -1,7 +1,7 @@
 ---
 page: particle-smoothing-backward-simulation-and-rbpf
 title: Particle smoothing, backward simulation, and Rao–Blackwellized filters
-status: draft
+status: published
 items:
   - lem-nonlinear-path-extension-is-a-probability-kernel
   - def-conditionally-linear-gaussian-state-space-model

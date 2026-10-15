@@ -2,7 +2,7 @@
 id: thm-cdf-and-multiscale-credible-band-calibration-from-bvm
 kind: theorem
 title: CDF and multiscale credible-band calibration from weak BvM limits
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

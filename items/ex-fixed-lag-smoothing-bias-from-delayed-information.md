@@ -2,7 +2,7 @@
 id: ex-fixed-lag-smoothing-bias-from-delayed-information
 kind: example
 title: Delayed information creates fixed-lag smoothing bias
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 7

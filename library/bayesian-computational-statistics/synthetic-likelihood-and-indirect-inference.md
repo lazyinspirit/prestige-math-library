@@ -1,7 +1,7 @@
 ---
 page: synthetic-likelihood-and-indirect-inference
 title: "Synthetic likelihood and indirect inference"
-status: draft
+status: published
 items:
   - def-synthetic-likelihood
   - def-binding-function-and-indirect-inference-target

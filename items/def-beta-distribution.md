@@ -2,7 +2,7 @@
 id: def-beta-distribution
 kind: definition
 title: "Beta distribution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: def-mixing-coefficients-for-stationary-markov-chain
 kind: definition
 title: Strong, uniform, and maximal-correlation mixing coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

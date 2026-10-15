@@ -7,7 +7,7 @@ verification:
 id: ex-identifiable-finite-model
 kind: example
 title: "A finite identifiable model with posterior consistency"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

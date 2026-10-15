@@ -2,7 +2,7 @@
 id: thm-moving-block-bootstrap-clt-for-dependent-data
 kind: theorem
 title: Moving block bootstrap CLT for dependent Hilbert-valued data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

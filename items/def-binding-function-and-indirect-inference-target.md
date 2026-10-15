@@ -2,7 +2,7 @@
 id: def-binding-function-and-indirect-inference-target
 kind: definition
 title: "Binding function and indirect-inference target"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

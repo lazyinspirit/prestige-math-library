@@ -2,7 +2,7 @@
 id: thm-iid-monte-carlo-mean-moments
 title: "Unbiasedness and exact variance of the IID Monte Carlo mean"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

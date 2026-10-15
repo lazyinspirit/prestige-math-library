@@ -2,7 +2,7 @@
 id: ex-continuous-density-mode-under-zero-one-loss
 kind: example
 title: A continuous density mode need not distinguish exact zero–one actions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

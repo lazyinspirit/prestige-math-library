@@ -1,7 +1,7 @@
 ---
 page: identifiability-and-approximation-bias-in-computational-inference
 title: "Identifiability and approximation bias in computational inference"
-status: draft
+status: published
 items:
   - thm-total-variation-bounds-for-expectations
   - def-exact-inferential-target-and-approximation-chain

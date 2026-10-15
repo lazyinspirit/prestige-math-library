@@ -2,7 +2,7 @@
 id: lem-finite-euclidean-space-is-standard-borel
 kind: lemma
 title: "Finite-dimensional Euclidean space with its Borel sigma-algebra is standard Borel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

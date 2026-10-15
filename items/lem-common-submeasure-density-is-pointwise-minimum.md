@@ -2,7 +2,7 @@
 id: lem-common-submeasure-density-is-pointwise-minimum
 kind: lemma
 title: The common submeasure of two finite densities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

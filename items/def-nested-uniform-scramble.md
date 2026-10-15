@@ -2,7 +2,7 @@
 id: def-nested-uniform-scramble
 kind: definition
 title: "Nested uniform scrambling of a finite point set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

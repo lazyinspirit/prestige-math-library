@@ -2,7 +2,7 @@
 id: lem-square-integrable-predictable-step-ito-integral-is-finite-sum
 kind: lemma
 title: "A square-integrable predictable step Itô integral is its finite sum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

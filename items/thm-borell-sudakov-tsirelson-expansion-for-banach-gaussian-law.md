@@ -3,7 +3,7 @@ dependency_level: 7
 id: thm-borell-sudakov-tsirelson-expansion-for-banach-gaussian-law
 kind: theorem
 title: Borell–Sudakov–Tsirelson expansion for a Banach Gaussian law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

@@ -7,7 +7,7 @@ verification:
 id: cex-smc-zero-residual-fraction-can-have-random-offspring
 kind: counterexample
 title: "Zero limiting remainder does not make finite residual offspring deterministic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

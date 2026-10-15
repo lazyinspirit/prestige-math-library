@@ -1,7 +1,7 @@
 ---
 page: block-bootstrap-for-dependent-data
 title: Moving and tapered block bootstrap for dependent data
-status: draft
+status: published
 items:
   - def-conditional-weak-convergence-in-probability
   - def-hadamard-differentiability-tangentially

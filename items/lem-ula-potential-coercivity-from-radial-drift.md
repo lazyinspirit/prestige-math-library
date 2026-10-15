@@ -2,7 +2,7 @@
 id: lem-ula-potential-coercivity-from-radial-drift
 kind: lemma
 title: Radial gradient drift forces potential coercivity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

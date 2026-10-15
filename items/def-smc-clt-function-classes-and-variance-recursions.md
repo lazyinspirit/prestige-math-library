@@ -2,7 +2,7 @@
 id: def-smc-clt-function-classes-and-variance-recursions
 kind: definition
 title: "Finite-horizon SMC CLT classes and variance recursions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

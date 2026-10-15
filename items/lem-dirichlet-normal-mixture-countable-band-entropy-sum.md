@@ -2,7 +2,7 @@
 id: lem-dirichlet-normal-mixture-countable-band-entropy-sum
 kind: lemma
 title: "The dyadic scale bands satisfy the weighted entropy condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

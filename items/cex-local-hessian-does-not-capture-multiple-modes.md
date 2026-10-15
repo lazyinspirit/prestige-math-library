@@ -2,7 +2,7 @@
 id: cex-local-hessian-does-not-capture-multiple-modes
 kind: counterexample
 title: "A full-rank local Hessian does not capture both posterior modes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

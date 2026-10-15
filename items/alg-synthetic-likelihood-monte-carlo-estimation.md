@@ -2,7 +2,7 @@
 id: alg-synthetic-likelihood-monte-carlo-estimation
 kind: algorithm
 title: "Finite-simulation plug-in synthetic-likelihood evaluation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-sparse-gap-sequence-is-hyperrectangular-but-undercovered
 kind: example
 title: "A sparse-gap truth lies in a hyperrectangle but is undercovered"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

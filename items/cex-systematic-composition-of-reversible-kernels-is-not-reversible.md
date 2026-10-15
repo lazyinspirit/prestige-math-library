@@ -2,7 +2,7 @@
 id: cex-systematic-composition-of-reversible-kernels-is-not-reversible
 kind: counterexample
 title: A systematic composition of reversible kernels need not be reversible
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

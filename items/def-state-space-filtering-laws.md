@@ -2,7 +2,7 @@
 id: def-state-space-filtering-laws
 kind: definition
 title: Filtering, predictive, and smoothing laws in a finite-horizon state-space model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-dirichlet-normal-mixture-polynomial-scale-tail-outside-theorem
 kind: example
 title: "A polynomial scale tail is outside the stated theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 10

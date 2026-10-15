@@ -2,7 +2,7 @@
 id: def-conditional-weak-convergence-in-probability
 kind: definition
 title: Conditional weak convergence in probability
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

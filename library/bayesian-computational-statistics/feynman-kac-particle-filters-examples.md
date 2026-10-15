@@ -1,7 +1,7 @@
 ---
 page: feynman-kac-particle-filters-examples
 title: "Feynman–Kac targets and sequential particle filters — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-multinomial-versus-residual-resampling

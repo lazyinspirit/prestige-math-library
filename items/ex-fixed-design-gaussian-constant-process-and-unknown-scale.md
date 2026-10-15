@@ -3,7 +3,7 @@ dependency_level: 10
 id: ex-fixed-design-gaussian-constant-process-and-unknown-scale
 kind: example
 title: A constant GP on a repeated fixed design meets the nondegenerate scale branch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

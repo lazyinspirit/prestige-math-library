@@ -2,7 +2,7 @@
 id: thm-exponential-family-conjugate-update
 kind: theorem
 title: "Conjugate update for an exponential-family likelihood"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

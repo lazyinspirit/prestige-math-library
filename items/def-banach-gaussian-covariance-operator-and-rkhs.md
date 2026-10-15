@@ -2,7 +2,7 @@
 id: def-banach-gaussian-covariance-operator-and-rkhs
 kind: definition
 title: "Covariance operator and reproducing-kernel Hilbert space of a Banach Gaussian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

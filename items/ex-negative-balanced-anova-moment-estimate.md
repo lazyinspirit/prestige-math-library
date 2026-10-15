@@ -2,7 +2,7 @@
 id: ex-negative-balanced-anova-moment-estimate
 kind: example
 title: "A negative balanced-ANOVA moment estimate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

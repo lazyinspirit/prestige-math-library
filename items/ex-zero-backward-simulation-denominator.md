@@ -2,7 +2,7 @@
 id: ex-zero-backward-simulation-denominator
 kind: example
 title: A zero backward-simulation denominator is inadmissible
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: lem-two-sample-u-statistic-projections-well-defined
 kind: lemma
 title: First projections are measurable and square-integrable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

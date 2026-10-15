@@ -2,7 +2,7 @@
 id: lem-gibbs-block-update-is-reversible-and-invariant
 kind: lemma
 title: Each exact Gibbs block update is reversible and invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

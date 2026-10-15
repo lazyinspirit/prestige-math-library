@@ -2,7 +2,7 @@
 id: ex-smc-bounded-weights-with-mixing
 kind: example
 title: "A bounded-weight mixing filter has bounded asymptotic variance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 7

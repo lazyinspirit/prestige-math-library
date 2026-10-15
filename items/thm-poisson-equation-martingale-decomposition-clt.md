@@ -2,7 +2,7 @@
 id: thm-poisson-equation-martingale-decomposition-clt
 kind: theorem
 title: Poisson-equation martingale decomposition and MCMC CLT
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

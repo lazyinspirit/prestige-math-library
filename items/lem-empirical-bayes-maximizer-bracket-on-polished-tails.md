@@ -2,7 +2,7 @@
 id: lem-empirical-bayes-maximizer-bracket-on-polished-tails
 kind: lemma
 title: "Marginal-likelihood maximizer bracket on polished tails"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

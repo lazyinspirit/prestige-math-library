@@ -2,7 +2,7 @@
 id: def-hadamard-differentiability-tangentially
 kind: definition
 title: Hadamard differentiability tangentially to a subspace
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

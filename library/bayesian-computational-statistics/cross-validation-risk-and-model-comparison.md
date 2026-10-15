@@ -1,7 +1,7 @@
 ---
 page: cross-validation-risk-and-model-comparison
 title: "Cross-validation risk, model selection, and comparison uncertainty"
-status: draft
+status: published
 items:
   - def-cross-validation-split-and-risk-target
   - def-risk-estimation-versus-model-identification

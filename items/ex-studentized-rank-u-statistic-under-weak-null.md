@@ -2,7 +2,7 @@
 id: ex-studentized-rank-u-statistic-under-weak-null
 kind: example
 title: A studentized rank U-statistic under a weak null
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 8

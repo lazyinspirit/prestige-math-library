@@ -2,7 +2,7 @@
 id: ex-point-null-needs-a-model-atom
 kind: example
 title: "Point-null mass under atomic and continuous priors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

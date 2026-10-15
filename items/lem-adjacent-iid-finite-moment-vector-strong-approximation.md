@@ -3,7 +3,7 @@ dependency_level: 4
 id: lem-adjacent-iid-finite-moment-vector-strong-approximation
 kind: lemma
 title: Adjacent iid vector functionals admit a finite-moment strong approximation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

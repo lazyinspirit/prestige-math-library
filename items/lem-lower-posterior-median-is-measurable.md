@@ -2,7 +2,7 @@
 id: lem-lower-posterior-median-is-measurable
 kind: lemma
 title: The lower posterior median is a measurable rule
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

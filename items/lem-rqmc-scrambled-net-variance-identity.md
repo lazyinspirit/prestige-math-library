@@ -2,7 +2,7 @@
 id: lem-rqmc-scrambled-net-variance-identity
 kind: lemma
 title: "ANOVA variance identity for nestedly scrambled point sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

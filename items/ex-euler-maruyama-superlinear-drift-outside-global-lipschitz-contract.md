@@ -2,7 +2,7 @@
 id: ex-euler-maruyama-superlinear-drift-outside-global-lipschitz-contract
 kind: example
 title: "A superlinear drift outside the Euler–Maruyama moment contract"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: alg-holdout-loo-lpo-v-fold-and-repeated-cv
 kind: algorithm
 title: "Holdout, leave-out, V-fold, and repeated cross-validation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: def-posterior-risk-and-bayes-action
 kind: definition
 title: Finite posterior risk and Bayes action rule
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

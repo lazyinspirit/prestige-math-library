@@ -2,7 +2,7 @@
 id: thm-lan-implies-total-variation-bvm
 kind: theorem
 title: Compact-uniform LAN and rate contraction imply a total-variation BvM limit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

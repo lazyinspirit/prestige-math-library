@@ -2,7 +2,7 @@
 id: ex-dirichlet-normal-mixture-compact-scale-hyperprior-and-rate
 kind: example
 title: "A compact scale hyperprior removes the tail term and permits an explicit bandwidth balance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 10

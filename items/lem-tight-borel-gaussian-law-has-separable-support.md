@@ -2,7 +2,7 @@
 id: lem-tight-borel-gaussian-law-has-separable-support
 kind: lemma
 title: "A tight Gaussian law is carried by a separable closed subspace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

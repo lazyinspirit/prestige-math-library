@@ -2,7 +2,7 @@
 id: ex-mala-gaussian-target-acceptance-correction
 kind: example
 title: MALA corrects the Gaussian ULA proposal with a Hastings ratio
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

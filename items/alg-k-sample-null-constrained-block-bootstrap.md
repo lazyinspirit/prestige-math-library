@@ -2,7 +2,7 @@
 id: alg-k-sample-null-constrained-block-bootstrap
 kind: algorithm
 title: Null-constrained block bootstrap for independent series
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

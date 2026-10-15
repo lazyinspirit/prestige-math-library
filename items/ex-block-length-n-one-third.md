@@ -2,7 +2,7 @@
 id: ex-block-length-n-one-third
 kind: example
 title: A block-length sequence in the bootstrap CLT regime
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

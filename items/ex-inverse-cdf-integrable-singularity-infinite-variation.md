@@ -2,7 +2,7 @@
 id: ex-inverse-cdf-integrable-singularity-infinite-variation
 kind: example
 title: "An inverse-CDF singularity can be integrable but have infinite variation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

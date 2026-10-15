@@ -3,7 +3,7 @@ dependency_level: 4
 id: lem-ula-uniform-exponential-moments-and-invariant-laws
 kind: lemma
 title: ULA invariant laws have uniform exponential moments on the needed step ranges
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

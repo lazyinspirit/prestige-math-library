@@ -2,7 +2,7 @@
 id: thm-banach-gaussian-covariance-rkhs-is-well-defined
 kind: theorem
 title: "The Banach Gaussian covariance and RKHS construction is well-defined"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

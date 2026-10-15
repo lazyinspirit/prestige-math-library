@@ -2,7 +2,7 @@
 id: lem-rqmc-scrambled-net-gain-formula
 kind: lemma
 title: "Pair-count formula for scrambled-net gain coefficients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

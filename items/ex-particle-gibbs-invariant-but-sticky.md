@@ -2,7 +2,7 @@
 id: ex-particle-gibbs-invariant-but-sticky
 kind: example
 title: An invariant particle Gibbs chain can be sticky
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 7

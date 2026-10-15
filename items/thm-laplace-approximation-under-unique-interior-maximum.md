@@ -2,7 +2,7 @@
 id: thm-laplace-approximation-under-unique-interior-maximum
 kind: theorem
 title: Laplace asymptotic under a unique nondegenerate interior maximum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

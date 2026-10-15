@@ -2,7 +2,7 @@
 id: ex-ula-critical-step-has-no-invariant-law
 kind: example
 title: At the critical quadratic ULA step size, no invariant law exists
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-binomial-count-law
 kind: lemma
 title: "The Binomial count has its usual probability mass function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

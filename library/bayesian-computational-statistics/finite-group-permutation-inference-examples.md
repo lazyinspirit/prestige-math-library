@@ -1,7 +1,7 @@
 ---
 page: finite-group-permutation-inference-examples
 title: "Exact permutation tests and random-permutation Monte Carlo — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-exchangeable-two-sample-permutation-test

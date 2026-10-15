@@ -2,7 +2,7 @@
 id: thm-finite-class-maximal-mass-is-zero-one-bayes-action
 kind: theorem
 title: A maximal-mass action is Bayes under finite-class zero–one loss
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

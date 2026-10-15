@@ -2,7 +2,7 @@
 id: thm-metropolized-hamiltonian-chain-preserves-target
 kind: theorem
 title: The Metropolized Hamiltonian chain preserves its target
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

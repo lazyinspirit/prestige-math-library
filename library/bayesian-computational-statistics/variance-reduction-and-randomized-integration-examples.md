@@ -1,7 +1,7 @@
 ---
 page: variance-reduction-and-randomized-integration-examples
 title: Control variates, antithetics, and stratification — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-perfect-control-variate

@@ -3,7 +3,7 @@ dependency_level: 3
 id: lem-geometric-markov-chain-has-adjacent-iid-split-tours
 kind: lemma
 title: Geometric Markov chains admit delayed adjacent-iid split tours with spare moments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

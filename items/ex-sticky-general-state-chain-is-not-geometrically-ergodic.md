@@ -2,7 +2,7 @@
 id: ex-sticky-general-state-chain-is-not-geometrically-ergodic
 kind: example
 title: "A sticky general-state chain can converge without a geometric rate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

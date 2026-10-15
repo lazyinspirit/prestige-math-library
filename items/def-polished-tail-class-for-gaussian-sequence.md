@@ -2,7 +2,7 @@
 id: def-polished-tail-class-for-gaussian-sequence
 kind: definition
 title: "Polished-tail class for a Gaussian sequence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

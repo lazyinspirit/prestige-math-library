@@ -2,7 +2,7 @@
 id: thm-perturbed-observation-ensemble-kalman-large-ensemble-limit
 kind: theorem
 title: The perturbed-observation EnKF converges to the Kalman filter at fixed horizon
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

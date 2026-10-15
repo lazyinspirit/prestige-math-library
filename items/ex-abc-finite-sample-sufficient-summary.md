@@ -2,7 +2,7 @@
 id: ex-abc-finite-sample-sufficient-summary
 kind: example
 title: A Bernoulli count is a sufficient summary for a finite-sample posterior
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

@@ -1,7 +1,7 @@
 ---
 page: generalized-bayes-loss-updates-and-temperature
 title: "Generalized Bayes loss updates and temperature"
-status: draft
+status: published
 items:
   - def-generalized-bayes-loss-update-and-temperature
   - lem-generalized-bayes-loss-update-normalizes-to-a-probability-measure

@@ -2,7 +2,7 @@
 id: ex-variational-candidate-outside-posterior-support
 kind: example
 title: "A candidate outside posterior support is not admissible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

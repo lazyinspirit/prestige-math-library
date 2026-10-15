@@ -2,7 +2,7 @@
 id: ex-finite-two-state-reversible-markov-kernel
 kind: example
 title: A finite reversible two-state Markov kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

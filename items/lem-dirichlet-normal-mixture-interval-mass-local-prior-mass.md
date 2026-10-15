@@ -3,7 +3,7 @@ dependency_level: 6
 id: lem-dirichlet-normal-mixture-interval-mass-local-prior-mass
 kind: lemma
 title: "Interval masses give a log-free local KL neighborhood for the mixture prior"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

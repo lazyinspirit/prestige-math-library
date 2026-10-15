@@ -2,7 +2,7 @@
 id: ex-posterior-median-can-be-nonunique
 kind: example
 title: A posterior median need not be unique
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

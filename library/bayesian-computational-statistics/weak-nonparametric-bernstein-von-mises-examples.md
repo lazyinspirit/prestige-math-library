@@ -1,7 +1,7 @@
 ---
 page: weak-nonparametric-bernstein-von-mises-examples
 title: Weak nonparametric Bernstein–von Mises limits — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-white-noise-is-not-l2-valued

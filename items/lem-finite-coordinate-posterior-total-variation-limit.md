@@ -2,7 +2,7 @@
 id: lem-finite-coordinate-posterior-total-variation-limit
 kind: lemma
 title: Finite-coordinate posterior total-variation limit
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

@@ -3,7 +3,7 @@ dependency_level: 0
 id: thm-finite-dimensional-gaussian-isoperimetric-expansion
 kind: theorem
 title: Finite-dimensional Gaussian isoperimetric expansion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

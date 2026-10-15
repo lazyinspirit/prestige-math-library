@@ -1,7 +1,7 @@
 ---
 page: metropolis-hastings-algorithm-and-invariance
 title: Metropolis–Hastings kernels
-status: draft
+status: published
 items:
   - lem-common-submeasure-density-is-pointwise-minimum
   - lem-common-submeasure-and-bounded-radon-nikodym-density

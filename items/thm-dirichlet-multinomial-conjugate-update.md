@@ -2,7 +2,7 @@
 id: thm-dirichlet-multinomial-conjugate-update
 kind: theorem
 title: "Dirichlet-Multinomial conjugate update"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

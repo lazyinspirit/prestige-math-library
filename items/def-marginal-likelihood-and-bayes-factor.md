@@ -2,7 +2,7 @@
 id: def-marginal-likelihood-and-bayes-factor
 kind: definition
 title: "Marginal likelihoods, proper model evidence, and Bayes factors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

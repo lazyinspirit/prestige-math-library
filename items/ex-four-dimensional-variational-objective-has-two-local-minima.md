@@ -2,7 +2,7 @@
 id: ex-four-dimensional-variational-objective-has-two-local-minima
 kind: example
 title: A strong-constraint 4DVAR objective can have two local minima
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-antithetic-variance-and-monotone-sufficiency
 kind: theorem
 title: Antithetic variance and a monotone sufficient condition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

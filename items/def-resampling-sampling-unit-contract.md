@@ -2,7 +2,7 @@
 id: def-resampling-sampling-unit-contract
 kind: definition
 title: "Sampling units and the resampling-unit contract"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

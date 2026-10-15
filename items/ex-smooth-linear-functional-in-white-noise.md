@@ -2,7 +2,7 @@
 id: ex-smooth-linear-functional-in-white-noise
 kind: example
 title: The integral functional under a product-prior white-noise BvM
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

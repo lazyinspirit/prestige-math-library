@@ -2,7 +2,7 @@
 id: cor-canonical-white-noise-law-is-tight-under-choice
 kind: corollary
 title: The canonical white-noise law is tight under the Axiom of Choice
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

@@ -2,7 +2,7 @@
 id: thm-dirichlet-process-polya-urn-predictive-law
 kind: theorem
 title: "Dirichlet-process Pólya-urn predictive law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 7

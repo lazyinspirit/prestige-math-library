@@ -2,7 +2,7 @@
 id: cex-positive-abc-tolerance-changes-posterior-target
 kind: counterexample
 title: "Positive ABC tolerance changes an identity-summary target"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

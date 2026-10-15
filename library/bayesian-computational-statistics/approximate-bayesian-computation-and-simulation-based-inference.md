@@ -1,7 +1,7 @@
 ---
 page: approximate-bayesian-computation-and-simulation-based-inference
 title: Approximate Bayesian computation and summary-based inference
-status: draft
+status: published
 items:
 - def-approximate-bayesian-computation
 - alg-abc-rejection

@@ -3,7 +3,7 @@ dependency_level: 0
 id: lem-gaussian-density-integrals-for-supplied-length-measures
 kind: lemma
 title: Gaussian density integrals for supplied length measures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

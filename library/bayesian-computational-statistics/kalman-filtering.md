@@ -1,7 +1,7 @@
 ---
 page: kalman-filtering
 title: Exact linear-Gaussian Kalman filtering
-status: draft
+status: published
 items:
   - lem-independent-noise-extends-a-conditional-law
   - alg-kalman-filter

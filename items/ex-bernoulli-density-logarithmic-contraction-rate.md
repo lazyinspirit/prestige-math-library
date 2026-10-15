@@ -2,7 +2,7 @@
 id: ex-bernoulli-density-logarithmic-contraction-rate
 kind: example
 title: "A one-parameter density prior meets the logarithmic contraction conditions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

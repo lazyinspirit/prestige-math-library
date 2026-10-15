@@ -2,7 +2,7 @@
 id: cex-synthetic-likelihood-changes-inferential-target
 kind: counterexample
 title: "A Gaussian synthetic likelihood can change an exact posterior"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

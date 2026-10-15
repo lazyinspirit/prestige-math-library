@@ -2,7 +2,7 @@
 id: thm-sequential-generalized-bayes-updates-are-coherent
 kind: theorem
 title: "Fixed-temperature generalized Bayes updates are sequentially coherent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

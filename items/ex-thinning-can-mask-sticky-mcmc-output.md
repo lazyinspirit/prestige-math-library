@@ -2,7 +2,7 @@
 id: ex-thinning-can-mask-sticky-mcmc-output
 kind: example
 title: Thinning lowers observed lag correlation but discards information
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

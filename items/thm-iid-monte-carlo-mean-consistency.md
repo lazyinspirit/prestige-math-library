@@ -2,7 +2,7 @@
 id: thm-iid-monte-carlo-mean-consistency
 title: "Strong and weak consistency of the IID Monte Carlo mean"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

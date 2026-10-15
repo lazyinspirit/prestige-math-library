@@ -2,7 +2,7 @@
 id: alg-split-rhat-from-multiple-chains
 kind: algorithm
 title: Split R-hat from multiple chains
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

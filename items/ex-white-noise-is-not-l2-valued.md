@@ -2,7 +2,7 @@
 id: ex-white-noise-is-not-l2-valued
 kind: example
 title: White noise has a negative-Sobolev law but no L2-valued law
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps:

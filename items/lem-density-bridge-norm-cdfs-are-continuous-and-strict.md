@@ -2,7 +2,7 @@
 id: lem-density-bridge-norm-cdfs-are-continuous-and-strict
 kind: lemma
 title: Continuous and strictly increasing norm distributions for density bridges
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

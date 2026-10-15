@@ -2,7 +2,7 @@
 id: cex-diminishing-adaptation-alone-does-not-imply-strong-law
 kind: counterexample
 title: Diminishing adaptation and uniform ergodicity need not give a strong law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

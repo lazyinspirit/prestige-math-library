@@ -3,7 +3,7 @@ dependency_level: 1
 id: lem-strong-mixing-quantile-covariance-bound
 kind: lemma
 title: Strong-mixing covariance bound in terms of tail quantiles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

@@ -2,7 +2,7 @@
 id: cex-smc-clt-class-does-not-ensure-target-moment
 kind: counterexample
 title: "The source function class need not give finite SMC CLT variances"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

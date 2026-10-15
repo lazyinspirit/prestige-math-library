@@ -7,7 +7,7 @@ verification:
 id: ex-metropolis-hastings-proposal-support-failure
 kind: example
 title: A proposal with disconnected support
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

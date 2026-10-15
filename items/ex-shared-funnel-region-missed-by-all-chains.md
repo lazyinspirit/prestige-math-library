@@ -2,7 +2,7 @@
 id: ex-shared-funnel-region-missed-by-all-chains
 kind: example
 title: A shared missed region in a finite funnel-shaped target
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

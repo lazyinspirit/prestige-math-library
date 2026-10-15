@@ -2,7 +2,7 @@
 id: ex-cluster-resampling-unit
 kind: example
 title: "Resampling complete cluster records"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

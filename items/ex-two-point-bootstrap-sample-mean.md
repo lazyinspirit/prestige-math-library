@@ -2,7 +2,7 @@
 id: ex-two-point-bootstrap-sample-mean
 kind: example
 title: "The bootstrap law of a two-point sample mean"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

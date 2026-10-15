@@ -2,7 +2,7 @@
 id: thm-two-sample-u-statistic-projection-clt
 kind: theorem
 title: Projection CLT for a two-sample U-statistic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

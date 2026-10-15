@@ -8,7 +8,7 @@ dependency_level: 4
 id: ex-two-series-block-bootstrap-null-centering
 kind: example
 title: Two-series null centering with a final block prefix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

@@ -2,7 +2,7 @@
 id: lem-one-step-kalman-gaussian-conditioning
 kind: lemma
 title: One-step Gaussian prediction and conditioning
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

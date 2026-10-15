@@ -2,7 +2,7 @@
 id: lem-product-prior-coordinate-posterior-law
 kind: lemma
 title: The product-prior posterior factors by coordinates
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:

@@ -2,7 +2,7 @@
 id: lem-dirichlet-process-simplex-small-ball
 kind: lemma
 title: "A Dirichlet process assigns exponential mass to a finite-partition simplex neighborhood"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

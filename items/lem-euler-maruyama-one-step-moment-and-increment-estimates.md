@@ -2,7 +2,7 @@
 id: lem-euler-maruyama-one-step-moment-and-increment-estimates
 kind: lemma
 title: "Euler–Maruyama one-step moment and increment estimates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

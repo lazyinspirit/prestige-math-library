@@ -2,7 +2,7 @@
 id: thm-rqmc-nested-scramble-zero-net-variance-bound
 kind: theorem
 title: "Variance bound for a nested scramble of a $(0,m,d)$-net"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 7

@@ -3,7 +3,7 @@ dependency_level: 1
 id: cex-degenerate-gaussian-scale-prior-can-break-arbitrary-concentration-rate
 kind: counterexample
 title: A spiky scale prior defeats an arbitrary degenerate-Gaussian concentration rate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

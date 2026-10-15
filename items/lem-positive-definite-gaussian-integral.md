@@ -2,7 +2,7 @@
 id: lem-positive-definite-gaussian-integral
 kind: lemma
 title: Gaussian integral for a positive-definite quadratic form
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

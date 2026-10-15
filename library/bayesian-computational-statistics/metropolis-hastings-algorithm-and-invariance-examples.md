@@ -1,7 +1,7 @@
 ---
 page: metropolis-hastings-algorithm-and-invariance-examples
 title: Metropolis–Hastings kernels — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-random-walk-metropolis-hastings

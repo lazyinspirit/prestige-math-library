@@ -1,7 +1,7 @@
 ---
 page: general-state-mcmc-kernels-and-reversibility-examples
 title: "General-state Markov kernels, invariance, and reversibility — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-finite-two-state-reversible-markov-kernel

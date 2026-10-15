@@ -1,7 +1,7 @@
 ---
 page: kalman-smoothing-and-rts-recursion-examples
 title: Fixed-interval Gaussian smoothing and RTS recursion — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-two-time-scalar-rauch-tung-striebel-smoother

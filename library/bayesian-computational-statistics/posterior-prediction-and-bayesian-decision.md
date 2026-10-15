@@ -1,7 +1,7 @@
 ---
 page: posterior-prediction-and-bayesian-decision
 title: "Posterior Prediction, Credible Sets, and Bayes Actions"
-status: draft
+status: published
 items:
   - def-posterior-predictive-law
   - thm-posterior-predictive-mixture-is-a-kernel

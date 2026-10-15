@@ -2,7 +2,7 @@
 id: ex-abc-smc-finite-particle-collapse
 kind: example
 title: Finite ABC-SMC particles can miss target support despite a valid mixture weight
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

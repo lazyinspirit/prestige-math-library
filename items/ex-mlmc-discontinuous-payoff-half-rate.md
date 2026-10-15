@@ -2,7 +2,7 @@
 id: ex-mlmc-discontinuous-payoff-half-rate
 kind: example
 title: "A discontinuous payoff with bias order one and variance order one-half"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

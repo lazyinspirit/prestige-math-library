@@ -2,7 +2,7 @@
 id: thm-multiscale-credible-band-holder-diameter
 kind: theorem
 title: Diameter of undersmoothed multiscale credible bands
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

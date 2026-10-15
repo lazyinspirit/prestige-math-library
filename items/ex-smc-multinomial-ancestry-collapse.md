@@ -2,7 +2,7 @@
 id: ex-smc-multinomial-ancestry-collapse
 kind: example
 title: "Ancestry collapse under repeated multinomial resampling"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

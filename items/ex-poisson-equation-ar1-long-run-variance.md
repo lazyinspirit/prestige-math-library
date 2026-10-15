@@ -2,7 +2,7 @@
 id: ex-poisson-equation-ar1-long-run-variance
 kind: example
 title: Poisson equation and long-run variance for a stationary AR(1) chain
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

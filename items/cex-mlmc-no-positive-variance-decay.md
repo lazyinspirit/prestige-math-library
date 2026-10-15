@@ -2,7 +2,7 @@
 id: cex-mlmc-no-positive-variance-decay
 kind: counterexample
 title: "Nondecaying correction variance can force cubic cost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

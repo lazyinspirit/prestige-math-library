@@ -2,7 +2,7 @@
 id: ex-rejection-sampling-bounded-likelihood-ratio
 kind: example
 title: A bounded target-to-proposal density ratio
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

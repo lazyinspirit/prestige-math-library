@@ -2,7 +2,7 @@
 id: alg-delete-d-jackknife-replicates
 kind: algorithm
 title: "Delete-d jackknife replicates and their uniform average"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

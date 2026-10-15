@@ -2,7 +2,7 @@
 id: lem-invariant-law-positive-set-and-almost-sure-hitting
 kind: lemma
 title: Invariant mass and almost-sure hitting of accessible sets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

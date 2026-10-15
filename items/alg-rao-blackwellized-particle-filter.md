@@ -2,7 +2,7 @@
 id: alg-rao-blackwellized-particle-filter
 kind: algorithm
 title: Rao–Blackwellized particle filter
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

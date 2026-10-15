@@ -1,7 +1,7 @@
 ---
 page: gaussian-process-posterior-contraction-examples
 title: Gaussian-process posterior contraction — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-degenerate-gp-phi-does-not-bound-unknown-scale-local-mass

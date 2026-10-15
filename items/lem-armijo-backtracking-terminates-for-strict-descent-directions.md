@@ -2,7 +2,7 @@
 id: lem-armijo-backtracking-terminates-for-strict-descent-directions
 kind: lemma
 title: "Armijo backtracking terminates for strict descent directions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

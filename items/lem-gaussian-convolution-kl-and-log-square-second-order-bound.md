@@ -3,7 +3,7 @@ dependency_level: 1
 id: lem-gaussian-convolution-kl-and-log-square-second-order-bound
 kind: lemma
 title: "Gaussian convolution has second-order KL and log-square error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

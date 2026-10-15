@@ -2,7 +2,7 @@
 id: ex-adaptive-mcmc-loss-of-containment
 kind: example
 title: Diminishing adaptation with loss of containment
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

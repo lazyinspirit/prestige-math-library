@@ -1,7 +1,7 @@
 ---
 page: randomized-quasi-monte-carlo-and-replicates-examples
 title: "Randomized quasi-Monte Carlo and replicate error — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-one-rqmc-scramble-vs-independent-replicates

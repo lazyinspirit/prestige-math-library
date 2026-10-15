@@ -2,7 +2,7 @@
 id: lem-iid-sample-covariance-converges
 kind: lemma
 title: Finite-second-moment IID sample covariance converges
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

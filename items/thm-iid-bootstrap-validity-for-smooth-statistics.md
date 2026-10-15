@@ -2,7 +2,7 @@
 id: thm-iid-bootstrap-validity-for-smooth-statistics
 kind: theorem
 title: First-order IID bootstrap validity for smooth functions of a mean
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-conditional-iid-bootstrap-clt-for-empirical-law
 kind: theorem
 title: Conditional IID bootstrap CLT for an empirical law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

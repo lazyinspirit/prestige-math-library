@@ -3,7 +3,7 @@ dependency_level: 0
 id: lem-gaussian-anchored-sums-have-cumulant-and-fourier-bounds
 kind: lemma
 title: Gaussian anchored bounded sums have uniform cumulant and Fourier bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

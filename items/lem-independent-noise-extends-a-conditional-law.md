@@ -2,7 +2,7 @@
 id: lem-independent-noise-extends-a-conditional-law
 kind: lemma
 title: Independent noise extends and pushes forward a conditional law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

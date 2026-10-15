@@ -2,7 +2,7 @@
 id: def-type-s-and-h-multiscale-density-priors
 kind: definition
 title: Type-S log-density and type-H histogram prior families
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

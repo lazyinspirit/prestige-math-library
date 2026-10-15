@@ -2,7 +2,7 @@
 id: thm-posterior-predictive-moment-decomposition
 kind: theorem
 title: Posterior-predictive mean and variance decomposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

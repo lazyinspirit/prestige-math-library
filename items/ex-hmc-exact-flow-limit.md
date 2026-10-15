@@ -2,7 +2,7 @@
 id: ex-hmc-exact-flow-limit
 kind: example
 title: The exact-flow Hamiltonian Monte Carlo limit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

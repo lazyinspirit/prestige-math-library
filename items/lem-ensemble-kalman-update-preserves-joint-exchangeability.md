@@ -2,7 +2,7 @@
 id: lem-ensemble-kalman-update-preserves-joint-exchangeability
 kind: lemma
 title: The perturbed-observation EnKF update preserves exchangeability
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

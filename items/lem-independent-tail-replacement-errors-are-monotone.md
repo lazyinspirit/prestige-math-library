@@ -3,7 +3,7 @@ dependency_level: 0
 id: lem-independent-tail-replacement-errors-are-monotone
 kind: lemma
 title: Independent-tail replacement errors are decreasing and summability implies the rate condition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

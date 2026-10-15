@@ -1,7 +1,7 @@
 ---
 page: abc-mcmc-and-sequential-abc
 title: ABC-MCMC and ABC-sequential Monte Carlo
-status: draft
+status: published
 items:
   - def-abc-augmented-tolerance-target
   - lem-abc-augmented-target-has-tolerance-posterior-marginal

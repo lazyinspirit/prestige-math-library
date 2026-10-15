@@ -2,7 +2,7 @@
 id: lem-m0w-finite-projection-and-tail-bvm-criterion
 kind: lemma
 title: Finite-projection convergence and posterior tail control imply weak BvM
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

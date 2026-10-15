@@ -2,7 +2,7 @@
 id: def-negative-sobolev-space-for-white-noise
 kind: definition
 title: Logarithmic negative Sobolev spaces for white noise
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-hilbert-space

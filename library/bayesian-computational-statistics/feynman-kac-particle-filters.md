@@ -1,7 +1,7 @@
 ---
 page: feynman-kac-particle-filters
 title: "Feynman–Kac targets and sequential particle filters"
-status: draft
+status: published
 items:
   - lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels
   - alg-multinomial-and-residual-offspring-resampling

@@ -7,7 +7,7 @@ verification:
 id: ex-smc-fixed-horizon-clt-does-not-give-time-uniform-accuracy
 kind: example
 title: "Fixed-horizon asymptotic variance can grow without mixing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 8

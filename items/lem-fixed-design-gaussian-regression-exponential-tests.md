@@ -2,7 +2,7 @@
 id: lem-fixed-design-gaussian-regression-exponential-tests
 kind: lemma
 title: "Supremum sieves admit tests in fixed-design Gaussian regression"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

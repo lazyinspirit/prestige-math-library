@@ -2,7 +2,7 @@
 id: lem-product-prior-posterior-second-moment-in-negative-sobolev-space
 kind: lemma
 title: A negative-Sobolev posterior second-moment bound
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

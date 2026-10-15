@@ -2,7 +2,7 @@
 id: alg-self-normalized-importance-sampling
 kind: algorithm
 title: Self-normalized importance sampling
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

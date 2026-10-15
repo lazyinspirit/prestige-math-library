@@ -3,7 +3,7 @@ dependency_level: 4
 id: cex-weak-tilted-tests-do-not-imply-almost-sure-consistency
 kind: counterexample
 title: Weak tests against likelihood tilts do not ensure almost-sure posterior consistency
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

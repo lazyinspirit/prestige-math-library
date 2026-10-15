@@ -2,7 +2,7 @@
 id: cor-gibbs-density-formula-supplies-full-conditional-kernels
 kind: corollary
 title: A joint density supplies a proper full conditional kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

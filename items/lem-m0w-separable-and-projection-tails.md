@@ -2,7 +2,7 @@
 id: lem-m0w-separable-and-projection-tails
 kind: lemma
 title: The multiscale coefficient space is separable and has vanishing projection tails
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-synthetic-likelihood
 kind: definition
 title: "Ideal and finite-simulation synthetic likelihood"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

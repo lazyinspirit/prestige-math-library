@@ -2,7 +2,7 @@
 id: cex-particle-filter-proposal-misses-target-support
 kind: counterexample
 title: "A particle proposal can miss positive target mass"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

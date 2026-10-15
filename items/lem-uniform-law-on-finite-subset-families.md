@@ -2,7 +2,7 @@
 id: lem-uniform-law-on-finite-subset-families
 kind: lemma
 title: "Uniform laws on finite subset families"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

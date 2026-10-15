@@ -2,7 +2,7 @@
 id: cex-sticky-reducible-chain-has-no-root-n-clt
 kind: counterexample
 title: A stationary sticky chain with finite variance and no root-n CLT
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

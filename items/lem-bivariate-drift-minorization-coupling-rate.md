@@ -2,7 +2,7 @@
 id: lem-bivariate-drift-minorization-coupling-rate
 kind: lemma
 title: "A bivariate drift and minorization bound geometric coupling error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

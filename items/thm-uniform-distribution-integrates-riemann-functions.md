@@ -2,7 +2,7 @@
 id: thm-uniform-distribution-integrates-riemann-functions
 kind: theorem
 title: "Uniform distribution integrates Riemann-integrable functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

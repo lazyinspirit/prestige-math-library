@@ -2,7 +2,7 @@
 id: def-bayesian-model-as-prior-and-sampling-kernel
 kind: definition
 title: Bayesian model as a prior and sampling kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: state-space-filtering-and-predictive-laws-examples
 title: State-space models and exact Bayesian filtering — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-finite-hidden-markov-filtering-and-smoothing

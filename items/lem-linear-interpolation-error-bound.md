@@ -2,7 +2,7 @@
 id: lem-linear-interpolation-error-bound
 kind: lemma
 title: Pointwise linear interpolation error from a second-derivative bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

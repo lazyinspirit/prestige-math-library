@@ -1,7 +1,7 @@
 ---
 page: gibbs-sampling-and-scan-schemes-examples
 title: Gibbs sampling and scan schemes — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-single-site-gibbs-reducible-on-disconnected-support

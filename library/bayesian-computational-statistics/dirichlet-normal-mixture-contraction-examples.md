@@ -1,7 +1,7 @@
 ---
 page: dirichlet-normal-mixture-contraction-examples
 title: "Dirichlet normal-mixture posterior contraction — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-dirichlet-normal-mixture-compact-scale-hyperprior-and-rate

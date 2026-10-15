@@ -2,7 +2,7 @@
 id: lem-finite-bootstrap-cdf-supremum-is-measurable
 kind: lemma
 title: Measurability of the finite-bootstrap CDF supremum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

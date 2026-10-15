@@ -2,7 +2,7 @@
 id: ex-uniformly-ergodic-adaptive-mcmc-family
 kind: example
 title: A uniformly ergodic adaptive refresh family
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

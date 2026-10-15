@@ -1,7 +1,7 @@
 ---
 page: adaptive-empirical-bayes-credible-set-calibration
 title: Adaptive empirical-Bayes credible-set calibration and failure
-status: draft
+status: published
 items:
   - def-gaussian-sequence-hyperrectangle-class
   - def-polished-tail-class-for-gaussian-sequence

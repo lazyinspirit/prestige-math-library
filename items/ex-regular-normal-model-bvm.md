@@ -2,7 +2,7 @@
 id: ex-regular-normal-model-bvm
 kind: example
 title: A correctly specified regular normal mean model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

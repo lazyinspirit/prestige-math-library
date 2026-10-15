@@ -3,7 +3,7 @@ dependency_level: 0
 id: def-flegal-jones-obm-batch-size-conditions
 kind: definition
 title: Flegal–Jones overlapping-batch size conditions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps: []

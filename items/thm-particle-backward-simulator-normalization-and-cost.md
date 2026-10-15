@@ -2,7 +2,7 @@
 id: thm-particle-backward-simulator-normalization-and-cost
 kind: theorem
 title: Normalization and operation counts for particle backward smoothing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

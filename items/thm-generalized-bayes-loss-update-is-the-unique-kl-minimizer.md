@@ -2,7 +2,7 @@
 id: thm-generalized-bayes-loss-update-is-the-unique-kl-minimizer
 kind: theorem
 title: "The generalized Bayes loss update uniquely minimizes loss plus KL"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

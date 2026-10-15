@@ -2,7 +2,7 @@
 id: alg-random-permutation-monte-carlo-pvalue
 kind: algorithm
 title: "Identity-corrected random-permutation Monte Carlo p-value"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

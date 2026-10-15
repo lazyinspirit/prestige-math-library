@@ -2,7 +2,7 @@
 id: def-general-state-reversibility-by-symmetric-flow-measure
 kind: definition
 title: General-state reversibility by symmetric flow measure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

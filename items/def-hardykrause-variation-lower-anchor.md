@@ -2,7 +2,7 @@
 id: def-hardykrause-variation-lower-anchor
 kind: definition
 title: "Hardy–Krause variation on subrectangles anchored at the lower corner"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

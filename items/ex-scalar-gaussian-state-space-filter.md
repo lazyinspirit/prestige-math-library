@@ -2,7 +2,7 @@
 id: ex-scalar-gaussian-state-space-filter
 kind: example
 title: A scalar Gaussian state-space update by completing the square
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

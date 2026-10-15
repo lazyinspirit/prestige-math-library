@@ -3,7 +3,7 @@ dependency_level: 4
 id: lem-ula-pathwise-kl-error-bound
 kind: lemma
 title: Pathwise relative-entropy error of the Langevin Euler interpolation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 axiom_base: Full AC

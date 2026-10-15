@@ -3,7 +3,7 @@ dependency_level: 0
 id: lem-gaussian-quadratic-form-centered-even-moment-bound
 kind: lemma
 title: Centered Gaussian quadratic forms have dimension-free even-moment bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

@@ -2,7 +2,7 @@
 id: alg-metropolis-adjusted-langevin-algorithm
 kind: algorithm
 title: Metropolis-adjusted Langevin algorithm (MALA)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

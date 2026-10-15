@@ -2,7 +2,7 @@
 id: lem-two-sample-u-statistic-hoeffding-decomposition
 kind: lemma
 title: Two-sample Hoeffding decomposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: ex-finite-mean-infinite-variance-monte-carlo-integrand
 title: "Finite mean does not give a finite-variance Monte Carlo error"
 kind: example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-iid-monte-carlo-estimators
 title: "IID Monte Carlo sample mean, variance, and standard error"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

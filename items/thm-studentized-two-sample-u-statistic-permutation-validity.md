@@ -2,7 +2,7 @@
 id: thm-studentized-two-sample-u-statistic-permutation-validity
 kind: theorem
 title: Studentized permutation validity under a weak two-sample parameter null
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

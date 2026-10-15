@@ -2,7 +2,7 @@
 id: def-control-variate-estimator
 kind: definition
 title: Control-variate estimators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

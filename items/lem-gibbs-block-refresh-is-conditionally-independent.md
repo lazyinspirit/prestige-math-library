@@ -2,7 +2,7 @@
 id: lem-gibbs-block-refresh-is-conditionally-independent
 kind: lemma
 title: A Gibbs refresh is conditionally independent of the old block
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: ex-omega-indexed-bayesian-posterior-r-c-d
 kind: example
 title: A Bayesian posterior RCD indexed by the sample point
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

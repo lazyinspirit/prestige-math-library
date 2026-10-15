@@ -1,7 +1,7 @@
 ---
 page: quasi-monte-carlo-discrepancy-and-rules
 title: "Deterministic quasi-Monte Carlo and discrepancy"
-status: draft
+status: published
 items:
   - def-star-discrepancy-and-digital-net
   - def-hardykrause-variation

@@ -2,7 +2,7 @@
 id: cor-continuous-functionals-of-the-scaled-posterior-converge
 kind: corollary
 title: Continuous images of the scaled posterior converge weakly
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps:

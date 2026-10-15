@@ -1,7 +1,7 @@
 ---
 page: parametric-bernstein-von-mises-and-misspecification
 title: "Parametric Bernstein–von Mises limits and misspecification"
-status: draft
+status: published
 items:
   - lem-local-lipschitz-class-empirical-process-bound
   - thm-lan-implies-total-variation-bvm

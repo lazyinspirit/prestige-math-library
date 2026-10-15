@@ -2,7 +2,7 @@
 id: ex-finite-dimensional-gaussian-process-as-tight-banach-prior
 kind: example
 title: "A rank-one finite-dimensional Gaussian process is a tight Banach prior"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

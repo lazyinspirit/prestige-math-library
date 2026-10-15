@@ -2,7 +2,7 @@
 id: alg-basic-bootstrap-interval
 kind: algorithm
 title: Basic bootstrap interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

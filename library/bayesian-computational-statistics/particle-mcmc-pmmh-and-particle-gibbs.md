@@ -1,7 +1,7 @@
 ---
 page: particle-mcmc-pmmh-and-particle-gibbs
 title: "Particle MCMC: PMMH and particle Gibbs"
-status: draft
+status: published
 items:
   - alg-pmmh
   - thm-pmmh-exact-invariance

@@ -2,7 +2,7 @@
 id: lem-brownian-ito-integral-l1-maximal-bound
 kind: lemma
 title: "An L1 maximal bound for finite-energy Brownian Itô integrals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

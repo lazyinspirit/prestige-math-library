@@ -2,7 +2,7 @@
 id: prop-fiberwise-posterior-propriety-iff-finite-positive-evidence
 kind: proposition
 title: Fiberwise posterior propriety is equivalent to finite positive evidence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

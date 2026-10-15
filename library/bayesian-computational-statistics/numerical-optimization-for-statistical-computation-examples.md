@@ -1,7 +1,7 @@
 ---
 page: numerical-optimization-for-statistical-computation-examples
 title: "Computational foundations: factorization, KL, and optimization — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-gaussian-location-kl

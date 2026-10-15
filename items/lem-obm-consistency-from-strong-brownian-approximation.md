@@ -3,7 +3,7 @@ dependency_level: 2
 id: lem-obm-consistency-from-strong-brownian-approximation
 kind: lemma
 title: Strong Brownian approximation implies overlapping-batch consistency
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

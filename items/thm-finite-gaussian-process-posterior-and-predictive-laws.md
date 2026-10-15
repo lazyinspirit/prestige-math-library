@@ -2,7 +2,7 @@
 id: thm-finite-gaussian-process-posterior-and-predictive-laws
 kind: theorem
 title: Finite Gaussian-process posterior and predictive laws
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

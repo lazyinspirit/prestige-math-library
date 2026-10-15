@@ -3,7 +3,7 @@ dependency_level: 2
 id: lem-empirical-bayes-radius-bias-and-noise-comparison
 kind: lemma
 title: "Posterior radius, bias and noise comparisons for empirical Bayes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

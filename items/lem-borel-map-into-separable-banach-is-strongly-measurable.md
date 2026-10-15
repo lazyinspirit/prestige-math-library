@@ -2,7 +2,7 @@
 id: lem-borel-map-into-separable-banach-is-strongly-measurable
 kind: lemma
 title: "A Borel map into a separable Banach space is strongly measurable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

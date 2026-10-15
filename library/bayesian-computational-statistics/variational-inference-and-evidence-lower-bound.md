@@ -1,7 +1,7 @@
 ---
 page: variational-inference-and-evidence-lower-bound
 title: Variational inference and the evidence lower bound
-status: draft
+status: published
 items:
   - def-variational-family-and-elbo
   - thm-elbo-kl-decomposition

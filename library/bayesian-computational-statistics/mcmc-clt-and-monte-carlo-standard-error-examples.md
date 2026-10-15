@@ -1,7 +1,7 @@
 ---
 page: mcmc-clt-and-monte-carlo-standard-error-examples
 title: MCMC central limit theorems, MCSE, and long-run variance — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-sticky-reducible-chain-has-no-root-n-clt

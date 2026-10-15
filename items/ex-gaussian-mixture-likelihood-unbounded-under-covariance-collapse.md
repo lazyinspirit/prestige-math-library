@@ -2,7 +2,7 @@
 id: ex-gaussian-mixture-likelihood-unbounded-under-covariance-collapse
 kind: example
 title: "Gaussian mixture likelihood is unbounded under covariance collapse"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

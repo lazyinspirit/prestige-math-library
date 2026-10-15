@@ -2,7 +2,7 @@
 id: thm-rejection-sampling-expected-proposal-count-under-finite-envelope
 kind: theorem
 title: Expected proposal count under a finite rejection envelope
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

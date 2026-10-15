@@ -2,7 +2,7 @@
 id: def-approximate-bayesian-computation
 kind: definition
 title: Approximate Bayesian computation and the tolerance-conditioned target
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

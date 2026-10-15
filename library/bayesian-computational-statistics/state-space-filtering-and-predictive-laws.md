@@ -1,7 +1,7 @@
 ---
 page: state-space-filtering-and-predictive-laws
 title: State-space models and exact Bayesian filtering
-status: draft
+status: published
 items:
   - def-state-space-filtering-laws
   - thm-state-space-filtering-and-smoothing-laws-exist

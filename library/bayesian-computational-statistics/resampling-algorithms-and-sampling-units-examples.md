@@ -1,7 +1,7 @@
 ---
 page: resampling-algorithms-and-sampling-units-examples
 title: "Resampling schemes and the sampling-unit contract — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-two-point-bootstrap-sample-mean

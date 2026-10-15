@@ -3,7 +3,7 @@ dependency_level: 2
 id: lem-type-s-posterior-preliminary-contraction
 kind: lemma
 title: Type-S posterior contracts in quotient log-density coordinates without a tail restriction on a log-Lipschitz prior
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

@@ -3,7 +3,7 @@ id: ex-coordinate-update-normalizer-diverges-outside-admissibility
 aliases: [ex-coordinate-update-normalizer-can-diverge-despite-admissibility]
 kind: example
 title: "Finite evidence and finite expected logs do not replace admissibility"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-abc-vanishing-acceptance-rate
 kind: example
 title: Vanishing acceptance probability with a stable zero-tolerance target
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-product-prior-predictive-and-fixed-truth-data-laws-equivalent
 kind: lemma
 title: Prior-predictive and fixed-truth data laws are equivalent
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice

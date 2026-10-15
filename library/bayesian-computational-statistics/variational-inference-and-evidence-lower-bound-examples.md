@@ -1,7 +1,7 @@
 ---
 page: variational-inference-and-evidence-lower-bound-examples
 title: Variational inference and the evidence lower bound — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-discrete-elbo-equality-at-exact-posterior

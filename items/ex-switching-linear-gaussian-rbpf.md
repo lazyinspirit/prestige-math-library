@@ -2,7 +2,7 @@
 id: ex-switching-linear-gaussian-rbpf
 kind: example
 title: A two-mode linear-Gaussian Rao–Blackwellized filter
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: ex-monotone-antithetic-pair
 kind: example
 title: A monotone uniform integrand has a zero-variance antithetic pair
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

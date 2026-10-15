@@ -2,7 +2,7 @@
 id: lem-ula-fixed-step-gaussian-kernel-exponential-drift
 kind: lemma
 title: ULA's Gaussian kernel satisfies an exponential drift bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

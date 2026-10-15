@@ -2,7 +2,7 @@
 id: lem-white-noise-is-borel-gaussian-on-negative-sobolev-space
 kind: lemma
 title: White noise is a Borel Gaussian law on the negative Sobolev space
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice

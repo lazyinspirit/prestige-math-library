@@ -2,7 +2,7 @@
 id: thm-posterior-mean-is-squared-error-bayes-action
 kind: theorem
 title: Under AC, the finite-second-moment posterior mean uniquely minimizes squared risk
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-smc-time-uniform-variance-bound-under-uniform-incremental-weights
 kind: theorem
 title: "Time-uniform SMC asymptotic variance under uniform weight and operator bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

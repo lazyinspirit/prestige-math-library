@@ -2,7 +2,7 @@
 id: lem-real-line-exponential-tail-integrable
 kind: lemma
 title: The real-line exponential tail is Lebesgue integrable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

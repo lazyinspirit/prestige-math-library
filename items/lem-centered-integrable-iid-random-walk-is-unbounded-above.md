@@ -3,7 +3,7 @@ dependency_level: 0
 id: lem-centered-integrable-iid-random-walk-is-unbounded-above
 kind: lemma
 title: A nonconstant centered integrable IID random walk is unbounded above
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 proof_strategy: direct

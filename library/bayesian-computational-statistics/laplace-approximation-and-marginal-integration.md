@@ -1,7 +1,7 @@
 ---
 page: laplace-approximation-and-marginal-integration
 title: Laplace approximation and deterministic quadrature
-status: draft
+status: published
 items:
   - def-composite-trapezoidal-rule
   - lem-positive-definite-gaussian-integral

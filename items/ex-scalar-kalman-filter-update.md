@@ -2,7 +2,7 @@
 id: ex-scalar-kalman-filter-update
 kind: example
 title: A one-step scalar Kalman update
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

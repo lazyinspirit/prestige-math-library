@@ -3,7 +3,7 @@ dependency_level: 1
 id: lem-geometrically-ergodic-chain-has-standard-borel-observation-factor
 kind: lemma
 title: A geometrically ergodic chain has an all-start standard-Borel observation factor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

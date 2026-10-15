@@ -3,7 +3,7 @@ dependency_level: 7
 id: cor-type-s-h-density-credible-band-calibration
 kind: corollary
 title: Type-S and Type-H density credible bands have asymptotically exact coverage
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

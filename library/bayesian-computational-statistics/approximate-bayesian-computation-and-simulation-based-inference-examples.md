@@ -1,7 +1,7 @@
 ---
 page: approximate-bayesian-computation-and-simulation-based-inference-examples
 title: Approximate Bayesian computation and simulation-based inference — Examples
-status: draft
+status: published
 items: []
 examples:
 - cex-abc-zero-tolerance-limit-fails-without-integrable-envelope

@@ -2,7 +2,7 @@
 id: lem-smc-multinomial-resampling-clt
 kind: lemma
 title: "Conditional multinomial resampling central limit theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

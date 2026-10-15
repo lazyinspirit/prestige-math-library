@@ -2,7 +2,7 @@
 id: cex-equal-multiple-modes-double-laplace-constant
 kind: counterexample
 title: Two equal modes contribute two Gaussian terms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

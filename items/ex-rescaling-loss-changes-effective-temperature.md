@@ -2,7 +2,7 @@
 id: ex-rescaling-loss-changes-effective-temperature
 kind: example
 title: "Rescaling loss changes the effective temperature"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

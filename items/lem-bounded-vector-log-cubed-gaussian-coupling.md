@@ -3,7 +3,7 @@ dependency_level: 3
 id: lem-bounded-vector-log-cubed-gaussian-coupling
 kind: lemma
 title: Bounded independent vector rows admit a logarithmic cubed Gaussian coupling
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

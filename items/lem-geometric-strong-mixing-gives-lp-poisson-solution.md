@@ -3,7 +3,7 @@ dependency_level: 2
 id: lem-geometric-strong-mixing-gives-lp-poisson-solution
 kind: lemma
 title: Geometric strong mixing gives an Lp Poisson solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

@@ -2,7 +2,7 @@
 id: thm-pmmh-exact-invariance
 kind: theorem
 title: PMMH preserves the exact parameter posterior
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

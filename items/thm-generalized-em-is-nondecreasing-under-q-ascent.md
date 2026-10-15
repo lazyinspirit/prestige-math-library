@@ -2,7 +2,7 @@
 id: thm-generalized-em-is-nondecreasing-under-q-ascent
 kind: theorem
 title: "Generalized EM does not decrease the observed log likelihood under Q-ascent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

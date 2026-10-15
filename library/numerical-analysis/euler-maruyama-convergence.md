@@ -1,7 +1,7 @@
 ---
 page: euler-maruyama-convergence
 title: "Euler–Maruyama Strong and Weak Convergence"
-status: draft
+status: published
 items:
   - alg-euler-maruyama-autonomous
   - lem-brownian-ito-integral-l1-maximal-bound

@@ -2,7 +2,7 @@
 id: thm-metropolis-hastings-kernel-is-reversible-and-invariant
 kind: theorem
 title: Metropolis–Hastings flow is reversible and invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

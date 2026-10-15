@@ -2,7 +2,7 @@
 id: thm-particle-gibbs-selected-path-marginal
 kind: theorem
 title: The particle Gibbs extended target has the exact smoothing marginal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

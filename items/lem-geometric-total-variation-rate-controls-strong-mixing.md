@@ -2,7 +2,7 @@
 id: lem-geometric-total-variation-rate-controls-strong-mixing
 kind: lemma
 title: A total-variation rate bounds strong-mixing coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

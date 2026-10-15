@@ -2,7 +2,7 @@
 id: def-posterior-predictive-law
 kind: definition
 title: Posterior-predictive probability kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

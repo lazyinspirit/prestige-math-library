@@ -2,7 +2,7 @@
 id: ex-normal-working-model-misspecified-coverage
 kind: example
 title: A unit-variance normal working model can miscalibrate credible intervals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

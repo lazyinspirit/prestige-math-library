@@ -2,7 +2,7 @@
 id: def-star-discrepancy-and-digital-net
 kind: definition
 title: "Star discrepancy, digital nets, and digital sequences"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

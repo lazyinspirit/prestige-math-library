@@ -3,7 +3,7 @@ dependency_level: 3
 id: thm-uniform-mixing-clt-for-square-integrable-sequences
 kind: theorem
 title: A uniform-mixing CLT for square-integrable stationary sequences
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

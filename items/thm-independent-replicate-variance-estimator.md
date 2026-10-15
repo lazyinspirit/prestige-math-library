@@ -2,7 +2,7 @@
 id: thm-independent-replicate-variance-estimator
 kind: theorem
 title: "Unbiased variance estimate from independent computation replicates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

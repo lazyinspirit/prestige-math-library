@@ -2,7 +2,7 @@
 id: alg-bootstrap-t-interval
 kind: algorithm
 title: Bootstrap-t interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

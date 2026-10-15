@@ -2,7 +2,7 @@
 id: def-posterior-evidence-normalizer-and-fiberwise-update
 kind: definition
 title: Evidence normalizer and fiberwise posterior update
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

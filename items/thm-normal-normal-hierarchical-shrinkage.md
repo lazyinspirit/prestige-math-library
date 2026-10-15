@@ -2,7 +2,7 @@
 id: thm-normal-normal-hierarchical-shrinkage
 kind: theorem
 title: "Conditional normal shrinkage in a finite hierarchy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

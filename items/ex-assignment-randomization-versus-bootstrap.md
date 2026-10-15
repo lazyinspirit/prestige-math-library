@@ -2,7 +2,7 @@
 id: ex-assignment-randomization-versus-bootstrap
 kind: example
 title: "Assignment randomization and bootstrap are different laws"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

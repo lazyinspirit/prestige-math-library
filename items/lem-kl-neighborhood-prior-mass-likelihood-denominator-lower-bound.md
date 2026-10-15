@@ -2,7 +2,7 @@
 id: lem-kl-neighborhood-prior-mass-likelihood-denominator-lower-bound
 kind: lemma
 title: "KL-neighborhood prior mass lower-bounds the likelihood denominator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

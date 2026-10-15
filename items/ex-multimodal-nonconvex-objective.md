@@ -2,7 +2,7 @@
 id: ex-multimodal-nonconvex-objective
 kind: example
 title: "A multimodal nonconvex objective"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

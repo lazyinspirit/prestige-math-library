@@ -2,7 +2,7 @@
 id: ex-nonunique-binding-function-target
 kind: example
 title: "A non-injective binding map cannot recover a sign"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

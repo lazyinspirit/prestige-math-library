@@ -1,7 +1,7 @@
 ---
 page: asymptotically-robust-permutation-tests-examples
 title: Studentized permutation tests under weak parameter nulls — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-weak-null-does-not-imply-mixed-assignment-centering

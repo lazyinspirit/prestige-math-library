@@ -1,7 +1,7 @@
 ---
 page: statistical-and-computational-error-accounting-examples
 title: "Statistical, resampling, simulation, and numerical error ledger — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-bootstrap-finite-b-versus-sampling-error

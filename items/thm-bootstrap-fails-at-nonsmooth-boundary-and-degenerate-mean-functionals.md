@@ -2,7 +2,7 @@
 id: thm-bootstrap-fails-at-nonsmooth-boundary-and-degenerate-mean-functionals
 kind: theorem
 title: Ordinary bootstrap failure for nonsmooth and first-order-degenerate mean functionals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

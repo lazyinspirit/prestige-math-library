@@ -2,7 +2,7 @@
 id: ex-asymmetric-loss-changes-the-posterior-optimal-action
 kind: example
 title: Asymmetric loss can change the posterior-optimal action
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

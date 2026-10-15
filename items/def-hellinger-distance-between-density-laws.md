@@ -2,7 +2,7 @@
 id: def-hellinger-distance-between-density-laws
 kind: definition
 title: "Root-L2 Hellinger distance between density laws"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

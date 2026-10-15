@@ -2,7 +2,7 @@
 id: cex-mean-field-variational-inference-underestimates-correlated-gaussian-variance
 kind: counterexample
 title: "Gaussian mean-field reverse KL underestimates correlated marginal variance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-weak-nonparametric-bernstein-von-mises-for-product-priors
 kind: theorem
 title: Weak nonparametric Bernstein–von Mises theorem for product priors
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-cauchy-schwarz-for-random-variables

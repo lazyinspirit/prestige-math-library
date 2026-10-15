@@ -2,7 +2,7 @@
 id: thm-total-variation-bounds-for-expectations
 kind: theorem
 title: "Total variation controls expectations of bounded functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

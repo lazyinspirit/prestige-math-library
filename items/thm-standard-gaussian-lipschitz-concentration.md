@@ -2,7 +2,7 @@
 id: thm-standard-gaussian-lipschitz-concentration
 kind: theorem
 title: "Lipschitz concentration for standard Gaussian measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

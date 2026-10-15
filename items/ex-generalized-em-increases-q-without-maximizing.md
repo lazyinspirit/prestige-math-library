@@ -2,7 +2,7 @@
 id: ex-generalized-em-increases-q-without-maximizing
 kind: example
 title: "A generalized EM step can increase Q without maximizing it"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

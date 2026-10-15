@@ -1,7 +1,7 @@
 ---
 page: iid-bootstrap-and-jackknife-validity-examples
 title: IID bootstrap and jackknife for smooth statistics — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-delete-one-jackknife-for-sample-mean

@@ -2,7 +2,7 @@
 id: cor-qmd-ac-component-lan-to-bvm
 kind: corollary
 title: The QMD route uses normalized absolutely continuous likelihoods and a separate uniform LAN premise
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

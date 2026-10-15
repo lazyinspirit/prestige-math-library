@@ -2,7 +2,7 @@
 id: ex-improper-beta-zero-zero-endpoint-divergence
 kind: example
 title: The improper Beta(0,0) prior has a divergent binomial endpoint posterior
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

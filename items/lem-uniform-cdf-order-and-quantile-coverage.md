@@ -2,7 +2,7 @@
 id: lem-uniform-cdf-order-and-quantile-coverage
 kind: lemma
 title: CDF ordering and uniform error control quantile coverage
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

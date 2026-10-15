@@ -1,7 +1,7 @@
 ---
 page: numerical-optimization-for-statistical-computation
 title: "Computational foundations: factorization, KL, and optimization"
-status: draft
+status: published
 items:
   - def-latent-variable-joint-and-observed-data-factorization
   - thm-kullback-leibler-is-nonnegative

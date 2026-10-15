@@ -1,7 +1,7 @@
 ---
 page: hamiltonian-monte-carlo-and-leapfrog
 title: Hamiltonian Monte Carlo and leapfrog correction
-status: draft
+status: published
 items:
   - def-leapfrog-step-map
   - thm-exact-hamiltonian-flow-preserves-energy-and-volume

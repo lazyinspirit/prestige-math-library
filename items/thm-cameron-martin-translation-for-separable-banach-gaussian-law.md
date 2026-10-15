@@ -2,7 +2,7 @@
 id: thm-cameron-martin-translation-for-separable-banach-gaussian-law
 kind: theorem
 title: "Cameron–Martin translation formula for a separable Banach Gaussian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

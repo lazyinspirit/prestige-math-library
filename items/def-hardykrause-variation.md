@@ -2,7 +2,7 @@
 id: def-hardykrause-variation
 kind: definition
 title: "Hardy–Krause variation anchored at the upper corner"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

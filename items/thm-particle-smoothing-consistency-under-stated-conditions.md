@@ -2,7 +2,7 @@
 id: thm-particle-smoothing-consistency-under-stated-conditions
 kind: theorem
 title: Fixed-horizon particle backward smoothing is consistent under stated conditions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

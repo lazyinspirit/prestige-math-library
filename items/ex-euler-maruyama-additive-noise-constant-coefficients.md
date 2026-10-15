@@ -2,7 +2,7 @@
 id: ex-euler-maruyama-additive-noise-constant-coefficients
 kind: example
 title: "Euler–Maruyama for a constant-coefficient additive-noise equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

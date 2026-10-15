@@ -2,7 +2,7 @@
 id: def-state-dependent-one-step-minorization
 kind: definition
 title: State-dependent one-step minorization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

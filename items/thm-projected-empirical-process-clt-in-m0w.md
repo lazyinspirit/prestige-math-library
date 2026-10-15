@@ -2,7 +2,7 @@
 id: thm-projected-empirical-process-clt-in-m0w
 kind: theorem
 title: Projected empirical bridge CLT in the little-o multiscale space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

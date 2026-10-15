@@ -2,7 +2,7 @@
 id: alg-rank-normalized-folded-split-rhat
 kind: algorithm
 title: Rank-normalized folded split R-hat
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-uniform-subsampling-coverage-under-root-law-control
 kind: theorem
 title: Uniform subsampling coverage under root-law control
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

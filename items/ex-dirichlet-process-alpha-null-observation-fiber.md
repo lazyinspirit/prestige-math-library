@@ -2,7 +2,7 @@
 id: ex-dirichlet-process-alpha-null-observation-fiber
 kind: example
 title: "A base-null observation is a prior-predictive null fiber"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 8

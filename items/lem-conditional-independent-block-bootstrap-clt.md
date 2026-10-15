@@ -2,7 +2,7 @@
 id: lem-conditional-independent-block-bootstrap-clt
 kind: lemma
 title: Conditional CLT for independent resampled weighted blocks
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

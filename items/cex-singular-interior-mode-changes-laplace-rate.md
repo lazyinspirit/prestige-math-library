@@ -2,7 +2,7 @@
 id: cex-singular-interior-mode-changes-laplace-rate
 kind: counterexample
 title: A singular interior mode need not have Gaussian scaling
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

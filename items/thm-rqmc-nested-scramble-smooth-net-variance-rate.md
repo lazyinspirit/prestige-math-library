@@ -2,7 +2,7 @@
 id: thm-rqmc-nested-scramble-smooth-net-variance-rate
 kind: theorem
 title: "Smooth-integrand variance rate for nestedly scrambled $(\\lambda,t,m,d)$-nets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 7

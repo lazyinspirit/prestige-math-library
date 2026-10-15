@@ -2,7 +2,7 @@
 id: lem-drift-sublevel-union-is-petite
 kind: lemma
 title: "A drift sublevel enlargement of a small set is petite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

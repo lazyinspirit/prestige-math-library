@@ -2,7 +2,7 @@
 id: ex-full-hyperposterior-versus-plug-in-normal-hierarchy
 kind: example
 title: "Integrating hyperparameter uncertainty versus plugging in"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

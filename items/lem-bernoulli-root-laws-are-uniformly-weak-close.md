@@ -2,7 +2,7 @@
 id: lem-bernoulli-root-laws-are-uniformly-weak-close
 kind: lemma
 title: Bernoulli root laws are uniformly close in Levy–Prokhorov distance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: functional-bayesian-limits-and-credible-set-calibration
 title: Functional BvM limits and credible-set calibration
-status: draft
+status: published
 items:
   - def-multiscale-coefficient-space-m0w
   - def-sobolev-linear-functional-for-white-noise

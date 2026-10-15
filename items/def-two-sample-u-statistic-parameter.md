@@ -2,7 +2,7 @@
 id: def-two-sample-u-statistic-parameter
 kind: definition
 title: Two-sample U-statistic parameter
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

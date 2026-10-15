@@ -2,7 +2,7 @@
 id: cex-iid-bootstrap-inconsistency-at-absolute-mean-kink
 kind: counterexample
 title: The IID bootstrap can fail at the kink of the absolute mean
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

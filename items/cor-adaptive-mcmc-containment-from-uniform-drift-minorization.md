@@ -2,7 +2,7 @@
 id: cor-adaptive-mcmc-containment-from-uniform-drift-minorization
 kind: corollary
 title: Common drift and minorization give containment under diminishing adaptation, strong aperiodicity, and a finite initial V-moment
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

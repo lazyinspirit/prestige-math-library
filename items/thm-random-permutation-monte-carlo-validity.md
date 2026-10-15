@@ -2,7 +2,7 @@
 id: thm-random-permutation-monte-carlo-validity
 kind: theorem
 title: "Validity of identity-corrected random-permutation Monte Carlo p-values"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

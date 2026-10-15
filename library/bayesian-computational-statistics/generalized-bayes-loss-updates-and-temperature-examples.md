@@ -1,7 +1,7 @@
 ---
 page: generalized-bayes-loss-updates-and-temperature-examples
 title: "Generalized Bayes loss updates and temperature calibration — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-loss-update-can-have-infinite-normalizer

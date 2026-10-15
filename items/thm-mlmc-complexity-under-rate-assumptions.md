@@ -2,7 +2,7 @@
 id: thm-mlmc-complexity-under-rate-assumptions
 kind: theorem
 title: "MLMC cost complexity under bias, variance, and work rates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

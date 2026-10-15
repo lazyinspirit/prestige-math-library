@@ -2,7 +2,7 @@
 id: cex-mlmc-no-bias-rate-no-accuracy
 kind: counterexample
 title: "Finite correction variance cannot replace bias control"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

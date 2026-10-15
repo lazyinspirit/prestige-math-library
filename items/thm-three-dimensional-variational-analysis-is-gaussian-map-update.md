@@ -2,7 +2,7 @@
 id: thm-three-dimensional-variational-analysis-is-gaussian-map-update
 kind: theorem
 title: The 3DVAR quadratic has the Gaussian MAP and Kalman analysis update
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

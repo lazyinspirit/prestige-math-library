@@ -2,7 +2,7 @@
 id: lem-weighted-pinsker-inequality-for-probability-laws
 kind: lemma
 title: A weighted total-variation bound from relative entropy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

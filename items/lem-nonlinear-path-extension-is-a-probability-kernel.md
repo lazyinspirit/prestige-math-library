@@ -2,7 +2,7 @@
 id: lem-nonlinear-path-extension-is-a-probability-kernel
 kind: lemma
 title: Nonlinear path extension is a probability kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

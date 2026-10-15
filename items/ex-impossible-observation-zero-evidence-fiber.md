@@ -2,7 +2,7 @@
 id: ex-impossible-observation-zero-evidence-fiber
 kind: example
 title: An impossible observation has zero evidence and only a filler filter value
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

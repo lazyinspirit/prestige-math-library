@@ -2,7 +2,7 @@
 id: ex-hmc-finite-step-energy-error
 kind: example
 title: Finite-step leapfrog energy error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

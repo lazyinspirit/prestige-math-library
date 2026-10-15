@@ -2,7 +2,7 @@
 id: thm-abc-zero-tolerance-target-is-summary-posterior-under-density-regularity
 kind: theorem
 title: ABC targets the density-defined summary posterior at zero tolerance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

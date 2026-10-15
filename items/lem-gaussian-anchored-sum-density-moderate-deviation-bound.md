@@ -3,7 +3,7 @@ dependency_level: 1
 id: lem-gaussian-anchored-sum-density-moderate-deviation-bound
 kind: lemma
 title: Moderate deviation density bounds for Gaussian anchored sums
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

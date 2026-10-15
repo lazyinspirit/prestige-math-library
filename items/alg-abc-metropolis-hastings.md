@@ -2,7 +2,7 @@
 id: alg-abc-metropolis-hastings
 kind: algorithm
 title: ABC Metropolis–Hastings on simulator-augmented states
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

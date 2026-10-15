@@ -2,7 +2,7 @@
 id: ex-global-lipschitz-scalar-ornstein-uhlenbeck-well-posedness
 kind: example
 title: A scalar Ornstein–Uhlenbeck SDE satisfies the strong well-posedness hypotheses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

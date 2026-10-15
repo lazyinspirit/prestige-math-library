@@ -2,7 +2,7 @@
 id: thm-finite-model-posterior-odds-from-marginal-evidence
 kind: theorem
 title: "Finite-model posterior probabilities and Bayes-factor odds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

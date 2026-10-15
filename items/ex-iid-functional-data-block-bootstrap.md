@@ -8,7 +8,7 @@ dependency_level: 6
 id: ex-iid-functional-data-block-bootstrap
 kind: example
 title: IID functional data in the block bootstrap regime
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

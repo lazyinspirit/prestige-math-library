@@ -2,7 +2,7 @@
 id: cex-positive-kernel-second-moment-does-not-imply-nondegenerate-projections
 kind: counterexample
 title: Positive kernel second moment does not imply nondegenerate first projections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 5

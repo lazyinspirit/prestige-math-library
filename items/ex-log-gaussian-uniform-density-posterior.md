@@ -3,7 +3,7 @@ dependency_level: 10
 id: ex-log-gaussian-uniform-density-posterior
 kind: example
 title: A constant Gaussian log-density prior gives the uniform density exactly
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

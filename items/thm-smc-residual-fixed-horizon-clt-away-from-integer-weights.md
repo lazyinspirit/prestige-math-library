@@ -2,7 +2,7 @@
 id: thm-smc-residual-fixed-horizon-clt-away-from-integer-weights
 kind: theorem
 title: "Fixed-horizon SMC central limit theorem with residual resampling away from integer weights"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 7

@@ -1,7 +1,7 @@
 ---
 page: rejection-sampling
 title: Rejection sampling
-status: draft
+status: published
 items:
   - alg-rejection-sampling
   - thm-counting-measure-integral-is-nonnegative-series

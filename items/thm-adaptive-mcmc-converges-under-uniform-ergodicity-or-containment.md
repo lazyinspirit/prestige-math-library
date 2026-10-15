@@ -2,7 +2,7 @@
 id: thm-adaptive-mcmc-converges-under-uniform-ergodicity-or-containment
 kind: theorem
 title: Adaptive MCMC marginal convergence under diminishing adaptation with uniform ergodicity or containment
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

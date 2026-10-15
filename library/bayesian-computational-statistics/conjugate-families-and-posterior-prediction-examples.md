@@ -1,7 +1,7 @@
 ---
 page: conjugate-families-and-posterior-prediction-examples
 title: "Conjugate families and Gaussian conditioning — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-multivariate-normal-conditioning-singular-state

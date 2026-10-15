@@ -2,7 +2,7 @@
 id: thm-ula-quantitative-invariant-law-weighted-tv-bias
 kind: theorem
 title: ULA's invariant-law bias under smoothness and radial drift
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 6

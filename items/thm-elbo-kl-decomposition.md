@@ -2,7 +2,7 @@
 id: thm-elbo-kl-decomposition
 kind: theorem
 title: "Evidence lower bound is log evidence minus reverse KL"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

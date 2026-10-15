@@ -2,7 +2,7 @@
 id: alg-kalman-filter
 kind: algorithm
 title: Exact linear-Gaussian Kalman filter
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

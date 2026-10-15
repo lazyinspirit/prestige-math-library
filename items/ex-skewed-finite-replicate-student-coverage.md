@@ -2,7 +2,7 @@
 id: ex-skewed-finite-replicate-student-coverage
 kind: example
 title: "A skewed finite-replicate law defeats a nominal Student interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

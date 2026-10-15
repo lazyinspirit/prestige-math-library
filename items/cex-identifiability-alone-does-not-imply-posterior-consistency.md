@@ -7,7 +7,7 @@ verification:
 id: cex-identifiability-alone-does-not-imply-posterior-consistency
 kind: counterexample
 title: "Identifiability and KL support do not replace testability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 2

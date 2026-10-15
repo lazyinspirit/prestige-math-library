@@ -2,7 +2,7 @@
 id: thm-conditional-bootstrap-hadamard-delta-method
 kind: theorem
 title: Conditional bootstrap delta method for Hadamard differentiable maps
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 deps:

@@ -2,7 +2,7 @@
 id: cor-mlmc-euler-hms-autonomous-cost-rate
 kind: corollary
 title: "Autonomous all-moment Euler MLMC logarithmic cost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 4

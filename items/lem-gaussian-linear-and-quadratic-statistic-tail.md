@@ -2,7 +2,7 @@
 id: lem-gaussian-linear-and-quadratic-statistic-tail
 kind: lemma
 title: "Linear and quadratic Gaussian statistics have exponential tails"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

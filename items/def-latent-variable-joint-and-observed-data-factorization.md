@@ -2,7 +2,7 @@
 id: def-latent-variable-joint-and-observed-data-factorization
 kind: definition
 title: "Latent-variable joint and observed-data factorization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

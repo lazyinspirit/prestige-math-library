@@ -2,7 +2,7 @@
 id: def-small-set-minorization-and-drift
 kind: definition
 title: Small-set minorization and geometric drift
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

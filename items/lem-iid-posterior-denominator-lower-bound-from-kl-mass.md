@@ -2,7 +2,7 @@
 id: lem-iid-posterior-denominator-lower-bound-from-kl-mass
 kind: lemma
 title: "KL prior mass gives a posterior denominator lower bound in probability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-centered-eight-schools-low-tail-ess-and-thinning
 kind: example
 title: Centered eight-schools runs show small R-hat with low tail ESS
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

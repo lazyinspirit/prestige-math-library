@@ -2,7 +2,7 @@
 id: lem-countable-norming-family-determines-borel-laws
 kind: lemma
 title: "A countable norming family determines Borel laws"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0

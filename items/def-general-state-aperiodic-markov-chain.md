@@ -2,7 +2,7 @@
 id: def-general-state-aperiodic-markov-chain
 kind: definition
 title: "Aperiodicity for a general-state Markov kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

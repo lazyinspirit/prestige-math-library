@@ -2,7 +2,7 @@
 id: ex-gaussian-location-kl
 kind: example
 title: "Equal-variance Gaussian location KL"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

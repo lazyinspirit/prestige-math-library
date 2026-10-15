@@ -2,7 +2,7 @@
 id: ex-improper-flat-prior-arbitrary-evidence-scale
 kind: example
 title: "An improper flat-prior scale makes a formal evidence arbitrary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

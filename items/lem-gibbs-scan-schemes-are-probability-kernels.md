@@ -2,7 +2,7 @@
 id: lem-gibbs-scan-schemes-are-probability-kernels
 kind: lemma
 title: Random and systematic scan kernels are well-defined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

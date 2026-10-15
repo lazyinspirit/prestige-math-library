@@ -2,7 +2,7 @@
 id: thm-composite-trapezoidal-rule-error-bound
 kind: theorem
 title: Second-derivative error bound for the composite trapezoidal rule
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 1

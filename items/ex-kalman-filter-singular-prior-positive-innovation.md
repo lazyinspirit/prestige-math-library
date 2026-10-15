@@ -2,7 +2,7 @@
 id: ex-kalman-filter-singular-prior-positive-innovation
 kind: example
 title: Singular prior covariance with positive innovation variance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 3

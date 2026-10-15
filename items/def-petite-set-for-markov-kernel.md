@@ -2,7 +2,7 @@
 id: def-petite-set-for-markov-kernel
 kind: definition
 title: "Petite sets for a Markov kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: bayesian-computational-statistics-62
 dependency_level: 0
