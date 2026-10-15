@@ -322,13 +322,13 @@ export class Executor {
   requestNativeRefresh(command: Control): void {
     const stage = this.stages.find(s => s.id === command.stage);
     const ctx = this.ctx();
-    if (command.run !== this.config.run || !stage || stage.id !== '3b-author' || !stage.refreshPlan
+    if (command.run !== this.config.run || !stage || !['1-scaffold', '3b-author'].includes(stage.id) || !stage.refreshPlan
       || !command.unit || !String(command.reason ?? '').trim()
       || !/^[a-zA-Z0-9-]{1,80}$/.test(command.requestId ?? ''))
-      throw new Error('refresh requires exact run, opted-in 3b-author stage, unit, reason and request identity');
+      throw new Error('refresh requires exact run, opted-in authoring stage, unit, reason and request identity');
     const saved = this.state.data.stages[stage.id];
     if (!saved || saved.skipped || saved.doneAt || saved.gatesPassedAt || this.currentStage().stage?.id !== stage.id)
-      throw new Error('refresh is restricted to the active unclosed 3b-author stage');
+      throw new Error('refresh is restricted to the active unclosed authoring stage');
     const owed = (stage.units?.(ctx) ?? []).map(String);
     if (!owed.includes(command.unit) || !this.stageCoverage(stage, ctx).has(command.unit)) {
       if (this.pendingRefreshes(stage, ctx).some(r => r.unit === command.unit)) {
@@ -339,6 +339,9 @@ export class Executor {
     }
     if ((this.state.data.nativeRefreshes ?? []).some((r: NativeRefresh) => r.id === command.requestId))
       throw new Error('refresh request identity is already recorded');
+    if (stage.id === '1-scaffold' && (this.state.data.nativeRefreshes ?? []).some((r: NativeRefresh) =>
+      r.stage === stage.id && r.unit === command.unit))
+      throw new Error('Step-1 continuation already spent for this unit; unresolved authoring requires owner escalation');
     const cohort = new Set([command.unit, ...(stage.exclusiveCohort?.(ctx, command.unit) ?? []).map(String)]);
     const active = new Set([...this.inflight.values()].filter(d => d.meta.stage === stage.id)
       .flatMap(d => d.meta.covers.map(String)));
@@ -346,12 +349,13 @@ export class Executor {
     if ([...cohort].some(unit => active.has(unit))) throw new Error('refresh refused while a unit/cohort writer is active');
     const requestedAt = new Date(this.clock.now()).toISOString();
     const plan = stage.refreshPlan(ctx, command.unit, { id: command.requestId, reason: command.reason, requestedAt });
-    if (plan.role !== stage.role || plan.role !== 'alpha-high' || plan.argv
+    const refreshRole = stage.id === '1-scaffold' ? 'beta' : 'alpha-high';
+    if (plan.role !== refreshRole || (stage.role && plan.role !== stage.role) || plan.argv
       || plan.covers?.length !== 1 || plan.covers[0] !== command.unit
       || !stagePattern(stage, ctx).test(`${plan.role}-${plan.label}.result.json`)
       || this.state.dispatch(`${stage.id}:${plan.label}`)
       || existsSync(join(ctx.dispatchDir, `${plan.role}-${plan.label}.result.json`)))
-      throw new Error('refresh plan must be a new native alpha-high label covering only the requested unit');
+      throw new Error(`refresh plan must be a new native ${refreshRole} label covering only the requested unit`);
     plan.writeReceipt = false;
     const problem = this.preflightPlan(stage, plan);
     if (problem) throw new Error(`refresh plan preflight: ${problem}`);
