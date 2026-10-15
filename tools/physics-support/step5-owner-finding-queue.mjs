@@ -231,8 +231,10 @@ export function ownerFindingCompletion(pack, reports, current, currentReviewCall
       reviews.push(review); resolutions.push(resolution);
       if (entry.original_tuple) {
         const decision = adjudications.find(row => row.id === id);
-        const allowed = new Set(['id', 'model', 'context_sha256', 'outcome', 'defect_type', 'reason', 'uncertain', 'source_urls', 'familiar']);
-        need(Object.keys(decision).every(field => allowed.has(field)) && key(decision) === key(entry.original_tuple)
+        const allowed = new Set(['id', 'model', 'context_sha256', 'outcome', 'defect_type', 'reason', 'uncertain', 'source_urls', 'familiar', 'evidence']);
+        need(Object.keys(decision).every(field => allowed.has(field))
+          && (!Object.hasOwn(decision, 'evidence') || reason(decision.evidence))
+          && key(decision) === key(entry.original_tuple)
           && evidenceRow(decision) && ['confirmed_fatal', 'confirmed_nonfatal', 'false_positive'].includes(decision.outcome)
           && (decision.outcome !== 'confirmed_fatal' || ['logic', 'dependency_citation', 'other'].includes(decision.defect_type)), 'not an exact fresh original-tuple decision');
         const originalPath = resolve(root, entry.native_outcome.path);

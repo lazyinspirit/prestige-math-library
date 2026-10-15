@@ -280,7 +280,9 @@ source and content/interface guards, completed native context, and original-owne
 science and unapplied proposals. An entry explicitly selects `native-referral`,
 `assigned-scope-restoration`, or `owner-discovery`. The first requires an actual
 native referral or the actual assigned rejected subject. An assigned original
-tuple must be copied exactly and separately reconciled. The discovery mode binds
+tuple must be copied exactly and separately reconciled. A corrective decision may
+include optional narrative `evidence` of at least 40 characters; this text supplies
+no tuple identity, file binding, assignment or certification authority. The discovery mode binds
 the named original scientific owner's final discovery and current snapshot;
 its native outcome is context only and supplies no invented edge or rejection.
 

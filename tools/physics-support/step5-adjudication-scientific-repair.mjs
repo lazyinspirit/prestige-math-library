@@ -1,6 +1,6 @@
 // Root-requested, single-subject native scope restoration before adjudication
 // collection. This authenticates authority; it never writes sources or receipts.
-import { existsSync, readFileSync, realpathSync } from 'node:fs';
+import { existsSync, readFileSync, realpathSync, statSync } from 'node:fs';
 import { basename, dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { isDeepStrictEqual } from 'node:util';
@@ -8,7 +8,10 @@ import { itemHashGuard } from './item-hash.mjs';
 import { statementHash } from './step5-statement.mjs';
 import { validateFrontier } from './step5-rounds.mjs';
 import { MODELS } from './models.mjs';
-import { ownerFindingRequest } from './step5-owner-finding-queue.mjs';
+const OWNER_FINDING_URL = new URL('./step5-owner-finding-queue.mjs', import.meta.url);
+const OWNER_FINDING_STAT = statSync(OWNER_FINDING_URL);
+const { ownerFindingRequest } = await import(OWNER_FINDING_URL.href
+  + '?v=' + OWNER_FINDING_STAT.mtimeMs + ':' + OWNER_FINDING_STAT.size);
 
 const raw = bytes => createHash('sha256').update(bytes).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
