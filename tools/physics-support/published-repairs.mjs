@@ -17,12 +17,20 @@ const run = opt('run');
 const root = resolve(opt('root') ?? '.');
 const R = (...parts) => join(root, ...parts);
 const repairsPath = R('research', `${run}-step5-published-repairs.jsonl`);
-const claimsPath = R('research', `${run}-step3-published-claims.jsonl`);
+const namespace = opt('claim-namespace') ?? 'step3';
+if (!/^[a-zA-Z0-9_-]+$/.test(run ?? '') || !['step3', 'owner-maintenance'].includes(namespace)
+  || (command !== 'claim' && opt('claim-namespace') !== null)) {
+  console.error('invalid run or claim namespace; --claim-namespace is for claim only');
+  process.exit(2);
+}
+const claimsFile = `research/${run}-${namespace}-published-claims.jsonl`;
+const claimsPath = R(claimsFile);
+const otherClaimsPath = R('research', `${run}-${namespace === 'step3' ? 'owner-maintenance' : 'step3'}-published-claims.jsonl`);
 const lockPath = R('research', `${run}-published-repairs.lock`);
 const wait = new Int32Array(new SharedArrayBuffer(4));
 
 if (!run || !['claim', 'append'].includes(command)) {
-  console.error('usage: node tools/physics-support/published-repairs.mjs claim --run <run> --id <published-id> --group <group> [--root <repo>]');
+  console.error('usage: node tools/physics-support/published-repairs.mjs claim --run <run> --id <published-id> --group <group> [--claim-namespace step3|owner-maintenance] [--root <repo>]');
   console.error('   or: node tools/physics-support/published-repairs.mjs append --run <run> --file <rows.json> [--root <repo>]');
   process.exit(2);
 }
@@ -61,12 +69,17 @@ try {
   if (command === 'claim') {
     const id = opt('id');
     const group = opt('group');
-    if (!id || !group) throw new Error('claim requires --id and --group');
+    if (!/^[a-zA-Z0-9_-]+$/.test(id ?? '') || !/^[a-zA-Z0-9_-]+$/.test(group ?? '')) throw new Error('claim requires safe --id and --group');
+    if (rows(otherClaimsPath).some(row => row.id === id)) throw new Error(`${id} already has ownership in the other namespace`);
     const itemPath = R('items', `${id}.md`);
     if (!existsSync(itemPath)) throw new Error(`${id} is not an existing published item`);
-    const pre = itemHashGuard(readFileSync(itemPath, 'utf8'));
+    const source = readFileSync(itemPath, 'utf8');
+    if (namespace === 'owner-maintenance' && !/^status: published\s*$/m.test(source.split(/^---\s*$/m)[1] ?? ''))
+      throw new Error(`${id} is not an existing published item`);
+    const pre = itemHashGuard(source);
     const existing = rows(claimsPath).find((row) => row.id === id);
     if (existing) {
+      if ((existing.ownership_namespace ?? 'step3') !== namespace) throw new Error('ownership namespace mismatch');
       if (existing.group !== group) {
         console.error(`published-repairs: ${id} is owned by group ${existing.group}; group ${group} must not edit it`);
         process.exitCode = 3;
@@ -75,6 +88,7 @@ try {
       }
     } else {
       appendFileSync(claimsPath, `${JSON.stringify({
+        ...(namespace === 'owner-maintenance' ? { ownership_namespace: namespace, ownership_claims_file: claimsFile } : {}),
         version: 1, run, id, group, pre_sha256: pre, claimed_at: new Date().toISOString(),
       })}\n`);
       console.log(`published-repairs: group ${group} claimed ${id} at ${pre}`);
@@ -96,7 +110,9 @@ try {
       }
       if (['3a-adjudicate', '3b-cross'].includes(row.found_at_stage)) {
         const claim = claims.find((candidate) => candidate.id === row.id);
-        if (!claim || row.repair_owner_group !== claim.group || row.pre_sha256 !== claim.pre_sha256) {
+        if (!claim || (claim.ownership_namespace ?? 'step3') !== 'step3'
+          || rows(otherClaimsPath).some(candidate => candidate.id === row.id)
+          || row.repair_owner_group !== claim.group || row.pre_sha256 !== claim.pre_sha256) {
           throw new Error(`${row.id} Step-3 receipt does not match its pre-edit ownership claim`);
         }
       }
