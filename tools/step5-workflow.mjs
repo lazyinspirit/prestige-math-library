@@ -633,9 +633,11 @@ function loadOwnerSupplement(root,pack,reports,current,items) {
   const path=ownerSupplementPath(root,pack.run,pack.phase,pack.round);if(!existsSync(path))return null;
   const row=read(path),unit=String(row.unit),native=reports.find(report=>String(report.unit)===unit);
   const scopeBlocked=row.version===2&&row.kind==='step5-owner-scope-blocker-supplement';
-  requireValue((row.version===1||scopeBlocked)&&row.run===pack.run&&row.phase===pack.phase&&row.round===pack.round
+  const extraSupplier=row.version===3&&row.kind==='step5-owner-extra-supplier-supplement';
+  const guardedSupplier=scopeBlocked||extraSupplier;
+  requireValue((row.version===1||guardedSupplier)&&row.run===pack.run&&row.phase===pack.phase&&row.round===pack.round
     &&['initial','repeat'].includes(pack.phase)&&pack.rejected&&pack.repair_scope==='frontier'
-    &&row.pack_sha256===digest(pack)&&native&&(scopeBlocked||native.completion==='blocked'),'invalid owner supplement identity or native blocker');
+    &&row.pack_sha256===digest(pack)&&native&&(guardedSupplier||native.completion==='blocked'),'invalid owner supplement identity or native blocker');
   requireValue(row.authorized_by==='owner'&&row.reviewed_by==='root'
     &&typeof row.authorization==='string'&&row.authorization.trim().length>=40,'owner supplement requires explicit root authority');
   const nativePath=workerReport(root,pack.run,pack.phase,pack.round,unit);
@@ -653,7 +655,7 @@ function loadOwnerSupplement(root,pack,reports,current,items) {
   const dispatch=read(dispatchPath),state=read(join(root,'.autopilot',pack.run,'state.json'));
   const stage=pack.phase==='initial'?'5.1-adjudicate':'5.5-adjudicate';
   requireValue(state.run===pack.run&&state.stage===stage
-    &&(scopeBlocked||state.blockers?.some(value=>value.stage===stage&&value.key==='gate:step5-wave-evidence'))
+    &&(guardedSupplier||state.blockers?.some(value=>value.stage===stage&&value.key==='gate:step5-wave-evidence'))
     &&Object.values(state.dispatches??{}).every(value=>!value.startedAt||Boolean(value.endedAt)),
     'owner supplement requires the held native collection gate and drained writers');
   requireValue(dispatch.ok===true&&dispatch.run===pack.run&&dispatch.role==='alpha-adjudicate'
@@ -663,25 +665,47 @@ function loadOwnerSupplement(root,pack,reports,current,items) {
   const rejected=pack.assignments[unit]?.find(value=>key(value)===key(row.rejection??{}));
   const blocker=native.blockers?.find(value=>value.id===rejected?.id&&value.uncertain===true);
   const oldReview=native.reviews?.find(value=>value.id===rejected?.id),oldDecision=native.decisions?.find(value=>key(value)===key(rejected??{}));
-  if(scopeBlocked){
-    const findings=(native.ledger_updates??[]).filter(value=>value.id===rejected?.id
-      &&value.ledger==='canonical-defect-ledger'&&value.action==='record-open-finding');
-    const finding=findings[0],proposal=native.repair_notes?.minimal_supplier_repair;
-    requireValue(rejected&&!Object.hasOwn(native,'completion')&&!(native.blockers??[]).length
-      &&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort==='high'
+  if(guardedSupplier){
+    if(extraSupplier){
+      const finding=native.ledger_updates?.[row.open_finding_index];
+      requireValue(rejected&&!Object.hasOwn(native,'completion')&&!(native.blockers??[]).length
+        &&native.repair_notes?.status==='assigned_repair_complete'&&native.repair_notes.repair_complete===true
+        &&oldReview?.disposition==='repaired'&&evidenceText(oldReview)
+        &&/^[a-f0-9]{64}$/.test(oldReview.post_sha256??'')&&oldReview.post_sha256!==pack.before[rejected.id]
+        &&oldDecision?.outcome==='confirmed_fatal'&&evidenceText(oldDecision)&&FATAL_TYPES.includes(oldDecision.defect_type)
+        &&Number.isInteger(row.open_finding_index)&&row.open_finding_index>=0
+        &&finding?.ledger==='canonical-defect-ledger'&&finding.action==='record-open-finding'
+        &&finding.id===row.required_supplier&&finding.id!==rejected.id
+        &&finding.status==='open'&&finding.severity==='fatal'&&evidenceText(finding)
+        &&native.ledger_updates.filter(value=>value.ledger==='canonical-defect-ledger'&&value.action==='record-open-finding').length===1
+        &&FATAL_TYPES.includes(finding.defect_type)&&row.open_finding_sha256===digest(finding)
+        &&['source_excerpt','affected_use','minimality','route'].every(name=>typeof finding[name]==='string'&&finding[name].trim().length>=40)
+        &&!pack.assignments[unit].some(value=>value.id===finding.id),
+        'owner extra-supplier supplement requires a completed assigned repair and exact separate native open supplier finding');
+    }else{
+      const findings=(native.ledger_updates??[]).filter(value=>value.id===rejected?.id
+        &&value.ledger==='canonical-defect-ledger'&&value.action==='record-open-finding');
+      const finding=findings[0],proposal=native.repair_notes?.minimal_supplier_repair;
+      requireValue(rejected&&!Object.hasOwn(native,'completion')&&!(native.blockers??[]).length
+        &&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort==='high'
+        &&dispatch.exit_code===0&&dispatch.timed_out===false&&typeof dispatch.session_id==='string'&&dispatch.session_id.length>0
+        &&JSON.stringify(dispatch.covers)===JSON.stringify([unit])
+        &&native.repair_notes?.status==='blocked_by_assigned_file_scope'&&native.repair_notes.repair_complete===false
+        &&oldReview?.disposition==='unaffected'&&oldReview.post_sha256===pack.before[rejected.id]&&evidenceText(oldReview)
+        &&oldDecision?.outcome==='confirmed_fatal'&&evidenceText(oldDecision)&&FATAL_TYPES.includes(oldDecision.defect_type)
+        &&findings.length===1&&finding.status==='open'&&finding.severity==='fatal'&&evidenceText(finding)
+        &&finding.defect_type===oldDecision.defect_type&&finding.supplier===row.required_supplier
+        &&row.open_finding_sha256===digest(finding)&&row.minimal_supplier_repair_sha256===digest(proposal)
+        &&proposal?.path===`items/${finding.supplier}.md`&&proposal.section==='Definition'
+        &&['source_excerpt','proposed_replacement','justification'].every(name=>typeof proposal[name]==='string'&&proposal[name].trim().length>0)
+        &&proposal.source_excerpt!==proposal.proposed_replacement
+        &&!Object.values(pack.assignments[unit]).some(value=>value.id===finding.supplier),
+        'owner scope supplement requires an exact native open fatal scope-blocked supplier proposal');
+    }
+    requireValue(dispatch.model===MODELS.sol61.id&&dispatch.provider_effort==='high'
       &&dispatch.exit_code===0&&dispatch.timed_out===false&&typeof dispatch.session_id==='string'&&dispatch.session_id.length>0
-      &&JSON.stringify(dispatch.covers)===JSON.stringify([unit])
-      &&native.repair_notes?.status==='blocked_by_assigned_file_scope'&&native.repair_notes.repair_complete===false
-      &&oldReview?.disposition==='unaffected'&&oldReview.post_sha256===pack.before[rejected.id]&&evidenceText(oldReview)
-      &&oldDecision?.outcome==='confirmed_fatal'&&evidenceText(oldDecision)&&FATAL_TYPES.includes(oldDecision.defect_type)
-      &&findings.length===1&&finding.status==='open'&&finding.severity==='fatal'&&evidenceText(finding)
-      &&finding.defect_type===oldDecision.defect_type&&finding.supplier===row.required_supplier
-      &&row.open_finding_sha256===digest(finding)&&row.minimal_supplier_repair_sha256===digest(proposal)
-      &&proposal?.path===`items/${finding.supplier}.md`&&proposal.section==='Definition'
-      &&['source_excerpt','proposed_replacement','justification'].every(name=>typeof proposal[name]==='string'&&proposal[name].trim().length>0)
-      &&proposal.source_excerpt!==proposal.proposed_replacement
-      &&!Object.values(pack.assignments[unit]).some(value=>value.id===finding.supplier),
-      'owner scope supplement requires an exact native open fatal scope-blocked supplier proposal');
+      &&JSON.stringify(dispatch.covers)===JSON.stringify([unit]),
+      'owner supplier supplement requires the original successful native Sol completion');
     const attemptPath=dispatchPath.replace(/\.result\.json$/,`.attempt-${dispatch.attempt}.result.json`);
     requireValue(Number.isInteger(dispatch.attempt)&&dispatch.attempt>0
       &&dispatch.prompt===dispatchPath.replace(/\.result\.json$/,`.attempt-${dispatch.attempt}.prompt.md`),
@@ -710,8 +734,15 @@ function loadOwnerSupplement(root,pack,reports,current,items) {
       return worker?.lastExitOk===true&&worker.role===dispatch.role&&worker.attempt===dispatch.attempt
         &&JSON.stringify(worker.covers)===JSON.stringify(dispatch.covers)
         &&Date.parse(worker.endedAt)>=Date.parse(dispatch.ended_at)&&Date.parse(worker.endedAt)<=Date.parse(row.completed_at);};
-    requireValue(held(snapshot)&&snapshot.paused===true&&completed(state)&&completed(snapshot),
-      'owner scope supplement requires exact paused drained failure and successful native creation state');
+    const creationHeld=extraSupplier
+      ?snapshot.run===pack.run&&snapshot.stage===stage&&snapshot.stages?.[stage]?.gatesPassedAt===null
+        &&snapshot.stages[stage].doneAt===null
+        &&!snapshot.blockers?.some(blocker=>blocker.stage===stage&&String(blocker.key).startsWith('gate:'))
+        &&Object.values(snapshot.dispatches??{}).every(value=>!value.startedAt||Boolean(value.endedAt))
+      :held(snapshot);
+    requireValue(creationHeld&&snapshot.paused===true&&completed(state)&&completed(snapshot),
+      extraSupplier?'owner extra-supplier supplement requires paused drained original pre-gate creation state'
+        :'owner scope supplement requires exact paused drained failure and successful native creation state');
   }else requireValue(rejected&&blocker&&row.blocker_sha256===digest(blocker)&&oldReview?.uncertain===true
     &&native.blockers.length===1
     &&oldDecision?.uncertain===false&&['confirmed_fatal','confirmed_nonfatal'].includes(oldDecision.outcome),
@@ -726,21 +757,41 @@ function loadOwnerSupplement(root,pack,reports,current,items) {
   const frontier=gateFrontier(root,pack.run),byId=new Map(items.map(value=>[value.id,value])),ids=new Set();
   for(const value of row.scope)requireValue(value&&frontier.has(value.id)&&pack.before[value.id]&&byId.has(value.id),
     'owner supplement can only review existing draft frozen-frontier subjects');
-  const primary=row.scope.filter(value=>value.role==='blocker');
-  requireValue(primary.length===1&&primary[0].id===rejected.id,'owner supplement blocker scope mismatch');
+  const primary=row.scope.filter(value=>value.role===(extraSupplier?'assigned-consumer':'blocker'));
+  requireValue(primary.length===1&&primary[0].id===rejected.id,extraSupplier
+    ?'owner extra-supplier assigned consumer scope mismatch':'owner supplement blocker scope mismatch');
   const prerequisites=row.scope.filter(value=>value.role==='prerequisite');
-  for(const value of prerequisites)requireValue(value.id!==rejected.id&&['definition','algorithm'].includes(itemKind(root,value.id))
+  for(const value of prerequisites)requireValue(value.id!==rejected.id
+    &&(extraSupplier?['lemma','proposition','theorem','corollary']:['definition','algorithm']).includes(itemKind(root,value.id))
     &&discoverDownstream({items,repairedIds:[value.id]}).some(impact=>impact.id===rejected.id),
-    'owner supplement prerequisite is not a necessary direct definition supplier');
+    extraSupplier?'owner extra-supplier prerequisite is not a necessary direct proved result'
+      :'owner supplement prerequisite is not a necessary direct definition supplier');
   const suppliers=new Set([rejected.id,...prerequisites.map(value=>value.id)]);
-  if(scopeBlocked){
+  if(guardedSupplier){
     requireValue(prerequisites.length===1&&prerequisites[0].id===row.required_supplier
       &&byId.get(rejected.id).deps.includes(row.required_supplier)
       &&pack.before_statements?.[row.required_supplier]
       &&byId.get(row.required_supplier).statement_sha256!==pack.before_statements[row.required_supplier]
       &&current[row.required_supplier]!==pack.before[row.required_supplier]
       &&current[rejected.id]!==pack.before[rejected.id],
-      'owner scope supplement requires genuine supplier Definition and blocker carrier repairs');
+      extraSupplier?'owner extra-supplier supplement requires genuine supplier Statement and assigned consumer repairs'
+        :'owner scope supplement requires genuine supplier Definition and blocker carrier repairs');
+    if(extraSupplier){
+      const binding=row.supplier_before,finding=native.ledger_updates[row.open_finding_index];
+      requireValue(binding&&resolve(binding.path??'').startsWith(resolve(root,'research')+'/')
+        &&/^[a-f0-9]{64}$/.test(binding.sha256??'')
+        &&(!Object.hasOwn(evidence,binding.path)||evidence[binding.path]===binding.sha256),
+        'owner extra-supplier supplement requires an exact archived supplier preimage');
+      evidence[binding.path]=binding.sha256;verifyEvidence(evidence);
+      const before=readFileSync(binding.path,'utf8'),after=readFileSync(join(root,'items',`${row.required_supplier}.md`),'utf8');
+      const originalStatement=before.match(/^## Statement[ \t]*\r?\n([\s\S]*?)(?=^##[ \t]+|(?![\s\S]))/m)?.[1];
+      const proof=after.match(/^## Proof[ \t]*\r?\n([\s\S]*?)(?=^##[ \t]+|(?![\s\S]))/m)?.[1];
+      requireValue(itemHashGuard(before)===pack.before[row.required_supplier]
+        &&statementHash(before)===pack.before_statements[row.required_supplier]
+        &&originalStatement?.includes(finding.source_excerpt)&&!after.includes(finding.source_excerpt)
+        &&typeof proof==='string'&&/^[1-9]\d*\.[1-9]\d*[ \t]+\S/m.test(proof),
+        'owner extra-supplier supplement requires the native defect preimage and an actual changed proved supplier');
+    }
     // Continue propagation only through actual interface changes. The exact
     // inventory cannot drop a current direct consumer of a repaired interface.
     const expected=new Set(suppliers),pending=[...suppliers];
@@ -765,7 +816,7 @@ function loadOwnerSupplement(root,pack,reports,current,items) {
     if(value.role==='direct-consumer')requireValue(suppliers.has(value.supplier)
       &&direct.some(impact=>impact.id===value.id&&impact.suppliers.includes(value.supplier))
       &&typeof value.consumed_clause==='string'&&value.consumed_clause.trim().length>=40,'owner supplement consumer lacks an actual direct supplier use');
-    else requireValue(['blocker','prerequisite'].includes(value.role),'unknown owner supplement scope role');
+    else requireValue([extraSupplier?'assigned-consumer':'blocker','prerequisite'].includes(value.role),'unknown owner supplement scope role');
   }
   for(const id of ids){
     const nativeRows=reports.flatMap(report=>report.reviews??[]).filter(value=>value.id===id);
@@ -1315,6 +1366,10 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
       open_finding_sha256:ownerSupplement.open_finding_sha256,
       minimal_supplier_repair_sha256:ownerSupplement.minimal_supplier_repair_sha256,
       native_execution_coverage_adopted:false};
+    if(ownerSupplement.version===3)receipt.native_extra_supplier_finding={
+      unit:ownerSupplement.unit,repair_notes:reports.find(row=>String(row.unit)===String(ownerSupplement.unit)).repair_notes,
+      finding:reports.find(row=>String(row.unit)===String(ownerSupplement.unit)).ledger_updates[ownerSupplement.open_finding_index],
+      open_finding_sha256:ownerSupplement.open_finding_sha256,native_execution_coverage_adopted:false};
     receipt.ledger_updates_origin='native-worker-historical-proposals';
     receipt.owner_resolution={reviewed_by:'root',status:'owner-repair-reviewed',id:ownerSupplement.rejection.id,
       rejection:ownerSupplement.rejection,decision:ownerSupplement.decisions[0],completed_at:ownerSupplement.completed_at,
@@ -1341,6 +1396,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     receipt.owner_downstream=required.filter(row=>ownerSupplement.ids.has(row.id)).map(row=>row.id);
     receipt.downstream=[...new Set([...receipt.downstream,...receipt.owner_downstream])];
     receipt.owner_resolution.examined_downstream=receipt.owner_downstream;
+    if(ownerSupplement.version===3)receipt.owner_resolution.extra_supplier=ownerSupplement.required_supplier;
   }
   const discoveries=receipt.downstream.filter(id=>!frontier.has(id)&&!direct.some(row=>row.id===id)&&!receipt.restated.includes(id));
   const uses=Object.assign({},...reports.map(row=>row.downstream_uses??{}));

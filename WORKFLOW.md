@@ -337,6 +337,12 @@ native finding, successful dispatch and paused/drained creation state remain
 bound; genuine supplier and blocker repairs, complete affected-consumer inventory,
 current reviews and source reading are mandatory. Original fatal counts and all
 later gates remain; this supplies no new native execution or judge credit.
+The same guarded loader has a separate version-3 form for a completed native
+assigned repair that explicitly routes a fatal open direct result supplier. It
+binds the original paused/drained pre-gate state, exact native finding and
+supplier preimage, genuine Statement repair, recursively complete affected
+consumer inventory and current root reviews. It requires no artificial gate
+failure and preserves the native decision, observations and fatal counts.
 Terminal judge stamps and mechanical coverage use the same per-item policy and
 stamp the actual judging model. When an item has no verification mapping or
 source block, its first judge-only verification mapping is inserted immediately

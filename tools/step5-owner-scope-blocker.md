@@ -79,3 +79,57 @@ finding/proposal digests as `native_scope_blocker`. Root reviews are separately
 attributed; the original fatal outcome/type and fatal counts remain. There is no
 new native execution or judge credit, no waiver of carrier changes, and no
 replacement for recertification, rejudgment, consumer maintenance or later gates.
+
+## Completed native repair with a separate open result supplier
+
+A distinct `version: 3`, `kind: "step5-owner-extra-supplier-supplement"` variant
+uses the same supplement path and common root authorization, identity,
+report/result/attempt/prompt, current review, decision and full-text source-reading
+fields. Versions 1 and 2 keep their existing conditions. Version 3 applies when
+the genuine native assigned repair is complete but its report separately routes
+one explicit fatal open finding about an unassigned direct proved supplier.
+
+Version 3 requires `required_supplier`, zero-based `open_finding_index`, and
+`open_finding_sha256` binding the complete literal original
+`ledger_updates[open_finding_index]` with SHA-256 of `JSON.stringify`. The native
+entry must be the report's sole canonical `record-open-finding`, with
+`id: required_supplier`, `status: open`, `severity: fatal`, valid fatal type,
+`uncertain: false`, and substantive literal `source_excerpt`, `affected_use`,
+`minimality` and `route`. The original assigned confirmed-fatal decision stays
+unchanged in outcome/type; its original review must say `repaired` with a changed
+carrier hash, and native `repair_notes` must say `assigned_repair_complete` and
+`repair_complete: true`. Neither native report nor pack is rewritten.
+
+Additional bindings are `creation_state: {path, sha256}` and
+`supplier_before: {path, sha256}`, both immutable research archives. The creation
+state must show the exact native stage paused and drained, the same successful
+original dispatch attempt, null stage `gatesPassedAt` and `doneAt`, and no
+stage-local gate-failure blocker. This is the original pre-gate boundary;
+no failed gate is required. Live collection retains exact stage, drained writers
+and successful original-attempt guards while allowing native resume. Ordinary
+owner gate authorization and every native gate remain required.
+
+The supplier preimage must match both the frozen pack's guard and Statement
+hash, and its Statement must contain the exact native defective `source_excerpt`.
+The current supplier must genuinely change its Statement and carrier, remove
+that excerpt, and contain an actual numbered Proof. Its kind must be theorem,
+lemma, proposition or corollary; open problems and source-only substitutes cannot
+supply this route. The originally assigned consumer must declare the supplier in
+`deps` and retain a genuine carrier repair from the pack baseline.
+
+Use one `scope` entry with `role: assigned-consumer` for the original assigned
+subject, exactly one `role: prerequisite` for `required_supplier`, and
+`role: direct-consumer` for the remaining affected subjects. `expected_review_ids`
+and scope must equal the exact sorted current inventory, recursively propagating
+through every actual Statement/Definition change from the frozen pack. Every
+entry receives a genuine current root mathematical review with all four current
+hashes and the common full-text reading evidence. A later consumer proof repair
+may make its original native review stale; the root's current review is distinctly
+attributed and the original observation stays intact. Necessary supplier and
+consumer repair ownership remains with the actual supplier repairer.
+
+Collection retains the original separate finding and native repair notes in
+`native_extra_supplier_finding`, and records the supplier in
+`owner_resolution.extra_supplier`. This grants no new native execution, judge
+verdict or fatal classification; the original fatal count and all repair,
+consumer maintenance, rejudgment and certification obligations remain.
