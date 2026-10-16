@@ -8,6 +8,7 @@ import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { itemHashGuard } from './item-hash.mjs';
 import { requiredPageClosureEvidence } from './step3-owner-required-page-routes.mjs';
+import { downstreamConsumerClosureEvidence } from './step3-owner-downstream-consumer-routes.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
 
 const argv = process.argv.slice(2);
@@ -43,6 +44,7 @@ const artifactHashes = (version = 3) => ({
     `research/${name}`, sha256(readFileSync(R('research', name))),
   ])),
   ...(version === 3 ? requiredPageClosureEvidence(root, run) : {}),
+  ...(version === 3 ? downstreamConsumerClosureEvidence(root, run) : {}),
 });
 const jsonl = (path) => existsSync(path)
   ? readFileSync(path, 'utf8').split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line)) : [];
