@@ -15,3 +15,9 @@ upstream work: adjudicators, collection tools, refuters, split tools, then reade
 Each batch still requires its predecessor receipts and artifacts, with no live
 predecessor writer. Stage, role, and global caps include workers adopted after a
 controller restart; the full group gate barrier remains in place.
+
+Routine reports build their current snapshot only when the report timer is due;
+forced reports still recompute immediately. In coverage mode, stage status checks
+artifacts for effectively covered units and retains uncovered units as missing.
+A successful worker still needs every declared artifact, including after it exits;
+legacy count mode and all readiness, writer and gate checks retain their behavior.

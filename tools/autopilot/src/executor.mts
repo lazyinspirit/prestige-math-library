@@ -440,7 +440,11 @@ export class Executor {
     //
     // A stage may name the file each unit owes. If it does, the file must exist.
     if (stage.artifacts) {
-      const absent = owed.filter((u: any) => {
+      // Uncovered units already fail completion. Check every effectively covered
+      // unit, including a dead worker's success, without hashing uncovered drafts.
+      const artifactUnits = units.mode === 'coverage'
+        ? owed.filter((u: any) => !units.missing.includes(u)) : owed;
+      const absent = artifactUnits.filter((u: any) => {
         const paths = [stage.artifacts(ctx, u)].flat().filter(Boolean);
         return !paths.every((f: any) => existsSync(join(ctx.repo, f)));
       });
@@ -450,7 +454,7 @@ export class Executor {
           unitsDone: false,
           gatesPassed: false,
           done: false,
-          missing: absent,
+          missing: units.mode === 'coverage' ? [...new Set([...units.missing, ...absent])] : absent,
           why: `${units.why}; artifact missing for ${absent.join(', ')}`,
         };
       }
@@ -1423,7 +1427,7 @@ export class Executor {
     }
 
     if (this.state.paused) {
-      this.reporter.report(this.snapshot());
+      if (this.reporter.due()) this.reporter.report(this.snapshot());
       return 'working';
     }
 
@@ -1466,7 +1470,7 @@ export class Executor {
         this.reporter.notify('barrier',
           `${stage.id} is ready but ${labels.length} dispatch(es) from an earlier stage are still running (${labels.join(', ')}); holding`);
       }
-      this.reporter.report(this.snapshot());
+      if (this.reporter.due()) this.reporter.report(this.snapshot());
       return 'working';
     }
     this._barrierFor = undefined;
@@ -1610,7 +1614,7 @@ export class Executor {
       }
     }
 
-    this.reporter.report(this.snapshot(), { force: false });
+    if (this.reporter.due()) this.reporter.report(this.snapshot(), { force: false });
     return 'working';
   }
 
