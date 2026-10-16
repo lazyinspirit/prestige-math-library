@@ -129,14 +129,15 @@ export function readerConcernSession(root,run,phase,round,unit) {
   if(!existsSync(packPath))return {};
   const pack=read(packPath),owners=pack.reader_review_owners??pack.reader_concern_owners??{};
   if(!(pack.assignments?.[unit]??[]).some(id=>owners[id]===unit))return {};
-  const sessionHome=join(root,'.autopilot',run,'step5-reader-owner-sessions',`u${unit}`);
+  const sessionHome=resolve(root,'.autopilot',run,'step5-reader-owner-sessions',`u${unit}`);
   if(phase==='impact-initial'&&round===1)return {sessionHome};
   const binding=pack.reader_owner_sessions?.[unit];
   need(binding&&pack.input_evidence?.[binding.result]===binding.sha256
     &&hash(readFileSync(binding.result,'utf8'))===binding.sha256,'missing exact prior owner session result');
   const result=read(binding.result);
   need(result.run===run&&result.role==='alpha-repair'&&result.ok===true&&result.model===MODELS.sol61.id
-    &&result.provider_effort==='high'&&result.session_home===sessionHome
+    &&result.provider_effort==='high'&&typeof result.session_home==='string'
+    &&resolve(root,result.session_home)===sessionHome
     &&typeof result.session_id==='string'&&result.session_id.length>0&&result.session_id===binding.session_id,
     'cannot resume the genuine prior owner reviewer');
   return {sessionHome,resumeSession:result.session_id};

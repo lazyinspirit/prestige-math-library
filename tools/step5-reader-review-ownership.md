@@ -20,7 +20,10 @@ For each item/lane obligation, coverage comes from that lane's exact original
 native report and successful dispatch, bound in its unchanged collected receipt.
 The report review must still match the actual current source and dependency
 context. The dispatch must retain the actual successful original persistent
-session in `.autopilot/RUN/step5-reader-owner-sessions/uN`. Later native passes
+session in `.autopilot/RUN/step5-reader-owner-sessions/uN`. Native result home
+strings resolve against the repository root before path comparison; relative
+and absolute spellings must identify that exact expected home, while the actual
+session ID and original result bytes stay unchanged. Later native passes
 must bind and resume that same session. A different lane's review cannot count,
 and a later source or context change makes an earlier review stale. An ordinary
 review from a different fresh session is ignored for this duty. A real review

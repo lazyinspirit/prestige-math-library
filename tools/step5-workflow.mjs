@@ -1327,7 +1327,8 @@ function readerReviewOwnership(root,run,packs,receipts,items,current) {
     const result=read(path),sha256=digest(readFileSync(path,'utf8'));
     requireValue(result.run===run&&result.role==='alpha-repair'&&result.label===workerLabel('impact-initial',1,unit)
       &&result.ok===true&&result.model===MODELS.sol61.id&&result.provider_effort==='high'
-      &&result.session_home===join(root,'.autopilot',run,'step5-reader-owner-sessions',`u${unit}`)
+      &&typeof result.session_home==='string'
+      &&resolve(root,result.session_home)===resolve(root,'.autopilot',run,'step5-reader-owner-sessions',`u${unit}`)
       &&typeof result.session_id==='string'&&result.session_id.length>0,
       `reader concern lacks genuine persistent reviewer origin: ${unit}`);
     const value={path,result,sha256};originCache.set(unit,value);return value;
@@ -1391,7 +1392,9 @@ function readerReviewOwnership(root,run,packs,receipts,items,current) {
         const sameReviewer=dispatch.run===run&&dispatch.role==='alpha-repair'
           &&dispatch.label===workerLabel(record.pack.phase,record.pack.round,unit)
           &&dispatch.ok===true&&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort==='high'
-          &&dispatch.session_home===auth.result.session_home&&dispatch.session_id===auth.result.session_id;
+          &&typeof dispatch.session_home==='string'
+          &&resolve(root,dispatch.session_home)===resolve(root,auth.result.session_home)
+          &&dispatch.session_id===auth.result.session_id;
         // An incidental lane number grants no coverage. A genuine review from
         // this exact session can count even before this item acquired a tag.
         if(!claimed&&!sameReviewer)continue;
@@ -1524,9 +1527,10 @@ export function advanceImpact(root,run,phase,round) {
       // Validate real session continuity before freezing or dispatching work.
       for(const unit of pack.units){
         const binding=pack.reader_owner_sessions[unit];if(!binding)continue;
-        const result=read(binding.result),home=join(root,'.autopilot',run,'step5-reader-owner-sessions',`u${unit}`);
+        const result=read(binding.result),home=resolve(root,'.autopilot',run,'step5-reader-owner-sessions',`u${unit}`);
         requireValue(result.run===run&&result.role==='alpha-repair'&&result.ok===true&&result.model===MODELS.sol61.id
-          &&result.provider_effort==='high'&&result.session_home===home&&typeof result.session_id==='string'&&result.session_id.length>0,
+          &&result.provider_effort==='high'&&typeof result.session_home==='string'
+          &&resolve(root,result.session_home)===home&&typeof result.session_id==='string'&&result.session_id.length>0,
           `reader concern continuation lacks genuine persistent reviewer: ${unit}`);
       }
     }
