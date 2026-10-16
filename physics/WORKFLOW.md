@@ -105,6 +105,9 @@ nonlogical links are hash-bound context, not extra logical scheduling edges.
 `node tools/physics-support/depcheck.mjs --help` (or `-h`) prints usage and
 exits before reading import receipts or loading content. Use `--items-file` for
 a nonempty explicit item selection; a bare invocation checks the whole library.
+`node tools/physics-support/rendercheck.mjs --help` (or `-h`) also exits
+before loading renderers or collecting content. Pass explicit item/page paths
+to keep a render check within the current scope.
 
 ## Owner resolution of Step-1 drift holds
 

@@ -61,6 +61,12 @@ import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 import { katexCandidates, yamlCandidates } from "./paths.mjs";
 
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  console.log('Usage: node tools/physics-support/rendercheck.mjs [files...] [--json] [--quiet]');
+  console.log('Checks explicit item/page paths. Without paths, checks the complete library.');
+  process.exit(0);
+}
+
 const REPO = (process.env.PHYSICS_REPO ?? (physicsExistsSync(join(physicsToolRoot, 'PHYSICS-CONTENT-MODEL.md')) ? join(physicsToolRoot, 'physics') : physicsToolRoot));
 
 // KaTeX lives in the app repo; this repo has no node_modules of its own. Same
