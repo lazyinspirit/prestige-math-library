@@ -10,10 +10,26 @@ const root = args.includes('--root') ? resolve(value('--root')) : REPO;
 try {
   if (args.includes('--step6-scope') && (!args.includes('--run') || args.includes('--plan')))
     throw Error('--step6-scope requires an authored --run frontier');
-  verifyMathematicsImports(root, args.includes('--run') ? { run: value('--run'), planning: args.includes('--plan'), frontierOnly: args.includes('--step6-scope') } : {});
-  const scope = args.includes('--run') ? frontierGateScope({ repo: root, run: value('--run') }, { requireItemFiles: !args.includes('--plan'), allowEmptyItems: args.includes('--plan') }) : null;
   let plan = args.includes('--plan') ? JSON.parse(readFileSync(resolve(root, value('--plan')), 'utf8')) : null;
-  if (scope && plan) {
+  let proposedPages = null;
+  if (args.includes('--pages-file')) {
+    if (!plan || args.includes('--run')) throw Error('--pages-file requires --plan without --run');
+    const ids = JSON.parse(readFileSync(resolve(root, value('--pages-file')), 'utf8'));
+    if (!Array.isArray(ids) || !ids.length || ids.some(id => typeof id !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)) || new Set(ids).size !== ids.length)
+      throw Error('proposed page selection must contain nonempty unique page ids');
+    proposedPages = ids.map(id => {
+      const matches = plan.pages.filter(page => page.id === id);
+      if (matches.length !== 1) throw Error(`proposed page ${id} must occur exactly once in plan`);
+      const page = matches[0];
+      if (!['A', 'B'].includes(page.kind) || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(page.category ?? '') || !Number.isFinite(page.order) || !Array.isArray(page.items))
+        throw Error(`invalid proposed page ${id}`);
+      return page;
+    });
+  }
+  verifyMathematicsImports(root, proposedPages ? { planning: true, proposedPages } : args.includes('--run') ? { run: value('--run'), planning: args.includes('--plan'), frontierOnly: args.includes('--step6-scope') } : {});
+  const scope = proposedPages ? { pages: new Set(proposedPages.map(page => page.id)), items: new Set(proposedPages.flatMap(page => page.items.map(item => item.id))) }
+    : args.includes('--run') ? frontierGateScope({ repo: root, run: value('--run') }, { requireItemFiles: !args.includes('--plan'), allowEmptyItems: args.includes('--plan') }) : null;
+  if (scope && plan && !proposedPages) {
     const current = readRunManifestPages(root, value('--run'), { allowEmptyItems: true });
     for (const page of current) if (plan.pages.filter(p => p.id === page.id).length !== 1) throw Error(`current page ${page.id} must occur exactly once in plan`);
     const overlay = new Map(current.map(page => [page.id, page]));

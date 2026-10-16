@@ -15,8 +15,9 @@
 //   autopilot start --run frontier-15 --detach  # steps 1..8, autonomous
 //   autopilot status                            # any time, from anywhere
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync, appendFileSync, rmSync, openSync, closeSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, mkdtempSync, appendFileSync, rmSync, openSync, closeSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
+import { tmpdir } from 'node:os';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
@@ -300,8 +301,6 @@ switch (cmd) {
 
   case 'plan': {
     const { spawnSync } = await import('node:child_process');
-    const check = spawnSync('node', ['tools/physics-support/physics-check.mjs', '--plan', 'research/plan-spec.json'], { cwd: repo, encoding: 'utf8', env: { ...process.env, PHYSICS_REPO: repo } });
-    if (check.status !== 0) die(check.stderr || check.stdout || 'physics plan validation failed');
     const run = opt('run') ?? die('--run is required');
     const pairsArg = opt('pairs');
     let pages;
@@ -354,6 +353,22 @@ switch (cmd) {
     const cap = Number(opt('cap', '1'));
     if (cap !== 1) die('plan: --cap must be 1 so each batch can be audited and authored in dependency-level order');
     const groups = packBatches(repo, pages, { cap });
+    // Validate the exact proposed A/B frontier before writing any run artifacts.
+    const spec = JSON.parse(readFileSync(join(repo, 'research/plan-spec.json'), 'utf8'));
+    const selectedPages = pages.flatMap((id: string) => {
+      const matches = spec.pages.filter((page: any) => page.id === id);
+      if (matches.length !== 1) die(`plan: A page ${id} must occur exactly once`);
+      return [id, matches[0].companion ?? `${id}-examples`];
+    });
+    const preflightDir = mkdtempSync(join(tmpdir(), 'physics-plan-preflight-'));
+    let preflightFailure: string | null = null;
+    try {
+      const pagesFile = join(preflightDir, 'pages.json');
+      writeFileSync(pagesFile, JSON.stringify(selectedPages));
+      const check = spawnSync('node', ['tools/physics-support/physics-check.mjs', '--plan', 'research/plan-spec.json', '--pages-file', pagesFile], { cwd: repo, encoding: 'utf8', env: { ...process.env, PHYSICS_REPO: repo } });
+      if (check.status !== 0) preflightFailure = check.stderr || check.stdout || 'physics plan validation failed';
+    } finally { rmSync(preflightDir, { recursive: true, force: true }); }
+    if (preflightFailure) die(preflightFailure);
     const written = writeManifests(repo, run, groups, { force: has('force') });
     writeBatchDependencyLevels(repo, run);
     console.log(`step 0 for ${run}: ${pages.length} A/B pair(s) -> ${groups.length} batch(es), cap ${cap}\n`);

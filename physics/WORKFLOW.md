@@ -553,6 +553,14 @@ receipts/revisions do not satisfy the rebuilt pipeline. Legacy authoring-prefix
 migration and ready-pair initial-authoring variants are not current entry routes.
 Preserve historical run evidence rather than relabeling it.
 
+Before manifests exist, native `plan` resolves the proposed A/B pairs and runs
+`physics-check --plan research/plan-spec.json --pages-file FILE` on their exact,
+nonempty page-ID selection before writing run artifacts. This checks selected
+page/item metadata and actual transitive suppliers, including current original
+import identity and pins. Unrelated imported logical or category defects are
+outside that planning frontier. Bare checks remain strict across the corpus;
+local import snapshot pins retain their existing verification.
+
 Item/page validators select current run manifests. Outside suppliers stay
 prerequisite context; do not validate or repair unrelated content. Closeout verifies the engine's exact owned content commit inside its transaction.
 Fresh Step 6 uses metadata/render checks -> focused repair -> all final gates

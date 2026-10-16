@@ -61,10 +61,11 @@ export function importMathematics(root, sourceRoot) {
   writeFileSync(ignorePath, base + '\n\n' + marker + '\n' + files.map(f => '/' + f.path).join('\n') + '\n# END mathematical imports\n');
   return receipt;
 }
-export function verifyMathematicsImports(root, { run = null, planning = false, frontierOnly = false } = {}) {
+export function verifyMathematicsImports(root, { run = null, planning = false, frontierOnly = false, proposedPages = null } = {}) {
   if (frontierOnly && (!run || planning)) throw Error('Step-6 import scope requires an authored --run frontier');
   if (run !== null && !/^[a-zA-Z0-9_-]+$/.test(run ?? '')) throw Error('invalid current import frontier run');
-  if (planning && !run) throw Error('planning import selection requires --run');
+  if (proposedPages !== null && (!planning || run || !Array.isArray(proposedPages) || !proposedPages.length)) throw Error('proposed import selection requires nonempty planning pages without --run');
+  if (planning && !run && proposedPages === null) throw Error('planning import selection requires --run or proposed pages');
   const receiptPath = join(root, 'research/math-imports.json');
   if (!existsSync(receiptPath)) throw Error('missing math import receipt; run physics init before planning');
   const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'));
@@ -78,9 +79,9 @@ export function verifyMathematicsImports(root, { run = null, planning = false, f
     seen.add(file.path);
   }
   const originals = markdownFiles(join(receipt.source_root, 'items')).map(readItem);
-  const sourcePages = run ? markdownFiles(join(receipt.source_root, 'library'))
+  const sourcePages = run || proposedPages !== null ? markdownFiles(join(receipt.source_root, 'library'))
     .filter(file => !file.split('/').at(-1).startsWith('_')).map(file => ({ ...readItem(file), path: relative(receipt.source_root, file) })) : [];
-  const scope = run ? frontierMathematicsImportScope(root, run, { planning, receipt, originals: { items: originals, pages: sourcePages } }) : null;
+  const scope = run || proposedPages !== null ? frontierMathematicsImportScope(root, run, { planning, receipt, originals: { items: originals, pages: sourcePages }, proposedPages }) : null;
   const localFiles = frontierOnly ? receipt.files.filter(file => scope.paths.has(file.path)) : receipt.files;
   for (const file of localFiles) {
     if (hash(readFileSync(join(root, file.path))) !== file.sha256)

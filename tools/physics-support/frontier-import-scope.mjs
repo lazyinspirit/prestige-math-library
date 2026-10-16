@@ -29,10 +29,11 @@ function unique(lookup, token, label) {
   return rows[0];
 }
 
-/** Only native --run checks opt in. An empty item inventory is legitimate
- * before scaffolding, but the page manifests themselves must stay nonempty. */
-export function frontierMathematicsImportScope(root, run, { planning = false, receipt, originals }) {
-  const current = readRunManifestPages(root, run, { allowEmptyItems: planning });
+/** Native run checks and explicit proposed planning pages share the same
+ * supplier closure. Empty item inventories are legitimate before scaffolding;
+ * the selected page inventory must stay nonempty. */
+export function frontierMathematicsImportScope(root, run, { planning = false, receipt, originals, proposedPages = null }) {
+  const current = proposedPages ?? readRunManifestPages(root, run, { allowEmptyItems: planning });
   const pages = new Set(current.map(page => page.id));
   const spec = JSON.parse(readFileSync(join(root, 'research/plan-spec.json'), 'utf8'));
   if (!Array.isArray(spec.pages)) throw Error('invalid physics plan pages');
