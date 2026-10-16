@@ -36,22 +36,66 @@ export function checkStep1(s) {
     closed: work.length === 0, work };
 }
 
-export function recordStep1(root, { run, item, decision, reason, dependencies, owner = false }) {
+function validateRecord({ run, item, decision, reason, dependencies, owner = false }) {
+  safe(run); safe(item);
   if (!['ready', 'escalated'].includes(decision)) throw Error('Decision must be ready or escalated');
-  if (!reason?.trim()) throw Error('Record evidence or the exact blocker');
+  if (typeof reason !== 'string' || !reason.trim()) throw Error('Record evidence or the exact blocker');
   if (!Array.isArray(dependencies) || dependencies.some(d => typeof d !== 'string' || !d.trim()))
     throw Error('Record examined dependency IDs, including an explicit empty list');
-  const s = loadStep1Record(root, run);
+  if (typeof owner !== 'boolean') throw Error('Owner must be a boolean');
+}
+
+function buildRecord(s, { run, item, decision, reason, dependencies, owner = false }) {
   if (!s.items.has(item)) throw Error(`Unknown run item ${item}`);
   if (s.invalidItems.has(item)) throw Error(s.invalidItems.get(item));
   const previous = step1Decision(s, item);
   if (!owner && (previous.owner || previous.row?.owner)) throw Error('Only the owner may resolve this record');
   if (previous.closed && !owner) throw Error('Keep unchanged ready items and records intact');
-  const row = { version: 1, run, item, decision, owner, reason,
+  return { version: 1, run, item, decision, owner, reason,
     dependencies: [...new Set(dependencies)].sort(), sha256: itemHash(s, item, dependencies),
     at: new Date().toISOString() };
-  writeFileSync(file(root, run, item), JSON.stringify(row, null, 2) + '\n');
+}
+
+function writeRecord(root, row) {
+  writeFileSync(file(root, row.run, row.item), JSON.stringify(row, null, 2) + '\n');
+}
+
+export function recordStep1(root, options) {
+  validateRecord(options);
+  const row = buildRecord(loadStep1Record(root, options.run), options);
+  writeRecord(root, row);
   return row;
+}
+
+/** Owner-only drained readiness recording. This shares snapshot caches, never
+ * scientific dispositions. Validate the whole batch and recapture its actual
+ * input closures before writing any native-format rows. */
+export function recordStep1Batch(root, { run, records, owner }) {
+  if (owner !== true) throw Error('Only the owner may record a readiness batch');
+  safe(run);
+  if (!Array.isArray(records) || !records.length) throw Error('Readiness batch must be nonempty');
+  const seen = new Set();
+  const options = records.map(record => {
+    if (!record || typeof record !== 'object' || Array.isArray(record)) throw Error('Invalid readiness batch record');
+    if (record.run !== undefined && record.run !== run) throw Error('Readiness batch run mismatch');
+    if (record.owner !== undefined && record.owner !== true) throw Error('Readiness batch records are owner-only');
+    const value = { ...record, run, owner: true };
+    validateRecord(value);
+    if (seen.has(value.item)) throw Error(`Duplicate readiness batch item ${value.item}`);
+    seen.add(value.item);
+    return value;
+  });
+  const s = loadStep1Record(root, run);
+  const rows = options.map(record => buildRecord(s, record));
+  // No prior snapshot cache may mask an edit made while the first was captured.
+  // Rebuilding also rechecks complete manifest ownership and relevant aliases.
+  const fresh = loadStep1Record(root, run);
+  for (const row of rows) {
+    const current = buildRecord(fresh, row);
+    if (current.sha256 !== row.sha256) throw Error(`Readiness batch inputs changed during capture: ${row.item}`);
+  }
+  for (const row of rows) writeRecord(root, row);
+  return rows;
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(physicsRealpath(resolve(process.argv[1]))).href) {

@@ -81,6 +81,19 @@ page/pair structure still fail.
 The hash calculation and alias resolution are shared with the strict full-frontier
 checker; local readiness records grant no global acceptance or gate authority.
 
+At a drained owner join, `recordStep1Batch(root, {run, records, owner: true})`
+from `tools/physics-support/step1-decisions.mjs` can record multiple independently
+reviewed readiness dispositions without rebuilding the full alias index per item.
+Each record supplies the ordinary `item`, `decision`, `reason` and explicit
+`dependencies` fields. The owner preserves prior rows before replacement and
+supplies actual scientific evidence; batching grants no review or gate authority.
+All records and ownership are validated before any writes. One shared local
+snapshot hashes each actual dependency closure plus examined context; a second
+fresh snapshot must reproduce every hash before the native-format rows are
+written. Relevant mutation aborts the batch without writing rows; unrelated
+unfinished drafts retain the ordinary local-recording exclusion. Keep writers
+drained through recording. The individual `record` CLI remains unchanged.
+
 Item `dependency_level` is determined before writing item/page carriers, recorded
 and independently checked in Step 1: zero
 without in-run logical suppliers, otherwise one plus the maximum supplier level.

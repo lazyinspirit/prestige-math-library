@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, readdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { recordStep1, checkStep1 } from './step1-decisions.mjs';
+import fs from 'node:fs';
+import { syncBuiltinESMExports } from 'node:module';
+import { recordStep1Batch, recordStep1, checkStep1 } from './step1-decisions.mjs';
 import { loadStep3 } from './step3-decisions.mjs';
 
 function fixture(t) {
@@ -177,4 +179,80 @@ test('unresolved YAML anchors cannot conceal relevant raw identity or alias conf
   writeFileSync(join(f.root, 'items/def-second.md'), '---\nid: def-published-input\ndeps: *missing\n---\n');
   f.pages[0].items[0].deps = ['def-published-input']; f.save();
   assert.throws(() => f.record('lem-local-first'), /Ambiguous.*def-published-input/);
+});
+
+
+const batchRecords = () => [
+  { item: 'lem-local-first', decision: 'ready', reason: 'Owner reviewed supplier and completed argument.', dependencies: [] },
+  { item: 'ex-local-consumer', decision: 'escalated', reason: 'Owner retains the exact unresolved scientific blocker.', dependencies: ['def-published-input'] },
+];
+const readinessFiles = f => readdirSync(join(f.root, 'research')).filter(name => name.startsWith('demo-step1-'));
+
+test('owner bulk rows match individual native rows, including examined inputs and prior escalations', t => {
+  const f = fixture(t), individual = fixture(t);
+  for (const current of [f, individual]) current.record('lem-local-first', { decision: 'escalated' });
+  const records = batchRecords();
+  const expected = records.map(record => individual.record(record.item, { ...record, owner: true }));
+  const actual = recordStep1Batch(f.root, { run: 'demo', records, owner: true });
+  const withoutTime = rows => rows.map(({ at, ...row }) => row);
+  assert.deepEqual(withoutTime(actual), withoutTime(expected));
+  for (const row of actual) assert.deepEqual(JSON.parse(readFileSync(join(f.root, `research/demo-step1-${row.item}.json`), 'utf8')), row);
+  assert.equal(f.check().ready, 1);
+});
+
+for (const invalid of ['not-owner', 'empty', 'duplicate', 'late-decision', 'late-reason', 'late-dependencies', 'late-unknown', 'late-carrier']) {
+  test(`bulk readiness rejects ${invalid} without any earlier writes`, t => {
+    const f = fixture(t);
+    const records = batchRecords();
+    let owner = true;
+    if (invalid === 'not-owner') owner = false;
+    if (invalid === 'empty') records.length = 0;
+    if (invalid === 'duplicate') records[1].item = records[0].item;
+    if (invalid === 'late-decision') records[1].decision = 'accept';
+    if (invalid === 'late-reason') records[1].reason = '';
+    if (invalid === 'late-dependencies') records[1].dependencies = [''];
+    if (invalid === 'late-unknown') records[1].item = 'def-not-owned';
+    if (invalid === 'late-carrier') carrier(f, 'ex-local-consumer', 'deps: [unfinished\n');
+    assert.throws(() => recordStep1Batch(f.root, { run: 'demo', records, owner }));
+    assert.deepEqual(readinessFiles(f), []);
+  });
+}
+
+function mutateOnRecapture(t, f, mutate) {
+  const original = fs.readFileSync;
+  const manifest = join(f.root, 'research/demo-batch-1.pages.json');
+  let reads = 0;
+  const stub = t.mock.method(fs, 'readFileSync', function(path, ...args) {
+    if (path === manifest && ++reads === 2) mutate();
+    return original.call(this, path, ...args);
+  });
+  syncBuiltinESMExports();
+  return () => { stub.mock.restore(); syncBuiltinESMExports(); };
+}
+
+for (const input of ['supplier', 'examined-context', 'owned-manifest', 'ownership']) {
+  test(`bulk recapture rejects changed ${input} before any writes`, t => {
+    const f = fixture(t), records = batchRecords();
+    carrier(f, 'def-examined', 'deps: []\n');
+    records[0].dependencies = ['def-examined'];
+    const restore = mutateOnRecapture(t, f, () => {
+      if (input === 'supplier') writeFileSync(f.supplier, readFileSync(f.supplier, 'utf8') + '\nChanged supplier.');
+      if (input === 'examined-context') carrier(f, 'def-examined', 'deps: []\nchanged: true\n');
+      if (input === 'owned-manifest') { f.pages[0].items[0].strategy = 'Changed argument'; f.save(); }
+      if (input === 'ownership') { f.pages[1].items.push({ ...f.pages[0].items[0] }); f.save(); }
+    });
+    try {
+      assert.throws(() => recordStep1Batch(f.root, { run: 'demo', records, owner: true }), /changed during capture|Duplicate/);
+      assert.deepEqual(readinessFiles(f), []);
+    } finally { restore(); }
+  });
+}
+
+test('unrelated malformed draft changes do not hold owner bulk readiness', t => {
+  const f = fixture(t);
+  carrier(f, 'def-unrelated', 'deps: [unfinished\n');
+  const restore = mutateOnRecapture(t, f, () => carrier(f, 'def-unrelated', 'deps: *unfinished\n'));
+  try {
+    assert.equal(recordStep1Batch(f.root, { run: 'demo', records: batchRecords(), owner: true }).length, 2);
+  } finally { restore(); }
 });
