@@ -47,6 +47,12 @@ import { frontmatterList } from './frontmatter-list.mjs';
 import { includesItem, parseItemScope, unknownItems } from './item-scope.mjs';
 import { recordedPublishedRepair } from './published-repair-policy.mjs';
 
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  console.log('Usage: node tools/physics-support/depcheck.mjs [--items-file FILE] [--json] [--quiet] [--pending-audit-ok]');
+  console.log('Checks selected items and their dependency context. Without an item selection, checks the complete library.');
+  process.exit(0);
+}
+
 const REPO = (process.env.PHYSICS_REPO ?? (physicsExistsSync(join(physicsToolRoot, 'PHYSICS-CONTENT-MODEL.md')) ? join(physicsToolRoot, 'physics') : physicsToolRoot));
 const physicsImports = physicsExistsSync(join(REPO, 'research/math-imports.json')) ? JSON.parse(readFileSync(join(REPO, 'research/math-imports.json'), 'utf8')) : { files: [] };
 const importedMathIds = new Set(physicsImports.files.filter(file => file.path.startsWith('items/')).map(file => basename(file.path, '.md')));

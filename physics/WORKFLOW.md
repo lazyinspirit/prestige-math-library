@@ -89,6 +89,10 @@ is introduced. Logical dependencies must agree between authored bodies and
 manifests; aliases resolve to canonical suppliers. Definition discharges and
 nonlogical links are hash-bound context, not extra logical scheduling edges.
 
+`node tools/physics-support/depcheck.mjs --help` (or `-h`) prints usage and
+exits before reading import receipts or loading content. Use `--items-file` for
+a nonempty explicit item selection; a bare invocation checks the whole library.
+
 ## Owner resolution of Step-1 drift holds
 
 A native `drift-blocked` observation remains immutable after owner repair.
