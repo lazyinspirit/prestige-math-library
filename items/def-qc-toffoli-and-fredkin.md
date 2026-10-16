@@ -2,7 +2,7 @@
 id: def-qc-toffoli-and-fredkin
 kind: definition
 title: "Toffoli and Fredkin gates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 9

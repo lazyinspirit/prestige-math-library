@@ -2,7 +2,7 @@
 id: def-qc-instrument-and-conditional-state
 kind: definition
 title: "Finite instruments and conditional states"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-completely-positive-map, def-trace-of-an-endomorphism, def-qc-density-operator]

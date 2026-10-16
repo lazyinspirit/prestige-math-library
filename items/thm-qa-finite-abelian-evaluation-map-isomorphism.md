@@ -2,7 +2,7 @@
 id: thm-qa-finite-abelian-evaluation-map-isomorphism
 kind: theorem
 title: Finite abelian group is canonically isomorphic to its double dual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qa-finite-abelian-character-dual, def-additive-character-of-a-finite-abelian-group, thm-qa-finite-abelian-dual-has-same-cardinality, thm-qa-finite-abelian-character-dual-is-finite-abelian-group, thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form, lem-qa-character-dual-of-a-product-factors, lem-qa-cyclic-group-has-n-characters, thm-complex-nth-roots-and-roots-of-unity, thm-subset-of-a-finite-set, def-finite-cardinality, def-group-isomorphism-and-automorphism]

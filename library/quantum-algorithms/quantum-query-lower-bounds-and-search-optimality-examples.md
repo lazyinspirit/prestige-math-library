@@ -1,7 +1,7 @@
 ---
 page: quantum-query-lower-bounds-and-search-optimality-examples
 title: "Quantum Query Lower Bounds and Search Optimality — Examples"
-status: draft
+status: published
 requires:
   - quantum-query-lower-bounds-and-search-optimality
 items:

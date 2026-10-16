@@ -2,7 +2,7 @@
 id: thm-qc-density-operator-existence
 kind: theorem
 title: Every nonzero finite-dimensional complex inner-product space admits a density operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: cex-qa-13-controlled-powers-are-not-free
 kind: counterexample
 title: "A bare unitary oracle does not supply controlled powers for free"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 22

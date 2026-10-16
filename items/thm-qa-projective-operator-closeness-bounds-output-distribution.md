@@ -2,7 +2,7 @@
 id: thm-qa-projective-operator-closeness-bounds-output-distribution
 kind: theorem
 title: Projective operator closeness bounds output distributions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

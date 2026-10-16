@@ -2,7 +2,7 @@
 id: def-qc-broadcasting-family
 kind: definition
 title: "Broadcasting Family"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: lem-qa-prime-power-order-two-adic-law
 kind: lemma
 title: "Two-adic order distribution in odd prime-power unit groups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

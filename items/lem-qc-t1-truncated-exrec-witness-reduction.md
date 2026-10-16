@@ -2,7 +2,7 @@
 id: lem-qc-t1-truncated-exrec-witness-reduction
 kind: lemma
 title: "Distance-Three exRec Correctness and Truncated Witness Reduction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

@@ -2,7 +2,7 @@
 id: thm-qc-pattern-is-measurement-circuit
 kind: theorem
 title: "Every finite open-graph pattern is a measurement circuit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-adaptive-measurement-pattern, def-qc-circuit-syntax-and-register-order, def-qc-circuit-denotational-semantics, def-qc-classical-control-and-measurement-circuit, def-qc-elementary-circuit-resources, def-qc-register-and-computational-basis, thm-qc-computational-basis-orthonormal, thm-qc-pattern-branch-probabilities-and-zero-branches, thm-trace-of-ab-equals-trace-of-ba, def-qc-instrument-and-conditional-state]

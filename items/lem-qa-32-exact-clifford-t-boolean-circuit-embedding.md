@@ -2,7 +2,7 @@
 id: lem-qa-32-exact-clifford-t-boolean-circuit-embedding
 kind: lemma
 title: Boolean circuits compile exactly into the QC14 gate alphabet
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: quantum-complexity-classes-and-oracle-separations

@@ -2,7 +2,7 @@
 id: def-qc-state-preparation-cost-model
 kind: definition
 title: QC24 State Preparation Cost Model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 9

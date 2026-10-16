@@ -1,7 +1,7 @@
 ---
 page: amplitude-estimation-and-counting-examples
 title: Amplitude Estimation and Counting — Examples
-status: draft
+status: published
 requires:
   - amplitude-estimation-and-counting
 items: []

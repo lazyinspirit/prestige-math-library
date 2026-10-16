@@ -1,7 +1,7 @@
 ---
 page: quantum-fourier-transform-circuits
 title: Quantum Fourier-Transform Circuits
-status: draft
+status: published
 items:
   - thm-qa-projective-operator-closeness-bounds-output-distribution
   - lem-qa-pi-over-two-exceeds-sqrt-two

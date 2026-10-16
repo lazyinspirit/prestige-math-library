@@ -2,7 +2,7 @@
 id: thm-qa-14-bbbv-search-lower-bound
 kind: theorem
 title: BBBV hybrid lower bound for unstructured search
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 24

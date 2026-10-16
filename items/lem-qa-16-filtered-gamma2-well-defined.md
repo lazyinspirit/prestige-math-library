@@ -2,7 +2,7 @@
 id: lem-qa-16-filtered-gamma2-well-defined
 kind: lemma
 title: Finite-dimensional well-definedness of the filtered γ₂ program
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 22

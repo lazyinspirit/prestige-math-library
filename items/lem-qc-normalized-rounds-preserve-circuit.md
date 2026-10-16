@@ -2,7 +2,7 @@
 id: lem-qc-normalized-rounds-preserve-circuit
 kind: lemma
 title: "Normalized transport rounds preserve the circuit up to a recorded phase"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-normalized-transport-schedule, def-qc-circuit-denotational-semantics, lem-qc-j-basis-and-phase-identities]

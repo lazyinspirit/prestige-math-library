@@ -2,7 +2,7 @@
 id: thm-qc-tableau-measurement-update
 kind: theorem
 title: Phase-aware tableau measurement agrees with the projective instrument
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

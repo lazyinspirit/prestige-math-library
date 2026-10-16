@@ -2,7 +2,7 @@
 id: thm-qc-finite-outcome-law-is-a-probability-kernel
 kind: theorem
 title: "The finite POVM law is a probability kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-finite-outcome-probability-kernel, thm-qc-povm-probabilities-normalize, def-finite-probability-space-and-event, def-trace-of-an-endomorphism, prop-trace-is-linear, def-matrix-product-and-identity-matrix, def-qc-density-operator, def-non-negative-and-positive-operator]

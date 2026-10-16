@@ -2,7 +2,7 @@
 id: thm-qa-23-bounded-height-root-arithmetic-cost
 kind: theorem
 title: Polynomial arithmetic cost for rounded-input bounded-grid root isolation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 3

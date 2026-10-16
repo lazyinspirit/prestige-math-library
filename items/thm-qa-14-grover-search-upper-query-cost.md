@@ -2,7 +2,7 @@
 id: thm-qa-14-grover-search-upper-query-cost
 kind: theorem
 title: Grover search upper-bound query cost
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23

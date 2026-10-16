@@ -1,7 +1,7 @@
 ---
 page: polynomial-method-and-approximate-degree-examples
 title: "Polynomial Method and Approximate Degree — Examples"
-status: draft
+status: published
 requires:
   - polynomial-method-and-approximate-degree
 items: []

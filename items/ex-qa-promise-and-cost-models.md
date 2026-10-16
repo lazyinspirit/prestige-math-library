@@ -2,7 +2,7 @@
 id: ex-qa-promise-and-cost-models
 kind: example
 title: "Promise, query and cost-model examples"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

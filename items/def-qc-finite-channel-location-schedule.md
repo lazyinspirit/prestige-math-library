@@ -2,7 +2,7 @@
 id: def-qc-finite-channel-location-schedule
 kind: definition
 title: "Finite ordered channel-location schedules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

@@ -2,7 +2,7 @@
 id: lem-qa-30-mmw-dual-output-feasibility
 kind: lemma
 title: "No-failure MMW rounds yield an approximate dual-feasible vector"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: thm-qc-stabilizer-logical-pauli-quotient-dimension
 kind: theorem
 title: Dimension of the logical Pauli quotient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

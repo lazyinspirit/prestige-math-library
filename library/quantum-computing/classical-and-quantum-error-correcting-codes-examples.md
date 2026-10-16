@@ -1,7 +1,7 @@
 ---
 page: classical-and-quantum-error-correcting-codes-examples
 title: Classical and Quantum Error-Correcting Codes — Examples
-status: draft
+status: published
 requires:
   - classical-and-quantum-error-correcting-codes
 items: []

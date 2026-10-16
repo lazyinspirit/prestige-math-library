@@ -2,7 +2,7 @@
 id: alg-qa-16-dual-adversary-reflection-evaluator
 kind: algorithm
 title: Bounded-error evaluation from a dual adversary certificate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 24

@@ -2,7 +2,7 @@
 id: thm-qa-34-modfkv-low-rank-approximation
 kind: theorem
 title: ModFKV low-rank approximation supplier
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

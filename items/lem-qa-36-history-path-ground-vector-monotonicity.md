@@ -2,7 +2,7 @@
 id: lem-qa-36-history-path-ground-vector-monotonicity
 kind: lemma
 title: Nonnegative monotone ground vector of the history path
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

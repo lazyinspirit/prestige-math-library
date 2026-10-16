@@ -2,7 +2,7 @@
 id: lem-qa-dihedral-sieve-pair-combination
 kind: lemma
 title: Dihedral hidden-state pair combination
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 7

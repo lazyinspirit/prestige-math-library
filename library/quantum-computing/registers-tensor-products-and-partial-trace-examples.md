@@ -1,7 +1,7 @@
 ---
 page: registers-tensor-products-and-partial-trace-examples
 title: "Registers, Tensor Products, and Partial Trace — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-qc-register-endian-partial-trace]
 requires:

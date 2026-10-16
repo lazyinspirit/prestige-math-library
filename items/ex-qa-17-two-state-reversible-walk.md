@@ -2,7 +2,7 @@
 id: ex-qa-17-two-state-reversible-walk
 kind: example
 title: "Two-state reversible walk and its endpoint phases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 12

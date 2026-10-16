@@ -1,7 +1,7 @@
 ---
 page: state-preparation-isometry-synthesis-and-limits-examples
 title: State Preparation, Isometry Synthesis, and Limits — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qc-amplitude-table-state-preparation-cost

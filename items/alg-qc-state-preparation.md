@@ -2,7 +2,7 @@
 id: alg-qc-state-preparation
 kind: algorithm
 title: QC24 State Preparation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

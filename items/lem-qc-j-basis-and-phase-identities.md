@@ -2,7 +2,7 @@
 id: lem-qc-j-basis-and-phase-identities
 kind: lemma
 title: "J-gate basis and exact phase identities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-j-gate-and-equatorial-basis, def-qc-one-qubit-gate-alphabet-and-rotations, def-qc-pauli-matrices, def-qc-dirac-notation-conversion]

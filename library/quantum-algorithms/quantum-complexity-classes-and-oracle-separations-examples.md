@@ -1,7 +1,7 @@
 ---
 page: quantum-complexity-classes-and-oracle-separations-examples
 title: "Quantum Complexity Classes and Oracle Separations — Examples"
-status: draft
+status: published
 requires:
   - quantum-complexity-classes-and-oracle-separations
   - uniform-circuit-families-promise-problems-and-complexity

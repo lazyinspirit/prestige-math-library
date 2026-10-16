@@ -2,7 +2,7 @@
 id: def-qa-19-hamiltonian-access-cost-model
 kind: definition
 title: Continuous-time Hamiltonian access cost model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

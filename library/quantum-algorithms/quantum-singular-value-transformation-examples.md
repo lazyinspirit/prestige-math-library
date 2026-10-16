@@ -1,7 +1,7 @@
 ---
 page: quantum-singular-value-transformation-examples
 title: Quantum Singular-Value Transformation — Examples
-status: draft
+status: published
 items: []
 examples: [cex-qa-24-parity-violation, ex-qa-24-rank-one-pue]
 requires:

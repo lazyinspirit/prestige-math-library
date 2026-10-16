@@ -2,7 +2,7 @@
 id: lem-qa-36-history-path-full-gap
 kind: lemma
 title: Full-space history-path gap
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

@@ -2,7 +2,7 @@
 id: lem-qa-26-phase-to-eigenvalue-unwrapping
 kind: lemma
 title: "Signed phase decoding has no alias on the promised spectrum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

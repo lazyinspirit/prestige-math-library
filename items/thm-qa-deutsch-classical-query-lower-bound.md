@@ -2,7 +2,7 @@
 id: thm-qa-deutsch-classical-query-lower-bound
 kind: theorem
 title: One classical query cannot solve Deutsch exactly
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

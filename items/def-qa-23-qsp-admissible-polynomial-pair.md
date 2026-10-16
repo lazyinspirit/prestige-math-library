@@ -2,7 +2,7 @@
 id: def-qa-23-qsp-admissible-polynomial-pair
 kind: definition
 title: Admissible polynomial pair for Hermitian-reflection QSP
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 8

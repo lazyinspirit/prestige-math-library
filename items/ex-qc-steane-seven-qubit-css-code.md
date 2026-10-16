@@ -2,7 +2,7 @@
 id: ex-qc-steane-seven-qubit-css-code
 kind: example
 title: Steane seven-qubit CSS code
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

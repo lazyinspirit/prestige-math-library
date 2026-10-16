@@ -2,7 +2,7 @@
 id: ex-qa-30-sdp-weak-duality
 kind: example
 title: "A one-constraint scalar SDP and its dual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-qc-stabilizer-subgroup
 kind: definition
 title: Stabilizer subgroup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

@@ -2,7 +2,7 @@
 id: thm-qa-16-filtered-gamma-adversary-equality
 kind: theorem
 title: Boolean-output filtered γ₂ equals the general adversary value
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 24

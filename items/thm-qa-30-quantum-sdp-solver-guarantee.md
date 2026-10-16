@@ -2,7 +2,7 @@
 id: thm-qa-30-quantum-sdp-solver-guarantee
 kind: theorem
 title: "Quantum SDP additive-optimality guarantee"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 27

@@ -2,7 +2,7 @@
 id: thm-qc-gottesman-knill-exact-simulation
 kind: theorem
 title: Exact Gottesman–Knill simulation with measurement
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

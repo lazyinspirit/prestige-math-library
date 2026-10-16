@@ -2,7 +2,7 @@
 id: thm-qc-deferred-measurement
 kind: theorem
 title: "Finite instruments can be coherently deferred"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

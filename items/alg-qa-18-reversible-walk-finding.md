@@ -2,7 +2,7 @@
 id: alg-qa-18-reversible-walk-finding
 kind: algorithm
 title: "MNRS finite reversible-walk finding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

@@ -2,7 +2,7 @@
 id: def-qc-reflection
 kind: definition
 title: Orthogonal-Projector Reflection and Access Contract
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

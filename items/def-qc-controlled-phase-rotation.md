@@ -2,7 +2,7 @@
 id: def-qc-controlled-phase-rotation
 kind: definition
 title: Controlled Phase Rotation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

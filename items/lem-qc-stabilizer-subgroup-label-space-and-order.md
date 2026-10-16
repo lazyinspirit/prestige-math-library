@@ -2,7 +2,7 @@
 id: lem-qc-stabilizer-subgroup-label-space-and-order
 kind: lemma
 title: Stabilizer labels form an isotropic space of the same rank
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

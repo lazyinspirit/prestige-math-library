@@ -2,7 +2,7 @@
 id: thm-qc-ensemble-barycenter-is-density
 kind: theorem
 title: Finite ensemble barycenters are density operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-qa-12-exact-success-query-cost
 kind: theorem
 title: "Exact-success amplitude amplification query cost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

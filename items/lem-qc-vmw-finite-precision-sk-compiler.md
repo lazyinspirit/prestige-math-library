@@ -2,7 +2,7 @@
 id: lem-qc-vmw-finite-precision-sk-compiler
 kind: lemma
 title: Finite-Bit Compilation into the VMW F/H Alphabet
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 pipeline_run: quantum-computing-algorithms-60-2026-10-15

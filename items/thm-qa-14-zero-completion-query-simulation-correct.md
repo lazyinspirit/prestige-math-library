@@ -2,7 +2,7 @@
 id: thm-qa-14-zero-completion-query-simulation-correct
 kind: theorem
 title: Zero-completed query simulation is exact and uses one raw query
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 21

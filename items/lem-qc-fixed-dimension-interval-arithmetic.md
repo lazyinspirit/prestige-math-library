@@ -2,7 +2,7 @@
 id: lem-qc-fixed-dimension-interval-arithmetic
 kind: lemma
 title: Fixed-Dimension Dyadic Matrix Routines Have Polynomial Bit Cost
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

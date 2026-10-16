@@ -1,7 +1,7 @@
 ---
 page: quantum-sampling-expectation-and-monte-carlo-examples
 title: "Quantum Sampling, Expectation, and Monte Carlo — Examples"
-status: draft
+status: published
 requires:
   - quantum-sampling-expectation-and-monte-carlo
 items:

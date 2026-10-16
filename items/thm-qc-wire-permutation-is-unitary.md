@@ -2,7 +2,7 @@
 id: thm-qc-wire-permutation-is-unitary
 kind: theorem
 title: "Finite wire permutations are unitary basis permutations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

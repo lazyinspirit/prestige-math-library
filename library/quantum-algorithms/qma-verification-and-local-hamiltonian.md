@@ -1,7 +1,7 @@
 ---
 page: qma-verification-and-local-hamiltonian
 title: "QMA Verification and Local Hamiltonian"
-status: draft
+status: published
 requires:
   - uniform-circuit-families-promise-problems-and-complexity
   - the-spectral-theorem-and-singular-value-decomposition

@@ -2,7 +2,7 @@
 id: def-qc-povm-and-outcome-law
 kind: definition
 title: "Finite POVMs and their outcome law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-non-negative-and-positive-operator, def-qc-density-operator, def-trace-of-an-endomorphism, def-qc-finite-positive-effect-family, lem-qc-complete-effect-family-members-are-effects, def-dimension, def-real-and-complex-inner-product-space, def-vector-space-of-linear-maps]

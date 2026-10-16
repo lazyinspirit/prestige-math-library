@@ -1,7 +1,7 @@
 ---
 page: quantum-walk-search-and-element-distinctness
 title: "Quantum-Walk Search and Element Distinctness"
-status: draft
+status: published
 items: [def-qa-18-marked-set-and-stationary-mass,
         def-qa-18-classical-hitting-time,
         lem-qa-18-absorbing-walk-discriminant-decomposition,

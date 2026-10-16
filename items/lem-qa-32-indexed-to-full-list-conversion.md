@@ -2,7 +2,7 @@
 id: lem-qa-32-indexed-to-full-list-conversion
 kind: lemma
 title: Indexed uniform circuits convert to polynomial-time full lists
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: quantum-complexity-classes-and-oracle-separations

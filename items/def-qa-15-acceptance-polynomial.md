@@ -2,7 +2,7 @@
 id: def-qa-15-acceptance-polynomial
 kind: definition
 title: "Acceptance polynomials and approximate degree on Boolean domains"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

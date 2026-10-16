@@ -2,7 +2,7 @@
 id: def-qa-quantum-query-complexity
 kind: definition
 title: "Quantum query complexity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

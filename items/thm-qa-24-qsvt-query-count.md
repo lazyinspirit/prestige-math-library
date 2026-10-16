@@ -2,7 +2,7 @@
 id: thm-qa-24-qsvt-query-count
 kind: theorem
 title: QSVT signal and reflection query counts
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

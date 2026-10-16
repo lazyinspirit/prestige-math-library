@@ -2,7 +2,7 @@
 id: alg-qa-finite-abelian-hidden-subgroup-sample
 kind: algorithm
 title: One finite abelian hidden-subgroup Fourier sample
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

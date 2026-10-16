@@ -2,7 +2,7 @@
 id: lem-qc-anticommuting-stabilizer-measurement-is-fair
 kind: lemma
 title: An anticommuting stabilizer measurement is fair
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

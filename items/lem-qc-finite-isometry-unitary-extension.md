@@ -2,7 +2,7 @@
 id: lem-qc-finite-isometry-unitary-extension
 kind: lemma
 title: "A finite isometry extends after finite ancilla padding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

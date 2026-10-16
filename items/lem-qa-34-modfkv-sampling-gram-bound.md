@@ -2,7 +2,7 @@
 id: lem-qa-34-modfkv-sampling-gram-bound
 kind: lemma
 title: Two-stage ℓ2 sampling controls Gram matrices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

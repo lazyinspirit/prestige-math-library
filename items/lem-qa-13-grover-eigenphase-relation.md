@@ -2,7 +2,7 @@
 id: lem-qa-13-grover-eigenphase-relation
 kind: lemma
 title: "Grover eigenphases encode the good probability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

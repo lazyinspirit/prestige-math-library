@@ -2,7 +2,7 @@
 id: ex-qa-27-fixed-vs-variable-time-cost
 kind: example
 title: "Fixed-time and variable-time solver cost comparison"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 24

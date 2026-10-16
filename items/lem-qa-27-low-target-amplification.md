@@ -2,7 +2,7 @@
 id: lem-qa-27-low-target-amplification
 kind: lemma
 title: Low-target amplification has a controlled multiplicative loss
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

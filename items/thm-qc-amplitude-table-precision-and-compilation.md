@@ -2,7 +2,7 @@
 id: thm-qc-amplitude-table-precision-and-compilation
 kind: theorem
 title: Amplitude Table Precision and Compilation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

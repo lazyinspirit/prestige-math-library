@@ -1,7 +1,7 @@
 ---
 page: quantum-signal-processing-examples
 title: Quantum Signal Processing — Examples
-status: draft
+status: published
 items: []
 examples: [ex-qa-23-degree-one-qsp]
 requires:

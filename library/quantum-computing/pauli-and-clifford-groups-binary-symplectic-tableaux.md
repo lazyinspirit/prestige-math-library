@@ -1,7 +1,7 @@
 ---
 page: pauli-and-clifford-groups-binary-symplectic-tableaux
 title: Pauli and Clifford Groups, Binary Symplectic Tableaux
-status: draft
+status: published
 items:
   - def-qc-phase-aware-n-qubit-pauli-group
   - lem-qc-hadamard-pauli-action

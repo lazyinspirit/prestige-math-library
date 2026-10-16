@@ -2,7 +2,7 @@
 id: thm-qc-rz-approximation-correct-on-termination
 kind: theorem
 title: The Rz approximation procedure is correct when it returns
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

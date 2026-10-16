@@ -2,7 +2,7 @@
 id: alg-qa-33-qma-parallel-majority-amplification
 kind: algorithm
 title: QMA parallel repetition with a midpoint threshold
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

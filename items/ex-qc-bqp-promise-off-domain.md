@@ -2,7 +2,7 @@
 id: ex-qc-bqp-promise-off-domain
 kind: example
 title: "A BQP promise pair with unrestricted off-promise inputs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

@@ -2,7 +2,7 @@
 id: thm-qa-phase-estimation-exact-grid
 kind: theorem
 title: Exact phase recovery on the QPE grid
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

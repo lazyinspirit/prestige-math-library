@@ -2,7 +2,7 @@
 id: thm-qc-projective-conditional-state
 kind: theorem
 title: "Conditional state for a projective measurement"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-projective-measurement, thm-qc-projective-measurement-outcome-law, def-qc-density-operator, def-trace-of-an-endomorphism, prop-trace-is-linear, thm-trace-of-ab-equals-trace-of-ba, def-non-negative-and-positive-operator, def-kernel-and-image-of-a-linear-map]

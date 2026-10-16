@@ -2,7 +2,7 @@
 id: thm-qa-34-error-budget-allocation-correctness
 kind: theorem
 title: Allocated local errors meet the global budget
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

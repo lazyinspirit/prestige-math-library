@@ -1,7 +1,7 @@
 ---
 page: stabilizer-circuits-and-gottesman-knill-simulation
 title: Stabilizer Circuits and Gottesman–Knill Simulation
-status: draft
+status: published
 items:
   - def-qc-pauli-measurement-branch-semantics
   - lem-qc-pauli-measurement-projectors

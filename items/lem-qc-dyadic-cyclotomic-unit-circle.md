@@ -2,7 +2,7 @@
 id: lem-qc-dyadic-cyclotomic-unit-circle
 kind: lemma
 title: Unit-modulus elements of the dyadic cyclotomic ring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

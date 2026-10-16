@@ -2,7 +2,7 @@
 id: ex-qa-shor-factorization-of-fifteen
 kind: example
 title: "A Shor order sample for factoring fifteen"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23

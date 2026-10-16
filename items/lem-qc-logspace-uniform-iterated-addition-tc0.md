@@ -2,7 +2,7 @@
 id: lem-qc-logspace-uniform-iterated-addition-tc0
 kind: lemma
 title: "DLOGTIME uniform iterated addition threshold circuits"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

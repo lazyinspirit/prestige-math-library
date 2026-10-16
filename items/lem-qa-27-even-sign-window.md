@@ -2,7 +2,7 @@
 id: lem-qa-27-even-sign-window
 kind: lemma
 title: "A bounded even window from an odd sign approximant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

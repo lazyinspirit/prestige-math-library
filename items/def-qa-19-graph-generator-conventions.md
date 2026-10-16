@@ -2,7 +2,7 @@
 id: def-qa-19-graph-generator-conventions
 kind: definition
 title: Graph adjacency and Laplacian generator conventions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates
 title: "Qubits, Bloch Sphere, Pauli Algebra, and One-Qubit Gates"
-status: draft
+status: published
 items:
   - def-qc-qubit-and-bloch-representation
   - def-qc-pauli-matrices

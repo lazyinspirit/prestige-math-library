@@ -1,7 +1,7 @@
 ---
 page: discrete-quantum-walks-and-szegedy-theory
 title: Discrete Quantum Walks and Szegedy Theory
-status: draft
+status: published
 items:
   - def-qa-17-finite-stochastic-kernel
   - def-qa-17-finite-reversible-chain

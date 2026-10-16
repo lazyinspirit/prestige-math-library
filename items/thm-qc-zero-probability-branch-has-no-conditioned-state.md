@@ -2,7 +2,7 @@
 id: thm-qc-zero-probability-branch-has-no-conditioned-state
 kind: theorem
 title: "A zero-probability instrument branch has no conditioned state"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-instrument-and-conditional-state, def-qc-completely-positive-map, def-trace-of-an-endomorphism, thm-non-negative-operator-characterisations, def-qc-density-operator, def-non-negative-and-positive-operator]

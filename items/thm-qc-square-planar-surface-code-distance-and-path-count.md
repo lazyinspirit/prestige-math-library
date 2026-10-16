@@ -2,7 +2,7 @@
 id: thm-qc-square-planar-surface-code-distance-and-path-count
 kind: theorem
 title: Square planar surface-code distance and path count
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

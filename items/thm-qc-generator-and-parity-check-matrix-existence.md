@@ -2,7 +2,7 @@
 id: thm-qc-generator-and-parity-check-matrix-existence
 kind: theorem
 title: Every finite-field linear code has generator and parity-check matrices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 5

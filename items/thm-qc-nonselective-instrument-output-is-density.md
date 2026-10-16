@@ -2,7 +2,7 @@
 id: thm-qc-nonselective-instrument-output-is-density
 kind: theorem
 title: "The nonselective output of an instrument is a density operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-instrument-and-conditional-state, thm-qc-instrument-outcome-law-normalizes, thm-qc-zero-probability-branch-has-no-conditioned-state, def-trace-of-an-endomorphism, prop-trace-is-linear, def-qc-density-operator, def-qc-completely-positive-map, def-non-negative-and-positive-operator]

@@ -2,7 +2,7 @@
 id: alg-qa-32-simon-query-rank-test
 kind: algorithm
 title: Simon promise decision by sampled rank
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: quantum-complexity-classes-and-oracle-separations

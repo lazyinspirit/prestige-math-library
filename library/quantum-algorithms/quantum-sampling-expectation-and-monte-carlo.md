@@ -1,7 +1,7 @@
 ---
 page: quantum-sampling-expectation-and-monte-carlo
 title: "Quantum Sampling, Expectation, and Monte Carlo"
-status: draft
+status: published
 requires:
   - amplitude-estimation-and-counting
   - independence-borel-cantelli-and-zero-one-laws

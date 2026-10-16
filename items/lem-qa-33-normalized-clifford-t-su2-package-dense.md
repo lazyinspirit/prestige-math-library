@@ -2,7 +2,7 @@
 id: lem-qa-33-normalized-clifford-t-su2-package-dense
 kind: lemma
 title: Dense normalized one-qubit Clifford–T package
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 7

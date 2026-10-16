@@ -2,7 +2,7 @@
 id: lem-qa-34-two-sketch-threshold-band-bound
 kind: lemma
 title: A deterministic threshold-band bound for two Gram sketches
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: exact-oracle-algorithms
 title: Exact Oracle Algorithms
-status: draft
+status: published
 items:
   - lem-qa-hadamard-f2-kernel
   - def-qa-deutsch-promise

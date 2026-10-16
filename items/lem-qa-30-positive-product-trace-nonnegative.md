@@ -2,7 +2,7 @@
 id: lem-qa-30-positive-product-trace-nonnegative
 kind: lemma
 title: "Trace of a product of positive semidefinite matrices is nonnegative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

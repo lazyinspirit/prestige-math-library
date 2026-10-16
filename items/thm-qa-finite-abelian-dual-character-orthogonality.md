@@ -2,7 +2,7 @@
 id: thm-qa-finite-abelian-dual-character-orthogonality
 kind: theorem
 title: Dual-index character orthogonality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qa-finite-abelian-character-dual, def-additive-character-of-a-finite-abelian-group, thm-qa-finite-abelian-dual-has-same-cardinality, thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form, def-group-isomorphism-and-automorphism, lem-inverse-of-bijective-group-homomorphism, lem-qa-character-dual-of-a-product-factors, lem-qa-cyclic-group-has-n-characters, lem-qa-finite-character-values-have-unit-modulus, lem-complex-conjugation-and-modulus-laws, thm-complex-nth-roots-and-roots-of-unity, lem-finite-sum-reindexing-and-fubini]

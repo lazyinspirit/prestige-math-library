@@ -2,7 +2,7 @@
 id: rem-qa-32-bqp-pp-pspace-proof-obligations
 kind: remark
 title: BQP to PP and PSPACE proof obligations in the exact QC14 basis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: quantum-complexity-classes-and-oracle-separations

@@ -2,7 +2,7 @@
 id: lem-qa-33-kkr-two-qubit-propagation-restriction
 kind: lemma
 title: KKR restriction to correct two-qubit propagation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

@@ -2,7 +2,7 @@
 id: thm-qa-22-lcu-block-encoding-correctness
 kind: theorem
 title: LCU projected-block correctness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

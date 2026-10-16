@@ -2,7 +2,7 @@
 id: lem-qa-13-two-nearest-phase-mass
 kind: lemma
 title: "Two nearest phase labels carry probability at least eight over pi squared"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

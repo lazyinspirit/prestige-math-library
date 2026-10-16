@@ -2,7 +2,7 @@
 id: thm-qa-34-linear-combination-sampler-correct-and-cost
 kind: theorem
 title: Correctness and cost of the linear-combination sampler
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

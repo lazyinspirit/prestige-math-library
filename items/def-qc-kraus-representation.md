@@ -2,7 +2,7 @@
 id: def-qc-kraus-representation
 kind: definition
 title: "Finite Kraus representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

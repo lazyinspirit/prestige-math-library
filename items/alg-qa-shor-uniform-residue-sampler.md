@@ -2,7 +2,7 @@
 id: alg-qa-shor-uniform-residue-sampler
 kind: algorithm
 title: "Exact uniform sampling from the nonzero residue representatives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

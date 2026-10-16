@@ -2,7 +2,7 @@
 id: alg-qa-30-sdp-matrix-expectation-oracle
 kind: algorithm
 title: "Coherent SDP matrix-expectation oracle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 24

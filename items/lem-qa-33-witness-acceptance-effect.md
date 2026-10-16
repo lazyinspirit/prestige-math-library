@@ -2,7 +2,7 @@
 id: lem-qa-33-witness-acceptance-effect
 kind: lemma
 title: A finite verifier induces an effect on its witness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 12

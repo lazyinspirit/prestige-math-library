@@ -2,7 +2,7 @@
 id: def-qc-measurement-branch-output-law
 kind: definition
 title: "The outcome law and outputs of a measured circuit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

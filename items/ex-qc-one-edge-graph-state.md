@@ -2,7 +2,7 @@
 id: ex-qc-one-edge-graph-state
 kind: example
 title: "One-edge graph state and two-wire CZ pattern"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-graph-state, lem-qc-graph-state-amplitude-formula, lem-qc-graph-state-stabilizer-generators, lem-qc-measurement-pattern-for-cz]

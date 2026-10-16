@@ -1,7 +1,7 @@
 ---
 page: continuous-gate-universality-and-exact-synthesis
 title: Continuous-Gate Universality and Exact Synthesis
-status: draft
+status: published
 items:
   - def-qc-global-phase-equivalence
   - lem-qc-two-unitary-block-demultiplexing

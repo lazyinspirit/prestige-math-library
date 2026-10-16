@@ -2,7 +2,7 @@
 id: lem-qa-27-cks-stopping-time-instantiation
 kind: lemma
 title: "CKS stopping-time and success-mass instantiation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 25

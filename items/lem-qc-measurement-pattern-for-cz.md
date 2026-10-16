@@ -2,7 +2,7 @@
 id: lem-qc-measurement-pattern-for-cz
 kind: lemma
 title: "Four-branch open-graph pattern for CZ"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-adaptive-measurement-pattern, lem-qc-one-bit-teleportation, lem-qc-j-basis-and-phase-identities, def-qc-controlled-phase-rotation]

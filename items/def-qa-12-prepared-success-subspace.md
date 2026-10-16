@@ -2,7 +2,7 @@
 id: def-qa-12-prepared-success-subspace
 kind: definition
 title: "Prepared unitary and success subspace for amplitude amplification"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

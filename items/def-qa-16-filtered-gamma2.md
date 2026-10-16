@@ -2,7 +2,7 @@
 id: def-qa-16-filtered-gamma2
 kind: definition
 title: Filtered γ₂ factorization norm for query mismatch masks
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 21

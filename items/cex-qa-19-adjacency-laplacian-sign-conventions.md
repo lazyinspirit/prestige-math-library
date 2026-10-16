@@ -2,7 +2,7 @@
 id: cex-qa-19-adjacency-laplacian-sign-conventions
 kind: counterexample
 title: Generator convention matters
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

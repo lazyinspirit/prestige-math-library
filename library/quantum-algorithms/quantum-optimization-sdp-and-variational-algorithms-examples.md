@@ -1,7 +1,7 @@
 ---
 page: quantum-optimization-sdp-and-variational-algorithms-examples
 title: Quantum Optimization, Semidefinite Programs, and Variational Algorithms — Examples
-status: draft
+status: published
 items: []
 examples:
 - ex-qa-30-sdp-weak-duality

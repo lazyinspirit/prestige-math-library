@@ -2,7 +2,7 @@
 id: lem-qa-character-dual-of-a-product-factors
 kind: lemma
 title: Characters of a finite product factor coordinatewise
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qa-finite-abelian-character-dual, def-additive-character-of-a-finite-abelian-group, def-external-direct-product-of-groups, thm-external-direct-product-is-a-group]

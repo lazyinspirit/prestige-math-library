@@ -2,7 +2,7 @@
 id: thm-qc-reflection-unitary-involution
 kind: theorem
 title: Projector Reflections Are Hermitian Unitary Involutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

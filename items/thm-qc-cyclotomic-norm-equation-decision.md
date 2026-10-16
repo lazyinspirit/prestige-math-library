@@ -2,7 +2,7 @@
 id: thm-qc-cyclotomic-norm-equation-decision
 kind: theorem
 title: Constructive decision of the dyadic cyclotomic norm equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

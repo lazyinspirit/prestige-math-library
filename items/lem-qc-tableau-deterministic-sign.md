@@ -2,7 +2,7 @@
 id: lem-qc-tableau-deterministic-sign
 kind: lemma
 title: Tableau row reduction returns the deterministic Pauli sign
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

@@ -2,7 +2,7 @@
 id: ex-qc-clifford-t-exact-period-and-phase
 kind: example
 title: Exact T period and a non-exact Rz phase
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis-examples

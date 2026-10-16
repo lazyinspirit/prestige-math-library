@@ -2,7 +2,7 @@
 id: def-qa-36-adiabatic-resource-model
 kind: definition
 title: Adiabatic path access and resource model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

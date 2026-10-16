@@ -2,7 +2,7 @@
 id: lem-qa-finite-abelian-annihilators-are-subgroups
 kind: lemma
 title: Annihilators of subgroups are subgroups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qa-finite-abelian-subgroup-annihilator, thm-qa-finite-abelian-character-dual-is-finite-abelian-group, def-subgroup, def-additive-character-of-a-finite-abelian-group]

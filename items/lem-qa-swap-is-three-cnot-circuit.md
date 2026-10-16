@@ -2,7 +2,7 @@
 id: lem-qa-swap-is-three-cnot-circuit
 kind: lemma
 title: A SWAP Is Three CNOTs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 8

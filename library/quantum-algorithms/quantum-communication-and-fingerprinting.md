@@ -1,7 +1,7 @@
 ---
 page: quantum-communication-and-fingerprinting
 title: Quantum Communication and Fingerprinting
-status: draft
+status: published
 items:
   - def-qa-35-finite-probability-entropy-and-stochastic-matrices
   - lem-qa-35-log-tangent-bound

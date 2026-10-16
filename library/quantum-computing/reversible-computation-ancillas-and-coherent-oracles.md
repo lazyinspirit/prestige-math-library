@@ -1,7 +1,7 @@
 ---
 page: reversible-computation-ancillas-and-coherent-oracles
 title: "Reversible Computation, Ancillas, and Coherent Oracles"
-status: draft
+status: published
 items:
   - def-qc-clean-and-dirty-ancillas
   - def-qc-toffoli-and-fredkin

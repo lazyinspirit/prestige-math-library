@@ -2,7 +2,7 @@
 id: alg-qa-12-known-amplitude-amplification
 kind: algorithm
 title: "Known-amplitude amplification with integer rounding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

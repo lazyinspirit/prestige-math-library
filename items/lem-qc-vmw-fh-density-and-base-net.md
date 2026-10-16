@@ -2,7 +2,7 @@
 id: lem-qc-vmw-fh-density-and-base-net
 kind: lemma
 title: The VMW F/H Alphabet Has an Algebraic Dense SU(2) Lift and a Fixed Base Net
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 pipeline_run: quantum-computing-algorithms-60-2026-10-15

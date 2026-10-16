@@ -2,7 +2,7 @@
 id: lem-qa-18-absorbing-walk-discriminant-decomposition
 kind: lemma
 title: "Discriminant of the marked-state absorbing walk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

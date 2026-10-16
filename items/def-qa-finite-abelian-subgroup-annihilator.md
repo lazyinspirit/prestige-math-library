@@ -2,7 +2,7 @@
 id: def-qa-finite-abelian-subgroup-annihilator
 kind: definition
 title: Character annihilator of a subgroup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qa-finite-abelian-character-dual, def-subgroup]

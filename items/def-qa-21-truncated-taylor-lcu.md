@@ -2,7 +2,7 @@
 id: def-qa-21-truncated-taylor-lcu
 kind: definition
 title: Finite Taylor LCU polynomial
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

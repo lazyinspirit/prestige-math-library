@@ -2,7 +2,7 @@
 id: thm-qa-15-parity-approximate-degree
 kind: theorem
 title: "Parity has approximate degree N and requires at least N over 2 queries"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

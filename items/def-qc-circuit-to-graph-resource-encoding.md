@@ -2,7 +2,7 @@
 id: def-qc-circuit-to-graph-resource-encoding
 kind: definition
 title: "Circuit-to-open-graph resource encoding with normalized transport rounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-finite-simple-graph, def-qc-normalized-transport-schedule, def-qc-binary-adjacency-matrix, def-qc-adaptive-measurement-pattern, def-qc-j-gate-and-equatorial-basis, lem-qc-j-basis-and-phase-identities, lem-qc-adaptive-angle-pauli-frame-update, lem-qc-cz-matching-pauli-frame-action, def-qc-phase-aware-n-qubit-pauli-group, lem-qc-transport-encoding-is-simple-and-size-bounded, lem-qc-normalized-rounds-preserve-circuit]

@@ -2,7 +2,7 @@
 id: thm-qa-17-absolute-gap-eigenvalue-characterization
 kind: theorem
 title: "Absolute gap equals one minus the largest nonconstant eigenvalue modulus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

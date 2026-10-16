@@ -1,7 +1,7 @@
 ---
 page: qubitization-and-optimal-hamiltonian-simulation
 title: Qubitization and Near-Optimal Hamiltonian Simulation
-status: draft
+status: published
 items:
   - lem-qa-25-isometry-error-implies-trace-distance
   - lem-qa-25-parity-path-transfer

@@ -2,7 +2,7 @@
 id: alg-qa-13-iterative-likelihood-amplitude-estimation
 kind: algorithm
 title: "Iterative no-QFT amplitude estimation by finite-grid likelihood"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

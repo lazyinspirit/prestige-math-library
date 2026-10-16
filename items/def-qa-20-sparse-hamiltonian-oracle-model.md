@@ -2,7 +2,7 @@
 id: def-qa-20-sparse-hamiltonian-oracle-model
 kind: definition
 title: Sparse Hamiltonian row and value oracles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

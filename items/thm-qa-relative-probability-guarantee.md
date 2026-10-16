@@ -2,7 +2,7 @@
 id: thm-qa-relative-probability-guarantee
 kind: theorem
 title: "Relative probability estimation with a charged finite cap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 22

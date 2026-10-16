@@ -1,7 +1,7 @@
 ---
 page: quantum-phase-estimation-examples
 title: Quantum Phase Estimation — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qa-exact-phase-estimation

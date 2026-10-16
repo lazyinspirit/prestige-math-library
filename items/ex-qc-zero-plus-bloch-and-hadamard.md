@@ -2,7 +2,7 @@
 id: ex-qc-zero-plus-bloch-and-hadamard
 kind: example
 title: "Bloch coordinates of |0> and H|0>"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

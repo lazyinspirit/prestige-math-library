@@ -2,7 +2,7 @@
 id: alg-qa-28-qsvt-matrix-function
 kind: algorithm
 title: QSVT implementation of a bounded matrix function
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

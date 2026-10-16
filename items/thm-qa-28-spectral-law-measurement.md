@@ -2,7 +2,7 @@
 id: thm-qa-28-spectral-law-measurement
 kind: theorem
 title: QPE output law and conditional state for a spectral input
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

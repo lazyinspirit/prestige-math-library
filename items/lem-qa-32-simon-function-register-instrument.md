@@ -2,7 +2,7 @@
 id: lem-qa-32-simon-function-register-instrument
 kind: lemma
 title: Computational-basis instruments and conditional states on two registers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: quantum-complexity-classes-and-oracle-separations

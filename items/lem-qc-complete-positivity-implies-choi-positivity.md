@@ -2,7 +2,7 @@
 id: lem-qc-complete-positivity-implies-choi-positivity
 kind: lemma
 title: "Complete positivity implies Choi positivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

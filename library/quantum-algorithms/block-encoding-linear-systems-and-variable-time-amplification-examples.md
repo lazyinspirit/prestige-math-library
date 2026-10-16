@@ -1,7 +1,7 @@
 ---
 page: block-encoding-linear-systems-and-variable-time-amplification-examples
 title: Block-Encoding Linear Systems and Variable-Time Amplification — Examples
-status: draft
+status: published
 items:
   - ex-qa-27-sparse-diagonal-qlsp
   - ex-qa-27-fixed-vs-variable-time-cost

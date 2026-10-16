@@ -1,7 +1,7 @@
 ---
 page: uniform-circuit-families-promise-problems-and-complexity
 title: "Uniform Circuit Families, Promise Problems, and Complexity"
-status: draft
+status: published
 requires:
   - approximate-universality-and-solovay-kitaev
   - boolean-circuits-and-nonuniform-complexity

@@ -2,7 +2,7 @@
 id: def-qa-17-walk-access-model
 kind: definition
 title: "Finite row-preparation access model for a Szegedy walk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

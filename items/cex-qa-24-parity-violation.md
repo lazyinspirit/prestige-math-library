@@ -2,7 +2,7 @@
 id: cex-qa-24-parity-violation
 kind: counterexample
 title: Parity violation makes singular-value action basis dependent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

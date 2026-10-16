@@ -1,7 +1,7 @@
 ---
 page: block-encoding-linear-systems-and-variable-time-amplification
 title: Block-Encoding Linear Systems and Variable-Time Amplification
-status: draft
+status: published
 items:
   - lem-qa-27-even-sign-window
   - def-qa-27-variable-time-model

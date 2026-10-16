@@ -2,7 +2,7 @@
 id: thm-qc-instrument-induces-povm
 kind: theorem
 title: "Every finite instrument induces a unique POVM"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

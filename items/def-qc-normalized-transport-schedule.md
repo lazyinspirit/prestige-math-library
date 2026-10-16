@@ -2,7 +2,7 @@
 id: def-qc-normalized-transport-schedule
 kind: definition
 title: "Normalized transport schedule for a J/CZ circuit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-circuit-syntax-and-register-order, def-qc-circuit-denotational-semantics, lem-qc-disjoint-layer-order-independence, def-qc-one-qubit-gate-alphabet-and-rotations, def-qc-controlled-phase-rotation, def-qc-j-gate-and-equatorial-basis, lem-qc-j-basis-and-phase-identities]

@@ -2,7 +2,7 @@
 id: thm-qc-finite-naimark-isometric-compression
 kind: theorem
 title: "Finite Naimark isometric compression"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-povm-and-outcome-law, def-qc-projective-measurement, def-qc-density-operator, def-non-negative-and-positive-operator, def-trace-of-an-endomorphism, thm-trace-of-ab-equals-trace-of-ba, thm-non-negative-square-root-exists-and-is-unique, def-qc-tensor-map, def-qc-dirac-notation-conversion, def-qc-register-and-computational-basis, def-qc-tensor-register-and-permutation, lem-qc-tensor-product-basis-and-dimension, thm-gram-schmidt-orthonormalisation, def-dimension, thm-qc-projective-measurement-outcome-law, def-adjoint-of-a-linear-map-between-inner-product-spaces, thm-adjoint-exists-and-is-unique-in-finite-dimension, def-real-and-complex-inner-product-space]

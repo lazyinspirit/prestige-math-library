@@ -2,7 +2,7 @@
 id: lem-qa-15-branch-density-degree
 kind: lemma
 title: "Unnormalized branch density entries have degree at most twice the query count"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

@@ -2,7 +2,7 @@
 id: def-qc-uniform-circuit-family
 kind: definition
 title: "Full-list uniform quantum circuit family"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

@@ -2,7 +2,7 @@
 id: lem-qc-clifford-t-determinant-one-approximants
 kind: lemma
 title: Determinant-one Clifford+T words are dense in SU(2)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

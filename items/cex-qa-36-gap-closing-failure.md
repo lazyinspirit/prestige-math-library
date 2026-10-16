@@ -2,7 +2,7 @@
 id: cex-qa-36-gap-closing-failure
 kind: counterexample
 title: Gap closing invalidates a uniform adiabatic bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

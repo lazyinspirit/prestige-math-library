@@ -2,7 +2,7 @@
 id: def-qa-rational-phase-reconstruction
 kind: definition
 title: Denominator-bounded rational phase reconstruction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 1

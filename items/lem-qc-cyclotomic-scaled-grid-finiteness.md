@@ -2,7 +2,7 @@
 id: lem-qc-cyclotomic-scaled-grid-finiteness
 kind: lemma
 title: Finite coefficient bounds for the scaled cyclotomic grid
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

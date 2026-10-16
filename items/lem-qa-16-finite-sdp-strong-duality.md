@@ -2,7 +2,7 @@
 id: lem-qa-16-finite-sdp-strong-duality
 kind: lemma
 title: Finite real semidefinite programs satisfy strong duality under strict feasibility
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

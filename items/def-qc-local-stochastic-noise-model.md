@@ -2,7 +2,7 @@
 id: def-qc-local-stochastic-noise-model
 kind: definition
 title: "Local-Stochastic Correlated Quantum Noise"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

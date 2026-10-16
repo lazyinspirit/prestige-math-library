@@ -2,7 +2,7 @@
 id: lem-qa-30-normalized-sdp-strong-duality
 kind: lemma
 title: "Normalized Hermitian inequality SDPs have equal primal and dual values"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 2

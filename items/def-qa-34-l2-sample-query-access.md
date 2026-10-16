@@ -2,7 +2,7 @@
 id: def-qa-34-l2-sample-query-access
 kind: definition
 title: ℓ2 sample/query access to vectors and matrices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

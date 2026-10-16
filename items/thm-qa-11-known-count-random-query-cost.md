@@ -2,7 +2,7 @@
 id: thm-qa-11-known-count-random-query-cost
 kind: theorem
 title: Query cost of randomized known-count Grover search
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 22

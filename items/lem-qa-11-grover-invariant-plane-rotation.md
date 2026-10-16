@@ -2,7 +2,7 @@
 id: lem-qa-11-grover-invariant-plane-rotation
 kind: lemma
 title: The Grover iterate rotates the marked/unmarked plane
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 21

@@ -1,7 +1,7 @@
 ---
 page: period-hidden-shift-and-number-theoretic-algorithms
 title: Period, Hidden-Shift, and Number-Theoretic Algorithms
-status: draft
+status: published
 items:
   - alg-qa-euclidean-modular-inverse
   - rem-qa-number-theoretic-extension-scope

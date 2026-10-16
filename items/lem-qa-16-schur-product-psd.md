@@ -2,7 +2,7 @@
 id: lem-qa-16-schur-product-psd
 kind: lemma
 title: Entrywise products of finite positive semidefinite matrices are positive semidefinite
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

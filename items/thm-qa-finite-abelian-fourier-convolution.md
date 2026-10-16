@@ -2,7 +2,7 @@
 id: thm-qa-finite-abelian-fourier-convolution
 kind: theorem
 title: Fourier transform of unnormalized convolution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qa-finite-abelian-convolution, def-qa-normalized-finite-abelian-fourier-transform, def-additive-character-of-a-finite-abelian-group, lem-finite-sum-reindexing-and-fubini, lem-complex-conjugation-and-modulus-laws, lem-rational-power-laws]

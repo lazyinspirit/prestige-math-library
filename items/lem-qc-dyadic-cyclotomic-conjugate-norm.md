@@ -2,7 +2,7 @@
 id: lem-qc-dyadic-cyclotomic-conjugate-norm
 kind: lemma
 title: Conjugate norms from the dyadic eighth-cyclotomic ring are real dyadics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

@@ -2,7 +2,7 @@
 id: thm-qa-12-arbitrary-phase-query-cost
 kind: theorem
 title: "Arbitrary-phase amplification query count"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

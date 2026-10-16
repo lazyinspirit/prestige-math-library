@@ -2,7 +2,7 @@
 id: thm-qa-12-phase-mismatch-robustness
 kind: theorem
 title: "Success bound under an explicit amplitude-amplification phase mismatch"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

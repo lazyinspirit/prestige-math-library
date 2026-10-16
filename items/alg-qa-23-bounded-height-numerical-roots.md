@@ -2,7 +2,7 @@
 id: alg-qa-23-bounded-height-numerical-roots
 kind: algorithm
 title: Bounded-grid rational root isolation and rounded numerical QSP input
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 2

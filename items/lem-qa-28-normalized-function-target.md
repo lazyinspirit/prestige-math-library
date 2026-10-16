@@ -2,7 +2,7 @@
 id: lem-qa-28-normalized-function-target
 kind: lemma
 title: Rescaling a matrix-function target for QSVT
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 8

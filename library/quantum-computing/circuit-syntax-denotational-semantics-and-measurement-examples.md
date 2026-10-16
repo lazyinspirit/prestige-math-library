@@ -1,7 +1,7 @@
 ---
 page: circuit-syntax-denotational-semantics-and-measurement-examples
 title: "Circuit Syntax, Denotational Semantics, and Measurement — Examples"
-status: draft
+status: published
 requires:
   - circuit-syntax-denotational-semantics-and-measurement
 items: []

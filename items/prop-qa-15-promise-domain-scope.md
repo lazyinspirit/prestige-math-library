@@ -2,7 +2,7 @@
 id: prop-qa-15-promise-domain-scope
 kind: proposition
 title: "Approximation constraints apply only on the promise domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

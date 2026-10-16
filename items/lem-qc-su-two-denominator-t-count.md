@@ -2,7 +2,7 @@
 id: lem-qc-su-two-denominator-t-count
 kind: lemma
 title: Denominator exponent and optimal T count for determinant-one unitaries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

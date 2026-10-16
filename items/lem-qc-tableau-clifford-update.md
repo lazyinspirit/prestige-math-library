@@ -2,7 +2,7 @@
 id: lem-qc-tableau-clifford-update
 kind: lemma
 title: Phase-aware tableau updates for Clifford generators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

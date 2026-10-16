@@ -2,7 +2,7 @@
 id: lem-qa-26-hhl-filter-perturbation
 kind: lemma
 title: "Relative stability of the HHL filter on supported eigenvalues"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 2

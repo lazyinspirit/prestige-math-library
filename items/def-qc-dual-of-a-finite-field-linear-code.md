@@ -2,7 +2,7 @@
 id: def-qc-dual-of-a-finite-field-linear-code
 kind: definition
 title: Bilinear dual of a finite-field linear code
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 2

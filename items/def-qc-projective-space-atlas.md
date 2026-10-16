@@ -2,7 +2,7 @@
 id: def-qc-projective-space-atlas
 kind: definition
 title: QC24 Complex Projective Space and Its Standard Patches
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 2

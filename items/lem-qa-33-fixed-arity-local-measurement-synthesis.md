@@ -2,7 +2,7 @@
 id: lem-qa-33-fixed-arity-local-measurement-synthesis
 kind: lemma
 title: Uniform finite-arity local-energy measurement synthesis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 12

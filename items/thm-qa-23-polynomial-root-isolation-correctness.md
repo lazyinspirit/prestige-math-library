@@ -2,7 +2,7 @@
 id: thm-qa-23-polynomial-root-isolation-correctness
 kind: theorem
 title: Correctness and termination of certified complex-polynomial root isolation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 2

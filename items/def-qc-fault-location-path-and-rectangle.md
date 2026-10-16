@@ -2,7 +2,7 @@
 id: def-qc-fault-location-path-and-rectangle
 kind: definition
 title: "Fault Locations, Paths, and Rectangles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

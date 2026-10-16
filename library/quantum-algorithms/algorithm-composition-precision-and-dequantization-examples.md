@@ -1,7 +1,7 @@
 ---
 page: algorithm-composition-precision-and-dequantization-examples
 title: Algorithm Composition, Precision Budgets, and Dequantization — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qa-34-three-stage-budget

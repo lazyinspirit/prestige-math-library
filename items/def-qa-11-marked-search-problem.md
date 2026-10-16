@@ -2,7 +2,7 @@
 id: def-qa-11-marked-search-problem
 kind: definition
 title: Finite marked-item search and its bit oracle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

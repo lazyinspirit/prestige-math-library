@@ -2,7 +2,7 @@
 id: alg-qc-exact-single-qubit-clifford-t-synthesis
 kind: algorithm
 title: Exact single-qubit Clifford+T synthesis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

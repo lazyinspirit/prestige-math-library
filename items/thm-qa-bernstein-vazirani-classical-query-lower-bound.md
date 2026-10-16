@@ -2,7 +2,7 @@
 id: thm-qa-bernstein-vazirani-classical-query-lower-bound
 kind: theorem
 title: Classical Bernstein–Vazirani needs n queries for bounded error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

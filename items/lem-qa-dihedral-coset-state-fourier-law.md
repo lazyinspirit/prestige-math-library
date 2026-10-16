@@ -2,7 +2,7 @@
 id: lem-qa-dihedral-coset-state-fourier-law
 kind: lemma
 title: Fourier sample from a generalized-dihedral reflection coset state
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

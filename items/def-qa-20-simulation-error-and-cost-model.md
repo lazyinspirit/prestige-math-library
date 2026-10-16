@@ -2,7 +2,7 @@
 id: def-qa-20-simulation-error-and-cost-model
 kind: definition
 title: Hamiltonian simulation error and resources
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

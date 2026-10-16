@@ -2,7 +2,7 @@
 id: ex-qa-29-bernoulli-expectation
 kind: example
 title: "Bernoulli mean as a good-state probability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 25

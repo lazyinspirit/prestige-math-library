@@ -2,7 +2,7 @@
 id: lem-qa-26-hhl-sine-window-prefix-masses
 kind: lemma
 title: "Sine-window normalization and positive prefix weights"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 2

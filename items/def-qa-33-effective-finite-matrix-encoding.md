@@ -2,7 +2,7 @@
 id: def-qa-33-effective-finite-matrix-encoding
 kind: definition
 title: Effective finite matrix encodings for local Hamiltonians
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

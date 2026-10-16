@@ -2,7 +2,7 @@
 id: def-qa-17-szegedy-transition-isometry
 kind: definition
 title: "Szegedy row-preparation map and discriminant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-qc-verified-steane-magic-state-and-injection
 kind: lemma
 title: Finite Verified Steane Magic States and T Injection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

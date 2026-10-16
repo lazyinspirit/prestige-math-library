@@ -1,7 +1,7 @@
 ---
 page: amplitude-estimation-and-counting
 title: Amplitude Estimation and Counting
-status: draft
+status: published
 requires:
   - reversible-arithmetic-and-oracle-conversion
   - quantum-phase-estimation

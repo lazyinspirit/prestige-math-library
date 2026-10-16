@@ -2,7 +2,7 @@
 id: thm-qa-12-unknown-amplitude-query-cost
 kind: theorem
 title: "Expected cost of unknown-amplitude search"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

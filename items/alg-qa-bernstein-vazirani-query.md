@@ -2,7 +2,7 @@
 id: alg-qa-bernstein-vazirani-query
 kind: algorithm
 title: One-query Bernstein–Vazirani algorithm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

@@ -1,7 +1,7 @@
 ---
 page: finite-abelian-hidden-subgroup-algorithms
 title: Finite Abelian Hidden-Subgroup Algorithms
-status: draft
+status: published
 items:
   - rem-qa-nonabelian-hidden-subgroup-scope
   - lem-qa-annihilator-restriction-cut

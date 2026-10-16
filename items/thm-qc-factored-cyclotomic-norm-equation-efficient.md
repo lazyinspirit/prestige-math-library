@@ -2,7 +2,7 @@
 id: thm-qc-factored-cyclotomic-norm-equation-efficient
 kind: theorem
 title: Efficient exact cyclotomic norm solving with a supplied integer factorization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

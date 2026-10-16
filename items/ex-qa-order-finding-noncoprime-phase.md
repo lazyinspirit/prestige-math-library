@@ -2,7 +2,7 @@
 id: ex-qa-order-finding-noncoprime-phase
 kind: example
 title: A non-coprime phase gives a proper order divisor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 21

@@ -1,7 +1,7 @@
 ---
 page: pure-and-mixed-states-ensembles-and-schmidt-decomposition-examples
 title: Pure and Mixed States, Ensembles, and Schmidt Decomposition — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qc-bell-state-schmidt-reduction

@@ -2,7 +2,7 @@
 id: thm-qc-instrument-kraus-normalization
 kind: theorem
 title: "Instrument branch Kraus families satisfy total normalization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

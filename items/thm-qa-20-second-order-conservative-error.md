@@ -2,7 +2,7 @@
 id: thm-qa-20-second-order-conservative-error
 kind: theorem
 title: Conservative second-order error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

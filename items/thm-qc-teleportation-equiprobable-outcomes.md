@@ -2,7 +2,7 @@
 id: thm-qc-teleportation-equiprobable-outcomes
 kind: theorem
 title: Teleportation outcomes are equiprobable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

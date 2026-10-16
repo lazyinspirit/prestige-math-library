@@ -2,7 +2,7 @@
 id: def-qc-dyadic-cyclotomic-ring
 kind: definition
 title: Dyadic cyclotomic ring for Clifford+T synthesis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

@@ -2,7 +2,7 @@
 id: lem-qc-sparse-fault-path-implies-code-deviation
 kind: lemma
 title: "Sparse Fault Paths Preserve Correctable Code Deviation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

@@ -2,7 +2,7 @@
 id: lem-qc-tensor-product-basis-and-dimension
 kind: lemma
 title: "The product basis is orthonormal and tensor dimensions multiply"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

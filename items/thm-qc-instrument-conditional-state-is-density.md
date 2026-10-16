@@ -2,7 +2,7 @@
 id: thm-qc-instrument-conditional-state-is-density
 kind: theorem
 title: "Positive-probability instrument branches are density operators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-instrument-and-conditional-state, thm-qc-instrument-outcome-law-normalizes, def-qc-density-operator, def-trace-of-an-endomorphism, prop-trace-is-linear, def-qc-completely-positive-map, def-non-negative-and-positive-operator]

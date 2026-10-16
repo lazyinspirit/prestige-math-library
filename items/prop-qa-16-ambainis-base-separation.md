@@ -2,7 +2,7 @@
 id: prop-qa-16-ambainis-base-separation
 kind: proposition
 title: The four-bit Ambainis function separates nonnegative and signed adversary bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 25

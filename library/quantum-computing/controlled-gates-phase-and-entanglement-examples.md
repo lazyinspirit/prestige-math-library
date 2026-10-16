@@ -1,7 +1,7 @@
 ---
 page: controlled-gates-phase-and-entanglement-examples
 title: Controlled Gates, Phase, and Entanglement — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qc-controlled-global-phase-witness

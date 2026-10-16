@@ -2,7 +2,7 @@
 id: thm-qc-solovay-kitaev-error-and-resource-bound
 kind: theorem
 title: Solovay–Kitaev Error and Resource Bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 8

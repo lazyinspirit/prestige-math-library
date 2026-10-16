@@ -2,7 +2,7 @@
 id: thm-qa-23-real-polynomial-completion
 kind: theorem
 title: Completion of a bounded real parity polynomial
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

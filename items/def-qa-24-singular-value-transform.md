@@ -2,7 +2,7 @@
 id: def-qa-24-singular-value-transform
 kind: definition
 title: Odd and even singular-value transforms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 9

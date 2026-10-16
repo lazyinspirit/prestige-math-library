@@ -2,7 +2,7 @@
 id: cor-qc-cyclotomic-prime-norm-solvability
 kind: corollary
 title: Prime norm numerators congruent to one modulo eight are solvable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

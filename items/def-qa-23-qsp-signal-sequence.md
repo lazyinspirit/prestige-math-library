@@ -2,7 +2,7 @@
 id: def-qa-23-qsp-signal-sequence
 kind: definition
 title: QSP signal matrix and ordered phase sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 7

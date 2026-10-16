@@ -2,7 +2,7 @@
 id: thm-qc-circuit-simulated-by-adaptive-pattern
 kind: theorem
 title: "A finite J/CZ circuit is simulated branch by branch by its adaptive pattern"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-adaptive-measurement-pattern, def-qc-circuit-denotational-semantics, def-qc-tensor-register-and-permutation, def-qc-circuit-to-graph-resource-encoding, def-qc-normalized-transport-schedule, lem-qc-normalized-rounds-preserve-circuit, lem-qc-transport-encoding-is-simple-and-size-bounded, lem-qc-one-bit-teleportation, lem-qc-adaptive-angle-pauli-frame-update, lem-qc-cz-matching-pauli-frame-action, lem-qc-graph-state-edge-gates-commute, thm-qc-pattern-branch-probabilities-and-zero-branches, cor-trace-is-invariant-under-similarity]

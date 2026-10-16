@@ -2,7 +2,7 @@
 id: ex-qa-11-small-grover-rotation
 kind: example
 title: Exact Grover rotation for four addresses and one marked item
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23

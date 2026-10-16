@@ -1,7 +1,7 @@
 ---
 page: stabilizer-css-codes-syndromes-and-procedures
 title: Stabilizer and CSS Codes, Syndromes, and Procedures
-status: draft
+status: published
 requires:
   - circuit-syntax-denotational-semantics-and-measurement
   - classical-and-quantum-error-correcting-codes

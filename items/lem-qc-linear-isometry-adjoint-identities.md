@@ -2,7 +2,7 @@
 id: lem-qc-linear-isometry-adjoint-identities
 kind: lemma
 title: "Finite-dimensional linear isometries satisfy the adjoint identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-real-and-complex-inner-product-space, def-dimension, def-linear-map, def-linear-isometry-and-orthogonal-or-unitary-operator, def-adjoint-of-a-linear-map-between-inner-product-spaces, thm-adjoint-exists-and-is-unique-in-finite-dimension, lem-inner-product-pairing-is-nondegenerate-and-norm-is-homogeneous, thm-jordan-von-neumann-polarization]

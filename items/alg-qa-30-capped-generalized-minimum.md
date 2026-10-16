@@ -2,7 +2,7 @@
 id: alg-qa-30-capped-generalized-minimum
 kind: algorithm
 title: Finite capped quantum quantile minimum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 9

@@ -1,7 +1,7 @@
 ---
 page: grover-search-and-invariant-plane-rotations
 title: "Grover Search and Invariant-Plane Rotations"
-status: draft
+status: published
 requires:
   - reversible-arithmetic-and-oracle-conversion
   - computational-problems-promises-and-cost-models

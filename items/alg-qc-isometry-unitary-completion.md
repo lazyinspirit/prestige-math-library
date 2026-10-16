@@ -2,7 +2,7 @@
 id: alg-qc-isometry-unitary-completion
 kind: algorithm
 title: Isometry Unitary Completion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

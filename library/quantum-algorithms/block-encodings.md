@@ -1,7 +1,7 @@
 ---
 page: block-encodings
 title: Block Encodings
-status: draft
+status: published
 items: [def-qa-22-block-encoding, lem-qa-22-block-compression-contraction, def-qa-22-block-encoding-access-model, alg-qa-22-product-block-encoding, thm-qa-22-adjoint-block-encoding, thm-qa-22-product-block-encoding-correctness, thm-qa-22-long-product-error-recurrence, alg-qa-22-lcu-block-encoding, thm-qa-22-lcu-block-encoding-correctness, thm-qa-22-block-encoding-error-and-query-cost]
 examples: []
 requires:

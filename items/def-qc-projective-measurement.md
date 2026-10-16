@@ -2,7 +2,7 @@
 id: def-qc-projective-measurement
 kind: definition
 title: "Finite projective measurements"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-non-negative-and-positive-operator, def-qc-density-operator, def-dimension, def-real-and-complex-inner-product-space, def-adjoint-of-a-linear-map-between-inner-product-spaces, thm-adjoint-exists-and-is-unique-in-finite-dimension, def-vector-space-of-linear-maps, prop-linear-maps-form-a-vector-space, lem-composition-and-identity-linear-maps]

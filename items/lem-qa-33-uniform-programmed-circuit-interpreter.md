@@ -2,7 +2,7 @@
 id: lem-qa-33-uniform-programmed-circuit-interpreter
 kind: lemma
 title: Uniform interpretation of an input-generated quantum circuit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 12

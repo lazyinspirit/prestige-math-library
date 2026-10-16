@@ -2,7 +2,7 @@
 id: lem-qa-35-private-coin-error-reduction
 kind: lemma
 title: "Constant private-coin error reduction by repetition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

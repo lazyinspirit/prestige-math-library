@@ -2,7 +2,7 @@
 id: lem-qa-29-certified-natural-logarithm-series
 kind: lemma
 title: "A terminating rational enclosure for the natural logarithm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: def-qa-finite-branch-output-law
 kind: definition
 title: "Normalized output law for finite quantum query branches"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

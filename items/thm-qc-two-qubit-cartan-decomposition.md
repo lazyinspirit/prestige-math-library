@@ -2,7 +2,7 @@
 id: thm-qc-two-qubit-cartan-decomposition
 kind: theorem
 title: Exact Two-Qubit Cartan Decomposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 7

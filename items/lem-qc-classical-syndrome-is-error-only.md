@@ -2,7 +2,7 @@
 id: lem-qc-classical-syndrome-is-error-only
 kind: lemma
 title: A received-word syndrome depends only on the error vector
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 7

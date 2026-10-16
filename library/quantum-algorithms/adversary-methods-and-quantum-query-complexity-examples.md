@@ -1,7 +1,7 @@
 ---
 page: adversary-methods-and-quantum-query-complexity-examples
 title: "Adversary Methods and Quantum Query Complexity — Examples"
-status: draft
+status: published
 requires:
   - "adversary-methods-and-quantum-query-complexity"
 items: []

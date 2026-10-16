@@ -1,7 +1,7 @@
 ---
 page: simon-algorithm-and-finite-field-recovery
 title: Simon’s Algorithm and Finite-Field Recovery
-status: draft
+status: published
 items:
   - thm-qa-binary-field-f2-is-a-field
   - def-qa-binary-vector-space

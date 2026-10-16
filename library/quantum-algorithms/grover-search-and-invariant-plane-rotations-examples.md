@@ -1,7 +1,7 @@
 ---
 page: grover-search-and-invariant-plane-rotations-examples
 title: "Grover Search and Invariant-Plane Rotations — Examples"
-status: draft
+status: published
 requires:
   - grover-search-and-invariant-plane-rotations
 items: []

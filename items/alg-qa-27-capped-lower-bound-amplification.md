@@ -2,7 +2,7 @@
 id: alg-qa-27-capped-lower-bound-amplification
 kind: algorithm
 title: Finite amplification from a supplied success lower bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

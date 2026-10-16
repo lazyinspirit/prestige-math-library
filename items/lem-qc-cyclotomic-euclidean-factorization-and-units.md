@@ -2,7 +2,7 @@
 id: lem-qc-cyclotomic-euclidean-factorization-and-units
 kind: lemma
 title: Constructive cyclotomic factorization and real unit squares
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

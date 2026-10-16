@@ -2,7 +2,7 @@
 id: thm-qc-generic-unitary-cnot-lower-bound
 kind: theorem
 title: Generic No-Ancilla CNOT Lower Bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

@@ -2,7 +2,7 @@
 id: lem-qc-logspace-uniform-cook-formula-encoding
 kind: lemma
 title: "Logspace uniform near-linear Cook formula encoding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 3

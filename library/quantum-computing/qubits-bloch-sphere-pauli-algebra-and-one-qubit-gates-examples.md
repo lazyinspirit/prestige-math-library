@@ -1,7 +1,7 @@
 ---
 page: qubits-bloch-sphere-pauli-algebra-and-one-qubit-gates-examples
 title: "Qubits, Bloch Sphere, Pauli Algebra, and One-Qubit Gates — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-qc-zero-plus-bloch-and-hadamard

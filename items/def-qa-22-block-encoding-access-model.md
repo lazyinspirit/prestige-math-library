@@ -2,7 +2,7 @@
 id: def-qa-22-block-encoding-access-model
 kind: definition
 title: Block-encoding oracle and implementation cost model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

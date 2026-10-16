@@ -2,7 +2,7 @@
 id: thm-qc-rz-clifford-t-tcount
 kind: theorem
 title: T-count guarantees for Clifford+T Rz synthesis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

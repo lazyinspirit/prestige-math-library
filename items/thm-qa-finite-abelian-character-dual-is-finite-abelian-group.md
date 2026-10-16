@@ -2,7 +2,7 @@
 id: thm-qa-finite-abelian-character-dual-is-finite-abelian-group
 kind: theorem
 title: Pointwise character dual is a finite abelian group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qa-finite-abelian-character-dual, def-additive-character-of-a-finite-abelian-group, lem-group-homomorphism-basic-properties, thm-complex-numbers-form-a-field, thm-qa-finite-abelian-dual-has-same-cardinality]

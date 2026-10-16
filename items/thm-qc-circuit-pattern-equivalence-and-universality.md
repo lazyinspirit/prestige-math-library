@@ -2,7 +2,7 @@
 id: thm-qc-circuit-pattern-equivalence-and-universality
 kind: theorem
 title: "Circuit and pattern translations are branch preserving and universal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [thm-qc-circuit-simulated-by-adaptive-pattern, thm-qc-pattern-is-measurement-circuit, def-qc-j-gate-and-equatorial-basis, def-qc-one-qubit-gate-alphabet-and-rotations, def-qc-pauli-matrices, def-qc-controlled-phase-rotation, lem-qc-j-basis-and-phase-identities, thm-qc-one-qubit-euler-decomposition, thm-qc-exact-unitary-synthesis-from-qsd, def-qc-circuit-syntax-and-register-order]

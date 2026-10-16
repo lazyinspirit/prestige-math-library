@@ -2,7 +2,7 @@
 id: def-qa-30-sdp-sparse-oracle-model
 kind: definition
 title: "Sparse SDP matrix access and computational model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

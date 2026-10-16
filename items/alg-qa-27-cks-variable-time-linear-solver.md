@@ -2,7 +2,7 @@
 id: alg-qa-27-cks-variable-time-linear-solver
 kind: algorithm
 title: "Finite CKS sparse QLSP with variable-time inverse estimation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 24

@@ -2,7 +2,7 @@
 id: lem-qa-shor-residue-gcd-branch
 kind: lemma
 title: "Random residue gcd branch for factoring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

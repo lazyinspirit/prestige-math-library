@@ -2,7 +2,7 @@
 id: thm-qa-deutsch-jozsa-query-correct
 kind: theorem
 title: Deutsch–Jozsa algorithm is exact
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

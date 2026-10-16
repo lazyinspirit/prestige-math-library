@@ -2,7 +2,7 @@
 id: ex-qa-26-diagonal-hhl
 kind: example
 title: "Two-dimensional diagonal HHL inversion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 22

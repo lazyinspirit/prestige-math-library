@@ -2,7 +2,7 @@
 id: thm-qa-28-polynomial-matrix-function-error
 kind: theorem
 title: Uniform polynomial approximation transfers to a Hermitian matrix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

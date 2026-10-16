@@ -2,7 +2,7 @@
 id: thm-qc-exact-unitary-synthesis-from-qsd
 kind: theorem
 title: "Exact finite unitary synthesis from cosine-sine recursion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [thm-qc-cosine-sine-block-decomposition, lem-qc-two-unitary-block-demultiplexing, lem-qc-r-y-r-z-multiplexor-gray-code, thm-qc-two-qubit-unitary-three-cnot-synthesis, thm-polar-form-with-unique-principal-argument, def-qc-circuit-syntax-and-register-order, def-qc-circuit-denotational-semantics, def-qc-cnot-and-control-target-order, def-qc-tensor-register-and-permutation, lem-qc-local-gate-wire-embedding]

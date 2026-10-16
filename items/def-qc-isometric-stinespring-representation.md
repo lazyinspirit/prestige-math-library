@@ -2,7 +2,7 @@
 id: def-qc-isometric-stinespring-representation
 kind: definition
 title: "Isometric Stinespring representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

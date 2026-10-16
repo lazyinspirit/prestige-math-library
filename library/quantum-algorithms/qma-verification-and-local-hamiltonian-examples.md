@@ -1,7 +1,7 @@
 ---
 page: qma-verification-and-local-hamiltonian-examples
 title: "QMA Verification and Local Hamiltonian — Examples"
-status: draft
+status: published
 requires:
   - qma-verification-and-local-hamiltonian
 items: []

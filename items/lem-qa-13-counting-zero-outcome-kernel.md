@@ -2,7 +2,7 @@
 id: lem-qa-13-counting-zero-outcome-kernel
 kind: lemma
 title: "Exact zero-label probability for counting"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 21

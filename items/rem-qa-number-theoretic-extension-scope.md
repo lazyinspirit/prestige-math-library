@@ -2,7 +2,7 @@
 id: rem-qa-number-theoretic-extension-scope
 kind: remark
 title: Scope of number-field and elliptic-curve extensions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

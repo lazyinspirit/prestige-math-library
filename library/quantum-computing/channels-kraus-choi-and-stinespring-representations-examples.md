@@ -1,7 +1,7 @@
 ---
 page: channels-kraus-choi-and-stinespring-representations-examples
 title: Channels, Kraus, Choi, and Stinespring Representations — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qc-dephasing-channel-kraus-choi

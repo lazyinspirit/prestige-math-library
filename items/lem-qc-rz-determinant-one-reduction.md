@@ -2,7 +2,7 @@
 id: lem-qc-rz-determinant-one-reduction
 kind: lemma
 title: Determinant-one reduction for optimal Rz approximation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

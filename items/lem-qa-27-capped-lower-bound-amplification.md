@@ -2,7 +2,7 @@
 id: lem-qa-27-capped-lower-bound-amplification
 kind: lemma
 title: Finite amplification preserves the good state with a deterministic call cap
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

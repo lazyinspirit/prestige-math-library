@@ -2,7 +2,7 @@
 id: thm-qa-15-exact-degree-or
 kind: theorem
 title: "The exact polynomial degree of OR is N"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

@@ -2,7 +2,7 @@
 id: thm-qc-exact-single-qubit-synthesis-correct
 kind: theorem
 title: The exact single-qubit compiler returns the input matrix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

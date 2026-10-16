@@ -2,7 +2,7 @@
 id: thm-qa-11-known-count-query-cost
 kind: theorem
 title: Known-count Grover search uses O of the square root of N over t bit queries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 25

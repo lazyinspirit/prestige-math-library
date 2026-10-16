@@ -2,7 +2,7 @@
 id: def-qc-unbounded-error-time-space-counting-model
 kind: definition
 title: "Unbounded error time space counting model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

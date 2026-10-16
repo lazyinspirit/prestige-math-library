@@ -2,7 +2,7 @@
 id: thm-qc-unbounded-error-counting-time-space-alternative
 kind: theorem
 title: "Unbounded error counting time space alternative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 5

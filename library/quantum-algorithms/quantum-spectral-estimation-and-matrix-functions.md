@@ -1,7 +1,7 @@
 ---
 page: quantum-spectral-estimation-and-matrix-functions
 title: Quantum Spectral Estimation and Matrix Functions
-status: draft
+status: published
 items:
   - thm-qa-28-polynomial-matrix-function-error
   - def-qa-28-state-spectral-distribution

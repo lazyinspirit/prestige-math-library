@@ -2,7 +2,7 @@
 id: thm-qc-povm-probabilities-normalize
 kind: theorem
 title: "POVM outcome weights are probabilities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-povm-and-outcome-law, def-non-negative-and-positive-operator, thm-non-negative-operator-characterisations, thm-non-negative-square-root-exists-and-is-unique, def-trace-of-an-endomorphism, prop-trace-is-linear, thm-trace-of-ab-equals-trace-of-ba, def-qc-density-operator]

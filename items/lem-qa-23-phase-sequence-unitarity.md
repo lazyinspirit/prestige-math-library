@@ -2,7 +2,7 @@
 id: lem-qa-23-phase-sequence-unitarity
 kind: lemma
 title: Unitarity, determinant, and polynomial form of a QSP sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 8

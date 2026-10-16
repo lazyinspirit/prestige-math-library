@@ -2,7 +2,7 @@
 id: def-qc-trace-norm
 kind: definition
 title: Trace Norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

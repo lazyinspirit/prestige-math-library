@@ -2,7 +2,7 @@
 id: lem-qa-15-continuous-markov-derivative-bound
 kind: lemma
 title: "Continuous Markov derivative bound on an interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

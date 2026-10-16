@@ -1,7 +1,7 @@
 ---
 page: quantum-fourier-transform-circuits-examples
 title: Quantum Fourier-Transform Circuits — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qa-qft-fourier-circuit-order-and-truncation

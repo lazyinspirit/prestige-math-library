@@ -2,7 +2,7 @@
 id: ex-qc-quantum-repetition-projector-and-distance-boundary
 kind: example
 title: Quantum repetition subspace projector and a distance-one boundary error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: thm-qa-deutsch-jozsa-deterministic-query-lower-bound
 kind: theorem
 title: Exact deterministic Deutsch–Jozsa needs N/2+1 queries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

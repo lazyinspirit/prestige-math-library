@@ -2,7 +2,7 @@
 id: thm-qc-dirac-adjoint-amplitude-translation
 kind: theorem
 title: Dirac Adjoint Amplitude Translation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 1

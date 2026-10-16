@@ -1,7 +1,7 @@
 ---
 page: approximate-universality-and-solovay-kitaev-examples
 title: Approximate Universality and Solovay–Kitaev — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qc-solovay-kitaev-error-budget

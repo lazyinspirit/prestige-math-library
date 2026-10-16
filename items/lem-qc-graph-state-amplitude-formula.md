@@ -2,7 +2,7 @@
 id: lem-qc-graph-state-amplitude-formula
 kind: lemma
 title: "Computational-basis amplitudes of a graph state"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-graph-state, def-qc-ordered-bitstring-encoding, def-qc-tensor-register-and-permutation, def-qc-controlled-phase-rotation]

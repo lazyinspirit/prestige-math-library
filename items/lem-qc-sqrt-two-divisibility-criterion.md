@@ -2,7 +2,7 @@
 id: lem-qc-sqrt-two-divisibility-criterion
 kind: lemma
 title: Square root of two divisibility criterion in the eighth cyclotomic ring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

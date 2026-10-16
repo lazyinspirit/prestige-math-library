@@ -2,7 +2,7 @@
 id: lem-qc-single-qubit-ring-unitary-form
 kind: lemma
 title: Normal form of a single-qubit ring unitary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

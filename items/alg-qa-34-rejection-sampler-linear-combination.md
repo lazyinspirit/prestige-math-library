@@ -2,7 +2,7 @@
 id: alg-qa-34-rejection-sampler-linear-combination
 kind: algorithm
 title: Finite rejection sampler for a linear combination
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

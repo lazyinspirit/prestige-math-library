@@ -1,7 +1,7 @@
 ---
 page: quantum-complexity-classes-and-oracle-separations
 title: "Quantum Complexity Classes and Oracle Separations"
-status: draft
+status: published
 requires:
   - uniform-circuit-families-promise-problems-and-complexity
   - counting-complexity-and-sharpp

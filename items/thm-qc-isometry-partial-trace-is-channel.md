@@ -2,7 +2,7 @@
 id: thm-qc-isometry-partial-trace-is-channel
 kind: theorem
 title: "An isometry followed by partial trace is a channel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

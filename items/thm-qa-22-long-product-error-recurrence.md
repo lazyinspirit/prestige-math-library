@@ -2,7 +2,7 @@
 id: thm-qa-22-long-product-error-recurrence
 kind: theorem
 title: Error recurrence for a chain of block-encoded products
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

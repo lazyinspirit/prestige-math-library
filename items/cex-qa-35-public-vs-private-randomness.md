@@ -2,7 +2,7 @@
 id: cex-qa-35-public-vs-private-randomness
 kind: counterexample
 title: "Public-coin and private-coin SMP are different models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

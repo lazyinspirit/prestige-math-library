@@ -2,7 +2,7 @@
 id: def-qc-ordered-bitstring-encoding
 kind: definition
 title: "Big-endian encoding of ordered bit strings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-register-and-computational-basis]

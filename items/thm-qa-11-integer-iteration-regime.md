@@ -2,7 +2,7 @@
 id: thm-qa-11-integer-iteration-regime
 kind: theorem
 title: Integer rounding gives a high-success Grover iterate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23

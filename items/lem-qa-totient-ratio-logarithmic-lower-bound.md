@@ -2,7 +2,7 @@
 id: lem-qa-totient-ratio-logarithmic-lower-bound
 kind: lemma
 title: Elementary lower bound for the totient ratio
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

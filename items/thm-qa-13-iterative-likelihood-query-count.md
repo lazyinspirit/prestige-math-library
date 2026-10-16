@@ -2,7 +2,7 @@
 id: thm-qa-13-iterative-likelihood-query-count
 kind: theorem
 title: "Exact query count for the finite-grid iterative estimator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

@@ -2,7 +2,7 @@
 id: def-qa-qft-gate-cost-model
 kind: definition
 title: QFT ideal and finite-set gate-cost models
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 9

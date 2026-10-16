@@ -2,7 +2,7 @@
 id: thm-qa-30-sparse-sdp-resource-substitution
 kind: theorem
 title: Sparse evolution substitution gives the quantum SDP and diagonal LP query bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: quantum-optimization-sdp-and-variational-algorithms

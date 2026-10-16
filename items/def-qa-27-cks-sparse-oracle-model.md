@@ -2,7 +2,7 @@
 id: def-qa-27-cks-sparse-oracle-model
 kind: definition
 title: "Childs–Kothari–Somma sparse QLSP oracle model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

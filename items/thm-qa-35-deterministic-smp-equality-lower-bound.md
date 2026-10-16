@@ -2,7 +2,7 @@
 id: thm-qa-35-deterministic-smp-equality-lower-bound
 kind: theorem
 title: "Deterministic SMP equality costs Ω(n) bits"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

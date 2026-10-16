@@ -1,7 +1,7 @@
 ---
 page: finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces
 title: Finite-Dimensional Complex Inner-Product Spaces and Matrix Interfaces
-status: draft
+status: published
 items:
   - def-qc-dirac-notation-conversion
   - def-qc-trace-norm

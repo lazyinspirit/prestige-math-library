@@ -2,7 +2,7 @@
 id: lem-qa-29-dyadic-parameters-terminate
 kind: lemma
 title: "Finite termination of the dyadic estimator parameter searches"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

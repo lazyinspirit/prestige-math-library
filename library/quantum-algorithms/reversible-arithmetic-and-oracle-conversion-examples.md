@@ -1,7 +1,7 @@
 ---
 page: reversible-arithmetic-and-oracle-conversion-examples
 title: "Reversible Arithmetic and Oracle Conversion — Examples"
-status: draft
+status: published
 requires:
   - reversible-arithmetic-and-oracle-conversion
 items: []

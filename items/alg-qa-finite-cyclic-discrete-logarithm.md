@@ -2,7 +2,7 @@
 id: alg-qa-finite-cyclic-discrete-logarithm
 kind: algorithm
 title: Finite cyclic discrete logarithm by Fourier sampling
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

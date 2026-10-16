@@ -1,7 +1,7 @@
 ---
 page: pauli-and-clifford-groups-binary-symplectic-tableaux-examples
 title: Pauli and Clifford Groups, Binary Symplectic Tableaux — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qc-pauli-commutator-binary-symplectic

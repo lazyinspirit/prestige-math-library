@@ -2,7 +2,7 @@
 id: thm-qa-15-or-approximate-degree-lower-bound
 kind: theorem
 title: "OR has a square-root approximate-degree lower bound and corresponding query lower bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

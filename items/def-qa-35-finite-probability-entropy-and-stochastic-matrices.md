@@ -2,7 +2,7 @@
 id: def-qa-35-finite-probability-entropy-and-stochastic-matrices
 kind: definition
 title: "Finite distributions, entropy, divergence, and stochastic matrices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

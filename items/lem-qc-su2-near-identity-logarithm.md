@@ -2,7 +2,7 @@
 id: lem-qc-su2-near-identity-logarithm
 kind: lemma
 title: A Quantitative Logarithm Near the Identity in SU(2)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

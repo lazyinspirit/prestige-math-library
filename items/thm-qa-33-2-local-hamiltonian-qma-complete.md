@@ -2,7 +2,7 @@
 id: thm-qa-33-2-local-hamiltonian-qma-complete
 kind: theorem
 title: 2-Local Hamiltonian is QMA-complete
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

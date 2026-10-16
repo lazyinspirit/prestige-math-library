@@ -2,7 +2,7 @@
 id: lem-qc-r-y-r-z-multiplexor-gray-code
 kind: lemma
 title: "Exact Gray-code synthesis of multiplexed y- and z-axis rotations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-one-qubit-gate-alphabet-and-rotations, def-qc-pauli-matrices, thm-qc-axis-rotation-pauli-formula, def-qc-cnot-and-control-target-order, def-qc-circuit-syntax-and-register-order, def-qc-circuit-denotational-semantics, def-qc-elementary-circuit-resources, def-qc-ordered-bitstring-encoding, def-qc-tensor-register-and-permutation, lem-qc-local-gate-wire-embedding]

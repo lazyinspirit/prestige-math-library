@@ -1,7 +1,7 @@
 ---
 page: clifford-t-exact-and-approximate-synthesis-examples
 title: Clifford+T Exact and Approximate Synthesis — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qc-clifford-t-exact-period-and-phase

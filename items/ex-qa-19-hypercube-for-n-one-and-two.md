@@ -2,7 +2,7 @@
 id: ex-qa-19-hypercube-for-n-one-and-two
 kind: example
 title: Small hypercube transfer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

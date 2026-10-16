@@ -2,7 +2,7 @@
 id: thm-qa-simon-recovery-correctness-and-query-bound
 kind: theorem
 title: "Simon recovery succeeds with probability at least 1-delta"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23

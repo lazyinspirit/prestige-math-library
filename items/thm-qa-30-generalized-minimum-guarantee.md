@@ -2,7 +2,7 @@
 id: thm-qa-30-generalized-minimum-guarantee
 kind: theorem
 title: Quantile minimum and coherent-score nondomination guarantee
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

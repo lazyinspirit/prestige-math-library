@@ -2,7 +2,7 @@
 id: lem-qc-graph-state-stabilizer-generators
 kind: lemma
 title: "Graph-state stabilizer generators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-graph-state, def-qc-controlled-phase-rotation, def-qc-binary-adjacency-matrix, def-qc-pauli-matrices, def-qc-phase-aware-n-qubit-pauli-group, thm-qc-pauli-commutator-is-symplectic-pairing, lem-qc-graph-state-edge-gates-commute]

@@ -1,7 +1,7 @@
 ---
 page: quantum-signal-processing
 title: Quantum Signal Processing
-status: draft
+status: published
 items: [lem-qa-23-polynomial-interval-sign-certificate, lem-qa-23-sturm-root-counting, lem-qa-23-exact-interval-boundedness-decision, alg-qa-23-polynomial-root-isolation, thm-qa-23-polynomial-root-isolation-correctness, alg-qa-23-bounded-height-numerical-roots, thm-qa-23-bounded-height-root-arithmetic-cost, def-qa-23-qsp-signal-sequence, alg-qa-23-certified-phase-approximation, def-qa-23-qsp-admissible-polynomial-pair, lem-qa-23-hermitian-signal-convention-conversion, lem-qa-23-phase-sequence-unitarity, lem-qa-23-positive-polynomial-complement-factorization, thm-qa-23-certified-phase-approximation-correctness, thm-qa-23-qsp-phase-factorization, thm-qa-23-real-polynomial-completion, lem-qa-23-qsp-completion-peel-arithmetic-cost, alg-qa-23-qsp-phase-synthesis, thm-qa-23-qsp-phase-implementation-error, thm-qa-23-qsp-query-cost, thm-qa-23-qsp-synthesis-correctness]
 examples: []
 requires:

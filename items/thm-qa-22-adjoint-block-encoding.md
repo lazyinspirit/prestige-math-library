@@ -2,7 +2,7 @@
 id: thm-qa-22-adjoint-block-encoding
 kind: theorem
 title: Adjoint block encoding from inverse access
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 12

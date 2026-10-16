@@ -2,7 +2,7 @@
 id: def-qc-quantum-code-isometry-and-code-projector
 kind: definition
 title: Quantum code as an isometric encoding and its code projector
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 2

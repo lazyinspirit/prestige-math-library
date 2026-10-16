@@ -2,7 +2,7 @@
 id: thm-qa-23-certified-phase-approximation-correctness
 kind: theorem
 title: Correctness and arithmetic resource bound for buffered phase approximation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 9

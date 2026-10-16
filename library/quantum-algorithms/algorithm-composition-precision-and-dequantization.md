@@ -1,7 +1,7 @@
 ---
 page: algorithm-composition-precision-and-dequantization
 title: Algorithm Composition, Precision Budgets, and Dequantization
-status: draft
+status: published
 items:
   - def-qa-34-threshold-band-svd-target
   - thm-qa-34-best-frobenius-rank-k-approximation

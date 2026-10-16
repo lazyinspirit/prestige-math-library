@@ -2,7 +2,7 @@
 id: lem-qc-borrowed-bit-multicontrolled-x-linear
 kind: lemma
 title: Linear Multicontrolled X with One Borrowed Wire
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

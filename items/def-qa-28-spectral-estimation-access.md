@@ -2,7 +2,7 @@
 id: def-qa-28-spectral-estimation-access
 kind: definition
 title: Eigenvalue-estimation access and aliasing convention
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 12

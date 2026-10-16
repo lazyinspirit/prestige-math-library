@@ -2,7 +2,7 @@
 id: thm-qa-18-reversible-search-cost
 kind: theorem
 title: "Finite reversible-walk finding cost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

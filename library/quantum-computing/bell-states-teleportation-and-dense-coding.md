@@ -1,7 +1,7 @@
 ---
 page: bell-states-teleportation-and-dense-coding
 title: Bell States, Teleportation, and Dense Coding
-status: draft
+status: published
 items:
   - def-qc-bell-basis
   - thm-qc-bell-transform-inverse

@@ -2,7 +2,7 @@
 id: lem-qa-16-effective-spectral-gap
 kind: lemma
 title: Effective spectral gap for a product of two reflections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

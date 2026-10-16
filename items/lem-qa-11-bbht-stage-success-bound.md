@@ -2,7 +2,7 @@
 id: lem-qa-11-bbht-stage-success-bound
 kind: lemma
 title: Constant BBHT stage success beyond the threshold scale
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23

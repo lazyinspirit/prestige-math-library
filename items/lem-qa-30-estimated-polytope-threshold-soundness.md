@@ -2,7 +2,7 @@
 id: lem-qa-30-estimated-polytope-threshold-soundness
 kind: lemma
 title: Estimated SDP polytopes and sound bounded-dual threshold exclusion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 6

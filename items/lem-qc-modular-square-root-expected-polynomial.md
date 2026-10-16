@@ -2,7 +2,7 @@
 id: lem-qc-modular-square-root-expected-polynomial
 kind: lemma
 title: Exact randomized modular square roots in expected polynomial time
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

@@ -2,7 +2,7 @@
 id: thm-qc-stabilizer-projector-and-dimension
 kind: theorem
 title: Stabilizer projector and code dimension
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

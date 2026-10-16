@@ -2,7 +2,7 @@
 id: lem-qc-optimal-cloning-worst-case-upper-bound
 kind: lemma
 title: "Optimal Cloning Worst Case Upper Bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 7

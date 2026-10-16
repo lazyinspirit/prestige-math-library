@@ -2,7 +2,7 @@
 id: ex-qa-28-exponential-polynomial
 kind: example
 title: A bounded polynomial approximation to a scaled exponential
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

@@ -2,7 +2,7 @@
 id: thm-qa-finite-abelian-subgroup-annihilator-cardinality
 kind: theorem
 title: Subgroup-annihilator cardinality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qa-finite-abelian-subgroup-annihilator, def-subgroup, def-additive-character-of-a-finite-abelian-group, cor-subgroups-of-abelian-groups-are-normal, def-quotient-group, def-index, thm-quotient-group-laws, thm-qa-finite-abelian-dual-has-same-cardinality, thm-lagrange, cor-quotient-of-an-abelian-group-is-abelian, lem-coset-membership-and-equality, thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form]

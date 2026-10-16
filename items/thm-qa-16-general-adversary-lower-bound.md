@@ -2,7 +2,7 @@
 id: thm-qa-16-general-adversary-lower-bound
 kind: theorem
 title: General adversary spectral lower bound for quantum queries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 25

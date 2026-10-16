@@ -2,7 +2,7 @@
 id: thm-qc-state-family-no-broadcasting-iff-commuting
 kind: theorem
 title: "State Family No Broadcasting Iff Commuting"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

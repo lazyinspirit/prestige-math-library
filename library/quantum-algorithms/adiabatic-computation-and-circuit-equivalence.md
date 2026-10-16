@@ -1,7 +1,7 @@
 ---
 page: adiabatic-computation-and-circuit-equivalence
 title: Adiabatic Computation and Circuit Equivalence
-status: draft
+status: published
 items:
   - thm-qa-36-finite-cheeger-bound
   - lem-qa-36-clock-penalty-gap-perturbation

@@ -2,7 +2,7 @@
 id: lem-qc-finite-ancilla-amplification-is-block-map
 kind: lemma
 title: "Finite ancilla amplification is a well-defined block map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-register-and-computational-basis, def-qc-tensor-register-and-permutation, lem-qc-tensor-product-basis-and-dimension, thm-gram-schmidt-orthonormalisation, def-dimension, def-real-and-complex-inner-product-space, def-linear-map, def-vector-space-of-linear-maps, prop-linear-maps-form-a-vector-space, cor-finite-iterated-tensor-products-represent-multilinear-maps]

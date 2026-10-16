@@ -2,7 +2,7 @@
 id: thm-qc-ray-projector-well-defined-and-bijective
 kind: theorem
 title: Ray-to-projector is well-defined and bijective
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 2

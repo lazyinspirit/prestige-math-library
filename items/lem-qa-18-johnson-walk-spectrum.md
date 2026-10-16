@@ -2,7 +2,7 @@
 id: lem-qa-18-johnson-walk-spectrum
 kind: lemma
 title: "Spectrum of the lazy Johnson walk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

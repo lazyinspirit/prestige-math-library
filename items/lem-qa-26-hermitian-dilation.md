@@ -2,7 +2,7 @@
 id: lem-qa-26-hermitian-dilation
 kind: lemma
 title: "Hermitian dilation for a rectangular linear system"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 1

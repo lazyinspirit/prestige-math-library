@@ -2,7 +2,7 @@
 id: def-qc-circuit-cost-model
 kind: definition
 title: "Circuit-family and computation cost model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

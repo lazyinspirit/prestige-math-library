@@ -2,7 +2,7 @@
 id: thm-qa-19-measurement-distribution
 kind: theorem
 title: The measurement law for a finite continuous-time walk
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 3

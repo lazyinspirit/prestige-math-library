@@ -1,7 +1,7 @@
 ---
 page: finite-abelian-fourier-analysis-examples
 title: Finite Abelian Fourier Analysis — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qa-finite-abelian-fourier-tables-and-convolution

@@ -2,7 +2,7 @@
 id: def-qa-34-threshold-band-svd-target
 kind: definition
 title: Threshold-band singular-value approximation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: alg-qa-25-qubitized-hamiltonian-simulation
 kind: algorithm
 title: Qubitized Hamiltonian simulator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

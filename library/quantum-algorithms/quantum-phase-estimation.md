@@ -1,7 +1,7 @@
 ---
 page: quantum-phase-estimation
 title: Quantum Phase Estimation
-status: draft
+status: published
 items:
   - lem-qa-phase-estimation-geometric-sum
   - lem-qa-phase-estimation-sine-chord-bounds

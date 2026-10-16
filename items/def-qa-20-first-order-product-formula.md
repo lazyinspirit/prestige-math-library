@@ -2,7 +2,7 @@
 id: def-qa-20-first-order-product-formula
 kind: definition
 title: First-order Lie product formula
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

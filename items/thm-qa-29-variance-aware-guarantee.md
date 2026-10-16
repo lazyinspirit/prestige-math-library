@@ -2,7 +2,7 @@
 id: thm-qa-29-variance-aware-guarantee
 kind: theorem
 title: "Variance-aware quantum Monte Carlo guarantee"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 26

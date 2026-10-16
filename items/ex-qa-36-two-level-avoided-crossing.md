@@ -2,7 +2,7 @@
 id: ex-qa-36-two-level-avoided-crossing
 kind: example
 title: Two-level avoided crossing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

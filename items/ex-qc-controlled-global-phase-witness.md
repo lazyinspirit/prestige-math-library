@@ -2,7 +2,7 @@
 id: ex-qc-controlled-global-phase-witness
 kind: example
 title: Controlled Global Phase Changes an X-Outcome
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

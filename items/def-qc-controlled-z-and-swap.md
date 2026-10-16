@@ -2,7 +2,7 @@
 id: def-qc-controlled-z-and-swap
 kind: definition
 title: Controlled-Z and SWAP
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

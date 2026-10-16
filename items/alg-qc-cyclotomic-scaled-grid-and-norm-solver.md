@@ -2,7 +2,7 @@
 id: alg-qc-cyclotomic-scaled-grid-and-norm-solver
 kind: algorithm
 title: Cyclotomic scaled grid and norm-equation solver
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

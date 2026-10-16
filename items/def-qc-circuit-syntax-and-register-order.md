@@ -2,7 +2,7 @@
 id: def-qc-circuit-syntax-and-register-order
 kind: definition
 title: "Finite circuit syntax and ordered wire labels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

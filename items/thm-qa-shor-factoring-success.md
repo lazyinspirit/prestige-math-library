@@ -2,7 +2,7 @@
 id: thm-qa-shor-factoring-success
 kind: theorem
 title: "Bounded-error success of Shor factoring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23

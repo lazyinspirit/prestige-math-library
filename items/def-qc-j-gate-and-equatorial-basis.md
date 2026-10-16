@@ -2,7 +2,7 @@
 id: def-qc-j-gate-and-equatorial-basis
 kind: definition
 title: "J gate and ordered equatorial measurement vectors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-one-qubit-gate-alphabet-and-rotations, def-qc-dirac-notation-conversion]

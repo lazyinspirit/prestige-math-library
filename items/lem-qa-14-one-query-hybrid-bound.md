@@ -2,7 +2,7 @@
 id: lem-qa-14-one-query-hybrid-bound
 kind: lemma
 title: One-query oracle perturbation bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 21

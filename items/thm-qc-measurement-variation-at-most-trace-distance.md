@@ -2,7 +2,7 @@
 id: thm-qc-measurement-variation-at-most-trace-distance
 kind: theorem
 title: "Measurement Variation At Most Trace Distance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

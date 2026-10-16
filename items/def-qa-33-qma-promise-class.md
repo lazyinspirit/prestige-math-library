@@ -2,7 +2,7 @@
 id: def-qa-33-qma-promise-class
 kind: definition
 title: QMA promise class with a verifier effect on witnesses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

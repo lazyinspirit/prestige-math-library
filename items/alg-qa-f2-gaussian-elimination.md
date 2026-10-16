@@ -2,7 +2,7 @@
 id: alg-qa-f2-gaussian-elimination
 kind: algorithm
 title: "Gaussian elimination over F2 for Simon recovery"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 3

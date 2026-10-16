@@ -2,7 +2,7 @@
 id: thm-qa-21-taylor-simulation-error-and-cost
 kind: theorem
 title: Segmented Taylor error and resources
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

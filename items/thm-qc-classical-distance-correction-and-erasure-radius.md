@@ -2,7 +2,7 @@
 id: thm-qc-classical-distance-correction-and-erasure-radius
 kind: theorem
 title: Classical distance gives error detection, unique decoding, and erasure recovery
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 8

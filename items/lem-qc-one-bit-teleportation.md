@@ -2,7 +2,7 @@
 id: lem-qc-one-bit-teleportation
 kind: lemma
 title: "One-bit J-gate teleportation branch identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-tensor-register-and-permutation, def-qc-tensor-map, def-qc-register-and-computational-basis, thm-qc-computational-basis-orthonormal, def-qc-pure-state-and-ray, thm-qc-ray-projector-well-defined-and-bijective, def-qc-density-operator, def-qc-one-qubit-gate-alphabet-and-rotations, def-qc-pauli-matrices, def-qc-controlled-phase-rotation, def-qc-projective-measurement, def-qc-povm-and-outcome-law, def-qc-instrument-and-conditional-state, def-qc-j-gate-and-equatorial-basis, lem-qc-j-basis-and-phase-identities, def-qc-dirac-notation-conversion, thm-qc-dirac-notation-coordinate-identity, def-trace-of-an-endomorphism, thm-trace-of-ab-equals-trace-of-ba, prop-standard-coordinate-inner-products]

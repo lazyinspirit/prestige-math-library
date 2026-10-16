@@ -2,7 +2,7 @@
 id: cex-qa-30-variational-global-optimum
 kind: counterexample
 title: "A variational circuit family may miss the optimum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

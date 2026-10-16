@@ -2,7 +2,7 @@
 id: lem-qc-rz-scaled-grid-norm-solution-exists
 kind: lemma
 title: Every Rz epsilon region contains an exact norm-solvable grid point
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

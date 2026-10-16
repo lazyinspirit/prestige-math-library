@@ -2,7 +2,7 @@
 id: thm-qc-projective-measurement-outcome-law
 kind: theorem
 title: "Projective measurement outcome weights are probabilities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-projective-measurement, def-qc-density-operator, def-non-negative-and-positive-operator, def-trace-of-an-endomorphism, prop-trace-is-linear, thm-trace-of-ab-equals-trace-of-ba, thm-non-negative-operator-characterisations]

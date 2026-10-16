@@ -2,7 +2,7 @@
 id: def-qc-oracle-full-list-circuit-family
 kind: definition
 title: "Oracle-aware full-list quantum circuit family"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 12

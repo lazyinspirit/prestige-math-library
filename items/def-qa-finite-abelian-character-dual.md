@@ -2,7 +2,7 @@
 id: def-qa-finite-abelian-character-dual
 kind: definition
 title: Dual group of a finite abelian group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-additive-character-of-a-finite-abelian-group, def-group]

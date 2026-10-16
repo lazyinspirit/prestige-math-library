@@ -2,7 +2,7 @@
 id: lem-qc-uniform-family-size-bound
 kind: lemma
 title: "A full-list uniform generator bounds circuit size and width"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

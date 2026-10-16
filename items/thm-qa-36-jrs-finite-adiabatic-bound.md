@@ -2,7 +2,7 @@
 id: thm-qa-36-jrs-finite-adiabatic-bound
 kind: theorem
 title: Finite JRS adiabatic projector bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

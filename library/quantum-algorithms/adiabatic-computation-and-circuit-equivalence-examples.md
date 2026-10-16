@@ -1,7 +1,7 @@
 ---
 page: adiabatic-computation-and-circuit-equivalence-examples
 title: Adiabatic Computation and Circuit Equivalence — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qa-36-two-level-avoided-crossing

@@ -1,7 +1,7 @@
 ---
 page: classical-and-quantum-error-correcting-codes
 title: Classical and Quantum Error-Correcting Codes
-status: draft
+status: published
 requires:
   - algebraic-extensions-degree-and-finite-fields
   - congruences-and-the-chinese-remainder-theorem

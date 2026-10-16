@@ -1,7 +1,7 @@
 ---
 page: channels-kraus-choi-and-stinespring-representations
 title: Channels, Kraus, Choi, and Stinespring Representations
-status: draft
+status: published
 items:
   - def-qc-kraus-representation
   - lem-qc-linear-isometry-adjoint-identities

@@ -1,7 +1,7 @@
 ---
 page: computational-problems-promises-and-cost-models
 title: "Computational Problems, Promises, and Cost Models"
-status: draft
+status: published
 requires:
   - uniform-circuit-families-promise-problems-and-complexity
   - the-polynomial-hierarchy-and-relativization

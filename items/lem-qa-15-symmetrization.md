@@ -2,7 +2,7 @@
 id: lem-qa-15-symmetrization
 kind: lemma
 title: "Symmetrizing a Boolean-cube polynomial gives a Hamming-weight polynomial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

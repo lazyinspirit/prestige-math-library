@@ -2,7 +2,7 @@
 id: thm-qc-bqtisp-to-ptisp-simulation
 kind: theorem
 title: "BQTISP to Derived-Basis PrTISP Simulation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

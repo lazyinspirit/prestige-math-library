@@ -2,7 +2,7 @@
 id: def-qc-pauli-measurement-branch-semantics
 kind: definition
 title: Pauli measurement branch semantics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

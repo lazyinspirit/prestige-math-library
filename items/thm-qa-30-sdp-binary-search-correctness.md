@@ -2,7 +2,7 @@
 id: thm-qa-30-sdp-binary-search-correctness
 kind: theorem
 title: Binary search converts certified SDP thresholds to additive optimization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 25

@@ -2,7 +2,7 @@
 id: lem-qa-simon-annihilator-subspace-basis
 kind: lemma
 title: "The Simon annihilator is an (n−1)-dimensional binary subspace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

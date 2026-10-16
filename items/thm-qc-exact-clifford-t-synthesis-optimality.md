@@ -2,7 +2,7 @@
 id: thm-qc-exact-clifford-t-synthesis-optimality
 kind: theorem
 title: H-count and T-count optimality of exact Clifford+T synthesis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

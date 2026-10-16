@@ -2,7 +2,7 @@
 id: ex-qc-stabilizer-x-measurement-branches
 kind: example
 title: Stabilizer measurement on $|0\rangle$ in the $X$ basis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

@@ -2,7 +2,7 @@
 id: lem-qa-11-random-iteration-average
 kind: lemma
 title: Average Grover success for a uniform integer iteration count
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23

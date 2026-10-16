@@ -2,7 +2,7 @@
 id: rem-qa-34-dequantization-scope
 kind: remark
 title: Dequantization is relative to the input access and output task
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

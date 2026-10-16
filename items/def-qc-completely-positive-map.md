@@ -2,7 +2,7 @@
 id: def-qc-completely-positive-map
 kind: definition
 title: "Completely positive maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-non-negative-and-positive-operator, lem-qc-finite-ancilla-amplification-is-block-map, def-qc-register-and-computational-basis, def-qc-tensor-register-and-permutation, def-dimension, def-real-and-complex-inner-product-space, def-linear-map, def-vector-space-of-linear-maps, prop-linear-maps-form-a-vector-space]

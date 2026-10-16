@@ -2,7 +2,7 @@
 id: lem-qc-classical-code-distance-disjoint-error-balls
 kind: lemma
 title: Hamming balls below half the code distance are disjoint
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-qa-36-jrs-finite-band-estimates
 kind: lemma
 title: Finite spectral-band derivative estimates for adiabatic paths
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

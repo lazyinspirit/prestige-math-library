@@ -2,7 +2,7 @@
 id: cex-qa-12-known-probability-is-needed-for-the-fixed-rounding-rule
 kind: counterexample
 title: "A fixed Grover iteration count can fail when a is unknown"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

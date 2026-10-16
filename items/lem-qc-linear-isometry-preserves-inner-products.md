@@ -2,7 +2,7 @@
 id: lem-qc-linear-isometry-preserves-inner-products
 kind: lemma
 title: Finite complex linear isometries preserve inner products
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

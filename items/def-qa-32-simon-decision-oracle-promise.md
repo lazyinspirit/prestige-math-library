@@ -2,7 +2,7 @@
 id: def-qa-32-simon-decision-oracle-promise
 kind: definition
 title: Simon injectivity decision promise with XOR-oracle access
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: quantum-complexity-classes-and-oracle-separations

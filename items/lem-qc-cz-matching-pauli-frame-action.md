@@ -2,7 +2,7 @@
 id: lem-qc-cz-matching-pauli-frame-action
 kind: lemma
 title: "Controlled-Z matching action on a Pauli frame"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-finite-simple-graph, def-qc-controlled-phase-rotation, def-qc-binary-adjacency-matrix, def-qc-phase-aware-n-qubit-pauli-group, def-qc-tensor-register-and-permutation]

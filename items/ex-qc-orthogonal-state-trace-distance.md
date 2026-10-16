@@ -2,7 +2,7 @@
 id: ex-qc-orthogonal-state-trace-distance
 kind: example
 title: "Trace distance of orthogonal pure states"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: alg-qa-18-szegedy-phase-detection
 kind: algorithm
 title: "Szegedy-walk marked-set detection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

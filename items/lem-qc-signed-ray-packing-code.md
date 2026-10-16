@@ -2,7 +2,7 @@
 id: lem-qc-signed-ray-packing-code
 kind: lemma
 title: QC24 Signed Ray Packing Code
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

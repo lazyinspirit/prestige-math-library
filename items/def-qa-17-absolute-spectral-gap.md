@@ -2,7 +2,7 @@
 id: def-qa-17-absolute-spectral-gap
 kind: definition
 title: "Absolute spectral gap of a finite reversible chain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-qc-register-and-computational-basis
 kind: definition
 title: "Finite registers and their ordered computational bases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

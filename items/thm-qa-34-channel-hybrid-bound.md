@@ -2,7 +2,7 @@
 id: thm-qa-34-channel-hybrid-bound
 kind: theorem
 title: Hybrid bound for a composed channel circuit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

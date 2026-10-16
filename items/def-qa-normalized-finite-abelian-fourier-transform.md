@@ -2,7 +2,7 @@
 id: def-qa-normalized-finite-abelian-fourier-transform
 kind: definition
 title: Normalized Fourier transform on a finite abelian group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qa-finite-abelian-character-dual, thm-qa-finite-abelian-dual-has-same-cardinality, def-function-space, def-finite-sum-in-a-commutative-monoid, def-rational-power, lem-rational-power-well-defined, def-order-in-a-group, def-canonical-natural, lem-of-naturals-positive]

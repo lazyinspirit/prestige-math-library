@@ -2,7 +2,7 @@
 id: ex-qa-30-vqe-and-qaoa-objectives
 kind: example
 title: "VQE and MaxCut-QAOA objective calculation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

@@ -2,7 +2,7 @@
 id: lem-qa-17-reversible-transition-self-adjoint-on-l2-pi
 kind: lemma
 title: "A finite reversible transition operator is self-adjoint on weighted L2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 2

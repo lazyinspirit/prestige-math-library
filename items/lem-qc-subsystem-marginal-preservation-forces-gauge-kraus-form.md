@@ -2,7 +2,7 @@
 id: lem-qc-subsystem-marginal-preservation-forces-gauge-kraus-form
 kind: lemma
 title: Preserving the logical marginal forces a gauge-only channel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 7

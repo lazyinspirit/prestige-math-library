@@ -2,7 +2,7 @@
 id: def-qa-13-amplitude-estimation-task
 kind: definition
 title: "Amplitude estimation and counting input/output contract"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

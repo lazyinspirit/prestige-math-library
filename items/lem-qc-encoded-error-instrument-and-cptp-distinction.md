@@ -2,7 +2,7 @@
 id: lem-qc-encoded-error-instrument-and-cptp-distinction
 kind: lemma
 title: Encoded error instruments and full-space CPTP error maps
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

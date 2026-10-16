@@ -2,7 +2,7 @@
 id: cex-qa-29-unavailable-coherent-sampler
 kind: counterexample
 title: "Sample-only access is not coherent sampler access"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 12

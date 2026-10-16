@@ -2,7 +2,7 @@
 id: thm-qa-14-optimal-search-query-complexity
 kind: theorem
 title: Bounded-error unstructured search query complexity is Theta of square root N
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 25

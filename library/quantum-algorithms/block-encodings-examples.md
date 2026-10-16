@@ -1,7 +1,7 @@
 ---
 page: block-encodings-examples
 title: Block Encodings — Examples
-status: draft
+status: published
 items: []
 examples: [ex-qa-22-product-error, ex-qa-22-two-term-lcu]
 requires:

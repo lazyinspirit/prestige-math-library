@@ -2,7 +2,7 @@
 id: def-qc-finite-outcome-probability-kernel
 kind: definition
 title: "Finite POVM outcome kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-povm-and-outcome-law, def-finite-probability-space-and-event, def-dimension, def-real-and-complex-inner-product-space, def-qc-density-operator, def-coordinate-column-and-matrix-of-a-linear-map, def-trace-of-an-endomorphism]

@@ -2,7 +2,7 @@
 id: ex-qa-35-length-eight-fingerprints
 kind: example
 title: "Finite length-eight fingerprint overlap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

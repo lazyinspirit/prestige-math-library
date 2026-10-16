@@ -2,7 +2,7 @@
 id: ex-qa-28-two-level-spectral-estimate
 kind: example
 title: Spectral distribution and phase resolution for a two-level matrix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

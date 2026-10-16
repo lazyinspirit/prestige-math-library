@@ -1,7 +1,7 @@
 ---
 page: stabilizer-css-codes-syndromes-and-procedures-examples
 title: Stabilizer and CSS Codes, Syndromes, and Procedures — Examples
-status: draft
+status: published
 requires:
   - stabilizer-css-codes-syndromes-and-procedures
 items: []

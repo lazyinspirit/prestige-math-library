@@ -2,7 +2,7 @@
 id: alg-qa-relative-probability-estimation
 kind: algorithm
 title: "Relative estimation of a promised coherent success probability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

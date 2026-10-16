@@ -1,7 +1,7 @@
 ---
 page: lcu-oblivious-amplitude-amplification-and-taylor-simulation
 title: Linear Combinations of Unitaries and Taylor Simulation
-status: draft
+status: published
 items:
   - lem-qa-21-pure-state-trace-distance-from-vector-error
   - def-qa-21-clean-ancilla-postselection

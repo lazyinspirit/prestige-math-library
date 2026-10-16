@@ -2,7 +2,7 @@
 id: thm-qa-finite-abelian-dual-has-same-cardinality
 kind: theorem
 title: A finite abelian group and its character dual have equal order
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qa-finite-abelian-character-dual, thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form, lem-qa-cyclic-group-has-n-characters, lem-qa-character-dual-of-a-product-factors, prop-order-of-finite-direct-product, thm-product-rule, def-group-isomorphism-and-automorphism, lem-inverse-of-bijective-group-homomorphism, def-order-in-a-group]

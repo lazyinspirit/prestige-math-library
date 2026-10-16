@@ -2,7 +2,7 @@
 id: def-qc-adaptive-measurement-pattern
 kind: definition
 title: "Finite open-graph adaptive measurement pattern"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-graph-state, def-qc-projective-measurement, def-qc-povm-and-outcome-law, def-qc-instrument-and-conditional-state, def-qc-circuit-syntax-and-register-order, def-qc-circuit-denotational-semantics, def-qc-classical-control-and-measurement-circuit, def-qc-elementary-circuit-resources, def-qc-tensor-register-and-permutation, def-qc-tensor-map, def-qc-pure-state-and-ray, def-qc-controlled-phase-rotation, def-qc-dirac-notation-conversion, def-qc-j-gate-and-equatorial-basis, lem-qc-j-basis-and-phase-identities]

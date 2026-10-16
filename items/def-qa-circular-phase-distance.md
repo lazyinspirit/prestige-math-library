@@ -2,7 +2,7 @@
 id: def-qa-circular-phase-distance
 kind: definition
 title: Circular phase distance modulo one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

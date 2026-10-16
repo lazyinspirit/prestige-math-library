@@ -2,7 +2,7 @@
 id: def-qc-classical-error-syndrome
 kind: definition
 title: Syndrome of a received word over a finite field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: thm-qc-quantum-distance-detects-low-weight-errors
 kind: theorem
 title: Every operator below the quantum code distance is detectable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 7

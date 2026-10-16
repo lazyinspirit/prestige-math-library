@@ -2,7 +2,7 @@
 id: thm-qc-partial-trace-positive-and-trace-preserving
 kind: theorem
 title: "The partial trace preserves non-negativity and total trace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

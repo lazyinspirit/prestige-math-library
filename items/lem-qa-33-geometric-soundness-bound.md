@@ -2,7 +2,7 @@
 id: lem-qa-33-geometric-soundness-bound
 kind: lemma
 title: Geometric soundness bound for a history Hamiltonian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

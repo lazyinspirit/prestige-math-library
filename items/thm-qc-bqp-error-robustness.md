@@ -2,7 +2,7 @@
 id: thm-qc-bqp-error-robustness
 kind: theorem
 title: "BQP is unchanged by polynomially small bounded error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

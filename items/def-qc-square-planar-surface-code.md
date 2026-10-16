@@ -2,7 +2,7 @@
 id: def-qc-square-planar-surface-code
 kind: definition
 title: Square planar surface code
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

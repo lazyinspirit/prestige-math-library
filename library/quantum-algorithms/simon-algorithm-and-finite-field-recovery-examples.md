@@ -1,7 +1,7 @@
 ---
 page: simon-algorithm-and-finite-field-recovery-examples
 title: Simon’s Algorithm and Finite-Field Recovery — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qa-simon-finite-rank-and-sampling

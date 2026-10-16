@@ -1,7 +1,7 @@
 ---
 page: knill-laflamme-recovery-and-subsystem-codes-examples
 title: Knill–Laflamme Recovery and Subsystem Codes — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qc-knill-laflamme-orthogonal-error-recovery

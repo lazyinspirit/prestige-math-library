@@ -2,7 +2,7 @@
 id: thm-qa-11-known-count-success-bound
 kind: theorem
 title: Success guarantee and boundary behavior of known-count Grover search
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 24

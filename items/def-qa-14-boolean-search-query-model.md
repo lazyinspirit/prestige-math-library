@@ -2,7 +2,7 @@
 id: def-qa-14-boolean-search-query-model
 kind: definition
 title: Boolean oracle query model for search lower bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

@@ -2,7 +2,7 @@
 id: lem-qc-positive-marginals-imply-joint-support
 kind: lemma
 title: "Positive Marginals Imply Joint Support"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

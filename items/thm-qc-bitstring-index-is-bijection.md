@@ -2,7 +2,7 @@
 id: thm-qc-bitstring-index-is-bijection
 kind: theorem
 title: "Big-endian bit-string indices are bijective"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

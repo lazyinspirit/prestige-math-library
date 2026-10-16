@@ -2,7 +2,7 @@
 id: thm-qc-discrete-alphabet-approximate-preparation-lower-bound
 kind: theorem
 title: QC24 Discrete Alphabet Approximate Preparation Lower Bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

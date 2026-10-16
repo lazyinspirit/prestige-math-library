@@ -2,7 +2,7 @@
 id: thm-qc-finite-kraus-choi-stinespring-equivalence
 kind: theorem
 title: "Finite channel, Kraus, Choi, and Stinespring equivalence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

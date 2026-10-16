@@ -2,7 +2,7 @@
 id: thm-qc-diamond-norm-ancilla-dimension-bound
 kind: theorem
 title: "Diamond Norm Ancilla Dimension Bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

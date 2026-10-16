@@ -2,7 +2,7 @@
 id: lem-qa-cyclic-group-has-n-characters
 kind: lemma
 title: A cyclic group of order n has exactly n additive characters
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qa-finite-abelian-character-dual, def-additive-character-of-a-finite-abelian-group, lem-group-homomorphism-basic-properties, lem-group-power-laws, thm-classification-of-cyclic-groups, thm-complex-nth-roots-and-roots-of-unity]

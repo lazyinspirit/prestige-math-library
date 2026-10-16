@@ -2,7 +2,7 @@
 id: thm-qa-11-bbht-expected-query-cost
 kind: theorem
 title: Expected bit-query cost of unknown-count BBHT search
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 25

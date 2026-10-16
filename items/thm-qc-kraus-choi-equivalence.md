@@ -2,7 +2,7 @@
 id: thm-qc-kraus-choi-equivalence
 kind: theorem
 title: "Kraus and Choi characterizations of complete positivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

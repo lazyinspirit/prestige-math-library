@@ -1,7 +1,7 @@
 ---
 page: pure-and-mixed-states-ensembles-and-schmidt-decomposition
 title: Pure and Mixed States, Ensembles, and Schmidt Decomposition
-status: draft
+status: published
 items:
   - def-qc-density-operator
   - def-qc-finite-positive-effect-family

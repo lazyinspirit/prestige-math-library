@@ -2,7 +2,7 @@
 id: thm-qc-hermitian-pauli-phase-criterion
 kind: theorem
 title: Hermitian Pauli phase criterion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

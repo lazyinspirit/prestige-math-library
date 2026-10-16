@@ -2,7 +2,7 @@
 id: alg-qa-34-modfkv-low-rank-description
 kind: algorithm
 title: ModFKV low-rank description procedure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

@@ -2,7 +2,7 @@
 id: thm-qa-29-classical-mc-chebyshev-baseline
 kind: theorem
 title: "Classical bounded-sample mean baseline"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 1

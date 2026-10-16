@@ -1,7 +1,7 @@
 ---
 page: discrete-quantum-walks-and-szegedy-theory-examples
 title: Discrete Quantum Walks and Szegedy Theory — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-qa-17-zero-stationary-weight

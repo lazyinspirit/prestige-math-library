@@ -2,7 +2,7 @@
 id: prop-qc-unitary-conjugation-is-channel
 kind: proposition
 title: "Unitary conjugation is a channel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

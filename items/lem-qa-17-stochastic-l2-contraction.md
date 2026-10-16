@@ -2,7 +2,7 @@
 id: lem-qa-17-stochastic-l2-contraction
 kind: lemma
 title: "Finite stationary Markov operators contract in weighted L2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 2

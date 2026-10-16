@@ -2,7 +2,7 @@
 id: thm-qa-25-bounded-error-parity-query-lower-bound
 kind: theorem
 title: Bounded-error parity query lower bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

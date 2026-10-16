@@ -2,7 +2,7 @@
 id: def-qa-15-bit-oracle-query-model
 kind: definition
 title: "Oracle-only bit-query algorithm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

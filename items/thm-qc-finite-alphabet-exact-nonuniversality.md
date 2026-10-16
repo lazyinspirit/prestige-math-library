@@ -2,7 +2,7 @@
 id: thm-qc-finite-alphabet-exact-nonuniversality
 kind: theorem
 title: QC24 Finite Alphabet Exact Nonuniversality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

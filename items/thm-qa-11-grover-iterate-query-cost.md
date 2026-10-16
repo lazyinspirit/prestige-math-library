@@ -2,7 +2,7 @@
 id: thm-qa-11-grover-iterate-query-cost
 kind: theorem
 title: One Grover iterate uses one standard bit query
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 21

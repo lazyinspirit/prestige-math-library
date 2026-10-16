@@ -2,7 +2,7 @@
 id: lem-qc-tensor-products-of-operator-matrix-units-form-a-basis
 kind: lemma
 title: "Tensor products of operator matrix units form a basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-real-and-complex-inner-product-space, def-dimension, def-linear-map, def-coordinate-column-and-matrix-of-a-linear-map, thm-unique-coordinates-with-respect-to-an-ordered-basis, def-qc-tensor-register-and-permutation, def-qc-tensor-map, lem-qc-tensor-product-basis-and-dimension]

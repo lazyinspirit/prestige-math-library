@@ -2,7 +2,7 @@
 id: lem-qc-ancilla-identities-stable-under-reference-and-mixtures
 kind: lemma
 title: "Clean and dirty ancilla identities extend to references and mixed states"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

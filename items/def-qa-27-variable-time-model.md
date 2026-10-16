@@ -2,7 +2,7 @@
 id: def-qa-27-variable-time-model
 kind: definition
 title: "Coherent variable-time algorithm model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

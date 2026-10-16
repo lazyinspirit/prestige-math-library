@@ -2,7 +2,7 @@
 id: def-qa-simon-random-instance-distribution
 kind: definition
 title: "Random Simon-oracle distribution for a classical lower bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

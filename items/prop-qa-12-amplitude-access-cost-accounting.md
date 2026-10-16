@@ -2,7 +2,7 @@
 id: prop-qa-12-amplitude-access-cost-accounting
 kind: proposition
 title: "Amplitude-amplification access and resource accounting"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

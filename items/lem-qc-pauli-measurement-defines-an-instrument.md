@@ -2,7 +2,7 @@
 id: lem-qc-pauli-measurement-defines-an-instrument
 kind: lemma
 title: Pauli projectors define a finite measurement instrument
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

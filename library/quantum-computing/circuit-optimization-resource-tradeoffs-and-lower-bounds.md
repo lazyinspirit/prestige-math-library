@@ -1,7 +1,7 @@
 ---
 page: circuit-optimization-resource-tradeoffs-and-lower-bounds
 title: Circuit Optimization, Resource Tradeoffs, and Lower Bounds
-status: draft
+status: published
 items:
   - def-qc-unbounded-error-time-space-counting-model
   - lem-qc-logspace-uniform-iterated-addition-tc0

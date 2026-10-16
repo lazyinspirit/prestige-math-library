@@ -2,7 +2,7 @@
 id: thm-qa-34-classical-output-writing-lower-bound
 kind: theorem
 title: Writing an N-bit output costs at least N bit operations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

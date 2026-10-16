@@ -2,7 +2,7 @@
 id: lem-qc-basis-query-time-normalization
 kind: lemma
 title: "Time normalization of classical basis queries"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 2

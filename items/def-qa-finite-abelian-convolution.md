@@ -2,7 +2,7 @@
 id: def-qa-finite-abelian-convolution
 kind: definition
 title: Unnormalized convolution on a finite abelian group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-group, def-function-space, def-finite-sum-in-a-commutative-monoid]

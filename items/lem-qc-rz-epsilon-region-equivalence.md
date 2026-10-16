@@ -2,7 +2,7 @@
 id: lem-qc-rz-epsilon-region-equivalence
 kind: lemma
 title: The exact operator-norm epsilon region for determinant-one Rz candidates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

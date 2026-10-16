@@ -2,7 +2,7 @@
 id: thm-qa-reversible-binary-dot-product-correct-and-cost
 kind: theorem
 title: "Reversible binary dot product: correctness and exact cost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

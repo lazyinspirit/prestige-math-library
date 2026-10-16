@@ -2,7 +2,7 @@
 id: ex-qc-css-nested-code-parameters
 kind: example
 title: CSS encoding from nested binary codes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

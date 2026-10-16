@@ -2,7 +2,7 @@
 id: thm-qa-11-bbht-termination-and-success
 kind: theorem
 title: Unknown-count search halts almost surely when a marked item exists
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 24

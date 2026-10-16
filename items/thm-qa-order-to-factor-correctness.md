@@ -2,7 +2,7 @@
 id: thm-qa-order-to-factor-correctness
 kind: theorem
 title: "Order-to-factor output correctness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 22

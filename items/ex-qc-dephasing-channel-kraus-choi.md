@@ -2,7 +2,7 @@
 id: ex-qc-dephasing-channel-kraus-choi
 kind: example
 title: "Qubit dephasing channel in Kraus and Choi forms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

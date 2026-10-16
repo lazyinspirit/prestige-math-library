@@ -1,7 +1,7 @@
 ---
 page: measurements-povms-and-instruments-examples
 title: "Measurements, POVMs, and Instruments — Examples"
-status: draft
+status: published
 requires:
   - measurements-povms-and-instruments
 items: []

@@ -6,7 +6,7 @@
 
 page: finite-abelian-fourier-analysis
 title: Finite Abelian Fourier Analysis
-status: draft
+status: published
 items:
   - def-qa-finite-abelian-character-dual
   - def-qa-finite-abelian-convolution

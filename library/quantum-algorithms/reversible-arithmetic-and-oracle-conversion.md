@@ -1,7 +1,7 @@
 ---
 page: reversible-arithmetic-and-oracle-conversion
 title: "Reversible Arithmetic and Oracle Conversion"
-status: draft
+status: published
 requires:
   - computational-problems-promises-and-cost-models
   - congruences-and-the-chinese-remainder-theorem

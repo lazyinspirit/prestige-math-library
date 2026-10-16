@@ -2,7 +2,7 @@
 id: prop-qa-34-sample-inner-product-estimator
 kind: proposition
 title: Estimate an inner product from ℓ2-sampling access
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

@@ -2,7 +2,7 @@
 id: ex-qa-20-noncommuting-pauli-error
 kind: example
 title: First-order error for two Pauli terms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

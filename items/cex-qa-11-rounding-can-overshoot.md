@@ -2,7 +2,7 @@
 id: cex-qa-11-rounding-can-overshoot
 kind: counterexample
 title: A real-valued optimum is not a fractional Grover iteration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23

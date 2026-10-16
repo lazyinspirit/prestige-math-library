@@ -2,7 +2,7 @@
 id: lem-qa-14-state-distance-from-acceptance-gap
 kind: lemma
 title: Acceptance-gap lower bound on final-state distance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

@@ -1,7 +1,7 @@
 ---
 page: finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces-examples
 title: Finite-Dimensional Complex Inner-Product Spaces and Matrix Interfaces — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qc-inner-product-dirac-coordinate-check

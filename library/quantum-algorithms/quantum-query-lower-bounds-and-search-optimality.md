@@ -1,7 +1,7 @@
 ---
 page: quantum-query-lower-bounds-and-search-optimality
 title: "Quantum Query Lower Bounds and Search Optimality"
-status: draft
+status: published
 requires:
   - grover-search-and-invariant-plane-rotations
   - computational-problems-promises-and-cost-models

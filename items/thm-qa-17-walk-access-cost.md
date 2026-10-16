@@ -2,7 +2,7 @@
 id: thm-qa-17-walk-access-cost
 kind: theorem
 title: "Exact row-preparation access count for one and two walk steps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 12

@@ -2,7 +2,7 @@
 id: thm-qa-finite-abelian-hidden-subgroup-sample-law
 kind: theorem
 title: Fourier samples are uniform in the annihilator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

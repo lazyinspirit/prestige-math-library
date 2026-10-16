@@ -2,7 +2,7 @@
 id: lem-qc-graph-state-edge-gates-commute
 kind: lemma
 title: "Controlled-Z edge gates commute"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-graph-state, def-qc-controlled-phase-rotation]

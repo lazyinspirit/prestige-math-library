@@ -2,7 +2,7 @@
 id: thm-qa-rational-reconstruction-bit-cost
 kind: theorem
 title: Bit cost of phase-sample rational reconstruction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

@@ -1,7 +1,7 @@
 ---
 page: shors-factoring-algorithm
 title: Shor’s Factoring Algorithm
-status: draft
+status: published
 items:
   - alg-qa-shor-uniform-residue-sampler
   - lem-qa-crt-sign-vector-factorization

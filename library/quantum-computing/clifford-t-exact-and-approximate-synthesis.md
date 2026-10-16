@@ -1,7 +1,7 @@
 ---
 page: clifford-t-exact-and-approximate-synthesis
 title: Clifford+T Exact and Approximate Synthesis
-status: draft
+status: published
 items:
   - def-qc-dyadic-cyclotomic-ring
   - lem-qc-modular-square-root-expected-polynomial

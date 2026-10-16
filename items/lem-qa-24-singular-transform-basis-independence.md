@@ -2,7 +2,7 @@
 id: lem-qa-24-singular-transform-basis-independence
 kind: lemma
 title: Singular-value transform is independent of SVD choices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

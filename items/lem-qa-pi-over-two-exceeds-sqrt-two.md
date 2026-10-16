@@ -2,7 +2,7 @@
 id: lem-qa-pi-over-two-exceeds-sqrt-two
 kind: lemma
 title: "The half-turn constant exceeds $\\sqrt2$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

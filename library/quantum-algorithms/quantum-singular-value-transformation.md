@@ -1,7 +1,7 @@
 ---
 page: quantum-singular-value-transformation
 title: Quantum Singular-Value Transformation
-status: draft
+status: published
 items: [def-qa-24-pue-svd-data, lem-qa-24-pue-svd-invariant-subspaces, def-qa-24-singular-value-transform, alg-qa-24-qsvt, lem-qa-24-singular-transform-basis-independence, thm-qa-24-projector-phase-implementation, thm-qa-24-qsvt-query-count, thm-qa-24-qsvt-singular-space-action, lem-qa-24-qsvt-robustness-amplitude-bound, thm-qa-24-real-polynomial-extraction, thm-qa-24-qsvt-error-and-resource-bound]
 examples: []
 requires:

@@ -1,7 +1,7 @@
 ---
 page: amplitude-amplification-examples
 title: "Amplitude Amplification — Examples"
-status: draft
+status: published
 requires:
   - amplitude-amplification
 items: []

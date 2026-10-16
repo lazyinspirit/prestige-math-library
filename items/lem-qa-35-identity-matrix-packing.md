@@ -2,7 +2,7 @@
 id: lem-qa-35-identity-matrix-packing
 kind: lemma
 title: "Packing bound for separated randomized message rows"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 3

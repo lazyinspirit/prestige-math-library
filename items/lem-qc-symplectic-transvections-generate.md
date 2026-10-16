@@ -2,7 +2,7 @@
 id: lem-qc-symplectic-transvections-generate
 kind: lemma
 title: Symplectic transvections generate the binary symplectic group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

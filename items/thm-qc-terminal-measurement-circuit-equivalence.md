@@ -2,7 +2,7 @@
 id: thm-qc-terminal-measurement-circuit-equivalence
 kind: theorem
 title: "All measurements may be moved to terminal readout"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

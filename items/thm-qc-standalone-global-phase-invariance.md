@@ -2,7 +2,7 @@
 id: thm-qc-standalone-global-phase-invariance
 kind: theorem
 title: Standalone Global Phase Leaves Pure-State POVM Probabilities Unchanged
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

@@ -2,7 +2,7 @@
 id: cex-qa-15-off-cube-values-are-unconstrained
 kind: counterexample
 title: "A symmetrized acceptance polynomial can exceed one between Hamming layers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

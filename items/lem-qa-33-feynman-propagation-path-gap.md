@@ -2,7 +2,7 @@
 id: lem-qa-33-feynman-propagation-path-gap
 kind: lemma
 title: Propagation kernel and path-Laplacian gap
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

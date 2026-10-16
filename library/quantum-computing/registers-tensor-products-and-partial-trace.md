@@ -1,7 +1,7 @@
 ---
 page: registers-tensor-products-and-partial-trace
 title: "Registers, Tensor Products, and Partial Trace"
-status: draft
+status: published
 items:
   - def-qc-register-and-computational-basis
   - lem-qc-trace-pairing-nondegenerate

@@ -2,7 +2,7 @@
 id: thm-qa-modular-arithmetic-cost
 kind: theorem
 title: Gate and bit cost of modular multiplication and powering
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

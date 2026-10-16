@@ -2,7 +2,7 @@
 id: lem-qc-equal-syndrome-errors-differ-by-a-codeword
 kind: lemma
 title: Equal classical syndromes imply a codeword difference
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 7

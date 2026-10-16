@@ -2,7 +2,7 @@
 id: thm-qa-30-sdp-matrix-expectation-cost
 kind: theorem
 title: "SDP matrix-expectation estimation error and cost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 25

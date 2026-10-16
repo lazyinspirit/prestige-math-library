@@ -2,7 +2,7 @@
 id: lem-qa-computational-basis-measurement-law
 kind: lemma
 title: "Computational-basis measurement weights are squared amplitudes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 3

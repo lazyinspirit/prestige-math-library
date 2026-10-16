@@ -2,7 +2,7 @@
 id: def-qc-controlled-unitary-access
 kind: definition
 title: Controlled Unitary Access
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

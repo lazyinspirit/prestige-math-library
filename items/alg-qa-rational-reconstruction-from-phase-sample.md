@@ -2,7 +2,7 @@
 id: alg-qa-rational-reconstruction-from-phase-sample
 kind: algorithm
 title: Rational reconstruction from a phase sample
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

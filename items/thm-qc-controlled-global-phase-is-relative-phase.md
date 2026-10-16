@@ -2,7 +2,7 @@
 id: thm-qc-controlled-global-phase-is-relative-phase
 kind: theorem
 title: A Controlled Global Phase Becomes a Relative Control Phase
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

@@ -2,7 +2,7 @@
 id: lem-qc-stabilizer-maximal-isotropic-self-dual
 kind: lemma
 title: A maximal stabilizer label space is self-dual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

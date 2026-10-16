@@ -2,7 +2,7 @@
 id: thm-qc-tensor-map-composition-and-adjoint
 kind: theorem
 title: "Tensor maps preserve composition, identities, and adjoints"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

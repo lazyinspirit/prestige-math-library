@@ -2,7 +2,7 @@
 id: lem-qc-hadamard-pauli-action
 kind: lemma
 title: Hadamard pauli action
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

@@ -2,7 +2,7 @@
 id: thm-qc-rz-efficient-scaled-grid-enumeration
 kind: theorem
 title: Complete scaled-grid enumeration with expected polynomial prefix cost
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

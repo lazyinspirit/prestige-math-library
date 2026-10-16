@@ -2,7 +2,7 @@
 id: lem-qa-36-history-state-ground-and-output
 kind: lemma
 title: History state and padded output
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

@@ -2,7 +2,7 @@
 id: thm-qa-29-coherent-query-cost-translation
 kind: theorem
 title: "Coherent query-to-circuit cost translation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 27

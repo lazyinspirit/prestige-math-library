@@ -2,7 +2,7 @@
 id: thm-qc-knill-laflamme-explicit-recovery
 kind: theorem
 title: An explicit syndrome recovery corrects a Knill–Laflamme error family
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 6

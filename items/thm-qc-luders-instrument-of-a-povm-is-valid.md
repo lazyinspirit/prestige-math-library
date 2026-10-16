@@ -2,7 +2,7 @@
 id: thm-qc-luders-instrument-of-a-povm-is-valid
 kind: theorem
 title: "The square-root Lüders maps form an instrument"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-povm-and-outcome-law, def-qc-instrument-and-conditional-state, thm-non-negative-square-root-exists-and-is-unique, def-qc-completely-positive-map, lem-qc-finite-ancilla-amplification-is-block-map, def-qc-tensor-register-and-permutation, lem-qc-tensor-product-basis-and-dimension, thm-gram-schmidt-orthonormalisation, def-dimension, def-trace-of-an-endomorphism, prop-trace-is-linear, thm-trace-of-ab-equals-trace-of-ba, def-vector-space-of-linear-maps, prop-linear-maps-form-a-vector-space, lem-composition-and-identity-linear-maps, def-matrix-product-and-identity-matrix, def-non-negative-and-positive-operator]

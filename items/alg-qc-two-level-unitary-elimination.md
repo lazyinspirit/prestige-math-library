@@ -2,7 +2,7 @@
 id: alg-qc-two-level-unitary-elimination
 kind: algorithm
 title: Exact Two-Level Elimination of a Unitary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 3

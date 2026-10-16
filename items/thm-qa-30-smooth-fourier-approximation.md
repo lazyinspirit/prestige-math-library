@@ -2,7 +2,7 @@
 id: thm-qa-30-smooth-fourier-approximation
 kind: theorem
 title: Certified finite smooth Fourier approximation and LCU normalization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

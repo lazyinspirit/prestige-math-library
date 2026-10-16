@@ -2,7 +2,7 @@
 id: lem-qc-two-axis-su2-generation
 kind: lemma
 title: Two Nonparallel One-Parameter Subgroups Generate SU(2) After Closure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 5

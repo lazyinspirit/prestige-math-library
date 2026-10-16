@@ -2,7 +2,7 @@
 id: lem-qa-16-query-unitary-normal-form
 kind: lemma
 title: Unitary normal form for finite bit-query algorithms without extra queries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

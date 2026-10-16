@@ -2,7 +2,7 @@
 id: ex-qa-18-element-distinctness-unique-collision
 kind: example
 title: "Unique-collision element-distinctness parameters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

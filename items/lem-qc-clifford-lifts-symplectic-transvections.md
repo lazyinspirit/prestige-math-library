@@ -2,7 +2,7 @@
 id: lem-qc-clifford-lifts-symplectic-transvections
 kind: lemma
 title: Clifford circuits lift binary symplectic transvections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

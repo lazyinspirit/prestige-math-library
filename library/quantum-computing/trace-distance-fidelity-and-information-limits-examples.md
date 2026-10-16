@@ -1,7 +1,7 @@
 ---
 page: trace-distance-fidelity-and-information-limits-examples
 title: "Trace Distance, Fidelity, and Information Limits — Examples"
-status: draft
+status: published
 requires:
   - trace-distance-fidelity-and-information-limits
 items: []

@@ -2,7 +2,7 @@
 id: def-qa-34-end-to-end-error-contract
 kind: definition
 title: End-to-end channel and output error contract
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

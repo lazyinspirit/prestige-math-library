@@ -2,7 +2,7 @@
 id: thm-qa-24-projector-phase-implementation
 kind: theorem
 title: Projector phase operations from controlled reflections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

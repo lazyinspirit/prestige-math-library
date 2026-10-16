@@ -2,7 +2,7 @@
 id: def-qa-30-classical-optimizer-interface
 kind: definition
 title: "Classical optimizer interface for hybrid algorithms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: cex-qa-32-oracle-separation-is-not-gate-separation
 kind: counterexample
 title: Simon query lower bounds do not imply explicit-input gate lower bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: quantum-complexity-classes-and-oracle-separations-examples

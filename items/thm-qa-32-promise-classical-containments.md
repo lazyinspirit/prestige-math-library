@@ -2,7 +2,7 @@
 id: thm-qa-32-promise-classical-containments
 kind: theorem
 title: PromiseP is contained in PromiseBPP and PromiseBPP in BQP
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: quantum-complexity-classes-and-oracle-separations

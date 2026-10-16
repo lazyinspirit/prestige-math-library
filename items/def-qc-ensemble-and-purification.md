@@ -2,7 +2,7 @@
 id: def-qc-ensemble-and-purification
 kind: definition
 title: Ensemble and purification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 3

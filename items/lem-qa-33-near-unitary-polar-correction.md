@@ -2,7 +2,7 @@
 id: lem-qa-33-near-unitary-polar-correction
 kind: lemma
 title: Polar correction of a near-unitary matrix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

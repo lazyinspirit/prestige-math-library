@@ -2,7 +2,7 @@
 id: def-qc-exact-recovery-of-a-quantum-code
 kind: definition
 title: Exact recovery of an encoded quantum code
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 6

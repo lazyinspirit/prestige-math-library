@@ -2,7 +2,7 @@
 id: lem-qc-dyadic-coefficient-encoding
 kind: lemma
 title: Canonical dyadic coefficient encoding
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

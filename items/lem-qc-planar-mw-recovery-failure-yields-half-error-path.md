@@ -2,7 +2,7 @@
 id: lem-qc-planar-mw-recovery-failure-yields-half-error-path
 kind: lemma
 title: "Minimum-Weight Recovery Failure Yields a Half-Error Crossing Path"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

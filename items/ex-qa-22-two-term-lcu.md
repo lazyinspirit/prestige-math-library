@@ -2,7 +2,7 @@
 id: ex-qa-22-two-term-lcu
 kind: example
 title: Two-term LCU normalization and access count
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

@@ -2,7 +2,7 @@
 id: cex-qa-14-query-parallelism-does-not-give-exponential-search
 kind: counterexample
 title: One uniform phase query gives small trace-distance advantage
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 25

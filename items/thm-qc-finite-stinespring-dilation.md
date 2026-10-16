@@ -2,7 +2,7 @@
 id: thm-qc-finite-stinespring-dilation
 kind: theorem
 title: "Every finite-dimensional channel has a finite isometric dilation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

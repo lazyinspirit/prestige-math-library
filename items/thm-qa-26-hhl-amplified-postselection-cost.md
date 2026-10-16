@@ -2,7 +2,7 @@
 id: thm-qa-26-hhl-amplified-postselection-cost
 kind: theorem
 title: "HHL capped postselection amplification cost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 21

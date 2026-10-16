@@ -2,7 +2,7 @@
 id: thm-qa-16-adversary-composition-lower-bound
 kind: theorem
 title: Nonnegative and signed adversary bounds compose from below
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 24

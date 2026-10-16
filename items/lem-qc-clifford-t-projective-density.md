@@ -2,7 +2,7 @@
 id: lem-qc-clifford-t-projective-density
 kind: lemma
 title: Clifford+T Is Dense Projectively on One Qubit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 6

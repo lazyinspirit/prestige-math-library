@@ -1,7 +1,7 @@
 ---
 page: continuous-time-quantum-walks
 title: Continuous-Time Quantum Walks
-status: draft
+status: published
 items:
   - def-qa-19-finite-matrix-dynamics
   - thm-qa-19-matrix-exponential-unitary-properties

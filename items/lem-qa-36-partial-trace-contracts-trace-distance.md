@@ -2,7 +2,7 @@
 id: lem-qa-36-partial-trace-contracts-trace-distance
 kind: lemma
 title: Partial trace contracts trace distance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 5

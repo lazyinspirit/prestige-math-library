@@ -2,7 +2,7 @@
 id: ex-qa-exact-phase-estimation
 kind: example
 title: Exact estimation of a binary phase
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

@@ -2,7 +2,7 @@
 id: thm-qa-17-discriminant-self-adjoint
 kind: theorem
 title: "The Szegedy discriminant is self-adjoint and contractive"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 3

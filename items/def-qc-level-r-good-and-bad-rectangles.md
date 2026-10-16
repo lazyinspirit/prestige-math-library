@@ -2,7 +2,7 @@
 id: def-qc-level-r-good-and-bad-rectangles
 kind: definition
 title: "Good and Bad Concatenated Rectangles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

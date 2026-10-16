@@ -2,7 +2,7 @@
 id: thm-qa-19-complete-graph-search-correctness
 kind: theorem
 title: Exact and approximate success of complete-graph continuous-time search
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

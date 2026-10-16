@@ -2,7 +2,7 @@
 id: def-qa-18-element-distinctness-johnson-walk
 kind: definition
 title: "Element-distinctness Johnson walk and value access"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

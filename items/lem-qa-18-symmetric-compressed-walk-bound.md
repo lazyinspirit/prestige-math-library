@@ -2,7 +2,7 @@
 id: lem-qa-18-symmetric-compressed-walk-bound
 kind: lemma
 title: "Spectral bound for a symmetric lazy walk killed on a marked set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

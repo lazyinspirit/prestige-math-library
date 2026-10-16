@@ -2,7 +2,7 @@
 id: lem-qa-14-cumulative-hybrid-bound
 kind: lemma
 title: Cumulative hybrid distance for a T-query algorithm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 22

@@ -2,7 +2,7 @@
 id: lem-qc-clifford-t-entry-ring
 kind: lemma
 title: Clifford+T circuit entries lie in the dyadic cyclotomic ring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

@@ -2,7 +2,7 @@
 id: lem-qa-tensor-extension-preserves-operator-norm
 kind: lemma
 title: Operator Norm Is Unchanged by Spectator Registers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

@@ -1,7 +1,7 @@
 ---
 page: adversary-methods-and-quantum-query-complexity
 title: "Adversary Methods and Quantum Query Complexity"
-status: draft
+status: published
 requires:
   - reversible-arithmetic-and-oracle-conversion
   - quantum-phase-estimation

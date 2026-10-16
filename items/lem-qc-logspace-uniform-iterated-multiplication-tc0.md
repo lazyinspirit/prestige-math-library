@@ -2,7 +2,7 @@
 id: lem-qc-logspace-uniform-iterated-multiplication-tc0
 kind: lemma
 title: "Logspace uniform iterated multiplication threshold circuits"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 1

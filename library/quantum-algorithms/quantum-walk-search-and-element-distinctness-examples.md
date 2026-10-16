@@ -1,7 +1,7 @@
 ---
 page: quantum-walk-search-and-element-distinctness-examples
 title: "Quantum-Walk Search and Element Distinctness — Examples"
-status: draft
+status: published
 items: []
 examples: [cex-qa-18-query-cost-is-not-gate-cost,
            ex-qa-18-johnson-walk-parameters,

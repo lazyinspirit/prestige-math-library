@@ -1,7 +1,7 @@
 ---
 page: shors-factoring-algorithm-examples
 title: Shor’s Factoring Algorithm — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qa-shor-factorization-of-fifteen

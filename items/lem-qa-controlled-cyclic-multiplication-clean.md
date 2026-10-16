@@ -2,7 +2,7 @@
 id: lem-qa-controlled-cyclic-multiplication-clean
 kind: lemma
 title: Clean reversible controlled multiplication by a cyclic constant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

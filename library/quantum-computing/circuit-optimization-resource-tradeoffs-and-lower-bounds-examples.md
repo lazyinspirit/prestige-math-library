@@ -1,7 +1,7 @@
 ---
 page: circuit-optimization-resource-tradeoffs-and-lower-bounds-examples
 title: Circuit Optimization, Resource Tradeoffs, and Lower Bounds — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qc-two-qubit-qsd-cnot-count

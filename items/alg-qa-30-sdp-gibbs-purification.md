@@ -2,7 +2,7 @@
 id: alg-qa-30-sdp-gibbs-purification
 kind: algorithm
 title: "Sparse-oracle Gibbs-state purification"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

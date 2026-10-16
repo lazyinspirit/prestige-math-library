@@ -1,7 +1,7 @@
 ---
 page: qubitization-and-optimal-hamiltonian-simulation-examples
 title: Qubitization and Near-Optimal Hamiltonian Simulation — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qa-25-two-dimensional-block-encoding

@@ -2,7 +2,7 @@
 id: thm-qa-34-tang-recommendation-sampler
 kind: theorem
 title: Tang's conditional recommendation sampler
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

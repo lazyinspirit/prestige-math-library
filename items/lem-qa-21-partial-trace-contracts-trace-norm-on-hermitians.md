@@ -2,7 +2,7 @@
 id: lem-qa-21-partial-trace-contracts-trace-norm-on-hermitians
 kind: lemma
 title: Partial trace contracts the trace norm on Hermitian operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

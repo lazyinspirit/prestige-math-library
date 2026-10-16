@@ -2,7 +2,7 @@
 id: thm-qa-modular-order-finding-success
 kind: theorem
 title: Success probability and repetition for modular order finding
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

@@ -2,7 +2,7 @@
 id: thm-qa-23-qsp-query-cost
 kind: theorem
 title: QSP signal-query and phase-rotation count
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 12

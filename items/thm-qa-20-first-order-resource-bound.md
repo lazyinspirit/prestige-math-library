@@ -2,7 +2,7 @@
 id: thm-qa-20-first-order-resource-bound
 kind: theorem
 title: First-order query and gate cost
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

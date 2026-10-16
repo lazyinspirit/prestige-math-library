@@ -2,7 +2,7 @@
 id: thm-qa-finite-abelian-parseval
 kind: theorem
 title: Finite abelian Parseval identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [thm-qa-finite-abelian-fourier-transform-is-unitary, def-qa-normalized-finite-abelian-fourier-transform]

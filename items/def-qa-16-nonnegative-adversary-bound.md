@@ -2,7 +2,7 @@
 id: def-qa-16-nonnegative-adversary-bound
 kind: definition
 title: Nonnegative-weight adversary bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23

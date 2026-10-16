@@ -2,7 +2,7 @@
 id: ex-qa-27-sparse-diagonal-qlsp
 kind: example
 title: "Sparse diagonal block-encoded linear system"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

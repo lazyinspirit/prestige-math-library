@@ -2,7 +2,7 @@
 id: thm-qa-15-acceptance-degree-bound
 kind: theorem
 title: "A T-query bit algorithm has an acceptance polynomial of degree at most 2T"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

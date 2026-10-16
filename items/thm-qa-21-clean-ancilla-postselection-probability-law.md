@@ -2,7 +2,7 @@
 id: thm-qa-21-clean-ancilla-postselection-probability-law
 kind: theorem
 title: Clean-ancilla postselection has normalized branch weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 5

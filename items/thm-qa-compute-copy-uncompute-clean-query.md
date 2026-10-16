@@ -2,7 +2,7 @@
 id: thm-qa-compute-copy-uncompute-clean-query
 kind: theorem
 title: "Compute-copy-uncompute yields a clean coherent function query"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

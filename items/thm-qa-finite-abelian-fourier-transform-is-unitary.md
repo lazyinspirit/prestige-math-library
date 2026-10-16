@@ -2,7 +2,7 @@
 id: thm-qa-finite-abelian-fourier-transform-is-unitary
 kind: theorem
 title: Finite abelian Fourier transform is unitary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qa-normalized-finite-abelian-fourier-transform, thm-qa-finite-abelian-dual-character-orthogonality, lem-additive-character-orthogonality-from-representation-orthogonality, thm-qa-finite-abelian-dual-has-same-cardinality, lem-finite-sum-reindexing-and-fubini, def-rational-power, lem-rational-power-laws]

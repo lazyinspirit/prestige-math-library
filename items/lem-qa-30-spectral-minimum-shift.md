@@ -2,7 +2,7 @@
 id: lem-qa-30-spectral-minimum-shift
 kind: lemma
 title: "Coherent spectral minimum and a frozen Gibbs energy shift"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

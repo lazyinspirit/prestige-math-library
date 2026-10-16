@@ -2,7 +2,7 @@
 id: def-qa-34-output-and-cost-types
 kind: definition
 title: Classical output, quantum-state output, and access costs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

@@ -2,7 +2,7 @@
 id: thm-qc-stabilizer-distance-detection-and-correction
 kind: theorem
 title: Stabilizer distance detection and correction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

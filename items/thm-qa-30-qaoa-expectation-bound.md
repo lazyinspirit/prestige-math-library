@@ -2,7 +2,7 @@
 id: thm-qa-30-qaoa-expectation-bound
 kind: theorem
 title: "QAOA objective is an expected feasible score only"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 9

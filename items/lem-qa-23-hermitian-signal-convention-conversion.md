@@ -2,7 +2,7 @@
 id: lem-qa-23-hermitian-signal-convention-conversion
 kind: lemma
 title: Hermitian-reflection and SU(2) QSP convention conversion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 8

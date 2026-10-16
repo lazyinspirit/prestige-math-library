@@ -2,7 +2,7 @@
 id: thm-qc-dual-code-dimension-and-double-dual
 kind: theorem
 title: Dimension and double-dual identity for finite-field code duals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 3

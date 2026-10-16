@@ -2,7 +2,7 @@
 id: lem-qc-four-round-verified-shor-correction
 kind: lemma
 title: A Finite Four-Round Verified Shor Correction Circuit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

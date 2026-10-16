@@ -2,7 +2,7 @@
 id: lem-qa-25-clean-subspace-unitary-hybrid
 kind: lemma
 title: Unitary hybrids on a preserved clean-work subspace
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

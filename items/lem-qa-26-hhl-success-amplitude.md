@@ -2,7 +2,7 @@
 id: lem-qa-26-hhl-success-amplitude
 kind: lemma
 title: "Ideal inverse amplitude and HHL postselection probability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 21

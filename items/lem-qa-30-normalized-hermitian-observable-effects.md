@@ -2,7 +2,7 @@
 id: lem-qa-30-normalized-hermitian-observable-effects
 kind: lemma
 title: "Normalized Hermitian observable defines a two-outcome POVM"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 3

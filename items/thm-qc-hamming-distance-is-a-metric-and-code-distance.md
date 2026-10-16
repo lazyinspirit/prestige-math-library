@@ -2,7 +2,7 @@
 id: thm-qc-hamming-distance-is-a-metric-and-code-distance
 kind: theorem
 title: Hamming distance is a metric and linear-code distance is minimum nonzero weight
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 3

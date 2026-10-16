@@ -2,7 +2,7 @@
 id: lem-qa-finite-character-values-have-unit-modulus
 kind: lemma
 title: Values of additive characters of finite abelian groups have modulus one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-additive-character-of-a-finite-abelian-group, def-order-in-a-group, lem-group-homomorphism-basic-properties, thm-complex-nth-roots-and-roots-of-unity, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]

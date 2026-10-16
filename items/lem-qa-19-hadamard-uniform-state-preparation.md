@@ -2,7 +2,7 @@
 id: lem-qa-19-hadamard-uniform-state-preparation
 kind: lemma
 title: Hadamard preparation of a uniform binary state
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

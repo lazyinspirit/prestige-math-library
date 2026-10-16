@@ -2,7 +2,7 @@
 id: alg-qa-truncated-binary-qft-circuit
 kind: algorithm
 title: Truncated binary QFT
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

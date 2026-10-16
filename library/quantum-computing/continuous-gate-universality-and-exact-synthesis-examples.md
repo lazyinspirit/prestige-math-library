@@ -1,7 +1,7 @@
 ---
 page: continuous-gate-universality-and-exact-synthesis-examples
 title: Continuous-Gate Universality and Exact Synthesis — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qc-two-level-unitary-synthesis

@@ -1,7 +1,7 @@
 ---
 page: bell-states-teleportation-and-dense-coding-examples
 title: Bell States, Teleportation, and Dense Coding — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qc-teleportation-branch-correction

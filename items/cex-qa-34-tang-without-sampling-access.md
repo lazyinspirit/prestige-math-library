@@ -2,7 +2,7 @@
 id: cex-qa-34-tang-without-sampling-access
 kind: counterexample
 title: Entry queries alone do not provide Tang's sampling access
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

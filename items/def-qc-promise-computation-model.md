@@ -2,7 +2,7 @@
 id: def-qc-promise-computation-model
 kind: definition
 title: "Finite quantum promise-computation model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

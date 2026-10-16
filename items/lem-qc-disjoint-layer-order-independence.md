@@ -2,7 +2,7 @@
 id: lem-qc-disjoint-layer-order-independence
 kind: lemma
 title: "Gates on disjoint wires commute"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

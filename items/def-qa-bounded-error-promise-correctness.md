@@ -2,7 +2,7 @@
 id: def-qa-bounded-error-promise-correctness
 kind: definition
 title: "Worst-case bounded-error correctness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

@@ -2,7 +2,7 @@
 id: thm-qa-13-relative-counting-success
 kind: theorem
 title: "Relative approximate counting success guarantee"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23

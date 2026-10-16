@@ -2,7 +2,7 @@
 id: thm-qc-schmidt-decomposition
 kind: theorem
 title: Schmidt decomposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-qc-pauli-measurement-projectors
 kind: lemma
 title: Pauli measurement projectors and total probability
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

@@ -1,7 +1,7 @@
 ---
 page: hhl-phase-estimation-linear-systems-examples
 title: "Phase-Estimation Linear-System Algorithms — Examples"
-status: draft
+status: published
 requires:
   - hhl-phase-estimation-linear-systems
 items: []

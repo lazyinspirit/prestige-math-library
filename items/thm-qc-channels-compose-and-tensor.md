@@ -2,7 +2,7 @@
 id: thm-qc-channels-compose-and-tensor
 kind: theorem
 title: "Finite-dimensional channels compose and tensor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

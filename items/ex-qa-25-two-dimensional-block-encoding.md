@@ -2,7 +2,7 @@
 id: ex-qa-25-two-dimensional-block-encoding
 kind: example
 title: Two-dimensional Hermitian block-encoding signal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

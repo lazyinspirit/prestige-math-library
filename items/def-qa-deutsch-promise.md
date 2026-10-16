@@ -2,7 +2,7 @@
 id: def-qa-deutsch-promise
 kind: definition
 title: Deutsch constant-versus-balanced promise
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

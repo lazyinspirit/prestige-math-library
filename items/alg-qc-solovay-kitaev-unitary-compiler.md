@@ -2,7 +2,7 @@
 id: alg-qc-solovay-kitaev-unitary-compiler
 kind: algorithm
 title: Solovay–Kitaev Unitary Compiler for SU(2)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 7

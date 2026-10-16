@@ -2,7 +2,7 @@
 id: thm-qc-channel-composition-hybrid-bound
 kind: theorem
 title: "Channel Composition Hybrid Bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 8

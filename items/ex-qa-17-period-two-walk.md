@@ -2,7 +2,7 @@
 id: ex-qa-17-period-two-walk
 kind: example
 title: "The two-vertex deterministic swap has absolute gap zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 5

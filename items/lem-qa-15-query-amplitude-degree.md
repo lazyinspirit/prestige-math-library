@@ -2,7 +2,7 @@
 id: lem-qa-15-query-amplitude-degree
 kind: lemma
 title: "Coherent query amplitudes have degree at most the query count"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

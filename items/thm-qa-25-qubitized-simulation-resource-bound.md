@@ -2,7 +2,7 @@
 id: thm-qa-25-qubitized-simulation-resource-bound
 kind: theorem
 title: Qubitization query and gate resources
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23

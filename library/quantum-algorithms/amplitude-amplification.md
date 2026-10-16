@@ -1,7 +1,7 @@
 ---
 page: amplitude-amplification
 title: "Amplitude Amplification"
-status: draft
+status: published
 requires:
   - computational-problems-promises-and-cost-models
   - pure-and-mixed-states-ensembles-and-schmidt-decomposition

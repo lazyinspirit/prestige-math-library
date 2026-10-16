@@ -2,7 +2,7 @@
 id: thm-qa-12-unknown-amplitude-success
 kind: theorem
 title: "Unknown-amplitude search has no false positives and halts almost surely"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

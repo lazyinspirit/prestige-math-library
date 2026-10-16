@@ -2,7 +2,7 @@
 id: thm-qa-finite-abelian-hidden-subgroup-reconstruction-success
 kind: theorem
 title: Finite abelian hidden-subgroup reconstruction succeeds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

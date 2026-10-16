@@ -1,7 +1,7 @@
 ---
 page: measurements-povms-and-instruments
 title: "Measurements, POVMs, and Instruments"
-status: draft
+status: published
 requires:
   - finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces
   - finite-probability-spaces-and-random-variables

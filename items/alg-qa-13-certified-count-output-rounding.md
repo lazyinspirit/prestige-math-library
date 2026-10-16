@@ -2,7 +2,7 @@
 id: alg-qa-13-certified-count-output-rounding
 kind: algorithm
 title: "Rational-interval rounding of a counting output"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

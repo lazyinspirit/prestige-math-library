@@ -2,7 +2,7 @@
 id: ex-qa-14-hybrid-budget-for-n-small
 kind: example
 title: Finite hybrid budget for a four-address search space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23

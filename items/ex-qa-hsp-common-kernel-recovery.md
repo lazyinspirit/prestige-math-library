@@ -2,7 +2,7 @@
 id: ex-qa-hsp-common-kernel-recovery
 kind: example
 title: Common-kernel subgroup recovery in a product of cyclic groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

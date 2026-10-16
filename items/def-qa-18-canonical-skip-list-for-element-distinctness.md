@@ -2,7 +2,7 @@
 id: def-qa-18-canonical-skip-list-for-element-distinctness
 kind: definition
 title: "Canonical hash-bucket and nested skip-list storage"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

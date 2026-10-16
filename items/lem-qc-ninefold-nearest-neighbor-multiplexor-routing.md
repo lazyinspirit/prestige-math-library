@@ -2,7 +2,7 @@
 id: lem-qc-ninefold-nearest-neighbor-multiplexor-routing
 kind: lemma
 title: "Ninefold nearest-neighbor multiplexor routing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

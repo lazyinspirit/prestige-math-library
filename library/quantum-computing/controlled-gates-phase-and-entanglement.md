@@ -1,7 +1,7 @@
 ---
 page: controlled-gates-phase-and-entanglement
 title: Controlled Gates, Phase, and Entanglement
-status: draft
+status: published
 items:
   - thm-qc-unit-vector-projector-is-density
   - def-qc-pure-state-entanglement

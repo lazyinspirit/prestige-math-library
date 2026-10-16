@@ -2,7 +2,7 @@
 id: lem-qa-30-finite-grid-quantum-subgradient
 kind: lemma
 title: "A finite-grid quantum subgradient from approximate values"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 12

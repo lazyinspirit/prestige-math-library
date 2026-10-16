@@ -1,7 +1,7 @@
 ---
 page: quantum-optimization-sdp-and-variational-algorithms
 title: Quantum Optimization, Semidefinite Programs, and Variational Algorithms
-status: draft
+status: published
 items:
 - lem-qa-30-hermitian-product-trace-real
 - lem-qa-30-positive-product-trace-nonnegative

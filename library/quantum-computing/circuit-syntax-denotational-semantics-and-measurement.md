@@ -1,7 +1,7 @@
 ---
 page: circuit-syntax-denotational-semantics-and-measurement
 title: "Circuit Syntax, Denotational Semantics, and Measurement"
-status: draft
+status: published
 requires:
   - channels-kraus-choi-and-stinespring-representations
   - controlled-gates-phase-and-entanglement

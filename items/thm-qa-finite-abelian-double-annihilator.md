@@ -2,7 +2,7 @@
 id: thm-qa-finite-abelian-double-annihilator
 kind: theorem
 title: Double annihilator returns the subgroup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qa-finite-abelian-subgroup-annihilator, def-subgroup, lem-qa-finite-abelian-annihilators-are-subgroups, thm-qa-finite-abelian-character-dual-is-finite-abelian-group, thm-qa-finite-abelian-subgroup-annihilator-cardinality, thm-qa-finite-abelian-evaluation-map-isomorphism, thm-subset-of-a-finite-set]

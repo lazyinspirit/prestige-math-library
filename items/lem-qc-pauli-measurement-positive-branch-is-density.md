@@ -2,7 +2,7 @@
 id: lem-qc-pauli-measurement-positive-branch-is-density
 kind: lemma
 title: Positive-probability Pauli branches are density operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

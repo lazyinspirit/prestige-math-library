@@ -1,7 +1,7 @@
 ---
 page: quantum-spectral-estimation-and-matrix-functions-examples
 title: Quantum Spectral Estimation and Matrix Functions — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qa-28-two-level-spectral-estimate

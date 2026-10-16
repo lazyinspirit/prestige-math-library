@@ -2,7 +2,7 @@
 id: ex-qa-15-or-polynomial-small-n
 kind: example
 title: "A one-query exact algorithm on a two-point OR promise"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

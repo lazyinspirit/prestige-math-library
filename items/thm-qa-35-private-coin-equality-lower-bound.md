@@ -2,7 +2,7 @@
 id: thm-qa-35-private-coin-equality-lower-bound
 kind: theorem
 title: "Private-coin SMP equality requires Ω(√n) bits"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

@@ -2,7 +2,7 @@
 id: lem-qc-irrational-rotation-dense-on-circle
 kind: lemma
 title: Powers of an Irrational Rotation Are Dense on the Circle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

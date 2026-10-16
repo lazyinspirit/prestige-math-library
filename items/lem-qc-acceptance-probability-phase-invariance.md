@@ -2,7 +2,7 @@
 id: lem-qc-acceptance-probability-phase-invariance
 kind: lemma
 title: "Acceptance is invariant under an unconditional global phase"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 12

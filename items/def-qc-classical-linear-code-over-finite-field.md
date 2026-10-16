@@ -2,7 +2,7 @@
 id: def-qc-classical-linear-code-over-finite-field
 kind: definition
 title: Classical linear code over a finite field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 1

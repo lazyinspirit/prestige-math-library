@@ -2,7 +2,7 @@
 id: prop-qa-11-known-count-preprocessing-cost
 kind: proposition
 title: Bit cost of exact known-count iteration selection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 22

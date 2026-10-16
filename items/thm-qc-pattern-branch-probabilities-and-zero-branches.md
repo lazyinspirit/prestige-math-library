@@ -2,7 +2,7 @@
 id: thm-qc-pattern-branch-probabilities-and-zero-branches
 kind: theorem
 title: "Pattern branch probabilities and zero-probability transcripts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-adaptive-measurement-pattern, def-qc-pure-state-and-ray, def-qc-density-operator, def-qc-projective-measurement, def-qc-instrument-and-conditional-state, def-qc-controlled-phase-rotation, def-qc-register-and-computational-basis, thm-qc-computational-basis-orthonormal, def-qc-tensor-register-and-permutation, def-qc-tensor-map, def-trace-of-an-endomorphism, thm-trace-of-ab-equals-trace-of-ba, def-qc-dirac-notation-conversion, thm-qc-dirac-notation-coordinate-identity, def-non-negative-and-positive-operator, thm-non-negative-operator-characterisations, def-qc-j-gate-and-equatorial-basis, lem-qc-j-basis-and-phase-identities]

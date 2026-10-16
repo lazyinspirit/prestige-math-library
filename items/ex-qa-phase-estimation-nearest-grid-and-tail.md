@@ -2,7 +2,7 @@
 id: ex-qa-phase-estimation-nearest-grid-and-tail
 kind: example
 title: Nearest-grid and tail estimates in phase estimation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

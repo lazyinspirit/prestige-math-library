@@ -2,7 +2,7 @@
 id: def-qc-graph-state
 kind: definition
 title: "Graph state of an ordered finite simple graph"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-finite-simple-graph, def-qc-register-and-computational-basis, def-qc-ordered-bitstring-encoding, def-qc-tensor-register-and-permutation, def-qc-one-qubit-gate-alphabet-and-rotations, def-qc-controlled-phase-rotation, lem-qc-local-gate-wire-embedding]

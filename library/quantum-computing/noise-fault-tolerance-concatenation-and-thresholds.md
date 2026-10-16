@@ -1,7 +1,7 @@
 ---
 page: noise-fault-tolerance-concatenation-and-thresholds
 title: "Noise, Fault Tolerance, Concatenation, and Thresholds"
-status: draft
+status: published
 items:
   - def-qc-local-stochastic-fault-set-law
   - lem-qc-local-stochastic-fault-witness-bound

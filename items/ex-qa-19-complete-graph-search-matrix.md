@@ -2,7 +2,7 @@
 id: ex-qa-19-complete-graph-search-matrix
 kind: example
 title: Complete-graph search matrix and gap
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

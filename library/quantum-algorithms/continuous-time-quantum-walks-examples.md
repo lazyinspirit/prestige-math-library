@@ -1,7 +1,7 @@
 ---
 page: continuous-time-quantum-walks-examples
 title: Continuous-Time Quantum Walks — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-qa-19-adjacency-laplacian-sign-conventions

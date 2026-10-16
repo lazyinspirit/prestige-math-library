@@ -1,7 +1,7 @@
 ---
 page: state-preparation-isometry-synthesis-and-limits
 title: State Preparation, Isometry Synthesis, and Limits
-status: draft
+status: published
 items:
   - lem-qc-open-cube-is-not-null
   - def-qc-projective-chord-distance

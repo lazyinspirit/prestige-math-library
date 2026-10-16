@@ -1,7 +1,7 @@
 ---
 page: stabilizer-circuits-and-gottesman-knill-simulation-examples
 title: Stabilizer Circuits and Gottesman–Knill Simulation — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qc-stabilizer-x-measurement-branches

@@ -2,7 +2,7 @@
 id: thm-qc-phase-kickback-from-xor-oracle
 kind: theorem
 title: "Phase kickback from an XOR oracle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

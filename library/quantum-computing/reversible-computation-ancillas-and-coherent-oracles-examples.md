@@ -1,7 +1,7 @@
 ---
 page: reversible-computation-ancillas-and-coherent-oracles-examples
 title: "Reversible Computation, Ancillas, and Coherent Oracles — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-qc-reversible-and-oracle-compute-copy-uncompute

@@ -2,7 +2,7 @@
 id: thm-qa-shor-residue-sampler-correct-and-cost
 kind: theorem
 title: "Rejection sampling is uniform, almost surely terminating, and has expected linear bit cost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

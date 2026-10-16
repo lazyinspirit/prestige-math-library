@@ -2,7 +2,7 @@
 id: thm-qc-solovay-kitaev-bit-complexity
 kind: theorem
 title: Finite-Precision Bit Complexity of the SU(2) Solovay–Kitaev Compiler
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: lem-qa-16-nonnegative-dual-overlap-upper-bound
 kind: lemma
 title: Input-distribution certificates upper-bound the nonnegative adversary value
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 24

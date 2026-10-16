@@ -2,7 +2,7 @@
 id: lem-qa-common-kernel-repetition-bound
 kind: lemma
 title: Chernoff repetition bound for common-kernel recovery
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 7

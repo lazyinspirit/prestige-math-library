@@ -2,7 +2,7 @@
 id: thm-qa-finite-abelian-hidden-subgroup-cost
 kind: theorem
 title: Finite abelian hidden-subgroup query and circuit costs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

@@ -2,7 +2,7 @@
 id: lem-qa-18-johnson-stored-data-query-access
 kind: lemma
 title: "Coherent Johnson row access with stored values"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qa-18-element-distinctness-johnson-walk, def-qc-coherent-function-oracle, def-qc-controlled-unitary-access, def-qc-inverse-unitary-access, def-qa-17-walk-access-model, thm-qa-17-walk-access-cost, thm-gram-schmidt-orthonormalisation]

@@ -2,7 +2,7 @@
 id: alg-qa-11-grover-iterate
 kind: algorithm
 title: One Grover iterate in the standard bit-query model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

@@ -2,7 +2,7 @@
 id: def-qa-18-classical-hitting-time
 kind: definition
 title: "Finite-chain hitting time and survival law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

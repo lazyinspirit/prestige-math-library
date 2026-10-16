@@ -2,7 +2,7 @@
 id: def-qa-input-encoding-and-size
 kind: definition
 title: "Input encoding and size for algorithmic tasks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 1

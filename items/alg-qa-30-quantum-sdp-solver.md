@@ -2,7 +2,7 @@
 id: alg-qa-30-quantum-sdp-solver
 kind: algorithm
 title: "Sparse-oracle quantum SDP algorithm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 26

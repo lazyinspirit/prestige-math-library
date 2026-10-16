@@ -1,7 +1,7 @@
 ---
 page: exact-oracle-algorithms-examples
 title: Exact Oracle Algorithms — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qa-exact-oracle-algorithms

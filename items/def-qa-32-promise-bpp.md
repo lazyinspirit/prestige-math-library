@@ -2,7 +2,7 @@
 id: def-qa-32-promise-bpp
 kind: definition
 title: PromiseBPP
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: quantum-complexity-classes-and-oracle-separations

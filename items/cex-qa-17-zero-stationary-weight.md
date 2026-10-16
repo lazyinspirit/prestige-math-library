@@ -2,7 +2,7 @@
 id: cex-qa-17-zero-stationary-weight
 kind: counterexample
 title: "A zero stationary weight makes the full-state similarity undefined"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 3

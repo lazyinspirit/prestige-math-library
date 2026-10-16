@@ -2,7 +2,7 @@
 id: lem-qc-computational-basis-stabilizer-tableau
 kind: lemma
 title: Computational basis states have an extended stabilizer tableau
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

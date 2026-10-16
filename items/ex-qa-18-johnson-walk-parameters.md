@@ -2,7 +2,7 @@
 id: ex-qa-18-johnson-walk-parameters
 kind: example
 title: "Small Johnson-walk spectra and marked fractions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

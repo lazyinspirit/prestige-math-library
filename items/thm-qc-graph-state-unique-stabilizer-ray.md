@@ -2,7 +2,7 @@
 id: thm-qc-graph-state-unique-stabilizer-ray
 kind: theorem
 title: "Graph state is the unique joint stabilizer ray"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-graph-state, def-qc-controlled-phase-rotation, def-qc-tensor-register-and-permutation, thm-qc-computational-basis-orthonormal, def-qc-stabilizer-subgroup, lem-qc-graph-state-stabilizer-generators, lem-qc-stabilizer-average-projector, thm-qc-stabilizer-projector-rank-and-code-dimension, def-qc-dirac-notation-conversion]

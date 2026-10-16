@@ -2,7 +2,7 @@
 id: thm-qa-30-parameter-shift-rule
 kind: theorem
 title: "Parameter-shift derivative for a Pauli generator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 8

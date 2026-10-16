@@ -2,7 +2,7 @@
 id: thm-qa-finite-abelian-coset-fourier-transform
 kind: theorem
 title: Fourier transform of a subgroup coset indicator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qa-normalized-finite-abelian-fourier-transform, def-qa-finite-abelian-subgroup-annihilator, thm-qa-finite-abelian-subgroup-annihilator-cardinality, lem-additive-character-orthogonality-from-representation-orthogonality, lem-qa-finite-character-values-have-unit-modulus, lem-finite-sum-reindexing-and-fubini, lem-complex-conjugation-and-modulus-laws, def-rational-power, lem-rational-power-well-defined, lem-rational-power-laws]

@@ -2,7 +2,7 @@
 id: def-qc-binary-clifford-tableau
 kind: definition
 title: Phase-aware binary Clifford tableau
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

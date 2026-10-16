@@ -2,7 +2,7 @@
 id: def-qa-33-feynman-kitaev-history-hamiltonian
 kind: definition
 title: Feynman–Kitaev history Hamiltonian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

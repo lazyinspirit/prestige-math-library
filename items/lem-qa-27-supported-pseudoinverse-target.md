@@ -2,7 +2,7 @@
 id: lem-qa-27-supported-pseudoinverse-target
 kind: lemma
 title: "Normalization and nonzero success weight of the supported pseudoinverse target"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

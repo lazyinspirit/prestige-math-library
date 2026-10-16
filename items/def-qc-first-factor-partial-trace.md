@@ -2,7 +2,7 @@
 id: def-qc-first-factor-partial-trace
 kind: definition
 title: Partial trace over the first tensor factor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: def-qa-35-code-fingerprint-state
 kind: definition
 title: "Code-based quantum fingerprint"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

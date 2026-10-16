@@ -2,7 +2,7 @@
 id: def-qc-stabilizer-tableau
 kind: definition
 title: Phase-aware stabilizer tableau
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

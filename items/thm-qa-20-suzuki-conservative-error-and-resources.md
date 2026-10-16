@@ -2,7 +2,7 @@
 id: thm-qa-20-suzuki-conservative-error-and-resources
 kind: theorem
 title: Higher-order product-formula error with explicit term counts
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

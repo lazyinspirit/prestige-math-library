@@ -2,7 +2,7 @@
 id: lem-qa-26-hhl-filter-geometry
 kind: lemma
 title: "The reciprocal filter defines valid three-outcome amplitudes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 1

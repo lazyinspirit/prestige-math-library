@@ -2,7 +2,7 @@
 id: thm-qa-30-mmw-regret-bound
 kind: theorem
 title: "Matrix multiplicative-weights regret bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

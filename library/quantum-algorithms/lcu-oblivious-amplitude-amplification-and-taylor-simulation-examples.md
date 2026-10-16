@@ -1,7 +1,7 @@
 ---
 page: lcu-oblivious-amplitude-amplification-and-taylor-simulation-examples
 title: Linear Combinations of Unitaries and Taylor Simulation — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qa-21-cancelling-normalization-padding

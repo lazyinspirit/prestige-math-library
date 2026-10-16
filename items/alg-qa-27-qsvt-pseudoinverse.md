@@ -2,7 +2,7 @@
 id: alg-qa-27-qsvt-pseudoinverse
 kind: algorithm
 title: QSVT regularized pseudoinverse transformation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

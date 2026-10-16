@@ -1,7 +1,7 @@
 ---
 page: computational-problems-promises-and-cost-models-examples
 title: "Computational Problems, Promises, and Cost Models — Examples"
-status: draft
+status: published
 requires:
   - computational-problems-promises-and-cost-models
 items: []

@@ -2,7 +2,7 @@
 id: ex-qa-36-two-gate-history-state
 kind: example
 title: Two-gate padded history state
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

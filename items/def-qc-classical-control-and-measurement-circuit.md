@@ -2,7 +2,7 @@
 id: def-qc-classical-control-and-measurement-circuit
 kind: definition
 title: "Finite measurement branches and classical control"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

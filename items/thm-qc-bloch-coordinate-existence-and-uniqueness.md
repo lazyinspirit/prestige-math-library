@@ -2,7 +2,7 @@
 id: thm-qc-bloch-coordinate-existence-and-uniqueness
 kind: theorem
 title: "Existence and uniqueness of Bloch coordinates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

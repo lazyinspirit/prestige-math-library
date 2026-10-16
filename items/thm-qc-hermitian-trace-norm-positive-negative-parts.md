@@ -2,7 +2,7 @@
 id: thm-qc-hermitian-trace-norm-positive-negative-parts
 kind: theorem
 title: Hermitian Trace Norm Positive Negative Parts
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 2

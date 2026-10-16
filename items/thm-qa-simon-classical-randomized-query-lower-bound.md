@@ -2,7 +2,7 @@
 id: thm-qa-simon-classical-randomized-query-lower-bound
 kind: theorem
 title: "Classical randomized Simon search needs exponential queries"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

@@ -2,7 +2,7 @@
 id: lem-qa-13-pi-rational-bounds
 kind: lemma
 title: "Rational bounds for pi used in finite schedules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

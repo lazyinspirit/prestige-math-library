@@ -2,7 +2,7 @@
 id: lem-qc-kraus-operators-of-the-identity-channel-are-scalars
 kind: lemma
 title: Kraus operators in an identity-channel representation are scalar
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 6

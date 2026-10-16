@@ -1,7 +1,7 @@
 ---
 page: uniform-circuit-families-promise-problems-and-complexity-examples
 title: "Uniform Circuit Families, Promise Problems, and Complexity — Examples"
-status: draft
+status: published
 requires:
   - uniform-circuit-families-promise-problems-and-complexity
 items: []

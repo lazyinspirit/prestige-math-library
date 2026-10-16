@@ -2,7 +2,7 @@
 id: prop-qa-11-known-count-random-gate-accounting
 kind: proposition
 title: Gate and reflection accounting for randomized known-count search
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 22

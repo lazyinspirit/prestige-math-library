@@ -2,7 +2,7 @@
 id: ex-qa-hsp-cyclic-subgroup-annihilator
 kind: example
 title: Fourier sampling for a cyclic subgroup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 18

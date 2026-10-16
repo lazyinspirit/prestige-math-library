@@ -2,7 +2,7 @@
 id: lem-qc-linear-map-agreement-on-pure-states-implies-complete-agreement
 kind: lemma
 title: Agreement on pure states implies complete agreement
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-qc-bqp-promise-class
 kind: definition
 title: "BQP for promise problems in the fixed QC14 model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

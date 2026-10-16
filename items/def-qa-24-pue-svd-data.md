@@ -2,7 +2,7 @@
 id: def-qa-24-pue-svd-data
 kind: definition
 title: Projected-unitary encoding and singular vectors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 8

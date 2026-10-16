@@ -2,7 +2,7 @@
 id: def-qc-qubit-and-bloch-representation
 kind: definition
 title: "Qubit spaces and states"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

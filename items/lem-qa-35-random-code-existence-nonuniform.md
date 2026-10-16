@@ -2,7 +2,7 @@
 id: lem-qa-35-random-code-existence-nonuniform
 kind: lemma
 title: "Random linear-size fingerprint code exists nonuniformly"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

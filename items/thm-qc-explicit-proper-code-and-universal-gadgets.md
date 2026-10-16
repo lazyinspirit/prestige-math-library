@@ -2,7 +2,7 @@
 id: thm-qc-explicit-proper-code-and-universal-gadgets
 kind: theorem
 title: "An Explicit Proper Code and Universal Fault-Tolerant Gadgets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

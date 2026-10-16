@@ -2,7 +2,7 @@
 id: def-qa-29-coherent-sampler
 kind: definition
 title: "Coherent finite sampler and observable value"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

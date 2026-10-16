@@ -1,7 +1,7 @@
 ---
 page: graph-states-and-measurement-based-computation
 title: "Graph States and Measurement-Based Computation"
-status: draft
+status: published
 items: [
   def-qc-binary-adjacency-matrix,
   def-qc-j-gate-and-equatorial-basis,

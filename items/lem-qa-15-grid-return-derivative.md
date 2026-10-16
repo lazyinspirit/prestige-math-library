@@ -2,7 +2,7 @@
 id: lem-qa-15-grid-return-derivative
 kind: lemma
 title: "Bounded integer-grid values control excursions by the derivative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-qa-35-smp-prior-message-decomposition
 kind: lemma
 title: "Conditioning on a private message separates average acceptance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 1

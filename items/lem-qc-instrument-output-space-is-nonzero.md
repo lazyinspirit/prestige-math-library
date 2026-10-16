@@ -2,7 +2,7 @@
 id: lem-qc-instrument-output-space-is-nonzero
 kind: lemma
 title: "A finite instrument with nonzero input has nonzero output space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

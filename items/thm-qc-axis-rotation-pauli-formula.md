@@ -2,7 +2,7 @@
 id: thm-qc-axis-rotation-pauli-formula
 kind: theorem
 title: "Pauli formula for an axis rotation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

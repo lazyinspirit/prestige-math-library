@@ -2,7 +2,7 @@
 id: thm-qa-30-flagged-trace-error-and-cost
 kind: theorem
 title: "Flagged Gibbs trace estimation: errors, probability floors and charged access"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23

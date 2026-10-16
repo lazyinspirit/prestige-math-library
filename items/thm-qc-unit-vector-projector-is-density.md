@@ -2,7 +2,7 @@
 id: thm-qc-unit-vector-projector-is-density
 kind: theorem
 title: A unit-vector outer product is a density operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: alg-qa-26-hhl-phase-estimation
 kind: algorithm
 title: "HHL finite sine-window phase-estimation algorithm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

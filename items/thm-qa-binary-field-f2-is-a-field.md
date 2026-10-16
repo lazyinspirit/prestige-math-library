@@ -2,7 +2,7 @@
 id: thm-qa-binary-field-f2-is-a-field
 kind: theorem
 title: "The quotient Z/2 is the binary field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 1

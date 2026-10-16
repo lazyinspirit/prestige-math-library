@@ -2,7 +2,7 @@
 id: thm-qc-two-level-gate-synthesis-correct
 kind: theorem
 title: Correctness of Gray-Path Two-Level Synthesis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

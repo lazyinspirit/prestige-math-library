@@ -2,7 +2,7 @@
 id: lem-qc-disjoint-fault-location-events-are-independent
 kind: lemma
 title: "Disjoint Fault-Location Events Are Independent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

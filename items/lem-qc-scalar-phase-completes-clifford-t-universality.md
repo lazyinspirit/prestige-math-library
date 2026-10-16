@@ -2,7 +2,7 @@
 id: lem-qc-scalar-phase-completes-clifford-t-universality
 kind: lemma
 title: An explicit scalar phase completes Clifford+T to full unitary density
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

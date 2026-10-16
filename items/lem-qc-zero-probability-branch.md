@@ -2,7 +2,7 @@
 id: lem-qc-zero-probability-branch
 kind: lemma
 title: Zero-probability Pauli measurement branch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

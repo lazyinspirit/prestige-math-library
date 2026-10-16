@@ -2,7 +2,7 @@
 id: ex-qa-finite-abelian-fourier-tables-and-convolution
 kind: example
 title: Finite abelian Fourier and convolution examples
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-additive-character-of-a-finite-abelian-group, def-subgroup, def-external-direct-product-of-groups, thm-external-direct-product-is-a-group, def-qa-finite-abelian-character-dual, thm-qa-finite-abelian-character-dual-is-finite-abelian-group, def-qa-normalized-finite-abelian-fourier-transform, def-qa-finite-abelian-convolution, def-qa-finite-abelian-subgroup-annihilator, lem-qa-cyclic-group-has-n-characters, lem-qa-character-dual-of-a-product-factors, prop-order-of-finite-direct-product, thm-product-rule, lem-qa-finite-character-values-have-unit-modulus, lem-finite-sum-reindexing-and-fubini, lem-complex-conjugation-and-modulus-laws, thm-complex-nth-roots-and-roots-of-unity, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-complex-numbers-form-a-field]

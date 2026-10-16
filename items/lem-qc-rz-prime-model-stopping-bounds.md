@@ -2,7 +2,7 @@
 id: lem-qc-rz-prime-model-stopping-bounds
 kind: lemma
 title: Conditional stopping bounds for prime-tested Rz candidates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

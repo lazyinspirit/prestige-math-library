@@ -2,7 +2,7 @@
 id: def-qc-binary-adjacency-matrix
 kind: definition
 title: "Binary adjacency matrix of an ordered finite simple graph"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-finite-simple-graph, thm-z-mod-p-is-a-field, def-finite-field-and-its-order, def-vector-space, def-matrices-over-a-commutative-ring, def-qc-ordered-bitstring-encoding]

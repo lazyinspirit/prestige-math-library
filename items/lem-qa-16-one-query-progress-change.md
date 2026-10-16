@@ -2,7 +2,7 @@
 id: lem-qa-16-one-query-progress-change
 kind: lemma
 title: One oracle call changes adversary progress by at most filtered spectral norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 24

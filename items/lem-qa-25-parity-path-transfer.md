@@ -2,7 +2,7 @@
 id: lem-qa-25-parity-path-transfer
 kind: lemma
 title: Sparse parity-path transfer and norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 1

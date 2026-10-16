@@ -2,7 +2,7 @@
 id: lem-qc-capped-prime-norm-attempt-success
 kind: lemma
 title: Certified capped norm attempts succeed on prime residuals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

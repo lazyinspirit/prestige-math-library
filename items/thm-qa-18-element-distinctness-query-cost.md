@@ -2,7 +2,7 @@
 id: thm-qa-18-element-distinctness-query-cost
 kind: theorem
 title: "Element-distinctness O(N^{2/3}) query bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

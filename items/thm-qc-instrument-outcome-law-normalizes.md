@@ -2,7 +2,7 @@
 id: thm-qc-instrument-outcome-law-normalizes
 kind: theorem
 title: "Instrument outcome weights normalize"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-instrument-and-conditional-state, def-qc-density-operator, def-trace-of-an-endomorphism, thm-non-negative-operator-characterisations, def-qc-completely-positive-map, def-non-negative-and-positive-operator]

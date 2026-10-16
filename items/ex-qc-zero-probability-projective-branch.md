@@ -2,7 +2,7 @@
 id: ex-qc-zero-probability-projective-branch
 kind: example
 title: "A projective measurement branch with probability zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [thm-qc-zero-probability-branch-has-no-conditioned-state, def-qc-projective-measurement, def-qc-povm-and-outcome-law, def-qc-instrument-and-conditional-state, thm-qc-projective-measurement-outcome-law, thm-qc-luders-instrument-of-a-povm-is-valid, def-qc-density-operator, def-non-negative-and-positive-operator, def-trace-of-an-endomorphism, thm-non-negative-square-root-exists-and-is-unique, def-dimension, def-real-and-complex-inner-product-space, prop-standard-coordinate-inner-products, def-matrix-product-and-identity-matrix, def-adjoint-of-a-linear-map-between-inner-product-spaces]

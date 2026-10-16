@@ -2,7 +2,7 @@
 id: thm-qc-two-qubit-unitary-three-cnot-synthesis
 kind: theorem
 title: Exact Three-CNOT Synthesis of Two-Qubit Unitaries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: lem-qa-21-pure-state-trace-distance-from-vector-error
 kind: lemma
 title: Pure-state trace distance is bounded by vector error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 2

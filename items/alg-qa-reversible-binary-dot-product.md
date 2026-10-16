@@ -2,7 +2,7 @@
 id: alg-qa-reversible-binary-dot-product
 kind: algorithm
 title: "Reversible binary dot-product query"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 10

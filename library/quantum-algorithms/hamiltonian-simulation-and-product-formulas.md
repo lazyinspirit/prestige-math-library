@@ -1,7 +1,7 @@
 ---
 page: hamiltonian-simulation-and-product-formulas
 title: Hamiltonian Simulation and Product Formulas
-status: draft
+status: published
 items:
   - def-qa-20-simulation-error-and-cost-model
   - def-qa-20-term-list-access-model

@@ -2,7 +2,7 @@
 id: thm-qc-full-rank-pair-no-broadcasting
 kind: theorem
 title: "Full Rank Pair No Broadcasting"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: thm-qc-teleportation-correctness-and-resource-count
 kind: theorem
 title: Teleportation correctness and resources
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

@@ -2,7 +2,7 @@
 id: thm-qc-proper-code-concatenated-threshold
 kind: theorem
 title: "Conditional Concatenated Threshold for Proper Codes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

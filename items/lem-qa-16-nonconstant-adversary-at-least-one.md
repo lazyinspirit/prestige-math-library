@@ -2,7 +2,7 @@
 id: lem-qa-16-nonconstant-adversary-at-least-one
 kind: lemma
 title: Nonconstant Boolean functions have adversary value at least one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23

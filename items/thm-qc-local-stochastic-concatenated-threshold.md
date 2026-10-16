@@ -2,7 +2,7 @@
 id: thm-qc-local-stochastic-concatenated-threshold
 kind: theorem
 title: "Concatenated Threshold Under Local-Stochastic Correlated Noise"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

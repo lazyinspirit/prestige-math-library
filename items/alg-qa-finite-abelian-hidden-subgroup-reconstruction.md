@@ -2,7 +2,7 @@
 id: alg-qa-finite-abelian-hidden-subgroup-reconstruction
 kind: algorithm
 title: Finite abelian hidden-subgroup common-kernel reconstruction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

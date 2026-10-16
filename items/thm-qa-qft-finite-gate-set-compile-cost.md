@@ -2,7 +2,7 @@
 id: thm-qa-qft-finite-gate-set-compile-cost
 kind: theorem
 title: Finite universal-gate compilation cost for the truncated QFT
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

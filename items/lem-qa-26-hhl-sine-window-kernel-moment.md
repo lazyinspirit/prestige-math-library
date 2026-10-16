@@ -2,7 +2,7 @@
 id: lem-qa-26-hhl-sine-window-kernel-moment
 kind: lemma
 title: "Second moment of the signed sine-window phase kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 12

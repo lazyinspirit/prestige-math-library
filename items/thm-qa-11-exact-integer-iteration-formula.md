@@ -2,7 +2,7 @@
 id: thm-qa-11-exact-integer-iteration-formula
 kind: theorem
 title: Exact success probability after an integer number of Grover iterates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 22

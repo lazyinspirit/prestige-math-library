@@ -2,7 +2,7 @@
 id: thm-qc-knill-laflamme-necessity
 kind: theorem
 title: Exact recovery implies the Knill–Laflamme condition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 7

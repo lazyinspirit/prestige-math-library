@@ -2,7 +2,7 @@
 id: thm-qc-rank-one-reflection-phase-and-control-sign
 kind: theorem
 title: Rank-One Reflection Is Ray-Invariant and Its Signs Differ Under Control
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

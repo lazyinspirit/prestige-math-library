@@ -2,7 +2,7 @@
 id: lem-qa-phase-estimation-tail-bound
 kind: lemma
 title: Circular-distance tail bound in phase estimation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

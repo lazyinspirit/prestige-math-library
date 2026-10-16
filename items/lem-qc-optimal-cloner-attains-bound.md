@@ -2,7 +2,7 @@
 id: lem-qc-optimal-cloner-attains-bound
 kind: lemma
 title: "Optimal Cloner Attains Bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 6

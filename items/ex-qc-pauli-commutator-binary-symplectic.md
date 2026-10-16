@@ -2,7 +2,7 @@
 id: ex-qc-pauli-commutator-binary-symplectic
 kind: example
 title: Pauli commutator and binary symplectic sign
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

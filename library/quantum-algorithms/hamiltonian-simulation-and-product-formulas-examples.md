@@ -1,7 +1,7 @@
 ---
 page: hamiltonian-simulation-and-product-formulas-examples
 title: Hamiltonian Simulation and Product Formulas — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qa-20-commuting-two-term-simulation

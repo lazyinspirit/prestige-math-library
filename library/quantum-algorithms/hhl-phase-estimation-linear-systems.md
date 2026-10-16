@@ -1,7 +1,7 @@
 ---
 page: hhl-phase-estimation-linear-systems
 title: "Phase-Estimation Linear-System Algorithms"
-status: draft
+status: published
 requires:
   - quantum-phase-estimation
   - amplitude-amplification

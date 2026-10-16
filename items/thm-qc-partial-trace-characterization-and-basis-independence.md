@@ -2,7 +2,7 @@
 id: thm-qc-partial-trace-characterization-and-basis-independence
 kind: theorem
 title: "The partial trace is characterized by the trace pairing and is basis-independent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps:

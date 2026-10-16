@@ -2,7 +2,7 @@
 id: lem-qc-fixed-arity-polynomial-cauchy-gate-decomposition
 kind: lemma
 title: Effective Exact Gate Factors for Fixed Local Unitaries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

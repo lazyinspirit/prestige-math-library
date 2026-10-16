@@ -2,7 +2,7 @@
 id: thm-qa-26-hhl-state-correctness
 kind: theorem
 title: "OP5 HHL returns the QLSP state within the requested error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23

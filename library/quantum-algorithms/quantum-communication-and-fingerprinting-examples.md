@@ -1,7 +1,7 @@
 ---
 page: quantum-communication-and-fingerprinting-examples
 title: Quantum Communication and Fingerprinting — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-qa-35-public-vs-private-randomness

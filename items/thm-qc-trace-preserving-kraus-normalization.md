@@ -2,7 +2,7 @@
 id: thm-qc-trace-preserving-kraus-normalization
 kind: theorem
 title: "Trace preservation is Kraus normalization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

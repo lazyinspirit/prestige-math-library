@@ -2,7 +2,7 @@
 id: alg-qa-shor-factoring
 kind: algorithm
 title: "Shor factoring with verified output and bounded outer retries"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

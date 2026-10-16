@@ -1,7 +1,7 @@
 ---
 page: finite-abelian-hidden-subgroup-algorithms-examples
 title: Finite Abelian Hidden-Subgroup Algorithms — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qa-hsp-common-kernel-recovery

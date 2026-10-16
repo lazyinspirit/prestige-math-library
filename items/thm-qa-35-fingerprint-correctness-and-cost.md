@@ -2,7 +2,7 @@
 id: thm-qa-35-fingerprint-correctness-and-cost
 kind: theorem
 title: "Fingerprint swap-test error and communication cost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

@@ -2,7 +2,7 @@
 id: thm-qa-13-amplitude-estimation-query-complexity
 kind: theorem
 title: "Amplitude-estimation query and precision complexity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 21

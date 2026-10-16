@@ -2,7 +2,7 @@
 id: alg-qc-two-level-gate-to-elementary-gates
 kind: algorithm
 title: Gray-Path Synthesis of a Two-Level Gate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 12

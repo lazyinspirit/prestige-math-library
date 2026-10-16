@@ -2,7 +2,7 @@
 id: thm-qa-36-circuit-to-adiabatic-simulation
 kind: theorem
 title: Circuit-to-adiabatic simulation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

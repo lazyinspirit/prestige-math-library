@@ -2,7 +2,7 @@
 id: lem-qc-detectability-is-linear-and-encoding-invariant
 kind: lemma
 title: Detectable operators form a subspace and quantum distance is well defined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 6

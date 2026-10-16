@@ -2,7 +2,7 @@
 id: lem-qc-transport-encoding-is-simple-and-size-bounded
 kind: lemma
 title: "Normalized transport encoding is a finite simple graph of bounded size"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [def-qc-normalized-transport-schedule, def-finite-simple-graph]

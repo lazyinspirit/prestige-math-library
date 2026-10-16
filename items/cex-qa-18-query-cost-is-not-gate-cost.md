@@ -2,7 +2,7 @@
 id: cex-qa-18-query-cost-is-not-gate-cost
 kind: counterexample
 title: "One oracle query can require many ordinary gates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

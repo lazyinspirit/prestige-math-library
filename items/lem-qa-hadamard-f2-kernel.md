@@ -2,7 +2,7 @@
 id: lem-qa-hadamard-f2-kernel
 kind: lemma
 title: Hadamard character sum on F_2^n
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 6

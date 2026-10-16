@@ -1,7 +1,7 @@
 ---
 page: graph-states-and-measurement-based-computation-examples
 title: "Graph States and Measurement-Based Computation — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-qc-one-edge-graph-state]
 requires:

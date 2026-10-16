@@ -2,7 +2,7 @@
 id: thm-qa-deutsch-jozsa-randomized-constant-query-upper-bound
 kind: theorem
 title: Three classical samples solve Deutsch–Jozsa with bounded error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

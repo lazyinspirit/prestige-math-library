@@ -2,7 +2,7 @@
 id: lem-qa-16-general-adversary-finite-and-attained
 kind: lemma
 title: Finite, attained general adversary value for nonconstant Boolean functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 21

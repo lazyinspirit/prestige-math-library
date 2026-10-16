@@ -2,7 +2,7 @@
 id: thm-qa-32-eqp-zqp-bqp-containments
 kind: theorem
 title: PromiseP is contained in EQP, EQP in ZQP, and ZQP in BQP
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: quantum-complexity-classes-and-oracle-separations

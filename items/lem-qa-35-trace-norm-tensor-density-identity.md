@@ -2,7 +2,7 @@
 id: lem-qa-35-trace-norm-tensor-density-identity
 kind: lemma
 title: "Trace distance is unchanged by a fixed tensor factor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

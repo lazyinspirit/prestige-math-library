@@ -2,7 +2,7 @@
 id: ex-qc-short-reed-solomon-syndrome-table
 kind: example
 title: A short Reed–Solomon code over $F_5$ and its symbol-error syndromes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 9

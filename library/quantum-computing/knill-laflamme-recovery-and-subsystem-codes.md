@@ -1,7 +1,7 @@
 ---
 page: knill-laflamme-recovery-and-subsystem-codes
 title: Knill–Laflamme Recovery and Subsystem Codes
-status: draft
+status: published
 items:
   - lem-qc-linear-map-agreement-on-pure-states-implies-complete-agreement
   - lem-qc-knill-laflamme-product-operator-matrix-units-form-a-basis

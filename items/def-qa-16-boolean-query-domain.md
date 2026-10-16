@@ -2,7 +2,7 @@
 id: def-qa-16-boolean-query-domain
 kind: definition
 title: Finite Boolean query problem and error model for adversary bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

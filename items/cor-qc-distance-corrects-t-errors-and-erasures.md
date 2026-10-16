@@ -2,7 +2,7 @@
 id: cor-qc-distance-corrects-t-errors-and-erasures
 kind: corollary
 title: Distance corrects unlocated errors and known erasures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 8

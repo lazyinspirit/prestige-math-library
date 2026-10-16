@@ -2,7 +2,7 @@
 id: thm-qa-simon-postquery-coset-state
 kind: theorem
 title: "Simon query and output measurement produce a coset pair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 19

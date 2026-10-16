@@ -2,7 +2,7 @@
 id: thm-qa-26-hhl-simulator-cost
 kind: theorem
 title: "HHL cost under direct controlled-simulation access"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 21

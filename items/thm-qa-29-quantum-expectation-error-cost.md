@@ -2,7 +2,7 @@
 id: thm-qa-29-quantum-expectation-error-cost
 kind: theorem
 title: "Quantum bounded-expectation guarantee and query cost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 24

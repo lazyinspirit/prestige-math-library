@@ -2,7 +2,7 @@
 id: thm-qa-30-quantum-membership-separation-cost
 kind: theorem
 title: "Quantum weak-separation query bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

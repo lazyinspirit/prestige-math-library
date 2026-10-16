@@ -1,7 +1,7 @@
 ---
 page: period-hidden-shift-and-number-theoretic-algorithms-examples
 title: Period, Hidden-Shift, and Number-Theoretic Algorithms — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qa-hidden-shift-dihedral-cosets

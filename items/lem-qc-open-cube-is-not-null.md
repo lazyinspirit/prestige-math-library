@@ -2,7 +2,7 @@
 id: lem-qc-open-cube-is-not-null
 kind: lemma
 title: A Nonempty Euclidean Open Set Is Not Null
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

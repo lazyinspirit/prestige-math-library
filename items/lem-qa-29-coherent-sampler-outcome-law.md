@@ -2,7 +2,7 @@
 id: lem-qa-29-coherent-sampler-outcome-law
 kind: lemma
 title: "Measurement law of a coherent sampler"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 12

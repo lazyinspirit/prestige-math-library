@@ -2,7 +2,7 @@
 id: lem-qc-adaptive-angle-pauli-frame-update
 kind: lemma
 title: "Adaptive J angle and Pauli-frame update"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 deps: [lem-qc-one-bit-teleportation, lem-qc-hadamard-pauli-action, def-qc-one-qubit-gate-alphabet-and-rotations, def-qc-pauli-matrices, def-qc-j-gate-and-equatorial-basis, lem-qc-j-basis-and-phase-identities]

@@ -2,7 +2,7 @@
 id: cex-qa-34-state-output-not-amplitude-list
 kind: counterexample
 title: Quantum-state output does not mean an amplitude list was written
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

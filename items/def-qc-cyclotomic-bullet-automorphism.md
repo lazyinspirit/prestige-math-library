@@ -2,7 +2,7 @@
 id: def-qc-cyclotomic-bullet-automorphism
 kind: definition
 title: The nontrivial real-conjugation automorphism of the eighth cyclotomic field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

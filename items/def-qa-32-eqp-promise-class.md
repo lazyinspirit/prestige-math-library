@@ -2,7 +2,7 @@
 id: def-qa-32-eqp-promise-class
 kind: definition
 title: EQP on promise problems in the QC14 model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: quantum-complexity-classes-and-oracle-separations

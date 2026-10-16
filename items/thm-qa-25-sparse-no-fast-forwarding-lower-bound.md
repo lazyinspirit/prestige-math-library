@@ -2,7 +2,7 @@
 id: thm-qa-25-sparse-no-fast-forwarding-lower-bound
 kind: theorem
 title: Sparse Hamiltonian no-fast-forwarding
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

@@ -2,7 +2,7 @@
 id: cex-qa-26-hhl-classical-vector-output
 kind: counterexample
 title: "State preparation does not print all coordinates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 3

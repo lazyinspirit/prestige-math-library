@@ -2,7 +2,7 @@
 id: thm-qa-33-pure-witness-suffices
 kind: theorem
 title: A pure witness suffices for a QMA completeness threshold
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

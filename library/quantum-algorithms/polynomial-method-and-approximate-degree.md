@@ -1,7 +1,7 @@
 ---
 page: polynomial-method-and-approximate-degree
 title: "Polynomial Method and Approximate Degree"
-status: draft
+status: published
 requires:
   - reversible-arithmetic-and-oracle-conversion
   - fundamental-trigonometric-identities

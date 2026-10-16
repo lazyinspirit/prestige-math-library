@@ -2,7 +2,7 @@
 id: thm-qa-24-qsvt-error-and-resource-bound
 kind: theorem
 title: QSVT robustness, approximation error, and resources
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

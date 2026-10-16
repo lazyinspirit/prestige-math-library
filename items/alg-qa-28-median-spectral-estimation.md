@@ -2,7 +2,7 @@
 id: alg-qa-28-median-spectral-estimation
 kind: algorithm
 title: Median-amplified spectral estimate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

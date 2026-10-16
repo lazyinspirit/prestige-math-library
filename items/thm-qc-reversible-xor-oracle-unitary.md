@@ -2,7 +2,7 @@
 id: thm-qc-reversible-xor-oracle-unitary
 kind: theorem
 title: "A total Boolean XOR oracle is unitary and involutive"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

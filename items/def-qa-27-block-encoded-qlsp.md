@@ -2,7 +2,7 @@
 id: def-qa-27-block-encoded-qlsp
 kind: definition
 title: "Block-encoded QLSP input and singular-gap promise"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 12

@@ -2,7 +2,7 @@
 id: def-qa-19-finite-matrix-dynamics
 kind: definition
 title: Finite Hermitian matrix dynamics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

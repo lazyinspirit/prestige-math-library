@@ -2,7 +2,7 @@
 id: thm-qa-phase-estimation-superposition-law
 kind: theorem
 title: Phase estimation on a superposition of eigenspaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

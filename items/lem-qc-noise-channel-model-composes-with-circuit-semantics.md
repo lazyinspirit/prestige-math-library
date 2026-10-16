@@ -2,7 +2,7 @@
 id: lem-qc-noise-channel-model-composes-with-circuit-semantics
 kind: lemma
 title: "The Local Noise Model Composes With Circuit Semantics"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

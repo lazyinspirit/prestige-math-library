@@ -2,7 +2,7 @@
 id: lem-qa-16-adversary-progress-endpoints
 kind: lemma
 title: Adversary progress at initial and bounded-error final states
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23

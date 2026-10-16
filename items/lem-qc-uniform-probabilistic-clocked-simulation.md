@@ -2,7 +2,7 @@
 id: lem-qc-uniform-probabilistic-clocked-simulation
 kind: lemma
 title: Uniform clocked simulation of encoded probabilistic machines
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 1

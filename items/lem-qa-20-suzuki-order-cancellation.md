@@ -2,7 +2,7 @@
 id: lem-qa-20-suzuki-order-cancellation
 kind: lemma
 title: Suzuki recursive cancellation of error terms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 16

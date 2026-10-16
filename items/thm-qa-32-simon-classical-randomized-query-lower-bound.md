@@ -2,7 +2,7 @@
 id: thm-qa-32-simon-classical-randomized-query-lower-bound
 kind: theorem
 title: Classical randomized Simon decision requires square-root-many queries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: quantum-complexity-classes-and-oracle-separations

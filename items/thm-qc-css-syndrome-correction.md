@@ -2,7 +2,7 @@
 id: thm-qc-css-syndrome-correction
 kind: theorem
 title: CSS syndrome correction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

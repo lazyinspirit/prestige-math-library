@@ -2,7 +2,7 @@
 id: lem-qa-cyclic-dlp-annihilator-equation
 kind: lemma
 title: Fourier annihilator equation for cyclic discrete logarithm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

@@ -2,7 +2,7 @@
 id: ex-qa-21-cancelling-normalization-padding
 kind: example
 title: Cancelling identity padding fixes the LCU scale
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

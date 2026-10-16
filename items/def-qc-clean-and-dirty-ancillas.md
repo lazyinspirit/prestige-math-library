@@ -2,7 +2,7 @@
 id: def-qc-clean-and-dirty-ancillas
 kind: definition
 title: "Clean and dirty ancillas"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: lem-qa-25-isometry-error-implies-trace-distance
 kind: lemma
 title: Clean-input isometry error bounds output trace distance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

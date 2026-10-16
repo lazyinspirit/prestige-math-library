@@ -2,7 +2,7 @@
 id: thm-qc-full-column-rank-matrix-image-has-dimension
 kind: theorem
 title: A full-column-rank matrix has image dimension equal to its number of columns
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: trace-distance-fidelity-and-information-limits
 title: "Trace Distance, Fidelity, and Information Limits"
-status: draft
+status: published
 requires:
   - channels-kraus-choi-and-stinespring-representations
   - compactness-in-metric-spaces

@@ -2,7 +2,7 @@
 id: thm-qa-18-element-distinctness-qr-access-gate-cost
 kind: theorem
 title: "Element-distinctness gate cost in the QRAM model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

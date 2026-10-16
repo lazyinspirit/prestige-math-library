@@ -2,7 +2,7 @@
 id: alg-qa-20-suzuki-recursive-product-formula
 kind: algorithm
 title: Finite higher-order Suzuki product formula
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

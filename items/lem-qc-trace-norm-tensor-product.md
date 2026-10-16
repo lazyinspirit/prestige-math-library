@@ -2,7 +2,7 @@
 id: lem-qc-trace-norm-tensor-product
 kind: lemma
 title: Trace norm of a tensor product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-qa-nonoracle-gate-cost
 kind: definition
 title: "Nonoracle quantum gate cost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 17

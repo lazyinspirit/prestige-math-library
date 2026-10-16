@@ -2,7 +2,7 @@
 id: cex-qa-16-negative-weights-matter
 kind: counterexample
 title: A nonnegative-only adversary estimate need not capture the general bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 26

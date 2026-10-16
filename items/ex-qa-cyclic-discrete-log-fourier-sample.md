@@ -2,7 +2,7 @@
 id: ex-qa-cyclic-discrete-log-fourier-sample
 kind: example
 title: A composite-order cyclic discrete-log Fourier sample
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 20

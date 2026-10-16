@@ -2,7 +2,7 @@
 id: alg-qa-21-one-step-oblivious-amplification
 kind: algorithm
 title: One-step oblivious amplitude amplification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 15

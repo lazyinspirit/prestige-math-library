@@ -2,7 +2,7 @@
 id: lem-qc-rz-candidate-norm-integer
 kind: lemma
 title: Size and residue of the Rz candidate norm integer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 page: clifford-t-exact-and-approximate-synthesis

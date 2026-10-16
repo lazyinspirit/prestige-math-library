@@ -2,7 +2,7 @@
 id: def-qc-ft-gadget-and-proper-code-contract
 kind: definition
 title: "Fault-Tolerant Gadget and Proper-Code Contract"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

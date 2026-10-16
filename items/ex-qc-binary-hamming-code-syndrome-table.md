@@ -2,7 +2,7 @@
 id: ex-qc-binary-hamming-code-syndrome-table
 kind: example
 title: The binary [7,4,3] Hamming code and its single-error syndromes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 9

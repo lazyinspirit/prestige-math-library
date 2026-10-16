@@ -2,7 +2,7 @@
 id: lem-qc-logspace-predicates-in-linear-counting-hierarchy
 kind: lemma
 title: "Logspace predicates in a fixed linear counting hierarchy level"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-qa-18-random-access-gate-model
 kind: definition
 title: "Random-access quantum-memory gate model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 9

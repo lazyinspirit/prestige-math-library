@@ -1,7 +1,7 @@
 ---
 page: approximate-universality-and-solovay-kitaev
 title: Approximate Universality and Solovay–Kitaev
-status: draft
+status: published
 items:
   - def-qc-effective-unitary-matrix-input
   - def-qc-inverse-closed-dense-su2-gate-set

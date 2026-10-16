@@ -2,7 +2,7 @@
 id: lem-qc-toffoli-clean-target-and-uncomputation
 kind: lemma
 title: "Toffoli computes into a clean target and uncomputes it"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

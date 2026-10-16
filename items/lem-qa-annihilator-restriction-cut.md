@@ -2,7 +2,7 @@
 id: lem-qa-annihilator-restriction-cut
 kind: lemma
 title: A Fourier sample cuts a larger common kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 6

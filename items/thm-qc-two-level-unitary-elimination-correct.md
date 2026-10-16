@@ -2,7 +2,7 @@
 id: thm-qc-two-level-unitary-elimination-correct
 kind: theorem
 title: Correctness and Termination of Two-Level Elimination
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 4

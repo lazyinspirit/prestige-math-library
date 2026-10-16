@@ -2,7 +2,7 @@
 id: ex-qc-two-qubit-qsd-cnot-count
 kind: example
 title: "Two-qubit QSD CNOT upper-bound instance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 13

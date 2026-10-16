@@ -2,7 +2,7 @@
 id: def-qc-code-deviation-and-spread
 kind: definition
 title: "Code Deviation and Fault Spread"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 provenance:

@@ -2,7 +2,7 @@
 id: alg-qa-21-lcu-block-encoding
 kind: algorithm
 title: LCU block encoding
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 14

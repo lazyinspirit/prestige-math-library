@@ -2,7 +2,7 @@
 id: def-qc-circuit-optimization-task
 kind: definition
 title: "Circuit Optimization Task"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 11

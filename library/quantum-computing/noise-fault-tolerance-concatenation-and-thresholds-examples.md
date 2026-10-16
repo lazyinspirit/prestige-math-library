@@ -1,7 +1,7 @@
 ---
 page: noise-fault-tolerance-concatenation-and-thresholds-examples
 title: "Noise, Fault Tolerance, Concatenation, and Thresholds — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-qc-surface-memory-bound-hypotheses

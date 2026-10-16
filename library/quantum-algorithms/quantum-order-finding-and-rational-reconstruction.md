@@ -1,7 +1,7 @@
 ---
 page: quantum-order-finding-and-rational-reconstruction
 title: Quantum Order Finding and Rational Reconstruction
-status: draft
+status: published
 items:
   - lem-qa-finite-rational-legendre-criterion
   - lem-qa-rational-reconstruction-candidate-uniqueness

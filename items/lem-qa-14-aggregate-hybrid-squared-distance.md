@@ -2,7 +2,7 @@
 id: lem-qa-14-aggregate-hybrid-squared-distance
 kind: lemma
 title: Aggregate hybrid distance budget over all marked indices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-computing-algorithms-60-2026-10-15
 dependency_level: 23
