@@ -14,6 +14,7 @@ const assert = (x,m) => { if (!x) throw Error(`required page route: ${m}`); };
 const safe = x => /^[a-zA-Z0-9_-]+$/.test(String(x ?? ''));
 const id = x => /^[a-z][a-z0-9-]*$/.test(String(x ?? ''));
 const policy = 'owner-step3-required-published-page-route-v1';
+const nativePageRoutingBasis = 'native-page-null-consumer-owner-bound-consumer-v1';
 function file(root,p) {
   assert(typeof p === 'string' && !isAbsolute(p) && !p.includes('\\'), 'invalid relative path');
   const full=resolve(root,p),rel=relative(resolve(root),full);
@@ -37,7 +38,12 @@ export function validateRequiredPageRoute(root,run,e,receipt) {
   const findings=JSON.parse(ref(root,e.findings)),report=ref(root,e.report).toString();
   assert([e.batch,`${run}-batch-${e.batch}`].includes(String(findings.batch)) && Array.isArray(findings.findings),'wrong findings batch');
   const finding=findings.findings[e.index-1];
-  assert(finding && finding.id===e.page && finding.consumer_id===e.consumer_id && finding.subject_type==='published-dependency'
+  // The authority's consumer is a routing witness, not a replacement for the
+  // native reader's subject or consumer. The page/null case requires an exact
+  // owner opt-in; its assigned consumer and dependency path are checked below.
+  const originalDependency=finding?.subject_type==='published-dependency' && finding.consumer_id===e.consumer_id;
+  const originalPage=e.routing_basis===nativePageRoutingBasis && finding?.subject_type==='page' && finding.consumer_id===null;
+  assert(finding && finding.id===e.page && (originalDependency || originalPage)
     && finding.observed_source==null && requiredPageHash(finding)===e.finding_sha256,'changed original finding');
   assert(report.includes(e.page) && report.includes(e.consumer_id),'report lacks original page/consumer');
   assert(new RegExp(`^${nativePrefix}\\.attempt-[1-9]\\d*\\.result\\.json$`).test(e.native_result.path),'wrong native attempt');
@@ -99,8 +105,8 @@ export function loadRequiredPageRoutes(root,run,batch) {
 }
 export function requiredPageCarrier(root,run,batch,finding) {
   const route=loadRequiredPageRoutes(root,run,batch).get(finding.obligation);
-  assert(route && finding.id===route.entry.page && finding.consumer_id===route.entry.consumer_id
-    && finding.subject_type==='published-dependency' && requiredPageHash(finding.owner_required_page_route)===requiredPageHash(route.binding)
+  assert(route && finding.id===route.entry.page && finding.consumer_id===route.original.consumer_id
+    && finding.subject_type===route.original.subject_type && requiredPageHash(finding.owner_required_page_route)===requiredPageHash(route.binding)
     && finding.observed_sha256===null && finding.observation_basis==='unbound' && finding.pre_sha256===undefined,'lost exact foreign-page route');
   return {file_sha256:sha(bytes(root,route.entry.current_path)),owner_required_page_route:route.binding};
 }
