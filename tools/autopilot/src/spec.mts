@@ -79,8 +79,16 @@ export function validateStages(stages: Stage[], ctx: Ctx): SpecProblem[] {
       try {
         const units = s.units(ctx).map(String);
         const owed = new Set(units);
+        // Startup/hot-reload validates the same current initial-authoring DAG.
+        // Inventory readiness and actual repair/gate execution remain strict.
+        const project = s.deferConstructionArtifactsUntilDrain === true
+          && s.id === '1-scaffold' && s.unitPrerequisitePolicy === 'priority';
+        const graphCtx: any = project || ctx.constructionSchedulingDuplicateProjection
+          || (ctx as any).scopeSchedulingProjectedSnapshot
+          ? { ...ctx, constructionSchedulingDuplicateProjection: project } : ctx;
+        if (graphCtx !== ctx) delete graphCtx.scopeSchedulingProjectedSnapshot;
         const deps = new Map(units.map(unit => [unit,
-          [...new Set(s.unitPrerequisites!(ctx, unit).map(String))].sort()]));
+          [...new Set(s.unitPrerequisites!(graphCtx, unit).map(String))].sort()]));
         for (const [unit, direct] of deps) {
           const unknown = direct.filter(dep => !owed.has(dep));
           if (unknown.length) P(s.id, `${unit} names unit prerequisite(s) not owed by the stage: ${unknown.join(', ')}`);

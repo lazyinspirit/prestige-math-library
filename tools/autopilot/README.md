@@ -33,7 +33,8 @@ gate paths run normally. This defaults off and is invalid for other stage polici
 common mathematics stages do not enable it.
 
 The same opt-in grants a fresh capability only to initial priority graph checks
-and plan generation. Their scheduling projection may retain duplicate item IDs
+and plan generation, including startup/hot-reload validation of that initial
+authoring DAG. Their scheduling projection may retain duplicate item IDs
 within one page or its validated companion, only with the same batch and explicit
 valid kind. Every raw entry and its declared/current source dependencies remain
 in the batch DAG; raw manifests and projection metadata bind the scheduling digest.
