@@ -43,3 +43,12 @@ snapshots use separate caches. Repair checks (`requireComplete: true`), actual
 readiness/artifacts, post-drain recomputation and gates receive no capability and
 still reject duplicate inventory. An unblocked scheduling graph explicitly says
 when its projection does not certify that inventory.
+
+Adopted completion reconciliation ignores local and externally live writers. It
+reads results only for missing or impossible end stamps, binds native author
+identity, attempt, coverage, ordered timestamps and immutable replay evidence,
+and leaves attempt counters and start history intact. Native engine-written tool
+receipts retain their smaller explicit schema. An old stable result cannot close
+a newer dispatch; an impossible old stamp can recover from its genuine current
+result on a later tick. Retry controls reconcile adopted success before rearming
+failed lanes. Artifact, readiness and gate completion still require their checks.

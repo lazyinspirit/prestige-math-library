@@ -193,17 +193,52 @@ export class Executor {
    *  hand (frontier-15 carried three such records all night). */
   reconcileAdopted(): void {
     const dispatches = this.state.data.dispatches ?? {};
+    const candidates = (Object.entries(dispatches) as Array<[string, any]>).filter(([key, rec]) => {
+      const start = Date.parse(rec.startedAt), end = Date.parse(rec.endedAt);
+      // Valid historical completions need no repeated result-file reads.
+      return !this.inflight.has(key)
+        && !(rec.endedAt && Number.isFinite(start) && Number.isFinite(end) && end >= start);
+    });
+    if (!candidates.length) return;
+    const live = new Set(this.liveDispatches().map(row => `${row.role}:${row.label}`));
     let stamped = 0;
-    for (const [key, rec] of Object.entries(dispatches) as Array<[string, any]>) {
-      if (rec.endedAt || this.inflight.has(key)) continue;
-      const file = join(this.config.dispatchDir, `${rec.role}-${rec.label}.result.json`);
+    for (const [, rec] of candidates) {
+      if (live.has(`${rec.role}:${rec.label}`)) continue;
+      const start = Date.parse(rec.startedAt);
+      if (!Number.isFinite(start)) continue;
+      const stem = `${rec.role}-${rec.label}`;
+      const file = join(this.config.dispatchDir, `${stem}.result.json`);
       if (!existsSync(file)) continue;
       try {
-        const result = JSON.parse(readFileSync(file, 'utf8'));
-        rec.endedAt = typeof result.ended_at === 'string' ? result.ended_at : new Date(statSync(file).mtimeMs).toISOString();
-        rec.lastExitOk = result.ok === true || result.exit_code === 0;
+        const raw = readFileSync(file, 'utf8'), result = JSON.parse(raw);
+        const end = Date.parse(result.ended_at);
+        const covers = (value: any) => Array.isArray(value)
+          && value.every((unit: any) => typeof unit === 'string')
+          ? [...new Set<string>(value)].sort() : null;
+        if (result.run !== this.config.run || result.role !== rec.role || result.label !== rec.label
+          || covers(result.covers) === null || covers(rec.covers) === null
+          || JSON.stringify(covers(result.covers)) !== JSON.stringify(covers(rec.covers))
+          || !Number.isFinite(end) || end < start) continue;
+        if (result.written_by === 'autopilot') {
+          // Native tool receipts have only identity, covers, ok and ended_at;
+          // they do not have author attempts, sessions or a started_at field.
+          if (rec.role !== 'tool' || result.ok !== true
+            || statSync(file).mtimeMs < start) continue;
+        } else {
+          const began = Date.parse(result.started_at);
+          if (!Number.isFinite(began) || began < start || end < began
+            || !Number.isInteger(result.attempt) || result.attempt !== rec.attempt
+            || !new RegExp(`^\\.attempt-${result.attempt}(?:\\.replay-\\d+)?$`).test(result.evidence_tag ?? '')
+            || typeof result.ok !== 'boolean' || !Object.hasOwn(result, 'exit_code')
+            || (result.exit_code !== null && !Number.isInteger(result.exit_code))
+            || result.ok !== (result.exit_code === 0 && !result.timed_out)) continue;
+          const immutable = join(this.config.dispatchDir, `${stem}${result.evidence_tag}.result.json`);
+          if (!existsSync(immutable) || readFileSync(immutable, 'utf8') !== raw) continue;
+        }
+        rec.endedAt = result.ended_at;
+        rec.lastExitOk = result.ok;
         stamped += 1;
-      } catch { /* an unreadable result file is not this record's to guess at */ }
+      } catch { /* an unreadable or unbound result grants no completion stamp */ }
     }
     if (stamped) {
       this.state.save();
@@ -1290,6 +1325,8 @@ export class Executor {
         break;
       }
       case 'retry': {
+        // Reconcile genuine adopted success before deciding which lanes failed.
+        this.reconcileAdopted();
         const unit = cmd.unit ? String(cmd.unit) : null;
         let armed = 0;
         let unfinished = 0;
