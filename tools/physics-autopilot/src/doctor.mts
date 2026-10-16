@@ -18,14 +18,54 @@
 // each costs hours if discovered during one.
 
 import { existsSync, readFileSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { join, resolve, dirname } from 'node:path';
+import ts from 'typescript';
 import { spawnSync } from 'node:child_process';
 
 import { validateStages } from './spec.mts';
 import { validateCodexOutputSchema } from '../../physics-support/codex-output-schema.mjs';
 import { resolveLineup } from '../../physics-support/models.mjs';
 
-const flagsOf = (s: string): string[] => [...new Set(s.match(/--[a-z-]+/g) ?? [])];
+export const flagsOf = (s: string): string[] => [...new Set(s.match(/--[A-Za-z][A-Za-z0-9_-]*/g) ?? [])];
+
+/** Inspect only named CLI entrypoints actually called by this wrapper at module
+ * scope. A dependency's other functions never define this command's flags. */
+export function commandFlagSources(file: string): string[] {
+  const source = readFileSync(file, 'utf8');
+  const ast = ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true);
+  const delegated = new Map<string, { path: string; name: string }>();
+  for (const statement of ast.statements) {
+    if (!ts.isImportDeclaration(statement) || !ts.isStringLiteral(statement.moduleSpecifier)) continue;
+    const module = statement.moduleSpecifier.text;
+    const bindings = statement.importClause?.namedBindings;
+    if (!module.startsWith('.') || !bindings || !ts.isNamedImports(bindings)) continue;
+    for (const entry of bindings.elements) {
+      const name = (entry.propertyName ?? entry.name).text;
+      if (/^run[A-Za-z0-9]*CLI$/.test(name)) delegated.set(entry.name.text, { path: resolve(dirname(file), module), name });
+    }
+  }
+  const sources = [source], called = new Set<string>();
+  const visit = (node: ts.Node) => {
+    // Calls inside helpers are not a wrapper's module-level CLI delegation.
+    if (ts.isFunctionLike(node)) return;
+    if (ts.isCallExpression(node) && ts.isIdentifier(node.expression) && delegated.has(node.expression.text)) called.add(node.expression.text);
+    ts.forEachChild(node, visit);
+  };
+  visit(ast);
+  for (const local of called) {
+    const entry = delegated.get(local)!;
+    if (!existsSync(entry.path)) continue;
+    const implementation = ts.createSourceFile(entry.path, readFileSync(entry.path, 'utf8'), ts.ScriptTarget.Latest, true);
+    const functions = implementation.statements.filter((node): node is ts.FunctionDeclaration => ts.isFunctionDeclaration(node)
+      && node.name?.text === entry.name && !!node.body && !!node.modifiers?.some(modifier => modifier.kind === ts.SyntaxKind.ExportKeyword));
+    if (functions.length === 1) sources.push(functions[0].body!.getText(implementation));
+  }
+  return sources;
+}
+
+export function commandDefinesFlag(sources: string[], flag: string): boolean {
+  return sources.some(source => flagsOf(source).includes(flag));
+}
 
 /** The identity placeholders dispatch.mjs hard-errors on, found in a prompt
  *  file. Same token grammar as the dispatcher: single lowercase letters n and
@@ -117,6 +157,7 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   // only argv[1] for gates, so a shimmed gate's flags were checked against the
   // 35-line shim; and `src.includes(f)` was a substring test, so `--fail`
   // passed on a tool that defines only `--fail-on-dead`.
+  const flagSources = new Map<string, string[]>();
   let checkedFlags = 0;
   let toolCommands = 0;
   for (const st of mod.stages) {
@@ -136,12 +177,13 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
       const sources: string[] = [];
       for (const tool of tools) {
         if (!existsSync(join(repo, tool))) { problems.push(`${where}: no such tool ${tool}`); continue; }
-        sources.push(readFileSync(join(repo, tool), 'utf8'));
+        if (!flagSources.has(tool)) flagSources.set(tool, commandFlagSources(join(repo, tool)));
+        sources.push(...flagSources.get(tool)!);
       }
       if (!sources.length) continue;
       for (const f of flagsOf(line)) {
         checkedFlags += 1;
-        const defined = sources.some((src) => new RegExp(`${f.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![A-Za-z0-9-])`).test(src));
+        const defined = commandDefinesFlag(sources, f);
         if (!defined) problems.push(`${where}: ${tools.join('/')} defines no ${f}`);
       }
     }

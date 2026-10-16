@@ -547,7 +547,10 @@ subjects remain owned even if they were added after the frozen frontier.
 Use `node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts` with the ordinary
 `plan`, `doctor`, `start`, `status`, `pause`, `resume` and `retry` commands.
 `doctor` and generated task checks can run before authoring; they do not prepare
-or spend review rounds. No stage may install new prompts beneath a live old run.
+or spend review rounds. Doctor preserves complete numeric flag names and checks
+exact tokens. For a wrapper's statically imported, module-level invoked
+`run*CLI` entrypoint, it reads only that exported function's implementation;
+uncalled imports and unrelated dependency helpers grant no flag support. No stage may install new prompts beneath a live old run.
 The new revision is `physics-six-step-v1-construction-scope`. Start a fresh run and state directory; historical
 receipts/revisions do not satisfy the rebuilt pipeline. Legacy authoring-prefix
 migration and ready-pair initial-authoring variants are not current entry routes.
