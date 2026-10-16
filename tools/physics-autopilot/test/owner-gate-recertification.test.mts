@@ -4,6 +4,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'nod
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
+import { driftOwnerResolutionTemplate, driftResolutionPath } from '../../physics-support/drift-owner-resolutions.mjs';
 import { authorizeOwnerGate, gateReviewSnapshot } from '../src/owner-gate-recertification.mjs';
 import { Executor } from '../src/executor.mts';
 import { State, statePath } from '../src/state.mts';
@@ -231,4 +232,53 @@ test('plan-only gates require separate format and metadata passes without a math
     formatting: { verdict: 'pass', evidence: 'Checked current manifest structure and page headings.' },
     metadata: { verdict: 'pass', evidence: 'Checked current page identities, kinds, classification and prerequisites.' } });
   assert.equal(authorizeOwnerGate(f.args).ok, true);
+});
+
+
+test('canonical prerequisite location permits only identical pinned category-relocation snapshots', t => {
+  const f = fixture(t);
+  const manifest = JSON.parse(readFileSync(join(f.repo, 'research/demo-batch-1.pages.json'), 'utf8'));
+  manifest[0].requires = ['external-page'];
+  writeFileSync(join(f.repo, 'research/demo-batch-1.pages.json'), JSON.stringify(manifest));
+  for (const category of ['canonical', 'legacy']) mkdirSync(join(f.repo, 'library', category));
+  const page = '---\npage: external-page\nstatus: published\nitems: []\n---\nSame mathematical page.\n';
+  const canonical = 'library/canonical/external-page.md', pinned = 'library/legacy/external-page.md';
+  writeFileSync(join(f.repo, canonical), page); writeFileSync(join(f.repo, pinned), page);
+  writeFileSync(join(f.repo, 'research/plan-spec.json'), JSON.stringify({ pages: [{ id: 'external-page', category: 'canonical', kind: 'P' }] }));
+  const source = join(f.repo, 'originals'); mkdirSync(join(source, 'library/legacy'), { recursive: true });
+  writeFileSync(join(source, pinned), page);
+  writeFileSync(join(source, 'library/legacy/_category.md'), '---\nlibrary: mathematics\n---\n');
+  writeFileSync(join(f.repo, 'research/math-imports.json'), JSON.stringify({ source_root: source, files: [{ path: pinned, sha256: sha(page) }] }));
+  const snapshot = gateReviewSnapshot(f.ctx, f.gates, f.stages);
+  for (const path of [join(f.repo, canonical), join(f.repo, pinned), join(source, pinned)]) assert.ok(snapshot.inputs.some((row: any) => row.path === path), path);
+  writeFileSync(join(f.repo, pinned), page + 'Different body.');
+  assert.throws(() => gateReviewSnapshot(f.ctx, f.gates, f.stages), /Ambiguous prerequisite/);
+  writeFileSync(join(f.repo, pinned), page);
+  writeFileSync(join(f.repo, 'research/math-imports.json'), JSON.stringify({ files: [] }));
+  assert.throws(() => gateReviewSnapshot(f.ctx, f.gates, f.stages), /Ambiguous prerequisite/);
+  writeFileSync(join(f.repo, canonical), page.replace('page: external-page', 'page: wrong-page'));
+  assert.throws(() => gateReviewSnapshot(f.ctx, f.gates, f.stages), /Wrong prerequisite page identity/);
+});
+
+test('drift owner overlay binds original native evidence and every declared resolution input', t => {
+  const f = fixture(t);
+  const page = { id: 'test-page', category: 'test', kind: 'A', order: 2, requires: [], items: [] };
+  writeFileSync(join(f.repo, 'research/demo-batch-1.pages.json'), JSON.stringify([page]));
+  writeFileSync(join(f.repo, 'research/demo-scope-ledger.json'), JSON.stringify({ run: 'demo', pages: [{ id: page.id, kind: 'A', batch: '1' }] }));
+  writeFileSync(join(f.repo, 'research/plan-spec.json'), JSON.stringify({ pages: [page] }));
+  writeFileSync(join(f.repo, 'research/demo-alpha-step1-drift.md'), '### test-page\nVERDICT: drift-blocked — exact original prerequisite finding.\n');
+  mkdirSync(join(f.repo, 'research/demo-dispatch'));
+  const result = JSON.stringify({ run: 'demo', attempt: 1, role: 'alpha', label: 'drift-review', covers: ['drift'], ok: true });
+  for (const name of ['alpha-drift-review.result.json', 'alpha-drift-review.attempt-1.result.json']) writeFileSync(join(f.repo, 'research/demo-dispatch', name), result);
+  const reviewPath = 'research/demo-owner-review.md';
+  writeFileSync(join(f.repo, reviewPath), 'Fixture root review of the exact resolved prerequisite and affected uses.');
+  const receipt = driftOwnerResolutionTemplate(f.repo, 'demo');
+  receipt.inputs[reviewPath] = sha(readFileSync(join(f.repo, reviewPath), 'utf8'));
+  Object.assign(receipt.resolutions[0], { decision: 'resolved', reason: 'Root reviewed and resolved the exact original prerequisite finding.', evidence: [reviewPath] });
+  writeFileSync(join(f.repo, driftResolutionPath('demo')), JSON.stringify(receipt));
+  const gates = [{ id: 'drift-review', argv: ['node', 'tools/physics-support/drift-review-check.mjs', '--run', 'demo'] }];
+  const snapshot = gateReviewSnapshot(f.ctx, gates, ['1-drift']);
+  for (const path of [driftResolutionPath('demo'), ...Object.keys(receipt.inputs)]) assert.ok(snapshot.inputs.some((row: any) => row.path === join(f.repo, path)), path);
+  writeFileSync(join(f.repo, reviewPath), 'Changed owner evidence.');
+  assert.throws(() => gateReviewSnapshot(f.ctx, gates, ['1-drift']), /stale evidence/);
 });

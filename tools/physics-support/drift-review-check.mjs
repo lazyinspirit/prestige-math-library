@@ -5,6 +5,7 @@
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { pageBuildability } from './buildability.mjs';
+import { validateDriftOwnerResolutions } from './drift-owner-resolutions.mjs';
 
 const argv = process.argv.slice(2);
 const opt = (n) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] ? argv[i + 1] : null; };
@@ -98,6 +99,9 @@ const owedPages = ledgerPages
   .map((p) => p.id);
 
 const errors = [];
+let ownerResolved = new Set();
+try { ownerResolved = validateDriftOwnerResolutions(process.cwd(), run).resolved; }
+catch (error) { errors.push(error.message); }
 let applied = 0;
 let edgesChecked = 0;
 
@@ -215,7 +219,7 @@ for (const id of reviewedOwed) {
       }
     }
   }
-  if (kind === 'drift-blocked') {
+  if (kind === 'drift-blocked' && !ownerResolved.has(id)) {
     errors.push(`drift-check-blocked: ${id} — ${detail.trim() || 'unspecified edge'} — `
       + 'owner action required; no automatic re-review.');
   }
@@ -225,6 +229,6 @@ if (errors.length) {
   for (const e of errors) console.error(`ERROR ${e}`);
   process.exit(1);
 }
-console.log(beforeApply ? `drift-review-check: ${reviewedOwed.length} page(s) reviewed; decisions valid, materialization and buildability pending` : `drift-review-check: ${reviewedOwed.length} page(s) reviewed, ${applied} spec edit(s) applied, no blocked edges; `
+console.log(beforeApply ? `drift-review-check: ${reviewedOwed.length} page(s) reviewed; decisions valid, materialization and buildability pending` : `drift-review-check: ${reviewedOwed.length} page(s) reviewed, ${applied} spec edit(s) applied, no unresolved blocked edges; `
   + `${edgesChecked} same-category requires edge(s) checked, every owed A and B page strictly above 95% `
   + (allowInRunDependencies ? 'published-or-earlier-in-run' : 'published'));

@@ -3,6 +3,7 @@
 import { existsSync, readFileSync, readdirSync, mkdirSync, writeFileSync, renameSync } from 'node:fs';
 import { basename, dirname, join, resolve } from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
+import { validateDriftOwnerResolutions } from '../../physics-support/drift-owner-resolutions.mjs';
 import { frontierGateScope } from '../../physics-support/frontier-gate-scope.mjs';
 import { markdownFiles, readItem } from '../../physics-support/physics-content.mjs';
 import { originalImportPath } from '../../physics-support/physics-imports.mjs';
@@ -112,12 +113,36 @@ export function gateReviewSnapshot(ctx, gates, stages) {
     }
   }
   for (const path of scope.pageFiles) bind(join(ctx.repo, path));
+  const canonicalPlan = existsSync(join(research, 'plan-spec.json')) ? readJSON(join(research, 'plan-spec.json')) : { pages: [] };
+  const importReceipt = existsSync(join(research, 'math-imports.json')) ? readJSON(join(research, 'math-imports.json')) : { files: [] };
+  const pagePaths = markdownFiles(join(ctx.repo, 'library'));
+  const prerequisitePaths = prerequisite => {
+    const matches = pagePaths.filter(path => path.endsWith(`/${prerequisite}.md`));
+    const declared = canonicalPlan.pages.filter(page => page.id === prerequisite);
+    if (declared.length > 1) throw Error(`Ambiguous prerequisite page ${prerequisite}`);
+    for (const path of matches) {
+      const carrier = readItem(path);
+      if ((carrier.page ?? carrier.id) !== prerequisite) throw Error(`Wrong prerequisite page identity ${prerequisite}: ${path}`);
+    }
+    if (matches.length <= 1) return matches;
+    // A category relocation may leave an identical pinned import beside the
+    // canonical plan location. Accept only that authenticated duplicate; two
+    // distinct page bodies or an unpinned extra remain ambiguous.
+    const canonical = declared[0]?.category && join(ctx.repo, 'library', declared[0].category, `${prerequisite}.md`);
+    if (!canonical || !matches.includes(canonical)) throw Error(`Ambiguous prerequisite page ${prerequisite}`);
+    const expected = digest(readFileSync(canonical));
+    for (const path of matches) if (path !== canonical) {
+      const pin = importReceipt.files.find(row => join(ctx.repo, row.path) === path);
+      if (!pin || pin.sha256 !== expected || digest(readFileSync(path)) !== expected) throw Error(`Ambiguous prerequisite page ${prerequisite}`);
+    }
+    // Bind both the canonical page and its actual relevant import/original.
+    return matches;
+  };
   for (const page of pages) {
     bind(join(ctx.repo, 'library', page.category, '_category.md'));
     for (const prerequisite of page.requires ?? []) {
-      const matches = markdownFiles(join(ctx.repo, 'library')).filter(path => path.endsWith(`/${prerequisite}.md`));
-      if (matches.length > 1) throw Error(`Ambiguous prerequisite page ${prerequisite}`);
-      if (matches.length === 1) bind(matches[0]);
+      const matches = prerequisitePaths(prerequisite);
+      if (matches.length) for (const path of matches) { bind(path); bind(join(dirname(path), '_category.md')); }
       else {
         const supplier = pages.find(row => row.id === prerequisite && row.kind !== 'P');
         if (!supplier) throw Error(`Missing prerequisite page ${prerequisite}`);
@@ -181,7 +206,10 @@ export function gateReviewSnapshot(ctx, gates, stages) {
     }
   }
   if (toolNames.has('step1-decisions.mjs')) for (const id of scope.items) implicit.push(`${ctx.run}-step1-${id}.json`);
-  if (toolNames.has('drift-review-check.mjs')) implicit.push(`${ctx.run}-scope-ledger.json`, `${ctx.run}-alpha-step1-drift.md`);
+  if (toolNames.has('drift-review-check.mjs')) {
+    implicit.push(`${ctx.run}-scope-ledger.json`, `${ctx.run}-alpha-step1-drift.md`);
+    for (const input of validateDriftOwnerResolutions(ctx.repo, ctx.run).inputs) bindNativePath(input);
+  }
   if (toolNames.has('frontier-dependency-ledger.mjs')) for (const name of manifests) implicit.push(name.replace('.pages.json', '.cross-batch-dependencies.json'));
   if (toolNames.has('step3-decisions.mjs')) {
     for (const id of scope.items) for (const who of ['review', 'owner']) implicit.push(`${ctx.run}-step3b-${who}-${id}.json`);

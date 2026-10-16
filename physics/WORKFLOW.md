@@ -86,6 +86,47 @@ is introduced. Logical dependencies must agree between authored bodies and
 manifests; aliases resolve to canonical suppliers. Definition discharges and
 nonlogical links are hash-bound context, not extra logical scheduling edges.
 
+## Owner resolution of Step-1 drift holds
+
+A native `drift-blocked` observation remains immutable after owner repair.
+The owner may add `research/RUN-drift-owner-resolutions.json`; generate a
+pending template from the physics cwd with:
+
+```bash
+node tools/physics-support/drift-owner-resolutions.mjs template --run RUN
+```
+
+After the actual repairs and review, fill each resolved page's `decision` with
+`resolved`, provide its concrete `reason` and `evidence` paths, and add every
+review/source evidence file's raw SHA-256 to `inputs`. A resolution may also
+name explicit live obligations in its `current_inputs` hash map; those entries
+must appear in the flat input map. Historical JSON evidence retains its original
+hashes and is not recursively reinterpreted as a current-source obligation.
+The template binds the original report, genuine successful immutable drift
+attempt and current result, exact A/B page/batch frontier, current canonical plan
+bytes, blocked sections and repaired prerequisite lists. Its pending entries
+cannot pass. Only `/root` may authorize dispositions; unknown, duplicate,
+stale, nonblocked or outside subjects fail. Partial dispositions leave the
+other holds blocking. No report, result, coverage or historical verdict is
+rewritten, and no scientific review is invented by the template.
+
+Both drift checks retain all other native report, plan and buildability rules.
+Same-scope drift materialization changes manifests, not the canonical plan, so
+it preserves the plan binding. Any later canonical-plan edit requires a fresh
+owner disposition after actual review. Owner preparation binds the overlay
+and every declared evidence input; changed evidence requires fresh preparation.
+After writers drain and the owner resolves every escalation, use native
+`retry --unit drift`, then the ordinary fresh owner preparation and complete
+battery. Successful native drift coverage remains covered; no unchanged scope
+is dispatched again. A stopped controller may restart with the same run and
+state directory to adopt updated code without replacing its execution history.
+
+Prerequisite snapshot resolution uses canonical plan page identity. An identical
+pinned import at an old category location may coexist with the canonical page;
+both copies, their categories and relevant original are bound. Different bodies,
+unpinned extra copies and wrong page identities remain blocking. This resolution
+examines only the actual required page names.
+
 ## Whole-batch scope/prerequisite loop
 
 Step 2 workers perform only substantive scope/prerequisite review, local source
