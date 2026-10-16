@@ -1243,7 +1243,8 @@ export const stages = [
       ? MODEL_PROFILE_NAMES.lunaMax
       : undefined,
     units: (ctx: any) => batches(ctx),
-    unitPrerequisites: (ctx: any, unit: string) => prerequisiteBatches(ctx.repo, ctx.run, unit, ctx, {constructionScheduling:true}),
+    unitPrerequisites: (ctx: any, unit: string) => prerequisiteBatches(ctx.repo, ctx.run, unit, ctx,
+      {constructionScheduling:true, constructionSchedulingDuplicateProjection:ctx.constructionSchedulingDuplicateProjection === true}),
     unitPrerequisitePolicy: 'priority',
     artifacts: (ctx: any, unit: string) => [...scaffoldArtifacts(ctx, unit), ...authorArtifacts(ctx, unit)],
     // Anchored and exact ON PURPOSE: an unanchored `beta-batch-` also matches
@@ -1293,7 +1294,8 @@ export const stages = [
         brief:'briefs/beta-scaffold.md',task:[`research/${ctx.run}-beta-${u}.task.md`,`research/${ctx.run}-beta-batch.task.md`],timeout:14400}));
       // Fresh priority metadata before every construction dispatch. Cross-batch
       // suppliers may still be in flight; acceptance requires their real bodies.
-      const levels = writeBatchDependencyLevels(ctx.repo, ctx.run, {constructionScheduling:true});
+      const levels = writeBatchDependencyLevels(ctx.repo, ctx.run,
+        {constructionScheduling:true, constructionSchedulingDuplicateProjection:ctx.constructionSchedulingDuplicateProjection === true});
       const levelFor = (u: string) => levels.batches.find((row: any) => row.batch === String(u))?.dependency_level ?? Infinity;
       return [...pending].sort((a, b) => levelFor(a) - levelFor(b) || Number(a) - Number(b)).map((u: any) => {
         const row = levels.batches.find((row: any) => row.batch === String(u));
@@ -1305,6 +1307,9 @@ export const stages = [
         writeFileSync(R(ctx, task), [
           `Batch ${u}: dependency_level ${row.dependency_level}; prerequisite batches: ${row.requires.join(', ') || 'none'}.`,
           `Current scheduling input: ${levels.input_sha256}.`,
+          ...(levels.schedulingDuplicateProjection ? [
+            'Initial-authoring scheduling projects duplicate item ownership within one batch companion pair. All declared dependency edges remain; this does not certify inventory, readiness or proof coverage.',
+          ] : []),
           'Determine item inventories, logical deps and item dependency_level labels in the scaffold manifest before writing carriers. Author suppliers before consumers in ascending item level.',
           'Continue authoring this pair even if another pair has not supplied a prerequisite yet. Use the controlling plan and declared interfaces to draft independent definitions, arguments and examples; record exact unresolved supplier IDs and required hypotheses. Do not wait, poll or edit another pair. Verify actual supplier bodies before claiming readiness; never invent supplier excerpts or approval.',
           ...sources.flatMap(source => ['', `<!-- Source: ${source} -->`, readFileSync(R(ctx, source), 'utf8')]),

@@ -68,10 +68,13 @@ export function loopPattern(ctx,batches){
   return labels.length?new RegExp(`^(?:${labels.join('|')})\\.result\\.json$`):/^(?!)$/;
 }
 /** Actual item and page prerequisites; never infer order from batch numbers. */
-export function prerequisiteBatches(root, run, batch, pass=null, {constructionScheduling=false}={}) {
+export function prerequisiteBatches(root, run, batch, pass=null,
+  {constructionScheduling=false, constructionSchedulingDuplicateProjection=false}={}) {
+  const key = constructionSchedulingDuplicateProjection ? 'scopeSchedulingProjectedSnapshot' : 'scopeSchedulingSnapshot';
+  const options = {constructionScheduling, constructionSchedulingDuplicateProjection};
   const snapshot = constructionScheduling
-    ? (pass ? (pass.scopeSchedulingSnapshot??=loadStep3(root,run,{constructionScheduling:true})) : loadStep3(root,run,{constructionScheduling:true}))
-    : (pass ? (pass.scopeSnapshot??=loadStep3(root,run)) : loadStep3(root,run));
+    ? (pass ? (pass[key]??=loadStep3(root,run,options)) : loadStep3(root,run,options))
+    : (pass ? (pass.scopeSnapshot??=loadStep3(root,run,options)) : loadStep3(root,run,options));
   const home = new Map(snapshot.pages.map(page => [page.id, page.batch]));
   const out = new Set(), deps = new Set();
   for (const page of snapshot.pages.filter(page => page.batch === String(batch))) {

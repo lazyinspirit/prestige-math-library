@@ -28,6 +28,8 @@ export interface Ctx {
   stageRounds?: Record<string, number>;
   /** Latest routed failure for each gate stage, retained through repeat resets. */
   stageFailures?: Record<string, GateResult>;
+  /** Engine-issued only for opted-in initial priority construction; never repair. */
+  constructionSchedulingDuplicateProjection?: boolean;
 }
 
 /**

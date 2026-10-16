@@ -391,6 +391,18 @@ export class Executor {
     return (stage.units?.(ctx) ?? []).some(unit => !covered.has(String(unit)));
   }
 
+  /** Fresh initial-authoring capability; never inherit a projected snapshot
+   * into a repair/completion check or reuse another pass's inventory. */
+  initialConstructionContext(stage: Stage, ctx: Ctx, initial: boolean): Ctx {
+    const enabled = initial && stage.deferConstructionArtifactsUntilDrain === true
+      && stage.id === '1-scaffold' && stage.unitPrerequisitePolicy === 'priority';
+    if (!enabled && !ctx.constructionSchedulingDuplicateProjection
+      && !(ctx as any).scopeSchedulingProjectedSnapshot) return ctx;
+    const child: any = { ...ctx, constructionSchedulingDuplicateProjection: enabled };
+    delete child.scopeSchedulingProjectedSnapshot;
+    return child;
+  }
+
   /**
    * A stage is finished when its units are covered AND its gates have passed.
    *
@@ -602,7 +614,7 @@ export class Executor {
    * eligibility and exclusive-writer checks. Repair callers retain the default. */
   unitReadiness(stage: Stage, ctx: Ctx, candidates: Unit[], active = new Set<Unit>(),
     writes = new Set<Unit>(), cohortWrites = writes, requireComplete = true): {
-      ready: Unit[]; problem: string | null; deferred?: boolean;
+      ready: Unit[]; problem: string | null; deferred?: boolean; projected?: boolean;
     } {
     try {
       // Filter local holds before slicing dispatch slots. Held units stay in
@@ -612,8 +624,9 @@ export class Executor {
       const owed = (stage.units ? stage.units(ctx) : []).map(String);
       const owedSet = new Set(owed);
       const dependencies = new Map<string, string[]>();
+      const graphCtx = this.initialConstructionContext(stage, ctx, !requireComplete);
       for (const unit of owed) {
-        const direct = [...new Set((stage.unitPrerequisites(ctx, unit) ?? []).map(String))].sort();
+        const direct = [...new Set((stage.unitPrerequisites(graphCtx, unit) ?? []).map(String))].sort();
         const unknown = direct.filter(dep => !owedSet.has(dep));
         if (unknown.length) {
           return { ready: [], problem: `${unit} names prerequisite(s) not owed by this stage: ${unknown.join(', ')}` };
@@ -676,6 +689,7 @@ export class Executor {
         // without waiting for unrelated pairs in those levels to finish.
         }).sort((a, b) => (levels.get(String(a)) ?? 0) - (levels.get(String(b)) ?? 0)),
         problem: null,
+        projected: Boolean((graphCtx as any).scopeSchedulingProjectedSnapshot?.schedulingDuplicateProjection),
       };
     } catch (error: any) {
       // Stage-owned manifests are currently written by agent processes, which
@@ -930,14 +944,16 @@ export class Executor {
     }
   }
 
-  retireUnitPrerequisiteBlocker(stage: Stage): void {
+  retireUnitPrerequisiteBlocker(stage: Stage, projected = false): void {
     const key = `unit-prerequisites:${stage.id}`;
     const before = this.state.data.blockers.length;
     this.state.data.blockers = this.state.data.blockers.filter((blocker: any) =>
       blocker.stage !== stage.id || (blocker.key ?? blocker.message) !== key);
     if (this.state.data.blockers.length !== before) {
       this.state.save();
-      this.reporter.notify('unblocked', `${stage.id}: unit prerequisite graph is valid`);
+      this.reporter.notify('unblocked', projected
+        ? `${stage.id}: current batch DAG is valid under initial-authoring scheduling projection; duplicate inventory is not certified`
+        : `${stage.id}: unit prerequisite graph is valid`);
     }
   }
 
@@ -1126,7 +1142,7 @@ export class Executor {
       if (readiness.deferred) return true;
       const ready = new Set(readiness.ready.map(String));
       readyPlans = plans.filter(plan => (plan.covers ?? []).every(unit => ready.has(String(unit))));
-      this.retireUnitPrerequisiteBlocker(stage);
+      this.retireUnitPrerequisiteBlocker(stage, readiness.projected);
     } else if (stage.unitPrerequisites) {
       const requireComplete = !initialDispatch || stage.unitPrerequisitePolicy !== 'priority';
       const active = new Set<Unit>([...this.inflight.values()]
@@ -1154,7 +1170,7 @@ export class Executor {
         readyPlans.push(plan);
         for (const unit of covered) acceptedWrites.add(unit);
       }
-      this.retireUnitPrerequisiteBlocker(stage);
+      this.retireUnitPrerequisiteBlocker(stage, graph.projected);
     }
     for (const plan of readyPlans) this.start(stage, plan, { preflighted: true });
     return true;
@@ -1738,7 +1754,7 @@ export class Executor {
     }
     if (prerequisiteReadiness.deferred) return 'ok';
     need = prerequisiteReadiness.ready;
-    this.retireUnitPrerequisiteBlocker(stage);
+    this.retireUnitPrerequisiteBlocker(stage, prerequisiteReadiness.projected);
 
     // Retry policy: a unit whose lane failed gets `maxAttempts` tries, then
     // becomes a blocker. Unbounded retry of a deterministically failing lane
@@ -1791,7 +1807,8 @@ export class Executor {
         const refreshes = this.pendingRefreshes(stage, ctx).filter(r => selected.includes(r.unit));
         plans = [
           ...refreshes.map(r => r.plan),
-          ...stage.plan(ctx, selected.filter(unit => !refreshes.some(r => r.unit === unit)), slots - refreshes.length),
+          ...stage.plan(this.initialConstructionContext(stage, ctx, true),
+            selected.filter(unit => !refreshes.some(r => r.unit === unit)), slots - refreshes.length),
         ];
         // Drop any plan whose own dispatch key has exhausted its attempts.
         const exhaustedPlans: any[] = [];

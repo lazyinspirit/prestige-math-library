@@ -31,3 +31,14 @@ retry limits and blockers, and native refreshes continue. Once all owed authorin
 has coverage and every writer drains, the full artifact, readiness, stalemate and
 gate paths run normally. This defaults off and is invalid for other stage policies;
 common mathematics stages do not enable it.
+
+The same opt-in grants a fresh capability only to initial priority graph checks
+and plan generation. Their scheduling projection may retain duplicate item IDs
+within one page or its validated companion, only with the same batch and explicit
+valid kind. Every raw entry and its declared/current source dependencies remain
+in the batch DAG; raw manifests and projection metadata bind the scheduling digest.
+Cross-batch, kind and noncompanion conflicts still fail. Projected and strict
+snapshots use separate caches. Repair checks (`requireComplete: true`), actual
+readiness/artifacts, post-drain recomputation and gates receive no capability and
+still reject duplicate inventory. An unblocked scheduling graph explicitly says
+when its projection does not certify that inventory.

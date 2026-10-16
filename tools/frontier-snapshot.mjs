@@ -29,10 +29,15 @@ function constructionSourceFields(frontmatter, subject) {
   }
   return yaml().parse(selected.join('\n'));
 }
-export function loadStep3(root, run, {constructionScheduling=false}={}) {
+export function loadStep3(root, run, {constructionScheduling=false, constructionSchedulingDuplicateProjection=false}={}) {
+  if (constructionSchedulingDuplicateProjection && !constructionScheduling)
+    throw Error('Duplicate projection is limited to construction scheduling');
   safe(run);
   const dir = join(root, 'research'), pages = [], items = new Map(), pairs = new Map();
   let schedulingIdentityInputs;
+  const duplicateClaims = [], schedulingManifestInputs = [];
+  const validKinds = new Set(['definition','algorithm','theorem','lemma','proposition','corollary',
+    'example','counterexample','false-statement','remark','open-problem']);
   // Only native construction scheduling may project incomplete identities.
   // The worker's explicit page spelling must already have one exact owner and
   // canonical identity. Never infer inventory, relocate a page, or repair disk.
@@ -97,13 +102,22 @@ export function loadStep3(root, run, {constructionScheduling=false}={}) {
   for (const f of readdirSync(dir).filter(f => new RegExp(`^${run}-batch-\\d+\\.pages\\.json$`).test(f)).sort()) {
     const batch = f.match(/-batch-(\d+)\./)[1];
     const coverage = read(join(dir, f.replace('.pages.json', '.coverage.json')));
-    for (const original of json(join(dir, f))) {
+    const raw = constructionSchedulingDuplicateProjection ? readFileSync(join(dir, f), 'utf8') : null;
+    if (raw !== null) schedulingManifestInputs.push([batch, raw]);
+    for (const original of raw === null ? json(join(dir, f)) : JSON.parse(raw)) {
       const page = schedulingPage(original, batch);
       const livePage = { ...page, batch, coverage: coverage?.pages?.find(p => p.page === page.id) };
       pages.push(livePage);
       for (const item of page.items ?? []) {
-        if (items.has(item.id)) throw Error(`Duplicate item ${item.id}`);
-        items.set(item.id, { item, page: livePage });
+        const prior = items.get(item.id);
+        if (prior) {
+          if (!constructionSchedulingDuplicateProjection || prior.page.batch !== batch
+            || !validKinds.has(item.kind) || prior.item.kind !== item.kind)
+            throw Error(`Duplicate item ${item.id}`);
+          // Keep every raw declaration for prerequisiteBatches' dependency union.
+          // This index is used by scheduling only to identify the owner batch.
+          duplicateClaims.push({ id: item.id, kind: item.kind, batch, prior, page: livePage });
+        } else items.set(item.id, { item, page: livePage });
       }
     }
   }
@@ -119,11 +133,23 @@ export function loadStep3(root, run, {constructionScheduling=false}={}) {
     pairs.set(a.id, [a, b]);
   }
   if (pairs.size * 2 !== pages.length) throw Error('Every page must belong to one A/B pair');
+  for (const claim of duplicateClaims) {
+    if (claim.prior.page !== claim.page && ![...pairs.values()].some(pair =>
+      pair.includes(claim.prior.page) && pair.includes(claim.page)))
+      throw Error(`Duplicate item ${claim.id} outside one companion pair`);
+  }
+  const schedulingDuplicateProjection = duplicateClaims.length ? {
+    kind: 'same-batch-companion-item-ownership',
+    duplicates: duplicateClaims.map(claim => ({ id: claim.id, kind: claim.kind,
+      batch: claim.batch, pages: [claim.prior.page.id, claim.page.id] })),
+  } : null;
   const planned = new Map();
   for (const page of read(join(dir, 'plan-spec.json'))?.pages ?? [])
     for (const item of page.items ?? []) planned.set(item.id, { item, page });
   return { root, run, pages, pairs, items, planned, cache: new Map(),
-    ...(schedulingIdentityInputs ? { schedulingIdentityInputs } : {}) };
+    ...(schedulingIdentityInputs ? { schedulingIdentityInputs } : {}),
+    ...(schedulingDuplicateProjection ? { schedulingDuplicateProjection } : {}),
+    ...(constructionSchedulingDuplicateProjection ? { schedulingManifestInputs } : {}) };
 }
 
 // Proof repairs do not reopen scope. Changed claims or inventory do.

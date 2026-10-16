@@ -45,8 +45,10 @@ export function batchDependencyLevelsPath(root, run) {
 }
 
 /** Recompute from current manifests and actual logical carrier dependencies. */
-export function computeRunBatchDependencyLevels(root, run, {constructionScheduling=false}={}) {
-  const snapshot = loadStep3(root, run, {constructionScheduling}), homes = new Map();
+export function computeRunBatchDependencyLevels(root, run,
+  {constructionScheduling=false, constructionSchedulingDuplicateProjection=false}={}) {
+  const options = {constructionScheduling, constructionSchedulingDuplicateProjection};
+  const snapshot = loadStep3(root, run, options), homes = new Map();
   for (const page of snapshot.pages) {
     assert(typeof page.id === 'string' && page.id && !homes.has(page.id),
       `Invalid or duplicate page ownership: ${page.id}`);
@@ -57,13 +59,18 @@ export function computeRunBatchDependencyLevels(root, run, {constructionScheduli
       && (item.deps ?? []).every(id => typeof id === 'string' && id), `${item.id}: deps must name items`);
   }
   const batches = [...new Set(snapshot.pages.map(page => page.batch))].sort(compare);
-  const pass = constructionScheduling ? { scopeSchedulingSnapshot: snapshot } : { scopeSnapshot: snapshot };
-  const graph = batches.map(batch => ({ batch, requires: prerequisiteBatches(root, run, batch, pass,{constructionScheduling}) }));
+  const pass = constructionScheduling
+    ? { [constructionSchedulingDuplicateProjection ? 'scopeSchedulingProjectedSnapshot' : 'scopeSchedulingSnapshot']: snapshot }
+    : { scopeSnapshot: snapshot };
+  const graph = batches.map(batch => ({ batch, requires: prerequisiteBatches(root, run, batch, pass, options) }));
   const rows = computeBatchDependencyLevels(graph);
-  const manifests = batches.map(batch => [batch,
-    readFileSync(join(root, 'research', `${run}-batch-${batch}.pages.json`), 'utf8')]);
+  const projectedInputs = snapshot.schedulingManifestInputs ? new Map(snapshot.schedulingManifestInputs) : null;
+  const manifests = batches.map(batch => [batch, projectedInputs?.get(batch)
+    ?? readFileSync(join(root, 'research', `${run}-batch-${batch}.pages.json`), 'utf8')]);
   return { version: 1, run, input_sha256: digest({ manifests, graph,
-    ...(snapshot.schedulingIdentityInputs ? { schedulingIdentityInputs: snapshot.schedulingIdentityInputs } : {}) }), batches: rows };
+    ...(snapshot.schedulingIdentityInputs ? { schedulingIdentityInputs: snapshot.schedulingIdentityInputs } : {}),
+    ...(snapshot.schedulingDuplicateProjection ? { schedulingDuplicateProjection: snapshot.schedulingDuplicateProjection } : {}) }),
+    ...(snapshot.schedulingDuplicateProjection ? { schedulingDuplicateProjection: snapshot.schedulingDuplicateProjection } : {}), batches: rows };
 }
 
 export function writeBatchDependencyLevels(root, run, options={}) {
