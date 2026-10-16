@@ -655,9 +655,10 @@ if (errors.length) {
   console.log(`\n${errors.length} ERROR(s):`);
   for (const e of errors) console.log('  ' + e);
   console.log('\nFAIL');
-  process.exit(1);
-}
-console.log(
+  // Let piped diagnostics drain; an immediate exit can lose the error tail
+  // after a large frontier's warnings. Keep failure and success exclusive.
+  process.exitCode = 1;
+} else console.log(
   `\nOK — declared page order is acyclic and consistent; no item-level cycles, forward` +
   `\nreferences, B-page dependencies, or unresolved ids among the ${withItems} page(s) with item lists.` +
   (withItems < planned.length
