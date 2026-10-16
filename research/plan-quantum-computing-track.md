@@ -1,8 +1,9 @@
 # Quantum computing
 
-Status: draft prose scaffold, 2026-10-14. This proposal preserves all
-twenty-four approved quantum-computing topics and organizes their actual
-mathematical prerequisites into a branching dependency graph. It does not
+Status: draft prose scaffold; original scope 2026-10-14, TQC expansion
+2026-10-16. This proposal preserves all twenty-four approved
+quantum-computing topics and adds a three-pair topological-quantum-computing
+branch with explicit mathematical prerequisites. It does not
 register canonical library pages or items, author proofs, change a live plan,
 or claim any gate or proof acceptance. The machine-readable proposals are
 `research/quantum-computing-planning/pages.json` and
@@ -96,6 +97,9 @@ a requirement to read every earlier page before every later one.
 | QC22 | `graph-states-and-measurement-based-computation` | Graph states, adaptive measurement patterns, and circuit equivalence. |
 | QC23 | `circuit-optimization-resource-tradeoffs-and-lower-bounds` | Circuit optimization, ancilla/time/space tradeoffs, and lower bounds under explicit models. |
 | QC24 | `state-preparation-isometry-synthesis-and-limits` | State/isometry preparation, information limits, and exact mathematical access interfaces; no free data loading. |
+| QC25 | `unitary-fusion-spaces-f-and-r-symbols-and-anyon-models` | Unitary fusion spaces, F/R symbols, pentagon and hexagon, gauge covariance, ribbon twist and modularity, with fixed-convention Ising and Fibonacci fusion sectors. |
+| QC26 | `topological-braid-gates-encodings-and-universality` | Unitary braid gates on fixed-total-charge spaces, projective phase and encoding, the Ising/Majorana Clifford restriction, Fibonacci single-qubit density, exact joint SU(5)×SU(8) B₆ density, and arbitrary-size triple-encoded universality with explicit logical-error and leakage bounds. |
+| QC27 | `toric-code-anyons-logical-operators-and-protection` | Periodic toric-code stabilizers, e/m excitations, strings and logical operators, distance, contractible-region indistinguishability, exact finite Hamiltonian gap, and a constant energy-barrier upper bound. |
 
 The page-level `requires` edges are recorded exactly in `pages.json`. In
 particular, finite state/register foundations feed outcomes and channels;
@@ -245,3 +249,31 @@ separate authoring work is considered.
 ## Exhaustive scaffold audit and repair, 2026-10-14
 
 The independent audit reviewed all 334 original proposed contracts and all 24 topic scopes. The current inventory has 358 records after adding 24 explicit suppliers; exact per-item dispositions, repairs and consumer closures are recorded in [the audit report](scaffold-audit-2026-10-14/quantum-computing.md) and its coverage JSON. The current proposed-items.json and pages.json supersede the embedded original researcher export snapshots. Algorithms now declare finite instructions and their arithmetic/access models. Exact-arithmetic SK and arbitrary-angle preparation do not claim finite-precision Turing cost; the named bit-stability authoring hold remains. Bell preparation/decoding, partial-output acceptance, CSS nesting/logical quotient, diamond ancilla reduction, surface-code boundary counts, MBQC transports and charged circuit-counting models have focused repairs. Isometry synthesis is now explicitly represented. This is a contract audit, not proof acceptance. Root refreshed its combined checks after graph stabilization: 896 proposed items on 120 pages; actual closure still FAILS only on the original ten inherited remarks (1,834 root prerequisites), with a draft Golden–Thompson supplier warning. The conditional virtual overlay passes at 2,729 nodes, 18 recipes and 14 proposed prerequisite suppliers. Neither structural result is proof acceptance.
+
+## Topological quantum computing scaffold expansion, 2026-10-16
+
+QC25–QC27 add unitary fusion categories and fusion spaces, coordinate F/R
+symbols with pentagon/hexagon and gauge changes, fixed-convention Ising and
+Fibonacci braid data, encoded gates, and an exact toric-code construction.
+Arbitrary algebraic braid or Hecke representations are not treated as unitary.
+The F/R coherence section states the root associator/braiding identities as
+explicit operator formulas and derives their matrix equations by summing over
+every fusion label and multiplicity index. The displayed Ising results are
+scoped to the three-σ sector and the explicit Majorana/parity representation;
+no missing all-label Ising table is used as a premise. The density proof uses
+the two-dimensional three-anyon total-τ sector and published SU(2)/SO(3),
+closed-subgroup, irrational-rotation, and finite-matrix suppliers. Exact local
+Lie-rank certificates in dimensions five and eight and a subdirect-product
+argument prove joint `SU(5)×SU(8)` density in both six-anyon charge blocks. A
+full fusion-space spectator decomposition and braid-dependent one-qubit
+extensions yield arbitrary-size triple-encoded universality with explicit
+logical-error and leakage bounds; no exact leakage-free entangler is needed.
+An efficient joint-block compiler remains a separate resource obligation. The
+toric-code Hamiltonian is a finite mathematical model; gap, exact local
+indistinguishability, distance, and energy-barrier claims are for that model
+only. Physical phase existence, adiabatic realization, and perturbation
+stability remain contextual assumptions or physics-side obligations. Full
+definitions and proof routes are in
+[`sections/tqc-expansion.md`](quantum-computing-planning/sections/tqc-expansion.md),
+and exact current suppliers and source reading are in
+[`scaffold-audit-2026-10-16/topological-quantum-computing/`](scaffold-audit-2026-10-16/topological-quantum-computing/).

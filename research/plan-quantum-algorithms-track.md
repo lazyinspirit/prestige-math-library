@@ -1,6 +1,7 @@
 # Quantum algorithms
 
-Status: draft research plan, 2026-10-14. This document proposes a future
+Status: draft research plan; original scope 2026-10-14, QA37 TQC-algorithm
+expansion 2026-10-16. This document proposes a future
 mathematical category and item graph. It does not author library items, register
 canonical pages, assert source reading complete, claim proof acceptance, or
 change an autopilot run. Page identities and initial branches are in
@@ -85,8 +86,9 @@ definition's `justified_by` field when the schema's direction applies. No B
 example, counterexample, or remark supplies a dependency. B pages are logical
 leaves. A-page inventories should normally contain 10–35 items; topics exceeding
 60 proposed A items must be split into new A/B pairs while retaining all
-approved scope and branch dependencies. There are 36 approved topic areas, and
-the page map keeps each one visible as an A page with an examples companion.
+approved scope and branch dependencies. There are 36 originally approved
+topic areas; QA37 is an owner-authorized scaffold expansion, with each topic
+visible as an A page and examples companion.
 
 ## Branch architecture
 
@@ -154,6 +156,7 @@ The precise page-level graph is recorded in `pages.json`; item-level edges in
 | QA-34 | Define composition interfaces, precision/error budgets, verification, input/output costs, and dequantization. Prove error/resource composition and each advertised correspondence; a bibliography or empirical speedup is not a substitute. |
 | QA-35 | Define finite-dimensional communication protocols, shared resources, message dimensions, output relation, error, and communication cost. Prove the selected fingerprinting protocol and communication bounds, distinguishing classical and quantum messages. |
 | QA-36 | Define a finite-dimensional Hermitian path, endpoint encodings, differentiability/regularity, minimum gap, and adiabatic schedule. Prove the selected adiabatic error theorem and circuit equivalence under its hypotheses; state no empirical postulate. |
+| QA-37 | Define finite anyon tasks, fusion-tree input access, braid-word and fusion-measurement costs, and phase-sensitive control. Compile fixed-sector Fibonacci single-qubit circuits with a supplied certified inverse-closed SU(2) base net; prove termination, operator/output-distribution error, braid length, and finite-precision costs under Cauchy-name assumptions. Prove arbitrary-size triple-encoded approximation from joint SU(5)×SU(8) B₆ density, full spectator decomposition, braid-dependent one-qubit extensions, exact QSD, and summed projective-logical/leakage bounds, including after prior leakage. Compose with the finite JRS bound only for a specified C², isolated, uniformly gapped band. The dovetailed compiler terminates under certified target access but has no useful length bound; efficient joint-block compilation and physical realization remain separate cost/model obligations. No exact leakage-free entangler is assumed. |
 
 ## Existing mathematical suppliers and physical-source boundary
 
@@ -211,3 +214,32 @@ At this integration checkpoint, all six section inventories and source ledgers h
 
 
 Binding operational definitions for the advanced construction families are in [operational-contracts.md](quantum-algorithms-planning/operational-contracts.md). Machine rows bind OP0–OP8/OP1A, including bare-input coefficient/complement/phase generation, finite failure/cap branches, declared access and charged arithmetic. These finite definitions do not certify the separate correctness, precision, termination or resource proof obligations. The final scoped check has 896 proposed contracts/120 pages and 1,834 inherited root prerequisites; only the original ten forbidden inherited remarks and draft Golden–Thompson warning remain.
+
+## QA37 topological-algorithm expansion, 2026-10-16
+
+QA37 adds a fixed-sector Fibonacci braid compiler and an explicit fusion
+measurement interface. The compiler requires the published QC inverse-closed
+dense-SU(2) contract, its finite base-net certificate, rational per-gate
+tolerances, and the published Solovay–Kitaev error, length, and bit-complexity
+theorems. The derived length is
+`O(G log^3.97(G/ε))` for `G` one-qubit gates and total operator error `ε`;
+the bit-time claim is conditional on the exact Cauchy-name, algebraic-entry,
+and fixed-certificate hypotheses. Controlled operations retain their phase
+reference. The exact QC `B₆` proof gives joint `SU(5)×SU(8)` density in the two local
+charge blocks. It approximates `U⊕(det U)⁻¹` and
+`U⊕diag((det U)⁻¹,1,1,1)` simultaneously; the full spectator decomposition
+preserves the operator-error bound on the entire register. A braid-dependent
+one-qubit extension makes the same estimate valid after prior leakage. The
+exact QSD supplier and these local gates prove arbitrary-size
+triple-encoded circuit approximation. A dovetailed exhaustive compiler
+terminates with certified Cauchy target access but has no useful resource
+bound. Efficient joint-block compilation and physical realization remain
+separate obligations, and no exact leakage-free entangler is required.
+
+The adiabatic branch consumes the existing finite JRS theorem only under its
+`C²` path, isolated constant-rank spectral band, positive gap, and derivative
+bounds. A local Hamiltonian family, topological phase, and identification of
+its adiabatic transport with category `F/R` data are explicit model/physical
+inputs, not consequences of the finite path estimate. Detailed item contracts
+and proof routes are in
+[`sections/qa37-topological-algorithms.md`](quantum-algorithms-planning/sections/qa37-topological-algorithms.md).
